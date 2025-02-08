@@ -18,14 +18,14 @@ import (
 Author: LiuFeiHua
 Date: 2024/5/13 15:53
 */
-type UpdateHomeBrandSortLogic struct {
+type UpdateHomeBrandLogic struct {
 	logx.Logger
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
 }
 
-func NewUpdateHomeBrandSortLogic(ctx context.Context, svcCtx *svc.ServiceContext) *UpdateHomeBrandSortLogic {
-	return &UpdateHomeBrandSortLogic{
+func NewUpdateHomeBrandLogic(ctx context.Context, svcCtx *svc.ServiceContext) *UpdateHomeBrandLogic {
+	return &UpdateHomeBrandLogic{
 		Logger: logx.WithContext(ctx),
 		ctx:    ctx,
 		svcCtx: svcCtx,
@@ -33,7 +33,7 @@ func NewUpdateHomeBrandSortLogic(ctx context.Context, svcCtx *svc.ServiceContext
 }
 
 // UpdateHomeBrandSort 修改推荐品牌排序
-func (l *UpdateHomeBrandSortLogic) UpdateHomeBrandSort(req *types.UpdateHomeBrandSortReq) (resp *types.UpdateHomeBrandSortResp, err error) {
+func (l *UpdateHomeBrandLogic) UpdateHomeBrand(req *types.UpdateHomeBrandReq) (resp *types.UpdateHomeBrandResp, err error) {
 	_, err = l.svcCtx.HomeBrandService.UpdateHomeBrandSort(l.ctx, &smsclient.UpdateHomeBrandSortReq{
 		Id:   req.Id,
 		Sort: req.Sort,
@@ -45,7 +45,7 @@ func (l *UpdateHomeBrandSortLogic) UpdateHomeBrandSort(req *types.UpdateHomeBran
 		return nil, errorx.NewDefaultError(s.Message())
 	}
 
-	return &types.UpdateHomeBrandSortResp{
+	return &types.UpdateHomeBrandResp{
 		Code:    "000000",
 		Message: "更新首页品牌排序成功",
 	}, nil

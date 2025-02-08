@@ -9,16 +9,16 @@ import (
 	"github.com/zeromicro/go-zero/rest/httpx"
 )
 
-func UpdateHomeBrandSortHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
+func DeleteHomeBrandHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		var req types.UpdateHomeBrandSortReq
+		var req types.DeleteHomeBrandReq
 		if err := httpx.Parse(r, &req); err != nil {
 			httpx.ErrorCtx(r.Context(), w, err)
 			return
 		}
 
-		l := homebrand.NewUpdateHomeBrandSortLogic(r.Context(), svcCtx)
-		resp, err := l.UpdateHomeBrandSort(&req)
+		l := homebrand.NewDeleteHomeBrandLogic(r.Context(), svcCtx)
+		resp, err := l.DeleteHomeBrand(&req)
 		if err != nil {
 			httpx.ErrorCtx(r.Context(), w, err)
 		} else {

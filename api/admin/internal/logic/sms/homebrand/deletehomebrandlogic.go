@@ -19,24 +19,24 @@ import (
 Author: LiuFeiHua
 Date: 2024/5/13 15:53
 */
-type HomeBrandDeleteLogic struct {
+type DeleteHomeBrandLogic struct {
 	logx.Logger
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
 }
 
-func NewHomeBrandDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext) HomeBrandDeleteLogic {
-	return HomeBrandDeleteLogic{
+func NewDeleteHomeBrandLogic(ctx context.Context, svcCtx *svc.ServiceContext) DeleteHomeBrandLogic {
+	return DeleteHomeBrandLogic{
 		Logger: logx.WithContext(ctx),
 		ctx:    ctx,
 		svcCtx: svcCtx,
 	}
 }
 
-// HomeBrandDelete 删除首页品牌信息
+// DeleteHomeBrand 删除首页品牌信息
 // 1.删除sms_home_brand的记录(sms-rpc)
 // 2.修改pms_brand记录的状态为不推荐(pms-rpc)
-func (l *HomeBrandDeleteLogic) HomeBrandDelete(req types.DeleteHomeBrandReq) (*types.DeleteHomeBrandResp, error) {
+func (l *DeleteHomeBrandLogic) DeleteHomeBrand(req *types.DeleteHomeBrandReq) (*types.DeleteHomeBrandResp, error) {
 	// 1.删除sms_home_brand的记录(sms-rpc)
 	_, err := l.svcCtx.HomeBrandService.DeleteHomeBrand(l.ctx, &smsclient.DeleteHomeBrandReq{
 		Ids: req.Ids,

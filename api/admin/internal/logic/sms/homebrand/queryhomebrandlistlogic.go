@@ -19,22 +19,22 @@ import (
 Author: LiuFeiHua
 Date: 2024/5/13 15:53
 */
-type HomeBrandListLogic struct {
+type QueryHomeBrandListLogic struct {
 	logx.Logger
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
 }
 
-func NewHomeBrandListLogic(ctx context.Context, svcCtx *svc.ServiceContext) HomeBrandListLogic {
-	return HomeBrandListLogic{
+func NewQueryHomeBrandListLogic(ctx context.Context, svcCtx *svc.ServiceContext) QueryHomeBrandListLogic {
+	return QueryHomeBrandListLogic{
 		Logger: logx.WithContext(ctx),
 		ctx:    ctx,
 		svcCtx: svcCtx,
 	}
 }
 
-// HomeBrandList 查询首页品牌信息
-func (l *HomeBrandListLogic) HomeBrandList(req types.ListHomeBrandReq) (*types.ListHomeBrandResp, error) {
+// QueryHomeBrandList 查询首页品牌信息
+func (l *QueryHomeBrandListLogic) QueryHomeBrandList(req *types.QueryHomeBrandListReq) (*types.QueryHomeBrandListResp, error) {
 	resp, err := l.svcCtx.HomeBrandService.QueryHomeBrandList(l.ctx, &smsclient.QueryHomeBrandListReq{
 		BrandName:       strings.TrimSpace(req.BrandName),
 		RecommendStatus: req.RecommendStatus,
@@ -48,10 +48,10 @@ func (l *HomeBrandListLogic) HomeBrandList(req types.ListHomeBrandReq) (*types.L
 		return nil, errorx.NewDefaultError(s.Message())
 	}
 
-	var list []*types.ListHomeBrandData
+	var list []*types.QueryHomeBrandListData
 
 	for _, item := range resp.List {
-		list = append(list, &types.ListHomeBrandData{
+		list = append(list, &types.QueryHomeBrandListData{
 			Id:              item.Id,              //
 			BrandId:         item.BrandId,         // 商品品牌id
 			BrandName:       item.BrandName,       // 商品品牌名称
@@ -60,7 +60,7 @@ func (l *HomeBrandListLogic) HomeBrandList(req types.ListHomeBrandReq) (*types.L
 		})
 	}
 
-	return &types.ListHomeBrandResp{
+	return &types.QueryHomeBrandListResp{
 		Current:  req.Current,
 		Data:     list,
 		PageSize: req.PageSize,

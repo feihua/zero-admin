@@ -1,10 +1,11 @@
 info (
-	desc:   "首页品牌"
-	author: "koobe"
+	desc:   "首页推荐品牌表"
+	author: "刘飞华"
 	email:  "1002219331@qq.com"
 )
 
 type (
+	// 添加首页推荐品牌表请求参数
 	AddHomeBrandReq {
 		BrandIds []int64 `json:"brandIds"` // 商品品牌id
 	}
@@ -12,45 +13,7 @@ type (
 		Code    string `json:"code"`
 		Message string `json:"message"`
 	}
-	ListHomeBrandReq {
-		Current         int64  `form:"current,default=1"`
-		PageSize        int64  `form:"pageSize,default=20"`
-		BrandName       string `form:"brandName,optional"` // 商品品牌名称
-		RecommendStatus int32  `form:"recommendStatus,default=2"` // 推荐状态：0->不推荐;1->推荐
-	}
-	ListHomeBrandData {
-		Id              int64  `json:"id"`
-		BrandId         int64  `json:"brandId"` // 商品品牌id
-		BrandName       string `json:"brandName"` // 商品品牌名称
-		RecommendStatus int32  `json:"recommendStatus"` // 推荐状态：0->不推荐;1->推荐
-		Sort            int32  `json:"sort"` // 排序
-	}
-	ListHomeBrandResp {
-		Code     string               `json:"code"`
-		Message  string               `json:"message"`
-		Current  int64                `json:"current,default=1"`
-		Data     []*ListHomeBrandData `json:"data"`
-		PageSize int64                `json:"pageSize,default=20"`
-		Success  bool                 `json:"success"`
-		Total    int64                `json:"total"`
-	}
-	UpdateHomeBrandSortReq {
-		Id   int64 `json:"id"`
-		Sort int32 `json:"sort"` // 排序
-	}
-	UpdateHomeBrandSortResp {
-		Code    string `json:"code"`
-		Message string `json:"message"`
-	}
-	UpdateHomeBrandStatusReq {
-		Ids             []int64 `json:"ids"`
-		BrandIds        []int64 `json:"brandIds"` // 商品品牌id
-		RecommendStatus int32   `json:"recommendStatus"` // 推荐状态：0->不推荐;1->推荐
-	}
-	UpdateHomeBrandStatusResp {
-		Code    string `json:"code"`
-		Message string `json:"message"`
-	}
+	// 删除首页推荐品牌表请求参数
 	DeleteHomeBrandReq {
 		Ids      []int64 `form:"ids"`
 		BrandIds []int64 `form:"brandIds"` // 商品品牌id
@@ -58,6 +21,64 @@ type (
 	DeleteHomeBrandResp {
 		Code    string `json:"code"`
 		Message string `json:"message"`
+	}
+	// 更新首页推荐品牌表请求参数
+	UpdateHomeBrandReq {
+		Id   int64 `json:"id"` //
+		Sort int32 `json:"sort"` //排序
+	}
+	UpdateHomeBrandResp {
+		Code    string `json:"code"`
+		Message string `json:"message"`
+	}
+	// 更新首页推荐品牌表状态请求参数
+	UpdateHomeBrandStatusReq {
+		Ids             []int64 `json:"ids"` //
+		BrandIds        []int64 `json:"brandIds"` // 商品品牌id
+		RecommendStatus int32   `json:"recommendStatus,default=2"` //推荐状态：0->不推荐;1->推荐
+	}
+	UpdateHomeBrandStatusResp {
+		Code    string `json:"code"`
+		Message string `json:"message"`
+	}
+	// 查询首页推荐品牌表详情请求参数
+	QueryHomeBrandDetailReq {
+		Id int64 `form:"id"`
+	}
+	QueryHomeBrandDetailData {
+		Id              int64  `json:"id"` //
+		BrandId         int64  `json:"brandId"` //商品品牌id
+		BrandName       string `json:"brandName"` //商品品牌名称
+		RecommendStatus int32  `json:"recommendStatus"` //推荐状态：0->不推荐;1->推荐
+		Sort            int32  `json:"sort"` //排序
+	}
+	QueryHomeBrandDetailResp {
+		Code    string                   `json:"code"`
+		Message string                   `json:"message"`
+		Data    QueryHomeBrandDetailData `json:"data"`
+	}
+	// 分页查询首页推荐品牌表列表请求参数
+	QueryHomeBrandListReq {
+		Current         int64  `form:"current,default=1"` //第几页
+		PageSize        int64  `form:"pageSize,default=20"` //每页的数量
+		BrandName       string `form:"brandName,optional"` //商品品牌名称
+		RecommendStatus int32  `form:"recommendStatus,default=2"` //推荐状态：0->不推荐;1->推荐
+	}
+	QueryHomeBrandListData {
+		Id              int64  `json:"id"` //
+		BrandId         int64  `json:"brandId"` //商品品牌id
+		BrandName       string `json:"brandName"` //商品品牌名称
+		RecommendStatus int32  `json:"recommendStatus"` //推荐状态：0->不推荐;1->推荐
+		Sort            int32  `json:"sort"` //排序
+	}
+	QueryHomeBrandListResp {
+		Code     string                    `json:"code"`
+		Message  string                    `json:"message"`
+		Current  int64                     `json:"current,default=1"`
+		Data     []*QueryHomeBrandListData `json:"data"`
+		PageSize int64                     `json:"pageSize,default=20"`
+		Success  bool                      `json:"success"`
+		Total    int64                     `json:"total"`
 	}
 )
 
@@ -68,24 +89,28 @@ type (
 	prefix:     /api/sms/homeBrand
 )
 service admin-api {
-	//添加推荐品牌
-	@handler HomeBrandAdd
+	// 添加首页推荐品牌表
+	@handler AddHomeBrand
 	post /addHomeBrand (AddHomeBrandReq) returns (AddHomeBrandResp)
 
-	//分页查询推荐品牌
-	@handler HomeBrandList
-	get /queryHomeBrandList (ListHomeBrandReq) returns (ListHomeBrandResp)
+	// 删除首页推荐品牌表
+	@handler DeleteHomeBrand
+	get /deleteHomeBrand (DeleteHomeBrandReq) returns (DeleteHomeBrandResp)
 
-	//修改推荐品牌排序
-	@handler UpdateHomeBrandSort
-	post /updateHomeBrandSort (UpdateHomeBrandSortReq) returns (UpdateHomeBrandSortResp)
+	// 更新首页推荐品牌表
+	@handler UpdateHomeBrand
+	post /updateHomeBrandSort (UpdateHomeBrandReq) returns (UpdateHomeBrandResp)
 
-	//批量修改推荐品牌状态
+	// 更新首页推荐品牌表状态
 	@handler UpdateHomeBrandStatus
 	post /updateHomeBrandStatus (UpdateHomeBrandStatusReq) returns (UpdateHomeBrandStatusResp)
 
-	//删除推荐品牌
-	@handler HomeBrandDelete
-	get /deleteHomeBrand (DeleteHomeBrandReq) returns (DeleteHomeBrandResp)
+	// 查询首页推荐品牌表详情
+	@handler QueryHomeBrandDetail
+	get /queryHomeBrandDetail (QueryHomeBrandDetailReq) returns (QueryHomeBrandDetailResp)
+
+	// 分页查询首页推荐品牌表列表
+	@handler QueryHomeBrandList
+	get /queryHomeBrandList (QueryHomeBrandListReq) returns (QueryHomeBrandListResp)
 }
 

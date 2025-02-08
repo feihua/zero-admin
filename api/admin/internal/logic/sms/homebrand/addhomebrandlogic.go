@@ -19,25 +19,25 @@ import (
 Author: LiuFeiHua
 Date: 2024/5/13 15:53
 */
-type HomeBrandAddLogic struct {
+type AddHomeBrandLogic struct {
 	logx.Logger
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
 }
 
-func NewHomeBrandAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) HomeBrandAddLogic {
-	return HomeBrandAddLogic{
+func NewAddHomeBrandLogic(ctx context.Context, svcCtx *svc.ServiceContext) AddHomeBrandLogic {
+	return AddHomeBrandLogic{
 		Logger: logx.WithContext(ctx),
 		ctx:    ctx,
 		svcCtx: svcCtx,
 	}
 }
 
-// HomeBrandAdd 添加首页品牌信息
+// AddHomeBrand 添加首页品牌信息
 // 1.根据brandIds查询品牌信息(pms-rpc)
 // 2.添加首页品牌记录(sms-rpc)
 // 3.修改品牌的推荐状态为推荐(pms-rpc)
-func (l *HomeBrandAddLogic) HomeBrandAdd(req types.AddHomeBrandReq) (*types.AddHomeBrandResp, error) {
+func (l *AddHomeBrandLogic) AddHomeBrand(req *types.AddHomeBrandReq) (*types.AddHomeBrandResp, error) {
 	// 1.根据brandIds查询品牌信息(pms-rpc)
 	brandListResp, _ := l.svcCtx.BrandService.QueryBrandListByIds(l.ctx, &pmsclient.QueryBrandListByIdsReq{Ids: req.BrandIds})
 

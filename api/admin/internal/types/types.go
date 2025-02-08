@@ -1205,31 +1205,6 @@ type ListHomeAdvertiseResp struct {
 	Total    int64                    `json:"total"`
 }
 
-type ListHomeBrandData struct {
-	Id              int64  `json:"id"`
-	BrandId         int64  `json:"brandId"`         // 商品品牌id
-	BrandName       string `json:"brandName"`       // 商品品牌名称
-	RecommendStatus int32  `json:"recommendStatus"` // 推荐状态：0->不推荐;1->推荐
-	Sort            int32  `json:"sort"`            // 排序
-}
-
-type ListHomeBrandReq struct {
-	Current         int64  `form:"current,default=1"`
-	PageSize        int64  `form:"pageSize,default=20"`
-	BrandName       string `form:"brandName,optional"`        // 商品品牌名称
-	RecommendStatus int32  `form:"recommendStatus,default=2"` // 推荐状态：0->不推荐;1->推荐
-}
-
-type ListHomeBrandResp struct {
-	Code     string               `json:"code"`
-	Message  string               `json:"message"`
-	Current  int64                `json:"current,default=1"`
-	Data     []*ListHomeBrandData `json:"data"`
-	PageSize int64                `json:"pageSize,default=20"`
-	Success  bool                 `json:"success"`
-	Total    int64                `json:"total"`
-}
-
 type ListHomeNewProductData struct {
 	Id              int64  `json:"id"`
 	ProductId       int64  `json:"productId"`       // 商品id
@@ -2171,6 +2146,49 @@ type QueryFlashPromotionListResp struct {
 	PageSize int64                          `json:"pageSize,default=20"`
 	Success  bool                           `json:"success"`
 	Total    int64                          `json:"total"`
+}
+
+type QueryHomeBrandDetailData struct {
+	Id              int64  `json:"id"`              //
+	BrandId         int64  `json:"brandId"`         //商品品牌id
+	BrandName       string `json:"brandName"`       //商品品牌名称
+	RecommendStatus int32  `json:"recommendStatus"` //推荐状态：0->不推荐;1->推荐
+	Sort            int32  `json:"sort"`            //排序
+}
+
+type QueryHomeBrandDetailReq struct {
+	Id int64 `form:"id"`
+}
+
+type QueryHomeBrandDetailResp struct {
+	Code    string                   `json:"code"`
+	Message string                   `json:"message"`
+	Data    QueryHomeBrandDetailData `json:"data"`
+}
+
+type QueryHomeBrandListData struct {
+	Id              int64  `json:"id"`              //
+	BrandId         int64  `json:"brandId"`         //商品品牌id
+	BrandName       string `json:"brandName"`       //商品品牌名称
+	RecommendStatus int32  `json:"recommendStatus"` //推荐状态：0->不推荐;1->推荐
+	Sort            int32  `json:"sort"`            //排序
+}
+
+type QueryHomeBrandListReq struct {
+	Current         int64  `form:"current,default=1"`         //第几页
+	PageSize        int64  `form:"pageSize,default=20"`       //每页的数量
+	BrandName       string `form:"brandName,optional"`        //商品品牌名称
+	RecommendStatus int32  `form:"recommendStatus,default=2"` //推荐状态：0->不推荐;1->推荐
+}
+
+type QueryHomeBrandListResp struct {
+	Code     string                    `json:"code"`
+	Message  string                    `json:"message"`
+	Current  int64                     `json:"current,default=1"`
+	Data     []*QueryHomeBrandListData `json:"data"`
+	PageSize int64                     `json:"pageSize,default=20"`
+	Success  bool                      `json:"success"`
+	Total    int64                     `json:"total"`
 }
 
 type QueryIntegrationConsumeSettingDetailData struct {
@@ -3561,20 +3579,20 @@ type UpdateHomeAdvertiseStatusReq struct {
 	Status int32   `json:"status"` // 上下线状态：0->下线；1->上线
 }
 
-type UpdateHomeBrandSortReq struct {
-	Id   int64 `json:"id"`
-	Sort int32 `json:"sort"` // 排序
+type UpdateHomeBrandReq struct {
+	Id   int64 `json:"id"`   //
+	Sort int32 `json:"sort"` //排序
 }
 
-type UpdateHomeBrandSortResp struct {
+type UpdateHomeBrandResp struct {
 	Code    string `json:"code"`
 	Message string `json:"message"`
 }
 
 type UpdateHomeBrandStatusReq struct {
-	Ids             []int64 `json:"ids"`
-	BrandIds        []int64 `json:"brandIds"`        // 商品品牌id
-	RecommendStatus int32   `json:"recommendStatus"` // 推荐状态：0->不推荐;1->推荐
+	Ids             []int64 `json:"ids"`                       //
+	BrandIds        []int64 `json:"brandIds"`                  // 商品品牌id
+	RecommendStatus int32   `json:"recommendStatus,default=2"` //推荐状态：0->不推荐;1->推荐
 }
 
 type UpdateHomeBrandStatusResp struct {
