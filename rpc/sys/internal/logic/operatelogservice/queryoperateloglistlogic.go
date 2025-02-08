@@ -45,7 +45,7 @@ func (l *QueryOperateLogListLogic) QueryOperateLogList(in *sysclient.QueryOperat
 	if len(in.OperationName) > 0 {
 		q = q.Where(operateLog.OperationName.Like("%" + in.OperationName + "%"))
 	}
-	if in.OperationStatus != 0 {
+	if in.OperationStatus != 2 {
 		q = q.Where(operateLog.OperationStatus.Eq(in.OperationStatus))
 	}
 	if len(in.OperationType) > 0 {
@@ -56,6 +56,15 @@ func (l *QueryOperateLogListLogic) QueryOperateLogList(in *sysclient.QueryOperat
 	}
 	if len(in.Title) > 0 {
 		q = q.Where(operateLog.Title.Like("%" + in.Title + "%"))
+	}
+	if len(in.RequestMethod) > 0 {
+		q = q.Where(operateLog.RequestMethod.Like("%" + in.RequestMethod + "%"))
+	}
+	if len(in.Browser) > 0 {
+		q = q.Where(operateLog.Browser.Like("%" + in.Browser + "%"))
+	}
+	if len(in.Os) > 0 {
+		q = q.Where(operateLog.Os.Like("%" + in.Os + "%"))
 	}
 
 	result, count, err := q.Order(operateLog.ID.Desc()).FindByPage(int((in.PageNum-1)*in.PageSize), int(in.PageSize))

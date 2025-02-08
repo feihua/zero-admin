@@ -2627,17 +2627,18 @@ type QueryOperateLogListData struct {
 }
 
 type QueryOperateLogListReq struct {
-	Current         int64  `form:"current,default=1"`        //第几页
-	PageSize        int64  `form:"pageSize,default=20"`      //每页的数量
-	DeptName        string `form:"deptName,optional"`        //部门名称
-	OperationIp     string `form:"operationIp,optional"`     //操作地址
-	OperationName   string `form:"operationName,optional"`   //操作人员
-	OperationStatus int32  `form:"operationStatus,optional"` //操作状态
-	OperationType   string `form:"operationType,optional"`   //操作类型
-	OperationUrl    string `form:"operationUrl,optional"`    //操作方法
-	Title           string `form:"title,optional"`           //系统模块
-	Browser         string `form:"browser,optional"`         //浏览器
-	Os              string `form:"os,optional"`              //操作系统
+	Current         int64  `form:"current,default=1"`         //第几页
+	PageSize        int64  `form:"pageSize,default=20"`       //每页的数量
+	DeptName        string `form:"deptName,optional"`         //部门名称
+	OperationIp     string `form:"operationIp,optional"`      //操作地址
+	OperationName   string `form:"operationName,optional"`    //操作人员
+	OperationStatus int32  `form:"operationStatus,default=2"` //操作状态
+	OperationType   string `form:"operationType,optional"`    //操作类型
+	OperationUrl    string `form:"operationUrl,optional"`     //操作方法
+	Title           string `form:"title,optional"`            //系统模块
+	Browser         string `form:"browser,optional"`          //浏览器
+	Os              string `form:"os,optional"`               //操作系统
+	RequestMethod   string `form:"requestMethod,optional"`    //请求方式
 }
 
 type QueryOperateLogListResp struct {

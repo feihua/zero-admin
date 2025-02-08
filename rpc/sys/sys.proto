@@ -689,6 +689,7 @@ message QueryOperateLogListReq {
   string title = 10; //系统模块
   string os = 11; //操作系统信息
   string browser = 12; //浏览器
+  string request_method = 13; //请求方式
 }
 
 message OperateLogListData {

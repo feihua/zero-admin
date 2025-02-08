@@ -45,6 +45,7 @@ func (l *QueryOperateLogListLogic) QueryOperateLogList(req *types.QueryOperateLo
 		Title:           req.Title,           // 系统模块
 		Browser:         req.Browser,         // 浏览器
 		Os:              req.Os,              // 操作系统
+		RequestMethod:   req.RequestMethod,   // 请求方式
 	})
 
 	if err != nil {
