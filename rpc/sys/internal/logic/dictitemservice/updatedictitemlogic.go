@@ -10,6 +10,7 @@ import (
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
 	"github.com/zeromicro/go-zero/core/logc"
 	"gorm.io/gorm"
+	"time"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -104,16 +105,20 @@ func (l *UpdateDictItemLogic) UpdateDictItem(in *sysclient.UpdateDictItemReq) (*
 		}
 	}
 
+	now := time.Now()
 	data := &model.SysDictItem{
-		ID:         in.Id,         // 编号
-		DictType:   dictType,      // 字典类型
-		DictLabel:  in.DictLabel,  // 字典标签
-		DictValue:  in.DictValue,  // 字典键值
-		DictStatus: in.DictStatus, // 字典状态
-		DictSort:   in.DictSort,   // 排序
-		Remark:     in.Remark,     // 备注信息
-		IsDefault:  in.IsDefault,  // 是否默认  0：否  1：是
-		UpdateBy:   in.UpdateBy,   // 更新者
+		ID:         in.Id,               // 编号
+		DictType:   dictType,            // 字典类型
+		DictLabel:  in.DictLabel,        // 字典标签
+		DictValue:  in.DictValue,        // 字典键值
+		DictStatus: in.DictStatus,       // 字典状态
+		DictSort:   in.DictSort,         // 排序
+		Remark:     in.Remark,           // 备注信息
+		IsDefault:  in.IsDefault,        // 是否默认  0：否  1：是
+		CreateBy:   dictItem.CreateBy,   // 创建者
+		CreateTime: dictItem.CreateTime, // 创建时间
+		UpdateBy:   in.UpdateBy,         // 更新者
+		UpdateTime: &now,                // 更新时间
 	}
 
 	// 6.字典数据存在时,则直接更新字典数据

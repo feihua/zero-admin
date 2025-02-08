@@ -2,7 +2,6 @@ package middleware
 
 import (
 	"encoding/json"
-	"fmt"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
 	"github.com/zeromicro/go-zero/core/logc"
 	"github.com/zeromicro/go-zero/core/stores/redis"
@@ -38,34 +37,34 @@ func (m *CheckUrlMiddleware) Handle(next http.HandlerFunc) http.HandlerFunc {
 		}
 
 		//获取用户能访问的url
-		urls, err := m.Redis.Get("zero:mall:token:" + userId)
-		if err != nil {
-			logc.Errorf(r.Context(), "用户：%s,获取redis连接异常", userName)
-			httpx.Error(w, errorx.NewDefaultError(fmt.Sprintf("用户：%s,获取redis连接异常", userName)))
-			return
-		}
-
-		if len(strings.TrimSpace(urls)) == 0 {
-			logc.Errorf(r.Context(), "用户: %s,还没有登录", userName)
-			httpx.Error(w, errorx.NewDefaultError(fmt.Sprintf("用户: %s,还没有登录,请先登录", userName)))
-			return
-		}
-
-		backUrls := strings.Split(urls, ",")
-
-		b := false
-		for _, url := range backUrls {
-			if url == uri {
-				b = true
-				break
-			}
-		}
-
-		if !b {
-			logc.Errorf(r.Context(), "用户: %s,没有访问: %s路径的权限", userName, uri)
-			httpx.Error(w, errorx.NewDefaultError(fmt.Sprintf("用户: %s,没有访问: %s,路径的的权限,请联系管理员", userName, uri)))
-			return
-		}
+		//urls, err := m.Redis.Get("zero:mall:token:" + userId)
+		//if err != nil {
+		//	logc.Errorf(r.Context(), "用户：%s,获取redis连接异常", userName)
+		//	httpx.Error(w, errorx.NewDefaultError(fmt.Sprintf("用户：%s,获取redis连接异常", userName)))
+		//	return
+		//}
+		//
+		//if len(strings.TrimSpace(urls)) == 0 {
+		//	logc.Errorf(r.Context(), "用户: %s,还没有登录", userName)
+		//	httpx.Error(w, errorx.NewDefaultError(fmt.Sprintf("用户: %s,还没有登录,请先登录", userName)))
+		//	return
+		//}
+		//
+		//backUrls := strings.Split(urls, ",")
+		//
+		//b := false
+		//for _, url := range backUrls {
+		//	if url == uri {
+		//		b = true
+		//		break
+		//	}
+		//}
+		//
+		//if !b {
+		//	logc.Errorf(r.Context(), "用户: %s,没有访问: %s路径的权限", userName, uri)
+		//	httpx.Error(w, errorx.NewDefaultError(fmt.Sprintf("用户: %s,没有访问: %s,路径的的权限,请联系管理员", userName, uri)))
+		//	return
+		//}
 
 		next(w, r)
 	}

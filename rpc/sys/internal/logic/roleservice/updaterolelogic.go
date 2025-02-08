@@ -9,6 +9,8 @@ import (
 	"github.com/feihua/zero-admin/rpc/sys/internal/svc"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
 	"github.com/zeromicro/go-zero/core/logc"
+	"gorm.io/gorm"
+	"time"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -46,19 +48,20 @@ func (l *UpdateRoleLogic) UpdateRole(in *sysclient.UpdateRoleReq) (*sysclient.Up
 	}
 
 	// 1.查询角色角色是否已存在
-	count, err := role.WithContext(l.ctx).Where(role.ID.Eq(in.Id)).Count()
+	item, err := query.SysRole.WithContext(l.ctx).Where(query.SysRole.ID.Eq(in.Id)).First()
 
-	if err != nil {
-		return nil, errors.New("查询角色失败")
-	}
-
-	if count == 0 {
+	// 1.判断角色是否存在
+	switch {
+	case errors.Is(err, gorm.ErrRecordNotFound):
 		return nil, errors.New("角色不存在")
+	case err != nil:
+		logc.Errorf(l.ctx, "查询角色异常, 请求参数：%+v, 异常信息: %s", in, err.Error())
+		return nil, errors.New("查询角色异常")
 	}
 
 	// 2.查询角色名称是否存在
 	name := in.RoleName
-	count, err = q.Where(role.ID.Neq(in.Id), role.RoleName.Eq(name)).Count()
+	count, err := q.Where(role.ID.Neq(in.Id), role.RoleName.Eq(name)).Count()
 
 	if err != nil {
 		logc.Errorf(l.ctx, "根据角色名称：%s,查询角色失败,异常:%s", name, err.Error())
@@ -83,16 +86,20 @@ func (l *UpdateRoleLogic) UpdateRole(in *sysclient.UpdateRoleReq) (*sysclient.Up
 	}
 
 	// 4.角色存在时,则直接更新角色
+	now := time.Now()
 	sysRole := &model.SysRole{
-		ID:         in.Id,         // 编号
-		RoleName:   in.RoleName,   // 角色名称
-		RoleKey:    in.RoleKey,    // 权限字符
-		RoleStatus: in.RoleStatus, // 角色状态
-		RoleSort:   in.RoleSort,   // 角色排序
-		DataScope:  in.DataScope,  // 数据权限
-		IsAdmin:    in.IsAdmin,    // 是否超级管理员:  0：否  1：是
-		Remark:     in.Remark,     // 备注
-		UpdateBy:   in.UpdateBy,   // 更新者
+		ID:         in.Id,           // 编号
+		RoleName:   in.RoleName,     // 角色名称
+		RoleKey:    in.RoleKey,      // 权限字符
+		RoleStatus: in.RoleStatus,   // 角色状态
+		RoleSort:   in.RoleSort,     // 角色排序
+		DataScope:  in.DataScope,    // 数据权限
+		IsAdmin:    in.IsAdmin,      // 是否超级管理员:  0：否  1：是
+		Remark:     in.Remark,       // 备注
+		CreateBy:   item.CreateBy,   // 创建者
+		CreateTime: item.CreateTime, // 创建时间
+		UpdateBy:   in.UpdateBy,     // 更新者
+		UpdateTime: &now,            // 更新时间
 	}
 
 	err = l.svcCtx.DB.Model(&model.SysRole{}).WithContext(l.ctx).Where(query.SysRole.ID.Eq(in.Id)).Save(sysRole).Error
