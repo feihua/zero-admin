@@ -5,6 +5,7 @@ import (
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
 	"github.com/feihua/zero-admin/rpc/sms/smsclient"
 	"github.com/zeromicro/go-zero/core/logc"
+	"google.golang.org/grpc/status"
 
 	"github.com/feihua/zero-admin/api/admin/internal/svc"
 	"github.com/feihua/zero-admin/api/admin/internal/types"
@@ -33,7 +34,8 @@ func (l *FlashPromotionLogDeleteLogic) FlashPromotionLogDelete(req types.DeleteF
 
 	if err != nil {
 		logc.Errorf(l.ctx, "根据Id: %v,删除限时购通知记录异常:%s", req, err.Error())
-		return nil, errorx.NewDefaultError("删除限时购通知记录失败")
+		s, _ := status.FromError(err)
+		return nil, errorx.NewDefaultError(s.Message())
 	}
 	return &types.DeleteFlashPromotionLogResp{
 		Code:    "000000",

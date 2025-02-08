@@ -6,6 +6,7 @@ import (
 	"github.com/feihua/zero-admin/rpc/pms/pmsclient"
 	"github.com/feihua/zero-admin/rpc/sms/smsclient"
 	"github.com/zeromicro/go-zero/core/logc"
+	"google.golang.org/grpc/status"
 
 	"github.com/feihua/zero-admin/api/admin/internal/svc"
 	"github.com/feihua/zero-admin/api/admin/internal/types"
@@ -43,7 +44,8 @@ func (l *HomeNewProductDeleteLogic) HomeNewProductDelete(req types.DeleteHomeNew
 
 	if err != nil {
 		logc.Errorf(l.ctx, "根据Id: %+v,删除新鲜好物异常:%s", req, err.Error())
-		return nil, errorx.NewDefaultError("删除新鲜好物失败")
+		s, _ := status.FromError(err)
+		return nil, errorx.NewDefaultError(s.Message())
 	}
 
 	// 2.修改pms_product记录的状态为不推荐(pms-rpc)
@@ -53,7 +55,8 @@ func (l *HomeNewProductDeleteLogic) HomeNewProductDelete(req types.DeleteHomeNew
 	})
 	if err != nil {
 		logc.Errorf(l.ctx, "根据Ids: %+v,修改新鲜好物状态异常:%s", req, err.Error())
-		return nil, errorx.NewDefaultError("删除新鲜好物失败")
+		s, _ := status.FromError(err)
+		return nil, errorx.NewDefaultError(s.Message())
 	}
 
 	return &types.DeleteHomeNewProductResp{

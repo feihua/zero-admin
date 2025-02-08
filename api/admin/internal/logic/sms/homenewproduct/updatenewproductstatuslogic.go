@@ -6,6 +6,7 @@ import (
 	"github.com/feihua/zero-admin/rpc/pms/pmsclient"
 	"github.com/feihua/zero-admin/rpc/sms/smsclient"
 	"github.com/zeromicro/go-zero/core/logc"
+	"google.golang.org/grpc/status"
 
 	"github.com/feihua/zero-admin/api/admin/internal/svc"
 	"github.com/feihua/zero-admin/api/admin/internal/types"
@@ -44,7 +45,8 @@ func (l *UpdateNewProductStatusLogic) UpdateNewProductStatus(req *types.UpdateNe
 
 	if err != nil {
 		logc.Errorf(l.ctx, "批量修改推荐状态失败,参数：%+v,响应：%s", req, err.Error())
-		return nil, errorx.NewDefaultError("批量修改推荐状态失败")
+		s, _ := status.FromError(err)
+		return nil, errorx.NewDefaultError(s.Message())
 	}
 
 	// 2.修改pms_product记录的状态(pms-rpc)
@@ -54,7 +56,8 @@ func (l *UpdateNewProductStatusLogic) UpdateNewProductStatus(req *types.UpdateNe
 	})
 	if err != nil {
 		logc.Errorf(l.ctx, "根据Ids: %+v,修改新鲜好物状态异常:%s", req, err.Error())
-		return nil, errorx.NewDefaultError("删除新鲜好物失败")
+		s, _ := status.FromError(err)
+		return nil, errorx.NewDefaultError(s.Message())
 	}
 	return &types.UpdateNewProductStatusResp{
 		Code:    "000000",

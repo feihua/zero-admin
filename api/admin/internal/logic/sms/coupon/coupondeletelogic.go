@@ -5,6 +5,7 @@ import (
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
 	"github.com/feihua/zero-admin/rpc/sms/smsclient"
 	"github.com/zeromicro/go-zero/core/logc"
+	"google.golang.org/grpc/status"
 
 	"github.com/feihua/zero-admin/api/admin/internal/svc"
 	"github.com/feihua/zero-admin/api/admin/internal/types"
@@ -39,7 +40,8 @@ func (l *CouponDeleteLogic) CouponDelete(req types.DeleteCouponReq) (*types.Dele
 
 	if err != nil {
 		logc.Errorf(l.ctx, "根据Id: %+v,删除优惠券异常:%s", req, err.Error())
-		return nil, errorx.NewDefaultError("删除优惠券失败")
+		s, _ := status.FromError(err)
+		return nil, errorx.NewDefaultError(s.Message())
 	}
 	return &types.DeleteCouponResp{
 		Code:    "000000",

@@ -6,6 +6,7 @@ import (
 	"github.com/feihua/zero-admin/rpc/cms/cmsclient"
 	"github.com/feihua/zero-admin/rpc/sms/smsclient"
 	"github.com/zeromicro/go-zero/core/logc"
+	"google.golang.org/grpc/status"
 
 	"github.com/feihua/zero-admin/api/admin/internal/svc"
 	"github.com/feihua/zero-admin/api/admin/internal/types"
@@ -60,7 +61,8 @@ func (l *HomeRecommendSubjectAddLogic) HomeRecommendSubjectAdd(req types.AddHome
 
 	if err != nil {
 		logc.Errorf(l.ctx, "添加人气推荐专题信息失败,参数：%+v,响应：%s", req, err.Error())
-		return nil, errorx.NewDefaultError("添加人气推荐专题失败")
+		s, _ := status.FromError(err)
+		return nil, errorx.NewDefaultError(s.Message())
 	}
 
 	// 3.修改cms_subject记录的状态为推荐(cms-rpc)
@@ -70,7 +72,8 @@ func (l *HomeRecommendSubjectAddLogic) HomeRecommendSubjectAdd(req types.AddHome
 	})
 	if err != nil {
 		logc.Errorf(l.ctx, "根据Ids: %+v,更新人气推荐专题状态异常:%s", req, err.Error())
-		return nil, errorx.NewDefaultError("添加人气推荐专题失败")
+		s, _ := status.FromError(err)
+		return nil, errorx.NewDefaultError(s.Message())
 	}
 
 	return &types.AddHomeRecommendSubjectResp{

@@ -5,6 +5,7 @@ import (
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
 	"github.com/feihua/zero-admin/rpc/sms/smsclient"
 	"github.com/zeromicro/go-zero/core/logc"
+	"google.golang.org/grpc/status"
 	"strings"
 
 	"github.com/feihua/zero-admin/api/admin/internal/svc"
@@ -46,7 +47,8 @@ func (l *HomeAdvertiseListLogic) HomeAdvertiseList(req types.ListHomeAdvertiseRe
 
 	if err != nil {
 		logc.Errorf(l.ctx, "参数: %+v,查询首页广告列表异常:%s", req, err.Error())
-		return nil, errorx.NewDefaultError("查询首页广告失败")
+		s, _ := status.FromError(err)
+		return nil, errorx.NewDefaultError(s.Message())
 	}
 
 	var list []*types.ListHomeAdvertiseData

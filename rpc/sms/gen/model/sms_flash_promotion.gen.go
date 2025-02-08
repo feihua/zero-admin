@@ -12,12 +12,12 @@ const TableNameSmsFlashPromotion = "sms_flash_promotion"
 
 // SmsFlashPromotion 限时购表
 type SmsFlashPromotion struct {
-	ID         int64     `gorm:"column:id;primaryKey;autoIncrement:true;comment:编号" json:"id"` // 编号
-	Title      string    `gorm:"column:title;not null;comment:标题" json:"title"`                // 标题
-	StartDate  time.Time `gorm:"column:start_date;not null;comment:开始日期" json:"start_date"`    // 开始日期
-	EndDate    time.Time `gorm:"column:end_date;not null;comment:结束日期" json:"end_date"`        // 结束日期
-	Status     int32     `gorm:"column:status;not null;comment:上下线状态" json:"status"`           // 上下线状态
-	CreateTime time.Time `gorm:"column:create_time;not null;comment:创建时间" json:"create_time"`  // 创建时间
+	ID         int64     `gorm:"column:id;primaryKey;autoIncrement:true;comment:编号" json:"id"`              // 编号
+	Title      string    `gorm:"column:title;not null;comment:标题" json:"title"`                             // 标题
+	StartDate  time.Time `gorm:"column:start_date;not null;comment:开始日期" json:"start_date"`                 // 开始日期
+	EndDate    time.Time `gorm:"column:end_date;not null;comment:结束日期" json:"end_date"`                     // 结束日期
+	Status     int32     `gorm:"column:status;not null;comment:上下线状态" json:"status"`                        // 上下线状态
+	CreateTime time.Time `gorm:"column:create_time;not null;default:now();comment:创建时间" json:"create_time"` // 创建时间
 }
 
 // TableName SmsFlashPromotion's table name

@@ -5,6 +5,7 @@ import (
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
 	"github.com/feihua/zero-admin/rpc/sms/smsclient"
 	"github.com/zeromicro/go-zero/core/logc"
+	"google.golang.org/grpc/status"
 
 	"github.com/feihua/zero-admin/api/admin/internal/svc"
 	"github.com/feihua/zero-admin/api/admin/internal/types"
@@ -46,7 +47,8 @@ func (l *FlashPromotionProductRelationUpdateLogic) FlashPromotionProductRelation
 
 	if err != nil {
 		logc.Errorf(l.ctx, "更新限时购和商品关系息失败,参数：%+v,响应：%s", req, err.Error())
-		return nil, errorx.NewDefaultError("更新限时购和商品关系失败")
+		s, _ := status.FromError(err)
+		return nil, errorx.NewDefaultError(s.Message())
 	}
 
 	return &types.UpdateFlashPromotionProductRelationResp{

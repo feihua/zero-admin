@@ -40,12 +40,12 @@ func (l *QueryFlashPromotionDetailLogic) QueryFlashPromotionDetail(in *smsclient
 	}
 
 	data := &smsclient.QueryFlashPromotionDetailResp{
-		Id:         item.ID,                                      // 编号
-		Title:      item.Title,                                   // 标题
-		StartDate:  item.StartDate.Format("2006-01-02 15:04:05"), // 开始日期
-		EndDate:    item.EndDate.Format("2006-01-02 15:04:05"),   // 结束日期
-		Status:     item.Status,                                  // 上下线状态
-		CreateTime: time_util.TimeToStr(item.CreateTime),         // 创建时间
+		Id:         item.ID,                              // 编号
+		Title:      item.Title,                           // 标题
+		StartDate:  item.StartDate.Format("2006-01-02"),  // 开始日期
+		EndDate:    item.EndDate.Format("2006-01-02"),    // 结束日期
+		Status:     item.Status,                          // 上下线状态
+		CreateTime: time_util.TimeToStr(item.CreateTime), // 创建时间
 	}
 
 	logc.Infof(l.ctx, "查询限时购详情,参数：%+v,响应：%+v", in, data)

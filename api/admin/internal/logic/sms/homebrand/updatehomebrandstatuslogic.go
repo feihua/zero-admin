@@ -6,6 +6,7 @@ import (
 	"github.com/feihua/zero-admin/rpc/pms/pmsclient"
 	"github.com/feihua/zero-admin/rpc/sms/smsclient"
 	"github.com/zeromicro/go-zero/core/logc"
+	"google.golang.org/grpc/status"
 
 	"github.com/feihua/zero-admin/api/admin/internal/svc"
 	"github.com/feihua/zero-admin/api/admin/internal/types"
@@ -43,7 +44,8 @@ func (l *UpdateHomeBrandStatusLogic) UpdateHomeBrandStatus(req *types.UpdateHome
 
 	if err != nil {
 		logc.Errorf(l.ctx, "批量修改推荐品牌状态失败,参数：%+v,响应：%s", req, err.Error())
-		return nil, errorx.NewDefaultError("批量修改推荐品牌状态失败")
+		s, _ := status.FromError(err)
+		return nil, errorx.NewDefaultError(s.Message())
 	}
 
 	// 2.修改品牌的推荐状态(pms-rpc)

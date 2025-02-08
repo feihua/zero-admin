@@ -5,6 +5,7 @@ import (
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
 	"github.com/feihua/zero-admin/rpc/sms/smsclient"
 	"github.com/zeromicro/go-zero/core/logc"
+	"google.golang.org/grpc/status"
 	"strings"
 
 	"github.com/feihua/zero-admin/api/admin/internal/svc"
@@ -43,7 +44,8 @@ func (l *HomeRecommendProductListLogic) HomeRecommendProductList(req types.ListH
 
 	if err != nil {
 		logc.Errorf(l.ctx, "参数: %+v,查询人气推荐商品列表异常:%s", req, err.Error())
-		return nil, errorx.NewDefaultError("查询人气推荐商品失败")
+		s, _ := status.FromError(err)
+		return nil, errorx.NewDefaultError(s.Message())
 	}
 
 	var list []*types.ListHomeRecommendProductData

@@ -6,6 +6,7 @@ import (
 	"github.com/feihua/zero-admin/rpc/cms/cmsclient"
 	"github.com/feihua/zero-admin/rpc/sms/smsclient"
 	"github.com/zeromicro/go-zero/core/logc"
+	"google.golang.org/grpc/status"
 
 	"github.com/feihua/zero-admin/api/admin/internal/svc"
 	"github.com/feihua/zero-admin/api/admin/internal/types"
@@ -44,7 +45,8 @@ func (l *HomeRecommendSubjectDeleteLogic) HomeRecommendSubjectDelete(req types.D
 
 	if err != nil {
 		logc.Errorf(l.ctx, "根据Ids: %+v,删除人气推荐专题异常:%s", req, err.Error())
-		return nil, errorx.NewDefaultError("删除人气推荐专题失败")
+		s, _ := status.FromError(err)
+		return nil, errorx.NewDefaultError(s.Message())
 	}
 
 	// 2.修改cms_subject记录的状态为不推荐(cms-rpc)
@@ -54,7 +56,8 @@ func (l *HomeRecommendSubjectDeleteLogic) HomeRecommendSubjectDelete(req types.D
 	})
 	if err != nil {
 		logc.Errorf(l.ctx, "根据Ids: %+v,更新人气推荐专题状态异常:%s", req, err.Error())
-		return nil, errorx.NewDefaultError("删除人气推荐专题失败")
+		s, _ := status.FromError(err)
+		return nil, errorx.NewDefaultError(s.Message())
 	}
 
 	return &types.DeleteHomeRecommendSubjectResp{

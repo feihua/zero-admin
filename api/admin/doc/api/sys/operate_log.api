@@ -52,7 +52,7 @@ type (
 		Title           string `form:"title,optional"` //系统模块
 		Browser         string `form:"browser,optional"` //浏览器
 		Os              string `form:"os,optional"` //操作系统
-		RequestMethod     string `form:"requestMethod,optional"` //请求方式
+		RequestMethod   string `form:"requestMethod,optional"` //请求方式
 	}
 	QueryOperateLogListData {
 		Id                int64  `json:"id"` //编号

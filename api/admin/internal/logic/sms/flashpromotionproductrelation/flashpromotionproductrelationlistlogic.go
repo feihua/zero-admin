@@ -6,6 +6,7 @@ import (
 	"github.com/feihua/zero-admin/rpc/pms/pmsclient"
 	"github.com/feihua/zero-admin/rpc/sms/smsclient"
 	"github.com/zeromicro/go-zero/core/logc"
+	"google.golang.org/grpc/status"
 
 	"github.com/feihua/zero-admin/api/admin/internal/svc"
 	"github.com/feihua/zero-admin/api/admin/internal/types"
@@ -43,7 +44,8 @@ func (l *FlashPromotionProductRelationListLogic) FlashPromotionProductRelationLi
 
 	if err != nil {
 		logc.Errorf(l.ctx, "参数: %+v,分页查询不同场次关联及商品信息列表异常:%s", req, err.Error())
-		return nil, errorx.NewDefaultError("分页查询不同场次关联及商品信息失败")
+		s, _ := status.FromError(err)
+		return nil, errorx.NewDefaultError(s.Message())
 	}
 
 	var ids []int64

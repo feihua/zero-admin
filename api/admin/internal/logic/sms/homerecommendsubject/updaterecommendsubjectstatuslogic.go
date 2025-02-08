@@ -6,6 +6,7 @@ import (
 	"github.com/feihua/zero-admin/rpc/cms/cmsclient"
 	"github.com/feihua/zero-admin/rpc/sms/smsclient"
 	"github.com/zeromicro/go-zero/core/logc"
+	"google.golang.org/grpc/status"
 
 	"github.com/feihua/zero-admin/api/admin/internal/svc"
 	"github.com/feihua/zero-admin/api/admin/internal/types"
@@ -44,7 +45,8 @@ func (l *UpdateRecommendSubjectStatusLogic) UpdateRecommendSubjectStatus(req *ty
 
 	if err != nil {
 		logc.Errorf(l.ctx, "批量修改推荐状态失败,参数：%+v,响应：%s", req, err.Error())
-		return nil, errorx.NewDefaultError("修改推荐状态失败")
+		s, _ := status.FromError(err)
+		return nil, errorx.NewDefaultError(s.Message())
 	}
 
 	// 2.修改cms_subject记录的推荐状态(cms-rpc)
@@ -54,7 +56,8 @@ func (l *UpdateRecommendSubjectStatusLogic) UpdateRecommendSubjectStatus(req *ty
 	})
 	if err != nil {
 		logc.Errorf(l.ctx, "根据Ids: %+v,更新人气推荐专题状态异常:%s", req, err.Error())
-		return nil, errorx.NewDefaultError("修改推荐状态失败")
+		s, _ := status.FromError(err)
+		return nil, errorx.NewDefaultError(s.Message())
 	}
 
 	return &types.UpdateRecommendSubjectStatusResp{

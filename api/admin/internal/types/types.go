@@ -97,10 +97,10 @@ type AddFlashPromotionProductRelationResp struct {
 }
 
 type AddFlashPromotionReq struct {
-	Title     string `json:"title"`     //活动标题
-	StartDate string `json:"startDate"` // 开始日期
-	EndDate   string `json:"endDate"`   // 结束日期
-	Status    int32  `json:"status"`    // 上下线状态
+	Title     string `json:"title"`     //标题
+	StartDate string `json:"startDate"` //开始日期
+	EndDate   string `json:"endDate"`   //结束日期
+	Status    int32  `json:"status"`    //上下线状态
 }
 
 type AddFlashPromotionResp struct {
@@ -1087,15 +1087,6 @@ type ListCouponResp struct {
 	Total    int64             `json:"total"`
 }
 
-type ListFlashPromotionData struct {
-	Id         int64  `json:"id"`
-	Title      string `json:"title"`      //标题
-	StartDate  string `json:"startDate"`  // 开始日期
-	EndDate    string `json:"endDate"`    // 结束日期
-	Status     int32  `json:"status"`     // 上下线状态
-	CreateTime string `json:"createTime"` // 秒杀时间段名称
-}
-
 type ListFlashPromotionLogData struct {
 	Id            int64  `json:"id"`
 	MemberId      int64  `json:"memberId"`
@@ -1152,25 +1143,6 @@ type ListFlashPromotionProductRelationResp struct {
 	PageSize int64                                    `json:"pageSize,default=20"`
 	Success  bool                                     `json:"success"`
 	Total    int64                                    `json:"total"`
-}
-
-type ListFlashPromotionReq struct {
-	Current   int64  `form:"current,default=1"`
-	PageSize  int64  `form:"pageSize,default=20"`
-	Title     string `form:"title,optional"`     //标题
-	Status    int32  `form:"status,,default=2"`  // 上下线状态
-	StartDate string `form:"startDate,optional"` // 开始日期
-	EndDate   string `form:"endDate,optional"`   // 结束日期
-}
-
-type ListFlashPromotionResp struct {
-	Code     string                    `json:"code"`
-	Message  string                    `json:"message"`
-	Current  int64                     `json:"current,default=1"`
-	Data     []*ListFlashPromotionData `json:"data"`
-	PageSize int64                     `json:"pageSize,default=20"`
-	Success  bool                      `json:"success"`
-	Total    int64                     `json:"total"`
 }
 
 type ListFlashPromotionSessionData struct {
@@ -2152,6 +2124,53 @@ type QueryDictTypeListResp struct {
 	PageSize int64                    `json:"pageSize,default=20"`
 	Success  bool                     `json:"success"`
 	Total    int64                    `json:"total"`
+}
+
+type QueryFlashPromotionDetailData struct {
+	Id         int64  `json:"id"`         //编号
+	Title      string `json:"title"`      //标题
+	StartDate  string `json:"startDate"`  //开始日期
+	EndDate    string `json:"endDate"`    //结束日期
+	Status     int32  `json:"status"`     //上下线状态
+	CreateTime string `json:"createTime"` //创建时间
+}
+
+type QueryFlashPromotionDetailReq struct {
+	Id int64 `form:"id"`
+}
+
+type QueryFlashPromotionDetailResp struct {
+	Code    string                        `json:"code"`
+	Message string                        `json:"message"`
+	Data    QueryFlashPromotionDetailData `json:"data"`
+}
+
+type QueryFlashPromotionListData struct {
+	Id         int64  `json:"id"`         //编号
+	Title      string `json:"title"`      //标题
+	StartDate  string `json:"startDate"`  //开始日期
+	EndDate    string `json:"endDate"`    //结束日期
+	Status     int32  `json:"status"`     //上下线状态
+	CreateTime string `json:"createTime"` //创建时间
+}
+
+type QueryFlashPromotionListReq struct {
+	Current   int64  `form:"current,default=1"`   //第几页
+	PageSize  int64  `form:"pageSize,default=20"` //每页的数量
+	Title     string `form:"title,optional"`      //标题
+	StartDate string `form:"startDate,optional"`  //开始日期
+	EndDate   string `form:"endDate,optional"`    //结束日期
+	Status    int32  `form:"status,default=2"`    //上下线状态
+}
+
+type QueryFlashPromotionListResp struct {
+	Code     string                         `json:"code"`
+	Message  string                         `json:"message"`
+	Current  int64                          `json:"current,default=1"`
+	Data     []*QueryFlashPromotionListData `json:"data"`
+	PageSize int64                          `json:"pageSize,default=20"`
+	Success  bool                           `json:"success"`
+	Total    int64                          `json:"total"`
 }
 
 type QueryIntegrationConsumeSettingDetailData struct {
@@ -3474,11 +3493,11 @@ type UpdateFlashPromotionProductRelationResp struct {
 }
 
 type UpdateFlashPromotionReq struct {
-	Id        int64  `json:"id"`
-	Title     string `json:"title"`
-	StartDate string `json:"startDate"` // 开始日期
-	EndDate   string `json:"endDate"`   // 结束日期
-	Status    int32  `json:"status"`    // 上下线状态
+	Id        int64  `json:"id"`        //编号
+	Title     string `json:"title"`     //标题
+	StartDate string `json:"startDate"` //开始日期
+	EndDate   string `json:"endDate"`   //结束日期
+	Status    int32  `json:"status"`    //上下线状态
 }
 
 type UpdateFlashPromotionResp struct {
@@ -3510,8 +3529,8 @@ type UpdateFlashPromotionSessionStatusResp struct {
 }
 
 type UpdateFlashPromotionStatusReq struct {
-	Ids    []int64 `json:"ids"`
-	Status int32   `json:"status"`
+	Ids    []int64 `json:"ids"`    //编号
+	Status int32   `json:"status"` //上下线状态
 }
 
 type UpdateFlashPromotionStatusResp struct {

@@ -6,6 +6,7 @@ import (
 	"github.com/feihua/zero-admin/rpc/sms/client/couponservice"
 	"github.com/feihua/zero-admin/rpc/sms/smsclient"
 	"github.com/zeromicro/go-zero/core/logc"
+	"google.golang.org/grpc/status"
 
 	"github.com/feihua/zero-admin/api/admin/internal/svc"
 	"github.com/feihua/zero-admin/api/admin/internal/types"
@@ -40,7 +41,8 @@ func (l *CouponDetailLogic) CouponDetail(req *types.CouponDetailReq) (resp *type
 
 	if err != nil {
 		logc.Errorf(l.ctx, "参数: %+v,获取单个优惠券的详细信息异常:%s", req, err.Error())
-		return nil, errorx.NewDefaultError("获取单个优惠券的详细信息失败")
+		s, _ := status.FromError(err)
+		return nil, errorx.NewDefaultError(s.Message())
 	}
 
 	coupon := buildCoupon(item)

@@ -5,6 +5,7 @@ import (
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
 	"github.com/feihua/zero-admin/rpc/sms/smsclient"
 	"github.com/zeromicro/go-zero/core/logc"
+	"google.golang.org/grpc/status"
 
 	"github.com/feihua/zero-admin/api/admin/internal/svc"
 	"github.com/feihua/zero-admin/api/admin/internal/types"
@@ -73,7 +74,8 @@ func (l *CouponUpdateLogic) CouponUpdate(req types.AddOrUpdateCouponReq) (*types
 
 	if err != nil {
 		logc.Errorf(l.ctx, "更新优惠券信息失败,参数：%+v,响应：%s", req, err.Error())
-		return nil, errorx.NewDefaultError("更新优惠券失败")
+		s, _ := status.FromError(err)
+		return nil, errorx.NewDefaultError(s.Message())
 	}
 
 	return &types.AddOrUpdateCouponResp{

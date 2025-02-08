@@ -6,6 +6,7 @@ import (
 	"github.com/feihua/zero-admin/rpc/pms/pmsclient"
 	"github.com/feihua/zero-admin/rpc/sms/smsclient"
 	"github.com/zeromicro/go-zero/core/logc"
+	"google.golang.org/grpc/status"
 
 	"github.com/feihua/zero-admin/api/admin/internal/svc"
 	"github.com/feihua/zero-admin/api/admin/internal/types"
@@ -58,7 +59,8 @@ func (l *HomeRecommendProductAddLogic) HomeRecommendProductAdd(req types.AddHome
 
 	if err != nil {
 		logc.Errorf(l.ctx, "添加人气推荐商品信息失败,参数：%+v,响应：%s", req, err.Error())
-		return nil, errorx.NewDefaultError("添加人气推荐商品失败")
+		s, _ := status.FromError(err)
+		return nil, errorx.NewDefaultError(s.Message())
 	}
 
 	// 3.修改商品的推荐状态(pms-rpc)
@@ -69,7 +71,8 @@ func (l *HomeRecommendProductAddLogic) HomeRecommendProductAdd(req types.AddHome
 
 	if err != nil {
 		logc.Errorf(l.ctx, "根据Ids: %+v,修改商品的推荐状态异常:%s", req, err.Error())
-		return nil, errorx.NewDefaultError("添加人气推荐商品失败")
+		s, _ := status.FromError(err)
+		return nil, errorx.NewDefaultError(s.Message())
 	}
 	return &types.AddHomeRecommendProductResp{
 		Code:    "000000",

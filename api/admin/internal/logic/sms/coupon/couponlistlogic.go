@@ -8,6 +8,7 @@ import (
 	"github.com/feihua/zero-admin/rpc/sms/smsclient"
 	"github.com/zeromicro/go-zero/core/logc"
 	"github.com/zeromicro/go-zero/core/logx"
+	"google.golang.org/grpc/status"
 	"strings"
 )
 
@@ -45,7 +46,8 @@ func (l *CouponListLogic) CouponList(req types.ListCouponReq) (*types.ListCoupon
 
 	if err != nil {
 		logc.Errorf(l.ctx, "参数: %+v,查询优惠券列表异常:%s", req, err.Error())
-		return nil, errorx.NewDefaultError("查询优惠券失败")
+		s, _ := status.FromError(err)
+		return nil, errorx.NewDefaultError(s.Message())
 	}
 
 	var list []*types.ListCouponData
