@@ -14,7 +14,7 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// HomeBrandListLogic 首页品牌信息
+// QueryHomeBrandListLogic 首页品牌信息
 /*
 Author: LiuFeiHua
 Date: 2024/5/13 15:53

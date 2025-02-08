@@ -25,7 +25,7 @@ type HomeNewProductAddLogic struct {
 	svcCtx *svc.ServiceContext
 }
 
-func NewHomeNewProductAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) HomeNewProductAddLogic {
+func NewAddHomeNewProductLogic(ctx context.Context, svcCtx *svc.ServiceContext) HomeNewProductAddLogic {
 	return HomeNewProductAddLogic{
 		Logger: logx.WithContext(ctx),
 		ctx:    ctx,
@@ -33,11 +33,11 @@ func NewHomeNewProductAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) 
 	}
 }
 
-// HomeNewProductAdd 添加首页新品
+// AddHomeNewProduct 添加首页新品
 // 1.根据productIds查询商品(pms-rpc)
 // 2.添加首页新品推荐记录(sms-rpc)
 // 3.修改商品的推荐状态(pms-rpc)
-func (l *HomeNewProductAddLogic) HomeNewProductAdd(req types.AddHomeNewProductReq) (*types.AddHomeNewProductResp, error) {
+func (l *HomeNewProductAddLogic) AddHomeNewProduct(req *types.AddHomeNewProductReq) (*types.AddHomeNewProductResp, error) {
 	// 1.根据productIds查询商品(pms-rpc)
 	brandListResp, _ := l.svcCtx.ProductService.QueryProductListByIds(l.ctx, &pmsclient.QueryProductByIdsReq{Ids: req.ProductIds})
 

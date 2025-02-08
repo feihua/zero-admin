@@ -9,16 +9,16 @@ import (
 	"github.com/zeromicro/go-zero/rest/httpx"
 )
 
-func UpdateNewProductStatusHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
+func QueryHomeNewProductDetailHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		var req types.UpdateNewProductStatusReq
+		var req types.QueryHomeNewProductDetailReq
 		if err := httpx.Parse(r, &req); err != nil {
 			httpx.ErrorCtx(r.Context(), w, err)
 			return
 		}
 
-		l := homenewproduct.NewUpdateNewProductStatusLogic(r.Context(), svcCtx)
-		resp, err := l.UpdateNewProductStatus(&req)
+		l := homenewproduct.NewQueryHomeNewProductDetailLogic(r.Context(), svcCtx)
+		resp, err := l.QueryHomeNewProductDetail(&req)
 		if err != nil {
 			httpx.ErrorCtx(r.Context(), w, err)
 		} else {

@@ -739,7 +739,7 @@ type DeleteHomeBrandResp struct {
 
 type DeleteHomeNewProductReq struct {
 	Ids        []int64 `form:"ids"`
-	ProductIds []int64 `form:"productIds"` // 商品id
+	ProductIds []int64 `form:"productIds"`
 }
 
 type DeleteHomeNewProductResp struct {
@@ -1203,31 +1203,6 @@ type ListHomeAdvertiseResp struct {
 	PageSize int64                    `json:"pageSize,default=20"`
 	Success  bool                     `json:"success"`
 	Total    int64                    `json:"total"`
-}
-
-type ListHomeNewProductData struct {
-	Id              int64  `json:"id"`
-	ProductId       int64  `json:"productId"`       // 商品id
-	ProductName     string `json:"productName"`     // 商品名称
-	RecommendStatus int32  `json:"recommendStatus"` // 推荐状态：0->不推荐;1->推荐
-	Sort            int32  `json:"sort"`            // 排序
-}
-
-type ListHomeNewProductReq struct {
-	Current         int64  `form:"current,default=1"`
-	PageSize        int64  `form:"pageSize,default=20"`
-	ProductName     string `form:"productName,optional"`      // 商品名称
-	RecommendStatus int32  `form:"recommendStatus,default=2"` // 推荐状态：0->不推荐;1->推荐
-}
-
-type ListHomeNewProductResp struct {
-	Code     string                    `json:"code"`
-	Message  string                    `json:"message"`
-	Current  int64                     `json:"current,default=1"`
-	Data     []*ListHomeNewProductData `json:"data"`
-	PageSize int64                     `json:"pageSize,default=20"`
-	Success  bool                      `json:"success"`
-	Total    int64                     `json:"total"`
 }
 
 type ListHomeRecommendProductData struct {
@@ -2189,6 +2164,49 @@ type QueryHomeBrandListResp struct {
 	PageSize int64                     `json:"pageSize,default=20"`
 	Success  bool                      `json:"success"`
 	Total    int64                     `json:"total"`
+}
+
+type QueryHomeNewProductDetailData struct {
+	Id              int64  `json:"id"`              //
+	ProductId       int64  `json:"productId"`       //商品id
+	ProductName     string `json:"productName"`     //商品名称
+	RecommendStatus int32  `json:"recommendStatus"` //推荐状态：0->不推荐;1->推荐
+	Sort            int32  `json:"sort"`            //排序
+}
+
+type QueryHomeNewProductDetailReq struct {
+	Id int64 `form:"id"`
+}
+
+type QueryHomeNewProductDetailResp struct {
+	Code    string                        `json:"code"`
+	Message string                        `json:"message"`
+	Data    QueryHomeNewProductDetailData `json:"data"`
+}
+
+type QueryHomeNewProductListData struct {
+	Id              int64  `json:"id"`              //
+	ProductId       int64  `json:"productId"`       //商品id
+	ProductName     string `json:"productName"`     //商品名称
+	RecommendStatus int32  `json:"recommendStatus"` //推荐状态：0->不推荐;1->推荐
+	Sort            int32  `json:"sort"`            //排序
+}
+
+type QueryHomeNewProductListReq struct {
+	Current         int64  `form:"current,default=1"`         //第几页
+	PageSize        int64  `form:"pageSize,default=20"`       //每页的数量
+	ProductName     string `form:"productName,optional"`      //商品名称
+	RecommendStatus int32  `form:"recommendStatus,default=2"` //推荐状态：0->不推荐;1->推荐
+}
+
+type QueryHomeNewProductListResp struct {
+	Code     string                         `json:"code"`
+	Message  string                         `json:"message"`
+	Current  int64                          `json:"current,default=1"`
+	Data     []*QueryHomeNewProductListData `json:"data"`
+	PageSize int64                          `json:"pageSize,default=20"`
+	Success  bool                           `json:"success"`
+	Total    int64                          `json:"total"`
 }
 
 type QueryIntegrationConsumeSettingDetailData struct {
@@ -3600,6 +3618,17 @@ type UpdateHomeBrandStatusResp struct {
 	Message string `json:"message"`
 }
 
+type UpdateHomeNewProductStatusReq struct {
+	Ids             []int64 `json:"ids"`
+	ProductIds      []int64 `json:"productIds"`      // 商品id
+	RecommendStatus int32   `json:"recommendStatus"` // 推荐状态：0->不推荐;1->推荐
+}
+
+type UpdateHomeNewProductStatusResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
+}
+
 type UpdateIntegrationConsumeSettingReq struct {
 	Id                 int64 `json:"id"`                     //
 	DeductionPerAmount int32 `json:"deductionPerAmount"`     //每一元需要抵扣的积分数量
@@ -3814,17 +3843,6 @@ type UpdateNewProductSortReq struct {
 }
 
 type UpdateNewProductSortResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
-}
-
-type UpdateNewProductStatusReq struct {
-	Ids             []int64 `json:"ids"`
-	ProductIds      []int64 `json:"productIds"`      // 商品id
-	RecommendStatus int32   `json:"recommendStatus"` // 推荐状态：0->不推荐;1->推荐
-}
-
-type UpdateNewProductStatusResp struct {
 	Code    string `json:"code"`
 	Message string `json:"message"`
 }

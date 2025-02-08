@@ -25,7 +25,7 @@ type HomeNewProductDeleteLogic struct {
 	svcCtx *svc.ServiceContext
 }
 
-func NewHomeNewProductDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext) HomeNewProductDeleteLogic {
+func NewDeleteHomeNewProductLogic(ctx context.Context, svcCtx *svc.ServiceContext) HomeNewProductDeleteLogic {
 	return HomeNewProductDeleteLogic{
 		Logger: logx.WithContext(ctx),
 		ctx:    ctx,
@@ -33,11 +33,11 @@ func NewHomeNewProductDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContex
 	}
 }
 
-// HomeNewProductDelete 删除首页新品
-// 1.删除sms_home_new_product的记录(sms-rpc)
+// DeleteHomeNewProduct 删除首页新品
+// 1.删除homenewproduct的记录(sms-rpc)
 // 2.修改pms_product记录的状态为不推荐(pms-rpc)
-func (l *HomeNewProductDeleteLogic) HomeNewProductDelete(req types.DeleteHomeNewProductReq) (*types.DeleteHomeNewProductResp, error) {
-	// 1.删除sms_home_new_product的记录(sms-rpc)
+func (l *HomeNewProductDeleteLogic) DeleteHomeNewProduct(req *types.DeleteHomeNewProductReq) (*types.DeleteHomeNewProductResp, error) {
+	// 1.删除homenewproduct的记录(sms-rpc)
 	_, err := l.svcCtx.HomeNewProductService.DeleteHomeNewProduct(l.ctx, &smsclient.DeleteHomeNewProductReq{
 		Ids: req.Ids,
 	})

@@ -25,7 +25,7 @@ type UpdateNewProductStatusLogic struct {
 	svcCtx *svc.ServiceContext
 }
 
-func NewUpdateNewProductStatusLogic(ctx context.Context, svcCtx *svc.ServiceContext) *UpdateNewProductStatusLogic {
+func NewUpdateHomeNewProductStatusLogic(ctx context.Context, svcCtx *svc.ServiceContext) *UpdateNewProductStatusLogic {
 	return &UpdateNewProductStatusLogic{
 		Logger: logx.WithContext(ctx),
 		ctx:    ctx,
@@ -33,10 +33,10 @@ func NewUpdateNewProductStatusLogic(ctx context.Context, svcCtx *svc.ServiceCont
 	}
 }
 
-// UpdateNewProductStatus 批量修改推荐状态
+// UpdateHomeNewProductStatus 批量修改推荐状态
 // 1.修改sms_home_new_product的记录(sms-rpc)
 // 2.修改pms_product记录的状态(pms-rpc)
-func (l *UpdateNewProductStatusLogic) UpdateNewProductStatus(req *types.UpdateNewProductStatusReq) (resp *types.UpdateNewProductStatusResp, err error) {
+func (l *UpdateNewProductStatusLogic) UpdateHomeNewProductStatus(req *types.UpdateHomeNewProductStatusReq) (resp *types.UpdateHomeNewProductStatusResp, err error) {
 	// 1.修改sms_home_new_product的记录(sms-rpc)
 	_, err = l.svcCtx.HomeNewProductService.UpdateHomeNewProductStatus(l.ctx, &smsclient.UpdateHomeNewProductStatusReq{
 		Ids:             req.Ids,
@@ -59,7 +59,7 @@ func (l *UpdateNewProductStatusLogic) UpdateNewProductStatus(req *types.UpdateNe
 		s, _ := status.FromError(err)
 		return nil, errorx.NewDefaultError(s.Message())
 	}
-	return &types.UpdateNewProductStatusResp{
+	return &types.UpdateHomeNewProductStatusResp{
 		Code:    "000000",
 		Message: "批量修改推荐状态成功",
 	}, nil

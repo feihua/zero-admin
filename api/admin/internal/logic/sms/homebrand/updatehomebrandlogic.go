@@ -13,7 +13,7 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// UpdateHomeBrandSortLogic 首页品牌信息
+// UpdateHomeBrandLogic 首页品牌信息
 /*
 Author: LiuFeiHua
 Date: 2024/5/13 15:53
@@ -32,7 +32,7 @@ func NewUpdateHomeBrandLogic(ctx context.Context, svcCtx *svc.ServiceContext) *U
 	}
 }
 
-// UpdateHomeBrandSort 修改推荐品牌排序
+// UpdateHomeBrand 修改推荐品牌排序
 func (l *UpdateHomeBrandLogic) UpdateHomeBrand(req *types.UpdateHomeBrandReq) (resp *types.UpdateHomeBrandResp, err error) {
 	_, err = l.svcCtx.HomeBrandService.UpdateHomeBrandSort(l.ctx, &smsclient.UpdateHomeBrandSortReq{
 		Id:   req.Id,

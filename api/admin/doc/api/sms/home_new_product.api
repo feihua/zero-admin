@@ -1,10 +1,11 @@
 info (
-	desc:   "首页新鲜好物"
-	author: "koobe"
+	desc:   "新鲜好物表"
+	author: "刘飞华"
 	email:  "1002219331@qq.com"
 )
 
 type (
+	// 添加新鲜好物表请求参数
 	AddHomeNewProductReq {
 		ProductIds []int64 `json:"productIds"` // 商品id
 	}
@@ -12,27 +13,14 @@ type (
 		Code    string `json:"code"`
 		Message string `json:"message"`
 	}
-	ListHomeNewProductReq {
-		Current         int64  `form:"current,default=1"`
-		PageSize        int64  `form:"pageSize,default=20"`
-		ProductName     string `form:"productName,optional"` // 商品名称
-		RecommendStatus int32  `form:"recommendStatus,default=2"` // 推荐状态：0->不推荐;1->推荐
+	// 删除新鲜好物表请求参数
+	DeleteHomeNewProductReq {
+		Ids        []int64 `form:"ids"`
+		ProductIds []int64 `form:"productIds"`
 	}
-	ListHomeNewProductData {
-		Id              int64  `json:"id"`
-		ProductId       int64  `json:"productId"` // 商品id
-		ProductName     string `json:"productName"` // 商品名称
-		RecommendStatus int32  `json:"recommendStatus"` // 推荐状态：0->不推荐;1->推荐
-		Sort            int32  `json:"sort"` // 排序
-	}
-	ListHomeNewProductResp {
-		Code     string                    `json:"code"`
-		Message  string                    `json:"message"`
-		Current  int64                     `json:"current,default=1"`
-		Data     []*ListHomeNewProductData `json:"data"`
-		PageSize int64                     `json:"pageSize,default=20"`
-		Success  bool                      `json:"success"`
-		Total    int64                     `json:"total"`
+	DeleteHomeNewProductResp {
+		Code    string `json:"code"`
+		Message string `json:"message"`
 	}
 	UpdateNewProductSortReq {
 		Id   int64 `json:"id"`
@@ -42,22 +30,54 @@ type (
 		Code    string `json:"code"`
 		Message string `json:"message"`
 	}
-	UpdateNewProductStatusReq {
+	// 更新新鲜好物表状态请求参数
+	UpdateHomeNewProductStatusReq {
 		Ids             []int64 `json:"ids"`
 		ProductIds      []int64 `json:"productIds"` // 商品id
 		RecommendStatus int32   `json:"recommendStatus"` // 推荐状态：0->不推荐;1->推荐
 	}
-	UpdateNewProductStatusResp {
+	UpdateHomeNewProductStatusResp {
 		Code    string `json:"code"`
 		Message string `json:"message"`
 	}
-	DeleteHomeNewProductReq {
-		Ids        []int64 `form:"ids"`
-		ProductIds []int64 `form:"productIds"` // 商品id
+	// 查询新鲜好物表详情请求参数
+	QueryHomeNewProductDetailReq {
+		Id int64 `form:"id"`
 	}
-	DeleteHomeNewProductResp {
-		Code    string `json:"code"`
-		Message string `json:"message"`
+	QueryHomeNewProductDetailData {
+		Id              int64  `json:"id"` //
+		ProductId       int64  `json:"productId"` //商品id
+		ProductName     string `json:"productName"` //商品名称
+		RecommendStatus int32  `json:"recommendStatus"` //推荐状态：0->不推荐;1->推荐
+		Sort            int32  `json:"sort"` //排序
+	}
+	QueryHomeNewProductDetailResp {
+		Code    string                        `json:"code"`
+		Message string                        `json:"message"`
+		Data    QueryHomeNewProductDetailData `json:"data"`
+	}
+	// 分页查询新鲜好物表列表请求参数
+	QueryHomeNewProductListReq {
+		Current         int64  `form:"current,default=1"` //第几页
+		PageSize        int64  `form:"pageSize,default=20"` //每页的数量
+		ProductName     string `form:"productName,optional"` //商品名称
+		RecommendStatus int32  `form:"recommendStatus,default=2"` //推荐状态：0->不推荐;1->推荐
+	}
+	QueryHomeNewProductListData {
+		Id              int64  `json:"id"` //
+		ProductId       int64  `json:"productId"` //商品id
+		ProductName     string `json:"productName"` //商品名称
+		RecommendStatus int32  `json:"recommendStatus"` //推荐状态：0->不推荐;1->推荐
+		Sort            int32  `json:"sort"` //排序
+	}
+	QueryHomeNewProductListResp {
+		Code     string                         `json:"code"`
+		Message  string                         `json:"message"`
+		Current  int64                          `json:"current,default=1"`
+		Data     []*QueryHomeNewProductListData `json:"data"`
+		PageSize int64                          `json:"pageSize,default=20"`
+		Success  bool                           `json:"success"`
+		Total    int64                          `json:"total"`
 	}
 )
 
@@ -68,24 +88,28 @@ type (
 	prefix:     /api/sms/homeNewProduct
 )
 service admin-api {
-	//添加首页新品
-	@handler HomeNewProductAdd
+	// 添加新鲜好物表
+	@handler AddHomeNewProduct
 	post /addHomeNewProduct (AddHomeNewProductReq) returns (AddHomeNewProductResp)
 
-	//查询首页新品
-	@handler HomeNewProductList
-	get /queryHomeNewProductList (ListHomeNewProductReq) returns (ListHomeNewProductResp)
+	// 删除新鲜好物表
+	@handler DeleteHomeNewProduct
+	get /deleteHomeNewProduct (DeleteHomeNewProductReq) returns (DeleteHomeNewProductResp)
 
 	//修改推荐排序
 	@handler UpdateNewProductSort
 	post /updateNewProductSort (UpdateNewProductSortReq) returns (UpdateNewProductSortResp)
 
-	//批量修改推荐状态
-	@handler UpdateNewProductStatus
-	post /updateNewProductStatus (UpdateNewProductStatusReq) returns (UpdateNewProductStatusResp)
+	// 更新新鲜好物表状态
+	@handler UpdateHomeNewProductStatus
+	post /updateNewProductStatus (UpdateHomeNewProductStatusReq) returns (UpdateHomeNewProductStatusResp)
 
-	//删除首页新品
-	@handler HomeNewProductDelete
-	get /deleteHomeNewProduct (DeleteHomeNewProductReq) returns (DeleteHomeNewProductResp)
+	// 查询新鲜好物表详情
+	@handler QueryHomeNewProductDetail
+	get /queryHomeNewProductDetail (QueryHomeNewProductDetailReq) returns (QueryHomeNewProductDetailResp)
+
+	// 分页查询新鲜好物表列表
+	@handler QueryHomeNewProductList
+	get /queryHomeNewProductList (QueryHomeNewProductListReq) returns (QueryHomeNewProductListResp)
 }
 

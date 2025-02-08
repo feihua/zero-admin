@@ -25,7 +25,7 @@ type HomeNewProductListLogic struct {
 	svcCtx *svc.ServiceContext
 }
 
-func NewHomeNewProductListLogic(ctx context.Context, svcCtx *svc.ServiceContext) HomeNewProductListLogic {
+func NewQueryHomeNewProductListLogic(ctx context.Context, svcCtx *svc.ServiceContext) HomeNewProductListLogic {
 	return HomeNewProductListLogic{
 		Logger: logx.WithContext(ctx),
 		ctx:    ctx,
@@ -33,7 +33,7 @@ func NewHomeNewProductListLogic(ctx context.Context, svcCtx *svc.ServiceContext)
 	}
 }
 
-func (l *HomeNewProductListLogic) HomeNewProductList(req types.ListHomeNewProductReq) (*types.ListHomeNewProductResp, error) {
+func (l *HomeNewProductListLogic) QueryHomeNewProductList(req *types.QueryHomeNewProductListReq) (*types.QueryHomeNewProductListResp, error) {
 	resp, err := l.svcCtx.HomeNewProductService.QueryHomeNewProductList(l.ctx, &smsclient.QueryHomeNewProductListReq{
 		PageNum:         req.Current,
 		PageSize:        req.PageSize,
@@ -47,10 +47,10 @@ func (l *HomeNewProductListLogic) HomeNewProductList(req types.ListHomeNewProduc
 		return nil, errorx.NewDefaultError(s.Message())
 	}
 
-	var list []*types.ListHomeNewProductData
+	var list []*types.QueryHomeNewProductListData
 
 	for _, item := range resp.List {
-		list = append(list, &types.ListHomeNewProductData{
+		list = append(list, &types.QueryHomeNewProductListData{
 			Id:              item.Id,              //
 			ProductId:       item.ProductId,       // 商品id
 			ProductName:     item.ProductName,     // 商品名称
@@ -59,7 +59,7 @@ func (l *HomeNewProductListLogic) HomeNewProductList(req types.ListHomeNewProduc
 		})
 	}
 
-	return &types.ListHomeNewProductResp{
+	return &types.QueryHomeNewProductListResp{
 		Current:  req.Current,
 		Data:     list,
 		PageSize: req.PageSize,
