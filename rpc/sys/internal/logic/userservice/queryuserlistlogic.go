@@ -47,6 +47,9 @@ func (l *QueryUserListLogic) QueryUserList(in *sysclient.QueryUserListReq) (*sys
 	if len(in.NickName) > 0 {
 		q = q.Where(user.NickName.Like("%" + in.NickName + "%"))
 	}
+	if len(in.UserName) > 0 {
+		q = q.Where(user.UserName.Like("%" + in.UserName + "%"))
+	}
 	if in.UserStatus != 2 {
 		q = q.Where(user.UserStatus.Eq(in.UserStatus))
 	}

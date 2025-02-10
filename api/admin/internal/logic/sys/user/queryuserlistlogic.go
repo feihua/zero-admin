@@ -41,6 +41,7 @@ func (l *QueryUserListLogic) QueryUserList(req *types.QueryUserListReq) (*types.
 		Email:      strings.TrimSpace(req.Email),
 		Mobile:     strings.TrimSpace(req.Mobile),
 		NickName:   strings.TrimSpace(req.NickName),
+		UserName:   strings.TrimSpace(req.UserName),
 		UserStatus: req.UserStatus,
 	})
 

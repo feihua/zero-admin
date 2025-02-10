@@ -149,6 +149,7 @@ type (
 		DeptId     int64  `form:"deptId,default=0"` //部门id
 		Email      string `form:"email,optional"` //邮箱
 		Mobile     string `form:"mobile,optional"` //手机号
+		UserName   string `form:"userName,optional"` //用户名
 		NickName   string `form:"nickName,optional"` //昵称
 		UserStatus int32  `form:"userStatus,default=2"` //帐号状态（0正常 1停用）
 	}

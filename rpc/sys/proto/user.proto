@@ -154,6 +154,7 @@ message QueryUserListReq {
   string mobile = 5; //手机号
   string nick_name = 6; //昵称
   int32 user_status = 7; //帐号状态（0正常 1停用）
+  string user_name = 8; //用户名
 
 }
 
