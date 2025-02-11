@@ -84,7 +84,7 @@ type (
 		UserName   string  `json:"userName"` //用户名
 		NickName   string  `json:"nickName"` //昵称
 		Avatar     string  `json:"avatar,optional"` //头像
-		Password   string  `json:"password"` //密码
+		Password   string  `json:"password,optional"` //密码
 		Email      string  `json:"email"` //邮箱
 		Mobile     string  `json:"mobile"` //手机号
 		UserStatus int32   `json:"userStatus"` //帐号状态（0正常 1停用）

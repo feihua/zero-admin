@@ -10,6 +10,8 @@ import (
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
 	"github.com/zeromicro/go-zero/core/logc"
 	"github.com/zeromicro/go-zero/core/logx"
+	"gorm.io/gorm"
+	"time"
 )
 
 // UpdateUserLogic 更新用户
@@ -50,17 +52,19 @@ func (l *UpdateUserLogic) UpdateUser(in *sysclient.UpdateUserReq) (*sysclient.Up
 	q := user.WithContext(l.ctx)
 
 	// 1.根据用户id查询用户是否已存在
-	count, err := q.Where(user.ID.Eq(in.Id)).Count()
-	if err != nil {
-		return nil, errors.New("查询用户失败")
-	}
+	item, err := q.Where(query.SysUser.ID.Eq(in.Id)).First()
 
-	if count == 0 {
+	// 1.判断用户是否存在
+	switch {
+	case errors.Is(err, gorm.ErrRecordNotFound):
 		return nil, errors.New("用户不存在")
+	case err != nil:
+		logc.Errorf(l.ctx, "查询用户异常, 请求参数：%+v, 异常信息: %s", in, err.Error())
+		return nil, errors.New("查询用户异常")
 	}
 
 	// 2.查询用户名称是否存在
-	count, err = q.Where(user.ID.Neq(in.Id), user.UserName.Eq(name)).Count()
+	count, err := q.Where(user.ID.Neq(in.Id), user.UserName.Eq(name)).Count()
 
 	if err != nil {
 		logc.Errorf(l.ctx, "根据用户名称：%s,查询用户失败,异常:%s", name, err.Error())
@@ -98,24 +102,32 @@ func (l *UpdateUserLogic) UpdateUser(in *sysclient.UpdateUserReq) (*sysclient.Up
 	}
 
 	// 5.用户存在时,则直接更新用户
+	now := time.Now()
 	sysUser := &model.SysUser{
-		ID:         in.Id,         // 编号
-		UserName:   in.UserName,   // 用户名
-		NickName:   in.NickName,   // 昵称
-		Avatar:     in.Avatar,     // 头像
-		Password:   in.Password,   // 密码
-		Salt:       in.Salt,       // 加密盐
-		Email:      in.Email,      // 邮箱
-		Mobile:     in.Mobile,     // 手机号
-		UserStatus: in.UserStatus, // 帐号状态（0正常 1停用）
-		DeptID:     in.DeptId,     // 部门id
-		Remark:     in.Remark,     // 备注
-		UpdateBy:   in.UpdateBy,   // 更新者
+		ID:           in.Id,             // 编号
+		UserName:     in.UserName,       // 用户名
+		NickName:     in.NickName,       // 昵称
+		Avatar:       in.Avatar,         // 头像
+		Password:     item.Password,     // 密码
+		Salt:         in.Salt,           // 加密盐
+		Email:        in.Email,          // 邮箱
+		Mobile:       in.Mobile,         // 手机号
+		UserStatus:   in.UserStatus,     // 帐号状态（1正常 0停用）
+		DeptID:       in.DeptId,         // 部门id
+		Remark:       in.Remark,         // 备注
+		IsDeleted:    item.IsDeleted,    // 是否删除
+		LoginTime:    item.LoginTime,    // 登录时间
+		LoginIP:      item.LoginIP,      // 登录ip
+		LoginOs:      item.LoginOs,      // 登录os
+		LoginBrowser: item.LoginBrowser, // 登录浏览器
+		CreateBy:     item.CreateBy,     // 创建者
+		CreateTime:   item.CreateTime,   // 创建时间
+		UpdateBy:     in.UpdateBy,       // 更新者
+		UpdateTime:   &now,              // 更新时间
 	}
 
 	err = query.Q.Transaction(func(tx *query.Query) error {
-		_, err = tx.SysUser.WithContext(l.ctx).Updates(sysUser)
-
+		err = l.svcCtx.DB.Model(&model.SysUser{}).WithContext(l.ctx).Where(tx.SysUser.ID.Eq(sysUser.ID)).Save(sysUser).Error
 		if err != nil {
 			logc.Errorf(l.ctx, "更新用户异常,参数:%+v,异常:%s", user, err.Error())
 			return err

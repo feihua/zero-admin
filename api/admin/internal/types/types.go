@@ -4328,17 +4328,17 @@ type UpdateSubjectStatusResp struct {
 }
 
 type UpdateUserReq struct {
-	Id         int64   `json:"id"`              //编号
-	UserName   string  `json:"userName"`        //用户名
-	NickName   string  `json:"nickName"`        //昵称
-	Avatar     string  `json:"avatar,optional"` //头像
-	Password   string  `json:"password"`        //密码
-	Email      string  `json:"email"`           //邮箱
-	Mobile     string  `json:"mobile"`          //手机号
-	UserStatus int32   `json:"userStatus"`      //帐号状态（0正常 1停用）
-	DeptId     int64   `json:"deptId"`          //部门id
-	Remark     string  `json:"remark,optional"` //备注信息
-	PostIds    []int64 `json:"postIds"`         //部门id
+	Id         int64   `json:"id"`                //编号
+	UserName   string  `json:"userName"`          //用户名
+	NickName   string  `json:"nickName"`          //昵称
+	Avatar     string  `json:"avatar,optional"`   //头像
+	Password   string  `json:"password,optional"` //密码
+	Email      string  `json:"email"`             //邮箱
+	Mobile     string  `json:"mobile"`            //手机号
+	UserStatus int32   `json:"userStatus"`        //帐号状态（0正常 1停用）
+	DeptId     int64   `json:"deptId"`            //部门id
+	Remark     string  `json:"remark,optional"`   //备注信息
+	PostIds    []int64 `json:"postIds"`           //部门id
 }
 
 type UpdateUserResp struct {
