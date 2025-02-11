@@ -3128,6 +3128,7 @@ type QueryRoleListReq struct {
 	RoleKey    string `form:"roleKey,optional"`     //权限字符
 	RoleName   string `form:"roleName,optional"`    //角色名称
 	RoleStatus int32  `form:"roleStatus,default=2"` //角色状态
+	DataScope  int32  `form:"dataScope,default=0"`  //数据权限
 }
 
 type QueryRoleListResp struct {

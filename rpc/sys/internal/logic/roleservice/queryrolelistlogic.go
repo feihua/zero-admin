@@ -45,6 +45,9 @@ func (l *QueryRoleListLogic) QueryRoleList(in *sysclient.QueryRoleListReq) (*sys
 	if in.RoleStatus != 2 {
 		q = q.Where(query.SysRole.RoleStatus.Eq(in.RoleStatus))
 	}
+	if in.DataScope != 0 {
+		q = q.Where(query.SysRole.DataScope.Eq(in.DataScope))
+	}
 
 	offset := (in.PageNum - 1) * in.PageSize
 	result, count, err := q.FindByPage(int(offset), int(in.PageSize))

@@ -941,7 +941,7 @@ message QueryRoleListReq {
   string role_key = 4; //权限字符
   string role_name = 5; //角色名称
   int32 role_status = 6; //角色状态
-
+  int32 data_scope = 7; //数据权限
 }
 
 message RoleListData {

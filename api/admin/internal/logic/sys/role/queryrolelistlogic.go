@@ -40,6 +40,7 @@ func (l *QueryRoleListLogic) QueryRoleList(req *types.QueryRoleListReq) (*types.
 		RoleKey:    strings.TrimSpace(req.RoleKey),
 		RoleName:   strings.TrimSpace(req.RoleName),
 		RoleStatus: req.RoleStatus,
+		DataScope:  req.DataScope,
 	})
 
 	if err != nil {

@@ -94,6 +94,7 @@ func (l *UpdateRoleLogic) UpdateRole(in *sysclient.UpdateRoleReq) (*sysclient.Up
 		RoleStatus: in.RoleStatus,   // 角色状态
 		RoleSort:   in.RoleSort,     // 角色排序
 		DataScope:  in.DataScope,    // 数据权限
+		IsDeleted:  item.IsDeleted,  // 是否删除  0：否  1：是
 		IsAdmin:    in.IsAdmin,      // 是否超级管理员:  0：否  1：是
 		Remark:     in.Remark,       // 备注
 		CreateBy:   item.CreateBy,   // 创建者
