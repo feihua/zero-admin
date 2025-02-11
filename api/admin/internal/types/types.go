@@ -1674,11 +1674,12 @@ type MemberPriceList struct {
 }
 
 type MenuTreeListData struct {
-	Key      string `json:"key"`      // 编号
-	Title    string `json:"title"`    // 菜单名称
-	ParentId int64  `json:"parentId"` // 父菜单ID，一级菜单为0
-	Id       int64  `json:"id"`       // 编号
-	Label    string `json:"label"`    // 菜单名称
+	Key           string `json:"key"`           // 编号
+	Title         string `json:"title"`         // 菜单名称
+	ParentId      int64  `json:"parentId"`      // 父菜单ID，一级菜单为0
+	Id            int64  `json:"id"`            // 编号
+	Label         string `json:"label"`         // 菜单名称
+	IsPenultimate bool   `json:"isPenultimate"` // 菜单名称
 }
 
 type MenuTreeMeta struct {

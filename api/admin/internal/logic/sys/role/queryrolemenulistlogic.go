@@ -49,11 +49,12 @@ func (l *QueryRoleMenuListLogic) QueryRoleMenuList(req *types.QueryRoleMenuListR
 
 	for _, menu := range result.List {
 		menuList = append(menuList, types.MenuTreeListData{
-			Key:      strconv.FormatInt(menu.Id, 10),
-			Title:    menu.MenuName, // 菜单名称
-			ParentId: menu.ParentId, // 父菜单ID，一级菜单为0
-			Id:       menu.Id,       // 菜单ID
-			Label:    menu.MenuName, // 菜单名称
+			Key:           strconv.FormatInt(menu.Id, 10),
+			Title:         menu.MenuName, // 菜单名称
+			ParentId:      menu.ParentId, // 父菜单ID，一级菜单为0
+			Id:            menu.Id,       // 菜单ID
+			Label:         menu.MenuName, // 菜单名称
+			IsPenultimate: menu.ParentId == 2,
 		})
 	}
 
