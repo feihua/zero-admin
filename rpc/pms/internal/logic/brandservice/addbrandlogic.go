@@ -2,8 +2,11 @@ package brandservicelogic
 
 import (
 	"context"
+	"errors"
+	"fmt"
 	"github.com/feihua/zero-admin/rpc/pms/gen/model"
 	"github.com/feihua/zero-admin/rpc/pms/gen/query"
+	"github.com/zeromicro/go-zero/core/logc"
 
 	"github.com/feihua/zero-admin/rpc/pms/internal/svc"
 	"github.com/feihua/zero-admin/rpc/pms/pmsclient"
@@ -32,7 +35,20 @@ func NewAddBrandLogic(ctx context.Context, svcCtx *svc.ServiceContext) *AddBrand
 
 // AddBrand 添加品牌表
 func (l *AddBrandLogic) AddBrand(in *pmsclient.AddBrandReq) (*pmsclient.AddBrandResp, error) {
-	err := query.PmsBrand.WithContext(l.ctx).Create(&model.PmsBrand{
+	q := query.PmsBrand
+	name := in.Name
+	count, err := q.WithContext(l.ctx).Where(q.Name.Eq(name)).Count()
+
+	if err != nil {
+		logc.Errorf(l.ctx, "根据品牌名称：%s,查询品牌失败,异常:%s", name, err.Error())
+		return nil, errors.New(fmt.Sprintf("添加品牌失败"))
+	}
+
+	if count > 0 {
+		return nil, errors.New(fmt.Sprintf("品牌名称：%s,已存在", name))
+	}
+
+	brand := model.PmsBrand{
 		Name:                in.Name,                // 品牌名称
 		FirstLetter:         in.FirstLetter,         // 首字母
 		Sort:                in.Sort,                // 排序
@@ -45,11 +61,14 @@ func (l *AddBrandLogic) AddBrand(in *pmsclient.AddBrandReq) (*pmsclient.AddBrand
 		BigPic:              in.BigPic,              // 专区大图
 		BrandStory:          in.BrandStory,          // 品牌故事
 		CreateBy:            in.CreateBy,            // 创建者
-	})
+	}
+	err = q.WithContext(l.ctx).Create(&brand)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return &pmsclient.AddBrandResp{}, nil
+	return &pmsclient.AddBrandResp{
+		BrandId: brand.ID,
+	}, nil
 }

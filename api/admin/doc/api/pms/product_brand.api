@@ -56,18 +56,16 @@ type (
 		Message  string                  `json:"message"`
 	}
 	UpdateProductBrandReq {
-		Id                  int64  `json:"id"`
-		Name                string `json:"brandName"` //品牌名称
-		FirstLetter         string `json:"firstLetter"` //首字母
-		Sort                int32  `json:"sort"` //排序
-		FactoryStatus       int32  `json:"factoryStatus"` //是否为品牌制造商：0->不是；1->是
-		ShowStatus          int32  `json:"showStatus"` //品牌显示状态
-		RecommendStatus     int32  `json:"recommendStatus"` //推荐状态
-		ProductCount        int32  `json:"productCount"` //产品数量
-		ProductCommentCount int32  `json:"productCommentCount"` //产品评论数量
-		Logo                string `json:"logo"` //品牌logo
-		BigPic              string `json:"bigPic"` //专区大图
-		BrandStory          string `json:"brandStory"` //品牌故事
+		Id              int64  `json:"id"`
+		Name            string `json:"brandName"` //品牌名称
+		FirstLetter     string `json:"firstLetter"` //首字母
+		Sort            int32  `json:"sort"` //排序
+		FactoryStatus   int32  `json:"factoryStatus"` //是否为品牌制造商：0->不是；1->是
+		ShowStatus      int32  `json:"showStatus"` //品牌显示状态
+		RecommendStatus int32  `json:"recommendStatus"` //推荐状态
+		Logo            string `json:"logo"` //品牌logo
+		BigPic          string `json:"bigPic"` //专区大图
+		BrandStory      string `json:"brandStory"` //品牌故事
 	}
 	UpdateProductBrandResp {
 		Code    string `json:"code"`

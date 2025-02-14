@@ -22,7 +22,7 @@ message AddBrandReq {
 }
 
 message AddBrandResp {
-  string pong = 1;
+  int64 brand_id = 1;
 }
 
 // 删除品牌表
