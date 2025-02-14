@@ -386,7 +386,7 @@ type AddProductAttributeValueList struct {
 }
 
 type AddProductBrandReq struct {
-	Name            string `json:"name"`            //品牌名称
+	Name            string `json:"brandName"`       //品牌名称
 	FirstLetter     string `json:"firstLetter"`     //首字母
 	Sort            int32  `json:"sort"`            //排序
 	FactoryStatus   int32  `json:"factoryStatus"`   //是否为品牌制造商：0->不是；1->是
@@ -1557,7 +1557,7 @@ type ListProductAttributeResp struct {
 
 type ListProductBrandData struct {
 	Id                  int64  `json:"id"`                  //
-	Name                string `json:"name"`                //品牌名称
+	Name                string `json:"brandName"`           //品牌名称
 	FirstLetter         string `json:"firstLetter"`         //首字母
 	Sort                int32  `json:"sort"`                //排序
 	FactoryStatus       int32  `json:"factoryStatus"`       //是否为品牌制造商：0->不是；1->是
@@ -1575,11 +1575,12 @@ type ListProductBrandData struct {
 }
 
 type ListProductBrandReq struct {
-	Current       int64  `form:"current,default=1"`
-	PageSize      int64  `form:"pageSize,default=20"`
-	Name          string `form:"name,optional"`
-	FactoryStatus int32  `form:"factoryStatus,default=2"` // 是否为品牌制造商：0->不是；1->是
-	ShowStatus    int32  `form:"showStatus,default=2"`
+	Current         int64  `form:"current,default=1"`
+	PageSize        int64  `form:"pageSize,default=20"`
+	Name            string `form:"brandName,optional"`
+	FactoryStatus   int32  `form:"factoryStatus,default=2"` // 是否为品牌制造商：0->不是；1->是
+	ShowStatus      int32  `form:"showStatus,default=2"`
+	RecommendStatus int32  `form:"recommendStatus,default=2"` //推荐状态
 }
 
 type ListProductBrandResp struct {
@@ -4014,7 +4015,7 @@ type UpdateProductAttributeValueList struct {
 
 type UpdateProductBrandReq struct {
 	Id                  int64  `json:"id"`
-	Name                string `json:"name"`                //品牌名称
+	Name                string `json:"brandName"`           //品牌名称
 	FirstLetter         string `json:"firstLetter"`         //首字母
 	Sort                int32  `json:"sort"`                //排序
 	FactoryStatus       int32  `json:"factoryStatus"`       //是否为品牌制造商：0->不是；1->是

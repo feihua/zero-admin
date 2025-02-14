@@ -767,6 +767,21 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			[]rest.Route{
 				{
 					Method:  http.MethodGet,
+					Path:    "/queryProductDetail",
+					Handler: productproduct.QueryProductDetailHandler(serverCtx),
+				},
+			}...,
+		),
+		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
+		rest.WithPrefix("/api/product"),
+	)
+
+	server.AddRoutes(
+		rest.WithMiddlewares(
+			[]rest.Middleware{serverCtx.CheckUrl},
+			[]rest.Route{
+				{
+					Method:  http.MethodGet,
 					Path:    "/updateDeleteStatus",
 					Handler: productproduct.UpdateDeleteStatusHandler(serverCtx),
 				},
@@ -809,21 +824,6 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 					Method:  http.MethodGet,
 					Path:    "/queryProductList",
 					Handler: productproduct.QueryProductListHandler(serverCtx),
-				},
-			}...,
-		),
-		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
-		rest.WithPrefix("/api/product"),
-	)
-
-	server.AddRoutes(
-		rest.WithMiddlewares(
-			[]rest.Middleware{serverCtx.CheckUrl},
-			[]rest.Route{
-				{
-					Method:  http.MethodGet,
-					Path:    "/queryProductDetail",
-					Handler: productproduct.QueryProductDetailHandler(serverCtx),
 				},
 			}...,
 		),
@@ -1357,31 +1357,6 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			[]rest.Route{
 				{
 					Method:  http.MethodGet,
-					Path:    "/deleteOperateLog",
-					Handler: syslog.DeleteOperateLogHandler(serverCtx),
-				},
-				{
-					Method:  http.MethodGet,
-					Path:    "/queryOperateLogDetail",
-					Handler: syslog.QueryOperateLogDetailHandler(serverCtx),
-				},
-				{
-					Method:  http.MethodGet,
-					Path:    "/queryOperateLogList",
-					Handler: syslog.QueryOperateLogListHandler(serverCtx),
-				},
-			}...,
-		),
-		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
-		rest.WithPrefix("/api/sys/log"),
-	)
-
-	server.AddRoutes(
-		rest.WithMiddlewares(
-			[]rest.Middleware{serverCtx.CheckUrl},
-			[]rest.Route{
-				{
-					Method:  http.MethodGet,
 					Path:    "/deleteLoginLog",
 					Handler: syslog.DeleteLoginLogHandler(serverCtx),
 				},
@@ -1399,6 +1374,31 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 					Method:  http.MethodGet,
 					Path:    "/queryStatisticsLoginLog",
 					Handler: syslog.QueryStatisticsLoginLogHandler(serverCtx),
+				},
+			}...,
+		),
+		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
+		rest.WithPrefix("/api/sys/log"),
+	)
+
+	server.AddRoutes(
+		rest.WithMiddlewares(
+			[]rest.Middleware{serverCtx.CheckUrl},
+			[]rest.Route{
+				{
+					Method:  http.MethodGet,
+					Path:    "/deleteOperateLog",
+					Handler: syslog.DeleteOperateLogHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodGet,
+					Path:    "/queryOperateLogDetail",
+					Handler: syslog.QueryOperateLogDetailHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodGet,
+					Path:    "/queryOperateLogList",
+					Handler: syslog.QueryOperateLogListHandler(serverCtx),
 				},
 			}...,
 		),
