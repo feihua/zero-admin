@@ -73,11 +73,11 @@ type (
 service admin-api {
 	//添加商品属性分类
 	@handler ProductAttributeCategoryAdd
-	post /addProductAttributeCategory (AddProductAttributeCategoryReq) returns (AddProductAttributeCategoryResp)
+	post /addAttributeCategory (AddProductAttributeCategoryReq) returns (AddProductAttributeCategoryResp)
 
 	//查询商品属性分类
 	@handler ProductAttributeCategoryList
-	get /queryProductAttributeCategoryList (ListProductAttributeCategoryReq) returns (ListProductAttributeCategoryResp)
+	get /queryAttributeCategoryList (ListProductAttributeCategoryReq) returns (ListProductAttributeCategoryResp)
 
 	//获取所有商品属性分类及其下属性
 	@handler QueryCategoryWithAttrList
@@ -85,10 +85,10 @@ service admin-api {
 
 	//更新商品属性分类
 	@handler ProductAttributeCategoryUpdate
-	post /updateProductAttributeCategory (UpdateProductAttributeCategoryReq) returns (UpdateProductAttributeCategoryResp)
+	post /updateAttributeCategory (UpdateProductAttributeCategoryReq) returns (UpdateProductAttributeCategoryResp)
 
 	//删除商品属性分类
 	@handler ProductAttributeCategoryDelete
-	get /deleteProductAttributeCategory (DeleteProductAttributeCategoryReq) returns (DeleteProductAttributeCategoryResp)
+	get /deleteAttributeCategory (DeleteProductAttributeCategoryReq) returns (DeleteProductAttributeCategoryResp)
 }
 

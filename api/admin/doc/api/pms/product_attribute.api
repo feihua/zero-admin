@@ -100,11 +100,11 @@ type (
 service admin-api {
 	//添加商品属性
 	@handler ProductAttributeAdd
-	post /addProductAttribute (AddProductAttributeReq) returns (AddProductAttributeResp)
+	post /addAttribute (AddProductAttributeReq) returns (AddProductAttributeResp)
 
 	//查询商品属性
 	@handler ProductAttributeList
-	get /queryProductAttributeList (ListProductAttributeReq) returns (ListProductAttributeResp)
+	get /queryAttributeList (ListProductAttributeReq) returns (ListProductAttributeResp)
 
 	//根据商品分类的id获取商品属性及属性分类
 	@handler QueryByproductCategoryId
@@ -112,6 +112,6 @@ service admin-api {
 
 	//删除商品属性
 	@handler ProductAttributeDelete
-	get /deleteProductAttribute (DeleteProductAttributeReq) returns (DeleteProductAttributeResp)
+	get /deleteAttribute (DeleteProductAttributeReq) returns (DeleteProductAttributeResp)
 }
 
