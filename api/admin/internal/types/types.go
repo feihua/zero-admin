@@ -29,7 +29,6 @@ type AddDeptReq struct {
 	Phone      string  `json:"phone"`                //电话号码
 	Email      string  `json:"email"`                //邮箱
 	Remark     string  `json:"remark,optional"`      //备注信息
-	IsDeleted  int32   `json:"isDeleted"`            //是否删除  0：否  1：是
 	ParentIds  []int64 `json:"parentIds"`            //上级机构IDs，一级机构为0
 }
 
@@ -3449,7 +3448,6 @@ type UpdateDeptReq struct {
 	Phone      string  `json:"phone"`                //电话号码
 	Email      string  `json:"email"`                //邮箱
 	Remark     string  `json:"remark,optional"`      //备注信息
-	IsDeleted  int32   `json:"isDeleted"`            //是否删除  0：否  1：是
 	ParentIds  []int64 `json:"parentIds"`            //上级机构IDs，一级机构为0
 }
 
