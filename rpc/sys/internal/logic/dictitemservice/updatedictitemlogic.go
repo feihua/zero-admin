@@ -122,7 +122,7 @@ func (l *UpdateDictItemLogic) UpdateDictItem(in *sysclient.UpdateDictItemReq) (*
 	}
 
 	// 6.字典数据存在时,则直接更新字典数据
-	err = l.svcCtx.DB.Model(&model.SysDictItem{}).WithContext(l.ctx).Where(query.SysPost.ID.Eq(in.Id)).Save(data).Error
+	err = l.svcCtx.DB.Model(&model.SysDictItem{}).WithContext(l.ctx).Where(query.SysDictItem.ID.Eq(in.Id)).Save(data).Error
 
 	if err != nil {
 		logc.Errorf(l.ctx, "更新字典数据失败,参数:%+v,异常:%s", dictItem, err.Error())
