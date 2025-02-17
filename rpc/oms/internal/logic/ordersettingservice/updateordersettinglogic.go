@@ -33,7 +33,7 @@ func NewUpdateOrderSettingLogic(ctx context.Context, svcCtx *svc.ServiceContext)
 // UpdateOrderSetting 更新订单设置表
 func (l *UpdateOrderSettingLogic) UpdateOrderSetting(in *omsclient.UpdateOrderSettingReq) (*omsclient.UpdateOrderSettingResp, error) {
 	q := query.OmsOrderSetting
-	_, err := q.WithContext(l.ctx).Updates(&model.OmsOrderSetting{
+	var item = &model.OmsOrderSetting{
 		ID:                  in.Id,                  //
 		FlashOrderOvertime:  in.FlashOrderOvertime,  // 秒杀订单超时关闭时间(分)
 		NormalOrderOvertime: in.NormalOrderOvertime, // 正常订单超时时间(分)
@@ -42,7 +42,9 @@ func (l *UpdateOrderSettingLogic) UpdateOrderSetting(in *omsclient.UpdateOrderSe
 		Status:              in.Status,              // 状态：0->禁用；1->启用
 		IsDefault:           in.IsDefault,           // 是否默认：0->否；1->是
 		CommentOvertime:     in.CommentOvertime,     // 订单完成后自动好评时间（天）
-	})
+	}
+
+	err := l.svcCtx.DB.Model(&model.OmsOrderSetting{}).WithContext(l.ctx).Where(q.ID.Eq(in.Id)).Save(item).Error
 
 	if err != nil {
 		return nil, err
