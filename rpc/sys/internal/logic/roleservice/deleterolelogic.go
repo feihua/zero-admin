@@ -56,7 +56,7 @@ func (l *DeleteRoleLogic) DeleteRole(in *sysclient.DeleteRoleReq) (*sysclient.De
 
 		// 2.角色是否已使用
 		q1 := query.SysUserRole
-		count, err = q1.WithContext(l.ctx).Select(q1.RoleID).Where(q1.RoleID.Eq(roleId)).Count()
+		count, err = q1.WithContext(l.ctx).Where(q1.RoleID.Eq(roleId)).Count()
 		if err != nil {
 			return nil, errors.New("查询用户角色关联失败")
 		}
