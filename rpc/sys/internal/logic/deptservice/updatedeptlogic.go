@@ -79,7 +79,7 @@ func (l *UpdateDeptLogic) UpdateDept(in *sysclient.UpdateDeptReq) (*sysclient.Up
 
 	// 3.根据部门名称查询部门是否已存在
 	deptName := in.DeptName
-	count, err := q.Where(dept.DeptName.Eq(deptName), dept.ParentID.Eq(parentDept.ID)).Count()
+	count, err := q.Where(dept.ID.Neq(in.Id), dept.DeptName.Eq(deptName), dept.ParentID.Eq(parentDept.ID)).Count()
 
 	if err != nil {
 		logc.Errorf(l.ctx, "根据部门名称：%s,查询部门信息失败,异常:%s", deptName, err.Error())
