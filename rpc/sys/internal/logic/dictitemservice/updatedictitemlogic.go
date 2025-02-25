@@ -98,7 +98,7 @@ func (l *UpdateDictItemLogic) UpdateDictItem(in *sysclient.UpdateDictItemReq) (*
 
 	// 5.如果更新字典数据是默认,则修改其他选项为非默认状态
 	if in.IsDefault == 1 {
-		_, err = q.WithContext(l.ctx).Where(q.ID.Neq(in.Id)).Where(q.DictType.Eq(dictType)).Where(q.IsDefault.Eq(1)).Update(q.IsDefault, 0)
+		_, err = q.WithContext(l.ctx).Where(q.DictType.Eq(dictType)).Where(q.IsDefault.Eq(1)).Update(q.IsDefault, 0)
 		if err != nil {
 			logc.Errorf(l.ctx, "修改字典数据默认状态失败,参数:%+v,异常:%s", in, err.Error())
 			return nil, errors.New("更新字典数据失败")
