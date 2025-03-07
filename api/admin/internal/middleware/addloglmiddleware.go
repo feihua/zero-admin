@@ -20,19 +20,28 @@ func NewAddLogMiddleware(Sys operatelogservice.OperateLogService) *AddLogMiddlew
 	return &AddLogMiddleware{Sys: Sys}
 }
 
-// Handle 参考chatgpt实现
 func (m *AddLogMiddleware) Handle(next http.HandlerFunc) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 
 		uri := r.RequestURI
-		if uri == "/api/sys/user/login" || uri == "/api/sys/upload" {
-			logx.WithContext(r.Context()).Infof("Request: %s %s", r.Method, uri)
+
+		var userName string
+		var deptName string
+		// 从上下文中获取 userName，并进行类型断言和 nil 检查
+		if userNameRaw, ok := r.Context().Value("userName").(string); !ok || userNameRaw == "" {
 			next(w, r)
 			return
+		} else {
+			userName = userNameRaw
 		}
 
-		userName := r.Context().Value("userName").(string)
-		deptName := r.Context().Value("deptName").(string)
+		// 从上下文中获取 deptName，并进行类型断言和 nil 检查
+		if deptNameRaw, ok := r.Context().Value("deptName").(string); !ok || deptNameRaw == "" {
+			next(w, r)
+			return
+		} else {
+			deptName = deptNameRaw
+		}
 
 		startTime := time.Now()
 
@@ -61,7 +70,7 @@ func (m *AddLogMiddleware) Handle(next http.HandlerFunc) http.HandlerFunc {
 		// 打印响应日志
 		responseBoy := string(recorder.body)
 		// 响应参数较多,可以不打印
-		//logx.WithContext(r.Context()).Infof("Response: %s %s %s", r.Method, r.RequestURI, responseBoy)
+		// logx.WithContext(r.Context()).Infof("Response: %s %s %s", r.Method, r.RequestURI, responseBoy)
 
 		userAgent := r.Header.Get("User-Agent")
 		parser := uaparser.NewFromSaved()
