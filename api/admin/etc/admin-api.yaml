@@ -53,6 +53,8 @@ CmsRpc:
 Auth:
   AccessSecret: ad879037-c7a4-4063-9236-6bfc35d54b7d
   AccessExpire: 86400
+  # 不需要拦截的url
+  ExcludeUrl: "/api/sys/user/info,/api/sys/user/queryAllRelations,/api/sys/role/queryMenuByRoleId,/api/sys/dept/addDept"
 
 Prometheus:
   Host: 127.0.0.1

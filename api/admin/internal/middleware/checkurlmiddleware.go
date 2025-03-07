@@ -12,18 +12,19 @@ import (
 )
 
 type CheckUrlMiddleware struct {
-	Redis *redis.Redis
+	Redis       *redis.Redis
+	ExcludeUrls string
 }
 
-func NewCheckUrlMiddleware(Redis *redis.Redis) *CheckUrlMiddleware {
-	return &CheckUrlMiddleware{Redis: Redis}
+func NewCheckUrlMiddleware(Redis *redis.Redis, excludeUrls string) *CheckUrlMiddleware {
+	return &CheckUrlMiddleware{Redis: Redis, ExcludeUrls: excludeUrls}
 }
 
 func (m *CheckUrlMiddleware) Handle(next http.HandlerFunc) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 
 		uri := strings.Split(r.RequestURI, "?")[0]
-		//判断请求header中是否携带了x-user-id
+		// 判断请求header中是否携带了x-user-id
 		userId := r.Context().Value("userId").(json.Number).String()
 		userName := r.Context().Value("userName").(string)
 		if userId == "" || userName == "" {
@@ -32,12 +33,7 @@ func (m *CheckUrlMiddleware) Handle(next http.HandlerFunc) http.HandlerFunc {
 			return
 		}
 
-		if uri == "/api/sys/user/info" || uri == "/api/sys/user/queryAllRelations" || uri == "/api/sys/role/queryMenuByRoleId" {
-			next(w, r)
-			return
-		}
-
-		//获取用户能访问的url
+		// 获取用户能访问的url
 		urls, err := m.Redis.Get("zero:mall:token:" + userId)
 		if err != nil {
 			logc.Errorf(r.Context(), "用户：%s,获取redis连接异常", userName)
@@ -51,17 +47,9 @@ func (m *CheckUrlMiddleware) Handle(next http.HandlerFunc) http.HandlerFunc {
 			return
 		}
 
-		backUrls := strings.Split(urls, ",")
+		backUrls := strings.Split(fmt.Sprintf("%s,%s", urls, m.ExcludeUrls), ",")
 
-		b := false
-		for _, url := range backUrls {
-			if url == uri {
-				b = true
-				break
-			}
-		}
-
-		if !b {
+		if !isValueExist(backUrls, uri) {
 			logc.Errorf(r.Context(), "用户: %s,没有访问: %s路径的权限", userName, uri)
 			httpx.Error(w, errorx.NewDefaultError(fmt.Sprintf("用户: %s,没有访问: %s,路径的的权限,请联系管理员", userName, uri)))
 			return
@@ -69,4 +57,26 @@ func (m *CheckUrlMiddleware) Handle(next http.HandlerFunc) http.HandlerFunc {
 
 		next(w, r)
 	}
+}
+
+// isValueExist 检查一个字符串切片中是否存在指定的字符串值。
+// 这个函数通过遍历切片中的每个元素来搜索匹配的字符串。
+// 如果找到匹配项，它会立即返回true，表示值存在。
+// 如果遍历完所有元素都没有找到匹配项，则返回false，表示值不存在。
+//
+// 参数:
+//
+//	arr []string: 要搜索的字符串切片。
+//	value string: 要查找的字符串值。
+//
+// 返回值:
+//
+//	bool: 如果切片中存在指定的值，则返回true，否则返回false。
+func isValueExist(arr []string, value string) bool {
+	for _, v := range arr {
+		if v == value {
+			return true
+		}
+	}
+	return false
 }

@@ -74,7 +74,7 @@ type ServiceContext struct {
 	Config   config.Config
 	CheckUrl rest.Middleware
 	AddLog   rest.Middleware
-	//会员相关
+	// 会员相关
 	GrowthChangeHistoryService           growthchangehistoryservice.GrowthChangeHistoryService
 	IntegrationChangeHistoryService      integrationchangehistoryservice.IntegrationChangeHistoryService
 	IntegrationConsumeSettingService     integrationconsumesettingservice.IntegrationConsumeSettingService
@@ -90,7 +90,7 @@ type ServiceContext struct {
 	MemberStatisticsInfoService          memberstatisticsinfoservice.MemberStatisticsInfoService
 	MemberTagService                     membertagservice.MemberTagService
 	MemberTaskService                    membertaskservice.MemberTaskService
-	//系统相关
+	// 系统相关
 	DeptService       deptservice.DeptService
 	DictTypeService   dicttypeservice.DictTypeService
 	DictItemService   dictitemservice.DictItemService
@@ -100,7 +100,7 @@ type ServiceContext struct {
 	MenuService       menuservice.MenuService
 	RoleService       roleservice.RoleService
 	UserService       userservice.UserService
-	//商品相关
+	// 商品相关
 	BrandService                            brandservice.BrandService
 	CommentReplayService                    commentreplayservice.CommentReplayService
 	CommentService                          commentservice.CommentService
@@ -116,7 +116,7 @@ type ServiceContext struct {
 	ProductService                          productservice.ProductService
 	ProductVertifyRecordService             productvertifyrecordservice.ProductVertifyRecordService
 	SkuStockService                         skustockservice.SkuStockService
-	//订单相关
+	// 订单相关
 	CartItemService            cartitemservice.CartItemService
 	CompanyAddressService      companyaddressservice.CompanyAddressService
 	OrderItemService           orderitemservice.OrderItemService
@@ -125,7 +125,7 @@ type ServiceContext struct {
 	OrderReturnReasonService   orderreturnreasonservice.OrderReturnReasonService
 	OrderService               orderservice.OrderService
 	OrderSettingService        ordersettingservice.OrderSettingService
-	//营销相关
+	// 营销相关
 	CouponHistoryService                 couponhistoryservice.CouponHistoryService
 	CouponService                        couponservice.CouponService
 	FlashPromotionLogService             flashpromotionlogservice.FlashPromotionLogService
@@ -137,7 +137,7 @@ type ServiceContext struct {
 	HomeNewProductService                homenewproductservice.HomeNewProductService
 	HomeRecommendProductService          homerecommendproductservice.HomeRecommendProductService
 	HomeRecommendSubjectService          homerecommendsubjectservice.HomeRecommendSubjectService
-	//内容相关
+	// 内容相关
 	SubjectService                      subjectservice.SubjectService
 	SubjectProductRelationService       subjectproductrelationservice.SubjectProductRelationService
 	PreferredAreaService                preferredareaservice.PreferredAreaService
@@ -181,7 +181,7 @@ func NewServiceContext(c config.Config) *ServiceContext {
 		MenuService:       menuservice.NewMenuService(sysClient),
 		RoleService:       roleservice.NewRoleService(sysClient),
 		UserService:       userservice.NewUserService(sysClient),
-		CheckUrl:          middleware.NewCheckUrlMiddleware(newRedis).Handle,
+		CheckUrl:          middleware.NewCheckUrlMiddleware(newRedis, c.Auth.ExcludeUrl).Handle,
 		AddLog:            middleware.NewAddLogMiddleware(operateLogService).Handle,
 
 		BrandService:                            brandservice.NewBrandService(pmsClient),

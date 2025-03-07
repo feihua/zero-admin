@@ -8,23 +8,24 @@ import (
 type Config struct {
 	rest.RestConf
 
-	//系统
+	// 系统
 	SysRpc zrpc.RpcClientConf
-	//会员
+	// 会员
 	UmsRpc zrpc.RpcClientConf
-	//商品
+	// 商品
 	PmsRpc zrpc.RpcClientConf
-	//订单
+	// 订单
 	OmsRpc zrpc.RpcClientConf
-	//营销
+	// 营销
 	SmsRpc zrpc.RpcClientConf
 
-	//内容
+	// 内容
 	CmsRpc zrpc.RpcClientConf
 
 	Auth struct {
 		AccessSecret string
 		AccessExpire int64
+		ExcludeUrl   string
 	}
 
 	Redis struct {
