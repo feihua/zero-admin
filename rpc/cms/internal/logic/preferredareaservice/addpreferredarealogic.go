@@ -3,6 +3,7 @@ package preferredareaservicelogic
 import (
 	"context"
 	"errors"
+	"fmt"
 	"github.com/feihua/zero-admin/rpc/cms/cmsclient"
 	"github.com/feihua/zero-admin/rpc/cms/gen/model"
 	"github.com/feihua/zero-admin/rpc/cms/gen/query"
@@ -34,7 +35,16 @@ func NewAddPreferredAreaLogic(ctx context.Context, svcCtx *svc.ServiceContext) *
 func (l *AddPreferredAreaLogic) AddPreferredArea(in *cmsclient.AddPreferredAreaReq) (*cmsclient.AddPreferredAreaResp, error) {
 	q := query.CmsPreferredArea
 
-	item := &model.CmsPreferredArea{
+	count, err := q.WithContext(l.ctx).Where(q.Name.Eq(in.Name)).Count()
+	if err != nil {
+		return nil, errors.New(fmt.Sprintf("添加优选专区失败"))
+	}
+
+	if count > 0 {
+		return nil, errors.New(fmt.Sprintf("优选专区名称：%s,已存在", in.Name))
+	}
+
+	area := &model.CmsPreferredArea{
 		Name:       in.Name,       // 专区名称
 		SubTitle:   in.SubTitle,   // 子标题
 		Pic:        in.Pic,        // 展示图片
@@ -43,12 +53,11 @@ func (l *AddPreferredAreaLogic) AddPreferredArea(in *cmsclient.AddPreferredAreaR
 		CreateBy:   in.CreateBy,   // 创建者
 	}
 
-	err := q.WithContext(l.ctx).Create(item)
+	err = q.WithContext(l.ctx).Create(area)
 	if err != nil {
-		logc.Errorf(l.ctx, "添加优选专区失败,参数:%+v,异常:%s", item, err.Error())
+		logc.Errorf(l.ctx, "添加优选专区失败,参数:%+v,异常:%s", area, err.Error())
 		return nil, errors.New("添加优选专区失败")
 	}
 
-	logc.Infof(l.ctx, "添加优选专区成功,参数：%+v", in)
 	return &cmsclient.AddPreferredAreaResp{}, nil
 }

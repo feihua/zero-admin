@@ -34,14 +34,15 @@ func NewUpdatePreferredAreaLogic(ctx context.Context, svcCtx *svc.ServiceContext
 // UpdatePreferredArea 更新优选专区
 func (l *UpdatePreferredAreaLogic) UpdatePreferredArea(req *types.UpdatePreferredAreaReq) (resp *types.UpdatePreferredAreaResp, err error) {
 
+	updateBy := l.ctx.Value("userName").(string)
 	_, err = l.svcCtx.PreferredAreaService.UpdatePreferredArea(l.ctx, &cmsclient.UpdatePreferredAreaReq{
-		Id:         req.Id,         //主键ID
-		Name:       req.Name,       //专区名称
-		SubTitle:   req.SubTitle,   //子标题
-		Pic:        req.Pic,        //展示图片
-		Sort:       req.Sort,       //排序
-		ShowStatus: req.ShowStatus, //显示状态：0->不显示；1->显示
-		UpdateBy:   l.ctx.Value("userName").(string),
+		Id:         req.Id,         // 主键ID
+		Name:       req.Name,       // 专区名称
+		SubTitle:   req.SubTitle,   // 子标题
+		Pic:        req.Pic,        // 展示图片
+		Sort:       req.Sort,       // 排序
+		ShowStatus: req.ShowStatus, // 显示状态：0->不显示；1->显示
+		UpdateBy:   updateBy,       // 更新者
 	})
 
 	if err != nil {

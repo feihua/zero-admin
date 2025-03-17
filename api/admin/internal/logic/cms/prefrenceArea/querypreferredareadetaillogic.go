@@ -45,16 +45,16 @@ func (l *QueryPreferredAreaDetailLogic) QueryPreferredAreaDetail(req *types.Quer
 	}
 
 	data := types.QueryPreferredAreaDetailData{
-		Id:         detail.Id,         //主键ID
-		Name:       detail.Name,       //专区名称
-		SubTitle:   detail.SubTitle,   //子标题
-		Pic:        detail.Pic,        //展示图片
-		Sort:       detail.Sort,       //排序
-		ShowStatus: detail.ShowStatus, //显示状态：0->不显示；1->显示
-		CreateBy:   detail.CreateBy,   //创建者
-		CreateTime: detail.CreateTime, //创建时间
-		UpdateBy:   detail.UpdateBy,   //更新者
-		UpdateTime: detail.UpdateTime, //更新时间
+		Id:         detail.Id,         // 主键ID
+		Name:       detail.Name,       // 专区名称
+		SubTitle:   detail.SubTitle,   // 子标题
+		Pic:        detail.Pic,        // 展示图片
+		Sort:       detail.Sort,       // 排序
+		ShowStatus: detail.ShowStatus, // 显示状态：0->不显示；1->显示
+		CreateBy:   detail.CreateBy,   // 创建者
+		CreateTime: detail.CreateTime, // 创建时间
+		UpdateBy:   detail.UpdateBy,   // 更新者
+		UpdateTime: detail.UpdateTime, // 更新时间
 	}
 	return &types.QueryPreferredAreaDetailResp{
 		Code:    "000000",

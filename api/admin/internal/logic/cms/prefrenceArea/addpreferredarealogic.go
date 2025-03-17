@@ -33,14 +33,14 @@ func NewAddPreferredAreaLogic(ctx context.Context, svcCtx *svc.ServiceContext) *
 
 // AddPreferredArea 添加优选专区
 func (l *AddPreferredAreaLogic) AddPreferredArea(req *types.AddPreferredAreaReq) (resp *types.AddPreferredAreaResp, err error) {
-
+	createBy := l.ctx.Value("userName").(string)
 	_, err = l.svcCtx.PreferredAreaService.AddPreferredArea(l.ctx, &cmsclient.AddPreferredAreaReq{
-		Name:       req.Name,       //专区名称
-		SubTitle:   req.SubTitle,   //子标题
-		Pic:        req.Pic,        //展示图片
-		Sort:       req.Sort,       //排序
-		ShowStatus: req.ShowStatus, //显示状态：0->不显示；1->显示
-		CreateBy:   l.ctx.Value("userName").(string),
+		Name:       req.Name,       // 专区名称
+		SubTitle:   req.SubTitle,   // 子标题
+		Pic:        req.Pic,        // 展示图片
+		Sort:       req.Sort,       // 排序
+		ShowStatus: req.ShowStatus, // 显示状态：0->不显示；1->显示
+		CreateBy:   createBy,       // 创建者
 	})
 
 	if err != nil {

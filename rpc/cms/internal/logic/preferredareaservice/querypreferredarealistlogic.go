@@ -70,7 +70,6 @@ func (l *QueryPreferredAreaListLogic) QueryPreferredAreaList(in *cmsclient.Query
 		})
 	}
 
-	logc.Infof(l.ctx, "查询商品优选列表信息,参数：%+v,响应：%+v", in, list)
 	return &cmsclient.QueryPreferredAreaListResp{
 		Total: count,
 		List:  list,

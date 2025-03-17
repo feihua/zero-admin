@@ -9,6 +9,7 @@ import (
 	"github.com/feihua/zero-admin/rpc/cms/internal/svc"
 	"github.com/zeromicro/go-zero/core/logc"
 	"github.com/zeromicro/go-zero/core/logx"
+	"gorm.io/gorm"
 )
 
 // QueryPreferredAreaDetailLogic 查询优选专区详情
@@ -32,11 +33,15 @@ func NewQueryPreferredAreaDetailLogic(ctx context.Context, svcCtx *svc.ServiceCo
 
 // QueryPreferredAreaDetail 查询优选专区详情
 func (l *QueryPreferredAreaDetailLogic) QueryPreferredAreaDetail(in *cmsclient.QueryPreferredAreaDetailReq) (*cmsclient.QueryPreferredAreaDetailResp, error) {
-	item, err := query.CmsPreferredArea.WithContext(l.ctx).Where(query.CmsPreferredArea.ID.Eq(in.Id)).First()
+	q := query.CmsPreferredArea
+	item, err := q.WithContext(l.ctx).Where(q.ID.Eq(in.Id)).First()
 
-	if err != nil {
-		logc.Errorf(l.ctx, "查询优选专区详情失败,参数:%+v,异常:%s", in, err.Error())
-		return nil, errors.New("查询优选专区详情失败")
+	switch {
+	case errors.Is(err, gorm.ErrRecordNotFound):
+		return nil, errors.New("优选专区不存在")
+	case err != nil:
+		logc.Errorf(l.ctx, "查询优选专区异常, 请求参数：%+v, 异常信息: %s", in, err.Error())
+		return nil, errors.New("查询优选专区异常")
 	}
 
 	data := &cmsclient.QueryPreferredAreaDetailResp{
@@ -52,6 +57,5 @@ func (l *QueryPreferredAreaDetailLogic) QueryPreferredAreaDetail(in *cmsclient.Q
 		UpdateTime: time_util.TimeToString(item.UpdateTime), // 更新时间
 	}
 
-	logc.Infof(l.ctx, "查询优选专区详情,参数：%+v,响应：%+v", in, data)
 	return data, nil
 }

@@ -37,9 +37,9 @@ func (l *QueryPreferredAreaListLogic) QueryPreferredAreaList(req *types.QueryPre
 	result, err := l.svcCtx.PreferredAreaService.QueryPreferredAreaList(l.ctx, &cmsclient.QueryPreferredAreaListReq{
 		PageNum:    req.Current,
 		PageSize:   req.PageSize,
-		Name:       strings.TrimSpace(req.Name),     //专区名称
-		SubTitle:   strings.TrimSpace(req.SubTitle), //子标题
-		ShowStatus: req.ShowStatus,                  //显示状态：0->不显示；1->显示
+		Name:       strings.TrimSpace(req.Name),     // 专区名称
+		SubTitle:   strings.TrimSpace(req.SubTitle), // 子标题
+		ShowStatus: req.ShowStatus,                  // 显示状态：0->不显示；1->显示
 	})
 
 	if err != nil {
@@ -51,16 +51,16 @@ func (l *QueryPreferredAreaListLogic) QueryPreferredAreaList(req *types.QueryPre
 
 	for _, item := range result.List {
 		list = append(list, &types.QueryPreferredAreaListData{
-			Id:         item.Id,         //主键ID
-			Name:       item.Name,       //专区名称
-			SubTitle:   item.SubTitle,   //子标题
-			Pic:        item.Pic,        //展示图片
-			Sort:       item.Sort,       //排序
-			ShowStatus: item.ShowStatus, //显示状态：0->不显示；1->显示
-			CreateBy:   item.CreateBy,   //创建者
-			CreateTime: item.CreateTime, //创建时间
-			UpdateBy:   item.UpdateBy,   //更新者
-			UpdateTime: item.UpdateTime, //更新时间
+			Id:         item.Id,         // 主键ID
+			Name:       item.Name,       // 专区名称
+			SubTitle:   item.SubTitle,   // 子标题
+			Pic:        item.Pic,        // 展示图片
+			Sort:       item.Sort,       // 排序
+			ShowStatus: item.ShowStatus, // 显示状态：0->不显示；1->显示
+			CreateBy:   item.CreateBy,   // 创建者
+			CreateTime: item.CreateTime, // 创建时间
+			UpdateBy:   item.UpdateBy,   // 更新者
+			UpdateTime: item.UpdateTime, // 更新时间
 		})
 	}
 

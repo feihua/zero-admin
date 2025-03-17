@@ -33,10 +33,11 @@ func NewUpdatePreferredAreaStatusLogic(ctx context.Context, svcCtx *svc.ServiceC
 
 // UpdatePreferredAreaStatus 更新优选专区状态
 func (l *UpdatePreferredAreaStatusLogic) UpdatePreferredAreaStatus(req *types.UpdatePreferredAreaStatusReq) (resp *types.UpdatePreferredAreaStatusResp, err error) {
+	updateBy := l.ctx.Value("userName").(string)
 	_, err = l.svcCtx.PreferredAreaService.UpdatePreferredAreaStatus(l.ctx, &cmsclient.UpdatePreferredAreaStatusReq{
-		Ids:        req.Ids,        //主键ID
-		ShowStatus: req.ShowStatus, //显示状态：0->不显示；1->显示
-		UpdateBy:   l.ctx.Value("userName").(string),
+		Ids:        req.Ids,        // 主键ID
+		ShowStatus: req.ShowStatus, // 显示状态：0->不显示；1->显示
+		UpdateBy:   updateBy,       // 更新者
 	})
 
 	if err != nil {

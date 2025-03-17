@@ -10,6 +10,8 @@ import (
 	"github.com/feihua/zero-admin/rpc/cms/internal/svc"
 	"github.com/zeromicro/go-zero/core/logc"
 	"github.com/zeromicro/go-zero/core/logx"
+	"gorm.io/gorm"
+	"time"
 )
 
 // UpdatePreferredAreaLogic 更新优选专区
@@ -35,26 +37,40 @@ func NewUpdatePreferredAreaLogic(ctx context.Context, svcCtx *svc.ServiceContext
 func (l *UpdatePreferredAreaLogic) UpdatePreferredArea(in *cmsclient.UpdatePreferredAreaReq) (*cmsclient.UpdatePreferredAreaResp, error) {
 	q := query.CmsPreferredArea.WithContext(l.ctx)
 
-	// 1.根据优选专区id查询优选专区是否已存在
-	_, err := q.Where(query.CmsPreferredArea.ID.Eq(in.Id)).First()
-
-	if err != nil {
-		logc.Errorf(l.ctx, "根据优选专区id：%d,查询优选专区失败,异常:%s", in.Id, err.Error())
-		return nil, errors.New(fmt.Sprintf("查询优选专区失败"))
+	area, err := q.Where(query.CmsPreferredArea.ID.Eq(in.Id)).First()
+	switch {
+	case errors.Is(err, gorm.ErrRecordNotFound):
+		return nil, errors.New("优选专区不存在")
+	case err != nil:
+		logc.Errorf(l.ctx, "查询优选专区异常, 请求参数：%+v, 异常信息: %s", in, err.Error())
+		return nil, errors.New("查询优选专区异常")
 	}
 
+	count, err := q.Where(query.CmsPreferredArea.ID.Neq(in.Id), query.CmsPreferredArea.Name.Eq(in.Name)).Count()
+	if err != nil {
+		return nil, errors.New(fmt.Sprintf("更新优选专区失败"))
+	}
+
+	if count > 0 {
+		return nil, errors.New(fmt.Sprintf("优选专区名称：%s,已存在", in.Name))
+	}
+
+	now := time.Now()
 	item := &model.CmsPreferredArea{
-		ID:         in.Id,         // 主键ID
-		Name:       in.Name,       // 专区名称
-		SubTitle:   in.SubTitle,   // 子标题
-		Pic:        in.Pic,        // 展示图片
-		Sort:       in.Sort,       // 排序
-		ShowStatus: in.ShowStatus, // 显示状态：0->不显示；1->显示
-		UpdateBy:   in.UpdateBy,   // 更新者
+		ID:         in.Id,           // 主键ID
+		Name:       in.Name,         // 专区名称
+		SubTitle:   in.SubTitle,     // 子标题
+		Pic:        in.Pic,          // 展示图片
+		Sort:       in.Sort,         // 排序
+		ShowStatus: in.ShowStatus,   // 显示状态：0->不显示；1->显示
+		CreateBy:   area.CreateBy,   // 创建者
+		CreateTime: area.CreateTime, // 创建时间
+		UpdateBy:   in.UpdateBy,     // 更新者
+		UpdateTime: &now,            // 更新时间
 	}
 
 	// 2.优选专区存在时,则直接更新优选专区
-	_, err = q.Updates(item)
+	err = l.svcCtx.DB.Model(&model.CmsPreferredArea{}).WithContext(l.ctx).Where(query.CmsPreferredArea.ID.Eq(in.Id)).Save(item).Error
 
 	if err != nil {
 		logc.Errorf(l.ctx, "更新优选专区失败,参数:%+v,异常:%s", item, err.Error())
