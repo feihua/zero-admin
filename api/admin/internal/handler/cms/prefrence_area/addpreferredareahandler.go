@@ -1,9 +1,9 @@
-package prefrenceArea
+package prefrence_area
 
 import (
 	"net/http"
 
-	"github.com/feihua/zero-admin/api/admin/internal/logic/cms/prefrenceArea"
+	"github.com/feihua/zero-admin/api/admin/internal/logic/cms/prefrence_area"
 	"github.com/feihua/zero-admin/api/admin/internal/svc"
 	"github.com/feihua/zero-admin/api/admin/internal/types"
 	"github.com/zeromicro/go-zero/rest/httpx"
@@ -17,7 +17,7 @@ func AddPreferredAreaHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 			return
 		}
 
-		l := prefrenceArea.NewAddPreferredAreaLogic(r.Context(), svcCtx)
+		l := prefrence_area.NewAddPreferredAreaLogic(r.Context(), svcCtx)
 		resp, err := l.AddPreferredArea(&req)
 		if err != nil {
 			httpx.ErrorCtx(r.Context(), w, err)

@@ -6,7 +6,7 @@ package handler
 import (
 	"net/http"
 
-	cmsprefrenceArea "github.com/feihua/zero-admin/api/admin/internal/handler/cms/prefrenceArea"
+	cmsprefrence_area "github.com/feihua/zero-admin/api/admin/internal/handler/cms/prefrence_area"
 	cmssubject "github.com/feihua/zero-admin/api/admin/internal/handler/cms/subject"
 	cmssubject_category "github.com/feihua/zero-admin/api/admin/internal/handler/cms/subject_category"
 	memberaddress "github.com/feihua/zero-admin/api/admin/internal/handler/member/address"
@@ -61,32 +61,32 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				{
 					Method:  http.MethodPost,
 					Path:    "/addPreferredArea",
-					Handler: cmsprefrenceArea.AddPreferredAreaHandler(serverCtx),
+					Handler: cmsprefrence_area.AddPreferredAreaHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodGet,
 					Path:    "/deletePreferredArea",
-					Handler: cmsprefrenceArea.DeletePreferredAreaHandler(serverCtx),
+					Handler: cmsprefrence_area.DeletePreferredAreaHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodGet,
 					Path:    "/queryPreferredAreaDetail",
-					Handler: cmsprefrenceArea.QueryPreferredAreaDetailHandler(serverCtx),
+					Handler: cmsprefrence_area.QueryPreferredAreaDetailHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodGet,
 					Path:    "/queryPreferredAreaList",
-					Handler: cmsprefrenceArea.QueryPreferredAreaListHandler(serverCtx),
+					Handler: cmsprefrence_area.QueryPreferredAreaListHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
 					Path:    "/updatePreferredArea",
-					Handler: cmsprefrenceArea.UpdatePreferredAreaHandler(serverCtx),
+					Handler: cmsprefrence_area.UpdatePreferredAreaHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
 					Path:    "/updatePreferredAreaStatus",
-					Handler: cmsprefrenceArea.UpdatePreferredAreaStatusHandler(serverCtx),
+					Handler: cmsprefrence_area.UpdatePreferredAreaStatusHandler(serverCtx),
 				},
 			}...,
 		),

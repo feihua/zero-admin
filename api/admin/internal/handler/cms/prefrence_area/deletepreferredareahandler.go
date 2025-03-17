@@ -1,24 +1,24 @@
-package prefrenceArea
+package prefrence_area
 
 import (
 	"net/http"
 
-	"github.com/feihua/zero-admin/api/admin/internal/logic/cms/prefrenceArea"
+	"github.com/feihua/zero-admin/api/admin/internal/logic/cms/prefrence_area"
 	"github.com/feihua/zero-admin/api/admin/internal/svc"
 	"github.com/feihua/zero-admin/api/admin/internal/types"
 	"github.com/zeromicro/go-zero/rest/httpx"
 )
 
-func QueryPreferredAreaDetailHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
+func DeletePreferredAreaHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		var req types.QueryPreferredAreaDetailReq
+		var req types.DeletePreferredAreaReq
 		if err := httpx.Parse(r, &req); err != nil {
 			httpx.ErrorCtx(r.Context(), w, err)
 			return
 		}
 
-		l := prefrenceArea.NewQueryPreferredAreaDetailLogic(r.Context(), svcCtx)
-		resp, err := l.QueryPreferredAreaDetail(&req)
+		l := prefrence_area.NewDeletePreferredAreaLogic(r.Context(), svcCtx)
+		resp, err := l.DeletePreferredArea(&req)
 		if err != nil {
 			httpx.ErrorCtx(r.Context(), w, err)
 		} else {
