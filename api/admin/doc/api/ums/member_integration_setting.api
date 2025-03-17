@@ -91,8 +91,8 @@ type (
 @server (
 	jwt:        Auth
 	middleware: CheckUrl
-	group:      member/integration_setting
-	prefix:     /api/member/integrationConsumeSetting
+	group:      ums/member_integration_setting
+	prefix:     /api/ums/integrationConsumeSetting
 )
 service admin-api {
 	// 添加积分消费设置

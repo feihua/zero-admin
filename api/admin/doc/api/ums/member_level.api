@@ -120,8 +120,8 @@ type (
 @server (
 	jwt:        Auth
 	middleware: CheckUrl
-	group:      member/level
-	prefix:     /api/member/level
+	group:      ums/member_level
+	prefix:     /api/ums/level
 )
 service admin-api {
 	// 添加会员等级

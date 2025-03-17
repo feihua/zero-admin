@@ -89,8 +89,8 @@ type (
 @server (
 	jwt:        Auth
 	middleware: CheckUrl
-	group:      member/tag
-	prefix:     /api/member/tag
+	group:      ums/member_tag
+	prefix:     /api/ums/tag
 )
 service admin-api {
 	// 添加用户标签

@@ -102,8 +102,8 @@ type (
 @server (
 	jwt:        Auth
 	middleware: CheckUrl
-	group:      member/task
-	prefix:     /api/member/task
+	group:      ums/member_task
+	prefix:     /api/ums/task
 )
 service admin-api {
 	// 添加会员任务

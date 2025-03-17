@@ -125,8 +125,8 @@ type (
 @server (
 	jwt:        Auth
 	middleware: CheckUrl
-	group:      member/member
-	prefix:     /api/member
+	group:      ums/member
+	prefix:     /api/ums/member
 )
 service admin-api {
 	//分页查询会员信息

@@ -68,8 +68,8 @@ type (
 @server (
 	jwt:        Auth
 	middleware: CheckUrl
-	group:      member/statistics
-	prefix:     /api/member/statistics
+	group:      ums/member_statistics
+	prefix:     /api/ums/statistics
 )
 service admin-api {
 	// 查询会员统计信息详情

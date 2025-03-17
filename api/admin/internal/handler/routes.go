@@ -9,14 +9,6 @@ import (
 	cmsprefrence_area "github.com/feihua/zero-admin/api/admin/internal/handler/cms/prefrence_area"
 	cmssubject "github.com/feihua/zero-admin/api/admin/internal/handler/cms/subject"
 	cmssubject_category "github.com/feihua/zero-admin/api/admin/internal/handler/cms/subject_category"
-	memberaddress "github.com/feihua/zero-admin/api/admin/internal/handler/member/address"
-	memberintegration_setting "github.com/feihua/zero-admin/api/admin/internal/handler/member/integration_setting"
-	memberlevel "github.com/feihua/zero-admin/api/admin/internal/handler/member/level"
-	membermember "github.com/feihua/zero-admin/api/admin/internal/handler/member/member"
-	memberrule_setting "github.com/feihua/zero-admin/api/admin/internal/handler/member/rule_setting"
-	memberstatistics "github.com/feihua/zero-admin/api/admin/internal/handler/member/statistics"
-	membertag "github.com/feihua/zero-admin/api/admin/internal/handler/member/tag"
-	membertask "github.com/feihua/zero-admin/api/admin/internal/handler/member/task"
 	ordercompany_address "github.com/feihua/zero-admin/api/admin/internal/handler/order/company_address"
 	orderorder "github.com/feihua/zero-admin/api/admin/internal/handler/order/order"
 	orderorder_setting "github.com/feihua/zero-admin/api/admin/internal/handler/order/order_setting"
@@ -48,6 +40,14 @@ import (
 	sysrole "github.com/feihua/zero-admin/api/admin/internal/handler/sys/role"
 	sysupload "github.com/feihua/zero-admin/api/admin/internal/handler/sys/upload"
 	sysuser "github.com/feihua/zero-admin/api/admin/internal/handler/sys/user"
+	umsmember "github.com/feihua/zero-admin/api/admin/internal/handler/ums/member"
+	umsmember_address "github.com/feihua/zero-admin/api/admin/internal/handler/ums/member_address"
+	umsmember_integration_setting "github.com/feihua/zero-admin/api/admin/internal/handler/ums/member_integration_setting"
+	umsmember_level "github.com/feihua/zero-admin/api/admin/internal/handler/ums/member_level"
+	umsmember_rule_setting "github.com/feihua/zero-admin/api/admin/internal/handler/ums/member_rule_setting"
+	umsmember_statistics "github.com/feihua/zero-admin/api/admin/internal/handler/ums/member_statistics"
+	umsmember_tag "github.com/feihua/zero-admin/api/admin/internal/handler/ums/member_tag"
+	umsmember_task "github.com/feihua/zero-admin/api/admin/internal/handler/ums/member_task"
 	"github.com/feihua/zero-admin/api/admin/internal/svc"
 
 	"github.com/zeromicro/go-zero/rest"
@@ -172,281 +172,6 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 		),
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
 		rest.WithPrefix("/api/cms/subjectCategory"),
-	)
-
-	server.AddRoutes(
-		rest.WithMiddlewares(
-			[]rest.Middleware{serverCtx.CheckUrl},
-			[]rest.Route{
-				{
-					Method:  http.MethodGet,
-					Path:    "/queryMemberAddressList",
-					Handler: memberaddress.QueryMemberAddressListHandler(serverCtx),
-				},
-			}...,
-		),
-		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
-		rest.WithPrefix("/api/member/address"),
-	)
-
-	server.AddRoutes(
-		rest.WithMiddlewares(
-			[]rest.Middleware{serverCtx.CheckUrl},
-			[]rest.Route{
-				{
-					Method:  http.MethodPost,
-					Path:    "/addIntegrationConsumeSetting",
-					Handler: memberintegration_setting.AddIntegrationConsumeSettingHandler(serverCtx),
-				},
-				{
-					Method:  http.MethodGet,
-					Path:    "/deleteIntegrationConsumeSetting",
-					Handler: memberintegration_setting.DeleteIntegrationConsumeSettingHandler(serverCtx),
-				},
-				{
-					Method:  http.MethodGet,
-					Path:    "/queryIntegrationConsumeSettingDetail",
-					Handler: memberintegration_setting.QueryIntegrationConsumeSettingDetailHandler(serverCtx),
-				},
-				{
-					Method:  http.MethodGet,
-					Path:    "/queryIntegrationConsumeSettingList",
-					Handler: memberintegration_setting.QueryIntegrationConsumeSettingListHandler(serverCtx),
-				},
-				{
-					Method:  http.MethodPost,
-					Path:    "/updateIntegrationConsumeSetting",
-					Handler: memberintegration_setting.UpdateIntegrationConsumeSettingHandler(serverCtx),
-				},
-				{
-					Method:  http.MethodPost,
-					Path:    "/updateIntegrationConsumeSettingStatus",
-					Handler: memberintegration_setting.UpdateIntegrationConsumeSettingStatusHandler(serverCtx),
-				},
-			}...,
-		),
-		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
-		rest.WithPrefix("/api/member/integrationConsumeSetting"),
-	)
-
-	server.AddRoutes(
-		rest.WithMiddlewares(
-			[]rest.Middleware{serverCtx.CheckUrl},
-			[]rest.Route{
-				{
-					Method:  http.MethodPost,
-					Path:    "/addMemberLevel",
-					Handler: memberlevel.AddMemberLevelHandler(serverCtx),
-				},
-				{
-					Method:  http.MethodGet,
-					Path:    "/deleteMemberLevel",
-					Handler: memberlevel.DeleteMemberLevelHandler(serverCtx),
-				},
-				{
-					Method:  http.MethodGet,
-					Path:    "/queryMemberLevelDetail",
-					Handler: memberlevel.QueryMemberLevelDetailHandler(serverCtx),
-				},
-				{
-					Method:  http.MethodGet,
-					Path:    "/queryMemberLevelList",
-					Handler: memberlevel.QueryMemberLevelListHandler(serverCtx),
-				},
-				{
-					Method:  http.MethodPost,
-					Path:    "/updateMemberLevel",
-					Handler: memberlevel.UpdateMemberLevelHandler(serverCtx),
-				},
-				{
-					Method:  http.MethodPost,
-					Path:    "/updateMemberLevelStatus",
-					Handler: memberlevel.UpdateMemberLevelStatusHandler(serverCtx),
-				},
-			}...,
-		),
-		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
-		rest.WithPrefix("/api/member/level"),
-	)
-
-	server.AddRoutes(
-		rest.WithMiddlewares(
-			[]rest.Middleware{serverCtx.CheckUrl},
-			[]rest.Route{
-				{
-					Method:  http.MethodGet,
-					Path:    "/deleteMember",
-					Handler: membermember.DeleteMemberHandler(serverCtx),
-				},
-				{
-					Method:  http.MethodGet,
-					Path:    "/queryGrowthChangeHistoryList",
-					Handler: membermember.QueryGrowthChangeHistoryListHandler(serverCtx),
-				},
-				{
-					Method:  http.MethodGet,
-					Path:    "/queryIntegrationChangeHistoryList",
-					Handler: membermember.QueryIntegrationChangeHistoryListHandler(serverCtx),
-				},
-				{
-					Method:  http.MethodGet,
-					Path:    "/queryMemberList",
-					Handler: membermember.QueryMemberListHandler(serverCtx),
-				},
-				{
-					Method:  http.MethodGet,
-					Path:    "/queryMemberLoginLogList",
-					Handler: membermember.QueryMemberLoginLogListHandler(serverCtx),
-				},
-				{
-					Method:  http.MethodPost,
-					Path:    "/updateMember",
-					Handler: membermember.UpdateMemberHandler(serverCtx),
-				},
-			}...,
-		),
-		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
-		rest.WithPrefix("/api/member"),
-	)
-
-	server.AddRoutes(
-		rest.WithMiddlewares(
-			[]rest.Middleware{serverCtx.CheckUrl},
-			[]rest.Route{
-				{
-					Method:  http.MethodPost,
-					Path:    "/addMemberRuleSetting",
-					Handler: memberrule_setting.AddMemberRuleSettingHandler(serverCtx),
-				},
-				{
-					Method:  http.MethodGet,
-					Path:    "/deleteMemberRuleSetting",
-					Handler: memberrule_setting.DeleteMemberRuleSettingHandler(serverCtx),
-				},
-				{
-					Method:  http.MethodGet,
-					Path:    "/queryMemberRuleSettingDetail",
-					Handler: memberrule_setting.QueryMemberRuleSettingDetailHandler(serverCtx),
-				},
-				{
-					Method:  http.MethodGet,
-					Path:    "/queryMemberRuleSettingList",
-					Handler: memberrule_setting.QueryMemberRuleSettingListHandler(serverCtx),
-				},
-				{
-					Method:  http.MethodPost,
-					Path:    "/updateMemberRuleSetting",
-					Handler: memberrule_setting.UpdateMemberRuleSettingHandler(serverCtx),
-				},
-				{
-					Method:  http.MethodPost,
-					Path:    "/updateMemberRuleSettingStatus",
-					Handler: memberrule_setting.UpdateMemberRuleSettingStatusHandler(serverCtx),
-				},
-			}...,
-		),
-		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
-		rest.WithPrefix("/api/member/ruleSetting"),
-	)
-
-	server.AddRoutes(
-		rest.WithMiddlewares(
-			[]rest.Middleware{serverCtx.CheckUrl},
-			[]rest.Route{
-				{
-					Method:  http.MethodGet,
-					Path:    "/queryMemberStatisticsInfoDetail",
-					Handler: memberstatistics.QueryMemberStatisticsInfoDetailHandler(serverCtx),
-				},
-				{
-					Method:  http.MethodGet,
-					Path:    "/queryMemberStatisticsInfoList",
-					Handler: memberstatistics.QueryMemberStatisticsInfoListHandler(serverCtx),
-				},
-			}...,
-		),
-		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
-		rest.WithPrefix("/api/member/statistics"),
-	)
-
-	server.AddRoutes(
-		rest.WithMiddlewares(
-			[]rest.Middleware{serverCtx.CheckUrl},
-			[]rest.Route{
-				{
-					Method:  http.MethodPost,
-					Path:    "/addMemberTag",
-					Handler: membertag.AddMemberTagHandler(serverCtx),
-				},
-				{
-					Method:  http.MethodGet,
-					Path:    "/deleteMemberTag",
-					Handler: membertag.DeleteMemberTagHandler(serverCtx),
-				},
-				{
-					Method:  http.MethodGet,
-					Path:    "/queryMemberTagDetail",
-					Handler: membertag.QueryMemberTagDetailHandler(serverCtx),
-				},
-				{
-					Method:  http.MethodGet,
-					Path:    "/queryMemberTagList",
-					Handler: membertag.QueryMemberTagListHandler(serverCtx),
-				},
-				{
-					Method:  http.MethodPost,
-					Path:    "/updateMemberTag",
-					Handler: membertag.UpdateMemberTagHandler(serverCtx),
-				},
-				{
-					Method:  http.MethodPost,
-					Path:    "/updateMemberTagStatus",
-					Handler: membertag.UpdateMemberTagStatusHandler(serverCtx),
-				},
-			}...,
-		),
-		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
-		rest.WithPrefix("/api/member/tag"),
-	)
-
-	server.AddRoutes(
-		rest.WithMiddlewares(
-			[]rest.Middleware{serverCtx.CheckUrl},
-			[]rest.Route{
-				{
-					Method:  http.MethodPost,
-					Path:    "/addMemberTask",
-					Handler: membertask.AddMemberTaskHandler(serverCtx),
-				},
-				{
-					Method:  http.MethodGet,
-					Path:    "/deleteMemberTask",
-					Handler: membertask.DeleteMemberTaskHandler(serverCtx),
-				},
-				{
-					Method:  http.MethodGet,
-					Path:    "/queryMemberTaskDetail",
-					Handler: membertask.QueryMemberTaskDetailHandler(serverCtx),
-				},
-				{
-					Method:  http.MethodGet,
-					Path:    "/queryMemberTaskList",
-					Handler: membertask.QueryMemberTaskListHandler(serverCtx),
-				},
-				{
-					Method:  http.MethodPost,
-					Path:    "/updateMemberTask",
-					Handler: membertask.UpdateMemberTaskHandler(serverCtx),
-				},
-				{
-					Method:  http.MethodPost,
-					Path:    "/updateMemberTaskStatus",
-					Handler: membertask.UpdateMemberTaskStatusHandler(serverCtx),
-				},
-			}...,
-		),
-		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
-		rest.WithPrefix("/api/member/task"),
 	)
 
 	server.AddRoutes(
@@ -665,38 +390,8 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			[]rest.Route{
 				{
 					Method:  http.MethodGet,
-					Path:    "/queryProductList",
-					Handler: productproduct.QueryProductListHandler(serverCtx),
-				},
-			}...,
-		),
-		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
-		rest.WithPrefix("/api/product"),
-	)
-
-	server.AddRoutes(
-		rest.WithMiddlewares(
-			[]rest.Middleware{serverCtx.CheckUrl},
-			[]rest.Route{
-				{
-					Method:  http.MethodGet,
 					Path:    "/queryProductDetail",
 					Handler: productproduct.QueryProductDetailHandler(serverCtx),
-				},
-			}...,
-		),
-		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
-		rest.WithPrefix("/api/product"),
-	)
-
-	server.AddRoutes(
-		rest.WithMiddlewares(
-			[]rest.Middleware{serverCtx.CheckUrl},
-			[]rest.Route{
-				{
-					Method:  http.MethodPost,
-					Path:    "/addProduct",
-					Handler: productproduct.ProductAddHandler(serverCtx),
 				},
 			}...,
 		),
@@ -737,6 +432,36 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 					Method:  http.MethodPost,
 					Path:    "/updateVerifyStatus",
 					Handler: productproduct.UpdateVerifyStatusHandler(serverCtx),
+				},
+			}...,
+		),
+		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
+		rest.WithPrefix("/api/product"),
+	)
+
+	server.AddRoutes(
+		rest.WithMiddlewares(
+			[]rest.Middleware{serverCtx.CheckUrl},
+			[]rest.Route{
+				{
+					Method:  http.MethodGet,
+					Path:    "/queryProductList",
+					Handler: productproduct.QueryProductListHandler(serverCtx),
+				},
+			}...,
+		),
+		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
+		rest.WithPrefix("/api/product"),
+	)
+
+	server.AddRoutes(
+		rest.WithMiddlewares(
+			[]rest.Middleware{serverCtx.CheckUrl},
+			[]rest.Route{
+				{
+					Method:  http.MethodPost,
+					Path:    "/addProduct",
+					Handler: productproduct.ProductAddHandler(serverCtx),
 				},
 			}...,
 		),
@@ -1677,5 +1402,280 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				Handler: sysuser.UserLoginHandler(serverCtx),
 			},
 		},
+	)
+
+	server.AddRoutes(
+		rest.WithMiddlewares(
+			[]rest.Middleware{serverCtx.CheckUrl},
+			[]rest.Route{
+				{
+					Method:  http.MethodGet,
+					Path:    "/deleteMember",
+					Handler: umsmember.DeleteMemberHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodGet,
+					Path:    "/queryGrowthChangeHistoryList",
+					Handler: umsmember.QueryGrowthChangeHistoryListHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodGet,
+					Path:    "/queryIntegrationChangeHistoryList",
+					Handler: umsmember.QueryIntegrationChangeHistoryListHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodGet,
+					Path:    "/queryMemberList",
+					Handler: umsmember.QueryMemberListHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodGet,
+					Path:    "/queryMemberLoginLogList",
+					Handler: umsmember.QueryMemberLoginLogListHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodPost,
+					Path:    "/updateMember",
+					Handler: umsmember.UpdateMemberHandler(serverCtx),
+				},
+			}...,
+		),
+		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
+		rest.WithPrefix("/api/ums/member"),
+	)
+
+	server.AddRoutes(
+		rest.WithMiddlewares(
+			[]rest.Middleware{serverCtx.CheckUrl},
+			[]rest.Route{
+				{
+					Method:  http.MethodGet,
+					Path:    "/queryMemberAddressList",
+					Handler: umsmember_address.QueryMemberAddressListHandler(serverCtx),
+				},
+			}...,
+		),
+		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
+		rest.WithPrefix("/api/ums/address"),
+	)
+
+	server.AddRoutes(
+		rest.WithMiddlewares(
+			[]rest.Middleware{serverCtx.CheckUrl},
+			[]rest.Route{
+				{
+					Method:  http.MethodPost,
+					Path:    "/addIntegrationConsumeSetting",
+					Handler: umsmember_integration_setting.AddIntegrationConsumeSettingHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodGet,
+					Path:    "/deleteIntegrationConsumeSetting",
+					Handler: umsmember_integration_setting.DeleteIntegrationConsumeSettingHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodGet,
+					Path:    "/queryIntegrationConsumeSettingDetail",
+					Handler: umsmember_integration_setting.QueryIntegrationConsumeSettingDetailHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodGet,
+					Path:    "/queryIntegrationConsumeSettingList",
+					Handler: umsmember_integration_setting.QueryIntegrationConsumeSettingListHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodPost,
+					Path:    "/updateIntegrationConsumeSetting",
+					Handler: umsmember_integration_setting.UpdateIntegrationConsumeSettingHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodPost,
+					Path:    "/updateIntegrationConsumeSettingStatus",
+					Handler: umsmember_integration_setting.UpdateIntegrationConsumeSettingStatusHandler(serverCtx),
+				},
+			}...,
+		),
+		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
+		rest.WithPrefix("/api/ums/integrationConsumeSetting"),
+	)
+
+	server.AddRoutes(
+		rest.WithMiddlewares(
+			[]rest.Middleware{serverCtx.CheckUrl},
+			[]rest.Route{
+				{
+					Method:  http.MethodPost,
+					Path:    "/addMemberLevel",
+					Handler: umsmember_level.AddMemberLevelHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodGet,
+					Path:    "/deleteMemberLevel",
+					Handler: umsmember_level.DeleteMemberLevelHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodGet,
+					Path:    "/queryMemberLevelDetail",
+					Handler: umsmember_level.QueryMemberLevelDetailHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodGet,
+					Path:    "/queryMemberLevelList",
+					Handler: umsmember_level.QueryMemberLevelListHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodPost,
+					Path:    "/updateMemberLevel",
+					Handler: umsmember_level.UpdateMemberLevelHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodPost,
+					Path:    "/updateMemberLevelStatus",
+					Handler: umsmember_level.UpdateMemberLevelStatusHandler(serverCtx),
+				},
+			}...,
+		),
+		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
+		rest.WithPrefix("/api/ums/level"),
+	)
+
+	server.AddRoutes(
+		rest.WithMiddlewares(
+			[]rest.Middleware{serverCtx.CheckUrl},
+			[]rest.Route{
+				{
+					Method:  http.MethodPost,
+					Path:    "/addMemberRuleSetting",
+					Handler: umsmember_rule_setting.AddMemberRuleSettingHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodGet,
+					Path:    "/deleteMemberRuleSetting",
+					Handler: umsmember_rule_setting.DeleteMemberRuleSettingHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodGet,
+					Path:    "/queryMemberRuleSettingDetail",
+					Handler: umsmember_rule_setting.QueryMemberRuleSettingDetailHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodGet,
+					Path:    "/queryMemberRuleSettingList",
+					Handler: umsmember_rule_setting.QueryMemberRuleSettingListHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodPost,
+					Path:    "/updateMemberRuleSetting",
+					Handler: umsmember_rule_setting.UpdateMemberRuleSettingHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodPost,
+					Path:    "/updateMemberRuleSettingStatus",
+					Handler: umsmember_rule_setting.UpdateMemberRuleSettingStatusHandler(serverCtx),
+				},
+			}...,
+		),
+		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
+		rest.WithPrefix("/api/ums/ruleSetting"),
+	)
+
+	server.AddRoutes(
+		rest.WithMiddlewares(
+			[]rest.Middleware{serverCtx.CheckUrl},
+			[]rest.Route{
+				{
+					Method:  http.MethodGet,
+					Path:    "/queryMemberStatisticsInfoDetail",
+					Handler: umsmember_statistics.QueryMemberStatisticsInfoDetailHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodGet,
+					Path:    "/queryMemberStatisticsInfoList",
+					Handler: umsmember_statistics.QueryMemberStatisticsInfoListHandler(serverCtx),
+				},
+			}...,
+		),
+		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
+		rest.WithPrefix("/api/ums/statistics"),
+	)
+
+	server.AddRoutes(
+		rest.WithMiddlewares(
+			[]rest.Middleware{serverCtx.CheckUrl},
+			[]rest.Route{
+				{
+					Method:  http.MethodPost,
+					Path:    "/addMemberTag",
+					Handler: umsmember_tag.AddMemberTagHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodGet,
+					Path:    "/deleteMemberTag",
+					Handler: umsmember_tag.DeleteMemberTagHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodGet,
+					Path:    "/queryMemberTagDetail",
+					Handler: umsmember_tag.QueryMemberTagDetailHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodGet,
+					Path:    "/queryMemberTagList",
+					Handler: umsmember_tag.QueryMemberTagListHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodPost,
+					Path:    "/updateMemberTag",
+					Handler: umsmember_tag.UpdateMemberTagHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodPost,
+					Path:    "/updateMemberTagStatus",
+					Handler: umsmember_tag.UpdateMemberTagStatusHandler(serverCtx),
+				},
+			}...,
+		),
+		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
+		rest.WithPrefix("/api/ums/tag"),
+	)
+
+	server.AddRoutes(
+		rest.WithMiddlewares(
+			[]rest.Middleware{serverCtx.CheckUrl},
+			[]rest.Route{
+				{
+					Method:  http.MethodPost,
+					Path:    "/addMemberTask",
+					Handler: umsmember_task.AddMemberTaskHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodGet,
+					Path:    "/deleteMemberTask",
+					Handler: umsmember_task.DeleteMemberTaskHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodGet,
+					Path:    "/queryMemberTaskDetail",
+					Handler: umsmember_task.QueryMemberTaskDetailHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodGet,
+					Path:    "/queryMemberTaskList",
+					Handler: umsmember_task.QueryMemberTaskListHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodPost,
+					Path:    "/updateMemberTask",
+					Handler: umsmember_task.UpdateMemberTaskHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodPost,
+					Path:    "/updateMemberTaskStatus",
+					Handler: umsmember_task.UpdateMemberTaskStatusHandler(serverCtx),
+				},
+			}...,
+		),
+		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
+		rest.WithPrefix("/api/ums/task"),
 	)
 }
