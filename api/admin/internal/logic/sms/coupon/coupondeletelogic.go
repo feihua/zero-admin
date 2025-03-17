@@ -33,7 +33,7 @@ func NewCouponDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext) Coupo
 }
 
 // CouponDelete 删除优惠券
-func (l *CouponDeleteLogic) CouponDelete(req types.DeleteCouponReq) (*types.DeleteCouponResp, error) {
+func (l *CouponDeleteLogic) CouponDelete(req *types.DeleteCouponReq) (*types.DeleteCouponResp, error) {
 	_, err := l.svcCtx.CouponService.DeleteCoupon(l.ctx, &smsclient.DeleteCouponReq{
 		Ids: req.Ids,
 	})

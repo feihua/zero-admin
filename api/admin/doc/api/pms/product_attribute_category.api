@@ -67,7 +67,7 @@ type (
 @server (
 	jwt:        Auth
 	middleware: CheckUrl
-	group:      product/attribute_category
+	group:      product/product_attribute_category
 	prefix:     /api/product/attributeCategory
 )
 service admin-api {

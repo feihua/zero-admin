@@ -36,7 +36,7 @@ func NewHomeRecommendSubjectDeleteLogic(ctx context.Context, svcCtx *svc.Service
 // HomeRecommendSubjectDelete 删除人气推荐专题
 // 1.删除sms_home_recommend_subject的记录(sms-rpc)
 // 2.修改cms_subject记录的状态为不推荐(cms-rpc)
-func (l *HomeRecommendSubjectDeleteLogic) HomeRecommendSubjectDelete(req types.DeleteHomeRecommendSubjectReq) (*types.DeleteHomeRecommendSubjectResp, error) {
+func (l *HomeRecommendSubjectDeleteLogic) HomeRecommendSubjectDelete(req *types.DeleteHomeRecommendSubjectReq) (*types.DeleteHomeRecommendSubjectResp, error) {
 
 	// 1.删除sms_home_recommend_subject的记录(sms-rpc)
 	_, err := l.svcCtx.HomeRecommendSubjectService.DeleteHomeRecommendSubject(l.ctx, &smsclient.DeleteHomeRecommendSubjectReq{

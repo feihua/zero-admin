@@ -34,7 +34,7 @@ func NewHomeRecommendProductListLogic(ctx context.Context, svcCtx *svc.ServiceCo
 }
 
 // HomeRecommendProductList 查询人气推荐商品
-func (l *HomeRecommendProductListLogic) HomeRecommendProductList(req types.ListHomeRecommendProductReq) (*types.ListHomeRecommendProductResp, error) {
+func (l *HomeRecommendProductListLogic) HomeRecommendProductList(req *types.ListHomeRecommendProductReq) (*types.ListHomeRecommendProductResp, error) {
 	resp, err := l.svcCtx.HomeRecommendProductService.QueryHomeRecommendProductList(l.ctx, &smsclient.QueryHomeRecommendProductListReq{
 		PageNum:         req.Current,
 		PageSize:        req.PageSize,

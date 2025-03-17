@@ -37,7 +37,7 @@ func NewHomeRecommendProductAddLogic(ctx context.Context, svcCtx *svc.ServiceCon
 // 1.根据productIds查询商品(pms-rpc)
 // 2.添加首页人气推荐记录(sms-rpc)
 // 3.修改商品的推荐状态(pms-rpc)
-func (l *HomeRecommendProductAddLogic) HomeRecommendProductAdd(req types.AddHomeRecommendProductReq) (*types.AddHomeRecommendProductResp, error) {
+func (l *HomeRecommendProductAddLogic) HomeRecommendProductAdd(req *types.AddHomeRecommendProductReq) (*types.AddHomeRecommendProductResp, error) {
 	// 1.根据productIds查询商品(pms-rpc)
 	brandListResp, _ := l.svcCtx.ProductService.QueryProductListByIds(l.ctx, &pmsclient.QueryProductByIdsReq{Ids: req.ProductIds})
 

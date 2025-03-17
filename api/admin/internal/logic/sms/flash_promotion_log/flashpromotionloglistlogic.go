@@ -1,4 +1,4 @@
-package logic
+package flash_promotion_log
 
 import (
 	"context"
@@ -26,7 +26,7 @@ func NewFlashPromotionLogListLogic(ctx context.Context, svcCtx *svc.ServiceConte
 	}
 }
 
-func (l *FlashPromotionLogListLogic) FlashPromotionLogList(req types.ListFlashPromotionLogReq) (*types.ListFlashPromotionLogResp, error) {
+func (l *FlashPromotionLogListLogic) FlashPromotionLogList(req *types.ListFlashPromotionLogReq) (*types.ListFlashPromotionLogResp, error) {
 	resp, err := l.svcCtx.FlashPromotionLogService.QueryFlashPromotionLogList(l.ctx, &smsclient.QueryFlashPromotionLogListReq{
 		PageNum:  req.Current,
 		PageSize: req.PageSize,

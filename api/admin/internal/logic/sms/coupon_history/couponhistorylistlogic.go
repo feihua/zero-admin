@@ -1,4 +1,4 @@
-package logic
+package coupon_history
 
 import (
 	"context"
@@ -33,7 +33,7 @@ func NewCouponHistoryListLogic(ctx context.Context, svcCtx *svc.ServiceContext) 
 }
 
 // CouponHistoryList 根据优惠券id，使用状态，订单编号分页获取领取记录
-func (l *CouponHistoryListLogic) CouponHistoryList(req types.ListCouponHistoryReq) (*types.ListCouponHistoryResp, error) {
+func (l *CouponHistoryListLogic) CouponHistoryList(req *types.ListCouponHistoryReq) (*types.ListCouponHistoryResp, error) {
 	resp, err := l.svcCtx.CouponHistoryService.QueryCouponHistoryList(l.ctx, &smsclient.QueryCouponHistoryListReq{
 		PageNum:   req.Current,
 		PageSize:  req.PageSize,

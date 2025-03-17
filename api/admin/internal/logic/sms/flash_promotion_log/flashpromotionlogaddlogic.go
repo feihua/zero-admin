@@ -1,4 +1,4 @@
-package logic
+package flash_promotion_log
 
 import (
 	"context"
@@ -27,7 +27,7 @@ func NewFlashPromotionLogAddLogic(ctx context.Context, svcCtx *svc.ServiceContex
 	}
 }
 
-func (l *FlashPromotionLogAddLogic) FlashPromotionLogAdd(req types.AddFlashPromotionLogReq) (*types.AddFlashPromotionLogResp, error) {
+func (l *FlashPromotionLogAddLogic) FlashPromotionLogAdd(req *types.AddFlashPromotionLogReq) (*types.AddFlashPromotionLogResp, error) {
 	_, err := l.svcCtx.FlashPromotionLogService.AddFlashPromotionLog(l.ctx, &smsclient.AddFlashPromotionLogReq{
 		MemberId:      req.MemberId,      // 会员id
 		ProductId:     req.ProductId,     // 商品id

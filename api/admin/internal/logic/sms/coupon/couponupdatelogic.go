@@ -33,7 +33,7 @@ func NewCouponUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContext) Coupo
 }
 
 // CouponUpdate 更新优惠券
-func (l *CouponUpdateLogic) CouponUpdate(req types.AddOrUpdateCouponReq) (*types.AddOrUpdateCouponResp, error) {
+func (l *CouponUpdateLogic) CouponUpdate(req *types.AddOrUpdateCouponReq) (*types.AddOrUpdateCouponResp, error) {
 	var productList []*smsclient.CouponProductRelationData
 	for _, relation := range req.ProductRelationList {
 		productList = append(productList, &smsclient.CouponProductRelationData{

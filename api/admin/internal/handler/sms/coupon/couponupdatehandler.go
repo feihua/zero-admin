@@ -18,7 +18,7 @@ func CouponUpdateHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 		}
 
 		l := coupon.NewCouponUpdateLogic(r.Context(), svcCtx)
-		resp, err := l.CouponUpdate(req)
+		resp, err := l.CouponUpdate(&req)
 		if err != nil {
 			httpx.ErrorCtx(r.Context(), w, err)
 		} else {

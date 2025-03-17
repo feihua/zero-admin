@@ -19,14 +19,14 @@ import (
 	membertask "github.com/feihua/zero-admin/api/admin/internal/handler/member/task"
 	ordercompany_address "github.com/feihua/zero-admin/api/admin/internal/handler/order/company_address"
 	orderorder "github.com/feihua/zero-admin/api/admin/internal/handler/order/order"
+	orderorder_setting "github.com/feihua/zero-admin/api/admin/internal/handler/order/order_setting"
 	orderreturn_apply "github.com/feihua/zero-admin/api/admin/internal/handler/order/return_apply"
 	orderreturn_reason "github.com/feihua/zero-admin/api/admin/internal/handler/order/return_reason"
-	ordersetting "github.com/feihua/zero-admin/api/admin/internal/handler/order/setting"
-	productattribute "github.com/feihua/zero-admin/api/admin/internal/handler/product/attribute"
-	productattribute_category "github.com/feihua/zero-admin/api/admin/internal/handler/product/attribute_category"
-	productbrand "github.com/feihua/zero-admin/api/admin/internal/handler/product/brand"
-	productcategory "github.com/feihua/zero-admin/api/admin/internal/handler/product/category"
 	productproduct "github.com/feihua/zero-admin/api/admin/internal/handler/product/product"
+	productproduct_attribute "github.com/feihua/zero-admin/api/admin/internal/handler/product/product_attribute"
+	productproduct_attribute_category "github.com/feihua/zero-admin/api/admin/internal/handler/product/product_attribute_category"
+	productproduct_brand "github.com/feihua/zero-admin/api/admin/internal/handler/product/product_brand"
+	productproduct_category "github.com/feihua/zero-admin/api/admin/internal/handler/product/product_category"
 	productskustock "github.com/feihua/zero-admin/api/admin/internal/handler/product/skustock"
 	smscoupon "github.com/feihua/zero-admin/api/admin/internal/handler/sms/coupon"
 	smscoupon_history "github.com/feihua/zero-admin/api/admin/internal/handler/sms/coupon_history"
@@ -549,6 +549,51 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			[]rest.Middleware{serverCtx.CheckUrl},
 			[]rest.Route{
 				{
+					Method:  http.MethodPost,
+					Path:    "/addOrderSetting",
+					Handler: orderorder_setting.AddOrderSettingHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodGet,
+					Path:    "/deleteOrderSetting",
+					Handler: orderorder_setting.DeleteOrderSettingHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodGet,
+					Path:    "/queryOrderSettingDetail",
+					Handler: orderorder_setting.QueryOrderSettingDetailHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodGet,
+					Path:    "/queryOrderSettingList",
+					Handler: orderorder_setting.QueryOrderSettingListHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodPost,
+					Path:    "/updateOrderSetting",
+					Handler: orderorder_setting.UpdateOrderSettingHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodPost,
+					Path:    "/updateOrderSettingIsDefault",
+					Handler: orderorder_setting.UpdateOrderSettingIsDefaultHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodPost,
+					Path:    "/updateOrderSettingStatus",
+					Handler: orderorder_setting.UpdateOrderSettingStatusHandler(serverCtx),
+				},
+			}...,
+		),
+		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
+		rest.WithPrefix("/api/order/setting"),
+	)
+
+	server.AddRoutes(
+		rest.WithMiddlewares(
+			[]rest.Middleware{serverCtx.CheckUrl},
+			[]rest.Route{
+				{
 					Method:  http.MethodGet,
 					Path:    "/deleteOrderReturnApply",
 					Handler: orderreturn_apply.DeleteOrderReturnApplyHandler(serverCtx),
@@ -619,199 +664,39 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			[]rest.Middleware{serverCtx.CheckUrl},
 			[]rest.Route{
 				{
-					Method:  http.MethodPost,
-					Path:    "/addOrderSetting",
-					Handler: ordersetting.AddOrderSettingHandler(serverCtx),
-				},
-				{
-					Method:  http.MethodGet,
-					Path:    "/deleteOrderSetting",
-					Handler: ordersetting.DeleteOrderSettingHandler(serverCtx),
-				},
-				{
-					Method:  http.MethodGet,
-					Path:    "/queryOrderSettingDetail",
-					Handler: ordersetting.QueryOrderSettingDetailHandler(serverCtx),
-				},
-				{
-					Method:  http.MethodGet,
-					Path:    "/queryOrderSettingList",
-					Handler: ordersetting.QueryOrderSettingListHandler(serverCtx),
-				},
-				{
-					Method:  http.MethodPost,
-					Path:    "/updateOrderSetting",
-					Handler: ordersetting.UpdateOrderSettingHandler(serverCtx),
-				},
-				{
-					Method:  http.MethodPost,
-					Path:    "/updateOrderSettingIsDefault",
-					Handler: ordersetting.UpdateOrderSettingIsDefaultHandler(serverCtx),
-				},
-				{
-					Method:  http.MethodPost,
-					Path:    "/updateOrderSettingStatus",
-					Handler: ordersetting.UpdateOrderSettingStatusHandler(serverCtx),
-				},
-			}...,
-		),
-		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
-		rest.WithPrefix("/api/order/setting"),
-	)
-
-	server.AddRoutes(
-		rest.WithMiddlewares(
-			[]rest.Middleware{serverCtx.CheckUrl},
-			[]rest.Route{
-				{
-					Method:  http.MethodPost,
-					Path:    "/addAttribute",
-					Handler: productattribute.ProductAttributeAddHandler(serverCtx),
-				},
-				{
-					Method:  http.MethodGet,
-					Path:    "/deleteAttribute",
-					Handler: productattribute.ProductAttributeDeleteHandler(serverCtx),
-				},
-				{
-					Method:  http.MethodGet,
-					Path:    "/queryAttributeList",
-					Handler: productattribute.ProductAttributeListHandler(serverCtx),
-				},
-				{
-					Method:  http.MethodGet,
-					Path:    "/queryByproductCategoryId",
-					Handler: productattribute.QueryByproductCategoryIdHandler(serverCtx),
-				},
-			}...,
-		),
-		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
-		rest.WithPrefix("/api/product/attribute"),
-	)
-
-	server.AddRoutes(
-		rest.WithMiddlewares(
-			[]rest.Middleware{serverCtx.CheckUrl},
-			[]rest.Route{
-				{
-					Method:  http.MethodPost,
-					Path:    "/addAttributeCategory",
-					Handler: productattribute_category.ProductAttributeCategoryAddHandler(serverCtx),
-				},
-				{
-					Method:  http.MethodGet,
-					Path:    "/deleteAttributeCategory",
-					Handler: productattribute_category.ProductAttributeCategoryDeleteHandler(serverCtx),
-				},
-				{
-					Method:  http.MethodGet,
-					Path:    "/queryAttributeCategoryList",
-					Handler: productattribute_category.ProductAttributeCategoryListHandler(serverCtx),
-				},
-				{
-					Method:  http.MethodGet,
-					Path:    "/queryCategoryWithAttrList",
-					Handler: productattribute_category.QueryCategoryWithAttrListHandler(serverCtx),
-				},
-				{
-					Method:  http.MethodPost,
-					Path:    "/updateAttributeCategory",
-					Handler: productattribute_category.ProductAttributeCategoryUpdateHandler(serverCtx),
-				},
-			}...,
-		),
-		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
-		rest.WithPrefix("/api/product/attributeCategory"),
-	)
-
-	server.AddRoutes(
-		rest.WithMiddlewares(
-			[]rest.Middleware{serverCtx.CheckUrl},
-			[]rest.Route{
-				{
-					Method:  http.MethodPost,
-					Path:    "/addProductBrand",
-					Handler: productbrand.ProductBrandAddHandler(serverCtx),
-				},
-				{
-					Method:  http.MethodGet,
-					Path:    "/deleteProductBrand",
-					Handler: productbrand.ProductBrandDeleteHandler(serverCtx),
-				},
-				{
-					Method:  http.MethodGet,
-					Path:    "/queryProductBrandList",
-					Handler: productbrand.ProductBrandListHandler(serverCtx),
-				},
-				{
-					Method:  http.MethodPost,
-					Path:    "/updateBrandFactoryStatus",
-					Handler: productbrand.UpdateBrandFactoryStatusHandler(serverCtx),
-				},
-				{
-					Method:  http.MethodPost,
-					Path:    "/updateBrandShowStatus",
-					Handler: productbrand.UpdateBrandShowStatusHandler(serverCtx),
-				},
-				{
-					Method:  http.MethodPost,
-					Path:    "/updateProductBrand",
-					Handler: productbrand.ProductBrandUpdateHandler(serverCtx),
-				},
-			}...,
-		),
-		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
-		rest.WithPrefix("/api/product/brand"),
-	)
-
-	server.AddRoutes(
-		rest.WithMiddlewares(
-			[]rest.Middleware{serverCtx.CheckUrl},
-			[]rest.Route{
-				{
-					Method:  http.MethodPost,
-					Path:    "/addProductCategory",
-					Handler: productcategory.ProductCategoryAddHandler(serverCtx),
-				},
-				{
-					Method:  http.MethodGet,
-					Path:    "/deleteProductCategory",
-					Handler: productcategory.ProductCategoryDeleteHandler(serverCtx),
-				},
-				{
-					Method:  http.MethodGet,
-					Path:    "/queryProductCategoryList",
-					Handler: productcategory.ProductCategoryListHandler(serverCtx),
-				},
-				{
-					Method:  http.MethodPost,
-					Path:    "/updateCategoryNavStatus",
-					Handler: productcategory.UpdateCategoryNavStatusHandler(serverCtx),
-				},
-				{
-					Method:  http.MethodPost,
-					Path:    "/updateCategoryShowStatus",
-					Handler: productcategory.UpdateCategoryShowStatusHandler(serverCtx),
-				},
-				{
-					Method:  http.MethodPost,
-					Path:    "/updateProductCategory",
-					Handler: productcategory.ProductCategoryUpdateHandler(serverCtx),
-				},
-			}...,
-		),
-		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
-		rest.WithPrefix("/api/product/category"),
-	)
-
-	server.AddRoutes(
-		rest.WithMiddlewares(
-			[]rest.Middleware{serverCtx.CheckUrl},
-			[]rest.Route{
-				{
 					Method:  http.MethodGet,
 					Path:    "/queryProductList",
 					Handler: productproduct.QueryProductListHandler(serverCtx),
+				},
+			}...,
+		),
+		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
+		rest.WithPrefix("/api/product"),
+	)
+
+	server.AddRoutes(
+		rest.WithMiddlewares(
+			[]rest.Middleware{serverCtx.CheckUrl},
+			[]rest.Route{
+				{
+					Method:  http.MethodGet,
+					Path:    "/queryProductDetail",
+					Handler: productproduct.QueryProductDetailHandler(serverCtx),
+				},
+			}...,
+		),
+		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
+		rest.WithPrefix("/api/product"),
+	)
+
+	server.AddRoutes(
+		rest.WithMiddlewares(
+			[]rest.Middleware{serverCtx.CheckUrl},
+			[]rest.Route{
+				{
+					Method:  http.MethodPost,
+					Path:    "/addProduct",
+					Handler: productproduct.ProductAddHandler(serverCtx),
 				},
 			}...,
 		),
@@ -865,13 +750,28 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			[]rest.Route{
 				{
 					Method:  http.MethodPost,
-					Path:    "/addProduct",
-					Handler: productproduct.ProductAddHandler(serverCtx),
+					Path:    "/addAttribute",
+					Handler: productproduct_attribute.ProductAttributeAddHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodGet,
+					Path:    "/deleteAttribute",
+					Handler: productproduct_attribute.ProductAttributeDeleteHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodGet,
+					Path:    "/queryAttributeList",
+					Handler: productproduct_attribute.ProductAttributeListHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodGet,
+					Path:    "/queryByproductCategoryId",
+					Handler: productproduct_attribute.QueryByproductCategoryIdHandler(serverCtx),
 				},
 			}...,
 		),
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
-		rest.WithPrefix("/api/product"),
+		rest.WithPrefix("/api/product/attribute"),
 	)
 
 	server.AddRoutes(
@@ -879,14 +779,114 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			[]rest.Middleware{serverCtx.CheckUrl},
 			[]rest.Route{
 				{
+					Method:  http.MethodPost,
+					Path:    "/addAttributeCategory",
+					Handler: productproduct_attribute_category.ProductAttributeCategoryAddHandler(serverCtx),
+				},
+				{
 					Method:  http.MethodGet,
-					Path:    "/queryProductDetail",
-					Handler: productproduct.QueryProductDetailHandler(serverCtx),
+					Path:    "/deleteAttributeCategory",
+					Handler: productproduct_attribute_category.ProductAttributeCategoryDeleteHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodGet,
+					Path:    "/queryAttributeCategoryList",
+					Handler: productproduct_attribute_category.ProductAttributeCategoryListHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodGet,
+					Path:    "/queryCategoryWithAttrList",
+					Handler: productproduct_attribute_category.QueryCategoryWithAttrListHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodPost,
+					Path:    "/updateAttributeCategory",
+					Handler: productproduct_attribute_category.ProductAttributeCategoryUpdateHandler(serverCtx),
 				},
 			}...,
 		),
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
-		rest.WithPrefix("/api/product"),
+		rest.WithPrefix("/api/product/attributeCategory"),
+	)
+
+	server.AddRoutes(
+		rest.WithMiddlewares(
+			[]rest.Middleware{serverCtx.CheckUrl},
+			[]rest.Route{
+				{
+					Method:  http.MethodPost,
+					Path:    "/addProductBrand",
+					Handler: productproduct_brand.ProductBrandAddHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodGet,
+					Path:    "/deleteProductBrand",
+					Handler: productproduct_brand.ProductBrandDeleteHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodGet,
+					Path:    "/queryProductBrandList",
+					Handler: productproduct_brand.ProductBrandListHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodPost,
+					Path:    "/updateBrandFactoryStatus",
+					Handler: productproduct_brand.UpdateBrandFactoryStatusHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodPost,
+					Path:    "/updateBrandShowStatus",
+					Handler: productproduct_brand.UpdateBrandShowStatusHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodPost,
+					Path:    "/updateProductBrand",
+					Handler: productproduct_brand.ProductBrandUpdateHandler(serverCtx),
+				},
+			}...,
+		),
+		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
+		rest.WithPrefix("/api/product/brand"),
+	)
+
+	server.AddRoutes(
+		rest.WithMiddlewares(
+			[]rest.Middleware{serverCtx.CheckUrl},
+			[]rest.Route{
+				{
+					Method:  http.MethodPost,
+					Path:    "/addProductCategory",
+					Handler: productproduct_category.ProductCategoryAddHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodGet,
+					Path:    "/deleteProductCategory",
+					Handler: productproduct_category.ProductCategoryDeleteHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodGet,
+					Path:    "/queryProductCategoryList",
+					Handler: productproduct_category.ProductCategoryListHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodPost,
+					Path:    "/updateCategoryNavStatus",
+					Handler: productproduct_category.UpdateCategoryNavStatusHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodPost,
+					Path:    "/updateCategoryShowStatus",
+					Handler: productproduct_category.UpdateCategoryShowStatusHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodPost,
+					Path:    "/updateProductCategory",
+					Handler: productproduct_category.ProductCategoryUpdateHandler(serverCtx),
+				},
+			}...,
+		),
+		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
+		rest.WithPrefix("/api/product/category"),
 	)
 
 	server.AddRoutes(
@@ -1400,31 +1400,6 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			[]rest.Route{
 				{
 					Method:  http.MethodGet,
-					Path:    "/deleteOperateLog",
-					Handler: syslog.DeleteOperateLogHandler(serverCtx),
-				},
-				{
-					Method:  http.MethodGet,
-					Path:    "/queryOperateLogDetail",
-					Handler: syslog.QueryOperateLogDetailHandler(serverCtx),
-				},
-				{
-					Method:  http.MethodGet,
-					Path:    "/queryOperateLogList",
-					Handler: syslog.QueryOperateLogListHandler(serverCtx),
-				},
-			}...,
-		),
-		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
-		rest.WithPrefix("/api/sys/log"),
-	)
-
-	server.AddRoutes(
-		rest.WithMiddlewares(
-			[]rest.Middleware{serverCtx.CheckUrl},
-			[]rest.Route{
-				{
-					Method:  http.MethodGet,
 					Path:    "/deleteLoginLog",
 					Handler: syslog.DeleteLoginLogHandler(serverCtx),
 				},
@@ -1442,6 +1417,31 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 					Method:  http.MethodGet,
 					Path:    "/queryStatisticsLoginLog",
 					Handler: syslog.QueryStatisticsLoginLogHandler(serverCtx),
+				},
+			}...,
+		),
+		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
+		rest.WithPrefix("/api/sys/log"),
+	)
+
+	server.AddRoutes(
+		rest.WithMiddlewares(
+			[]rest.Middleware{serverCtx.CheckUrl},
+			[]rest.Route{
+				{
+					Method:  http.MethodGet,
+					Path:    "/deleteOperateLog",
+					Handler: syslog.DeleteOperateLogHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodGet,
+					Path:    "/queryOperateLogDetail",
+					Handler: syslog.QueryOperateLogDetailHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodGet,
+					Path:    "/queryOperateLogList",
+					Handler: syslog.QueryOperateLogListHandler(serverCtx),
 				},
 			}...,
 		),

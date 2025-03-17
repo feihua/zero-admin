@@ -33,7 +33,7 @@ func NewCouponAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) CouponAd
 }
 
 // CouponAdd 添加优惠券
-func (l *CouponAddLogic) CouponAdd(req types.AddOrUpdateCouponReq) (*types.AddOrUpdateCouponResp, error) {
+func (l *CouponAddLogic) CouponAdd(req *types.AddOrUpdateCouponReq) (*types.AddOrUpdateCouponResp, error) {
 	var productList []*smsclient.CouponProductRelationData
 	for _, relation := range req.ProductRelationList {
 		productList = append(productList, &smsclient.CouponProductRelationData{
