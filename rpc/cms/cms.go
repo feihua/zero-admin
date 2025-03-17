@@ -10,6 +10,7 @@ import (
 	"github.com/feihua/zero-admin/rpc/cms/internal/config"
 	prefrenceareaproductrelationserviceServer "github.com/feihua/zero-admin/rpc/cms/internal/server/preferredareaproductrelationservice"
 	prefrenceareaserviceServer "github.com/feihua/zero-admin/rpc/cms/internal/server/preferredareaservice"
+	subjectcategoryserviceServer "github.com/feihua/zero-admin/rpc/cms/internal/server/subjectcategoryservice"
 	subjectproductrelationserviceServer "github.com/feihua/zero-admin/rpc/cms/internal/server/subjectproductrelationservice"
 	subjectserviceServer "github.com/feihua/zero-admin/rpc/cms/internal/server/subjectservice"
 	"github.com/feihua/zero-admin/rpc/cms/internal/svc"
@@ -37,6 +38,7 @@ func main() {
 		cmsclient.RegisterSubjectProductRelationServiceServer(grpcServer, subjectproductrelationserviceServer.NewSubjectProductRelationServiceServer(ctx))
 		cmsclient.RegisterPreferredAreaServiceServer(grpcServer, prefrenceareaserviceServer.NewPreferredAreaServiceServer(ctx))
 		cmsclient.RegisterPreferredAreaProductRelationServiceServer(grpcServer, prefrenceareaproductrelationserviceServer.NewPreferredAreaProductRelationServiceServer(ctx))
+		cmsclient.RegisterSubjectCategoryServiceServer(grpcServer, subjectcategoryserviceServer.NewSubjectCategoryServiceServer(ctx))
 
 		if c.Mode == service.DevMode || c.Mode == service.TestMode {
 			reflection.Register(grpcServer)

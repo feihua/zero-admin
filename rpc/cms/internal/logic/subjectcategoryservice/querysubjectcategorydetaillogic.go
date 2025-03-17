@@ -3,11 +3,13 @@ package subjectcategoryservicelogic
 import (
 	"context"
 	"errors"
+	"github.com/feihua/zero-admin/pkg/time_util"
 	"github.com/feihua/zero-admin/rpc/cms/cmsclient"
 	"github.com/feihua/zero-admin/rpc/cms/gen/query"
 	"github.com/feihua/zero-admin/rpc/cms/internal/svc"
 	"github.com/zeromicro/go-zero/core/logc"
 	"github.com/zeromicro/go-zero/core/logx"
+	"gorm.io/gorm"
 )
 
 // QuerySubjectCategoryDetailLogic 查询专题分类详情
@@ -33,9 +35,12 @@ func NewQuerySubjectCategoryDetailLogic(ctx context.Context, svcCtx *svc.Service
 func (l *QuerySubjectCategoryDetailLogic) QuerySubjectCategoryDetail(in *cmsclient.QuerySubjectCategoryDetailReq) (*cmsclient.QuerySubjectCategoryDetailResp, error) {
 	item, err := query.CmsSubjectCategory.WithContext(l.ctx).Where(query.CmsSubjectCategory.ID.Eq(in.Id)).First()
 
-	if err != nil {
-		logc.Errorf(l.ctx, "查询专题分类详情失败,参数:%+v,异常:%s", in, err.Error())
-		return nil, errors.New("查询专题分类详情失败")
+	switch {
+	case errors.Is(err, gorm.ErrRecordNotFound):
+		return nil, errors.New("专题分类不存在")
+	case err != nil:
+		logc.Errorf(l.ctx, "查询专题分类异常, 请求参数：%+v, 异常信息: %s", in, err.Error())
+		return nil, errors.New("查询专题分类异常")
 	}
 
 	data := &cmsclient.QuerySubjectCategoryDetailResp{

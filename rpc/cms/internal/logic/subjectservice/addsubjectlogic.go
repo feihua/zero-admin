@@ -3,6 +3,7 @@ package subjectservicelogic
 import (
 	"context"
 	"errors"
+	"fmt"
 	"github.com/feihua/zero-admin/rpc/cms/cmsclient"
 	"github.com/feihua/zero-admin/rpc/cms/gen/model"
 	"github.com/feihua/zero-admin/rpc/cms/gen/query"
@@ -34,6 +35,14 @@ func NewAddSubjectLogic(ctx context.Context, svcCtx *svc.ServiceContext) *AddSub
 func (l *AddSubjectLogic) AddSubject(in *cmsclient.AddSubjectReq) (*cmsclient.AddSubjectResp, error) {
 	q := query.CmsSubject
 
+	count, err := q.WithContext(l.ctx).Where(q.Title.Eq(in.Title)).Count()
+	if err != nil {
+		return nil, errors.New(fmt.Sprintf("添加专题失败"))
+	}
+
+	if count > 0 {
+		return nil, errors.New(fmt.Sprintf("专题名称：%s,已存在", in.Title))
+	}
 	item := &model.CmsSubject{
 		CategoryID:      in.CategoryId,      // 专题分类id
 		Title:           in.Title,           // 专题标题
@@ -52,7 +61,7 @@ func (l *AddSubjectLogic) AddSubject(in *cmsclient.AddSubjectReq) (*cmsclient.Ad
 		CreateBy:        in.CreateBy,        // 创建者
 	}
 
-	err := q.WithContext(l.ctx).Create(item)
+	err = q.WithContext(l.ctx).Create(item)
 	if err != nil {
 		logc.Errorf(l.ctx, "添加专题失败,参数:%+v,异常:%s", item, err.Error())
 		return nil, errors.New("添加专题失败")

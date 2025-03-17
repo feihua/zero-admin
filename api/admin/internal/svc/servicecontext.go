@@ -5,6 +5,7 @@ import (
 	"github.com/feihua/zero-admin/api/admin/internal/middleware"
 	"github.com/feihua/zero-admin/rpc/cms/client/preferredareaproductrelationservice"
 	"github.com/feihua/zero-admin/rpc/cms/client/preferredareaservice"
+	"github.com/feihua/zero-admin/rpc/cms/client/subjectcategoryservice"
 	"github.com/feihua/zero-admin/rpc/cms/client/subjectproductrelationservice"
 	"github.com/feihua/zero-admin/rpc/cms/client/subjectservice"
 	"github.com/feihua/zero-admin/rpc/oms/client/cartitemservice"
@@ -142,6 +143,7 @@ type ServiceContext struct {
 	SubjectProductRelationService       subjectproductrelationservice.SubjectProductRelationService
 	PreferredAreaService                preferredareaservice.PreferredAreaService
 	PreferredAreaProductRelationService preferredareaproductrelationservice.PreferredAreaProductRelationService
+	SubjectCategoryService              subjectcategoryservice.SubjectCategoryService
 	Redis                               *redis.Redis
 }
 
@@ -225,6 +227,7 @@ func NewServiceContext(c config.Config) *ServiceContext {
 		SubjectProductRelationService:       subjectproductrelationservice.NewSubjectProductRelationService(cmsClient),
 		PreferredAreaService:                preferredareaservice.NewPreferredAreaService(cmsClient),
 		PreferredAreaProductRelationService: preferredareaproductrelationservice.NewPreferredAreaProductRelationService(cmsClient),
+		SubjectCategoryService:              subjectcategoryservice.NewSubjectCategoryService(cmsClient),
 		Redis:                               newRedis,
 	}
 }

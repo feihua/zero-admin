@@ -34,22 +34,23 @@ func NewAddSubjectLogic(ctx context.Context, svcCtx *svc.ServiceContext) *AddSub
 // AddSubject 添加专题表
 func (l *AddSubjectLogic) AddSubject(req *types.AddSubjectReq) (resp *types.AddSubjectResp, err error) {
 
+	createBy := l.ctx.Value("userName").(string)
 	_, err = l.svcCtx.SubjectService.AddSubject(l.ctx, &cmsclient.AddSubjectReq{
-		CategoryId:      req.CategoryId,      //专题分类id
-		Title:           req.Title,           //专题标题
-		Pic:             req.Pic,             //专题主图
-		ProductCount:    req.ProductCount,    //关联产品数量
-		RecommendStatus: req.RecommendStatus, //推荐状态：0->不推荐；1->推荐
-		CollectCount:    req.CollectCount,    //收藏数
-		ReadCount:       req.ReadCount,       //阅读数
-		CommentCount:    req.CommentCount,    //评论数
-		AlbumPics:       req.AlbumPics,       //画册图片用逗号分割
-		Description:     req.Description,     //专题内容
-		ShowStatus:      req.ShowStatus,      //显示状态：0->不显示；1->显示
-		Content:         req.Content,         //专题内容
-		ForwardCount:    req.ForwardCount,    //转发数
-		CategoryName:    req.CategoryName,    //专题分类名称
-		CreateBy:        l.ctx.Value("userName").(string),
+		CategoryId:      req.CategoryId,      // 专题分类id
+		Title:           req.Title,           // 专题标题
+		Pic:             req.Pic,             // 专题主图
+		ProductCount:    req.ProductCount,    // 关联产品数量
+		RecommendStatus: req.RecommendStatus, // 推荐状态：0->不推荐；1->推荐
+		CollectCount:    req.CollectCount,    // 收藏数
+		ReadCount:       req.ReadCount,       // 阅读数
+		CommentCount:    req.CommentCount,    // 评论数
+		AlbumPics:       req.AlbumPics,       // 画册图片用逗号分割
+		Description:     req.Description,     // 专题内容
+		ShowStatus:      req.ShowStatus,      // 显示状态：0->不显示；1->显示
+		Content:         req.Content,         // 专题内容
+		ForwardCount:    req.ForwardCount,    // 转发数
+		CategoryName:    req.CategoryName,    // 专题分类名称
+		CreateBy:        createBy,            // 创建者
 	})
 
 	if err != nil {

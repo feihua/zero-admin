@@ -9,6 +9,7 @@ import (
 	"github.com/feihua/zero-admin/rpc/cms/internal/svc"
 	"github.com/zeromicro/go-zero/core/logc"
 	"github.com/zeromicro/go-zero/core/logx"
+	"gorm.io/gorm"
 )
 
 // QuerySubjectDetailLogic 查询专题详情
@@ -34,9 +35,12 @@ func NewQuerySubjectDetailLogic(ctx context.Context, svcCtx *svc.ServiceContext)
 func (l *QuerySubjectDetailLogic) QuerySubjectDetail(in *cmsclient.QuerySubjectDetailReq) (*cmsclient.QuerySubjectDetailResp, error) {
 	item, err := query.CmsSubject.WithContext(l.ctx).Where(query.CmsSubject.ID.Eq(in.Id)).First()
 
-	if err != nil {
-		logc.Errorf(l.ctx, "查询专题详情失败,参数:%+v,异常:%s", in, err.Error())
-		return nil, errors.New("查询专题详情失败")
+	switch {
+	case errors.Is(err, gorm.ErrRecordNotFound):
+		return nil, errors.New("专题不存在")
+	case err != nil:
+		logc.Errorf(l.ctx, "查询专题异常, 请求参数：%+v, 异常信息: %s", in, err.Error())
+		return nil, errors.New("查询专题异常")
 	}
 
 	data := &cmsclient.QuerySubjectDetailResp{

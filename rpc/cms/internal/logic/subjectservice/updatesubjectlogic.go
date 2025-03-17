@@ -3,13 +3,14 @@ package subjectservicelogic
 import (
 	"context"
 	"errors"
-	"fmt"
 	"github.com/feihua/zero-admin/rpc/cms/cmsclient"
 	"github.com/feihua/zero-admin/rpc/cms/gen/model"
 	"github.com/feihua/zero-admin/rpc/cms/gen/query"
 	"github.com/feihua/zero-admin/rpc/cms/internal/svc"
 	"github.com/zeromicro/go-zero/core/logc"
 	"github.com/zeromicro/go-zero/core/logx"
+	"gorm.io/gorm"
+	"time"
 )
 
 // UpdateSubjectLogic 更新专题
@@ -36,13 +37,17 @@ func (l *UpdateSubjectLogic) UpdateSubject(in *cmsclient.UpdateSubjectReq) (*cms
 	q := query.CmsSubject.WithContext(l.ctx)
 
 	// 1.根据专题id查询专题是否已存在
-	_, err := q.Where(query.CmsSubject.ID.Eq(in.Id)).First()
+	s, err := q.Where(query.CmsSubject.ID.Eq(in.Id)).First()
 
-	if err != nil {
-		logc.Errorf(l.ctx, "根据专题id：%d,查询专题失败,异常:%s", in.Id, err.Error())
-		return nil, errors.New(fmt.Sprintf("查询专题失败"))
+	switch {
+	case errors.Is(err, gorm.ErrRecordNotFound):
+		return nil, errors.New("专题不存在")
+	case err != nil:
+		logc.Errorf(l.ctx, "查询专题异常, 请求参数：%+v, 异常信息: %s", in, err.Error())
+		return nil, errors.New("查询专题异常")
 	}
 
+	now := time.Now()
 	item := &model.CmsSubject{
 		ID:              in.Id,              // 专题id
 		CategoryID:      in.CategoryId,      // 专题分类id
@@ -59,17 +64,19 @@ func (l *UpdateSubjectLogic) UpdateSubject(in *cmsclient.UpdateSubjectReq) (*cms
 		Content:         in.Content,         // 专题内容
 		ForwardCount:    in.ForwardCount,    // 转发数
 		CategoryName:    in.CategoryName,    // 专题分类名称
+		CreateBy:        s.CreateBy,         // 创建者
+		CreateTime:      s.CreateTime,       // 创建时间
 		UpdateBy:        in.UpdateBy,        // 更新者
+		UpdateTime:      &now,               // 更新时间
 	}
 
 	// 2.专题存在时,则直接更新专题
-	_, err = q.Updates(item)
+	err = l.svcCtx.DB.Model(&model.CmsSubject{}).WithContext(l.ctx).Where(query.CmsSubject.ID.Eq(in.Id)).Save(item).Error
 
 	if err != nil {
 		logc.Errorf(l.ctx, "更新专题失败,参数:%+v,异常:%s", item, err.Error())
 		return nil, errors.New("更新专题失败")
 	}
 
-	logc.Infof(l.ctx, "更新专题成功,参数：%+v", in)
 	return &cmsclient.UpdateSubjectResp{}, nil
 }

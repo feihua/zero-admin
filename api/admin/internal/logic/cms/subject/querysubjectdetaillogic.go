@@ -35,7 +35,7 @@ func NewQuerySubjectDetailLogic(ctx context.Context, svcCtx *svc.ServiceContext)
 func (l *QuerySubjectDetailLogic) QuerySubjectDetail(req *types.QuerySubjectDetailReq) (resp *types.QuerySubjectDetailResp, err error) {
 
 	detail, err := l.svcCtx.SubjectService.QuerySubjectDetail(l.ctx, &cmsclient.QuerySubjectDetailReq{
-		Id: req.Id,
+		Id: req.Id, // 专题id
 	})
 
 	if err != nil {
@@ -45,25 +45,25 @@ func (l *QuerySubjectDetailLogic) QuerySubjectDetail(req *types.QuerySubjectDeta
 	}
 
 	data := types.QuerySubjectDetailData{
-		Id:              detail.Id,              //专题id
-		CategoryId:      detail.CategoryId,      //专题分类id
-		Title:           detail.Title,           //专题标题
-		Pic:             detail.Pic,             //专题主图
-		ProductCount:    detail.ProductCount,    //关联产品数量
-		RecommendStatus: detail.RecommendStatus, //推荐状态：0->不推荐；1->推荐
-		CollectCount:    detail.CollectCount,    //收藏数
-		ReadCount:       detail.ReadCount,       //阅读数
-		CommentCount:    detail.CommentCount,    //评论数
-		AlbumPics:       detail.AlbumPics,       //画册图片用逗号分割
-		Description:     detail.Description,     //专题内容
-		ShowStatus:      detail.ShowStatus,      //显示状态：0->不显示；1->显示
-		Content:         detail.Content,         //专题内容
-		ForwardCount:    detail.ForwardCount,    //转发数
-		CategoryName:    detail.CategoryName,    //专题分类名称
-		CreateBy:        detail.CreateBy,        //创建者
-		CreateTime:      detail.CreateTime,      //创建时间
-		UpdateBy:        detail.UpdateBy,        //更新者
-		UpdateTime:      detail.UpdateTime,      //更新时间
+		Id:              detail.Id,              // 专题id
+		CategoryId:      detail.CategoryId,      // 专题分类id
+		Title:           detail.Title,           // 专题标题
+		Pic:             detail.Pic,             // 专题主图
+		ProductCount:    detail.ProductCount,    // 关联产品数量
+		RecommendStatus: detail.RecommendStatus, // 推荐状态：0->不推荐；1->推荐
+		CollectCount:    detail.CollectCount,    // 收藏数
+		ReadCount:       detail.ReadCount,       // 阅读数
+		CommentCount:    detail.CommentCount,    // 评论数
+		AlbumPics:       detail.AlbumPics,       // 画册图片用逗号分割
+		Description:     detail.Description,     // 专题内容
+		ShowStatus:      detail.ShowStatus,      // 显示状态：0->不显示；1->显示
+		Content:         detail.Content,         // 专题内容
+		ForwardCount:    detail.ForwardCount,    // 转发数
+		CategoryName:    detail.CategoryName,    // 专题分类名称
+		CreateBy:        detail.CreateBy,        // 创建者
+		CreateTime:      detail.CreateTime,      // 创建时间
+		UpdateBy:        detail.UpdateBy,        // 更新者
+		UpdateTime:      detail.UpdateTime,      // 更新时间
 	}
 	return &types.QuerySubjectDetailResp{
 		Code:    "000000",

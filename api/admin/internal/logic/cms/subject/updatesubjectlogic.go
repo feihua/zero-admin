@@ -34,23 +34,24 @@ func NewUpdateSubjectLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Upd
 // UpdateSubject 更新专题表
 func (l *UpdateSubjectLogic) UpdateSubject(req *types.UpdateSubjectReq) (resp *types.UpdateSubjectResp, err error) {
 
+	updateBy := l.ctx.Value("userName").(string)
 	_, err = l.svcCtx.SubjectService.UpdateSubject(l.ctx, &cmsclient.UpdateSubjectReq{
-		Id:              req.Id,              //专题id
-		CategoryId:      req.CategoryId,      //专题分类id
-		Title:           req.Title,           //专题标题
-		Pic:             req.Pic,             //专题主图
-		ProductCount:    req.ProductCount,    //关联产品数量
-		RecommendStatus: req.RecommendStatus, //推荐状态：0->不推荐；1->推荐
-		CollectCount:    req.CollectCount,    //收藏数
-		ReadCount:       req.ReadCount,       //阅读数
-		CommentCount:    req.CommentCount,    //评论数
-		AlbumPics:       req.AlbumPics,       //画册图片用逗号分割
-		Description:     req.Description,     //专题内容
-		ShowStatus:      req.ShowStatus,      //显示状态：0->不显示；1->显示
-		Content:         req.Content,         //专题内容
-		ForwardCount:    req.ForwardCount,    //转发数
-		CategoryName:    req.CategoryName,    //专题分类名称
-		UpdateBy:        l.ctx.Value("userName").(string),
+		Id:              req.Id,              // 专题id
+		CategoryId:      req.CategoryId,      // 专题分类id
+		Title:           req.Title,           // 专题标题
+		Pic:             req.Pic,             // 专题主图
+		ProductCount:    req.ProductCount,    // 关联产品数量
+		RecommendStatus: req.RecommendStatus, // 推荐状态：0->不推荐；1->推荐
+		CollectCount:    req.CollectCount,    // 收藏数
+		ReadCount:       req.ReadCount,       // 阅读数
+		CommentCount:    req.CommentCount,    // 评论数
+		AlbumPics:       req.AlbumPics,       // 画册图片用逗号分割
+		Description:     req.Description,     // 专题内容
+		ShowStatus:      req.ShowStatus,      // 显示状态：0->不显示；1->显示
+		Content:         req.Content,         // 专题内容
+		ForwardCount:    req.ForwardCount,    // 转发数
+		CategoryName:    req.CategoryName,    // 专题分类名称
+		UpdateBy:        updateBy,            // 更新者
 	})
 
 	if err != nil {
