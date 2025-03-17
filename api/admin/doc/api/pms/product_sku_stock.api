@@ -52,8 +52,8 @@ type (
 @server (
 	jwt:        Auth
 	middleware: CheckUrl
-	group:      product/skustock
-	prefix:     /api/product/skuStock
+	group:      pms/skustock
+	prefix:     /api/pms/skuStock
 )
 service admin-api {
 	//根据商品ID及sku编码模糊搜索sku库存

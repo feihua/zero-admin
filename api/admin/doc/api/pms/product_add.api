@@ -107,8 +107,8 @@ type AddSkuStockList {
 @server (
 	jwt:        Auth
 	middleware: CheckUrl
-	group:      product/product
-	prefix:     /api/product
+	group:      pms/product
+	prefix:     /api/pms/product
 )
 service admin-api {
 	//创建商品

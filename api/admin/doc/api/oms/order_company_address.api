@@ -124,8 +124,8 @@ type (
 @server (
 	jwt:        Auth
 	middleware: CheckUrl
-	group:      order/company_address
-	prefix:     /api/order/companyAddress
+	group:      oms/company_address
+	prefix:     /api/oms/companyAddress
 )
 service admin-api {
 	// 添加公司收发货地址表

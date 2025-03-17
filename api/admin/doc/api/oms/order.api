@@ -175,8 +175,8 @@ type (
 @server (
 	jwt:        Auth
 	middleware: CheckUrl
-	group:      order/order
-	prefix:     /api/order
+	group:      oms/order
+	prefix:     /api/oms/order
 )
 service admin-api {
 	//批量发货

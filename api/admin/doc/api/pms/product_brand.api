@@ -91,8 +91,8 @@ type (
 @server (
 	jwt:        Auth
 	middleware: CheckUrl
-	group:      product/product_brand
-	prefix:     /api/product/brand
+	group:      pms/product_brand
+	prefix:     /api/pms/brand
 )
 service admin-api {
 	//添加商品品牌
