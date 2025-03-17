@@ -1,4 +1,4 @@
-package rulesetting
+package rule_setting
 
 import (
 	"context"

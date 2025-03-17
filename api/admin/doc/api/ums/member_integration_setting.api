@@ -91,7 +91,7 @@ type (
 @server (
 	jwt:        Auth
 	middleware: CheckUrl
-	group:      member/integrationconsumesetting
+	group:      member/integration_setting
 	prefix:     /api/member/integrationConsumeSetting
 )
 service admin-api {

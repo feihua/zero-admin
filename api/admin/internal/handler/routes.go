@@ -10,10 +10,10 @@ import (
 	cmssubject "github.com/feihua/zero-admin/api/admin/internal/handler/cms/subject"
 	cmssubject_category "github.com/feihua/zero-admin/api/admin/internal/handler/cms/subject_category"
 	memberaddress "github.com/feihua/zero-admin/api/admin/internal/handler/member/address"
-	memberintegrationconsumesetting "github.com/feihua/zero-admin/api/admin/internal/handler/member/integrationconsumesetting"
+	memberintegration_setting "github.com/feihua/zero-admin/api/admin/internal/handler/member/integration_setting"
 	memberlevel "github.com/feihua/zero-admin/api/admin/internal/handler/member/level"
 	membermember "github.com/feihua/zero-admin/api/admin/internal/handler/member/member"
-	memberrulesetting "github.com/feihua/zero-admin/api/admin/internal/handler/member/rulesetting"
+	memberrule_setting "github.com/feihua/zero-admin/api/admin/internal/handler/member/rule_setting"
 	memberstatistics "github.com/feihua/zero-admin/api/admin/internal/handler/member/statistics"
 	membertag "github.com/feihua/zero-admin/api/admin/internal/handler/member/tag"
 	membertask "github.com/feihua/zero-admin/api/admin/internal/handler/member/task"
@@ -196,32 +196,32 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				{
 					Method:  http.MethodPost,
 					Path:    "/addIntegrationConsumeSetting",
-					Handler: memberintegrationconsumesetting.AddIntegrationConsumeSettingHandler(serverCtx),
+					Handler: memberintegration_setting.AddIntegrationConsumeSettingHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodGet,
 					Path:    "/deleteIntegrationConsumeSetting",
-					Handler: memberintegrationconsumesetting.DeleteIntegrationConsumeSettingHandler(serverCtx),
+					Handler: memberintegration_setting.DeleteIntegrationConsumeSettingHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodGet,
 					Path:    "/queryIntegrationConsumeSettingDetail",
-					Handler: memberintegrationconsumesetting.QueryIntegrationConsumeSettingDetailHandler(serverCtx),
+					Handler: memberintegration_setting.QueryIntegrationConsumeSettingDetailHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodGet,
 					Path:    "/queryIntegrationConsumeSettingList",
-					Handler: memberintegrationconsumesetting.QueryIntegrationConsumeSettingListHandler(serverCtx),
+					Handler: memberintegration_setting.QueryIntegrationConsumeSettingListHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
 					Path:    "/updateIntegrationConsumeSetting",
-					Handler: memberintegrationconsumesetting.UpdateIntegrationConsumeSettingHandler(serverCtx),
+					Handler: memberintegration_setting.UpdateIntegrationConsumeSettingHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
 					Path:    "/updateIntegrationConsumeSettingStatus",
-					Handler: memberintegrationconsumesetting.UpdateIntegrationConsumeSettingStatusHandler(serverCtx),
+					Handler: memberintegration_setting.UpdateIntegrationConsumeSettingStatusHandler(serverCtx),
 				},
 			}...,
 		),
@@ -316,32 +316,32 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				{
 					Method:  http.MethodPost,
 					Path:    "/addMemberRuleSetting",
-					Handler: memberrulesetting.AddMemberRuleSettingHandler(serverCtx),
+					Handler: memberrule_setting.AddMemberRuleSettingHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodGet,
 					Path:    "/deleteMemberRuleSetting",
-					Handler: memberrulesetting.DeleteMemberRuleSettingHandler(serverCtx),
+					Handler: memberrule_setting.DeleteMemberRuleSettingHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodGet,
 					Path:    "/queryMemberRuleSettingDetail",
-					Handler: memberrulesetting.QueryMemberRuleSettingDetailHandler(serverCtx),
+					Handler: memberrule_setting.QueryMemberRuleSettingDetailHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodGet,
 					Path:    "/queryMemberRuleSettingList",
-					Handler: memberrulesetting.QueryMemberRuleSettingListHandler(serverCtx),
+					Handler: memberrule_setting.QueryMemberRuleSettingListHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
 					Path:    "/updateMemberRuleSetting",
-					Handler: memberrulesetting.UpdateMemberRuleSettingHandler(serverCtx),
+					Handler: memberrule_setting.UpdateMemberRuleSettingHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
 					Path:    "/updateMemberRuleSettingStatus",
-					Handler: memberrulesetting.UpdateMemberRuleSettingStatusHandler(serverCtx),
+					Handler: memberrule_setting.UpdateMemberRuleSettingStatusHandler(serverCtx),
 				},
 			}...,
 		),
@@ -810,6 +810,21 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			[]rest.Route{
 				{
 					Method:  http.MethodGet,
+					Path:    "/queryProductList",
+					Handler: productproduct.QueryProductListHandler(serverCtx),
+				},
+			}...,
+		),
+		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
+		rest.WithPrefix("/api/product"),
+	)
+
+	server.AddRoutes(
+		rest.WithMiddlewares(
+			[]rest.Middleware{serverCtx.CheckUrl},
+			[]rest.Route{
+				{
+					Method:  http.MethodGet,
 					Path:    "/queryProductDetail",
 					Handler: productproduct.QueryProductDetailHandler(serverCtx),
 				},
@@ -867,21 +882,6 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 					Method:  http.MethodPost,
 					Path:    "/updateVerifyStatus",
 					Handler: productproduct.UpdateVerifyStatusHandler(serverCtx),
-				},
-			}...,
-		),
-		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
-		rest.WithPrefix("/api/product"),
-	)
-
-	server.AddRoutes(
-		rest.WithMiddlewares(
-			[]rest.Middleware{serverCtx.CheckUrl},
-			[]rest.Route{
-				{
-					Method:  http.MethodGet,
-					Path:    "/queryProductList",
-					Handler: productproduct.QueryProductListHandler(serverCtx),
 				},
 			}...,
 		),

@@ -1,4 +1,4 @@
-package integrationconsumesetting
+package integration_setting
 
 import (
 	"context"

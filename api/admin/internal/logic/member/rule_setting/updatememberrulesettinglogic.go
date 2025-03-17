@@ -1,4 +1,4 @@
-package rulesetting
+package rule_setting
 
 import (
 	"context"
@@ -12,28 +12,29 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// AddMemberRuleSettingLogic 添加会员积分规则
+// UpdateMemberRuleSettingLogic 更新会员积分规则
 /*
 Author: LiuFeiHua
-Date: 2024/5/23 9:23
+Date: 2024/5/23 9:25
 */
-type AddMemberRuleSettingLogic struct {
+type UpdateMemberRuleSettingLogic struct {
 	logx.Logger
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
 }
 
-func NewAddMemberRuleSettingLogic(ctx context.Context, svcCtx *svc.ServiceContext) *AddMemberRuleSettingLogic {
-	return &AddMemberRuleSettingLogic{
+func NewUpdateMemberRuleSettingLogic(ctx context.Context, svcCtx *svc.ServiceContext) *UpdateMemberRuleSettingLogic {
+	return &UpdateMemberRuleSettingLogic{
 		Logger: logx.WithContext(ctx),
 		ctx:    ctx,
 		svcCtx: svcCtx,
 	}
 }
 
-// AddMemberRuleSetting 添加会员积分规则
-func (l *AddMemberRuleSettingLogic) AddMemberRuleSetting(req *types.AddMemberRuleSettingReq) (resp *types.AddMemberRuleSettingResp, err error) {
-	_, err = l.svcCtx.MemberRuleSettingService.AddMemberRuleSetting(l.ctx, &umsclient.AddMemberRuleSettingReq{
+// UpdateMemberRuleSetting 更新会员积分规则
+func (l *UpdateMemberRuleSettingLogic) UpdateMemberRuleSetting(req *types.UpdateMemberRuleSettingReq) (resp *types.UpdateMemberRuleSettingResp, err error) {
+	_, err = l.svcCtx.MemberRuleSettingService.UpdateMemberRuleSetting(l.ctx, &umsclient.UpdateMemberRuleSettingReq{
+		Id:                req.Id,                //
 		ContinueSignDay:   req.ContinueSignDay,   // 连续签到天数
 		ContinueSignPoint: req.ContinueSignPoint, // 连续签到赠送数量
 		ConsumePerPoint:   req.ConsumePerPoint,   // 每消费多少元获取1个点
@@ -41,16 +42,16 @@ func (l *AddMemberRuleSettingLogic) AddMemberRuleSetting(req *types.AddMemberRul
 		MaxPointPerOrder:  req.MaxPointPerOrder,  // 每笔订单最高获取点数
 		RuleType:          req.RuleType,          // 类型：0->积分规则；1->成长值规则
 		Status:            req.Status,            // 状态：0->禁用；1->启用
-		CreateBy:          l.ctx.Value("userName").(string),
+		UpdateBy:          l.ctx.Value("userName").(string),
 	})
 
 	if err != nil {
-		logc.Errorf(l.ctx, "添加会员积分规则信息失败,参数：%+v,响应：%s", req, err.Error())
-		return nil, errorx.NewDefaultError("添加会员积分规则失败")
+		logc.Errorf(l.ctx, "更新会员积分规则信息失败,参数：%+v,响应：%s", req, err.Error())
+		return nil, errorx.NewDefaultError("更新会员积分规则成功")
 	}
 
-	return &types.AddMemberRuleSettingResp{
+	return &types.UpdateMemberRuleSettingResp{
 		Code:    "000000",
-		Message: "添加会员积分规则成功",
+		Message: "更新会员积分规则成功",
 	}, nil
 }
