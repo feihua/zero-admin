@@ -120,7 +120,7 @@ type (
 @server (
 	jwt:        Auth
 	middleware: CheckUrl
-	group:      order/returnapply
+	group:      order/return_apply
 	prefix:     /api/order/returnApply
 )
 service admin-api {

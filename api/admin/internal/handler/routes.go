@@ -17,10 +17,10 @@ import (
 	memberstatistics "github.com/feihua/zero-admin/api/admin/internal/handler/member/statistics"
 	membertag "github.com/feihua/zero-admin/api/admin/internal/handler/member/tag"
 	membertask "github.com/feihua/zero-admin/api/admin/internal/handler/member/task"
-	ordercompanyaddress "github.com/feihua/zero-admin/api/admin/internal/handler/order/companyaddress"
+	ordercompany_address "github.com/feihua/zero-admin/api/admin/internal/handler/order/company_address"
 	orderorder "github.com/feihua/zero-admin/api/admin/internal/handler/order/order"
-	orderreturnapply "github.com/feihua/zero-admin/api/admin/internal/handler/order/returnapply"
-	orderreturnreason "github.com/feihua/zero-admin/api/admin/internal/handler/order/returnreason"
+	orderreturn_apply "github.com/feihua/zero-admin/api/admin/internal/handler/order/return_apply"
+	orderreturn_reason "github.com/feihua/zero-admin/api/admin/internal/handler/order/return_reason"
 	ordersetting "github.com/feihua/zero-admin/api/admin/internal/handler/order/setting"
 	productattribute "github.com/feihua/zero-admin/api/admin/internal/handler/product/attribute"
 	productattributecategory "github.com/feihua/zero-admin/api/admin/internal/handler/product/attributecategory"
@@ -456,37 +456,37 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				{
 					Method:  http.MethodPost,
 					Path:    "/addCompanyAddress",
-					Handler: ordercompanyaddress.AddCompanyAddressHandler(serverCtx),
+					Handler: ordercompany_address.AddCompanyAddressHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodGet,
 					Path:    "/deleteCompanyAddress",
-					Handler: ordercompanyaddress.DeleteCompanyAddressHandler(serverCtx),
+					Handler: ordercompany_address.DeleteCompanyAddressHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodGet,
 					Path:    "/queryCompanyAddressDetail",
-					Handler: ordercompanyaddress.QueryCompanyAddressDetailHandler(serverCtx),
+					Handler: ordercompany_address.QueryCompanyAddressDetailHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodGet,
 					Path:    "/queryCompanyAddressList",
-					Handler: ordercompanyaddress.QueryCompanyAddressListHandler(serverCtx),
+					Handler: ordercompany_address.QueryCompanyAddressListHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
 					Path:    "/updateCompanyAddress",
-					Handler: ordercompanyaddress.UpdateCompanyAddressHandler(serverCtx),
+					Handler: ordercompany_address.UpdateCompanyAddressHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
 					Path:    "/updateCompanyAddressReceiveStatus",
-					Handler: ordercompanyaddress.UpdateCompanyAddressReceiveStatusHandler(serverCtx),
+					Handler: ordercompany_address.UpdateCompanyAddressReceiveStatusHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
 					Path:    "/updateCompanyAddressSendStatus",
-					Handler: ordercompanyaddress.UpdateCompanyAddressSendStatusHandler(serverCtx),
+					Handler: ordercompany_address.UpdateCompanyAddressSendStatusHandler(serverCtx),
 				},
 			}...,
 		),
@@ -551,22 +551,22 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				{
 					Method:  http.MethodGet,
 					Path:    "/deleteOrderReturnApply",
-					Handler: orderreturnapply.DeleteOrderReturnApplyHandler(serverCtx),
+					Handler: orderreturn_apply.DeleteOrderReturnApplyHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodGet,
 					Path:    "/queryOrderReturnApplyDetail",
-					Handler: orderreturnapply.QueryOrderReturnApplyDetailHandler(serverCtx),
+					Handler: orderreturn_apply.QueryOrderReturnApplyDetailHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodGet,
 					Path:    "/queryOrderReturnApplyList",
-					Handler: orderreturnapply.QueryOrderReturnApplyListHandler(serverCtx),
+					Handler: orderreturn_apply.QueryOrderReturnApplyListHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
 					Path:    "/updateOrderReturnApplyStatus",
-					Handler: orderreturnapply.UpdateOrderReturnApplyStatusHandler(serverCtx),
+					Handler: orderreturn_apply.UpdateOrderReturnApplyStatusHandler(serverCtx),
 				},
 			}...,
 		),
@@ -581,32 +581,32 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				{
 					Method:  http.MethodPost,
 					Path:    "/addOrderReturnReason",
-					Handler: orderreturnreason.AddOrderReturnReasonHandler(serverCtx),
+					Handler: orderreturn_reason.AddOrderReturnReasonHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodGet,
 					Path:    "/deleteOrderReturnReason",
-					Handler: orderreturnreason.DeleteOrderReturnReasonHandler(serverCtx),
+					Handler: orderreturn_reason.DeleteOrderReturnReasonHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodGet,
 					Path:    "/queryOrderReturnReasonDetail",
-					Handler: orderreturnreason.QueryOrderReturnReasonDetailHandler(serverCtx),
+					Handler: orderreturn_reason.QueryOrderReturnReasonDetailHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodGet,
 					Path:    "/queryOrderReturnReasonList",
-					Handler: orderreturnreason.QueryOrderReturnReasonListHandler(serverCtx),
+					Handler: orderreturn_reason.QueryOrderReturnReasonListHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
 					Path:    "/updateOrderReturnReason",
-					Handler: orderreturnreason.UpdateOrderReturnReasonHandler(serverCtx),
+					Handler: orderreturn_reason.UpdateOrderReturnReasonHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
 					Path:    "/updateOrderReturnReasonStatus",
-					Handler: orderreturnreason.UpdateOrderReturnReasonStatusHandler(serverCtx),
+					Handler: orderreturn_reason.UpdateOrderReturnReasonStatusHandler(serverCtx),
 				},
 			}...,
 		),
@@ -824,21 +824,6 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			[]rest.Middleware{serverCtx.CheckUrl},
 			[]rest.Route{
 				{
-					Method:  http.MethodGet,
-					Path:    "/queryProductDetail",
-					Handler: productproduct.QueryProductDetailHandler(serverCtx),
-				},
-			}...,
-		),
-		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
-		rest.WithPrefix("/api/product"),
-	)
-
-	server.AddRoutes(
-		rest.WithMiddlewares(
-			[]rest.Middleware{serverCtx.CheckUrl},
-			[]rest.Route{
-				{
 					Method:  http.MethodPost,
 					Path:    "/addProduct",
 					Handler: productproduct.ProductAddHandler(serverCtx),
@@ -882,6 +867,21 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 					Method:  http.MethodPost,
 					Path:    "/updateVerifyStatus",
 					Handler: productproduct.UpdateVerifyStatusHandler(serverCtx),
+				},
+			}...,
+		),
+		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
+		rest.WithPrefix("/api/product"),
+	)
+
+	server.AddRoutes(
+		rest.WithMiddlewares(
+			[]rest.Middleware{serverCtx.CheckUrl},
+			[]rest.Route{
+				{
+					Method:  http.MethodGet,
+					Path:    "/queryProductDetail",
+					Handler: productproduct.QueryProductDetailHandler(serverCtx),
 				},
 			}...,
 		),

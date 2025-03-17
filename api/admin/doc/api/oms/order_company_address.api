@@ -124,7 +124,7 @@ type (
 @server (
 	jwt:        Auth
 	middleware: CheckUrl
-	group:      order/companyaddress
+	group:      order/company_address
 	prefix:     /api/order/companyAddress
 )
 service admin-api {
