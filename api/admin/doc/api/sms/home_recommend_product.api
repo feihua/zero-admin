@@ -64,7 +64,7 @@ type (
 @server (
 	jwt:        Auth
 	middleware: CheckUrl
-	group:      sms/homerecommendproduct
+	group:      sms/home_recommend_product
 	prefix:     /api/sms/homeRecommendProduct
 )
 service admin-api {

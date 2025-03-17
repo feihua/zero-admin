@@ -84,7 +84,7 @@ type (
 @server (
 	jwt:        Auth
 	middleware: CheckUrl
-	group:      sms/homeadvertise
+	group:      sms/home_advertise
 	prefix:     /api/sms/homeAdvertise
 )
 service admin-api {

@@ -23,22 +23,22 @@ import (
 	orderreturn_reason "github.com/feihua/zero-admin/api/admin/internal/handler/order/return_reason"
 	ordersetting "github.com/feihua/zero-admin/api/admin/internal/handler/order/setting"
 	productattribute "github.com/feihua/zero-admin/api/admin/internal/handler/product/attribute"
-	productattributecategory "github.com/feihua/zero-admin/api/admin/internal/handler/product/attributecategory"
+	productattribute_category "github.com/feihua/zero-admin/api/admin/internal/handler/product/attribute_category"
 	productbrand "github.com/feihua/zero-admin/api/admin/internal/handler/product/brand"
 	productcategory "github.com/feihua/zero-admin/api/admin/internal/handler/product/category"
 	productproduct "github.com/feihua/zero-admin/api/admin/internal/handler/product/product"
 	productskustock "github.com/feihua/zero-admin/api/admin/internal/handler/product/skustock"
 	smscoupon "github.com/feihua/zero-admin/api/admin/internal/handler/sms/coupon"
-	smscouponhistory "github.com/feihua/zero-admin/api/admin/internal/handler/sms/couponhistory"
-	smsflashpromotion "github.com/feihua/zero-admin/api/admin/internal/handler/sms/flashpromotion"
-	smsflashpromotionlog "github.com/feihua/zero-admin/api/admin/internal/handler/sms/flashpromotionlog"
-	smsflashpromotionproductrelation "github.com/feihua/zero-admin/api/admin/internal/handler/sms/flashpromotionproductrelation"
-	smsflashpromotionsession "github.com/feihua/zero-admin/api/admin/internal/handler/sms/flashpromotionsession"
-	smshomeadvertise "github.com/feihua/zero-admin/api/admin/internal/handler/sms/homeadvertise"
-	smshomebrand "github.com/feihua/zero-admin/api/admin/internal/handler/sms/homebrand"
-	smshomenewproduct "github.com/feihua/zero-admin/api/admin/internal/handler/sms/homenewproduct"
-	smshomerecommendproduct "github.com/feihua/zero-admin/api/admin/internal/handler/sms/homerecommendproduct"
-	smshomerecommendsubject "github.com/feihua/zero-admin/api/admin/internal/handler/sms/homerecommendsubject"
+	smscoupon_history "github.com/feihua/zero-admin/api/admin/internal/handler/sms/coupon_history"
+	smsflash_promotion "github.com/feihua/zero-admin/api/admin/internal/handler/sms/flash_promotion"
+	smsflash_promotion_log "github.com/feihua/zero-admin/api/admin/internal/handler/sms/flash_promotion_log"
+	smsflash_promotion_product "github.com/feihua/zero-admin/api/admin/internal/handler/sms/flash_promotion_product"
+	smsflash_promotion_session "github.com/feihua/zero-admin/api/admin/internal/handler/sms/flash_promotion_session"
+	smshome_advertise "github.com/feihua/zero-admin/api/admin/internal/handler/sms/home_advertise"
+	smshome_brand "github.com/feihua/zero-admin/api/admin/internal/handler/sms/home_brand"
+	smshome_new_product "github.com/feihua/zero-admin/api/admin/internal/handler/sms/home_new_product"
+	smshome_recommend_product "github.com/feihua/zero-admin/api/admin/internal/handler/sms/home_recommend_product"
+	smshome_recommend_subject "github.com/feihua/zero-admin/api/admin/internal/handler/sms/home_recommend_subject"
 	sysdept "github.com/feihua/zero-admin/api/admin/internal/handler/sys/dept"
 	sysdict_item "github.com/feihua/zero-admin/api/admin/internal/handler/sys/dict_item"
 	sysdict_type "github.com/feihua/zero-admin/api/admin/internal/handler/sys/dict_type"
@@ -696,27 +696,27 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				{
 					Method:  http.MethodPost,
 					Path:    "/addAttributeCategory",
-					Handler: productattributecategory.ProductAttributeCategoryAddHandler(serverCtx),
+					Handler: productattribute_category.ProductAttributeCategoryAddHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodGet,
 					Path:    "/deleteAttributeCategory",
-					Handler: productattributecategory.ProductAttributeCategoryDeleteHandler(serverCtx),
+					Handler: productattribute_category.ProductAttributeCategoryDeleteHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodGet,
 					Path:    "/queryAttributeCategoryList",
-					Handler: productattributecategory.ProductAttributeCategoryListHandler(serverCtx),
+					Handler: productattribute_category.ProductAttributeCategoryListHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodGet,
 					Path:    "/queryCategoryWithAttrList",
-					Handler: productattributecategory.QueryCategoryWithAttrListHandler(serverCtx),
+					Handler: productattribute_category.QueryCategoryWithAttrListHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
 					Path:    "/updateAttributeCategory",
-					Handler: productattributecategory.ProductAttributeCategoryUpdateHandler(serverCtx),
+					Handler: productattribute_category.ProductAttributeCategoryUpdateHandler(serverCtx),
 				},
 			}...,
 		),
@@ -824,21 +824,6 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			[]rest.Middleware{serverCtx.CheckUrl},
 			[]rest.Route{
 				{
-					Method:  http.MethodPost,
-					Path:    "/addProduct",
-					Handler: productproduct.ProductAddHandler(serverCtx),
-				},
-			}...,
-		),
-		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
-		rest.WithPrefix("/api/product"),
-	)
-
-	server.AddRoutes(
-		rest.WithMiddlewares(
-			[]rest.Middleware{serverCtx.CheckUrl},
-			[]rest.Route{
-				{
 					Method:  http.MethodGet,
 					Path:    "/updateDeleteStatus",
 					Handler: productproduct.UpdateDeleteStatusHandler(serverCtx),
@@ -867,6 +852,21 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 					Method:  http.MethodPost,
 					Path:    "/updateVerifyStatus",
 					Handler: productproduct.UpdateVerifyStatusHandler(serverCtx),
+				},
+			}...,
+		),
+		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
+		rest.WithPrefix("/api/product"),
+	)
+
+	server.AddRoutes(
+		rest.WithMiddlewares(
+			[]rest.Middleware{serverCtx.CheckUrl},
+			[]rest.Route{
+				{
+					Method:  http.MethodPost,
+					Path:    "/addProduct",
+					Handler: productproduct.ProductAddHandler(serverCtx),
 				},
 			}...,
 		),
@@ -951,7 +951,7 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				{
 					Method:  http.MethodGet,
 					Path:    "/queryCouponHistoryList",
-					Handler: smscouponhistory.CouponHistoryListHandler(serverCtx),
+					Handler: smscoupon_history.CouponHistoryListHandler(serverCtx),
 				},
 			}...,
 		),
@@ -966,32 +966,32 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				{
 					Method:  http.MethodPost,
 					Path:    "/addFlashPromotion",
-					Handler: smsflashpromotion.AddFlashPromotionHandler(serverCtx),
+					Handler: smsflash_promotion.AddFlashPromotionHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodGet,
 					Path:    "/deleteFlashPromotion",
-					Handler: smsflashpromotion.DeleteFlashPromotionHandler(serverCtx),
+					Handler: smsflash_promotion.DeleteFlashPromotionHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodGet,
 					Path:    "/queryFlashPromotionDetail",
-					Handler: smsflashpromotion.QueryFlashPromotionDetailHandler(serverCtx),
+					Handler: smsflash_promotion.QueryFlashPromotionDetailHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodGet,
 					Path:    "/queryFlashPromotionList",
-					Handler: smsflashpromotion.QueryFlashPromotionListHandler(serverCtx),
+					Handler: smsflash_promotion.QueryFlashPromotionListHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
 					Path:    "/updateFlashPromotion",
-					Handler: smsflashpromotion.UpdateFlashPromotionHandler(serverCtx),
+					Handler: smsflash_promotion.UpdateFlashPromotionHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
 					Path:    "/updateFlashPromotionStatus",
-					Handler: smsflashpromotion.UpdateFlashPromotionStatusHandler(serverCtx),
+					Handler: smsflash_promotion.UpdateFlashPromotionStatusHandler(serverCtx),
 				},
 			}...,
 		),
@@ -1006,17 +1006,17 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				{
 					Method:  http.MethodPost,
 					Path:    "/addFlashPromotionLog",
-					Handler: smsflashpromotionlog.FlashPromotionLogAddHandler(serverCtx),
+					Handler: smsflash_promotion_log.FlashPromotionLogAddHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodGet,
 					Path:    "/deleteFlashPromotionLog",
-					Handler: smsflashpromotionlog.FlashPromotionLogDeleteHandler(serverCtx),
+					Handler: smsflash_promotion_log.FlashPromotionLogDeleteHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodGet,
 					Path:    "/queryFlashPromotionLogList",
-					Handler: smsflashpromotionlog.FlashPromotionLogListHandler(serverCtx),
+					Handler: smsflash_promotion_log.FlashPromotionLogListHandler(serverCtx),
 				},
 			}...,
 		),
@@ -1031,22 +1031,22 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				{
 					Method:  http.MethodPost,
 					Path:    "/addFlashPromotionProductRelation",
-					Handler: smsflashpromotionproductrelation.FlashPromotionProductRelationAddHandler(serverCtx),
+					Handler: smsflash_promotion_product.FlashPromotionProductRelationAddHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodGet,
 					Path:    "/deleteFlashPromotionProductRelation",
-					Handler: smsflashpromotionproductrelation.FlashPromotionProductRelationDeleteHandler(serverCtx),
+					Handler: smsflash_promotion_product.FlashPromotionProductRelationDeleteHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodGet,
 					Path:    "/queryFlashPromotionProductRelationList",
-					Handler: smsflashpromotionproductrelation.FlashPromotionProductRelationListHandler(serverCtx),
+					Handler: smsflash_promotion_product.FlashPromotionProductRelationListHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
 					Path:    "/updateFlashPromotionProductRelation",
-					Handler: smsflashpromotionproductrelation.FlashPromotionProductRelationUpdateHandler(serverCtx),
+					Handler: smsflash_promotion_product.FlashPromotionProductRelationUpdateHandler(serverCtx),
 				},
 			}...,
 		),
@@ -1061,27 +1061,27 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				{
 					Method:  http.MethodPost,
 					Path:    "/addFlashPromotionSession",
-					Handler: smsflashpromotionsession.FlashPromotionSessionAddHandler(serverCtx),
+					Handler: smsflash_promotion_session.FlashPromotionSessionAddHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodGet,
 					Path:    "/deleteFlashPromotionSession",
-					Handler: smsflashpromotionsession.FlashPromotionSessionDeleteHandler(serverCtx),
+					Handler: smsflash_promotion_session.FlashPromotionSessionDeleteHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodGet,
 					Path:    "/queryFlashPromotionSessionList",
-					Handler: smsflashpromotionsession.FlashPromotionSessionListHandler(serverCtx),
+					Handler: smsflash_promotion_session.FlashPromotionSessionListHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
 					Path:    "/updateFlashPromotionSession",
-					Handler: smsflashpromotionsession.FlashPromotionSessionUpdateHandler(serverCtx),
+					Handler: smsflash_promotion_session.FlashPromotionSessionUpdateHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
 					Path:    "/updateSessionStatus",
-					Handler: smsflashpromotionsession.UpdateFlashPromotionSessionStatusHandler(serverCtx),
+					Handler: smsflash_promotion_session.UpdateFlashPromotionSessionStatusHandler(serverCtx),
 				},
 			}...,
 		),
@@ -1096,27 +1096,27 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				{
 					Method:  http.MethodPost,
 					Path:    "/addHomeAdvertise",
-					Handler: smshomeadvertise.HomeAdvertiseAddHandler(serverCtx),
+					Handler: smshome_advertise.HomeAdvertiseAddHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodGet,
 					Path:    "/deleteHomeAdvertise",
-					Handler: smshomeadvertise.HomeAdvertiseDeleteHandler(serverCtx),
+					Handler: smshome_advertise.HomeAdvertiseDeleteHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodGet,
 					Path:    "/queryHomeAdvertiseList",
-					Handler: smshomeadvertise.HomeAdvertiseListHandler(serverCtx),
+					Handler: smshome_advertise.HomeAdvertiseListHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
 					Path:    "/updateHomeAdvertise",
-					Handler: smshomeadvertise.HomeAdvertiseUpdateHandler(serverCtx),
+					Handler: smshome_advertise.HomeAdvertiseUpdateHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
 					Path:    "/updateHomeAdvertiseStatus",
-					Handler: smshomeadvertise.UpdateHomeAdvertiseStatusHandler(serverCtx),
+					Handler: smshome_advertise.UpdateHomeAdvertiseStatusHandler(serverCtx),
 				},
 			}...,
 		),
@@ -1131,32 +1131,32 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				{
 					Method:  http.MethodPost,
 					Path:    "/addHomeBrand",
-					Handler: smshomebrand.AddHomeBrandHandler(serverCtx),
+					Handler: smshome_brand.AddHomeBrandHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodGet,
 					Path:    "/deleteHomeBrand",
-					Handler: smshomebrand.DeleteHomeBrandHandler(serverCtx),
+					Handler: smshome_brand.DeleteHomeBrandHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodGet,
 					Path:    "/queryHomeBrandDetail",
-					Handler: smshomebrand.QueryHomeBrandDetailHandler(serverCtx),
+					Handler: smshome_brand.QueryHomeBrandDetailHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodGet,
 					Path:    "/queryHomeBrandList",
-					Handler: smshomebrand.QueryHomeBrandListHandler(serverCtx),
+					Handler: smshome_brand.QueryHomeBrandListHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
 					Path:    "/updateHomeBrandSort",
-					Handler: smshomebrand.UpdateHomeBrandHandler(serverCtx),
+					Handler: smshome_brand.UpdateHomeBrandHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
 					Path:    "/updateHomeBrandStatus",
-					Handler: smshomebrand.UpdateHomeBrandStatusHandler(serverCtx),
+					Handler: smshome_brand.UpdateHomeBrandStatusHandler(serverCtx),
 				},
 			}...,
 		),
@@ -1171,32 +1171,32 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				{
 					Method:  http.MethodPost,
 					Path:    "/addHomeNewProduct",
-					Handler: smshomenewproduct.AddHomeNewProductHandler(serverCtx),
+					Handler: smshome_new_product.AddHomeNewProductHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodGet,
 					Path:    "/deleteHomeNewProduct",
-					Handler: smshomenewproduct.DeleteHomeNewProductHandler(serverCtx),
+					Handler: smshome_new_product.DeleteHomeNewProductHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodGet,
 					Path:    "/queryHomeNewProductDetail",
-					Handler: smshomenewproduct.QueryHomeNewProductDetailHandler(serverCtx),
+					Handler: smshome_new_product.QueryHomeNewProductDetailHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodGet,
 					Path:    "/queryHomeNewProductList",
-					Handler: smshomenewproduct.QueryHomeNewProductListHandler(serverCtx),
+					Handler: smshome_new_product.QueryHomeNewProductListHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
 					Path:    "/updateNewProductSort",
-					Handler: smshomenewproduct.UpdateNewProductSortHandler(serverCtx),
+					Handler: smshome_new_product.UpdateNewProductSortHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
 					Path:    "/updateNewProductStatus",
-					Handler: smshomenewproduct.UpdateHomeNewProductStatusHandler(serverCtx),
+					Handler: smshome_new_product.UpdateHomeNewProductStatusHandler(serverCtx),
 				},
 			}...,
 		),
@@ -1211,27 +1211,27 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				{
 					Method:  http.MethodPost,
 					Path:    "/addHomeRecommendProduct",
-					Handler: smshomerecommendproduct.HomeRecommendProductAddHandler(serverCtx),
+					Handler: smshome_recommend_product.HomeRecommendProductAddHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodGet,
 					Path:    "/deleteHomeRecommendProduct",
-					Handler: smshomerecommendproduct.HomeRecommendProductDeleteHandler(serverCtx),
+					Handler: smshome_recommend_product.HomeRecommendProductDeleteHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodGet,
 					Path:    "/queryHomeRecommendProductList",
-					Handler: smshomerecommendproduct.HomeRecommendProductListHandler(serverCtx),
+					Handler: smshome_recommend_product.HomeRecommendProductListHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
 					Path:    "/updateRecommendProductSort",
-					Handler: smshomerecommendproduct.UpdateRecommendProductSortHandler(serverCtx),
+					Handler: smshome_recommend_product.UpdateRecommendProductSortHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
 					Path:    "/updateRecommendProductStatus",
-					Handler: smshomerecommendproduct.UpdateRecommendProductStatusHandler(serverCtx),
+					Handler: smshome_recommend_product.UpdateRecommendProductStatusHandler(serverCtx),
 				},
 			}...,
 		),
@@ -1246,27 +1246,27 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				{
 					Method:  http.MethodPost,
 					Path:    "/addHomeRecommendSubject",
-					Handler: smshomerecommendsubject.HomeRecommendSubjectAddHandler(serverCtx),
+					Handler: smshome_recommend_subject.HomeRecommendSubjectAddHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodGet,
 					Path:    "/deleteHomeRecommendSubject",
-					Handler: smshomerecommendsubject.HomeRecommendSubjectDeleteHandler(serverCtx),
+					Handler: smshome_recommend_subject.HomeRecommendSubjectDeleteHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodGet,
 					Path:    "/queryHomeRecommendSubjectList",
-					Handler: smshomerecommendsubject.HomeRecommendSubjectListHandler(serverCtx),
+					Handler: smshome_recommend_subject.HomeRecommendSubjectListHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
 					Path:    "/updateRecommendSubjectSort",
-					Handler: smshomerecommendsubject.UpdateRecommendSubjectSortHandler(serverCtx),
+					Handler: smshome_recommend_subject.UpdateRecommendSubjectSortHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
 					Path:    "/updateRecommendSubjectStatus",
-					Handler: smshomerecommendsubject.UpdateRecommendSubjectStatusHandler(serverCtx),
+					Handler: smshome_recommend_subject.UpdateRecommendSubjectStatusHandler(serverCtx),
 				},
 			}...,
 		),
@@ -1400,6 +1400,31 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			[]rest.Route{
 				{
 					Method:  http.MethodGet,
+					Path:    "/deleteOperateLog",
+					Handler: syslog.DeleteOperateLogHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodGet,
+					Path:    "/queryOperateLogDetail",
+					Handler: syslog.QueryOperateLogDetailHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodGet,
+					Path:    "/queryOperateLogList",
+					Handler: syslog.QueryOperateLogListHandler(serverCtx),
+				},
+			}...,
+		),
+		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
+		rest.WithPrefix("/api/sys/log"),
+	)
+
+	server.AddRoutes(
+		rest.WithMiddlewares(
+			[]rest.Middleware{serverCtx.CheckUrl},
+			[]rest.Route{
+				{
+					Method:  http.MethodGet,
 					Path:    "/deleteLoginLog",
 					Handler: syslog.DeleteLoginLogHandler(serverCtx),
 				},
@@ -1417,31 +1442,6 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 					Method:  http.MethodGet,
 					Path:    "/queryStatisticsLoginLog",
 					Handler: syslog.QueryStatisticsLoginLogHandler(serverCtx),
-				},
-			}...,
-		),
-		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
-		rest.WithPrefix("/api/sys/log"),
-	)
-
-	server.AddRoutes(
-		rest.WithMiddlewares(
-			[]rest.Middleware{serverCtx.CheckUrl},
-			[]rest.Route{
-				{
-					Method:  http.MethodGet,
-					Path:    "/deleteOperateLog",
-					Handler: syslog.DeleteOperateLogHandler(serverCtx),
-				},
-				{
-					Method:  http.MethodGet,
-					Path:    "/queryOperateLogDetail",
-					Handler: syslog.QueryOperateLogDetailHandler(serverCtx),
-				},
-				{
-					Method:  http.MethodGet,
-					Path:    "/queryOperateLogList",
-					Handler: syslog.QueryOperateLogListHandler(serverCtx),
 				},
 			}...,
 		),

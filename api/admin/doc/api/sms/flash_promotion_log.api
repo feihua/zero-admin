@@ -50,7 +50,7 @@ type (
 @server (
 	jwt:        Auth
 	middleware: CheckUrl
-	group:      sms/flashpromotionlog
+	group:      sms/flash_promotion_log
 	prefix:     /api/sms/flashPromotionLog
 )
 service admin-api {
