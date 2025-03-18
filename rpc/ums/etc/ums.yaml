@@ -14,8 +14,8 @@ JWT:
 Log:
   ServiceName: ums-service
   Stat: false # go-zero 版本 >= 1.5.0 才支持
-#  Mode: file
-#  Path: logs/ums
+  Mode: file
+  Path: logs/ums
 Prometheus:
   Host: 127.0.0.1
   Port: 8181
