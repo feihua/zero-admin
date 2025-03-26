@@ -2,9 +2,10 @@ package category
 
 import (
 	"context"
-	"errors"
+	"github.com/feihua/zero-admin/pkg/errorx"
 	"github.com/feihua/zero-admin/rpc/pms/pmsclient"
 	"github.com/zeromicro/go-zero/core/logc"
+	"google.golang.org/grpc/status"
 
 	"github.com/feihua/zero-admin/api/front/internal/svc"
 	"github.com/feihua/zero-admin/api/front/internal/types"
@@ -41,8 +42,9 @@ func (l *QueryProductCateListByIdLogic) QueryProductCateListById(req *types.Quer
 	})
 
 	if err != nil {
-		logc.Errorf(l.ctx, "参数: %+v,查询商品分类列表异常:%s", req, err.Error())
-		return nil, errors.New("查询商品分类失败")
+		logc.Errorf(l.ctx, "查询商品分类失败,参数: %+v,异常：%s", req, err.Error())
+		s, _ := status.FromError(err)
+		return nil, errorx.NewDefaultError(s.Message())
 	}
 
 	list := make([]types.ProductCateListData, 0)

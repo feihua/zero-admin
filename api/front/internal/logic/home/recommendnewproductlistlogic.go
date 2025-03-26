@@ -2,7 +2,10 @@ package home
 
 import (
 	"context"
+	"github.com/feihua/zero-admin/pkg/errorx"
 	"github.com/feihua/zero-admin/rpc/sms/smsclient"
+	"github.com/zeromicro/go-zero/core/logc"
+	"google.golang.org/grpc/status"
 
 	"github.com/feihua/zero-admin/api/front/internal/svc"
 	"github.com/feihua/zero-admin/api/front/internal/types"
@@ -31,11 +34,17 @@ func NewRecommendNewProductListLogic(ctx context.Context, svcCtx *svc.ServiceCon
 
 // RecommendNewProductList 分页获取新品推荐商品
 func (l *RecommendNewProductListLogic) RecommendNewProductList(req *types.RecommendNewProductListReq) (resp *types.RecommendNewProductListResp, err error) {
-	homeNewProductList, _ := l.svcCtx.HomeNewProductService.QueryHomeNewProductList(l.ctx, &smsclient.QueryHomeNewProductListReq{
+	homeNewProductList, err := l.svcCtx.HomeNewProductService.QueryHomeNewProductList(l.ctx, &smsclient.QueryHomeNewProductListReq{
 		PageNum:         req.Current,
 		PageSize:        req.PageSize,
-		RecommendStatus: 1, //推荐状态：0->不推荐;1->推荐
+		RecommendStatus: 1, // 推荐状态：0->不推荐;1->推荐
 	})
+
+	if err != nil {
+		logc.Errorf(l.ctx, "分页获取新品推荐商品失败,参数: %+v,异常：%s", req, err.Error())
+		s, _ := status.FromError(err)
+		return nil, errorx.NewDefaultError(s.Message())
+	}
 
 	var productIds []int64
 	for _, item := range homeNewProductList.List {

@@ -2,7 +2,10 @@ package order
 
 import (
 	"context"
+	"github.com/feihua/zero-admin/pkg/errorx"
 	"github.com/feihua/zero-admin/rpc/oms/omsclient"
+	"github.com/zeromicro/go-zero/core/logc"
+	"google.golang.org/grpc/status"
 
 	"github.com/feihua/zero-admin/api/front/internal/svc"
 	"github.com/feihua/zero-admin/api/front/internal/types"
@@ -51,7 +54,9 @@ func (l *ReturnApplyLogic) ReturnApply(req *types.ReturnApplyReq) (resp *types.R
 		ProofPics:        req.ProofPics,
 	})
 	if err != nil {
-		return nil, err
+		logc.Errorf(l.ctx, "申请退货失败,参数: %+v,异常：%s", req, err.Error())
+		s, _ := status.FromError(err)
+		return nil, errorx.NewDefaultError(s.Message())
 	}
 
 	return &types.ReturnApplyResp{

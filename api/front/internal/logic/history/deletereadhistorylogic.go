@@ -2,8 +2,11 @@ package history
 
 import (
 	"context"
-	"encoding/json"
+	"github.com/feihua/zero-admin/api/front/internal/logic/common"
+	"github.com/feihua/zero-admin/pkg/errorx"
 	"github.com/feihua/zero-admin/rpc/ums/umsclient"
+	"github.com/zeromicro/go-zero/core/logc"
+	"google.golang.org/grpc/status"
 
 	"github.com/feihua/zero-admin/api/front/internal/svc"
 	"github.com/feihua/zero-admin/api/front/internal/types"
@@ -32,11 +35,20 @@ func NewDeleteReadHistoryLogic(ctx context.Context, svcCtx *svc.ServiceContext) 
 
 // DeleteReadHistory 删除浏览记录
 func (l *DeleteReadHistoryLogic) DeleteReadHistory(req *types.ReadHistoryDeleteReq) (resp *types.ReadHistoryDeleteResp, err error) {
-	memberId, _ := l.ctx.Value("memberId").(json.Number).Int64()
-	_, _ = l.svcCtx.MemberReadHistoryService.DeleteMemberReadHistory(l.ctx, &umsclient.DeleteMemberReadHistoryReq{
+	memberId, err := common.GetMemberId(l.ctx)
+	if err != nil {
+		return nil, err
+	}
+	_, err = l.svcCtx.MemberReadHistoryService.DeleteMemberReadHistory(l.ctx, &umsclient.DeleteMemberReadHistoryReq{
 		Ids:      req.Ids,
 		MemberId: memberId,
 	})
+
+	if err != nil {
+		logc.Errorf(l.ctx, "删除浏览记录失败,参数: %+v,异常：%s", req, err.Error())
+		s, _ := status.FromError(err)
+		return nil, errorx.NewDefaultError(s.Message())
+	}
 
 	return &types.ReadHistoryDeleteResp{
 		Code:    0,

@@ -2,8 +2,11 @@ package home
 
 import (
 	"context"
+	"github.com/feihua/zero-admin/pkg/errorx"
 	"github.com/feihua/zero-admin/rpc/cms/cmsclient"
 	"github.com/feihua/zero-admin/rpc/sms/smsclient"
+	"github.com/zeromicro/go-zero/core/logc"
+	"google.golang.org/grpc/status"
 
 	"github.com/feihua/zero-admin/api/front/internal/svc"
 	"github.com/feihua/zero-admin/api/front/internal/types"
@@ -36,15 +39,26 @@ func (l *QuerySubjectListLogic) QuerySubjectList(req *types.SubjectListReq) (res
 	listResp, err := l.svcCtx.HomeRecommendSubjectService.QueryHomeRecommendSubjectList(l.ctx, &smsclient.QueryHomeRecommendSubjectListReq{
 		PageNum:         req.Current,
 		PageSize:        req.PageSize,
-		RecommendStatus: 1, //推荐状态：0->不推荐;1->推荐
+		RecommendStatus: 1, // 推荐状态：0->不推荐;1->推荐
 	})
+
+	if err != nil {
+		logc.Errorf(l.ctx, "分页获取专题失败,参数: %+v,异常：%s", req, err.Error())
+		s, _ := status.FromError(err)
+		return nil, errorx.NewDefaultError(s.Message())
+	}
 
 	var homeRecommendSubjectIdLists []int64
 	for _, item := range listResp.List {
 		homeRecommendSubjectIdLists = append(homeRecommendSubjectIdLists, item.SubjectId)
 	}
 
-	subjectListResp, _ := l.svcCtx.SubjectService.SubjectListByIds(l.ctx, &cmsclient.SubjectListByIdsReq{Ids: homeRecommendSubjectIdLists})
+	subjectListResp, err := l.svcCtx.SubjectService.SubjectListByIds(l.ctx, &cmsclient.SubjectListByIdsReq{Ids: homeRecommendSubjectIdLists})
+	if err != nil {
+		logc.Errorf(l.ctx, "分页获取专题失败,参数: %+v,异常：%s", req, err.Error())
+		s, _ := status.FromError(err)
+		return nil, errorx.NewDefaultError(s.Message())
+	}
 	for _, item := range subjectListResp.List {
 		subjectLists = append(subjectLists, types.SubjectList{
 			CategoryId:      item.CategoryId,

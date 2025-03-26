@@ -2,8 +2,11 @@ package address
 
 import (
 	"context"
-	"encoding/json"
+	"github.com/feihua/zero-admin/api/front/internal/logic/common"
+	"github.com/feihua/zero-admin/pkg/errorx"
 	"github.com/feihua/zero-admin/rpc/ums/umsclient"
+	"github.com/zeromicro/go-zero/core/logc"
+	"google.golang.org/grpc/status"
 
 	"github.com/feihua/zero-admin/api/front/internal/svc"
 	"github.com/feihua/zero-admin/api/front/internal/types"
@@ -32,7 +35,10 @@ func NewUpdateMemberAddressLogic(ctx context.Context, svcCtx *svc.ServiceContext
 
 // UpdateMemberAddress 修改收货地址
 func (l *UpdateMemberAddressLogic) UpdateMemberAddress(req *types.UpdateMemberAddressReq) (resp *types.UpdateMemberAddressResp, err error) {
-	memberId, _ := l.ctx.Value("memberId").(json.Number).Int64()
+	memberId, err := common.GetMemberId(l.ctx)
+	if err != nil {
+		return nil, err
+	}
 	_, err = l.svcCtx.MemberReceiveAddressService.UpdateMemberReceiveAddress(l.ctx, &umsclient.UpdateMemberReceiveAddressReq{
 		Id:            req.Id,
 		MemberId:      memberId,
@@ -46,7 +52,9 @@ func (l *UpdateMemberAddressLogic) UpdateMemberAddress(req *types.UpdateMemberAd
 		DetailAddress: req.DetailAddress,
 	})
 	if err != nil {
-		return nil, err
+		logc.Errorf(l.ctx, "修改收货地址失败,参数: %+v,异常：%s", req, err.Error())
+		s, _ := status.FromError(err)
+		return nil, errorx.NewDefaultError(s.Message())
 	}
 
 	return &types.UpdateMemberAddressResp{

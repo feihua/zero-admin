@@ -2,7 +2,10 @@ package product
 
 import (
 	"context"
+	"github.com/feihua/zero-admin/pkg/errorx"
 	"github.com/feihua/zero-admin/rpc/pms/pmsclient"
+	"github.com/zeromicro/go-zero/core/logc"
+	"google.golang.org/grpc/status"
 
 	"github.com/feihua/zero-admin/api/front/internal/svc"
 	"github.com/feihua/zero-admin/api/front/internal/types"
@@ -31,7 +34,7 @@ func NewQueryProductListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *
 
 // QueryProductList 查询商品列表
 func (l *QueryProductListLogic) QueryProductList(req *types.QueryProductListReq) (resp *types.QueryProductListResp, err error) {
-	productListResp, _ := l.svcCtx.ProductService.QueryProductList(l.ctx, &pmsclient.QueryProductListReq{
+	productListResp, err := l.svcCtx.ProductService.QueryProductList(l.ctx, &pmsclient.QueryProductListReq{
 		Current:           req.Current,
 		PageSize:          req.PageSize,
 		VerifyStatus:      1, // 审核状态：0->未审核；1->审核通过
@@ -41,6 +44,12 @@ func (l *QueryProductListLogic) QueryProductList(req *types.QueryProductListReq)
 		BrandId:           req.BrandId,
 		Name:              req.Keyword,
 	})
+
+	if err != nil {
+		logc.Errorf(l.ctx, "查询商品列表失败,参数: %+v,异常：%s", req, err.Error())
+		s, _ := status.FromError(err)
+		return nil, errorx.NewDefaultError(s.Message())
+	}
 
 	var productLists []types.QueryProductListData
 	for _, item := range productListResp.List {

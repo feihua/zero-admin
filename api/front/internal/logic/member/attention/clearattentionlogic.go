@@ -2,7 +2,7 @@ package attention
 
 import (
 	"context"
-	"encoding/json"
+	"github.com/feihua/zero-admin/api/front/internal/logic/common"
 	"github.com/feihua/zero-admin/pkg/errorx"
 	"github.com/feihua/zero-admin/rpc/ums/umsclient"
 	"github.com/zeromicro/go-zero/core/logc"
@@ -35,13 +35,16 @@ func NewClearAttentionLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Cl
 
 // ClearAttention 清空当前用户品牌关注列表
 func (l *ClearAttentionLogic) ClearAttention() (resp *types.DeleteAttentionResp, err error) {
-	memberId, _ := l.ctx.Value("memberId").(json.Number).Int64()
+	memberId, err := common.GetMemberId(l.ctx)
+	if err != nil {
+		return nil, err
+	}
 	_, err = l.svcCtx.MemberBrandAttentionService.DeleteMemberBrandAttention(l.ctx, &umsclient.DeleteMemberBrandAttentionReq{
 		MemberId: memberId,
 	})
 
 	if err != nil {
-		logc.Errorf(l.ctx, "清空当前用户品牌关注列表失败,参数memberId: %d,响应：%s", memberId, err.Error())
+		logc.Errorf(l.ctx, "清空当前用户品牌关注列表失败,参数memberId: %d,异常：%s", memberId, err.Error())
 		s, _ := status.FromError(err)
 		return nil, errorx.NewDefaultError(s.Message())
 	}

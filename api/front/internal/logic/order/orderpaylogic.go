@@ -2,7 +2,7 @@ package order
 
 import (
 	"context"
-	"encoding/json"
+	"github.com/feihua/zero-admin/api/front/internal/logic/common"
 	"github.com/feihua/zero-admin/rpc/oms/omsclient"
 
 	"github.com/feihua/zero-admin/api/front/internal/svc"
@@ -32,9 +32,12 @@ func NewOrderPayLogic(ctx context.Context, svcCtx *svc.ServiceContext) *OrderPay
 
 // OrderPay 预下单
 func (l *OrderPayLogic) OrderPay(req *types.OrderPayReq) (resp *types.OrderPayResp, err error) {
-	memberId, _ := l.ctx.Value("memberId").(json.Number).Int64()
+	memberId, err := common.GetMemberId(l.ctx)
+	if err != nil {
+		return nil, err
+	}
 
-	//1.判断订单是否存在
+	// 1.判断订单是否存在
 	orderInfo, err := l.svcCtx.OrderService.OrderListByMemberId(l.ctx, &omsclient.OrderListByMemberIdReq{
 		Id:       req.OrderId,
 		MemberId: memberId,
@@ -43,7 +46,7 @@ func (l *OrderPayLogic) OrderPay(req *types.OrderPayReq) (resp *types.OrderPayRe
 		return orderPayResp(1, "查询订单异常", "")
 	}
 
-	//2.调用支付rpc进行预下单
+	// 2.调用支付rpc进行预下单
 	operationsUtils := NewPaymentOperationsUtils(l.ctx, l.svcCtx)
 	outTradeNo := orderInfo.Data.OrderSn
 	message, err := operationsUtils.TradeAppPay(outTradeNo, "0.01", "支付测试")
@@ -51,7 +54,7 @@ func (l *OrderPayLogic) OrderPay(req *types.OrderPayReq) (resp *types.OrderPayRe
 		return orderPayResp(1, message, "")
 	}
 
-	//3.返回唤起客户端的信息
+	// 3.返回唤起客户端的信息
 	return orderPayResp(0, "预下单成功", message)
 
 }

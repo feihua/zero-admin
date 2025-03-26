@@ -2,8 +2,11 @@ package coupon
 
 import (
 	"context"
-	"encoding/json"
+	"github.com/feihua/zero-admin/api/front/internal/logic/common"
+	"github.com/feihua/zero-admin/pkg/errorx"
 	"github.com/feihua/zero-admin/rpc/sms/smsclient"
+	"github.com/zeromicro/go-zero/core/logc"
+	"google.golang.org/grpc/status"
 
 	"github.com/feihua/zero-admin/api/front/internal/svc"
 	"github.com/feihua/zero-admin/api/front/internal/types"
@@ -32,14 +35,20 @@ func NewQueryCouponListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Q
 
 // QueryCouponList 获取用户优惠券列表
 func (l *QueryCouponListLogic) QueryCouponList(req *types.ListCouponReq) (resp *types.ListCouponResp, err error) {
-	memberId, _ := l.ctx.Value("memberId").(json.Number).Int64()
+	memberId, err := common.GetMemberId(l.ctx)
+	if err != nil {
+		return nil, err
+	}
 	couponList, err := l.svcCtx.CouponHistoryService.QueryMemberCouponList(l.ctx, &smsclient.QueryMemberCouponListReq{
 		MemberId:  memberId,
 		UseStatus: req.UseStatus,
 	})
 	if err != nil {
-		return nil, err
+		logc.Errorf(l.ctx, "获取用户优惠券列表失败,参数: %+v,异常：%s", req, err.Error())
+		s, _ := status.FromError(err)
+		return nil, errorx.NewDefaultError(s.Message())
 	}
+
 	var list []*types.ListCouponData
 
 	for _, item := range couponList.List {

@@ -2,8 +2,11 @@ package cart
 
 import (
 	"context"
-	"encoding/json"
+	"github.com/feihua/zero-admin/api/front/internal/logic/common"
+	"github.com/feihua/zero-admin/pkg/errorx"
 	"github.com/feihua/zero-admin/rpc/oms/omsclient"
+	"github.com/zeromicro/go-zero/core/logc"
+	"google.golang.org/grpc/status"
 
 	"github.com/feihua/zero-admin/api/front/internal/svc"
 	"github.com/feihua/zero-admin/api/front/internal/types"
@@ -32,9 +35,17 @@ func NewCartItemDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Ca
 
 // CartItemDelete 删除购物车中的某个商品
 func (l *CartItemDeleteLogic) CartItemDelete(req *types.CartItemDeleteReq) (resp *types.CartItemDeleteResp, err error) {
-	memberId, _ := l.ctx.Value("memberId").(json.Number).Int64()
-	_, _ = l.svcCtx.CartItemService.DeleteCartItem(l.ctx, &omsclient.DeleteCartItemReq{MemberId: memberId, Ids: req.Ids})
+	memberId, err := common.GetMemberId(l.ctx)
+	if err != nil {
+		return nil, err
+	}
+	_, err = l.svcCtx.CartItemService.DeleteCartItem(l.ctx, &omsclient.DeleteCartItemReq{MemberId: memberId, Ids: req.Ids})
 
+	if err != nil {
+		logc.Errorf(l.ctx, "删除购物车中的某个商品失败,参数: %+v,异常：%s", req, err.Error())
+		s, _ := status.FromError(err)
+		return nil, errorx.NewDefaultError(s.Message())
+	}
 	return &types.CartItemDeleteResp{
 		Code:    0,
 		Message: "操作成功",

@@ -2,8 +2,11 @@ package collection
 
 import (
 	"context"
-	"encoding/json"
+	"github.com/feihua/zero-admin/api/front/internal/logic/common"
+	"github.com/feihua/zero-admin/pkg/errorx"
 	"github.com/feihua/zero-admin/rpc/ums/umsclient"
+	"github.com/zeromicro/go-zero/core/logc"
+	"google.golang.org/grpc/status"
 
 	"github.com/feihua/zero-admin/api/front/internal/svc"
 	"github.com/feihua/zero-admin/api/front/internal/types"
@@ -32,11 +35,20 @@ func NewDeleteProductCollectionLogic(ctx context.Context, svcCtx *svc.ServiceCon
 
 // DeleteProductCollection 删除商品收藏/清空当前用户商品收藏列表
 func (l *DeleteProductCollectionLogic) DeleteProductCollection(req *types.ProductCollectionDeleteReq) (resp *types.ProductCollectionDeleteResp, err error) {
-	memberId, _ := l.ctx.Value("memberId").(json.Number).Int64()
-	_, _ = l.svcCtx.MemberProductCollectionService.DeleteMemberProductCollection(l.ctx, &umsclient.DeleteMemberProductCollectionReq{
+	memberId, err := common.GetMemberId(l.ctx)
+	if err != nil {
+		return nil, err
+	}
+	_, err = l.svcCtx.MemberProductCollectionService.DeleteMemberProductCollection(l.ctx, &umsclient.DeleteMemberProductCollectionReq{
 		Ids:      req.Ids,
 		MemberId: memberId,
 	})
+
+	if err != nil {
+		logc.Errorf(l.ctx, "删除商品收藏失败,参数memberId: %+v,异常：%s", memberId, err.Error())
+		s, _ := status.FromError(err)
+		return nil, errorx.NewDefaultError(s.Message())
+	}
 
 	return &types.ProductCollectionDeleteResp{
 		Code:    0,

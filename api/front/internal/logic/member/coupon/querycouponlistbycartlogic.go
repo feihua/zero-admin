@@ -35,10 +35,13 @@ func NewQueryCouponListByCartLogic(ctx context.Context, svcCtx *svc.ServiceConte
 
 // QueryCouponListByCart 获取登录会员购物车的相关优惠券
 func (l *QueryCouponListByCartLogic) QueryCouponListByCart(req *types.CouponListByCartReq) (resp *types.CouponListByCartResp, err error) {
-	//1.获取购物车信息
-	cartPromotionItemList := cart.QueryCartListPromotion(nil, l.ctx, l.svcCtx)
+	// 1.获取购物车信息
+	cartPromotionItemList, err := cart.QueryCartListPromotion(nil, l.ctx, l.svcCtx)
 
-	//获取该用户所有优惠券
+	if err != nil {
+		return nil, err
+	}
+	// 获取该用户所有优惠券
 	enableList, disableList := QueryCouponList(l.svcCtx, l.ctx, cartPromotionItemList)
 	return &types.CouponListByCartResp{
 		Data: types.CouponListByCartData{
@@ -58,7 +61,7 @@ func QueryCouponList(svcCtx *svc.ServiceContext, ctx context.Context, cartPromot
 
 	var enableList = make([]*smsclient.CouponHistoryDetailListData, 0)
 	var disableList = make([]*smsclient.CouponHistoryDetailListData, 0)
-	//根据优惠券使用类型来判断优惠券是否可用
+	// 根据优惠券使用类型来判断优惠券是否可用
 	for _, couponHistoryDetail := range historyDetailList.List {
 		useType := couponHistoryDetail.CouponListData.UseType
 		minPoint := couponHistoryDetail.CouponListData.MinPoint
@@ -67,9 +70,9 @@ func QueryCouponList(svcCtx *svc.ServiceContext, ctx context.Context, cartPromot
 		productRelationList := couponHistoryDetail.ProductRelationList
 		categoryRelationList := couponHistoryDetail.CategoryRelationList
 		if useType == 0 {
-			//0->全场通用
-			//判断是否满足优惠起点
-			//计算购物车商品的总价
+			// 0->全场通用
+			// 判断是否满足优惠起点
+			// 计算购物车商品的总价
 			var totalAmount int64
 			for _, item := range cartPromotionItemList {
 				realPrice := item.Price - item.ReduceAmount
@@ -82,8 +85,8 @@ func QueryCouponList(svcCtx *svc.ServiceContext, ctx context.Context, cartPromot
 				disableList = append(disableList, couponHistoryDetail)
 			}
 		} else if useType == 1 {
-			//1->指定分类
-			//计算指定分类商品的总价
+			// 1->指定分类
+			// 计算指定分类商品的总价
 			var productCategoryIds = make(map[int64]int64, 0)
 			for _, item := range categoryRelationList {
 				productCategoryIds[item.ProductCategoryId] = item.ProductCategoryId
@@ -103,8 +106,8 @@ func QueryCouponList(svcCtx *svc.ServiceContext, ctx context.Context, cartPromot
 				disableList = append(disableList, couponHistoryDetail)
 			}
 		} else if useType == 2 {
-			//2->指定商品
-			//计算指定商品的总价
+			// 2->指定商品
+			// 计算指定商品的总价
 			var productIds = make(map[int64]int64, 0)
 			for _, item := range productRelationList {
 				productIds[item.ProductId] = item.ProductId

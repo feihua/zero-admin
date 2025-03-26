@@ -43,7 +43,7 @@ func (l *LoginLogic) Login(req *types.LoginReq, ip string) (resp *types.LoginRes
 	})
 
 	if err != nil {
-		logc.Errorf(l.ctx, "会员登录失败,参数: %+v,响应：%s", req, err.Error())
+		logc.Errorf(l.ctx, "会员登录失败,参数: %+v,异常：%s", req, err.Error())
 		s, _ := status.FromError(err)
 		return nil, errorx.NewDefaultError(s.Message())
 	}

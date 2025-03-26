@@ -2,7 +2,10 @@ package cart
 
 import (
 	"context"
+	"github.com/feihua/zero-admin/pkg/errorx"
 	"github.com/feihua/zero-admin/rpc/pms/pmsclient"
+	"github.com/zeromicro/go-zero/core/logc"
+	"google.golang.org/grpc/status"
 
 	"github.com/feihua/zero-admin/api/front/internal/svc"
 	"github.com/feihua/zero-admin/api/front/internal/types"
@@ -31,9 +34,16 @@ func NewCartProductLogic(ctx context.Context, svcCtx *svc.ServiceContext) *CartP
 
 // CartProduct 获取购物车中某个商品的规格,用于重选规格
 func (l *CartProductLogic) CartProduct(req *types.CartProductReq) (resp *types.CartProductResp, err error) {
-	productResp, _ := l.svcCtx.ProductService.QueryProductDetailById(l.ctx, &pmsclient.QueryProductDetailByIdReq{
+	productResp, err := l.svcCtx.ProductService.QueryProductDetailById(l.ctx, &pmsclient.QueryProductDetailByIdReq{
 		Id: req.ProductId,
 	})
+
+	if err != nil {
+		logc.Errorf(l.ctx, "获取购物车中某个商品的规格,用于重选规格失败,参数: %+v,异常：%s", req, err.Error())
+		s, _ := status.FromError(err)
+		return nil, errorx.NewDefaultError(s.Message())
+	}
+
 	return &types.CartProductResp{
 		Code:    0,
 		Message: "操作成功",

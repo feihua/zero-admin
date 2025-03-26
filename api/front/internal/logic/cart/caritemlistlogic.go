@@ -2,8 +2,11 @@ package cart
 
 import (
 	"context"
-	"encoding/json"
+	"github.com/feihua/zero-admin/api/front/internal/logic/common"
+	"github.com/feihua/zero-admin/pkg/errorx"
 	"github.com/feihua/zero-admin/rpc/oms/omsclient"
+	"github.com/zeromicro/go-zero/core/logc"
+	"google.golang.org/grpc/status"
 
 	"github.com/feihua/zero-admin/api/front/internal/svc"
 	"github.com/feihua/zero-admin/api/front/internal/types"
@@ -32,8 +35,17 @@ func NewCarItemListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *CarIt
 
 // CarItemList 获取某个会员的购物车列表
 func (l *CarItemListLogic) CarItemList() (resp *types.CartItemListResp, err error) {
-	memberId, _ := l.ctx.Value("memberId").(json.Number).Int64()
-	itemListResp, _ := l.svcCtx.CartItemService.QueryCartItemList(l.ctx, &omsclient.QueryCartItemListReq{MemberId: memberId})
+	memberId, err := common.GetMemberId(l.ctx)
+	if err != nil {
+		return nil, err
+	}
+	itemListResp, err := l.svcCtx.CartItemService.QueryCartItemList(l.ctx, &omsclient.QueryCartItemListReq{MemberId: memberId})
+
+	if err != nil {
+		logc.Errorf(l.ctx, "获取某个会员的购物车列表失败,参数memberId: %+v,异常：%s", memberId, err.Error())
+		s, _ := status.FromError(err)
+		return nil, errorx.NewDefaultError(s.Message())
+	}
 
 	list := make([]types.CartListData, 0)
 

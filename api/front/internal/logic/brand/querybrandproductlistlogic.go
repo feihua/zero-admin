@@ -4,7 +4,10 @@ import (
 	"context"
 	"github.com/feihua/zero-admin/api/front/internal/svc"
 	"github.com/feihua/zero-admin/api/front/internal/types"
+	"github.com/feihua/zero-admin/pkg/errorx"
 	"github.com/feihua/zero-admin/rpc/pms/pmsclient"
+	"github.com/zeromicro/go-zero/core/logc"
+	"google.golang.org/grpc/status"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -30,8 +33,7 @@ func NewQueryBrandProductListLogic(ctx context.Context, svcCtx *svc.ServiceConte
 
 // QueryBrandProductList 分页获取品牌相关商品
 func (l *QueryBrandProductListLogic) QueryBrandProductList(req *types.QueryBrandProductListReq) (resp *types.QueryBrandProductListResp, err error) {
-
-	productListResp, _ := l.svcCtx.ProductService.QueryProductList(l.ctx, &pmsclient.QueryProductListReq{
+	productListResp, err := l.svcCtx.ProductService.QueryProductList(l.ctx, &pmsclient.QueryProductListReq{
 		Current:       req.Current,
 		PageSize:      req.PageSize,
 		VerifyStatus:  2,
@@ -39,6 +41,13 @@ func (l *QueryBrandProductListLogic) QueryBrandProductList(req *types.QueryBrand
 		DeleteStatus:  2,
 		BrandId:       req.BrandId,
 	})
+
+	if err != nil {
+		logc.Errorf(l.ctx, "获取品牌相关商品失败,参数: %+v,异常：%s", req, err.Error())
+		s, _ := status.FromError(err)
+		return nil, errorx.NewDefaultError(s.Message())
+	}
+
 	productLists := make([]types.BrandProductList, 0)
 
 	for _, item := range productListResp.List {

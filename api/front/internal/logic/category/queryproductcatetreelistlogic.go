@@ -2,7 +2,10 @@ package category
 
 import (
 	"context"
+	"github.com/feihua/zero-admin/pkg/errorx"
 	"github.com/feihua/zero-admin/rpc/pms/pmsclient"
+	"github.com/zeromicro/go-zero/core/logc"
+	"google.golang.org/grpc/status"
 	"strconv"
 
 	"github.com/feihua/zero-admin/api/front/internal/svc"
@@ -33,6 +36,12 @@ func NewQueryProductCateTreeListLogic(ctx context.Context, svcCtx *svc.ServiceCo
 // QueryProductCateTreeList 以树形结构获取所有商品分类
 func (l *QueryProductCateTreeListLogic) QueryProductCateTreeList() (resp *types.QueryProductCateListResp, err error) {
 	categoryListResp, err := l.svcCtx.ProductCategoryService.QueryProductCategoryTreeList(l.ctx, &pmsclient.QueryProductCategoryTreeListReq{})
+
+	if err != nil {
+		logc.Errorf(l.ctx, "查询商品分类列表失败,异常：%s", err.Error())
+		s, _ := status.FromError(err)
+		return nil, errorx.NewDefaultError(s.Message())
+	}
 
 	var list []types.ProductCateListData
 

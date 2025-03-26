@@ -2,8 +2,11 @@ package brand
 
 import (
 	"context"
+	"github.com/feihua/zero-admin/pkg/errorx"
 	"github.com/feihua/zero-admin/rpc/pms/pmsclient"
 	"github.com/feihua/zero-admin/rpc/sms/smsclient"
+	"github.com/zeromicro/go-zero/core/logc"
+	"google.golang.org/grpc/status"
 
 	"github.com/feihua/zero-admin/api/front/internal/svc"
 	"github.com/feihua/zero-admin/api/front/internal/types"
@@ -32,18 +35,31 @@ func NewQueryBrandListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Qu
 
 // QueryBrandList 分页获取推荐品牌
 func (l *QueryBrandListLogic) QueryBrandList(req *types.BrandListReq) (resp *types.BrandListResp, err error) {
-	homeBrandList, _ := l.svcCtx.HomeBrandService.QueryHomeBrandList(l.ctx, &smsclient.QueryHomeBrandListReq{
+	homeBrandList, err := l.svcCtx.HomeBrandService.QueryHomeBrandList(l.ctx, &smsclient.QueryHomeBrandListReq{
 		PageNum:         req.Current,
 		PageSize:        req.PageSize,
-		RecommendStatus: 1, //推荐状态：0->不推荐;1->推荐
+		RecommendStatus: 1, // 推荐状态：0->不推荐;1->推荐
 	})
+
+	if err != nil {
+		logc.Errorf(l.ctx, "分页获取推荐品牌失败,参数: %+v,响应：%s", req, err.Error())
+		s, _ := status.FromError(err)
+		return nil, errorx.NewDefaultError(s.Message())
+	}
 
 	var brandIdLists []int64
 	for _, item := range homeBrandList.List {
 		brandIdLists = append(brandIdLists, item.BrandId)
 	}
 
-	brandListResp, _ := l.svcCtx.BrandService.QueryBrandListByIds(l.ctx, &pmsclient.QueryBrandListByIdsReq{Ids: brandIdLists})
+	brandListResp, err := l.svcCtx.BrandService.QueryBrandListByIds(l.ctx, &pmsclient.QueryBrandListByIdsReq{Ids: brandIdLists})
+
+	if err != nil {
+		logc.Errorf(l.ctx, "分页获取推荐品牌失败,参数: %+v,异常：%s", req, err.Error())
+		s, _ := status.FromError(err)
+		return nil, errorx.NewDefaultError(s.Message())
+	}
+
 	var brandLists []types.BrandList
 	for _, item := range brandListResp.List {
 

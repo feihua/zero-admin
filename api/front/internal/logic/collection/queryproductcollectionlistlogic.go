@@ -2,8 +2,11 @@ package collection
 
 import (
 	"context"
-	"encoding/json"
+	"github.com/feihua/zero-admin/api/front/internal/logic/common"
+	"github.com/feihua/zero-admin/pkg/errorx"
 	"github.com/feihua/zero-admin/rpc/ums/umsclient"
+	"github.com/zeromicro/go-zero/core/logc"
+	"google.golang.org/grpc/status"
 
 	"github.com/feihua/zero-admin/api/front/internal/svc"
 	"github.com/feihua/zero-admin/api/front/internal/types"
@@ -32,13 +35,22 @@ func NewQueryProductCollectionListLogic(ctx context.Context, svcCtx *svc.Service
 
 // QueryProductCollectionList 查询会员收藏的商品
 func (l *QueryProductCollectionListLogic) QueryProductCollectionList() (resp *types.ProductCollectionListResp, err error) {
-	memberId, _ := l.ctx.Value("memberId").(json.Number).Int64()
-	collectionList, _ := l.svcCtx.MemberProductCollectionService.QueryMemberProductCollectionList(l.ctx, &umsclient.QueryMemberProductCollectionListReq{
+	memberId, err := common.GetMemberId(l.ctx)
+	if err != nil {
+		return nil, err
+	}
+	collectionList, err := l.svcCtx.MemberProductCollectionService.QueryMemberProductCollectionList(l.ctx, &umsclient.QueryMemberProductCollectionListReq{
 		PageNum:   1,
 		PageSize:  100,
 		MemberId:  memberId,
 		ProductId: 0,
 	})
+
+	if err != nil {
+		logc.Errorf(l.ctx, "查询会员收藏的商品失败,参数memberId: %+v,异常：%s", memberId, err.Error())
+		s, _ := status.FromError(err)
+		return nil, errorx.NewDefaultError(s.Message())
+	}
 
 	var list []types.ProductCollectionList
 

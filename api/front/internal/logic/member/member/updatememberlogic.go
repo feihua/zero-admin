@@ -2,9 +2,10 @@ package member
 
 import (
 	"context"
-	"errors"
+	"github.com/feihua/zero-admin/pkg/errorx"
 	"github.com/feihua/zero-admin/rpc/ums/umsclient"
 	"github.com/zeromicro/go-zero/core/logc"
+	"google.golang.org/grpc/status"
 
 	"github.com/feihua/zero-admin/api/front/internal/svc"
 	"github.com/feihua/zero-admin/api/front/internal/types"
@@ -53,8 +54,9 @@ func (l *UpdateMemberLogic) UpdateMember(req *types.UpdateMemberReq) (resp *type
 	})
 
 	if err != nil {
-		logc.Errorf(l.ctx, "更新会员信息失败,参数:%+v,异常:%s", req, err.Error())
-		return nil, errors.New("更新会员信息失败")
+		logc.Errorf(l.ctx, "更新会员信息失败,参数: %+v,异常：%s", req, err.Error())
+		s, _ := status.FromError(err)
+		return nil, errorx.NewDefaultError(s.Message())
 	}
 
 	return &types.UpdateMemberResp{

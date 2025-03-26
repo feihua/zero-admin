@@ -4,7 +4,10 @@ import (
 	"context"
 	"github.com/feihua/zero-admin/api/front/internal/svc"
 	"github.com/feihua/zero-admin/api/front/internal/types"
+	"github.com/feihua/zero-admin/pkg/errorx"
 	"github.com/feihua/zero-admin/rpc/sms/smsclient"
+	"github.com/zeromicro/go-zero/core/logc"
+	"google.golang.org/grpc/status"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -33,10 +36,15 @@ func NewQueryCouponListByProductIdLogic(ctx context.Context, svcCtx *svc.Service
 // 2.获取指定分类优惠券
 // 3.所有优惠券
 func (l *QueryCouponListByProductIdLogic) QueryCouponListByProductId(req *types.QueryCouponListByProductIdReq) (resp *types.ListCouponResp, err error) {
-	couponList, _ := l.svcCtx.CouponService.QueryCouponFindByProductIdAndProductCategoryId(l.ctx, &smsclient.CouponFindByProductIdAndProductCategoryIdReq{
+	couponList, err := l.svcCtx.CouponService.QueryCouponFindByProductIdAndProductCategoryId(l.ctx, &smsclient.CouponFindByProductIdAndProductCategoryIdReq{
 		ProductId:         req.ProductId,
 		ProductCategoryId: req.ProductCategoryId,
 	})
+	if err != nil {
+		logc.Errorf(l.ctx, "获取当前商品相关优惠券失败,参数: %+v,异常：%s", req, err.Error())
+		s, _ := status.FromError(err)
+		return nil, errorx.NewDefaultError(s.Message())
+	}
 	var list []*types.ListCouponData
 
 	for _, item := range couponList.List {

@@ -2,10 +2,11 @@ package order
 
 import (
 	"context"
-	"encoding/json"
-	"errors"
+	"github.com/feihua/zero-admin/api/front/internal/logic/common"
+	"github.com/feihua/zero-admin/pkg/errorx"
 	"github.com/feihua/zero-admin/rpc/oms/omsclient"
 	"github.com/zeromicro/go-zero/core/logc"
+	"google.golang.org/grpc/status"
 
 	"github.com/feihua/zero-admin/api/front/internal/svc"
 	"github.com/feihua/zero-admin/api/front/internal/types"
@@ -34,15 +35,19 @@ func NewOrderDetailLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Order
 
 // OrderDetail 订单详情
 func (l *OrderDetailLogic) OrderDetail(req *types.OrderDetailReq) (*types.OrderDetailResp, error) {
-	memberId, _ := l.ctx.Value("memberId").(json.Number).Int64()
+	memberId, err := common.GetMemberId(l.ctx)
+	if err != nil {
+		return nil, err
+	}
 	resp, err := l.svcCtx.OrderService.OrderListByMemberId(l.ctx, &omsclient.OrderListByMemberIdReq{
 		Id:       req.OrderId,
 		MemberId: memberId,
 	})
 
 	if err != nil {
-		logc.Errorf(l.ctx, "参数: %s,查询订单信息列表异常:%s", req, err.Error())
-		return nil, errors.New("查询订单信息失败")
+		logc.Errorf(l.ctx, "获取订单详情失败,参数: %+v,异常：%s", req, err.Error())
+		s, _ := status.FromError(err)
+		return nil, errorx.NewDefaultError(s.Message())
 	}
 
 	item := resp.Data

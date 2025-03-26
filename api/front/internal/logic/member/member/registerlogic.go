@@ -2,8 +2,10 @@ package member
 
 import (
 	"context"
+	"github.com/feihua/zero-admin/pkg/errorx"
 	"github.com/feihua/zero-admin/rpc/ums/umsclient"
 	"github.com/zeromicro/go-zero/core/logc"
+	"google.golang.org/grpc/status"
 
 	"github.com/feihua/zero-admin/api/front/internal/svc"
 	"github.com/feihua/zero-admin/api/front/internal/types"
@@ -45,12 +47,11 @@ func (l *RegisterLogic) Register(req *types.RegisterReq) (resp *types.RegisterRe
 	})
 
 	if err != nil {
-		logc.Errorf(l.ctx, "会员注册失败,参数: %+v,响应：%s", req, err.Error())
-		return &types.RegisterResp{
-			Code:    1,
-			Message: "注册失败",
-		}, nil
+		logc.Errorf(l.ctx, "会员注册失败,参数: %+v,异常：%s", req, err.Error())
+		s, _ := status.FromError(err)
+		return nil, errorx.NewDefaultError(s.Message())
 	}
+
 	return &types.RegisterResp{
 		Code:    0,
 		Message: "注册成功",

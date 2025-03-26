@@ -2,8 +2,11 @@ package cart
 
 import (
 	"context"
-	"encoding/json"
+	"github.com/feihua/zero-admin/api/front/internal/logic/common"
+	"github.com/feihua/zero-admin/pkg/errorx"
 	"github.com/feihua/zero-admin/rpc/oms/omsclient"
+	"github.com/zeromicro/go-zero/core/logc"
+	"google.golang.org/grpc/status"
 
 	"github.com/feihua/zero-admin/api/front/internal/svc"
 	"github.com/feihua/zero-admin/api/front/internal/types"
@@ -32,8 +35,11 @@ func NewCartItemAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) *CartI
 
 // CartItemAdd 添加商品进购物车
 func (l *CartItemAddLogic) CartItemAdd(req *types.CartItemAddReq) (resp *types.CartItemAddResp, err error) {
-	memberId, _ := l.ctx.Value("memberId").(json.Number).Int64()
-	_, _ = l.svcCtx.CartItemService.AddCartItem(l.ctx, &omsclient.AddCartItemReq{
+	memberId, err := common.GetMemberId(l.ctx)
+	if err != nil {
+		return nil, err
+	}
+	_, err = l.svcCtx.CartItemService.AddCartItem(l.ctx, &omsclient.AddCartItemReq{
 		ProductId:         req.ProductId,
 		ProductSkuId:      req.ProductSkuId,
 		MemberId:          memberId,
@@ -49,6 +55,12 @@ func (l *CartItemAddLogic) CartItemAdd(req *types.CartItemAddReq) (resp *types.C
 		ProductSn:         req.ProductSn,
 		ProductAttr:       req.ProductAttr,
 	})
+
+	if err != nil {
+		logc.Errorf(l.ctx, "添加商品进购物车失败,参数: %+v,异常：%s", req, err.Error())
+		s, _ := status.FromError(err)
+		return nil, errorx.NewDefaultError(s.Message())
+	}
 
 	return &types.CartItemAddResp{
 		Code:    0,

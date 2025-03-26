@@ -29,8 +29,8 @@ func NewPaymentOperationsUtils(ctx context.Context, svcCtx *svc.ServiceContext) 
 func (l *PaymentOperationsUtils) TradeAppPay(outTradeNo, totalAmount, subject string) (string, error) {
 	var p = alipay.TradeAppPay{}
 	p.NotifyURL = l.svcCtx.Config.Alipay.NotifyURL
-	p.Subject = subject         //订单标题
-	p.OutTradeNo = outTradeNo   //商户订单号，64个字符以内、可包含字母、数字、下划线；需保证在商户端不重复
+	p.Subject = subject         // 订单标题
+	p.OutTradeNo = outTradeNo   // 商户订单号，64个字符以内、可包含字母、数字、下划线；需保证在商户端不重复
 	p.TotalAmount = totalAmount // 订单总金额，单位为元，精确到小数点后两位，取值范围[0.01,100000000]
 	return l.svcCtx.AlipayClient.TradeAppPay(p)
 }
@@ -53,14 +53,14 @@ func (l *PaymentOperationsUtils) AliPayNotify(writer http.ResponseWriter, reques
 	var outTradeNo = notification.OutTradeNo
 	var tradeStatus = notification.TradeStatus
 
-	//订单状态修改可以为分二种方式实现
-	//1.直接更新订单表
-	//2.发送到mq,后再处理
-	//目前实现的是第一种,直接更新订单状态
+	// 订单状态修改可以为分二种方式实现
+	// 1.直接更新订单表
+	// 2.发送到mq,后再处理
+	// 目前实现的是第一种,直接更新订单状态
 	if alipay.TradeStatusSuccess == tradeStatus {
 		_, err = l.svcCtx.OrderService.UpdateOrderStatusByOutTradeNo(l.ctx, &omsclient.UpdateOrderStatusByOutTradeNoReq{
 			OutTradeNo:  outTradeNo,
-			OrderStatus: 1, //支付成功后,订单状态修改为待发货
+			OrderStatus: 1, // 支付成功后,订单状态修改为待发货
 		})
 
 		if err == nil {

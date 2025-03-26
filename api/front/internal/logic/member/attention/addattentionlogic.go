@@ -2,7 +2,7 @@ package attention
 
 import (
 	"context"
-	"encoding/json"
+	"github.com/feihua/zero-admin/api/front/internal/logic/common"
 	"github.com/feihua/zero-admin/pkg/errorx"
 	"github.com/feihua/zero-admin/rpc/ums/umsclient"
 	"github.com/zeromicro/go-zero/core/logc"
@@ -35,7 +35,10 @@ func NewAddAttentionLogic(ctx context.Context, svcCtx *svc.ServiceContext) *AddA
 
 // AddAttention 添加会员关注的品牌
 func (l *AddAttentionLogic) AddAttention(req *types.AddAttentionReq) (resp *types.AddAttentionResp, err error) {
-	memberId, _ := l.ctx.Value("memberId").(json.Number).Int64()
+	memberId, err := common.GetMemberId(l.ctx)
+	if err != nil {
+		return nil, err
+	}
 	_, err = l.svcCtx.MemberBrandAttentionService.AddMemberBrandAttention(l.ctx, &umsclient.AddMemberBrandAttentionReq{
 		BrandId:   req.BrandId,
 		BrandName: req.BrandName,
@@ -45,7 +48,7 @@ func (l *AddAttentionLogic) AddAttention(req *types.AddAttentionReq) (resp *type
 	})
 
 	if err != nil {
-		logc.Errorf(l.ctx, "添加会员关注的品牌失败,参数: %+v,响应：%s", req, err.Error())
+		logc.Errorf(l.ctx, "添加会员关注的品牌失败,参数: %+v,异常：%s", req, err.Error())
 		s, _ := status.FromError(err)
 		return nil, errorx.NewDefaultError(s.Message())
 	}

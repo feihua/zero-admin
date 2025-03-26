@@ -2,8 +2,11 @@ package product
 
 import (
 	"context"
+	"github.com/feihua/zero-admin/pkg/errorx"
 	"github.com/feihua/zero-admin/rpc/pms/pmsclient"
 	"github.com/feihua/zero-admin/rpc/sms/smsclient"
+	"github.com/zeromicro/go-zero/core/logc"
+	"google.golang.org/grpc/status"
 
 	"github.com/feihua/zero-admin/api/front/internal/svc"
 	"github.com/feihua/zero-admin/api/front/internal/types"
@@ -42,16 +45,26 @@ func NewQueryProductLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Quer
 // 注意: 步骤1到7是在商品模块(rpc),8是在营销模块(rpc)
 func (l *QueryProductLogic) QueryProduct(req *types.QueryProductReq) (resp *types.QueryProductResp, err error) {
 
-	productResp, _ := l.svcCtx.ProductService.QueryProductDetailById(l.ctx, &pmsclient.QueryProductDetailByIdReq{
+	productResp, err := l.svcCtx.ProductService.QueryProductDetailById(l.ctx, &pmsclient.QueryProductDetailByIdReq{
 		Id: req.ProductId,
 	})
 
-	//8.商品可用优惠券(根据商品id和分类id查询)
-	couponList, _ := l.svcCtx.CouponService.QueryCouponFindByProductIdAndProductCategoryId(l.ctx, &smsclient.CouponFindByProductIdAndProductCategoryIdReq{
+	if err != nil {
+		logc.Errorf(l.ctx, "获取商品详情失败,参数: %+v,异常：%s", req, err.Error())
+		s, _ := status.FromError(err)
+		return nil, errorx.NewDefaultError(s.Message())
+	}
+
+	// 8.商品可用优惠券(根据商品id和分类id查询)
+	couponList, err := l.svcCtx.CouponService.QueryCouponFindByProductIdAndProductCategoryId(l.ctx, &smsclient.CouponFindByProductIdAndProductCategoryIdReq{
 		ProductId:         req.ProductId,
 		ProductCategoryId: productResp.Product.ProductCategoryId,
 	})
-
+	if err != nil {
+		logc.Errorf(l.ctx, "获取商品可用优惠券失败,参数: %+v,异常：%s", req, err.Error())
+		s, _ := status.FromError(err)
+		return nil, errorx.NewDefaultError(s.Message())
+	}
 	return &types.QueryProductResp{
 		Code:    0,
 		Message: "操作成功",

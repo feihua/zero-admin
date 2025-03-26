@@ -2,8 +2,11 @@ package cart
 
 import (
 	"context"
-	"encoding/json"
+	"github.com/feihua/zero-admin/api/front/internal/logic/common"
+	"github.com/feihua/zero-admin/pkg/errorx"
 	"github.com/feihua/zero-admin/rpc/oms/omsclient"
+	"github.com/zeromicro/go-zero/core/logc"
+	"google.golang.org/grpc/status"
 
 	"github.com/feihua/zero-admin/api/front/internal/svc"
 	"github.com/feihua/zero-admin/api/front/internal/types"
@@ -32,8 +35,17 @@ func NewCartUpdateQuantityLogic(ctx context.Context, svcCtx *svc.ServiceContext)
 
 // CartUpdateQuantity 修改购物车中某个商品的数量
 func (l *CartUpdateQuantityLogic) CartUpdateQuantity(req *types.CartItemUpdateQuantityReq) (resp *types.CartItemUpdateResp, err error) {
-	memberId, _ := l.ctx.Value("memberId").(json.Number).Int64()
-	_, _ = l.svcCtx.CartItemService.UpdateCartItemQuantity(l.ctx, &omsclient.UpdateCartItemQuantityReq{Id: req.Id, Quantity: req.Quantity, MemberId: memberId})
+	memberId, err := common.GetMemberId(l.ctx)
+	if err != nil {
+		return nil, err
+	}
+	_, err = l.svcCtx.CartItemService.UpdateCartItemQuantity(l.ctx, &omsclient.UpdateCartItemQuantityReq{Id: req.Id, Quantity: req.Quantity, MemberId: memberId})
+
+	if err != nil {
+		logc.Errorf(l.ctx, "修改购物车中某个商品的数量失败,参数: %+v,异常：%s", req, err.Error())
+		s, _ := status.FromError(err)
+		return nil, errorx.NewDefaultError(s.Message())
+	}
 
 	return &types.CartItemUpdateResp{
 		Code:    0,

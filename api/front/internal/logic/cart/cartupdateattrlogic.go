@@ -2,8 +2,11 @@ package cart
 
 import (
 	"context"
-	"encoding/json"
+	"github.com/feihua/zero-admin/api/front/internal/logic/common"
+	"github.com/feihua/zero-admin/pkg/errorx"
 	"github.com/feihua/zero-admin/rpc/oms/omsclient"
+	"github.com/zeromicro/go-zero/core/logc"
+	"google.golang.org/grpc/status"
 
 	"github.com/feihua/zero-admin/api/front/internal/svc"
 	"github.com/feihua/zero-admin/api/front/internal/types"
@@ -32,8 +35,11 @@ func NewCartUpdateAttrLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Ca
 
 // CartUpdateAttr 修改购物车中商品的规格
 func (l *CartUpdateAttrLogic) CartUpdateAttr(req *types.CartItemUpdateAttrReq) (resp *types.CartItemUpdateResp, err error) {
-	memberId, _ := l.ctx.Value("memberId").(json.Number).Int64()
-	_, _ = l.svcCtx.CartItemService.UpdateCartItem(l.ctx, &omsclient.UpdateCartItemReq{
+	memberId, err := common.GetMemberId(l.ctx)
+	if err != nil {
+		return nil, err
+	}
+	_, err = l.svcCtx.CartItemService.UpdateCartItem(l.ctx, &omsclient.UpdateCartItemReq{
 		Id:                req.Id,
 		ProductId:         req.ProductId,
 		ProductSkuId:      req.ProductSkuId,
@@ -50,6 +56,12 @@ func (l *CartUpdateAttrLogic) CartUpdateAttr(req *types.CartItemUpdateAttrReq) (
 		ProductSn:         req.ProductSn,
 		ProductAttr:       req.ProductAttr,
 	})
+
+	if err != nil {
+		logc.Errorf(l.ctx, "修改购物车中商品的规格失败,参数: %+v,异常：%s", req, err.Error())
+		s, _ := status.FromError(err)
+		return nil, errorx.NewDefaultError(s.Message())
+	}
 
 	return &types.CartItemUpdateResp{
 		Code:    0,

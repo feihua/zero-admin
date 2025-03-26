@@ -2,10 +2,13 @@ package history
 
 import (
 	"context"
-	"encoding/json"
+	"github.com/feihua/zero-admin/api/front/internal/logic/common"
 	"github.com/feihua/zero-admin/api/front/internal/svc"
 	"github.com/feihua/zero-admin/api/front/internal/types"
+	"github.com/feihua/zero-admin/pkg/errorx"
 	"github.com/feihua/zero-admin/rpc/ums/umsclient"
+	"github.com/zeromicro/go-zero/core/logc"
+	"google.golang.org/grpc/status"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -31,9 +34,17 @@ func NewAddReadHistoryLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Ad
 
 // AddReadHistory 添加浏览商品记录
 func (l *AddReadHistoryLogic) AddReadHistory(req *types.AddReadHistoryReq) (resp *types.AddReadHistoryResp, err error) {
-	memberId, _ := l.ctx.Value("memberId").(json.Number).Int64()
-	member, _ := l.svcCtx.MemberService.QueryMemberDetail(l.ctx, &umsclient.QueryMemberDetailReq{Id: memberId})
+	memberId, err := common.GetMemberId(l.ctx)
+	if err != nil {
+		return nil, err
+	}
+	member, err := l.svcCtx.MemberService.QueryMemberDetail(l.ctx, &umsclient.QueryMemberDetailReq{Id: memberId})
 
+	if err != nil {
+		logc.Errorf(l.ctx, "查询会员信息失败,参数memberId: %+v,异常：%s", memberId, err.Error())
+		s, _ := status.FromError(err)
+		return nil, errorx.NewDefaultError(s.Message())
+	}
 	_, err = l.svcCtx.MemberReadHistoryService.AddMemberReadHistory(l.ctx, &umsclient.AddMemberReadHistoryReq{
 		MemberId:        member.Id,
 		MemberNickName:  member.Nickname,
@@ -46,7 +57,9 @@ func (l *AddReadHistoryLogic) AddReadHistory(req *types.AddReadHistoryReq) (resp
 	})
 
 	if err != nil {
-		return nil, err
+		logc.Errorf(l.ctx, "添加浏览商品记录失败,参数: %+v,异常：%s", req, err.Error())
+		s, _ := status.FromError(err)
+		return nil, errorx.NewDefaultError(s.Message())
 	}
 	return &types.AddReadHistoryResp{
 		Code:    0,

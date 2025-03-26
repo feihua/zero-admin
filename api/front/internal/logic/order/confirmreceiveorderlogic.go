@@ -2,8 +2,11 @@ package order
 
 import (
 	"context"
-	"encoding/json"
+	"github.com/feihua/zero-admin/api/front/internal/logic/common"
+	"github.com/feihua/zero-admin/pkg/errorx"
 	"github.com/feihua/zero-admin/rpc/oms/omsclient"
+	"github.com/zeromicro/go-zero/core/logc"
+	"google.golang.org/grpc/status"
 
 	"github.com/feihua/zero-admin/api/front/internal/svc"
 	"github.com/feihua/zero-admin/api/front/internal/types"
@@ -32,15 +35,21 @@ func NewConfirmReceiveOrderLogic(ctx context.Context, svcCtx *svc.ServiceContext
 
 // ConfirmReceiveOrder 用户确认收货
 func (l *ConfirmReceiveOrderLogic) ConfirmReceiveOrder(req *types.ConfirmReceiveOrderReq) (resp *types.ConfirmReceiveOrderResp, err error) {
-	memberId, _ := l.ctx.Value("memberId").(json.Number).Int64()
+	memberId, err := common.GetMemberId(l.ctx)
+	if err != nil {
+		return nil, err
+	}
 	_, err = l.svcCtx.OrderService.OrderConfirm(l.ctx, &omsclient.OrderConfirmReq{
 		MemberId: memberId,
 		OrderId:  req.OrderId,
 	})
 
 	if err != nil {
-		return nil, err
+		logc.Errorf(l.ctx, "用户确认收货失败,参数: %+v,异常：%s", req, err.Error())
+		s, _ := status.FromError(err)
+		return nil, errorx.NewDefaultError(s.Message())
 	}
+
 	return &types.ConfirmReceiveOrderResp{
 		Code:    0,
 		Message: "操作成功",
