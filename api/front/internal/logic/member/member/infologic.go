@@ -43,7 +43,7 @@ func (l *InfoLogic) Info() (resp *types.InfoResp, err error) {
 	member, err := l.svcCtx.MemberService.QueryMemberDetail(l.ctx, &umsclient.QueryMemberDetailReq{Id: memberId})
 
 	if err != nil {
-		logc.Errorf(l.ctx, "获取个人信息失败,参数memberId：%+d,异常：%s", memberId, err.Error())
+		logc.Errorf(l.ctx, "获取个人信息失败,参数memberId：%d,异常：%s", memberId, err.Error())
 		s, _ := status.FromError(err)
 		return nil, errorx.NewDefaultError(s.Message())
 	}
@@ -54,7 +54,7 @@ func (l *InfoLogic) Info() (resp *types.InfoResp, err error) {
 	})
 
 	if err != nil {
-		logc.Errorf(l.ctx, "获取用户优惠券失败,参数memberId：%+d,异常：%s", memberId, err.Error())
+		logc.Errorf(l.ctx, "获取用户优惠券失败,参数memberId：%d,异常：%s", memberId, err.Error())
 		// 为了兼容，这里不返回错误
 	}
 

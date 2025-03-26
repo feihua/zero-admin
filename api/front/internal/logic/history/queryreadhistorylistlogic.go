@@ -46,7 +46,7 @@ func (l *QueryReadHistoryListLogic) QueryReadHistoryList() (resp *types.ReadHist
 	})
 
 	if err != nil {
-		logc.Errorf(l.ctx, "查询会员浏览商品的记录失败,参数memberId: %+d,异常：%s", memberId, err.Error())
+		logc.Errorf(l.ctx, "查询会员浏览商品的记录失败,参数memberId: %d,异常：%s", memberId, err.Error())
 		s, _ := status.FromError(err)
 		return nil, errorx.NewDefaultError(s.Message())
 	}

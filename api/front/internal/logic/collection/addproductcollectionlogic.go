@@ -42,7 +42,7 @@ func (l *AddProductCollectionLogic) AddProductCollection(req *types.AddProductCo
 	member, err := l.svcCtx.MemberService.QueryMemberDetail(l.ctx, &umsclient.QueryMemberDetailReq{Id: memberId})
 
 	if err != nil {
-		logc.Errorf(l.ctx, "查询会员信息失败,参数memberId: %+d,异常：%s", memberId, err.Error())
+		logc.Errorf(l.ctx, "查询会员信息失败,参数memberId: %d,异常：%s", memberId, err.Error())
 		s, _ := status.FromError(err)
 		return nil, errorx.NewDefaultError(s.Message())
 	}
@@ -56,7 +56,7 @@ func (l *AddProductCollectionLogic) AddProductCollection(req *types.AddProductCo
 	})
 
 	if err != nil {
-		logc.Errorf(l.ctx, "查询会员是否已经收藏失败,参数memberId: %+d,异常：%s", memberId, err.Error())
+		logc.Errorf(l.ctx, "查询会员是否已经收藏失败,参数memberId: %d,异常：%s", memberId, err.Error())
 		s, _ := status.FromError(err)
 		return nil, errorx.NewDefaultError(s.Message())
 	}

@@ -36,7 +36,7 @@ func NewQueryMemberReceiveAddressListLogic(ctx context.Context, svcCtx *svc.Serv
 func (l *QueryMemberReceiveAddressListLogic) QueryMemberReceiveAddressList(in *umsclient.QueryMemberReceiveAddressListReq) (*umsclient.QueryMemberReceiveAddressListResp, error) {
 	q := query.UmsMemberReceiveAddress.WithContext(l.ctx)
 	if in.MemberId != 0 {
-		q = q.Where(query.UmsMemberLoginLog.MemberID.Eq(in.MemberId))
+		q = q.Where(query.UmsMemberReceiveAddress.MemberID.Eq(in.MemberId))
 	}
 	result, count, err := q.FindByPage(int((in.PageNum-1)*in.PageSize), int(in.PageSize))
 

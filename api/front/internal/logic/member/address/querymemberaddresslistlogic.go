@@ -46,7 +46,7 @@ func (l *QueryMemberAddressListLogic) QueryMemberAddressList() (resp *types.List
 	})
 
 	if err != nil {
-		logc.Errorf(l.ctx, "获取所有收货地址失败,参数memberId: %+d,异常：%s", memberId, err.Error())
+		logc.Errorf(l.ctx, "获取所有收货地址失败,参数memberId: %d,异常：%s", memberId, err.Error())
 		s, _ := status.FromError(err)
 		return nil, errorx.NewDefaultError(s.Message())
 	}

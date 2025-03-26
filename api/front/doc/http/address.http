@@ -9,7 +9,7 @@ Content-Type: application/json
 > {% client.global.set("token", response.body.data.token); %}
 
 ### 添加会员个人的收货地址
-POST {{host}}/api/member/address/add
+POST {{host}}/api/member/address/addMemberAddress
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
@@ -25,11 +25,11 @@ Authorization: Bearer {{token}}
 }
 
 ### 删除会员个人的收货地址
-GET {{host}}/api/member/address/delete/5
+GET {{host}}/api/member/address/deleteMemberAddress?ids=6
 Authorization: Bearer {{token}}
 
 ### 修改会员个人的收货地址
-POST {{host}}/api/member/address/update
+POST {{host}}/api/member/address/updateMemberAddress
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
@@ -47,5 +47,5 @@ Authorization: Bearer {{token}}
 }
 
 ### 获取会员个人的收货地址
-GET {{host}}/api/member/address/list
+GET {{host}}/api/member/address/queryMemberAddressList
 Authorization: Bearer {{token}}

@@ -44,7 +44,7 @@ func (l *QueryAttentionListLogic) QueryAttentionList() (resp *types.ListAttentio
 	})
 
 	if err != nil {
-		logc.Errorf(l.ctx, "查询会员关注的品牌失败,参数memberId: %+d,异常：%s", memberId, err.Error())
+		logc.Errorf(l.ctx, "查询会员关注的品牌失败,参数memberId: %d,异常：%s", memberId, err.Error())
 		s, _ := status.FromError(err)
 		return nil, errorx.NewDefaultError(s.Message())
 	}
