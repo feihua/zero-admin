@@ -2,7 +2,9 @@ package memberbrandattentionservicelogic
 
 import (
 	"context"
+	"errors"
 	"github.com/feihua/zero-admin/rpc/ums/gen/query"
+	"github.com/zeromicro/go-zero/core/logc"
 
 	"github.com/feihua/zero-admin/rpc/ums/internal/svc"
 	"github.com/feihua/zero-admin/rpc/ums/umsclient"
@@ -38,7 +40,8 @@ func (l *DeleteMemberBrandAttentionLogic) DeleteMemberBrandAttention(in *umsclie
 	}
 	_, err := attentionDo.Delete()
 	if err != nil {
-		return nil, err
+		logc.Errorf(l.ctx, "取消品牌关注失败,参数:%+v,异常:%s", in, err.Error())
+		return nil, errors.New("取消品牌关注失败")
 	}
 
 	return &umsclient.DeleteMemberBrandAttentionResp{}, nil

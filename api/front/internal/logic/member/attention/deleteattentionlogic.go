@@ -3,7 +3,10 @@ package attention
 import (
 	"context"
 	"encoding/json"
+	"github.com/feihua/zero-admin/pkg/errorx"
 	"github.com/feihua/zero-admin/rpc/ums/umsclient"
+	"github.com/zeromicro/go-zero/core/logc"
+	"google.golang.org/grpc/status"
 
 	"github.com/feihua/zero-admin/api/front/internal/svc"
 	"github.com/feihua/zero-admin/api/front/internal/types"
@@ -11,7 +14,7 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// DeleteAttentionLogic //取消品牌关注/清空当前用户品牌关注列表
+// DeleteAttentionLogic //取消品牌关注
 /*
 Author: LiuFeiHua
 Date: 2024/5/16 11:03
@@ -30,13 +33,19 @@ func NewDeleteAttentionLogic(ctx context.Context, svcCtx *svc.ServiceContext) *D
 	}
 }
 
-// DeleteAttention //取消品牌关注/清空当前用户品牌关注列表
+// DeleteAttention //取消品牌关注
 func (l *DeleteAttentionLogic) DeleteAttention(req *types.DeleteAttentionReq) (resp *types.DeleteAttentionResp, err error) {
 	memberId, _ := l.ctx.Value("memberId").(json.Number).Int64()
-	_, _ = l.svcCtx.MemberBrandAttentionService.DeleteMemberBrandAttention(l.ctx, &umsclient.DeleteMemberBrandAttentionReq{
+	_, err = l.svcCtx.MemberBrandAttentionService.DeleteMemberBrandAttention(l.ctx, &umsclient.DeleteMemberBrandAttentionReq{
 		Ids:      req.BrandIds,
 		MemberId: memberId,
 	})
+
+	if err != nil {
+		logc.Errorf(l.ctx, "删除会员关注的品牌失败,参数: %+v,响应：%s", req, err.Error())
+		s, _ := status.FromError(err)
+		return nil, errorx.NewDefaultError(s.Message())
+	}
 
 	return &types.DeleteAttentionResp{
 		Code:    0,

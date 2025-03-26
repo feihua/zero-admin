@@ -9,7 +9,7 @@ Content-Type: application/json
 > {% client.global.set("token", response.body.data.token); %}
 
 ### 添加会员品牌关注
-POST {{host}}/api/member/attention/add
+POST {{host}}/api/member/attention/addAttention
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
@@ -20,14 +20,14 @@ Authorization: Bearer {{token}}
   "brandLogo": "http://macro-oss.oss-cn-shenzhen.aliyuncs.com/mall/images/20200607/5565f5a2N0b8169ae.jpg"
 }
 
-### 清空会员品牌关注
-GET {{host}}/api/member/attention/clear
+### 删除会员品牌关注
+GET {{host}}/api/member/attention/deleteAttention?brandIds=1&brandIds=2
 Authorization: Bearer {{token}}
 
-### 删除会员品牌关注
-GET {{host}}/api/member/attention/delete/5
+### 清空会员品牌关注
+GET {{host}}/api/member/attention/clearAttention
 Authorization: Bearer {{token}}
 
 ### 获取会员品牌关注
-GET {{host}}/api/member/attention/list
+GET {{host}}/api/member/attention/queryAttentionList
 Authorization: Bearer {{token}}

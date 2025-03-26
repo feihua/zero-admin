@@ -435,7 +435,7 @@ type Data struct {
 }
 
 type DeleteAttentionReq struct {
-	BrandIds []int64 `form:"brandId"`
+	BrandIds []int64 `form:"brandIds"`
 }
 
 type DeleteAttentionResp struct {

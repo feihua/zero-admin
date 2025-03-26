@@ -2,10 +2,12 @@ package memberbrandattentionservicelogic
 
 import (
 	"context"
+	"errors"
 	"github.com/feihua/zero-admin/rpc/ums/gen/model"
 	"github.com/feihua/zero-admin/rpc/ums/gen/query"
 	"github.com/feihua/zero-admin/rpc/ums/internal/svc"
 	"github.com/feihua/zero-admin/rpc/ums/umsclient"
+	"github.com/zeromicro/go-zero/core/logc"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -45,7 +47,8 @@ func (l *AddMemberBrandAttentionLogic) AddMemberBrandAttention(in *umsclient.Add
 	})
 
 	if err != nil {
-		return nil, err
+		logc.Errorf(l.ctx, "添加会员关注品牌失败,参数:%+v,异常:%s", in, err.Error())
+		return nil, errors.New("添加会员关注品牌失败")
 	}
 
 	return &umsclient.AddMemberBrandAttentionResp{}, nil

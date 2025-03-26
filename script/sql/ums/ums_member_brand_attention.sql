@@ -12,3 +12,4 @@ create table ums_member_brand_attention
     create_time      timestamp    default CURRENT_TIMESTAMP not null comment '关注时间'
 ) comment '会员关注品牌管理';
 
+INSERT INTO ums_member_brand_attention (member_id, member_nick_name, member_icon, brand_id, brand_name, brand_logo, brand_city, create_time) VALUES (1, 'test', '', 6, '小米', 'http://macro-oss.oss-cn-shenzhen.aliyuncs.com/mall/images/20200607/5565f5a2N0b8169ae.jpg', '广东省', '2025-03-26 11:32:22');

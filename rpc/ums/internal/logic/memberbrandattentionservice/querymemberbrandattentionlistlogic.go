@@ -2,6 +2,7 @@ package memberbrandattentionservicelogic
 
 import (
 	"context"
+	"errors"
 	"github.com/feihua/zero-admin/pkg/time_util"
 	"github.com/feihua/zero-admin/rpc/ums/gen/query"
 	"github.com/zeromicro/go-zero/core/logc"
@@ -43,7 +44,7 @@ func (l *QueryMemberBrandAttentionListLogic) QueryMemberBrandAttentionList(in *u
 
 	if err != nil {
 		logc.Errorf(l.ctx, "查询品牌关注列表失败,参数：%+v,异常:%s", in, err.Error())
-		return nil, err
+		return nil, errors.New("查询品牌关注列表失败")
 	}
 
 	var list []*umsclient.MemberBrandAttentionListData

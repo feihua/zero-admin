@@ -14,43 +14,39 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// AddAttentionLogic 添加会员关注的品牌
+// ClearAttentionLogic 清空当前用户品牌关注列表
 /*
 Author: LiuFeiHua
-Date: 2024/5/16 11:03
+Date: 2025/3/26 11:43
 */
-type AddAttentionLogic struct {
+type ClearAttentionLogic struct {
 	logx.Logger
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
 }
 
-func NewAddAttentionLogic(ctx context.Context, svcCtx *svc.ServiceContext) *AddAttentionLogic {
-	return &AddAttentionLogic{
+func NewClearAttentionLogic(ctx context.Context, svcCtx *svc.ServiceContext) *ClearAttentionLogic {
+	return &ClearAttentionLogic{
 		Logger: logx.WithContext(ctx),
 		ctx:    ctx,
 		svcCtx: svcCtx,
 	}
 }
 
-// AddAttention 添加会员关注的品牌
-func (l *AddAttentionLogic) AddAttention(req *types.AddAttentionReq) (resp *types.AddAttentionResp, err error) {
+// ClearAttention 清空当前用户品牌关注列表
+func (l *ClearAttentionLogic) ClearAttention() (resp *types.DeleteAttentionResp, err error) {
 	memberId, _ := l.ctx.Value("memberId").(json.Number).Int64()
-	_, err = l.svcCtx.MemberBrandAttentionService.AddMemberBrandAttention(l.ctx, &umsclient.AddMemberBrandAttentionReq{
-		BrandId:   req.BrandId,
-		BrandName: req.BrandName,
-		BrandLogo: req.BrandLogo,
-		BrandCity: req.BrandCity,
-		MemberId:  memberId,
+	_, err = l.svcCtx.MemberBrandAttentionService.DeleteMemberBrandAttention(l.ctx, &umsclient.DeleteMemberBrandAttentionReq{
+		MemberId: memberId,
 	})
 
 	if err != nil {
-		logc.Errorf(l.ctx, "添加会员关注的品牌失败,参数: %+v,响应：%s", req, err.Error())
+		logc.Errorf(l.ctx, "清空当前用户品牌关注列表失败,参数memberId: %d,响应：%s", memberId, err.Error())
 		s, _ := status.FromError(err)
 		return nil, errorx.NewDefaultError(s.Message())
 	}
 
-	return &types.AddAttentionResp{
+	return &types.DeleteAttentionResp{
 		Code:    0,
 		Message: "操作成功",
 	}, nil

@@ -33,7 +33,7 @@ type (
 		Message string              `json:"message"`
 	}
 	DeleteAttentionReq {
-		BrandIds []int64 `form:"brandId"`
+		BrandIds []int64 `form:"brandIds"`
 	}
 	DeleteAttentionResp {
 		Code    int64  `json:"code"`
@@ -55,8 +55,12 @@ service front-api {
 	@handler QueryAttentionList
 	get /queryAttentionList returns (ListAttentionResp)
 
-	//取消品牌关注/清空当前用户品牌关注列表
+	//取消品牌关注
 	@handler DeleteAttention
 	get /deleteAttention (DeleteAttentionReq) returns (DeleteAttentionResp)
+
+	//清空当前用户品牌关注列表
+	@handler ClearAttention
+	get /clearAttention returns (DeleteAttentionResp)
 }
 
