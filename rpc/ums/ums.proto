@@ -357,6 +357,7 @@ message QueryMemberDetailResp {
   int32 history_integration = 18; //历史积分数量
   string create_time = 19; //创建时间
   string update_time = 20; //更新时间
+  string member_level = 21; //会员等级名称
 
 }
 
@@ -403,6 +404,7 @@ message MemberLoginReq {
   string      Account = 1;
   string      Password = 2;
   string      Ip = 3;
+  int32      LoginType = 4;
 }
 
 message MemberLoginResp {

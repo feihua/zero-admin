@@ -1,3 +1,4 @@
+drop table if exists ums_member;
 create table ums_member
 (
     id                     bigint auto_increment
@@ -28,13 +29,4 @@ create table ums_member
 )
     comment '会员表';
 
-INSERT INTO ums_member (id, member_level_id, member_name, password, nickname, phone, member_status, create_time, icon,
-                        gender, birthday, city, job, personalized_signature, source_type, integration, growth,
-                        lottery_count, history_integration)
-VALUES (1, 4, 'koobe', '123456', 'koobe', '18613030352', 1, current_time, '', 1, '2021-03-16', '深圳', 'go开发', 'test',
-        1, 100, 20, 1000, 1000);
-INSERT INTO ums_member (id, member_level_id, member_name, password, nickname, phone, member_status, create_time, icon,
-                        gender, birthday, city, job, personalized_signature, source_type, integration, growth,
-                        lottery_count, history_integration)
-VALUES (2, 1, 'koobe1', '123456', 'koobe1', '18613030351', 0, current_time, '', 0, '2022-06-22', '', '', '', 0, 0, 0, 0,
-        0);
+INSERT INTO ums_member (id, member_level_id, member_name, password, nickname, phone, member_status, icon, gender, birthday, city, job, personalized_signature, source_type, integration, growth, lottery_count, history_integration) VALUES (1, 4, 'test', '123456', '测试会员1', '18613030352', 1, '', 1, '2021-03-16', '深圳', '自由职业', '个性签名', 1, 100, 20, 1000, 1000);
