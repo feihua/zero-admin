@@ -2,6 +2,7 @@ package memberreceiveaddressservicelogic
 
 import (
 	"context"
+	"errors"
 	"github.com/feihua/zero-admin/pkg/time_util"
 	"github.com/feihua/zero-admin/rpc/ums/gen/query"
 	"github.com/zeromicro/go-zero/core/logc"
@@ -12,7 +13,7 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// QueryMemberReceiveAddressListLogic 查询会员收货地址表列表
+// QueryMemberReceiveAddressListLogic 查询会员收货地址列表
 /*
 Author: LiuFeiHua
 Date: 2024/6/11 14:04
@@ -31,7 +32,7 @@ func NewQueryMemberReceiveAddressListLogic(ctx context.Context, svcCtx *svc.Serv
 	}
 }
 
-// QueryMemberReceiveAddressList 查询会员收货地址表列表
+// QueryMemberReceiveAddressList 查询会员收货地址列表
 func (l *QueryMemberReceiveAddressListLogic) QueryMemberReceiveAddressList(in *umsclient.QueryMemberReceiveAddressListReq) (*umsclient.QueryMemberReceiveAddressListResp, error) {
 	q := query.UmsMemberReceiveAddress.WithContext(l.ctx)
 	if in.MemberId != 0 {
@@ -40,8 +41,8 @@ func (l *QueryMemberReceiveAddressListLogic) QueryMemberReceiveAddressList(in *u
 	result, count, err := q.FindByPage(int((in.PageNum-1)*in.PageSize), int(in.PageSize))
 
 	if err != nil {
-		logc.Errorf(l.ctx, "查询会员地址列表信息失败,参数：%+v,异常:%s", in, err.Error())
-		return nil, err
+		logc.Errorf(l.ctx, "查询会员收货地址列表失败,参数:%+v,异常:%s", in, err.Error())
+		return nil, errors.New("查询会员收货地址列表失败")
 	}
 	var list []*umsclient.MemberReceiveAddressListData
 	for _, item := range result {

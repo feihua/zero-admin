@@ -2,8 +2,10 @@ package homeadvertiseservicelogic
 
 import (
 	"context"
+	"errors"
 	"github.com/feihua/zero-admin/rpc/sms/gen/model"
 	"github.com/feihua/zero-admin/rpc/sms/gen/query"
+	"github.com/zeromicro/go-zero/core/logc"
 	"time"
 
 	"github.com/feihua/zero-admin/rpc/sms/internal/svc"
@@ -12,7 +14,7 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// UpdateHomeAdvertiseLogic 更新首页轮播广告表
+// UpdateHomeAdvertiseLogic 更新首页轮播广告
 /*
 Author: LiuFeiHua
 Date: 2024/6/12 17:51
@@ -31,7 +33,7 @@ func NewUpdateHomeAdvertiseLogic(ctx context.Context, svcCtx *svc.ServiceContext
 	}
 }
 
-// UpdateHomeAdvertise 更新首页轮播广告表
+// UpdateHomeAdvertise 更新首页轮播广告
 func (l *UpdateHomeAdvertiseLogic) UpdateHomeAdvertise(in *smsclient.UpdateHomeAdvertiseReq) (*smsclient.UpdateHomeAdvertiseResp, error) {
 	StartTime, _ := time.Parse("2006-01-02 15:04:05", in.StartTime)
 	EndTime, _ := time.Parse("2006-01-02 15:04:05", in.EndTime)
@@ -53,7 +55,8 @@ func (l *UpdateHomeAdvertiseLogic) UpdateHomeAdvertise(in *smsclient.UpdateHomeA
 	})
 
 	if err != nil {
-		return nil, err
+		logc.Errorf(l.ctx, "更新首页轮播广告失败,参数:%+v,异常:%s", in, err.Error())
+		return nil, errors.New("更新首页轮播广告失败")
 	}
 
 	return &smsclient.UpdateHomeAdvertiseResp{}, nil

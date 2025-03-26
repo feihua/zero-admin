@@ -2,8 +2,10 @@ package skustockservicelogic
 
 import (
 	"context"
+	"errors"
 	"github.com/feihua/zero-admin/rpc/pms/internal/svc"
 	"github.com/feihua/zero-admin/rpc/pms/pmsclient"
+	"github.com/zeromicro/go-zero/core/logc"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -34,7 +36,8 @@ func (l *ReleaseSkuStockLockLogic) ReleaseSkuStockLock(in *pmsclient.ReleaseSkuS
 		db := l.svcCtx.DB
 		err := db.Exec(sql, item.ProductSkuId, item.ProductQuantity).Error
 		if err != nil {
-			return nil, err
+			logc.Errorf(l.ctx, "更新商品库存失败,参数:%+v,异常:%s", in, err.Error())
+			return nil, errors.New("更新商品库存失败")
 		}
 	}
 

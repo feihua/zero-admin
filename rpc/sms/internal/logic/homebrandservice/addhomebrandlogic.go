@@ -2,8 +2,10 @@ package homebrandservicelogic
 
 import (
 	"context"
+	"errors"
 	"github.com/feihua/zero-admin/rpc/sms/gen/model"
 	"github.com/feihua/zero-admin/rpc/sms/gen/query"
+	"github.com/zeromicro/go-zero/core/logc"
 
 	"github.com/feihua/zero-admin/rpc/sms/internal/svc"
 	"github.com/feihua/zero-admin/rpc/sms/smsclient"
@@ -11,7 +13,7 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// AddHomeBrandLogic 添加首页推荐品牌表
+// AddHomeBrandLogic 添加首页推荐品牌
 /*
 Author: LiuFeiHua
 Date: 2024/6/12 17:52
@@ -30,7 +32,7 @@ func NewAddHomeBrandLogic(ctx context.Context, svcCtx *svc.ServiceContext) *AddH
 	}
 }
 
-// AddHomeBrand 添加首页推荐品牌表
+// AddHomeBrand 添加首页推荐品牌
 func (l *AddHomeBrandLogic) AddHomeBrand(in *smsclient.AddHomeBrandReq) (*smsclient.AddHomeBrandResp, error) {
 	q := query.SmsHomeBrand
 
@@ -55,7 +57,8 @@ func (l *AddHomeBrandLogic) AddHomeBrand(in *smsclient.AddHomeBrandReq) (*smscli
 
 	err := q.WithContext(l.ctx).CreateInBatches(brands, len(brands))
 	if err != nil {
-		return nil, err
+		logc.Errorf(l.ctx, "添加首页推荐品牌失败,参数:%+v,异常:%s", in, err.Error())
+		return nil, errors.New("添加首页推荐品牌失败")
 	}
 
 	return &smsclient.AddHomeBrandResp{}, nil

@@ -2,7 +2,9 @@ package memberrulesettingservicelogic
 
 import (
 	"context"
+	"errors"
 	"github.com/feihua/zero-admin/rpc/ums/gen/query"
+	"github.com/zeromicro/go-zero/core/logc"
 
 	"github.com/feihua/zero-admin/rpc/ums/internal/svc"
 	"github.com/feihua/zero-admin/rpc/ums/umsclient"
@@ -10,7 +12,7 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// DeleteMemberRuleSettingLogic 删除会员积分成长规则表
+// DeleteMemberRuleSettingLogic 删除会员积分成长规则
 /*
 Author: LiuFeiHua
 Date: 2024/6/11 14:01
@@ -29,12 +31,13 @@ func NewDeleteMemberRuleSettingLogic(ctx context.Context, svcCtx *svc.ServiceCon
 	}
 }
 
-// DeleteMemberRuleSetting 删除会员积分成长规则表
+// DeleteMemberRuleSetting 删除会员积分成长规则
 func (l *DeleteMemberRuleSettingLogic) DeleteMemberRuleSetting(in *umsclient.DeleteMemberRuleSettingReq) (*umsclient.DeleteMemberRuleSettingResp, error) {
 	q := query.UmsMemberRuleSetting
 	_, err := q.WithContext(l.ctx).Where(q.ID.In(in.Ids...)).Delete()
 	if err != nil {
-		return nil, err
+		logc.Errorf(l.ctx, "删除会员积分成长规则失败,参数:%+v,异常:%s", in, err.Error())
+		return nil, errors.New("删除会员积分成长规则失败")
 	}
 
 	return &umsclient.DeleteMemberRuleSettingResp{}, nil

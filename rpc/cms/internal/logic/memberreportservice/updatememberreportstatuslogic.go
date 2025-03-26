@@ -40,6 +40,5 @@ func (l *UpdateMemberReportStatusLogic) UpdateMemberReportStatus(in *cmsclient.U
 		return nil, errors.New("更新用户举报状态失败")
 	}
 
-	logc.Infof(l.ctx, "更新用户举报状态成功,参数：%+v", in)
 	return &cmsclient.UpdateMemberReportStatusResp{}, nil
 }

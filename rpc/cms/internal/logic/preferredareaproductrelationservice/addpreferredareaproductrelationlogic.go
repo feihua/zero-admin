@@ -2,8 +2,10 @@ package preferredareaproductrelationservicelogic
 
 import (
 	"context"
+	"errors"
 	"github.com/feihua/zero-admin/rpc/cms/gen/model"
 	"github.com/feihua/zero-admin/rpc/cms/gen/query"
+	"github.com/zeromicro/go-zero/core/logc"
 
 	"github.com/feihua/zero-admin/rpc/cms/cmsclient"
 	"github.com/feihua/zero-admin/rpc/cms/internal/svc"
@@ -11,7 +13,7 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// AddPreferredAreaProductRelationLogic 添加优选专区和产品关系表
+// AddPreferredAreaProductRelationLogic 添加优选专区和产品关系
 /*
 Author: LiuFeiHua
 Date: 2024/6/11 16:40
@@ -30,7 +32,7 @@ func NewAddPreferredAreaProductRelationLogic(ctx context.Context, svcCtx *svc.Se
 	}
 }
 
-// AddPreferredAreaProductRelation 添加优选专区和产品关系表
+// AddPreferredAreaProductRelation 添加优选专区和产品关系
 func (l *AddPreferredAreaProductRelationLogic) AddPreferredAreaProductRelation(in *cmsclient.AddPreferredAreaProductRelationReq) (*cmsclient.AddPreferredAreaProductRelationResp, error) {
 	// 1.先删除优选商品的关联
 	q := query.CmsPreferredAreaProductRelation
@@ -50,7 +52,8 @@ func (l *AddPreferredAreaProductRelationLogic) AddPreferredAreaProductRelation(i
 
 	err = q.WithContext(l.ctx).CreateInBatches(productRelations, len(productRelations))
 	if err != nil {
-		return nil, err
+		logc.Errorf(l.ctx, "添加优选专区和产品关系失败,参数:%+v,异常:%s", in, err.Error())
+		return nil, errors.New("添加优选专区和产品关系失败")
 	}
 
 	return &cmsclient.AddPreferredAreaProductRelationResp{}, nil

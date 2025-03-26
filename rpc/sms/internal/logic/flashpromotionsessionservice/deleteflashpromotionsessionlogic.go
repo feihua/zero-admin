@@ -2,7 +2,9 @@ package flashpromotionsessionservicelogic
 
 import (
 	"context"
+	"errors"
 	"github.com/feihua/zero-admin/rpc/sms/gen/query"
+	"github.com/zeromicro/go-zero/core/logc"
 
 	"github.com/feihua/zero-admin/rpc/sms/internal/svc"
 	"github.com/feihua/zero-admin/rpc/sms/smsclient"
@@ -10,7 +12,7 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// DeleteFlashPromotionSessionLogic 删除限时购场次表
+// DeleteFlashPromotionSessionLogic 删除限时购场次
 /*
 Author: LiuFeiHua
 Date: 2024/6/12 17:49
@@ -29,13 +31,14 @@ func NewDeleteFlashPromotionSessionLogic(ctx context.Context, svcCtx *svc.Servic
 	}
 }
 
-// DeleteFlashPromotionSession 删除限时购场次表
+// DeleteFlashPromotionSession 删除限时购场次
 func (l *DeleteFlashPromotionSessionLogic) DeleteFlashPromotionSession(in *smsclient.DeleteFlashPromotionSessionReq) (*smsclient.DeleteFlashPromotionSessionResp, error) {
 	q := query.SmsFlashPromotionSession
 	_, err := q.WithContext(l.ctx).Where(q.ID.In(in.Ids...)).Delete()
 
 	if err != nil {
-		return nil, err
+		logc.Errorf(l.ctx, "删除限时购场次失败,参数:%+v,异常:%s", in, err.Error())
+		return nil, errors.New("删除限时购场次失败")
 	}
 
 	return &smsclient.DeleteFlashPromotionSessionResp{}, nil

@@ -23,7 +23,7 @@ func NewDeleteIntegrationChangeHistoryLogic(ctx context.Context, svcCtx *svc.Ser
 	}
 }
 
-// 删除积分变化历史记录表
+// 删除积分变化历史记录
 func (l *DeleteIntegrationChangeHistoryLogic) DeleteIntegrationChangeHistory(in *umsclient.DeleteIntegrationChangeHistoryReq) (*umsclient.DeleteIntegrationChangeHistoryResp, error) {
 	// todo: add your logic here and delete this line
 

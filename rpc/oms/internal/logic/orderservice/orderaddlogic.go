@@ -2,6 +2,7 @@ package orderservicelogic
 
 import (
 	"context"
+	"errors"
 	"github.com/feihua/zero-admin/rpc/oms/gen/model"
 	"github.com/feihua/zero-admin/rpc/oms/gen/query"
 	"github.com/feihua/zero-admin/rpc/oms/internal/svc"
@@ -41,7 +42,7 @@ func (l *OrderAddLogic) OrderAdd(in *omsclient.OrderAddReq) (*omsclient.OrderAdd
 	err := query.OmsOrder.WithContext(l.ctx).Create(orderInfo)
 	if err != nil {
 		logc.Errorf(l.ctx, "插入order表失败,参数：%+v,异常：%s", orderInfo, err.Error())
-		return nil, err
+		return nil, errors.New("创建订单失败")
 	}
 
 	// 获取订单id
@@ -58,7 +59,7 @@ func (l *OrderAddLogic) OrderAdd(in *omsclient.OrderAddReq) (*omsclient.OrderAdd
 
 	if err != nil {
 		logc.Errorf(l.ctx, "删除购物车中的下单商品失败,参数：%+v,异常：%s", in.CartItemIds, err.Error())
-		return nil, err
+		return nil, errors.New("创建订单失败")
 	}
 
 	return &omsclient.OrderAddResp{

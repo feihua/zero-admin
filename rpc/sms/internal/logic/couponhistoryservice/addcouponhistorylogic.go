@@ -7,6 +7,7 @@ import (
 	"github.com/feihua/zero-admin/rpc/sms/gen/query"
 	"github.com/feihua/zero-admin/rpc/sms/internal/svc"
 	"github.com/feihua/zero-admin/rpc/sms/smsclient"
+	"github.com/zeromicro/go-zero/core/logc"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -61,7 +62,8 @@ func (l *AddCouponHistoryLogic) AddCouponHistory(in *smsclient.AddCouponHistoryR
 		UseStatus:      in.UseStatus,      // 使用状态：0->未使用；1->已使用；2->已过期
 	})
 	if err != nil {
-		return nil, err
+		logc.Errorf(l.ctx, "添加领取优惠券记录失败,参数:%+v,异常:%s", in, err.Error())
+		return nil, errors.New("添加领取优惠券记录失败")
 	}
 
 	// 4.更新优惠券数量
@@ -69,7 +71,8 @@ func (l *AddCouponHistoryLogic) AddCouponHistory(in *smsclient.AddCouponHistoryR
 	smsCoupon.ReceiveCount = smsCoupon.ReceiveCount + 1
 	_, err = coupon.WithContext(l.ctx).Where(coupon.ID.Eq(in.CouponId)).Updates(smsCoupon)
 	if err != nil {
-		return nil, err
+		logc.Errorf(l.ctx, "更新优惠券数量失败,参数:%+v,异常:%s", in, err.Error())
+		return nil, errors.New("更新优惠券数量失败")
 	}
 
 	return &smsclient.AddCouponHistoryResp{}, nil

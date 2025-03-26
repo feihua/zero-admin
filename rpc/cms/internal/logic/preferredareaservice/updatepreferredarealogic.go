@@ -77,6 +77,5 @@ func (l *UpdatePreferredAreaLogic) UpdatePreferredArea(in *cmsclient.UpdatePrefe
 		return nil, errors.New("更新优选专区失败")
 	}
 
-	logc.Infof(l.ctx, "更新优选专区成功,参数：%+v", in)
 	return &cmsclient.UpdatePreferredAreaResp{}, nil
 }

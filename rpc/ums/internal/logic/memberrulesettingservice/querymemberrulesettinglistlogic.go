@@ -2,6 +2,7 @@ package memberrulesettingservicelogic
 
 import (
 	"context"
+	"errors"
 	"github.com/feihua/zero-admin/pkg/time_util"
 	"github.com/feihua/zero-admin/rpc/ums/gen/query"
 	"github.com/zeromicro/go-zero/core/logc"
@@ -12,7 +13,7 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// QueryMemberRuleSettingListLogic 查询会员积分成长规则表列表
+// QueryMemberRuleSettingListLogic 查询会员积分成长规则列表
 /*
 Author: LiuFeiHua
 Date: 2024/6/11 14:01
@@ -31,7 +32,7 @@ func NewQueryMemberRuleSettingListLogic(ctx context.Context, svcCtx *svc.Service
 	}
 }
 
-// QueryMemberRuleSettingList 查询会员积分成长规则表列表
+// QueryMemberRuleSettingList 查询会员积分成长规则列表
 func (l *QueryMemberRuleSettingListLogic) QueryMemberRuleSettingList(in *umsclient.QueryMemberRuleSettingListReq) (*umsclient.QueryMemberRuleSettingListResp, error) {
 	q := query.UmsMemberRuleSetting.WithContext(l.ctx)
 	if in.Status != 2 {
@@ -43,8 +44,8 @@ func (l *QueryMemberRuleSettingListLogic) QueryMemberRuleSettingList(in *umsclie
 	result, count, err := q.FindByPage(int((in.PageNum-1)*in.PageSize), int(in.PageSize))
 
 	if err != nil {
-		logc.Errorf(l.ctx, "查询积分规则列表信息失败,参数：%+v,异常:%s", in, err.Error())
-		return nil, err
+		logc.Errorf(l.ctx, "查询会员积分成长规则列表失败,参数:%+v,异常:%s", in, err.Error())
+		return nil, errors.New("查询会员积分成长规则列表失败")
 	}
 
 	var list []*umsclient.MemberRuleSettingListData

@@ -2,6 +2,7 @@ package ordersettingservicelogic
 
 import (
 	"context"
+	"errors"
 	"github.com/feihua/zero-admin/rpc/oms/gen/query"
 	"github.com/zeromicro/go-zero/core/logc"
 
@@ -11,7 +12,7 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// QueryOrderSettingListLogic 查询订单设置表列表
+// QueryOrderSettingListLogic 查询订单设置列表
 /*
 Author: LiuFeiHua
 Date: 2024/6/12 9:39
@@ -30,7 +31,7 @@ func NewQueryOrderSettingListLogic(ctx context.Context, svcCtx *svc.ServiceConte
 	}
 }
 
-// QueryOrderSettingList 查询订单设置表列表
+// QueryOrderSettingList 查询订单设置列表
 func (l *QueryOrderSettingListLogic) QueryOrderSettingList(in *omsclient.QueryOrderSettingListReq) (*omsclient.QueryOrderSettingListResp, error) {
 	q := query.OmsOrderSetting.WithContext(l.ctx)
 	if in.Status != 2 {
@@ -39,8 +40,8 @@ func (l *QueryOrderSettingListLogic) QueryOrderSettingList(in *omsclient.QueryOr
 	result, count, err := q.FindByPage(int((in.PageNum-1)*in.PageSize), int(in.PageSize))
 
 	if err != nil {
-		logc.Errorf(l.ctx, "查询订单设置列表信息失败,参数：%+v,异常:%s", in, err.Error())
-		return nil, err
+		logc.Errorf(l.ctx, "查询订单设置列表失败,参数:%+v,异常:%s", in, err.Error())
+		return nil, errors.New("查询订单设置列表失败")
 	}
 
 	var list []*omsclient.OrderSettingListData

@@ -2,8 +2,10 @@ package flashpromotionlogservicelogic
 
 import (
 	"context"
+	"errors"
 	"github.com/feihua/zero-admin/rpc/sms/gen/model"
 	"github.com/feihua/zero-admin/rpc/sms/gen/query"
+	"github.com/zeromicro/go-zero/core/logc"
 	"time"
 
 	"github.com/feihua/zero-admin/rpc/sms/internal/svc"
@@ -44,7 +46,8 @@ func (l *AddFlashPromotionLogLogic) AddFlashPromotionLog(in *smsclient.AddFlashP
 	})
 
 	if err != nil {
-		return nil, err
+		logc.Errorf(l.ctx, "添加限时购通知记录失败,参数:%+v,异常:%s", in, err.Error())
+		return nil, errors.New("添加限时购通知记录失败")
 	}
 
 	return &smsclient.AddFlashPromotionLogResp{}, nil

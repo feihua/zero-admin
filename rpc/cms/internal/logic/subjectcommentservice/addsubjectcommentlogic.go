@@ -48,6 +48,5 @@ func (l *AddSubjectCommentLogic) AddSubjectComment(in *cmsclient.AddSubjectComme
 		return nil, errors.New("添加专题评论失败")
 	}
 
-	logc.Infof(l.ctx, "添加专题评论成功,参数：%+v", in)
 	return &cmsclient.AddSubjectCommentResp{}, nil
 }

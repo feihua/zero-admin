@@ -40,6 +40,5 @@ func (l *DeleteMemberReportLogic) DeleteMemberReport(in *cmsclient.DeleteMemberR
 		return nil, errors.New("删除用户举报失败")
 	}
 
-	logc.Infof(l.ctx, "删除用户举报成功,参数：%+v", in)
 	return &cmsclient.DeleteMemberReportResp{}, nil
 }

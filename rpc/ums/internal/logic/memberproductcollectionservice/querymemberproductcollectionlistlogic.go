@@ -2,6 +2,7 @@ package memberproductcollectionservicelogic
 
 import (
 	"context"
+	"errors"
 	"github.com/feihua/zero-admin/pkg/time_util"
 	"github.com/feihua/zero-admin/rpc/ums/gen/query"
 	"github.com/zeromicro/go-zero/core/logc"
@@ -44,8 +45,8 @@ func (l *QueryMemberProductCollectionListLogic) QueryMemberProductCollectionList
 	result, count, err := q.FindByPage(int((in.PageNum-1)*in.PageSize), int(in.PageSize))
 
 	if err != nil {
-		logc.Errorf(l.ctx, "查询会员收藏列表信息失败,参数：%+v,异常:%s", in, err.Error())
-		return nil, err
+		logc.Errorf(l.ctx, "查询用户收藏的商品列表失败,参数:%+v,异常:%s", in, err.Error())
+		return nil, errors.New("查询用户收藏的商品列表失败")
 	}
 
 	var list []*umsclient.MemberProductCollectionListData
@@ -64,8 +65,6 @@ func (l *QueryMemberProductCollectionListLogic) QueryMemberProductCollectionList
 			CreateTime:      time_util.TimeToStr(item.CreateTime), // 收藏时间
 		})
 	}
-
-	logc.Infof(l.ctx, "查询会员收藏列表信息,参数：%+v,响应：%+v", in, list)
 
 	return &umsclient.QueryMemberProductCollectionListResp{
 		Total: count,

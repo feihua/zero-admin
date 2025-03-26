@@ -59,6 +59,5 @@ func (l *AddSubjectCategoryLogic) AddSubjectCategory(in *cmsclient.AddSubjectCat
 		return nil, errors.New("添加专题分类失败")
 	}
 
-	logc.Infof(l.ctx, "添加专题分类成功,参数：%+v", in)
 	return &cmsclient.AddSubjectCategoryResp{}, nil
 }

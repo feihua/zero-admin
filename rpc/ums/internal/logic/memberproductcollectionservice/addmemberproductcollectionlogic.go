@@ -2,10 +2,12 @@ package memberproductcollectionservicelogic
 
 import (
 	"context"
+	"errors"
 	"github.com/feihua/zero-admin/rpc/ums/gen/model"
 	"github.com/feihua/zero-admin/rpc/ums/gen/query"
 	"github.com/feihua/zero-admin/rpc/ums/internal/svc"
 	"github.com/feihua/zero-admin/rpc/ums/umsclient"
+	"github.com/zeromicro/go-zero/core/logc"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -43,7 +45,8 @@ func (l *AddMemberProductCollectionLogic) AddMemberProductCollection(in *umsclie
 	})
 
 	if err != nil {
-		return nil, err
+		logc.Errorf(l.ctx, "添加用户收藏的商品失败,参数:%+v,异常:%s", in, err.Error())
+		return nil, errors.New("添加用户收藏的商品失败")
 	}
 
 	return &umsclient.AddMemberProductCollectionResp{}, nil

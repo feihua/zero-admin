@@ -2,10 +2,12 @@ package productservicelogic
 
 import (
 	"context"
+	"errors"
 	"github.com/feihua/zero-admin/rpc/pms/gen/model"
 	"github.com/feihua/zero-admin/rpc/pms/gen/query"
 	"github.com/feihua/zero-admin/rpc/pms/internal/svc"
 	"github.com/feihua/zero-admin/rpc/pms/pmsclient"
+	"github.com/zeromicro/go-zero/core/logc"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -35,7 +37,8 @@ func (l *UpdateVerifyStatusLogic) UpdateVerifyStatus(in *pmsclient.UpdateProduct
 	_, err := q.WithContext(l.ctx).Where(q.ID.In(in.Ids...)).Update(q.VerifyStatus, in.Status)
 
 	if err != nil {
-		return nil, err
+		logc.Errorf(l.ctx, "批量修改审核状态失败,参数:%+v,异常:%s", in, err.Error())
+		return nil, errors.New("批量修改审核状态失败")
 	}
 
 	// 修改完审核状态后插入审核记录
@@ -50,7 +53,8 @@ func (l *UpdateVerifyStatusLogic) UpdateVerifyStatus(in *pmsclient.UpdateProduct
 	}
 	err = query.PmsProductVertifyRecord.WithContext(l.ctx).CreateInBatches(list, len(list))
 	if err != nil {
-		return nil, err
+		logc.Errorf(l.ctx, "批量修改审核状态失败,参数:%+v,异常:%s", in, err.Error())
+		return nil, errors.New("批量修改审核状态失败")
 	}
 
 	return &pmsclient.UpdateProductStatusResp{}, nil

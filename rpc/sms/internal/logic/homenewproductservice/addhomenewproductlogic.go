@@ -11,7 +11,7 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// AddHomeNewProductLogic 添加新鲜好物表
+// AddHomeNewProductLogic 添加新鲜好物
 /*
 Author: LiuFeiHua
 Date: 2024/6/12 17:54
@@ -30,7 +30,7 @@ func NewAddHomeNewProductLogic(ctx context.Context, svcCtx *svc.ServiceContext) 
 	}
 }
 
-// AddHomeNewProduct 添加新鲜好物表
+// AddHomeNewProduct 添加新鲜好物
 func (l *AddHomeNewProductLogic) AddHomeNewProduct(in *smsclient.AddHomeNewProductReq) (*smsclient.AddHomeNewProductResp, error) {
 	for _, data := range in.NewProductAddData {
 		q := query.SmsHomeNewProduct

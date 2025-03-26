@@ -2,7 +2,9 @@ package productattributevalueservicelogic
 
 import (
 	"context"
+	"errors"
 	"github.com/feihua/zero-admin/rpc/pms/gen/query"
+	"github.com/zeromicro/go-zero/core/logc"
 
 	"github.com/feihua/zero-admin/rpc/pms/internal/svc"
 	"github.com/feihua/zero-admin/rpc/pms/pmsclient"
@@ -10,7 +12,7 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// DeleteProductAttributeValueLogic 删除存储产品参数信息的表
+// DeleteProductAttributeValueLogic 删除存储产品参数信息
 /*
 Author: LiuFeiHua
 Date: 2024/6/12 16:49
@@ -29,13 +31,14 @@ func NewDeleteProductAttributeValueLogic(ctx context.Context, svcCtx *svc.Servic
 	}
 }
 
-// DeleteProductAttributeValue 删除存储产品参数信息的表
+// DeleteProductAttributeValue 删除存储产品参数信息
 func (l *DeleteProductAttributeValueLogic) DeleteProductAttributeValue(in *pmsclient.DeleteProductAttributeValueReq) (*pmsclient.DeleteProductAttributeValueResp, error) {
 	q := query.PmsProductAttributeValue
 	_, err := q.WithContext(l.ctx).Where(q.ID.In(in.Ids...)).Delete()
 
 	if err != nil {
-		return nil, err
+		logc.Errorf(l.ctx, "删除存储产品参数信息失败,参数:%+v,异常:%s", in, err.Error())
+		return nil, errors.New("删除存储产品参数信息失败")
 	}
 
 	return &pmsclient.DeleteProductAttributeValueResp{}, nil

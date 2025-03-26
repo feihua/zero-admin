@@ -2,6 +2,7 @@ package companyaddressservicelogic
 
 import (
 	"context"
+	"errors"
 	"github.com/feihua/zero-admin/pkg/time_util"
 	"github.com/feihua/zero-admin/rpc/oms/gen/query"
 	"github.com/zeromicro/go-zero/core/logc"
@@ -12,7 +13,7 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// QueryCompanyAddressListLogic 查询公司收发货地址表列表
+// QueryCompanyAddressListLogic 查询公司收发货地址列表
 /*
 Author: LiuFeiHua
 Date: 2024/6/12 10:11
@@ -31,7 +32,7 @@ func NewQueryCompanyAddressListLogic(ctx context.Context, svcCtx *svc.ServiceCon
 	}
 }
 
-// QueryCompanyAddressList 查询公司收发货地址表列表
+// QueryCompanyAddressList 查询公司收发货地址列表
 func (l *QueryCompanyAddressListLogic) QueryCompanyAddressList(in *omsclient.QueryCompanyAddressListReq) (*omsclient.QueryCompanyAddressListResp, error) {
 	q := query.OmsCompanyAddress.WithContext(l.ctx)
 
@@ -47,8 +48,8 @@ func (l *QueryCompanyAddressListLogic) QueryCompanyAddressList(in *omsclient.Que
 	result, count, err := q.FindByPage(int((in.PageNum-1)*in.PageSize), int(in.PageSize))
 
 	if err != nil {
-		logc.Errorf(l.ctx, "查询公司收发货地址列表信息失败,参数：%+v,异常:%s", in, err.Error())
-		return nil, err
+		logc.Errorf(l.ctx, "查询公司收发货地址列表失败,参数:%+v,异常:%s", in, err.Error())
+		return nil, errors.New("查询公司收发货地址列表失败")
 	}
 
 	var list []*omsclient.CompanyAddressListData

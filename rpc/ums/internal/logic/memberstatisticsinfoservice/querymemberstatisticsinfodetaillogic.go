@@ -57,6 +57,5 @@ func (l *QueryMemberStatisticsInfoDetailLogic) QueryMemberStatisticsInfoDetail(i
 		RecentOrderTime:     item.RecentOrderTime.Format("2006-01-02 15:04:05"), // 最后一次下订单时间
 	}
 
-	logc.Infof(l.ctx, "查询会员统计信息详情,参数：%+v,响应：%+v", in, data)
 	return data, nil
 }

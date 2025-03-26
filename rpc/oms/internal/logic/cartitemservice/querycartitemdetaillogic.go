@@ -23,7 +23,7 @@ func NewQueryCartItemDetailLogic(ctx context.Context, svcCtx *svc.ServiceContext
 	}
 }
 
-// 查询购物车表详情
+// 查询购物车详情
 func (l *QueryCartItemDetailLogic) QueryCartItemDetail(in *omsclient.QueryCartItemDetailReq) (*omsclient.QueryCartItemDetailResp, error) {
 	// todo: add your logic here and delete this line
 

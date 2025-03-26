@@ -2,6 +2,7 @@ package growthchangehistoryservicelogic
 
 import (
 	"context"
+	"errors"
 	"github.com/feihua/zero-admin/pkg/time_util"
 	"github.com/feihua/zero-admin/rpc/ums/gen/query"
 	"github.com/zeromicro/go-zero/core/logc"
@@ -12,7 +13,7 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// QueryGrowthChangeHistoryListLogic 查询成长值变化历史记录表列表
+// QueryGrowthChangeHistoryListLogic 查询成长值变化历史记录列表
 /*
 Author: LiuFeiHua
 Date: 2024/6/11 14:25
@@ -31,15 +32,15 @@ func NewQueryGrowthChangeHistoryListLogic(ctx context.Context, svcCtx *svc.Servi
 	}
 }
 
-// QueryGrowthChangeHistoryList 查询成长值变化历史记录表列表
+// QueryGrowthChangeHistoryList 查询成长值变化历史记录列表
 func (l *QueryGrowthChangeHistoryListLogic) QueryGrowthChangeHistoryList(in *umsclient.QueryGrowthChangeHistoryListReq) (*umsclient.QueryGrowthChangeHistoryListResp, error) {
 	history := query.UmsGrowthChangeHistory
 	q := history.WithContext(l.ctx).Where(history.MemberID.Eq(in.MemberId))
 	result, count, err := q.FindByPage(int((in.PageNum-1)*in.PageSize), int(in.PageSize))
 
 	if err != nil {
-		logc.Errorf(l.ctx, "查询成长值变化历史记录列表信息失败,参数:%+v,异常:%s", in, err.Error())
-		return nil, err
+		logc.Errorf(l.ctx, "查询成长值变化历史记录列表失败,参数:%+v,异常:%s", in, err.Error())
+		return nil, errors.New("查询成长值变化历史记录列表失败")
 	}
 
 	var list []*umsclient.GrowthChangeHistoryListData

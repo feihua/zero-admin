@@ -2,7 +2,9 @@ package flashpromotionlogservicelogic
 
 import (
 	"context"
+	"errors"
 	"github.com/feihua/zero-admin/rpc/sms/gen/query"
+	"github.com/zeromicro/go-zero/core/logc"
 
 	"github.com/feihua/zero-admin/rpc/sms/internal/svc"
 	"github.com/feihua/zero-admin/rpc/sms/smsclient"
@@ -35,7 +37,8 @@ func (l *DeleteFlashPromotionLogLogic) DeleteFlashPromotionLog(in *smsclient.Del
 	_, err := q.WithContext(l.ctx).Where(q.ID.In(in.Ids...)).Delete()
 
 	if err != nil {
-		return nil, err
+		logc.Errorf(l.ctx, "删除限时购通知记录失败,参数:%+v,异常:%s", in, err.Error())
+		return nil, errors.New("删除限时购通知记录失败")
 	}
 
 	return &smsclient.DeleteFlashPromotionLogResp{}, nil

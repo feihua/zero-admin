@@ -23,7 +23,7 @@ func NewUpdateMemberLevelStatusLogic(ctx context.Context, svcCtx *svc.ServiceCon
 	}
 }
 
-// 更新会员等级表状态
+// 更新会员等级状态
 func (l *UpdateMemberLevelStatusLogic) UpdateMemberLevelStatus(in *umsclient.UpdateMemberLevelStatusReq) (*umsclient.UpdateMemberLevelStatusResp, error) {
 	// todo: add your logic here and delete this line
 

@@ -23,7 +23,7 @@ func NewQueryMemberRuleSettingDetailLogic(ctx context.Context, svcCtx *svc.Servi
 	}
 }
 
-// 查询会员积分成长规则表详情
+// 查询会员积分成长规则详情
 func (l *QueryMemberRuleSettingDetailLogic) QueryMemberRuleSettingDetail(in *umsclient.QueryMemberRuleSettingDetailReq) (*umsclient.QueryMemberRuleSettingDetailResp, error) {
 	// todo: add your logic here and delete this line
 

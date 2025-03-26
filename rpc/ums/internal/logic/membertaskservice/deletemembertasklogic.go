@@ -40,6 +40,5 @@ func (l *DeleteMemberTaskLogic) DeleteMemberTask(in *umsclient.DeleteMemberTaskR
 		return nil, errors.New("删除会员任务失败")
 	}
 
-	logc.Infof(l.ctx, "删除会员任务成功,参数：%+v", in)
 	return &umsclient.DeleteMemberTaskResp{}, nil
 }

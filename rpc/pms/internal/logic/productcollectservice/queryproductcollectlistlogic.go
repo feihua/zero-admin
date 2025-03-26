@@ -59,8 +59,6 @@ func (l *QueryProductCollectListLogic) QueryProductCollectList(in *pmsclient.Que
 		})
 	}
 
-	logc.Infof(l.ctx, "查询收藏列表信息,参数：%+v,响应：%+v", in, list)
-
 	return &pmsclient.QueryProductCollectListResp{
 		Total: count,
 		List:  list,

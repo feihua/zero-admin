@@ -14,7 +14,7 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// AddBrandLogic 添加品牌表
+// AddBrandLogic 添加品牌
 /*
 Author: LiuFeiHua
 Date: 2024/6/12 16:25
@@ -33,7 +33,7 @@ func NewAddBrandLogic(ctx context.Context, svcCtx *svc.ServiceContext) *AddBrand
 	}
 }
 
-// AddBrand 添加品牌表
+// AddBrand 添加品牌
 func (l *AddBrandLogic) AddBrand(in *pmsclient.AddBrandReq) (*pmsclient.AddBrandResp, error) {
 	q := query.PmsBrand
 	name := in.Name
@@ -65,7 +65,8 @@ func (l *AddBrandLogic) AddBrand(in *pmsclient.AddBrandReq) (*pmsclient.AddBrand
 	err = q.WithContext(l.ctx).Create(&brand)
 
 	if err != nil {
-		return nil, err
+		logc.Errorf(l.ctx, "添加品牌失败失败,参数:%+v,异常:%s", in, err.Error())
+		return nil, errors.New("添加品牌失败失败")
 	}
 
 	return &pmsclient.AddBrandResp{

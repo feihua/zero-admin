@@ -2,6 +2,7 @@ package productoperatelogservicelogic
 
 import (
 	"context"
+	"errors"
 	"github.com/feihua/zero-admin/pkg/time_util"
 	"github.com/feihua/zero-admin/rpc/pms/gen/query"
 	"github.com/zeromicro/go-zero/core/logc"
@@ -12,7 +13,7 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// QueryProductOperateLogListLogic 查询列表
+// QueryProductOperateLogListLogic 查询商品操作日志列表
 /*
 Author: LiuFeiHua
 Date: 2024/6/12 17:10
@@ -31,15 +32,15 @@ func NewQueryProductOperateLogListLogic(ctx context.Context, svcCtx *svc.Service
 	}
 }
 
-// QueryProductOperateLogList 查询列表
+// QueryProductOperateLogList 查询商品操作日志列表
 func (l *QueryProductOperateLogListLogic) QueryProductOperateLogList(in *pmsclient.QueryProductOperateLogListReq) (*pmsclient.QueryProductOperateLogListResp, error) {
 	q := query.PmsProductOperateLog.WithContext(l.ctx)
 
 	result, count, err := q.FindByPage(int((in.PageNum-1)*in.PageSize), int(in.PageSize))
 
 	if err != nil {
-		logc.Errorf(l.ctx, "查询商品操作历史列表信息失败,参数：%+v,异常:%s", in, err.Error())
-		return nil, err
+		logc.Errorf(l.ctx, "查询商品操作日志列表失败,参数:%+v,异常:%s", in, err.Error())
+		return nil, errors.New("查询商品操作日志列表失败")
 	}
 
 	var list []*pmsclient.ProductOperateLogListData

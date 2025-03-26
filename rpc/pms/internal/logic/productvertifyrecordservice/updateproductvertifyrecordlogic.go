@@ -59,6 +59,5 @@ func (l *UpdateProductVertifyRecordLogic) UpdateProductVertifyRecord(in *pmsclie
 		return nil, errors.New("更新商品审核记录失败")
 	}
 
-	logc.Infof(l.ctx, "更新商品审核记录成功,参数：%+v", in)
 	return &pmsclient.UpdateProductVertifyRecordResp{}, nil
 }

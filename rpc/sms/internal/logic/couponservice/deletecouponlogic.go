@@ -2,7 +2,9 @@ package couponservicelogic
 
 import (
 	"context"
+	"errors"
 	"github.com/feihua/zero-admin/rpc/sms/gen/query"
+	"github.com/zeromicro/go-zero/core/logc"
 
 	"github.com/feihua/zero-admin/rpc/sms/internal/svc"
 	"github.com/feihua/zero-admin/rpc/sms/smsclient"
@@ -39,21 +41,23 @@ func (l *DeleteCouponLogic) DeleteCoupon(in *smsclient.DeleteCouponReq) (*smscli
 	_, err := q.WithContext(l.ctx).Where(q.ID.In(in.Ids...)).Delete()
 
 	if err != nil {
-		return nil, err
+		logc.Errorf(l.ctx, "删除优惠券失败,参数:%+v,异常:%s", in, err.Error())
+		return nil, errors.New("删除优惠券失败")
 	}
 
 	// 2.删除商品关联
 	relation := query.SmsCouponProductRelation
 	_, err = relation.WithContext(l.ctx).Where(relation.CouponID.In(in.Ids...)).Delete()
 	if err != nil {
-		return nil, err
+		logc.Errorf(l.ctx, "删除优惠券失败,参数:%+v,异常:%s", in, err.Error())
+		return nil, errors.New("删除优惠券失败")
 	}
-
 	// 3.删除商品分类关联
 	categoryRelation := query.SmsCouponProductCategoryRelation
 	_, err = categoryRelation.WithContext(l.ctx).Where(categoryRelation.CouponID.In(in.Ids...)).Delete()
 	if err != nil {
-		return nil, err
+		logc.Errorf(l.ctx, "删除优惠券失败,参数:%+v,异常:%s", in, err.Error())
+		return nil, errors.New("删除优惠券失败")
 	}
 
 	return &smsclient.DeleteCouponResp{}, nil

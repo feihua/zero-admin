@@ -2,15 +2,17 @@ package commentservicelogic
 
 import (
 	"context"
+	"errors"
 	"github.com/feihua/zero-admin/rpc/pms/gen/model"
 	"github.com/feihua/zero-admin/rpc/pms/gen/query"
 	"github.com/feihua/zero-admin/rpc/pms/internal/svc"
 	"github.com/feihua/zero-admin/rpc/pms/pmsclient"
+	"github.com/zeromicro/go-zero/core/logc"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// AddCommentLogic 添加商品评价表
+// AddCommentLogic 添加商品评价
 /*
 Author: LiuFeiHua
 Date: 2024/6/12 16:35
@@ -29,7 +31,7 @@ func NewAddCommentLogic(ctx context.Context, svcCtx *svc.ServiceContext) *AddCom
 	}
 }
 
-// AddComment 添加商品评价表
+// AddComment 添加商品评价
 func (l *AddCommentLogic) AddComment(in *pmsclient.AddCommentReq) (*pmsclient.AddCommentResp, error) {
 	err := query.PmsComment.WithContext(l.ctx).Create(&model.PmsComment{
 		ProductID:        in.ProductId,        // 商品id
@@ -48,7 +50,8 @@ func (l *AddCommentLogic) AddComment(in *pmsclient.AddCommentReq) (*pmsclient.Ad
 	})
 
 	if err != nil {
-		return nil, err
+		logc.Errorf(l.ctx, "添加商品评价失败,参数:%+v,异常:%s", in, err.Error())
+		return nil, errors.New("添加商品评价失败")
 	}
 
 	return &pmsclient.AddCommentResp{}, nil

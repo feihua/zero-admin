@@ -14,7 +14,7 @@ import (
 	"time"
 )
 
-// UpdateCompanyAddressLogic 更新公司收发货地址表
+// UpdateCompanyAddressLogic 更新公司收发货地址
 /*
 Author: LiuFeiHua
 Date: 2024/6/12 10:11
@@ -33,7 +33,7 @@ func NewUpdateCompanyAddressLogic(ctx context.Context, svcCtx *svc.ServiceContex
 	}
 }
 
-// UpdateCompanyAddress 更新公司收发货地址表
+// UpdateCompanyAddress 更新公司收发货地址
 func (l *UpdateCompanyAddressLogic) UpdateCompanyAddress(in *omsclient.UpdateCompanyAddressReq) (*omsclient.UpdateCompanyAddressResp, error) {
 
 	err := query.Q.Transaction(func(tx *query.Query) error {
@@ -51,7 +51,7 @@ func (l *UpdateCompanyAddressLogic) UpdateCompanyAddress(in *omsclient.UpdateCom
 
 		count, err := q.WithContext(l.ctx).Where(q.AddressName.Eq(in.AddressName), q.ID.Neq(in.Id)).Count()
 		if count > 0 {
-			return errors.New(fmt.Sprintf("更新公司收发货地址表失败,地址名称已存在"))
+			return errors.New(fmt.Sprintf("更新公司收发货地址失败,地址名称已存在"))
 		}
 
 		if in.ReceiveStatus == 1 {

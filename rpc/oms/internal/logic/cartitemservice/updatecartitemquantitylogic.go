@@ -2,7 +2,9 @@ package cartitemservicelogic
 
 import (
 	"context"
+	"errors"
 	"github.com/feihua/zero-admin/rpc/oms/gen/query"
+	"github.com/zeromicro/go-zero/core/logc"
 
 	"github.com/feihua/zero-admin/rpc/oms/internal/svc"
 	"github.com/feihua/zero-admin/rpc/oms/omsclient"
@@ -35,7 +37,8 @@ func (l *UpdateCartItemQuantityLogic) UpdateCartItemQuantity(in *omsclient.Updat
 	_, err := q.WithContext(l.ctx).Where(q.ID.Eq(in.Id), q.MemberID.Eq(in.MemberId)).Update(q.Quantity, in.Quantity)
 
 	if err != nil {
-		return nil, err
+		logc.Errorf(l.ctx, "修改购物车中某个商品的数量失败,参数:%+v,异常:%s", in, err.Error())
+		return nil, errors.New("修改购物车中某个商品的数量失败")
 	}
 
 	return &omsclient.UpdateCartItemQuantityResp{}, nil

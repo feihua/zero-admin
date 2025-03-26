@@ -2,8 +2,10 @@ package memberlevelservicelogic
 
 import (
 	"context"
+	"errors"
 	"github.com/feihua/zero-admin/rpc/ums/gen/model"
 	"github.com/feihua/zero-admin/rpc/ums/gen/query"
+	"github.com/zeromicro/go-zero/core/logc"
 
 	"github.com/feihua/zero-admin/rpc/ums/internal/svc"
 	"github.com/feihua/zero-admin/rpc/ums/umsclient"
@@ -11,7 +13,7 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// AddMemberLevelLogic 添加会员等级表
+// AddMemberLevelLogic 添加会员等级
 /*
 Author: LiuFeiHua
 Date: 2024/6/11 14:16
@@ -30,7 +32,7 @@ func NewAddMemberLevelLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Ad
 	}
 }
 
-// AddMemberLevel 添加会员等级表
+// AddMemberLevel 添加会员等级
 func (l *AddMemberLevelLogic) AddMemberLevel(in *umsclient.AddMemberLevelReq) (*umsclient.AddMemberLevelResp, error) {
 	err := query.UmsMemberLevel.WithContext(l.ctx).Create(&model.UmsMemberLevel{
 		LevelName:          in.LevelName,          // 等级名称
@@ -48,7 +50,8 @@ func (l *AddMemberLevelLogic) AddMemberLevel(in *umsclient.AddMemberLevelReq) (*
 	})
 
 	if err != nil {
-		return nil, err
+		logc.Errorf(l.ctx, "添加会员等级失败,参数:%+v,异常:%s", in, err.Error())
+		return nil, errors.New("添加会员等级失败")
 	}
 
 	return &umsclient.AddMemberLevelResp{}, nil

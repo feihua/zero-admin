@@ -2,6 +2,7 @@ package memberstatisticsinfoservicelogic
 
 import (
 	"context"
+	"errors"
 	"github.com/feihua/zero-admin/pkg/time_util"
 	"github.com/feihua/zero-admin/rpc/ums/gen/query"
 	"github.com/feihua/zero-admin/rpc/ums/internal/svc"
@@ -36,7 +37,7 @@ func (l *QueryMemberStatisticsInfoListLogic) QueryMemberStatisticsInfoList(in *u
 
 	if err != nil {
 		logc.Errorf(l.ctx, "查询会员统计信息列表失败,参数:%+v,异常:%s", in, err.Error())
-		return nil, err
+		return nil, errors.New("查询会员统计信息列表失败")
 	}
 
 	var list []*umsclient.QueryMemberStatisticsInfoListData

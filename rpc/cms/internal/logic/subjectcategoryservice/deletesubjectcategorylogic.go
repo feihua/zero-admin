@@ -40,6 +40,5 @@ func (l *DeleteSubjectCategoryLogic) DeleteSubjectCategory(in *cmsclient.DeleteS
 		return nil, errors.New("删除专题分类失败")
 	}
 
-	logc.Infof(l.ctx, "删除专题分类成功,参数：%+v", in)
 	return &cmsclient.DeleteSubjectCategoryResp{}, nil
 }

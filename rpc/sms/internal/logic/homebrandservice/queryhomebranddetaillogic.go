@@ -10,7 +10,7 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// QueryHomeBrandDetailLogic 查询首页推荐品牌表详情
+// QueryHomeBrandDetailLogic 查询首页推荐品牌详情
 /*
 Author: 刘飞华
 Date: 2025/02/07 10:11:43
@@ -29,13 +29,13 @@ func NewQueryHomeBrandDetailLogic(ctx context.Context, svcCtx *svc.ServiceContex
 	}
 }
 
-// QueryHomeBrandDetail 查询首页推荐品牌表详情
+// QueryHomeBrandDetail 查询首页推荐品牌详情
 func (l *QueryHomeBrandDetailLogic) QueryHomeBrandDetail(in *smsclient.QueryHomeBrandDetailReq) (*smsclient.QueryHomeBrandDetailResp, error) {
 	item, err := query.SmsHomeBrand.WithContext(l.ctx).Where(query.SmsHomeBrand.ID.Eq(in.Id)).First()
 
 	if err != nil {
-		logc.Errorf(l.ctx, "查询首页推荐品牌表详情失败,参数:%+v,异常:%s", in, err.Error())
-		return nil, errors.New("查询首页推荐品牌表详情失败")
+		logc.Errorf(l.ctx, "查询首页推荐品牌详情失败,参数:%+v,异常:%s", in, err.Error())
+		return nil, errors.New("查询首页推荐品牌详情失败")
 	}
 
 	data := &smsclient.QueryHomeBrandDetailResp{
@@ -47,6 +47,5 @@ func (l *QueryHomeBrandDetailLogic) QueryHomeBrandDetail(in *smsclient.QueryHome
 
 	}
 
-	logc.Infof(l.ctx, "查询首页推荐品牌表详情,参数：%+v,响应：%+v", in, data)
 	return data, nil
 }

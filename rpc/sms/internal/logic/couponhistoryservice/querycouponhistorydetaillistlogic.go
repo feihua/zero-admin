@@ -2,6 +2,7 @@ package couponhistoryservicelogic
 
 import (
 	"context"
+	"errors"
 	"github.com/feihua/zero-admin/pkg/time_util"
 	"github.com/feihua/zero-admin/rpc/sms/gen/query"
 	"github.com/zeromicro/go-zero/core/logc"
@@ -44,8 +45,8 @@ func (l *QueryCouponHistoryDetailListLogic) QueryCouponHistoryDetailList(in *sms
 	result, err := q.Find()
 
 	if err != nil {
-		logc.Errorf(l.ctx, "查询优惠券使用历史列表信息失败,参数：%+v,异常:%s", in, err.Error())
-		return nil, err
+		logc.Errorf(l.ctx, "获取该用户所有优惠券失败,参数:%+v,异常:%s", in, err.Error())
+		return nil, errors.New("获取该用户所有优惠券失败")
 	}
 
 	var list = make([]*smsclient.CouponHistoryDetailListData, 0)

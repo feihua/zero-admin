@@ -2,6 +2,7 @@ package memberlevelservicelogic
 
 import (
 	"context"
+	"errors"
 	"github.com/feihua/zero-admin/rpc/ums/gen/query"
 	"github.com/zeromicro/go-zero/core/logc"
 
@@ -11,7 +12,7 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// QueryMemberLevelListLogic 查询会员等级表列表
+// QueryMemberLevelListLogic 查询会员等级列表
 /*
 Author: LiuFeiHua
 Date: 2024/6/11 14:17
@@ -30,7 +31,7 @@ func NewQueryMemberLevelListLogic(ctx context.Context, svcCtx *svc.ServiceContex
 	}
 }
 
-// QueryMemberLevelList 查询会员等级表列表
+// QueryMemberLevelList 查询会员等级列表
 func (l *QueryMemberLevelListLogic) QueryMemberLevelList(in *umsclient.QueryMemberLevelListReq) (*umsclient.QueryMemberLevelListResp, error) {
 	q := query.UmsMemberLevel.WithContext(l.ctx)
 	if len(in.LevelName) > 0 {
@@ -40,8 +41,8 @@ func (l *QueryMemberLevelListLogic) QueryMemberLevelList(in *umsclient.QueryMemb
 	result, count, err := q.FindByPage(int((in.PageNum-1)*in.PageSize), int(in.PageSize))
 
 	if err != nil {
-		logc.Errorf(l.ctx, "查询会员等级列表信息失败,参数:%+v,异常:%s", in, err.Error())
-		return nil, err
+		logc.Errorf(l.ctx, "查询会员等级列表失败,参数:%+v,异常:%s", in, err.Error())
+		return nil, errors.New("查询会员等级列表失败")
 	}
 	var list []*umsclient.MemberLevelListData
 	for _, item := range result {

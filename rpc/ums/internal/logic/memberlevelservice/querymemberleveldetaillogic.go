@@ -23,7 +23,7 @@ func NewQueryMemberLevelDetailLogic(ctx context.Context, svcCtx *svc.ServiceCont
 	}
 }
 
-// 查询会员等级表详情
+// 查询会员等级详情
 func (l *QueryMemberLevelDetailLogic) QueryMemberLevelDetail(in *umsclient.QueryMemberLevelDetailReq) (*umsclient.QueryMemberLevelDetailResp, error) {
 	// todo: add your logic here and delete this line
 

@@ -2,8 +2,10 @@ package homeadvertiseservicelogic
 
 import (
 	"context"
+	"errors"
 	"github.com/feihua/zero-admin/rpc/sms/gen/model"
 	"github.com/feihua/zero-admin/rpc/sms/gen/query"
+	"github.com/zeromicro/go-zero/core/logc"
 	"time"
 
 	"github.com/feihua/zero-admin/rpc/sms/internal/svc"
@@ -12,7 +14,7 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// AddHomeAdvertiseLogic 添加首页轮播广告表
+// AddHomeAdvertiseLogic 添加首页轮播广告
 /*
 Author: LiuFeiHua
 Date: 2024/6/12 17:50
@@ -31,7 +33,7 @@ func NewAddHomeAdvertiseLogic(ctx context.Context, svcCtx *svc.ServiceContext) *
 	}
 }
 
-// AddHomeAdvertise 添加首页轮播广告表
+// AddHomeAdvertise 添加首页轮播广告
 func (l *AddHomeAdvertiseLogic) AddHomeAdvertise(in *smsclient.AddHomeAdvertiseReq) (*smsclient.AddHomeAdvertiseResp, error) {
 	StartTime, _ := time.Parse("2006-01-02 15:04:05", in.StartTime)
 	EndTime, _ := time.Parse("2006-01-02 15:04:05", in.EndTime)
@@ -51,7 +53,8 @@ func (l *AddHomeAdvertiseLogic) AddHomeAdvertise(in *smsclient.AddHomeAdvertiseR
 	})
 
 	if err != nil {
-		return nil, err
+		logc.Errorf(l.ctx, "添加首页轮播广告失败,参数:%+v,异常:%s", in, err.Error())
+		return nil, errors.New("添加首页轮播广告失败")
 	}
 
 	return &smsclient.AddHomeAdvertiseResp{}, nil

@@ -40,6 +40,5 @@ func (l *DeletePreferredAreaLogic) DeletePreferredArea(in *cmsclient.DeletePrefe
 		return nil, errors.New("删除优选专区失败")
 	}
 
-	logc.Infof(l.ctx, "删除优选专区成功,参数：%+v", in)
 	return &cmsclient.DeletePreferredAreaResp{}, nil
 }

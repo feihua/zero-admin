@@ -2,6 +2,7 @@ package orderreturnreasonservicelogic
 
 import (
 	"context"
+	"errors"
 	"github.com/feihua/zero-admin/pkg/time_util"
 	"github.com/feihua/zero-admin/rpc/oms/gen/query"
 	"github.com/zeromicro/go-zero/core/logc"
@@ -12,7 +13,7 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// QueryOrderReturnReasonListLogic 查询退货原因表列表
+// QueryOrderReturnReasonListLogic 查询退货原因列表
 /*
 Author: LiuFeiHua
 Date: 2024/6/12 10:19
@@ -31,7 +32,7 @@ func NewQueryOrderReturnReasonListLogic(ctx context.Context, svcCtx *svc.Service
 	}
 }
 
-// QueryOrderReturnReasonList 查询退货原因表列表
+// QueryOrderReturnReasonList 查询退货原因列表
 func (l *QueryOrderReturnReasonListLogic) QueryOrderReturnReasonList(in *omsclient.QueryOrderReturnReasonListReq) (*omsclient.QueryOrderReturnReasonListResp, error) {
 	q := query.OmsOrderReturnReason.WithContext(l.ctx)
 	if len(in.Name) > 0 {
@@ -45,8 +46,8 @@ func (l *QueryOrderReturnReasonListLogic) QueryOrderReturnReasonList(in *omsclie
 	result, count, err := q.FindByPage(int((in.PageNum-1)*in.PageSize), int(in.PageSize))
 
 	if err != nil {
-		logc.Errorf(l.ctx, "查询退货原因列表信息失败,参数：%+v,异常:%s", in, err.Error())
-		return nil, err
+		logc.Errorf(l.ctx, "查询退货原因详情失败,参数:%+v,异常:%s", in, err.Error())
+		return nil, errors.New("查询退货原因详情失败")
 	}
 
 	var list []*omsclient.OrderReturnReasonListData

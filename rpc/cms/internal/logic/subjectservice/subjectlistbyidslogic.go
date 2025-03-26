@@ -64,8 +64,6 @@ func (l *SubjectListByIdsLogic) SubjectListByIds(in *cmsclient.SubjectListByIdsR
 		})
 	}
 
-	logc.Infof(l.ctx, "查询专题列表信息,参数：%+v,响应：%+v", in, list)
-
 	return &cmsclient.QuerySubjectListResp{
 		Total: 0,
 		List:  list,

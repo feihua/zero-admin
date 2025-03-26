@@ -61,6 +61,5 @@ func (l *UpdateTopicCategoryLogic) UpdateTopicCategory(in *cmsclient.UpdateTopic
 		return nil, errors.New("更新话题分类失败")
 	}
 
-	logc.Infof(l.ctx, "更新话题分类成功,参数：%+v", in)
 	return &cmsclient.UpdateTopicCategoryResp{}, nil
 }

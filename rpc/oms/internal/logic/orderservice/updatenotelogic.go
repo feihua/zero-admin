@@ -2,8 +2,10 @@ package orderservicelogic
 
 import (
 	"context"
+	"errors"
 	"github.com/feihua/zero-admin/rpc/oms/gen/model"
 	"github.com/feihua/zero-admin/rpc/oms/gen/query"
+	"github.com/zeromicro/go-zero/core/logc"
 	"time"
 
 	"github.com/feihua/zero-admin/rpc/oms/internal/svc"
@@ -37,7 +39,8 @@ func (l *UpdateNoteLogic) UpdateNote(in *omsclient.UpdateNoteReq) (*omsclient.Up
 	q := query.OmsOrder
 	order, err := q.WithContext(l.ctx).Where(q.ID.Eq(in.OrderId)).First()
 	if err != nil {
-		return nil, err
+		logc.Errorf(l.ctx, "备注订单失败,参数:%+v,异常:%s", in, err.Error())
+		return nil, errors.New("备注订单失败")
 	}
 
 	order.Note = in.Note
@@ -60,7 +63,8 @@ func (l *UpdateNoteLogic) UpdateNote(in *omsclient.UpdateNoteReq) (*omsclient.Up
 		Note:        note,
 	})
 	if err != nil {
-		return nil, err
+		logc.Errorf(l.ctx, "备注订单失败,参数:%+v,异常:%s", in, err.Error())
+		return nil, errors.New("备注订单失败")
 	}
 
 	return &omsclient.UpdateNoteResp{}, nil

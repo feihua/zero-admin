@@ -77,8 +77,6 @@ func (l *QuerySubjectListLogic) QuerySubjectList(in *cmsclient.QuerySubjectListR
 		})
 	}
 
-	logc.Infof(l.ctx, "查询专题列表信息,参数：%+v,响应：%+v", in, list)
-
 	return &cmsclient.QuerySubjectListResp{
 		Total: count,
 		List:  list,

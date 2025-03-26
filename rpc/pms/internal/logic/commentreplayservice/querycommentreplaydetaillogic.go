@@ -49,6 +49,5 @@ func (l *QueryCommentReplayDetailLogic) QueryCommentReplayDetail(in *pmsclient.Q
 		Type:           item.Type,                            // 评论人员类型；0->会员；1->管理员
 	}
 
-	logc.Infof(l.ctx, "查询产品评价回复详情,参数：%+v,响应：%+v", in, data)
 	return data, nil
 }

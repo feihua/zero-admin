@@ -2,6 +2,7 @@ package orderitemservicelogic
 
 import (
 	"context"
+	"errors"
 	"github.com/feihua/zero-admin/rpc/oms/gen/query"
 	"github.com/zeromicro/go-zero/core/logc"
 
@@ -37,8 +38,8 @@ func (l *QueryOrderItemListLogic) QueryOrderItemList(in *omsclient.QueryOrderIte
 	result, count, err := q.FindByPage(int((in.PageNum-1)*in.PageSize), int(in.PageSize))
 
 	if err != nil {
-		logc.Errorf(l.ctx, "查询订单详情列表信息失败,参数：%+v,异常:%s", in, err.Error())
-		return nil, err
+		logc.Errorf(l.ctx, "查询订单中所包含的商品列表失败,参数:%+v,异常:%s", in, err.Error())
+		return nil, errors.New("查询订单中所包含的商品列表失败")
 	}
 
 	var list []*omsclient.OrderItemListData

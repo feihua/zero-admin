@@ -46,6 +46,5 @@ func (l *AddProductAttributeCategoryLogic) AddProductAttributeCategory(in *pmscl
 		return nil, errors.New("添加产品属性分类失败")
 	}
 
-	logc.Infof(l.ctx, "添加产品属性分类成功,参数：%+v", in)
 	return &pmsclient.AddProductAttributeCategoryResp{}, nil
 }

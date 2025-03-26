@@ -2,7 +2,9 @@ package skustockservicelogic
 
 import (
 	"context"
+	"errors"
 	"github.com/feihua/zero-admin/rpc/pms/gen/query"
+	"github.com/zeromicro/go-zero/core/logc"
 
 	"github.com/feihua/zero-admin/rpc/pms/internal/svc"
 	"github.com/feihua/zero-admin/rpc/pms/pmsclient"
@@ -34,7 +36,8 @@ func (l *QuerySkuStockByProductSkuIdLogic) QuerySkuStockByProductSkuId(in *pmscl
 	q := query.PmsSkuStock
 	item, err := q.WithContext(l.ctx).Where(q.ID.Eq(in.ProductSkuId)).First()
 	if err != nil {
-		return nil, err
+		logc.Errorf(l.ctx, "根据ProductSkuId查询sku失败,参数:%+v,异常:%s", in, err.Error())
+		return nil, errors.New("根据ProductSkuId查询sku失败")
 	}
 
 	return &pmsclient.SkuStockListData{

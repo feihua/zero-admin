@@ -2,6 +2,7 @@ package flashpromotionsessionservicelogic
 
 import (
 	"context"
+	"errors"
 	"github.com/feihua/zero-admin/pkg/time_util"
 	"github.com/feihua/zero-admin/rpc/sms/gen/query"
 	"github.com/zeromicro/go-zero/core/logc"
@@ -12,7 +13,7 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// QueryFlashPromotionSessionListLogic 查询限时购场次表列表
+// QueryFlashPromotionSessionListLogic 查询限时购场次列表
 /*
 Author: LiuFeiHua
 Date: 2024/6/12 17:49
@@ -31,15 +32,15 @@ func NewQueryFlashPromotionSessionListLogic(ctx context.Context, svcCtx *svc.Ser
 	}
 }
 
-// QueryFlashPromotionSessionList 查询限时购场次表列表
+// QueryFlashPromotionSessionList 查询限时购场次列表
 func (l *QueryFlashPromotionSessionListLogic) QueryFlashPromotionSessionList(in *smsclient.QueryFlashPromotionSessionListReq) (*smsclient.QueryFlashPromotionSessionListResp, error) {
 	q := query.SmsFlashPromotionSession.WithContext(l.ctx)
 
 	result, count, err := q.FindByPage(int((in.PageNum-1)*in.PageSize), int(in.PageSize))
 
 	if err != nil {
-		logc.Errorf(l.ctx, "查询限时购场次列表信息失败,参数：%+v,异常:%s", in, err.Error())
-		return nil, err
+		logc.Errorf(l.ctx, "查询限时购场次列表失败,参数:%+v,异常:%s", in, err.Error())
+		return nil, errors.New("查询限时购场次列表失败")
 	}
 
 	var list []*smsclient.FlashPromotionSessionListData

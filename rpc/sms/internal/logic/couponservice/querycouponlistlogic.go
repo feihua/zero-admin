@@ -2,6 +2,7 @@ package couponservicelogic
 
 import (
 	"context"
+	"errors"
 	"github.com/feihua/zero-admin/pkg/time_util"
 	"github.com/feihua/zero-admin/rpc/sms/gen/query"
 	"github.com/zeromicro/go-zero/core/logc"
@@ -60,8 +61,8 @@ func (l *QueryCouponListLogic) QueryCouponList(in *smsclient.QueryCouponListReq)
 	result, count, err := q.FindByPage(int((in.Current-1)*in.PageSize), int(in.PageSize))
 
 	if err != nil {
-		logc.Errorf(l.ctx, "查询优惠券列表信息失败,参数：%+v,异常:%s", in, err.Error())
-		return nil, err
+		logc.Errorf(l.ctx, "查询优惠券失败,参数:%+v,异常:%s", in, err.Error())
+		return nil, errors.New("查询优惠券失败")
 	}
 
 	var list []*smsclient.QueryCouponListData

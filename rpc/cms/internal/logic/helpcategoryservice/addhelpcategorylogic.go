@@ -49,6 +49,5 @@ func (l *AddHelpCategoryLogic) AddHelpCategory(in *cmsclient.AddHelpCategoryReq)
 		return nil, errors.New("添加帮助分类失败")
 	}
 
-	logc.Infof(l.ctx, "添加帮助分类成功,参数：%+v", in)
 	return &cmsclient.AddHelpCategoryResp{}, nil
 }

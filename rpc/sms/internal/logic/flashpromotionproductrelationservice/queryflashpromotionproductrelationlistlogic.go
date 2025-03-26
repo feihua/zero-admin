@@ -2,6 +2,7 @@ package flashpromotionproductrelationservicelogic
 
 import (
 	"context"
+	"errors"
 	"github.com/feihua/zero-admin/rpc/sms/gen/query"
 	"github.com/zeromicro/go-zero/core/logc"
 
@@ -11,7 +12,7 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// QueryFlashPromotionProductRelationListLogic 查询商品限时购与商品关系表列表
+// QueryFlashPromotionProductRelationListLogic 查询商品限时购与商品关系列表
 /*
 Author: LiuFeiHua
 Date: 2024/6/12 17:41
@@ -30,7 +31,7 @@ func NewQueryFlashPromotionProductRelationListLogic(ctx context.Context, svcCtx 
 	}
 }
 
-// QueryFlashPromotionProductRelationList 查询商品限时购与商品关系表列表
+// QueryFlashPromotionProductRelationList 查询商品限时购与商品关系列表
 func (l *QueryFlashPromotionProductRelationListLogic) QueryFlashPromotionProductRelationList(in *smsclient.QueryFlashPromotionProductRelationListReq) (*smsclient.QueryFlashPromotionProductRelationListResp, error) {
 	relation := query.SmsFlashPromotionProductRelation
 	q := relation.WithContext(l.ctx)
@@ -39,8 +40,8 @@ func (l *QueryFlashPromotionProductRelationListLogic) QueryFlashPromotionProduct
 	result, count, err := q.FindByPage(int((in.PageNum-1)*in.PageSize), int(in.PageSize))
 
 	if err != nil {
-		logc.Errorf(l.ctx, "查询限时购与产品关糸列表信息失败,参数：%+v,异常:%s", in, err.Error())
-		return nil, err
+		logc.Errorf(l.ctx, "查询商品限时购与商品关系列表失败,参数:%+v,异常:%s", in, err.Error())
+		return nil, errors.New("查询商品限时购与商品关系列表失败")
 	}
 
 	var list []*smsclient.FlashPromotionProductRelationListData

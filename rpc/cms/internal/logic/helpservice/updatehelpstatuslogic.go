@@ -40,6 +40,5 @@ func (l *UpdateHelpStatusLogic) UpdateHelpStatus(in *cmsclient.UpdateHelpStatusR
 		return nil, errors.New("更新帮助状态失败")
 	}
 
-	logc.Infof(l.ctx, "更新帮助状态成功,参数：%+v", in)
 	return &cmsclient.UpdateHelpStatusResp{}, nil
 }

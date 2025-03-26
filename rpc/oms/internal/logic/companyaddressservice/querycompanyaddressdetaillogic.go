@@ -12,7 +12,7 @@ import (
 	"gorm.io/gorm"
 )
 
-// QueryCompanyAddressDetailLogic 查询公司收发货地址表详情
+// QueryCompanyAddressDetailLogic 查询公司收发货地址详情
 /*
 Author: 刘飞华
 Date: 2025/02/06 13:53:02
@@ -31,7 +31,7 @@ func NewQueryCompanyAddressDetailLogic(ctx context.Context, svcCtx *svc.ServiceC
 	}
 }
 
-// QueryCompanyAddressDetail 查询公司收发货地址表详情
+// QueryCompanyAddressDetail 查询公司收发货地址详情
 func (l *QueryCompanyAddressDetailLogic) QueryCompanyAddressDetail(in *omsclient.QueryCompanyAddressDetailReq) (*omsclient.QueryCompanyAddressDetailResp, error) {
 	item, err := query.OmsCompanyAddress.WithContext(l.ctx).Where(query.OmsCompanyAddress.ID.Eq(in.Id)).First()
 
@@ -61,6 +61,5 @@ func (l *QueryCompanyAddressDetailLogic) QueryCompanyAddressDetail(in *omsclient
 
 	}
 
-	logc.Infof(l.ctx, "查询公司收发货地址表详情,参数：%+v,响应：%+v", in, data)
 	return data, nil
 }

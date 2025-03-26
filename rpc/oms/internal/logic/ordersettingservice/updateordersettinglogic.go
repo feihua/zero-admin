@@ -2,8 +2,10 @@ package ordersettingservicelogic
 
 import (
 	"context"
+	"errors"
 	"github.com/feihua/zero-admin/rpc/oms/gen/model"
 	"github.com/feihua/zero-admin/rpc/oms/gen/query"
+	"github.com/zeromicro/go-zero/core/logc"
 
 	"github.com/feihua/zero-admin/rpc/oms/internal/svc"
 	"github.com/feihua/zero-admin/rpc/oms/omsclient"
@@ -11,7 +13,7 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// UpdateOrderSettingLogic 更新订单设置表
+// UpdateOrderSettingLogic 更新订单设置
 /*
 Author: LiuFeiHua
 Date: 2024/6/12 9:40
@@ -30,7 +32,7 @@ func NewUpdateOrderSettingLogic(ctx context.Context, svcCtx *svc.ServiceContext)
 	}
 }
 
-// UpdateOrderSetting 更新订单设置表
+// UpdateOrderSetting 更新订单设置
 func (l *UpdateOrderSettingLogic) UpdateOrderSetting(in *omsclient.UpdateOrderSettingReq) (*omsclient.UpdateOrderSettingResp, error) {
 	q := query.OmsOrderSetting
 	var item = &model.OmsOrderSetting{
@@ -47,7 +49,8 @@ func (l *UpdateOrderSettingLogic) UpdateOrderSetting(in *omsclient.UpdateOrderSe
 	err := l.svcCtx.DB.Model(&model.OmsOrderSetting{}).WithContext(l.ctx).Where(q.ID.Eq(in.Id)).Save(item).Error
 
 	if err != nil {
-		return nil, err
+		logc.Errorf(l.ctx, "更新订单设置失败,参数:%+v,异常:%s", in, err.Error())
+		return nil, errors.New("更新订单设置失败")
 	}
 
 	return &omsclient.UpdateOrderSettingResp{}, nil

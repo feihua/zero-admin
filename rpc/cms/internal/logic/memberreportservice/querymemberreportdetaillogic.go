@@ -3,6 +3,7 @@ package memberreportservicelogic
 import (
 	"context"
 	"errors"
+	"github.com/feihua/zero-admin/pkg/time_util"
 	"github.com/feihua/zero-admin/rpc/cms/cmsclient"
 	"github.com/feihua/zero-admin/rpc/cms/gen/query"
 	"github.com/feihua/zero-admin/rpc/cms/internal/svc"
@@ -49,6 +50,5 @@ func (l *QueryMemberReportDetailLogic) QueryMemberReportDetail(in *cmsclient.Que
 		CreateTime:       time_util.TimeToStr(item.CreateTime), // 创建时间
 	}
 
-	logc.Infof(l.ctx, "查询用户举报详情,参数：%+v,响应：%+v", in, data)
 	return data, nil
 }

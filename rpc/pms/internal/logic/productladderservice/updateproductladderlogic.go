@@ -2,8 +2,10 @@ package productladderservicelogic
 
 import (
 	"context"
+	"errors"
 	"github.com/feihua/zero-admin/rpc/pms/gen/model"
 	"github.com/feihua/zero-admin/rpc/pms/gen/query"
+	"github.com/zeromicro/go-zero/core/logc"
 
 	"github.com/feihua/zero-admin/rpc/pms/internal/svc"
 	"github.com/feihua/zero-admin/rpc/pms/pmsclient"
@@ -11,7 +13,7 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// UpdateProductLadderLogic 更新产品阶梯价格表(只针对同商品)
+// UpdateProductLadderLogic 更新产品阶梯价格(只针对同商品)
 /*
 Author: LiuFeiHua
 Date: 2024/6/12 17:08
@@ -30,7 +32,7 @@ func NewUpdateProductLadderLogic(ctx context.Context, svcCtx *svc.ServiceContext
 	}
 }
 
-// UpdateProductLadder 更新产品阶梯价格表(只针对同商品)
+// UpdateProductLadder 更新产品阶梯价格(只针对同商品)
 func (l *UpdateProductLadderLogic) UpdateProductLadder(in *pmsclient.UpdateProductLadderReq) (*pmsclient.UpdateProductLadderResp, error) {
 	q := query.PmsProductLadder
 	_, err := q.WithContext(l.ctx).Updates(&model.PmsProductLadder{
@@ -42,7 +44,8 @@ func (l *UpdateProductLadderLogic) UpdateProductLadder(in *pmsclient.UpdateProdu
 	})
 
 	if err != nil {
-		return nil, err
+		logc.Errorf(l.ctx, "更新产品阶梯价格失败,参数:%+v,异常:%s", in, err.Error())
+		return nil, errors.New("更新产品阶梯价格失败")
 	}
 
 	return &pmsclient.UpdateProductLadderResp{}, nil

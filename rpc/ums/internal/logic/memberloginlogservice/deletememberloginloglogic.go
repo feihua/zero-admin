@@ -2,7 +2,9 @@ package memberloginlogservicelogic
 
 import (
 	"context"
+	"errors"
 	"github.com/feihua/zero-admin/rpc/ums/gen/query"
+	"github.com/zeromicro/go-zero/core/logc"
 
 	"github.com/feihua/zero-admin/rpc/ums/internal/svc"
 	"github.com/feihua/zero-admin/rpc/ums/umsclient"
@@ -34,7 +36,8 @@ func (l *DeleteMemberLoginLogLogic) DeleteMemberLoginLog(in *umsclient.DeleteMem
 	q := query.UmsMemberLoginLog
 	_, err := q.WithContext(l.ctx).Where(q.ID.In(in.Ids...)).Delete()
 	if err != nil {
-		return nil, err
+		logc.Errorf(l.ctx, "删除会员登录记录失败,参数:%+v,异常:%s", in, err.Error())
+		return nil, errors.New("删除会员登录记录失败")
 	}
 
 	return &umsclient.DeleteMemberLoginLogResp{}, nil

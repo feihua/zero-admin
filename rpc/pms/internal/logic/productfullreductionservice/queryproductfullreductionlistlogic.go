@@ -2,6 +2,7 @@ package productfullreductionservicelogic
 
 import (
 	"context"
+	"errors"
 	"github.com/feihua/zero-admin/rpc/pms/gen/query"
 	"github.com/zeromicro/go-zero/core/logc"
 
@@ -35,8 +36,8 @@ func (l *QueryProductFullReductionListLogic) QueryProductFullReductionList(in *p
 	result, err := query.PmsProductFullReduction.WithContext(l.ctx).Where(query.PmsProductFullReduction.ProductID.Eq(in.ProductId)).Find()
 
 	if err != nil {
-		logc.Errorf(l.ctx, "查询产品满减列表信息失败,参数：%+v,异常:%s", in, err.Error())
-		return nil, err
+		logc.Errorf(l.ctx, "查询产品满减表失败,参数:%+v,异常:%s", in, err.Error())
+		return nil, errors.New("查询产品满减表失败")
 	}
 
 	var list []*pmsclient.ProductFullReductionListData

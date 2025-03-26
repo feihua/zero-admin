@@ -2,6 +2,7 @@ package homeadvertiseservicelogic
 
 import (
 	"context"
+	"errors"
 	"github.com/feihua/zero-admin/rpc/sms/gen/query"
 	"github.com/zeromicro/go-zero/core/logc"
 	"time"
@@ -12,7 +13,7 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// QueryHomeAdvertiseListLogic 查询首页轮播广告表列表
+// QueryHomeAdvertiseListLogic 查询首页轮播广告列表
 /*
 Author: LiuFeiHua
 Date: 2024/6/12 17:51
@@ -31,7 +32,7 @@ func NewQueryHomeAdvertiseListLogic(ctx context.Context, svcCtx *svc.ServiceCont
 	}
 }
 
-// QueryHomeAdvertiseList 查询首页轮播广告表列表
+// QueryHomeAdvertiseList 查询首页轮播广告列表
 func (l *QueryHomeAdvertiseListLogic) QueryHomeAdvertiseList(in *smsclient.QueryHomeAdvertiseListReq) (*smsclient.QueryHomeAdvertiseListResp, error) {
 	q := query.SmsHomeAdvertise.WithContext(l.ctx)
 	if len(in.Name) > 0 {
@@ -56,8 +57,8 @@ func (l *QueryHomeAdvertiseListLogic) QueryHomeAdvertiseList(in *smsclient.Query
 	result, count, err := q.FindByPage(int((in.PageNum-1)*in.PageSize), int(in.PageSize))
 
 	if err != nil {
-		logc.Errorf(l.ctx, "查询首页广告列表信息失败,参数：%+v,异常:%s", in, err.Error())
-		return nil, err
+		logc.Errorf(l.ctx, "查询首页轮播广告列表失败,参数:%+v,异常:%s", in, err.Error())
+		return nil, errors.New("查询首页轮播广告列表失败")
 	}
 
 	var list []*smsclient.HomeAdvertiseListData

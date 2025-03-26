@@ -61,6 +61,5 @@ func (l *UpdateMemberTaskLogic) UpdateMemberTask(in *umsclient.UpdateMemberTaskR
 		return nil, errors.New("更新会员任务失败")
 	}
 
-	logc.Infof(l.ctx, "更新会员任务成功,参数：%+v", in)
 	return &umsclient.UpdateMemberTaskResp{}, nil
 }

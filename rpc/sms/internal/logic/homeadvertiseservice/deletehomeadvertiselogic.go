@@ -2,7 +2,9 @@ package homeadvertiseservicelogic
 
 import (
 	"context"
+	"errors"
 	"github.com/feihua/zero-admin/rpc/sms/gen/query"
+	"github.com/zeromicro/go-zero/core/logc"
 
 	"github.com/feihua/zero-admin/rpc/sms/internal/svc"
 	"github.com/feihua/zero-admin/rpc/sms/smsclient"
@@ -10,7 +12,7 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// DeleteHomeAdvertiseLogic 删除首页轮播广告表
+// DeleteHomeAdvertiseLogic 删除首页轮播广告
 /*
 Author: LiuFeiHua
 Date: 2024/6/12 17:51
@@ -29,13 +31,14 @@ func NewDeleteHomeAdvertiseLogic(ctx context.Context, svcCtx *svc.ServiceContext
 	}
 }
 
-// DeleteHomeAdvertise 删除首页轮播广告表
+// DeleteHomeAdvertise 删除首页轮播广告
 func (l *DeleteHomeAdvertiseLogic) DeleteHomeAdvertise(in *smsclient.DeleteHomeAdvertiseReq) (*smsclient.DeleteHomeAdvertiseResp, error) {
 	q := query.SmsHomeAdvertise
 	_, err := q.WithContext(l.ctx).Where(q.ID.In(in.Ids...)).Delete()
 
 	if err != nil {
-		return nil, err
+		logc.Errorf(l.ctx, "删除首页轮播广告失败,参数:%+v,异常:%s", in, err.Error())
+		return nil, errors.New("删除首页轮播广告失败")
 	}
 
 	return &smsclient.DeleteHomeAdvertiseResp{}, nil

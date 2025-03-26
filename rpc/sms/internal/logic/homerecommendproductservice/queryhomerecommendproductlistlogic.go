@@ -2,6 +2,7 @@ package homerecommendproductservicelogic
 
 import (
 	"context"
+	"errors"
 	"github.com/feihua/zero-admin/rpc/sms/gen/query"
 	"github.com/zeromicro/go-zero/core/logc"
 
@@ -11,7 +12,7 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// QueryHomeRecommendProductListLogic 查询人气推荐商品表列表
+// QueryHomeRecommendProductListLogic 查询人气推荐商品列表
 /*
 Author: LiuFeiHua
 Date: 2024/6/12 17:56
@@ -30,7 +31,7 @@ func NewQueryHomeRecommendProductListLogic(ctx context.Context, svcCtx *svc.Serv
 	}
 }
 
-// QueryHomeRecommendProductList 查询人气推荐商品表列表
+// QueryHomeRecommendProductList 查询人气推荐商品列表
 func (l *QueryHomeRecommendProductListLogic) QueryHomeRecommendProductList(in *smsclient.QueryHomeRecommendProductListReq) (*smsclient.QueryHomeRecommendProductListResp, error) {
 	q := query.SmsHomeRecommendProduct.WithContext(l.ctx)
 	if len(in.ProductName) > 0 {
@@ -44,8 +45,8 @@ func (l *QueryHomeRecommendProductListLogic) QueryHomeRecommendProductList(in *s
 	result, count, err := q.FindByPage(int((in.PageNum-1)*in.PageSize), int(in.PageSize))
 
 	if err != nil {
-		logc.Errorf(l.ctx, "查询人气商品推荐列表信息失败,参数：%+v,异常:%s", in, err.Error())
-		return nil, err
+		logc.Errorf(l.ctx, "查询人气推荐商品列表失败,参数:%+v,异常:%s", in, err.Error())
+		return nil, errors.New("查询人气推荐商品列表失败")
 	}
 
 	var list []*smsclient.HomeRecommendProductListData

@@ -40,6 +40,5 @@ func (l *DeleteSubjectCommentLogic) DeleteSubjectComment(in *cmsclient.DeleteSub
 		return nil, errors.New("删除专题评论失败")
 	}
 
-	logc.Infof(l.ctx, "删除专题评论成功,参数：%+v", in)
 	return &cmsclient.DeleteSubjectCommentResp{}, nil
 }

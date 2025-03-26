@@ -49,6 +49,5 @@ func (l *AddMemberTaskLogic) AddMemberTask(in *umsclient.AddMemberTaskReq) (*ums
 		return nil, errors.New("添加会员任务失败")
 	}
 
-	logc.Infof(l.ctx, "添加会员任务成功,参数：%+v", in)
 	return &umsclient.AddMemberTaskResp{}, nil
 }

@@ -2,10 +2,12 @@ package orderreturnapplyservicelogic
 
 import (
 	"context"
+	"errors"
 	"github.com/feihua/zero-admin/rpc/oms/gen/model"
 	"github.com/feihua/zero-admin/rpc/oms/gen/query"
 	"github.com/feihua/zero-admin/rpc/oms/internal/svc"
 	"github.com/feihua/zero-admin/rpc/oms/omsclient"
+	"github.com/zeromicro/go-zero/core/logc"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -52,7 +54,8 @@ func (l *AddOrderReturnApplyLogic) AddOrderReturnApply(in *omsclient.AddOrderRet
 	})
 
 	if err != nil {
-		return nil, err
+		logc.Errorf(l.ctx, "添加订单退货申请失败,参数:%+v,异常:%s", in, err.Error())
+		return nil, errors.New("添加订单退货申请失败")
 	}
 
 	return &omsclient.AddOrderReturnApplyResp{}, nil

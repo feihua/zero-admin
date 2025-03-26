@@ -13,7 +13,7 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// UpdateCompanyAddressReceiveStatusLogic 更新公司收发货地址表状态
+// UpdateCompanyAddressReceiveStatusLogic 更新公司收发货地址状态
 /*
 Author: LiuFeiHua
 Date: 2024/6/15 11:34
@@ -32,7 +32,7 @@ func NewUpdateCompanyAddressReceiveStatusLogic(ctx context.Context, svcCtx *svc.
 	}
 }
 
-// UpdateCompanyAddressReceiveStatus 更新公司收发货地址表状态
+// UpdateCompanyAddressReceiveStatus 更新公司收发货地址状态
 func (l *UpdateCompanyAddressReceiveStatusLogic) UpdateCompanyAddressReceiveStatus(in *omsclient.UpdateCompanyAddressReceiveStatusReq) (*omsclient.UpdateCompanyAddressStatusResp, error) {
 	err := query.Q.Transaction(func(tx *query.Query) error {
 		q := tx.OmsCompanyAddress

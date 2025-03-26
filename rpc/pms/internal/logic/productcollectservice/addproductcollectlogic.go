@@ -47,6 +47,5 @@ func (l *AddProductCollectLogic) AddProductCollect(in *pmsclient.AddProductColle
 		return nil, errors.New("添加收藏失败")
 	}
 
-	logc.Infof(l.ctx, "添加收藏成功,参数：%+v", in)
 	return &pmsclient.AddProductCollectResp{}, nil
 }

@@ -57,8 +57,6 @@ func (l *QueryMemberTagListLogic) QueryMemberTagList(in *umsclient.QueryMemberTa
 		})
 	}
 
-	logc.Infof(l.ctx, "查询用户标签列表信息,参数：%+v,响应：%+v", in, list)
-
 	return &umsclient.QueryMemberTagListResp{
 		Total: count,
 		List:  list,

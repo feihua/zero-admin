@@ -2,7 +2,9 @@ package couponhistoryservicelogic
 
 import (
 	"context"
+	"errors"
 	"github.com/feihua/zero-admin/rpc/sms/gen/query"
+	"github.com/zeromicro/go-zero/core/logc"
 
 	"github.com/feihua/zero-admin/rpc/sms/internal/svc"
 	"github.com/feihua/zero-admin/rpc/sms/smsclient"
@@ -32,8 +34,12 @@ func NewQueryCouponCountLogic(ctx context.Context, svcCtx *svc.ServiceContext) *
 // QueryCouponCount 登录时获取用户还没有使用的获取优惠券数量
 func (l *QueryCouponCountLogic) QueryCouponCount(in *smsclient.QueryCouponCountReq) (*smsclient.QueryCouponCountResp, error) {
 	q := query.SmsCouponHistory
-	count, _ := q.WithContext(l.ctx).Where(q.MemberID.Eq(in.MemberId)).Count()
+	count, err := q.WithContext(l.ctx).Where(q.MemberID.Eq(in.MemberId)).Count()
 
+	if err != nil {
+		logc.Errorf(l.ctx, "登录时获取用户还没有使用的获取优惠券数量失败,参数:%+v,异常:%s", in, err.Error())
+		return nil, errors.New("登录时获取用户还没有使用的获取优惠券数量失败")
+	}
 	return &smsclient.QueryCouponCountResp{
 		Total: count,
 	}, nil

@@ -2,8 +2,10 @@ package skustockservicelogic
 
 import (
 	"context"
+	"errors"
 	"github.com/feihua/zero-admin/rpc/pms/gen/model"
 	"github.com/feihua/zero-admin/rpc/pms/gen/query"
+	"github.com/zeromicro/go-zero/core/logc"
 
 	"github.com/feihua/zero-admin/rpc/pms/internal/svc"
 	"github.com/feihua/zero-admin/rpc/pms/pmsclient"
@@ -54,14 +56,16 @@ func (l *UpdateSkuStockLogic) UpdateSkuStock(in *pmsclient.UpdateSkuStockReq) (*
 	// 1.先删除
 	_, err := q.WithContext(l.ctx).Where(q.ID.In(skuIds...)).Delete()
 	if err != nil {
-		return nil, err
+		logc.Errorf(l.ctx, "更新sku的库存失败,参数:%+v,异常:%s", in, err.Error())
+		return nil, errors.New("更新sku的库存失败")
 	}
 
 	// 2.后添加
 	err = q.WithContext(l.ctx).CreateInBatches(skuStockList, len(skuStockList))
 
 	if err != nil {
-		return nil, err
+		logc.Errorf(l.ctx, "更新sku的库存失败,参数:%+v,异常:%s", in, err.Error())
+		return nil, errors.New("更新sku的库存失败")
 	}
 
 	return &pmsclient.UpdateSkuStockResp{}, nil

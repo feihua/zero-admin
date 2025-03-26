@@ -2,6 +2,7 @@ package productservicelogic
 
 import (
 	"context"
+	"errors"
 	"github.com/feihua/zero-admin/pkg/time_util"
 	"github.com/feihua/zero-admin/rpc/pms/gen/query"
 	"github.com/zeromicro/go-zero/core/logc"
@@ -12,6 +13,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// QueryProductListByIdsLogic 查询商品列表
+/*
+Author: LiuFeiHua
+Date: 2025/3/26 16:36
+*/
 type QueryProductListByIdsLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
@@ -26,13 +32,14 @@ func NewQueryProductListByIdsLogic(ctx context.Context, svcCtx *svc.ServiceConte
 	}
 }
 
+// QueryProductListByIds 查询商品列表
 func (l *QueryProductListByIdsLogic) QueryProductListByIds(in *pmsclient.QueryProductByIdsReq) (*pmsclient.QueryProductListResp, error) {
 	q := query.PmsProduct
 	result, err := q.WithContext(l.ctx).Where(q.ID.In(in.Ids...)).Find()
 
 	if err != nil {
-		logc.Errorf(l.ctx, "查询商品列表信息失败,参数：%+v,异常:%s", in, err.Error())
-		return nil, err
+		logc.Errorf(l.ctx, "查询商品列表失败,参数:%+v,异常:%s", in, err.Error())
+		return nil, errors.New("查询商品列表失败")
 	}
 
 	var list []*pmsclient.ProductListData
@@ -85,7 +92,6 @@ func (l *QueryProductListByIdsLogic) QueryProductListByIds(in *pmsclient.QueryPr
 		})
 	}
 
-	logc.Infof(l.ctx, "查询商品列表信息,参数：%+v,响应：%+v", in, list)
 	return &pmsclient.QueryProductListResp{
 		Total: 0,
 		List:  list,

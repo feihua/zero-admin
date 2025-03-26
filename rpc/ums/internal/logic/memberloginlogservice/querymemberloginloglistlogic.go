@@ -2,6 +2,7 @@ package memberloginlogservicelogic
 
 import (
 	"context"
+	"errors"
 	"github.com/feihua/zero-admin/pkg/time_util"
 	"github.com/feihua/zero-admin/rpc/ums/gen/query"
 	"github.com/zeromicro/go-zero/core/logc"
@@ -39,8 +40,8 @@ func (l *QueryMemberLoginLogListLogic) QueryMemberLoginLogList(in *umsclient.Que
 	result, count, err := q.FindByPage(int((in.PageNum-1)*in.PageSize), int(in.PageSize))
 
 	if err != nil {
-		logc.Errorf(l.ctx, "查询会员登录记录列表信息失败,参数:%+v,异常:%s", in, err.Error())
-		return nil, err
+		logc.Errorf(l.ctx, "查询会员登录记录列表失败,参数:%+v,异常:%s", in, err.Error())
+		return nil, errors.New("查询会员登录记录列表失败")
 	}
 
 	var list []*umsclient.MemberLoginLogListData
@@ -56,7 +57,6 @@ func (l *QueryMemberLoginLogListLogic) QueryMemberLoginLogList(in *umsclient.Que
 		})
 	}
 
-	logc.Infof(l.ctx, "查询会员登录记录列表信息,参数：%+v,响应：%+v", in, list)
 	return &umsclient.QueryMemberLoginLogListResp{
 		Total: count,
 		List:  list,

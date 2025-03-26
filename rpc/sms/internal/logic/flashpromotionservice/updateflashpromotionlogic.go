@@ -73,7 +73,8 @@ func (l *UpdateFlashPromotionLogic) UpdateFlashPromotion(in *smsclient.UpdateFla
 	}).Error
 
 	if err != nil {
-		return nil, err
+		logc.Errorf(l.ctx, "更新限时购表失败,参数:%+v,异常:%s", in, err.Error())
+		return nil, errors.New("更新限时购表失败")
 	}
 
 	return &smsclient.UpdateFlashPromotionResp{}, nil

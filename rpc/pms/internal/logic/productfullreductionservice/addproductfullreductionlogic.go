@@ -2,8 +2,10 @@ package productfullreductionservicelogic
 
 import (
 	"context"
+	"errors"
 	"github.com/feihua/zero-admin/rpc/pms/gen/model"
 	"github.com/feihua/zero-admin/rpc/pms/gen/query"
+	"github.com/zeromicro/go-zero/core/logc"
 
 	"github.com/feihua/zero-admin/rpc/pms/internal/svc"
 	"github.com/feihua/zero-admin/rpc/pms/pmsclient"
@@ -39,7 +41,8 @@ func (l *AddProductFullReductionLogic) AddProductFullReduction(in *pmsclient.Add
 	})
 
 	if err != nil {
-		return nil, err
+		logc.Errorf(l.ctx, "添加产品满减表失败,参数:%+v,异常:%s", in, err.Error())
+		return nil, errors.New("添加产品满减表失败")
 	}
 
 	return &pmsclient.AddProductFullReductionResp{}, nil

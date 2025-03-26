@@ -2,6 +2,7 @@ package brandservicelogic
 
 import (
 	"context"
+	"errors"
 	"github.com/feihua/zero-admin/pkg/time_util"
 	"github.com/feihua/zero-admin/rpc/pms/gen/query"
 	"github.com/zeromicro/go-zero/core/logc"
@@ -36,8 +37,8 @@ func (l *QueryBrandListByIdsLogic) QueryBrandListByIds(in *pmsclient.QueryBrandL
 	result, err := query.PmsBrand.WithContext(l.ctx).Where(query.PmsBrand.ID.In(in.Ids...)).Find()
 
 	if err != nil {
-		logc.Errorf(l.ctx, "查询商品品牌列表信息失败,参数：%+v,异常:%s", in, err.Error())
-		return nil, err
+		logc.Errorf(l.ctx, "根据ids查询品牌信息失败,参数:%+v,异常:%s", in, err.Error())
+		return nil, errors.New("根据ids查询品牌信息失败")
 	}
 
 	var list []*pmsclient.BrandListData

@@ -2,6 +2,7 @@ package preferredareaproductrelationservicelogic
 
 import (
 	"context"
+	"errors"
 	"github.com/feihua/zero-admin/rpc/cms/gen/query"
 	"github.com/zeromicro/go-zero/core/logc"
 
@@ -11,7 +12,7 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// QueryPreferredAreaProductRelationListLogic 查询优选专区和产品关系表列表
+// QueryPreferredAreaProductRelationListLogic 查询优选专区和产品关系列表
 /*
 Author: LiuFeiHua
 Date: 2024/6/11 16:40
@@ -30,15 +31,15 @@ func NewQueryPreferredAreaProductRelationListLogic(ctx context.Context, svcCtx *
 	}
 }
 
-// QueryPreferredAreaProductRelationList 查询优选专区和产品关系表列表
+// QueryPreferredAreaProductRelationList 查询优选专区和产品关系列表
 func (l *QueryPreferredAreaProductRelationListLogic) QueryPreferredAreaProductRelationList(in *cmsclient.QueryPreferredAreaProductRelationListReq) (*cmsclient.QueryPreferredAreaProductRelationListResp, error) {
 	var ids []int64
 	q := query.CmsPreferredAreaProductRelation
 	err := q.WithContext(l.ctx).Select(q.PreferredAreaID).Where(q.ProductID.Eq(in.ProductId)).Scan(&ids)
 
 	if err != nil {
-		logc.Errorf(l.ctx, "查询关联优选列表信息失败,参数:%+v,异常:%s", in, err.Error())
-		return nil, err
+		logc.Errorf(l.ctx, "查询优选专区和产品关系列表失败,参数:%+v,异常:%s", in, err.Error())
+		return nil, errors.New("查询优选专区和产品关系列表失败")
 	}
 
 	return &cmsclient.QueryPreferredAreaProductRelationListResp{

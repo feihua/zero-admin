@@ -48,6 +48,5 @@ func (l *QueryFlashPromotionDetailLogic) QueryFlashPromotionDetail(in *smsclient
 		CreateTime: time_util.TimeToStr(item.CreateTime), // 创建时间
 	}
 
-	logc.Infof(l.ctx, "查询限时购详情,参数：%+v,响应：%+v", in, data)
 	return data, nil
 }

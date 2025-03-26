@@ -2,6 +2,7 @@ package flashpromotionlogservicelogic
 
 import (
 	"context"
+	"errors"
 	"github.com/feihua/zero-admin/rpc/sms/gen/query"
 	"github.com/zeromicro/go-zero/core/logc"
 
@@ -37,8 +38,8 @@ func (l *QueryFlashPromotionLogListLogic) QueryFlashPromotionLogList(in *smsclie
 	result, count, err := q.FindByPage(int((in.PageNum-1)*in.PageSize), int(in.PageSize))
 
 	if err != nil {
-		logc.Errorf(l.ctx, "查询限时购通知记录列表信息失败,参数：%+v,异常:%s", in, err.Error())
-		return nil, err
+		logc.Errorf(l.ctx, "查询限时购通知记录列表失败,参数:%+v,异常:%s", in, err.Error())
+		return nil, errors.New("查询限时购通知记录列表失败")
 	}
 
 	var list []*smsclient.FlashPromotionLogListData
@@ -55,7 +56,6 @@ func (l *QueryFlashPromotionLogListLogic) QueryFlashPromotionLogList(in *smsclie
 		})
 	}
 
-	logc.Infof(l.ctx, "查询限时购通知记录列表信息,参数：%+v,响应：%+v", in, list)
 	return &smsclient.QueryFlashPromotionLogListResp{
 		Total: count,
 		List:  list,

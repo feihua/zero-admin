@@ -11,7 +11,7 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// AddHomeRecommendSubjectLogic 添加首页推荐专题表
+// AddHomeRecommendSubjectLogic 添加首页推荐专题
 /*
 Author: LiuFeiHua
 Date: 2024/6/12 11:30
@@ -30,7 +30,7 @@ func NewAddHomeRecommendSubjectLogic(ctx context.Context, svcCtx *svc.ServiceCon
 	}
 }
 
-// AddHomeRecommendSubject 添加首页推荐专题表
+// AddHomeRecommendSubject 添加首页推荐专题
 func (l *AddHomeRecommendSubjectLogic) AddHomeRecommendSubject(in *smsclient.AddHomeRecommendSubjectReq) (*smsclient.AddHomeRecommendSubjectResp, error) {
 	for _, data := range in.RecommendSubjectAddData {
 		q := query.SmsHomeRecommendSubject

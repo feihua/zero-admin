@@ -70,8 +70,6 @@ func (l *QueryMemberTaskListLogic) QueryMemberTaskList(in *umsclient.QueryMember
 		})
 	}
 
-	logc.Infof(l.ctx, "查询会员任务列表信息,参数：%+v,响应：%+v", in, list)
-
 	return &umsclient.QueryMemberTaskListResp{
 		Total: count,
 		List:  list,

@@ -2,6 +2,7 @@ package orderservicelogic
 
 import (
 	"context"
+	"errors"
 	"github.com/feihua/zero-admin/pkg/time_util"
 	"github.com/feihua/zero-admin/rpc/oms/gen/query"
 	"github.com/feihua/zero-admin/rpc/oms/internal/svc"
@@ -31,8 +32,8 @@ func (l *OrderListByMemberIdLogic) OrderListByMemberId(in *omsclient.OrderListBy
 	item, err := q.WithContext(l.ctx).Where(q.ID.Eq(in.Id), q.MemberID.Eq(in.MemberId)).First()
 
 	if err != nil {
-		logc.Errorf(l.ctx, "查询订单列表信息失败,参数：%+v,异常:%s", in, err.Error())
-		return nil, err
+		logc.Errorf(l.ctx, "查询订单列表失败,参数:%+v,异常:%s", in, err.Error())
+		return nil, errors.New("查询订单列表失败")
 	}
 
 	data := &omsclient.OrderListData{
@@ -83,7 +84,6 @@ func (l *OrderListByMemberIdLogic) OrderListByMemberId(in *omsclient.OrderListBy
 		ItemListData:          queryOrderItemsById(l, item.ID),
 	}
 
-	logc.Infof(l.ctx, "查询订单列表信息,参数：%+v,响应：%+v", in, data)
 	return &omsclient.OrderListByMemberIdResp{
 		Total: 0,
 		Data:  data,

@@ -2,6 +2,7 @@ package brandservicelogic
 
 import (
 	"context"
+	"errors"
 	"github.com/feihua/zero-admin/pkg/time_util"
 	"github.com/feihua/zero-admin/rpc/pms/gen/query"
 	"github.com/zeromicro/go-zero/core/logc"
@@ -26,7 +27,7 @@ func NewQueryBrandListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Qu
 	}
 }
 
-// 查询品牌表列表
+// QueryBrandList 查询品牌列表
 func (l *QueryBrandListLogic) QueryBrandList(in *pmsclient.QueryBrandListReq) (*pmsclient.QueryBrandListResp, error) {
 	q := query.PmsBrand.WithContext(l.ctx)
 	if len(in.Name) > 0 {
@@ -45,8 +46,8 @@ func (l *QueryBrandListLogic) QueryBrandList(in *pmsclient.QueryBrandListReq) (*
 	result, count, err := q.FindByPage(int((in.PageNum-1)*in.PageSize), int(in.PageSize))
 
 	if err != nil {
-		logc.Errorf(l.ctx, "查询商品品牌列表信息失败,参数：%+v,异常:%s", in, err.Error())
-		return nil, err
+		logc.Errorf(l.ctx, "查询品牌列表失败,参数:%+v,异常:%s", in, err.Error())
+		return nil, errors.New("查询品牌列表失败")
 	}
 
 	var list []*pmsclient.BrandListData

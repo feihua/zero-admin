@@ -2,8 +2,10 @@ package productservicelogic
 
 import (
 	"context"
+	"errors"
 	"github.com/feihua/zero-admin/rpc/pms/gen/model"
 	"github.com/feihua/zero-admin/rpc/pms/gen/query"
+	"github.com/zeromicro/go-zero/core/logc"
 	"math/rand"
 	"strconv"
 	"time"
@@ -95,7 +97,8 @@ func (l *UpdateProductLogic) UpdateProduct(in *pmsclient.UpdateProductReq) (*pms
 	})
 
 	if err != nil {
-		return nil, err
+		logc.Errorf(l.ctx, "更新商品失败,参数:%+v,异常:%s", in, err.Error())
+		return nil, errors.New("更新商品失败")
 	}
 
 	// 根据促销类型设置价格：会员价格、阶梯价格、满减价格

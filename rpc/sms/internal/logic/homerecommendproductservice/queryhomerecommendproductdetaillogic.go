@@ -23,7 +23,7 @@ func NewQueryHomeRecommendProductDetailLogic(ctx context.Context, svcCtx *svc.Se
 	}
 }
 
-// 查询人气推荐商品表详情
+// 查询人气推荐商品详情
 func (l *QueryHomeRecommendProductDetailLogic) QueryHomeRecommendProductDetail(in *smsclient.QueryHomeRecommendProductDetailReq) (*smsclient.QueryHomeRecommendProductDetailResp, error) {
 	// todo: add your logic here and delete this line
 

@@ -2,8 +2,10 @@ package productservicelogic
 
 import (
 	"context"
+	"errors"
 	"github.com/feihua/zero-admin/rpc/pms/gen/model"
 	"github.com/feihua/zero-admin/rpc/pms/gen/query"
+	"github.com/zeromicro/go-zero/core/logc"
 	"math/rand"
 	"strconv"
 	"time"
@@ -100,7 +102,8 @@ func (l *AddProductLogic) AddProduct(in *pmsclient.AddProductReq) (*pmsclient.Ad
 	err := query.PmsProduct.WithContext(l.ctx).Create(&product)
 
 	if err != nil {
-		return nil, err
+		logc.Errorf(l.ctx, "添加商品失败,参数:%+v,异常:%s", in, err.Error())
+		return nil, errors.New("添加商品失败")
 	}
 
 	productId := product.ID

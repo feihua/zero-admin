@@ -2,8 +2,10 @@ package memberrulesettingservicelogic
 
 import (
 	"context"
+	"errors"
 	"github.com/feihua/zero-admin/rpc/ums/gen/model"
 	"github.com/feihua/zero-admin/rpc/ums/gen/query"
+	"github.com/zeromicro/go-zero/core/logc"
 
 	"github.com/feihua/zero-admin/rpc/ums/internal/svc"
 	"github.com/feihua/zero-admin/rpc/ums/umsclient"
@@ -11,7 +13,7 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// UpdateMemberRuleSettingLogic 更新会员积分成长规则表
+// UpdateMemberRuleSettingLogic 更新会员积分成长规则
 /*
 Author: LiuFeiHua
 Date: 2024/6/11 14:02
@@ -30,7 +32,7 @@ func NewUpdateMemberRuleSettingLogic(ctx context.Context, svcCtx *svc.ServiceCon
 	}
 }
 
-// UpdateMemberRuleSetting 更新会员积分成长规则表
+// UpdateMemberRuleSetting 更新会员积分成长规则
 func (l *UpdateMemberRuleSettingLogic) UpdateMemberRuleSetting(in *umsclient.UpdateMemberRuleSettingReq) (*umsclient.UpdateMemberRuleSettingResp, error) {
 	_, err := query.UmsMemberRuleSetting.WithContext(l.ctx).Updates(&model.UmsMemberRuleSetting{
 		ID:                in.Id,
@@ -45,7 +47,8 @@ func (l *UpdateMemberRuleSettingLogic) UpdateMemberRuleSetting(in *umsclient.Upd
 	})
 
 	if err != nil {
-		return nil, err
+		logc.Errorf(l.ctx, "更新会员积分成长规则失败,参数:%+v,异常:%s", in, err.Error())
+		return nil, errors.New("更新会员积分成长规则失败")
 	}
 
 	return &umsclient.UpdateMemberRuleSettingResp{}, nil

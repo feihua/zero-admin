@@ -2,7 +2,9 @@ package memberservicelogic
 
 import (
 	"context"
+	"errors"
 	"github.com/feihua/zero-admin/rpc/ums/gen/query"
+	"github.com/zeromicro/go-zero/core/logc"
 
 	"github.com/feihua/zero-admin/rpc/ums/internal/svc"
 	"github.com/feihua/zero-admin/rpc/ums/umsclient"
@@ -34,7 +36,8 @@ func (l *UpdateMemberIntegrationLogic) UpdateMemberIntegration(in *umsclient.Upd
 	q := query.UmsMember
 	_, err := q.WithContext(l.ctx).Where(q.ID.Eq(in.Id)).Update(q.Integration, in.Integration)
 	if err != nil {
-		return nil, err
+		logc.Errorf(l.ctx, "更新会员积分失败,参数:%+v,异常:%s", in, err.Error())
+		return nil, errors.New("更新会员积分失败")
 	}
 
 	return &umsclient.UpdateMemberIntegrationResp{}, nil

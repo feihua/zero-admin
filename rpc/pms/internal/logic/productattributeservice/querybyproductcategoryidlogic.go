@@ -2,6 +2,8 @@ package productattributeservicelogic
 
 import (
 	"context"
+	"errors"
+	"github.com/zeromicro/go-zero/core/logc"
 
 	"github.com/feihua/zero-admin/rpc/pms/internal/svc"
 	"github.com/feihua/zero-admin/rpc/pms/pmsclient"
@@ -43,7 +45,8 @@ func (l *QueryByproductCategoryIdLogic) QueryByproductCategoryId(in *pmsclient.Q
 	var categoryIdData []*pmsclient.QueryByproductCategoryIdData
 	err := db.WithContext(l.ctx).Raw(sql, in.ProductCategoryId).Scan(&categoryIdData).Error
 	if err != nil {
-		return nil, err
+		logc.Errorf(l.ctx, "根据商品分类的id获取商品属性及属性分类失败,参数:%+v,异常:%s", in, err.Error())
+		return nil, errors.New("根据商品分类的id获取商品属性及属性分类失败")
 	}
 
 	return &pmsclient.QueryByproductCategoryIdResp{

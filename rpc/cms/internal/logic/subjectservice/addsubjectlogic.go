@@ -67,6 +67,5 @@ func (l *AddSubjectLogic) AddSubject(in *cmsclient.AddSubjectReq) (*cmsclient.Ad
 		return nil, errors.New("添加专题失败")
 	}
 
-	logc.Infof(l.ctx, "添加专题成功,参数：%+v", in)
 	return &cmsclient.AddSubjectResp{}, nil
 }

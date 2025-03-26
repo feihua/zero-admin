@@ -2,7 +2,9 @@ package homebrandservicelogic
 
 import (
 	"context"
+	"errors"
 	"github.com/feihua/zero-admin/rpc/sms/gen/query"
+	"github.com/zeromicro/go-zero/core/logc"
 
 	"github.com/feihua/zero-admin/rpc/sms/internal/svc"
 	"github.com/feihua/zero-admin/rpc/sms/smsclient"
@@ -35,7 +37,8 @@ func (l *UpdateHomeBrandStatusLogic) UpdateHomeBrandStatus(in *smsclient.UpdateH
 	_, err := q.WithContext(l.ctx).Where(q.ID.In(in.Ids...)).Update(q.RecommendStatus, in.RecommendStatus)
 
 	if err != nil {
-		return nil, err
+		logc.Errorf(l.ctx, "批量修改推荐品牌状态失败,参数:%+v,异常:%s", in, err.Error())
+		return nil, errors.New("批量修改推荐品牌状态失败")
 	}
 
 	return &smsclient.UpdateHomeBrandStatusResp{}, nil

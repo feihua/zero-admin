@@ -2,15 +2,17 @@ package orderreturnreasonservicelogic
 
 import (
 	"context"
+	"errors"
 	"github.com/feihua/zero-admin/rpc/oms/gen/model"
 	"github.com/feihua/zero-admin/rpc/oms/gen/query"
 	"github.com/feihua/zero-admin/rpc/oms/internal/svc"
 	"github.com/feihua/zero-admin/rpc/oms/omsclient"
+	"github.com/zeromicro/go-zero/core/logc"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// AddOrderReturnReasonLogic 添加退货原因表
+// AddOrderReturnReasonLogic 添加退货原因
 /*
 Author: LiuFeiHua
 Date: 2024/6/12 10:18
@@ -29,7 +31,7 @@ func NewAddOrderReturnReasonLogic(ctx context.Context, svcCtx *svc.ServiceContex
 	}
 }
 
-// AddOrderReturnReason 添加退货原因表
+// AddOrderReturnReason 添加退货原因
 func (l *AddOrderReturnReasonLogic) AddOrderReturnReason(in *omsclient.AddOrderReturnReasonReq) (*omsclient.AddOrderReturnReasonResp, error) {
 	err := query.OmsOrderReturnReason.WithContext(l.ctx).Create(&model.OmsOrderReturnReason{
 		Name:   in.Name,   // 退货类型
@@ -38,7 +40,8 @@ func (l *AddOrderReturnReasonLogic) AddOrderReturnReason(in *omsclient.AddOrderR
 	})
 
 	if err != nil {
-		return nil, err
+		logc.Errorf(l.ctx, "添加退货原因失败,参数:%+v,异常:%s", in, err.Error())
+		return nil, errors.New("添加退货原因失败")
 	}
 
 	return &omsclient.AddOrderReturnReasonResp{}, nil

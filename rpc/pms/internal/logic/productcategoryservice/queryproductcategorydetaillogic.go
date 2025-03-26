@@ -53,6 +53,5 @@ func (l *QueryProductCategoryDetailLogic) QueryProductCategoryDetail(in *pmsclie
 		Description:  item.Description,  // 描述
 	}
 
-	logc.Infof(l.ctx, "查询产品分类详情,参数：%+v,响应：%+v", in, data)
 	return data, nil
 }

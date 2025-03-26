@@ -58,6 +58,5 @@ func (l *UpdateProductAttributeCategoryLogic) UpdateProductAttributeCategory(in 
 		return nil, errors.New("更新产品属性分类失败")
 	}
 
-	logc.Infof(l.ctx, "更新产品属性分类成功,参数：%+v", in)
 	return &pmsclient.UpdateProductAttributeCategoryResp{}, nil
 }

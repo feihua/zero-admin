@@ -40,6 +40,5 @@ func (l *DeleteProductAttributeCategoryLogic) DeleteProductAttributeCategory(in 
 		return nil, errors.New("删除产品属性分类失败")
 	}
 
-	logc.Infof(l.ctx, "删除产品属性分类成功,参数：%+v", in)
 	return &pmsclient.DeleteProductAttributeCategoryResp{}, nil
 }

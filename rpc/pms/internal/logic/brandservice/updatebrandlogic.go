@@ -87,6 +87,5 @@ func (l *UpdateBrandLogic) UpdateBrand(in *pmsclient.UpdateBrandReq) (*pmsclient
 		return nil, errors.New("更新品牌失败")
 	}
 
-	logc.Infof(l.ctx, "更新品牌成功,参数：%+v", in)
 	return &pmsclient.UpdateBrandResp{}, nil
 }

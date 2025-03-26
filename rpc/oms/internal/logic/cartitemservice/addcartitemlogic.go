@@ -2,15 +2,17 @@ package cartitemservicelogic
 
 import (
 	"context"
+	"errors"
 	"github.com/feihua/zero-admin/rpc/oms/gen/model"
 	"github.com/feihua/zero-admin/rpc/oms/gen/query"
 	"github.com/feihua/zero-admin/rpc/oms/internal/svc"
 	"github.com/feihua/zero-admin/rpc/oms/omsclient"
+	"github.com/zeromicro/go-zero/core/logc"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// AddCartItemLogic 添加购物车表
+// AddCartItemLogic 添加购物车
 /*
 Author: LiuFeiHua
 Date: 2024/6/12 9:40
@@ -29,7 +31,7 @@ func NewAddCartItemLogic(ctx context.Context, svcCtx *svc.ServiceContext) *AddCa
 	}
 }
 
-// AddCartItem 添加购物车表
+// AddCartItem 添加购物车
 // 1.购物车是否已经存在商品
 // 2.如果有,则更新数量
 // 3.如果没有,插入数据
@@ -64,7 +66,8 @@ func (l *AddCartItemLogic) AddCartItem(in *omsclient.AddCartItemReq) (*omsclient
 
 	}
 	if err != nil {
-		return nil, err
+		logc.Errorf(l.ctx, "添加购物车失败,参数:%+v,异常:%s", in, err.Error())
+		return nil, errors.New("添加购物车失败")
 	}
 
 	return &omsclient.AddCartItemResp{}, nil

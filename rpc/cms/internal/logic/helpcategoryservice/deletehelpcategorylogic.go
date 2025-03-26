@@ -40,6 +40,5 @@ func (l *DeleteHelpCategoryLogic) DeleteHelpCategory(in *cmsclient.DeleteHelpCat
 		return nil, errors.New("删除帮助分类失败")
 	}
 
-	logc.Infof(l.ctx, "删除帮助分类成功,参数：%+v", in)
 	return &cmsclient.DeleteHelpCategoryResp{}, nil
 }

@@ -23,7 +23,7 @@ func NewUpdateMemberReceiveAddressStatusLogic(ctx context.Context, svcCtx *svc.S
 	}
 }
 
-// 更新会员收货地址表状态
+// 更新会员收货地址状态
 func (l *UpdateMemberReceiveAddressStatusLogic) UpdateMemberReceiveAddressStatus(in *umsclient.UpdateMemberReceiveAddressStatusReq) (*umsclient.UpdateMemberReceiveAddressStatusResp, error) {
 	// todo: add your logic here and delete this line
 

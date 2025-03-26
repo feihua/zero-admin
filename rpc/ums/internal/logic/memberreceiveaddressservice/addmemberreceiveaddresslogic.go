@@ -2,8 +2,10 @@ package memberreceiveaddressservicelogic
 
 import (
 	"context"
+	"errors"
 	"github.com/feihua/zero-admin/rpc/ums/gen/model"
 	"github.com/feihua/zero-admin/rpc/ums/gen/query"
+	"github.com/zeromicro/go-zero/core/logc"
 
 	"github.com/feihua/zero-admin/rpc/ums/internal/svc"
 	"github.com/feihua/zero-admin/rpc/ums/umsclient"
@@ -11,7 +13,7 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// AddMemberReceiveAddressLogic 添加会员收货地址表
+// AddMemberReceiveAddressLogic 添加会员收货地址
 /*
 Author: LiuFeiHua
 Date: 2024/6/11 14:03
@@ -30,7 +32,7 @@ func NewAddMemberReceiveAddressLogic(ctx context.Context, svcCtx *svc.ServiceCon
 	}
 }
 
-// AddMemberReceiveAddress 添加会员收货地址表
+// AddMemberReceiveAddress 添加会员收货地址
 func (l *AddMemberReceiveAddressLogic) AddMemberReceiveAddress(in *umsclient.AddMemberReceiveAddressReq) (*umsclient.AddMemberReceiveAddressResp, error) {
 	err := query.Q.Transaction(func(tx *query.Query) error {
 
@@ -62,7 +64,8 @@ func (l *AddMemberReceiveAddressLogic) AddMemberReceiveAddress(in *umsclient.Add
 	})
 
 	if err != nil {
-		return nil, err
+		logc.Errorf(l.ctx, "添加会员收货地址失败,参数:%+v,异常:%s", in, err.Error())
+		return nil, errors.New("添加会员收货地址失败")
 	}
 
 	return &umsclient.AddMemberReceiveAddressResp{}, nil

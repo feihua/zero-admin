@@ -48,6 +48,5 @@ func (l *QueryFlashPromotionLogDetailLogic) QueryFlashPromotionLogDetail(in *sms
 		SendTime:      item.SendTime.Format("2006-01-02 15:04:05"),      // 发送时间
 	}
 
-	logc.Infof(l.ctx, "查询限时购通知记录详情,参数：%+v,响应：%+v", in, data)
 	return data, nil
 }

@@ -2,10 +2,12 @@ package productvertifyrecordservicelogic
 
 import (
 	"context"
+	"errors"
 	"github.com/feihua/zero-admin/rpc/pms/gen/model"
 	"github.com/feihua/zero-admin/rpc/pms/gen/query"
 	"github.com/feihua/zero-admin/rpc/pms/internal/svc"
 	"github.com/feihua/zero-admin/rpc/pms/pmsclient"
+	"github.com/zeromicro/go-zero/core/logc"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -39,7 +41,8 @@ func (l *AddProductVertifyRecordLogic) AddProductVertifyRecord(in *pmsclient.Add
 	})
 
 	if err != nil {
-		return nil, err
+		logc.Errorf(l.ctx, "添加商品审核记录失败,参数:%+v,异常:%s", in, err.Error())
+		return nil, errors.New("添加商品审核记录失败")
 	}
 
 	return &pmsclient.AddProductVertifyRecordResp{}, nil

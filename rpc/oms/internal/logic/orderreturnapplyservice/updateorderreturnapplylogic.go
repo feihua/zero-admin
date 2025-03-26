@@ -2,7 +2,9 @@ package orderreturnapplyservicelogic
 
 import (
 	"context"
+	"errors"
 	"github.com/feihua/zero-admin/rpc/oms/gen/query"
+	"github.com/zeromicro/go-zero/core/logc"
 	"time"
 
 	"github.com/feihua/zero-admin/rpc/oms/internal/svc"
@@ -35,7 +37,8 @@ func (l *UpdateOrderReturnApplyLogic) UpdateOrderReturnApply(in *omsclient.Updat
 	q := query.OmsOrderReturnApply
 	returnApply, err := q.WithContext(l.ctx).Where(q.ID.Eq(in.Id)).First()
 	if err != nil {
-		return nil, err
+		logc.Errorf(l.ctx, "更新订单退货申请失败,参数:%+v,异常:%s", in, err.Error())
+		return nil, errors.New("更新订单退货申请失败")
 	}
 
 	returnApply.Status = in.Status
@@ -63,6 +66,9 @@ func (l *UpdateOrderReturnApplyLogic) UpdateOrderReturnApply(in *omsclient.Updat
 	}
 
 	_, err = q.WithContext(l.ctx).Updates(returnApply)
-
+	if err != nil {
+		logc.Errorf(l.ctx, "更新订单退货申请失败,参数:%+v,异常:%s", in, err.Error())
+		return nil, errors.New("更新订单退货申请失败")
+	}
 	return &omsclient.UpdateOrderReturnApplyResp{}, nil
 }

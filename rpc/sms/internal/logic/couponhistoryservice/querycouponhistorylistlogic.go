@@ -2,6 +2,7 @@ package couponhistoryservicelogic
 
 import (
 	"context"
+	"errors"
 	"github.com/feihua/zero-admin/pkg/time_util"
 	"github.com/feihua/zero-admin/rpc/sms/gen/query"
 	"github.com/zeromicro/go-zero/core/logc"
@@ -52,7 +53,7 @@ func (l *QueryCouponHistoryListLogic) QueryCouponHistoryList(in *smsclient.Query
 
 	if err != nil {
 		logc.Errorf(l.ctx, "根据优惠券id，使用状态，订单编号分页获取领取记录失败,参数：%+v,异常:%s", in, err.Error())
-		return nil, err
+		return nil, errors.New("根据优惠券id，使用状态，订单编号分页获取领取记录失败")
 	}
 
 	var list []*smsclient.CouponHistoryListData
@@ -73,7 +74,6 @@ func (l *QueryCouponHistoryListLogic) QueryCouponHistoryList(in *smsclient.Query
 		})
 	}
 
-	logc.Infof(l.ctx, "根据优惠券id，使用状态，订单编号分页获取领取记录,参数：%+v,响应：%+v", in, list)
 	return &smsclient.QueryCouponHistoryListResp{
 		Total: count,
 		List:  list,

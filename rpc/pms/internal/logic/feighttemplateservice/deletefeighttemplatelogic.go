@@ -2,7 +2,9 @@ package feighttemplateservicelogic
 
 import (
 	"context"
+	"errors"
 	"github.com/feihua/zero-admin/rpc/pms/gen/query"
+	"github.com/zeromicro/go-zero/core/logc"
 
 	"github.com/feihua/zero-admin/rpc/pms/internal/svc"
 	"github.com/feihua/zero-admin/rpc/pms/pmsclient"
@@ -35,7 +37,8 @@ func (l *DeleteFeightTemplateLogic) DeleteFeightTemplate(in *pmsclient.DeleteFei
 	_, err := q.WithContext(l.ctx).Where(q.ID.In(in.Ids...)).Delete()
 
 	if err != nil {
-		return nil, err
+		logc.Errorf(l.ctx, "删除运费模版失败,参数:%+v,异常:%s", in, err.Error())
+		return nil, errors.New("删除运费模版失败")
 	}
 
 	return &pmsclient.DeleteFeightTemplateResp{}, nil

@@ -2,8 +2,10 @@ package memberservicelogic
 
 import (
 	"context"
+	"errors"
 	"github.com/feihua/zero-admin/rpc/ums/gen/model"
 	"github.com/feihua/zero-admin/rpc/ums/gen/query"
+	"github.com/zeromicro/go-zero/core/logc"
 	"time"
 
 	"github.com/feihua/zero-admin/rpc/ums/internal/svc"
@@ -54,7 +56,8 @@ func (l *UpdateMemberLogic) UpdateMember(in *umsclient.UpdateMemberReq) (*umscli
 		HistoryIntegration:    in.HistoryIntegration,    // 历史积分数量
 	})
 	if err != nil {
-		return nil, err
+		logc.Errorf(l.ctx, "更新会员失败,参数:%+v,异常:%s", in, err.Error())
+		return nil, errors.New("更新会员失败")
 	}
 
 	return &umsclient.UpdateMemberResp{}, nil

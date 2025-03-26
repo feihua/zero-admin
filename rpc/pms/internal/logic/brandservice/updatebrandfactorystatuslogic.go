@@ -2,7 +2,9 @@ package brandservicelogic
 
 import (
 	"context"
+	"errors"
 	"github.com/feihua/zero-admin/rpc/pms/gen/query"
+	"github.com/zeromicro/go-zero/core/logc"
 
 	"github.com/feihua/zero-admin/rpc/pms/internal/svc"
 	"github.com/feihua/zero-admin/rpc/pms/pmsclient"
@@ -35,7 +37,8 @@ func (l *UpdateBrandFactoryStatusLogic) UpdateBrandFactoryStatus(in *pmsclient.U
 	_, err := q.WithContext(l.ctx).Where(q.ID.In(in.Ids...)).Update(q.FactoryStatus, in.FactoryStatus)
 
 	if err != nil {
-		return nil, err
+		logc.Errorf(l.ctx, "批量更新厂家制造商状态失败,参数:%+v,异常:%s", in, err.Error())
+		return nil, errors.New("批量更新厂家制造商状态失败")
 	}
 
 	return &pmsclient.UpdateBrandStatusResp{}, nil

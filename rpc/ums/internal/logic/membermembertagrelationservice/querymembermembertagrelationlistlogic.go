@@ -2,6 +2,7 @@ package membermembertagrelationservicelogic
 
 import (
 	"context"
+	"errors"
 	"github.com/feihua/zero-admin/rpc/ums/gen/query"
 	"github.com/zeromicro/go-zero/core/logc"
 
@@ -11,7 +12,7 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// QueryMemberMemberTagRelationListLogic 查询用户和标签关系表列表
+// QueryMemberMemberTagRelationListLogic 查询用户和标签关系列表
 /*
 Author: LiuFeiHua
 Date: 2024/6/11 14:14
@@ -30,13 +31,13 @@ func NewQueryMemberMemberTagRelationListLogic(ctx context.Context, svcCtx *svc.S
 	}
 }
 
-// QueryMemberMemberTagRelationList 查询用户和标签关系表列表
+// QueryMemberMemberTagRelationList 查询用户和标签关系列表
 func (l *QueryMemberMemberTagRelationListLogic) QueryMemberMemberTagRelationList(in *umsclient.QueryMemberMemberTagRelationListReq) (*umsclient.QueryMemberMemberTagRelationListResp, error) {
 	result, err := query.UmsMemberMemberTagRelation.WithContext(l.ctx).Where(query.UmsMemberProductCategoryRelation.MemberID.Eq(in.MemberId)).Find()
 
 	if err != nil {
-		logc.Errorf(l.ctx, "查询用户和标签关系列表信息失败,参数:%+v,异常:%s", in, err.Error())
-		return nil, err
+		logc.Errorf(l.ctx, "查询用户和标签关系列表失败,参数:%+v,异常:%s", in, err.Error())
+		return nil, errors.New("查询用户和标签关系列表失败")
 	}
 
 	var list []*umsclient.MemberMemberTagRelationListData
@@ -48,7 +49,6 @@ func (l *QueryMemberMemberTagRelationListLogic) QueryMemberMemberTagRelationList
 		})
 	}
 
-	logc.Infof(l.ctx, "查询用户和标签关系表信息,参数：%+v,响应：%+v", in, list)
 	return &umsclient.QueryMemberMemberTagRelationListResp{
 		Total: 0,
 		List:  list,

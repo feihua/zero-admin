@@ -2,6 +2,7 @@ package cartitemservicelogic
 
 import (
 	"context"
+	"errors"
 	"github.com/feihua/zero-admin/pkg/time_util"
 	"github.com/feihua/zero-admin/rpc/oms/gen/query"
 	"github.com/zeromicro/go-zero/core/logc"
@@ -12,7 +13,7 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// QueryCartItemListLogic 查询购物车表列表
+// QueryCartItemListLogic 查询购物车列表
 /*
 Author: LiuFeiHua
 Date: 2024/6/12 9:56
@@ -31,14 +32,14 @@ func NewQueryCartItemListLogic(ctx context.Context, svcCtx *svc.ServiceContext) 
 	}
 }
 
-// QueryCartItemList 查询购物车表列表
+// QueryCartItemList 查询购物车列表
 func (l *QueryCartItemListLogic) QueryCartItemList(in *omsclient.QueryCartItemListReq) (*omsclient.QueryCartItemListResp, error) {
 	q := query.OmsCartItem
 	result, err := q.WithContext(l.ctx).Where(q.MemberID.Eq(in.MemberId)).Find()
 
 	if err != nil {
-		logc.Errorf(l.ctx, "查询购物车列表信息失败,参数：%+v,异常:%s", in, err.Error())
-		return nil, err
+		logc.Errorf(l.ctx, "查询购物车列表失败,参数:%+v,异常:%s", in, err.Error())
+		return nil, errors.New("查询购物车列表失败")
 	}
 	var list []*omsclient.CartItemListData
 	for _, item := range result {

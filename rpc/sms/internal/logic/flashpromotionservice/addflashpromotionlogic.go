@@ -60,7 +60,8 @@ func (l *AddFlashPromotionLogic) AddFlashPromotion(in *smsclient.AddFlashPromoti
 	})
 
 	if err != nil {
-		return nil, err
+		logc.Errorf(l.ctx, "添加限时购失败,参数:%+v,异常:%s", in, err.Error())
+		return nil, errors.New("添加限时购失败")
 	}
 
 	return &smsclient.AddFlashPromotionResp{}, nil

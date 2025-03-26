@@ -3,6 +3,7 @@ package helpservicelogic
 import (
 	"context"
 	"errors"
+	"github.com/feihua/zero-admin/pkg/time_util"
 	"github.com/feihua/zero-admin/rpc/cms/cmsclient"
 	"github.com/feihua/zero-admin/rpc/cms/gen/query"
 	"github.com/feihua/zero-admin/rpc/cms/internal/svc"
@@ -77,8 +78,6 @@ func (l *QueryHelpListLogic) QueryHelpList(in *cmsclient.QueryHelpListReq) (*cms
 
 		})
 	}
-
-	logc.Infof(l.ctx, "查询帮助列表信息,参数：%+v,响应：%+v", in, list)
 
 	return &cmsclient.QueryHelpListResp{
 		Total: count,

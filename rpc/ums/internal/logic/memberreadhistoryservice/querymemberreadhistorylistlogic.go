@@ -2,6 +2,7 @@ package memberreadhistoryservicelogic
 
 import (
 	"context"
+	"errors"
 	"github.com/feihua/zero-admin/pkg/time_util"
 	"github.com/feihua/zero-admin/rpc/ums/gen/query"
 	"github.com/zeromicro/go-zero/core/logc"
@@ -41,8 +42,8 @@ func (l *QueryMemberReadHistoryListLogic) QueryMemberReadHistoryList(in *umsclie
 	result, count, err := q.FindByPage(int((in.PageNum-1)*in.PageSize), int(in.PageSize))
 
 	if err != nil {
-		logc.Errorf(l.ctx, "查询会员浏览列表信息失败,参数：%+v,异常:%s", in, err.Error())
-		return nil, err
+		logc.Errorf(l.ctx, "查询用户商品浏览历史记录列表失败,参数:%+v,异常:%s", in, err.Error())
+		return nil, errors.New("查询用户商品浏览历史记录列表失败")
 	}
 
 	var list []*umsclient.MemberReadHistoryListData
@@ -61,8 +62,6 @@ func (l *QueryMemberReadHistoryListLogic) QueryMemberReadHistoryList(in *umsclie
 			CreateTime:      time_util.TimeToStr(item.CreateTime), // 浏览时间
 		})
 	}
-
-	logc.Infof(l.ctx, "查询会员浏览列表信息,参数：%+v,响应：%+v", in, list)
 
 	return &umsclient.QueryMemberReadHistoryListResp{
 		Total: count,

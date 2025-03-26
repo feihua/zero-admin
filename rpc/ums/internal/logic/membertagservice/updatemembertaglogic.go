@@ -59,6 +59,5 @@ func (l *UpdateMemberTagLogic) UpdateMemberTag(in *umsclient.UpdateMemberTagReq)
 		return nil, errors.New("更新用户标签失败")
 	}
 
-	logc.Infof(l.ctx, "更新用户标签成功,参数：%+v", in)
 	return &umsclient.UpdateMemberTagResp{}, nil
 }

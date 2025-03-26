@@ -2,6 +2,7 @@ package homebrandservicelogic
 
 import (
 	"context"
+	"errors"
 	"github.com/feihua/zero-admin/rpc/sms/gen/query"
 	"github.com/zeromicro/go-zero/core/logc"
 
@@ -11,7 +12,7 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// QueryHomeBrandListLogic 查询首页推荐品牌表列表
+// QueryHomeBrandListLogic 查询首页推荐品牌列表
 /*
 Author: LiuFeiHua
 Date: 2024/6/12 17:53
@@ -30,7 +31,7 @@ func NewQueryHomeBrandListLogic(ctx context.Context, svcCtx *svc.ServiceContext)
 	}
 }
 
-// QueryHomeBrandList 查询首页推荐品牌表列表
+// QueryHomeBrandList 查询首页推荐品牌列表
 func (l *QueryHomeBrandListLogic) QueryHomeBrandList(in *smsclient.QueryHomeBrandListReq) (*smsclient.QueryHomeBrandListResp, error) {
 	q := query.SmsHomeBrand.WithContext(l.ctx)
 	if len(in.BrandName) > 0 {
@@ -44,8 +45,8 @@ func (l *QueryHomeBrandListLogic) QueryHomeBrandList(in *smsclient.QueryHomeBran
 	result, count, err := q.FindByPage(int((in.PageNum-1)*in.PageSize), int(in.PageSize))
 
 	if err != nil {
-		logc.Errorf(l.ctx, "查询首页品牌列表信息失败,参数：%+v,异常:%s", in, err.Error())
-		return nil, err
+		logc.Errorf(l.ctx, "查询首页推荐品牌列表失败,参数:%+v,异常:%s", in, err.Error())
+		return nil, errors.New("查询首页推荐品牌列表失败")
 	}
 
 	var list []*smsclient.HomeBrandListData

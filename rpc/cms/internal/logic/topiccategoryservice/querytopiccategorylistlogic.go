@@ -3,6 +3,7 @@ package topiccategoryservicelogic
 import (
 	"context"
 	"errors"
+	"github.com/feihua/zero-admin/pkg/time_util"
 	"github.com/feihua/zero-admin/rpc/cms/cmsclient"
 	"github.com/feihua/zero-admin/rpc/cms/gen/query"
 	"github.com/feihua/zero-admin/rpc/cms/internal/svc"
@@ -70,8 +71,6 @@ func (l *QueryTopicCategoryListLogic) QueryTopicCategoryList(in *cmsclient.Query
 
 		})
 	}
-
-	logc.Infof(l.ctx, "查询话题分类列表信息,参数：%+v,响应：%+v", in, list)
 
 	return &cmsclient.QueryTopicCategoryListResp{
 		Total: count,

@@ -11,7 +11,7 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// QueryOrderReturnReasonDetailLogic 查询退货原因表详情
+// QueryOrderReturnReasonDetailLogic 查询退货原因详情
 /*
 Author: 刘飞华
 Date: 2025/02/07 10:05:47
@@ -30,13 +30,13 @@ func NewQueryOrderReturnReasonDetailLogic(ctx context.Context, svcCtx *svc.Servi
 	}
 }
 
-// QueryOrderReturnReasonDetail 查询退货原因表详情
+// QueryOrderReturnReasonDetail 查询退货原因详情
 func (l *QueryOrderReturnReasonDetailLogic) QueryOrderReturnReasonDetail(in *omsclient.QueryOrderReturnReasonDetailReq) (*omsclient.QueryOrderReturnReasonDetailResp, error) {
 	item, err := query.OmsOrderReturnReason.WithContext(l.ctx).Where(query.OmsOrderReturnReason.ID.Eq(in.Id)).First()
 
 	if err != nil {
-		logc.Errorf(l.ctx, "查询退货原因表详情失败,参数:%+v,异常:%s", in, err.Error())
-		return nil, errors.New("查询退货原因表详情失败")
+		logc.Errorf(l.ctx, "查询退货原因详情失败,参数:%+v,异常:%s", in, err.Error())
+		return nil, errors.New("查询退货原因详情失败")
 	}
 
 	data := &omsclient.QueryOrderReturnReasonDetailResp{
@@ -48,6 +48,5 @@ func (l *QueryOrderReturnReasonDetailLogic) QueryOrderReturnReasonDetail(in *oms
 
 	}
 
-	logc.Infof(l.ctx, "查询退货原因表详情,参数：%+v,响应：%+v", in, data)
 	return data, nil
 }

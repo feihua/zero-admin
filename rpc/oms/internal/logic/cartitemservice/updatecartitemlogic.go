@@ -2,15 +2,17 @@ package cartitemservicelogic
 
 import (
 	"context"
+	"errors"
 	"github.com/feihua/zero-admin/rpc/oms/gen/model"
 	"github.com/feihua/zero-admin/rpc/oms/gen/query"
 	"github.com/feihua/zero-admin/rpc/oms/internal/svc"
 	"github.com/feihua/zero-admin/rpc/oms/omsclient"
+	"github.com/zeromicro/go-zero/core/logc"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// UpdateCartItemLogic 更新购物车表
+// UpdateCartItemLogic 更新购物车
 /*
 Author: LiuFeiHua
 Date: 2024/6/12 10:05
@@ -29,7 +31,7 @@ func NewUpdateCartItemLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Up
 	}
 }
 
-// UpdateCartItem 更新购物车表
+// UpdateCartItem 更新购物车
 // 1.先更加id删除原来的
 // 2.添加新的
 func (l *UpdateCartItemLogic) UpdateCartItem(in *omsclient.UpdateCartItemReq) (*omsclient.UpdateCartItemResp, error) {
@@ -60,7 +62,8 @@ func (l *UpdateCartItemLogic) UpdateCartItem(in *omsclient.UpdateCartItemReq) (*
 	})
 
 	if err != nil {
-		return nil, err
+		logc.Errorf(l.ctx, "更新购物车失败,参数:%+v,异常:%s", in, err.Error())
+		return nil, errors.New("更新购物车失败")
 	}
 
 	return &omsclient.UpdateCartItemResp{}, nil

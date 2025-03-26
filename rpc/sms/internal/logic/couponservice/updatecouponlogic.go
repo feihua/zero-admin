@@ -2,8 +2,10 @@ package couponservicelogic
 
 import (
 	"context"
+	"errors"
 	"github.com/feihua/zero-admin/rpc/sms/gen/model"
 	"github.com/feihua/zero-admin/rpc/sms/gen/query"
+	"github.com/zeromicro/go-zero/core/logc"
 	"time"
 
 	"github.com/feihua/zero-admin/rpc/sms/internal/svc"
@@ -63,7 +65,8 @@ func (l *UpdateCouponLogic) UpdateCoupon(in *smsclient.AddOrUpdateCouponReq) (*s
 	})
 
 	if err != nil {
-		return nil, err
+		logc.Errorf(l.ctx, "更新优惠券失败,参数:%+v,异常:%s", in, err.Error())
+		return nil, errors.New("更新优惠券失败")
 	}
 
 	// 2.插入优惠券和商品关系表
@@ -83,7 +86,8 @@ func (l *UpdateCouponLogic) UpdateCoupon(in *smsclient.AddOrUpdateCouponReq) (*s
 
 		err = relation.WithContext(l.ctx).CreateInBatches(list, len(list))
 		if err != nil {
-			return nil, err
+			logc.Errorf(l.ctx, "更新优惠券失败,参数:%+v,异常:%s", in, err.Error())
+			return nil, errors.New("更新优惠券失败")
 		}
 	}
 
@@ -104,7 +108,8 @@ func (l *UpdateCouponLogic) UpdateCoupon(in *smsclient.AddOrUpdateCouponReq) (*s
 
 		err = relation.WithContext(l.ctx).CreateInBatches(list, len(list))
 		if err != nil {
-			return nil, err
+			logc.Errorf(l.ctx, "更新优惠券失败,参数:%+v,异常:%s", in, err.Error())
+			return nil, errors.New("更新优惠券失败")
 		}
 	}
 

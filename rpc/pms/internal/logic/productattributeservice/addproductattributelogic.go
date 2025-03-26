@@ -2,8 +2,10 @@ package productattributeservicelogic
 
 import (
 	"context"
+	"errors"
 	"github.com/feihua/zero-admin/rpc/pms/gen/model"
 	"github.com/feihua/zero-admin/rpc/pms/gen/query"
+	"github.com/zeromicro/go-zero/core/logc"
 
 	"github.com/feihua/zero-admin/rpc/pms/internal/svc"
 	"github.com/feihua/zero-admin/rpc/pms/pmsclient"
@@ -11,7 +13,7 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// AddProductAttributeLogic 添加商品属性参数表
+// AddProductAttributeLogic 添加商品属性参数
 /*
 Author: LiuFeiHua
 Date: 2024/6/12 16:47
@@ -30,7 +32,7 @@ func NewAddProductAttributeLogic(ctx context.Context, svcCtx *svc.ServiceContext
 	}
 }
 
-// AddProductAttribute 添加商品属性参数表
+// AddProductAttribute 添加商品属性参数
 func (l *AddProductAttributeLogic) AddProductAttribute(in *pmsclient.AddProductAttributeReq) (*pmsclient.AddProductAttributeResp, error) {
 	err := query.PmsProductAttribute.WithContext(l.ctx).Create(&model.PmsProductAttribute{
 		ProductAttributeCategoryID: in.ProductAttributeCategoryId, // 商品属性分类id
@@ -47,7 +49,8 @@ func (l *AddProductAttributeLogic) AddProductAttribute(in *pmsclient.AddProductA
 	})
 
 	if err != nil {
-		return nil, err
+		logc.Errorf(l.ctx, "添加商品属性参数失败,参数:%+v,异常:%s", in, err.Error())
+		return nil, errors.New("添加商品属性参数失败")
 	}
 
 	// 新增商品属性以后需要更新商品属性分类数量
@@ -55,7 +58,8 @@ func (l *AddProductAttributeLogic) AddProductAttribute(in *pmsclient.AddProductA
 	categoryDo := q.WithContext(l.ctx).Where(q.ID.Eq(in.ProductAttributeCategoryId))
 	category, err := categoryDo.First()
 	if err != nil {
-		return nil, err
+		logc.Errorf(l.ctx, "添加商品属性参数失败,参数:%+v,异常:%s", in, err.Error())
+		return nil, errors.New("添加商品属性参数失败")
 	}
 
 	if in.Type == 0 {

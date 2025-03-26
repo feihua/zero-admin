@@ -2,7 +2,9 @@ package productattributeservicelogic
 
 import (
 	"context"
+	"errors"
 	"github.com/feihua/zero-admin/rpc/pms/gen/query"
+	"github.com/zeromicro/go-zero/core/logc"
 
 	"github.com/feihua/zero-admin/rpc/pms/internal/svc"
 	"github.com/feihua/zero-admin/rpc/pms/pmsclient"
@@ -10,7 +12,7 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// DeleteProductAttributeLogic 删除商品属性参数表
+// DeleteProductAttributeLogic 删除商品属性参数
 /*
 Author: LiuFeiHua
 Date: 2024/6/12 16:48
@@ -29,7 +31,7 @@ func NewDeleteProductAttributeLogic(ctx context.Context, svcCtx *svc.ServiceCont
 	}
 }
 
-// DeleteProductAttribute 删除商品属性参数表
+// DeleteProductAttribute 删除商品属性参数
 // 1.根据属性id查询属性信息
 // 2.根据属性分类id查询分类信息
 func (l *DeleteProductAttributeLogic) DeleteProductAttribute(in *pmsclient.DeleteProductAttributeReq) (*pmsclient.DeleteProductAttributeResp, error) {
@@ -54,7 +56,8 @@ func (l *DeleteProductAttributeLogic) DeleteProductAttribute(in *pmsclient.Delet
 	_, err := q.WithContext(l.ctx).Where(q.ID.In(in.Ids...)).Delete()
 
 	if err != nil {
-		return nil, err
+		logc.Errorf(l.ctx, "删除商品属性参数失败,参数:%+v,异常:%s", in, err.Error())
+		return nil, errors.New("删除商品属性参数失败")
 	}
 
 	return &pmsclient.DeleteProductAttributeResp{}, nil

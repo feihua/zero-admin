@@ -43,8 +43,8 @@ func (l *QueryCouponFindByIdLogic) QueryCouponFindById(in *smsclient.QueryCoupon
 	productRelation, err := query.SmsCouponProductRelation.WithContext(l.ctx).Find()
 
 	if err != nil {
-		logc.Errorf(l.ctx, "查询优惠券与产品关糸列表信息失败,参数：%+v,异常:%s", in, err.Error)
-		return nil, err
+		logc.Errorf(l.ctx, "根据优惠券id查询优惠券失败,参数:%+v,异常:%s", in, err.Error())
+		return nil, errors.New("根据优惠券id查询优惠券失败")
 	}
 
 	var productRelationList []*smsclient.CouponProductRelationData
@@ -63,7 +63,7 @@ func (l *QueryCouponFindByIdLogic) QueryCouponFindById(in *smsclient.QueryCoupon
 
 	if err != nil {
 		logc.Errorf(l.ctx, "查询优惠券与产品分类关糸列表信息失败,参数：%+v,异常:%s", in, err.Error)
-		return nil, err
+		return nil, errors.New("根据优惠券id查询优惠券失败")
 	}
 
 	var categoryRelationList []*smsclient.CouponProductCategoryRelationData

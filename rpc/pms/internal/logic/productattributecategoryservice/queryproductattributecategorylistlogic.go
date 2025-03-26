@@ -56,8 +56,6 @@ func (l *QueryProductAttributeCategoryListLogic) QueryProductAttributeCategoryLi
 		})
 	}
 
-	logc.Infof(l.ctx, "查询产品属性分类列表信息,参数：%+v,响应：%+v", in, list)
-
 	return &pmsclient.QueryProductAttributeCategoryListResp{
 		Total: count,
 		List:  list,

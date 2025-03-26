@@ -2,7 +2,9 @@ package commentservicelogic
 
 import (
 	"context"
+	"errors"
 	"github.com/feihua/zero-admin/rpc/pms/gen/query"
+	"github.com/zeromicro/go-zero/core/logc"
 
 	"github.com/feihua/zero-admin/rpc/pms/internal/svc"
 	"github.com/feihua/zero-admin/rpc/pms/pmsclient"
@@ -10,7 +12,7 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// DeleteCommentLogic 删除商品评价表
+// DeleteCommentLogic 删除商品评价
 /*
 Author: LiuFeiHua
 Date: 2024/6/12 16:36
@@ -29,13 +31,14 @@ func NewDeleteCommentLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Del
 	}
 }
 
-// DeleteComment 删除商品评价表
+// DeleteComment 删除商品评价
 func (l *DeleteCommentLogic) DeleteComment(in *pmsclient.DeleteCommentReq) (*pmsclient.DeleteCommentResp, error) {
 	q := query.PmsComment
 	_, err := q.WithContext(l.ctx).Where(q.ID.In(in.Ids...)).Delete()
 
 	if err != nil {
-		return nil, err
+		logc.Errorf(l.ctx, "删除商品评价失败,参数:%+v,异常:%s", in, err.Error())
+		return nil, errors.New("删除商品评价失败")
 	}
 
 	return &pmsclient.DeleteCommentResp{}, nil

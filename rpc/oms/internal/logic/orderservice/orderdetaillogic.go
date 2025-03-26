@@ -2,6 +2,7 @@ package orderservicelogic
 
 import (
 	"context"
+	"errors"
 	"github.com/feihua/zero-admin/pkg/time_util"
 	"github.com/feihua/zero-admin/rpc/oms/gen/model"
 	"github.com/feihua/zero-admin/rpc/oms/gen/query"
@@ -37,8 +38,8 @@ func (l *OrderDetailLogic) OrderDetail(in *omsclient.OrderDetailReq) (*omsclient
 	item, err := query.OmsOrder.WithContext(l.ctx).Where(query.OmsOrder.ID.Eq(in.OrderId)).First()
 
 	if err != nil {
-		logc.Errorf(l.ctx, "获取订单详情失败,参数：%+v,异常:%s", in, err.Error())
-		return nil, err
+		logc.Errorf(l.ctx, "获取订单详情失败,参数:%+v,异常:%s", in, err.Error())
+		return nil, errors.New("获取订单详情失败")
 	}
 
 	result, _ := query.OmsOrderItem.WithContext(l.ctx).Where(query.OmsOrderItem.OrderID.Eq(in.OrderId)).Find()
@@ -94,7 +95,6 @@ func (l *OrderDetailLogic) OrderDetail(in *omsclient.OrderDetailReq) (*omsclient
 		HistoryListData:       buildOperateHistory(histories),
 	}
 
-	logc.Infof(l.ctx, "获取订单详情信息,参数：%+v,响应：%+v", in, orderListData)
 	return &omsclient.OrderDetailResp{
 		Data: orderListData,
 	}, nil

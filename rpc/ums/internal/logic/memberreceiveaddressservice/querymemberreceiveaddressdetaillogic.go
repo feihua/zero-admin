@@ -2,6 +2,7 @@ package memberreceiveaddressservicelogic
 
 import (
 	"context"
+	"errors"
 	"github.com/feihua/zero-admin/pkg/time_util"
 	"github.com/feihua/zero-admin/rpc/ums/gen/query"
 	"github.com/zeromicro/go-zero/core/logc"
@@ -12,7 +13,7 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// QueryMemberReceiveAddressDetailLogic 查询会员收货地址表详情
+// QueryMemberReceiveAddressDetailLogic 查询会员收货地址详情
 /*
 Author: LiuFeiHua
 Date: 2024/6/11 14:05
@@ -31,14 +32,14 @@ func NewQueryMemberReceiveAddressDetailLogic(ctx context.Context, svcCtx *svc.Se
 	}
 }
 
-// QueryMemberReceiveAddressDetail 查询会员收货地址表详情
+// QueryMemberReceiveAddressDetail 查询会员收货地址详情
 func (l *QueryMemberReceiveAddressDetailLogic) QueryMemberReceiveAddressDetail(in *umsclient.QueryMemberReceiveAddressDetailReq) (*umsclient.QueryMemberReceiveAddressDetailResp, error) {
 	q := query.UmsMemberReceiveAddress
 	item, err := q.WithContext(l.ctx).Where(q.MemberID.Eq(in.MemberId), q.ID.Eq(in.Id)).First()
 
 	if err != nil {
-		logc.Errorf(l.ctx, "查询会员地址信息失败,参数：%+v,异常:%s", in, err.Error())
-		return nil, err
+		logc.Errorf(l.ctx, "查询会员收货地址详情失败,参数:%+v,异常:%s", in, err.Error())
+		return nil, errors.New("查询会员收货地址详情失败")
 	}
 
 	resp := &umsclient.QueryMemberReceiveAddressDetailResp{

@@ -40,6 +40,5 @@ func (l *DeleteTopicLogic) DeleteTopic(in *cmsclient.DeleteTopicReq) (*cmsclient
 		return nil, errors.New("删除话题失败")
 	}
 
-	logc.Infof(l.ctx, "删除话题成功,参数：%+v", in)
 	return &cmsclient.DeleteTopicResp{}, nil
 }

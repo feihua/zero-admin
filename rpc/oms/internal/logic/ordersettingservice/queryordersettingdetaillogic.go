@@ -10,7 +10,7 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// QueryOrderSettingDetailLogic 查询订单设置表详情
+// QueryOrderSettingDetailLogic 查询订单设置详情
 /*
 Author: 刘飞华
 Date: 2025/02/07 10:05:47
@@ -29,13 +29,13 @@ func NewQueryOrderSettingDetailLogic(ctx context.Context, svcCtx *svc.ServiceCon
 	}
 }
 
-// QueryOrderSettingDetail 查询订单设置表详情
+// QueryOrderSettingDetail 查询订单设置详情
 func (l *QueryOrderSettingDetailLogic) QueryOrderSettingDetail(in *omsclient.QueryOrderSettingDetailReq) (*omsclient.QueryOrderSettingDetailResp, error) {
 	item, err := query.OmsOrderSetting.WithContext(l.ctx).Where(query.OmsOrderSetting.ID.Eq(in.Id)).First()
 
 	if err != nil {
-		logc.Errorf(l.ctx, "查询订单设置表详情失败,参数:%+v,异常:%s", in, err.Error())
-		return nil, errors.New("查询订单设置表详情失败")
+		logc.Errorf(l.ctx, "查询订单设置详情失败,参数:%+v,异常:%s", in, err.Error())
+		return nil, errors.New("查询订单设置详情失败")
 	}
 
 	data := &omsclient.QueryOrderSettingDetailResp{
@@ -50,6 +50,5 @@ func (l *QueryOrderSettingDetailLogic) QueryOrderSettingDetail(in *omsclient.Que
 
 	}
 
-	logc.Infof(l.ctx, "查询订单设置表详情,参数：%+v,响应：%+v", in, data)
 	return data, nil
 }

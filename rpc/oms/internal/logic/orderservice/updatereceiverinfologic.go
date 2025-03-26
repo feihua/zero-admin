@@ -2,8 +2,10 @@ package orderservicelogic
 
 import (
 	"context"
+	"errors"
 	"github.com/feihua/zero-admin/rpc/oms/gen/model"
 	"github.com/feihua/zero-admin/rpc/oms/gen/query"
+	"github.com/zeromicro/go-zero/core/logc"
 	"time"
 
 	"github.com/feihua/zero-admin/rpc/oms/internal/svc"
@@ -37,7 +39,8 @@ func (l *UpdateReceiverInfoLogic) UpdateReceiverInfo(in *omsclient.UpdateReceive
 	q := query.OmsOrder
 	order, err := q.WithContext(l.ctx).Where(q.ID.Eq(in.OrderId)).First()
 	if err != nil {
-		return nil, err
+		logc.Errorf(l.ctx, "修改收货人信息失败,参数:%+v,异常:%s", in, err.Error())
+		return nil, errors.New("修改收货人信息失败")
 	}
 
 	order.ReceiverName = in.ReceiverName
@@ -51,9 +54,9 @@ func (l *UpdateReceiverInfoLogic) UpdateReceiverInfo(in *omsclient.UpdateReceive
 	order.ModifyTime = &now
 
 	_, err = q.WithContext(l.ctx).Updates(order)
-
 	if err != nil {
-		return nil, err
+		logc.Errorf(l.ctx, "修改收货人信息失败,参数:%+v,异常:%s", in, err.Error())
+		return nil, errors.New("修改收货人信息失败")
 	}
 
 	// 2.添加操作记录
@@ -66,7 +69,8 @@ func (l *UpdateReceiverInfoLogic) UpdateReceiverInfo(in *omsclient.UpdateReceive
 		Note:        note,
 	})
 	if err != nil {
-		return nil, err
+		logc.Errorf(l.ctx, "修改收货人信息失败,参数:%+v,异常:%s", in, err.Error())
+		return nil, errors.New("修改收货人信息失败")
 	}
 
 	return &omsclient.UpdateReceiverInfoResp{}, nil

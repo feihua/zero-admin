@@ -3,6 +3,7 @@ package memberreportservicelogic
 import (
 	"context"
 	"errors"
+	"github.com/feihua/zero-admin/pkg/time_util"
 	"github.com/feihua/zero-admin/rpc/cms/cmsclient"
 	"github.com/feihua/zero-admin/rpc/cms/gen/query"
 	"github.com/feihua/zero-admin/rpc/cms/internal/svc"
@@ -74,8 +75,6 @@ func (l *QueryMemberReportListLogic) QueryMemberReportList(in *cmsclient.QueryMe
 
 		})
 	}
-
-	logc.Infof(l.ctx, "查询用户举报列表信息,参数：%+v,响应：%+v", in, list)
 
 	return &cmsclient.QueryMemberReportListResp{
 		Total: count,

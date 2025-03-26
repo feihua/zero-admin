@@ -40,6 +40,5 @@ func (l *DeleteHelpLogic) DeleteHelp(in *cmsclient.DeleteHelpReq) (*cmsclient.De
 		return nil, errors.New("删除帮助失败")
 	}
 
-	logc.Infof(l.ctx, "删除帮助成功,参数：%+v", in)
 	return &cmsclient.DeleteHelpResp{}, nil
 }

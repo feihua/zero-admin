@@ -58,6 +58,5 @@ func (l *QueryBrandDetailLogic) QueryBrandDetail(in *pmsclient.QueryBrandDetailR
 		UpdateTime:          time_util.TimeToString(item.UpdateTime), // 更新时间
 	}
 
-	logc.Infof(l.ctx, "查询品牌详情,参数：%+v,响应：%+v", in, data)
 	return data, nil
 }

@@ -2,7 +2,9 @@ package productoperatelogservicelogic
 
 import (
 	"context"
+	"errors"
 	"github.com/feihua/zero-admin/rpc/pms/gen/query"
+	"github.com/zeromicro/go-zero/core/logc"
 
 	"github.com/feihua/zero-admin/rpc/pms/internal/svc"
 	"github.com/feihua/zero-admin/rpc/pms/pmsclient"
@@ -10,7 +12,7 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// DeleteProductOperateLogLogic 删除
+// DeleteProductOperateLogLogic 删除商品操作日志
 /*
 Author: LiuFeiHua
 Date: 2024/6/12 17:09
@@ -29,13 +31,14 @@ func NewDeleteProductOperateLogLogic(ctx context.Context, svcCtx *svc.ServiceCon
 	}
 }
 
-// DeleteProductOperateLog 删除
+// DeleteProductOperateLog 删除商品操作日志
 func (l *DeleteProductOperateLogLogic) DeleteProductOperateLog(in *pmsclient.DeleteProductOperateLogReq) (*pmsclient.DeleteProductOperateLogResp, error) {
 	q := query.PmsProductOperateLog
 	_, err := q.WithContext(l.ctx).Where(q.ID.In(in.Ids...)).Delete()
 
 	if err != nil {
-		return nil, err
+		logc.Errorf(l.ctx, "删除商品操作日志失败,参数:%+v,异常:%s", in, err.Error())
+		return nil, errors.New("删除商品操作日志失败")
 	}
 
 	return &pmsclient.DeleteProductOperateLogResp{}, nil

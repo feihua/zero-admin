@@ -2,7 +2,9 @@ package productcategoryservicelogic
 
 import (
 	"context"
+	"errors"
 	"github.com/feihua/zero-admin/rpc/pms/gen/query"
+	"github.com/zeromicro/go-zero/core/logc"
 
 	"github.com/feihua/zero-admin/rpc/pms/internal/svc"
 	"github.com/feihua/zero-admin/rpc/pms/pmsclient"
@@ -35,7 +37,8 @@ func (l *UpdateCategoryShowStatusLogic) UpdateCategoryShowStatus(in *pmsclient.U
 	_, err := q.WithContext(l.ctx).Where(q.ID.In(in.Ids...)).Update(q.ShowStatus, in.Status)
 
 	if err != nil {
-		return nil, err
+		logc.Errorf(l.ctx, "更新商品分类显示状态失败,参数:%+v,异常:%s", in, err.Error())
+		return nil, errors.New("更新商品分类显示状态失败")
 	}
 
 	return &pmsclient.UpdateProductCategoryStatusResp{}, nil

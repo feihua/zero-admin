@@ -2,7 +2,9 @@ package orderreturnapplyservicelogic
 
 import (
 	"context"
+	"errors"
 	"github.com/feihua/zero-admin/rpc/oms/gen/query"
+	"github.com/zeromicro/go-zero/core/logc"
 
 	"github.com/feihua/zero-admin/rpc/oms/internal/svc"
 	"github.com/feihua/zero-admin/rpc/oms/omsclient"
@@ -35,7 +37,8 @@ func (l *DeleteOrderReturnApplyLogic) DeleteOrderReturnApply(in *omsclient.Delet
 	_, err := q.WithContext(l.ctx).Where(q.ID.In(in.Ids...)).Delete()
 
 	if err != nil {
-		return nil, err
+		logc.Errorf(l.ctx, "删除订单退货申请失败,参数:%+v,异常:%s", in, err.Error())
+		return nil, errors.New("删除订单退货申请失败")
 	}
 
 	return &omsclient.DeleteOrderReturnApplyResp{}, nil

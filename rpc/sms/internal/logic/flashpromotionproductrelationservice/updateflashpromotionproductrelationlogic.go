@@ -2,8 +2,10 @@ package flashpromotionproductrelationservicelogic
 
 import (
 	"context"
+	"errors"
 	"github.com/feihua/zero-admin/rpc/sms/gen/model"
 	"github.com/feihua/zero-admin/rpc/sms/gen/query"
+	"github.com/zeromicro/go-zero/core/logc"
 
 	"github.com/feihua/zero-admin/rpc/sms/internal/svc"
 	"github.com/feihua/zero-admin/rpc/sms/smsclient"
@@ -11,7 +13,7 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// UpdateFlashPromotionProductRelationLogic 更新商品限时购与商品关系表
+// UpdateFlashPromotionProductRelationLogic 更新商品限时购与商品关系
 /*
 Author: LiuFeiHua
 Date: 2024/6/12 17:41
@@ -30,7 +32,7 @@ func NewUpdateFlashPromotionProductRelationLogic(ctx context.Context, svcCtx *sv
 	}
 }
 
-// UpdateFlashPromotionProductRelation 更新商品限时购与商品关系表
+// UpdateFlashPromotionProductRelation 更新商品限时购与商品关系
 func (l *UpdateFlashPromotionProductRelationLogic) UpdateFlashPromotionProductRelation(in *smsclient.UpdateFlashPromotionProductRelationReq) (*smsclient.UpdateFlashPromotionProductRelationResp, error) {
 	q := query.SmsFlashPromotionProductRelation
 	_, err := q.WithContext(l.ctx).Updates(&model.SmsFlashPromotionProductRelation{
@@ -45,7 +47,8 @@ func (l *UpdateFlashPromotionProductRelationLogic) UpdateFlashPromotionProductRe
 	})
 
 	if err != nil {
-		return nil, err
+		logc.Errorf(l.ctx, "更新商品限时购与商品关系失败,参数:%+v,异常:%s", in, err.Error())
+		return nil, errors.New("更新商品限时购与商品关系失败")
 	}
 
 	return &smsclient.UpdateFlashPromotionProductRelationResp{}, nil

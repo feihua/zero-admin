@@ -24,7 +24,7 @@ func NewQueryProductCategoryTreeListLogic(ctx context.Context, svcCtx *svc.Servi
 	}
 }
 
-// 查询商品分类（tree）
+// QueryProductCategoryTreeList 查询商品分类（tree）
 func (l *QueryProductCategoryTreeListLogic) QueryProductCategoryTreeList(in *pmsclient.QueryProductCategoryTreeListReq) (*pmsclient.QueryProductCategoryListTreeResp, error) {
 	// 1.查询第一级分类
 	categoryList := queryLevel2(l, 0)

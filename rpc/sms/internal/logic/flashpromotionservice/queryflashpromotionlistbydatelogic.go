@@ -2,6 +2,7 @@ package flashpromotionservicelogic
 
 import (
 	"context"
+	"errors"
 	"github.com/feihua/zero-admin/pkg/time_util"
 	"github.com/feihua/zero-admin/rpc/sms/gen/query"
 	"github.com/zeromicro/go-zero/core/logc"
@@ -39,8 +40,8 @@ func (l *QueryFlashPromotionListByDateLogic) QueryFlashPromotionListByDate(in *s
 	result, err := q.WithContext(l.ctx).Where(q.Status.Eq(1), q.StartDate.Lte(currentDate), q.EndDate.Gte(currentDate)).Find()
 
 	if err != nil {
-		logc.Errorf(l.ctx, "查询限时购列表信息失败,参数：%+v,异常:%s", in, err.Error())
-		return nil, err
+		logc.Errorf(l.ctx, "查询当前时间是否有秒杀活动失败,参数:%+v,异常:%s", in, err.Error())
+		return nil, errors.New("查询当前时间是否有秒杀活动失败")
 	}
 
 	var list []*smsclient.FlashPromotionListData

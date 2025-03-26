@@ -23,7 +23,7 @@ func NewQueryIntegrationChangeHistoryDetailLogic(ctx context.Context, svcCtx *sv
 	}
 }
 
-// 查询积分变化历史记录表详情
+// 查询积分变化历史记录详情
 func (l *QueryIntegrationChangeHistoryDetailLogic) QueryIntegrationChangeHistoryDetail(in *umsclient.QueryIntegrationChangeHistoryDetailReq) (*umsclient.QueryIntegrationChangeHistoryDetailResp, error) {
 	// todo: add your logic here and delete this line
 

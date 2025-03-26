@@ -2,8 +2,10 @@ package memberreceiveaddressservicelogic
 
 import (
 	"context"
+	"errors"
 	"github.com/feihua/zero-admin/rpc/ums/gen/model"
 	"github.com/feihua/zero-admin/rpc/ums/gen/query"
+	"github.com/zeromicro/go-zero/core/logc"
 
 	"github.com/feihua/zero-admin/rpc/ums/internal/svc"
 	"github.com/feihua/zero-admin/rpc/ums/umsclient"
@@ -11,7 +13,7 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// UpdateMemberReceiveAddressLogic 更新会员收货地址表
+// UpdateMemberReceiveAddressLogic 更新会员收货地址
 /*
 Author: LiuFeiHua
 Date: 2024/6/11 14:05
@@ -30,7 +32,7 @@ func NewUpdateMemberReceiveAddressLogic(ctx context.Context, svcCtx *svc.Service
 	}
 }
 
-// UpdateMemberReceiveAddress 更新会员收货地址表
+// UpdateMemberReceiveAddress 更新会员收货地址
 func (l *UpdateMemberReceiveAddressLogic) UpdateMemberReceiveAddress(in *umsclient.UpdateMemberReceiveAddressReq) (*umsclient.UpdateMemberReceiveAddressResp, error) {
 	err := query.Q.Transaction(func(tx *query.Query) error {
 
@@ -63,7 +65,8 @@ func (l *UpdateMemberReceiveAddressLogic) UpdateMemberReceiveAddress(in *umsclie
 	})
 
 	if err != nil {
-		return nil, err
+		logc.Errorf(l.ctx, "更新会员收货地址失败,参数:%+v,异常:%s", in, err.Error())
+		return nil, errors.New("更新会员收货地址失败")
 	}
 
 	return &umsclient.UpdateMemberReceiveAddressResp{}, nil

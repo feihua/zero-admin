@@ -62,6 +62,5 @@ func (l *UpdateHelpLogic) UpdateHelp(in *cmsclient.UpdateHelpReq) (*cmsclient.Up
 		return nil, errors.New("更新帮助失败")
 	}
 
-	logc.Infof(l.ctx, "更新帮助成功,参数：%+v", in)
 	return &cmsclient.UpdateHelpResp{}, nil
 }

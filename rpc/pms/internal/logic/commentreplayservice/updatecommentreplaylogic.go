@@ -2,15 +2,17 @@ package commentreplayservicelogic
 
 import (
 	"context"
+	"errors"
 	"github.com/feihua/zero-admin/rpc/pms/gen/model"
 	"github.com/feihua/zero-admin/rpc/pms/gen/query"
 	"github.com/feihua/zero-admin/rpc/pms/internal/svc"
 	"github.com/feihua/zero-admin/rpc/pms/pmsclient"
+	"github.com/zeromicro/go-zero/core/logc"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// UpdateCommentReplayLogic 更新产品评价回复表
+// UpdateCommentReplayLogic 更新产品评价回复
 /*
 Author: LiuFeiHua
 Date: 2024/6/12 16:35
@@ -29,7 +31,7 @@ func NewUpdateCommentReplayLogic(ctx context.Context, svcCtx *svc.ServiceContext
 	}
 }
 
-// UpdateCommentReplay 更新产品评价回复表
+// UpdateCommentReplay 更新产品评价回复
 func (l *UpdateCommentReplayLogic) UpdateCommentReplay(in *pmsclient.UpdateCommentReplayReq) (*pmsclient.UpdateCommentReplayResp, error) {
 	q := query.PmsCommentReplay
 	_, err := q.WithContext(l.ctx).Updates(&model.PmsCommentReplay{
@@ -42,7 +44,8 @@ func (l *UpdateCommentReplayLogic) UpdateCommentReplay(in *pmsclient.UpdateComme
 	})
 
 	if err != nil {
-		return nil, err
+		logc.Errorf(l.ctx, "更新产品评价回复失败,参数:%+v,异常:%s", in, err.Error())
+		return nil, errors.New("更新产品评价回复失败")
 	}
 
 	return &pmsclient.UpdateCommentReplayResp{}, nil

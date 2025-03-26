@@ -2,6 +2,7 @@ package productcategoryservicelogic
 
 import (
 	"context"
+	"errors"
 	"github.com/feihua/zero-admin/rpc/pms/gen/query"
 	"github.com/feihua/zero-admin/rpc/pms/internal/svc"
 	"github.com/feihua/zero-admin/rpc/pms/pmsclient"
@@ -43,8 +44,8 @@ func (l *QueryProductCategoryListLogic) QueryProductCategoryList(in *pmsclient.Q
 	result, count, err := q.FindByPage(int((in.PageNum-1)*in.PageSize), int(in.PageSize))
 
 	if err != nil {
-		logc.Errorf(l.ctx, "查询商品类别列表信息失败,参数：%+v,异常:%s", in, err.Error())
-		return nil, err
+		logc.Errorf(l.ctx, "查询商品类别列表失败,参数:%+v,异常:%s", in, err.Error())
+		return nil, errors.New("查询商品类别列表失败")
 	}
 
 	var list []*pmsclient.ProductCategoryListData

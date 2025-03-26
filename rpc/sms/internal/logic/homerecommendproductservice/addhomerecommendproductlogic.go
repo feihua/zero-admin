@@ -2,8 +2,10 @@ package homerecommendproductservicelogic
 
 import (
 	"context"
+	"errors"
 	"github.com/feihua/zero-admin/rpc/sms/gen/model"
 	"github.com/feihua/zero-admin/rpc/sms/gen/query"
+	"github.com/zeromicro/go-zero/core/logc"
 
 	"github.com/feihua/zero-admin/rpc/sms/internal/svc"
 	"github.com/feihua/zero-admin/rpc/sms/smsclient"
@@ -11,7 +13,7 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// AddHomeRecommendProductLogic 添加人气推荐商品表
+// AddHomeRecommendProductLogic 添加人气推荐商品
 /*
 Author: LiuFeiHua
 Date: 2024/6/12 17:56
@@ -30,7 +32,7 @@ func NewAddHomeRecommendProductLogic(ctx context.Context, svcCtx *svc.ServiceCon
 	}
 }
 
-// AddHomeRecommendProduct 添加人气推荐商品表
+// AddHomeRecommendProduct 添加人气推荐商品
 func (l *AddHomeRecommendProductLogic) AddHomeRecommendProduct(in *smsclient.AddHomeRecommendProductReq) (*smsclient.AddHomeRecommendProductResp, error) {
 	q := query.SmsHomeRecommendProduct
 	for _, data := range in.RecommendProductAddData {
@@ -44,7 +46,8 @@ func (l *AddHomeRecommendProductLogic) AddHomeRecommendProduct(in *smsclient.Add
 			})
 
 			if err != nil {
-				return nil, err
+				logc.Errorf(l.ctx, "添加人气推荐商品失败,参数:%+v,异常:%s", in, err.Error())
+				return nil, errors.New("添加人气推荐商品失败")
 			}
 		}
 

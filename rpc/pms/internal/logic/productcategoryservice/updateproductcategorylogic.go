@@ -2,8 +2,10 @@ package productcategoryservicelogic
 
 import (
 	"context"
+	"errors"
 	"github.com/feihua/zero-admin/rpc/pms/gen/model"
 	"github.com/feihua/zero-admin/rpc/pms/gen/query"
+	"github.com/zeromicro/go-zero/core/logc"
 
 	"github.com/feihua/zero-admin/rpc/pms/internal/svc"
 	"github.com/feihua/zero-admin/rpc/pms/pmsclient"
@@ -34,8 +36,12 @@ func NewUpdateProductCategoryLogic(ctx context.Context, svcCtx *svc.ServiceConte
 func (l *UpdateProductCategoryLogic) UpdateProductCategory(in *pmsclient.UpdateProductCategoryReq) (*pmsclient.UpdateProductCategoryResp, error) {
 	// 更新商品分类时要更新商品中的名称
 	product := query.PmsProduct
-	_, _ = product.WithContext(l.ctx).Where(product.ProductCategoryID.Eq(in.Id)).Update(product.ProductCategoryName, in.Name)
+	_, err := product.WithContext(l.ctx).Where(product.ProductCategoryID.Eq(in.Id)).Update(product.ProductCategoryName, in.Name)
 
+	if err != nil {
+		logc.Errorf(l.ctx, "更新产品分类失败,参数:%+v,异常:%s", in, err.Error())
+		return nil, errors.New("更新产品分类失败")
+	}
 	// 同时更新筛选属性的信息
 	relation := query.PmsProductCategoryAttributeRelation
 	_, _ = relation.WithContext(l.ctx).Where(relation.ProductCategoryID.Eq(in.Id)).Delete()
@@ -51,7 +57,7 @@ func (l *UpdateProductCategoryLogic) UpdateProductCategory(in *pmsclient.UpdateP
 	}
 
 	q := query.PmsProductCategory
-	_, err := q.WithContext(l.ctx).Updates(&model.PmsProductCategory{
+	_, err = q.WithContext(l.ctx).Updates(&model.PmsProductCategory{
 		ID:           in.Id,
 		ParentID:     in.ParentId,     // 上机分类的编号：0表示一级分类
 		Name:         in.Name,         // 商品分类名称
@@ -67,7 +73,8 @@ func (l *UpdateProductCategoryLogic) UpdateProductCategory(in *pmsclient.UpdateP
 	})
 
 	if err != nil {
-		return nil, err
+		logc.Errorf(l.ctx, "更新产品分类失败,参数:%+v,异常:%s", in, err.Error())
+		return nil, errors.New("更新产品分类失败")
 	}
 
 	return &pmsclient.UpdateProductCategoryResp{}, nil

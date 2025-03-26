@@ -2,15 +2,17 @@ package growthchangehistoryservicelogic
 
 import (
 	"context"
+	"errors"
 	"github.com/feihua/zero-admin/rpc/ums/gen/model"
 	"github.com/feihua/zero-admin/rpc/ums/gen/query"
 	"github.com/feihua/zero-admin/rpc/ums/internal/svc"
 	"github.com/feihua/zero-admin/rpc/ums/umsclient"
+	"github.com/zeromicro/go-zero/core/logc"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// AddGrowthChangeHistoryLogic 添加成长值变化历史记录表
+// AddGrowthChangeHistoryLogic 添加成长值变化历史记录
 /*
 Author: LiuFeiHua
 Date: 2024/6/11 14:24
@@ -29,7 +31,7 @@ func NewAddGrowthChangeHistoryLogic(ctx context.Context, svcCtx *svc.ServiceCont
 	}
 }
 
-// AddGrowthChangeHistory 添加成长值变化历史记录表
+// AddGrowthChangeHistory 添加成长值变化历史记录
 func (l *AddGrowthChangeHistoryLogic) AddGrowthChangeHistory(in *umsclient.AddGrowthChangeHistoryReq) (*umsclient.AddGrowthChangeHistoryResp, error) {
 	err := query.UmsGrowthChangeHistory.WithContext(l.ctx).Create(&model.UmsGrowthChangeHistory{
 		MemberID:    in.MemberId,    // 会员id
@@ -41,7 +43,8 @@ func (l *AddGrowthChangeHistoryLogic) AddGrowthChangeHistory(in *umsclient.AddGr
 	})
 
 	if err != nil {
-		return nil, err
+		logc.Errorf(l.ctx, "添加成长值变化历史记录失败,参数:%+v,异常:%s", in, err.Error())
+		return nil, errors.New("添加成长值变化历史记录失败")
 	}
 
 	return &umsclient.AddGrowthChangeHistoryResp{}, nil

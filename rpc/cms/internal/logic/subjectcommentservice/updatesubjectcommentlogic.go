@@ -60,6 +60,5 @@ func (l *UpdateSubjectCommentLogic) UpdateSubjectComment(in *cmsclient.UpdateSub
 		return nil, errors.New("更新专题评论失败")
 	}
 
-	logc.Infof(l.ctx, "更新专题评论成功,参数：%+v", in)
 	return &cmsclient.UpdateSubjectCommentResp{}, nil
 }

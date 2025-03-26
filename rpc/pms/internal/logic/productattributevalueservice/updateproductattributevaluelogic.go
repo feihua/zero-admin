@@ -31,7 +31,7 @@ func NewUpdateProductAttributeValueLogic(ctx context.Context, svcCtx *svc.Servic
 	}
 }
 
-// UpdateProductAttributeValue 更新存储产品参数信息的
+// UpdateProductAttributeValue 更新存储产品参数信息
 func (l *UpdateProductAttributeValueLogic) UpdateProductAttributeValue(in *pmsclient.UpdateProductAttributeValueReq) (*pmsclient.UpdateProductAttributeValueResp, error) {
 	q := query.PmsProductAttributeValue.WithContext(l.ctx)
 
@@ -58,6 +58,5 @@ func (l *UpdateProductAttributeValueLogic) UpdateProductAttributeValue(in *pmscl
 		return nil, errors.New("更新存储产品参数信息的失败")
 	}
 
-	logc.Infof(l.ctx, "更新存储产品参数信息的成功,参数：%+v", in)
 	return &pmsclient.UpdateProductAttributeValueResp{}, nil
 }

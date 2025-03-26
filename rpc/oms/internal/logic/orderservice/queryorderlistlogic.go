@@ -2,6 +2,7 @@ package orderservicelogic
 
 import (
 	"context"
+	"errors"
 	"github.com/feihua/zero-admin/pkg/time_util"
 	"github.com/feihua/zero-admin/rpc/oms/gen/query"
 	"github.com/zeromicro/go-zero/core/logc"
@@ -46,8 +47,8 @@ func (l *QueryOrderListLogic) QueryOrderList(in *omsclient.QueryOrderListReq) (*
 	result, err := q.Offset(int(offset)).Limit(int(in.PageSize)).Find()
 
 	if err != nil {
-		logc.Errorf(l.ctx, "查询订单列表信息失败,参数：%+v,异常:%s", in, err.Error())
-		return nil, err
+		logc.Errorf(l.ctx, "app端查询会员的订单列表信息失败,参数:%+v,异常:%s", in, err.Error())
+		return nil, errors.New("app端查询会员的订单列表信息失败")
 	}
 
 	var list []*omsclient.OrderListData
@@ -102,7 +103,6 @@ func (l *QueryOrderListLogic) QueryOrderList(in *omsclient.QueryOrderListReq) (*
 		})
 	}
 
-	logc.Infof(l.ctx, "查询订单列表信息,参数：%+v,响应：%+v", in, list)
 	return &omsclient.OrderListResp{
 		Total: 0,
 		List:  list,

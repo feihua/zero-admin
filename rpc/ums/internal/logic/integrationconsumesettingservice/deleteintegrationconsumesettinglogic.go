@@ -2,7 +2,9 @@ package integrationconsumesettingservicelogic
 
 import (
 	"context"
+	"errors"
 	"github.com/feihua/zero-admin/rpc/ums/gen/query"
+	"github.com/zeromicro/go-zero/core/logc"
 
 	"github.com/feihua/zero-admin/rpc/ums/internal/svc"
 	"github.com/feihua/zero-admin/rpc/ums/umsclient"
@@ -34,7 +36,8 @@ func (l *DeleteIntegrationConsumeSettingLogic) DeleteIntegrationConsumeSetting(i
 	q := query.UmsIntegrationConsumeSetting
 	_, err := q.WithContext(l.ctx).Where(q.ID.In(in.Ids...)).Delete()
 	if err != nil {
-		return nil, err
+		logc.Errorf(l.ctx, "删除积分消费设置失败,参数:%+v,异常:%s", in, err.Error())
+		return nil, errors.New("删除积分消费设置失败")
 	}
 
 	return &umsclient.DeleteIntegrationConsumeSettingResp{}, nil

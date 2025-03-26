@@ -2,8 +2,10 @@ package productladderservicelogic
 
 import (
 	"context"
+	"errors"
 	"github.com/feihua/zero-admin/rpc/pms/gen/model"
 	"github.com/feihua/zero-admin/rpc/pms/gen/query"
+	"github.com/zeromicro/go-zero/core/logc"
 
 	"github.com/feihua/zero-admin/rpc/pms/internal/svc"
 	"github.com/feihua/zero-admin/rpc/pms/pmsclient"
@@ -11,7 +13,7 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// AddProductLadderLogic 添加产品阶梯价格表(只针对同商品)
+// AddProductLadderLogic 添加产品阶梯价格(只针对同商品)
 /*
 Author: LiuFeiHua
 Date: 2024/6/12 17:07
@@ -30,7 +32,7 @@ func NewAddProductLadderLogic(ctx context.Context, svcCtx *svc.ServiceContext) *
 	}
 }
 
-// AddProductLadder 添加产品阶梯价格表(只针对同商品)
+// AddProductLadder 添加产品阶梯价格(只针对同商品)
 func (l *AddProductLadderLogic) AddProductLadder(in *pmsclient.AddProductLadderReq) (*pmsclient.AddProductLadderResp, error) {
 	err := query.PmsProductLadder.WithContext(l.ctx).Create(&model.PmsProductLadder{
 		ProductID: in.ProductId, // 商品id
@@ -40,7 +42,8 @@ func (l *AddProductLadderLogic) AddProductLadder(in *pmsclient.AddProductLadderR
 	})
 
 	if err != nil {
-		return nil, err
+		logc.Errorf(l.ctx, "添加产品阶梯价格失败,参数:%+v,异常:%s", in, err.Error())
+		return nil, errors.New("添加产品阶梯价格失败")
 	}
 
 	return &pmsclient.AddProductLadderResp{}, nil

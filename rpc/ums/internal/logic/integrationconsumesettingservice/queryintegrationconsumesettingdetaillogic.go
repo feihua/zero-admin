@@ -2,6 +2,7 @@ package integrationconsumesettingservicelogic
 
 import (
 	"context"
+	"errors"
 	"github.com/feihua/zero-admin/rpc/ums/gen/query"
 	"github.com/zeromicro/go-zero/core/logc"
 
@@ -36,8 +37,8 @@ func (l *QueryIntegrationConsumeSettingDetailLogic) QueryIntegrationConsumeSetti
 	item, err := q.WithContext(l.ctx).Where(q.ID.Eq(in.Id)).First()
 
 	if err != nil {
-		logc.Errorf(l.ctx, "查询积分消费设置列表信息失败,参数：%+v,异常:%s", in, err.Error())
-		return nil, err
+		logc.Errorf(l.ctx, "查询积分消费设置详情失败,参数:%+v,异常:%s", in, err.Error())
+		return nil, errors.New("查询积分消费设置详情失败")
 	}
 
 	return &umsclient.QueryIntegrationConsumeSettingDetailResp{

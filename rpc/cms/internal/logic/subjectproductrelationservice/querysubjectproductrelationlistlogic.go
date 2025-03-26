@@ -11,7 +11,7 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// QuerySubjectProductRelationListLogic 查询专题商品关系表列表
+// QuerySubjectProductRelationListLogic 查询专题商品关系列表
 /*
 Author: LiuFeiHua
 Date: 2024/6/11 16:42
@@ -30,7 +30,7 @@ func NewQuerySubjectProductRelationListLogic(ctx context.Context, svcCtx *svc.Se
 	}
 }
 
-// QuerySubjectProductRelationList 查询专题商品关系表列表
+// QuerySubjectProductRelationList 查询专题商品关系列表
 func (l *QuerySubjectProductRelationListLogic) QuerySubjectProductRelationList(in *cmsclient.QuerySubjectProductRelationListReq) (*cmsclient.QuerySubjectProductRelationListResp, error) {
 	var ids []int64
 	q := query.CmsSubjectProductRelation

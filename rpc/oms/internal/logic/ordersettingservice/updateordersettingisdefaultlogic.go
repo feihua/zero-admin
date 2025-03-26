@@ -2,7 +2,9 @@ package ordersettingservicelogic
 
 import (
 	"context"
+	"errors"
 	"github.com/feihua/zero-admin/rpc/oms/gen/query"
+	"github.com/zeromicro/go-zero/core/logc"
 
 	"github.com/feihua/zero-admin/rpc/oms/internal/svc"
 	"github.com/feihua/zero-admin/rpc/oms/omsclient"
@@ -10,7 +12,7 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// UpdateOrderSettingIsDefaultLogic 更新订单设置表是否为默认
+// UpdateOrderSettingIsDefaultLogic 更新订单设置是否为默认
 /*
 Author: LiuFeiHua
 Date: 2024/6/15 11:20
@@ -29,7 +31,7 @@ func NewUpdateOrderSettingIsDefaultLogic(ctx context.Context, svcCtx *svc.Servic
 	}
 }
 
-// UpdateOrderSettingIsDefault 更新订单设置表是否为默认
+// UpdateOrderSettingIsDefault 更新订单设置是否为默认
 func (l *UpdateOrderSettingIsDefaultLogic) UpdateOrderSettingIsDefault(in *omsclient.UpdateOrderSettingIsDefaultReq) (*omsclient.UpdateOrderSettingStatusResp, error) {
 	q := query.OmsOrderSetting
 	if in.IsDefault == 1 {
@@ -40,7 +42,8 @@ func (l *UpdateOrderSettingIsDefaultLogic) UpdateOrderSettingIsDefault(in *omscl
 	_, err := q.WithContext(l.ctx).Where(q.ID.Eq(in.Id)).Update(q.IsDefault, in.IsDefault)
 
 	if err != nil {
-		return nil, err
+		logc.Errorf(l.ctx, "更新订单设置是否为默认失败,参数:%+v,异常:%s", in, err.Error())
+		return nil, errors.New("更新订单设置是否为默认失败")
 	}
 
 	return &omsclient.UpdateOrderSettingStatusResp{}, nil

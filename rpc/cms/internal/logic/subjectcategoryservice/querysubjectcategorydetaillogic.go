@@ -56,6 +56,5 @@ func (l *QuerySubjectCategoryDetailLogic) QuerySubjectCategoryDetail(in *cmsclie
 		UpdateTime:   time_util.TimeToString(item.UpdateTime), // 更新时间
 	}
 
-	logc.Infof(l.ctx, "查询专题分类详情,参数：%+v,响应：%+v", in, data)
 	return data, nil
 }

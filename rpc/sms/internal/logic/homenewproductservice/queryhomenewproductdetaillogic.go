@@ -10,7 +10,7 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// QueryHomeNewProductDetailLogic 查询新鲜好物表详情
+// QueryHomeNewProductDetailLogic 查询新鲜好物详情
 /*
 Author: 刘飞华
 Date: 2025/02/07 10:11:43
@@ -29,13 +29,13 @@ func NewQueryHomeNewProductDetailLogic(ctx context.Context, svcCtx *svc.ServiceC
 	}
 }
 
-// QueryHomeNewProductDetail 查询新鲜好物表详情
+// QueryHomeNewProductDetail 查询新鲜好物详情
 func (l *QueryHomeNewProductDetailLogic) QueryHomeNewProductDetail(in *smsclient.QueryHomeNewProductDetailReq) (*smsclient.QueryHomeNewProductDetailResp, error) {
 	item, err := query.SmsHomeNewProduct.WithContext(l.ctx).Where(query.SmsHomeNewProduct.ID.Eq(in.Id)).First()
 
 	if err != nil {
-		logc.Errorf(l.ctx, "查询新鲜好物表详情失败,参数:%+v,异常:%s", in, err.Error())
-		return nil, errors.New("查询新鲜好物表详情失败")
+		logc.Errorf(l.ctx, "查询新鲜好物详情失败,参数:%+v,异常:%s", in, err.Error())
+		return nil, errors.New("查询新鲜好物详情失败")
 	}
 
 	data := &smsclient.QueryHomeNewProductDetailResp{
@@ -47,6 +47,5 @@ func (l *QueryHomeNewProductDetailLogic) QueryHomeNewProductDetail(in *smsclient
 
 	}
 
-	logc.Infof(l.ctx, "查询新鲜好物表详情,参数：%+v,响应：%+v", in, data)
 	return data, nil
 }

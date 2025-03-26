@@ -49,6 +49,5 @@ func (l *QueryFeightTemplateDetailLogic) QueryFeightTemplateDetail(in *pmsclient
 		Dest:           item.Dest,           // 目的地（省、市）
 	}
 
-	logc.Infof(l.ctx, "查询运费模版详情,参数：%+v,响应：%+v", in, data)
 	return data, nil
 }

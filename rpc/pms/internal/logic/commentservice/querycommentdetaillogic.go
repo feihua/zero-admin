@@ -57,6 +57,5 @@ func (l *QueryCommentDetailLogic) QueryCommentDetail(in *pmsclient.QueryCommentD
 		ReplayCount:      item.ReplayCount,                     // 回复数量
 	}
 
-	logc.Infof(l.ctx, "查询商品评价详情,参数：%+v,响应：%+v", in, data)
 	return data, nil
 }

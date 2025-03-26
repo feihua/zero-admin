@@ -2,6 +2,7 @@ package productattributecategoryservicelogic
 
 import (
 	"context"
+	"errors"
 	"github.com/feihua/zero-admin/rpc/pms/gen/query"
 	"github.com/zeromicro/go-zero/core/logc"
 
@@ -35,8 +36,8 @@ func (l *QueryCategoryWithAttrListLogic) QueryCategoryWithAttrList(in *pmsclient
 	result, err := query.PmsProductAttributeCategory.WithContext(l.ctx).Find()
 
 	if err != nil {
-		logc.Errorf(l.ctx, "查询商品属性类别列表信息失败,参数：%+v,异常:%s", in, err.Error())
-		return nil, err
+		logc.Errorf(l.ctx, "获取所有商品属性分类及其下属性失败,参数:%+v,异常:%s", in, err.Error())
+		return nil, errors.New("获取所有商品属性分类及其下属性失败")
 	}
 
 	var list []*pmsclient.ProductAttributeCategoryListData
@@ -70,7 +71,6 @@ func (l *QueryCategoryWithAttrListLogic) QueryCategoryWithAttrList(in *pmsclient
 		})
 	}
 
-	logc.Infof(l.ctx, "查询商品属性类别列表信息,参数：%+v,响应：%+v", in, list)
 	return &pmsclient.QueryProductAttributeCategoryListResp{
 		Total: 0,
 		List:  list,

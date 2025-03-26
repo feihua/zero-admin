@@ -49,6 +49,5 @@ func (l *QueryFlashPromotionProductRelationDetailLogic) QueryFlashPromotionProdu
 		Sort:                    item.Sort,                    // 排序
 	}
 
-	logc.Infof(l.ctx, "查询商品限时购与商品关系详情,参数：%+v,响应：%+v", in, data)
 	return data, nil
 }

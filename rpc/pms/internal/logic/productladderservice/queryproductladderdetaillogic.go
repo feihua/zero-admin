@@ -46,6 +46,5 @@ func (l *QueryProductLadderDetailLogic) QueryProductLadderDetail(in *pmsclient.Q
 		Price:     item.Price,     // 折后价格
 	}
 
-	logc.Infof(l.ctx, "查询产品阶梯价格(只针对同商品)详情,参数：%+v,响应：%+v", in, data)
 	return data, nil
 }

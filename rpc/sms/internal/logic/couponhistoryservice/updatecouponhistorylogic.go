@@ -2,8 +2,10 @@ package couponhistoryservicelogic
 
 import (
 	"context"
+	"errors"
 	"github.com/feihua/zero-admin/rpc/sms/gen/model"
 	"github.com/feihua/zero-admin/rpc/sms/gen/query"
+	"github.com/zeromicro/go-zero/core/logc"
 	"time"
 
 	"github.com/feihua/zero-admin/rpc/sms/internal/svc"
@@ -48,7 +50,8 @@ func (l *UpdateCouponHistoryLogic) UpdateCouponHistory(in *smsclient.UpdateCoupo
 	})
 
 	if err != nil {
-		return nil, err
+		logc.Errorf(l.ctx, "更新优惠券使用失败,参数:%+v,异常:%s", in, err.Error())
+		return nil, errors.New("更新优惠券使用失败")
 	}
 
 	return &smsclient.UpdateCouponHistoryResp{}, nil

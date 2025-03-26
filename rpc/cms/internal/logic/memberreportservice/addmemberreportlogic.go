@@ -49,6 +49,5 @@ func (l *AddMemberReportLogic) AddMemberReport(in *cmsclient.AddMemberReportReq)
 		return nil, errors.New("添加用户举报失败")
 	}
 
-	logc.Infof(l.ctx, "添加用户举报成功,参数：%+v", in)
 	return &cmsclient.AddMemberReportResp{}, nil
 }

@@ -3,6 +3,7 @@ package subjectcommentservicelogic
 import (
 	"context"
 	"errors"
+	"github.com/feihua/zero-admin/pkg/time_util"
 	"github.com/feihua/zero-admin/rpc/cms/cmsclient"
 	"github.com/feihua/zero-admin/rpc/cms/gen/query"
 	"github.com/feihua/zero-admin/rpc/cms/internal/svc"
@@ -48,6 +49,5 @@ func (l *QuerySubjectCommentDetailLogic) QuerySubjectCommentDetail(in *cmsclient
 		ShowStatus:     item.ShowStatus,                      // 是否显示，0->不显示；1->显示
 	}
 
-	logc.Infof(l.ctx, "查询专题评论详情,参数：%+v,响应：%+v", in, data)
 	return data, nil
 }

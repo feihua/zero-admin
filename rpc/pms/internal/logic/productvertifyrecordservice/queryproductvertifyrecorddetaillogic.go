@@ -48,6 +48,5 @@ func (l *QueryProductVertifyRecordDetailLogic) QueryProductVertifyRecordDetail(i
 		Detail:     item.Detail,                          // 反馈详情
 	}
 
-	logc.Infof(l.ctx, "查询商品审核记录详情,参数：%+v,响应：%+v", in, data)
 	return data, nil
 }

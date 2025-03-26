@@ -53,6 +53,5 @@ func (l *QueryHomeAdvertiseDetailLogic) QueryHomeAdvertiseDetail(in *smsclient.Q
 		Sort:       item.Sort,                                    // 排序
 	}
 
-	logc.Infof(l.ctx, "查询首页轮播广告详情,参数：%+v,响应：%+v", in, data)
 	return data, nil
 }

@@ -54,6 +54,5 @@ func (l *AddTopicLogic) AddTopic(in *cmsclient.AddTopicReq) (*cmsclient.AddTopic
 		return nil, errors.New("添加话题失败")
 	}
 
-	logc.Infof(l.ctx, "添加话题成功,参数：%+v", in)
 	return &cmsclient.AddTopicResp{}, nil
 }

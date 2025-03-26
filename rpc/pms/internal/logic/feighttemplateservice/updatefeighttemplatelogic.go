@@ -62,6 +62,5 @@ func (l *UpdateFeightTemplateLogic) UpdateFeightTemplate(in *pmsclient.UpdateFei
 		return nil, errors.New("更新运费模版失败")
 	}
 
-	logc.Infof(l.ctx, "更新运费模版成功,参数：%+v", in)
 	return &pmsclient.UpdateFeightTemplateResp{}, nil
 }

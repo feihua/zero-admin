@@ -2,8 +2,10 @@ package orderservicelogic
 
 import (
 	"context"
+	"errors"
 	"github.com/feihua/zero-admin/rpc/oms/gen/model"
 	"github.com/feihua/zero-admin/rpc/oms/gen/query"
+	"github.com/zeromicro/go-zero/core/logc"
 	"time"
 
 	"github.com/feihua/zero-admin/rpc/oms/internal/svc"
@@ -49,7 +51,8 @@ func (l *DeliveryLogic) Delivery(in *omsclient.DeliveryReq) (*omsclient.Delivery
 	_, err = q.WithContext(l.ctx).Updates(order)
 
 	if err != nil {
-		return nil, err
+		logc.Errorf(l.ctx, "批量发货失败,参数:%+v,异常:%s", in, err.Error())
+		return nil, errors.New("批量发货失败")
 	}
 
 	// 2.添加操作记录
@@ -62,7 +65,8 @@ func (l *DeliveryLogic) Delivery(in *omsclient.DeliveryReq) (*omsclient.Delivery
 		Note:        note,
 	})
 	if err != nil {
-		return nil, err
+		logc.Errorf(l.ctx, "添加操作记录失败,参数:%+v,异常:%s", in, err.Error())
+		return nil, errors.New("添加操作记录失败")
 	}
 
 	return &omsclient.DeliveryResp{}, nil

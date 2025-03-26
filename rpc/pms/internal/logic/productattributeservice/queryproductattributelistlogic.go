@@ -2,6 +2,7 @@ package productattributeservicelogic
 
 import (
 	"context"
+	"errors"
 	"github.com/feihua/zero-admin/rpc/pms/gen/query"
 	"github.com/zeromicro/go-zero/core/logc"
 
@@ -11,7 +12,7 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// QueryProductAttributeListLogic 查询商品属性参数表列表
+// QueryProductAttributeListLogic 查询商品属性参数列表
 /*
 Author: LiuFeiHua
 Date: 2024/6/12 16:48
@@ -30,7 +31,7 @@ func NewQueryProductAttributeListLogic(ctx context.Context, svcCtx *svc.ServiceC
 	}
 }
 
-// QueryProductAttributeList 查询商品属性参数表列表
+// QueryProductAttributeList 查询商品属性参数列表
 func (l *QueryProductAttributeListLogic) QueryProductAttributeList(in *pmsclient.QueryProductAttributeListReq) (*pmsclient.QueryProductAttributeListResp, error) {
 	q := query.PmsProductAttribute.WithContext(l.ctx)
 	if len(in.Name) > 0 {
@@ -48,8 +49,8 @@ func (l *QueryProductAttributeListLogic) QueryProductAttributeList(in *pmsclient
 	result, count, err := q.FindByPage(int((in.PageNum-1)*in.PageSize), int(in.PageSize))
 
 	if err != nil {
-		logc.Errorf(l.ctx, "查询商品属性列表信息失败,参数：%+v,异常:%s", in, err.Error())
-		return nil, err
+		logc.Errorf(l.ctx, "查询商品属性参数列表失败,参数:%+v,异常:%s", in, err.Error())
+		return nil, errors.New("查询商品属性参数列表失败")
 	}
 
 	var list []*pmsclient.ProductAttributeListData

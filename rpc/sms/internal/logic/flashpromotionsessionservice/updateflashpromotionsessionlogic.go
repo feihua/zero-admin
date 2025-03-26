@@ -2,15 +2,17 @@ package flashpromotionsessionservicelogic
 
 import (
 	"context"
+	"errors"
 	"github.com/feihua/zero-admin/rpc/sms/gen/model"
 	"github.com/feihua/zero-admin/rpc/sms/gen/query"
 	"github.com/feihua/zero-admin/rpc/sms/internal/svc"
 	"github.com/feihua/zero-admin/rpc/sms/smsclient"
+	"github.com/zeromicro/go-zero/core/logc"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// UpdateFlashPromotionSessionLogic 更新限时购场次表
+// UpdateFlashPromotionSessionLogic 更新限时购场次
 /*
 Author: LiuFeiHua
 Date: 2024/6/12 17:50
@@ -29,7 +31,7 @@ func NewUpdateFlashPromotionSessionLogic(ctx context.Context, svcCtx *svc.Servic
 	}
 }
 
-// UpdateFlashPromotionSession 更新限时购场次表
+// UpdateFlashPromotionSession 更新限时购场次
 func (l *UpdateFlashPromotionSessionLogic) UpdateFlashPromotionSession(in *smsclient.UpdateFlashPromotionSessionReq) (*smsclient.UpdateFlashPromotionSessionResp, error) {
 	q := query.SmsFlashPromotionSession
 	_, err := q.WithContext(l.ctx).Updates(&model.SmsFlashPromotionSession{
@@ -41,7 +43,8 @@ func (l *UpdateFlashPromotionSessionLogic) UpdateFlashPromotionSession(in *smscl
 	})
 
 	if err != nil {
-		return nil, err
+		logc.Errorf(l.ctx, "更新限时购场次失败,参数:%+v,异常:%s", in, err.Error())
+		return nil, errors.New("更新限时购场次失败")
 	}
 
 	return &smsclient.UpdateFlashPromotionSessionResp{}, nil

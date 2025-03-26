@@ -52,6 +52,5 @@ func (l *QuerySkuStockDetailLogic) QuerySkuStockDetail(in *pmsclient.QuerySkuSto
 		SpData:         item.SpData,         // 商品销售属性，json格式
 	}
 
-	logc.Infof(l.ctx, "查询sku的库存详情,参数：%+v,响应：%+v", in, data)
 	return data, nil
 }

@@ -2,15 +2,17 @@ package productoperatelogservicelogic
 
 import (
 	"context"
+	"errors"
 	"github.com/feihua/zero-admin/rpc/pms/gen/model"
 	"github.com/feihua/zero-admin/rpc/pms/gen/query"
 	"github.com/feihua/zero-admin/rpc/pms/internal/svc"
 	"github.com/feihua/zero-admin/rpc/pms/pmsclient"
+	"github.com/zeromicro/go-zero/core/logc"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// AddProductOperateLogLogic 添加
+// AddProductOperateLogLogic 添加商品操作日志
 /*
 Author: LiuFeiHua
 Date: 2024/6/12 17:09
@@ -29,7 +31,7 @@ func NewAddProductOperateLogLogic(ctx context.Context, svcCtx *svc.ServiceContex
 	}
 }
 
-// AddProductOperateLog 添加
+// AddProductOperateLog 添加商品操作日志
 func (l *AddProductOperateLogLogic) AddProductOperateLog(in *pmsclient.AddProductOperateLogReq) (*pmsclient.AddProductOperateLogResp, error) {
 	err := query.PmsProductOperateLog.WithContext(l.ctx).Create(&model.PmsProductOperateLog{
 		ProductID:        in.ProductId,        // 产品id
@@ -45,7 +47,8 @@ func (l *AddProductOperateLogLogic) AddProductOperateLog(in *pmsclient.AddProduc
 	})
 
 	if err != nil {
-		return nil, err
+		logc.Errorf(l.ctx, "添加商品操作日志失败,参数:%+v,异常:%s", in, err.Error())
+		return nil, errors.New("添加商品操作日志失败")
 	}
 
 	return &pmsclient.AddProductOperateLogResp{}, nil

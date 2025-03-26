@@ -2,6 +2,7 @@ package couponservicelogic
 
 import (
 	"context"
+	"errors"
 	"github.com/feihua/zero-admin/pkg/time_util"
 	"github.com/feihua/zero-admin/rpc/sms/gen/model"
 	"github.com/zeromicro/go-zero/core/logc"
@@ -60,8 +61,8 @@ UNION
 	err := db.WithContext(l.ctx).Raw(sql, in.ProductCategoryId, in.ProductId).Scan(&result).Error
 
 	if err != nil {
-		logc.Errorf(l.ctx, "查询商品优惠券列表信息失败,参数：%+v,异常:%s", in, err.Error())
-		return nil, err
+		logc.Errorf(l.ctx, "根据商品Id和分类id查询可用的优惠券(app)失败,参数:%+v,异常:%s", in, err.Error())
+		return nil, errors.New("根据商品Id和分类id查询可用的优惠券(app)失败")
 	}
 
 	var list []*smsclient.QueryCouponListData
@@ -88,7 +89,6 @@ UNION
 			MemberLevel:  coupon.MemberLevel,                     // 可领取的会员类型：0->无限时
 		})
 
-		logc.Infof(l.ctx, "查询商品优惠券列表信息,参数：%+v,响应：%+v", in, list)
 	}
 
 	return &smsclient.CouponFindByProductIdAndProductCategoryIdResp{

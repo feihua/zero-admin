@@ -2,15 +2,17 @@ package memberrulesettingservicelogic
 
 import (
 	"context"
+	"errors"
 	"github.com/feihua/zero-admin/rpc/ums/gen/model"
 	"github.com/feihua/zero-admin/rpc/ums/gen/query"
 	"github.com/feihua/zero-admin/rpc/ums/internal/svc"
 	"github.com/feihua/zero-admin/rpc/ums/umsclient"
+	"github.com/zeromicro/go-zero/core/logc"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// AddMemberRuleSettingLogic 添加会员积分成长规则表
+// AddMemberRuleSettingLogic 添加会员积分成长规则
 /*
 Author: LiuFeiHua
 Date: 2024/6/11 14:00
@@ -29,7 +31,7 @@ func NewAddMemberRuleSettingLogic(ctx context.Context, svcCtx *svc.ServiceContex
 	}
 }
 
-// AddMemberRuleSetting 添加会员积分成长规则表
+// AddMemberRuleSetting 添加会员积分成长规则
 func (l *AddMemberRuleSettingLogic) AddMemberRuleSetting(in *umsclient.AddMemberRuleSettingReq) (*umsclient.AddMemberRuleSettingResp, error) {
 	err := query.UmsMemberRuleSetting.WithContext(l.ctx).Create(&model.UmsMemberRuleSetting{
 		ContinueSignDay:   in.ContinueSignDay,   // 连续签到天数
@@ -43,7 +45,8 @@ func (l *AddMemberRuleSettingLogic) AddMemberRuleSetting(in *umsclient.AddMember
 	})
 
 	if err != nil {
-		return nil, err
+		logc.Errorf(l.ctx, "添加会员积分成长规则失败,参数:%+v,异常:%s", in, err.Error())
+		return nil, errors.New("添加会员积分成长规则失败")
 	}
 
 	return &umsclient.AddMemberRuleSettingResp{}, nil

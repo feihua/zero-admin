@@ -2,6 +2,7 @@ package memberproductcategoryrelationservicelogic
 
 import (
 	"context"
+	"errors"
 	"github.com/feihua/zero-admin/rpc/ums/gen/query"
 	"github.com/zeromicro/go-zero/core/logc"
 
@@ -11,7 +12,7 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// QueryMemberProductCategoryRelationListLogic 查询会员与产品分类关系表（用户喜欢的分类）列表
+// QueryMemberProductCategoryRelationListLogic 查询会员与产品分类关系（用户喜欢的分类）列表
 /*
 Author: LiuFeiHua
 Date: 2024/6/11 14:11
@@ -30,14 +31,14 @@ func NewQueryMemberProductCategoryRelationListLogic(ctx context.Context, svcCtx 
 	}
 }
 
-// QueryMemberProductCategoryRelationList 查询会员与产品分类关系表（用户喜欢的分类）列表
+// QueryMemberProductCategoryRelationList 查询会员与产品分类关系（用户喜欢的分类）列表
 func (l *QueryMemberProductCategoryRelationListLogic) QueryMemberProductCategoryRelationList(in *umsclient.QueryMemberProductCategoryRelationListReq) (*umsclient.QueryMemberProductCategoryRelationListResp, error) {
 	q := query.UmsMemberProductCategoryRelation
 	result, err := q.WithContext(l.ctx).Where(q.MemberID.Eq(in.MemberId)).Find()
 
 	if err != nil {
-		logc.Errorf(l.ctx, "查询会员与产品关糸列表信息失败,参数:%+v,异常:%s", in, err.Error())
-		return nil, err
+		logc.Errorf(l.ctx, "查询会员与产品分类关系失败,参数:%+v,异常:%s", in, err.Error())
+		return nil, errors.New("查询会员与产品分类关系失败")
 	}
 
 	var list []*umsclient.MemberProductCategoryRelationListData

@@ -2,8 +2,10 @@ package orderitemservicelogic
 
 import (
 	"context"
+	"errors"
 	"github.com/feihua/zero-admin/rpc/oms/gen/model"
 	"github.com/feihua/zero-admin/rpc/oms/gen/query"
+	"github.com/zeromicro/go-zero/core/logc"
 
 	"github.com/feihua/zero-admin/rpc/oms/internal/svc"
 	"github.com/feihua/zero-admin/rpc/oms/omsclient"
@@ -56,7 +58,8 @@ func (l *AddOrderItemLogic) AddOrderItem(in *omsclient.AddOrderItemReq) (*omscli
 	})
 
 	if err != nil {
-		return nil, err
+		logc.Errorf(l.ctx, "添加订单中所包含的商品失败,参数:%+v,异常:%s", in, err.Error())
+		return nil, errors.New("添加订单中所包含的商品失败")
 	}
 
 	return &omsclient.AddOrderItemResp{}, nil

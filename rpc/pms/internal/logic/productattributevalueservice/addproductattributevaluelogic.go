@@ -2,8 +2,10 @@ package productattributevalueservicelogic
 
 import (
 	"context"
+	"errors"
 	"github.com/feihua/zero-admin/rpc/pms/gen/model"
 	"github.com/feihua/zero-admin/rpc/pms/gen/query"
+	"github.com/zeromicro/go-zero/core/logc"
 
 	"github.com/feihua/zero-admin/rpc/pms/internal/svc"
 	"github.com/feihua/zero-admin/rpc/pms/pmsclient"
@@ -11,7 +13,7 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// AddProductAttributeValueLogic 添加存储产品参数信息的表
+// AddProductAttributeValueLogic 添加存储产品参数信息
 /*
 Author: LiuFeiHua
 Date: 2024/6/12 16:49
@@ -30,7 +32,7 @@ func NewAddProductAttributeValueLogic(ctx context.Context, svcCtx *svc.ServiceCo
 	}
 }
 
-// AddProductAttributeValue 添加存储产品参数信息的表
+// AddProductAttributeValue 添加存储产品参数信息
 func (l *AddProductAttributeValueLogic) AddProductAttributeValue(in *pmsclient.AddProductAttributeValueReq) (*pmsclient.AddProductAttributeValueResp, error) {
 	err := query.PmsProductAttributeValue.WithContext(l.ctx).Create(&model.PmsProductAttributeValue{
 		ProductID:          in.ProductId,          // 商品id
@@ -39,7 +41,8 @@ func (l *AddProductAttributeValueLogic) AddProductAttributeValue(in *pmsclient.A
 	})
 
 	if err != nil {
-		return nil, err
+		logc.Errorf(l.ctx, "添加存储产品参数信息失败,参数:%+v,异常:%s", in, err.Error())
+		return nil, errors.New("添加存储产品参数信息失败")
 	}
 
 	return &pmsclient.AddProductAttributeValueResp{}, nil

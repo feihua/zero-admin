@@ -2,7 +2,9 @@ package homerecommendproductservicelogic
 
 import (
 	"context"
+	"errors"
 	"github.com/feihua/zero-admin/rpc/sms/gen/query"
+	"github.com/zeromicro/go-zero/core/logc"
 
 	"github.com/feihua/zero-admin/rpc/sms/internal/svc"
 	"github.com/feihua/zero-admin/rpc/sms/smsclient"
@@ -10,7 +12,7 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// UpdateHomeRecommendProductStatusLogic 更新人气推荐商品表状态
+// UpdateHomeRecommendProductStatusLogic 更新人气推荐商品状态
 /*
 Author: LiuFeiHua
 Date: 2024/6/12 17:57
@@ -29,13 +31,14 @@ func NewUpdateHomeRecommendProductStatusLogic(ctx context.Context, svcCtx *svc.S
 	}
 }
 
-// UpdateHomeRecommendProductStatus 更新人气推荐商品表状态
+// UpdateHomeRecommendProductStatus 更新人气推荐商品状态
 func (l *UpdateHomeRecommendProductStatusLogic) UpdateHomeRecommendProductStatus(in *smsclient.UpdateHomeRecommendProductStatusReq) (*smsclient.UpdateHomeRecommendProductStatusResp, error) {
 	q := query.SmsHomeRecommendProduct
 	_, err := q.WithContext(l.ctx).Where(q.ID.In(in.Ids...)).Update(q.RecommendStatus, in.RecommendStatus)
 
 	if err != nil {
-		return nil, err
+		logc.Errorf(l.ctx, "更新人气推荐商品状态失败,参数:%+v,异常:%s", in, err.Error())
+		return nil, errors.New("更新人气推荐商品状态失败")
 	}
 
 	return &smsclient.UpdateHomeRecommendProductStatusResp{}, nil

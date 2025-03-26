@@ -3,6 +3,7 @@ package topicservicelogic
 import (
 	"context"
 	"errors"
+	"github.com/feihua/zero-admin/pkg/time_util"
 	"github.com/feihua/zero-admin/rpc/cms/cmsclient"
 	"github.com/feihua/zero-admin/rpc/cms/gen/query"
 	"github.com/feihua/zero-admin/rpc/cms/internal/svc"
@@ -56,6 +57,5 @@ func (l *QueryTopicDetailLogic) QueryTopicDetail(in *cmsclient.QueryTopicDetailR
 		UpdateTime:     time_util.TimeToString(item.UpdateTime),      // 更新时间
 	}
 
-	logc.Infof(l.ctx, "查询话题详情,参数：%+v,响应：%+v", in, data)
 	return data, nil
 }
