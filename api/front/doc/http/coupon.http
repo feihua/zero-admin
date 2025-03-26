@@ -9,10 +9,18 @@ Content-Type: application/json
 > {% client.global.set("token", response.body.data.token); %}
 
 
-### 获取会员个人的优惠券
-GET {{host}}/api/member/coupon/queryCouponList
+### 获取会员优惠券历史列表
+GET {{host}}/api/member/coupon/queryCouponHistoryList
+Authorization: Bearer {{token}}
+
+### 获取会员个人的优惠券列表
+GET {{host}}/api/member/coupon/queryCouponList?useStatus=0
+Authorization: Bearer {{token}}
+
+### 获取当前商品相关优惠券
+GET {{host}}/api/member/coupon/queryCouponListByProductId
 Authorization: Bearer {{token}}
 
 ### 获取登录会员购物车的相关优惠券
-GET {{host}}/api/member/coupon/queryCouponHistoryList
+GET {{host}}/api/member/coupon/queryCouponListByCart
 Authorization: Bearer {{token}}
