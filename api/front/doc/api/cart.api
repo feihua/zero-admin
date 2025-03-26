@@ -180,11 +180,11 @@ type CartItemClearResp {
 service front-api {
 	//添加商品进购物车
 	@handler CartItemAdd
-	post /add (CartItemAddReq) returns (CartItemAddResp)
+	post /addCart (CartItemAddReq) returns (CartItemAddResp)
 
 	//删除购物车中的某个商品
 	@handler CartItemDelete
-	post /delete (CartItemDeleteReq) returns (CartItemDeleteResp)
+	post /deleteCart (CartItemDeleteReq) returns (CartItemDeleteResp)
 
 	//修改购物车中某个商品的数量
 	@handler CartUpdateQuantity
@@ -196,7 +196,7 @@ service front-api {
 
 	//获取某个会员的购物车列表
 	@handler CarItemList
-	get /list returns (CartItemListResp)
+	get /queryCartList returns (CartItemListResp)
 
 	//获取某个会员的购物车列表,包括促销信息
 	@handler CarItemtListPromotion
