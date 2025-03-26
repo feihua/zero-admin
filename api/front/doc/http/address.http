@@ -14,7 +14,7 @@ Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {
-  "name": "大梨",
+  "name": "小红",
   "phoneNumber": "18033441849",
   "defaultStatus": 1,
   "postCode": "518000",
@@ -25,7 +25,7 @@ Authorization: Bearer {{token}}
 }
 
 ### 删除会员个人的收货地址
-GET {{host}}/api/member/address/deleteMemberAddress?ids=6
+GET {{host}}/api/member/address/deleteMemberAddress?ids=5
 Authorization: Bearer {{token}}
 
 ### 修改会员个人的收货地址
@@ -34,7 +34,7 @@ Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {
-  "id": 6,
+  "id": 5,
   "memberId": 11,
   "name": "大梨123123",
   "phoneNumber": "18033441849",

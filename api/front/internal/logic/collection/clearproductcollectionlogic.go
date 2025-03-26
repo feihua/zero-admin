@@ -14,33 +14,33 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// DeleteProductCollectionLogic 删除商品收藏
+// ClearProductCollectionLogic 清空当前用户商品收藏列表
 /*
 Author: LiuFeiHua
-Date: 2024/5/16 13:46
+Date: 2025/3/26 17:35
 */
-type DeleteProductCollectionLogic struct {
+type ClearProductCollectionLogic struct {
 	logx.Logger
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
 }
 
-func NewDeleteProductCollectionLogic(ctx context.Context, svcCtx *svc.ServiceContext) *DeleteProductCollectionLogic {
-	return &DeleteProductCollectionLogic{
+func NewClearProductCollectionLogic(ctx context.Context, svcCtx *svc.ServiceContext) *ClearProductCollectionLogic {
+	return &ClearProductCollectionLogic{
 		Logger: logx.WithContext(ctx),
 		ctx:    ctx,
 		svcCtx: svcCtx,
 	}
 }
 
-// DeleteProductCollection 删除商品收藏
-func (l *DeleteProductCollectionLogic) DeleteProductCollection(req *types.ProductCollectionDeleteReq) (resp *types.ProductCollectionDeleteResp, err error) {
+// ClearProductCollection 清空当前用户商品收藏列表
+func (l *ClearProductCollectionLogic) ClearProductCollection() (resp *types.ProductCollectionDeleteResp, err error) {
 	memberId, err := common.GetMemberId(l.ctx)
 	if err != nil {
 		return nil, err
 	}
 	_, err = l.svcCtx.MemberProductCollectionService.DeleteMemberProductCollection(l.ctx, &umsclient.DeleteMemberProductCollectionReq{
-		Ids:      req.Ids,
+		Ids:      nil,
 		MemberId: memberId,
 	})
 

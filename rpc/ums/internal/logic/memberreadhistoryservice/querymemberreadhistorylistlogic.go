@@ -36,7 +36,7 @@ func NewQueryMemberReadHistoryListLogic(ctx context.Context, svcCtx *svc.Service
 func (l *QueryMemberReadHistoryListLogic) QueryMemberReadHistoryList(in *umsclient.QueryMemberReadHistoryListReq) (*umsclient.QueryMemberReadHistoryListResp, error) {
 	q := query.UmsMemberReadHistory.WithContext(l.ctx)
 	if in.MemberId != 0 {
-		q = q.Where(query.UmsMemberLoginLog.MemberID.Eq(in.MemberId))
+		q = q.Where(query.UmsMemberReadHistory.MemberID.Eq(in.MemberId))
 	}
 
 	result, count, err := q.FindByPage(int((in.PageNum-1)*in.PageSize), int(in.PageSize))

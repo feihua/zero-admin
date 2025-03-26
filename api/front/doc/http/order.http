@@ -9,11 +9,11 @@ Content-Type: application/json
 > {% client.global.set("token", response.body.data.token); %}
 
 ### 获取订单列表
-GET {{host}}/api/order/orderList/0/1
+GET {{host}}/api/order/orderList?status=0
 Authorization: Bearer {{token}}
 
 ### 获取订单详情
-GET {{host}}/api/order/orderDetail/27
+GET {{host}}/api/order/orderDetail?orderId=27
 Authorization: Bearer {{token}}
 
 ### 根据购物车信息生成确认单信息

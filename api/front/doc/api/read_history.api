@@ -55,9 +55,13 @@ service front-api {
 	@handler AddReadHistory
 	post /addReadHistory (AddReadHistoryReq) returns (AddReadHistoryResp)
 
-	//清空浏览记录/删除浏览记录
+	//删除浏览记录
 	@handler DeleteReadHistory
 	get /deleteReadHistory (ReadHistoryDeleteReq) returns (ReadHistoryDeleteResp)
+
+	//清空浏览记录
+	@handler ClearReadHistory
+	get /clearReadHistory returns (ReadHistoryDeleteResp)
 
 	//获取浏览记录
 	@handler QueryReadHistoryList

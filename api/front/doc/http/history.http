@@ -10,7 +10,7 @@ Content-Type: application/json
 
 
 ### 添加会员个人的浏览记录
-POST {{host}}/api/history/add
+POST {{host}}/api/history/addReadHistory
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
@@ -24,13 +24,13 @@ Authorization: Bearer {{token}}
 }
 
 ### 删除会员个人的浏览记录
-GET {{host}}/api/history/delete/2
+GET {{host}}/api/history/deleteReadHistory?ids=13
 Authorization: Bearer {{token}}
 
 ### 获取会员个人的浏览记录
-GET {{host}}/api/history/list
+GET {{host}}/api/history/queryReadHistoryList
 Authorization: Bearer {{token}}
 
 ### 清空会员个人的浏览记录
-GET {{host}}/api/history/clear
+GET {{host}}/api/history/clearReadHistory
 Authorization: Bearer {{token}}

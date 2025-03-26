@@ -60,9 +60,13 @@ service front-api {
 	@handler AddProductCollection
 	post /addProductCollection (AddProductCollectionReq) returns (AddProductCollectionResp)
 
-	//删除商品收藏/清空当前用户商品收藏列表
+	//删除商品收藏
 	@handler DeleteProductCollection
 	get /deleteProductCollection (ProductCollectionDeleteReq) returns (ProductCollectionDeleteResp)
+
+	//清空当前用户商品收藏列表
+	@handler ClearProductCollection
+	get /clearProductCollection returns (ProductCollectionDeleteResp)
 
 	//分页查询商品收藏列表
 	@handler QueryProductCollectionList

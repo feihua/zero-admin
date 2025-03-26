@@ -112,6 +112,11 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			},
 			{
 				Method:  http.MethodGet,
+				Path:    "/clearProductCollection",
+				Handler: collection.ClearProductCollectionHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodGet,
 				Path:    "/deleteProductCollection",
 				Handler: collection.DeleteProductCollectionHandler(serverCtx),
 			},
@@ -131,6 +136,11 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				Method:  http.MethodPost,
 				Path:    "/addReadHistory",
 				Handler: history.AddReadHistoryHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodGet,
+				Path:    "/clearReadHistory",
+				Handler: history.ClearReadHistoryHandler(serverCtx),
 			},
 			{
 				Method:  http.MethodGet,
@@ -310,6 +320,34 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 	server.AddRoutes(
 		[]rest.Route{
 			{
+				Method:  http.MethodPost,
+				Path:    "/orderPay",
+				Handler: order.OrderPayHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodGet,
+				Path:    "/orderPayQuery/:orderId",
+				Handler: order.OrderPayQueryHandler(serverCtx),
+			},
+		},
+		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
+		rest.WithPrefix("/api/pay"),
+	)
+
+	server.AddRoutes(
+		[]rest.Route{
+			{
+				Method:  http.MethodPost,
+				Path:    "/notify",
+				Handler: order.NotifyHandler(serverCtx),
+			},
+		},
+		rest.WithPrefix("/api/pay"),
+	)
+
+	server.AddRoutes(
+		[]rest.Route{
+			{
 				Method:  http.MethodGet,
 				Path:    "/cancelUserOrder",
 				Handler: order.CancelUserOrderHandler(serverCtx),
@@ -357,34 +395,6 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 		},
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
 		rest.WithPrefix("/api/order"),
-	)
-
-	server.AddRoutes(
-		[]rest.Route{
-			{
-				Method:  http.MethodPost,
-				Path:    "/orderPay",
-				Handler: order.OrderPayHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodGet,
-				Path:    "/orderPayQuery/:orderId",
-				Handler: order.OrderPayQueryHandler(serverCtx),
-			},
-		},
-		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
-		rest.WithPrefix("/api/pay"),
-	)
-
-	server.AddRoutes(
-		[]rest.Route{
-			{
-				Method:  http.MethodPost,
-				Path:    "/notify",
-				Handler: order.NotifyHandler(serverCtx),
-			},
-		},
-		rest.WithPrefix("/api/pay"),
 	)
 
 	server.AddRoutes(

@@ -1,7 +1,7 @@
 ### 品牌列表
-GET {{host}}/api/brand/list
+GET {{host}}/api/brand/queryBrandList
 
 ### 品牌详情
-GET {{host}}/api/brand/detail/6
+GET {{host}}/api/brand/queryBrandProductList?brandId=1
 
 

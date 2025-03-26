@@ -11,7 +11,7 @@ Content-Type: application/json
 
 
 ### 添加会员个人的收藏
-POST {{host}}/api/collection/add
+POST {{host}}/api/collection/addProductCollection
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
@@ -25,14 +25,14 @@ Authorization: Bearer {{token}}
 }
 
 ### 删除会员个人的收藏
-GET {{host}}/api/collection/delete/2
+GET {{host}}/api/collection/deleteProductCollection?ids=13
 Authorization: Bearer {{token}}
 
 ### 获取会员个人的收藏
-GET {{host}}/api/collection/list
+GET {{host}}/api/collection/queryProductCollectionList
 Authorization: Bearer {{token}}
 
 ### 清空会员个人的收藏
-GET {{host}}/api/collection/clear
+GET {{host}}/api/collection/clearProductCollection
 Authorization: Bearer {{token}}
 
