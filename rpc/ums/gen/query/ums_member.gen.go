@@ -53,7 +53,7 @@ func newUmsMember(db *gorm.DB, opts ...gen.DOOption) umsMember {
 	return _umsMember
 }
 
-// umsMember 会员表
+// umsMember 会员信息
 type umsMember struct {
 	umsMemberDo umsMemberDo
 
@@ -71,7 +71,7 @@ type umsMember struct {
 	City                  field.String // 所做城市
 	Job                   field.String // 职业
 	PersonalizedSignature field.String // 个性签名
-	SourceType            field.Int32  // 用户来源
+	SourceType            field.Int32  // 用户来源：1->移动端; 2->pc端
 	Integration           field.Int32  // 积分
 	Growth                field.Int32  // 成长值
 	LotteryCount          field.Int32  // 剩余抽奖次数

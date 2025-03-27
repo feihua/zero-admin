@@ -8,7 +8,7 @@ Content-Type: application/json
 }
 > {% client.global.set("token", response.body.data.token); %}
 
-### 获取订单列表--status--->订单状态：0->待付款；1->待发货；2->已发货；3->已完成；4->已关闭；5->无效订单
+### 获取订单列表--status--->订单状态：0->待付款；1->待发货；2->已发货；3->已完成；4->已关闭；5->无效订单 ==>不传status则拿所有订单
 GET {{host}}/api/order/orderList?status=2
 Authorization: Bearer {{token}}
 

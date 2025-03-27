@@ -3,7 +3,7 @@ POST {{host}}/api/member/register
 Content-Type: application/json
 
 {
-  "username": "test",
+  "username": "dev",
   "mobile": "18613030355",
   "confirmPassword": "123456",
   "password": "123456"

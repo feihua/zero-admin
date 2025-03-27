@@ -67,7 +67,7 @@ func (l *QueryMemberDetailLogic) QueryMemberDetail(in *umsclient.QueryMemberDeta
 		CreateTime:            time_util.TimeToStr(member.CreateTime),
 		Icon:                  member.Icon,
 		Gender:                member.Gender,
-		Birthday:              time_util.TimeToStr(member.Birthday),
+		Birthday:              time_util.TimeToString(member.Birthday),
 		City:                  member.City,
 		Job:                   member.Job,
 		PersonalizedSignature: member.PersonalizedSignature,

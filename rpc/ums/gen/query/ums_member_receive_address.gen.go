@@ -45,7 +45,7 @@ func newUmsMemberReceiveAddress(db *gorm.DB, opts ...gen.DOOption) umsMemberRece
 	return _umsMemberReceiveAddress
 }
 
-// umsMemberReceiveAddress 会员收货地址表
+// umsMemberReceiveAddress 会员收货地址
 type umsMemberReceiveAddress struct {
 	umsMemberReceiveAddressDo umsMemberReceiveAddressDo
 

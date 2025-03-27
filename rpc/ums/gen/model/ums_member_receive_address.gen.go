@@ -10,7 +10,7 @@ import (
 
 const TableNameUmsMemberReceiveAddress = "ums_member_receive_address"
 
-// UmsMemberReceiveAddress 会员收货地址表
+// UmsMemberReceiveAddress 会员收货地址
 type UmsMemberReceiveAddress struct {
 	ID            int64      `gorm:"column:id;primaryKey;autoIncrement:true" json:"id"`
 	MemberID      int64      `gorm:"column:member_id;not null;comment:会员id" json:"member_id"`                               // 会员id
