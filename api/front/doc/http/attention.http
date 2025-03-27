@@ -3,7 +3,7 @@ POST {{host}}/api/member/login
 Content-Type: application/json
 
 {
-  "mobile": "18613030352",
+  "account": "koobe",
   "password": "123456"
 }
 > {% client.global.set("token", response.body.data.token); %}
@@ -14,10 +14,10 @@ Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {
-  "brandId": 6,
-  "brandName": "小米",
+  "brandId": 3,
+  "brandName": "华为",
   "brandCity": "广东省",
-  "brandLogo": "http://macro-oss.oss-cn-shenzhen.aliyuncs.com/mall/images/20200607/5565f5a2N0b8169ae.jpg"
+  "brandLogo": "http://macro-oss.oss-cn-shenzhen.aliyuncs.com/mall/images/20200607/5abf6f26N31658aa2.jpg"
 }
 
 ### 删除会员品牌关注

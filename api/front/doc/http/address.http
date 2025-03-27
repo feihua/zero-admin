@@ -3,7 +3,7 @@ POST {{host}}/api/member/login
 Content-Type: application/json
 
 {
-  "mobile": "18613030352",
+  "account": "koobe",
   "password": "123456"
 }
 > {% client.global.set("token", response.body.data.token); %}
@@ -14,14 +14,14 @@ Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {
-  "name": "小红",
-  "phoneNumber": "18033441849",
-  "defaultStatus": 1,
-  "postCode": "518000",
+  "name": "koobe",
+  "phoneNumber": "13144410222",
+  "defaultStatus": 0,
+  "postCode": "228000",
   "province": "广东省",
-  "city": "深圳市",
-  "region": "福田区",
-  "detailAddress": "东晓街道"
+  "city": "广州市",
+  "region": "天河区",
+  "detailAddress": "测试详细地址2"
 }
 
 ### 删除会员个人的收货地址
@@ -34,16 +34,16 @@ Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {
-  "id": 5,
-  "memberId": 11,
-  "name": "大梨123123",
-  "phoneNumber": "18033441849",
-  "defaultStatus": 1,
-  "postCode": "518000",
+  "id": 4,
+  "memberId": 2,
+  "name": "koobe",
+  "phoneNumber": "13144410222",
+  "defaultStatus": 0,
+  "postCode": "647000",
   "province": "广东省",
-  "city": "深圳市",
-  "region": "福田区",
-  "detailAddress": "东晓街道"
+  "city": "广州市",
+  "region": "天河区",
+  "detailAddress": "测试详细地址2"
 }
 
 ### 获取会员个人的收货地址

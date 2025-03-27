@@ -38,7 +38,7 @@ func newSmsHomeBrand(db *gorm.DB, opts ...gen.DOOption) smsHomeBrand {
 	return _smsHomeBrand
 }
 
-// smsHomeBrand 首页推荐品牌表
+// smsHomeBrand 首页推荐品牌
 type smsHomeBrand struct {
 	smsHomeBrandDo smsHomeBrandDo
 

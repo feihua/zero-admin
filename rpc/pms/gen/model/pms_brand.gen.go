@@ -10,7 +10,7 @@ import (
 
 const TableNamePmsBrand = "pms_brand"
 
-// PmsBrand 品牌表
+// PmsBrand 商品品牌
 type PmsBrand struct {
 	ID                  int64      `gorm:"column:id;primaryKey;autoIncrement:true" json:"id"`
 	Name                string     `gorm:"column:name;not null;comment:品牌名称" json:"name"`                                         // 品牌名称

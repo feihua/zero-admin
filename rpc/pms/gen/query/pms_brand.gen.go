@@ -49,7 +49,7 @@ func newPmsBrand(db *gorm.DB, opts ...gen.DOOption) pmsBrand {
 	return _pmsBrand
 }
 
-// pmsBrand 品牌表
+// pmsBrand 商品品牌
 type pmsBrand struct {
 	pmsBrandDo pmsBrandDo
 

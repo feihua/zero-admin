@@ -39,6 +39,8 @@ func newPmsProductCategory(db *gorm.DB, opts ...gen.DOOption) pmsProductCategory
 	_pmsProductCategory.Icon = field.NewString(tableName, "icon")
 	_pmsProductCategory.Keywords = field.NewString(tableName, "keywords")
 	_pmsProductCategory.Description = field.NewString(tableName, "description")
+	_pmsProductCategory.CreateTime = field.NewTime(tableName, "create_time")
+	_pmsProductCategory.UpdateTime = field.NewTime(tableName, "update_time")
 
 	_pmsProductCategory.fillFieldMap()
 
@@ -62,6 +64,8 @@ type pmsProductCategory struct {
 	Icon         field.String // 图标
 	Keywords     field.String // 关键字
 	Description  field.String // 描述
+	CreateTime   field.Time   // 创建时间
+	UpdateTime   field.Time   // 更新时间
 
 	fieldMap map[string]field.Expr
 }
@@ -90,6 +94,8 @@ func (p *pmsProductCategory) updateTableName(table string) *pmsProductCategory {
 	p.Icon = field.NewString(table, "icon")
 	p.Keywords = field.NewString(table, "keywords")
 	p.Description = field.NewString(table, "description")
+	p.CreateTime = field.NewTime(table, "create_time")
+	p.UpdateTime = field.NewTime(table, "update_time")
 
 	p.fillFieldMap()
 
@@ -118,7 +124,7 @@ func (p *pmsProductCategory) GetFieldByName(fieldName string) (field.OrderExpr, 
 }
 
 func (p *pmsProductCategory) fillFieldMap() {
-	p.fieldMap = make(map[string]field.Expr, 12)
+	p.fieldMap = make(map[string]field.Expr, 14)
 	p.fieldMap["id"] = p.ID
 	p.fieldMap["parent_id"] = p.ParentID
 	p.fieldMap["name"] = p.Name
@@ -131,6 +137,8 @@ func (p *pmsProductCategory) fillFieldMap() {
 	p.fieldMap["icon"] = p.Icon
 	p.fieldMap["keywords"] = p.Keywords
 	p.fieldMap["description"] = p.Description
+	p.fieldMap["create_time"] = p.CreateTime
+	p.fieldMap["update_time"] = p.UpdateTime
 }
 
 func (p pmsProductCategory) clone(db *gorm.DB) pmsProductCategory {

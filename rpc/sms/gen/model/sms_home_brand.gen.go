@@ -6,7 +6,7 @@ package model
 
 const TableNameSmsHomeBrand = "sms_home_brand"
 
-// SmsHomeBrand 首页推荐品牌表
+// SmsHomeBrand 首页推荐品牌
 type SmsHomeBrand struct {
 	ID              int64  `gorm:"column:id;primaryKey;autoIncrement:true" json:"id"`
 	BrandID         int64  `gorm:"column:brand_id;not null;comment:商品品牌id" json:"brand_id"`                            // 商品品牌id

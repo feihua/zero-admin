@@ -38,6 +38,8 @@ func newPmsSkuStock(db *gorm.DB, opts ...gen.DOOption) pmsSkuStock {
 	_pmsSkuStock.PromotionPrice = field.NewInt64(tableName, "promotion_price")
 	_pmsSkuStock.LockStock = field.NewInt32(tableName, "lock_stock")
 	_pmsSkuStock.SpData = field.NewString(tableName, "sp_data")
+	_pmsSkuStock.CreateTime = field.NewTime(tableName, "create_time")
+	_pmsSkuStock.UpdateTime = field.NewTime(tableName, "update_time")
 
 	_pmsSkuStock.fillFieldMap()
 
@@ -60,6 +62,8 @@ type pmsSkuStock struct {
 	PromotionPrice field.Int64  // 单品促销价格
 	LockStock      field.Int32  // 锁定库存
 	SpData         field.String // 商品销售属性，json格式
+	CreateTime     field.Time   // 创建时间
+	UpdateTime     field.Time   // 更新时间
 
 	fieldMap map[string]field.Expr
 }
@@ -87,6 +91,8 @@ func (p *pmsSkuStock) updateTableName(table string) *pmsSkuStock {
 	p.PromotionPrice = field.NewInt64(table, "promotion_price")
 	p.LockStock = field.NewInt32(table, "lock_stock")
 	p.SpData = field.NewString(table, "sp_data")
+	p.CreateTime = field.NewTime(table, "create_time")
+	p.UpdateTime = field.NewTime(table, "update_time")
 
 	p.fillFieldMap()
 
@@ -113,7 +119,7 @@ func (p *pmsSkuStock) GetFieldByName(fieldName string) (field.OrderExpr, bool) {
 }
 
 func (p *pmsSkuStock) fillFieldMap() {
-	p.fieldMap = make(map[string]field.Expr, 11)
+	p.fieldMap = make(map[string]field.Expr, 13)
 	p.fieldMap["id"] = p.ID
 	p.fieldMap["product_id"] = p.ProductID
 	p.fieldMap["sku_code"] = p.SkuCode
@@ -125,6 +131,8 @@ func (p *pmsSkuStock) fillFieldMap() {
 	p.fieldMap["promotion_price"] = p.PromotionPrice
 	p.fieldMap["lock_stock"] = p.LockStock
 	p.fieldMap["sp_data"] = p.SpData
+	p.fieldMap["create_time"] = p.CreateTime
+	p.fieldMap["update_time"] = p.UpdateTime
 }
 
 func (p pmsSkuStock) clone(db *gorm.DB) pmsSkuStock {

@@ -77,8 +77,8 @@ type omsOrderItem struct {
 	CouponAmount      field.Int64  // 优惠券优惠分解金额
 	IntegrationAmount field.Int64  // 积分优惠分解金额
 	RealAmount        field.Int64  // 该商品经过优惠后的分解金额
-	GiftIntegration   field.Int32
-	GiftGrowth        field.Int32
+	GiftIntegration   field.Int32  // 赠送的积分
+	GiftGrowth        field.Int32  // 赠送的成长值
 	ProductAttr       field.String // 商品销售属性:[{"key":"颜色","value":"颜色"},{"key":"容量","value":"4G"}]
 
 	fieldMap map[string]field.Expr

@@ -38,20 +38,20 @@ func newOmsCartItem(db *gorm.DB, opts ...gen.DOOption) omsCartItem {
 	_omsCartItem.ProductSubTitle = field.NewString(tableName, "product_sub_title")
 	_omsCartItem.ProductSkuCode = field.NewString(tableName, "product_sku_code")
 	_omsCartItem.MemberNickname = field.NewString(tableName, "member_nickname")
-	_omsCartItem.CreateTime = field.NewTime(tableName, "create_time")
-	_omsCartItem.UpdateTime = field.NewTime(tableName, "update_time")
 	_omsCartItem.DeleteStatus = field.NewInt32(tableName, "delete_status")
 	_omsCartItem.ProductCategoryID = field.NewInt64(tableName, "product_category_id")
 	_omsCartItem.ProductBrand = field.NewString(tableName, "product_brand")
 	_omsCartItem.ProductSn = field.NewString(tableName, "product_sn")
 	_omsCartItem.ProductAttr = field.NewString(tableName, "product_attr")
+	_omsCartItem.CreateTime = field.NewTime(tableName, "create_time")
+	_omsCartItem.UpdateTime = field.NewTime(tableName, "update_time")
 
 	_omsCartItem.fillFieldMap()
 
 	return _omsCartItem
 }
 
-// omsCartItem 购物车表
+// omsCartItem 购物车
 type omsCartItem struct {
 	omsCartItemDo omsCartItemDo
 
@@ -67,13 +67,13 @@ type omsCartItem struct {
 	ProductSubTitle   field.String // 商品副标题（卖点）
 	ProductSkuCode    field.String // 商品sku条码
 	MemberNickname    field.String // 会员昵称
-	CreateTime        field.Time   // 创建时间
-	UpdateTime        field.Time   // 更新时间
 	DeleteStatus      field.Int32  // 是否删除
 	ProductCategoryID field.Int64  // 商品分类
 	ProductBrand      field.String // 商品品牌
 	ProductSn         field.String // 货号
 	ProductAttr       field.String // 商品销售属性:[{"key":"颜色","value":"颜色"},{"key":"容量","value":"4G"}]
+	CreateTime        field.Time   // 创建时间
+	UpdateTime        field.Time   // 更新时间
 
 	fieldMap map[string]field.Expr
 }
@@ -101,13 +101,13 @@ func (o *omsCartItem) updateTableName(table string) *omsCartItem {
 	o.ProductSubTitle = field.NewString(table, "product_sub_title")
 	o.ProductSkuCode = field.NewString(table, "product_sku_code")
 	o.MemberNickname = field.NewString(table, "member_nickname")
-	o.CreateTime = field.NewTime(table, "create_time")
-	o.UpdateTime = field.NewTime(table, "update_time")
 	o.DeleteStatus = field.NewInt32(table, "delete_status")
 	o.ProductCategoryID = field.NewInt64(table, "product_category_id")
 	o.ProductBrand = field.NewString(table, "product_brand")
 	o.ProductSn = field.NewString(table, "product_sn")
 	o.ProductAttr = field.NewString(table, "product_attr")
+	o.CreateTime = field.NewTime(table, "create_time")
+	o.UpdateTime = field.NewTime(table, "update_time")
 
 	o.fillFieldMap()
 
@@ -146,13 +146,13 @@ func (o *omsCartItem) fillFieldMap() {
 	o.fieldMap["product_sub_title"] = o.ProductSubTitle
 	o.fieldMap["product_sku_code"] = o.ProductSkuCode
 	o.fieldMap["member_nickname"] = o.MemberNickname
-	o.fieldMap["create_time"] = o.CreateTime
-	o.fieldMap["update_time"] = o.UpdateTime
 	o.fieldMap["delete_status"] = o.DeleteStatus
 	o.fieldMap["product_category_id"] = o.ProductCategoryID
 	o.fieldMap["product_brand"] = o.ProductBrand
 	o.fieldMap["product_sn"] = o.ProductSn
 	o.fieldMap["product_attr"] = o.ProductAttr
+	o.fieldMap["create_time"] = o.CreateTime
+	o.fieldMap["update_time"] = o.UpdateTime
 }
 
 func (o omsCartItem) clone(db *gorm.DB) omsCartItem {

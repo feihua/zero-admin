@@ -3,6 +3,7 @@ package couponhistoryservicelogic
 import (
 	"context"
 	"errors"
+	"github.com/feihua/zero-admin/pkg/pointerprocess"
 	"github.com/feihua/zero-admin/pkg/time_util"
 	"github.com/feihua/zero-admin/rpc/sms/gen/query"
 	"github.com/feihua/zero-admin/rpc/sms/internal/svc"
@@ -40,17 +41,17 @@ func (l *QueryCouponHistoryDetailLogic) QueryCouponHistoryDetail(in *smsclient.Q
 	}
 
 	data := &smsclient.QueryCouponHistoryDetailResp{
-		Id:             item.ID,                              //
-		CouponId:       item.CouponID,                        // 优惠券id
-		MemberId:       item.MemberID,                        // 会员id
-		CouponCode:     item.CouponCode,                      // 优惠码
-		MemberNickname: item.MemberNickname,                  // 领取人昵称
-		GetType:        item.GetType,                         // 获取类型：0->后台赠送；1->主动获取
-		CreateTime:     time_util.TimeToStr(item.CreateTime), // 领取时间
-		UseStatus:      item.UseStatus,                       // 使用状态：0->未使用；1->已使用；2->已过期
-		UseTime:        time_util.TimeToStr(item.UseTime),    // 使用时间
-		OrderId:        item.OrderID,                         // 订单编号
-		OrderSn:        item.OrderSn,                         // 订单号码
+		Id:             item.ID,                                          //
+		CouponId:       item.CouponID,                                    // 优惠券id
+		MemberId:       item.MemberID,                                    // 会员id
+		CouponCode:     item.CouponCode,                                  // 优惠码
+		MemberNickname: item.MemberNickname,                              // 领取人昵称
+		GetType:        item.GetType,                                     // 获取类型：0->后台赠送；1->主动获取
+		CreateTime:     time_util.TimeToStr(item.CreateTime),             // 领取时间
+		UseStatus:      item.UseStatus,                                   // 使用状态：0->未使用；1->已使用；2->已过期
+		UseTime:        time_util.TimeToString(item.UseTime),             // 使用时间
+		OrderId:        pointerprocess.DefaltData(item.OrderID).(int64),  // 订单编号
+		OrderSn:        pointerprocess.DefaltData(item.OrderSn).(string), // 订单号码
 	}
 
 	logc.Infof(l.ctx, "查询优惠券使用、领取历史详情,参数：%+v,响应：%+v", in, data)

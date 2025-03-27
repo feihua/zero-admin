@@ -45,13 +45,15 @@ func newSmsCoupon(db *gorm.DB, opts ...gen.DOOption) smsCoupon {
 	_smsCoupon.EnableTime = field.NewTime(tableName, "enable_time")
 	_smsCoupon.Code = field.NewString(tableName, "code")
 	_smsCoupon.MemberLevel = field.NewInt32(tableName, "member_level")
+	_smsCoupon.CreateTime = field.NewTime(tableName, "create_time")
+	_smsCoupon.UpdateTime = field.NewTime(tableName, "update_time")
 
 	_smsCoupon.fillFieldMap()
 
 	return _smsCoupon
 }
 
-// smsCoupon 优惠券表
+// smsCoupon 优惠券
 type smsCoupon struct {
 	smsCouponDo smsCouponDo
 
@@ -74,6 +76,8 @@ type smsCoupon struct {
 	EnableTime   field.Time   // 可以领取的日期
 	Code         field.String // 优惠码
 	MemberLevel  field.Int32  // 可领取的会员类型：0->无限时
+	CreateTime   field.Time   // 创建时间
+	UpdateTime   field.Time   // 更新时间
 
 	fieldMap map[string]field.Expr
 }
@@ -108,6 +112,8 @@ func (s *smsCoupon) updateTableName(table string) *smsCoupon {
 	s.EnableTime = field.NewTime(table, "enable_time")
 	s.Code = field.NewString(table, "code")
 	s.MemberLevel = field.NewInt32(table, "member_level")
+	s.CreateTime = field.NewTime(table, "create_time")
+	s.UpdateTime = field.NewTime(table, "update_time")
 
 	s.fillFieldMap()
 
@@ -134,7 +140,7 @@ func (s *smsCoupon) GetFieldByName(fieldName string) (field.OrderExpr, bool) {
 }
 
 func (s *smsCoupon) fillFieldMap() {
-	s.fieldMap = make(map[string]field.Expr, 18)
+	s.fieldMap = make(map[string]field.Expr, 20)
 	s.fieldMap["id"] = s.ID
 	s.fieldMap["type"] = s.Type
 	s.fieldMap["name"] = s.Name
@@ -153,6 +159,8 @@ func (s *smsCoupon) fillFieldMap() {
 	s.fieldMap["enable_time"] = s.EnableTime
 	s.fieldMap["code"] = s.Code
 	s.fieldMap["member_level"] = s.MemberLevel
+	s.fieldMap["create_time"] = s.CreateTime
+	s.fieldMap["update_time"] = s.UpdateTime
 }
 
 func (s smsCoupon) clone(db *gorm.DB) smsCoupon {

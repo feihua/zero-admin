@@ -35,6 +35,8 @@ func newPmsFeightTemplate(db *gorm.DB, opts ...gen.DOOption) pmsFeightTemplate {
 	_pmsFeightTemplate.ContinueWeight = field.NewInt64(tableName, "continue_weight")
 	_pmsFeightTemplate.ContinueFee = field.NewInt64(tableName, "continue_fee")
 	_pmsFeightTemplate.Dest = field.NewString(tableName, "dest")
+	_pmsFeightTemplate.CreateTime = field.NewTime(tableName, "create_time")
+	_pmsFeightTemplate.UpdateTime = field.NewTime(tableName, "update_time")
 
 	_pmsFeightTemplate.fillFieldMap()
 
@@ -54,6 +56,8 @@ type pmsFeightTemplate struct {
 	ContinueWeight field.Int64  // 续重kg
 	ContinueFee    field.Int64  // 续费（元）
 	Dest           field.String // 目的地（省、市）
+	CreateTime     field.Time   // 创建时间
+	UpdateTime     field.Time   // 更新时间
 
 	fieldMap map[string]field.Expr
 }
@@ -78,6 +82,8 @@ func (p *pmsFeightTemplate) updateTableName(table string) *pmsFeightTemplate {
 	p.ContinueWeight = field.NewInt64(table, "continue_weight")
 	p.ContinueFee = field.NewInt64(table, "continue_fee")
 	p.Dest = field.NewString(table, "dest")
+	p.CreateTime = field.NewTime(table, "create_time")
+	p.UpdateTime = field.NewTime(table, "update_time")
 
 	p.fillFieldMap()
 
@@ -106,7 +112,7 @@ func (p *pmsFeightTemplate) GetFieldByName(fieldName string) (field.OrderExpr, b
 }
 
 func (p *pmsFeightTemplate) fillFieldMap() {
-	p.fieldMap = make(map[string]field.Expr, 8)
+	p.fieldMap = make(map[string]field.Expr, 10)
 	p.fieldMap["id"] = p.ID
 	p.fieldMap["name"] = p.Name
 	p.fieldMap["charge_type"] = p.ChargeType
@@ -115,6 +121,8 @@ func (p *pmsFeightTemplate) fillFieldMap() {
 	p.fieldMap["continue_weight"] = p.ContinueWeight
 	p.fieldMap["continue_fee"] = p.ContinueFee
 	p.fieldMap["dest"] = p.Dest
+	p.fieldMap["create_time"] = p.CreateTime
+	p.fieldMap["update_time"] = p.UpdateTime
 }
 
 func (p pmsFeightTemplate) clone(db *gorm.DB) pmsFeightTemplate {

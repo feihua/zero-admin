@@ -1,17 +1,21 @@
+drop table if exists pms_sku_stock;
 create table pms_sku_stock
 (
     id              bigint auto_increment
         primary key,
-    product_id      bigint        not null comment '商品id',
-    sku_code        varchar(64)   not null comment 'sku编码',
-    price           bigint        not null comment '价格',
-    stock           int default 0 not null comment '库存',
-    low_stock       int           not null comment '预警库存',
-    pic             varchar(255)  not null comment '展示图片',
-    sale            int           not null comment '销量',
-    promotion_price bigint        not null comment '单品促销价格',
-    lock_stock      int default 0 not null comment '锁定库存',
-    sp_data         varchar(500)  not null comment '商品销售属性，json格式'
+    product_id      bigint                             not null comment '商品id',
+    sku_code        varchar(64)                        not null comment 'sku编码',
+    price           bigint                             not null comment '价格',
+    stock           int      default 0                 not null comment '库存',
+    low_stock       int                                not null comment '预警库存',
+    pic             varchar(255)                       not null comment '展示图片',
+    sale            int                                not null comment '销量',
+    promotion_price bigint                             not null comment '单品促销价格',
+    lock_stock      int      default 0                 not null comment '锁定库存',
+    sp_data         varchar(500)                       not null comment '商品销售属性，json格式',
+    create_time     datetime default CURRENT_TIMESTAMP not null comment '创建时间',
+    update_time     datetime                           null on update CURRENT_TIMESTAMP comment '更新时间'
+
 )
     comment 'sku的库存';
 

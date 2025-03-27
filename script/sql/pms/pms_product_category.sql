@@ -2,17 +2,20 @@ create table pms_product_category
 (
     id            bigint auto_increment
         primary key,
-    parent_id     bigint       not null comment '上机分类的编号：0表示一级分类',
-    name          varchar(64)  not null comment '商品分类名称',
-    level         tinyint      not null comment '分类级别：0->1级；1->2级',
-    product_count int          not null comment '商品数量',
-    product_unit  varchar(64)  not null comment '商品数量',
-    nav_status    tinyint      not null comment '是否显示在导航栏：0->不显示；1->显示',
-    show_status   tinyint      not null comment '显示状态：0->不显示；1->显示',
-    sort          int          not null comment '排序',
-    icon          varchar(255) not null comment '图标',
-    keywords      varchar(255) not null comment '关键字',
-    description   text         not null comment '描述'
+    parent_id     bigint                             not null comment '上机分类的编号：0表示一级分类',
+    name          varchar(64)                        not null comment '商品分类名称',
+    level         tinyint                            not null comment '分类级别：0->1级；1->2级',
+    product_count int                                not null comment '商品数量',
+    product_unit  varchar(64)                        not null comment '商品数量',
+    nav_status    tinyint                            not null comment '是否显示在导航栏：0->不显示；1->显示',
+    show_status   tinyint                            not null comment '显示状态：0->不显示；1->显示',
+    sort          int                                not null comment '排序',
+    icon          varchar(255)                       not null comment '图标',
+    keywords      varchar(255)                       not null comment '关键字',
+    description   text                               not null comment '描述',
+    create_time   datetime default CURRENT_TIMESTAMP not null comment '创建时间',
+    update_time   datetime                           null on update CURRENT_TIMESTAMP comment '更新时间'
+
 )
     comment '产品分类';
 

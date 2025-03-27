@@ -2,6 +2,11 @@ package pointerprocess
 
 import "reflect"
 
+// DefaltData
+/*
+Author: xixigh <1746877224@qq.com>
+Date: 2024/6/27 18:13
+*/
 func DefaltData(v interface{}) interface{} {
 	// 使用反射检查传入的值是否是一个指针
 	val := reflect.ValueOf(v)

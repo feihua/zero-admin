@@ -1,3 +1,4 @@
+drop table if exists ums_member_receive_address;
 create table ums_member_receive_address
 (
     id             bigint auto_increment
@@ -14,14 +15,9 @@ create table ums_member_receive_address
     create_time    datetime default CURRENT_TIMESTAMP not null comment '创建时间',
     update_time    datetime                           null on update CURRENT_TIMESTAMP comment '更新时间'
 )
-    comment '会员收货地址表';
+    comment '会员收货地址';
 
-INSERT INTO ums_member_receive_address (id, member_id, member_name, phone_number, default_status, post_code, province,
-                                        city, region, detail_address, create_time)
-VALUES (1, 1, '大梨', '18033441849', 0, '518000', '广东省', '深圳市', '南山区', '科兴科学园', current_timestamp);
-INSERT INTO ums_member_receive_address (id, member_id, member_name, phone_number, default_status, post_code, province,
-                                        city, region, detail_address, create_time)
-VALUES (3, 1, '大梨', '18033441849', 0, '518000', '广东省', '深圳市', '福田区', '清水河街道', current_timestamp);
-INSERT INTO ums_member_receive_address (id, member_id, member_name, phone_number, default_status, post_code, province,
-                                        city, region, detail_address, create_time)
-VALUES (4, 1, '大梨', '18033441849', 1, '518000', '广东省', '深圳市', '福田区', '东晓街道', current_timestamp);
+INSERT INTO ums_member_receive_address (id, member_id, member_name, phone_number, default_status, post_code, province, city, region, detail_address) VALUES (1, 1, 'test', '18613030352', 1, '518000', '广东省', '深圳市', '南山区', '西丽街道1688街道88号');
+INSERT INTO ums_member_receive_address (id, member_id, member_name, phone_number, default_status, post_code, province, city, region, detail_address) VALUES (2, 1, 'test', '18613030111', 0, '318000', '广东省', '茂名市', '高州', '曹江林村123号');
+INSERT INTO ums_member_receive_address (id, member_id, member_name, phone_number, default_status, post_code, province, city, region, detail_address) VALUES (3, 2, 'koobe', '13144410811', 1, '226600', '广东省', '茂名市', '高州', '测试详细地址');
+INSERT INTO ums_member_receive_address (id, member_id, member_name, phone_number, default_status, post_code, province, city, region, detail_address) VALUES (4, 2, 'koobe', '13144410222', 0, '647000', '广东省', '广州市', '天河区', '测试详细地址2');

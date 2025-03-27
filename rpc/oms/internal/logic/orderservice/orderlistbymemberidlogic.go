@@ -8,10 +8,16 @@ import (
 	"github.com/feihua/zero-admin/rpc/oms/internal/svc"
 	"github.com/feihua/zero-admin/rpc/oms/omsclient"
 	"github.com/zeromicro/go-zero/core/logc"
+	"gorm.io/gorm"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// OrderListByMemberIdLogic 查询订单详情
+/*
+Author: LiuFeiHua
+Date: 2025/3/27 16:34
+*/
 type OrderListByMemberIdLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
@@ -26,14 +32,18 @@ func NewOrderListByMemberIdLogic(ctx context.Context, svcCtx *svc.ServiceContext
 	}
 }
 
+// OrderListByMemberId 查询订单详情
 func (l *OrderListByMemberIdLogic) OrderListByMemberId(in *omsclient.OrderListByMemberIdReq) (*omsclient.OrderListByMemberIdResp, error) {
 	q := query.OmsOrder
-	// 1.查询订单是否存在
 	item, err := q.WithContext(l.ctx).Where(q.ID.Eq(in.Id), q.MemberID.Eq(in.MemberId)).First()
 
-	if err != nil {
-		logc.Errorf(l.ctx, "查询订单列表失败,参数:%+v,异常:%s", in, err.Error())
-		return nil, errors.New("查询订单列表失败")
+	switch {
+	case errors.Is(err, gorm.ErrRecordNotFound):
+		logc.Errorf(l.ctx, "订单不存在, 请求参数：%+v, 异常信息: %s", in, err.Error())
+		return nil, errors.New("订单不存在")
+	case err != nil:
+		logc.Errorf(l.ctx, "查询订单异常, 请求参数：%+v, 异常信息: %s", in, err.Error())
+		return nil, errors.New("查询订单异常")
 	}
 
 	data := &omsclient.OrderListData{

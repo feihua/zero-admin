@@ -3,17 +3,17 @@ POST {{host}}/api/member/login
 Content-Type: application/json
 
 {
-  "mobile": "18613030352",
+  "account": "test",
   "password": "123456"
 }
 > {% client.global.set("token", response.body.data.token); %}
 
-### 获取订单列表
-GET {{host}}/api/order/orderList?status=0
+### 获取订单列表--status--->订单状态：0->待付款；1->待发货；2->已发货；3->已完成；4->已关闭；5->无效订单
+GET {{host}}/api/order/orderList?status=2
 Authorization: Bearer {{token}}
 
 ### 获取订单详情
-GET {{host}}/api/order/orderDetail?orderId=27
+GET {{host}}/api/order/orderDetail?orderId=12
 Authorization: Bearer {{token}}
 
 ### 根据购物车信息生成确认单信息
@@ -34,7 +34,7 @@ Authorization: Bearer {{token}}
   "productId": 27,
   "productSkuId": 163,
   "quantity": 3,
-  "price": 2999.00,
+  "price": 2999,
   "productPic": "http://macro-oss.oss-cn-shenzhen.aliyuncs.com/mall/images/20221104/xiaomi_12_pro_01.jpg",
   "productName": "小米12 Pro 天玑版 天玑9000+处理器 5000万疾速影像 2K超视感屏 120Hz高刷 67W快充",
   "productSubTitle": "天玑9000+处理器、5160mAh大电量、2KAmoled超视感屏【点击购买小米11Ultra，戳】 ",

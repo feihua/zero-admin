@@ -33,11 +33,11 @@ func newSmsCouponHistory(db *gorm.DB, opts ...gen.DOOption) smsCouponHistory {
 	_smsCouponHistory.CouponCode = field.NewString(tableName, "coupon_code")
 	_smsCouponHistory.MemberNickname = field.NewString(tableName, "member_nickname")
 	_smsCouponHistory.GetType = field.NewInt32(tableName, "get_type")
-	_smsCouponHistory.CreateTime = field.NewTime(tableName, "create_time")
 	_smsCouponHistory.UseStatus = field.NewInt32(tableName, "use_status")
 	_smsCouponHistory.UseTime = field.NewTime(tableName, "use_time")
 	_smsCouponHistory.OrderID = field.NewInt64(tableName, "order_id")
 	_smsCouponHistory.OrderSn = field.NewString(tableName, "order_sn")
+	_smsCouponHistory.CreateTime = field.NewTime(tableName, "create_time")
 
 	_smsCouponHistory.fillFieldMap()
 
@@ -55,11 +55,11 @@ type smsCouponHistory struct {
 	CouponCode     field.String // 优惠码
 	MemberNickname field.String // 领取人昵称
 	GetType        field.Int32  // 获取类型：0->后台赠送；1->主动获取
-	CreateTime     field.Time   // 领取时间
 	UseStatus      field.Int32  // 使用状态：0->未使用；1->已使用；2->已过期
 	UseTime        field.Time   // 使用时间
 	OrderID        field.Int64  // 订单编号
 	OrderSn        field.String // 订单号码
+	CreateTime     field.Time   // 领取时间
 
 	fieldMap map[string]field.Expr
 }
@@ -82,11 +82,11 @@ func (s *smsCouponHistory) updateTableName(table string) *smsCouponHistory {
 	s.CouponCode = field.NewString(table, "coupon_code")
 	s.MemberNickname = field.NewString(table, "member_nickname")
 	s.GetType = field.NewInt32(table, "get_type")
-	s.CreateTime = field.NewTime(table, "create_time")
 	s.UseStatus = field.NewInt32(table, "use_status")
 	s.UseTime = field.NewTime(table, "use_time")
 	s.OrderID = field.NewInt64(table, "order_id")
 	s.OrderSn = field.NewString(table, "order_sn")
+	s.CreateTime = field.NewTime(table, "create_time")
 
 	s.fillFieldMap()
 
@@ -122,11 +122,11 @@ func (s *smsCouponHistory) fillFieldMap() {
 	s.fieldMap["coupon_code"] = s.CouponCode
 	s.fieldMap["member_nickname"] = s.MemberNickname
 	s.fieldMap["get_type"] = s.GetType
-	s.fieldMap["create_time"] = s.CreateTime
 	s.fieldMap["use_status"] = s.UseStatus
 	s.fieldMap["use_time"] = s.UseTime
 	s.fieldMap["order_id"] = s.OrderID
 	s.fieldMap["order_sn"] = s.OrderSn
+	s.fieldMap["create_time"] = s.CreateTime
 }
 
 func (s smsCouponHistory) clone(db *gorm.DB) smsCouponHistory {

@@ -4,18 +4,24 @@
 
 package model
 
+import (
+	"time"
+)
+
 const TableNamePmsFeightTemplate = "pms_feight_template"
 
 // PmsFeightTemplate 运费模版
 type PmsFeightTemplate struct {
-	ID             int64  `gorm:"column:id;primaryKey;autoIncrement:true" json:"id"`
-	Name           string `gorm:"column:name;not null;comment:运费模版名称" json:"name"`                           // 运费模版名称
-	ChargeType     int32  `gorm:"column:charge_type;not null;comment:计费类型:0->按重量；1->按件数" json:"charge_type"` // 计费类型:0->按重量；1->按件数
-	FirstWeight    int64  `gorm:"column:first_weight;not null;comment:首重kg" json:"first_weight"`             // 首重kg
-	FirstFee       int64  `gorm:"column:first_fee;not null;comment:首费（元）" json:"first_fee"`                  // 首费（元）
-	ContinueWeight int64  `gorm:"column:continue_weight;not null;comment:续重kg" json:"continue_weight"`       // 续重kg
-	ContinueFee    int64  `gorm:"column:continue_fee;not null;comment:续费（元）" json:"continue_fee"`            // 续费（元）
-	Dest           string `gorm:"column:dest;not null;comment:目的地（省、市）" json:"dest"`                         // 目的地（省、市）
+	ID             int64      `gorm:"column:id;primaryKey;autoIncrement:true" json:"id"`
+	Name           string     `gorm:"column:name;not null;comment:运费模版名称" json:"name"`                                       // 运费模版名称
+	ChargeType     int32      `gorm:"column:charge_type;not null;comment:计费类型:0->按重量；1->按件数" json:"charge_type"`             // 计费类型:0->按重量；1->按件数
+	FirstWeight    int64      `gorm:"column:first_weight;not null;comment:首重kg" json:"first_weight"`                         // 首重kg
+	FirstFee       int64      `gorm:"column:first_fee;not null;comment:首费（元）" json:"first_fee"`                              // 首费（元）
+	ContinueWeight int64      `gorm:"column:continue_weight;not null;comment:续重kg" json:"continue_weight"`                   // 续重kg
+	ContinueFee    int64      `gorm:"column:continue_fee;not null;comment:续费（元）" json:"continue_fee"`                        // 续费（元）
+	Dest           string     `gorm:"column:dest;not null;comment:目的地（省、市）" json:"dest"`                                     // 目的地（省、市）
+	CreateTime     time.Time  `gorm:"column:create_time;not null;default:CURRENT_TIMESTAMP;comment:创建时间" json:"create_time"` // 创建时间
+	UpdateTime     *time.Time `gorm:"column:update_time;comment:更新时间" json:"update_time"`                                    // 更新时间
 }
 
 // TableName PmsFeightTemplate's table name

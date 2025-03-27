@@ -10,7 +10,7 @@ import (
 
 const TableNameOmsCartItem = "oms_cart_item"
 
-// OmsCartItem 购物车表
+// OmsCartItem 购物车
 type OmsCartItem struct {
 	ID                int64      `gorm:"column:id;primaryKey;autoIncrement:true" json:"id"`
 	ProductID         int64      `gorm:"column:product_id;not null;comment:商品id" json:"product_id"`                                                             // 商品id
@@ -23,13 +23,13 @@ type OmsCartItem struct {
 	ProductSubTitle   string     `gorm:"column:product_sub_title;not null;comment:商品副标题（卖点）" json:"product_sub_title"`                                          // 商品副标题（卖点）
 	ProductSkuCode    string     `gorm:"column:product_sku_code;not null;comment:商品sku条码" json:"product_sku_code"`                                              // 商品sku条码
 	MemberNickname    string     `gorm:"column:member_nickname;not null;comment:会员昵称" json:"member_nickname"`                                                   // 会员昵称
-	CreateTime        time.Time  `gorm:"column:create_time;not null;default:CURRENT_TIMESTAMP;comment:创建时间" json:"create_time"`                                 // 创建时间
-	UpdateTime        *time.Time `gorm:"column:update_time;comment:更新时间" json:"update_time"`                                                                    // 更新时间
 	DeleteStatus      int32      `gorm:"column:delete_status;not null;comment:是否删除" json:"delete_status"`                                                       // 是否删除
 	ProductCategoryID int64      `gorm:"column:product_category_id;not null;comment:商品分类" json:"product_category_id"`                                           // 商品分类
 	ProductBrand      string     `gorm:"column:product_brand;not null;comment:商品品牌" json:"product_brand"`                                                       // 商品品牌
 	ProductSn         string     `gorm:"column:product_sn;not null;comment:货号" json:"product_sn"`                                                               // 货号
 	ProductAttr       string     `gorm:"column:product_attr;not null;comment:商品销售属性:[{"key":"颜色","value":"颜色"},{"key":"容量","value":"4G"}]" json:"product_attr"` // 商品销售属性:[{"key":"颜色","value":"颜色"},{"key":"容量","value":"4G"}]
+	CreateTime        time.Time  `gorm:"column:create_time;not null;default:CURRENT_TIMESTAMP;comment:创建时间" json:"create_time"`                                 // 创建时间
+	UpdateTime        *time.Time `gorm:"column:update_time;comment:更新时间" json:"update_time"`                                                                    // 更新时间
 }
 
 // TableName OmsCartItem's table name
