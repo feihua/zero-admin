@@ -1,11 +1,11 @@
 info (
 	desc:   "系统操作日志"
-	author: "liufeihua"
+	author: "LiuFeiHua"
 	email:  "1002219331@qq.com"
 )
 
 type (
-	// 删除系统操作日志
+	// 删除系统操作日志请求参数
 	DeleteOperateLogReq {
 		Ids []int64 `form:"ids"`
 	}
@@ -13,63 +13,89 @@ type (
 		Code    string `json:"code"`
 		Message string `json:"message"`
 	}
-	// 查询系统操作日志详情
+	// 查询系统操作日志详情请求参数
 	QueryOperateLogDetailReq {
 		Id int64 `form:"id"`
 	}
 	QueryOperateLogDetailData {
-		Id                int64  `json:"id"` //编号
-		Title             string `json:"title"` //系统模块
-		OperationType     string `json:"operationType"` //操作类型
-		OperationName     string `json:"operationName"` //操作人员
-		RequestMethod     string `json:"requestMethod"` //请求方式
-		OperationUrl      string `json:"operationUrl"` //操作方法
-		OperationParams   string `json:"operationParams"` //请求参数
-		OperationResponse string `json:"operationResponse"` //响应参数
-		OperationStatus   int32  `json:"operationStatus"` //操作状态
-		DeptName          string `json:"deptName"` //部门名称
-		UseTime           int64  `json:"useTime"` //执行时长(毫秒)
-		Browser           string `json:"browser"` //浏览器
-		Os                string `json:"os"` //操作信息
-		OperationIp       string `json:"operationIp"` //操作地址
-		OperationTime     string `json:"operationTime"` //操作时间
+		Id              int64  `json:"id"` //操作日志id
+		Title           string `json:"title"` //模块标题
+		BusinessType    int32  `json:"businessType"` //业务类型（0其它 1新增 2修改 3删除）
+		Method          string `json:"method"` //方法名称
+		RequestMethod   string `json:"requestMethod"` //请求方式
+		OperatorType    int32  `json:"operatorType"` //操作类别（0其它 1后台用户 2手机端用户）
+		OperateName     string `json:"operateName"` //操作人员
+		DeptName        string `json:"deptName"` //部门名称
+		OperateUrl      string `json:"operateUrl"` //请求URL
+		OperateIp       string `json:"operateIp"` //主机地址
+		OperateLocation string `json:"operateLocation"` //操作地点
+		OperateParam    string `json:"operateParam"` //请求参数
+		JsonResult      string `json:"jsonResult"` //返回参数
+		Platform        string `json:"platform"` //平台信息
+		Browser         string `json:"browser"` //浏览器类型
+		Version         string `json:"version"` //浏览器版本
+		Os              string `json:"os"` //操作系统
+		Arch            string `json:"arch"` //体系结构信息
+		Engine          string `json:"engine"` //渲染引擎信息
+		EngineDetails   string `json:"engineDetails"` //渲染引擎详细信息
+		Extra           string `json:"extra"` //其他信息（可选）
+		Status          int32  `json:"status"` // 操作状态(0:异常,正常)
+		ErrorMsg        string `json:"errorMsg"` // 错误消息
+		OperateTime     string `json:"operateTime"` // 操作时间
+		CostTime        int64  `json:"costTime"` // 消耗时间
 	}
 	QueryOperateLogDetailResp {
 		Code    string                    `json:"code"`
 		Message string                    `json:"message"`
 		Data    QueryOperateLogDetailData `json:"data"`
 	}
-	// 分页查询系统操作日志列
+	// 分页查询系统操作日志列表请求参数
 	QueryOperateLogListReq {
 		Current         int64  `form:"current,default=1"` //第几页
 		PageSize        int64  `form:"pageSize,default=20"` //每页的数量
-		DeptName        string `form:"deptName,optional"` //部门名称
-		OperationIp     string `form:"operationIp,optional"` //操作地址
-		OperationName   string `form:"operationName,optional"` //操作人员
-		OperationStatus int32  `form:"operationStatus,default=2"` //操作状态
-		OperationType   string `form:"operationType,optional"` //操作类型
-		OperationUrl    string `form:"operationUrl,optional"` //操作方法
-		Title           string `form:"title,optional"` //系统模块
-		Browser         string `form:"browser,optional"` //浏览器
-		Os              string `form:"os,optional"` //操作系统
+		Title           string `form:"title,optional"` //模块标题
+		BusinessType    int32  `form:"businessType,optional"` //业务类型（0其它 1新增 2修改 3删除）
+		Method          string `form:"method,optional"` //方法名称
 		RequestMethod   string `form:"requestMethod,optional"` //请求方式
+		OperatorType    int32  `form:"operatorType,optional"` //操作类别（0其它 1后台用户 2手机端用户）
+		OperateName     string `form:"operateName,optional"` //操作人员
+		DeptName        string `form:"deptName,optional"` //部门名称
+		OperateUrl      string `form:"operateUrl,optional"` //请求URL
+		OperateIp       string `form:"operateIp,optional"` //主机地址
+		OperateLocation string `form:"operateLocation,optional"` //操作地点
+		Platform        string `form:"platform,optional"` //平台信息
+		Browser         string `form:"browser,optional"` //浏览器类型
+		Os              string `form:"os,optional"` //操作系统
+		Status          int32  `form:"status,default=2"` // 操作状态(0:异常,正常)
+		ErrorMsg        string `form:"errorMsg,optional"` // 错误消息
+		OperateTime     string `form:"operateTime,optional"` // 操作时间
 	}
 	QueryOperateLogListData {
-		Id                int64  `json:"id"` //编号
-		Title             string `json:"title"` //系统模块
-		OperationType     string `json:"operationType"` //操作类型
-		OperationName     string `json:"operationName"` //操作人员
-		RequestMethod     string `json:"requestMethod"` //请求方式
-		OperationUrl      string `json:"operationUrl"` //操作方法
-		OperationParams   string `json:"operationParams"` //请求参数
-		OperationResponse string `json:"operationResponse"` //响应参数
-		OperationStatus   int32  `json:"operationStatus"` //操作状态
-		DeptName          string `json:"deptName"` //部门名称
-		UseTime           int64  `json:"useTime"` //执行时长(毫秒)
-		Browser           string `json:"browser"` //浏览器
-		Os                string `json:"os"` //操作信息
-		OperationIp       string `json:"operationIp"` //操作地址
-		OperationTime     string `json:"operationTime"` //操作时间
+		Id              int64  `json:"id"` //操作日志id
+		Title           string `json:"title"` //模块标题
+		BusinessType    int32  `json:"businessType"` //业务类型（0其它 1新增 2修改 3删除）
+		Method          string `json:"method"` //方法名称
+		RequestMethod   string `json:"requestMethod"` //请求方式
+		OperatorType    int32  `json:"operatorType"` //操作类别（0其它 1后台用户 2手机端用户）
+		OperateName     string `json:"operateName"` //操作人员
+		DeptName        string `json:"deptName"` //部门名称
+		OperateUrl      string `json:"operateUrl"` //请求URL
+		OperateIp       string `json:"operateIp"` //主机地址
+		OperateLocation string `json:"operateLocation"` //操作地点
+		OperateParam    string `json:"operateParam"` //请求参数
+		JsonResult      string `json:"jsonResult"` //返回参数
+		Platform        string `json:"platform"` //平台信息
+		Browser         string `json:"browser"` //浏览器类型
+		Version         string `json:"version"` //浏览器版本
+		Os              string `json:"os"` //操作系统
+		Arch            string `json:"arch"` //体系结构信息
+		Engine          string `json:"engine"` //渲染引擎信息
+		EngineDetails   string `json:"engineDetails"` //渲染引擎详细信息
+		Extra           string `json:"extra"` //其他信息（可选）
+		Status          int32  `json:"status"` // 操作状态(0:异常,正常)
+		ErrorMsg        string `json:"errorMsg"` // 错误消息
+		OperateTime     string `json:"operateTime"` // 操作时间
+		CostTime        int64  `json:"costTime"` // 消耗时间
 	}
 	QueryOperateLogListResp {
 		Code     string                     `json:"code"`

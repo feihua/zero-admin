@@ -10,7 +10,9 @@ import (
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
 	"github.com/zeromicro/go-zero/core/logc"
 	"gorm.io/gorm"
+	"strconv"
 	"strings"
+	"time"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -77,6 +79,7 @@ func (l *UpdateDeptLogic) UpdateDept(in *sysclient.UpdateDeptReq) (*sysclient.Up
 		return nil, errors.New("查询上级部门异常")
 	}
 
+	ancestors := fmt.Sprintf("%s,%d", parentDept.Ancestors, parentDept.ID)
 	// 3.根据部门名称查询部门是否已存在
 	deptName := in.DeptName
 	count, err := q.Where(dept.ID.Neq(in.Id), dept.DeptName.Eq(deptName), dept.ParentID.Eq(parentDept.ID)).Count()
@@ -92,18 +95,18 @@ func (l *UpdateDeptLogic) UpdateDept(in *sysclient.UpdateDeptReq) (*sysclient.Up
 	}
 
 	// 4.查询是否有下级部门
-	sql := "select count(*) from sys_dept where status = 1 and del_flag = 1 and find_in_set(?, 'parentIds')"
+	sql := "select count(*) from sys_dept where status = 1 and del_flag = 1 and find_in_set(?, 'ancestors')"
 	err = l.svcCtx.DB.Raw(sql, in.Id).Count(&count).Error
 	if err != nil {
 		logc.Errorf(l.ctx, "根据部门id查询是否有下级部门失败,异常:%s", err.Error())
 		return nil, errors.New(fmt.Sprintf("更新部门失败"))
 	}
 
-	if count > 0 && in.DeptStatus == 0 {
+	if count > 0 && in.Status == 0 {
 		return nil, errors.New(fmt.Sprintf("该部门包含未停用的子部门"))
 	}
 
-	sql = "select * from sys_dept where find_in_set(?, 'parentIds')"
+	sql = "select * from sys_dept where find_in_set(?, 'ancestors')"
 	list := make([]model.SysDept, 10)
 	err = l.svcCtx.DB.Model(&model.SysDept{}).Raw(sql, in.Id).Scan(list).Error
 	if err != nil {
@@ -112,34 +115,37 @@ func (l *UpdateDeptLogic) UpdateDept(in *sysclient.UpdateDeptReq) (*sysclient.Up
 	}
 
 	// 5.修改下级部门祖级
-	parentIds := strings.Replace(strings.Trim(fmt.Sprint(in.ParentIds), "[]"), " ", ",", -1) // 上级机构IDs，一级机构为0
 	if count > 0 {
 		for _, dept1 := range list {
-			parentIdStr := strings.Replace(dept1.ParentIds, oldDept.ParentIds, parentIds, -1)
-			_, err = q.Where(dept.ID.Eq(dept1.ID)).Update(dept.ParentIds, parentIdStr)
+			newAncestors := strings.Replace(dept1.Ancestors, oldDept.Ancestors, ancestors, -1)
+			_, err = q.Where(dept.ID.Eq(dept1.ID)).Update(dept.Ancestors, newAncestors)
 			if err != nil {
 				logc.Errorf(l.ctx, "修改下级部门祖级失败,异常:%s", err.Error())
 				return nil, errors.New(fmt.Sprintf("更新部门失败"))
 			}
 		}
 	}
-
+	now := time.Now()
 	sysDept := &model.SysDept{
-		ID:         in.Id,         // 编号
-		DeptName:   in.DeptName,   // 部门名称
-		DeptStatus: in.DeptStatus, // 部门状态
-		DeptSort:   in.DeptSort,   // 部门排序
-		ParentID:   in.ParentId,   // 上级机构ID，一级机构为0
-		Leader:     in.Leader,     // 负责人
-		Phone:      in.Phone,      // 电话号码
-		Email:      in.Email,      // 邮箱
-		Remark:     in.Remark,     // 备注信息
-		UpdateBy:   in.UpdateBy,   // 更新者
-		ParentIds:  parentIds,     // 上级机构IDs，一级机构为0
+		ID:         in.Id,              // 部门id
+		ParentID:   in.ParentId,        // 上级部门id
+		Ancestors:  ancestors,          // 祖级列表
+		DeptName:   in.DeptName,        // 部门名称
+		Sort:       in.Sort,            // 显示顺序
+		Leader:     in.Leader,          // 负责人
+		Phone:      in.Phone,           // 联系电话
+		Email:      in.Email,           // 邮箱
+		Status:     in.Status,          // 部门状态（0：停用，1:正常）
+		DelFlag:    oldDept.DelFlag,    // 删除标志（0代表删除 1代表存在）
+		Remark:     in.Remark,          // 备注信息
+		CreateBy:   oldDept.CreateBy,   // 创建者
+		CreateTime: oldDept.CreateTime, // 创建时间
+		UpdateBy:   in.UpdateBy,        // 更新者
+		UpdateTime: &now,               // 更新时间
 	}
 
 	// 6.部门存在时,则直接更新部门
-	_, err = q.Where(dept.ID.Eq(in.Id)).Updates(sysDept)
+	err = l.svcCtx.DB.Model(&model.SysDept{}).WithContext(l.ctx).Where(dept.ID.Eq(in.Id)).Save(sysDept).Error
 
 	if err != nil {
 		logc.Errorf(l.ctx, "更新部门信息失败,参数:%+v,异常:%s", dept, err.Error())
@@ -147,8 +153,8 @@ func (l *UpdateDeptLogic) UpdateDept(in *sysclient.UpdateDeptReq) (*sysclient.Up
 	}
 
 	// 7.如果该部门是启用状态，则启用该部门的所有上级部门
-	if in.DeptStatus == 1 {
-		_, err = q.Where(dept.ID.In(in.ParentIds...)).Update(dept.DeptStatus, in.DeptStatus)
+	if in.Status == 1 {
+		_, err = q.Where(dept.ID.In(GetParentIds(ancestors)...)).Update(dept.Status, in.Status)
 		if err != nil {
 			logc.Errorf(l.ctx, "修改上级部门状态失败,异常:%s", err.Error())
 			return nil, errors.New(fmt.Sprintf("更新部门失败"))
@@ -156,4 +162,15 @@ func (l *UpdateDeptLogic) UpdateDept(in *sysclient.UpdateDeptReq) (*sysclient.Up
 
 	}
 	return &sysclient.UpdateDeptResp{}, nil
+}
+
+func GetParentIds(ancestors string) []int64 {
+	var parentIds []int64
+	if len(ancestors) > 0 {
+		for _, i := range strings.Split(ancestors, ",") {
+			p, _ := strconv.ParseInt(i, 10, 64)
+			parentIds = append(parentIds, p)
+		}
+	}
+	return parentIds
 }

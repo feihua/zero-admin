@@ -35,9 +35,9 @@ func NewUpdateRoleStatusLogic(ctx context.Context, svcCtx *svc.ServiceContext) *
 // UpdateRoleStatus 更新角色状态
 func (l *UpdateRoleStatusLogic) UpdateRoleStatus(req *types.UpdateRoleStatusReq) (resp *types.UpdateRoleStatusResp, err error) {
 	roleReq := sysclient.UpdateRoleStatusReq{
-		Ids:        req.RoleIds,    // 角色编号
-		RoleStatus: req.RoleStatus, // 角色状态
-		UpdateBy:   l.ctx.Value("userName").(string),
+		Ids:      req.Ids,    // 角色编号
+		Status:   req.Status, // 角色状态
+		UpdateBy: l.ctx.Value("userName").(string),
 	}
 	_, err = l.svcCtx.RoleService.UpdateRoleStatus(l.ctx, &roleReq)
 

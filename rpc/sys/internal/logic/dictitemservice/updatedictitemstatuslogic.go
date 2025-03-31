@@ -36,7 +36,7 @@ func NewUpdateDictItemStatusLogic(ctx context.Context, svcCtx *svc.ServiceContex
 func (l *UpdateDictItemStatusLogic) UpdateDictItemStatus(in *sysclient.UpdateDictItemStatusReq) (*sysclient.UpdateDictItemStatusResp, error) {
 	q := query.SysDictItem
 
-	_, err := q.WithContext(l.ctx).Where(q.ID.In(in.Ids...)).Update(q.DictStatus, in.DictStatus)
+	_, err := q.WithContext(l.ctx).Where(q.ID.In(in.Ids...)).Update(q.Status, in.Status)
 
 	if err != nil {
 		logc.Errorf(l.ctx, "根据字典数据ids：%+v,更新字典数据状态失败,异常:%s", in, err.Error())

@@ -35,7 +35,7 @@ func NewReSetPasswordLogic(ctx context.Context, svcCtx *svc.ServiceContext) *ReS
 // ReSetPassword 重置用户密码
 func (l *ReSetPasswordLogic) ReSetPassword(in *sysclient.ReSetPasswordReq) (*sysclient.ReSetPasswordResp, error) {
 
-	//不能重置重置管理员的密码
+	// 不能重置重置管理员的密码
 	if common.IsAdmin(l.ctx, in.Id, l.svcCtx.DB) {
 		logc.Errorf(l.ctx, "不能重置重置管理员的密码,参数:%+v", in)
 		return nil, errors.New("不能重置重置管理员的密码")
@@ -44,7 +44,6 @@ func (l *ReSetPasswordLogic) ReSetPassword(in *sysclient.ReSetPasswordReq) (*sys
 	_, err := query.SysUser.WithContext(l.ctx).Updates(&model.SysUser{
 		ID:       in.Id,
 		Password: "123456",
-		Salt:     "123456",
 		UpdateBy: in.UpdateBy,
 	})
 

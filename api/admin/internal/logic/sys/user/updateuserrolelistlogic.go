@@ -13,7 +13,7 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// UpdateUserRoleListLogic 更新用户与角色的关联
+// UpdateUserRoleListLogic 分配用户角色
 /*
 Author: LiuFeiHua
 Date: 2024/5/23 17:33
@@ -32,7 +32,7 @@ func NewUpdateUserRoleListLogic(ctx context.Context, svcCtx *svc.ServiceContext)
 	}
 }
 
-// UpdateUserRoleList 更新用户与角色的关联
+// UpdateUserRoleList 分配用户角色
 func (l *UpdateUserRoleListLogic) UpdateUserRoleList(req *types.UpdateUserRoleReq) (resp *types.UpdateUserRoleResp, err error) {
 	_, err = l.svcCtx.UserService.UpdateUserRoleList(l.ctx, &sysclient.UpdateUserRoleListReq{
 		UserId:  req.UserId,  // 用户id
@@ -40,13 +40,13 @@ func (l *UpdateUserRoleListLogic) UpdateUserRoleList(req *types.UpdateUserRoleRe
 	})
 
 	if err != nil {
-		logc.Errorf(l.ctx, "更新用户与角色的关联失败,参数:%+v,异常:%s", req, err.Error())
+		logc.Errorf(l.ctx, "分配用户角色失败,参数:%+v,异常:%s", req, err.Error())
 		s, _ := status.FromError(err)
 		return nil, errorx.NewDefaultError(s.Message())
 	}
 
 	return &types.UpdateUserRoleResp{
 		Code:    "000000",
-		Message: "更新用户与角色的关联成功",
+		Message: "分配用户角色成功",
 	}, nil
 }

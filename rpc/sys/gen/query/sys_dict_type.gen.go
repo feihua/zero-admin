@@ -30,10 +30,8 @@ func newSysDictType(db *gorm.DB, opts ...gen.DOOption) sysDictType {
 	_sysDictType.ID = field.NewInt64(tableName, "id")
 	_sysDictType.DictName = field.NewString(tableName, "dict_name")
 	_sysDictType.DictType = field.NewString(tableName, "dict_type")
-	_sysDictType.DictStatus = field.NewInt32(tableName, "dict_status")
+	_sysDictType.Status = field.NewInt32(tableName, "status")
 	_sysDictType.Remark = field.NewString(tableName, "remark")
-	_sysDictType.IsSystem = field.NewInt32(tableName, "is_system")
-	_sysDictType.IsDeleted = field.NewInt32(tableName, "is_deleted")
 	_sysDictType.CreateBy = field.NewString(tableName, "create_by")
 	_sysDictType.CreateTime = field.NewTime(tableName, "create_time")
 	_sysDictType.UpdateBy = field.NewString(tableName, "update_by")
@@ -49,13 +47,11 @@ type sysDictType struct {
 	sysDictTypeDo sysDictTypeDo
 
 	ALL        field.Asterisk
-	ID         field.Int64  // 编号
+	ID         field.Int64  // 字典id
 	DictName   field.String // 字典名称
 	DictType   field.String // 字典类型
-	DictStatus field.Int32  // 字典状态
-	Remark     field.String // 备注信息
-	IsSystem   field.Int32  // 是否系统预留  0：否  1：是
-	IsDeleted  field.Int32  // 是否删除  0：否  1：是
+	Status     field.Int32  // 状态（0：停用，1:正常）
+	Remark     field.String // 备注
 	CreateBy   field.String // 创建者
 	CreateTime field.Time   // 创建时间
 	UpdateBy   field.String // 更新者
@@ -79,10 +75,8 @@ func (s *sysDictType) updateTableName(table string) *sysDictType {
 	s.ID = field.NewInt64(table, "id")
 	s.DictName = field.NewString(table, "dict_name")
 	s.DictType = field.NewString(table, "dict_type")
-	s.DictStatus = field.NewInt32(table, "dict_status")
+	s.Status = field.NewInt32(table, "status")
 	s.Remark = field.NewString(table, "remark")
-	s.IsSystem = field.NewInt32(table, "is_system")
-	s.IsDeleted = field.NewInt32(table, "is_deleted")
 	s.CreateBy = field.NewString(table, "create_by")
 	s.CreateTime = field.NewTime(table, "create_time")
 	s.UpdateBy = field.NewString(table, "update_by")
@@ -113,14 +107,12 @@ func (s *sysDictType) GetFieldByName(fieldName string) (field.OrderExpr, bool) {
 }
 
 func (s *sysDictType) fillFieldMap() {
-	s.fieldMap = make(map[string]field.Expr, 11)
+	s.fieldMap = make(map[string]field.Expr, 9)
 	s.fieldMap["id"] = s.ID
 	s.fieldMap["dict_name"] = s.DictName
 	s.fieldMap["dict_type"] = s.DictType
-	s.fieldMap["dict_status"] = s.DictStatus
+	s.fieldMap["status"] = s.Status
 	s.fieldMap["remark"] = s.Remark
-	s.fieldMap["is_system"] = s.IsSystem
-	s.fieldMap["is_deleted"] = s.IsDeleted
 	s.fieldMap["create_by"] = s.CreateBy
 	s.fieldMap["create_time"] = s.CreateTime
 	s.fieldMap["update_by"] = s.UpdateBy

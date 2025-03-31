@@ -36,16 +36,21 @@ func (l *QueryOperateLogListLogic) QueryOperateLogList(req *types.QueryOperateLo
 	result, err := l.svcCtx.Operatelogservice.QueryOperateLogList(l.ctx, &sysclient.QueryOperateLogListReq{
 		PageNum:         req.Current,
 		PageSize:        req.PageSize,
-		OperationIp:     req.OperationIp,     // 操作地址
-		OperationName:   req.OperationName,   // 操作人员
-		DeptName:        req.DeptName,        // 部门名称
-		OperationStatus: req.OperationStatus, // 操作状态
-		OperationType:   req.OperationType,   // 操作类型
-		OperationUrl:    req.OperationUrl,    // 操作方法
-		Title:           req.Title,           // 系统模块
-		Browser:         req.Browser,         // 浏览器
-		Os:              req.Os,              // 操作系统
+		Title:           req.Title,           // 模块标题
+		BusinessType:    req.BusinessType,    // 业务类型（0其它 1新增 2修改 3删除）
+		Method:          req.Method,          // 方法名称
 		RequestMethod:   req.RequestMethod,   // 请求方式
+		OperatorType:    req.OperatorType,    // 操作类别（0其它 1后台用户 2手机端用户）
+		OperateName:     req.OperateName,     // 操作人员
+		DeptName:        req.DeptName,        // 部门名称
+		OperateUrl:      req.OperateUrl,      // 请求URL
+		OperateIp:       req.OperateIp,       // 主机地址
+		OperateLocation: req.OperateLocation, // 操作地点
+		Platform:        req.Platform,        // 平台信息
+		Browser:         req.Browser,         // 浏览器类型
+		Os:              req.Os,              // 操作系统
+		Status:          req.Status,          // 操作状态(0:异常,正常)
+		OperateTime:     req.OperateTime,     // 操作时间
 	})
 
 	if err != nil {
@@ -58,21 +63,31 @@ func (l *QueryOperateLogListLogic) QueryOperateLogList(req *types.QueryOperateLo
 
 	for _, detail := range result.List {
 		list = append(list, &types.QueryOperateLogListData{
-			Id:                detail.Id,                // 编号
-			Title:             detail.Title,             // 系统模块
-			OperationType:     detail.OperationType,     // 操作类型
-			OperationName:     detail.OperationName,     // 操作人员
-			RequestMethod:     detail.RequestMethod,     // 请求方式
-			OperationUrl:      detail.OperationUrl,      // 操作方法
-			OperationParams:   detail.OperationParams,   // 请求参数
-			OperationResponse: detail.OperationResponse, // 响应参数
-			OperationStatus:   detail.OperationStatus,   // 操作状态
-			DeptName:          detail.DeptName,          // 部门名称
-			UseTime:           detail.UseTime,           // 执行时长(毫秒)
-			Browser:           detail.Browser,           // 浏览器
-			Os:                detail.Os,                // 操作系统
-			OperationIp:       detail.OperationIp,       // 操作地址
-			OperationTime:     detail.OperationTime,     // 操作时间
+			Id:              detail.Id,              // 操作日志id
+			Title:           detail.Title,           // 模块标题
+			BusinessType:    detail.BusinessType,    // 业务类型（0其它 1新增 2修改 3删除）
+			Method:          detail.Method,          // 方法名称
+			RequestMethod:   detail.RequestMethod,   // 请求方式
+			OperatorType:    detail.OperatorType,    // 操作类别（0其它 1后台用户 2手机端用户）
+			OperateName:     detail.OperateName,     // 操作人员
+			DeptName:        detail.DeptName,        // 部门名称
+			OperateUrl:      detail.OperateUrl,      // 请求URL
+			OperateIp:       detail.OperateIp,       // 主机地址
+			OperateLocation: detail.OperateLocation, // 操作地点
+			OperateParam:    detail.OperateParam,    // 请求参数
+			JsonResult:      detail.JsonResult,      // 返回参数
+			Platform:        detail.Platform,        // 平台信息
+			Browser:         detail.Browser,         // 浏览器类型
+			Version:         detail.Version,         // 浏览器版本
+			Os:              detail.Os,              // 操作系统
+			Arch:            detail.Arch,            // 体系结构信息
+			Engine:          detail.Engine,          // 渲染引擎信息
+			EngineDetails:   detail.EngineDetails,   // 渲染引擎详细信息
+			Extra:           detail.Extra,           // 其他信息（可选）
+			Status:          detail.Status,          // 操作状态(0:异常,正常)
+			ErrorMsg:        detail.ErrorMsg,        // 错误消息
+			OperateTime:     detail.OperateTime,     // 操作时间
+			CostTime:        detail.CostTime,        // 消耗时间
 		})
 	}
 

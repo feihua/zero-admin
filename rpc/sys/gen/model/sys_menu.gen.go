@@ -12,7 +12,7 @@ const TableNameSysMenu = "sys_menu"
 
 // SysMenu 菜单信息表
 type SysMenu struct {
-	ID            int64      `gorm:"column:id;primaryKey;autoIncrement:true;comment:编号" json:"id"`                          // 编号
+	ID            int64      `gorm:"column:id;primaryKey;autoIncrement:true;comment:菜单id" json:"id"`                        // 菜单id
 	MenuName      string     `gorm:"column:menu_name;not null;comment:菜单名称" json:"menu_name"`                               // 菜单名称
 	ParentID      int64      `gorm:"column:parent_id;not null;comment:父菜单ID，一级菜单为0" json:"parent_id"`                       // 父菜单ID，一级菜单为0
 	MenuPath      string     `gorm:"column:menu_path;not null;comment:前端路由" json:"menu_path"`                               // 前端路由

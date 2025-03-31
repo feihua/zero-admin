@@ -4,27 +4,25 @@ package sysclient;
 
 option go_package = "./sysclient";
 
-// 添加部门信息表
+// 添加部门
 message AddDeptReq {
-  int64 id = 1; //编号
-  string dept_name = 2; //部门名称
-  int32 dept_status = 3; //部门状态
-  int32 dept_sort = 4; //部门排序
-  int64 parent_id = 5; //上级机构ID，一级机构为0
-  string leader = 6; //负责人
-  string phone = 7; //电话号码
-  string email = 8; //邮箱
+  int64 id = 1; //部门id
+  int64 parent_id = 2; //上级部门id
+  string dept_name = 3; //部门名称
+  int32 sort = 4; //显示顺序
+  string leader = 5; //负责人
+  string phone = 6; //联系电话
+  string email = 7; //邮箱
+  int32 status = 8; //部门状态（0：停用，1:正常）
   string remark = 9; //备注信息
-  repeated int64 parent_ids = 10; //上级机构IDs，一级机构为0
-  string create_by = 11; //创建者
-
+  string create_by = 10; //创建者
 }
 
 message AddDeptResp {
   string pong = 1;
 }
 
-// 删除部门信息表
+// 删除部门
 message DeleteDeptReq {
   int64 id = 1;
 }
@@ -33,55 +31,52 @@ message DeleteDeptResp {
   string pong = 1;
 }
 
-// 更新部门信息表
+// 更新部门
 message UpdateDeptReq {
-  int64 id = 1; //编号
-  string dept_name = 2; //部门名称
-  int32 dept_status = 3; //部门状态
-  int32 dept_sort = 4; //部门排序
-  int64 parent_id = 5; //上级机构ID，一级机构为0
-  string leader = 6; //负责人
-  string phone = 7; //电话号码
-  string email = 8; //邮箱
+  int64 id = 1; //部门id
+  int64 parent_id = 2; //上级部门id
+  string dept_name = 3; //部门名称
+  int32 sort = 4; //显示顺序
+  string leader = 5; //负责人
+  string phone = 6; //联系电话
+  string email = 7; //邮箱
+  int32 status = 8; //部门状态（0：停用，1:正常）
   string remark = 9; //备注信息
-  repeated int64 parent_ids = 10; //上级机构IDs，一级机构为0
-  string update_by = 11; //更新者
-
+  string update_by = 10; //更新者
 }
 
 message UpdateDeptResp {
   string pong = 1;
 }
 
-// 更新部门信息表状态
+// 更新部门状态
 message UpdateDeptStatusReq {
-  int32 dept_status = 1; //部门状态
-  repeated int64 ids = 2; //编号
-  string update_by = 3; //更新者
-
+  int64 id = 1; //部门id
+  int32 status = 9; //部门状态（0：停用，1:正常）
+  string update_by = 14; //更新者
 }
 
 message UpdateDeptStatusResp {
   string pong = 1;
 }
 
-// 查询部门信息表详情
+// 查询部门详情
 message QueryDeptDetailReq {
   int64 id = 1;
 }
 
 message QueryDeptDetailResp {
-  int64 id = 1; //编号
-  string dept_name = 2; //部门名称
-  int32 dept_status = 3; //部门状态
-  int32 dept_sort = 4; //部门排序
-  int64 parent_id = 5; //上级机构ID，一级机构为0
+  int64 id = 1; //部门id
+  int64 parent_id = 2; //上级部门id
+  string ancestors = 3; //祖级列表
+  string dept_name = 4; //部门名称
+  int32 sort = 5; //显示顺序
   string leader = 6; //负责人
-  string phone = 7; //电话号码
+  string phone = 7; //联系电话
   string email = 8; //邮箱
-  string remark = 9; //备注信息
-  int32 is_deleted = 10; //是否删除  0：否  1：是
-  repeated int64 parent_ids = 11; //上级机构IDs，一级机构为0
+  int32 status = 9; //部门状态（0：停用，1:正常）
+  int32 del_flag = 10; //删除标志（0代表删除 1代表存在）
+  string remark = 11; //备注信息
   string create_by = 12; //创建者
   string create_time = 13; //创建时间
   string update_by = 14; //更新者
@@ -89,23 +84,23 @@ message QueryDeptDetailResp {
 
 }
 
-// 分页查询部门信息表列表
+// 分页查询部门列表
 message QueryDeptListReq {
 
 }
 
 message DeptListData {
-  int64 id = 1; //编号
-  string dept_name = 2; //部门名称
-  int32 dept_status = 3; //部门状态
-  int32 dept_sort = 4; //部门排序
-  int64 parent_id = 5; //上级机构ID，一级机构为0
+  int64 id = 1; //部门id
+  int64 parent_id = 2; //上级部门id
+  string ancestors = 3; //祖级列表
+  string dept_name = 4; //部门名称
+  int32 sort = 5; //显示顺序
   string leader = 6; //负责人
-  string phone = 7; //电话号码
+  string phone = 7; //联系电话
   string email = 8; //邮箱
-  string remark = 9; //备注信息
-  int32 is_deleted = 10; //是否删除  0：否  1：是
-  repeated int64 parent_ids = 11; //上级机构IDs，一级机构为0
+  int32 status = 9; //部门状态（0：停用，1:正常）
+  int32 del_flag = 10; //删除标志（0代表删除 1代表存在）
+  string remark = 11; //备注信息
   string create_by = 12; //创建者
   string create_time = 13; //创建时间
   string update_by = 14; //更新者
@@ -114,48 +109,48 @@ message DeptListData {
 }
 
 message QueryDeptListResp {
-  int64 total = 1;
   repeated  DeptListData list = 2;
 }
 
-// 部门信息表
+// 部门服务
 service DeptService {
-  // 添加部门信息表
+  // 添加部门
   rpc AddDept(AddDeptReq) returns (AddDeptResp){}
-  // 删除部门信息表
+  // 删除部门
   rpc DeleteDept(DeleteDeptReq) returns (DeleteDeptResp){}
-  // 更新部门信息表
+  // 更新部门
   rpc UpdateDept(UpdateDeptReq) returns (UpdateDeptResp ){}
-  // 更新部门信息表状态
+  // 更新部门状态
   rpc UpdateDeptStatus(UpdateDeptStatusReq) returns (UpdateDeptStatusResp ){}
-  // 查询部门信息表详情
+  // 查询部门详情
   rpc QueryDeptDetail(QueryDeptDetailReq) returns (QueryDeptDetailResp){}
-  // 查询部门信息表列表
+  // 查询部门列表
   rpc QueryDeptList(QueryDeptListReq) returns (QueryDeptListResp){}
 
 
 }
 
 
-// 添加字典数据表
+// 添加字典数据
 message AddDictItemReq {
-  int64 id = 1; //编号
-  string dict_type = 2; //字典类型
+  int64 id = 1; //字典数据id
+  int32 dict_sort = 2; //字典排序
   string dict_label = 3; //字典标签
   string dict_value = 4; //字典键值
-  int32 dict_status = 5; //字典状态
-  int32 dict_sort = 6; //排序
-  string remark = 7; //备注信息
-  int32 is_default = 8; //是否默认  0：否  1：是
-  string create_by = 9; //创建者
-
+  string dict_type = 5; //字典类型
+  string css_class = 6; //样式属性（其他样式扩展）
+  string list_class = 7; //表格回显样式
+  string is_default = 8; //是否默认（Y是 N否）
+  int32 status = 9; //状态（0：停用，1:正常）
+  string remark = 10; //备注
+  string create_by = 11; //创建者
 }
 
 message AddDictItemResp {
   string pong = 1;
 }
 
-// 删除字典数据表
+// 删除字典数据
 message DeleteDictItemReq {
   repeated int64 ids = 1;
 }
@@ -164,81 +159,83 @@ message DeleteDictItemResp {
   string pong = 1;
 }
 
-// 更新字典数据表
+// 更新字典数据
 message UpdateDictItemReq {
-  int64 id = 1; //编号
-  string dict_type = 2; //字典类型
+  int64 id = 1; //字典数据id
+  int32 dict_sort = 2; //字典排序
   string dict_label = 3; //字典标签
   string dict_value = 4; //字典键值
-  int32 dict_status = 5; //字典状态
-  int32 dict_sort = 6; //排序
-  string remark = 7; //备注信息
-  int32 is_default = 8; //是否默认  0：否  1：是
-  string update_by = 9; //更新者
-
+  string dict_type = 5; //字典类型
+  string css_class = 6; //样式属性（其他样式扩展）
+  string list_class = 7; //表格回显样式
+  string is_default = 8; //是否默认（Y是 N否）
+  int32 status = 9; //状态（0：停用，1:正常）
+  string remark = 10; //备注
+  string update_by = 13; //更新者
 }
 
 message UpdateDictItemResp {
   string pong = 1;
 }
 
-// 更新字典数据表状态
+// 更新字典数据状态
 message UpdateDictItemStatusReq {
-  int32 dict_status = 1; //字典状态
-  repeated int64 ids = 2; //编号
+  repeated int64 ids = 1; //字典数据id
+  int32 status = 2; //状态（0：停用，1:正常）
   string update_by = 3; //更新者
-
 }
 
 message UpdateDictItemStatusResp {
   string pong = 1;
 }
 
-// 查询字典数据表详情
+// 查询字典数据详情
 message QueryDictItemDetailReq {
   int64 id = 1;
 }
 
 message QueryDictItemDetailResp {
-  int64 id = 1; //编号
-  string dict_type = 2; //字典类型
+  int64 id = 1; //字典数据id
+  int32 dict_sort = 2; //字典排序
   string dict_label = 3; //字典标签
   string dict_value = 4; //字典键值
-  int32 dict_status = 5; //字典状态
-  int32 dict_sort = 6; //排序
-  string remark = 7; //备注信息
-  int32 is_default = 8; //是否默认  0：否  1：是
-  int32 is_deleted = 9; //是否删除  0：否  1：是
-  string create_by = 10; //创建者
-  string create_time = 11; //创建时间
-  string update_by = 12; //更新者
-  string update_time = 13; //更新时间
+  string dict_type = 5; //字典类型
+  string css_class = 6; //样式属性（其他样式扩展）
+  string list_class = 7; //表格回显样式
+  string is_default = 8; //是否默认（Y是 N否）
+  int32 status = 9; //状态（0：停用，1:正常）
+  string remark = 10; //备注
+  string create_by = 11; //创建者
+  string create_time = 12; //创建时间
+  string update_by = 13; //更新者
+  string update_time = 14; //更新时间
 
 }
 
-// 分页查询字典数据表列表
+// 分页查询字典数据列表
 message QueryDictItemListReq {
-  int64 page_num = 1; //第几页
-  int64 page_size = 2; //每页的数量
-  string dict_label = 3; //字典标签
-  int32 dict_status = 5; //字典状态
-  string dict_type = 6; //字典类型
+  string dict_label = 1; //字典标签
+  string dict_type = 2; //字典类型
+  int32 status = 3; //状态（0：停用，1:正常）
+  int64 page_num = 4; //第几页
+  int64 page_size = 59; //每页的数量
 }
 
 message DictItemListData {
-  int64 id = 1; //编号
-  string dict_type = 2; //字典类型
+  int64 id = 1; //字典数据id
+  int32 dict_sort = 2; //字典排序
   string dict_label = 3; //字典标签
   string dict_value = 4; //字典键值
-  int32 dict_status = 5; //字典状态
-  int32 dict_sort = 6; //排序
-  string remark = 7; //备注信息
-  int32 is_default = 8; //是否默认  0：否  1：是
-  int32 is_deleted = 9; //是否删除  0：否  1：是
-  string create_by = 10; //创建者
-  string create_time = 11; //创建时间
-  string update_by = 12; //更新者
-  string update_time = 13; //更新时间
+  string dict_type = 5; //字典类型
+  string css_class = 6; //样式属性（其他样式扩展）
+  string list_class = 7; //表格回显样式
+  string is_default = 8; //是否默认（Y是 N否）
+  int32 status = 9; //状态（0：停用，1:正常）
+  string remark = 10; //备注
+  string create_by = 11; //创建者
+  string create_time = 12; //创建时间
+  string update_by = 13; //更新者
+  string update_time = 14; //更新时间
 
 }
 
@@ -247,42 +244,40 @@ message QueryDictItemListResp {
   repeated  DictItemListData list = 2;
 }
 
-// 字典数据表
+// 字典数据
 service DictItemService {
-  // 添加字典数据表
+  // 添加字典数据
   rpc AddDictItem(AddDictItemReq) returns (AddDictItemResp){}
-  // 删除字典数据表
+  // 删除字典数据
   rpc DeleteDictItem(DeleteDictItemReq) returns (DeleteDictItemResp){}
-  // 更新字典数据表
-  rpc UpdateDictItem(UpdateDictItemReq) returns (UpdateDictItemResp){}
-  // 更新字典数据表状态
-  rpc UpdateDictItemStatus(UpdateDictItemStatusReq) returns (UpdateDictItemStatusResp){}
-  // 查询字典数据表详情
+  // 更新字典数据
+  rpc UpdateDictItem(UpdateDictItemReq) returns (UpdateDictItemResp ){}
+  // 更新字典数据状态
+  rpc UpdateDictItemStatus(UpdateDictItemStatusReq) returns (UpdateDictItemStatusResp ){}
+  // 查询字典数据详情
   rpc QueryDictItemDetail(QueryDictItemDetailReq) returns (QueryDictItemDetailResp){}
-  // 查询字典数据表列表
+  // 查询字典数据列表
   rpc QueryDictItemList(QueryDictItemListReq) returns (QueryDictItemListResp){}
 
 
 }
 
 
-// 添加字典类型表
+// 添加字典类型
 message AddDictTypeReq {
-  int64 id = 1; //编号
+  int64 id = 1; //字典id
   string dict_name = 2; //字典名称
   string dict_type = 3; //字典类型
-  int32 dict_status = 4; //字典状态
-  string remark = 5; //备注信息
-  int32 is_system = 6; //是否系统预留  0：否  1：是
-  string create_by = 7; //创建者
-
+  int32 status = 4; //状态（0：停用，1:正常）
+  string remark = 5; //备注
+  string create_by = 6; //创建者
 }
 
 message AddDictTypeResp {
   string pong = 1;
 }
 
-// 删除字典类型表
+// 删除字典类型
 message DeleteDictTypeReq {
   repeated int64 ids = 1;
 }
@@ -291,77 +286,68 @@ message DeleteDictTypeResp {
   string pong = 1;
 }
 
-// 更新字典类型表
+// 更新字典类型
 message UpdateDictTypeReq {
-  int64 id = 1; //编号
+  int64 id = 1; //字典id
   string dict_name = 2; //字典名称
   string dict_type = 3; //字典类型
-  int32 dict_status = 4; //字典状态
-  string remark = 5; //备注信息
-  int32 is_system = 6; //是否系统预留  0：否  1：是
-  string update_by = 10; //更新者
-
+  int32 status = 4; //状态（0：停用，1:正常）
+  string remark = 5; //备注
+  string update_by = 8; //更新者
 }
 
 message UpdateDictTypeResp {
   string pong = 1;
 }
 
-// 更新字典类型表状态
+// 更新字典类型状态
 message UpdateDictTypeStatusReq {
-  int32 dict_status = 4; //字典状态
-  repeated int64 ids = 6; //编号
-  string update_by = 10; //更新者
-
+  repeated int64 ids = 1; //字典id
+  int32 status = 2; //状态（0：停用，1:正常）
+  string update_by = 3; //更新者
 }
 
 message UpdateDictTypeStatusResp {
   string pong = 1;
 }
 
-// 查询字典类型表详情
+// 查询字典类型详情
 message QueryDictTypeDetailReq {
   int64 id = 1;
 }
 
 message QueryDictTypeDetailResp {
-  int64 id = 1; //编号
+  int64 id = 1; //字典id
   string dict_name = 2; //字典名称
   string dict_type = 3; //字典类型
-  int32 dict_status = 4; //字典状态
-  string remark = 5; //备注信息
-  int32 is_system = 6; //是否系统预留  0：否  1：是
-  int32 is_deleted = 7; //是否删除  0：否  1：是
-  string create_by = 8; //创建者
-  string create_time = 9; //创建时间
-  string update_by = 10; //更新者
-  string update_time = 11; //更新时间
+  int32 status = 4; //状态（0：停用，1:正常）
+  string remark = 5; //备注
+  string create_by = 6; //创建者
+  string create_time = 7; //创建时间
+  string update_by = 8; //更新者
+  string update_time = 9; //更新时间
 
 }
 
-// 分页查询字典类型表列表
+// 分页查询字典类型列表
 message QueryDictTypeListReq {
-  int64 page_num = 1; //第几页
-  int64 page_size = 2; //每页的数量
-  string dict_name = 3; //字典名称
-  int32 dict_status = 4; //字典状态
-  string dict_type = 5; //字典类型
-  int32 is_system = 8; //是否系统预留  0：否  1：是
-
+  string dict_name = 1; //字典名称
+  string dict_type = 2; //字典类型
+  int32 status = 3; //状态（0：停用，1:正常）
+  int64 page_num = 4; //第几页
+  int64 page_size = 5; //每页的数量
 }
 
 message DictTypeListData {
-  int64 id = 1; //编号
+  int64 id = 1; //字典id
   string dict_name = 2; //字典名称
   string dict_type = 3; //字典类型
-  int32 dict_status = 4; //字典状态
-  string remark = 5; //备注信息
-  int32 is_system = 6; //是否系统预留  0：否  1：是
-  int32 is_deleted = 7; //是否删除  0：否  1：是
-  string create_by = 8; //创建者
-  string create_time = 9; //创建时间
-  string update_by = 10; //更新者
-  string update_time = 11; //更新时间
+  int32 status = 4; //状态（0：停用，1:正常）
+  string remark = 5; //备注
+  string create_by = 6; //创建者
+  string create_time = 7; //创建时间
+  string update_by = 8; //更新者
+  string update_time = 9; //更新时间
 
 }
 
@@ -370,26 +356,26 @@ message QueryDictTypeListResp {
   repeated  DictTypeListData list = 2;
 }
 
-// 字典类型表
+// 字典类型
 service DictTypeService {
-  // 添加字典类型表
+  // 添加字典类型
   rpc AddDictType(AddDictTypeReq) returns (AddDictTypeResp){}
-  // 删除字典类型表
+  // 删除字典类型
   rpc DeleteDictType(DeleteDictTypeReq) returns (DeleteDictTypeResp){}
-  // 更新字典类型表
-  rpc UpdateDictType(UpdateDictTypeReq) returns (UpdateDictTypeResp){}
-  // 更新字典类型表状态
-  rpc UpdateDictTypeStatus(UpdateDictTypeStatusReq) returns (UpdateDictTypeStatusResp){}
-  // 查询字典类型表详情
+  // 更新字典类型
+  rpc UpdateDictType(UpdateDictTypeReq) returns (UpdateDictTypeResp ){}
+  // 更新字典类型状态
+  rpc UpdateDictTypeStatus(UpdateDictTypeStatusReq) returns (UpdateDictTypeStatusResp ){}
+  // 查询字典类型详情
   rpc QueryDictTypeDetail(QueryDictTypeDetailReq) returns (QueryDictTypeDetailResp){}
-  // 查询字典类型表列表
+  // 查询字典类型列表
   rpc QueryDictTypeList(QueryDictTypeListReq) returns (QueryDictTypeListResp){}
 
 
 }
 
 
-// 删除系统登录日志表
+// 删除系统登录日志
 message DeleteLoginLogReq {
   repeated int64 ids = 1;
 }
@@ -397,44 +383,62 @@ message DeleteLoginLogReq {
 message DeleteLoginLogResp {
   string pong = 1;
 }
-// 查询系统登录日志表详情
+
+// 查询系统登录日志详情
 message QueryLoginLogDetailReq {
   int64 id = 1;
 }
 
 message QueryLoginLogDetailResp {
-  int64 id = 1; //编号
-  string user_name = 2; //用户名
-  string login_status = 3; //登录状态
-  string ip_address = 4; //IP地址
-  string browser = 5; //浏览器
-  string os = 6; //操作系统
-  string error_msg = 7; //登录失败信息
-  string login_time = 8; //登录时间
+  int64 id = 1; //登录日志id
+  string login_name = 2; //登录账号
+  string ipaddr = 3; //登录IP地址
+  string login_location = 4; //登录地点
+  string platform = 5; //平台信息
+  string browser = 6; //浏览器类型
+  string version = 7; //浏览器版本
+  string os = 8; //操作系统
+  string arch = 9; //体系结构信息
+  string engine = 10; //渲染引擎信息
+  string engine_details = 11; //渲染引擎详细信息
+  string extra = 12; //其他信息（可选）
+  int32 status = 13; //登录状态(0:失败,1:成功)
+  string msg = 14; //提示消息
+  string login_time = 15; //访问时间
 
 }
 
-// 分页查询系统登录日志表列表
+// 分页查询系统登录日志列表
 message QueryLoginLogListReq {
-  int64 page_num = 1; //第几页
-  int64 page_size = 2; //每页的数量
-  string browser = 5; //浏览器
-  string ip_address = 3; //IP地址
-  string login_status = 4; //登录状态
-  string os = 6; //操作系统
-  string user_name = 7; //用户名
-
+  string login_name = 1; //登录账号
+  string ipaddr = 2; //登录IP地址
+  string login_location = 3; //登录地点
+  string platform = 4; //平台信息
+  string browser = 5; //浏览器类型
+  string version = 6; //浏览器版本
+  string os = 7; //操作系统
+  int32 status = 8; //登录状态(0:失败,1:成功)
+  int64 page_num = 9; //第几页
+  int64 page_size = 10; //每页的数量
 }
 
 message LoginLogListData {
-  int64 id = 1; //编号
-  string user_name = 2; //用户名
-  string login_status = 3; //登录状态
-  string ip_address = 4; //IP地址
-  string browser = 5; //浏览器
-  string os = 6; //操作系统
-  string error_msg = 7; //登录失败信息
-  string login_time = 8; //登录时间
+  int64 id = 1; //登录日志id
+  string login_name = 2; //登录账号
+  string ipaddr = 3; //登录IP地址
+  string login_location = 4; //登录地点
+  string platform = 5; //平台信息
+  string browser = 6; //浏览器类型
+  string version = 7; //浏览器版本
+  string os = 8; //操作系统
+  string arch = 9; //体系结构信息
+  string engine = 10; //渲染引擎信息
+  string engine_details = 11; //渲染引擎详细信息
+  string extra = 12; //其他信息（可选）
+  int32 status = 13; //登录状态(0:失败,1:成功)
+  string msg = 14; //提示消息
+  string login_time = 15; //访问时间
+
 }
 
 message QueryLoginLogListResp {
@@ -442,13 +446,14 @@ message QueryLoginLogListResp {
   repeated  LoginLogListData list = 2;
 }
 
-// 系统登录日志表
+// 系统登录日志
 service LoginLogService {
-  // 删除系统登录日志表
+
+  // 删除系统登录日志
   rpc DeleteLoginLog(DeleteLoginLogReq) returns (DeleteLoginLogResp){}
-  // 查询系统登录日志表详情
+  // 查询系统登录日志详情
   rpc QueryLoginLogDetail(QueryLoginLogDetailReq) returns (QueryLoginLogDetailResp){}
-  // 查询系统登录日志表列表
+  // 查询系统登录日志列表
   rpc QueryLoginLogList(QueryLoginLogListReq) returns (QueryLoginLogListResp){}
 
 
@@ -619,31 +624,40 @@ service MenuService {
 }
 
 
-// 添加系统操作日志表
+// 添加系统操作日志
 message AddOperateLogReq {
-  int64 id = 1; //编号
-  string title = 2; //系统模块
-  string operation_type = 3; //操作类型
-  string operation_name = 4; //操作人员
+  int64 id = 1; //操作日志id
+  string title = 2; //模块标题
+  int32 business_type = 3; //业务类型（0其它 1新增 2修改 3删除）
+  string method = 4; //方法名称
   string request_method = 5; //请求方式
-  string operation_url = 6; //操作方法
-  string operation_params = 7; //请求参数
-  string operation_response = 8; //响应参数
-  int32 operation_status = 9; //操作状态
-  string dept_name = 10; //部门名称
-  int64 use_time = 11; //执行时长(毫秒)
-  string browser = 12; //浏览器
-  string os = 13; //操作信息
-  string operation_ip = 14; //操作地址
-  string operation_time = 15; //操作时间
-
+  int32 operator_type = 6; //操作类别（0其它 1后台用户 2手机端用户）
+  string operate_name = 7; //操作人员
+  string dept_name = 8; //部门名称
+  string operate_url = 9; //请求URL
+  string operate_ip = 10; //主机地址
+  string operate_location = 11; //操作地点
+  string operate_param = 12; //请求参数
+  string json_result = 13; //返回参数
+  string platform = 14; //平台信息
+  string browser = 15; //浏览器类型
+  string version = 16; //浏览器版本
+  string os = 17; //操作系统
+  string arch = 18; //体系结构信息
+  string engine = 19; //渲染引擎信息
+  string engine_details = 20; //渲染引擎详细信息
+  string extra = 21; //其他信息（可选）
+  int32 status = 22; // 操作状态(0:异常,正常)
+  string error_msg = 23; // 错误消息
+  string operate_time = 24; // 操作时间
+  int64 cost_time = 25; // 消耗时间
 }
 
 message AddOperateLogResp {
   string pong = 1;
 }
 
-// 删除系统操作日志表
+// 删除系统操作日志
 message DeleteOperateLogReq {
   repeated int64 ids = 1;
 }
@@ -652,62 +666,93 @@ message DeleteOperateLogResp {
   string pong = 1;
 }
 
-// 查询系统操作日志表详情
+// 查询系统操作日志详情
 message QueryOperateLogDetailReq {
   int64 id = 1;
 }
 
 message QueryOperateLogDetailResp {
-  int64 id = 1; //编号
-  string title = 2; //系统模块
-  string operation_type = 3; //操作类型
-  string operation_name = 4; //操作人员
+  int64 id = 1; //操作日志id
+  string title = 2; //模块标题
+  int32 business_type = 3; //业务类型（0其它 1新增 2修改 3删除）
+  string method = 4; //方法名称
   string request_method = 5; //请求方式
-  string operation_url = 6; //操作方法
-  string operation_params = 7; //请求参数
-  string operation_response = 8; //响应参数
-  int32 operation_status = 9; //操作状态
-  string dept_name = 10; //部门名称
-  int64 use_time = 11; //执行时长(毫秒)
-  string browser = 12; //浏览器
-  string os = 13; //操作信息
-  string operation_ip = 14; //操作地址
-  string operation_time = 15; //操作时间
+  int32 operator_type = 6; //操作类别（0其它 1后台用户 2手机端用户）
+  string operate_name = 7; //操作人员
+  string dept_name = 8; //部门名称
+  string operate_url = 9; //请求URL
+  string operate_ip = 10; //主机地址
+  string operate_location = 11; //操作地点
+  string operate_param = 12; //请求参数
+  string json_result = 13; //返回参数
+  string platform = 14; //平台信息
+  string browser = 15; //浏览器类型
+  string version = 16; //浏览器版本
+  string os = 17; //操作系统
+  string arch = 18; //体系结构信息
+  string engine = 19; //渲染引擎信息
+  string engine_details = 20; //渲染引擎详细信息
+  string extra = 21; //其他信息（可选）
+  int32 status = 22; // 操作状态(0:异常,正常)
+  string error_msg = 23; // 错误消息
+  string operate_time = 24; // 操作时间
+  int64 cost_time = 25; // 消耗时间
 
 }
 
-// 分页查询系统操作日志表列表
+// 分页查询系统操作日志列表
 message QueryOperateLogListReq {
-  int64 page_num = 1; //第几页
-  int64 page_size = 2; //每页的数量
-  string operation_ip = 3; //操作地址
-  string operation_name = 4; //操作人员
-  string dept_name = 5; //部门名称
-  int32 operation_status = 6; //操作状态
-  string operation_type = 7; //操作类型
-  string operation_url = 8; //操作方法
-  string title = 10; //系统模块
-  string os = 11; //操作系统信息
-  string browser = 12; //浏览器
-  string request_method = 13; //请求方式
+  string title = 1; //模块标题
+  int32 business_type = 2; //业务类型（0其它 1新增 2修改 3删除）
+  string method = 3; //方法名称
+  string request_method = 4; //请求方式
+  int32 operator_type = 5; //操作类别（0其它 1后台用户 2手机端用户）
+  string operate_name = 6; //操作人员
+  string dept_name = 7; //部门名称
+  string operate_url = 8; //请求URL
+  string operate_ip = 9; //主机地址
+  string operate_location = 10; //操作地点
+  string platform = 13; //平台信息
+  string browser = 14; //浏览器类型
+  string version = 15; //浏览器版本
+  string os = 16; //操作系统
+  string arch = 17; //体系结构信息
+  string engine = 18; //渲染引擎信息
+  string engine_details = 19; //渲染引擎详细信息
+  string extra = 20; //其他信息（可选）
+  int32 status = 21; // 操作状态(0:异常,正常)
+  string operate_time = 23; // 操作时间
+  int64 page_num = 25; //第几页
+  int64 page_size = 26; //每页的数量
 }
 
 message OperateLogListData {
-  int64 id = 1; //编号
-  string title = 2; //系统模块
-  string operation_type = 3; //操作类型
-  string operation_name = 4; //操作人员
+  int64 id = 1; //操作日志id
+  string title = 2; //模块标题
+  int32 business_type = 3; //业务类型（0其它 1新增 2修改 3删除）
+  string method = 4; //方法名称
   string request_method = 5; //请求方式
-  string operation_url = 6; //操作方法
-  string operation_params = 7; //请求参数
-  string operation_response = 8; //响应参数
-  int32 operation_status = 9; //操作状态
-  string dept_name = 10; //部门名称
-  int64 use_time = 11; //执行时长(毫秒)
-  string browser = 12; //浏览器
-  string os = 13; //操作信息
-  string operation_ip = 14; //操作地址
-  string operation_time = 15; //操作时间
+  int32 operator_type = 6; //操作类别（0其它 1后台用户 2手机端用户）
+  string operate_name = 7; //操作人员
+  string dept_name = 8; //部门名称
+  string operate_url = 9; //请求URL
+  string operate_ip = 10; //主机地址
+  string operate_location = 11; //操作地点
+  string operate_param = 12; //请求参数
+  string json_result = 13; //返回参数
+  string platform = 14; //平台信息
+  string browser = 15; //浏览器类型
+  string version = 16; //浏览器版本
+  string os = 17; //操作系统
+  string arch = 18; //体系结构信息
+  string engine = 19; //渲染引擎信息
+  string engine_details = 20; //渲染引擎详细信息
+  string extra = 21; //其他信息（可选）
+  int32 status = 22; // 操作状态(0:异常,正常)
+  string error_msg = 23; // 错误消息
+  string operate_time = 24; // 操作时间
+  int64 cost_time = 25; // 消耗时间
+
 }
 
 message QueryOperateLogListResp {
@@ -715,40 +760,37 @@ message QueryOperateLogListResp {
   repeated  OperateLogListData list = 2;
 }
 
-// 系统操作日志表
+// 系统操作日志
 service OperateLogService {
-  // 添加系统操作日志表
+  // 添加系统操作日志
   rpc AddOperateLog(AddOperateLogReq) returns (AddOperateLogResp){}
-  // 删除系统操作日志表
+  // 删除系统操作日志
   rpc DeleteOperateLog(DeleteOperateLogReq) returns (DeleteOperateLogResp){}
-  // 查询系统操作日志表详情
+  // 查询系统操作日志详情
   rpc QueryOperateLogDetail(QueryOperateLogDetailReq) returns (QueryOperateLogDetailResp){}
-  // 查询系统操作日志表列表
+  // 查询系统操作日志列表
   rpc QueryOperateLogList(QueryOperateLogListReq) returns (QueryOperateLogListResp){}
 
 
 }
 
 
-
-
-// 添加岗位管理
+// 添加岗位信息
 message AddPostReq {
   int64 id = 1; //岗位id
-  string post_name = 2; //岗位名称
-  string post_code = 3; //岗位编码
-  int32 post_status = 4; //岗位状态
-  int32 post_sort = 5; //岗位排序
-  string remark = 6; //备注信息
-  string create_by = 8; //创建者
-
+  string post_code = 2; //岗位编码
+  string post_name = 3; //岗位名称
+  int32 sort = 4; //显示顺序
+  int32 status = 5; //岗位状态（0：停用，1:正常）
+  string remark = 6; //备注
+  string create_by = 7; //创建者
 }
 
 message AddPostResp {
   string pong = 1;
 }
 
-// 删除岗位管理
+// 删除岗位信息
 message DeletePostReq {
   repeated int64 ids = 1;
 }
@@ -757,75 +799,71 @@ message DeletePostResp {
   string pong = 1;
 }
 
-// 更新岗位管理
+// 更新岗位信息
 message UpdatePostReq {
   int64 id = 1; //岗位id
-  string post_name = 2; //岗位名称
-  string post_code = 3; //岗位编码
-  int32 post_status = 4; //岗位状态
-  int32 post_sort = 5; //岗位排序
-  string remark = 6; //备注信息
-  string update_by = 10; //更新者
-
+  string post_code = 2; //岗位编码
+  string post_name = 3; //岗位名称
+  int32 sort = 4; //显示顺序
+  int32 status = 5; //岗位状态（0：停用，1:正常）
+  string remark = 6; //备注
+  string update_by = 9; //更新者
 }
 
 message UpdatePostResp {
   string pong = 1;
 }
 
-// 更新岗位管理状态
+// 更新岗位信息状态
 message UpdatePostStatusReq {
-  repeated int64 ids = 1; //编号
-  int32 status = 2; //岗位状态
-  string update_by = 3; //更新者
-
+  repeated int64 ids = 1; //岗位id
+  int32 status = 5; //岗位状态（0：停用，1:正常）
+  string update_by = 9; //更新者
 }
 
 message UpdatePostStatusResp {
   string pong = 1;
 }
 
-// 查询岗位管理详情
+// 查询岗位信息详情
 message QueryPostDetailReq {
   int64 id = 1;
 }
 
 message QueryPostDetailResp {
   int64 id = 1; //岗位id
-  string post_name = 2; //岗位名称
-  string post_code = 3; //岗位编码
-  int32 post_status = 4; //岗位状态
-  int32 post_sort = 5; //岗位排序
-  string remark = 6; //备注信息
-  int32 is_deleted = 7; //是否删除  0：否  1：是
-  string create_by = 8; //创建者
-  string create_time = 9; //创建时间
-  string update_by = 10; //更新者
-  string update_time = 11; //更新时间
+  string post_code = 2; //岗位编码
+  string post_name = 3; //岗位名称
+  int32 sort = 4; //显示顺序
+  int32 status = 5; //岗位状态（0：停用，1:正常）
+  string remark = 6; //备注
+  string create_by = 7; //创建者
+  string create_time = 8; //创建时间
+  string update_by = 9; //更新者
+  string update_time = 10; //更新时间
 
 }
 
-// 分页查询岗位管理列表
+// 分页查询岗位信息列表
 message QueryPostListReq {
   string post_code = 1; //岗位编码
   string post_name = 2; //岗位名称
-  int32 post_status = 3; //岗位状态
+  int32 status = 3; //岗位状态（0：停用，1:正常）
   int64 page_num = 4; //第几页
   int64 page_size = 5; //每页的数量
 }
 
 message PostListData {
   int64 id = 1; //岗位id
-  string post_name = 2; //岗位名称
-  string post_code = 3; //岗位编码
-  int32 post_status = 4; //岗位状态
-  int32 post_sort = 5; //岗位排序
-  string remark = 6; //备注信息
-  int32 is_deleted = 7; //是否删除  0：否  1：是
-  string create_by = 8; //创建者
-  string create_time = 9; //创建时间
-  string update_by = 10; //更新者
-  string update_time = 11; //更新时间
+  string post_code = 2; //岗位编码
+  string post_name = 3; //岗位名称
+  int32 sort = 4; //显示顺序
+  int32 status = 5; //岗位状态（0：停用，1:正常）
+  string remark = 6; //备注
+  string create_by = 7; //创建者
+  string create_time = 8; //创建时间
+  string update_by = 9; //更新者
+  string update_time = 10; //更新时间
 
 }
 
@@ -834,44 +872,42 @@ message QueryPostListResp {
   repeated  PostListData list = 2;
 }
 
-// 岗位管理
+// 岗位信息
 service PostService {
-  // 添加岗位管理
+  // 添加岗位信息
   rpc AddPost(AddPostReq) returns (AddPostResp){}
-  // 删除岗位管理
+  // 删除岗位信息
   rpc DeletePost(DeletePostReq) returns (DeletePostResp){}
-  // 更新岗位管理
-  rpc UpdatePost(UpdatePostReq) returns (UpdatePostResp){}
-  // 更新岗位管理状态
-  rpc UpdatePostStatus(UpdatePostStatusReq) returns (UpdatePostStatusResp){}
-  // 查询岗位管理详情
+  // 更新岗位信息
+  rpc UpdatePost(UpdatePostReq) returns (UpdatePostResp ){}
+  // 更新岗位信息状态
+  rpc UpdatePostStatus(UpdatePostStatusReq) returns (UpdatePostStatusResp ){}
+  // 查询岗位信息详情
   rpc QueryPostDetail(QueryPostDetailReq) returns (QueryPostDetailResp){}
-  // 查询岗位管理列表
+  // 查询岗位信息列表
   rpc QueryPostList(QueryPostListReq) returns (QueryPostListResp){}
 
 
 }
 
 
-// 添加角色信息表
+// 添加角色信息
 message AddRoleReq {
-  int64 id = 1; //编号
-  string role_name = 2; //角色名称
-  string role_key = 3; //权限字符
-  int32 role_status = 4; //角色状态
-  int32 role_sort = 5; //角色排序
-  int32 data_scope = 6; //数据权限
-  int32 is_admin = 8; //是否超级管理员:  0：否  1：是
-  string remark = 9; //备注
-  string create_by = 10; //创建者
-
+  int64 id = 1; //角色id
+  string role_name = 2; //名称
+  string role_key = 3; //角色权限字符串
+  int32 data_scope = 4; //数据范围（1：全部数据权限 2：自定数据权限 3：本部门数据权限 4：本部门及以下数据权限）
+  int32 status = 5; //状态(1:正常，0:禁用)
+  string remark = 6; //备注
+  int32 del_flag = 7; //删除标志（0代表删除 1代表存在）
+  string create_by = 8; //创建者
 }
 
 message AddRoleResp {
   string pong = 1;
 }
 
-// 删除角色信息表
+// 删除角色信息
 message DeleteRoleReq {
   repeated int64 ids = 1;
 }
@@ -880,85 +916,76 @@ message DeleteRoleResp {
   string pong = 1;
 }
 
-// 更新角色信息表
+// 更新角色信息
 message UpdateRoleReq {
-  int64 id = 1; //编号
-  string role_name = 2; //角色名称
-  string role_key = 3; //权限字符
-  int32 role_status = 4; //角色状态
-  int32 role_sort = 5; //角色排序
-  int32 data_scope = 6; //数据权限
-  int32 is_admin = 8; //是否超级管理员:  0：否  1：是
-  string remark = 9; //备注
-  string update_by = 12; //更新者
-
+  int64 id = 1; //角色id
+  string role_name = 2; //名称
+  string role_key = 3; //角色权限字符串
+  int32 data_scope = 4; //数据范围（1：全部数据权限 2：自定数据权限 3：本部门数据权限 4：本部门及以下数据权限）
+  int32 status = 5; //状态(1:正常，0:禁用)
+  string remark = 6; //备注
+  int32 del_flag = 7; //删除标志（0代表删除 1代表存在）
+  string update_by = 10; //更新者
 }
 
 message UpdateRoleResp {
   string pong = 1;
 }
 
-// 更新角色信息表状态
+// 更新角色信息状态
 message UpdateRoleStatusReq {
-  repeated int64 ids = 1; //编号
-  int32 role_status = 2; //角色状态
-  string update_by = 3; //更新者
-
+  repeated int64 ids = 1; //角色id
+  int32 status = 5; //状态(1:正常，0:禁用)
+  string update_by = 10; //更新者
 }
 
 message UpdateRoleStatusResp {
   string pong = 1;
 }
 
-// 查询角色信息表详情
+// 查询角色信息详情
 message QueryRoleDetailReq {
   int64 id = 1;
 }
 
 message QueryRoleDetailResp {
-  int64 id = 1; //编号
-  string role_name = 2; //角色名称
-  string role_key = 3; //权限字符
-  int32 role_status = 4; //角色状态
-  int32 role_sort = 5; //角色排序
-  int32 data_scope = 6; //数据权限
-  int32 is_deleted = 7; //是否删除  0：否  1：是
-  int32 is_admin = 8; //是否超级管理员:  0：否  1：是
-  string remark = 9; //备注
-  string create_by = 10; //创建者
-  string create_time = 11; //创建时间
-  string update_by = 12; //更新者
-  string update_time = 13; //更新时间
-
+  int64 id = 1; //角色id
+  string role_name = 2; //名称
+  string role_key = 3; //角色权限字符串
+  int32 data_scope = 4; //数据范围（1：全部数据权限 2：自定数据权限 3：本部门数据权限 4：本部门及以下数据权限）
+  int32 status = 5; //状态(1:正常，0:禁用)
+  string remark = 6; //备注
+  int32 del_flag = 7; //删除标志（0代表删除 1代表存在）
+  string create_by = 8; //创建者
+  string create_time = 9; //创建时间
+  string update_by = 10; //更新者
+  string update_time = 11; //更新时间
 
 }
 
-// 分页查询角色信息表列表
+// 分页查询角色信息列表
 message QueryRoleListReq {
-  int64 page_num = 1; //第几页
-  int64 page_size = 2; //每页的数量
-  int32 is_admin = 3; //是否超级管理员
-  string role_key = 4; //权限字符
-  string role_name = 5; //角色名称
-  int32 role_status = 6; //角色状态
-  int32 data_scope = 7; //数据权限
+  string role_name = 1; //名称
+  string role_key = 2; //角色权限字符串
+  int32 data_scope = 3; //数据范围（1：全部数据权限 2：自定数据权限 3：本部门数据权限 4：本部门及以下数据权限）
+  int32 status = 4; //状态(1:正常，0:禁用)
+  int32 del_flag = 5; //删除标志（0代表删除 1代表存在）
+  int64 page_num = 6; //第几页
+  int64 page_size = 7; //每页的数量
 }
 
 message RoleListData {
-  int64 id = 1; //编号
-  string role_name = 2; //角色名称
-  string role_key = 3; //权限字符
-  int32 role_status = 4; //角色状态
-  int32 role_sort = 5; //角色排序
-  int32 data_scope = 6; //数据权限
-  int32 is_deleted = 7; //是否删除  0：否  1：是
-  int32 is_admin = 8; //是否超级管理员:  0：否  1：是
-  string remark = 9; //备注
-  string create_by = 10; //创建者
-  string create_time = 11; //创建时间
-  string update_by = 12; //更新者
-  string update_time = 13; //更新时间
-
+  int64 id = 1; //角色id
+  string role_name = 2; //名称
+  string role_key = 3; //角色权限字符串
+  int32 data_scope = 4; //数据范围（1：全部数据权限 2：自定数据权限 3：本部门数据权限 4：本部门及以下数据权限）
+  int32 status = 5; //状态(1:正常，0:禁用)
+  string remark = 6; //备注
+  int32 del_flag = 7; //删除标志（0代表删除 1代表存在）
+  string create_by = 8; //创建者
+  string create_time = 9; //创建时间
+  string update_by = 10; //更新者
+  string update_time = 11; //更新时间
 
 }
 
@@ -1000,12 +1027,12 @@ message QueryRoleMenuListResp {
   repeated int64 MenuIds = 2;
 }
 
-message UpdateMenuRoleReq {
+message UpdateRoleMenuReq {
   int64 roleId = 1;
   repeated int64 menuIds = 2;
 }
 
-message UpdateMenuRoleResp {
+message UpdateRoleMenuResp {
   string pong = 1;
 }
 
@@ -1018,24 +1045,27 @@ message QueryRoleUserListReq {
   string user_name = 6; //昵称
 }
 message UserData {
-  int64 id = 1; //编号
-  string user_name = 2; //用户名
-  string nick_name = 3; //昵称
-  string avatar = 4; //头像
-  string email = 7; //邮箱
-  string mobile = 8; //手机号
-  int32 user_status = 9; //帐号状态（0正常 1停用）
-  int64 dept_id = 10; //部门id
-  string remark = 11; //备注信息
-  int32 is_deleted = 12; //是否删除  0：否  1：是
-  string login_time = 13; //登录时间
-  string login_ip = 14; //登录ip
-  string login_os = 15; //登录os
-  string login_browser = 16; //登录浏览器
-  string create_by = 17; //创建者
-  string create_time = 18; //创建时间
-  string update_by = 19; //更新者
-  string update_time = 20; //更新时间
+  int64 id = 1; //用户id
+  string mobile = 2; //手机号码
+  string user_name = 3; //用户账号
+  string nick_name = 4; //用户昵称
+  string user_type = 5; //用户类型（00系统用户）
+  string avatar = 6; //头像路径
+  string email = 7; //用户邮箱
+  string password = 8; //密码
+  int32 status = 9; //状态(1:正常，0:禁用)
+  int64 dept_id = 10; //部门ID
+  string login_ip = 11; //最后登录IP
+  string login_date = 12; //最后登录时间
+  string login_browser = 13; //浏览器类型
+  string login_os = 14; //操作系统
+  string pwd_update_date = 15; //密码最后更新时间
+  string remark = 16; //备注
+  int32 del_flag = 17; //删除标志（0代表删除 1代表存在）
+  string create_by = 18; //创建者
+  string create_time = 19; //创建时间
+  string update_by = 20; //更新者
+  string update_time = 21; //更新时间
 
 }
 message QueryRoleUserListResp {
@@ -1055,25 +1085,25 @@ message CancelAuthorizationResp {
 }
 
 
-// 角色信息表
+// 角色信息
 service RoleService {
-  // 添加角色信息表
+  // 添加角色信息
   rpc AddRole(AddRoleReq) returns (AddRoleResp){}
-  // 删除角色信息表
+  // 删除角色信息
   rpc DeleteRole(DeleteRoleReq) returns (DeleteRoleResp){}
-  // 更新角色信息表
-  rpc UpdateRole(UpdateRoleReq) returns (UpdateRoleResp){}
-  // 更新角色信息表状态
-  rpc UpdateRoleStatus(UpdateRoleStatusReq) returns (UpdateRoleStatusResp){}
-  // 查询角色信息表详情
+  // 更新角色信息
+  rpc UpdateRole(UpdateRoleReq) returns (UpdateRoleResp ){}
+  // 更新角色信息状态
+  rpc UpdateRoleStatus(UpdateRoleStatusReq) returns (UpdateRoleStatusResp ){}
+  // 查询角色信息详情
   rpc QueryRoleDetail(QueryRoleDetailReq) returns (QueryRoleDetailResp){}
-  // 查询角色信息表列表
+  // 查询角色信息列表
   rpc QueryRoleList(QueryRoleListReq) returns (QueryRoleListResp){}
 
-  //查询用户与角色的关联
+  //查询角色与菜单的关联
   rpc QueryRoleMenuList(QueryRoleMenuListReq) returns(QueryRoleMenuListResp);
-  //更新用户与角色的关联
-  rpc UpdateMenuRoleList(UpdateMenuRoleReq) returns(UpdateMenuRoleResp);
+  //更新角色与菜单的关联
+  rpc UpdateMenuRoleList(UpdateRoleMenuReq) returns(UpdateRoleMenuResp);
 
   //查询角色的用户关联
   rpc QueryRoleUserList(QueryRoleUserListReq) returns(QueryRoleUserListResp);
@@ -1084,7 +1114,145 @@ service RoleService {
 }
 
 
+// 添加用户信息
+message AddUserReq {
+  int64 id = 1; //用户id
+  string mobile = 2; //手机号码
+  string user_name = 3; //用户账号
+  string nick_name = 4; //用户昵称
+  string user_type = 5; //用户类型（00系统用户）
+  string avatar = 6; //头像路径
+  string email = 7; //用户邮箱
+  string password = 8; //密码
+  int32 status = 9; //状态(1:正常，0:禁用)
+  int64 dept_id = 10; //部门ID
+  string remark = 11; //备注
+  string create_by = 12; //创建者
+  repeated int64 PostIds = 13; //岗位ids
+}
 
+message AddUserResp {
+  string pong = 1;
+}
+
+// 删除用户信息
+message DeleteUserReq {
+  repeated int64 ids = 1;
+}
+
+message DeleteUserResp {
+  string pong = 1;
+}
+
+// 更新用户信息
+message UpdateUserReq {
+  int64 id = 1; //用户id
+  string mobile = 2; //手机号码
+  string user_name = 3; //用户账号
+  string nick_name = 4; //用户昵称
+  string user_type = 5; //用户类型（00系统用户）
+  string avatar = 6; //头像路径
+  string email = 7; //用户邮箱
+  int32 status = 9; //状态(1:正常，0:禁用)
+  int64 dept_id = 10; //部门ID
+  string remark = 11; //备注
+  string update_by = 12; //更新者
+  repeated int64 PostIds = 13; //岗位ids
+}
+
+message UpdateUserResp {
+  string pong = 1;
+}
+
+// 更新用户信息状态
+message UpdateUserStatusReq {
+  repeated int64 ids = 1; //用户id
+  int32 status = 2; //状态(1:正常，0:禁用)
+  string update_by = 3; //更新者
+}
+
+message UpdateUserStatusResp {
+  string pong = 1;
+}
+
+// 查询用户信息详情
+message QueryUserDetailReq {
+  int64 id = 1;
+}
+
+message QueryUserDetailResp {
+  int64 id = 1; //用户id
+  string mobile = 2; //手机号码
+  string user_name = 3; //用户账号
+  string nick_name = 4; //用户昵称
+  string user_type = 5; //用户类型（00系统用户）
+  string avatar = 6; //头像路径
+  string email = 7; //用户邮箱
+  int32 status = 9; //状态(1:正常，0:禁用)
+  int64 dept_id = 10; //部门ID
+  string login_ip = 11; //最后登录IP
+  string login_date = 12; //最后登录时间
+  string login_browser = 13; //浏览器类型
+  string login_os = 14; //操作系统
+  string pwd_update_date = 15; //密码最后更新时间
+  string remark = 16; //备注
+  int32 del_flag = 17; //删除标志（0代表删除 1代表存在）
+  string create_by = 18; //创建者
+  string create_time = 19; //创建时间
+  string update_by = 20; //更新者
+  string update_time = 21; //更新时间
+  repeated int64 PostIds = 22; //岗位ids
+}
+
+// 分页查询用户信息列表
+message QueryUserListReq {
+  string mobile = 1; //手机号码
+  string user_name = 2; //用户账号
+  string nick_name = 3; //用户昵称
+  string user_type = 4; //用户类型（00系统用户）
+  string avatar = 5; //头像路径
+  string email = 6; //用户邮箱
+  string password = 7; //密码
+  int32 status = 8; //状态(1:正常，0:禁用)
+  int64 dept_id = 9; //部门ID
+  string login_ip = 10; //最后登录IP
+  string login_date = 11; //最后登录时间
+  string login_browser = 12; //浏览器类型
+  string login_os = 13; //操作系统
+  string pwd_update_date = 14; //密码最后更新时间
+  int32 del_flag = 15; //删除标志（0代表删除 1代表存在）
+  int64 page_num = 16; //第几页
+  int64 page_size = 17; //每页的数量
+}
+
+message UserListData {
+  int64 id = 1; //用户id
+  string mobile = 2; //手机号码
+  string user_name = 3; //用户账号
+  string nick_name = 4; //用户昵称
+  string user_type = 5; //用户类型（00系统用户）
+  string avatar = 6; //头像路径
+  string email = 7; //用户邮箱
+  int32 status = 9; //状态(1:正常，0:禁用)
+  int64 dept_id = 10; //部门ID
+  string login_ip = 11; //最后登录IP
+  string login_date = 12; //最后登录时间
+  string login_browser = 13; //浏览器类型
+  string login_os = 14; //操作系统
+  string pwd_update_date = 15; //密码最后更新时间
+  string remark = 16; //备注
+  int32 del_flag = 17; //删除标志（0代表删除 1代表存在）
+  string create_by = 18; //创建者
+  string create_time = 19; //创建时间
+  string update_by = 20; //更新者
+  string update_time = 21; //更新时间
+  repeated int64 PostIds = 22; //岗位ids
+}
+
+message QueryUserListResp {
+  int64 total = 1;
+  repeated  UserListData list = 2;
+}
 message LoginReq {
   string account = 1;//账号
   string password = 2;//密码
@@ -1134,138 +1302,6 @@ message ReSetPasswordResp {
   string pong = 1;
 }
 
-// 添加用户信息表
-message AddUserReq {
-  int64 id = 1; //编号
-  string user_name = 2; //用户名
-  string nick_name = 3; //昵称
-  string avatar = 4; //头像
-  string password = 5; //密码
-  string salt = 6; //加密盐
-  string email = 7; //邮箱
-  string mobile = 8; //手机号
-  int32 user_status = 9; //帐号状态（0正常 1停用）
-  int64 dept_id = 10; //部门id
-  string remark = 11; //备注信息
-  repeated int64 PostIds = 12; //岗位ids
-  string create_by = 13; //创建者
-}
-
-message AddUserResp {
-  string pong = 1;
-}
-
-// 删除用户信息表
-message DeleteUserReq {
-  repeated int64 ids = 1;
-}
-
-message DeleteUserResp {
-  string pong = 1;
-}
-
-// 更新用户信息表
-message UpdateUserReq {
-  int64 id = 1; //编号
-  string user_name = 2; //用户名
-  string nick_name = 3; //昵称
-  string avatar = 4; //头像
-  string password = 5; //密码
-  string salt = 6; //加密盐
-  string email = 7; //邮箱
-  string mobile = 8; //手机号
-  int32 user_status = 9; //帐号状态（0正常 1停用）
-  int64 dept_id = 10; //部门id
-  string remark = 11; //备注信息
-  repeated int64 PostIds = 12; //岗位ids
-  string update_by = 13; //更新者
-}
-
-message UpdateUserResp {
-  string pong = 1;
-}
-
-// 更新用户信息表状态
-message UpdateUserStatusReq {
-  repeated int64 ids = 1; //编号
-  int32 user_status = 2; //帐号状态（0正常 1停用）
-  string update_by = 3; //更新者
-
-}
-
-message UpdateUserStatusResp {
-  string pong = 1;
-}
-
-// 查询用户信息表详情
-message QueryUserDetailReq {
-  int64 id = 1;
-}
-
-message QueryUserDetailResp {
-  int64 id = 1; //编号
-  string user_name = 2; //用户名
-  string nick_name = 3; //昵称
-  string avatar = 4; //头像
-  string email = 7; //邮箱
-  string mobile = 8; //手机号
-  int32 user_status = 9; //帐号状态（0正常 1停用）
-  int64 dept_id = 10; //部门id
-  string remark = 11; //备注信息
-  int32 is_deleted = 12; //是否删除  0：否  1：是
-  string login_time = 13; //登录时间
-  string login_ip = 14; //登录ip
-  string login_os = 15; //登录os
-  string login_browser = 16; //登录浏览器
-  string create_by = 17; //创建者
-  string create_time = 18; //创建时间
-  string update_by = 19; //更新者
-  string update_time = 20; //更新时间
-  repeated int64 PostIds = 21; //岗位ids
-
-}
-
-// 分页查询用户信息表列表
-message QueryUserListReq {
-  int64 page_num = 1; //第几页
-  int64 page_size = 2; //每页的数量
-  int64 dept_id = 3; //部门id
-  string email = 4; //邮箱
-  string mobile = 5; //手机号
-  string nick_name = 6; //昵称
-  int32 user_status = 7; //帐号状态（0正常 1停用）
-  string user_name = 8; //用户名
-
-}
-
-message UserListData {
-  int64 id = 1; //编号
-  string user_name = 2; //用户名
-  string nick_name = 3; //昵称
-  string avatar = 4; //头像
-  string email = 7; //邮箱
-  string mobile = 8; //手机号
-  int32 user_status = 9; //帐号状态（0正常 1停用）
-  int64 dept_id = 10; //部门id
-  string remark = 11; //备注信息
-  int32 is_deleted = 12; //是否删除  0：否  1：是
-  string login_time = 13; //登录时间
-  string login_ip = 14; //登录ip
-  string login_os = 15; //登录os
-  string login_browser = 16; //登录浏览器
-  string create_by = 17; //创建者
-  string create_time = 18; //创建时间
-  string update_by = 19; //更新者
-  string update_time = 20; //更新时间
-
-
-}
-
-message QueryUserListResp {
-  int64 total = 1;
-  repeated  UserListData list = 2;
-}
-
 message UpdateUserRoleListReq {
   int64 userId = 1;
   repeated int64 roleIds = 2;
@@ -1281,19 +1317,17 @@ message QueryUserRoleListReq {
 }
 
 message RoleData {
-  int64 id = 1; //编号
-  string role_name = 2; //角色名称
-  string role_key = 3; //权限字符
-  int32 role_status = 4; //角色状态
-  int32 role_sort = 5; //角色排序
-  int32 data_scope = 6; //数据权限
-  int32 is_deleted = 7; //是否删除  0：否  1：是
-  int32 is_admin = 8; //是否超级管理员:  0：否  1：是
-  string remark = 9; //备注
-  string create_by = 10; //创建者
-  string create_time = 11; //创建时间
-  string update_by = 12; //更新者
-  string update_time = 13; //更新时间
+  int64 id = 1; //角色id
+  string role_name = 2; //名称
+  string role_key = 3; //角色权限字符串
+  int32 data_scope = 4; //数据范围（1：全部数据权限 2：自定数据权限 3：本部门数据权限 4：本部门及以下数据权限）
+  int32 status = 5; //状态(1:正常，0:禁用)
+  string remark = 6; //备注
+  int32 del_flag = 7; //删除标志（0代表删除 1代表存在）
+  string create_by = 8; //创建者
+  string create_time = 9; //创建时间
+  string update_by = 10; //更新者
+  string update_time = 11; //更新时间
 
 
 }
@@ -1313,50 +1347,60 @@ message QueryDeptAndPostListResp {
 }
 
 message DeptData {
-  int64 id = 1; //编号
-  string dept_name = 2; //部门名称
-  int32 dept_status = 3; //部门状态
-  int32 dept_sort = 4; //部门排序
-  int64 parent_id = 5; //上级机构ID，一级机构为0
+  int64 id = 1; //部门id
+  int64 parent_id = 2; //上级部门id
+  string ancestors = 3; //祖级列表
+  string dept_name = 4; //部门名称
+  int32 sort = 5; //显示顺序
   string leader = 6; //负责人
-  string phone = 7; //电话号码
+  string phone = 7; //联系电话
   string email = 8; //邮箱
-  string remark = 9; //备注信息
-  repeated int64 parent_ids = 11; //上级机构IDs，一级机构为0
+  int32 status = 9; //部门状态（0：停用，1:正常）
+  int32 del_flag = 10; //删除标志（0代表删除 1代表存在）
+  string remark = 11; //备注信息
+  string create_by = 12; //创建者
+  string create_time = 13; //创建时间
+  string update_by = 14; //更新者
+  string update_time = 15; //更新时间
 
 }
 
 message PostData {
   int64 id = 1; //岗位id
-  string post_name = 2; //岗位名称
-  string post_code = 3; //岗位编码
-  int32 post_status = 4; //岗位状态
-  int32 post_sort = 5; //岗位排序
-  string remark = 6; //备注信息
+  string post_code = 2; //岗位编码
+  string post_name = 3; //岗位名称
+  int32 sort = 4; //显示顺序
+  int32 status = 5; //岗位状态（0：停用，1:正常）
+  string remark = 6; //备注
+  string create_by = 7; //创建者
+  string create_time = 8; //创建时间
+  string update_by = 9; //更新者
+  string update_time = 10; //更新时间
+
 
 }
 
 // 用户信息表
 service UserService {
+  // 添加用户信息
+  rpc AddUser(AddUserReq) returns (AddUserResp){}
+  // 删除用户信息
+  rpc DeleteUser(DeleteUserReq) returns (DeleteUserResp){}
+  // 更新用户信息
+  rpc UpdateUser(UpdateUserReq) returns (UpdateUserResp ){}
+  // 更新用户信息状态
+  rpc UpdateUserStatus(UpdateUserStatusReq) returns (UpdateUserStatusResp ){}
+  // 查询用户信息详情
+  rpc QueryUserDetail(QueryUserDetailReq) returns (QueryUserDetailResp){}
+  // 查询用户信息列表
+  rpc QueryUserList(QueryUserListReq) returns (QueryUserListResp){}
+
   // 用户登录
   rpc Login(LoginReq) returns(loginResp);
   // 获取用户个人信息
   rpc UserInfo(InfoReq) returns(InfoResp);
   // 重置用户密码
   rpc ReSetPassword(ReSetPasswordReq) returns(ReSetPasswordResp);
-  // 添加用户信息表
-  rpc AddUser(AddUserReq) returns (AddUserResp){}
-  // 删除用户信息表
-  rpc DeleteUser(DeleteUserReq) returns (DeleteUserResp){}
-  // 更新用户信息表
-  rpc UpdateUser(UpdateUserReq) returns (UpdateUserResp){}
-  // 更新用户信息表状态
-  rpc UpdateUserStatus(UpdateUserStatusReq) returns (UpdateUserStatusResp){}
-  // 查询用户信息表详情
-  rpc QueryUserDetail(QueryUserDetailReq) returns (QueryUserDetailResp){}
-  // 查询用户信息表列表
-  rpc QueryUserList(QueryUserListReq) returns (QueryUserListResp){}
-
   //查询用户与角色的关联
   rpc QueryUserRoleList(QueryUserRoleListReq) returns(QueryUserRoleListResp);
   //更新用户与角色的关联

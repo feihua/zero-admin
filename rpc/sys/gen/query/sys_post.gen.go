@@ -28,12 +28,11 @@ func newSysPost(db *gorm.DB, opts ...gen.DOOption) sysPost {
 	tableName := _sysPost.sysPostDo.TableName()
 	_sysPost.ALL = field.NewAsterisk(tableName)
 	_sysPost.ID = field.NewInt64(tableName, "id")
-	_sysPost.PostName = field.NewString(tableName, "post_name")
 	_sysPost.PostCode = field.NewString(tableName, "post_code")
-	_sysPost.PostStatus = field.NewInt32(tableName, "post_status")
-	_sysPost.PostSort = field.NewInt32(tableName, "post_sort")
+	_sysPost.PostName = field.NewString(tableName, "post_name")
+	_sysPost.Sort = field.NewInt32(tableName, "sort")
+	_sysPost.Status = field.NewInt32(tableName, "status")
 	_sysPost.Remark = field.NewString(tableName, "remark")
-	_sysPost.IsDeleted = field.NewInt32(tableName, "is_deleted")
 	_sysPost.CreateBy = field.NewString(tableName, "create_by")
 	_sysPost.CreateTime = field.NewTime(tableName, "create_time")
 	_sysPost.UpdateBy = field.NewString(tableName, "update_by")
@@ -44,18 +43,17 @@ func newSysPost(db *gorm.DB, opts ...gen.DOOption) sysPost {
 	return _sysPost
 }
 
-// sysPost 岗位管理
+// sysPost 岗位信息表
 type sysPost struct {
 	sysPostDo sysPostDo
 
 	ALL        field.Asterisk
 	ID         field.Int64  // 岗位id
-	PostName   field.String // 岗位名称
 	PostCode   field.String // 岗位编码
-	PostStatus field.Int32  // 岗位状态
-	PostSort   field.Int32  // 岗位排序
-	Remark     field.String // 备注信息
-	IsDeleted  field.Int32  // 是否删除  0：否  1：是
+	PostName   field.String // 岗位名称
+	Sort       field.Int32  // 显示顺序
+	Status     field.Int32  // 岗位状态（0：停用，1:正常）
+	Remark     field.String // 备注
 	CreateBy   field.String // 创建者
 	CreateTime field.Time   // 创建时间
 	UpdateBy   field.String // 更新者
@@ -77,12 +75,11 @@ func (s sysPost) As(alias string) *sysPost {
 func (s *sysPost) updateTableName(table string) *sysPost {
 	s.ALL = field.NewAsterisk(table)
 	s.ID = field.NewInt64(table, "id")
-	s.PostName = field.NewString(table, "post_name")
 	s.PostCode = field.NewString(table, "post_code")
-	s.PostStatus = field.NewInt32(table, "post_status")
-	s.PostSort = field.NewInt32(table, "post_sort")
+	s.PostName = field.NewString(table, "post_name")
+	s.Sort = field.NewInt32(table, "sort")
+	s.Status = field.NewInt32(table, "status")
 	s.Remark = field.NewString(table, "remark")
-	s.IsDeleted = field.NewInt32(table, "is_deleted")
 	s.CreateBy = field.NewString(table, "create_by")
 	s.CreateTime = field.NewTime(table, "create_time")
 	s.UpdateBy = field.NewString(table, "update_by")
@@ -111,14 +108,13 @@ func (s *sysPost) GetFieldByName(fieldName string) (field.OrderExpr, bool) {
 }
 
 func (s *sysPost) fillFieldMap() {
-	s.fieldMap = make(map[string]field.Expr, 11)
+	s.fieldMap = make(map[string]field.Expr, 10)
 	s.fieldMap["id"] = s.ID
-	s.fieldMap["post_name"] = s.PostName
 	s.fieldMap["post_code"] = s.PostCode
-	s.fieldMap["post_status"] = s.PostStatus
-	s.fieldMap["post_sort"] = s.PostSort
+	s.fieldMap["post_name"] = s.PostName
+	s.fieldMap["sort"] = s.Sort
+	s.fieldMap["status"] = s.Status
 	s.fieldMap["remark"] = s.Remark
-	s.fieldMap["is_deleted"] = s.IsDeleted
 	s.fieldMap["create_by"] = s.CreateBy
 	s.fieldMap["create_time"] = s.CreateTime
 	s.fieldMap["update_by"] = s.UpdateBy

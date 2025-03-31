@@ -42,11 +42,8 @@ func (l *QueryDictTypeListLogic) QueryDictTypeList(in *sysclient.QueryDictTypeLi
 		q = q.Where(query.SysDictType.DictType.Like("%" + in.DictType + "%"))
 	}
 
-	if in.DictStatus != 2 {
-		q = q.Where(query.SysDictType.DictStatus.Eq(in.DictStatus))
-	}
-	if in.IsSystem != 2 {
-		q = q.Where(query.SysDictType.IsSystem.Eq(in.IsSystem))
+	if in.Status != 2 {
+		q = q.Where(query.SysDictType.Status.Eq(in.Status))
 	}
 
 	result, count, err := q.FindByPage(int((in.PageNum-1)*in.PageSize), int(in.PageSize))
@@ -58,13 +55,11 @@ func (l *QueryDictTypeListLogic) QueryDictTypeList(in *sysclient.QueryDictTypeLi
 	var list = make([]*sysclient.DictTypeListData, 0, len(result))
 	for _, dict := range result {
 		list = append(list, &sysclient.DictTypeListData{
-			Id:         dict.ID,                                 // 编号
+			Id:         dict.ID,                                 // 字典id
 			DictName:   dict.DictName,                           // 字典名称
 			DictType:   dict.DictType,                           // 字典类型
-			DictStatus: dict.DictStatus,                         // 字典状态
-			Remark:     dict.Remark,                             // 备注信息
-			IsSystem:   dict.IsSystem,                           // 是否系统预留  0：否  1：是
-			IsDeleted:  dict.IsDeleted,                          // 是否删除  0：否  1：是
+			Status:     dict.Status,                             // 状态（0：停用，1:正常）
+			Remark:     dict.Remark,                             // 备注
 			CreateBy:   dict.CreateBy,                           // 创建者
 			CreateTime: time_util.TimeToStr(dict.CreateTime),    // 创建时间
 			UpdateBy:   dict.UpdateBy,                           // 更新者

@@ -28,14 +28,15 @@ func newSysDictItem(db *gorm.DB, opts ...gen.DOOption) sysDictItem {
 	tableName := _sysDictItem.sysDictItemDo.TableName()
 	_sysDictItem.ALL = field.NewAsterisk(tableName)
 	_sysDictItem.ID = field.NewInt64(tableName, "id")
-	_sysDictItem.DictType = field.NewString(tableName, "dict_type")
+	_sysDictItem.DictSort = field.NewInt32(tableName, "dict_sort")
 	_sysDictItem.DictLabel = field.NewString(tableName, "dict_label")
 	_sysDictItem.DictValue = field.NewString(tableName, "dict_value")
-	_sysDictItem.DictStatus = field.NewInt32(tableName, "dict_status")
-	_sysDictItem.DictSort = field.NewInt32(tableName, "dict_sort")
+	_sysDictItem.DictType = field.NewString(tableName, "dict_type")
+	_sysDictItem.CSSClass = field.NewString(tableName, "css_class")
+	_sysDictItem.ListClass = field.NewString(tableName, "list_class")
+	_sysDictItem.IsDefault = field.NewString(tableName, "is_default")
+	_sysDictItem.Status = field.NewInt32(tableName, "status")
 	_sysDictItem.Remark = field.NewString(tableName, "remark")
-	_sysDictItem.IsDefault = field.NewInt32(tableName, "is_default")
-	_sysDictItem.IsDeleted = field.NewInt32(tableName, "is_deleted")
 	_sysDictItem.CreateBy = field.NewString(tableName, "create_by")
 	_sysDictItem.CreateTime = field.NewTime(tableName, "create_time")
 	_sysDictItem.UpdateBy = field.NewString(tableName, "update_by")
@@ -51,15 +52,16 @@ type sysDictItem struct {
 	sysDictItemDo sysDictItemDo
 
 	ALL        field.Asterisk
-	ID         field.Int64  // 编号
-	DictType   field.String // 字典类型
+	ID         field.Int64  // 字典数据id
+	DictSort   field.Int32  // 字典排序
 	DictLabel  field.String // 字典标签
 	DictValue  field.String // 字典键值
-	DictStatus field.Int32  // 字典状态
-	DictSort   field.Int32  // 排序
-	Remark     field.String // 备注信息
-	IsDefault  field.Int32  // 是否默认  0：否  1：是
-	IsDeleted  field.Int32  // 是否删除  0：否  1：是
+	DictType   field.String // 字典类型
+	CSSClass   field.String // 样式属性（其他样式扩展）
+	ListClass  field.String // 表格回显样式
+	IsDefault  field.String // 是否默认（Y是 N否）
+	Status     field.Int32  // 状态（0：停用，1:正常）
+	Remark     field.String // 备注
 	CreateBy   field.String // 创建者
 	CreateTime field.Time   // 创建时间
 	UpdateBy   field.String // 更新者
@@ -81,14 +83,15 @@ func (s sysDictItem) As(alias string) *sysDictItem {
 func (s *sysDictItem) updateTableName(table string) *sysDictItem {
 	s.ALL = field.NewAsterisk(table)
 	s.ID = field.NewInt64(table, "id")
-	s.DictType = field.NewString(table, "dict_type")
+	s.DictSort = field.NewInt32(table, "dict_sort")
 	s.DictLabel = field.NewString(table, "dict_label")
 	s.DictValue = field.NewString(table, "dict_value")
-	s.DictStatus = field.NewInt32(table, "dict_status")
-	s.DictSort = field.NewInt32(table, "dict_sort")
+	s.DictType = field.NewString(table, "dict_type")
+	s.CSSClass = field.NewString(table, "css_class")
+	s.ListClass = field.NewString(table, "list_class")
+	s.IsDefault = field.NewString(table, "is_default")
+	s.Status = field.NewInt32(table, "status")
 	s.Remark = field.NewString(table, "remark")
-	s.IsDefault = field.NewInt32(table, "is_default")
-	s.IsDeleted = field.NewInt32(table, "is_deleted")
 	s.CreateBy = field.NewString(table, "create_by")
 	s.CreateTime = field.NewTime(table, "create_time")
 	s.UpdateBy = field.NewString(table, "update_by")
@@ -119,16 +122,17 @@ func (s *sysDictItem) GetFieldByName(fieldName string) (field.OrderExpr, bool) {
 }
 
 func (s *sysDictItem) fillFieldMap() {
-	s.fieldMap = make(map[string]field.Expr, 13)
+	s.fieldMap = make(map[string]field.Expr, 14)
 	s.fieldMap["id"] = s.ID
-	s.fieldMap["dict_type"] = s.DictType
+	s.fieldMap["dict_sort"] = s.DictSort
 	s.fieldMap["dict_label"] = s.DictLabel
 	s.fieldMap["dict_value"] = s.DictValue
-	s.fieldMap["dict_status"] = s.DictStatus
-	s.fieldMap["dict_sort"] = s.DictSort
-	s.fieldMap["remark"] = s.Remark
+	s.fieldMap["dict_type"] = s.DictType
+	s.fieldMap["css_class"] = s.CSSClass
+	s.fieldMap["list_class"] = s.ListClass
 	s.fieldMap["is_default"] = s.IsDefault
-	s.fieldMap["is_deleted"] = s.IsDeleted
+	s.fieldMap["status"] = s.Status
+	s.fieldMap["remark"] = s.Remark
 	s.fieldMap["create_by"] = s.CreateBy
 	s.fieldMap["create_time"] = s.CreateTime
 	s.fieldMap["update_by"] = s.UpdateBy

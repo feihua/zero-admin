@@ -43,7 +43,7 @@ func (l *DeleteDeptLogic) DeleteDept(in *sysclient.DeleteDeptReq) (*sysclient.De
 
 	id := in.Id
 	if id == 1 {
-		return nil, errors.New("顶级部门,不允许删除")
+		return nil, errors.New("删除部门信息失败,顶级部门,不允许删除")
 	}
 
 	// 1.查询部门是否存在
@@ -59,12 +59,12 @@ func (l *DeleteDeptLogic) DeleteDept(in *sysclient.DeleteDeptReq) (*sysclient.De
 	}
 
 	// 2.判断部门状态是否为启用
-	if record.DeptStatus == 1 {
+	if record.Status == 1 {
 		return nil, errors.New("部门状态为启用,不允许删除")
 	}
 
 	// 3.查询是否有下级部门
-	count, err := q.WithContext(l.ctx).Where(q.ParentID.Eq(id)).Count()
+	count, err := q.WithContext(l.ctx).Where(q.ParentID.Eq(id), q.DelFlag.Eq(1)).Count()
 	if err != nil {
 		logc.Errorf(l.ctx, "根据父部门id查询下级部门数量失败,参数:%+v,异常:%s", in, err.Error())
 		return nil, errors.New("删除部门信息失败")

@@ -29,19 +29,29 @@ func newSysOperateLog(db *gorm.DB, opts ...gen.DOOption) sysOperateLog {
 	_sysOperateLog.ALL = field.NewAsterisk(tableName)
 	_sysOperateLog.ID = field.NewInt64(tableName, "id")
 	_sysOperateLog.Title = field.NewString(tableName, "title")
-	_sysOperateLog.OperationType = field.NewString(tableName, "operation_type")
-	_sysOperateLog.OperationName = field.NewString(tableName, "operation_name")
+	_sysOperateLog.BusinessType = field.NewInt32(tableName, "business_type")
+	_sysOperateLog.Method = field.NewString(tableName, "method")
 	_sysOperateLog.RequestMethod = field.NewString(tableName, "request_method")
-	_sysOperateLog.OperationURL = field.NewString(tableName, "operation_url")
-	_sysOperateLog.OperationParams = field.NewString(tableName, "operation_params")
-	_sysOperateLog.OperationResponse = field.NewString(tableName, "operation_response")
-	_sysOperateLog.OperationStatus = field.NewInt32(tableName, "operation_status")
+	_sysOperateLog.OperatorType = field.NewInt32(tableName, "operator_type")
+	_sysOperateLog.OperateName = field.NewString(tableName, "operate_name")
 	_sysOperateLog.DeptName = field.NewString(tableName, "dept_name")
-	_sysOperateLog.UseTime = field.NewInt64(tableName, "use_time")
+	_sysOperateLog.OperateURL = field.NewString(tableName, "operate_url")
+	_sysOperateLog.OperateIP = field.NewString(tableName, "operate_ip")
+	_sysOperateLog.OperateLocation = field.NewString(tableName, "operate_location")
+	_sysOperateLog.OperateParam = field.NewString(tableName, "operate_param")
+	_sysOperateLog.JSONResult = field.NewString(tableName, "json_result")
+	_sysOperateLog.Platform = field.NewString(tableName, "platform")
 	_sysOperateLog.Browser = field.NewString(tableName, "browser")
+	_sysOperateLog.Version = field.NewString(tableName, "version")
 	_sysOperateLog.Os = field.NewString(tableName, "os")
-	_sysOperateLog.OperationIP = field.NewString(tableName, "operation_ip")
-	_sysOperateLog.OperationTime = field.NewTime(tableName, "operation_time")
+	_sysOperateLog.Arch = field.NewString(tableName, "arch")
+	_sysOperateLog.Engine = field.NewString(tableName, "engine")
+	_sysOperateLog.EngineDetails = field.NewString(tableName, "engine_details")
+	_sysOperateLog.Extra = field.NewString(tableName, "extra")
+	_sysOperateLog.Status = field.NewInt32(tableName, "status")
+	_sysOperateLog.ErrorMsg = field.NewString(tableName, "error_msg")
+	_sysOperateLog.OperateTime = field.NewTime(tableName, "operate_time")
+	_sysOperateLog.CostTime = field.NewInt64(tableName, "cost_time")
 
 	_sysOperateLog.fillFieldMap()
 
@@ -52,22 +62,32 @@ func newSysOperateLog(db *gorm.DB, opts ...gen.DOOption) sysOperateLog {
 type sysOperateLog struct {
 	sysOperateLogDo sysOperateLogDo
 
-	ALL               field.Asterisk
-	ID                field.Int64  // 编号
-	Title             field.String // 系统模块
-	OperationType     field.String // 操作类型
-	OperationName     field.String // 操作人员
-	RequestMethod     field.String // 请求方式
-	OperationURL      field.String // 操作方法
-	OperationParams   field.String // 请求参数
-	OperationResponse field.String // 响应参数
-	OperationStatus   field.Int32  // 操作状态
-	DeptName          field.String // 部门名称
-	UseTime           field.Int64  // 执行时长(毫秒)
-	Browser           field.String // 浏览器
-	Os                field.String // 操作系统
-	OperationIP       field.String // 操作地址
-	OperationTime     field.Time   // 操作时间
+	ALL             field.Asterisk
+	ID              field.Int64  // 操作日志id
+	Title           field.String // 模块标题
+	BusinessType    field.Int32  // 业务类型（0其它 1新增 2修改 3删除）
+	Method          field.String // 方法名称
+	RequestMethod   field.String // 请求方式
+	OperatorType    field.Int32  // 操作类别（0其它 1后台用户 2手机端用户）
+	OperateName     field.String // 操作人员
+	DeptName        field.String // 部门名称
+	OperateURL      field.String // 请求URL
+	OperateIP       field.String // 主机地址
+	OperateLocation field.String // 操作地点
+	OperateParam    field.String // 请求参数
+	JSONResult      field.String // 返回参数
+	Platform        field.String // 平台信息
+	Browser         field.String // 浏览器类型
+	Version         field.String // 浏览器版本
+	Os              field.String // 操作系统
+	Arch            field.String // 体系结构信息
+	Engine          field.String // 渲染引擎信息
+	EngineDetails   field.String // 渲染引擎详细信息
+	Extra           field.String // 其他信息（可选）
+	Status          field.Int32  //  操作状态(0:异常,正常)
+	ErrorMsg        field.String //  错误消息
+	OperateTime     field.Time   //  操作时间
+	CostTime        field.Int64  //  消耗时间
 
 	fieldMap map[string]field.Expr
 }
@@ -86,19 +106,29 @@ func (s *sysOperateLog) updateTableName(table string) *sysOperateLog {
 	s.ALL = field.NewAsterisk(table)
 	s.ID = field.NewInt64(table, "id")
 	s.Title = field.NewString(table, "title")
-	s.OperationType = field.NewString(table, "operation_type")
-	s.OperationName = field.NewString(table, "operation_name")
+	s.BusinessType = field.NewInt32(table, "business_type")
+	s.Method = field.NewString(table, "method")
 	s.RequestMethod = field.NewString(table, "request_method")
-	s.OperationURL = field.NewString(table, "operation_url")
-	s.OperationParams = field.NewString(table, "operation_params")
-	s.OperationResponse = field.NewString(table, "operation_response")
-	s.OperationStatus = field.NewInt32(table, "operation_status")
+	s.OperatorType = field.NewInt32(table, "operator_type")
+	s.OperateName = field.NewString(table, "operate_name")
 	s.DeptName = field.NewString(table, "dept_name")
-	s.UseTime = field.NewInt64(table, "use_time")
+	s.OperateURL = field.NewString(table, "operate_url")
+	s.OperateIP = field.NewString(table, "operate_ip")
+	s.OperateLocation = field.NewString(table, "operate_location")
+	s.OperateParam = field.NewString(table, "operate_param")
+	s.JSONResult = field.NewString(table, "json_result")
+	s.Platform = field.NewString(table, "platform")
 	s.Browser = field.NewString(table, "browser")
+	s.Version = field.NewString(table, "version")
 	s.Os = field.NewString(table, "os")
-	s.OperationIP = field.NewString(table, "operation_ip")
-	s.OperationTime = field.NewTime(table, "operation_time")
+	s.Arch = field.NewString(table, "arch")
+	s.Engine = field.NewString(table, "engine")
+	s.EngineDetails = field.NewString(table, "engine_details")
+	s.Extra = field.NewString(table, "extra")
+	s.Status = field.NewInt32(table, "status")
+	s.ErrorMsg = field.NewString(table, "error_msg")
+	s.OperateTime = field.NewTime(table, "operate_time")
+	s.CostTime = field.NewInt64(table, "cost_time")
 
 	s.fillFieldMap()
 
@@ -127,22 +157,32 @@ func (s *sysOperateLog) GetFieldByName(fieldName string) (field.OrderExpr, bool)
 }
 
 func (s *sysOperateLog) fillFieldMap() {
-	s.fieldMap = make(map[string]field.Expr, 15)
+	s.fieldMap = make(map[string]field.Expr, 25)
 	s.fieldMap["id"] = s.ID
 	s.fieldMap["title"] = s.Title
-	s.fieldMap["operation_type"] = s.OperationType
-	s.fieldMap["operation_name"] = s.OperationName
+	s.fieldMap["business_type"] = s.BusinessType
+	s.fieldMap["method"] = s.Method
 	s.fieldMap["request_method"] = s.RequestMethod
-	s.fieldMap["operation_url"] = s.OperationURL
-	s.fieldMap["operation_params"] = s.OperationParams
-	s.fieldMap["operation_response"] = s.OperationResponse
-	s.fieldMap["operation_status"] = s.OperationStatus
+	s.fieldMap["operator_type"] = s.OperatorType
+	s.fieldMap["operate_name"] = s.OperateName
 	s.fieldMap["dept_name"] = s.DeptName
-	s.fieldMap["use_time"] = s.UseTime
+	s.fieldMap["operate_url"] = s.OperateURL
+	s.fieldMap["operate_ip"] = s.OperateIP
+	s.fieldMap["operate_location"] = s.OperateLocation
+	s.fieldMap["operate_param"] = s.OperateParam
+	s.fieldMap["json_result"] = s.JSONResult
+	s.fieldMap["platform"] = s.Platform
 	s.fieldMap["browser"] = s.Browser
+	s.fieldMap["version"] = s.Version
 	s.fieldMap["os"] = s.Os
-	s.fieldMap["operation_ip"] = s.OperationIP
-	s.fieldMap["operation_time"] = s.OperationTime
+	s.fieldMap["arch"] = s.Arch
+	s.fieldMap["engine"] = s.Engine
+	s.fieldMap["engine_details"] = s.EngineDetails
+	s.fieldMap["extra"] = s.Extra
+	s.fieldMap["status"] = s.Status
+	s.fieldMap["error_msg"] = s.ErrorMsg
+	s.fieldMap["operate_time"] = s.OperateTime
+	s.fieldMap["cost_time"] = s.CostTime
 }
 
 func (s sysOperateLog) clone(db *gorm.DB) sysOperateLog {

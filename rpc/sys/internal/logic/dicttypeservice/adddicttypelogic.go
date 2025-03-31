@@ -64,13 +64,11 @@ func (l *AddDictTypeLogic) AddDictType(in *sysclient.AddDictTypeReq) (*sysclient
 	}
 
 	dict := &model.SysDictType{
-		DictName:   in.DictName,   // 字典名称
-		DictType:   in.DictType,   // 字典类型
-		DictStatus: in.DictStatus, // 字典状态
-		Remark:     in.Remark,     // 备注信息
-		IsSystem:   in.IsSystem,   // 是否系统预留  0：否  1：是
-		IsDeleted:  0,             // 是否删除  0：否  1：是
-		CreateBy:   in.CreateBy,   // 创建者
+		DictName: in.DictName, // 字典名称
+		DictType: in.DictType, // 字典类型
+		Status:   in.Status,   // 状态（0：停用，1:正常）
+		Remark:   in.Remark,   // 备注
+		CreateBy: in.CreateBy, // 创建者
 	}
 	err = q.WithContext(l.ctx).Create(dict)
 

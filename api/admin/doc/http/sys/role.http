@@ -16,16 +16,15 @@ Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {
-  "name": "test123",
-  "remark": "测试人员123",
-  "delFlag": 10,
-  "label": "test",
-  "value": "4",
-  "status": 1
+  "roleName": "122",
+  "roleKey": "dev1",
+  "dataScope": 1,
+  "status": 0,
+  "remark": "121211"
 }
 
 ### 删除角色
-GET {{host}}/api/sys/role/deleteRole?ids=[5]
+GET {{host}}/api/sys/role/deleteRole?ids=4
 Authorization: Bearer {{token}}
 
 
@@ -36,62 +35,50 @@ Authorization: Bearer {{token}}
 
 {
   "id": 4,
-  "name": "test1",
-  "remark": "测试人员1",
-  "delFlag": 10,
-  "label": "test",
-  "value": "4",
-  "status": 1
+  "roleName": "1221",
+  "roleKey": "dev11",
+  "dataScope": 1,
+  "status": 1,
+  "remark": "121211"
 }
+
+### 修改角色状态
+POST {{host}}/api/sys/role/updateRoleStatus
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "ids": [4],
+  "status": 0
+}
+
+### 查询角色详情
+GET {{host}}/api/sys/role/queryRoleDetail?id=4
+Authorization: Bearer {{token}}
 
 ### 查询角色列表
 GET {{host}}/api/sys/role/queryRoleList
 Authorization: Bearer {{token}}
 
-### 查询角色与菜单的关联
-GET {{host}}/api/sys/role/queryRoleMenuList?roleId=1
+### 查询角色的菜单
+GET {{host}}/api/sys/role/queryRoleMenuList?roleId=2
 Authorization: Bearer {{token}}
 
 
-### 更新角色与菜单的关联
+### 分配角色菜单
 POST {{host}}/api/sys/role/updateRoleMenuList
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {
-  "roleId": 4,
+  "roleId": 2,
   "menuIds": [1,2,3]
 }
 
-### 查询角色与菜单的关联
-GET {{host}}/api/sys/role/queryRoleMenuList?roleId=1
+### 根据roleId查询用户列表（isExist->1:表示拥有的用户，0:表示没拥有的用户）
+GET {{host}}/api/sys/role/queryRoleUserList?roleId=2&isExist=0
 Authorization: Bearer {{token}}
 
-
-### 更新角色与菜单的关联
-POST {{host}}/api/sys/role/updateRoleMenuList
-Content-Type: application/json
-Authorization: Bearer {{token}}
-
-{
-  "roleId": 4,
-  "menuIds": [1,2,3]
-}
-
-### 根据roleId分页查询用户信息列表
-GET {{host}}/api/sys/role/queryRoleUserList?roleId=1&isExist=1&mobile=1
-Authorization: Bearer {{token}}
-
-
-### 更新角色与用户的关联
-POST {{host}}/api/sys/role/updateRoleUserList
-Content-Type: application/json
-Authorization: Bearer {{token}}
-
-{
-  "roleId": 4,
-  "userIds": [1]
-}
 
 ### 取消授权
 POST {{host}}/api/sys/role/cancelAuthorization
@@ -99,6 +86,7 @@ Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {
-  "roleId": 4,
-  "userId": 1
+  "roleId": 2,
+  "userIds": [9],
+  "isExist": 0
 }

@@ -49,13 +49,11 @@ func (l *QueryDictTypeDetailLogic) QueryDictTypeDetail(in *sysclient.QueryDictTy
 	}
 
 	data := &sysclient.QueryDictTypeDetailResp{
-		Id:         dict.ID,                                 // 编号
+		Id:         dict.ID,                                 // 字典id
 		DictName:   dict.DictName,                           // 字典名称
 		DictType:   dict.DictType,                           // 字典类型
-		DictStatus: dict.DictStatus,                         // 字典状态
-		Remark:     dict.Remark,                             // 备注信息
-		IsSystem:   dict.IsSystem,                           // 是否系统预留  0：否  1：是
-		IsDeleted:  dict.IsDeleted,                          // 是否删除  0：否  1：是
+		Status:     dict.Status,                             // 状态（0：停用，1:正常）
+		Remark:     dict.Remark,                             // 备注
 		CreateBy:   dict.CreateBy,                           // 创建者
 		CreateTime: time_util.TimeToStr(dict.CreateTime),    // 创建时间
 		UpdateBy:   dict.UpdateBy,                           // 更新者

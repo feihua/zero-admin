@@ -87,18 +87,17 @@ func (l *AddUserLogic) AddUser(in *sysclient.AddUserReq) (*sysclient.AddUserResp
 		avatar = "https://gw.alipayobjects.com/zos/antfincdn/XAosXuNZyF/BiazfanxmamNRoxxVxka.png"
 	}
 	user := &model.SysUser{
-		UserName:   in.UserName,   // 用户名
-		NickName:   in.NickName,   // 昵称
-		Avatar:     avatar,        // 头像
-		Password:   in.Password,   // 密码
-		Salt:       in.Salt,       // 加密盐
-		Email:      in.Email,      // 邮箱
-		Mobile:     in.Mobile,     // 手机号
-		UserStatus: in.UserStatus, // 帐号状态（0正常 1停用）
-		DeptID:     in.DeptId,     // 部门id
-		Remark:     in.Remark,     // 备注
-		IsDeleted:  0,             // 是否删除  0：否  1：是
-		CreateBy:   in.CreateBy,   // 创建者
+		Mobile:   in.Mobile,   // 手机号码
+		UserName: in.UserName, // 用户账号
+		NickName: in.NickName, // 用户昵称
+		UserType: in.UserType, // 用户类型（00系统用户）
+		Avatar:   in.Avatar,   // 头像路径
+		Email:    in.Email,    // 用户邮箱
+		Password: in.Password, // 密码
+		Status:   in.Status,   // 状态(1:正常，0:禁用)
+		DeptID:   in.DeptId,   // 部门ID
+		Remark:   in.Remark,   // 备注
+		CreateBy: in.CreateBy, // 创建者
 	}
 
 	err = query.Q.Transaction(func(tx *query.Query) error {
@@ -127,7 +126,7 @@ func (l *AddUserLogic) AddUser(in *sysclient.AddUserReq) (*sysclient.AddUserResp
 		}
 
 		// 6.添加用户与岗位关联
-		err = postDo.Create(userPosts...)
+		err = postDo.CreateInBatches(userPosts, len(userPosts))
 		if err != nil {
 			logc.Errorf(l.ctx, "新增用户与岗位关联异常,参数:%+v,异常:%s", user, err.Error())
 			return err

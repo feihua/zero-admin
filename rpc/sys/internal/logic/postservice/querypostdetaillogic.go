@@ -36,7 +36,7 @@ func NewQueryPostDetailLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Q
 // QueryPostDetail 查询岗位管理详情
 // 1.判断岗位信息是否存在
 func (l *QueryPostDetailLogic) QueryPostDetail(in *sysclient.QueryPostDetailReq) (*sysclient.QueryPostDetailResp, error) {
-	job, err := query.SysPost.WithContext(l.ctx).Where(query.SysPost.ID.Eq(in.Id)).First()
+	post, err := query.SysPost.WithContext(l.ctx).Where(query.SysPost.ID.Eq(in.Id)).First()
 
 	// 1.判断岗位信息是否存在
 	switch {
@@ -49,17 +49,16 @@ func (l *QueryPostDetailLogic) QueryPostDetail(in *sysclient.QueryPostDetailReq)
 	}
 
 	data := &sysclient.QueryPostDetailResp{
-		Id:         job.ID,                                 // 岗位id
-		PostName:   job.PostName,                           // 岗位名称
-		PostCode:   job.PostCode,                           // 岗位编码
-		PostStatus: job.PostStatus,                         // 岗位状态
-		PostSort:   job.PostSort,                           // 岗位排序
-		Remark:     job.Remark,                             // 备注信息
-		IsDeleted:  job.IsDeleted,                          // 是否删除  0：否  1：是
-		CreateBy:   job.CreateBy,                           // 创建者
-		CreateTime: time_util.TimeToStr(job.CreateTime),    // 创建时间
-		UpdateBy:   job.UpdateBy,                           // 更新者
-		UpdateTime: time_util.TimeToString(job.UpdateTime), // 更新时间
+		Id:         post.ID,                                 // 岗位id
+		PostCode:   post.PostCode,                           // 岗位编码
+		PostName:   post.PostName,                           // 岗位名称
+		Sort:       post.Sort,                               // 显示顺序
+		Status:     post.Status,                             // 岗位状态（0：停用，1:正常）
+		Remark:     post.Remark,                             // 备注
+		CreateBy:   post.CreateBy,                           // 创建者
+		CreateTime: time_util.TimeToStr(post.CreateTime),    // 创建时间
+		UpdateBy:   post.UpdateBy,                           // 更新者
+		UpdateTime: time_util.TimeToString(post.UpdateTime), // 更新时间
 	}
 
 	return data, nil

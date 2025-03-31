@@ -36,7 +36,7 @@ func NewQueryDictItemDetailLogic(ctx context.Context, svcCtx *svc.ServiceContext
 // QueryDictItemDetail 查询字典数据详情
 // 1.判断字典数据是否存在
 func (l *QueryDictItemDetailLogic) QueryDictItemDetail(in *sysclient.QueryDictItemDetailReq) (*sysclient.QueryDictItemDetailResp, error) {
-	dictItem, err := query.SysDictItem.WithContext(l.ctx).Where(query.SysDictItem.ID.Eq(in.Id)).First()
+	item, err := query.SysDictItem.WithContext(l.ctx).Where(query.SysDictItem.ID.Eq(in.Id)).First()
 
 	// 1.判断字典数据是否存在
 	switch {
@@ -49,19 +49,20 @@ func (l *QueryDictItemDetailLogic) QueryDictItemDetail(in *sysclient.QueryDictIt
 	}
 
 	data := &sysclient.QueryDictItemDetailResp{
-		Id:         dictItem.ID,                                 // 编号
-		DictType:   dictItem.DictType,                           // 字典类型
-		DictLabel:  dictItem.DictLabel,                          // 字典标签
-		DictValue:  dictItem.DictValue,                          // 字典键值
-		DictStatus: dictItem.DictStatus,                         // 字典状态
-		DictSort:   dictItem.DictSort,                           // 排序
-		Remark:     dictItem.Remark,                             // 备注信息
-		IsDefault:  dictItem.IsDefault,                          // 是否默认  0：否  1：是
-		IsDeleted:  dictItem.IsDeleted,                          // 是否删除  0：否  1：是
-		CreateBy:   dictItem.CreateBy,                           // 创建者
-		CreateTime: time_util.TimeToStr(dictItem.CreateTime),    // 创建时间
-		UpdateBy:   dictItem.UpdateBy,                           // 更新者
-		UpdateTime: time_util.TimeToString(dictItem.UpdateTime), // 更新时间
+		Id:         item.ID,                                 // 字典数据id
+		DictSort:   item.DictSort,                           // 字典排序
+		DictLabel:  item.DictLabel,                          // 字典标签
+		DictValue:  item.DictValue,                          // 字典键值
+		DictType:   item.DictType,                           // 字典类型
+		CssClass:   item.CSSClass,                           // 样式属性（其他样式扩展）
+		ListClass:  item.ListClass,                          // 表格回显样式
+		IsDefault:  item.IsDefault,                          // 是否默认（Y是 N否）
+		Status:     item.Status,                             // 状态（0：停用，1:正常）
+		Remark:     item.Remark,                             // 备注
+		CreateBy:   item.CreateBy,                           // 创建者
+		CreateTime: time_util.TimeToStr(item.CreateTime),    // 创建时间
+		UpdateBy:   item.UpdateBy,                           // 更新者
+		UpdateTime: time_util.TimeToString(item.UpdateTime), // 更新时间
 	}
 
 	return data, nil

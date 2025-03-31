@@ -35,12 +35,11 @@ func NewQueryDictTypeListLogic(ctx context.Context, svcCtx *svc.ServiceContext) 
 // QueryDictTypeList 查询字典类型列表
 func (l *QueryDictTypeListLogic) QueryDictTypeList(req *types.QueryDictTypeListReq) (*types.QueryDictTypeListResp, error) {
 	var resp, err = l.svcCtx.DictTypeService.QueryDictTypeList(l.ctx, &sysclient.QueryDictTypeListReq{
-		PageNum:    req.Current,
-		PageSize:   req.PageSize,
-		DictName:   strings.TrimSpace(req.DictName), // 字典名称
-		DictType:   req.DictType,                    // 字典类型
-		DictStatus: req.DictStatus,                  // 字典状态
-		IsSystem:   req.IsSystem,                    // 是否系统预留  0：否  1：是
+		PageNum:  req.Current,
+		PageSize: req.PageSize,
+		DictName: strings.TrimSpace(req.DictName), // 字典名称
+		DictType: req.DictType,                    // 字典类型
+		Status:   req.Status,                      // 状态（0：停用，1:正常）
 	})
 
 	if err != nil {
@@ -51,19 +50,17 @@ func (l *QueryDictTypeListLogic) QueryDictTypeList(req *types.QueryDictTypeListR
 
 	var list []*types.QueryDictTypeListData
 
-	for _, dict := range resp.List {
+	for _, detail := range resp.List {
 		list = append(list, &types.QueryDictTypeListData{
-			Id:         dict.Id,         // 编号
-			DictName:   dict.DictName,   // 字典名称
-			DictType:   dict.DictType,   // 字典类型
-			DictStatus: dict.DictStatus, // 字典状态
-			Remark:     dict.Remark,     // 备注信息
-			IsSystem:   dict.IsSystem,   // 是否系统预留  0：否  1：是
-			IsDeleted:  dict.IsDeleted,  // 是否删除  0：否  1：是
-			CreateBy:   dict.CreateBy,   // 创建者
-			CreateTime: dict.CreateTime, // 创建时间
-			UpdateBy:   dict.UpdateBy,   // 更新者
-			UpdateTime: dict.UpdateTime, // 更新时间
+			Id:         detail.Id,         // 字典id
+			DictName:   detail.DictName,   // 字典名称
+			DictType:   detail.DictType,   // 字典类型
+			Status:     detail.Status,     // 状态（0：停用，1:正常）
+			Remark:     detail.Remark,     // 备注
+			CreateBy:   detail.CreateBy,   // 创建者
+			CreateTime: detail.CreateTime, // 创建时间
+			UpdateBy:   detail.UpdateBy,   // 更新者
+			UpdateTime: detail.UpdateTime, // 更新时间
 		})
 	}
 

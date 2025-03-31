@@ -59,7 +59,7 @@ type sysMenu struct {
 	sysMenuDo sysMenuDo
 
 	ALL           field.Asterisk
-	ID            field.Int64  // 编号
+	ID            field.Int64  // 菜单id
 	MenuName      field.String // 菜单名称
 	ParentID      field.Int64  // 父菜单ID，一级菜单为0
 	MenuPath      field.String // 前端路由

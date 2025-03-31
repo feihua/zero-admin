@@ -34,18 +34,18 @@ func NewUpdateUserLogic(ctx context.Context, svcCtx *svc.ServiceContext) UpdateU
 // UpdateUser 更新用户信息
 func (l *UpdateUserLogic) UpdateUser(req *types.UpdateUserReq) (*types.UpdateUserResp, error) {
 	userUpdateReq := sysclient.UpdateUserReq{
-		Id:         req.Id,         // 编号
-		UserName:   req.UserName,   // 用户名
-		NickName:   req.NickName,   // 昵称
-		Avatar:     req.Avatar,     // 头像
-		Password:   req.Password,   // 密码
-		Email:      req.Email,      // 邮箱
-		Mobile:     req.Mobile,     // 手机号
-		UserStatus: req.UserStatus, // 帐号状态（0正常 1停用）
-		DeptId:     req.DeptId,     // 部门id
-		Remark:     req.Remark,     // 备注信息
-		PostIds:    req.PostIds,    // 部门id
-		UpdateBy:   l.ctx.Value("userName").(string),
+		Id:       req.Id,       // 用户id
+		Mobile:   req.Mobile,   // 手机号码
+		UserName: req.UserName, // 用户账号
+		NickName: req.NickName, // 用户昵称
+		UserType: req.UserType, // 用户类型（00系统用户）
+		Avatar:   req.Avatar,   // 头像路径
+		Email:    req.Email,    // 用户邮箱
+		Status:   req.Status,   // 状态(1:正常，0:禁用)
+		DeptId:   req.DeptId,   // 部门ID
+		Remark:   req.Remark,   // 备注
+		UpdateBy: l.ctx.Value("userName").(string),
+		PostIds:  req.PostIds, // 部门id
 	}
 
 	if _, err := l.svcCtx.UserService.UpdateUser(l.ctx, &userUpdateReq); err != nil {

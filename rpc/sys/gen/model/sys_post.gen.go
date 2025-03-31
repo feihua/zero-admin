@@ -10,15 +10,14 @@ import (
 
 const TableNameSysPost = "sys_post"
 
-// SysPost 岗位管理
+// SysPost 岗位信息表
 type SysPost struct {
 	ID         int64      `gorm:"column:id;primaryKey;autoIncrement:true;comment:岗位id" json:"id"`                        // 岗位id
-	PostName   string     `gorm:"column:post_name;not null;comment:岗位名称" json:"post_name"`                               // 岗位名称
 	PostCode   string     `gorm:"column:post_code;not null;comment:岗位编码" json:"post_code"`                               // 岗位编码
-	PostStatus int32      `gorm:"column:post_status;not null;default:1;comment:岗位状态" json:"post_status"`                 // 岗位状态
-	PostSort   int32      `gorm:"column:post_sort;not null;comment:岗位排序" json:"post_sort"`                               // 岗位排序
-	Remark     string     `gorm:"column:remark;not null;comment:备注信息" json:"remark"`                                     // 备注信息
-	IsDeleted  int32      `gorm:"column:is_deleted;not null;comment:是否删除  0：否  1：是" json:"is_deleted"`                   // 是否删除  0：否  1：是
+	PostName   string     `gorm:"column:post_name;not null;comment:岗位名称" json:"post_name"`                               // 岗位名称
+	Sort       int32      `gorm:"column:sort;not null;comment:显示顺序" json:"sort"`                                         // 显示顺序
+	Status     int32      `gorm:"column:status;not null;comment:岗位状态（0：停用，1:正常）" json:"status"`                          // 岗位状态（0：停用，1:正常）
+	Remark     string     `gorm:"column:remark;not null;comment:备注" json:"remark"`                                       // 备注
 	CreateBy   string     `gorm:"column:create_by;not null;default:admin;comment:创建者" json:"create_by"`                  // 创建者
 	CreateTime time.Time  `gorm:"column:create_time;not null;default:CURRENT_TIMESTAMP;comment:创建时间" json:"create_time"` // 创建时间
 	UpdateBy   string     `gorm:"column:update_by;not null;comment:更新者" json:"update_by"`                                // 更新者

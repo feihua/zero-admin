@@ -35,15 +35,17 @@ func NewUpdateDictItemLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Up
 // UpdateDictItem 更新字典数据
 func (l *UpdateDictItemLogic) UpdateDictItem(req *types.UpdateDictItemReq) (resp *types.UpdateDictItemResp, err error) {
 	_, err = l.svcCtx.DictItemService.UpdateDictItem(l.ctx, &sysclient.UpdateDictItemReq{
-		Id:         req.Id,         // 编号
-		DictType:   req.DictType,   // 字典类型
-		DictLabel:  req.DictLabel,  // 字典标签
-		DictValue:  req.DictValue,  // 字典键值
-		DictStatus: req.DictStatus, // 字典状态
-		DictSort:   req.DictSort,   // 排序
-		Remark:     req.Remark,     // 备注信息
-		IsDefault:  req.IsDefault,  // 是否默认  0：否  1：是
-		UpdateBy:   l.ctx.Value("userName").(string),
+		Id:        req.Id,        // 字典数据id
+		DictSort:  req.DictSort,  // 字典排序
+		DictLabel: req.DictLabel, // 字典标签
+		DictValue: req.DictValue, // 字典键值
+		DictType:  req.DictType,  // 字典类型
+		CssClass:  req.CssClass,  // 样式属性（其他样式扩展）
+		ListClass: req.ListClass, // 表格回显样式
+		IsDefault: req.IsDefault, // 是否默认（Y是 N否）
+		Status:    req.Status,    // 状态（0：停用，1:正常）
+		Remark:    req.Remark,    // 备注
+		UpdateBy:  l.ctx.Value("userName").(string),
 	})
 
 	if err != nil {

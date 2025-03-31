@@ -36,11 +36,11 @@ func NewQueryPostListLogic(ctx context.Context, svcCtx *svc.ServiceContext) Quer
 // QueryPostList 岗位信息列表
 func (l *QueryPostListLogic) QueryPostList(req *types.QueryPostListReq) (*types.QueryPostListResp, error) {
 	result, err := l.svcCtx.PostService.QueryPostList(l.ctx, &sysclient.QueryPostListReq{
-		PostCode:   strings.TrimSpace(req.PostCode),
-		PostName:   strings.TrimSpace(req.PostName),
-		PostStatus: req.PostStatus,
-		PageNum:    req.Current,
-		PageSize:   req.PageSize,
+		PostCode: strings.TrimSpace(req.PostCode),
+		PostName: strings.TrimSpace(req.PostName),
+		Status:   req.Status,
+		PageNum:  req.Current,
+		PageSize: req.PageSize,
 	})
 
 	if err != nil {
@@ -54,12 +54,11 @@ func (l *QueryPostListLogic) QueryPostList(req *types.QueryPostListReq) (*types.
 	for _, post := range result.List {
 		list = append(list, &types.QueryPostListData{
 			Id:         post.Id,         // 岗位id
-			PostName:   post.PostName,   // 岗位名称
 			PostCode:   post.PostCode,   // 岗位编码
-			PostStatus: post.PostStatus, // 岗位状态
-			PostSort:   post.PostSort,   // 岗位排序
-			Remark:     post.Remark,     // 备注信息
-			IsDeleted:  post.IsDeleted,  // 是否删除  0：否  1：是
+			PostName:   post.PostName,   // 岗位名称
+			Sort:       post.Sort,       // 显示顺序
+			Status:     post.Status,     // 岗位状态（0：停用，1:正常）
+			Remark:     post.Remark,     // 备注
 			CreateBy:   post.CreateBy,   // 创建者
 			CreateTime: post.CreateTime, // 创建时间
 			UpdateBy:   post.UpdateBy,   // 更新者

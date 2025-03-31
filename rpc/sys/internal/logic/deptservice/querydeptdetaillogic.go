@@ -13,7 +13,7 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// QueryDeptDetailLogic 查询部门信息表详情
+// QueryDeptDetailLogic 查询部门信息详情
 /*
 Author: LiuFeiHua
 Date: 2024/5/30 10:13
@@ -32,12 +32,10 @@ func NewQueryDeptDetailLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Q
 	}
 }
 
-// QueryDeptDetail 查询部门信息表详情
-// 1.判断部门是否存在
+// QueryDeptDetail 查询部门信息详情
 func (l *QueryDeptDetailLogic) QueryDeptDetail(in *sysclient.QueryDeptDetailReq) (*sysclient.QueryDeptDetailResp, error) {
 	dept, err := query.SysDept.WithContext(l.ctx).Where(query.SysDept.ID.Eq(in.Id)).First()
 
-	// 1.判断部门是否存在
 	switch {
 	case errors.Is(err, gorm.ErrRecordNotFound):
 		logc.Errorf(l.ctx, "部门不存在, 请求参数：%+v, 异常信息: %s", in, err.Error())
@@ -48,17 +46,17 @@ func (l *QueryDeptDetailLogic) QueryDeptDetail(in *sysclient.QueryDeptDetailReq)
 	}
 
 	data := &sysclient.QueryDeptDetailResp{
-		Id:         dept.ID,                                 // 编号
+		Id:         dept.ID,                                 // 部门id
+		ParentId:   dept.ParentID,                           // 上级部门id
+		Ancestors:  dept.Ancestors,                          // 祖级列表
 		DeptName:   dept.DeptName,                           // 部门名称
-		DeptStatus: dept.DeptStatus,                         // 部门状态
-		DeptSort:   dept.DeptSort,                           // 部门排序
-		ParentId:   dept.ParentID,                           // 上级机构ID，一级机构为0
+		Sort:       dept.Sort,                               // 显示顺序
 		Leader:     dept.Leader,                             // 负责人
-		Phone:      dept.Phone,                              // 电话号码
+		Phone:      dept.Phone,                              // 联系电话
 		Email:      dept.Email,                              // 邮箱
+		Status:     dept.Status,                             // 部门状态（0：停用，1:正常）
+		DelFlag:    dept.DelFlag,                            // 删除标志（0代表删除 1代表存在）
 		Remark:     dept.Remark,                             // 备注信息
-		IsDeleted:  dept.IsDeleted,                          // 是否删除  0：否  1：是
-		ParentIds:  GetParentIds(dept.ParentIds),            // 上级机构IDs，一级机构为0
 		CreateBy:   dept.CreateBy,                           // 创建者
 		CreateTime: time_util.TimeToStr(dept.CreateTime),    // 创建时间
 		UpdateBy:   dept.UpdateBy,                           // 更新者

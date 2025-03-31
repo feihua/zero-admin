@@ -19,21 +19,21 @@ Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {
-  "name": "test21",
-  "nickName": "测试人员1",
-  "avatar": "",
-  "email": "1002219321@qq.com",
-  "mobile": "18613033350",
+  "mobile": "18613030221",
+  "userName": "dev",
+  "nickName": "dev",
+  "userType": "01",
+  "avatar": "https://gw.alipayobjects.com/zos/antfincdn/XAosXuNZyF/BiazfanxmamNRoxxVxka.png",
+  "email": "xx@qq.com",
+  "password": "123456",
   "status": 1,
-  "deptId": 4,
-  "delFlag": 1,
-  "jobId": 1,
-  "roleId": 0
-
+  "deptId": 1,
+  "remark": "测试",
+  "postIds": [1]
 }
 
 ### 删除用户
-GET {{host}}/api/sys/user/deleteUser?ids=[6]
+GET {{host}}/api/sys/user/deleteUser?ids=8
 Authorization: Bearer {{token}}
 
 
@@ -43,39 +43,43 @@ Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {
-  "id": 3,
-  "name": "test1",
-  "nickName": "测试人员",
-  "avatar": "",
-  "email": "1002219331@qq.com",
-  "mobile": "18613030350",
+  "id": 9,
+  "mobile": "18613030221",
+  "userName": "dev",
+  "nickName": "dev",
+  "userType": "01",
+  "avatar": "https://gw.alipayobjects.com/zos/antfincdn/XAosXuNZyF/BiazfanxmamNRoxxVxka.png",
+  "email": "xx@qq.com",
   "status": 1,
-  "deptId": 4,
+  "deptId": 1,
+  "remark": "测试",
   "delFlag": 1,
-  "jobId": 1,
-  "roleId": 0,
-  "roleName": "",
-  "jobName": "",
-  "deptName": ""
+  "postIds": [
+    2
+  ]
 }
 
+### 查询用户详情
+GET {{host}}/api/sys/user/queryUserDetail?id=9
+Authorization: Bearer {{token}}
+
 ### 用户列表
-GET {{host}}/api/sys/user/queryUserList
+GET {{host}}/api/sys/user/queryUserList?deptId=3
 Authorization: Bearer {{token}}
 
-### 查询用户与角色的关联
-GET {{host}}/api/sys/user/queryUserRoleList?userId=1
+### 查询用户的角色
+GET {{host}}/api/sys/user/queryUserRoleList?userId=9
 Authorization: Bearer {{token}}
 
 
-### 更新用户与角色的关联
+### 分配用户角色
 POST {{host}}/api/sys/user/updateUserRoleList
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {
-  "userId": 2,
-  "roleIds": [1,2,3]
+  "userId": 9,
+  "roleIds": [2]
 }
 
 ### 查询所有部门和岗位

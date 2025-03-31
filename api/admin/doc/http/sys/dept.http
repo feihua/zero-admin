@@ -16,17 +16,18 @@ Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {
-  "deptName": "蜀国test2",
   "parentId": 3,
-  "parentIds": [
-    3
-  ],
-  "orderNum": 1,
-  "delFlag": 1
+  "deptName": "财务部门2",
+  "sort": 1,
+  "leader": "1",
+  "phone": "1",
+  "email": "xx@qq.com",
+  "status": 1,
+  "remark": ""
 }
 
 ### 删除部门
-GET {{host}}/api/sys/dept/deleteDept?ids=[100]
+GET {{host}}/api/sys/dept/deleteDept?ids=11
 Authorization: Bearer {{token}}
 
 
@@ -36,15 +37,31 @@ Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {
-  "id": 19,
-  "deptName": "蜀国test2",
-  "parentId": 3,
-  "parentIds": [
-    3
-  ],
-  "orderNum": 1,
-  "delFlag": 0
+  "id": 11,
+  "parentId": 2,
+  "deptName": "财务部门2",
+  "sort": 1,
+  "leader": "1",
+  "phone": "1",
+  "email": "xx@qq.com",
+  "status": 0,
+  "remark": ""
 }
+
+### 修改部门状态
+POST {{host}}/api/sys/dept/updateDeptStatus
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "id": 11,
+  "status": 0
+
+}
+
+### 查询部门详情
+GET {{host}}/api/sys/dept/queryDeptDetail?id=11
+Authorization: Bearer {{token}}
 
 ### 查询部门列表
 GET {{host}}/api/sys/dept/queryDeptList

@@ -32,14 +32,14 @@ func NewQueryRoleUserListLogic(ctx context.Context, svcCtx *svc.ServiceContext) 
 }
 
 // QueryRoleUserList 查询角色与用户的关联
-// 1.查询角色角色是否已存在
+// 1.查询角色是否已存在
 // 2.超级管理员不需要分配用户
 // 3.如果角色不是admin则根据roleId查询用户
 func (l *QueryRoleUserListLogic) QueryRoleUserList(in *sysclient.QueryRoleUserListReq) (*sysclient.QueryRoleUserListResp, error) {
 	var result []model.SysUser
 
-	userRole := query.SysUserRole
-	sysUser := query.SysUser
+	ur := query.SysUserRole
+	u := query.SysUser
 
 	// 1.查询角色角色是否已存在
 	count, err := query.SysRole.WithContext(l.ctx).Where(query.SysRole.ID.Eq(in.RoleId)).Count()
@@ -52,20 +52,22 @@ func (l *QueryRoleUserListLogic) QueryRoleUserList(in *sysclient.QueryRoleUserLi
 		return nil, errors.New("角色不存在")
 	}
 
-	q := userRole.WithContext(l.ctx).LeftJoin(sysUser, sysUser.ID.EqCol(userRole.UserID)).Select(sysUser.ALL)
+	q := u.WithContext(l.ctx).LeftJoin(ur, ur.UserID.EqCol(u.ID)).Select(u.ALL)
+	q = q.Where(u.DelFlag.Eq(1))
 	if len(in.Mobile) > 0 {
-		q = q.Where(sysUser.Mobile.Like("%" + in.Mobile + "%"))
+		q = q.Where(u.Mobile.Like("%" + in.Mobile + "%"))
 	}
 	if len(in.UserName) > 0 {
-		q = q.Where(sysUser.UserName.Like("%" + in.UserName + "%"))
+		q = q.Where(u.UserName.Like("%" + in.UserName + "%"))
 	}
 
-	// IsExist 1:表示拥有的用户
+	// IsExist 1:表示拥有的用户,0:表示没拥有的用户
 	if in.IsExist == 1 {
-		q = q.Where(userRole.RoleID.Eq(in.RoleId))
+		q = q.Where(ur.RoleID.Eq(in.RoleId))
+	} else if in.IsExist == 0 {
+		q = q.Where(ur.WithContext(l.ctx).Where(ur.RoleID.IsNull()).Or(ur.RoleID.Neq(in.RoleId)))
 	} else {
-		// IsExist 0:表示没拥有的用户
-		q = q.Where(userRole.RoleID.Neq(in.RoleId))
+		return nil, errors.New("参数错误,IsExist只能是0或者1")
 	}
 	offset := (in.PageNum - 1) * in.PageSize
 	count, err = q.ScanByPage(&result, int(offset), int(in.PageSize))
@@ -78,24 +80,27 @@ func (l *QueryRoleUserListLogic) QueryRoleUserList(in *sysclient.QueryRoleUserLi
 
 	for _, item := range result {
 		list = append(list, &sysclient.UserData{
-			Id:           item.ID,                                 // 编号
-			UserName:     item.UserName,                           // 用户名
-			NickName:     item.NickName,                           // 昵称
-			Avatar:       item.Avatar,                             // 头像
-			Email:        item.Email,                              // 邮箱
-			Mobile:       item.Mobile,                             // 手机号
-			UserStatus:   item.UserStatus,                         // 帐号状态（0正常 1停用）
-			DeptId:       item.DeptID,                             // 部门id
-			Remark:       item.Remark,                             // 备注信息
-			IsDeleted:    item.IsDeleted,                          // 是否删除  0：否  1：是
-			LoginTime:    time_util.TimeToString(item.LoginTime),  // 登录时间
-			LoginIp:      item.LoginIP,                            // 登录ip
-			LoginOs:      item.LoginOs,                            // 登录os
-			LoginBrowser: item.LoginBrowser,                       // 登录浏览器
-			CreateBy:     item.CreateBy,                           // 创建者
-			CreateTime:   time_util.TimeToStr(item.CreateTime),    // 创建时间
-			UpdateBy:     item.UpdateBy,                           // 更新者
-			UpdateTime:   time_util.TimeToString(item.UpdateTime), // 更新时间
+			Id:            item.ID,                                    // 用户id
+			Mobile:        item.Mobile,                                // 手机号码
+			UserName:      item.UserName,                              // 用户账号
+			NickName:      item.NickName,                              // 用户昵称
+			UserType:      item.UserType,                              // 用户类型（00系统用户）
+			Avatar:        item.Avatar,                                // 头像路径
+			Email:         item.Email,                                 // 用户邮箱
+			Password:      item.Password,                              // 密码
+			Status:        item.Status,                                // 状态(1:正常，0:禁用)
+			DeptId:        item.DeptID,                                // 部门ID
+			LoginIp:       item.LoginIP,                               // 最后登录IP
+			LoginDate:     time_util.TimeToString(item.LoginDate),     // 最后登录时间
+			LoginBrowser:  item.LoginBrowser,                          // 浏览器类型
+			LoginOs:       item.LoginOs,                               // 操作系统
+			PwdUpdateDate: time_util.TimeToString(item.PwdUpdateDate), // 密码最后更新时间
+			Remark:        item.Remark,                                // 备注
+			DelFlag:       item.DelFlag,                               // 删除标志（0代表删除 1代表存在）
+			CreateBy:      item.CreateBy,                              // 创建者
+			CreateTime:    time_util.TimeToStr(item.CreateTime),       // 创建时间
+			UpdateBy:      item.UpdateBy,                              // 更新者
+			UpdateTime:    time_util.TimeToString(item.UpdateTime),    // 更新时间
 		})
 	}
 

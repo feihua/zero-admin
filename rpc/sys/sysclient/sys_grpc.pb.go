@@ -31,17 +31,17 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type DeptServiceClient interface {
-	// 添加部门信息表
+	// 添加部门
 	AddDept(ctx context.Context, in *AddDeptReq, opts ...grpc.CallOption) (*AddDeptResp, error)
-	// 删除部门信息表
+	// 删除部门
 	DeleteDept(ctx context.Context, in *DeleteDeptReq, opts ...grpc.CallOption) (*DeleteDeptResp, error)
-	// 更新部门信息表
+	// 更新部门
 	UpdateDept(ctx context.Context, in *UpdateDeptReq, opts ...grpc.CallOption) (*UpdateDeptResp, error)
-	// 更新部门信息表状态
+	// 更新部门状态
 	UpdateDeptStatus(ctx context.Context, in *UpdateDeptStatusReq, opts ...grpc.CallOption) (*UpdateDeptStatusResp, error)
-	// 查询部门信息表详情
+	// 查询部门详情
 	QueryDeptDetail(ctx context.Context, in *QueryDeptDetailReq, opts ...grpc.CallOption) (*QueryDeptDetailResp, error)
-	// 查询部门信息表列表
+	// 查询部门列表
 	QueryDeptList(ctx context.Context, in *QueryDeptListReq, opts ...grpc.CallOption) (*QueryDeptListResp, error)
 }
 
@@ -111,17 +111,17 @@ func (c *deptServiceClient) QueryDeptList(ctx context.Context, in *QueryDeptList
 // All implementations must embed UnimplementedDeptServiceServer
 // for forward compatibility
 type DeptServiceServer interface {
-	// 添加部门信息表
+	// 添加部门
 	AddDept(context.Context, *AddDeptReq) (*AddDeptResp, error)
-	// 删除部门信息表
+	// 删除部门
 	DeleteDept(context.Context, *DeleteDeptReq) (*DeleteDeptResp, error)
-	// 更新部门信息表
+	// 更新部门
 	UpdateDept(context.Context, *UpdateDeptReq) (*UpdateDeptResp, error)
-	// 更新部门信息表状态
+	// 更新部门状态
 	UpdateDeptStatus(context.Context, *UpdateDeptStatusReq) (*UpdateDeptStatusResp, error)
-	// 查询部门信息表详情
+	// 查询部门详情
 	QueryDeptDetail(context.Context, *QueryDeptDetailReq) (*QueryDeptDetailResp, error)
-	// 查询部门信息表列表
+	// 查询部门列表
 	QueryDeptList(context.Context, *QueryDeptListReq) (*QueryDeptListResp, error)
 	mustEmbedUnimplementedDeptServiceServer()
 }
@@ -318,17 +318,17 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type DictItemServiceClient interface {
-	// 添加字典数据表
+	// 添加字典数据
 	AddDictItem(ctx context.Context, in *AddDictItemReq, opts ...grpc.CallOption) (*AddDictItemResp, error)
-	// 删除字典数据表
+	// 删除字典数据
 	DeleteDictItem(ctx context.Context, in *DeleteDictItemReq, opts ...grpc.CallOption) (*DeleteDictItemResp, error)
-	// 更新字典数据表
+	// 更新字典数据
 	UpdateDictItem(ctx context.Context, in *UpdateDictItemReq, opts ...grpc.CallOption) (*UpdateDictItemResp, error)
-	// 更新字典数据表状态
+	// 更新字典数据状态
 	UpdateDictItemStatus(ctx context.Context, in *UpdateDictItemStatusReq, opts ...grpc.CallOption) (*UpdateDictItemStatusResp, error)
-	// 查询字典数据表详情
+	// 查询字典数据详情
 	QueryDictItemDetail(ctx context.Context, in *QueryDictItemDetailReq, opts ...grpc.CallOption) (*QueryDictItemDetailResp, error)
-	// 查询字典数据表列表
+	// 查询字典数据列表
 	QueryDictItemList(ctx context.Context, in *QueryDictItemListReq, opts ...grpc.CallOption) (*QueryDictItemListResp, error)
 }
 
@@ -398,17 +398,17 @@ func (c *dictItemServiceClient) QueryDictItemList(ctx context.Context, in *Query
 // All implementations must embed UnimplementedDictItemServiceServer
 // for forward compatibility
 type DictItemServiceServer interface {
-	// 添加字典数据表
+	// 添加字典数据
 	AddDictItem(context.Context, *AddDictItemReq) (*AddDictItemResp, error)
-	// 删除字典数据表
+	// 删除字典数据
 	DeleteDictItem(context.Context, *DeleteDictItemReq) (*DeleteDictItemResp, error)
-	// 更新字典数据表
+	// 更新字典数据
 	UpdateDictItem(context.Context, *UpdateDictItemReq) (*UpdateDictItemResp, error)
-	// 更新字典数据表状态
+	// 更新字典数据状态
 	UpdateDictItemStatus(context.Context, *UpdateDictItemStatusReq) (*UpdateDictItemStatusResp, error)
-	// 查询字典数据表详情
+	// 查询字典数据详情
 	QueryDictItemDetail(context.Context, *QueryDictItemDetailReq) (*QueryDictItemDetailResp, error)
-	// 查询字典数据表列表
+	// 查询字典数据列表
 	QueryDictItemList(context.Context, *QueryDictItemListReq) (*QueryDictItemListResp, error)
 	mustEmbedUnimplementedDictItemServiceServer()
 }
@@ -605,17 +605,17 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type DictTypeServiceClient interface {
-	// 添加字典类型表
+	// 添加字典类型
 	AddDictType(ctx context.Context, in *AddDictTypeReq, opts ...grpc.CallOption) (*AddDictTypeResp, error)
-	// 删除字典类型表
+	// 删除字典类型
 	DeleteDictType(ctx context.Context, in *DeleteDictTypeReq, opts ...grpc.CallOption) (*DeleteDictTypeResp, error)
-	// 更新字典类型表
+	// 更新字典类型
 	UpdateDictType(ctx context.Context, in *UpdateDictTypeReq, opts ...grpc.CallOption) (*UpdateDictTypeResp, error)
-	// 更新字典类型表状态
+	// 更新字典类型状态
 	UpdateDictTypeStatus(ctx context.Context, in *UpdateDictTypeStatusReq, opts ...grpc.CallOption) (*UpdateDictTypeStatusResp, error)
-	// 查询字典类型表详情
+	// 查询字典类型详情
 	QueryDictTypeDetail(ctx context.Context, in *QueryDictTypeDetailReq, opts ...grpc.CallOption) (*QueryDictTypeDetailResp, error)
-	// 查询字典类型表列表
+	// 查询字典类型列表
 	QueryDictTypeList(ctx context.Context, in *QueryDictTypeListReq, opts ...grpc.CallOption) (*QueryDictTypeListResp, error)
 }
 
@@ -685,17 +685,17 @@ func (c *dictTypeServiceClient) QueryDictTypeList(ctx context.Context, in *Query
 // All implementations must embed UnimplementedDictTypeServiceServer
 // for forward compatibility
 type DictTypeServiceServer interface {
-	// 添加字典类型表
+	// 添加字典类型
 	AddDictType(context.Context, *AddDictTypeReq) (*AddDictTypeResp, error)
-	// 删除字典类型表
+	// 删除字典类型
 	DeleteDictType(context.Context, *DeleteDictTypeReq) (*DeleteDictTypeResp, error)
-	// 更新字典类型表
+	// 更新字典类型
 	UpdateDictType(context.Context, *UpdateDictTypeReq) (*UpdateDictTypeResp, error)
-	// 更新字典类型表状态
+	// 更新字典类型状态
 	UpdateDictTypeStatus(context.Context, *UpdateDictTypeStatusReq) (*UpdateDictTypeStatusResp, error)
-	// 查询字典类型表详情
+	// 查询字典类型详情
 	QueryDictTypeDetail(context.Context, *QueryDictTypeDetailReq) (*QueryDictTypeDetailResp, error)
-	// 查询字典类型表列表
+	// 查询字典类型列表
 	QueryDictTypeList(context.Context, *QueryDictTypeListReq) (*QueryDictTypeListResp, error)
 	mustEmbedUnimplementedDictTypeServiceServer()
 }
@@ -889,11 +889,11 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type LoginLogServiceClient interface {
-	// 删除系统登录日志表
+	// 删除系统登录日志
 	DeleteLoginLog(ctx context.Context, in *DeleteLoginLogReq, opts ...grpc.CallOption) (*DeleteLoginLogResp, error)
-	// 查询系统登录日志表详情
+	// 查询系统登录日志详情
 	QueryLoginLogDetail(ctx context.Context, in *QueryLoginLogDetailReq, opts ...grpc.CallOption) (*QueryLoginLogDetailResp, error)
-	// 查询系统登录日志表列表
+	// 查询系统登录日志列表
 	QueryLoginLogList(ctx context.Context, in *QueryLoginLogListReq, opts ...grpc.CallOption) (*QueryLoginLogListResp, error)
 }
 
@@ -936,11 +936,11 @@ func (c *loginLogServiceClient) QueryLoginLogList(ctx context.Context, in *Query
 // All implementations must embed UnimplementedLoginLogServiceServer
 // for forward compatibility
 type LoginLogServiceServer interface {
-	// 删除系统登录日志表
+	// 删除系统登录日志
 	DeleteLoginLog(context.Context, *DeleteLoginLogReq) (*DeleteLoginLogResp, error)
-	// 查询系统登录日志表详情
+	// 查询系统登录日志详情
 	QueryLoginLogDetail(context.Context, *QueryLoginLogDetailReq) (*QueryLoginLogDetailResp, error)
-	// 查询系统登录日志表列表
+	// 查询系统登录日志列表
 	QueryLoginLogList(context.Context, *QueryLoginLogListReq) (*QueryLoginLogListResp, error)
 	mustEmbedUnimplementedLoginLogServiceServer()
 }
@@ -1347,13 +1347,13 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type OperateLogServiceClient interface {
-	// 添加系统操作日志表
+	// 添加系统操作日志
 	AddOperateLog(ctx context.Context, in *AddOperateLogReq, opts ...grpc.CallOption) (*AddOperateLogResp, error)
-	// 删除系统操作日志表
+	// 删除系统操作日志
 	DeleteOperateLog(ctx context.Context, in *DeleteOperateLogReq, opts ...grpc.CallOption) (*DeleteOperateLogResp, error)
-	// 查询系统操作日志表详情
+	// 查询系统操作日志详情
 	QueryOperateLogDetail(ctx context.Context, in *QueryOperateLogDetailReq, opts ...grpc.CallOption) (*QueryOperateLogDetailResp, error)
-	// 查询系统操作日志表列表
+	// 查询系统操作日志列表
 	QueryOperateLogList(ctx context.Context, in *QueryOperateLogListReq, opts ...grpc.CallOption) (*QueryOperateLogListResp, error)
 }
 
@@ -1405,13 +1405,13 @@ func (c *operateLogServiceClient) QueryOperateLogList(ctx context.Context, in *Q
 // All implementations must embed UnimplementedOperateLogServiceServer
 // for forward compatibility
 type OperateLogServiceServer interface {
-	// 添加系统操作日志表
+	// 添加系统操作日志
 	AddOperateLog(context.Context, *AddOperateLogReq) (*AddOperateLogResp, error)
-	// 删除系统操作日志表
+	// 删除系统操作日志
 	DeleteOperateLog(context.Context, *DeleteOperateLogReq) (*DeleteOperateLogResp, error)
-	// 查询系统操作日志表详情
+	// 查询系统操作日志详情
 	QueryOperateLogDetail(context.Context, *QueryOperateLogDetailReq) (*QueryOperateLogDetailResp, error)
-	// 查询系统操作日志表列表
+	// 查询系统操作日志列表
 	QueryOperateLogList(context.Context, *QueryOperateLogListReq) (*QueryOperateLogListResp, error)
 	mustEmbedUnimplementedOperateLogServiceServer()
 }
@@ -1558,17 +1558,17 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type PostServiceClient interface {
-	// 添加岗位管理
+	// 添加岗位信息
 	AddPost(ctx context.Context, in *AddPostReq, opts ...grpc.CallOption) (*AddPostResp, error)
-	// 删除岗位管理
+	// 删除岗位信息
 	DeletePost(ctx context.Context, in *DeletePostReq, opts ...grpc.CallOption) (*DeletePostResp, error)
-	// 更新岗位管理
+	// 更新岗位信息
 	UpdatePost(ctx context.Context, in *UpdatePostReq, opts ...grpc.CallOption) (*UpdatePostResp, error)
-	// 更新岗位管理状态
+	// 更新岗位信息状态
 	UpdatePostStatus(ctx context.Context, in *UpdatePostStatusReq, opts ...grpc.CallOption) (*UpdatePostStatusResp, error)
-	// 查询岗位管理详情
+	// 查询岗位信息详情
 	QueryPostDetail(ctx context.Context, in *QueryPostDetailReq, opts ...grpc.CallOption) (*QueryPostDetailResp, error)
-	// 查询岗位管理列表
+	// 查询岗位信息列表
 	QueryPostList(ctx context.Context, in *QueryPostListReq, opts ...grpc.CallOption) (*QueryPostListResp, error)
 }
 
@@ -1638,17 +1638,17 @@ func (c *postServiceClient) QueryPostList(ctx context.Context, in *QueryPostList
 // All implementations must embed UnimplementedPostServiceServer
 // for forward compatibility
 type PostServiceServer interface {
-	// 添加岗位管理
+	// 添加岗位信息
 	AddPost(context.Context, *AddPostReq) (*AddPostResp, error)
-	// 删除岗位管理
+	// 删除岗位信息
 	DeletePost(context.Context, *DeletePostReq) (*DeletePostResp, error)
-	// 更新岗位管理
+	// 更新岗位信息
 	UpdatePost(context.Context, *UpdatePostReq) (*UpdatePostResp, error)
-	// 更新岗位管理状态
+	// 更新岗位信息状态
 	UpdatePostStatus(context.Context, *UpdatePostStatusReq) (*UpdatePostStatusResp, error)
-	// 查询岗位管理详情
+	// 查询岗位信息详情
 	QueryPostDetail(context.Context, *QueryPostDetailReq) (*QueryPostDetailResp, error)
-	// 查询岗位管理列表
+	// 查询岗位信息列表
 	QueryPostList(context.Context, *QueryPostListReq) (*QueryPostListResp, error)
 	mustEmbedUnimplementedPostServiceServer()
 }
@@ -1849,22 +1849,22 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type RoleServiceClient interface {
-	// 添加角色信息表
+	// 添加角色信息
 	AddRole(ctx context.Context, in *AddRoleReq, opts ...grpc.CallOption) (*AddRoleResp, error)
-	// 删除角色信息表
+	// 删除角色信息
 	DeleteRole(ctx context.Context, in *DeleteRoleReq, opts ...grpc.CallOption) (*DeleteRoleResp, error)
-	// 更新角色信息表
+	// 更新角色信息
 	UpdateRole(ctx context.Context, in *UpdateRoleReq, opts ...grpc.CallOption) (*UpdateRoleResp, error)
-	// 更新角色信息表状态
+	// 更新角色信息状态
 	UpdateRoleStatus(ctx context.Context, in *UpdateRoleStatusReq, opts ...grpc.CallOption) (*UpdateRoleStatusResp, error)
-	// 查询角色信息表详情
+	// 查询角色信息详情
 	QueryRoleDetail(ctx context.Context, in *QueryRoleDetailReq, opts ...grpc.CallOption) (*QueryRoleDetailResp, error)
-	// 查询角色信息表列表
+	// 查询角色信息列表
 	QueryRoleList(ctx context.Context, in *QueryRoleListReq, opts ...grpc.CallOption) (*QueryRoleListResp, error)
-	// 查询用户与角色的关联
+	// 查询角色与菜单的关联
 	QueryRoleMenuList(ctx context.Context, in *QueryRoleMenuListReq, opts ...grpc.CallOption) (*QueryRoleMenuListResp, error)
-	// 更新用户与角色的关联
-	UpdateMenuRoleList(ctx context.Context, in *UpdateMenuRoleReq, opts ...grpc.CallOption) (*UpdateMenuRoleResp, error)
+	// 更新角色与菜单的关联
+	UpdateMenuRoleList(ctx context.Context, in *UpdateRoleMenuReq, opts ...grpc.CallOption) (*UpdateRoleMenuResp, error)
 	// 查询角色的用户关联
 	QueryRoleUserList(ctx context.Context, in *QueryRoleUserListReq, opts ...grpc.CallOption) (*QueryRoleUserListResp, error)
 	// 取消授权/确认授权
@@ -1942,8 +1942,8 @@ func (c *roleServiceClient) QueryRoleMenuList(ctx context.Context, in *QueryRole
 	return out, nil
 }
 
-func (c *roleServiceClient) UpdateMenuRoleList(ctx context.Context, in *UpdateMenuRoleReq, opts ...grpc.CallOption) (*UpdateMenuRoleResp, error) {
-	out := new(UpdateMenuRoleResp)
+func (c *roleServiceClient) UpdateMenuRoleList(ctx context.Context, in *UpdateRoleMenuReq, opts ...grpc.CallOption) (*UpdateRoleMenuResp, error) {
+	out := new(UpdateRoleMenuResp)
 	err := c.cc.Invoke(ctx, RoleService_UpdateMenuRoleList_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -1973,22 +1973,22 @@ func (c *roleServiceClient) CancelAuthorization(ctx context.Context, in *CancelA
 // All implementations must embed UnimplementedRoleServiceServer
 // for forward compatibility
 type RoleServiceServer interface {
-	// 添加角色信息表
+	// 添加角色信息
 	AddRole(context.Context, *AddRoleReq) (*AddRoleResp, error)
-	// 删除角色信息表
+	// 删除角色信息
 	DeleteRole(context.Context, *DeleteRoleReq) (*DeleteRoleResp, error)
-	// 更新角色信息表
+	// 更新角色信息
 	UpdateRole(context.Context, *UpdateRoleReq) (*UpdateRoleResp, error)
-	// 更新角色信息表状态
+	// 更新角色信息状态
 	UpdateRoleStatus(context.Context, *UpdateRoleStatusReq) (*UpdateRoleStatusResp, error)
-	// 查询角色信息表详情
+	// 查询角色信息详情
 	QueryRoleDetail(context.Context, *QueryRoleDetailReq) (*QueryRoleDetailResp, error)
-	// 查询角色信息表列表
+	// 查询角色信息列表
 	QueryRoleList(context.Context, *QueryRoleListReq) (*QueryRoleListResp, error)
-	// 查询用户与角色的关联
+	// 查询角色与菜单的关联
 	QueryRoleMenuList(context.Context, *QueryRoleMenuListReq) (*QueryRoleMenuListResp, error)
-	// 更新用户与角色的关联
-	UpdateMenuRoleList(context.Context, *UpdateMenuRoleReq) (*UpdateMenuRoleResp, error)
+	// 更新角色与菜单的关联
+	UpdateMenuRoleList(context.Context, *UpdateRoleMenuReq) (*UpdateRoleMenuResp, error)
 	// 查询角色的用户关联
 	QueryRoleUserList(context.Context, *QueryRoleUserListReq) (*QueryRoleUserListResp, error)
 	// 取消授权/确认授权
@@ -2021,7 +2021,7 @@ func (UnimplementedRoleServiceServer) QueryRoleList(context.Context, *QueryRoleL
 func (UnimplementedRoleServiceServer) QueryRoleMenuList(context.Context, *QueryRoleMenuListReq) (*QueryRoleMenuListResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method QueryRoleMenuList not implemented")
 }
-func (UnimplementedRoleServiceServer) UpdateMenuRoleList(context.Context, *UpdateMenuRoleReq) (*UpdateMenuRoleResp, error) {
+func (UnimplementedRoleServiceServer) UpdateMenuRoleList(context.Context, *UpdateRoleMenuReq) (*UpdateRoleMenuResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateMenuRoleList not implemented")
 }
 func (UnimplementedRoleServiceServer) QueryRoleUserList(context.Context, *QueryRoleUserListReq) (*QueryRoleUserListResp, error) {
@@ -2170,7 +2170,7 @@ func _RoleService_QueryRoleMenuList_Handler(srv interface{}, ctx context.Context
 }
 
 func _RoleService_UpdateMenuRoleList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UpdateMenuRoleReq)
+	in := new(UpdateRoleMenuReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -2182,7 +2182,7 @@ func _RoleService_UpdateMenuRoleList_Handler(srv interface{}, ctx context.Contex
 		FullMethod: RoleService_UpdateMenuRoleList_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(RoleServiceServer).UpdateMenuRoleList(ctx, req.(*UpdateMenuRoleReq))
+		return srv.(RoleServiceServer).UpdateMenuRoleList(ctx, req.(*UpdateRoleMenuReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -2276,15 +2276,15 @@ var RoleService_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	UserService_Login_FullMethodName                = "/sysclient.UserService/Login"
-	UserService_UserInfo_FullMethodName             = "/sysclient.UserService/UserInfo"
-	UserService_ReSetPassword_FullMethodName        = "/sysclient.UserService/ReSetPassword"
 	UserService_AddUser_FullMethodName              = "/sysclient.UserService/AddUser"
 	UserService_DeleteUser_FullMethodName           = "/sysclient.UserService/DeleteUser"
 	UserService_UpdateUser_FullMethodName           = "/sysclient.UserService/UpdateUser"
 	UserService_UpdateUserStatus_FullMethodName     = "/sysclient.UserService/UpdateUserStatus"
 	UserService_QueryUserDetail_FullMethodName      = "/sysclient.UserService/QueryUserDetail"
 	UserService_QueryUserList_FullMethodName        = "/sysclient.UserService/QueryUserList"
+	UserService_Login_FullMethodName                = "/sysclient.UserService/Login"
+	UserService_UserInfo_FullMethodName             = "/sysclient.UserService/UserInfo"
+	UserService_ReSetPassword_FullMethodName        = "/sysclient.UserService/ReSetPassword"
 	UserService_QueryUserRoleList_FullMethodName    = "/sysclient.UserService/QueryUserRoleList"
 	UserService_UpdateUserRoleList_FullMethodName   = "/sysclient.UserService/UpdateUserRoleList"
 	UserService_QueryDeptAndPostList_FullMethodName = "/sysclient.UserService/QueryDeptAndPostList"
@@ -2294,24 +2294,24 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type UserServiceClient interface {
+	// 添加用户信息
+	AddUser(ctx context.Context, in *AddUserReq, opts ...grpc.CallOption) (*AddUserResp, error)
+	// 删除用户信息
+	DeleteUser(ctx context.Context, in *DeleteUserReq, opts ...grpc.CallOption) (*DeleteUserResp, error)
+	// 更新用户信息
+	UpdateUser(ctx context.Context, in *UpdateUserReq, opts ...grpc.CallOption) (*UpdateUserResp, error)
+	// 更新用户信息状态
+	UpdateUserStatus(ctx context.Context, in *UpdateUserStatusReq, opts ...grpc.CallOption) (*UpdateUserStatusResp, error)
+	// 查询用户信息详情
+	QueryUserDetail(ctx context.Context, in *QueryUserDetailReq, opts ...grpc.CallOption) (*QueryUserDetailResp, error)
+	// 查询用户信息列表
+	QueryUserList(ctx context.Context, in *QueryUserListReq, opts ...grpc.CallOption) (*QueryUserListResp, error)
 	// 用户登录
 	Login(ctx context.Context, in *LoginReq, opts ...grpc.CallOption) (*LoginResp, error)
 	// 获取用户个人信息
 	UserInfo(ctx context.Context, in *InfoReq, opts ...grpc.CallOption) (*InfoResp, error)
 	// 重置用户密码
 	ReSetPassword(ctx context.Context, in *ReSetPasswordReq, opts ...grpc.CallOption) (*ReSetPasswordResp, error)
-	// 添加用户信息表
-	AddUser(ctx context.Context, in *AddUserReq, opts ...grpc.CallOption) (*AddUserResp, error)
-	// 删除用户信息表
-	DeleteUser(ctx context.Context, in *DeleteUserReq, opts ...grpc.CallOption) (*DeleteUserResp, error)
-	// 更新用户信息表
-	UpdateUser(ctx context.Context, in *UpdateUserReq, opts ...grpc.CallOption) (*UpdateUserResp, error)
-	// 更新用户信息表状态
-	UpdateUserStatus(ctx context.Context, in *UpdateUserStatusReq, opts ...grpc.CallOption) (*UpdateUserStatusResp, error)
-	// 查询用户信息表详情
-	QueryUserDetail(ctx context.Context, in *QueryUserDetailReq, opts ...grpc.CallOption) (*QueryUserDetailResp, error)
-	// 查询用户信息表列表
-	QueryUserList(ctx context.Context, in *QueryUserListReq, opts ...grpc.CallOption) (*QueryUserListResp, error)
 	// 查询用户与角色的关联
 	QueryUserRoleList(ctx context.Context, in *QueryUserRoleListReq, opts ...grpc.CallOption) (*QueryUserRoleListResp, error)
 	// 更新用户与角色的关联
@@ -2326,33 +2326,6 @@ type userServiceClient struct {
 
 func NewUserServiceClient(cc grpc.ClientConnInterface) UserServiceClient {
 	return &userServiceClient{cc}
-}
-
-func (c *userServiceClient) Login(ctx context.Context, in *LoginReq, opts ...grpc.CallOption) (*LoginResp, error) {
-	out := new(LoginResp)
-	err := c.cc.Invoke(ctx, UserService_Login_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *userServiceClient) UserInfo(ctx context.Context, in *InfoReq, opts ...grpc.CallOption) (*InfoResp, error) {
-	out := new(InfoResp)
-	err := c.cc.Invoke(ctx, UserService_UserInfo_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *userServiceClient) ReSetPassword(ctx context.Context, in *ReSetPasswordReq, opts ...grpc.CallOption) (*ReSetPasswordResp, error) {
-	out := new(ReSetPasswordResp)
-	err := c.cc.Invoke(ctx, UserService_ReSetPassword_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
 }
 
 func (c *userServiceClient) AddUser(ctx context.Context, in *AddUserReq, opts ...grpc.CallOption) (*AddUserResp, error) {
@@ -2409,6 +2382,33 @@ func (c *userServiceClient) QueryUserList(ctx context.Context, in *QueryUserList
 	return out, nil
 }
 
+func (c *userServiceClient) Login(ctx context.Context, in *LoginReq, opts ...grpc.CallOption) (*LoginResp, error) {
+	out := new(LoginResp)
+	err := c.cc.Invoke(ctx, UserService_Login_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userServiceClient) UserInfo(ctx context.Context, in *InfoReq, opts ...grpc.CallOption) (*InfoResp, error) {
+	out := new(InfoResp)
+	err := c.cc.Invoke(ctx, UserService_UserInfo_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userServiceClient) ReSetPassword(ctx context.Context, in *ReSetPasswordReq, opts ...grpc.CallOption) (*ReSetPasswordResp, error) {
+	out := new(ReSetPasswordResp)
+	err := c.cc.Invoke(ctx, UserService_ReSetPassword_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *userServiceClient) QueryUserRoleList(ctx context.Context, in *QueryUserRoleListReq, opts ...grpc.CallOption) (*QueryUserRoleListResp, error) {
 	out := new(QueryUserRoleListResp)
 	err := c.cc.Invoke(ctx, UserService_QueryUserRoleList_FullMethodName, in, out, opts...)
@@ -2440,24 +2440,24 @@ func (c *userServiceClient) QueryDeptAndPostList(ctx context.Context, in *QueryD
 // All implementations must embed UnimplementedUserServiceServer
 // for forward compatibility
 type UserServiceServer interface {
+	// 添加用户信息
+	AddUser(context.Context, *AddUserReq) (*AddUserResp, error)
+	// 删除用户信息
+	DeleteUser(context.Context, *DeleteUserReq) (*DeleteUserResp, error)
+	// 更新用户信息
+	UpdateUser(context.Context, *UpdateUserReq) (*UpdateUserResp, error)
+	// 更新用户信息状态
+	UpdateUserStatus(context.Context, *UpdateUserStatusReq) (*UpdateUserStatusResp, error)
+	// 查询用户信息详情
+	QueryUserDetail(context.Context, *QueryUserDetailReq) (*QueryUserDetailResp, error)
+	// 查询用户信息列表
+	QueryUserList(context.Context, *QueryUserListReq) (*QueryUserListResp, error)
 	// 用户登录
 	Login(context.Context, *LoginReq) (*LoginResp, error)
 	// 获取用户个人信息
 	UserInfo(context.Context, *InfoReq) (*InfoResp, error)
 	// 重置用户密码
 	ReSetPassword(context.Context, *ReSetPasswordReq) (*ReSetPasswordResp, error)
-	// 添加用户信息表
-	AddUser(context.Context, *AddUserReq) (*AddUserResp, error)
-	// 删除用户信息表
-	DeleteUser(context.Context, *DeleteUserReq) (*DeleteUserResp, error)
-	// 更新用户信息表
-	UpdateUser(context.Context, *UpdateUserReq) (*UpdateUserResp, error)
-	// 更新用户信息表状态
-	UpdateUserStatus(context.Context, *UpdateUserStatusReq) (*UpdateUserStatusResp, error)
-	// 查询用户信息表详情
-	QueryUserDetail(context.Context, *QueryUserDetailReq) (*QueryUserDetailResp, error)
-	// 查询用户信息表列表
-	QueryUserList(context.Context, *QueryUserListReq) (*QueryUserListResp, error)
 	// 查询用户与角色的关联
 	QueryUserRoleList(context.Context, *QueryUserRoleListReq) (*QueryUserRoleListResp, error)
 	// 更新用户与角色的关联
@@ -2471,15 +2471,6 @@ type UserServiceServer interface {
 type UnimplementedUserServiceServer struct {
 }
 
-func (UnimplementedUserServiceServer) Login(context.Context, *LoginReq) (*LoginResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Login not implemented")
-}
-func (UnimplementedUserServiceServer) UserInfo(context.Context, *InfoReq) (*InfoResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UserInfo not implemented")
-}
-func (UnimplementedUserServiceServer) ReSetPassword(context.Context, *ReSetPasswordReq) (*ReSetPasswordResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ReSetPassword not implemented")
-}
 func (UnimplementedUserServiceServer) AddUser(context.Context, *AddUserReq) (*AddUserResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AddUser not implemented")
 }
@@ -2497,6 +2488,15 @@ func (UnimplementedUserServiceServer) QueryUserDetail(context.Context, *QueryUse
 }
 func (UnimplementedUserServiceServer) QueryUserList(context.Context, *QueryUserListReq) (*QueryUserListResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method QueryUserList not implemented")
+}
+func (UnimplementedUserServiceServer) Login(context.Context, *LoginReq) (*LoginResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Login not implemented")
+}
+func (UnimplementedUserServiceServer) UserInfo(context.Context, *InfoReq) (*InfoResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UserInfo not implemented")
+}
+func (UnimplementedUserServiceServer) ReSetPassword(context.Context, *ReSetPasswordReq) (*ReSetPasswordResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ReSetPassword not implemented")
 }
 func (UnimplementedUserServiceServer) QueryUserRoleList(context.Context, *QueryUserRoleListReq) (*QueryUserRoleListResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method QueryUserRoleList not implemented")
@@ -2518,60 +2518,6 @@ type UnsafeUserServiceServer interface {
 
 func RegisterUserServiceServer(s grpc.ServiceRegistrar, srv UserServiceServer) {
 	s.RegisterService(&UserService_ServiceDesc, srv)
-}
-
-func _UserService_Login_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(LoginReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(UserServiceServer).Login(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: UserService_Login_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UserServiceServer).Login(ctx, req.(*LoginReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _UserService_UserInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(InfoReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(UserServiceServer).UserInfo(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: UserService_UserInfo_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UserServiceServer).UserInfo(ctx, req.(*InfoReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _UserService_ReSetPassword_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ReSetPasswordReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(UserServiceServer).ReSetPassword(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: UserService_ReSetPassword_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UserServiceServer).ReSetPassword(ctx, req.(*ReSetPasswordReq))
-	}
-	return interceptor(ctx, in, info, handler)
 }
 
 func _UserService_AddUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -2682,6 +2628,60 @@ func _UserService_QueryUserList_Handler(srv interface{}, ctx context.Context, de
 	return interceptor(ctx, in, info, handler)
 }
 
+func _UserService_Login_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(LoginReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServiceServer).Login(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: UserService_Login_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServiceServer).Login(ctx, req.(*LoginReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _UserService_UserInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(InfoReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServiceServer).UserInfo(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: UserService_UserInfo_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServiceServer).UserInfo(ctx, req.(*InfoReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _UserService_ReSetPassword_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ReSetPasswordReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServiceServer).ReSetPassword(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: UserService_ReSetPassword_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServiceServer).ReSetPassword(ctx, req.(*ReSetPasswordReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _UserService_QueryUserRoleList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(QueryUserRoleListReq)
 	if err := dec(in); err != nil {
@@ -2744,18 +2744,6 @@ var UserService_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*UserServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "Login",
-			Handler:    _UserService_Login_Handler,
-		},
-		{
-			MethodName: "UserInfo",
-			Handler:    _UserService_UserInfo_Handler,
-		},
-		{
-			MethodName: "ReSetPassword",
-			Handler:    _UserService_ReSetPassword_Handler,
-		},
-		{
 			MethodName: "AddUser",
 			Handler:    _UserService_AddUser_Handler,
 		},
@@ -2778,6 +2766,18 @@ var UserService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "QueryUserList",
 			Handler:    _UserService_QueryUserList_Handler,
+		},
+		{
+			MethodName: "Login",
+			Handler:    _UserService_Login_Handler,
+		},
+		{
+			MethodName: "UserInfo",
+			Handler:    _UserService_UserInfo_Handler,
+		},
+		{
+			MethodName: "ReSetPassword",
+			Handler:    _UserService_ReSetPassword_Handler,
 		},
 		{
 			MethodName: "QueryUserRoleList",

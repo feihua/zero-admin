@@ -4,6 +4,7 @@ import (
 	"context"
 	"errors"
 	"github.com/feihua/zero-admin/pkg/time_util"
+	"github.com/feihua/zero-admin/rpc/sys/gen/model"
 	"github.com/feihua/zero-admin/rpc/sys/gen/query"
 	"github.com/feihua/zero-admin/rpc/sys/internal/svc"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
@@ -36,7 +37,10 @@ func (l *QueryUserListLogic) QueryUserList(in *sysclient.QueryUserListReq) (*sys
 	user := query.SysUser
 	q := user.WithContext(l.ctx)
 	if in.DeptId != 0 {
-		q = q.Where(user.DeptID.Eq(in.DeptId))
+		var deptIds []int64
+		l.svcCtx.DB.Model(model.SysDept{}).WithContext(l.ctx).Select("id").Where("find_in_set(?, ancestors)", in.DeptId).Scan(&deptIds)
+		deptIds = append(deptIds, in.DeptId)
+		q = q.Where(user.DeptID.In(deptIds...))
 	}
 	if len(in.Email) > 0 {
 		q = q.Where(user.Email.Like("%" + in.Email + "%"))
@@ -50,8 +54,8 @@ func (l *QueryUserListLogic) QueryUserList(in *sysclient.QueryUserListReq) (*sys
 	if len(in.UserName) > 0 {
 		q = q.Where(user.UserName.Like("%" + in.UserName + "%"))
 	}
-	if in.UserStatus != 2 {
-		q = q.Where(user.UserStatus.Eq(in.UserStatus))
+	if in.Status != 2 {
+		q = q.Where(user.Status.Eq(in.Status))
 	}
 
 	offset := (in.PageNum - 1) * in.PageSize
@@ -65,24 +69,26 @@ func (l *QueryUserListLogic) QueryUserList(in *sysclient.QueryUserListReq) (*sys
 	var list = make([]*sysclient.UserListData, 0, len(result))
 	for _, item := range result {
 		list = append(list, &sysclient.UserListData{
-			Id:           item.ID,                                 // 编号
-			UserName:     item.UserName,                           // 用户名
-			NickName:     item.NickName,                           // 昵称
-			Avatar:       item.Avatar,                             // 头像
-			Email:        item.Email,                              // 邮箱
-			Mobile:       item.Mobile,                             // 手机号
-			UserStatus:   item.UserStatus,                         // 帐号状态（0正常 1停用）
-			DeptId:       item.DeptID,                             // 部门id
-			Remark:       item.Remark,                             // 备注
-			IsDeleted:    item.IsDeleted,                          // 是否删除  0：否  1：是
-			LoginTime:    time_util.TimeToString(item.LoginTime),  // 登录时间
-			LoginIp:      item.LoginIP,                            // 登录ip
-			LoginOs:      item.LoginOs,                            // 登录os
-			LoginBrowser: item.LoginBrowser,                       // 登录浏览器
-			CreateBy:     item.CreateBy,                           // 创建者
-			CreateTime:   time_util.TimeToStr(item.CreateTime),    // 创建时间
-			UpdateBy:     item.UpdateBy,                           // 更新者
-			UpdateTime:   time_util.TimeToString(item.UpdateTime), // 更新时间
+			Id:            item.ID,                                    // 用户id
+			Mobile:        item.Mobile,                                // 手机号码
+			UserName:      item.UserName,                              // 用户账号
+			NickName:      item.NickName,                              // 用户昵称
+			UserType:      item.UserType,                              // 用户类型（00系统用户）
+			Avatar:        item.Avatar,                                // 头像路径
+			Email:         item.Email,                                 // 用户邮箱
+			Status:        item.Status,                                // 状态(1:正常，0:禁用)
+			DeptId:        item.DeptID,                                // 部门ID
+			LoginIp:       item.LoginIP,                               // 最后登录IP
+			LoginDate:     time_util.TimeToString(item.LoginDate),     // 最后登录时间
+			LoginBrowser:  item.LoginBrowser,                          // 浏览器类型
+			LoginOs:       item.LoginOs,                               // 操作系统
+			PwdUpdateDate: time_util.TimeToString(item.PwdUpdateDate), // 密码最后更新时间
+			Remark:        item.Remark,                                // 备注
+			DelFlag:       item.DelFlag,                               // 删除标志（0代表删除 1代表存在）
+			CreateBy:      item.CreateBy,                              // 创建者
+			CreateTime:    time_util.TimeToStr(item.CreateTime),       // 创建时间
+			UpdateBy:      item.UpdateBy,                              // 更新者
+			UpdateTime:    time_util.TimeToString(item.UpdateTime),    // 更新时间
 		})
 	}
 

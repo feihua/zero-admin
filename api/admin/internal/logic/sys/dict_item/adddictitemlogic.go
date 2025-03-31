@@ -35,14 +35,16 @@ func NewAddDictItemLogic(ctx context.Context, svcCtx *svc.ServiceContext) *AddDi
 // AddDictItem 添加字典数据
 func (l *AddDictItemLogic) AddDictItem(req *types.AddDictItemReq) (resp *types.AddDictItemResp, err error) {
 	_, err = l.svcCtx.DictItemService.AddDictItem(l.ctx, &sysclient.AddDictItemReq{
-		DictType:   req.DictType,   // 字典类型
-		DictLabel:  req.DictLabel,  // 字典标签
-		DictValue:  req.DictValue,  // 字典键值
-		DictStatus: req.DictStatus, // 字典状态
-		DictSort:   req.DictSort,   // 排序
-		Remark:     req.Remark,     // 备注信息
-		IsDefault:  req.IsDefault,  // 是否默认  0：否  1：是
-		CreateBy:   l.ctx.Value("userName").(string),
+		DictSort:  req.DictSort,  // 字典排序
+		DictLabel: req.DictLabel, // 字典标签
+		DictValue: req.DictValue, // 字典键值
+		DictType:  req.DictType,  // 字典类型
+		CssClass:  req.CssClass,  // 样式属性（其他样式扩展）
+		ListClass: req.ListClass, // 表格回显样式
+		IsDefault: req.IsDefault, // 是否默认（Y是 N否）
+		Status:    req.Status,    // 状态（0：停用，1:正常）
+		Remark:    req.Remark,    // 备注
+		CreateBy:  l.ctx.Value("userName").(string),
 	})
 
 	if err != nil {

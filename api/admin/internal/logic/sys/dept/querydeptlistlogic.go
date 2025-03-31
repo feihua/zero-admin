@@ -44,17 +44,17 @@ func (l *QueryDeptListLogic) QueryDeptList(req *types.QueryDeptListReq) (*types.
 
 	for _, dept := range resp.List {
 		list = append(list, &types.QueryDeptListData{
-			Id:         dept.Id,         // 编号
+			Id:         dept.Id,         // 部门id
+			ParentId:   dept.ParentId,   // 上级部门id
+			Ancestors:  dept.Ancestors,  // 祖级列表
 			DeptName:   dept.DeptName,   // 部门名称
-			DeptStatus: dept.DeptStatus, // 部门状态
-			DeptSort:   dept.DeptSort,   // 部门排序
-			ParentId:   dept.ParentId,   // 上级机构ID，一级机构为0
+			Sort:       dept.Sort,       // 显示顺序
 			Leader:     dept.Leader,     // 负责人
-			Phone:      dept.Phone,      // 电话号码
+			Phone:      dept.Phone,      // 联系电话
 			Email:      dept.Email,      // 邮箱
+			Status:     dept.Status,     // 部门状态（0：停用，1:正常）
+			DelFlag:    dept.DelFlag,    // 删除标志（0代表删除 1代表存在）
 			Remark:     dept.Remark,     // 备注信息
-			IsDeleted:  dept.IsDeleted,  // 是否删除  0：否  1：是
-			ParentIds:  dept.ParentIds,  // 上级机构IDs，一级机构为0
 			CreateBy:   dept.CreateBy,   // 创建者
 			CreateTime: dept.CreateTime, // 创建时间
 			UpdateBy:   dept.UpdateBy,   // 更新者

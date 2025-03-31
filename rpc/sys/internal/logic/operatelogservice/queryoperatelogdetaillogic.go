@@ -49,21 +49,31 @@ func (l *QueryOperateLogDetailLogic) QueryOperateLogDetail(in *sysclient.QueryOp
 	}
 
 	data := &sysclient.QueryOperateLogDetailResp{
-		Id:                item.ID,                                 // 编号
-		Title:             item.Title,                              // 系统模块
-		OperationType:     item.OperationType,                      // 操作类型
-		OperationName:     item.OperationName,                      // 操作人员
-		RequestMethod:     item.RequestMethod,                      // 请求方式
-		OperationUrl:      item.OperationURL,                       // 操作方法
-		OperationParams:   item.OperationParams,                    // 请求参数
-		OperationResponse: item.OperationResponse,                  // 响应参数
-		OperationStatus:   item.OperationStatus,                    // 操作状态
-		DeptName:          item.DeptName,                           // 部门名称
-		UseTime:           item.UseTime,                            // 执行时长(毫秒)
-		Browser:           item.Browser,                            // 浏览器
-		Os:                item.Os,                                 // 操作信息
-		OperationIp:       item.OperationIP,                        // 操作地址
-		OperationTime:     time_util.TimeToStr(item.OperationTime), // 操作时间
+		Id:              item.ID,                               // 操作日志id
+		Title:           item.Title,                            // 模块标题
+		BusinessType:    item.BusinessType,                     // 业务类型（0其它 1新增 2修改 3删除）
+		Method:          item.Method,                           // 方法名称
+		RequestMethod:   item.RequestMethod,                    // 请求方式
+		OperatorType:    item.OperatorType,                     // 操作类别（0其它 1后台用户 2手机端用户）
+		OperateName:     item.OperateName,                      // 操作人员
+		DeptName:        item.DeptName,                         // 部门名称
+		OperateUrl:      item.OperateURL,                       // 请求URL
+		OperateIp:       item.OperateIP,                        // 主机地址
+		OperateLocation: item.OperateLocation,                  // 操作地点
+		OperateParam:    item.OperateParam,                     // 请求参数
+		JsonResult:      item.JSONResult,                       // 返回参数
+		Platform:        item.Platform,                         // 平台信息
+		Browser:         item.Browser,                          // 浏览器类型
+		Version:         item.Version,                          // 浏览器版本
+		Os:              item.Os,                               // 操作系统
+		Arch:            item.Arch,                             // 体系结构信息
+		Engine:          item.Engine,                           // 渲染引擎信息
+		EngineDetails:   item.EngineDetails,                    // 渲染引擎详细信息
+		Extra:           item.Extra,                            // 其他信息（可选）
+		Status:          item.Status,                           // 操作状态(0:异常,正常)
+		ErrorMsg:        item.ErrorMsg,                         // 错误消息
+		OperateTime:     time_util.TimeToStr(item.OperateTime), // 操作时间
+		CostTime:        item.CostTime,                         // 消耗时间
 	}
 
 	return data, nil

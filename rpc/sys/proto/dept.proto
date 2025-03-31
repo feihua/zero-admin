@@ -4,27 +4,25 @@ package main;
 
 option go_package = "./proto";
 
-// 添加部门信息表
+// 添加部门
 message AddDeptReq {
-  int64 id = 1; //编号
-  string dept_name = 2; //部门名称
-  int32 dept_status = 3; //部门状态
-  int32 dept_sort = 4; //部门排序
-  int64 parent_id = 5; //上级机构ID，一级机构为0
-  string leader = 6; //负责人
-  string phone = 7; //电话号码
-  string email = 8; //邮箱
+  int64 id = 1; //部门id
+  int64 parent_id = 2; //上级部门id
+  string dept_name = 3; //部门名称
+  int32 sort = 4; //显示顺序
+  string leader = 5; //负责人
+  string phone = 6; //联系电话
+  string email = 7; //邮箱
+  int32 status = 8; //部门状态（0：停用，1:正常）
   string remark = 9; //备注信息
-  repeated int64 parent_ids = 10; //上级机构IDs，一级机构为0
-  string create_by = 11; //创建者
-
+  string create_by = 10; //创建者
 }
 
 message AddDeptResp {
   string pong = 1;
 }
 
-// 删除部门信息表
+// 删除部门
 message DeleteDeptReq {
   int64 id = 1;
 }
@@ -33,55 +31,52 @@ message DeleteDeptResp {
   string pong = 1;
 }
 
-// 更新部门信息表
+// 更新部门
 message UpdateDeptReq {
-  int64 id = 1; //编号
-  string dept_name = 2; //部门名称
-  int32 dept_status = 3; //部门状态
-  int32 dept_sort = 4; //部门排序
-  int64 parent_id = 5; //上级机构ID，一级机构为0
-  string leader = 6; //负责人
-  string phone = 7; //电话号码
-  string email = 8; //邮箱
+  int64 id = 1; //部门id
+  int64 parent_id = 2; //上级部门id
+  string dept_name = 3; //部门名称
+  int32 sort = 4; //显示顺序
+  string leader = 5; //负责人
+  string phone = 6; //联系电话
+  string email = 7; //邮箱
+  int32 status = 8; //部门状态（0：停用，1:正常）
   string remark = 9; //备注信息
-  repeated int64 parent_ids = 10; //上级机构IDs，一级机构为0
-  string update_by = 11; //更新者
-
+  string update_by = 10; //更新者
 }
 
 message UpdateDeptResp {
   string pong = 1;
 }
 
-// 更新部门信息表状态
+// 更新部门状态
 message UpdateDeptStatusReq {
-  int32 dept_status = 1; //部门状态
-  repeated int64 ids = 2; //编号
-  string update_by = 3; //更新者
-
+  int64 id = 1; //部门id
+  int32 status = 9; //部门状态（0：停用，1:正常）
+  string update_by = 14; //更新者
 }
 
 message UpdateDeptStatusResp {
   string pong = 1;
 }
 
-// 查询部门信息表详情
+// 查询部门详情
 message QueryDeptDetailReq {
   int64 id = 1;
 }
 
 message QueryDeptDetailResp {
-  int64 id = 1; //编号
-  string dept_name = 2; //部门名称
-  int32 dept_status = 3; //部门状态
-  int32 dept_sort = 4; //部门排序
-  int64 parent_id = 5; //上级机构ID，一级机构为0
+  int64 id = 1; //部门id
+  int64 parent_id = 2; //上级部门id
+  string ancestors = 3; //祖级列表
+  string dept_name = 4; //部门名称
+  int32 sort = 5; //显示顺序
   string leader = 6; //负责人
-  string phone = 7; //电话号码
+  string phone = 7; //联系电话
   string email = 8; //邮箱
-  string remark = 9; //备注信息
-  int32 is_deleted = 10; //是否删除  0：否  1：是
-  repeated int64 parent_ids = 11; //上级机构IDs，一级机构为0
+  int32 status = 9; //部门状态（0：停用，1:正常）
+  int32 del_flag = 10; //删除标志（0代表删除 1代表存在）
+  string remark = 11; //备注信息
   string create_by = 12; //创建者
   string create_time = 13; //创建时间
   string update_by = 14; //更新者
@@ -89,23 +84,23 @@ message QueryDeptDetailResp {
 
 }
 
-// 分页查询部门信息表列表
+// 分页查询部门列表
 message QueryDeptListReq {
 
 }
 
 message DeptListData {
-  int64 id = 1; //编号
-  string dept_name = 2; //部门名称
-  int32 dept_status = 3; //部门状态
-  int32 dept_sort = 4; //部门排序
-  int64 parent_id = 5; //上级机构ID，一级机构为0
+  int64 id = 1; //部门id
+  int64 parent_id = 2; //上级部门id
+  string ancestors = 3; //祖级列表
+  string dept_name = 4; //部门名称
+  int32 sort = 5; //显示顺序
   string leader = 6; //负责人
-  string phone = 7; //电话号码
+  string phone = 7; //联系电话
   string email = 8; //邮箱
-  string remark = 9; //备注信息
-  int32 is_deleted = 10; //是否删除  0：否  1：是
-  repeated int64 parent_ids = 11; //上级机构IDs，一级机构为0
+  int32 status = 9; //部门状态（0：停用，1:正常）
+  int32 del_flag = 10; //删除标志（0代表删除 1代表存在）
+  string remark = 11; //备注信息
   string create_by = 12; //创建者
   string create_time = 13; //创建时间
   string update_by = 14; //更新者
@@ -114,23 +109,22 @@ message DeptListData {
 }
 
 message QueryDeptListResp {
-  int64 total = 1;
   repeated  DeptListData list = 2;
 }
 
-// 部门信息表
+// 部门服务
 service DeptService {
-  // 添加部门信息表
+  // 添加部门
   rpc AddDept(AddDeptReq) returns (AddDeptResp){}
-  // 删除部门信息表
+  // 删除部门
   rpc DeleteDept(DeleteDeptReq) returns (DeleteDeptResp){}
-  // 更新部门信息表
+  // 更新部门
   rpc UpdateDept(UpdateDeptReq) returns (UpdateDeptResp ){}
-  // 更新部门信息表状态
+  // 更新部门状态
   rpc UpdateDeptStatus(UpdateDeptStatusReq) returns (UpdateDeptStatusResp ){}
-  // 查询部门信息表详情
+  // 查询部门详情
   rpc QueryDeptDetail(QueryDeptDetailReq) returns (QueryDeptDetailResp){}
-  // 查询部门信息表列表
+  // 查询部门列表
   rpc QueryDeptList(QueryDeptListReq) returns (QueryDeptListResp){}
 
 

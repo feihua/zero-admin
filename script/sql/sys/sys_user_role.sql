@@ -6,4 +6,4 @@ create table sys_user_role
     role_id bigint not null comment '角色Id'
 ) comment '用户角色关联表';
 
-INSERT INTO sys_user_role (id, user_id, role_id) VALUES (1, 1, 1);
+INSERT INTO sys_user_role (user_id, role_id) VALUES (1, 1);

@@ -97,8 +97,8 @@ func (l *UpdateDictItemLogic) UpdateDictItem(in *sysclient.UpdateDictItemReq) (*
 	}
 
 	// 5.如果更新字典数据是默认,则修改其他选项为非默认状态
-	if in.IsDefault == 1 {
-		_, err = q.WithContext(l.ctx).Where(q.ID.Neq(in.Id)).Where(q.DictType.Eq(dictType)).Where(q.IsDefault.Eq(1)).Update(q.IsDefault, 0)
+	if in.IsDefault == "Y" {
+		_, err = q.WithContext(l.ctx).Where(q.ID.Neq(in.Id)).Where(q.DictType.Eq(dictType)).Where(q.IsDefault.Eq("Y")).Update(q.IsDefault, "N")
 		if err != nil {
 			logc.Errorf(l.ctx, "修改字典数据默认状态失败,参数:%+v,异常:%s", in, err.Error())
 			return nil, errors.New("更新字典数据失败")
@@ -107,14 +107,16 @@ func (l *UpdateDictItemLogic) UpdateDictItem(in *sysclient.UpdateDictItemReq) (*
 
 	now := time.Now()
 	data := &model.SysDictItem{
-		ID:         in.Id,               // 编号
-		DictType:   dictType,            // 字典类型
+		ID:         in.Id,               // 字典数据id
+		DictSort:   in.DictSort,         // 字典排序
 		DictLabel:  in.DictLabel,        // 字典标签
 		DictValue:  in.DictValue,        // 字典键值
-		DictStatus: in.DictStatus,       // 字典状态
-		DictSort:   in.DictSort,         // 排序
-		Remark:     in.Remark,           // 备注信息
-		IsDefault:  in.IsDefault,        // 是否默认  0：否  1：是
+		DictType:   in.DictType,         // 字典类型
+		CSSClass:   in.CssClass,         // 样式属性（其他样式扩展）
+		ListClass:  in.ListClass,        // 表格回显样式
+		IsDefault:  in.IsDefault,        // 是否默认（Y是 N否）
+		Status:     in.Status,           // 状态（0：停用，1:正常）
+		Remark:     in.Remark,           // 备注
 		CreateBy:   dictItem.CreateBy,   // 创建者
 		CreateTime: dictItem.CreateTime, // 创建时间
 		UpdateBy:   in.UpdateBy,         // 更新者

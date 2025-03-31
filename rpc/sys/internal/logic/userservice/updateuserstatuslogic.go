@@ -55,7 +55,7 @@ func (l *UpdateUserStatusLogic) UpdateUserStatus(in *sysclient.UpdateUserStatusR
 
 	// 2.更新用户状态
 	q := query.SysUser
-	_, err := q.WithContext(l.ctx).Where(q.ID.In(ids...)).Update(q.UserStatus, in.UserStatus)
+	_, err := q.WithContext(l.ctx).Where(q.ID.In(ids...)).Update(q.Status, in.Status)
 
 	if err != nil {
 		logc.Errorf(l.ctx, "更新用户状态异常,参数:%+v,异常:%s", in, err.Error())

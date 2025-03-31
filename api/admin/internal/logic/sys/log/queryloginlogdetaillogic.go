@@ -45,14 +45,21 @@ func (l *QueryLoginLogDetailLogic) QueryLoginLogDetail(req *types.QueryLoginLogD
 	}
 
 	log := types.QueryLoginLogDetailData{
-		Id:          detail.Id,          // 编号
-		UserName:    detail.UserName,    // 用户名
-		LoginStatus: detail.LoginStatus, // 登录状态
-		IpAddress:   detail.IpAddress,   // IP地址
-		Browser:     detail.Browser,     // 浏览器
-		Os:          detail.Os,          // 操作系统
-		ErrorMsg:    detail.ErrorMsg,    // 登录失败信息
-		LoginTime:   detail.LoginTime,   // 登录时间
+		Id:            detail.Id,            // 登录日志id
+		LoginName:     detail.LoginName,     // 登录账号
+		Ipaddr:        detail.Ipaddr,        // 登录IP地址
+		LoginLocation: detail.LoginLocation, // 登录地点
+		Platform:      detail.Platform,      // 平台信息
+		Browser:       detail.Browser,       // 浏览器类型
+		Version:       detail.Version,       // 浏览器版本
+		Os:            detail.Os,            // 操作系统
+		Arch:          detail.Arch,          // 体系结构信息
+		Engine:        detail.Engine,        // 渲染引擎信息
+		EngineDetails: detail.EngineDetails, // 渲染引擎详细信息
+		Extra:         detail.Extra,         // 其他信息（可选）
+		Status:        detail.Status,        // 登录状态(0:失败,1:成功)
+		Msg:           detail.Msg,           // 提示消息
+		LoginTime:     detail.LoginTime,     // 访问时间
 	}
 
 	return &types.QueryLoginLogDetailResp{

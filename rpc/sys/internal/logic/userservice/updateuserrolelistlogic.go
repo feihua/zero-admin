@@ -13,7 +13,7 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// UpdateUserRoleListLogic 更新用户与角色的关联
+// UpdateUserRoleListLogic 分配用户角色
 /*
 Author: LiuFeiHua
 Date: 2024/5/23 17:38
@@ -32,7 +32,7 @@ func NewUpdateUserRoleListLogic(ctx context.Context, svcCtx *svc.ServiceContext)
 	}
 }
 
-// UpdateUserRoleList 更新用户与角色的关联(角色id为1的是系统预留超级管理员角色,不用关联)
+// UpdateUserRoleList 分配用户角色(角色id为1的是系统预留超级管理员角色,不用关联)
 // 1.判断是否为超级管理员
 // 2.删除用户与角色的关联
 // 3.添加用户与角色的关联
@@ -57,7 +57,7 @@ func (l *UpdateUserRoleListLogic) UpdateUserRoleList(in *sysclient.UpdateUserRol
 		userId := in.UserId
 
 		// 2.删除用户与角色的关联
-		if _, err = q.WithContext(l.ctx).Where(q.RoleID.Eq(userId)).Delete(); err != nil {
+		if _, err = q.WithContext(l.ctx).Where(q.UserID.Eq(userId)).Delete(); err != nil {
 			logc.Errorf(l.ctx, "删除用户与角色的关联失败,参数:%+v,异常:%s", in, err.Error())
 			return err
 		}
@@ -81,7 +81,7 @@ func (l *UpdateUserRoleListLogic) UpdateUserRoleList(in *sysclient.UpdateUserRol
 
 	if err != nil {
 		logc.Errorf(l.ctx, "更新用户与角色的关联失败,参数:%+v,异常:%s", in, err.Error())
-		return nil, errors.New("更新用户与角色的关联失败")
+		return nil, errors.New("分配用户角色失败")
 	}
 
 	return &sysclient.UpdateUserRoleListResp{}, nil

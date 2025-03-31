@@ -58,25 +58,27 @@ func (l *QueryUserDetailLogic) QueryUserDetail(in *sysclient.QueryUserDetailReq)
 	}
 
 	data := &sysclient.QueryUserDetailResp{
-		Id:           item.ID,                                 // 编号
-		UserName:     item.UserName,                           // 用户名
-		NickName:     item.NickName,                           // 昵称
-		Avatar:       item.Avatar,                             // 头像
-		Email:        item.Email,                              // 邮箱
-		Mobile:       item.Mobile,                             // 手机号
-		UserStatus:   item.UserStatus,                         // 帐号状态（0正常 1停用）
-		DeptId:       item.DeptID,                             // 部门id
-		Remark:       item.Remark,                             // 备注
-		IsDeleted:    item.IsDeleted,                          // 是否删除  0：否  1：是
-		LoginTime:    time_util.TimeToString(item.LoginTime),  // 登录时间
-		LoginIp:      item.LoginIP,                            // 登录ip
-		LoginOs:      item.LoginOs,                            // 登录os
-		LoginBrowser: item.LoginBrowser,                       // 登录浏览器
-		CreateBy:     item.CreateBy,                           // 创建者
-		CreateTime:   time_util.TimeToStr(item.CreateTime),    // 创建时间
-		UpdateBy:     item.UpdateBy,                           // 更新者
-		UpdateTime:   time_util.TimeToString(item.UpdateTime), // 更新时间
-		PostIds:      postIds,                                 // 岗位id
+		Id:            item.ID,                                    // 用户id
+		Mobile:        item.Mobile,                                // 手机号码
+		UserName:      item.UserName,                              // 用户账号
+		NickName:      item.NickName,                              // 用户昵称
+		UserType:      item.UserType,                              // 用户类型（00系统用户）
+		Avatar:        item.Avatar,                                // 头像路径
+		Email:         item.Email,                                 // 用户邮箱
+		Status:        item.Status,                                // 状态(1:正常，0:禁用)
+		DeptId:        item.DeptID,                                // 部门ID
+		LoginIp:       item.LoginIP,                               // 最后登录IP
+		LoginDate:     time_util.TimeToString(item.LoginDate),     // 最后登录时间
+		LoginBrowser:  item.LoginBrowser,                          // 浏览器类型
+		LoginOs:       item.LoginOs,                               // 操作系统
+		PwdUpdateDate: time_util.TimeToString(item.PwdUpdateDate), // 密码最后更新时间
+		Remark:        item.Remark,                                // 备注
+		DelFlag:       item.DelFlag,                               // 删除标志（0代表删除 1代表存在）
+		CreateBy:      item.CreateBy,                              // 创建者
+		CreateTime:    time_util.TimeToStr(item.CreateTime),       // 创建时间
+		UpdateBy:      item.UpdateBy,                              // 更新者
+		UpdateTime:    time_util.TimeToString(item.UpdateTime),    // 更新时间
+		PostIds:       postIds,                                    // 岗位id
 	}
 
 	return data, nil

@@ -46,12 +46,11 @@ func (l *QueryPostDetailLogic) QueryPostDetail(req *types.QueryPostDetailReq) (r
 
 	post := types.QueryPostDetailData{
 		Id:         detail.Id,         // 岗位id
-		PostName:   detail.PostName,   // 岗位名称
 		PostCode:   detail.PostCode,   // 岗位编码
-		PostStatus: detail.PostStatus, // 岗位状态
-		PostSort:   detail.PostSort,   // 岗位排序
-		Remark:     detail.Remark,     // 备注信息
-		IsDeleted:  detail.IsDeleted,  // 是否删除  0：否  1：是
+		PostName:   detail.PostName,   // 岗位名称
+		Sort:       detail.Sort,       // 显示顺序
+		Status:     detail.Status,     // 岗位状态（0：停用，1:正常）
+		Remark:     detail.Remark,     // 备注
 		CreateBy:   detail.CreateBy,   // 创建者
 		CreateTime: detail.CreateTime, // 创建时间
 		UpdateBy:   detail.UpdateBy,   // 更新者

@@ -4,31 +4,40 @@ package main;
 
 option go_package = "./proto";
 
-// 添加系统操作日志表
+// 添加系统操作日志
 message AddOperateLogReq {
-  int64 id = 1; //编号
-  string title = 2; //系统模块
-  string operation_type = 3; //操作类型
-  string operation_name = 4; //操作人员
+  int64 id = 1; //操作日志id
+  string title = 2; //模块标题
+  int32 business_type = 3; //业务类型（0其它 1新增 2修改 3删除）
+  string method = 4; //方法名称
   string request_method = 5; //请求方式
-  string operation_url = 6; //操作方法
-  string operation_params = 7; //请求参数
-  string operation_response = 8; //响应参数
-  int32 operation_status = 9; //操作状态
-  string dept_name = 10; //部门名称
-  int64 use_time = 11; //执行时长(毫秒)
-  string browser = 12; //浏览器
-  string os = 13; //操作信息
-  string operation_ip = 14; //操作地址
-  string operation_time = 15; //操作时间
-
+  int32 operator_type = 6; //操作类别（0其它 1后台用户 2手机端用户）
+  string operate_name = 7; //操作人员
+  string dept_name = 8; //部门名称
+  string operate_url = 9; //请求URL
+  string operate_ip = 10; //主机地址
+  string operate_location = 11; //操作地点
+  string operate_param = 12; //请求参数
+  string json_result = 13; //返回参数
+  string platform = 14; //平台信息
+  string browser = 15; //浏览器类型
+  string version = 16; //浏览器版本
+  string os = 17; //操作系统
+  string arch = 18; //体系结构信息
+  string engine = 19; //渲染引擎信息
+  string engine_details = 20; //渲染引擎详细信息
+  string extra = 21; //其他信息（可选）
+  int32 status = 22; // 操作状态(0:异常,正常)
+  string error_msg = 23; // 错误消息
+  string operate_time = 24; // 操作时间
+  int64 cost_time = 25; // 消耗时间
 }
 
 message AddOperateLogResp {
   string pong = 1;
 }
 
-// 删除系统操作日志表
+// 删除系统操作日志
 message DeleteOperateLogReq {
   repeated int64 ids = 1;
 }
@@ -37,62 +46,93 @@ message DeleteOperateLogResp {
   string pong = 1;
 }
 
-// 查询系统操作日志表详情
+// 查询系统操作日志详情
 message QueryOperateLogDetailReq {
   int64 id = 1;
 }
 
 message QueryOperateLogDetailResp {
-  int64 id = 1; //编号
-  string title = 2; //系统模块
-  string operation_type = 3; //操作类型
-  string operation_name = 4; //操作人员
+  int64 id = 1; //操作日志id
+  string title = 2; //模块标题
+  int32 business_type = 3; //业务类型（0其它 1新增 2修改 3删除）
+  string method = 4; //方法名称
   string request_method = 5; //请求方式
-  string operation_url = 6; //操作方法
-  string operation_params = 7; //请求参数
-  string operation_response = 8; //响应参数
-  int32 operation_status = 9; //操作状态
-  string dept_name = 10; //部门名称
-  int64 use_time = 11; //执行时长(毫秒)
-  string browser = 12; //浏览器
-  string os = 13; //操作信息
-  string operation_ip = 14; //操作地址
-  string operation_time = 15; //操作时间
+  int32 operator_type = 6; //操作类别（0其它 1后台用户 2手机端用户）
+  string operate_name = 7; //操作人员
+  string dept_name = 8; //部门名称
+  string operate_url = 9; //请求URL
+  string operate_ip = 10; //主机地址
+  string operate_location = 11; //操作地点
+  string operate_param = 12; //请求参数
+  string json_result = 13; //返回参数
+  string platform = 14; //平台信息
+  string browser = 15; //浏览器类型
+  string version = 16; //浏览器版本
+  string os = 17; //操作系统
+  string arch = 18; //体系结构信息
+  string engine = 19; //渲染引擎信息
+  string engine_details = 20; //渲染引擎详细信息
+  string extra = 21; //其他信息（可选）
+  int32 status = 22; // 操作状态(0:异常,正常)
+  string error_msg = 23; // 错误消息
+  string operate_time = 24; // 操作时间
+  int64 cost_time = 25; // 消耗时间
 
 }
 
-// 分页查询系统操作日志表列表
+// 分页查询系统操作日志列表
 message QueryOperateLogListReq {
-  int64 page_num = 1; //第几页
-  int64 page_size = 2; //每页的数量
-  string operation_ip = 3; //操作地址
-  string operation_name = 4; //操作人员
-  string dept_name = 5; //部门名称
-  int32 operation_status = 6; //操作状态
-  string operation_type = 7; //操作类型
-  string operation_url = 8; //操作方法
-  string title = 10; //系统模块
-  string os = 11; //操作系统信息
-  string browser = 12; //浏览器
-  string request_method = 13; //请求方式
+  string title = 1; //模块标题
+  int32 business_type = 2; //业务类型（0其它 1新增 2修改 3删除）
+  string method = 3; //方法名称
+  string request_method = 4; //请求方式
+  int32 operator_type = 5; //操作类别（0其它 1后台用户 2手机端用户）
+  string operate_name = 6; //操作人员
+  string dept_name = 7; //部门名称
+  string operate_url = 8; //请求URL
+  string operate_ip = 9; //主机地址
+  string operate_location = 10; //操作地点
+  string platform = 13; //平台信息
+  string browser = 14; //浏览器类型
+  string version = 15; //浏览器版本
+  string os = 16; //操作系统
+  string arch = 17; //体系结构信息
+  string engine = 18; //渲染引擎信息
+  string engine_details = 19; //渲染引擎详细信息
+  string extra = 20; //其他信息（可选）
+  int32 status = 21; // 操作状态(0:异常,正常)
+  string operate_time = 23; // 操作时间
+  int64 page_num = 25; //第几页
+  int64 page_size = 26; //每页的数量
 }
 
 message OperateLogListData {
-  int64 id = 1; //编号
-  string title = 2; //系统模块
-  string operation_type = 3; //操作类型
-  string operation_name = 4; //操作人员
+  int64 id = 1; //操作日志id
+  string title = 2; //模块标题
+  int32 business_type = 3; //业务类型（0其它 1新增 2修改 3删除）
+  string method = 4; //方法名称
   string request_method = 5; //请求方式
-  string operation_url = 6; //操作方法
-  string operation_params = 7; //请求参数
-  string operation_response = 8; //响应参数
-  int32 operation_status = 9; //操作状态
-  string dept_name = 10; //部门名称
-  int64 use_time = 11; //执行时长(毫秒)
-  string browser = 12; //浏览器
-  string os = 13; //操作信息
-  string operation_ip = 14; //操作地址
-  string operation_time = 15; //操作时间
+  int32 operator_type = 6; //操作类别（0其它 1后台用户 2手机端用户）
+  string operate_name = 7; //操作人员
+  string dept_name = 8; //部门名称
+  string operate_url = 9; //请求URL
+  string operate_ip = 10; //主机地址
+  string operate_location = 11; //操作地点
+  string operate_param = 12; //请求参数
+  string json_result = 13; //返回参数
+  string platform = 14; //平台信息
+  string browser = 15; //浏览器类型
+  string version = 16; //浏览器版本
+  string os = 17; //操作系统
+  string arch = 18; //体系结构信息
+  string engine = 19; //渲染引擎信息
+  string engine_details = 20; //渲染引擎详细信息
+  string extra = 21; //其他信息（可选）
+  int32 status = 22; // 操作状态(0:异常,正常)
+  string error_msg = 23; // 错误消息
+  string operate_time = 24; // 操作时间
+  int64 cost_time = 25; // 消耗时间
+
 }
 
 message QueryOperateLogListResp {
@@ -100,17 +140,16 @@ message QueryOperateLogListResp {
   repeated  OperateLogListData list = 2;
 }
 
-// 系统操作日志表
+// 系统操作日志
 service OperateLogService {
-  // 添加系统操作日志表
+  // 添加系统操作日志
   rpc AddOperateLog(AddOperateLogReq) returns (AddOperateLogResp){}
-  // 删除系统操作日志表
+  // 删除系统操作日志
   rpc DeleteOperateLog(DeleteOperateLogReq) returns (DeleteOperateLogResp){}
-  // 查询系统操作日志表详情
+  // 查询系统操作日志详情
   rpc QueryOperateLogDetail(QueryOperateLogDetailReq) returns (QueryOperateLogDetailResp){}
-  // 查询系统操作日志表列表
+  // 查询系统操作日志列表
   rpc QueryOperateLogList(QueryOperateLogListReq) returns (QueryOperateLogListResp){}
 
 
 }
-

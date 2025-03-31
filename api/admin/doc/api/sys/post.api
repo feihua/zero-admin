@@ -1,23 +1,23 @@
 info (
-	desc:   "岗位管理"
-	author: "liufeihua"
+	desc:   "岗位信息"
+	author: "LiuFeiHua"
 	email:  "1002219331@qq.com"
 )
 
 type (
-	// 添加岗位管理
+	// 添加岗位信息请求参数
 	AddPostReq {
-		PostName   string `json:"postName"` //岗位名称
-		PostCode   string `json:"postCode"` //岗位编码
-		PostStatus int32  `json:"postStatus"` //岗位状态
-		PostSort   int32  `json:"postSort"` //岗位排序
-		Remark     string `json:"remark,optional"` //备注信息
+		PostCode string `json:"postCode"` //岗位编码
+		PostName string `json:"postName"` //岗位名称
+		Sort     int32  `json:"sort"` //显示顺序
+		Status   int32  `json:"status"` //岗位状态（0：停用，1:正常）
+		Remark   string `json:"remark,optional"` //备注
 	}
 	AddPostResp {
 		Code    string `json:"code"`
 		Message string `json:"message"`
 	}
-	// 删除岗位管理
+	// 删除岗位信息请求参数
 	DeletePostReq {
 		Ids []int64 `form:"ids"`
 	}
@@ -25,40 +25,39 @@ type (
 		Code    string `json:"code"`
 		Message string `json:"message"`
 	}
-	// 更新岗位管理
+	// 更新岗位信息请求参数
 	UpdatePostReq {
-		Id         int64  `json:"id"` //岗位id
-		PostName   string `json:"postName"` //岗位名称
-		PostCode   string `json:"postCode"` //岗位编码
-		PostStatus int32  `json:"postStatus"` //岗位状态
-		PostSort   int32  `json:"postSort"` //岗位排序
-		Remark     string `json:"remark,optional"` //备注信息
+		Id       int64  `json:"id"` //岗位id
+		PostCode string `json:"postCode"` //岗位编码
+		PostName string `json:"postName"` //岗位名称
+		Sort     int32  `json:"sort"` //显示顺序
+		Status   int32  `json:"status"` //岗位状态（0：停用，1:正常）
+		Remark   string `json:"remark,optional"` //备注
 	}
 	UpdatePostResp {
 		Code    string `json:"code"`
 		Message string `json:"message"`
 	}
-	// 批量更新岗位管理状态
+	// 更新岗位信息状态请求参数
 	UpdatePostStatusReq {
-		Ids    []int64 `json:"ids"` //编号
-		Status int32   `json:"status"` //岗位状态
+		Ids    []int64 `json:"ids"` //岗位id
+		Status int32   `json:"status"` //状态
 	}
 	UpdatePostStatusResp {
 		Code    string `json:"code"`
 		Message string `json:"message"`
 	}
-	// 查询岗位管理详情
+	// 查询岗位信息详情请求参数
 	QueryPostDetailReq {
 		Id int64 `form:"id"`
 	}
 	QueryPostDetailData {
 		Id         int64  `json:"id"` //岗位id
-		PostName   string `json:"postName"` //岗位名称
 		PostCode   string `json:"postCode"` //岗位编码
-		PostStatus int32  `json:"postStatus"` //岗位状态
-		PostSort   int32  `json:"postSort"` //岗位排序
-		Remark     string `json:"remark"` //备注信息
-		IsDeleted  int32  `json:"isDeleted"` //是否删除  0：否  1：是
+		PostName   string `json:"postName"` //岗位名称
+		Sort       int32  `json:"sort"` //显示顺序
+		Status     int32  `json:"status"` //岗位状态（0：停用，1:正常）
+		Remark     string `json:"remark"` //备注
 		CreateBy   string `json:"createBy"` //创建者
 		CreateTime string `json:"createTime"` //创建时间
 		UpdateBy   string `json:"updateBy"` //更新者
@@ -69,22 +68,21 @@ type (
 		Message string              `json:"message"`
 		Data    QueryPostDetailData `json:"data"`
 	}
-	// 分页查询岗位管理列表
+	// 分页查询岗位信息列表请求参数
 	QueryPostListReq {
-		Current    int64  `form:"current,default=1"` //第几页
-		PageSize   int64  `form:"pageSize,default=20"` //每页的数量
-		PostCode   string `form:"postCode,optional"` //岗位编码
-		PostName   string `form:"postName,optional"` //岗位名称
-		PostStatus int32  `form:"postStatus,default=2"` //岗位状态
+		Current  int64  `form:"current,default=1"` //第几页
+		PageSize int64  `form:"pageSize,default=20"` //每页的数量
+		PostCode string `form:"postCode,optional"` //岗位编码
+		PostName string `form:"postName,optional"` //岗位名称
+		Status   int32  `form:"status,default=2"` //岗位状态（0：停用，1:正常）
 	}
 	QueryPostListData {
 		Id         int64  `json:"id"` //岗位id
-		PostName   string `json:"postName"` //岗位名称
 		PostCode   string `json:"postCode"` //岗位编码
-		PostStatus int32  `json:"postStatus"` //岗位状态
-		PostSort   int32  `json:"postSort"` //岗位排序
-		Remark     string `json:"remark"` //备注信息
-		IsDeleted  int32  `json:"isDeleted"` //是否删除  0：否  1：是
+		PostName   string `json:"postName"` //岗位名称
+		Sort       int32  `json:"sort"` //显示顺序
+		Status     int32  `json:"status"` //岗位状态（0：停用，1:正常）
+		Remark     string `json:"remark"` //备注
 		CreateBy   string `json:"createBy"` //创建者
 		CreateTime string `json:"createTime"` //创建时间
 		UpdateBy   string `json:"updateBy"` //更新者
@@ -93,9 +91,9 @@ type (
 	QueryPostListResp {
 		Code     string               `json:"code"`
 		Message  string               `json:"message"`
-		Current  int64                `json:"current"`
+		Current  int64                `json:"current,default=1"`
 		Data     []*QueryPostListData `json:"data"`
-		PageSize int64                `json:"pageSize"`
+		PageSize int64                `json:"pageSize,default=20"`
 		Success  bool                 `json:"success"`
 		Total    int64                `json:"total"`
 	}
@@ -108,27 +106,27 @@ type (
 	prefix:     /api/sys/post
 )
 service admin-api {
-	// 添加岗位管理
+	// 添加岗位信息
 	@handler AddPost
 	post /addPost (AddPostReq) returns (AddPostResp)
 
-	// 删除岗位管理
+	// 删除岗位信息
 	@handler DeletePost
 	get /deletePost (DeletePostReq) returns (DeletePostResp)
 
-	// 更新岗位管理
+	// 更新岗位信息
 	@handler UpdatePost
 	post /updatePost (UpdatePostReq) returns (UpdatePostResp)
 
-	// 批量更新岗位管理状态
+	// 更新岗位信息状态
 	@handler UpdatePostStatus
 	post /updatePostStatus (UpdatePostStatusReq) returns (UpdatePostStatusResp)
 
-	// 查询岗位管理详情
+	// 查询岗位信息详情
 	@handler QueryPostDetail
 	get /queryPostDetail (QueryPostDetailReq) returns (QueryPostDetailResp)
 
-	// 分页查询岗位管理列表
+	// 分页查询岗位信息列表
 	@handler QueryPostList
 	get /queryPostList (QueryPostListReq) returns (QueryPostListResp)
 }

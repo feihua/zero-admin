@@ -37,7 +37,7 @@ func NewUpdateMenuRoleListLogic(ctx context.Context, svcCtx *svc.ServiceContext)
 // 2.判断角色是否存在
 // 3.删除角色与菜单的关联
 // 4.添加角色与菜单的关联
-func (l *UpdateMenuRoleListLogic) UpdateMenuRoleList(in *sysclient.UpdateMenuRoleReq) (*sysclient.UpdateMenuRoleResp, error) {
+func (l *UpdateMenuRoleListLogic) UpdateMenuRoleList(in *sysclient.UpdateRoleMenuReq) (*sysclient.UpdateRoleMenuResp, error) {
 	// 1.不允许操作超级管理员角色
 	if in.RoleId == 1 {
 		return nil, errors.New(fmt.Sprintf("不允许操作超级管理员角色"))
@@ -86,5 +86,5 @@ func (l *UpdateMenuRoleListLogic) UpdateMenuRoleList(in *sysclient.UpdateMenuRol
 		return nil, errors.New("更新角色与菜单的关联失败")
 	}
 
-	return &sysclient.UpdateMenuRoleResp{}, nil
+	return &sysclient.UpdateRoleMenuResp{}, nil
 }

@@ -4,7 +4,7 @@ package main;
 
 option go_package = "./proto";
 
-// 删除系统登录日志表
+// 删除系统登录日志
 message DeleteLoginLogReq {
   repeated int64 ids = 1;
 }
@@ -12,44 +12,62 @@ message DeleteLoginLogReq {
 message DeleteLoginLogResp {
   string pong = 1;
 }
-// 查询系统登录日志表详情
+
+// 查询系统登录日志详情
 message QueryLoginLogDetailReq {
   int64 id = 1;
 }
 
 message QueryLoginLogDetailResp {
-  int64 id = 1; //编号
-  string user_name = 2; //用户名
-  string login_status = 3; //登录状态
-  string ip_address = 4; //IP地址
-  string browser = 5; //浏览器
-  string os = 6; //操作系统
-  string error_msg = 7; //登录失败信息
-  string login_time = 8; //登录时间
+  int64 id = 1; //登录日志id
+  string login_name = 2; //登录账号
+  string ipaddr = 3; //登录IP地址
+  string login_location = 4; //登录地点
+  string platform = 5; //平台信息
+  string browser = 6; //浏览器类型
+  string version = 7; //浏览器版本
+  string os = 8; //操作系统
+  string arch = 9; //体系结构信息
+  string engine = 10; //渲染引擎信息
+  string engine_details = 11; //渲染引擎详细信息
+  string extra = 12; //其他信息（可选）
+  int32 status = 13; //登录状态(0:失败,1:成功)
+  string msg = 14; //提示消息
+  string login_time = 15; //访问时间
 
 }
 
-// 分页查询系统登录日志表列表
+// 分页查询系统登录日志列表
 message QueryLoginLogListReq {
-  int64 page_num = 1; //第几页
-  int64 page_size = 2; //每页的数量
-  string browser = 5; //浏览器
-  string ip_address = 3; //IP地址
-  string login_status = 4; //登录状态
-  string os = 6; //操作系统
-  string user_name = 7; //用户名
-
+  string login_name = 1; //登录账号
+  string ipaddr = 2; //登录IP地址
+  string login_location = 3; //登录地点
+  string platform = 4; //平台信息
+  string browser = 5; //浏览器类型
+  string version = 6; //浏览器版本
+  string os = 7; //操作系统
+  int32 status = 8; //登录状态(0:失败,1:成功)
+  int64 page_num = 9; //第几页
+  int64 page_size = 10; //每页的数量
 }
 
 message LoginLogListData {
-  int64 id = 1; //编号
-  string user_name = 2; //用户名
-  string login_status = 3; //登录状态
-  string ip_address = 4; //IP地址
-  string browser = 5; //浏览器
-  string os = 6; //操作系统
-  string error_msg = 7; //登录失败信息
-  string login_time = 8; //登录时间
+  int64 id = 1; //登录日志id
+  string login_name = 2; //登录账号
+  string ipaddr = 3; //登录IP地址
+  string login_location = 4; //登录地点
+  string platform = 5; //平台信息
+  string browser = 6; //浏览器类型
+  string version = 7; //浏览器版本
+  string os = 8; //操作系统
+  string arch = 9; //体系结构信息
+  string engine = 10; //渲染引擎信息
+  string engine_details = 11; //渲染引擎详细信息
+  string extra = 12; //其他信息（可选）
+  int32 status = 13; //登录状态(0:失败,1:成功)
+  string msg = 14; //提示消息
+  string login_time = 15; //访问时间
+
 }
 
 message QueryLoginLogListResp {
@@ -57,13 +75,14 @@ message QueryLoginLogListResp {
   repeated  LoginLogListData list = 2;
 }
 
-// 系统登录日志表
+// 系统登录日志
 service LoginLogService {
-  // 删除系统登录日志表
+
+  // 删除系统登录日志
   rpc DeleteLoginLog(DeleteLoginLogReq) returns (DeleteLoginLogResp){}
-  // 查询系统登录日志表详情
+  // 查询系统登录日志详情
   rpc QueryLoginLogDetail(QueryLoginLogDetailReq) returns (QueryLoginLogDetailResp){}
-  // 查询系统登录日志表列表
+  // 查询系统登录日志列表
   rpc QueryLoginLogList(QueryLoginLogListReq) returns (QueryLoginLogListResp){}
 
 

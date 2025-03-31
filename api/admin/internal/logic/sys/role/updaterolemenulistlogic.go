@@ -34,7 +34,7 @@ func NewUpdateRoleMenuListLogic(ctx context.Context, svcCtx *svc.ServiceContext)
 
 // UpdateRoleMenuList 更新角色与菜单的关联
 func (l *UpdateRoleMenuListLogic) UpdateRoleMenuList(req *types.UpdateRoleMenuListReq) (resp *types.UpdateRoleMenuListResp, err error) {
-	_, err = l.svcCtx.RoleService.UpdateMenuRoleList(l.ctx, &sysclient.UpdateMenuRoleReq{
+	_, err = l.svcCtx.RoleService.UpdateMenuRoleList(l.ctx, &sysclient.UpdateRoleMenuReq{
 		RoleId:  req.RoleId,  // 角色id
 		MenuIds: req.MenuIds, // 菜单id
 	})

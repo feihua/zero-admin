@@ -67,12 +67,12 @@ func (l *AddPostLogic) AddPost(in *sysclient.AddPostReq) (*sysclient.AddPostResp
 
 	// 3.岗位不存在时,则直接添加岗位
 	job := &model.SysPost{
-		PostName:   in.PostName,   // 岗位名称
-		PostCode:   in.PostCode,   // 岗位编码
-		PostStatus: in.PostStatus, // 岗位状态
-		PostSort:   in.PostSort,   // 岗位排序
-		Remark:     in.Remark,     // 备注信息
-		CreateBy:   in.CreateBy,   // 创建者
+		PostCode: in.PostCode, // 岗位编码
+		PostName: in.PostName, // 岗位名称
+		Sort:     in.Sort,     // 显示顺序
+		Status:   in.Status,   // 岗位状态（0：停用，1:正常）
+		Remark:   in.Remark,   // 备注
+		CreateBy: in.CreateBy, // 创建者
 	}
 
 	err = q.Create(job)

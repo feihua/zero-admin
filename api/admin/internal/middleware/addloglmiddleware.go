@@ -80,20 +80,33 @@ func (m *AddLogMiddleware) Handle(next http.HandlerFunc) http.HandlerFunc {
 		os := ua.Os.Family + " " + ua.Os.Major
 		// 打印请求和响应耗时
 		duration := time.Since(startTime)
-		_, _ = m.Sys.AddOperateLog(r.Context(), &sysclient.AddOperateLogReq{
-			DeptName:          deptName,
-			OperationIp:       httpx.GetRemoteAddr(r),
-			OperationName:     userName,
-			OperationParams:   string(body),
-			OperationResponse: responseBoy,
-			UseTime:           duration.Milliseconds(),
-			OperationType:     "",
-			OperationUrl:      uri,
-			RequestMethod:     r.Method,
-			Title:             "",
-			Os:                os,
-			Browser:           browser,
-		})
+		opLog := &sysclient.AddOperateLogReq{
+			Title:           "",
+			BusinessType:    0,
+			Method:          r.Method,
+			RequestMethod:   r.Method,
+			OperatorType:    0,
+			OperateName:     userName,
+			DeptName:        deptName,
+			OperateUrl:      uri,
+			OperateIp:       httpx.GetRemoteAddr(r),
+			OperateLocation: "",
+			OperateParam:    string(body),
+			JsonResult:      responseBoy,
+			Platform:        "",
+			Browser:         browser,
+			Version:         "",
+			Os:              os,
+			Arch:            "",
+			Engine:          "",
+			EngineDetails:   "",
+			Extra:           "",
+			Status:          0,
+			ErrorMsg:        "",
+			OperateTime:     "",
+			CostTime:        duration.Milliseconds(),
+		}
+		_, _ = m.Sys.AddOperateLog(r.Context(), opLog)
 	}
 }
 

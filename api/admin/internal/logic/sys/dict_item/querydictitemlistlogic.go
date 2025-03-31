@@ -36,11 +36,11 @@ func NewQueryDictItemListLogic(ctx context.Context, svcCtx *svc.ServiceContext) 
 // QueryDictItemList 查询字典数据列表
 func (l *QueryDictItemListLogic) QueryDictItemList(req *types.QueryDictItemListReq) (resp *types.QueryDictItemListResp, err error) {
 	result, err := l.svcCtx.DictItemService.QueryDictItemList(l.ctx, &sysclient.QueryDictItemListReq{
-		PageNum:    req.Current,
-		PageSize:   req.PageSize,
-		DictLabel:  strings.TrimSpace(req.DictLabel),
-		DictStatus: req.DictStatus,
-		DictType:   req.DictType,
+		PageNum:   req.Current,
+		PageSize:  req.PageSize,
+		DictLabel: strings.TrimSpace(req.DictLabel), // 字典标签
+		DictType:  req.DictType,                     // 字典类型
+		Status:    req.Status,                       // 状态（0：停用，1:正常）
 	})
 
 	if err != nil {
@@ -51,21 +51,22 @@ func (l *QueryDictItemListLogic) QueryDictItemList(req *types.QueryDictItemListR
 
 	var list []*types.QueryDictItemListData
 
-	for _, dict := range result.List {
+	for _, detail := range result.List {
 		list = append(list, &types.QueryDictItemListData{
-			Id:         dict.Id,         // 编号
-			DictType:   dict.DictType,   // 字典类型
-			DictLabel:  dict.DictLabel,  // 字典标签
-			DictValue:  dict.DictValue,  // 字典键值
-			DictStatus: dict.DictStatus, // 字典状态
-			DictSort:   dict.DictSort,   // 排序
-			Remark:     dict.Remark,     // 备注信息
-			IsDefault:  dict.IsDefault,  // 是否默认  0：否  1：是
-			IsDeleted:  dict.IsDeleted,  // 是否删除  0：否  1：是
-			CreateBy:   dict.CreateBy,   // 创建者
-			CreateTime: dict.CreateTime, // 创建时间
-			UpdateBy:   dict.UpdateBy,   // 更新者
-			UpdateTime: dict.UpdateTime, // 更新时间
+			Id:         detail.Id,         // 字典数据id
+			DictSort:   detail.DictSort,   // 字典排序
+			DictLabel:  detail.DictLabel,  // 字典标签
+			DictValue:  detail.DictValue,  // 字典键值
+			DictType:   detail.DictType,   // 字典类型
+			CssClass:   detail.CssClass,   // 样式属性（其他样式扩展）
+			ListClass:  detail.ListClass,  // 表格回显样式
+			IsDefault:  detail.IsDefault,  // 是否默认（Y是 N否）
+			Status:     detail.Status,     // 状态（0：停用，1:正常）
+			Remark:     detail.Remark,     // 备注
+			CreateBy:   detail.CreateBy,   // 创建者
+			CreateTime: detail.CreateTime, // 创建时间
+			UpdateBy:   detail.UpdateBy,   // 更新者
+			UpdateTime: detail.UpdateTime, // 更新时间
 		})
 	}
 

@@ -1,11 +1,11 @@
 info (
 	desc:   "系统登录日志"
-	author: "liufeihua"
+	author: "LiuFeiHua"
 	email:  "1002219331@qq.com"
 )
 
 type (
-	// 删除系统登录日志
+	// 删除系统登录日志请求参数
 	DeleteLoginLogReq {
 		Ids []int64 `form:"ids"`
 	}
@@ -13,44 +13,60 @@ type (
 		Code    string `json:"code"`
 		Message string `json:"message"`
 	}
-	// 查询系统登录日志详情
+	// 查询系统登录日志详情请求参数
 	QueryLoginLogDetailReq {
 		Id int64 `form:"id"`
 	}
 	QueryLoginLogDetailData {
-		Id          int64  `json:"id"` //编号
-		UserName    string `json:"userName"` //用户名
-		LoginStatus string `json:"loginStatus"` //登录状态
-		IpAddress   string `json:"ipAddress"` //IP地址
-		Browser     string `json:"browser"` //浏览器
-		Os          string `json:"os"` //操作系统
-		ErrorMsg    string `json:"errorMsg"` //登录失败信息
-		LoginTime   string `json:"loginTime"` //登录时间
+		Id            int64  `json:"id"` //登录日志id
+		LoginName     string `json:"loginName"` //登录账号
+		Ipaddr        string `json:"ipaddr"` //登录IP地址
+		LoginLocation string `json:"loginLocation"` //登录地点
+		Platform      string `json:"platform"` //平台信息
+		Browser       string `json:"browser"` //浏览器类型
+		Version       string `json:"version"` //浏览器版本
+		Os            string `json:"os"` //操作系统
+		Arch          string `json:"arch"` //体系结构信息
+		Engine        string `json:"engine"` //渲染引擎信息
+		EngineDetails string `json:"engineDetails"` //渲染引擎详细信息
+		Extra         string `json:"extra"` //其他信息（可选）
+		Status        int32  `json:"status"` //登录状态(0:失败,1:成功)
+		Msg           string `json:"msg"` //提示消息
+		LoginTime     string `json:"loginTime"` //访问时间
 	}
 	QueryLoginLogDetailResp {
 		Code    string                  `json:"code"`
 		Message string                  `json:"message"`
 		Data    QueryLoginLogDetailData `json:"data"`
 	}
-	// 分页查询系统登录日志列
+	// 分页查询系统登录日志列表请求参数
 	QueryLoginLogListReq {
-		Current     int64  `form:"current,default=1"` //第几页
-		PageSize    int64  `form:"pageSize,default=20"` //每页的数量
-		Browser     string `form:"browser,optional"` //浏览器
-		IpAddress   string `form:"ipAddress,optional"` //IP地址
-		LoginStatus string `form:"loginStatus,optional"` //登录状态
-		Os          string `form:"os,optional"` //操作系统
-		UserName    string `form:"userName,optional"` //用户名
+		Current       int64  `form:"current,default=1"` //第几页
+		PageSize      int64  `form:"pageSize,default=20"` //每页的数量
+		LoginName     string `json:"loginName,optional"` //登录账号
+		Ipaddr        string `json:"ipaddr,optional"` //登录IP地址
+		LoginLocation string `json:"loginLocation,optional"` //登录地点
+		Platform      string `json:"platform,optional"` //平台信息
+		Browser       string `json:"browser,optional"` //浏览器类型
+		Os            string `json:"os,optional"` //操作系统
+		Status        int32  `json:"status,default=2"` //登录状态(0:失败,1:成功)
 	}
 	QueryLoginLogListData {
-		Id          int64  `json:"id"` //编号
-		UserName    string `json:"userName"` //用户名
-		LoginStatus string `json:"loginStatus"` //登录状态
-		IpAddress   string `json:"ipAddress"` //IP地址
-		Browser     string `json:"browser"` //浏览器
-		Os          string `json:"os"` //操作系统
-		ErrorMsg    string `json:"errorMsg"` //登录失败信息
-		LoginTime   string `json:"loginTime"` //登录时间
+		Id            int64  `json:"id"` //登录日志id
+		LoginName     string `json:"loginName"` //登录账号
+		Ipaddr        string `json:"ipaddr"` //登录IP地址
+		LoginLocation string `json:"loginLocation"` //登录地点
+		Platform      string `json:"platform"` //平台信息
+		Browser       string `json:"browser"` //浏览器类型
+		Version       string `json:"version"` //浏览器版本
+		Os            string `json:"os"` //操作系统
+		Arch          string `json:"arch"` //体系结构信息
+		Engine        string `json:"engine"` //渲染引擎信息
+		EngineDetails string `json:"engineDetails"` //渲染引擎详细信息
+		Extra         string `json:"extra"` //其他信息（可选）
+		Status        int32  `json:"status"` //登录状态(0:失败,1:成功)
+		Msg           string `json:"msg"` //提示消息
+		LoginTime     string `json:"loginTime"` //访问时间
 	}
 	QueryLoginLogListResp {
 		Code     string                   `json:"code"`
@@ -60,16 +76,6 @@ type (
 		PageSize int64                    `json:"pageSize,default=20"`
 		Success  bool                     `json:"success"`
 		Total    int64                    `json:"total"`
-	}
-	QueryStatisticsLoginLogResp {
-		Code    string                      `json:"code"`
-		Message string                      `json:"message"`
-		Data    QueryStatisticsLoginLogData `json:"data"`
-	}
-	QueryStatisticsLoginLogData {
-		DayLoginCount   int32 `json:"dayLoginCount"` //查询当天登录人数（根据IP）
-		WeekLoginCount  int32 `json:"weekLoginCount"` //统计当前周登录人数（根据IP）
-		MonthLoginCount int32 `json:"monthLoginCount"` //统计当前月登录人数（根据IP）
 	}
 )
 
@@ -91,9 +97,5 @@ service admin-api {
 	// 分页查询系统登录日志列表
 	@handler QueryLoginLogList
 	get /queryLoginLogList (QueryLoginLogListReq) returns (QueryLoginLogListResp)
-
-	// 统计后台用户登录信息
-	@handler QueryStatisticsLoginLog
-	get /queryStatisticsLoginLog returns (QueryStatisticsLoginLogResp)
 }
 

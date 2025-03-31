@@ -1,25 +1,27 @@
 info (
 	desc:   "字典数据"
-	author: "liufeihua"
+	author: "LiuFeiHua"
 	email:  "1002219331@qq.com"
 )
 
 type (
-	// 添加字典数据
+	// 添加字典数据请求参数
 	AddDictItemReq {
-		DictType   string `json:"dictType"` //字典类型
-		DictLabel  string `json:"dictLabel"` //字典标签
-		DictValue  string `json:"dictValue"` //字典键值
-		DictStatus int32  `json:"dictStatus,default=2"` //字典状态
-		DictSort   int32  `json:"dictSort"` //排序
-		Remark     string `json:"remark,optional"` //备注信息
-		IsDefault  int32  `json:"isDefault"` //是否默认  0：否  1：是
+		DictSort  int32  `json:"dictSort"` //字典排序
+		DictLabel string `json:"dictLabel"` //字典标签
+		DictValue string `json:"dictValue"` //字典键值
+		DictType  string `json:"dictType"` //字典类型
+		CssClass  string `json:"cssClass,optional"` //样式属性（其他样式扩展）
+		ListClass string `json:"listClass,optional"` //表格回显样式
+		IsDefault string `json:"isDefault"` //是否默认（Y是 N否）
+		Status    int32  `json:"status"` //状态（0：停用，1:正常）
+		Remark    string `json:"remark,optional"` //备注
 	}
 	AddDictItemResp {
 		Code    string `json:"code"`
 		Message string `json:"message"`
 	}
-	// 删除字典数据
+	// 删除字典数据请求参数
 	DeleteDictItemReq {
 		Ids []int64 `form:"ids"`
 	}
@@ -27,44 +29,47 @@ type (
 		Code    string `json:"code"`
 		Message string `json:"message"`
 	}
-	// 更新字典数据
+	// 更新字典数据请求参数
 	UpdateDictItemReq {
-		Id         int64  `json:"id"` //编号
-		DictType   string `json:"dictType"` //字典类型
-		DictLabel  string `json:"dictLabel"` //字典标签
-		DictValue  string `json:"dictValue"` //字典键值
-		DictStatus int32  `json:"dictStatus,default=2"` //字典状态
-		DictSort   int32  `json:"dictSort"` //排序
-		Remark     string `json:"remark,optional"` //备注信息
-		IsDefault  int32  `json:"isDefault"` //是否默认  0：否  1：是
+		Id        int64  `json:"id"` //字典数据id
+		DictSort  int32  `json:"dictSort"` //字典排序
+		DictLabel string `json:"dictLabel"` //字典标签
+		DictValue string `json:"dictValue"` //字典键值
+		DictType  string `json:"dictType"` //字典类型
+		CssClass  string `json:"cssClass,optional"` //样式属性（其他样式扩展）
+		ListClass string `json:"listClass,optional"` //表格回显样式
+		IsDefault string `json:"isDefault"` //是否默认（Y是 N否）
+		Status    int32  `json:"status"` //状态（0：停用，1:正常）
+		Remark    string `json:"remark,optional"` //备注
 	}
 	UpdateDictItemResp {
 		Code    string `json:"code"`
 		Message string `json:"message"`
 	}
-	// 批量更新字典数据状态
+	// 更新字典数据状态请求参数
 	UpdateDictItemStatusReq {
-		DictStatus int32   `json:"dictStatus"` //字典状态
-		DictIds    []int64 `json:"dictIds"` //编号
+		Ids    []int64 `json:"ids"` //字典数据id
+		Status int32   `json:"status"` //状态（0：停用，1:正常）
 	}
 	UpdateDictItemStatusResp {
 		Code    string `json:"code"`
 		Message string `json:"message"`
 	}
-	// 查询字典数据详情
+	// 查询字典数据详情请求参数
 	QueryDictItemDetailReq {
 		Id int64 `form:"id"`
 	}
 	QueryDictItemDetailData {
-		Id         int64  `json:"id"` //编号
-		DictType   string `json:"dictType"` //字典类型
+		Id         int64  `json:"id"` //字典数据id
+		DictSort   int32  `json:"dictSort"` //字典排序
 		DictLabel  string `json:"dictLabel"` //字典标签
 		DictValue  string `json:"dictValue"` //字典键值
-		DictStatus int32  `json:"dictStatus"` //字典状态
-		DictSort   int32  `json:"dictSort"` //排序
-		Remark     string `json:"remark"` //备注信息
-		IsDefault  int32  `json:"isDefault"` //是否默认  0：否  1：是
-		IsDeleted  int32  `json:"isDeleted"` //是否删除  0：否  1：是
+		DictType   string `json:"dictType"` //字典类型
+		CssClass   string `json:"cssClass"` //样式属性（其他样式扩展）
+		ListClass  string `json:"listClass"` //表格回显样式
+		IsDefault  string `json:"isDefault"` //是否默认（Y是 N否）
+		Status     int32  `json:"status"` //状态（0：停用，1:正常）
+		Remark     string `json:"remark"` //备注
 		CreateBy   string `json:"createBy"` //创建者
 		CreateTime string `json:"createTime"` //创建时间
 		UpdateBy   string `json:"updateBy"` //更新者
@@ -75,24 +80,25 @@ type (
 		Message string                  `json:"message"`
 		Data    QueryDictItemDetailData `json:"data"`
 	}
-	// 分页查询字典数据列
+	// 分页查询字典数据列表请求参数
 	QueryDictItemListReq {
-		Current    int64  `form:"current,default=1"` //第几页
-		PageSize   int64  `form:"pageSize,default=20"` //每页的数量
-		DictLabel  string `form:"dictLabel,optional"` //字典标签
-		DictStatus int32  `form:"dictStatus,,default=2"` //字典状态
-		DictType   string `form:"dictType,optional"` //字典类型
+		Current   int64  `form:"current,default=1"` //第几页
+		PageSize  int64  `form:"pageSize,default=20"` //每页的数量
+		DictLabel string `form:"dictLabel,optional"` //字典标签
+		DictType  string `form:"dictType,optional"` //字典类型
+		Status    int32  `form:"status,default=2"` //状态（0：停用，1:正常）
 	}
 	QueryDictItemListData {
-		Id         int64  `json:"id"` //编号
-		DictType   string `json:"dictType"` //字典类型
+		Id         int64  `json:"id"` //字典数据id
+		DictSort   int32  `json:"dictSort"` //字典排序
 		DictLabel  string `json:"dictLabel"` //字典标签
 		DictValue  string `json:"dictValue"` //字典键值
-		DictStatus int32  `json:"dictStatus"` //字典状态
-		DictSort   int32  `json:"dictSort"` //排序
-		Remark     string `json:"remark"` //备注信息
-		IsDefault  int32  `json:"isDefault"` //是否默认  0：否  1：是
-		IsDeleted  int32  `json:"isDeleted"` //是否删除  0：否  1：是
+		DictType   string `json:"dictType"` //字典类型
+		CssClass   string `json:"cssClass"` //样式属性（其他样式扩展）
+		ListClass  string `json:"listClass"` //表格回显样式
+		IsDefault  string `json:"isDefault"` //是否默认（Y是 N否）
+		Status     int32  `json:"status"` //状态（0：停用，1:正常）
+		Remark     string `json:"remark"` //备注
 		CreateBy   string `json:"createBy"` //创建者
 		CreateTime string `json:"createTime"` //创建时间
 		UpdateBy   string `json:"updateBy"` //更新者
@@ -128,7 +134,7 @@ service admin-api {
 	@handler UpdateDictItem
 	post /updateDictItem (UpdateDictItemReq) returns (UpdateDictItemResp)
 
-	// 批量更新字典数据状态
+	// 更新字典数据状态
 	@handler UpdateDictItemStatus
 	post /updateDictItemStatus (UpdateDictItemStatusReq) returns (UpdateDictItemStatusResp)
 

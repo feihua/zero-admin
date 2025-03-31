@@ -4,23 +4,21 @@ package main;
 
 option go_package = "./proto";
 
-// 添加字典类型表
+// 添加字典类型
 message AddDictTypeReq {
-  int64 id = 1; //编号
+  int64 id = 1; //字典id
   string dict_name = 2; //字典名称
   string dict_type = 3; //字典类型
-  int32 dict_status = 4; //字典状态
-  string remark = 5; //备注信息
-  int32 is_system = 6; //是否系统预留  0：否  1：是
-  string create_by = 7; //创建者
-
+  int32 status = 4; //状态（0：停用，1:正常）
+  string remark = 5; //备注
+  string create_by = 6; //创建者
 }
 
 message AddDictTypeResp {
   string pong = 1;
 }
 
-// 删除字典类型表
+// 删除字典类型
 message DeleteDictTypeReq {
   repeated int64 ids = 1;
 }
@@ -29,77 +27,68 @@ message DeleteDictTypeResp {
   string pong = 1;
 }
 
-// 更新字典类型表
+// 更新字典类型
 message UpdateDictTypeReq {
-  int64 id = 1; //编号
+  int64 id = 1; //字典id
   string dict_name = 2; //字典名称
   string dict_type = 3; //字典类型
-  int32 dict_status = 4; //字典状态
-  string remark = 5; //备注信息
-  int32 is_system = 6; //是否系统预留  0：否  1：是
-  string update_by = 10; //更新者
-
+  int32 status = 4; //状态（0：停用，1:正常）
+  string remark = 5; //备注
+  string update_by = 8; //更新者
 }
 
 message UpdateDictTypeResp {
   string pong = 1;
 }
 
-// 更新字典类型表状态
+// 更新字典类型状态
 message UpdateDictTypeStatusReq {
-  int32 dict_status = 4; //字典状态
-  repeated int64 ids = 6; //编号
-  string update_by = 10; //更新者
-
+  repeated int64 ids = 1; //字典id
+  int32 status = 2; //状态（0：停用，1:正常）
+  string update_by = 3; //更新者
 }
 
 message UpdateDictTypeStatusResp {
   string pong = 1;
 }
 
-// 查询字典类型表详情
+// 查询字典类型详情
 message QueryDictTypeDetailReq {
   int64 id = 1;
 }
 
 message QueryDictTypeDetailResp {
-  int64 id = 1; //编号
+  int64 id = 1; //字典id
   string dict_name = 2; //字典名称
   string dict_type = 3; //字典类型
-  int32 dict_status = 4; //字典状态
-  string remark = 5; //备注信息
-  int32 is_system = 6; //是否系统预留  0：否  1：是
-  int32 is_deleted = 7; //是否删除  0：否  1：是
-  string create_by = 8; //创建者
-  string create_time = 9; //创建时间
-  string update_by = 10; //更新者
-  string update_time = 11; //更新时间
+  int32 status = 4; //状态（0：停用，1:正常）
+  string remark = 5; //备注
+  string create_by = 6; //创建者
+  string create_time = 7; //创建时间
+  string update_by = 8; //更新者
+  string update_time = 9; //更新时间
 
 }
 
-// 分页查询字典类型表列表
+// 分页查询字典类型列表
 message QueryDictTypeListReq {
-  int64 page_num = 1; //第几页
-  int64 page_size = 2; //每页的数量
-  string dict_name = 3; //字典名称
-  int32 dict_status = 4; //字典状态
-  string dict_type = 5; //字典类型
-  int32 is_system = 8; //是否系统预留  0：否  1：是
-
+  string dict_name = 1; //字典名称
+  string dict_type = 2; //字典类型
+  int32 status = 3; //状态（0：停用，1:正常）
+  int64 page_num = 4; //第几页
+  int64 page_size = 5; //每页的数量
 }
 
 message DictTypeListData {
-  int64 id = 1; //编号
+  int64 id = 1; //字典id
   string dict_name = 2; //字典名称
   string dict_type = 3; //字典类型
-  int32 dict_status = 4; //字典状态
-  string remark = 5; //备注信息
-  int32 is_system = 6; //是否系统预留  0：否  1：是
-  int32 is_deleted = 7; //是否删除  0：否  1：是
-  string create_by = 8; //创建者
-  string create_time = 9; //创建时间
-  string update_by = 10; //更新者
-  string update_time = 11; //更新时间
+  int32 status = 4; //状态（0：停用，1:正常）
+  string remark = 5; //备注
+  string create_by = 6; //创建者
+  string create_time = 7; //创建时间
+  string update_by = 8; //更新者
+  string update_time = 9; //更新时间
 
 }
 
@@ -108,19 +97,19 @@ message QueryDictTypeListResp {
   repeated  DictTypeListData list = 2;
 }
 
-// 字典类型表
+// 字典类型
 service DictTypeService {
-  // 添加字典类型表
+  // 添加字典类型
   rpc AddDictType(AddDictTypeReq) returns (AddDictTypeResp){}
-  // 删除字典类型表
+  // 删除字典类型
   rpc DeleteDictType(DeleteDictTypeReq) returns (DeleteDictTypeResp){}
-  // 更新字典类型表
-  rpc UpdateDictType(UpdateDictTypeReq) returns (UpdateDictTypeResp){}
-  // 更新字典类型表状态
-  rpc UpdateDictTypeStatus(UpdateDictTypeStatusReq) returns (UpdateDictTypeStatusResp){}
-  // 查询字典类型表详情
+  // 更新字典类型
+  rpc UpdateDictType(UpdateDictTypeReq) returns (UpdateDictTypeResp ){}
+  // 更新字典类型状态
+  rpc UpdateDictTypeStatus(UpdateDictTypeStatusReq) returns (UpdateDictTypeStatusResp ){}
+  // 查询字典类型详情
   rpc QueryDictTypeDetail(QueryDictTypeDetailReq) returns (QueryDictTypeDetailResp){}
-  // 查询字典类型表列表
+  // 查询字典类型列表
   rpc QueryDictTypeList(QueryDictTypeListReq) returns (QueryDictTypeListResp){}
 
 

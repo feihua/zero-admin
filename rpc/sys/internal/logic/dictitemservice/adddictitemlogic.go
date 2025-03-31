@@ -78,8 +78,8 @@ func (l *AddDictItemLogic) AddDictItem(in *sysclient.AddDictItemReq) (*sysclient
 	}
 
 	// 4.如果新增字典数据是默认,则修改其他选项为非默认状态
-	if in.IsDefault == 1 {
-		_, err = q.WithContext(l.ctx).Where(q.DictType.Eq(dictType)).Where(q.IsDefault.Eq(1)).Update(q.IsDefault, 0)
+	if in.IsDefault == "Y" {
+		_, err = q.WithContext(l.ctx).Where(q.DictType.Eq(dictType)).Where(q.IsDefault.Eq("Y")).Update(q.IsDefault, "N")
 		if err != nil {
 			logc.Errorf(l.ctx, "修改字典数据默认状态失败,参数:%+v,异常:%s", in, err.Error())
 			return nil, errors.New("新增字典数据失败")
@@ -88,15 +88,16 @@ func (l *AddDictItemLogic) AddDictItem(in *sysclient.AddDictItemReq) (*sysclient
 
 	// 5.字典数据不存在时,则直接添加字典数据
 	dictItem := &model.SysDictItem{
-		DictType:   dictType,      // 字典类型
-		DictLabel:  in.DictLabel,  // 字典标签
-		DictValue:  in.DictValue,  // 字典键值
-		DictStatus: in.DictStatus, // 字典状态
-		DictSort:   in.DictSort,   // 排序
-		Remark:     in.Remark,     // 备注信息
-		IsDefault:  in.IsDefault,  // 是否默认  0：否  1：是
-		IsDeleted:  0,             // 是否删除  0：否  1：是
-		CreateBy:   in.CreateBy,   // 创建者
+		DictSort:  in.DictSort,  // 字典排序
+		DictLabel: in.DictLabel, // 字典标签
+		DictValue: in.DictValue, // 字典键值
+		DictType:  in.DictType,  // 字典类型
+		CSSClass:  in.CssClass,  // 样式属性（其他样式扩展）
+		ListClass: in.ListClass, // 表格回显样式
+		IsDefault: in.IsDefault, // 是否默认（Y是 N否）
+		Status:    in.Status,    // 状态（0：停用，1:正常）
+		Remark:    in.Remark,    // 备注
+		CreateBy:  in.CreateBy,  // 创建者
 	}
 
 	err = q.WithContext(l.ctx).Create(dictItem)

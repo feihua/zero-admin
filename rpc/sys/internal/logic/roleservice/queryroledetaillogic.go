@@ -48,15 +48,13 @@ func (l *QueryRoleDetailLogic) QueryRoleDetail(in *sysclient.QueryRoleDetailReq)
 	}
 
 	data := &sysclient.QueryRoleDetailResp{
-		Id:         item.ID,                                 // 编号
-		RoleName:   item.RoleName,                           // 角色名称
-		RoleKey:    item.RoleKey,                            // 权限字符
-		RoleStatus: item.RoleStatus,                         // 角色状态
-		RoleSort:   item.RoleSort,                           // 角色排序
-		DataScope:  item.DataScope,                          // 数据权限
-		IsDeleted:  item.IsDeleted,                          // 是否删除  0：否  1：是
-		IsAdmin:    item.IsAdmin,                            // 是否超级管理员:  0：否  1：是
+		Id:         item.ID,                                 // 角色id
+		RoleName:   item.RoleName,                           // 名称
+		RoleKey:    item.RoleKey,                            // 角色权限字符串
+		DataScope:  item.DataScope,                          // 数据范围（1：全部数据权限 2：自定数据权限 3：本部门数据权限 4：本部门及以下数据权限）
+		Status:     item.Status,                             // 状态(1:正常，0:禁用)
 		Remark:     item.Remark,                             // 备注
+		DelFlag:    item.DelFlag,                            // 删除标志（0代表删除 1代表存在）
 		CreateBy:   item.CreateBy,                           // 创建者
 		CreateTime: time_util.TimeToStr(item.CreateTime),    // 创建时间
 		UpdateBy:   item.UpdateBy,                           // 更新者

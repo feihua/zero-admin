@@ -84,10 +84,10 @@ func (l *UpdatePostLogic) UpdatePost(in *sysclient.UpdatePostReq) (*sysclient.Up
 	now := time.Now()
 	var job = &model.SysPost{
 		ID:         in.Id,           // 岗位id
-		PostName:   in.PostName,     // 岗位名称
 		PostCode:   in.PostCode,     // 岗位编码
-		PostStatus: in.PostStatus,   // 岗位状态
-		PostSort:   in.PostSort,     // 岗位排序
+		PostName:   in.PostName,     // 岗位名称
+		Sort:       in.Sort,         // 显示顺序
+		Status:     in.Status,       // 岗位状态（0：停用，1:正常）
 		Remark:     in.Remark,       // 备注信息
 		CreateBy:   post.CreateBy,   // 创建者
 		CreateTime: post.CreateTime, // 创建时间

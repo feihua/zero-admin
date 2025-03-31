@@ -4,25 +4,23 @@ package main;
 
 option go_package = "./proto";
 
-// 添加角色信息表
+// 添加角色信息
 message AddRoleReq {
-  int64 id = 1; //编号
-  string role_name = 2; //角色名称
-  string role_key = 3; //权限字符
-  int32 role_status = 4; //角色状态
-  int32 role_sort = 5; //角色排序
-  int32 data_scope = 6; //数据权限
-  int32 is_admin = 8; //是否超级管理员:  0：否  1：是
-  string remark = 9; //备注
-  string create_by = 10; //创建者
-
+  int64 id = 1; //角色id
+  string role_name = 2; //名称
+  string role_key = 3; //角色权限字符串
+  int32 data_scope = 4; //数据范围（1：全部数据权限 2：自定数据权限 3：本部门数据权限 4：本部门及以下数据权限）
+  int32 status = 5; //状态(1:正常，0:禁用)
+  string remark = 6; //备注
+  int32 del_flag = 7; //删除标志（0代表删除 1代表存在）
+  string create_by = 8; //创建者
 }
 
 message AddRoleResp {
   string pong = 1;
 }
 
-// 删除角色信息表
+// 删除角色信息
 message DeleteRoleReq {
   repeated int64 ids = 1;
 }
@@ -31,85 +29,76 @@ message DeleteRoleResp {
   string pong = 1;
 }
 
-// 更新角色信息表
+// 更新角色信息
 message UpdateRoleReq {
-  int64 id = 1; //编号
-  string role_name = 2; //角色名称
-  string role_key = 3; //权限字符
-  int32 role_status = 4; //角色状态
-  int32 role_sort = 5; //角色排序
-  int32 data_scope = 6; //数据权限
-  int32 is_admin = 8; //是否超级管理员:  0：否  1：是
-  string remark = 9; //备注
-  string update_by = 12; //更新者
-
+  int64 id = 1; //角色id
+  string role_name = 2; //名称
+  string role_key = 3; //角色权限字符串
+  int32 data_scope = 4; //数据范围（1：全部数据权限 2：自定数据权限 3：本部门数据权限 4：本部门及以下数据权限）
+  int32 status = 5; //状态(1:正常，0:禁用)
+  string remark = 6; //备注
+  int32 del_flag = 7; //删除标志（0代表删除 1代表存在）
+  string update_by = 10; //更新者
 }
 
 message UpdateRoleResp {
   string pong = 1;
 }
 
-// 更新角色信息表状态
+// 更新角色信息状态
 message UpdateRoleStatusReq {
-  repeated int64 ids = 1; //编号
-  int32 role_status = 2; //角色状态
-  string update_by = 3; //更新者
-
+  repeated int64 ids = 1; //角色id
+  int32 status = 5; //状态(1:正常，0:禁用)
+  string update_by = 10; //更新者
 }
 
 message UpdateRoleStatusResp {
   string pong = 1;
 }
 
-// 查询角色信息表详情
+// 查询角色信息详情
 message QueryRoleDetailReq {
   int64 id = 1;
 }
 
 message QueryRoleDetailResp {
-  int64 id = 1; //编号
-  string role_name = 2; //角色名称
-  string role_key = 3; //权限字符
-  int32 role_status = 4; //角色状态
-  int32 role_sort = 5; //角色排序
-  int32 data_scope = 6; //数据权限
-  int32 is_deleted = 7; //是否删除  0：否  1：是
-  int32 is_admin = 8; //是否超级管理员:  0：否  1：是
-  string remark = 9; //备注
-  string create_by = 10; //创建者
-  string create_time = 11; //创建时间
-  string update_by = 12; //更新者
-  string update_time = 13; //更新时间
-
+  int64 id = 1; //角色id
+  string role_name = 2; //名称
+  string role_key = 3; //角色权限字符串
+  int32 data_scope = 4; //数据范围（1：全部数据权限 2：自定数据权限 3：本部门数据权限 4：本部门及以下数据权限）
+  int32 status = 5; //状态(1:正常，0:禁用)
+  string remark = 6; //备注
+  int32 del_flag = 7; //删除标志（0代表删除 1代表存在）
+  string create_by = 8; //创建者
+  string create_time = 9; //创建时间
+  string update_by = 10; //更新者
+  string update_time = 11; //更新时间
 
 }
 
-// 分页查询角色信息表列表
+// 分页查询角色信息列表
 message QueryRoleListReq {
-  int64 page_num = 1; //第几页
-  int64 page_size = 2; //每页的数量
-  int32 is_admin = 3; //是否超级管理员
-  string role_key = 4; //权限字符
-  string role_name = 5; //角色名称
-  int32 role_status = 6; //角色状态
-  int32 data_scope = 7; //数据权限
+  string role_name = 1; //名称
+  string role_key = 2; //角色权限字符串
+  int32 data_scope = 3; //数据范围（1：全部数据权限 2：自定数据权限 3：本部门数据权限 4：本部门及以下数据权限）
+  int32 status = 4; //状态(1:正常，0:禁用)
+  int32 del_flag = 5; //删除标志（0代表删除 1代表存在）
+  int64 page_num = 6; //第几页
+  int64 page_size = 7; //每页的数量
 }
 
 message RoleListData {
-  int64 id = 1; //编号
-  string role_name = 2; //角色名称
-  string role_key = 3; //权限字符
-  int32 role_status = 4; //角色状态
-  int32 role_sort = 5; //角色排序
-  int32 data_scope = 6; //数据权限
-  int32 is_deleted = 7; //是否删除  0：否  1：是
-  int32 is_admin = 8; //是否超级管理员:  0：否  1：是
-  string remark = 9; //备注
-  string create_by = 10; //创建者
-  string create_time = 11; //创建时间
-  string update_by = 12; //更新者
-  string update_time = 13; //更新时间
-
+  int64 id = 1; //角色id
+  string role_name = 2; //名称
+  string role_key = 3; //角色权限字符串
+  int32 data_scope = 4; //数据范围（1：全部数据权限 2：自定数据权限 3：本部门数据权限 4：本部门及以下数据权限）
+  int32 status = 5; //状态(1:正常，0:禁用)
+  string remark = 6; //备注
+  int32 del_flag = 7; //删除标志（0代表删除 1代表存在）
+  string create_by = 8; //创建者
+  string create_time = 9; //创建时间
+  string update_by = 10; //更新者
+  string update_time = 11; //更新时间
 
 }
 
@@ -151,12 +140,12 @@ message QueryRoleMenuListResp {
   repeated int64 MenuIds = 2;
 }
 
-message UpdateMenuRoleReq {
+message UpdateRoleMenuReq {
   int64 roleId = 1;
   repeated int64 menuIds = 2;
 }
 
-message UpdateMenuRoleResp {
+message UpdateRoleMenuResp {
   string pong = 1;
 }
 
@@ -169,24 +158,27 @@ message QueryRoleUserListReq {
   string user_name = 6; //昵称
 }
 message UserData {
-  int64 id = 1; //编号
-  string user_name = 2; //用户名
-  string nick_name = 3; //昵称
-  string avatar = 4; //头像
-  string email = 7; //邮箱
-  string mobile = 8; //手机号
-  int32 user_status = 9; //帐号状态（0正常 1停用）
-  int64 dept_id = 10; //部门id
-  string remark = 11; //备注信息
-  int32 is_deleted = 12; //是否删除  0：否  1：是
-  string login_time = 13; //登录时间
-  string login_ip = 14; //登录ip
-  string login_os = 15; //登录os
-  string login_browser = 16; //登录浏览器
-  string create_by = 17; //创建者
-  string create_time = 18; //创建时间
-  string update_by = 19; //更新者
-  string update_time = 20; //更新时间
+  int64 id = 1; //用户id
+  string mobile = 2; //手机号码
+  string user_name = 3; //用户账号
+  string nick_name = 4; //用户昵称
+  string user_type = 5; //用户类型（00系统用户）
+  string avatar = 6; //头像路径
+  string email = 7; //用户邮箱
+  string password = 8; //密码
+  int32 status = 9; //状态(1:正常，0:禁用)
+  int64 dept_id = 10; //部门ID
+  string login_ip = 11; //最后登录IP
+  string login_date = 12; //最后登录时间
+  string login_browser = 13; //浏览器类型
+  string login_os = 14; //操作系统
+  string pwd_update_date = 15; //密码最后更新时间
+  string remark = 16; //备注
+  int32 del_flag = 17; //删除标志（0代表删除 1代表存在）
+  string create_by = 18; //创建者
+  string create_time = 19; //创建时间
+  string update_by = 20; //更新者
+  string update_time = 21; //更新时间
 
 }
 message QueryRoleUserListResp {
@@ -206,25 +198,25 @@ message CancelAuthorizationResp {
 }
 
 
-// 角色信息表
+// 角色信息
 service RoleService {
-  // 添加角色信息表
+  // 添加角色信息
   rpc AddRole(AddRoleReq) returns (AddRoleResp){}
-  // 删除角色信息表
+  // 删除角色信息
   rpc DeleteRole(DeleteRoleReq) returns (DeleteRoleResp){}
-  // 更新角色信息表
-  rpc UpdateRole(UpdateRoleReq) returns (UpdateRoleResp){}
-  // 更新角色信息表状态
-  rpc UpdateRoleStatus(UpdateRoleStatusReq) returns (UpdateRoleStatusResp){}
-  // 查询角色信息表详情
+  // 更新角色信息
+  rpc UpdateRole(UpdateRoleReq) returns (UpdateRoleResp ){}
+  // 更新角色信息状态
+  rpc UpdateRoleStatus(UpdateRoleStatusReq) returns (UpdateRoleStatusResp ){}
+  // 查询角色信息详情
   rpc QueryRoleDetail(QueryRoleDetailReq) returns (QueryRoleDetailResp){}
-  // 查询角色信息表列表
+  // 查询角色信息列表
   rpc QueryRoleList(QueryRoleListReq) returns (QueryRoleListResp){}
 
-  //查询用户与角色的关联
+  //查询角色与菜单的关联
   rpc QueryRoleMenuList(QueryRoleMenuListReq) returns(QueryRoleMenuListResp);
-  //更新用户与角色的关联
-  rpc UpdateMenuRoleList(UpdateMenuRoleReq) returns(UpdateMenuRoleResp);
+  //更新角色与菜单的关联
+  rpc UpdateMenuRoleList(UpdateRoleMenuReq) returns(UpdateRoleMenuResp);
 
   //查询角色的用户关联
   rpc QueryRoleUserList(QueryRoleUserListReq) returns(QueryRoleUserListResp);

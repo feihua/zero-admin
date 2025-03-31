@@ -1,6 +1,7 @@
+drop table if exists sys_menu;
 create table sys_menu
 (
-    id             bigint auto_increment comment '编号'
+    id             bigint auto_increment comment '菜单id'
         primary key,
     menu_name           varchar(50)                         not null comment '菜单名称',
     parent_id      bigint                              not null comment '父菜单ID，一级菜单为0',
@@ -220,3 +221,21 @@ INSERT INTO sys_menu (id, menu_name, parent_id, menu_path, menu_perms, menu_type
 INSERT INTO sys_menu (id, menu_name, parent_id, menu_path, menu_perms, menu_type, menu_icon, menu_sort, create_by, create_time, update_by, update_time, is_deleted, vue_path, vue_component, vue_icon, vue_redirect, background_url) VALUES (170, '取消授权', 4, '', '', 2, '', 3, 'liufeihua', current_time, 'liufeihua', current_time, 1, '', '', '', '', '/api/sys/role/cancelAuthorization');
 
 INSERT INTO sys_menu (id, menu_name, parent_id, menu_path, menu_perms, menu_type, menu_icon, menu_sort, create_by, create_time, update_by, update_time, is_deleted, vue_path, vue_component, vue_icon, vue_redirect, background_url) VALUES (171, '查询公司地址详情', 117, '', '', 2, '', 3, 'liufeihua', current_time, 'liufeihua', current_time, 1, '', '', '', '', '/api/order/companyAddress/queryCompanyAddressDetail');
+
+INSERT INTO sys_menu (id, menu_name, parent_id, menu_path, menu_perms, menu_type, menu_icon, menu_sort, create_by, create_time, update_by, update_time, is_deleted, vue_path, vue_component, vue_icon, vue_redirect, background_url) VALUES (172, '查询部门详情', 6, '', '', 2, '', 1, 'liufeihua', current_time, 'liufeihua', current_time, 1, '', '', '', '', '/api/sys/dept/queryDeptDetail');
+INSERT INTO sys_menu (id, menu_name, parent_id, menu_path, menu_perms, menu_type, menu_icon, menu_sort, create_by, create_time, update_by, update_time, is_deleted, vue_path, vue_component, vue_icon, vue_redirect, background_url) VALUES (173, '修改部门状态', 6, '', '', 2, '', 1, 'liufeihua', current_time, 'liufeihua', current_time, 1, '', '', '', '', '/api/sys/dept/updateDeptStatus');
+
+INSERT INTO sys_menu (id, menu_name, parent_id, menu_path, menu_perms, menu_type, menu_icon, menu_sort, create_by, create_time, update_by, update_time, is_deleted, vue_path, vue_component, vue_icon, vue_redirect, background_url) VALUES (174, '查询字典详情', 7, '', '', 2, '', 1, 'liufeihua', current_time, 'liufeihua', current_time, 1, '', '', '', '', '/api/sys/dictType/queryDictTypeDetail');
+INSERT INTO sys_menu (id, menu_name, parent_id, menu_path, menu_perms, menu_type, menu_icon, menu_sort, create_by, create_time, update_by, update_time, is_deleted, vue_path, vue_component, vue_icon, vue_redirect, background_url) VALUES (175, '修改字典状态', 7, '', '', 2, '', 1, 'liufeihua', current_time, 'liufeihua', current_time, 1, '', '', '', '', '/api/sys/dictType/updateDictTypeStatus');
+
+INSERT INTO sys_menu (id, menu_name, parent_id, menu_path, menu_perms, menu_type, menu_icon, menu_sort, create_by, create_time, update_by, update_time, is_deleted, vue_path, vue_component, vue_icon, vue_redirect, background_url) VALUES (176, '查询字典数据详情', 164, '', '', 2, '', 1, 'liufeihua', current_time, 'liufeihua', current_time, 1, '', '', '', '', '/api/sys/dictItem/queryDictItemDetail');
+INSERT INTO sys_menu (id, menu_name, parent_id, menu_path, menu_perms, menu_type, menu_icon, menu_sort, create_by, create_time, update_by, update_time, is_deleted, vue_path, vue_component, vue_icon, vue_redirect, background_url) VALUES (177, '修改字典数据状态', 164, '', '', 2, '', 1, 'liufeihua', current_time, 'liufeihua', current_time, 1, '', '', '', '', '/api/sys/dictItem/updateDictItemStatus');
+
+INSERT INTO sys_menu (id, menu_name, parent_id, menu_path, menu_perms, menu_type, menu_icon, menu_sort, create_by, create_time, update_by, update_time, is_deleted, vue_path, vue_component, vue_icon, vue_redirect, background_url) VALUES (178, '查询登录日志详情', 51, '', '', 2, '', 1, 'liufeihua', current_time, 'liufeihua', current_time, 1, '', '', '', '', '/api/sys/log/queryLoginLogDetail');
+INSERT INTO sys_menu (id, menu_name, parent_id, menu_path, menu_perms, menu_type, menu_icon, menu_sort, create_by, create_time, update_by, update_time, is_deleted, vue_path, vue_component, vue_icon, vue_redirect, background_url) VALUES (179, '查询操作日志详情', 51, '', '', 2, '', 1, 'liufeihua', current_time, 'liufeihua', current_time, 1, '', '', '', '', '/api/sys/log/queryOperateLogDetail');
+
+INSERT INTO sys_menu (id, menu_name, parent_id, menu_path, menu_perms, menu_type, menu_icon, menu_sort, create_by, create_time, update_by, update_time, is_deleted, vue_path, vue_component, vue_icon, vue_redirect, background_url) VALUES (180, '查询岗位详情', 33, '', '', 2, '', 1, 'liufeihua', current_time, 'liufeihua', current_time, 1, '', '', '', '', '/api/sys/post/queryPostDetail');
+INSERT INTO sys_menu (id, menu_name, parent_id, menu_path, menu_perms, menu_type, menu_icon, menu_sort, create_by, create_time, update_by, update_time, is_deleted, vue_path, vue_component, vue_icon, vue_redirect, background_url) VALUES (181, '修改岗位状态', 33, '', '', 2, '', 1, 'liufeihua', current_time, 'liufeihua', current_time, 1, '', '', '', '', '/api/sys/post/updatePostStatus');
+
+INSERT INTO sys_menu (id, menu_name, parent_id, menu_path, menu_perms, menu_type, menu_icon, menu_sort, create_by, create_time, update_by, update_time, is_deleted, vue_path, vue_component, vue_icon, vue_redirect, background_url) VALUES (182, '查询角色详情', 4, '', '', 2, '', 1, 'liufeihua', current_time, 'liufeihua', current_time, 1, '', '', '', '', '/api/sys/role/queryRoleDetail');
+INSERT INTO sys_menu (id, menu_name, parent_id, menu_path, menu_perms, menu_type, menu_icon, menu_sort, create_by, create_time, update_by, update_time, is_deleted, vue_path, vue_component, vue_icon, vue_redirect, background_url) VALUES (183, '修改角色状态', 4, '', '', 2, '', 1, 'liufeihua', current_time, 'liufeihua', current_time, 1, '', '', '', '', '/api/sys/role/updateRoleStatus');

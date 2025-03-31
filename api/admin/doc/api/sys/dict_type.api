@@ -1,23 +1,22 @@
 info (
 	desc:   "字典类型"
-	author: "liufeihua"
+	author: "LiuFeiHua"
 	email:  "1002219331@qq.com"
 )
 
 type (
-	// 添加字典类型
+	// 添加字典类型请求参数
 	AddDictTypeReq {
-		DictName   string `json:"dictName"` //字典名称
-		DictType   string `json:"dictType"` //字典类型
-		DictStatus int32  `json:"dictStatus,default=2"` //字典状态
-		Remark     string `json:"remark,optional"` //备注信息
-		IsSystem   int32  `json:"isSystem"` //是否系统预留  0：否  1：是
+		DictName string `json:"dictName"` //字典名称
+		DictType string `json:"dictType"` //字典类型
+		Status   int32  `json:"status"` //状态（0：停用，1:正常）
+		Remark   string `json:"remark,optional"` //备注
 	}
 	AddDictTypeResp {
 		Code    string `json:"code"`
 		Message string `json:"message"`
 	}
-	// 删除字典类型
+	// 删除字典类型请求参数
 	DeleteDictTypeReq {
 		Ids []int64 `form:"ids"`
 	}
@@ -25,40 +24,37 @@ type (
 		Code    string `json:"code"`
 		Message string `json:"message"`
 	}
-	// 更新字典类型
+	// 更新字典类型请求参数
 	UpdateDictTypeReq {
-		Id         int64  `json:"id"` //编号
-		DictName   string `json:"dictName"` //字典名称
-		DictType   string `json:"dictType"` //字典类型
-		DictStatus int32  `json:"dictStatus,default=2"` //字典状态
-		Remark     string `json:"remark,optional"` //备注信息
-		IsSystem   int32  `json:"isSystem"` //是否系统预留  0：否  1：是
+		Id       int64  `json:"id"` //字典id
+		DictName string `json:"dictName"` //字典名称
+		DictType string `json:"dictType"` //字典类型
+		Status   int32  `json:"status"` //状态（0：停用，1:正常）
+		Remark   string `json:"remark,optional"` //备注
 	}
 	UpdateDictTypeResp {
 		Code    string `json:"code"`
 		Message string `json:"message"`
 	}
-	// 批量更新字典类型状态
+	// 更新字典类型状态请求参数
 	UpdateDictTypeStatusReq {
-		DictStatus int32   `json:"dictStatus"` //字典状态
-		DictIds    []int64 `json:"dictIds"` //编号
+		Ids    []int64 `json:"ids"` //字典id
+		Status int32   `json:"status"` //状态
 	}
 	UpdateDictTypeStatusResp {
 		Code    string `json:"code"`
 		Message string `json:"message"`
 	}
-	// 查询字典类型详情
+	// 查询字典类型详情请求参数
 	QueryDictTypeDetailReq {
 		Id int64 `form:"id"`
 	}
 	QueryDictTypeDetailData {
-		Id         int64  `json:"id"` //编号
+		Id         int64  `json:"id"` //字典id
 		DictName   string `json:"dictName"` //字典名称
 		DictType   string `json:"dictType"` //字典类型
-		DictStatus int32  `json:"dictStatus"` //字典状态
-		Remark     string `json:"remark"` //备注信息
-		IsSystem   int32  `json:"isSystem"` //是否系统预留  0：否  1：是
-		IsDeleted  int32  `json:"isDeleted"` //是否删除  0：否  1：是
+		Status     int32  `json:"status"` //状态（0：停用，1:正常）
+		Remark     string `json:"remark"` //备注
 		CreateBy   string `json:"createBy"` //创建者
 		CreateTime string `json:"createTime"` //创建时间
 		UpdateBy   string `json:"updateBy"` //更新者
@@ -69,23 +65,20 @@ type (
 		Message string                  `json:"message"`
 		Data    QueryDictTypeDetailData `json:"data"`
 	}
-	// 分页查询字典类型列
+	// 分页查询字典类型列表请求参数
 	QueryDictTypeListReq {
-		Current    int64  `form:"current,default=1"` //第几页
-		PageSize   int64  `form:"pageSize,default=20"` //每页的数量
-		DictName   string `form:"dictName,optional"` //字典名称
-		DictStatus int32  `form:"dictStatus,default=2"` //字典状态
-		DictType   string `form:"dictType,optional"` //字典类型
-		IsSystem   int32  `form:"isSystem,default=2"` //是否系统预留  0：否  1：是
+		Current  int64  `form:"current,default=1"` //第几页
+		PageSize int64  `form:"pageSize,default=20"` //每页的数量
+		DictName string `form:"dictName,optional"` //字典名称
+		DictType string `form:"dictType,optional"` //字典类型
+		Status   int32  `form:"status,default=2"` //状态（0：停用，1:正常）
 	}
 	QueryDictTypeListData {
-		Id         int64  `json:"id"` //编号
+		Id         int64  `json:"id"` //字典id
 		DictName   string `json:"dictName"` //字典名称
 		DictType   string `json:"dictType"` //字典类型
-		DictStatus int32  `json:"dictStatus"` //字典状态
-		Remark     string `json:"remark"` //备注信息
-		IsSystem   int32  `json:"isSystem"` //是否系统预留  0：否  1：是
-		IsDeleted  int32  `json:"isDeleted"` //是否删除  0：否  1：是
+		Status     int32  `json:"status"` //状态（0：停用，1:正常）
+		Remark     string `json:"remark"` //备注
 		CreateBy   string `json:"createBy"` //创建者
 		CreateTime string `json:"createTime"` //创建时间
 		UpdateBy   string `json:"updateBy"` //更新者
@@ -121,7 +114,7 @@ service admin-api {
 	@handler UpdateDictType
 	post /updateDictType (UpdateDictTypeReq) returns (UpdateDictTypeResp)
 
-	// 批量更新字典类型状态
+	// 更新字典类型状态
 	@handler UpdateDictTypeStatus
 	post /updateDictTypeStatus (UpdateDictTypeStatusReq) returns (UpdateDictTypeStatusResp)
 

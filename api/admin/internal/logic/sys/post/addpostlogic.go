@@ -34,12 +34,12 @@ func NewAddPostLogic(ctx context.Context, svcCtx *svc.ServiceContext) AddPostLog
 // AddPost 添加岗位信息
 func (l *AddPostLogic) AddPost(req *types.AddPostReq) (*types.AddPostResp, error) {
 	_, err := l.svcCtx.PostService.AddPost(l.ctx, &sysclient.AddPostReq{
-		PostName:   req.PostName,   // 岗位名称
-		PostCode:   req.PostCode,   // 岗位编码
-		PostStatus: req.PostStatus, // 岗位状态
-		PostSort:   req.PostSort,   // 岗位排序
-		Remark:     req.Remark,     // 备注信息
-		CreateBy:   l.ctx.Value("userName").(string),
+		PostCode: req.PostCode, // 岗位编码
+		PostName: req.PostName, // 岗位名称
+		Sort:     req.Sort,     // 显示顺序
+		Status:   req.Status,   // 岗位状态（0：停用，1:正常）
+		Remark:   req.Remark,   // 备注
+		CreateBy: l.ctx.Value("userName").(string),
 	})
 
 	if err != nil {

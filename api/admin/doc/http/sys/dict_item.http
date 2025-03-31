@@ -10,48 +10,64 @@ Content-Type: application/json
     client.global.set("token", response.body.data.token);
 %}
 
-### 添加字典项
+### 添加字典数据
 POST {{host}}/api/sys/dictItem/addDictItem
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {
-  "delFlag": 1,
-  "dictLabel": "test",
-  "dictSort": 1,
-  "dictStatus": 1,
-  "dictType": "1",
-  "dictValue": "1",
-  "isDefault": 1,
-  "remark": "test",
-  "updateBy": "",
-  "updateTime": ""
+  "dictSort": 2,
+  "dictLabel": "公告1",
+  "dictValue": "21",
+  "dictType": "sys_notice_type",
+  "cssClass": "1",
+  "listClass": "1",
+  "isDefault": "N",
+  "status": 1,
+  "remark": "公告"
 }
-
-### 删除字典项
-GET {{host}}/api/sys/dictItem/deleteDictItem?ids=[5]
+### 删除字典数据
+GET {{host}}/api/sys/dictItem/deleteDictItem?ids=6
 Authorization: Bearer {{token}}
 
 
-### 修改字典项
+### 修改字典数据
 POST {{host}}/api/sys/dictItem/updateDictItem
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {
-  "delFlag": 1,
-  "dictLabel": "1",
-  "dictSort": 1,
-  "dictStatus": 1,
-  "dictType": "1",
-  "dictValue": "1",
-  "id": 1,
-  "isDefault": 1,
-  "remark": "test",
+  "id": 6,
+  "dictSort": 2,
+  "dictLabel": "公告11",
+  "dictValue": "221",
+  "dictType": "sys_notice_type",
+  "cssClass": "1",
+  "listClass": "1",
+  "isDefault": "N",
+  "status": 1,
+  "remark": "公告",
+  "createBy": "admin",
+  "createTime": "2025-03-31 14:23:57",
   "updateBy": "",
   "updateTime": ""
 }
 
-### 查询字典项列表
-GET {{host}}/api/sys/dictItem/queryDictItemList
+### 修改字典数据状态
+POST {{host}}/api/sys/dictItem/updateDictItemStatus
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "ids": [6],
+  "status": 1
+}
+
+### 查询字典数据详情
+GET {{host}}/api/sys/dictItem/queryDictItemDetail?id=6
+Authorization: Bearer {{token}}
+
+
+### 查询字典数据列表
+GET {{host}}/api/sys/dictItem/queryDictItemList?dictType
 Authorization: Bearer {{token}}

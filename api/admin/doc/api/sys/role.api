@@ -5,21 +5,19 @@ info (
 )
 
 type (
-	// 添加角色信息
+	// 添加角色信息请求参数
 	AddRoleReq {
-		RoleName   string `json:"roleName"` //角色名称
-		RoleKey    string `json:"roleKey"` //权限字符
-		RoleStatus int32  `json:"roleStatus"` //角色状态
-		RoleSort   int32  `json:"roleSort"` //角色排序
-		DataScope  int32  `json:"dataScope"` //数据权限
-		IsAdmin    int32  `json:"isAdmin"` //是否超级管理员:  0：否  1：是
-		Remark     string `json:"remark,optional"` //备注
+		RoleName  string `json:"roleName"` //名称
+		RoleKey   string `json:"roleKey"` //角色权限字符串
+		DataScope int32  `json:"dataScope"` //数据范围（1：全部数据权限 2：自定数据权限 3：本部门数据权限 4：本部门及以下数据权限）
+		Status    int32  `json:"status"` //状态(1:正常，0:禁用)
+		Remark    string `json:"remark,optional"` //备注
 	}
 	AddRoleResp {
 		Code    string `json:"code"`
 		Message string `json:"message"`
 	}
-	// 删除角色信息
+	// 删除角色信息请求参数
 	DeleteRoleReq {
 		Ids []int64 `form:"ids"`
 	}
@@ -27,44 +25,40 @@ type (
 		Code    string `json:"code"`
 		Message string `json:"message"`
 	}
-	// 更新角色信息
+	// 更新角色信息请求参数
 	UpdateRoleReq {
-		Id         int64  `json:"id"` //编号
-		RoleName   string `json:"roleName"` //角色名称
-		RoleKey    string `json:"roleKey"` //权限字符
-		RoleStatus int32  `json:"roleStatus"` //角色状态
-		RoleSort   int32  `json:"roleSort"` //角色排序
-		DataScope  int32  `json:"dataScope"` //数据权限
-		IsAdmin    int32  `json:"isAdmin"` //是否超级管理员:  0：否  1：是
-		Remark     string `json:"remark,optional"` //备注
+		Id        int64  `json:"id"` //角色id
+		RoleName  string `json:"roleName"` //名称
+		RoleKey   string `json:"roleKey"` //角色权限字符串
+		DataScope int32  `json:"dataScope"` //数据范围（1：全部数据权限 2：自定数据权限 3：本部门数据权限 4：本部门及以下数据权限）
+		Status    int32  `json:"status"` //状态(1:正常，0:禁用)
+		Remark    string `json:"remark,optional"` //备注
 	}
 	UpdateRoleResp {
 		Code    string `json:"code"`
 		Message string `json:"message"`
 	}
-	// 更新角色信息状态
+	// 更新角色信息状态请求参数
 	UpdateRoleStatusReq {
-		RoleIds    []int64 `json:"roleIds"` //编号
-		RoleStatus int32   `json:"roleStatus"` //角色状态
+		Ids    []int64 `json:"ids"` //角色id
+		Status int32   `json:"status"` //状态
 	}
 	UpdateRoleStatusResp {
 		Code    string `json:"code"`
 		Message string `json:"message"`
 	}
-	// 查询角色信息详情
+	// 查询角色信息详情请求参数
 	QueryRoleDetailReq {
 		Id int64 `form:"id"`
 	}
 	QueryRoleDetailData {
-		Id         int64  `json:"id"` //编号
-		RoleName   string `json:"roleName"` //角色名称
-		RoleKey    string `json:"roleKey"` //权限字符
-		RoleStatus int32  `json:"roleStatus"` //角色状态
-		RoleSort   int32  `json:"roleSort"` //角色排序
-		DataScope  int32  `json:"dataScope"` //数据权限
-		IsDeleted  int32  `json:"isDeleted"` //是否删除  0：否  1：是
-		IsAdmin    int32  `json:"isAdmin"` //是否超级管理员:  0：否  1：是
+		Id         int64  `json:"id"` //角色id
+		RoleName   string `json:"roleName"` //名称
+		RoleKey    string `json:"roleKey"` //角色权限字符串
+		DataScope  int32  `json:"dataScope"` //数据范围（1：全部数据权限 2：自定数据权限 3：本部门数据权限 4：本部门及以下数据权限）
+		Status     int32  `json:"status"` //状态(1:正常，0:禁用)
 		Remark     string `json:"remark"` //备注
+		DelFlag    int32  `json:"delFlag"` //删除标志（0代表删除 1代表存在）
 		CreateBy   string `json:"createBy"` //创建者
 		CreateTime string `json:"createTime"` //创建时间
 		UpdateBy   string `json:"updateBy"` //更新者
@@ -75,26 +69,23 @@ type (
 		Message string              `json:"message"`
 		Data    QueryRoleDetailData `json:"data"`
 	}
-	// 分页查询角色信息列
+	// 分页查询角色信息列表请求参数
 	QueryRoleListReq {
-		Current    int64  `form:"current,default=1"` //第几页
-		PageSize   int64  `form:"pageSize,default=20"` //每页的数量
-		IsAdmin    int32  `form:"isAdmin,default=2"` //是否超级管理员
-		RoleKey    string `form:"roleKey,optional"` //权限字符
-		RoleName   string `form:"roleName,optional"` //角色名称
-		RoleStatus int32  `form:"roleStatus,default=2"` //角色状态
-		DataScope  int32  `form:"dataScope,default=0"` //数据权限
+		Current   int64  `form:"current,default=1"` //第几页
+		PageSize  int64  `form:"pageSize,default=20"` //每页的数量
+		RoleName  string `form:"roleName,optional"` //名称
+		RoleKey   string `form:"roleKey,optional"` //角色权限字符串
+		DataScope int32  `form:"dataScope,optional"` //数据范围（1：全部数据权限 2：自定数据权限 3：本部门数据权限 4：本部门及以下数据权限）
+		Status    int32  `form:"status,default=2"` //状态(1:正常，0:禁用)
 	}
 	QueryRoleListData {
-		Id         int64  `json:"id"` //编号
-		RoleName   string `json:"roleName"` //角色名称
-		RoleKey    string `json:"roleKey"` //权限字符
-		RoleStatus int32  `json:"roleStatus"` //角色状态
-		RoleSort   int32  `json:"roleSort"` //角色排序
-		DataScope  int32  `json:"dataScope"` //数据权限
-		IsDeleted  int32  `json:"isDeleted"` //是否删除  0：否  1：是
-		IsAdmin    int32  `json:"isAdmin"` //是否超级管理员:  0：否  1：是
+		Id         int64  `json:"id"` //角色id
+		RoleName   string `json:"roleName"` //名称
+		RoleKey    string `json:"roleKey"` //角色权限字符串
+		DataScope  int32  `json:"dataScope"` //数据范围（1：全部数据权限 2：自定数据权限 3：本部门数据权限 4：本部门及以下数据权限）
+		Status     int32  `json:"status"` //状态(1:正常，0:禁用)
 		Remark     string `json:"remark"` //备注
+		DelFlag    int32  `json:"delFlag"` //删除标志（0代表删除 1代表存在）
 		CreateBy   string `json:"createBy"` //创建者
 		CreateTime string `json:"createTime"` //创建时间
 		UpdateBy   string `json:"updateBy"` //更新者
@@ -142,24 +133,31 @@ type (
 		Current  int64  `form:"current,default=1"` //第几页
 		PageSize int64  `form:"pageSize,default=20"` //每页的数量
 		RoleId   int64  `form:"roleId"` //角色id
-		IsExist  int64  `form:"isExist"` //角色是否已经拥有用户
+		IsExist  int64  `form:"isExist"` //角色是否已经拥有用户， 1:表示拥有的用户，0:表示没拥有的用户
 		Mobile   string `form:"mobile,optional"` //手机号
 		UserName string `form:"userName,optional"` //昵称
 	}
 	QueryRoleUserListData {
-		Id         int64  `json:"id"` //编号
-		UserName   string `json:"userName"` //用户名
-		NickName   string `json:"nickName"` //昵称
-		Avatar     string `json:"avatar"` //头像
-		Email      string `json:"email"` //邮箱
-		Mobile     string `json:"mobile"` //手机号
-		UserStatus int32  `json:"userStatus"` //帐号状态（0正常 1停用）
-		DeptId     int64  `json:"deptId"` //部门id
-		Remark     string `json:"remark"` //备注信息
-		CreateBy   string `json:"createBy"` //创建者
-		CreateTime string `json:"createTime"` //创建时间
-		UpdateBy   string `json:"updateBy"` //更新者
-		UpdateTime string `json:"updateTime"` //更新时间
+		Id            int64  `json:"id"` //用户id
+		Mobile        string `json:"mobile"` //手机号码
+		UserName      string `json:"userName"` //用户账号
+		NickName      string `json:"nickName"` //用户昵称
+		UserType      string `json:"userType"` //用户类型（00系统用户）
+		Avatar        string `json:"avatar"` //头像路径
+		Email         string `json:"email"` //用户邮箱
+		Status        int32  `json:"status"` //状态(1:正常，0:禁用)
+		DeptId        int64  `json:"deptId"` //部门ID
+		LoginIp       string `json:"loginIp"` //最后登录IP
+		LoginDate     string `json:"loginDate"` //最后登录时间
+		LoginBrowser  string `json:"loginBrowser"` //浏览器类型
+		LoginOs       string `json:"loginOs"` //操作系统
+		PwdUpdateDate string `json:"pwdUpdateDate"` //密码最后更新时间
+		Remark        string `json:"remark"` //备注
+		DelFlag       int32  `json:"delFlag"` //删除标志（0代表删除 1代表存在）
+		CreateBy      string `json:"createBy"` //创建者
+		CreateTime    string `json:"createTime"` //创建时间
+		UpdateBy      string `json:"updateBy"` //更新者
+		UpdateTime    string `json:"updateTime"` //更新时间
 	}
 	QueryRoleUserListResp {
 		Code     string                   `json:"code"`

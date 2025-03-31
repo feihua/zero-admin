@@ -31,9 +31,9 @@ func NewUpdateDictItemStatusLogic(ctx context.Context, svcCtx *svc.ServiceContex
 // UpdateDictItemStatus 更新字典数据状态
 func (l *UpdateDictItemStatusLogic) UpdateDictItemStatus(req *types.UpdateDictItemStatusReq) (resp *types.UpdateDictItemStatusResp, err error) {
 	_, err = l.svcCtx.DictItemService.UpdateDictItemStatus(l.ctx, &sysclient.UpdateDictItemStatusReq{
-		Ids:        req.DictIds,    // 编号
-		DictStatus: req.DictStatus, // 字典状态
-		UpdateBy:   l.ctx.Value("userName").(string),
+		Ids:      req.Ids,    // 字典数据id
+		Status:   req.Status, // 状态（0：停用，1:正常）
+		UpdateBy: l.ctx.Value("userName").(string),
 	})
 
 	if err != nil {

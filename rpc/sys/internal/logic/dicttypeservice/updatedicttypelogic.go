@@ -82,12 +82,11 @@ func (l *UpdateDictTypeLogic) UpdateDictType(in *sysclient.UpdateDictTypeReq) (*
 	// 4.字典存在时,则直接更新字典
 	now := time.Now()
 	dict := &model.SysDictType{
-		ID:         in.Id,          // 编号
+		ID:         in.Id,          // 字典id
 		DictName:   in.DictName,    // 字典名称
 		DictType:   in.DictType,    // 字典类型
-		DictStatus: in.DictStatus,  // 字典状态
+		Status:     in.Status,      // 状态（0：停用，1:正常）
 		Remark:     in.Remark,      // 备注信息
-		IsSystem:   in.IsSystem,    // 是否系统预留  0：否  1：是
 		CreateBy:   res.CreateBy,   // 创建者
 		CreateTime: res.CreateTime, // 创建时间
 		UpdateBy:   in.UpdateBy,    // 更新者

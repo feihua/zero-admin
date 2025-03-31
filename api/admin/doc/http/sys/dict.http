@@ -16,15 +16,14 @@ Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {
-  "dictName": "2",
-  "dictStatus": 1,
-  "dictType": "3123",
-  "isSystem": 1,
-  "remark": "test"
+  "dictName": "通知类型1",
+  "dictType": "sys_notice_type1",
+  "status": 1,
+  "remark": "测试"
 }
 
 ### 删除字典
-GET {{host}}/api/sys/dictType/deleteDictType?ids=[5]
+GET {{host}}/api/sys/dictType/deleteDictType?ids=3
 Authorization: Bearer {{token}}
 
 
@@ -34,13 +33,28 @@ Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {
-  "id": 1,
-  "dictName": "123122",
-  "dictStatus": 1,
-  "dictType": "3123",
-  "isSystem": 1,
-  "remark": "test"
+  "id": 4,
+  "dictName": "通知类型12",
+  "dictType": "sys_notice_type",
+  "status": 1,
+  "remark": "测试"
+
 }
+
+### 修改字典状态
+POST {{host}}/api/sys/dictType/updateDictTypeStatus
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "ids": [4],
+  "status": 0
+
+}
+
+### 查询字典详情
+GET {{host}}/api/sys/dictType/queryDictTypeDetail?id=4
+Authorization: Bearer {{token}}
 
 ### 查询字典列表
 GET {{host}}/api/sys/dictType/queryDictTypeList

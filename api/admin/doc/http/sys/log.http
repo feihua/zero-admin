@@ -14,20 +14,25 @@ Content-Type: application/json
 GET {{host}}/api/sys/log/queryLoginLogList
 Authorization: Bearer {{token}}
 
+
+### 查询登录日志详情
+GET {{host}}/api/sys/log/queryLoginLogDetail?id=1
+Authorization: Bearer {{token}}
+
 ### 删除登录日志列表
-GET {{host}}/api/sys/log/deleteLoginLog
+GET {{host}}/api/sys/log/deleteLoginLog?ids=1
 Authorization: Bearer {{token}}
 
 ### 查询系统日志列表
 GET {{host}}/api/sys/log/queryOperateLogList
 Authorization: Bearer {{token}}
 
+### 查询系统日志详情
+GET {{host}}/api/sys/log/queryOperateLogDetail?id=1
+Authorization: Bearer {{token}}
+
 ### 删除系统日志列表
-GET {{host}}/api/sys/log/deleteOperateLog
+GET {{host}}/api/sys/log/deleteOperateLog?ids=1
 Authorization: Bearer {{token}}
 
-
-### 登陆日志统计
-GET {{host}}/api/sys/log/statisticsLoginLog
-Authorization: Bearer {{token}}
 

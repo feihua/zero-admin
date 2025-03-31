@@ -35,12 +35,11 @@ func NewAddDictTypeLogic(ctx context.Context, svcCtx *svc.ServiceContext) AddDic
 // AddDictType 添加字典类型信息
 func (l *AddDictTypeLogic) AddDictType(req *types.AddDictTypeReq) (*types.AddDictTypeResp, error) {
 	_, err := l.svcCtx.DictTypeService.AddDictType(l.ctx, &sysclient.AddDictTypeReq{
-		DictName:   req.DictName,   // 字典名称
-		DictType:   req.DictType,   // 字典类型
-		DictStatus: req.DictStatus, // 字典状态
-		Remark:     req.Remark,     // 备注信息
-		IsSystem:   req.IsSystem,   // 是否系统预留  0：否  1：是
-		CreateBy:   l.ctx.Value("userName").(string),
+		DictName: req.DictName, // 字典名称
+		DictType: req.DictType, // 字典类型
+		Status:   req.Status,   // 状态（0：停用，1:正常）
+		Remark:   req.Remark,   // 备注
+		CreateBy: l.ctx.Value("userName").(string),
 	})
 
 	if err != nil {

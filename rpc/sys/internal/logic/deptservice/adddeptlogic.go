@@ -9,10 +9,8 @@ import (
 	"github.com/feihua/zero-admin/rpc/sys/internal/svc"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
 	"github.com/zeromicro/go-zero/core/logc"
-	"gorm.io/gorm"
-	"strings"
-
 	"github.com/zeromicro/go-zero/core/logx"
+	"gorm.io/gorm"
 )
 
 // AddDeptLogic 添加部门
@@ -43,18 +41,18 @@ func (l *AddDeptLogic) AddDept(in *sysclient.AddDeptReq) (*sysclient.AddDeptResp
 	q := query.SysDept.WithContext(l.ctx)
 
 	// 1.根据部门名称查询部门是否已存在
-	deptName := in.DeptName
-	count, err := q.Where(query.SysDept.DeptName.Eq(deptName), query.SysDept.ParentID.Eq(in.ParentId)).Count()
+	name := in.DeptName
+	count, err := q.Where(query.SysDept.DeptName.Eq(name), query.SysDept.ParentID.Eq(in.ParentId)).Count()
 
 	if err != nil {
-		logc.Errorf(l.ctx, "根据部门名称：%s,查询部门失败,异常:%s", deptName, err.Error())
-		return nil, errors.New(fmt.Sprintf("查询部门失败"))
+		logc.Errorf(l.ctx, "根据部门名称：%s,查询部门失败,异常:%s", name, err.Error())
+		return nil, errors.New(fmt.Sprintf("添加部门失败"))
 	}
 
 	// 2.如果部门已存在,则直接返回
 	if count > 0 {
 		logc.Errorf(l.ctx, "部门名称已存在：%+v", in)
-		return nil, errors.New(fmt.Sprintf("部门名称：%s,已存在", deptName))
+		return nil, errors.New(fmt.Sprintf("部门名称：%s,已存在", name))
 	}
 
 	// 3.如果父节点不为正常状态,则不允许新增子节点
@@ -69,23 +67,24 @@ func (l *AddDeptLogic) AddDept(in *sysclient.AddDeptReq) (*sysclient.AddDeptResp
 		return nil, errors.New("添加部门失败,查询上级部门异常")
 	}
 
-	if parentDept.DeptStatus != 1 {
+	if parentDept.Status != 1 {
 		return nil, errors.New(fmt.Sprintf("添加部门失败,：%s,停用，不允许新增", parentDept.DeptName))
 	}
 
+	ancestors := fmt.Sprintf("%s,%d", parentDept.Ancestors, parentDept.ID)
 	// 4.部门不存在时,则直接添加部门
-	parentId := strings.Replace(strings.Trim(fmt.Sprint(in.ParentIds), "[]"), " ", ",", -1) // 上级机构IDs，一级机构为0
 	dept := &model.SysDept{
-		DeptName:   in.DeptName,   // 部门名称
-		DeptStatus: in.DeptStatus, // 部门状态
-		DeptSort:   in.DeptSort,   // 部门排序
-		ParentIds:  parentId,      // 上级机构IDs，一级机构为0
-		Leader:     in.Leader,     // 负责人
-		Phone:      in.Phone,      // 电话号码
-		Email:      in.Email,      // 邮箱
-		Remark:     in.Remark,     // 备注
-		IsDeleted:  0,             // 是否删除  0：否  1：是
-		CreateBy:   in.CreateBy,   // 创建者
+		ParentID:  in.ParentId, // 上级部门id
+		Ancestors: ancestors,   // 祖级列表
+		DeptName:  in.DeptName, // 部门名称
+		Sort:      in.Sort,     // 显示顺序
+		Leader:    in.Leader,   // 负责人
+		Phone:     in.Phone,    // 联系电话
+		Email:     in.Email,    // 邮箱
+		Status:    in.Status,   // 部门状态（0：停用，1:正常）
+		DelFlag:   1,           // 删除标志（0代表删除 1代表存在）
+		Remark:    in.Remark,   // 备注信息
+		CreateBy:  in.CreateBy, // 创建者
 	}
 
 	err = q.Create(dept)

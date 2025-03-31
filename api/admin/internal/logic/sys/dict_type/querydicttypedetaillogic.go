@@ -45,13 +45,11 @@ func (l *QueryDictTypeDetailLogic) QueryDictTypeDetail(req *types.QueryDictTypeD
 	}
 
 	data := types.QueryDictTypeDetailData{
-		Id:         detail.Id,         // 编号
+		Id:         detail.Id,         // 字典id
 		DictName:   detail.DictName,   // 字典名称
 		DictType:   detail.DictType,   // 字典类型
-		DictStatus: detail.DictStatus, // 字典状态
-		Remark:     detail.Remark,     // 备注信息
-		IsSystem:   detail.IsSystem,   // 是否系统预留  0：否  1：是
-		IsDeleted:  detail.IsDeleted,  // 是否删除  0：否  1：是
+		Status:     detail.Status,     // 状态（0：停用，1:正常）
+		Remark:     detail.Remark,     // 备注
 		CreateBy:   detail.CreateBy,   // 创建者
 		CreateTime: detail.CreateTime, // 创建时间
 		UpdateBy:   detail.UpdateBy,   // 更新者

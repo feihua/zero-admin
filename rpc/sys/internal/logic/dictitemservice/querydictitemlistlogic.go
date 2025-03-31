@@ -36,13 +36,15 @@ func NewQueryDictItemListLogic(ctx context.Context, svcCtx *svc.ServiceContext) 
 func (l *QueryDictItemListLogic) QueryDictItemList(in *sysclient.QueryDictItemListReq) (*sysclient.QueryDictItemListResp, error) {
 	q := query.SysDictItem.WithContext(l.ctx)
 
-	q = q.Where(query.SysDictItem.DictType.Eq(in.DictType))
+	if len(in.DictType) > 0 {
+		q = q.Where(query.SysDictItem.DictType.Eq(in.DictType))
+	}
 	if len(in.DictLabel) > 0 {
 		q = q.Where(query.SysDictItem.DictLabel.Like("%" + in.DictLabel + "%"))
 	}
 
-	if in.DictStatus != 2 {
-		q = q.Where(query.SysDictItem.DictStatus.Eq(in.DictStatus))
+	if in.Status != 2 {
+		q = q.Where(query.SysDictItem.Status.Eq(in.Status))
 	}
 
 	result, count, err := q.FindByPage(int((in.PageNum-1)*in.PageSize), int(in.PageSize))
@@ -54,21 +56,22 @@ func (l *QueryDictItemListLogic) QueryDictItemList(in *sysclient.QueryDictItemLi
 
 	var list = make([]*sysclient.DictItemListData, 0, len(result))
 
-	for _, dict := range result {
+	for _, item := range result {
 		list = append(list, &sysclient.DictItemListData{
-			Id:         dict.ID,                                 // 编号
-			DictType:   dict.DictType,                           // 字典类型
-			DictLabel:  dict.DictLabel,                          // 字典标签
-			DictValue:  dict.DictValue,                          // 字典键值
-			DictStatus: dict.DictStatus,                         // 字典状态
-			DictSort:   dict.DictSort,                           // 排序
-			Remark:     dict.Remark,                             // 备注
-			IsDefault:  dict.IsDefault,                          // 是否默认  0：否  1：是
-			IsDeleted:  dict.IsDeleted,                          // 是否删除  0：否  1：是
-			CreateBy:   dict.CreateBy,                           // 创建者
-			CreateTime: time_util.TimeToStr(dict.CreateTime),    // 创建时间
-			UpdateBy:   dict.UpdateBy,                           // 更新者
-			UpdateTime: time_util.TimeToString(dict.UpdateTime), // 更新时间
+			Id:         item.ID,                                 // 字典数据id
+			DictSort:   item.DictSort,                           // 字典排序
+			DictLabel:  item.DictLabel,                          // 字典标签
+			DictValue:  item.DictValue,                          // 字典键值
+			DictType:   item.DictType,                           // 字典类型
+			CssClass:   item.CSSClass,                           // 样式属性（其他样式扩展）
+			ListClass:  item.ListClass,                          // 表格回显样式
+			IsDefault:  item.IsDefault,                          // 是否默认（Y是 N否）
+			Status:     item.Status,                             // 状态（0：停用，1:正常）
+			Remark:     item.Remark,                             // 备注
+			CreateBy:   item.CreateBy,                           // 创建者
+			CreateTime: time_util.TimeToStr(item.CreateTime),    // 创建时间
+			UpdateBy:   item.UpdateBy,                           // 更新者
+			UpdateTime: time_util.TimeToString(item.UpdateTime), // 更新时间
 		})
 	}
 
