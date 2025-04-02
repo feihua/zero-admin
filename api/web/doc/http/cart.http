@@ -3,15 +3,13 @@ POST {{host}}/api/member/login
 Content-Type: application/json
 
 {
-  "account": "18613030352",
+  "account": "koobe",
   "password": "123456"
 }
-> {%
-    client.global.set("token", response.body.data.token);
-%}
+> {% client.global.set("token", response.body.data.token); %}
 
 ### 添加商品进购物车
-POST {{host}}/api/cart/add
+POST {{host}}/api/cart/addCart
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
@@ -19,7 +17,7 @@ Authorization: Bearer {{token}}
   "productId": 27,
   "productSkuId": 163,
   "quantity": 3,
-  "price": 2999.00,
+  "price": 2999,
   "productPic": "http://macro-oss.oss-cn-shenzhen.aliyuncs.com/mall/images/20221104/xiaomi_12_pro_01.jpg",
   "productName": "小米12 Pro 天玑版 天玑9000+处理器 5000万疾速影像 2K超视感屏 120Hz高刷 67W快充",
   "productSubTitle": "天玑9000+处理器、5160mAh大电量、2KAmoled超视感屏【点击购买小米11Ultra，戳】 ",
@@ -31,8 +29,13 @@ Authorization: Bearer {{token}}
 }
 
 ### 删除购物车中的某个商品
-GET {{host}}/api/cart/delete?ids=[3,4]
+POST {{host}}/api/cart/deleteCart
+Content-Type: application/json
 Authorization: Bearer {{token}}
+
+{
+  "ids": [3,4]
+}
 
 ### 修改购物车中某个商品的数量
 POST {{host}}/api/cart/updateQuantity
@@ -43,7 +46,6 @@ Authorization: Bearer {{token}}
   "id": 5,
   "quantity": 221
 }
-
 ### 修改购物车中商品的规格
 POST {{host}}/api/cart/updateAttr
 Content-Type: application/json
@@ -69,13 +71,17 @@ Authorization: Bearer {{token}}
 }
 
 ### 获取某个会员的购物车列表
-GET {{host}}/api/cart/queryCarItemList
+GET {{host}}/api/cart/queryCartList
 Authorization: Bearer {{token}}
 
 ### 获取某个会员的购物车列表,包括促销信息
-GET {{host}}/api/cart/queryPromotionList?ids=[]
+POST {{host}}/api/cart/promotionList
 Content-Type: application/json
+Authorization: Bearer {{token}}
 
+//{
+//  "ids": [27]
+//}
 
 ### 获取购物车中某个商品的规格,用于重选规格
 GET {{host}}/api/cart/product/32

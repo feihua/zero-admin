@@ -3121,7 +3121,6 @@ type QueryProductListReq struct {
 	VerifyStatus      int32  `form:"verifyStatus,default=2"`      //审核状态
 	BrandId           int64  `form:"brandId,default=0"`           //商品品牌编号
 	ProductCategoryId int64  `form:"productCategoryId,default=0"` //商品分类编号
-	DeleteStatus      int32  `form:"deleteStatus,default=2"`      // 删除状态：0->未删除；1->已删除
 	PublishStatus     int32  `form:"publishStatus,default=2"`     //上架状态
 	ProductSn         string `form:"productSn,optional"`          // 货号
 }
@@ -3230,7 +3229,7 @@ type QueryRoleUserListReq struct {
 	Current  int64  `form:"current,default=1"`   //第几页
 	PageSize int64  `form:"pageSize,default=20"` //每页的数量
 	RoleId   int64  `form:"roleId"`              //角色id
-	IsExist  int64  `form:"isExist"`             //角色是否已经拥有用户
+	IsExist  int64  `form:"isExist"`             //角色是否已经拥有用户， 1:表示拥有的用户，0:表示没拥有的用户
 	Mobile   string `form:"mobile,optional"`     //手机号
 	UserName string `form:"userName,optional"`   //昵称
 }
@@ -3353,11 +3352,11 @@ type QuerySubjectListData struct {
 }
 
 type QuerySubjectListReq struct {
-	Current         int64  `form:"current,default=1"`   //第几页
-	PageSize        int64  `form:"pageSize,default=20"` //每页的数量
-	ShowStatus      int32  `form:"showStatus,optional"` //显示状态：0->不显示；1->显示
-	Title           string `form:"title,optional"`      //
-	RecommendStatus int32  `json:"recommendStatus"`     //
+	Current         int64  `form:"current,default=1"`         //第几页
+	PageSize        int64  `form:"pageSize,default=20"`       //每页的数量
+	ShowStatus      int32  `form:"showStatus,default=2"`      //显示状态：0->不显示；1->显示
+	Title           string `form:"title,optional"`            //专题标题
+	RecommendStatus int32  `form:"recommendStatus,default=2"` ////推荐状态：0->不推荐；1->推荐
 }
 
 type QuerySubjectListResp struct {

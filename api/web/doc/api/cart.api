@@ -25,7 +25,7 @@ type CartItemAddResp {
 }
 
 type CartItemDeleteReq {
-	Ids []int64 `form:"ids"`
+	Ids []int64 `json:"ids"`
 }
 
 type CartItemDeleteResp {
@@ -35,7 +35,7 @@ type CartItemDeleteResp {
 
 type CartItemUpdateQuantityReq {
 	Id       int64 `json:"id"`
-	Quantity int64 `json:"quantity"` // 购买数量
+	Quantity int32 `json:"quantity"` // 购买数量
 }
 
 type CartItemUpdateAttrReq {
@@ -48,7 +48,7 @@ type CartItemUpdateAttrReq {
 	ProductName       string `json:"productName"` // 商品名称
 	ProductSubTitle   string `json:"productSubTitle"` // 商品副标题（卖点）
 	ProductSkuCode    string `json:"productSkuCode"` // 商品sku条码
-	DeleteStatus      int64  `json:"deleteStatus"` // 是否删除
+	DeleteStatus      int32  `json:"deleteStatus"` // 是否删除
 	ProductCategoryId int64  `json:"productCategoryId"` // 商品分类
 	ProductBrand      string `json:"productBrand"`
 	ProductSn         string `json:"productSn"`
@@ -88,7 +88,7 @@ type CartListData {
 }
 
 type CarItemListPromotionReq {
-	Ids []int64 `form:"ids"`
+	Ids []int64 `form:"ids,optional"`
 }
 
 type CarItemtListPromotionResp {
@@ -118,9 +118,9 @@ type CarItemtPromotionListData {
 	ProductAttr       string `json:"productAttr"` // 商品销售属性:[{"key":"颜色","value":"颜色"},{"key":"容量","value":"4G"}]
 	PromotionMessage  string `json:"promotionMessage"` //促销活动信息
 	ReduceAmount      int64  `json:"reduceAmount"` //促销活动减去的金额，针对每个商品
-	RealStock         int64  `json:"realStock"` //商品的真实库存（剩余库存-锁定库存）
-	Integration       int64  `json:"integration"` //购买商品赠送积分
-	Growth            int64  `json:"growth"` //购买商品赠送成长值
+	RealStock         int32  `json:"realStock"` //商品的真实库存（剩余库存-锁定库存）
+	Integration       int32  `json:"integration"` //购买商品赠送积分
+	Growth            int32  `json:"growth"` //购买商品赠送成长值
 }
 
 type CartProductReq {
@@ -145,12 +145,12 @@ type CartItemProductAttributeList {
 	SelectType                 int32  `json:"selectType"`
 	InputType                  int32  `json:"inputType"`
 	InputList                  string `json:"inputList"`
-	Sort                       int64  `json:"sort"`
+	Sort                       int32  `json:"sort"`
 	FilterType                 int32  `json:"filterType"`
 	SearchType                 int32  `json:"searchType"`
 	RelatedStatus              int32  `json:"relatedStatus"`
 	HandAddStatus              int32  `json:"handAddStatus"`
-	Type                       int64  `json:"type"`
+	Type                       int32  `json:"type"`
 }
 
 type CartItemSkuStockList {
@@ -180,11 +180,11 @@ type CartItemClearResp {
 service web-api {
 	//添加商品进购物车
 	@handler CartItemAdd
-	post /addCartItem (CartItemAddReq) returns (CartItemAddResp)
+	post /addCart (CartItemAddReq) returns (CartItemAddResp)
 
 	//删除购物车中的某个商品
 	@handler CartItemDelete
-	get /deleteCartItem (CartItemDeleteReq) returns (CartItemDeleteResp)
+	post /deleteCart (CartItemDeleteReq) returns (CartItemDeleteResp)
 
 	//修改购物车中某个商品的数量
 	@handler CartUpdateQuantity
@@ -196,11 +196,11 @@ service web-api {
 
 	//获取某个会员的购物车列表
 	@handler CarItemList
-	get /queryCarItemList returns (CartItemListResp)
+	get /queryCartList returns (CartItemListResp)
 
 	//获取某个会员的购物车列表,包括促销信息
 	@handler CarItemtListPromotion
-	get /queryPromotionList (CarItemListPromotionReq) returns (CarItemtListPromotionResp)
+	post /promotionList (CarItemListPromotionReq) returns (CarItemtListPromotionResp)
 
 	//获取购物车中某个商品的规格,用于重选规格
 	@handler CartProduct

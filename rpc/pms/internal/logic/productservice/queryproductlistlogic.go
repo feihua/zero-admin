@@ -35,6 +35,7 @@ func NewQueryProductListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *
 // QueryProductList 查询商品列表
 func (l *QueryProductListLogic) QueryProductList(in *pmsclient.QueryProductListReq) (*pmsclient.QueryProductListResp, error) {
 	q := query.PmsProduct.WithContext(l.ctx)
+	q = q.Where(query.PmsProduct.DeleteStatus.Eq(0))
 	if len(in.Name) > 0 {
 		q = q.Where(query.PmsProduct.Name.Like("%" + in.Name + "%"))
 	}
@@ -52,9 +53,6 @@ func (l *QueryProductListLogic) QueryProductList(in *pmsclient.QueryProductListR
 	}
 	if in.PublishStatus != 2 {
 		q = q.Where(query.PmsProduct.PublishStatus.Eq(in.PublishStatus))
-	}
-	if in.DeleteStatus != 2 {
-		q = q.Where(query.PmsProduct.DeleteStatus.Eq(in.DeleteStatus))
 	}
 
 	result, count, err := q.FindByPage(int((in.Current-1)*in.PageSize), int(in.PageSize))

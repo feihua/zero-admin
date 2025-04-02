@@ -47,7 +47,7 @@ type CouponList {
 	Count        int32  `json:"count"`
 	Amount       int64  `json:"amount"`
 	PerLimit     int32  `json:"perLimit"`
-	MinPoint     int32  `json:"minPoint"`
+	MinPoint     int64  `json:"minPoint"`
 	StartTime    string `json:"startTime"`
 	EndTime      string `json:"endTime"`
 	UseType      int32  `json:"useType"`

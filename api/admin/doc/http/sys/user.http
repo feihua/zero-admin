@@ -60,7 +60,7 @@ Authorization: Bearer {{token}}
 }
 
 ### 查询用户详情
-GET {{host}}/api/sys/user/queryUserDetail?id=9
+GET {{host}}/api/sys/user/queryUserDetail?id=1
 Authorization: Bearer {{token}}
 
 ### 用户列表

@@ -11,5 +11,5 @@ Content-Type: application/json
 %}
 
 ### 查询商品优选列表
-GET {{host}}/api/cms/prefrenceArea/queryPrefrenceAreaList
+GET {{host}}/api/cms/prefrenceArea/queryPreferredAreaList
 Authorization: Bearer {{token}}

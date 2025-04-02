@@ -42,7 +42,6 @@ func (l *QueryProductListLogic) QueryProductList(req *types.QueryProductListReq)
 		VerifyStatus:      req.VerifyStatus,
 		ProductCategoryId: req.ProductCategoryId,
 		PublishStatus:     req.PublishStatus,
-		DeleteStatus:      req.DeleteStatus,
 		BrandId:           req.BrandId,
 		ProductSn:         strings.TrimSpace(req.ProductSn),
 	})

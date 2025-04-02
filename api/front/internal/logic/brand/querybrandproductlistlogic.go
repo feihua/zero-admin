@@ -38,7 +38,6 @@ func (l *QueryBrandProductListLogic) QueryBrandProductList(req *types.QueryBrand
 		PageSize:      req.PageSize,
 		VerifyStatus:  2,
 		PublishStatus: 2,
-		DeleteStatus:  2,
 		BrandId:       req.BrandId,
 	})
 

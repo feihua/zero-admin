@@ -100,9 +100,9 @@ type (
 	QuerySubjectListReq {
 		Current         int64  `form:"current,default=1"` //第几页
 		PageSize        int64  `form:"pageSize,default=20"` //每页的数量
-		ShowStatus      int32  `form:"showStatus,optional"` //显示状态：0->不显示；1->显示
-		Title           string `form:"title,optional"` //
-		RecommendStatus int32  `json:"recommendStatus"` //
+		ShowStatus      int32  `form:"showStatus,default=2"` //显示状态：0->不显示；1->显示
+		Title           string `form:"title,optional"` //专题标题
+		RecommendStatus int32  `form:"recommendStatus,default=2"` ////推荐状态：0->不推荐；1->推荐
 	}
 	QuerySubjectListData {
 		Id              int64  `json:"id"` //专题id
