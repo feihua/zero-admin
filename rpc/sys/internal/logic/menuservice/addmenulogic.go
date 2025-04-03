@@ -55,16 +55,18 @@ func (l *AddMenuLogic) AddMenu(in *sysclient.AddMenuReq) (*sysclient.AddMenuResp
 	}
 
 	// 2.查询菜单路由是否已存在,如果菜单已存在,则直接返回
-	count, err = q.Where(query.SysMenu.MenuPath.Eq(path)).Count()
+	if len(path) != 0 {
+		count, err = q.Where(query.SysMenu.MenuPath.Eq(path)).Count()
 
-	if err != nil {
-		logc.Errorf(l.ctx, "查询菜单路由是否已存在失败,路由：%s,异常:%s", path, err.Error())
-		return nil, errors.New(fmt.Sprintf("新增菜单失"))
-	}
+		if err != nil {
+			logc.Errorf(l.ctx, "查询菜单路由是否已存在失败,路由：%s,异常:%s", path, err.Error())
+			return nil, errors.New(fmt.Sprintf("新增菜单失"))
+		}
 
-	if count > 0 {
-		logc.Errorf(l.ctx, "路由已存在：%+v", in)
-		return nil, errors.New(fmt.Sprintf("新增菜单失败,菜单路由：%s,已存在", path))
+		if count > 0 {
+			logc.Errorf(l.ctx, "路由已存在：%+v", in)
+			return nil, errors.New(fmt.Sprintf("新增菜单失败,菜单路由：%s,已存在", path))
+		}
 	}
 
 	// 3.菜单不存在时,则直接添加菜单

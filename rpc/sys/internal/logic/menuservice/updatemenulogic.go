@@ -4,10 +4,13 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"github.com/feihua/zero-admin/pkg/errorx"
 	"github.com/feihua/zero-admin/rpc/sys/gen/model"
 	"github.com/feihua/zero-admin/rpc/sys/gen/query"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
 	"github.com/zeromicro/go-zero/core/logc"
+	"gorm.io/gorm"
+	"time"
 
 	"github.com/feihua/zero-admin/rpc/sys/internal/svc"
 
@@ -46,18 +49,19 @@ func (l *UpdateMenuLogic) UpdateMenu(in *sysclient.UpdateMenuReq) (*sysclient.Up
 	q := sMenu.WithContext(l.ctx)
 
 	// 1.根据菜单id查询菜单是否已存在
-	count, err := q.Where(sMenu.ID.Eq(in.Id)).Count()
+	item, err := q.Where(query.SysMenu.ID.Eq(in.Id)).First()
 
-	if err != nil {
-		return nil, errors.New("查询菜单失败")
-	}
-
-	if count == 0 {
-		return nil, errors.New("菜单不存在")
+	switch {
+	case errors.Is(err, gorm.ErrRecordNotFound):
+		logc.Errorf(l.ctx, "菜单不存在, 请求参数：%+v, 异常信息: %s", in, err.Error())
+		return nil, errorx.NewDefaultError("菜单不存在")
+	case err != nil:
+		logc.Errorf(l.ctx, "查询菜单异常, 请求参数：%+v, 异常信息: %s", in, err.Error())
+		return nil, errorx.NewDefaultError("查询菜单异常")
 	}
 
 	// 2.查询菜单名称是否已存在,如果菜单已存在,则直接返回
-	count, err = q.Where(sMenu.ID.Neq(in.Id), sMenu.MenuName.Eq(name)).Count()
+	count, err := q.Where(sMenu.ID.Neq(in.Id), sMenu.MenuName.Eq(name)).Count()
 	if err != nil {
 		logc.Errorf(l.ctx, "查询菜单名称是否已存在失败, 参数：%s,异常:%s", name, err.Error())
 		return nil, errors.New(fmt.Sprintf("新增菜单失败,菜单名称已存在"))
@@ -68,18 +72,21 @@ func (l *UpdateMenuLogic) UpdateMenu(in *sysclient.UpdateMenuReq) (*sysclient.Up
 	}
 
 	// 3.查询菜单路由是否已存在,如果菜单已存在,则直接返回
-	count, err = q.Where(sMenu.ID.Neq(in.Id), sMenu.MenuPath.Eq(path)).Count()
+	if len(path) != 0 {
+		count, err = q.Where(sMenu.ID.Neq(in.Id), sMenu.MenuPath.Eq(path)).Count()
 
-	if err != nil {
-		logc.Errorf(l.ctx, "查询菜单路由是否已存在失败,路由：%s,异常:%s", path, err.Error())
-		return nil, errors.New(fmt.Sprintf("新增菜单失"))
+		if err != nil {
+			logc.Errorf(l.ctx, "查询菜单路由是否已存在失败,路由：%s,异常:%s", path, err.Error())
+			return nil, errors.New(fmt.Sprintf("新增菜单失"))
+		}
+
+		if count > 0 {
+			logc.Errorf(l.ctx, "路由已存在：%+v", in)
+			return nil, errors.New(fmt.Sprintf("新增菜单失败,菜单路由：%s,已存在", path))
+		}
 	}
 
-	if count > 0 {
-		logc.Errorf(l.ctx, "路由已存在：%+v", in)
-		return nil, errors.New(fmt.Sprintf("新增菜单失败,菜单路由：%s,已存在", path))
-	}
-
+	now := time.Now()
 	menu := &model.SysMenu{
 		ID:            in.Id,            // 编号
 		MenuName:      name,             // 菜单名称
@@ -99,6 +106,9 @@ func (l *UpdateMenuLogic) UpdateMenu(in *sysclient.UpdateMenuReq) (*sysclient.Up
 		VueIcon:       in.VueIcon,       // vue的图标
 		VueRedirect:   in.VueRedirect,   // vue的路由重定向
 		BackgroundURL: in.BackgroundUrl, // 接口地址
+		CreateBy:      item.CreateBy,    // 创建者
+		CreateTime:    item.CreateTime,  // 创建时间
+		UpdateTime:    &now,             // 更新时间
 	}
 
 	// 4.菜单存在时,则直接更新菜单
