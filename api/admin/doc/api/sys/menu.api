@@ -8,7 +8,7 @@ type (
 	// 添加菜单信息
 	AddMenuReq {
 		MenuName      string `json:"menuName"` //菜单名称
-		ParentId      int64  `json:"parentId"` //父菜单ID，一级菜单为0
+		ParentId      int64  `json:"parentId,default=0"` //父菜单ID，一级菜单为0
 		MenuPath      string `json:"menuPath,optional"` //前端路由
 		MenuPerms     string `json:"menuPerms,optional"` //权限标识
 		MenuType      int32  `json:"menuType"` //类型 0：目录,1：菜单,2：按钮,3：外链
