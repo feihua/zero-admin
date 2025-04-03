@@ -3,6 +3,7 @@ package roleservicelogic
 import (
 	"context"
 	"errors"
+	"fmt"
 	"github.com/feihua/zero-admin/pkg/time_util"
 	"github.com/feihua/zero-admin/rpc/sys/gen/model"
 	"github.com/feihua/zero-admin/rpc/sys/gen/query"
@@ -36,10 +37,10 @@ func NewQueryRoleUserListLogic(ctx context.Context, svcCtx *svc.ServiceContext) 
 // 2.超级管理员不需要分配用户
 // 3.如果角色不是admin则根据roleId查询用户
 func (l *QueryRoleUserListLogic) QueryRoleUserList(in *sysclient.QueryRoleUserListReq) (*sysclient.QueryRoleUserListResp, error) {
-	var result []model.SysUser
 
-	ur := query.SysUserRole
-	u := query.SysUser
+	if in.RoleId == 1 {
+		return nil, errors.New(fmt.Sprintf("不允许操作超级管理员角色"))
+	}
 
 	// 1.查询角色角色是否已存在
 	count, err := query.SysRole.WithContext(l.ctx).Where(query.SysRole.ID.Eq(in.RoleId)).Count()
@@ -52,25 +53,17 @@ func (l *QueryRoleUserListLogic) QueryRoleUserList(in *sysclient.QueryRoleUserLi
 		return nil, errors.New("角色不存在")
 	}
 
-	q := u.WithContext(l.ctx).LeftJoin(ur, ur.UserID.EqCol(u.ID)).Select(u.ALL)
-	q = q.Where(u.DelFlag.Eq(1))
-	if len(in.Mobile) > 0 {
-		q = q.Where(u.Mobile.Like("%" + in.Mobile + "%"))
-	}
-	if len(in.UserName) > 0 {
-		q = q.Where(u.UserName.Like("%" + in.UserName + "%"))
-	}
-
+	var result []*model.SysUser
+	var count1 int64
 	// IsExist 1:表示拥有的用户,0:表示没拥有的用户
 	if in.IsExist == 1 {
-		q = q.Where(ur.RoleID.Eq(in.RoleId))
+		result, count1, err = QueryAllocatedList(l.ctx, in)
 	} else if in.IsExist == 0 {
-		q = q.Where(ur.WithContext(l.ctx).Where(ur.RoleID.IsNull()).Or(ur.RoleID.Neq(in.RoleId)))
+		result, count1, err = QueryUnallocatedList(l.ctx, in)
 	} else {
 		return nil, errors.New("参数错误,IsExist只能是0或者1")
 	}
-	offset := (in.PageNum - 1) * in.PageSize
-	count, err = q.ScanByPage(&result, int(offset), int(in.PageSize))
+
 	if err != nil {
 		logc.Errorf(l.ctx, "查询用户列表信息失败,参数：%+v,异常:%s", in, err.Error())
 		return nil, errors.New("查询用户列表信息失败")
@@ -106,6 +99,64 @@ func (l *QueryRoleUserListLogic) QueryRoleUserList(in *sysclient.QueryRoleUserLi
 
 	return &sysclient.QueryRoleUserListResp{
 		List:  list,
-		Total: count,
+		Total: count1,
 	}, nil
+}
+
+func QueryAllocatedList(ctx context.Context, in *sysclient.QueryRoleUserListReq) ([]*model.SysUser, int64, error) {
+	ur := query.SysUserRole
+	u := query.SysUser
+
+	q := u.WithContext(ctx).LeftJoin(ur, ur.UserID.EqCol(u.ID)).Select(u.ALL)
+	q = q.Where(u.DelFlag.Eq(1))
+	if len(in.Mobile) > 0 {
+		q = q.Where(u.Mobile.Like("%" + in.Mobile + "%"))
+	}
+	if len(in.UserName) > 0 {
+		q = q.Where(u.UserName.Like("%" + in.UserName + "%"))
+	}
+	q = q.Where(ur.RoleID.Eq(in.RoleId))
+
+	offset := (in.PageNum - 1) * in.PageSize
+	result, count, err := q.FindByPage(int(offset), int(in.PageSize))
+	if err != nil {
+		logc.Errorf(ctx, "查询用户列表信息失败,参数：%+v,异常:%s", in, err.Error())
+		return nil, 0, errors.New("查询用户列表信息失败")
+	}
+
+	return result, count, nil
+}
+
+func QueryUnallocatedList(ctx context.Context, in *sysclient.QueryRoleUserListReq) ([]*model.SysUser, int64, error) {
+	ur := query.SysUserRole
+	u := query.SysUser
+	q := u.WithContext(ctx).LeftJoin(ur, ur.UserID.EqCol(u.ID))
+	q = q.Where(u.DelFlag.Eq(1))
+
+	q = q.Select(u.ID).Where(ur.RoleID.Eq(in.RoleId))
+
+	var ids []int64
+	err := q.Scan(&ids)
+	if err != nil {
+		logc.Errorf(ctx, "查询用户列表信息失败,参数：%+v,异常:%s", in, err.Error())
+		return nil, 0, errors.New("查询用户列表信息失败")
+	}
+
+	offset := (in.PageNum - 1) * in.PageSize
+
+	q1 := u.WithContext(ctx).Where(u.ID.NotIn(ids...))
+	if len(in.Mobile) > 0 {
+		q1 = q1.Where(u.Mobile.Like("%" + in.Mobile + "%"))
+	}
+	if len(in.UserName) > 0 {
+		q1 = q1.Where(u.UserName.Like("%" + in.UserName + "%"))
+	}
+	users, count, err := q1.FindByPage(int(offset), int(in.PageSize))
+	if err != nil {
+		logc.Errorf(ctx, "查询用户列表信息失败,参数：%+v,异常:%s", in, err.Error())
+		return nil, 0, errors.New("查询用户列表信息失败")
+	}
+
+	return users, count, nil
+
 }

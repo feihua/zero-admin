@@ -39,7 +39,6 @@ func (l *CancelAuthorizationLogic) CancelAuthorization(in *sysclient.CancelAutho
 		return nil, errors.New("不允许操作超级管理员角色")
 	}
 
-	// 1.查询角色角色是否已存在
 	count, err := query.SysRole.WithContext(l.ctx).Where(query.SysRole.ID.Eq(in.RoleId)).Count()
 
 	if err != nil {
@@ -50,35 +49,46 @@ func (l *CancelAuthorizationLogic) CancelAuthorization(in *sysclient.CancelAutho
 		return nil, errors.New("角色不存在")
 	}
 
-	userRole := query.SysUserRole
-	q := userRole.WithContext(l.ctx)
-
-	// 确认授权
 	if in.IsExist == 1 {
-		var userRoles []*model.SysUserRole
-		for _, userId := range in.UserIds {
-			sysUserRole := model.SysUserRole{
-				RoleID: in.RoleId,
-				UserID: userId,
-			}
-			userRoles = append(userRoles, &sysUserRole)
-		}
-
-		// 2.添加角色与用户的关联
-		err = q.CreateInBatches(userRoles, len(userRoles))
-
-		if err != nil {
-			logc.Errorf(l.ctx, "授权失败,参数:%+v,异常:%s", in, err.Error())
-			return nil, errors.New("授权失败")
-		}
-		return &sysclient.CancelAuthorizationResp{}, nil
+		return addRoleUser(in, l.ctx)
+	} else if in.IsExist == 0 {
+		return deleteRoleUser(in, l.ctx)
+	} else {
+		return nil, errors.New("参数错误,IsExist只能是0或者1")
 	}
 
-	// 取消授权
-	_, err = q.Where(userRole.RoleID.Eq(in.RoleId), userRole.UserID.In(in.UserIds...)).Delete()
+}
+
+func deleteRoleUser(in *sysclient.CancelAuthorizationReq, ctx context.Context) (*sysclient.CancelAuthorizationResp, error) {
+	userRole := query.SysUserRole
+	q := userRole.WithContext(ctx)
+
+	_, err := q.Where(userRole.RoleID.Eq(in.RoleId), userRole.UserID.In(in.UserIds...)).Delete()
 	if err != nil {
-		logc.Errorf(l.ctx, "取消授权失败,参数:%+v,异常:%s", in, err.Error())
+		logc.Errorf(ctx, "取消授权失败,参数:%+v,异常:%s", in, err.Error())
 		return nil, errors.New("取消授权失败")
+	}
+
+	return &sysclient.CancelAuthorizationResp{}, nil
+}
+
+func addRoleUser(in *sysclient.CancelAuthorizationReq, ctx context.Context) (*sysclient.CancelAuthorizationResp, error) {
+	q := query.SysUserRole.WithContext(ctx)
+	for _, userId := range in.UserIds {
+		count, err := q.Where(query.SysUserRole.UserID.Eq(userId), query.SysUserRole.RoleID.Eq(in.RoleId)).Count()
+		if err != nil {
+			return nil, errors.New("授权失败")
+		}
+		if count == 0 {
+			err = q.Create(&model.SysUserRole{
+				RoleID: in.RoleId,
+				UserID: userId,
+			})
+			if err != nil {
+				logc.Errorf(ctx, "授权失败,参数:%+v,异常:%s", in, err.Error())
+				return nil, errors.New("授权失败")
+			}
+		}
 	}
 
 	return &sysclient.CancelAuthorizationResp{}, nil

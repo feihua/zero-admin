@@ -76,7 +76,7 @@ Authorization: Bearer {{token}}
 }
 
 ### 根据roleId查询用户列表（isExist->1:表示拥有的用户，0:表示没拥有的用户）
-GET {{host}}/api/sys/role/queryRoleUserList?roleId=2&isExist=0
+GET {{host}}/api/sys/role/queryRoleUserList?roleId=3&isExist=0
 Authorization: Bearer {{token}}
 
 
@@ -86,7 +86,7 @@ Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {
-  "roleId": 2,
-  "userIds": [9],
-  "isExist": 0
+  "roleId": 3,
+  "userIds": [1,2,9],
+  "isExist": 1
 }
