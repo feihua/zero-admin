@@ -3,6 +3,7 @@ package product
 import (
 	"context"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
+	"github.com/feihua/zero-admin/api/admin/internal/common/res"
 	"github.com/feihua/zero-admin/rpc/pms/pmsclient"
 	"github.com/zeromicro/go-zero/core/logc"
 
@@ -32,7 +33,7 @@ func NewUpdateNewStatusLogic(ctx context.Context, svcCtx *svc.ServiceContext) *U
 }
 
 // UpdateNewStatus 批量设为新品
-func (l *UpdateNewStatusLogic) UpdateNewStatus(req *types.UpdateProductStatusReq) (resp *types.UpdateProductStatusResp, err error) {
+func (l *UpdateNewStatusLogic) UpdateNewStatus(req *types.UpdateProductStatusReq) (resp *types.BaseResp, err error) {
 	_, err = l.svcCtx.ProductService.UpdateNewStatus(l.ctx, &pmsclient.UpdateProductStatusReq{
 		Ids:    req.Ids,
 		Status: req.Status,
@@ -43,8 +44,5 @@ func (l *UpdateNewStatusLogic) UpdateNewStatus(req *types.UpdateProductStatusReq
 		return nil, errorx.NewDefaultError("批量设为新品失败")
 	}
 
-	return &types.UpdateProductStatusResp{
-		Code:    "000000",
-		Message: "批量设为新品成功",
-	}, nil
+	return res.Success()
 }

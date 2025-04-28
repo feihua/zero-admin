@@ -3,6 +3,7 @@ package company_address
 import (
 	"context"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
+	"github.com/feihua/zero-admin/api/admin/internal/common/res"
 	"github.com/feihua/zero-admin/rpc/oms/omsclient"
 	"github.com/zeromicro/go-zero/core/logc"
 	"google.golang.org/grpc/status"
@@ -33,7 +34,7 @@ func NewUpdateCompanyAddressReceiveStatusLogic(ctx context.Context, svcCtx *svc.
 }
 
 // UpdateCompanyAddressReceiveStatus 更新公司默认收货地址状态
-func (l *UpdateCompanyAddressReceiveStatusLogic) UpdateCompanyAddressReceiveStatus(req *types.UpdateCompanyAddressReceiveStatusReq) (resp *types.UpdateCompanyAddressStatusResp, err error) {
+func (l *UpdateCompanyAddressReceiveStatusLogic) UpdateCompanyAddressReceiveStatus(req *types.UpdateCompanyAddressReceiveStatusReq) (resp *types.BaseResp, err error) {
 	_, err = l.svcCtx.CompanyAddressService.UpdateCompanyAddressReceiveStatus(l.ctx, &omsclient.UpdateCompanyAddressReceiveStatusReq{
 		Id:            req.Id,
 		ReceiveStatus: req.ReceiveStatus, // 是否默认收货地址：0->否；1->是
@@ -46,8 +47,5 @@ func (l *UpdateCompanyAddressReceiveStatusLogic) UpdateCompanyAddressReceiveStat
 		return nil, errorx.NewDefaultError(s.Message())
 	}
 
-	return &types.UpdateCompanyAddressStatusResp{
-		Code:    "000000",
-		Message: "更新公司默认收货地址状态成功",
-	}, nil
+	return res.Success()
 }

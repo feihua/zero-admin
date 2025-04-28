@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"errors"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
+	"github.com/feihua/zero-admin/api/admin/internal/common/res"
 	"github.com/feihua/zero-admin/api/admin/internal/svc"
 	"github.com/feihua/zero-admin/api/admin/internal/types"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
@@ -52,8 +53,5 @@ func (l *DeleteUserLogic) DeleteUser(req *types.DeleteUserReq) (*types.BaseResp,
 		return nil, errorx.NewDefaultError(s.Message())
 	}
 
-	return &types.BaseResp{
-		Code:    "000000",
-		Message: "删除用户成功",
-	}, nil
+	return res.Success()
 }

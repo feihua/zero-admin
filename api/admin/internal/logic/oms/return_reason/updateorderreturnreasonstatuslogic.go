@@ -3,6 +3,7 @@ package return_reason
 import (
 	"context"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
+	"github.com/feihua/zero-admin/api/admin/internal/common/res"
 	"github.com/feihua/zero-admin/rpc/oms/omsclient"
 	"github.com/zeromicro/go-zero/core/logc"
 
@@ -32,7 +33,7 @@ func NewUpdateOrderReturnReasonStatusLogic(ctx context.Context, svcCtx *svc.Serv
 }
 
 // UpdateOrderReturnReasonStatus 批量更新退货原因状态
-func (l *UpdateOrderReturnReasonStatusLogic) UpdateOrderReturnReasonStatus(req *types.UpdateOrderReturnReasonStatusReq) (resp *types.UpdateOrderReturnReasonStatusResp, err error) {
+func (l *UpdateOrderReturnReasonStatusLogic) UpdateOrderReturnReasonStatus(req *types.UpdateOrderReturnReasonStatusReq) (resp *types.BaseResp, err error) {
 	_, err = l.svcCtx.OrderReturnReasonService.UpdateOrderReturnReasonStatus(l.ctx, &omsclient.UpdateOrderReturnReasonStatusReq{
 		Ids:    req.Ids,
 		Status: req.Status,
@@ -43,8 +44,5 @@ func (l *UpdateOrderReturnReasonStatusLogic) UpdateOrderReturnReasonStatus(req *
 		return nil, errorx.NewDefaultError("批量更新退货原因状态失败")
 	}
 
-	return &types.UpdateOrderReturnReasonStatusResp{
-		Code:    "000000",
-		Message: "批量更新退货原因状态成功",
-	}, nil
+	return res.Success()
 }

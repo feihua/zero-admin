@@ -3,6 +3,7 @@ package home_recommend_product
 import (
 	"context"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
+	"github.com/feihua/zero-admin/api/admin/internal/common/res"
 	"github.com/feihua/zero-admin/rpc/pms/pmsclient"
 	"github.com/feihua/zero-admin/rpc/sms/smsclient"
 	"github.com/zeromicro/go-zero/core/logc"
@@ -36,7 +37,7 @@ func NewHomeRecommendProductDeleteLogic(ctx context.Context, svcCtx *svc.Service
 // HomeRecommendProductDelete 删除人气推荐商品
 // 1.删除sms_home_recommend_product的记录(sms-rpc)
 // 2.修改pms_product记录的状态为不推荐(pms-rpc)
-func (l *HomeRecommendProductDeleteLogic) HomeRecommendProductDelete(req *types.DeleteHomeRecommendProductReq) (*types.DeleteHomeRecommendProductResp, error) {
+func (l *HomeRecommendProductDeleteLogic) HomeRecommendProductDelete(req *types.DeleteHomeRecommendProductReq) (*types.BaseResp, error) {
 	// 1.删除sms_home_recommend_product的记录(sms-rpc)
 	_, err := l.svcCtx.HomeRecommendProductService.DeleteHomeRecommendProduct(l.ctx, &smsclient.DeleteHomeRecommendProductReq{
 		Ids: req.Ids,
@@ -58,8 +59,5 @@ func (l *HomeRecommendProductDeleteLogic) HomeRecommendProductDelete(req *types.
 		return nil, errorx.NewDefaultError(s.Message())
 	}
 
-	return &types.DeleteHomeRecommendProductResp{
-		Code:    "000000",
-		Message: "",
-	}, nil
+	return res.Success()
 }

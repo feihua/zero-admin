@@ -3,6 +3,7 @@ package member_integration_setting
 import (
 	"context"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
+	"github.com/feihua/zero-admin/api/admin/internal/common/res"
 	"github.com/feihua/zero-admin/rpc/ums/umsclient"
 	"github.com/zeromicro/go-zero/core/logc"
 
@@ -32,7 +33,7 @@ func NewDeleteIntegrationConsumeSettingLogic(ctx context.Context, svcCtx *svc.Se
 }
 
 // DeleteIntegrationConsumeSetting 删除积分消费设置
-func (l *DeleteIntegrationConsumeSettingLogic) DeleteIntegrationConsumeSetting(req *types.DeleteIntegrationConsumeSettingReq) (resp *types.DeleteIntegrationConsumeSettingResp, err error) {
+func (l *DeleteIntegrationConsumeSettingLogic) DeleteIntegrationConsumeSetting(req *types.DeleteIntegrationConsumeSettingReq) (resp *types.BaseResp, err error) {
 	_, err = l.svcCtx.IntegrationConsumeSettingService.DeleteIntegrationConsumeSetting(l.ctx, &umsclient.DeleteIntegrationConsumeSettingReq{
 		Ids: req.Ids,
 	})
@@ -41,8 +42,5 @@ func (l *DeleteIntegrationConsumeSettingLogic) DeleteIntegrationConsumeSetting(r
 		logc.Errorf(l.ctx, "根据Id: %+v,删除积分消费设置异常:%s", req, err.Error())
 		return nil, errorx.NewDefaultError("删除积分消费设置失败")
 	}
-	return &types.DeleteIntegrationConsumeSettingResp{
-		Code:    "000000",
-		Message: "删除积分消费设置成功",
-	}, nil
+	return res.Success()
 }

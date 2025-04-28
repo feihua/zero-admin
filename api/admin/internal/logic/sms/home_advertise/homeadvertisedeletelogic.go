@@ -3,6 +3,7 @@ package home_advertise
 import (
 	"context"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
+	"github.com/feihua/zero-admin/api/admin/internal/common/res"
 	"github.com/feihua/zero-admin/rpc/sms/smsclient"
 	"github.com/zeromicro/go-zero/core/logc"
 	"google.golang.org/grpc/status"
@@ -33,7 +34,7 @@ func NewHomeAdvertiseDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext
 }
 
 // HomeAdvertiseDelete 删除首页轮播广告
-func (l *HomeAdvertiseDeleteLogic) HomeAdvertiseDelete(req *types.DeleteHomeAdvertiseReq) (*types.DeleteHomeAdvertiseResp, error) {
+func (l *HomeAdvertiseDeleteLogic) HomeAdvertiseDelete(req *types.DeleteHomeAdvertiseReq) (*types.BaseResp, error) {
 	_, err := l.svcCtx.HomeAdvertiseService.DeleteHomeAdvertise(l.ctx, &smsclient.DeleteHomeAdvertiseReq{
 		Ids: req.Ids,
 	})
@@ -44,8 +45,5 @@ func (l *HomeAdvertiseDeleteLogic) HomeAdvertiseDelete(req *types.DeleteHomeAdve
 		return nil, errorx.NewDefaultError(s.Message())
 	}
 
-	return &types.DeleteHomeAdvertiseResp{
-		Code:    "000000",
-		Message: "",
-	}, nil
+	return res.Success()
 }

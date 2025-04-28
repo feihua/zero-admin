@@ -3,6 +3,7 @@ package subject
 import (
 	"context"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
+	"github.com/feihua/zero-admin/api/admin/internal/common/res"
 	"github.com/feihua/zero-admin/api/admin/internal/svc"
 	"github.com/feihua/zero-admin/api/admin/internal/types"
 	"github.com/feihua/zero-admin/rpc/cms/cmsclient"
@@ -32,7 +33,7 @@ func NewAddSubjectLogic(ctx context.Context, svcCtx *svc.ServiceContext) *AddSub
 }
 
 // AddSubject 添加专题表
-func (l *AddSubjectLogic) AddSubject(req *types.AddSubjectReq) (resp *types.AddSubjectResp, err error) {
+func (l *AddSubjectLogic) AddSubject(req *types.AddSubjectReq) (resp *types.BaseResp, err error) {
 
 	createBy := l.ctx.Value("userName").(string)
 	_, err = l.svcCtx.SubjectService.AddSubject(l.ctx, &cmsclient.AddSubjectReq{
@@ -59,8 +60,5 @@ func (l *AddSubjectLogic) AddSubject(req *types.AddSubjectReq) (resp *types.AddS
 		return nil, errorx.NewDefaultError(s.Message())
 	}
 
-	return &types.AddSubjectResp{
-		Code:    "000000",
-		Message: "添加专题表成功",
-	}, nil
+	return res.Success()
 }

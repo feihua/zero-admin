@@ -3,6 +3,7 @@ package order
 import (
 	"context"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
+	"github.com/feihua/zero-admin/api/admin/internal/common/res"
 	"github.com/feihua/zero-admin/rpc/oms/omsclient"
 	"github.com/zeromicro/go-zero/core/logc"
 
@@ -32,7 +33,7 @@ func NewUpdateMoneyInfoLogic(ctx context.Context, svcCtx *svc.ServiceContext) *U
 }
 
 // UpdateMoneyInfo 修改订单费用信息
-func (l *UpdateMoneyInfoLogic) UpdateMoneyInfo(req *types.UpdateMoneyInfoReq) (resp *types.UpdateMoneyInfoResp, err error) {
+func (l *UpdateMoneyInfoLogic) UpdateMoneyInfo(req *types.UpdateMoneyInfoReq) (resp *types.BaseResp, err error) {
 	_, err = l.svcCtx.OrderService.UpdateMoneyInfo(l.ctx, &omsclient.UpdateMoneyInfoReq{
 		Status:         req.Status,
 		OrderId:        req.Id,
@@ -46,8 +47,5 @@ func (l *UpdateMoneyInfoLogic) UpdateMoneyInfo(req *types.UpdateMoneyInfoReq) (r
 		return nil, errorx.NewDefaultError("修改订单费用信息失败")
 	}
 
-	return &types.UpdateMoneyInfoResp{
-		Code:    "000000",
-		Message: "修改订单费用信息成功",
-	}, nil
+	return res.Success()
 }

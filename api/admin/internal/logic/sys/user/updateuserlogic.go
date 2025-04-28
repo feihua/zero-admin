@@ -3,6 +3,7 @@ package user
 import (
 	"context"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
+	"github.com/feihua/zero-admin/api/admin/internal/common/res"
 	"github.com/feihua/zero-admin/api/admin/internal/svc"
 	"github.com/feihua/zero-admin/api/admin/internal/types"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
@@ -32,7 +33,7 @@ func NewUpdateUserLogic(ctx context.Context, svcCtx *svc.ServiceContext) UpdateU
 }
 
 // UpdateUser 更新用户信息
-func (l *UpdateUserLogic) UpdateUser(req *types.UpdateUserReq) (*types.UpdateUserResp, error) {
+func (l *UpdateUserLogic) UpdateUser(req *types.UpdateUserReq) (*types.BaseResp, error) {
 	userUpdateReq := sysclient.UpdateUserReq{
 		Id:       req.Id,       // 用户id
 		Mobile:   req.Mobile,   // 手机号码
@@ -54,8 +55,5 @@ func (l *UpdateUserLogic) UpdateUser(req *types.UpdateUserReq) (*types.UpdateUse
 		return nil, errorx.NewDefaultError(s.Message())
 	}
 
-	return &types.UpdateUserResp{
-		Code:    "000000",
-		Message: "更新用户成功",
-	}, nil
+	return res.Success()
 }

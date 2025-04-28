@@ -3,6 +3,7 @@ package product_attribute
 import (
 	"context"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
+	"github.com/feihua/zero-admin/api/admin/internal/common/res"
 	"github.com/feihua/zero-admin/rpc/pms/pmsclient"
 	"github.com/zeromicro/go-zero/core/logc"
 
@@ -32,7 +33,7 @@ func NewProductAttributeDeleteLogic(ctx context.Context, svcCtx *svc.ServiceCont
 }
 
 // ProductAttributeDelete 删除商品属性
-func (l *ProductAttributeDeleteLogic) ProductAttributeDelete(req *types.DeleteProductAttributeReq) (resp *types.DeleteProductAttributeResp, err error) {
+func (l *ProductAttributeDeleteLogic) ProductAttributeDelete(req *types.DeleteProductAttributeReq) (resp *types.BaseResp, err error) {
 	_, err = l.svcCtx.ProductAttributeService.DeleteProductAttribute(l.ctx, &pmsclient.DeleteProductAttributeReq{
 		Ids: req.Ids,
 	})
@@ -42,8 +43,5 @@ func (l *ProductAttributeDeleteLogic) ProductAttributeDelete(req *types.DeletePr
 		return nil, errorx.NewDefaultError("删除属性失败")
 	}
 
-	return &types.DeleteProductAttributeResp{
-		Code:    "000000",
-		Message: "",
-	}, nil
+	return res.Success()
 }

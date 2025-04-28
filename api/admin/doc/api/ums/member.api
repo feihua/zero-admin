@@ -1,3 +1,5 @@
+import "../base/base.api"
+
 info (
 	desc:   "会员信息"
 	author: "koobe"
@@ -62,16 +64,8 @@ type (
 		LotteryCount          int32  `json:"lotteryCount"` //剩余抽奖次数
 		HistoryIntegration    int32  `json:"historyIntegration"` //历史积分数量
 	}
-	UpdateMemberResp {
-		Code    string `json:"code"`
-		Message string `json:"message"`
-	}
 	DeleteMemberReq {
 		Ids []int64 `form:"ids"`
-	}
-	DeleteMemberResp {
-		Code    string `json:"code"`
-		Message string `json:"message"`
 	}
 	ListMemberLoginLogReq {
 		Current  int64 `form:"current,default=1"`
@@ -135,11 +129,11 @@ service admin-api {
 
 	//更新查询会员信息
 	@handler UpdateMember
-	post /updateMember (UpdateMemberReq) returns (UpdateMemberResp)
+	post /updateMember (UpdateMemberReq) returns (BaseResp)
 
 	//删除查询会员信息
 	@handler DeleteMember
-	get /deleteMember (DeleteMemberReq) returns (DeleteMemberResp)
+	get /deleteMember (DeleteMemberReq) returns (BaseResp)
 
 	//查询会员的登录日志
 	@handler QueryMemberLoginLogList

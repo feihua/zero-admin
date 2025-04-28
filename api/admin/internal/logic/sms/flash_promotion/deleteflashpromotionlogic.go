@@ -3,6 +3,7 @@ package flash_promotion
 import (
 	"context"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
+	"github.com/feihua/zero-admin/api/admin/internal/common/res"
 	"github.com/feihua/zero-admin/api/admin/internal/svc"
 	"github.com/feihua/zero-admin/api/admin/internal/types"
 	"github.com/feihua/zero-admin/rpc/sms/smsclient"
@@ -32,7 +33,7 @@ func NewDeleteFlashPromotionLogic(ctx context.Context, svcCtx *svc.ServiceContex
 }
 
 // DeleteFlashPromotion 删除限时购表
-func (l *DeleteFlashPromotionLogic) DeleteFlashPromotion(req *types.DeleteFlashPromotionReq) (resp *types.DeleteFlashPromotionResp, err error) {
+func (l *DeleteFlashPromotionLogic) DeleteFlashPromotion(req *types.DeleteFlashPromotionReq) (resp *types.BaseResp, err error) {
 	_, err = l.svcCtx.FlashPromotionService.DeleteFlashPromotion(l.ctx, &smsclient.DeleteFlashPromotionReq{
 		Ids: req.Ids,
 	})
@@ -43,8 +44,5 @@ func (l *DeleteFlashPromotionLogic) DeleteFlashPromotion(req *types.DeleteFlashP
 		return nil, errorx.NewDefaultError(s.Message())
 	}
 
-	return &types.DeleteFlashPromotionResp{
-		Code:    "000000",
-		Message: "删除限时购表成功",
-	}, nil
+	return res.Success()
 }

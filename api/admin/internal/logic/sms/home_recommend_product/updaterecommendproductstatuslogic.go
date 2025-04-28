@@ -3,6 +3,7 @@ package home_recommend_product
 import (
 	"context"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
+	"github.com/feihua/zero-admin/api/admin/internal/common/res"
 	"github.com/feihua/zero-admin/rpc/pms/pmsclient"
 	"github.com/feihua/zero-admin/rpc/sms/smsclient"
 	"github.com/zeromicro/go-zero/core/logc"
@@ -32,7 +33,7 @@ func NewUpdateRecommendProductStatusLogic(ctx context.Context, svcCtx *svc.Servi
 // UpdateRecommendProductStatus 批量修改推荐状态
 // 1.修改sms_home_recommend_product的记录(sms-rpc)
 // 2.修改pms_product记录的状态
-func (l *UpdateRecommendProductStatusLogic) UpdateRecommendProductStatus(req *types.UpdateRecommendProductStatusReq) (resp *types.UpdateRecommendProductStatusResp, err error) {
+func (l *UpdateRecommendProductStatusLogic) UpdateRecommendProductStatus(req *types.UpdateRecommendProductStatusReq) (resp *types.BaseResp, err error) {
 	// 1.修改sms_home_recommend_product的记录(sms-rpc)
 	_, err = l.svcCtx.HomeRecommendProductService.UpdateHomeRecommendProductStatus(l.ctx, &smsclient.UpdateHomeRecommendProductStatusReq{
 		Ids:             req.Ids,
@@ -55,8 +56,5 @@ func (l *UpdateRecommendProductStatusLogic) UpdateRecommendProductStatus(req *ty
 		s, _ := status.FromError(err)
 		return nil, errorx.NewDefaultError(s.Message())
 	}
-	return &types.UpdateRecommendProductStatusResp{
-		Code:    "000000",
-		Message: "批量修改人气推荐状态成功",
-	}, nil
+	return res.Success()
 }

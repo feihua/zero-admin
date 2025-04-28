@@ -3,6 +3,7 @@ package skustock
 import (
 	"context"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
+	"github.com/feihua/zero-admin/api/admin/internal/common/res"
 	"github.com/feihua/zero-admin/rpc/pms/pmsclient"
 	"github.com/zeromicro/go-zero/core/logc"
 
@@ -32,7 +33,7 @@ func NewSkuStockUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContext) Sku
 }
 
 // SkuStockUpdate 批量更新sku库存信息
-func (l *SkuStockUpdateLogic) SkuStockUpdate(req *types.UpdateSkuStockReq) (*types.UpdateSkuStockResp, error) {
+func (l *SkuStockUpdateLogic) SkuStockUpdate(req *types.UpdateSkuStockReq) (*types.BaseResp, error) {
 	var skuStockList []*pmsclient.UpdateSkuStockData
 	for _, item := range req.SkuStockList {
 		skuStockList = append(skuStockList, &pmsclient.UpdateSkuStockData{
@@ -58,8 +59,5 @@ func (l *SkuStockUpdateLogic) SkuStockUpdate(req *types.UpdateSkuStockReq) (*typ
 		return nil, errorx.NewDefaultError("更新商品库存失败")
 	}
 
-	return &types.UpdateSkuStockResp{
-		Code:    "000000",
-		Message: "更新商品库存成功",
-	}, nil
+	return res.Success()
 }

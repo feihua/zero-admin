@@ -3,6 +3,7 @@ package role
 import (
 	"context"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
+	"github.com/feihua/zero-admin/api/admin/internal/common/res"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
 	"github.com/zeromicro/go-zero/core/logc"
 	"google.golang.org/grpc/status"
@@ -33,7 +34,7 @@ func NewDeleteRoleLogic(ctx context.Context, svcCtx *svc.ServiceContext) DeleteR
 }
 
 // DeleteRole 删除角色
-func (l *DeleteRoleLogic) DeleteRole(req *types.DeleteRoleReq) (*types.DeleteRoleResp, error) {
+func (l *DeleteRoleLogic) DeleteRole(req *types.DeleteRoleReq) (*types.BaseResp, error) {
 
 	_, err := l.svcCtx.RoleService.DeleteRole(l.ctx, &sysclient.DeleteRoleReq{
 		Ids: req.Ids, // 角色id
@@ -45,8 +46,5 @@ func (l *DeleteRoleLogic) DeleteRole(req *types.DeleteRoleReq) (*types.DeleteRol
 		return nil, errorx.NewDefaultError(s.Message())
 	}
 
-	return &types.DeleteRoleResp{
-		Code:    "000000",
-		Message: "删除角色成功",
-	}, nil
+	return res.Success()
 }

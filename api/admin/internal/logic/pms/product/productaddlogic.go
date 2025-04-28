@@ -3,6 +3,7 @@ package product
 import (
 	"context"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
+	"github.com/feihua/zero-admin/api/admin/internal/common/res"
 	"github.com/feihua/zero-admin/api/admin/internal/svc"
 	"github.com/feihua/zero-admin/api/admin/internal/types"
 	"github.com/feihua/zero-admin/rpc/cms/cmsclient"
@@ -37,7 +38,7 @@ func NewProductAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) Product
 // 7.关联专题
 // 8.关联优选
 // 注意: 步骤1到6是在商品(rpc)中操作,步骤7到8是在cms模块中操作
-func (l *ProductAddLogic) ProductAdd(req *types.AddProductReq) (*types.AddProductResp, error) {
+func (l *ProductAddLogic) ProductAdd(req *types.AddProductReq) (*types.BaseResp, error) {
 	// 添加商品成功后返回商品id,然后关联专题和关联优选(因为这二个表在cms模块中,需要通过rpc去调用)
 	product := req.ProductData
 	result, err := l.svcCtx.ProductService.AddProduct(l.ctx, &pmsclient.AddProductReq{
@@ -103,10 +104,7 @@ func (l *ProductAddLogic) ProductAdd(req *types.AddProductReq) (*types.AddProduc
 	// 8.关联优选
 	addPreferredAreaProductRelation(req, l, productId)
 
-	return &types.AddProductResp{
-		Code:    "000000",
-		Message: "添加商品信息成功",
-	}, nil
+	return res.Success()
 }
 
 // 商品会员价格设置

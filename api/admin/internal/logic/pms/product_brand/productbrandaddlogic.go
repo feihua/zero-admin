@@ -3,6 +3,7 @@ package product_brand
 import (
 	"context"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
+	"github.com/feihua/zero-admin/api/admin/internal/common/res"
 	"github.com/feihua/zero-admin/rpc/pms/pmsclient"
 	"github.com/feihua/zero-admin/rpc/sms/smsclient"
 	"github.com/zeromicro/go-zero/core/logc"
@@ -34,8 +35,8 @@ func NewProductBrandAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) Pr
 }
 
 // ProductBrandAdd 添加商品品牌
-func (l *ProductBrandAddLogic) ProductBrandAdd(req *types.AddProductBrandReq) (*types.AddProductBrandResp, error) {
-	res, err := l.svcCtx.BrandService.AddBrand(l.ctx, &pmsclient.AddBrandReq{
+func (l *ProductBrandAddLogic) ProductBrandAdd(req *types.AddProductBrandReq) (*types.BaseResp, error) {
+	res1, err := l.svcCtx.BrandService.AddBrand(l.ctx, &pmsclient.AddBrandReq{
 		Name:            req.Name,            // 品牌名称
 		FirstLetter:     req.FirstLetter,     // 首字母
 		Sort:            req.Sort,            // 排序
@@ -57,7 +58,7 @@ func (l *ProductBrandAddLogic) ProductBrandAdd(req *types.AddProductBrandReq) (*
 	if req.RecommendStatus == 1 {
 		var list []*smsclient.HomeBrandAddData
 		list = append(list, &smsclient.HomeBrandAddData{
-			BrandId:         res.BrandId,         // 商品品牌id
+			BrandId:         res1.BrandId,        // 商品品牌id
 			BrandName:       req.Name,            // 商品品牌名称
 			RecommendStatus: req.RecommendStatus, // 推荐状态：0->不推荐;1->推荐
 			Sort:            req.Sort,            // 排序
@@ -74,8 +75,5 @@ func (l *ProductBrandAddLogic) ProductBrandAdd(req *types.AddProductBrandReq) (*
 		}
 	}
 
-	return &types.AddProductBrandResp{
-		Code:    "000000",
-		Message: "添加商品品牌成功",
-	}, nil
+	return res.Success()
 }

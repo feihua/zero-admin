@@ -1,3 +1,5 @@
+import "../base/base.api"
+
 info (
 	desc:   "商品品牌"
 	author: "koobe"
@@ -15,10 +17,6 @@ type (
 		Logo            string `json:"logo"` //品牌logo
 		BigPic          string `json:"bigPic"` //专区大图
 		BrandStory      string `json:"brandStory"` //品牌故事
-	}
-	AddProductBrandResp {
-		Code    string `json:"code"`
-		Message string `json:"message"`
 	}
 	ListProductBrandReq {
 		Current         int64  `form:"current,default=1"`
@@ -67,24 +65,12 @@ type (
 		BigPic          string `json:"bigPic"` //专区大图
 		BrandStory      string `json:"brandStory"` //品牌故事
 	}
-	UpdateProductBrandResp {
-		Code    string `json:"code"`
-		Message string `json:"message"`
-	}
 	UpdateProductBrandStatusReq {
 		Ids    []int64 `json:"ids"`
 		status int32   `json:"status"`
 	}
-	UpdateProductBrandStatusResp {
-		Code    string `json:"code"`
-		Message string `json:"message"`
-	}
 	DeleteProductBrandReq {
 		Ids []int64 `form:"ids"`
-	}
-	DeleteProductBrandResp {
-		Code    string `json:"code"`
-		Message string `json:"message"`
 	}
 )
 
@@ -97,7 +83,7 @@ type (
 service admin-api {
 	//添加商品品牌
 	@handler ProductBrandAdd
-	post /addProductBrand (AddProductBrandReq) returns (AddProductBrandResp)
+	post /addProductBrand (AddProductBrandReq) returns (BaseResp)
 
 	//查询商品品牌
 	@handler ProductBrandList
@@ -105,18 +91,18 @@ service admin-api {
 
 	//更新商品品牌
 	@handler ProductBrandUpdate
-	post /updateProductBrand (UpdateProductBrandReq) returns (UpdateProductBrandResp)
+	post /updateProductBrand (UpdateProductBrandReq) returns (BaseResp)
 
 	//批量更新显示状态
 	@handler UpdateBrandShowStatus
-	post /updateBrandShowStatus (UpdateProductBrandStatusReq) returns (UpdateProductBrandStatusResp)
+	post /updateBrandShowStatus (UpdateProductBrandStatusReq) returns (BaseResp)
 
 	//批量更新厂家制造商状态
 	@handler UpdateBrandFactoryStatus
-	post /updateBrandFactoryStatus (UpdateProductBrandStatusReq) returns (UpdateProductBrandStatusResp)
+	post /updateBrandFactoryStatus (UpdateProductBrandStatusReq) returns (BaseResp)
 
 	//删除商品品牌
 	@handler ProductBrandDelete
-	get /deleteProductBrand (DeleteProductBrandReq) returns (DeleteProductBrandResp)
+	get /deleteProductBrand (DeleteProductBrandReq) returns (BaseResp)
 }
 

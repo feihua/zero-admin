@@ -3,6 +3,7 @@ package menu
 import (
 	"context"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
+	"github.com/feihua/zero-admin/api/admin/internal/common/res"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
 	"github.com/zeromicro/go-zero/core/logc"
 	"google.golang.org/grpc/status"
@@ -33,7 +34,7 @@ func NewUpdateMenuLogic(ctx context.Context, svcCtx *svc.ServiceContext) UpdateM
 }
 
 // UpdateMenu 更新菜单
-func (l *UpdateMenuLogic) UpdateMenu(req *types.UpdateMenuReq) (*types.UpdateMenuResp, error) {
+func (l *UpdateMenuLogic) UpdateMenu(req *types.UpdateMenuReq) (*types.BaseResp, error) {
 	updateBy := l.ctx.Value("userName").(string)
 	menuReq := sysclient.UpdateMenuReq{
 		Id:            req.Id,
@@ -60,8 +61,5 @@ func (l *UpdateMenuLogic) UpdateMenu(req *types.UpdateMenuReq) (*types.UpdateMen
 		return nil, errorx.NewDefaultError(s.Message())
 	}
 
-	return &types.UpdateMenuResp{
-		Code:    "000000",
-		Message: "更新菜单信息成功!",
-	}, nil
+	return res.Success()
 }

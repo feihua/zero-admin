@@ -3,6 +3,7 @@ package flash_promotion_session
 import (
 	"context"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
+	"github.com/feihua/zero-admin/api/admin/internal/common/res"
 	"github.com/feihua/zero-admin/rpc/sms/smsclient"
 	"github.com/zeromicro/go-zero/core/logc"
 	"google.golang.org/grpc/status"
@@ -33,7 +34,7 @@ func NewFlashPromotionSessionAddLogic(ctx context.Context, svcCtx *svc.ServiceCo
 }
 
 // FlashPromotionSessionAdd 添加限时购场次
-func (l *FlashPromotionSessionAddLogic) FlashPromotionSessionAdd(req *types.AddFlashPromotionSessionReq) (*types.AddFlashPromotionSessionResp, error) {
+func (l *FlashPromotionSessionAddLogic) FlashPromotionSessionAdd(req *types.AddFlashPromotionSessionReq) (*types.BaseResp, error) {
 	_, err := l.svcCtx.FlashPromotionSessionService.AddFlashPromotionSession(l.ctx, &smsclient.AddFlashPromotionSessionReq{
 		Name:      req.Name,      // 场次名称
 		StartTime: req.StartTime, // 每日开始时间
@@ -47,8 +48,5 @@ func (l *FlashPromotionSessionAddLogic) FlashPromotionSessionAdd(req *types.AddF
 		return nil, errorx.NewDefaultError(s.Message())
 	}
 
-	return &types.AddFlashPromotionSessionResp{
-		Code:    "000000",
-		Message: "添加限时购场次表成功",
-	}, nil
+	return res.Success()
 }

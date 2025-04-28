@@ -3,6 +3,7 @@ package prefrence_area
 import (
 	"context"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
+	"github.com/feihua/zero-admin/api/admin/internal/common/res"
 	"github.com/feihua/zero-admin/api/admin/internal/svc"
 	"github.com/feihua/zero-admin/api/admin/internal/types"
 	"github.com/feihua/zero-admin/rpc/cms/cmsclient"
@@ -32,7 +33,7 @@ func NewUpdatePreferredAreaStatusLogic(ctx context.Context, svcCtx *svc.ServiceC
 }
 
 // UpdatePreferredAreaStatus 更新优选专区状态
-func (l *UpdatePreferredAreaStatusLogic) UpdatePreferredAreaStatus(req *types.UpdatePreferredAreaStatusReq) (resp *types.UpdatePreferredAreaStatusResp, err error) {
+func (l *UpdatePreferredAreaStatusLogic) UpdatePreferredAreaStatus(req *types.UpdatePreferredAreaStatusReq) (resp *types.BaseResp, err error) {
 	updateBy := l.ctx.Value("userName").(string)
 	_, err = l.svcCtx.PreferredAreaService.UpdatePreferredAreaStatus(l.ctx, &cmsclient.UpdatePreferredAreaStatusReq{
 		Ids:        req.Ids,        // 主键ID
@@ -46,8 +47,5 @@ func (l *UpdatePreferredAreaStatusLogic) UpdatePreferredAreaStatus(req *types.Up
 		return nil, errorx.NewDefaultError(s.Message())
 	}
 
-	return &types.UpdatePreferredAreaStatusResp{
-		Code:    "000000",
-		Message: "更新优选专区状态成功",
-	}, nil
+	return res.Success()
 }

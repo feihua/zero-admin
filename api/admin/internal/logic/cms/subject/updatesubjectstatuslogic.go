@@ -3,6 +3,7 @@ package subject
 import (
 	"context"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
+	"github.com/feihua/zero-admin/api/admin/internal/common/res"
 	"github.com/feihua/zero-admin/api/admin/internal/svc"
 	"github.com/feihua/zero-admin/api/admin/internal/types"
 	"github.com/feihua/zero-admin/rpc/cms/cmsclient"
@@ -32,7 +33,7 @@ func NewUpdateSubjectStatusLogic(ctx context.Context, svcCtx *svc.ServiceContext
 }
 
 // UpdateSubjectStatus 更新专题表状态
-func (l *UpdateSubjectStatusLogic) UpdateSubjectStatus(req *types.UpdateSubjectStatusReq) (resp *types.UpdateSubjectStatusResp, err error) {
+func (l *UpdateSubjectStatusLogic) UpdateSubjectStatus(req *types.UpdateSubjectStatusReq) (resp *types.BaseResp, err error) {
 	updateBy := l.ctx.Value("userName").(string)
 	_, err = l.svcCtx.SubjectService.UpdateSubjectStatus(l.ctx, &cmsclient.UpdateSubjectStatusReq{
 		Ids:             req.Ids,             // 专题id
@@ -47,8 +48,5 @@ func (l *UpdateSubjectStatusLogic) UpdateSubjectStatus(req *types.UpdateSubjectS
 		return nil, errorx.NewDefaultError(s.Message())
 	}
 
-	return &types.UpdateSubjectStatusResp{
-		Code:    "000000",
-		Message: "更新专题表状态成功",
-	}, nil
+	return res.Success()
 }

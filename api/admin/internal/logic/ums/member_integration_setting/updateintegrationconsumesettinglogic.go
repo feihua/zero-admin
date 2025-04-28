@@ -3,6 +3,7 @@ package member_integration_setting
 import (
 	"context"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
+	"github.com/feihua/zero-admin/api/admin/internal/common/res"
 	"github.com/feihua/zero-admin/rpc/ums/umsclient"
 	"github.com/zeromicro/go-zero/core/logc"
 
@@ -32,7 +33,7 @@ func NewUpdateIntegrationConsumeSettingLogic(ctx context.Context, svcCtx *svc.Se
 }
 
 // UpdateIntegrationConsumeSetting 更新积分消费设置
-func (l *UpdateIntegrationConsumeSettingLogic) UpdateIntegrationConsumeSetting(req *types.UpdateIntegrationConsumeSettingReq) (resp *types.UpdateIntegrationConsumeSettingResp, err error) {
+func (l *UpdateIntegrationConsumeSettingLogic) UpdateIntegrationConsumeSetting(req *types.UpdateIntegrationConsumeSettingReq) (resp *types.BaseResp, err error) {
 	_, err = l.svcCtx.IntegrationConsumeSettingService.UpdateIntegrationConsumeSetting(l.ctx, &umsclient.UpdateIntegrationConsumeSettingReq{
 		Id:                 req.Id,                 //
 		DeductionPerAmount: req.DeductionPerAmount, // 每一元需要抵扣的积分数量
@@ -47,8 +48,5 @@ func (l *UpdateIntegrationConsumeSettingLogic) UpdateIntegrationConsumeSetting(r
 		return nil, errorx.NewDefaultError("更新积分消费设置失败")
 	}
 
-	return &types.UpdateIntegrationConsumeSettingResp{
-		Code:    "000000",
-		Message: "更新积分消费设置失败",
-	}, nil
+	return res.Success()
 }

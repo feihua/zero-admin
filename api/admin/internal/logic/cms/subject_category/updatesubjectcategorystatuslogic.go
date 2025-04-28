@@ -3,6 +3,7 @@ package subject_category
 import (
 	"context"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
+	"github.com/feihua/zero-admin/api/admin/internal/common/res"
 	"github.com/feihua/zero-admin/api/admin/internal/svc"
 	"github.com/feihua/zero-admin/api/admin/internal/types"
 	"github.com/feihua/zero-admin/rpc/cms/cmsclient"
@@ -32,7 +33,7 @@ func NewUpdateSubjectCategoryStatusLogic(ctx context.Context, svcCtx *svc.Servic
 }
 
 // UpdateSubjectCategoryStatus 更新专题分类表状态
-func (l *UpdateSubjectCategoryStatusLogic) UpdateSubjectCategoryStatus(req *types.UpdateSubjectCategoryStatusReq) (resp *types.UpdateSubjectCategoryStatusResp, err error) {
+func (l *UpdateSubjectCategoryStatusLogic) UpdateSubjectCategoryStatus(req *types.UpdateSubjectCategoryStatusReq) (resp *types.BaseResp, err error) {
 	_, err = l.svcCtx.SubjectCategoryService.UpdateSubjectCategoryStatus(l.ctx, &cmsclient.UpdateSubjectCategoryStatusReq{
 		Ids:        req.Ids,        // 主键ID
 		ShowStatus: req.ShowStatus, // 显示状态：0->不显示；1->显示
@@ -45,8 +46,5 @@ func (l *UpdateSubjectCategoryStatusLogic) UpdateSubjectCategoryStatus(req *type
 		return nil, errorx.NewDefaultError(s.Message())
 	}
 
-	return &types.UpdateSubjectCategoryStatusResp{
-		Code:    "000000",
-		Message: "更新专题分类表状态成功",
-	}, nil
+	return res.Success()
 }

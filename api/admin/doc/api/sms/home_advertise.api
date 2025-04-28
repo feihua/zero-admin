@@ -1,3 +1,5 @@
+import "../base/base.api"
+
 info (
 	desc:   "首页广告"
 	author: "koobe"
@@ -15,10 +17,6 @@ type (
 		Url       string `json:"url"` // 链接地址
 		Note      string `json:"note,optional"` // 备注
 		Sort      int32  `json:"sort"` // 排序
-	}
-	AddHomeAdvertiseResp {
-		Code    string `json:"code"`
-		Message string `json:"message"`
 	}
 	ListHomeAdvertiseReq {
 		Current   int64  `form:"current,default=1"`
@@ -56,10 +54,6 @@ type (
 		Ids    []int64 `json:"ids"`
 		Status int32   `json:"status"` // 上下线状态：0->下线；1->上线
 	}
-	UpdateHomeAdvertiseResp {
-		Code    string `json:"code"`
-		Message string `json:"message"`
-	}
 	UpdateHomeAdvertiseReq {
 		Id        int64  `json:"id"`
 		Name      string `json:"name"` // 名称
@@ -75,10 +69,6 @@ type (
 	DeleteHomeAdvertiseReq {
 		Ids []int64 `form:"ids"`
 	}
-	DeleteHomeAdvertiseResp {
-		Code    string `json:"code"`
-		Message string `json:"message"`
-	}
 )
 
 @server (
@@ -90,7 +80,7 @@ type (
 service admin-api {
 	//添加首页轮播广告
 	@handler HomeAdvertiseAdd
-	post /addHomeAdvertise (AddHomeAdvertiseReq) returns (AddHomeAdvertiseResp)
+	post /addHomeAdvertise (AddHomeAdvertiseReq) returns (BaseResp)
 
 	//查询首页轮播广告
 	@handler HomeAdvertiseList
@@ -98,14 +88,14 @@ service admin-api {
 
 	//更新首页轮播广告
 	@handler HomeAdvertiseUpdate
-	post /updateHomeAdvertise (UpdateHomeAdvertiseReq) returns (UpdateHomeAdvertiseResp)
+	post /updateHomeAdvertise (UpdateHomeAdvertiseReq) returns (BaseResp)
 
 	//更新首页轮播广告状态
 	@handler UpdateHomeAdvertiseStatus
-	post /updateHomeAdvertiseStatus (UpdateHomeAdvertiseStatusReq) returns (UpdateHomeAdvertiseResp)
+	post /updateHomeAdvertiseStatus (UpdateHomeAdvertiseStatusReq) returns (BaseResp)
 
 	//删除首页轮播广告
 	@handler HomeAdvertiseDelete
-	get /deleteHomeAdvertise (DeleteHomeAdvertiseReq) returns (DeleteHomeAdvertiseResp)
+	get /deleteHomeAdvertise (DeleteHomeAdvertiseReq) returns (BaseResp)
 }
 

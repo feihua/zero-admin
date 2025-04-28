@@ -3,6 +3,7 @@ package member_rule_setting
 import (
 	"context"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
+	"github.com/feihua/zero-admin/api/admin/internal/common/res"
 	"github.com/feihua/zero-admin/rpc/ums/umsclient"
 	"github.com/zeromicro/go-zero/core/logc"
 
@@ -28,7 +29,7 @@ func NewUpdateMemberRuleSettingStatusLogic(ctx context.Context, svcCtx *svc.Serv
 }
 
 // UpdateMemberRuleSettingStatus 更新会员积分规则状态
-func (l *UpdateMemberRuleSettingStatusLogic) UpdateMemberRuleSettingStatus(req *types.UpdateMemberRuleSettingStatusReq) (resp *types.UpdateMemberRuleSettingStatusResp, err error) {
+func (l *UpdateMemberRuleSettingStatusLogic) UpdateMemberRuleSettingStatus(req *types.UpdateMemberRuleSettingStatusReq) (resp *types.BaseResp, err error) {
 	_, err = l.svcCtx.MemberRuleSettingService.UpdateMemberRuleSettingStatus(l.ctx, &umsclient.UpdateMemberRuleSettingStatusReq{
 		Ids:      req.Ids,
 		Status:   req.Status,
@@ -40,8 +41,5 @@ func (l *UpdateMemberRuleSettingStatusLogic) UpdateMemberRuleSettingStatus(req *
 		return nil, errorx.NewDefaultError("更新会员积分规则状态失败")
 	}
 
-	return &types.UpdateMemberRuleSettingStatusResp{
-		Code:    "000000",
-		Message: "更新会员积分规则状态成功",
-	}, nil
+	return res.Success()
 }

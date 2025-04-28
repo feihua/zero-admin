@@ -3,6 +3,7 @@ package dict_type
 import (
 	"context"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
+	"github.com/feihua/zero-admin/api/admin/internal/common/res"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
 	"github.com/zeromicro/go-zero/core/logc"
 	"google.golang.org/grpc/status"
@@ -33,7 +34,7 @@ func NewAddDictTypeLogic(ctx context.Context, svcCtx *svc.ServiceContext) AddDic
 }
 
 // AddDictType 添加字典类型信息
-func (l *AddDictTypeLogic) AddDictType(req *types.AddDictTypeReq) (*types.AddDictTypeResp, error) {
+func (l *AddDictTypeLogic) AddDictType(req *types.AddDictTypeReq) (*types.BaseResp, error) {
 	_, err := l.svcCtx.DictTypeService.AddDictType(l.ctx, &sysclient.AddDictTypeReq{
 		DictName: req.DictName, // 字典名称
 		DictType: req.DictType, // 字典类型
@@ -48,8 +49,5 @@ func (l *AddDictTypeLogic) AddDictType(req *types.AddDictTypeReq) (*types.AddDic
 		return nil, errorx.NewDefaultError(s.Message())
 	}
 
-	return &types.AddDictTypeResp{
-		Code:    "000000",
-		Message: "添加字典类型成功",
-	}, nil
+	return res.Success()
 }

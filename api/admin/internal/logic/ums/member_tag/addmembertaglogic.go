@@ -3,6 +3,7 @@ package member_tag
 import (
 	"context"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
+	"github.com/feihua/zero-admin/api/admin/internal/common/res"
 	"github.com/feihua/zero-admin/rpc/ums/umsclient"
 	"github.com/zeromicro/go-zero/core/logc"
 
@@ -32,7 +33,7 @@ func NewAddMemberTagLogic(ctx context.Context, svcCtx *svc.ServiceContext) *AddM
 }
 
 // AddMemberTag 添加会员标签
-func (l *AddMemberTagLogic) AddMemberTag(req *types.AddMemberTagReq) (resp *types.AddMemberTagResp, err error) {
+func (l *AddMemberTagLogic) AddMemberTag(req *types.AddMemberTagReq) (resp *types.BaseResp, err error) {
 	_, err = l.svcCtx.MemberTagService.AddMemberTag(l.ctx, &umsclient.AddMemberTagReq{
 		TagName:           req.TagName,           // 标签名称
 		FinishOrderCount:  req.FinishOrderCount,  // 自动打标签完成订单数量
@@ -45,8 +46,5 @@ func (l *AddMemberTagLogic) AddMemberTag(req *types.AddMemberTagReq) (resp *type
 		return nil, errorx.NewDefaultError("添加会员标签失败")
 	}
 
-	return &types.AddMemberTagResp{
-		Code:    "000000",
-		Message: "添加会员标签成功",
-	}, nil
+	return res.Success()
 }

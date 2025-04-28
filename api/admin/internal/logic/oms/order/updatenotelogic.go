@@ -3,6 +3,7 @@ package order
 import (
 	"context"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
+	"github.com/feihua/zero-admin/api/admin/internal/common/res"
 	"github.com/feihua/zero-admin/rpc/oms/omsclient"
 	"github.com/zeromicro/go-zero/core/logc"
 
@@ -32,7 +33,7 @@ func NewUpdateNoteLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Update
 }
 
 // UpdateNote 备注订单
-func (l *UpdateNoteLogic) UpdateNote(req *types.UpdateNoteReq) (resp *types.UpdateNoteResp, err error) {
+func (l *UpdateNoteLogic) UpdateNote(req *types.UpdateNoteReq) (resp *types.BaseResp, err error) {
 	_, err = l.svcCtx.OrderService.UpdateNote(l.ctx, &omsclient.UpdateNoteReq{
 		OrderId:    req.Id,
 		Status:     req.Status,
@@ -45,8 +46,5 @@ func (l *UpdateNoteLogic) UpdateNote(req *types.UpdateNoteReq) (resp *types.Upda
 		return nil, errorx.NewDefaultError("备注订单失败")
 	}
 
-	return &types.UpdateNoteResp{
-		Code:    "000000",
-		Message: "备注订单成功",
-	}, nil
+	return res.Success()
 }

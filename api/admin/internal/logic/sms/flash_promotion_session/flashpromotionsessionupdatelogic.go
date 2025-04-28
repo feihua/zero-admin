@@ -3,6 +3,7 @@ package flash_promotion_session
 import (
 	"context"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
+	"github.com/feihua/zero-admin/api/admin/internal/common/res"
 	"github.com/feihua/zero-admin/rpc/sms/smsclient"
 	"github.com/zeromicro/go-zero/core/logc"
 	"google.golang.org/grpc/status"
@@ -33,7 +34,7 @@ func NewFlashPromotionSessionUpdateLogic(ctx context.Context, svcCtx *svc.Servic
 }
 
 // FlashPromotionSessionUpdate 更新限时购场次
-func (l *FlashPromotionSessionUpdateLogic) FlashPromotionSessionUpdate(req *types.UpdateFlashPromotionSessionReq) (*types.UpdateFlashPromotionSessionResp, error) {
+func (l *FlashPromotionSessionUpdateLogic) FlashPromotionSessionUpdate(req *types.UpdateFlashPromotionSessionReq) (*types.BaseResp, error) {
 	_, err := l.svcCtx.FlashPromotionSessionService.UpdateFlashPromotionSession(l.ctx, &smsclient.UpdateFlashPromotionSessionReq{
 		Id:        req.Id,
 		Name:      req.Name,      // 场次名称
@@ -48,8 +49,5 @@ func (l *FlashPromotionSessionUpdateLogic) FlashPromotionSessionUpdate(req *type
 		return nil, errorx.NewDefaultError(s.Message())
 	}
 
-	return &types.UpdateFlashPromotionSessionResp{
-		Code:    "000000",
-		Message: "更新限时购场次表成功",
-	}, nil
+	return res.Success()
 }

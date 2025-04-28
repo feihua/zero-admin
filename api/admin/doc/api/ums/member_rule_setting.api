@@ -1,3 +1,5 @@
+import "../base/base.api"
+
 info (
 	desc:   "会员积分成长规则"
 	author: "liufeihua"
@@ -15,17 +17,9 @@ type (
 		RuleType          int32 `json:"ruleType"` //类型：0->积分规则；1->成长值规则
 		Status            int32 `json:"status"` //状态：0->禁用；1->启用
 	}
-	AddMemberRuleSettingResp {
-		Code    string `json:"code"`
-		Message string `json:"message"`
-	}
 	// 删除会员积分成长规则请求参数
 	DeleteMemberRuleSettingReq {
 		Ids []int64 `form:"ids"`
-	}
-	DeleteMemberRuleSettingResp {
-		Code    string `json:"code"`
-		Message string `json:"message"`
 	}
 	// 更新会员积分成长规则请求参数
 	UpdateMemberRuleSettingReq {
@@ -38,18 +32,10 @@ type (
 		RuleType          int32 `json:"ruleType"` //类型：0->积分规则；1->成长值规则
 		Status            int32 `json:"status"` //状态：0->禁用；1->启用
 	}
-	UpdateMemberRuleSettingResp {
-		Code    string `json:"code"`
-		Message string `json:"message"`
-	}
 	// 更新会员积分成长规则状态请求参数
 	UpdateMemberRuleSettingStatusReq {
 		Ids    []int64 `json:"ids"` //
 		Status int32   `json:"status"` //状态：0->禁用；1->启用
-	}
-	UpdateMemberRuleSettingStatusResp {
-		Code    string `json:"code"`
-		Message string `json:"message"`
 	}
 	// 查询会员积分成长规则详情请求参数
 	QueryMemberRuleSettingDetailReq {
@@ -115,19 +101,19 @@ type (
 service admin-api {
 	// 添加会员积分成长规则
 	@handler AddMemberRuleSetting
-	post /addMemberRuleSetting (AddMemberRuleSettingReq) returns (AddMemberRuleSettingResp)
+	post /addMemberRuleSetting (AddMemberRuleSettingReq) returns (BaseResp)
 
 	// 删除会员积分成长规则
 	@handler DeleteMemberRuleSetting
-	get /deleteMemberRuleSetting (DeleteMemberRuleSettingReq) returns (DeleteMemberRuleSettingResp)
+	get /deleteMemberRuleSetting (DeleteMemberRuleSettingReq) returns (BaseResp)
 
 	// 更新会员积分成长规则
 	@handler UpdateMemberRuleSetting
-	post /updateMemberRuleSetting (UpdateMemberRuleSettingReq) returns (UpdateMemberRuleSettingResp)
+	post /updateMemberRuleSetting (UpdateMemberRuleSettingReq) returns (BaseResp)
 
 	// 更新会员积分成长规则状态
 	@handler UpdateMemberRuleSettingStatus
-	post /updateMemberRuleSettingStatus (UpdateMemberRuleSettingStatusReq) returns (UpdateMemberRuleSettingStatusResp)
+	post /updateMemberRuleSettingStatus (UpdateMemberRuleSettingStatusReq) returns (BaseResp)
 
 	// 查询会员积分成长规则详情
 	@handler QueryMemberRuleSettingDetail

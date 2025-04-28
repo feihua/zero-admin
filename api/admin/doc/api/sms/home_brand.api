@@ -1,3 +1,5 @@
+import "../base/base.api"
+
 info (
 	desc:   "首页推荐品牌表"
 	author: "刘飞华"
@@ -9,37 +11,21 @@ type (
 	AddHomeBrandReq {
 		BrandIds []int64 `json:"brandIds"` // 商品品牌id
 	}
-	AddHomeBrandResp {
-		Code    string `json:"code"`
-		Message string `json:"message"`
-	}
 	// 删除首页推荐品牌表请求参数
 	DeleteHomeBrandReq {
 		Ids      []int64 `form:"ids"`
 		BrandIds []int64 `form:"brandIds"` // 商品品牌id
-	}
-	DeleteHomeBrandResp {
-		Code    string `json:"code"`
-		Message string `json:"message"`
 	}
 	// 更新首页推荐品牌表请求参数
 	UpdateHomeBrandReq {
 		Id   int64 `json:"id"` //
 		Sort int32 `json:"sort"` //排序
 	}
-	UpdateHomeBrandResp {
-		Code    string `json:"code"`
-		Message string `json:"message"`
-	}
 	// 更新首页推荐品牌表状态请求参数
 	UpdateHomeBrandStatusReq {
 		Ids             []int64 `json:"ids"` //
 		BrandIds        []int64 `json:"brandIds"` // 商品品牌id
 		RecommendStatus int32   `json:"recommendStatus,default=2"` //推荐状态：0->不推荐;1->推荐
-	}
-	UpdateHomeBrandStatusResp {
-		Code    string `json:"code"`
-		Message string `json:"message"`
 	}
 	// 查询首页推荐品牌表详情请求参数
 	QueryHomeBrandDetailReq {
@@ -91,19 +77,19 @@ type (
 service admin-api {
 	// 添加首页推荐品牌表
 	@handler AddHomeBrand
-	post /addHomeBrand (AddHomeBrandReq) returns (AddHomeBrandResp)
+	post /addHomeBrand (AddHomeBrandReq) returns (BaseResp)
 
 	// 删除首页推荐品牌表
 	@handler DeleteHomeBrand
-	get /deleteHomeBrand (DeleteHomeBrandReq) returns (DeleteHomeBrandResp)
+	get /deleteHomeBrand (DeleteHomeBrandReq) returns (BaseResp)
 
 	// 更新首页推荐品牌表
 	@handler UpdateHomeBrand
-	post /updateHomeBrandSort (UpdateHomeBrandReq) returns (UpdateHomeBrandResp)
+	post /updateHomeBrandSort (UpdateHomeBrandReq) returns (BaseResp)
 
 	// 更新首页推荐品牌表状态
 	@handler UpdateHomeBrandStatus
-	post /updateHomeBrandStatus (UpdateHomeBrandStatusReq) returns (UpdateHomeBrandStatusResp)
+	post /updateHomeBrandStatus (UpdateHomeBrandStatusReq) returns (BaseResp)
 
 	// 查询首页推荐品牌表详情
 	@handler QueryHomeBrandDetail

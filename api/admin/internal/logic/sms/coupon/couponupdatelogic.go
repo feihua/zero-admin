@@ -3,6 +3,7 @@ package coupon
 import (
 	"context"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
+	"github.com/feihua/zero-admin/api/admin/internal/common/res"
 	"github.com/feihua/zero-admin/rpc/sms/smsclient"
 	"github.com/zeromicro/go-zero/core/logc"
 	"google.golang.org/grpc/status"
@@ -33,7 +34,7 @@ func NewCouponUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContext) Coupo
 }
 
 // CouponUpdate 更新优惠券
-func (l *CouponUpdateLogic) CouponUpdate(req *types.AddOrUpdateCouponReq) (*types.AddOrUpdateCouponResp, error) {
+func (l *CouponUpdateLogic) CouponUpdate(req *types.AddOrUpdateCouponReq) (*types.BaseResp, error) {
 	var productList []*smsclient.CouponProductRelationData
 	for _, relation := range req.ProductRelationList {
 		productList = append(productList, &smsclient.CouponProductRelationData{
@@ -78,8 +79,5 @@ func (l *CouponUpdateLogic) CouponUpdate(req *types.AddOrUpdateCouponReq) (*type
 		return nil, errorx.NewDefaultError(s.Message())
 	}
 
-	return &types.AddOrUpdateCouponResp{
-		Code:    "000000",
-		Message: "更新优惠券成功",
-	}, nil
+	return res.Success()
 }

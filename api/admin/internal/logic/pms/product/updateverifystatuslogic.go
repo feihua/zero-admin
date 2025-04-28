@@ -3,6 +3,7 @@ package product
 import (
 	"context"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
+	"github.com/feihua/zero-admin/api/admin/internal/common/res"
 	"github.com/feihua/zero-admin/rpc/pms/pmsclient"
 	"github.com/zeromicro/go-zero/core/logc"
 
@@ -32,7 +33,7 @@ func NewUpdateVerifyStatusLogic(ctx context.Context, svcCtx *svc.ServiceContext)
 }
 
 // UpdateVerifyStatus 批量修改审核状态
-func (l *UpdateVerifyStatusLogic) UpdateVerifyStatus(req *types.UpdateProductStatusReq) (resp *types.UpdateProductStatusResp, err error) {
+func (l *UpdateVerifyStatusLogic) UpdateVerifyStatus(req *types.UpdateProductStatusReq) (resp *types.BaseResp, err error) {
 	_, err = l.svcCtx.ProductService.UpdateVerifyStatus(l.ctx, &pmsclient.UpdateProductStatusReq{
 		Ids:    req.Ids,
 		Status: req.Status,
@@ -43,8 +44,5 @@ func (l *UpdateVerifyStatusLogic) UpdateVerifyStatus(req *types.UpdateProductSta
 		return nil, errorx.NewDefaultError("批量修改审核状态失败")
 	}
 
-	return &types.UpdateProductStatusResp{
-		Code:    "000000",
-		Message: "批量修改审核状态成功",
-	}, nil
+	return res.Success()
 }

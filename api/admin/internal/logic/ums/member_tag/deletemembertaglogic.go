@@ -3,6 +3,7 @@ package member_tag
 import (
 	"context"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
+	"github.com/feihua/zero-admin/api/admin/internal/common/res"
 	"github.com/feihua/zero-admin/rpc/ums/umsclient"
 	"github.com/zeromicro/go-zero/core/logc"
 
@@ -32,7 +33,7 @@ func NewDeleteMemberTagLogic(ctx context.Context, svcCtx *svc.ServiceContext) *D
 }
 
 // DeleteMemberTag 删除会员标签
-func (l *DeleteMemberTagLogic) DeleteMemberTag(req *types.DeleteMemberTagReq) (resp *types.DeleteMemberTagResp, err error) {
+func (l *DeleteMemberTagLogic) DeleteMemberTag(req *types.DeleteMemberTagReq) (resp *types.BaseResp, err error) {
 	_, err = l.svcCtx.MemberTagService.DeleteMemberTag(l.ctx, &umsclient.DeleteMemberTagReq{
 		Ids: req.Ids,
 	})
@@ -41,8 +42,5 @@ func (l *DeleteMemberTagLogic) DeleteMemberTag(req *types.DeleteMemberTagReq) (r
 		logc.Errorf(l.ctx, "根据Id: %+v,删除会员标签异常:%s", req, err.Error())
 		return nil, errorx.NewDefaultError("删除会员标签失败")
 	}
-	return &types.DeleteMemberTagResp{
-		Code:    "000000",
-		Message: "删除会员标签成功",
-	}, nil
+	return res.Success()
 }

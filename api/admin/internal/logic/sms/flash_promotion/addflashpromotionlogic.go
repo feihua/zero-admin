@@ -3,6 +3,7 @@ package flash_promotion
 import (
 	"context"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
+	"github.com/feihua/zero-admin/api/admin/internal/common/res"
 	"github.com/feihua/zero-admin/api/admin/internal/svc"
 	"github.com/feihua/zero-admin/api/admin/internal/types"
 	"github.com/feihua/zero-admin/rpc/sms/smsclient"
@@ -32,7 +33,7 @@ func NewAddFlashPromotionLogic(ctx context.Context, svcCtx *svc.ServiceContext) 
 }
 
 // AddFlashPromotion 添加限时购表
-func (l *AddFlashPromotionLogic) AddFlashPromotion(req *types.AddFlashPromotionReq) (resp *types.AddFlashPromotionResp, err error) {
+func (l *AddFlashPromotionLogic) AddFlashPromotion(req *types.AddFlashPromotionReq) (resp *types.BaseResp, err error) {
 
 	_, err = l.svcCtx.FlashPromotionService.AddFlashPromotion(l.ctx, &smsclient.AddFlashPromotionReq{
 		Title:     req.Title,     // 标题
@@ -48,8 +49,5 @@ func (l *AddFlashPromotionLogic) AddFlashPromotion(req *types.AddFlashPromotionR
 		return nil, errorx.NewDefaultError(s.Message())
 	}
 
-	return &types.AddFlashPromotionResp{
-		Code:    "000000",
-		Message: "添加限时购表成功",
-	}, nil
+	return res.Success()
 }

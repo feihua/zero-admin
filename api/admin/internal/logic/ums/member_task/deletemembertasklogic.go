@@ -3,6 +3,7 @@ package member_task
 import (
 	"context"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
+	"github.com/feihua/zero-admin/api/admin/internal/common/res"
 	"github.com/feihua/zero-admin/rpc/ums/umsclient"
 	"github.com/zeromicro/go-zero/core/logc"
 
@@ -32,7 +33,7 @@ func NewDeleteMemberTaskLogic(ctx context.Context, svcCtx *svc.ServiceContext) *
 }
 
 // DeleteMemberTask 删除会员任务
-func (l *DeleteMemberTaskLogic) DeleteMemberTask(req *types.DeleteMemberTaskReq) (resp *types.DeleteMemberTaskResp, err error) {
+func (l *DeleteMemberTaskLogic) DeleteMemberTask(req *types.DeleteMemberTaskReq) (resp *types.BaseResp, err error) {
 	_, err = l.svcCtx.MemberTaskService.DeleteMemberTask(l.ctx, &umsclient.DeleteMemberTaskReq{
 		Ids: req.Ids,
 	})
@@ -42,8 +43,5 @@ func (l *DeleteMemberTaskLogic) DeleteMemberTask(req *types.DeleteMemberTaskReq)
 		return nil, errorx.NewDefaultError("删除会员任务失败")
 	}
 
-	return &types.DeleteMemberTaskResp{
-		Code:    "000000",
-		Message: "删除会员任务成功",
-	}, nil
+	return res.Success()
 }

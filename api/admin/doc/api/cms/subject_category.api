@@ -1,3 +1,5 @@
+import "../base/base.api"
+
 info (
 	desc:   "专题分类表"
 	author: "liufeihua"
@@ -12,17 +14,9 @@ type (
 		ShowStatus int32  `json:"showStatus,default=2"` //显示状态：0->不显示；1->显示
 		Sort       int32  `json:"sort"` //排序
 	}
-	AddSubjectCategoryResp {
-		Code    string `json:"code"`
-		Message string `json:"message"`
-	}
 	// 删除专题分类表请求参数
 	DeleteSubjectCategoryReq {
 		Ids []int64 `form:"ids"`
-	}
-	DeleteSubjectCategoryResp {
-		Code    string `json:"code"`
-		Message string `json:"message"`
 	}
 	// 更新专题分类表请求参数
 	UpdateSubjectCategoryReq {
@@ -32,18 +26,10 @@ type (
 		ShowStatus int32  `json:"showStatus,default=2"` //显示状态：0->不显示；1->显示
 		Sort       int32  `json:"sort"` //排序
 	}
-	UpdateSubjectCategoryResp {
-		Code    string `json:"code"`
-		Message string `json:"message"`
-	}
 	// 更新专题分类表状态请求参数
 	UpdateSubjectCategoryStatusReq {
 		Ids        []int64 `json:"ids"` //主键ID
 		ShowStatus int32   `json:"showStatus,default=2"` //显示状态：0->不显示；1->显示
-	}
-	UpdateSubjectCategoryStatusResp {
-		Code    string `json:"code"`
-		Message string `json:"message"`
 	}
 	// 查询专题分类表详情请求参数
 	QuerySubjectCategoryDetailReq {
@@ -105,19 +91,19 @@ type (
 service admin-api {
 	// 添加专题分类表
 	@handler AddSubjectCategory
-	post /addSubjectCategory (AddSubjectCategoryReq) returns (AddSubjectCategoryResp)
+	post /addSubjectCategory (AddSubjectCategoryReq) returns (BaseResp)
 
 	// 删除专题分类表
 	@handler DeleteSubjectCategory
-	get /deleteSubjectCategory (DeleteSubjectCategoryReq) returns (DeleteSubjectCategoryResp)
+	get /deleteSubjectCategory (DeleteSubjectCategoryReq) returns (BaseResp)
 
 	// 更新专题分类表
 	@handler UpdateSubjectCategory
-	post /updateSubjectCategory (UpdateSubjectCategoryReq) returns (UpdateSubjectCategoryResp)
+	post /updateSubjectCategory (UpdateSubjectCategoryReq) returns (BaseResp)
 
 	// 更新专题分类表状态
 	@handler UpdateSubjectCategoryStatus
-	post /updateSubjectCategoryStatus (UpdateSubjectCategoryStatusReq) returns (UpdateSubjectCategoryStatusResp)
+	post /updateSubjectCategoryStatus (UpdateSubjectCategoryStatusReq) returns (BaseResp)
 
 	// 查询专题分类表详情
 	@handler QuerySubjectCategoryDetail

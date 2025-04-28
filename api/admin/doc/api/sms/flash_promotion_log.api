@@ -1,3 +1,5 @@
+import "../base/base.api"
+
 info (
 	desc:   "秒杀日志"
 	author: "koobe"
@@ -11,10 +13,6 @@ type (
 		MemberPhone   string `json:"memberPhone"`
 		ProductName   string `json:"productName"`
 		SubscribeTime string `json:"subscribeTime"` // 会员订阅时间
-	}
-	AddFlashPromotionLogResp {
-		Code    string `json:"code"`
-		Message string `json:"message"`
 	}
 	ListFlashPromotionLogReq {
 		Current  int64 `form:"current,default=1"`
@@ -41,10 +39,6 @@ type (
 	DeleteFlashPromotionLogReq {
 		Ids []int64 `form:"ids"`
 	}
-	DeleteFlashPromotionLogResp {
-		Code    string `json:"code"`
-		Message string `json:"message"`
-	}
 )
 
 @server (
@@ -56,13 +50,13 @@ type (
 service admin-api {
 	//
 	@handler FlashPromotionLogAdd
-	post /addFlashPromotionLog (AddFlashPromotionLogReq) returns (AddFlashPromotionLogResp)
+	post /addFlashPromotionLog (AddFlashPromotionLogReq) returns (BaseResp)
 
 	//
 	@handler FlashPromotionLogList
 	get /queryFlashPromotionLogList (ListFlashPromotionLogReq) returns (ListFlashPromotionLogResp)
 
 	@handler FlashPromotionLogDelete
-	get /deleteFlashPromotionLog (DeleteFlashPromotionLogReq) returns (DeleteFlashPromotionLogResp)
+	get /deleteFlashPromotionLog (DeleteFlashPromotionLogReq) returns (BaseResp)
 }
 

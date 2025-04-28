@@ -3,6 +3,7 @@ package return_reason
 import (
 	"context"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
+	"github.com/feihua/zero-admin/api/admin/internal/common/res"
 	"github.com/feihua/zero-admin/rpc/oms/omsclient"
 	"github.com/zeromicro/go-zero/core/logc"
 
@@ -32,7 +33,7 @@ func NewDeleteOrderReturnReasonLogic(ctx context.Context, svcCtx *svc.ServiceCon
 }
 
 // DeleteOrderReturnReason 删除退货原因
-func (l *DeleteOrderReturnReasonLogic) DeleteOrderReturnReason(req *types.DeleteOrderReturnReasonReq) (resp *types.DeleteOrderReturnReasonResp, err error) {
+func (l *DeleteOrderReturnReasonLogic) DeleteOrderReturnReason(req *types.DeleteOrderReturnReasonReq) (resp *types.BaseResp, err error) {
 	_, err = l.svcCtx.OrderReturnReasonService.DeleteOrderReturnReason(l.ctx, &omsclient.DeleteOrderReturnReasonReq{
 		Ids: req.Ids,
 	})
@@ -41,8 +42,5 @@ func (l *DeleteOrderReturnReasonLogic) DeleteOrderReturnReason(req *types.Delete
 		logc.Errorf(l.ctx, "根据Id: %+v,删除退货原因异常:%s", req, err.Error())
 		return nil, errorx.NewDefaultError("删除退货原因失败")
 	}
-	return &types.DeleteOrderReturnReasonResp{
-		Code:    "000000",
-		Message: "删除退货原因成功",
-	}, nil
+	return res.Success()
 }

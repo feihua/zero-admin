@@ -3,6 +3,7 @@ package dict_item
 import (
 	"context"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
+	"github.com/feihua/zero-admin/api/admin/internal/common/res"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
 	"github.com/zeromicro/go-zero/core/logc"
 	"google.golang.org/grpc/status"
@@ -33,7 +34,7 @@ func NewAddDictItemLogic(ctx context.Context, svcCtx *svc.ServiceContext) *AddDi
 }
 
 // AddDictItem 添加字典数据
-func (l *AddDictItemLogic) AddDictItem(req *types.AddDictItemReq) (resp *types.AddDictItemResp, err error) {
+func (l *AddDictItemLogic) AddDictItem(req *types.AddDictItemReq) (resp *types.BaseResp, err error) {
 	_, err = l.svcCtx.DictItemService.AddDictItem(l.ctx, &sysclient.AddDictItemReq{
 		DictSort:  req.DictSort,  // 字典排序
 		DictLabel: req.DictLabel, // 字典标签
@@ -53,8 +54,5 @@ func (l *AddDictItemLogic) AddDictItem(req *types.AddDictItemReq) (resp *types.A
 		return nil, errorx.NewDefaultError(s.Message())
 	}
 
-	return &types.AddDictItemResp{
-		Code:    "000000",
-		Message: "添加字典项成功",
-	}, nil
+	return res.Success()
 }

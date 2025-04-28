@@ -1,3 +1,5 @@
+import "../base/base.api"
+
 info (
 	desc:   "会员统计信息"
 	author: "liufeihua"

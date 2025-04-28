@@ -1,3 +1,5 @@
+import "../base/base.api"
+
 info (
 	desc:   "优惠券使用记录"
 	author: "koobe"

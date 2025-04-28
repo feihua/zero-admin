@@ -3,6 +3,7 @@ package return_apply
 import (
 	"context"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
+	"github.com/feihua/zero-admin/api/admin/internal/common/res"
 	"github.com/feihua/zero-admin/rpc/oms/omsclient"
 	"github.com/zeromicro/go-zero/core/logc"
 
@@ -32,7 +33,7 @@ func NewDeleteOrderReturnApplyLogic(ctx context.Context, svcCtx *svc.ServiceCont
 }
 
 // DeleteOrderReturnApply 删除订单退货申请
-func (l *DeleteOrderReturnApplyLogic) DeleteOrderReturnApply(req *types.DeleteOrderReturnApplyReq) (resp *types.DeleteOrderReturnApplyResp, err error) {
+func (l *DeleteOrderReturnApplyLogic) DeleteOrderReturnApply(req *types.DeleteOrderReturnApplyReq) (resp *types.BaseResp, err error) {
 	_, err = l.svcCtx.OrderReturnApplyService.DeleteOrderReturnApply(l.ctx, &omsclient.DeleteOrderReturnApplyReq{
 		Ids: req.Ids,
 	})
@@ -42,8 +43,5 @@ func (l *DeleteOrderReturnApplyLogic) DeleteOrderReturnApply(req *types.DeleteOr
 		return nil, errorx.NewDefaultError("删除退货申请失败")
 	}
 
-	return &types.DeleteOrderReturnApplyResp{
-		Code:    "000000",
-		Message: "",
-	}, nil
+	return res.Success()
 }

@@ -3,6 +3,7 @@ package home_new_product
 import (
 	"context"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
+	"github.com/feihua/zero-admin/api/admin/internal/common/res"
 	"github.com/feihua/zero-admin/rpc/pms/pmsclient"
 	"github.com/feihua/zero-admin/rpc/sms/smsclient"
 	"github.com/zeromicro/go-zero/core/logc"
@@ -36,7 +37,7 @@ func NewDeleteHomeNewProductLogic(ctx context.Context, svcCtx *svc.ServiceContex
 // DeleteHomeNewProduct 删除首页新品
 // 1.删除homenewproduct的记录(sms-rpc)
 // 2.修改pms_product记录的状态为不推荐(pms-rpc)
-func (l *HomeNewProductDeleteLogic) DeleteHomeNewProduct(req *types.DeleteHomeNewProductReq) (*types.DeleteHomeNewProductResp, error) {
+func (l *HomeNewProductDeleteLogic) DeleteHomeNewProduct(req *types.DeleteHomeNewProductReq) (*types.BaseResp, error) {
 	// 1.删除homenewproduct的记录(sms-rpc)
 	_, err := l.svcCtx.HomeNewProductService.DeleteHomeNewProduct(l.ctx, &smsclient.DeleteHomeNewProductReq{
 		Ids: req.Ids,
@@ -59,8 +60,5 @@ func (l *HomeNewProductDeleteLogic) DeleteHomeNewProduct(req *types.DeleteHomeNe
 		return nil, errorx.NewDefaultError(s.Message())
 	}
 
-	return &types.DeleteHomeNewProductResp{
-		Code:    "000000",
-		Message: "删除新鲜好物成功",
-	}, nil
+	return res.Success()
 }

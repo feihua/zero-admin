@@ -3,6 +3,7 @@ package post
 import (
 	"context"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
+	"github.com/feihua/zero-admin/api/admin/internal/common/res"
 	"github.com/feihua/zero-admin/api/admin/internal/svc"
 	"github.com/feihua/zero-admin/api/admin/internal/types"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
@@ -32,7 +33,7 @@ func NewAddPostLogic(ctx context.Context, svcCtx *svc.ServiceContext) AddPostLog
 }
 
 // AddPost 添加岗位信息
-func (l *AddPostLogic) AddPost(req *types.AddPostReq) (*types.AddPostResp, error) {
+func (l *AddPostLogic) AddPost(req *types.AddPostReq) (*types.BaseResp, error) {
 	_, err := l.svcCtx.PostService.AddPost(l.ctx, &sysclient.AddPostReq{
 		PostCode: req.PostCode, // 岗位编码
 		PostName: req.PostName, // 岗位名称
@@ -48,8 +49,5 @@ func (l *AddPostLogic) AddPost(req *types.AddPostReq) (*types.AddPostResp, error
 		return nil, errorx.NewDefaultError(s.Message())
 	}
 
-	return &types.AddPostResp{
-		Code:    "000000",
-		Message: "添加岗位成功",
-	}, nil
+	return res.Success()
 }

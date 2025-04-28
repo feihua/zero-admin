@@ -3,6 +3,7 @@ package subject_category
 import (
 	"context"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
+	"github.com/feihua/zero-admin/api/admin/internal/common/res"
 	"github.com/feihua/zero-admin/api/admin/internal/svc"
 	"github.com/feihua/zero-admin/api/admin/internal/types"
 	"github.com/feihua/zero-admin/rpc/cms/cmsclient"
@@ -32,7 +33,7 @@ func NewUpdateSubjectCategoryLogic(ctx context.Context, svcCtx *svc.ServiceConte
 }
 
 // UpdateSubjectCategory 更新专题分类表
-func (l *UpdateSubjectCategoryLogic) UpdateSubjectCategory(req *types.UpdateSubjectCategoryReq) (resp *types.UpdateSubjectCategoryResp, err error) {
+func (l *UpdateSubjectCategoryLogic) UpdateSubjectCategory(req *types.UpdateSubjectCategoryReq) (resp *types.BaseResp, err error) {
 
 	_, err = l.svcCtx.SubjectCategoryService.UpdateSubjectCategory(l.ctx, &cmsclient.UpdateSubjectCategoryReq{
 		Id:         req.Id,         // 主键ID
@@ -49,8 +50,5 @@ func (l *UpdateSubjectCategoryLogic) UpdateSubjectCategory(req *types.UpdateSubj
 		return nil, errorx.NewDefaultError(s.Message())
 	}
 
-	return &types.UpdateSubjectCategoryResp{
-		Code:    "000000",
-		Message: "更新专题分类表成功",
-	}, nil
+	return res.Success()
 }

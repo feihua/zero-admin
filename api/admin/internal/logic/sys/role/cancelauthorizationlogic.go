@@ -3,6 +3,7 @@ package role
 import (
 	"context"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
+	"github.com/feihua/zero-admin/api/admin/internal/common/res"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
 	"github.com/zeromicro/go-zero/core/logc"
 	"google.golang.org/grpc/status"
@@ -33,7 +34,7 @@ func NewCancelAuthorizationLogic(ctx context.Context, svcCtx *svc.ServiceContext
 }
 
 // CancelAuthorization 取消授权/确认授权
-func (l *CancelAuthorizationLogic) CancelAuthorization(req *types.CancelAuthorizationReq) (resp *types.CancelAuthorizationResp, err error) {
+func (l *CancelAuthorizationLogic) CancelAuthorization(req *types.CancelAuthorizationReq) (resp *types.BaseResp, err error) {
 	_, err = l.svcCtx.RoleService.CancelAuthorization(l.ctx, &sysclient.CancelAuthorizationReq{
 		RoleId:  req.RoleId,  // 角色id
 		UserIds: req.UserIds, // 用户ids
@@ -46,8 +47,5 @@ func (l *CancelAuthorizationLogic) CancelAuthorization(req *types.CancelAuthoriz
 		return nil, errorx.NewDefaultError(s.Message())
 	}
 
-	return &types.CancelAuthorizationResp{
-		Code:    "000000",
-		Message: "取消授权/确认授权成功",
-	}, nil
+	return res.Success()
 }

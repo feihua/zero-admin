@@ -3,6 +3,7 @@ package flash_promotion_product
 import (
 	"context"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
+	"github.com/feihua/zero-admin/api/admin/internal/common/res"
 	"github.com/feihua/zero-admin/rpc/sms/smsclient"
 	"github.com/zeromicro/go-zero/core/logc"
 	"google.golang.org/grpc/status"
@@ -33,7 +34,7 @@ func NewFlashPromotionProductRelationDeleteLogic(ctx context.Context, svcCtx *sv
 }
 
 // FlashPromotionProductRelationDelete 删除限时购和商品关系
-func (l *FlashPromotionProductRelationDeleteLogic) FlashPromotionProductRelationDelete(req *types.DeleteFlashPromotionProductRelationReq) (resp *types.DeleteFlashPromotionProductRelationResp, err error) {
+func (l *FlashPromotionProductRelationDeleteLogic) FlashPromotionProductRelationDelete(req *types.DeleteFlashPromotionProductRelationReq) (resp *types.BaseResp, err error) {
 	_, err = l.svcCtx.FlashPromotionProductRelationService.DeleteFlashPromotionProductRelation(l.ctx, &smsclient.DeleteFlashPromotionProductRelationReq{
 		Ids:              req.Ids,
 		FlashPromotionId: req.FlashPromotionId,
@@ -44,8 +45,5 @@ func (l *FlashPromotionProductRelationDeleteLogic) FlashPromotionProductRelation
 		s, _ := status.FromError(err)
 		return nil, errorx.NewDefaultError(s.Message())
 	}
-	return &types.DeleteFlashPromotionProductRelationResp{
-		Code:    "000000",
-		Message: "删除限时购和商品关系成功",
-	}, nil
+	return res.Success()
 }

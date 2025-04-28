@@ -3,6 +3,7 @@ package order
 import (
 	"context"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
+	"github.com/feihua/zero-admin/api/admin/internal/common/res"
 	"github.com/feihua/zero-admin/rpc/oms/omsclient"
 	"github.com/zeromicro/go-zero/core/logc"
 
@@ -32,7 +33,7 @@ func NewCloseOrderLogic(ctx context.Context, svcCtx *svc.ServiceContext) *CloseO
 }
 
 // CloseOrder 批量关闭订单
-func (l *CloseOrderLogic) CloseOrder(req *types.CloseOrderReq) (resp *types.CloseOrderResp, err error) {
+func (l *CloseOrderLogic) CloseOrder(req *types.CloseOrderReq) (resp *types.BaseResp, err error) {
 	_, err = l.svcCtx.OrderService.CloseOrder(l.ctx, &omsclient.CloseOrderReq{
 		Ids:        req.Ids,
 		Note:       req.Note,
@@ -44,8 +45,5 @@ func (l *CloseOrderLogic) CloseOrder(req *types.CloseOrderReq) (resp *types.Clos
 		return nil, errorx.NewDefaultError("批量关闭订单失败")
 	}
 
-	return &types.CloseOrderResp{
-		Code:    "000000",
-		Message: "更批量关闭订单成功",
-	}, nil
+	return res.Success()
 }

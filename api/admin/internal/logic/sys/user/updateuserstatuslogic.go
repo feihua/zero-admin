@@ -3,6 +3,7 @@ package user
 import (
 	"context"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
+	"github.com/feihua/zero-admin/api/admin/internal/common/res"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
 	"google.golang.org/grpc/status"
 
@@ -32,7 +33,7 @@ func NewUpdateUserStatusLogic(ctx context.Context, svcCtx *svc.ServiceContext) U
 }
 
 // UpdateUserStatus 更新用户状态
-func (l *UpdateUserStatusLogic) UpdateUserStatus(req *types.UpdateUserStatusReq) (*types.UpdateUserStatusResp, error) {
+func (l *UpdateUserStatusLogic) UpdateUserStatus(req *types.UpdateUserStatusReq) (*types.BaseResp, error) {
 
 	_, err := l.svcCtx.UserService.UpdateUserStatus(l.ctx, &sysclient.UpdateUserStatusReq{
 		Ids:      req.Ids,    // 用户id
@@ -45,8 +46,5 @@ func (l *UpdateUserStatusLogic) UpdateUserStatus(req *types.UpdateUserStatusReq)
 		return nil, errorx.NewDefaultError(s.Message())
 	}
 
-	return &types.UpdateUserStatusResp{
-		Code:    "000000",
-		Message: "更新用户状态成功",
-	}, nil
+	return res.Success()
 }

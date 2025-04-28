@@ -3,6 +3,7 @@ package order
 import (
 	"context"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
+	"github.com/feihua/zero-admin/api/admin/internal/common/res"
 	"github.com/feihua/zero-admin/rpc/oms/omsclient"
 	"github.com/zeromicro/go-zero/core/logc"
 
@@ -32,7 +33,7 @@ func NewUpdateReceiverInfoLogic(ctx context.Context, svcCtx *svc.ServiceContext)
 }
 
 // UpdateReceiverInfo 修改收货人信息
-func (l *UpdateReceiverInfoLogic) UpdateReceiverInfo(req *types.UpdateReceiverInfoReq) (resp *types.UpdateReceiverInfoResp, err error) {
+func (l *UpdateReceiverInfoLogic) UpdateReceiverInfo(req *types.UpdateReceiverInfoReq) (resp *types.BaseResp, err error) {
 	_, err = l.svcCtx.OrderService.UpdateReceiverInfo(l.ctx, &omsclient.UpdateReceiverInfoReq{
 		OrderId:               req.Id,
 		Status:                req.Status,
@@ -51,8 +52,5 @@ func (l *UpdateReceiverInfoLogic) UpdateReceiverInfo(req *types.UpdateReceiverIn
 		return nil, errorx.NewDefaultError("修改收货人信息失败")
 	}
 
-	return &types.UpdateReceiverInfoResp{
-		Code:    "000000",
-		Message: "修改收货人信息成功",
-	}, nil
+	return res.Success()
 }

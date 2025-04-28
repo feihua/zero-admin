@@ -3,6 +3,7 @@ package log
 import (
 	"context"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
+	"github.com/feihua/zero-admin/api/admin/internal/common/res"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
 	"github.com/zeromicro/go-zero/core/logc"
 	"google.golang.org/grpc/status"
@@ -33,7 +34,7 @@ func NewDeleteOperateLogLogic(ctx context.Context, svcCtx *svc.ServiceContext) D
 }
 
 // DeleteOperateLog 删除操作日志
-func (l *DeleteOperateLogLogic) DeleteOperateLog(req *types.DeleteOperateLogReq) (*types.DeleteOperateLogResp, error) {
+func (l *DeleteOperateLogLogic) DeleteOperateLog(req *types.DeleteOperateLogReq) (*types.BaseResp, error) {
 	_, err := l.svcCtx.Operatelogservice.DeleteOperateLog(l.ctx, &sysclient.DeleteOperateLogReq{
 		Ids: req.Ids, // 编号
 	})
@@ -44,8 +45,5 @@ func (l *DeleteOperateLogLogic) DeleteOperateLog(req *types.DeleteOperateLogReq)
 		return nil, errorx.NewDefaultError(s.Message())
 	}
 
-	return &types.DeleteOperateLogResp{
-		Code:    "000000",
-		Message: "删除操作日志成功",
-	}, nil
+	return res.Success()
 }

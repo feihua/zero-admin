@@ -1,3 +1,5 @@
+import "../base/base.api"
+
 info (
 	desc:   "优惠券"
 	author: "koobe"
@@ -23,10 +25,6 @@ type (
 		MemberLevel                 int32                     `json:"memberLevel"` // 可领取的会员类型：0->无限时
 		ProductRelationList         []ProductRelation         `json:"productRelationList,optional"` // 优惠券绑定的商品
 		ProductCategoryRelationList []ProductCategoryRelation `json:"productCategoryRelationList,optional"` // 优惠券绑定的商品分类
-	}
-	AddOrUpdateCouponResp {
-		Code    string `json:"code"`
-		Message string `json:"message"`
 	}
 	CouponDetailReq {
 		Id int64 `form:"id"`
@@ -92,10 +90,6 @@ type (
 	DeleteCouponReq {
 		Ids []int64 `form:"ids"`
 	}
-	DeleteCouponResp {
-		Code    string `json:"code"`
-		Message string `json:"message"`
-	}
 )
 
 @server (
@@ -107,7 +101,7 @@ type (
 service admin-api {
 	//添加优惠券
 	@handler CouponAdd
-	post /addCoupon (AddOrUpdateCouponReq) returns (AddOrUpdateCouponResp)
+	post /addCoupon (AddOrUpdateCouponReq) returns (BaseResp)
 
 	//获取单张优惠券
 	@handler CouponDetail
@@ -119,10 +113,10 @@ service admin-api {
 
 	//更新优惠券
 	@handler CouponUpdate
-	post /updateCoupon (AddOrUpdateCouponReq) returns (AddOrUpdateCouponResp)
+	post /updateCoupon (AddOrUpdateCouponReq) returns (BaseResp)
 
 	//删除优惠券
 	@handler CouponDelete
-	get /deleteCoupon (DeleteCouponReq) returns (DeleteCouponResp)
+	get /deleteCoupon (DeleteCouponReq) returns (BaseResp)
 }
 

@@ -3,6 +3,7 @@ package product
 import (
 	"context"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
+	"github.com/feihua/zero-admin/api/admin/internal/common/res"
 	"github.com/feihua/zero-admin/rpc/cms/cmsclient"
 	"github.com/feihua/zero-admin/rpc/pms/pmsclient"
 	"github.com/zeromicro/go-zero/core/logc"
@@ -38,7 +39,7 @@ func NewProductUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContext) Prod
 // 7.关联专题
 // 8.关联优选
 // 注意: 步骤1到6是在商品(rpc)中操作,步骤7到8是在cms模块中操作
-func (l *ProductUpdateLogic) ProductUpdate(req *types.UpdateProductReq) (*types.UpdateProductResp, error) {
+func (l *ProductUpdateLogic) ProductUpdate(req *types.UpdateProductReq) (*types.BaseResp, error) {
 	product := req.ProductData
 	productId := product.Id
 	_, err := l.svcCtx.ProductService.UpdateProduct(l.ctx, &pmsclient.UpdateProductReq{
@@ -103,10 +104,7 @@ func (l *ProductUpdateLogic) ProductUpdate(req *types.UpdateProductReq) (*types.
 	// 8.关联优选
 	updatePreferredAreaProductRelation(req, l, productId)
 
-	return &types.UpdateProductResp{
-		Code:    "000000",
-		Message: "更新商品信息成功",
-	}, nil
+	return res.Success()
 }
 
 // 商品会员价格设置

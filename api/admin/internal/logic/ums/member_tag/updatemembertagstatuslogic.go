@@ -3,6 +3,7 @@ package member_tag
 import (
 	"context"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
+	"github.com/feihua/zero-admin/api/admin/internal/common/res"
 	"github.com/feihua/zero-admin/rpc/ums/umsclient"
 	"github.com/zeromicro/go-zero/core/logc"
 
@@ -28,7 +29,7 @@ func NewUpdateMemberTagStatusLogic(ctx context.Context, svcCtx *svc.ServiceConte
 }
 
 // UpdateMemberTagStatus 更新会员标签状态
-func (l *UpdateMemberTagStatusLogic) UpdateMemberTagStatus(req *types.UpdateMemberTagStatusReq) (resp *types.UpdateMemberTagStatusResp, err error) {
+func (l *UpdateMemberTagStatusLogic) UpdateMemberTagStatus(req *types.UpdateMemberTagStatusReq) (resp *types.BaseResp, err error) {
 	_, err = l.svcCtx.MemberTagService.UpdateMemberTagStatus(l.ctx, &umsclient.UpdateMemberTagStatusReq{
 		Ids:    req.Ids,
 		Status: req.Status,
@@ -39,9 +40,6 @@ func (l *UpdateMemberTagStatusLogic) UpdateMemberTagStatus(req *types.UpdateMemb
 		return nil, errorx.NewDefaultError("更新会员标签状态失败")
 	}
 
-	return &types.UpdateMemberTagStatusResp{
-		Code:    "000000",
-		Message: "更新会员标签状态成功",
-	}, nil
+	return res.Success()
 
 }

@@ -1,3 +1,5 @@
+import "../base/base.api"
+
 info (
 	desc:   "岗位信息"
 	author: "LiuFeiHua"
@@ -13,17 +15,9 @@ type (
 		Status   int32  `json:"status"` //岗位状态（0：停用，1:正常）
 		Remark   string `json:"remark,optional"` //备注
 	}
-	AddPostResp {
-		Code    string `json:"code"`
-		Message string `json:"message"`
-	}
 	// 删除岗位信息请求参数
 	DeletePostReq {
 		Ids []int64 `form:"ids"`
-	}
-	DeletePostResp {
-		Code    string `json:"code"`
-		Message string `json:"message"`
 	}
 	// 更新岗位信息请求参数
 	UpdatePostReq {
@@ -34,18 +28,10 @@ type (
 		Status   int32  `json:"status"` //岗位状态（0：停用，1:正常）
 		Remark   string `json:"remark,optional"` //备注
 	}
-	UpdatePostResp {
-		Code    string `json:"code"`
-		Message string `json:"message"`
-	}
 	// 更新岗位信息状态请求参数
 	UpdatePostStatusReq {
 		Ids    []int64 `json:"ids"` //岗位id
 		Status int32   `json:"status"` //状态
-	}
-	UpdatePostStatusResp {
-		Code    string `json:"code"`
-		Message string `json:"message"`
 	}
 	// 查询岗位信息详情请求参数
 	QueryPostDetailReq {
@@ -108,23 +94,23 @@ type (
 service admin-api {
 	// 添加岗位信息
 	@handler AddPost
-	post /addPost (AddPostReq) returns (AddPostResp)
+	post /addPost (AddPostReq) returns (BaseResp)
 
 	// 删除岗位信息
 	@handler DeletePost
-	get /deletePost (DeletePostReq) returns (DeletePostResp)
+	get /deletePost (DeletePostReq) returns (BaseResp)
 
 	// 更新岗位信息
 	@handler UpdatePost
-	post /updatePost (UpdatePostReq) returns (UpdatePostResp)
+	post /updatePost (UpdatePostReq) returns (BaseResp)
 
 	// 更新岗位信息状态
 	@handler UpdatePostStatus
-	post /updatePostStatus (UpdatePostStatusReq) returns (UpdatePostStatusResp)
+	post /updatePostStatus (UpdatePostStatusReq) returns (BaseResp)
 
 	// 查询岗位信息详情
 	@handler QueryPostDetail
-	get /queryPostDetail (QueryPostDetailReq) returns (QueryPostDetailResp)
+	get /queryPostDetail (QueryPostDetailReq) returns (BaseResp)
 
 	// 分页查询岗位信息列表
 	@handler QueryPostList

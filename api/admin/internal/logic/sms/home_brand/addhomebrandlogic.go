@@ -3,6 +3,7 @@ package home_brand
 import (
 	"context"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
+	"github.com/feihua/zero-admin/api/admin/internal/common/res"
 	"github.com/feihua/zero-admin/rpc/pms/pmsclient"
 	"github.com/feihua/zero-admin/rpc/sms/smsclient"
 	"github.com/zeromicro/go-zero/core/logc"
@@ -37,7 +38,7 @@ func NewAddHomeBrandLogic(ctx context.Context, svcCtx *svc.ServiceContext) AddHo
 // 1.根据brandIds查询品牌信息(pms-rpc)
 // 2.添加首页品牌记录(sms-rpc)
 // 3.修改品牌的推荐状态为推荐(pms-rpc)
-func (l *AddHomeBrandLogic) AddHomeBrand(req *types.AddHomeBrandReq) (*types.AddHomeBrandResp, error) {
+func (l *AddHomeBrandLogic) AddHomeBrand(req *types.AddHomeBrandReq) (*types.BaseResp, error) {
 	// 1.根据brandIds查询品牌信息(pms-rpc)
 	brandListResp, _ := l.svcCtx.BrandService.QueryBrandListByIds(l.ctx, &pmsclient.QueryBrandListByIdsReq{Ids: req.BrandIds})
 
@@ -74,8 +75,5 @@ func (l *AddHomeBrandLogic) AddHomeBrand(req *types.AddHomeBrandReq) (*types.Add
 		return nil, errorx.NewDefaultError(s.Message())
 	}
 
-	return &types.AddHomeBrandResp{
-		Code:    "000000",
-		Message: "添加首页品牌成功",
-	}, nil
+	return res.Success()
 }

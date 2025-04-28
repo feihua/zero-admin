@@ -3,6 +3,7 @@ package dept
 import (
 	"context"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
+	"github.com/feihua/zero-admin/api/admin/internal/common/res"
 	"github.com/feihua/zero-admin/api/admin/internal/svc"
 	"github.com/feihua/zero-admin/api/admin/internal/types"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
@@ -32,7 +33,7 @@ func NewAddDeptLogic(ctx context.Context, svcCtx *svc.ServiceContext) AddDeptLog
 }
 
 // AddDept 添加部门信息
-func (l *AddDeptLogic) AddDept(req *types.AddDeptReq) (*types.AddDeptResp, error) {
+func (l *AddDeptLogic) AddDept(req *types.AddDeptReq) (*types.BaseResp, error) {
 	_, err := l.svcCtx.DeptService.AddDept(l.ctx, &sysclient.AddDeptReq{
 		ParentId: req.ParentId, // 上级部门id
 		DeptName: req.DeptName, // 部门名称
@@ -51,8 +52,5 @@ func (l *AddDeptLogic) AddDept(req *types.AddDeptReq) (*types.AddDeptResp, error
 		return nil, errorx.NewDefaultError(s.Message())
 	}
 
-	return &types.AddDeptResp{
-		Code:    "000000",
-		Message: "添加部门成功",
-	}, nil
+	return res.Success()
 }

@@ -3,6 +3,7 @@ package dept
 import (
 	"context"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
+	"github.com/feihua/zero-admin/api/admin/internal/common/res"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
 	"github.com/zeromicro/go-zero/core/logc"
 	"google.golang.org/grpc/status"
@@ -33,7 +34,7 @@ func NewUpdateDeptLogic(ctx context.Context, svcCtx *svc.ServiceContext) UpdateD
 }
 
 // UpdateDept 更新部门信息
-func (l *UpdateDeptLogic) UpdateDept(req *types.UpdateDeptReq) (*types.UpdateDeptResp, error) {
+func (l *UpdateDeptLogic) UpdateDept(req *types.UpdateDeptReq) (*types.BaseResp, error) {
 
 	_, err := l.svcCtx.DeptService.UpdateDept(l.ctx, &sysclient.UpdateDeptReq{
 		Id:       req.Id,       // 部门id
@@ -54,8 +55,5 @@ func (l *UpdateDeptLogic) UpdateDept(req *types.UpdateDeptReq) (*types.UpdateDep
 		return nil, errorx.NewDefaultError(s.Message())
 	}
 
-	return &types.UpdateDeptResp{
-		Code:    "000000",
-		Message: "更新部门成功",
-	}, nil
+	return res.Success()
 }

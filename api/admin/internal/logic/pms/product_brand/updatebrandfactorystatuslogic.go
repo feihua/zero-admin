@@ -3,6 +3,7 @@ package product_brand
 import (
 	"context"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
+	"github.com/feihua/zero-admin/api/admin/internal/common/res"
 	"github.com/feihua/zero-admin/rpc/pms/pmsclient"
 	"github.com/zeromicro/go-zero/core/logc"
 
@@ -32,7 +33,7 @@ func NewUpdateBrandFactoryStatusLogic(ctx context.Context, svcCtx *svc.ServiceCo
 }
 
 // UpdateBrandFactoryStatus 批量更新厂家制造商状态
-func (l *UpdateBrandFactoryStatusLogic) UpdateBrandFactoryStatus(req *types.UpdateProductBrandStatusReq) (resp *types.UpdateProductBrandStatusResp, err error) {
+func (l *UpdateBrandFactoryStatusLogic) UpdateBrandFactoryStatus(req *types.UpdateProductBrandStatusReq) (resp *types.BaseResp, err error) {
 	_, err = l.svcCtx.BrandService.UpdateBrandFactoryStatus(l.ctx, &pmsclient.UpdateBrandFactoryStatusReq{
 		Ids:           req.Ids,
 		FactoryStatus: req.Status,
@@ -43,8 +44,5 @@ func (l *UpdateBrandFactoryStatusLogic) UpdateBrandFactoryStatus(req *types.Upda
 		return nil, errorx.NewDefaultError("批量更新厂家制造商状态失败")
 	}
 
-	return &types.UpdateProductBrandStatusResp{
-		Code:    "000000",
-		Message: "批量更新厂家制造商状态成功",
-	}, nil
+	return res.Success()
 }

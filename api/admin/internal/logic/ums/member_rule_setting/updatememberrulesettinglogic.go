@@ -3,6 +3,7 @@ package member_rule_setting
 import (
 	"context"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
+	"github.com/feihua/zero-admin/api/admin/internal/common/res"
 	"github.com/feihua/zero-admin/rpc/ums/umsclient"
 	"github.com/zeromicro/go-zero/core/logc"
 
@@ -32,7 +33,7 @@ func NewUpdateMemberRuleSettingLogic(ctx context.Context, svcCtx *svc.ServiceCon
 }
 
 // UpdateMemberRuleSetting 更新会员积分规则
-func (l *UpdateMemberRuleSettingLogic) UpdateMemberRuleSetting(req *types.UpdateMemberRuleSettingReq) (resp *types.UpdateMemberRuleSettingResp, err error) {
+func (l *UpdateMemberRuleSettingLogic) UpdateMemberRuleSetting(req *types.UpdateMemberRuleSettingReq) (resp *types.BaseResp, err error) {
 	_, err = l.svcCtx.MemberRuleSettingService.UpdateMemberRuleSetting(l.ctx, &umsclient.UpdateMemberRuleSettingReq{
 		Id:                req.Id,                //
 		ContinueSignDay:   req.ContinueSignDay,   // 连续签到天数
@@ -50,8 +51,5 @@ func (l *UpdateMemberRuleSettingLogic) UpdateMemberRuleSetting(req *types.Update
 		return nil, errorx.NewDefaultError("更新会员积分规则成功")
 	}
 
-	return &types.UpdateMemberRuleSettingResp{
-		Code:    "000000",
-		Message: "更新会员积分规则成功",
-	}, nil
+	return res.Success()
 }

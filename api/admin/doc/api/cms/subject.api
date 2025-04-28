@@ -1,3 +1,5 @@
+import "../base/base.api"
+
 info (
 	desc:   "专题表"
 	author: "liufeihua"
@@ -22,17 +24,9 @@ type (
 		ForwardCount    int32  `json:"forwardCount"` //转发数
 		CategoryName    string `json:"categoryName"` //专题分类名称
 	}
-	AddSubjectResp {
-		Code    string `json:"code"`
-		Message string `json:"message"`
-	}
 	// 删除专题表
 	DeleteSubjectReq {
 		Ids []int64 `form:"ids"`
-	}
-	DeleteSubjectResp {
-		Code    string `json:"code"`
-		Message string `json:"message"`
 	}
 	// 更新专题表
 	UpdateSubjectReq {
@@ -52,19 +46,11 @@ type (
 		ForwardCount    int32  `json:"forwardCount"` //转发数
 		CategoryName    string `json:"categoryName"` //专题分类名称
 	}
-	UpdateSubjectResp {
-		Code    string `json:"code"`
-		Message string `json:"message"`
-	}
 	// 更新专题表状态
 	UpdateSubjectStatusReq {
 		Ids             []int64 `json:"ids"`
 		RecommendStatus int32   `json:"recommendStatus"` //推荐状态：0->不推荐；1->推荐
 		ShowStatus      int32   `json:"showStatus"` //显示状态：0->不显示；1->显示
-	}
-	UpdateSubjectStatusResp {
-		Code    string `json:"code"`
-		Message string `json:"message"`
 	}
 	// 查询专题表详情
 	QuerySubjectDetailReq {
@@ -145,19 +131,19 @@ type (
 service admin-api {
 	// 添加专题表
 	@handler AddSubject
-	post /addSubject (AddSubjectReq) returns (AddSubjectResp)
+	post /addSubject (AddSubjectReq) returns (BaseResp)
 
 	// 删除专题表
 	@handler DeleteSubject
-	get /deleteSubject (DeleteSubjectReq) returns (DeleteSubjectResp)
+	get /deleteSubject (DeleteSubjectReq) returns (BaseResp)
 
 	// 更新专题表
 	@handler UpdateSubject
-	post /updateSubject (UpdateSubjectReq) returns (UpdateSubjectResp)
+	post /updateSubject (UpdateSubjectReq) returns (BaseResp)
 
 	// 更新专题表状态
 	@handler UpdateSubjectStatus
-	post /updateSubjectStatus (UpdateSubjectStatusReq) returns (UpdateSubjectStatusResp)
+	post /updateSubjectStatus (UpdateSubjectStatusReq) returns (BaseResp)
 
 	// 查询专题表详情
 	@handler QuerySubjectDetail

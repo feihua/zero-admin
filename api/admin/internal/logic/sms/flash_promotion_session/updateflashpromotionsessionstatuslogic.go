@@ -3,6 +3,7 @@ package flash_promotion_session
 import (
 	"context"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
+	"github.com/feihua/zero-admin/api/admin/internal/common/res"
 	"github.com/feihua/zero-admin/rpc/sms/smsclient"
 	"github.com/zeromicro/go-zero/core/logc"
 	"google.golang.org/grpc/status"
@@ -29,7 +30,7 @@ func NewUpdateFlashPromotionSessionStatusLogic(ctx context.Context, svcCtx *svc.
 }
 
 // UpdateFlashPromotionSessionStatus 更新状态
-func (l *UpdateFlashPromotionSessionStatusLogic) UpdateFlashPromotionSessionStatus(req *types.UpdateFlashPromotionSessionStatusReq) (resp *types.UpdateFlashPromotionSessionStatusResp, err error) {
+func (l *UpdateFlashPromotionSessionStatusLogic) UpdateFlashPromotionSessionStatus(req *types.UpdateFlashPromotionSessionStatusReq) (resp *types.BaseResp, err error) {
 	_, err = l.svcCtx.FlashPromotionSessionService.UpdateFlashPromotionSessionStatus(l.ctx, &smsclient.UpdateFlashPromotionSessionStatusReq{
 		Ids:    req.Ids,
 		Status: req.Status,
@@ -41,9 +42,6 @@ func (l *UpdateFlashPromotionSessionStatusLogic) UpdateFlashPromotionSessionStat
 		return nil, errorx.NewDefaultError(s.Message())
 	}
 
-	return &types.UpdateFlashPromotionSessionStatusResp{
-		Code:    "000000",
-		Message: "更新状态成功",
-	}, nil
+	return res.Success()
 
 }

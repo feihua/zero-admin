@@ -3,6 +3,7 @@ package product_attribute_category
 import (
 	"context"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
+	"github.com/feihua/zero-admin/api/admin/internal/common/res"
 	"github.com/feihua/zero-admin/rpc/pms/pmsclient"
 	"github.com/zeromicro/go-zero/core/logc"
 
@@ -28,7 +29,7 @@ func NewProductAttributeCategoryUpdateLogic(ctx context.Context, svcCtx *svc.Ser
 }
 
 // ProductAttributeCategoryUpdate 更新商品属性分类
-func (l *ProductAttributeCategoryUpdateLogic) ProductAttributeCategoryUpdate(req *types.UpdateProductAttributeCategoryReq) (resp *types.UpdateProductAttributeCategoryResp, err error) {
+func (l *ProductAttributeCategoryUpdateLogic) ProductAttributeCategoryUpdate(req *types.UpdateProductAttributeCategoryReq) (resp *types.BaseResp, err error) {
 	_, err = l.svcCtx.ProductAttributeCategoryService.UpdateProductAttributeCategory(l.ctx, &pmsclient.UpdateProductAttributeCategoryReq{
 		Id:   req.Id,
 		Name: req.Name,
@@ -39,8 +40,5 @@ func (l *ProductAttributeCategoryUpdateLogic) ProductAttributeCategoryUpdate(req
 		return nil, errorx.NewDefaultError("更新属性分类失败")
 	}
 
-	return &types.UpdateProductAttributeCategoryResp{
-		Code:    "000000",
-		Message: "更新属性分类成功",
-	}, nil
+	return res.Success()
 }

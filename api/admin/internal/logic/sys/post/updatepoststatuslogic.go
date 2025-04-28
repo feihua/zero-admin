@@ -3,6 +3,7 @@ package post
 import (
 	"context"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
+	"github.com/feihua/zero-admin/api/admin/internal/common/res"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
 	"github.com/zeromicro/go-zero/core/logc"
 	"google.golang.org/grpc/status"
@@ -33,7 +34,7 @@ func NewUpdatePostStatusLogic(ctx context.Context, svcCtx *svc.ServiceContext) *
 }
 
 // UpdatePostStatus 更新岗位状态
-func (l *UpdatePostStatusLogic) UpdatePostStatus(req *types.UpdatePostStatusReq) (resp *types.UpdatePostStatusResp, err error) {
+func (l *UpdatePostStatusLogic) UpdatePostStatus(req *types.UpdatePostStatusReq) (resp *types.BaseResp, err error) {
 	_, err = l.svcCtx.PostService.UpdatePostStatus(l.ctx, &sysclient.UpdatePostStatusReq{
 		Ids:      req.Ids,    // 岗位id
 		Status:   req.Status, // 岗位状态
@@ -46,8 +47,5 @@ func (l *UpdatePostStatusLogic) UpdatePostStatus(req *types.UpdatePostStatusReq)
 		return nil, errorx.NewDefaultError(s.Message())
 	}
 
-	return &types.UpdatePostStatusResp{
-		Code:    "000000",
-		Message: "更新岗位状态成功",
-	}, nil
+	return res.Success()
 }

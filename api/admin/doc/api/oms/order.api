@@ -1,3 +1,5 @@
+import "../base/base.api"
+
 info (
 	desc:   "订单详情"
 	author: "koobe"
@@ -10,17 +12,9 @@ type (
 		DeliveryCompany string `json:"deliveryCompany"` // 物流公司
 		DeliverySn      string `json:"deliverySn"` // 物流单号
 	}
-	DeliveryResp {
-		Code    string `json:"code"`
-		Message string `json:"message"`
-	}
 	CloseOrderReq {
 		Ids  []int64 `json:"ids"` //订单id
 		Note string  `json:"note"`
-	}
-	CloseOrderResp {
-		Code    string `json:"code"`
-		Message string `json:"message"`
 	}
 	OrderDetailReq {
 		Id int64 `form:"id"` //订单id
@@ -140,35 +134,19 @@ type (
 		ReceiverCity          string `json:"receiverCity,optional"` // 城市
 		ReceiverRegion        string `json:"receiverRegion,optional"` // 区
 	}
-	UpdateReceiverInfoResp {
-		Code    string `json:"code"`
-		Message string `json:"message"`
-	}
 	UpdateMoneyInfoReq {
 		Id             int64 `json:"id"` // 订单id
 		Status         int32 `json:"status,optional"` // 订单状态：0->待付款；1->待发货；2->已发货；3->已完成；4->已关闭；5->无效订单
 		FreightAmount  int64 `json:"freightAmount"` // 运费金额
 		DiscountAmount int64 `json:"discountAmount"` // 管理员后台调整订单所使用的折扣金额
 	}
-	UpdateMoneyInfoResp {
-		Code    string `json:"code"`
-		Message string `json:"message"`
-	}
 	UpdateNoteReq {
 		Id     int64  `json:"id"` // 订单id
 		Status int32  `json:"status,optional"` // 订单状态：0->待付款；1->待发货；2->已发货；3->已完成；4->已关闭；5->无效订单
 		Note   string `json:"note,optional"` // 订单备注
 	}
-	UpdateNoteResp {
-		Code    string `json:"code"`
-		Message string `json:"message"`
-	}
 	DeleteOrderReq {
 		Ids []int64 `form:"ids"`
-	}
-	DeleteOrderResp {
-		Code    string `json:"code"`
-		Message string `json:"message"`
 	}
 )
 
@@ -181,11 +159,11 @@ type (
 service admin-api {
 	//批量发货
 	@handler Delivery
-	post /delivery (DeliveryReq) returns (DeliveryResp)
+	post /delivery (DeliveryReq) returns (BaseResp)
 
 	//批量关闭订单
 	@handler CloseOrder
-	post /closeOrder (CloseOrderReq) returns (CloseOrderResp)
+	post /closeOrder (CloseOrderReq) returns (BaseResp)
 
 	//获取订单详情：订单信息、商品信息、操作记录
 	@handler OrderDetail
@@ -197,18 +175,18 @@ service admin-api {
 
 	//修改收货人信息
 	@handler UpdateReceiverInfo
-	post /updateReceiverInfo (UpdateReceiverInfoReq) returns (UpdateReceiverInfoResp)
+	post /updateReceiverInfo (UpdateReceiverInfoReq) returns (BaseResp)
 
 	//修改订单费用信息
 	@handler UpdateMoneyInfo
-	post /updateMoneyInfo (UpdateMoneyInfoReq) returns (UpdateMoneyInfoResp)
+	post /updateMoneyInfo (UpdateMoneyInfoReq) returns (BaseResp)
 
 	//备注订单
 	@handler UpdateNote
-	post /updateNote (UpdateNoteReq) returns (UpdateNoteResp)
+	post /updateNote (UpdateNoteReq) returns (BaseResp)
 
 	//批量删除订单
 	@handler OrderDelete
-	get /deleteOrder (DeleteOrderReq) returns (DeleteOrderResp)
+	get /deleteOrder (DeleteOrderReq) returns (BaseResp)
 }
 

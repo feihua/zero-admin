@@ -3,6 +3,7 @@ package member_integration_setting
 import (
 	"context"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
+	"github.com/feihua/zero-admin/api/admin/internal/common/res"
 	"github.com/feihua/zero-admin/rpc/ums/umsclient"
 	"github.com/zeromicro/go-zero/core/logc"
 
@@ -28,7 +29,7 @@ func NewUpdateIntegrationConsumeSettingStatusLogic(ctx context.Context, svcCtx *
 }
 
 // UpdateIntegrationConsumeSettingStatus 更新积分消费设置状态
-func (l *UpdateIntegrationConsumeSettingStatusLogic) UpdateIntegrationConsumeSettingStatus(req *types.UpdateIntegrationConsumeSettingStatusReq) (resp *types.UpdateIntegrationConsumeSettingStatusResp, err error) {
+func (l *UpdateIntegrationConsumeSettingStatusLogic) UpdateIntegrationConsumeSettingStatus(req *types.UpdateIntegrationConsumeSettingStatusReq) (resp *types.BaseResp, err error) {
 	_, err = l.svcCtx.IntegrationConsumeSettingService.UpdateIntegrationConsumeSettingStatus(l.ctx, &umsclient.UpdateIntegrationConsumeSettingStatusReq{
 		Id:        req.Id,
 		IsDefault: req.IsDefault,
@@ -39,10 +40,5 @@ func (l *UpdateIntegrationConsumeSettingStatusLogic) UpdateIntegrationConsumeSet
 		return nil, errorx.NewDefaultError("更新积分消费设置状态失败")
 	}
 
-	return &types.UpdateIntegrationConsumeSettingStatusResp{
-		Code:    "000000",
-		Message: "更新积分消费设置状态失败",
-	}, nil
-
-	return
+	return res.Success()
 }

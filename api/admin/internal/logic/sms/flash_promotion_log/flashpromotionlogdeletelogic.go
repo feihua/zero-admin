@@ -3,6 +3,7 @@ package flash_promotion_log
 import (
 	"context"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
+	"github.com/feihua/zero-admin/api/admin/internal/common/res"
 	"github.com/feihua/zero-admin/rpc/sms/smsclient"
 	"github.com/zeromicro/go-zero/core/logc"
 	"google.golang.org/grpc/status"
@@ -27,7 +28,7 @@ func NewFlashPromotionLogDeleteLogic(ctx context.Context, svcCtx *svc.ServiceCon
 	}
 }
 
-func (l *FlashPromotionLogDeleteLogic) FlashPromotionLogDelete(req *types.DeleteFlashPromotionLogReq) (*types.DeleteFlashPromotionLogResp, error) {
+func (l *FlashPromotionLogDeleteLogic) FlashPromotionLogDelete(req *types.DeleteFlashPromotionLogReq) (*types.BaseResp, error) {
 	_, err := l.svcCtx.FlashPromotionLogService.DeleteFlashPromotionLog(l.ctx, &smsclient.DeleteFlashPromotionLogReq{
 		Ids: req.Ids,
 	})
@@ -37,8 +38,5 @@ func (l *FlashPromotionLogDeleteLogic) FlashPromotionLogDelete(req *types.Delete
 		s, _ := status.FromError(err)
 		return nil, errorx.NewDefaultError(s.Message())
 	}
-	return &types.DeleteFlashPromotionLogResp{
-		Code:    "000000",
-		Message: "",
-	}, nil
+	return res.Success()
 }

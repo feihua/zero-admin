@@ -3,6 +3,7 @@ package flash_promotion_session
 import (
 	"context"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
+	"github.com/feihua/zero-admin/api/admin/internal/common/res"
 	"github.com/feihua/zero-admin/rpc/sms/smsclient"
 	"github.com/zeromicro/go-zero/core/logc"
 	"google.golang.org/grpc/status"
@@ -33,7 +34,7 @@ func NewFlashPromotionSessionDeleteLogic(ctx context.Context, svcCtx *svc.Servic
 }
 
 // FlashPromotionSessionDelete 删除限时购场次
-func (l *FlashPromotionSessionDeleteLogic) FlashPromotionSessionDelete(req *types.DeleteFlashPromotionSessionReq) (*types.DeleteFlashPromotionSessionResp, error) {
+func (l *FlashPromotionSessionDeleteLogic) FlashPromotionSessionDelete(req *types.DeleteFlashPromotionSessionReq) (*types.BaseResp, error) {
 	_, err := l.svcCtx.FlashPromotionSessionService.DeleteFlashPromotionSession(l.ctx, &smsclient.DeleteFlashPromotionSessionReq{
 		Ids: req.Ids,
 	})
@@ -43,8 +44,5 @@ func (l *FlashPromotionSessionDeleteLogic) FlashPromotionSessionDelete(req *type
 		s, _ := status.FromError(err)
 		return nil, errorx.NewDefaultError(s.Message())
 	}
-	return &types.DeleteFlashPromotionSessionResp{
-		Code:    "000000",
-		Message: "",
-	}, nil
+	return res.Success()
 }

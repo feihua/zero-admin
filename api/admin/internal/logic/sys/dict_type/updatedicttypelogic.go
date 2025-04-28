@@ -3,6 +3,7 @@ package dict_type
 import (
 	"context"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
+	"github.com/feihua/zero-admin/api/admin/internal/common/res"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
 	"github.com/zeromicro/go-zero/core/logc"
 	"google.golang.org/grpc/status"
@@ -33,7 +34,7 @@ func NewUpdateDictTypeLogic(ctx context.Context, svcCtx *svc.ServiceContext) Upd
 }
 
 // UpdateDictType 更新字典类型信息
-func (l *UpdateDictTypeLogic) UpdateDictType(req *types.UpdateDictTypeReq) (*types.UpdateDictTypeResp, error) {
+func (l *UpdateDictTypeLogic) UpdateDictType(req *types.UpdateDictTypeReq) (*types.BaseResp, error) {
 	_, err := l.svcCtx.DictTypeService.UpdateDictType(l.ctx, &sysclient.UpdateDictTypeReq{
 		Id:       req.Id,       // 字典id
 		DictName: req.DictName, // 字典名称
@@ -49,8 +50,5 @@ func (l *UpdateDictTypeLogic) UpdateDictType(req *types.UpdateDictTypeReq) (*typ
 		return nil, errorx.NewDefaultError(s.Message())
 	}
 
-	return &types.UpdateDictTypeResp{
-		Code:    "000000",
-		Message: "更新字典类型成功",
-	}, nil
+	return res.Success()
 }

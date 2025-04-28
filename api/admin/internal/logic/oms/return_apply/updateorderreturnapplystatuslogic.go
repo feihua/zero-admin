@@ -3,6 +3,7 @@ package return_apply
 import (
 	"context"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
+	"github.com/feihua/zero-admin/api/admin/internal/common/res"
 	"github.com/feihua/zero-admin/rpc/oms/omsclient"
 	"github.com/zeromicro/go-zero/core/logc"
 
@@ -36,7 +37,7 @@ func NewUpdateOrderReturnApplyStatusLogic(ctx context.Context, svcCtx *svc.Servi
 Author: LiuFeiHua
 Date: 2024/6/15 11:38
 */
-func (l *UpdateOrderReturnApplyStatusLogic) UpdateOrderReturnApplyStatus(req *types.UpdateOrderReturnApplyStatusReq) (resp *types.UpdateOrderReturnApplyStatusResp, err error) {
+func (l *UpdateOrderReturnApplyStatusLogic) UpdateOrderReturnApplyStatus(req *types.UpdateOrderReturnApplyStatusReq) (resp *types.BaseResp, err error) {
 	userName := l.ctx.Value("userName").(string)
 	_, err = l.svcCtx.OrderReturnApplyService.UpdateOrderReturnApply(l.ctx, &omsclient.UpdateOrderReturnApplyReq{
 		Id:               req.Id,
@@ -54,8 +55,5 @@ func (l *UpdateOrderReturnApplyStatusLogic) UpdateOrderReturnApplyStatus(req *ty
 		return nil, errorx.NewDefaultError("更新退货申请失败")
 	}
 
-	return &types.UpdateOrderReturnApplyStatusResp{
-		Code:    "000000",
-		Message: "更新退货申请成功",
-	}, nil
+	return res.Success()
 }

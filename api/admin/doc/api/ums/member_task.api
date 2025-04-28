@@ -1,3 +1,5 @@
+import "../base/base.api"
+
 info (
 	desc:   "会员任务"
 	author: "刘飞华"
@@ -13,17 +15,9 @@ type (
 		TaskType     int32  `json:"taskType"` //任务类型：0->新手任务；1->日常任务
 		Status       int32  `json:"status"` //状态：0->禁用；1->启用
 	}
-	AddMemberTaskResp {
-		Code    string `json:"code"`
-		Message string `json:"message"`
-	}
 	// 删除会员任务请求参数
 	DeleteMemberTaskReq {
 		Ids []int64 `form:"ids"`
-	}
-	DeleteMemberTaskResp {
-		Code    string `json:"code"`
-		Message string `json:"message"`
 	}
 	// 更新会员任务请求参数
 	UpdateMemberTaskReq {
@@ -34,18 +28,10 @@ type (
 		TaskType     int32  `json:"taskType"` //任务类型：0->新手任务；1->日常任务
 		Status       int32  `json:"status"` //状态：0->禁用；1->启用
 	}
-	UpdateMemberTaskResp {
-		Code    string `json:"code"`
-		Message string `json:"message"`
-	}
 	// 更新会员任务状态请求参数
 	UpdateMemberTaskStatusReq {
 		Ids    []int64 `json:"ids"` //
 		Status int32   `json:"status"` //状态：0->禁用；1->启用
-	}
-	UpdateMemberTaskStatusResp {
-		Code    string `json:"code"`
-		Message string `json:"message"`
 	}
 	// 查询会员任务详情请求参数
 	QueryMemberTaskDetailReq {
@@ -108,19 +94,19 @@ type (
 service admin-api {
 	// 添加会员任务
 	@handler AddMemberTask
-	post /addMemberTask (AddMemberTaskReq) returns (AddMemberTaskResp)
+	post /addMemberTask (AddMemberTaskReq) returns (BaseResp)
 
 	// 删除会员任务
 	@handler DeleteMemberTask
-	get /deleteMemberTask (DeleteMemberTaskReq) returns (DeleteMemberTaskResp)
+	get /deleteMemberTask (DeleteMemberTaskReq) returns (BaseResp)
 
 	// 更新会员任务
 	@handler UpdateMemberTask
-	post /updateMemberTask (UpdateMemberTaskReq) returns (UpdateMemberTaskResp)
+	post /updateMemberTask (UpdateMemberTaskReq) returns (BaseResp)
 
 	// 更新会员任务状态
 	@handler UpdateMemberTaskStatus
-	post /updateMemberTaskStatus (UpdateMemberTaskStatusReq) returns (UpdateMemberTaskStatusResp)
+	post /updateMemberTaskStatus (UpdateMemberTaskStatusReq) returns (BaseResp)
 
 	// 查询会员任务详情
 	@handler QueryMemberTaskDetail

@@ -3,6 +3,7 @@ package member_task
 import (
 	"context"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
+	"github.com/feihua/zero-admin/api/admin/internal/common/res"
 	"github.com/feihua/zero-admin/rpc/ums/umsclient"
 	"github.com/zeromicro/go-zero/core/logc"
 
@@ -32,7 +33,7 @@ func NewUpdateMemberTaskLogic(ctx context.Context, svcCtx *svc.ServiceContext) *
 }
 
 // UpdateMemberTask 更新会员任务
-func (l *UpdateMemberTaskLogic) UpdateMemberTask(req *types.UpdateMemberTaskReq) (resp *types.UpdateMemberTaskResp, err error) {
+func (l *UpdateMemberTaskLogic) UpdateMemberTask(req *types.UpdateMemberTaskReq) (resp *types.BaseResp, err error) {
 	_, err = l.svcCtx.MemberTaskService.UpdateMemberTask(l.ctx, &umsclient.UpdateMemberTaskReq{
 		Id:           req.Id,
 		TaskName:     req.TaskName,     // 任务名称
@@ -48,8 +49,5 @@ func (l *UpdateMemberTaskLogic) UpdateMemberTask(req *types.UpdateMemberTaskReq)
 		return nil, errorx.NewDefaultError("更新会员任务失败")
 	}
 
-	return &types.UpdateMemberTaskResp{
-		Code:    "000000",
-		Message: "更新会员任务成功",
-	}, nil
+	return res.Success()
 }

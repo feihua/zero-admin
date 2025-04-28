@@ -3,6 +3,7 @@ package product_brand
 import (
 	"context"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
+	"github.com/feihua/zero-admin/api/admin/internal/common/res"
 	"github.com/feihua/zero-admin/rpc/pms/pmsclient"
 	"github.com/feihua/zero-admin/rpc/sms/smsclient"
 	"github.com/zeromicro/go-zero/core/logc"
@@ -34,7 +35,7 @@ func NewProductBrandDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext)
 }
 
 // ProductBrandDelete 删除商品品牌
-func (l *ProductBrandDeleteLogic) ProductBrandDelete(req *types.DeleteProductBrandReq) (*types.DeleteProductBrandResp, error) {
+func (l *ProductBrandDeleteLogic) ProductBrandDelete(req *types.DeleteProductBrandReq) (*types.BaseResp, error) {
 	_, err := l.svcCtx.BrandService.DeleteBrand(l.ctx, &pmsclient.DeleteBrandReq{
 		Ids: req.Ids,
 	})
@@ -54,8 +55,5 @@ func (l *ProductBrandDeleteLogic) ProductBrandDelete(req *types.DeleteProductBra
 		return nil, errorx.NewDefaultError(s.Message())
 	}
 
-	return &types.DeleteProductBrandResp{
-		Code:    "000000",
-		Message: "",
-	}, nil
+	return res.Success()
 }

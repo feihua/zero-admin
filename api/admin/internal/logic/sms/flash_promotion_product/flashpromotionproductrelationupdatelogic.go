@@ -3,6 +3,7 @@ package flash_promotion_product
 import (
 	"context"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
+	"github.com/feihua/zero-admin/api/admin/internal/common/res"
 	"github.com/feihua/zero-admin/rpc/sms/smsclient"
 	"github.com/zeromicro/go-zero/core/logc"
 	"google.golang.org/grpc/status"
@@ -33,7 +34,7 @@ func NewFlashPromotionProductRelationUpdateLogic(ctx context.Context, svcCtx *sv
 }
 
 // FlashPromotionProductRelationUpdate 更新限时购和商品关系
-func (l *FlashPromotionProductRelationUpdateLogic) FlashPromotionProductRelationUpdate(req *types.UpdateFlashPromotionProductRelationReq) (resp *types.UpdateFlashPromotionProductRelationResp, err error) {
+func (l *FlashPromotionProductRelationUpdateLogic) FlashPromotionProductRelationUpdate(req *types.UpdateFlashPromotionProductRelationReq) (resp *types.BaseResp, err error) {
 	_, err = l.svcCtx.FlashPromotionProductRelationService.UpdateFlashPromotionProductRelation(l.ctx, &smsclient.UpdateFlashPromotionProductRelationReq{
 		Id:                      req.ID,
 		FlashPromotionId:        req.FlashPromotionProductRelationID,        // 限时购id
@@ -51,8 +52,5 @@ func (l *FlashPromotionProductRelationUpdateLogic) FlashPromotionProductRelation
 		return nil, errorx.NewDefaultError(s.Message())
 	}
 
-	return &types.UpdateFlashPromotionProductRelationResp{
-		Code:    "000000",
-		Message: "更新限时购和商品关系成功",
-	}, nil
+	return res.Success()
 }

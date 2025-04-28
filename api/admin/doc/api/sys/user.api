@@ -69,17 +69,9 @@ type (
 		Remark   string  `json:"remark,optional"` //备注
 		PostIds  []int64 `json:"postIds"` //部门id
 	}
-	AddUserResp {
-		Code    string `json:"code"`
-		Message string `json:"message"`
-	}
 	// 删除用户信息请求参数
 	DeleteUserReq {
 		Ids []int64 `form:"ids"`
-	}
-	DeleteUserResp {
-		Code    string `json:"code"`
-		Message string `json:"message"`
 	}
 	// 更新用户信息请求参数
 	UpdateUserReq {
@@ -95,25 +87,13 @@ type (
 		Remark   string  `json:"remark,optional"` //备注
 		PostIds  []int64 `json:"postIds"` //部门id
 	}
-	UpdateUserResp {
-		Code    string `json:"code"`
-		Message string `json:"message"`
-	}
 	// 更新用户信息状态请求参数
 	UpdateUserStatusReq {
 		Ids    []int64 `json:"ids"` //用户id
 		Status int32   `json:"status"` //状态
 	}
-	UpdateUserStatusResp {
-		Code    string `json:"code"`
-		Message string `json:"message"`
-	}
 	ReSetPasswordReq {
 		UserId int64 `json:"userId"`
-	}
-	ReSetPasswordResp {
-		Code    string `json:"code"`
-		Message string `json:"message"`
 	}
 	// 查询用户信息详情请求参数
 	QueryUserDetailReq {
@@ -224,10 +204,6 @@ type (
 		UserId  int64   `json:"userId"`
 		RoleIds []int64 `json:"roleIds"`
 	}
-	UpdateUserRoleResp {
-		Code    string `json:"code"`
-		Message string `json:"message"`
-	}
 	DeptList {
 		Id       int64  `json:"id"`
 		DeptKey  string `json:"key"`
@@ -267,7 +243,7 @@ service admin-api {
 
 	// 添加用户信息
 	@handler AddUser
-	post /addUser (AddUserReq) returns (AddUserResp)
+	post /addUser (AddUserReq) returns (BaseResp)
 
 	// 删除用户信息
 	@handler DeleteUser
@@ -275,15 +251,15 @@ service admin-api {
 
 	// 更新用户信息
 	@handler UpdateUser
-	post /updateUser (UpdateUserReq) returns (UpdateUserResp)
+	post /updateUser (UpdateUserReq) returns (BaseResp)
 
 	// 更新用户信息状态
 	@handler UpdateUserStatus
-	post /updateUserStatus (UpdateUserStatusReq) returns (UpdateUserStatusResp)
+	post /updateUserStatus (UpdateUserStatusReq) returns (BaseResp)
 
 	//重置用户密码
 	@handler ReSetPassword
-	post /reSetPassword (ReSetPasswordReq) returns (ReSetPasswordResp)
+	post /reSetPassword (ReSetPasswordReq) returns (BaseResp)
 
 	// 查询用户信息详情
 	@handler QueryUserDetail
@@ -299,7 +275,7 @@ service admin-api {
 
 	//分配用户角色
 	@handler UpdateUserRoleList
-	post /updateUserRoleList (UpdateUserRoleReq) returns (UpdateUserRoleResp)
+	post /updateUserRoleList (UpdateUserRoleReq) returns (BaseResp)
 
 	//查询所有部门和岗位
 	@handler QueryDeptAndPostList

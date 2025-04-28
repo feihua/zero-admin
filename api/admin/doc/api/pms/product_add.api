@@ -1,3 +1,5 @@
+import "../base/base.api"
+
 info (
 	desc:   "商品信息"
 	author: "koobe"
@@ -13,11 +15,6 @@ type AddProductReq {
 	ProductAttributeValueList        []AddProductAttributeValueList `json:"productAttributeValueList"`
 	SubjectProductRelationList       []int64                        `json:"subjectProductRelationList"`
 	PrefrenceAreaProductRelationList []int64                        `json:"prefrenceAreaProductRelationList"`
-}
-
-type AddProductResp {
-	Code    string `json:"code"`
-	Message string `json:"message"`
 }
 
 type AddProductData {
@@ -113,6 +110,6 @@ type AddSkuStockList {
 service admin-api {
 	//创建商品
 	@handler ProductAdd
-	post /addProduct (AddProductReq) returns (AddProductResp)
+	post /addProduct (AddProductReq) returns (BaseResp)
 }
 

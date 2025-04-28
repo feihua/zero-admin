@@ -1,3 +1,5 @@
+import "../base/base.api"
+
 info (
 	desc:   "订单设置"
 	author: "liufeihua"
@@ -15,17 +17,9 @@ type (
 		IsDefault           int32 `json:"isDefault"` //是否默认：0->否；1->是
 		CommentOvertime     int32 `json:"commentOvertime"` //订单完成后自动好评时间（天）
 	}
-	AddOrderSettingResp {
-		Code    string `json:"code"`
-		Message string `json:"message"`
-	}
 	// 删除订单设置请求参数
 	DeleteOrderSettingReq {
 		Ids []int64 `form:"ids"`
-	}
-	DeleteOrderSettingResp {
-		Code    string `json:"code"`
-		Message string `json:"message"`
 	}
 	// 更新订单设置请求参数
 	UpdateOrderSettingReq {
@@ -38,10 +32,6 @@ type (
 		IsDefault           int32 `json:"isDefault"` //是否默认：0->否；1->是
 		CommentOvertime     int32 `json:"commentOvertime"` //订单完成后自动好评时间（天）
 	}
-	UpdateOrderSettingResp {
-		Code    string `json:"code"`
-		Message string `json:"message"`
-	}
 	// 更新订单设置表状态
 	UpdateOrderSettingIsDefaultReq {
 		Id        int64 `json:"id"` //
@@ -51,10 +41,6 @@ type (
 	UpdateOrderSettingStatusReq {
 		Ids    []int64 `json:"ids"` //
 		Status int32   `json:"status,default=2"` //状态：0->禁用；1->启用
-	}
-	UpdateOrderSettingStatusResp {
-		Code    string `json:"code"`
-		Message string `json:"message"`
 	}
 	// 查询订单设置详情请求参数
 	QueryOrderSettingDetailReq {
@@ -111,23 +97,23 @@ type (
 service admin-api {
 	// 添加订单设置
 	@handler AddOrderSetting
-	post /addOrderSetting (AddOrderSettingReq) returns (AddOrderSettingResp)
+	post /addOrderSetting (AddOrderSettingReq) returns (BaseResp)
 
 	// 删除订单设置
 	@handler DeleteOrderSetting
-	get /deleteOrderSetting (DeleteOrderSettingReq) returns (DeleteOrderSettingResp)
+	get /deleteOrderSetting (DeleteOrderSettingReq) returns (BaseResp)
 
 	// 更新订单设置
 	@handler UpdateOrderSetting
-	post /updateOrderSetting (UpdateOrderSettingReq) returns (UpdateOrderSettingResp)
+	post /updateOrderSetting (UpdateOrderSettingReq) returns (BaseResp)
 
 	// 更新订单设置表是否默认状态
 	@handler UpdateOrderSettingIsDefault
-	post /updateOrderSettingIsDefault (UpdateOrderSettingIsDefaultReq) returns (UpdateOrderSettingStatusResp)
+	post /updateOrderSettingIsDefault (UpdateOrderSettingIsDefaultReq) returns (BaseResp)
 
 	// 更新订单设置状态
 	@handler UpdateOrderSettingStatus
-	post /updateOrderSettingStatus (UpdateOrderSettingStatusReq) returns (UpdateOrderSettingStatusResp)
+	post /updateOrderSettingStatus (UpdateOrderSettingStatusReq) returns (BaseResp)
 
 	// 查询订单设置详情
 	@handler QueryOrderSettingDetail

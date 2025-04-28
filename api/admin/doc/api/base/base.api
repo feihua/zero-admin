@@ -1,11 +1,11 @@
 syntax = "v1"
 
 info (
-	title:   "type title here"
-	desc:    "type desc here"
-	author:  "type author here"
-	email:   "type email here"
-	version: "type version here"
+	title:   "公共响应"
+	desc:    "公共响应,减少重复定义"
+	author:  "LiuFeiHua"
+	email:   "1002219331@qq.com"
+	version: "0.0.1"
 )
 
 type BaseResp {

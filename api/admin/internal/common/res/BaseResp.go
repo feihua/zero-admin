@@ -9,11 +9,11 @@ import (
 Author: LiuFeiHua
 Date: 2025/4/28 10:03
 */
-func Success() *types.BaseResp {
+func Success() (*types.BaseResp, error) {
 	return &types.BaseResp{
 		Code:    "000000",
 		Message: "操作成功",
-	}
+	}, nil
 }
 
 // Error 返回失败(默认)

@@ -3,6 +3,7 @@ package menu
 import (
 	"context"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
+	"github.com/feihua/zero-admin/api/admin/internal/common/res"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
 	"github.com/zeromicro/go-zero/core/logc"
 	"google.golang.org/grpc/status"
@@ -33,7 +34,7 @@ func NewDeleteMenuLogic(ctx context.Context, svcCtx *svc.ServiceContext) DeleteM
 }
 
 // DeleteMenu 删除菜单
-func (l *DeleteMenuLogic) DeleteMenu(req *types.DeleteMenuReq) (*types.DeleteMenuResp, error) {
+func (l *DeleteMenuLogic) DeleteMenu(req *types.DeleteMenuReq) (*types.BaseResp, error) {
 	if _, err := l.svcCtx.MenuService.DeleteMenu(l.ctx, &sysclient.DeleteMenuReq{
 		Id: req.Id, // 编号
 	}); err != nil {
@@ -42,8 +43,5 @@ func (l *DeleteMenuLogic) DeleteMenu(req *types.DeleteMenuReq) (*types.DeleteMen
 		return nil, errorx.NewDefaultError(s.Message())
 	}
 
-	return &types.DeleteMenuResp{
-		Code:    "000000",
-		Message: "删除菜单成功",
-	}, nil
+	return res.Success()
 }

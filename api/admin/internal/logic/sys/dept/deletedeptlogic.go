@@ -3,6 +3,7 @@ package dept
 import (
 	"context"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
+	"github.com/feihua/zero-admin/api/admin/internal/common/res"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
 	"github.com/zeromicro/go-zero/core/logc"
 	"google.golang.org/grpc/status"
@@ -33,7 +34,7 @@ func NewDeleteDeptLogic(ctx context.Context, svcCtx *svc.ServiceContext) DeleteD
 }
 
 // DeleteDept 删除部门信息
-func (l *DeleteDeptLogic) DeleteDept(req *types.DeleteDeptReq) (*types.DeleteDeptResp, error) {
+func (l *DeleteDeptLogic) DeleteDept(req *types.DeleteDeptReq) (*types.BaseResp, error) {
 	_, err := l.svcCtx.DeptService.DeleteDept(l.ctx, &sysclient.DeleteDeptReq{
 		Id: req.Id, // 编号
 	})
@@ -44,8 +45,5 @@ func (l *DeleteDeptLogic) DeleteDept(req *types.DeleteDeptReq) (*types.DeleteDep
 		return nil, errorx.NewDefaultError(s.Message())
 	}
 
-	return &types.DeleteDeptResp{
-		Code:    "000000",
-		Message: "删除部门成功",
-	}, nil
+	return res.Success()
 }

@@ -15,11 +15,6 @@ type AddCompanyAddressReq struct {
 	DetailAddress string `json:"detailAddress"` //详细地址
 }
 
-type AddCompanyAddressResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
-}
-
 type AddDeptReq struct {
 	ParentId int64  `json:"parentId"`        //上级部门id
 	DeptName string `json:"deptName"`        //部门名称
@@ -29,11 +24,6 @@ type AddDeptReq struct {
 	Email    string `json:"email"`           //邮箱
 	Status   int32  `json:"status"`          //部门状态（0：停用，1:正常）
 	Remark   string `json:"remark,optional"` //备注信息
-}
-
-type AddDeptResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
 }
 
 type AddDictItemReq struct {
@@ -48,21 +38,11 @@ type AddDictItemReq struct {
 	Remark    string `json:"remark,optional"`    //备注
 }
 
-type AddDictItemResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
-}
-
 type AddDictTypeReq struct {
 	DictName string `json:"dictName"`        //字典名称
 	DictType string `json:"dictType"`        //字典类型
 	Status   int32  `json:"status"`          //状态（0：停用，1:正常）
 	Remark   string `json:"remark,optional"` //备注
-}
-
-type AddDictTypeResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
 }
 
 type AddFlashPromotionLogReq struct {
@@ -71,11 +51,6 @@ type AddFlashPromotionLogReq struct {
 	MemberPhone   string `json:"memberPhone"`
 	ProductName   string `json:"productName"`
 	SubscribeTime string `json:"subscribeTime"` // 会员订阅时间
-}
-
-type AddFlashPromotionLogResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
 }
 
 type AddFlashPromotionProductRelationData struct {
@@ -92,11 +67,6 @@ type AddFlashPromotionProductRelationReq struct {
 	Data []AddFlashPromotionProductRelationData ` json:"data"` // 限时购id
 }
 
-type AddFlashPromotionProductRelationResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
-}
-
 type AddFlashPromotionReq struct {
 	Title     string `json:"title"`     //标题
 	StartDate string `json:"startDate"` //开始日期
@@ -104,21 +74,11 @@ type AddFlashPromotionReq struct {
 	Status    int32  `json:"status"`    //上下线状态
 }
 
-type AddFlashPromotionResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
-}
-
 type AddFlashPromotionSessionReq struct {
 	Name      string `json:"name"`      // 场次名称
 	StartTime string `json:"startTime"` // 每日开始时间
 	EndTime   string `json:"endTime"`   // 每日结束时间
 	Status    int32  `json:"status"`    // 启用状态：0->不启用；1->启用
-}
-
-type AddFlashPromotionSessionResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
 }
 
 type AddHomeAdvertiseReq struct {
@@ -133,45 +93,20 @@ type AddHomeAdvertiseReq struct {
 	Sort      int32  `json:"sort"`          // 排序
 }
 
-type AddHomeAdvertiseResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
-}
-
 type AddHomeBrandReq struct {
 	BrandIds []int64 `json:"brandIds"` // 商品品牌id
-}
-
-type AddHomeBrandResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
 }
 
 type AddHomeNewProductReq struct {
 	ProductIds []int64 `json:"productIds"` // 商品id
 }
 
-type AddHomeNewProductResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
-}
-
 type AddHomeRecommendProductReq struct {
 	ProductIds []int64 `json:"productIds"` // 商品id
 }
 
-type AddHomeRecommendProductResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
-}
-
 type AddHomeRecommendSubjectReq struct {
 	SubjectIds []int64 `json:"subjectIds"` // 专题id
-}
-
-type AddHomeRecommendSubjectResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
 }
 
 type AddIntegrationConsumeSettingReq struct {
@@ -180,11 +115,6 @@ type AddIntegrationConsumeSettingReq struct {
 	UseUnit            int32 `json:"useUnit"`            //每次使用积分最小单位100
 	IsDefault          int32 `json:"isDefault"`          //是否默认：0->否；1->是
 	CouponStatus       int32 `json:"couponStatus"`       //是否可以和优惠券同用；0->不可以；1->可以
-}
-
-type AddIntegrationConsumeSettingResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
 }
 
 type AddMemberLevelReq struct {
@@ -200,11 +130,6 @@ type AddMemberLevelReq struct {
 	IsMemberPrice      int32  `json:"isMemberPrice"`      //是否有会员价格特权
 	IsBirthday         int32  `json:"isBirthday"`         //是否有生日特权
 	Remark             string `json:"remark,optional"`    //备注
-}
-
-type AddMemberLevelResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
 }
 
 type AddMemberPriceList struct {
@@ -223,21 +148,11 @@ type AddMemberRuleSettingReq struct {
 	Status            int32 `json:"status"`            //状态：0->禁用；1->启用
 }
 
-type AddMemberRuleSettingResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
-}
-
 type AddMemberTagReq struct {
 	TagName           string `json:"tagName"`           //标签名称
 	FinishOrderCount  int32  `json:"finishOrderCount"`  //自动打标签完成订单数量
 	Status            int32  `json:"status"`            //状态：0->禁用；1->启用
 	FinishOrderAmount int64  `json:"finishOrderAmount"` //自动打标签完成订单金额
-}
-
-type AddMemberTagResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
 }
 
 type AddMemberTaskReq struct {
@@ -246,11 +161,6 @@ type AddMemberTaskReq struct {
 	TaskIntegral int32  `json:"taskIntegral"` //赠送积分
 	TaskType     int32  `json:"taskType"`     //任务类型：0->新手任务；1->日常任务
 	Status       int32  `json:"status"`       //状态：0->禁用；1->启用
-}
-
-type AddMemberTaskResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
 }
 
 type AddMenuReq struct {
@@ -269,11 +179,6 @@ type AddMenuReq struct {
 	VueIcon       string `json:"vueIcon,optional"`       //vue的图标
 	VueRedirect   string `json:"vueRedirect,optional"`   //vue的路由重定向
 	BackgroundUrl string `json:"backgroundUrl,optional"` //接口地址
-}
-
-type AddMenuResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
 }
 
 type AddOrUpdateCouponReq struct {
@@ -296,20 +201,10 @@ type AddOrUpdateCouponReq struct {
 	ProductCategoryRelationList []ProductCategoryRelation `json:"productCategoryRelationList,optional"` // 优惠券绑定的商品分类
 }
 
-type AddOrUpdateCouponResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
-}
-
 type AddOrderReturnReasonReq struct {
 	Name   string `json:"name"`   //退货类型
 	Sort   int32  `json:"sort"`   //排序
 	Status int32  `json:"status"` //状态：0->不启用；1->启用
-}
-
-type AddOrderReturnReasonResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
 }
 
 type AddOrderSettingReq struct {
@@ -322,22 +217,12 @@ type AddOrderSettingReq struct {
 	CommentOvertime     int32 `json:"commentOvertime"`     //订单完成后自动好评时间（天）
 }
 
-type AddOrderSettingResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
-}
-
 type AddPostReq struct {
 	PostCode string `json:"postCode"`        //岗位编码
 	PostName string `json:"postName"`        //岗位名称
 	Sort     int32  `json:"sort"`            //显示顺序
 	Status   int32  `json:"status"`          //岗位状态（0：停用，1:正常）
 	Remark   string `json:"remark,optional"` //备注
-}
-
-type AddPostResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
 }
 
 type AddPreferredAreaReq struct {
@@ -348,18 +233,8 @@ type AddPreferredAreaReq struct {
 	ShowStatus int32  `json:"showStatus,default=2"` //显示状态：0->不显示；1->显示
 }
 
-type AddPreferredAreaResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
-}
-
 type AddProductAttributeCategoryReq struct {
 	Name string `json:"name"`
-}
-
-type AddProductAttributeCategoryResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
 }
 
 type AddProductAttributeReq struct {
@@ -374,11 +249,6 @@ type AddProductAttributeReq struct {
 	RelatedStatus              int32  `json:"relatedStatus"`      // 相同属性产品是否关联；0->不关联；1->关联
 	HandAddStatus              int32  `json:"handAddStatus"`      // 是否支持手动新增；0->不支持；1->支持
 	Type                       int32  `json:"type"`               // 属性的类型；0->规格；1->参数
-}
-
-type AddProductAttributeResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
 }
 
 type AddProductAttributeValueList struct {
@@ -398,11 +268,6 @@ type AddProductBrandReq struct {
 	BrandStory      string `json:"brandStory"`      //品牌故事
 }
 
-type AddProductBrandResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
-}
-
 type AddProductCategoryReq struct {
 	ParentId               int64   `json:"parentId"`   //上机分类的编号：0表示一级分类
 	Name                   string  `json:"name"`       //商品分类名称
@@ -415,11 +280,6 @@ type AddProductCategoryReq struct {
 	Keywords               string  `json:"keywords"`                        //关键字
 	Description            string  `json:"description"`                     //描述
 	ProductAttributeIdList []int64 `json:"productAttributeIdList,optional"` // 商品相关筛选属性集合
-}
-
-type AddProductCategoryResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
 }
 
 type AddProductData struct {
@@ -494,22 +354,12 @@ type AddProductReq struct {
 	PrefrenceAreaProductRelationList []int64                        `json:"prefrenceAreaProductRelationList"`
 }
 
-type AddProductResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
-}
-
 type AddRoleReq struct {
 	RoleName  string `json:"roleName"`        //名称
 	RoleKey   string `json:"roleKey"`         //角色权限字符串
 	DataScope int32  `json:"dataScope"`       //数据范围（1：全部数据权限 2：自定数据权限 3：本部门数据权限 4：本部门及以下数据权限）
 	Status    int32  `json:"status"`          //状态(1:正常，0:禁用)
 	Remark    string `json:"remark,optional"` //备注
-}
-
-type AddRoleResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
 }
 
 type AddSkuStockList struct {
@@ -531,11 +381,6 @@ type AddSubjectCategoryReq struct {
 	Sort       int32  `json:"sort"`                 //排序
 }
 
-type AddSubjectCategoryResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
-}
-
 type AddSubjectReq struct {
 	CategoryId      int64  `json:"categoryId"`                //专题分类id
 	Title           string `json:"title"`                     //专题标题
@@ -553,11 +398,6 @@ type AddSubjectReq struct {
 	CategoryName    string `json:"categoryName"`              //专题分类名称
 }
 
-type AddSubjectResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
-}
-
 type AddUserReq struct {
 	Mobile   string  `json:"mobile"`            //手机号码
 	UserName string  `json:"userName"`          //用户账号
@@ -570,11 +410,6 @@ type AddUserReq struct {
 	DeptId   int64   `json:"deptId"`            //部门ID
 	Remark   string  `json:"remark,optional"`   //备注
 	PostIds  []int64 `json:"postIds"`           //部门id
-}
-
-type AddUserResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
 }
 
 type BaseResp struct {
@@ -607,19 +442,9 @@ type CancelAuthorizationReq struct {
 	IsExist int64   `json:"isExist"` //0：取消授权，1：确认授权
 }
 
-type CancelAuthorizationResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
-}
-
 type CloseOrderReq struct {
 	Ids  []int64 `json:"ids"` //订单id
 	Note string  `json:"note"`
-}
-
-type CloseOrderResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
 }
 
 type CouponDetailReq struct {
@@ -657,54 +482,24 @@ type DeleteCompanyAddressReq struct {
 	Ids []int64 `form:"ids"`
 }
 
-type DeleteCompanyAddressResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
-}
-
 type DeleteCouponReq struct {
 	Ids []int64 `form:"ids"`
-}
-
-type DeleteCouponResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
 }
 
 type DeleteDeptReq struct {
 	Id int64 `form:"id"`
 }
 
-type DeleteDeptResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
-}
-
 type DeleteDictItemReq struct {
 	Ids []int64 `form:"ids"`
-}
-
-type DeleteDictItemResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
 }
 
 type DeleteDictTypeReq struct {
 	Ids []int64 `form:"ids"`
 }
 
-type DeleteDictTypeResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
-}
-
 type DeleteFlashPromotionLogReq struct {
 	Ids []int64 `form:"ids"`
-}
-
-type DeleteFlashPromotionLogResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
 }
 
 type DeleteFlashPromotionProductRelationReq struct {
@@ -712,36 +507,16 @@ type DeleteFlashPromotionProductRelationReq struct {
 	FlashPromotionId int64   `form:"flashPromotionId"`
 }
 
-type DeleteFlashPromotionProductRelationResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
-}
-
 type DeleteFlashPromotionReq struct {
 	Ids []int64 `form:"ids"`
-}
-
-type DeleteFlashPromotionResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
 }
 
 type DeleteFlashPromotionSessionReq struct {
 	Ids []int64 `form:"ids"`
 }
 
-type DeleteFlashPromotionSessionResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
-}
-
 type DeleteHomeAdvertiseReq struct {
 	Ids []int64 `form:"ids"`
-}
-
-type DeleteHomeAdvertiseResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
 }
 
 type DeleteHomeBrandReq struct {
@@ -749,19 +524,9 @@ type DeleteHomeBrandReq struct {
 	BrandIds []int64 `form:"brandIds"` // 商品品牌id
 }
 
-type DeleteHomeBrandResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
-}
-
 type DeleteHomeNewProductReq struct {
 	Ids        []int64 `form:"ids"`
 	ProductIds []int64 `form:"productIds"`
-}
-
-type DeleteHomeNewProductResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
 }
 
 type DeleteHomeRecommendProductReq struct {
@@ -769,237 +534,107 @@ type DeleteHomeRecommendProductReq struct {
 	ProductIds []int64 `form:"productIds"` // 商品id
 }
 
-type DeleteHomeRecommendProductResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
-}
-
 type DeleteHomeRecommendSubjectReq struct {
 	Ids        []int64 `form:"ids"`
 	SubjectIds []int64 `form:"subjectIds"`
-}
-
-type DeleteHomeRecommendSubjectResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
 }
 
 type DeleteIntegrationConsumeSettingReq struct {
 	Ids []int64 `form:"ids"`
 }
 
-type DeleteIntegrationConsumeSettingResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
-}
-
 type DeleteLoginLogReq struct {
 	Ids []int64 `form:"ids"`
-}
-
-type DeleteLoginLogResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
 }
 
 type DeleteMemberLevelReq struct {
 	Ids []int64 `form:"ids"`
 }
 
-type DeleteMemberLevelResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
-}
-
 type DeleteMemberReq struct {
 	Ids []int64 `form:"ids"`
-}
-
-type DeleteMemberResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
 }
 
 type DeleteMemberRuleSettingReq struct {
 	Ids []int64 `form:"ids"`
 }
 
-type DeleteMemberRuleSettingResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
-}
-
 type DeleteMemberTagReq struct {
 	Ids []int64 `form:"ids"`
-}
-
-type DeleteMemberTagResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
 }
 
 type DeleteMemberTaskReq struct {
 	Ids []int64 `form:"ids"`
 }
 
-type DeleteMemberTaskResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
-}
-
 type DeleteMenuReq struct {
 	Id int64 `form:"id"`
-}
-
-type DeleteMenuResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
 }
 
 type DeleteOperateLogReq struct {
 	Ids []int64 `form:"ids"`
 }
 
-type DeleteOperateLogResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
-}
-
 type DeleteOrderReq struct {
 	Ids []int64 `form:"ids"`
-}
-
-type DeleteOrderResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
 }
 
 type DeleteOrderReturnApplyReq struct {
 	Ids []int64 `form:"ids"`
 }
 
-type DeleteOrderReturnApplyResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
-}
-
 type DeleteOrderReturnReasonReq struct {
 	Ids []int64 `form:"ids"`
-}
-
-type DeleteOrderReturnReasonResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
 }
 
 type DeleteOrderSettingReq struct {
 	Ids []int64 `form:"ids"`
 }
 
-type DeleteOrderSettingResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
-}
-
 type DeletePostReq struct {
 	Ids []int64 `form:"ids"`
-}
-
-type DeletePostResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
 }
 
 type DeletePreferredAreaReq struct {
 	Ids []int64 `form:"ids"`
 }
 
-type DeletePreferredAreaResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
-}
-
 type DeleteProductAttributeCategoryReq struct {
 	Ids []int64 `form:"ids"`
-}
-
-type DeleteProductAttributeCategoryResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
 }
 
 type DeleteProductAttributeReq struct {
 	Ids []int64 `form:"ids"`
 }
 
-type DeleteProductAttributeResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
-}
-
 type DeleteProductBrandReq struct {
 	Ids []int64 `form:"ids"`
-}
-
-type DeleteProductBrandResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
 }
 
 type DeleteProductCategoryReq struct {
 	Ids []int64 `form:"ids"`
 }
 
-type DeleteProductCategoryResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
-}
-
 type DeleteRoleReq struct {
 	Ids []int64 `form:"ids"`
-}
-
-type DeleteRoleResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
 }
 
 type DeleteSubjectCategoryReq struct {
 	Ids []int64 `form:"ids"`
 }
 
-type DeleteSubjectCategoryResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
-}
-
 type DeleteSubjectReq struct {
 	Ids []int64 `form:"ids"`
-}
-
-type DeleteSubjectResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
 }
 
 type DeleteUserReq struct {
 	Ids []int64 `form:"ids"`
 }
 
-type DeleteUserResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
-}
-
 type DeliveryReq struct {
 	OrderId         int64  `json:"orderId"`         //订单id
 	DeliveryCompany string `json:"deliveryCompany"` // 物流公司
 	DeliverySn      string `json:"deliverySn"`      // 物流单号
-}
-
-type DeliveryResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
 }
 
 type DeptList struct {
@@ -3470,11 +3105,6 @@ type ReSetPasswordReq struct {
 	UserId int64 `json:"userId"`
 }
 
-type ReSetPasswordResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
-}
-
 type RoleListData struct {
 	Id         int64  `json:"id"`         //角色id
 	RoleName   string `json:"roleName"`   //名称
@@ -3526,19 +3156,9 @@ type UpdateCompanyAddressReq struct {
 	DetailAddress string `json:"detailAddress"` //详细地址
 }
 
-type UpdateCompanyAddressResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
-}
-
 type UpdateCompanyAddressSendStatusReq struct {
 	Id         int64 `json:"id"`         //
 	SendStatus int32 `json:"sendStatus"` //默认发货地址：0->否；1->是
-}
-
-type UpdateCompanyAddressStatusResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
 }
 
 type UpdateDeptReq struct {
@@ -3553,19 +3173,9 @@ type UpdateDeptReq struct {
 	Remark   string `json:"remark,optional"` //备注信息
 }
 
-type UpdateDeptResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
-}
-
 type UpdateDeptStatusReq struct {
 	Id     int64 `json:"id"`     //部门id
 	Status int32 `json:"status"` //部门状态（0：停用，1:正常）
-}
-
-type UpdateDeptStatusResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
 }
 
 type UpdateDictItemReq struct {
@@ -3581,19 +3191,9 @@ type UpdateDictItemReq struct {
 	Remark    string `json:"remark,optional"`    //备注
 }
 
-type UpdateDictItemResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
-}
-
 type UpdateDictItemStatusReq struct {
 	Ids    []int64 `json:"ids"`    //字典数据id
 	Status int32   `json:"status"` //状态（0：停用，1:正常）
-}
-
-type UpdateDictItemStatusResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
 }
 
 type UpdateDictTypeReq struct {
@@ -3604,19 +3204,9 @@ type UpdateDictTypeReq struct {
 	Remark   string `json:"remark,optional"` //备注
 }
 
-type UpdateDictTypeResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
-}
-
 type UpdateDictTypeStatusReq struct {
 	Ids    []int64 `json:"ids"`    //字典id
 	Status int32   `json:"status"` //状态
-}
-
-type UpdateDictTypeStatusResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
 }
 
 type UpdateFlashPromotionProductRelationReq struct {
@@ -3630,22 +3220,12 @@ type UpdateFlashPromotionProductRelationReq struct {
 	Sort                                   int32 ` json:"sort"`
 }
 
-type UpdateFlashPromotionProductRelationResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
-}
-
 type UpdateFlashPromotionReq struct {
 	Id        int64  `json:"id"`        //编号
 	Title     string `json:"title"`     //标题
 	StartDate string `json:"startDate"` //开始日期
 	EndDate   string `json:"endDate"`   //结束日期
 	Status    int32  `json:"status"`    //上下线状态
-}
-
-type UpdateFlashPromotionResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
 }
 
 type UpdateFlashPromotionSessionReq struct {
@@ -3656,29 +3236,14 @@ type UpdateFlashPromotionSessionReq struct {
 	Status    int32  `json:"status"`    // 启用状态：0->不启用；1->启用
 }
 
-type UpdateFlashPromotionSessionResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
-}
-
 type UpdateFlashPromotionSessionStatusReq struct {
 	Ids    []int64 `json:"ids"`
 	Status int32   `json:"status"`
 }
 
-type UpdateFlashPromotionSessionStatusResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
-}
-
 type UpdateFlashPromotionStatusReq struct {
 	Ids    []int64 `json:"ids"`    //编号
 	Status int32   `json:"status"` //上下线状态
-}
-
-type UpdateFlashPromotionStatusResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
 }
 
 type UpdateHomeAdvertiseReq struct {
@@ -3694,11 +3259,6 @@ type UpdateHomeAdvertiseReq struct {
 	Sort      int32  `json:"sort"`          // 排序
 }
 
-type UpdateHomeAdvertiseResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
-}
-
 type UpdateHomeAdvertiseStatusReq struct {
 	Ids    []int64 `json:"ids"`
 	Status int32   `json:"status"` // 上下线状态：0->下线；1->上线
@@ -3709,31 +3269,16 @@ type UpdateHomeBrandReq struct {
 	Sort int32 `json:"sort"` //排序
 }
 
-type UpdateHomeBrandResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
-}
-
 type UpdateHomeBrandStatusReq struct {
 	Ids             []int64 `json:"ids"`                       //
 	BrandIds        []int64 `json:"brandIds"`                  // 商品品牌id
 	RecommendStatus int32   `json:"recommendStatus,default=2"` //推荐状态：0->不推荐;1->推荐
 }
 
-type UpdateHomeBrandStatusResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
-}
-
 type UpdateHomeNewProductStatusReq struct {
 	Ids             []int64 `json:"ids"`
 	ProductIds      []int64 `json:"productIds"`      // 商品id
 	RecommendStatus int32   `json:"recommendStatus"` // 推荐状态：0->不推荐;1->推荐
-}
-
-type UpdateHomeNewProductStatusResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
 }
 
 type UpdateIntegrationConsumeSettingReq struct {
@@ -3745,19 +3290,9 @@ type UpdateIntegrationConsumeSettingReq struct {
 	CouponStatus       int32 `json:"couponStatus,default=2"` //是否可以和优惠券同用；0->不可以；1->可以
 }
 
-type UpdateIntegrationConsumeSettingResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
-}
-
 type UpdateIntegrationConsumeSettingStatusReq struct {
 	Id        int64 `json:"id"`        //
 	IsDefault int32 `json:"isDefault"` //是否默认：0->否；1->是
-}
-
-type UpdateIntegrationConsumeSettingStatusResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
 }
 
 type UpdateMemberLevelReq struct {
@@ -3776,19 +3311,9 @@ type UpdateMemberLevelReq struct {
 	Remark             string `json:"remark,optional"`    //备注
 }
 
-type UpdateMemberLevelResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
-}
-
 type UpdateMemberLevelStatusReq struct {
 	Id            int64 `json:"id"`            //
 	DefaultStatus int32 `json:"defaultStatus"` //是否为默认等级：0->不是；1->是
-}
-
-type UpdateMemberLevelStatusResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
 }
 
 type UpdateMemberPriceList struct {
@@ -3820,11 +3345,6 @@ type UpdateMemberReq struct {
 	HistoryIntegration    int32  `json:"historyIntegration"`    //历史积分数量
 }
 
-type UpdateMemberResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
-}
-
 type UpdateMemberRuleSettingReq struct {
 	Id                int64 `json:"id"`                //
 	ContinueSignDay   int32 `json:"continueSignDay"`   //连续签到天数
@@ -3836,19 +3356,9 @@ type UpdateMemberRuleSettingReq struct {
 	Status            int32 `json:"status"`            //状态：0->禁用；1->启用
 }
 
-type UpdateMemberRuleSettingResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
-}
-
 type UpdateMemberRuleSettingStatusReq struct {
 	Ids    []int64 `json:"ids"`    //
 	Status int32   `json:"status"` //状态：0->禁用；1->启用
-}
-
-type UpdateMemberRuleSettingStatusResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
 }
 
 type UpdateMemberTagReq struct {
@@ -3859,19 +3369,9 @@ type UpdateMemberTagReq struct {
 	FinishOrderAmount int64  `json:"finishOrderAmount"` //自动打标签完成订单金额
 }
 
-type UpdateMemberTagResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
-}
-
 type UpdateMemberTagStatusReq struct {
 	Ids    []int64 `json:"ids"`    //
 	Status int32   `json:"status"` //状态：0->禁用；1->启用
-}
-
-type UpdateMemberTagStatusResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
 }
 
 type UpdateMemberTaskReq struct {
@@ -3883,19 +3383,9 @@ type UpdateMemberTaskReq struct {
 	Status       int32  `json:"status"`       //状态：0->禁用；1->启用
 }
 
-type UpdateMemberTaskResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
-}
-
 type UpdateMemberTaskStatusReq struct {
 	Ids    []int64 `json:"ids"`    //
 	Status int32   `json:"status"` //状态：0->禁用；1->启用
-}
-
-type UpdateMemberTaskStatusResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
 }
 
 type UpdateMenuReq struct {
@@ -3917,19 +3407,9 @@ type UpdateMenuReq struct {
 	BackgroundUrl string `json:"backgroundUrl,optional"` //接口地址
 }
 
-type UpdateMenuResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
-}
-
 type UpdateMenuStatusReq struct {
 	MenuId     int64 `json:"menuId"`     //编号
 	MenuStatus int32 `json:"menuStatus"` //菜单状态
-}
-
-type UpdateMenuStatusResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
 }
 
 type UpdateMoneyInfoReq struct {
@@ -3939,30 +3419,15 @@ type UpdateMoneyInfoReq struct {
 	DiscountAmount int64 `json:"discountAmount"`  // 管理员后台调整订单所使用的折扣金额
 }
 
-type UpdateMoneyInfoResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
-}
-
 type UpdateNewProductSortReq struct {
 	Id   int64 `json:"id"`
 	Sort int32 `json:"sort"` // 排序
-}
-
-type UpdateNewProductSortResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
 }
 
 type UpdateNoteReq struct {
 	Id     int64  `json:"id"`              // 订单id
 	Status int32  `json:"status,optional"` // 订单状态：0->待付款；1->待发货；2->已发货；3->已完成；4->已关闭；5->无效订单
 	Note   string `json:"note,optional"`   // 订单备注
-}
-
-type UpdateNoteResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
 }
 
 type UpdateOrderReturnApplyStatusReq struct {
@@ -3974,11 +3439,6 @@ type UpdateOrderReturnApplyStatusReq struct {
 	ReturnAmount     int64  `json:"returnAmount,optional"`     // 退款金额
 }
 
-type UpdateOrderReturnApplyStatusResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
-}
-
 type UpdateOrderReturnReasonReq struct {
 	Id     int64  `json:"id"`     //
 	Name   string `json:"name"`   //退货类型
@@ -3986,19 +3446,9 @@ type UpdateOrderReturnReasonReq struct {
 	Status int32  `json:"status"` //状态：0->不启用；1->启用
 }
 
-type UpdateOrderReturnReasonResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
-}
-
 type UpdateOrderReturnReasonStatusReq struct {
 	Ids    []int64 `json:"ids"`    //
 	Status int32   `json:"status"` //状态：0->不启用；1->启用
-}
-
-type UpdateOrderReturnReasonStatusResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
 }
 
 type UpdateOrderSettingIsDefaultReq struct {
@@ -4017,19 +3467,9 @@ type UpdateOrderSettingReq struct {
 	CommentOvertime     int32 `json:"commentOvertime"`     //订单完成后自动好评时间（天）
 }
 
-type UpdateOrderSettingResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
-}
-
 type UpdateOrderSettingStatusReq struct {
 	Ids    []int64 `json:"ids"`              //
 	Status int32   `json:"status,default=2"` //状态：0->禁用；1->启用
-}
-
-type UpdateOrderSettingStatusResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
 }
 
 type UpdatePostReq struct {
@@ -4041,19 +3481,9 @@ type UpdatePostReq struct {
 	Remark   string `json:"remark,optional"` //备注
 }
 
-type UpdatePostResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
-}
-
 type UpdatePostStatusReq struct {
 	Ids    []int64 `json:"ids"`    //岗位id
 	Status int32   `json:"status"` //状态
-}
-
-type UpdatePostStatusResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
 }
 
 type UpdatePreferredAreaReq struct {
@@ -4065,29 +3495,14 @@ type UpdatePreferredAreaReq struct {
 	ShowStatus int32  `json:"showStatus,default=2"` //显示状态：0->不显示；1->显示
 }
 
-type UpdatePreferredAreaResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
-}
-
 type UpdatePreferredAreaStatusReq struct {
 	Ids        []int64 `json:"ids"`                  //主键ID
 	ShowStatus int32   `json:"showStatus,default=2"` //显示状态：0->不显示；1->显示
 }
 
-type UpdatePreferredAreaStatusResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
-}
-
 type UpdateProductAttributeCategoryReq struct {
 	Id   int64  `json:"id"`
 	Name string `json:"name"`
-}
-
-type UpdateProductAttributeCategoryResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
 }
 
 type UpdateProductAttributeReq struct {
@@ -4103,11 +3518,6 @@ type UpdateProductAttributeReq struct {
 	RelatedStatus              int32  `json:"relatedStatus"`      // 相同属性产品是否关联；0->不关联；1->关联
 	HandAddStatus              int32  `json:"handAddStatus"`      // 是否支持手动新增；0->不支持；1->支持
 	Type                       int32  `json:"type"`               // 属性的类型；0->规格；1->参数
-}
-
-type UpdateProductAttributeResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
 }
 
 type UpdateProductAttributeValueList struct {
@@ -4130,19 +3540,9 @@ type UpdateProductBrandReq struct {
 	BrandStory      string `json:"brandStory"`      //品牌故事
 }
 
-type UpdateProductBrandResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
-}
-
 type UpdateProductBrandStatusReq struct {
 	Ids    []int64 `json:"ids"`
 	Status int32   `json:"status"`
-}
-
-type UpdateProductBrandStatusResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
 }
 
 type UpdateProductCategoryReq struct {
@@ -4159,11 +3559,6 @@ type UpdateProductCategoryReq struct {
 	Keywords               string  `json:"keywords"`                        //关键字
 	Description            string  `json:"description"`                     //描述
 	ProductAttributeIdList []int64 `json:"productAttributeIdList,optional"` // 商品相关筛选属性集合
-}
-
-type UpdateProductCategoryResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
 }
 
 type UpdateProductCategoryStatusReq struct {
@@ -4250,20 +3645,10 @@ type UpdateProductReq struct {
 	PrefrenceAreaProductRelationList []int64                           `json:"prefrenceAreaProductRelationList"`
 }
 
-type UpdateProductResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
-}
-
 type UpdateProductStatusReq struct {
 	Ids    []int64 `form:"ids"`
 	Status int32   `form:"status"`
 	Detail string  `form:"detail"`
-}
-
-type UpdateProductStatusResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
 }
 
 type UpdateReceiverInfoReq struct {
@@ -4278,19 +3663,9 @@ type UpdateReceiverInfoReq struct {
 	ReceiverRegion        string `json:"receiverRegion,optional"`        // 区
 }
 
-type UpdateReceiverInfoResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
-}
-
 type UpdateRecommendProductSortReq struct {
 	Id   int64 `json:"id"`
 	Sort int32 `json:"sort"` // 排序
-}
-
-type UpdateRecommendProductSortResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
 }
 
 type UpdateRecommendProductStatusReq struct {
@@ -4299,19 +3674,9 @@ type UpdateRecommendProductStatusReq struct {
 	RecommendStatus int32   `json:"recommendStatus"` // 推荐状态：0->不推荐;1->推荐
 }
 
-type UpdateRecommendProductStatusResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
-}
-
 type UpdateRecommendSubjectSortReq struct {
 	Id   int64 `json:"id"`
 	Sort int32 `json:"sort"` // 排序
-}
-
-type UpdateRecommendSubjectSortResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
 }
 
 type UpdateRecommendSubjectStatusReq struct {
@@ -4320,19 +3685,9 @@ type UpdateRecommendSubjectStatusReq struct {
 	RecommendStatus int32   `json:"recommendStatus"` // 推荐状态：0->不推荐;1->推荐
 }
 
-type UpdateRecommendSubjectStatusResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
-}
-
 type UpdateRoleMenuListReq struct {
 	RoleId  int64   `json:"roleId"`
 	MenuIds []int64 `json:"menuIds"`
-}
-
-type UpdateRoleMenuListResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
 }
 
 type UpdateRoleReq struct {
@@ -4344,19 +3699,9 @@ type UpdateRoleReq struct {
 	Remark    string `json:"remark,optional"` //备注
 }
 
-type UpdateRoleResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
-}
-
 type UpdateRoleStatusReq struct {
 	Ids    []int64 `json:"ids"`    //角色id
 	Status int32   `json:"status"` //状态
-}
-
-type UpdateRoleStatusResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
 }
 
 type UpdateSkuStockData struct {
@@ -4391,11 +3736,6 @@ type UpdateSkuStockReq struct {
 	SkuStockList []UpdateSkuStockData `json:"skuStockList"`
 }
 
-type UpdateSkuStockResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
-}
-
 type UpdateSubjectCategoryReq struct {
 	Id         int64  `json:"id"`                   //主键ID
 	Name       string `json:"name"`                 //专题分类名称
@@ -4404,19 +3744,9 @@ type UpdateSubjectCategoryReq struct {
 	Sort       int32  `json:"sort"`                 //排序
 }
 
-type UpdateSubjectCategoryResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
-}
-
 type UpdateSubjectCategoryStatusReq struct {
 	Ids        []int64 `json:"ids"`                  //主键ID
 	ShowStatus int32   `json:"showStatus,default=2"` //显示状态：0->不显示；1->显示
-}
-
-type UpdateSubjectCategoryStatusResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
 }
 
 type UpdateSubjectReq struct {
@@ -4437,20 +3767,10 @@ type UpdateSubjectReq struct {
 	CategoryName    string `json:"categoryName"`              //专题分类名称
 }
 
-type UpdateSubjectResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
-}
-
 type UpdateSubjectStatusReq struct {
 	Ids             []int64 `json:"ids"`
 	RecommendStatus int32   `json:"recommendStatus"` //推荐状态：0->不推荐；1->推荐
 	ShowStatus      int32   `json:"showStatus"`      //显示状态：0->不显示；1->显示
-}
-
-type UpdateSubjectStatusResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
 }
 
 type UpdateUserReq struct {
@@ -4467,29 +3787,14 @@ type UpdateUserReq struct {
 	PostIds  []int64 `json:"postIds"`         //部门id
 }
 
-type UpdateUserResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
-}
-
 type UpdateUserRoleReq struct {
 	UserId  int64   `json:"userId"`
 	RoleIds []int64 `json:"roleIds"`
 }
 
-type UpdateUserRoleResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
-}
-
 type UpdateUserStatusReq struct {
 	Ids    []int64 `json:"ids"`    //用户id
 	Status int32   `json:"status"` //状态
-}
-
-type UpdateUserStatusResp struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
 }
 
 type UploadResp struct {

@@ -1,3 +1,5 @@
+import "../base/base.api"
+
 info (
 	desc:   "优选专区"
 	author: "刘飞华"
@@ -13,17 +15,9 @@ type (
 		Sort       int32  `json:"sort"` //排序
 		ShowStatus int32  `json:"showStatus,default=2"` //显示状态：0->不显示；1->显示
 	}
-	AddPreferredAreaResp {
-		Code    string `json:"code"`
-		Message string `json:"message"`
-	}
 	// 删除优选专区请求参数
 	DeletePreferredAreaReq {
 		Ids []int64 `form:"ids"`
-	}
-	DeletePreferredAreaResp {
-		Code    string `json:"code"`
-		Message string `json:"message"`
 	}
 	// 更新优选专区请求参数
 	UpdatePreferredAreaReq {
@@ -34,18 +28,10 @@ type (
 		Sort       int32  `json:"sort"` //排序
 		ShowStatus int32  `json:"showStatus,default=2"` //显示状态：0->不显示；1->显示
 	}
-	UpdatePreferredAreaResp {
-		Code    string `json:"code"`
-		Message string `json:"message"`
-	}
 	// 更新优选专区状态请求参数
 	UpdatePreferredAreaStatusReq {
 		Ids        []int64 `json:"ids"` //主键ID
 		ShowStatus int32   `json:"showStatus,default=2"` //显示状态：0->不显示；1->显示
-	}
-	UpdatePreferredAreaStatusResp {
-		Code    string `json:"code"`
-		Message string `json:"message"`
 	}
 	// 查询优选专区详情请求参数
 	QueryPreferredAreaDetailReq {
@@ -109,19 +95,19 @@ type (
 service admin-api {
 	// 添加优选专区
 	@handler AddPreferredArea
-	post /addPreferredArea (AddPreferredAreaReq) returns (AddPreferredAreaResp)
+	post /addPreferredArea (AddPreferredAreaReq) returns (BaseResp)
 
 	// 删除优选专区
 	@handler DeletePreferredArea
-	get /deletePreferredArea (DeletePreferredAreaReq) returns (DeletePreferredAreaResp)
+	get /deletePreferredArea (DeletePreferredAreaReq) returns (BaseResp)
 
 	// 更新优选专区
 	@handler UpdatePreferredArea
-	post /updatePreferredArea (UpdatePreferredAreaReq) returns (UpdatePreferredAreaResp)
+	post /updatePreferredArea (UpdatePreferredAreaReq) returns (BaseResp)
 
 	// 更新优选专区状态
 	@handler UpdatePreferredAreaStatus
-	post /updatePreferredAreaStatus (UpdatePreferredAreaStatusReq) returns (UpdatePreferredAreaStatusResp)
+	post /updatePreferredAreaStatus (UpdatePreferredAreaStatusReq) returns (BaseResp)
 
 	// 查询优选专区详情
 	@handler QueryPreferredAreaDetail

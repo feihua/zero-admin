@@ -3,6 +3,7 @@ package prefrence_area
 import (
 	"context"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
+	"github.com/feihua/zero-admin/api/admin/internal/common/res"
 	"github.com/feihua/zero-admin/api/admin/internal/svc"
 	"github.com/feihua/zero-admin/api/admin/internal/types"
 	"github.com/feihua/zero-admin/rpc/cms/cmsclient"
@@ -32,7 +33,7 @@ func NewUpdatePreferredAreaLogic(ctx context.Context, svcCtx *svc.ServiceContext
 }
 
 // UpdatePreferredArea 更新优选专区
-func (l *UpdatePreferredAreaLogic) UpdatePreferredArea(req *types.UpdatePreferredAreaReq) (resp *types.UpdatePreferredAreaResp, err error) {
+func (l *UpdatePreferredAreaLogic) UpdatePreferredArea(req *types.UpdatePreferredAreaReq) (resp *types.BaseResp, err error) {
 
 	updateBy := l.ctx.Value("userName").(string)
 	_, err = l.svcCtx.PreferredAreaService.UpdatePreferredArea(l.ctx, &cmsclient.UpdatePreferredAreaReq{
@@ -51,8 +52,5 @@ func (l *UpdatePreferredAreaLogic) UpdatePreferredArea(req *types.UpdatePreferre
 		return nil, errorx.NewDefaultError(s.Message())
 	}
 
-	return &types.UpdatePreferredAreaResp{
-		Code:    "000000",
-		Message: "更新优选专区成功",
-	}, nil
+	return res.Success()
 }

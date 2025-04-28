@@ -3,6 +3,7 @@ package order
 import (
 	"context"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
+	"github.com/feihua/zero-admin/api/admin/internal/common/res"
 	"github.com/feihua/zero-admin/rpc/oms/omsclient"
 	"github.com/zeromicro/go-zero/core/logc"
 
@@ -32,7 +33,7 @@ func NewOrderDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext) OrderD
 }
 
 // OrderDelete 批量删除订单
-func (l *OrderDeleteLogic) OrderDelete(req *types.DeleteOrderReq) (*types.DeleteOrderResp, error) {
+func (l *OrderDeleteLogic) OrderDelete(req *types.DeleteOrderReq) (*types.BaseResp, error) {
 	_, err := l.svcCtx.OrderService.OrderDeleteById(l.ctx, &omsclient.OrderDeleteByIdReq{
 		Ids: req.Ids,
 	})
@@ -41,8 +42,5 @@ func (l *OrderDeleteLogic) OrderDelete(req *types.DeleteOrderReq) (*types.Delete
 		logc.Errorf(l.ctx, "根据Id: %+v,删除订单信息异常:%s", req, err.Error())
 		return nil, errorx.NewDefaultError("删除订单信息失败")
 	}
-	return &types.DeleteOrderResp{
-		Code:    "000000",
-		Message: "",
-	}, nil
+	return res.Success()
 }

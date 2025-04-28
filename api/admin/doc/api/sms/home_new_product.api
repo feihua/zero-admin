@@ -1,3 +1,5 @@
+import "../base/base.api"
+
 info (
 	desc:   "新鲜好物表"
 	author: "刘飞华"
@@ -9,36 +11,20 @@ type (
 	AddHomeNewProductReq {
 		ProductIds []int64 `json:"productIds"` // 商品id
 	}
-	AddHomeNewProductResp {
-		Code    string `json:"code"`
-		Message string `json:"message"`
-	}
 	// 删除新鲜好物表请求参数
 	DeleteHomeNewProductReq {
 		Ids        []int64 `form:"ids"`
 		ProductIds []int64 `form:"productIds"`
 	}
-	DeleteHomeNewProductResp {
-		Code    string `json:"code"`
-		Message string `json:"message"`
-	}
 	UpdateNewProductSortReq {
 		Id   int64 `json:"id"`
 		Sort int32 `json:"sort"` // 排序
-	}
-	UpdateNewProductSortResp {
-		Code    string `json:"code"`
-		Message string `json:"message"`
 	}
 	// 更新新鲜好物表状态请求参数
 	UpdateHomeNewProductStatusReq {
 		Ids             []int64 `json:"ids"`
 		ProductIds      []int64 `json:"productIds"` // 商品id
 		RecommendStatus int32   `json:"recommendStatus"` // 推荐状态：0->不推荐;1->推荐
-	}
-	UpdateHomeNewProductStatusResp {
-		Code    string `json:"code"`
-		Message string `json:"message"`
 	}
 	// 查询新鲜好物表详情请求参数
 	QueryHomeNewProductDetailReq {
@@ -90,19 +76,19 @@ type (
 service admin-api {
 	// 添加新鲜好物表
 	@handler AddHomeNewProduct
-	post /addHomeNewProduct (AddHomeNewProductReq) returns (AddHomeNewProductResp)
+	post /addHomeNewProduct (AddHomeNewProductReq) returns (BaseResp)
 
 	// 删除新鲜好物表
 	@handler DeleteHomeNewProduct
-	get /deleteHomeNewProduct (DeleteHomeNewProductReq) returns (DeleteHomeNewProductResp)
+	get /deleteHomeNewProduct (DeleteHomeNewProductReq) returns (BaseResp)
 
 	//修改推荐排序
 	@handler UpdateNewProductSort
-	post /updateNewProductSort (UpdateNewProductSortReq) returns (UpdateNewProductSortResp)
+	post /updateNewProductSort (UpdateNewProductSortReq) returns (BaseResp)
 
 	// 更新新鲜好物表状态
 	@handler UpdateHomeNewProductStatus
-	post /updateNewProductStatus (UpdateHomeNewProductStatusReq) returns (UpdateHomeNewProductStatusResp)
+	post /updateNewProductStatus (UpdateHomeNewProductStatusReq) returns (BaseResp)
 
 	// 查询新鲜好物表详情
 	@handler QueryHomeNewProductDetail

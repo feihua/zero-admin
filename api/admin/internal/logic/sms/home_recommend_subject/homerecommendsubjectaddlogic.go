@@ -3,6 +3,7 @@ package home_recommend_subject
 import (
 	"context"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
+	"github.com/feihua/zero-admin/api/admin/internal/common/res"
 	"github.com/feihua/zero-admin/rpc/cms/cmsclient"
 	"github.com/feihua/zero-admin/rpc/sms/smsclient"
 	"github.com/zeromicro/go-zero/core/logc"
@@ -37,7 +38,7 @@ func NewHomeRecommendSubjectAddLogic(ctx context.Context, svcCtx *svc.ServiceCon
 // 1.根据subjectIds查询推商品专题(cms-rpc)
 // 2.添加首页推荐记录(sms-rpc)
 // 3.修改商品专题的推荐状态(cms-rpc)
-func (l *HomeRecommendSubjectAddLogic) HomeRecommendSubjectAdd(req *types.AddHomeRecommendSubjectReq) (*types.AddHomeRecommendSubjectResp, error) {
+func (l *HomeRecommendSubjectAddLogic) HomeRecommendSubjectAdd(req *types.AddHomeRecommendSubjectReq) (*types.BaseResp, error) {
 	// 1.根据subjectIds查询推商品专题(cms-rpc)
 	listResp, _ := l.svcCtx.SubjectService.SubjectListByIds(l.ctx, &cmsclient.SubjectListByIdsReq{
 		Ids: req.SubjectIds,
@@ -76,8 +77,5 @@ func (l *HomeRecommendSubjectAddLogic) HomeRecommendSubjectAdd(req *types.AddHom
 		return nil, errorx.NewDefaultError(s.Message())
 	}
 
-	return &types.AddHomeRecommendSubjectResp{
-		Code:    "000000",
-		Message: "添加人气推荐专题成功",
-	}, nil
+	return res.Success()
 }

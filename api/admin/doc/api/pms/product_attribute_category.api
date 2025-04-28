@@ -1,3 +1,5 @@
+import "../base/base.api"
+
 info (
 	desc:   "属性分类"
 	author: "koobe"
@@ -7,10 +9,6 @@ info (
 type (
 	AddProductAttributeCategoryReq {
 		Name string `json:"name"`
-	}
-	AddProductAttributeCategoryResp {
-		Code    string `json:"code"`
-		Message string `json:"message"`
 	}
 	ListProductAttributeCategoryReq {
 		Current  int64  `form:"current,default=1"`
@@ -51,16 +49,8 @@ type (
 		Id   int64  `json:"id"`
 		Name string `json:"name"`
 	}
-	UpdateProductAttributeCategoryResp {
-		Code    string `json:"code"`
-		Message string `json:"message"`
-	}
 	DeleteProductAttributeCategoryReq {
 		Ids []int64 `form:"ids"`
-	}
-	DeleteProductAttributeCategoryResp {
-		Code    string `json:"code"`
-		Message string `json:"message"`
 	}
 )
 
@@ -73,7 +63,7 @@ type (
 service admin-api {
 	//添加商品属性分类
 	@handler ProductAttributeCategoryAdd
-	post /addAttributeCategory (AddProductAttributeCategoryReq) returns (AddProductAttributeCategoryResp)
+	post /addAttributeCategory (AddProductAttributeCategoryReq) returns (BaseResp)
 
 	//查询商品属性分类
 	@handler ProductAttributeCategoryList
@@ -85,10 +75,10 @@ service admin-api {
 
 	//更新商品属性分类
 	@handler ProductAttributeCategoryUpdate
-	post /updateAttributeCategory (UpdateProductAttributeCategoryReq) returns (UpdateProductAttributeCategoryResp)
+	post /updateAttributeCategory (UpdateProductAttributeCategoryReq) returns (BaseResp)
 
 	//删除商品属性分类
 	@handler ProductAttributeCategoryDelete
-	get /deleteAttributeCategory (DeleteProductAttributeCategoryReq) returns (DeleteProductAttributeCategoryResp)
+	get /deleteAttributeCategory (DeleteProductAttributeCategoryReq) returns (BaseResp)
 }
 

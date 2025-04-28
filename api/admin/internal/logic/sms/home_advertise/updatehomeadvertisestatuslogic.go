@@ -3,6 +3,7 @@ package home_advertise
 import (
 	"context"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
+	"github.com/feihua/zero-admin/api/admin/internal/common/res"
 	"github.com/feihua/zero-admin/rpc/sms/smsclient"
 	"github.com/zeromicro/go-zero/core/logc"
 	"google.golang.org/grpc/status"
@@ -33,7 +34,7 @@ func NewUpdateHomeAdvertiseStatusLogic(ctx context.Context, svcCtx *svc.ServiceC
 }
 
 // UpdateHomeAdvertiseStatus 修改上下线状态
-func (l *UpdateHomeAdvertiseStatusLogic) UpdateHomeAdvertiseStatus(req *types.UpdateHomeAdvertiseStatusReq) (resp *types.UpdateHomeAdvertiseResp, err error) {
+func (l *UpdateHomeAdvertiseStatusLogic) UpdateHomeAdvertiseStatus(req *types.UpdateHomeAdvertiseStatusReq) (resp *types.BaseResp, err error) {
 	_, err = l.svcCtx.HomeAdvertiseService.UpdateHomeAdvertiseStatus(l.ctx, &smsclient.UpdateHomeAdvertiseStatusReq{
 		Ids:    req.Ids,
 		Status: req.Status,
@@ -45,8 +46,5 @@ func (l *UpdateHomeAdvertiseStatusLogic) UpdateHomeAdvertiseStatus(req *types.Up
 		return nil, errorx.NewDefaultError(s.Message())
 	}
 
-	return &types.UpdateHomeAdvertiseResp{
-		Code:    "000000",
-		Message: "修改上下线状态成功",
-	}, nil
+	return res.Success()
 }

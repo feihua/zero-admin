@@ -3,6 +3,7 @@ package user
 import (
 	"context"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
+	"github.com/feihua/zero-admin/api/admin/internal/common/res"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
 
 	"github.com/feihua/zero-admin/api/admin/internal/svc"
@@ -31,7 +32,7 @@ func NewReSetPasswordLogic(ctx context.Context, svcCtx *svc.ServiceContext) ReSe
 }
 
 // ReSetPassword 重置用户密码
-func (l *ReSetPasswordLogic) ReSetPassword(req *types.ReSetPasswordReq) (*types.ReSetPasswordResp, error) {
+func (l *ReSetPasswordLogic) ReSetPassword(req *types.ReSetPasswordReq) (*types.BaseResp, error) {
 
 	_, err := l.svcCtx.UserService.ReSetPassword(l.ctx, &sysclient.ReSetPasswordReq{
 		Id:       req.UserId,
@@ -42,8 +43,5 @@ func (l *ReSetPasswordLogic) ReSetPassword(req *types.ReSetPasswordReq) (*types.
 		return nil, errorx.NewDefaultError("重置用户密码异常")
 	}
 
-	return &types.ReSetPasswordResp{
-		Code:    "000000",
-		Message: "重置用户密码成功",
-	}, nil
+	return res.Success()
 }

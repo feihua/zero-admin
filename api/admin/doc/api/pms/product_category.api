@@ -1,3 +1,5 @@
+import "../base/base.api"
+
 info (
 	desc:   "商品分类"
 	author: "koobe"
@@ -17,10 +19,6 @@ type (
 		Keywords               string  `json:"keywords"` //关键字
 		Description            string  `json:"description"` //描述
 		ProductAttributeIdList []int64 `json:"productAttributeIdList,optional"` // 商品相关筛选属性集合
-	}
-	AddProductCategoryResp {
-		Code    string `json:"code"`
-		Message string `json:"message"`
 	}
 	ListProductCategoryReq {
 		Current    int64  `form:"current,default=1"`
@@ -67,20 +65,12 @@ type (
 		Description            string  `json:"description"` //描述
 		ProductAttributeIdList []int64 `json:"productAttributeIdList,optional"` // 商品相关筛选属性集合
 	}
-	UpdateProductCategoryResp {
-		Code    string `json:"code"`
-		Message string `json:"message"`
-	}
 	UpdateProductCategoryStatusReq {
 		Ids    []int64 `json:"ids"`
 		Status int32   `json:"status"` //0->不显示；1->显示
 	}
 	DeleteProductCategoryReq {
 		Ids []int64 `form:"ids"`
-	}
-	DeleteProductCategoryResp {
-		Code    string `json:"code"`
-		Message string `json:"message"`
 	}
 )
 
@@ -93,7 +83,7 @@ type (
 service admin-api {
 	//添加商品分类
 	@handler ProductCategoryAdd
-	post /addProductCategory (AddProductCategoryReq) returns (AddProductCategoryResp)
+	post /addProductCategory (AddProductCategoryReq) returns (BaseResp)
 
 	//查询商品分类
 	@handler ProductCategoryList
@@ -101,18 +91,18 @@ service admin-api {
 
 	//更新商品分类-是否显示在导航栏：0->不显示；1->显示
 	@handler ProductCategoryUpdate
-	post /updateProductCategory (UpdateProductCategoryReq) returns (UpdateProductCategoryResp)
+	post /updateProductCategory (UpdateProductCategoryReq) returns (BaseResp)
 
 	//更新商品分类-是否显示在导航栏：0->不显示；1->显示
 	@handler UpdateCategoryNavStatus
-	post /updateCategoryNavStatus (UpdateProductCategoryStatusReq) returns (UpdateProductCategoryResp)
+	post /updateCategoryNavStatus (UpdateProductCategoryStatusReq) returns (BaseResp)
 
 	//更新商品分类-显示状态：0->不显示；1->显示
 	@handler UpdateCategoryShowStatus
-	post /updateCategoryShowStatus (UpdateProductCategoryStatusReq) returns (UpdateProductCategoryResp)
+	post /updateCategoryShowStatus (UpdateProductCategoryStatusReq) returns (BaseResp)
 
 	//删除商品分类
 	@handler ProductCategoryDelete
-	get /deleteProductCategory (DeleteProductCategoryReq) returns (DeleteProductCategoryResp)
+	get /deleteProductCategory (DeleteProductCategoryReq) returns (BaseResp)
 }
 

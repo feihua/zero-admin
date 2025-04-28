@@ -3,6 +3,7 @@ package company_address
 import (
 	"context"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
+	"github.com/feihua/zero-admin/api/admin/internal/common/res"
 	"github.com/feihua/zero-admin/rpc/oms/omsclient"
 	"github.com/zeromicro/go-zero/core/logc"
 	"google.golang.org/grpc/status"
@@ -33,7 +34,7 @@ func NewUpdateCompanyAddressLogic(ctx context.Context, svcCtx *svc.ServiceContex
 }
 
 // UpdateCompanyAddress 更新公司收货地址
-func (l *UpdateCompanyAddressLogic) UpdateCompanyAddress(req *types.UpdateCompanyAddressReq) (resp *types.UpdateCompanyAddressResp, err error) {
+func (l *UpdateCompanyAddressLogic) UpdateCompanyAddress(req *types.UpdateCompanyAddressReq) (resp *types.BaseResp, err error) {
 	_, err = l.svcCtx.CompanyAddressService.UpdateCompanyAddress(l.ctx, &omsclient.UpdateCompanyAddressReq{
 		Id:            req.Id,
 		AddressName:   req.AddressName,   // 地址名称
@@ -54,8 +55,5 @@ func (l *UpdateCompanyAddressLogic) UpdateCompanyAddress(req *types.UpdateCompan
 		return nil, errorx.NewDefaultError(s.Message())
 	}
 
-	return &types.UpdateCompanyAddressResp{
-		Code:    "000000",
-		Message: "更新公司收发货地址成功",
-	}, nil
+	return res.Success()
 }

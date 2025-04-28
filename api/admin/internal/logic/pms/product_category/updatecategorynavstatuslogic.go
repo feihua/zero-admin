@@ -3,6 +3,7 @@ package product_category
 import (
 	"context"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
+	"github.com/feihua/zero-admin/api/admin/internal/common/res"
 	"github.com/feihua/zero-admin/rpc/pms/pmsclient"
 	"github.com/zeromicro/go-zero/core/logc"
 
@@ -32,7 +33,7 @@ func NewUpdateCategoryNavStatusLogic(ctx context.Context, svcCtx *svc.ServiceCon
 }
 
 // UpdateCategoryNavStatus 更新导航状态
-func (l *UpdateCategoryNavStatusLogic) UpdateCategoryNavStatus(req *types.UpdateProductCategoryStatusReq) (resp *types.UpdateProductCategoryResp, err error) {
+func (l *UpdateCategoryNavStatusLogic) UpdateCategoryNavStatus(req *types.UpdateProductCategoryStatusReq) (resp *types.BaseResp, err error) {
 	_, err = l.svcCtx.ProductCategoryService.UpdateCategoryShowStatus(l.ctx, &pmsclient.UpdateProductCategoryStatusReq{
 		Ids:    req.Ids,
 		Status: req.Status,
@@ -43,8 +44,5 @@ func (l *UpdateCategoryNavStatusLogic) UpdateCategoryNavStatus(req *types.Update
 		return nil, errorx.NewDefaultError("更新显示状态失败")
 	}
 
-	return &types.UpdateProductCategoryResp{
-		Code:    "000000",
-		Message: "更新显示状态成功",
-	}, nil
+	return res.Success()
 }

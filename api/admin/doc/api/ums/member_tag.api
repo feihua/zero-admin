@@ -1,3 +1,5 @@
+import "../base/base.api"
+
 info (
 	desc:   "用户标签"
 	author: "liufeihua"
@@ -12,17 +14,9 @@ type (
 		Status            int32  `json:"status"` //状态：0->禁用；1->启用
 		FinishOrderAmount int64  `json:"finishOrderAmount"` //自动打标签完成订单金额
 	}
-	AddMemberTagResp {
-		Code    string `json:"code"`
-		Message string `json:"message"`
-	}
 	// 删除用户标签请求参数
 	DeleteMemberTagReq {
 		Ids []int64 `form:"ids"`
-	}
-	DeleteMemberTagResp {
-		Code    string `json:"code"`
-		Message string `json:"message"`
 	}
 	// 更新用户标签请求参数
 	UpdateMemberTagReq {
@@ -32,18 +26,10 @@ type (
 		Status            int32  `json:"status"` //状态：0->禁用；1->启用
 		FinishOrderAmount int64  `json:"finishOrderAmount"` //自动打标签完成订单金额
 	}
-	UpdateMemberTagResp {
-		Code    string `json:"code"`
-		Message string `json:"message"`
-	}
 	// 更新用户标签状态请求参数
 	UpdateMemberTagStatusReq {
 		Ids    []int64 `json:"ids"` //
 		Status int32   `json:"status"` //状态：0->禁用；1->启用
-	}
-	UpdateMemberTagStatusResp {
-		Code    string `json:"code"`
-		Message string `json:"message"`
 	}
 	// 查询用户标签详情请求参数
 	QueryMemberTagDetailReq {
@@ -95,19 +81,19 @@ type (
 service admin-api {
 	// 添加用户标签
 	@handler AddMemberTag
-	post /addMemberTag (AddMemberTagReq) returns (AddMemberTagResp)
+	post /addMemberTag (AddMemberTagReq) returns (BaseResp)
 
 	// 删除用户标签
 	@handler DeleteMemberTag
-	get /deleteMemberTag (DeleteMemberTagReq) returns (DeleteMemberTagResp)
+	get /deleteMemberTag (DeleteMemberTagReq) returns (BaseResp)
 
 	// 更新用户标签
 	@handler UpdateMemberTag
-	post /updateMemberTag (UpdateMemberTagReq) returns (UpdateMemberTagResp)
+	post /updateMemberTag (UpdateMemberTagReq) returns (BaseResp)
 
 	// 更新用户标签状态
 	@handler UpdateMemberTagStatus
-	post /updateMemberTagStatus (UpdateMemberTagStatusReq) returns (UpdateMemberTagStatusResp)
+	post /updateMemberTagStatus (UpdateMemberTagStatusReq) returns (BaseResp)
 
 	// 查询用户标签详情
 	@handler QueryMemberTagDetail

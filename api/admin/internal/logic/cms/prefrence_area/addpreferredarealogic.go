@@ -3,6 +3,7 @@ package prefrence_area
 import (
 	"context"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
+	"github.com/feihua/zero-admin/api/admin/internal/common/res"
 	"github.com/feihua/zero-admin/api/admin/internal/svc"
 	"github.com/feihua/zero-admin/api/admin/internal/types"
 	"github.com/feihua/zero-admin/rpc/cms/cmsclient"
@@ -32,7 +33,7 @@ func NewAddPreferredAreaLogic(ctx context.Context, svcCtx *svc.ServiceContext) *
 }
 
 // AddPreferredArea 添加优选专区
-func (l *AddPreferredAreaLogic) AddPreferredArea(req *types.AddPreferredAreaReq) (resp *types.AddPreferredAreaResp, err error) {
+func (l *AddPreferredAreaLogic) AddPreferredArea(req *types.AddPreferredAreaReq) (resp *types.BaseResp, err error) {
 	createBy := l.ctx.Value("userName").(string)
 	_, err = l.svcCtx.PreferredAreaService.AddPreferredArea(l.ctx, &cmsclient.AddPreferredAreaReq{
 		Name:       req.Name,       // 专区名称
@@ -49,8 +50,5 @@ func (l *AddPreferredAreaLogic) AddPreferredArea(req *types.AddPreferredAreaReq)
 		return nil, errorx.NewDefaultError(s.Message())
 	}
 
-	return &types.AddPreferredAreaResp{
-		Code:    "000000",
-		Message: "添加优选专区成功",
-	}, nil
+	return res.Success()
 }

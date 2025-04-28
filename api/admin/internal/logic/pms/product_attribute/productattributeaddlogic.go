@@ -3,6 +3,7 @@ package product_attribute
 import (
 	"context"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
+	"github.com/feihua/zero-admin/api/admin/internal/common/res"
 	"github.com/feihua/zero-admin/rpc/pms/pmsclient"
 	"github.com/zeromicro/go-zero/core/logc"
 
@@ -32,7 +33,7 @@ func NewProductAttributeAddLogic(ctx context.Context, svcCtx *svc.ServiceContext
 }
 
 // ProductAttributeAdd 添加商品属性
-func (l *ProductAttributeAddLogic) ProductAttributeAdd(req *types.AddProductAttributeReq) (resp *types.AddProductAttributeResp, err error) {
+func (l *ProductAttributeAddLogic) ProductAttributeAdd(req *types.AddProductAttributeReq) (resp *types.BaseResp, err error) {
 	_, err = l.svcCtx.ProductAttributeService.AddProductAttribute(l.ctx, &pmsclient.AddProductAttributeReq{
 		ProductAttributeCategoryId: req.ProductAttributeCategoryId, // 商品属性分类id
 		Name:                       req.Name,                       // 商品属性分类id
@@ -52,8 +53,5 @@ func (l *ProductAttributeAddLogic) ProductAttributeAdd(req *types.AddProductAttr
 		return nil, errorx.NewDefaultError("添加属性失败")
 	}
 
-	return &types.AddProductAttributeResp{
-		Code:    "000000",
-		Message: "添加属性成功",
-	}, nil
+	return res.Success()
 }

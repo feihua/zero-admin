@@ -3,6 +3,7 @@ package member_rule_setting
 import (
 	"context"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
+	"github.com/feihua/zero-admin/api/admin/internal/common/res"
 	"github.com/feihua/zero-admin/rpc/ums/umsclient"
 	"github.com/zeromicro/go-zero/core/logc"
 
@@ -32,7 +33,7 @@ func NewAddMemberRuleSettingLogic(ctx context.Context, svcCtx *svc.ServiceContex
 }
 
 // AddMemberRuleSetting 添加会员积分规则
-func (l *AddMemberRuleSettingLogic) AddMemberRuleSetting(req *types.AddMemberRuleSettingReq) (resp *types.AddMemberRuleSettingResp, err error) {
+func (l *AddMemberRuleSettingLogic) AddMemberRuleSetting(req *types.AddMemberRuleSettingReq) (resp *types.BaseResp, err error) {
 	_, err = l.svcCtx.MemberRuleSettingService.AddMemberRuleSetting(l.ctx, &umsclient.AddMemberRuleSettingReq{
 		ContinueSignDay:   req.ContinueSignDay,   // 连续签到天数
 		ContinueSignPoint: req.ContinueSignPoint, // 连续签到赠送数量
@@ -49,8 +50,5 @@ func (l *AddMemberRuleSettingLogic) AddMemberRuleSetting(req *types.AddMemberRul
 		return nil, errorx.NewDefaultError("添加会员积分规则失败")
 	}
 
-	return &types.AddMemberRuleSettingResp{
-		Code:    "000000",
-		Message: "添加会员积分规则成功",
-	}, nil
+	return res.Success()
 }

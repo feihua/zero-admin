@@ -3,6 +3,7 @@ package role
 import (
 	"context"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
+	"github.com/feihua/zero-admin/api/admin/internal/common/res"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
 	"github.com/zeromicro/go-zero/core/logc"
 	"google.golang.org/grpc/status"
@@ -33,7 +34,7 @@ func NewUpdateRoleMenuListLogic(ctx context.Context, svcCtx *svc.ServiceContext)
 }
 
 // UpdateRoleMenuList 更新角色与菜单的关联
-func (l *UpdateRoleMenuListLogic) UpdateRoleMenuList(req *types.UpdateRoleMenuListReq) (resp *types.UpdateRoleMenuListResp, err error) {
+func (l *UpdateRoleMenuListLogic) UpdateRoleMenuList(req *types.UpdateRoleMenuListReq) (resp *types.BaseResp, err error) {
 	_, err = l.svcCtx.RoleService.UpdateMenuRoleList(l.ctx, &sysclient.UpdateRoleMenuReq{
 		RoleId:  req.RoleId,  // 角色id
 		MenuIds: req.MenuIds, // 菜单id
@@ -45,8 +46,5 @@ func (l *UpdateRoleMenuListLogic) UpdateRoleMenuList(req *types.UpdateRoleMenuLi
 		return nil, errorx.NewDefaultError(s.Message())
 	}
 
-	return &types.UpdateRoleMenuListResp{
-		Code:    "000000",
-		Message: "更新角色菜单成功",
-	}, nil
+	return res.Success()
 }

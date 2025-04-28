@@ -1,3 +1,5 @@
+import "../base/base.api"
+
 info (
 	desc:   "系统登录日志"
 	author: "LiuFeiHua"
@@ -8,10 +10,6 @@ type (
 	// 删除系统登录日志请求参数
 	DeleteLoginLogReq {
 		Ids []int64 `form:"ids"`
-	}
-	DeleteLoginLogResp {
-		Code    string `json:"code"`
-		Message string `json:"message"`
 	}
 	// 查询系统登录日志详情请求参数
 	QueryLoginLogDetailReq {
@@ -88,7 +86,7 @@ type (
 service admin-api {
 	// 删除系统登录日志
 	@handler DeleteLoginLog
-	get /deleteLoginLog (DeleteLoginLogReq) returns (DeleteLoginLogResp)
+	get /deleteLoginLog (DeleteLoginLogReq) returns (BaseResp)
 
 	// 查询系统登录日志详情
 	@handler QueryLoginLogDetail

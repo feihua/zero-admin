@@ -3,6 +3,7 @@ package product_brand
 import (
 	"context"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
+	"github.com/feihua/zero-admin/api/admin/internal/common/res"
 	"github.com/feihua/zero-admin/rpc/pms/pmsclient"
 	"github.com/feihua/zero-admin/rpc/sms/smsclient"
 	"github.com/zeromicro/go-zero/core/logc"
@@ -34,7 +35,7 @@ func NewProductBrandUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContext)
 }
 
 // ProductBrandUpdate 更新商品品牌
-func (l *ProductBrandUpdateLogic) ProductBrandUpdate(req *types.UpdateProductBrandReq) (*types.UpdateProductBrandResp, error) {
+func (l *ProductBrandUpdateLogic) ProductBrandUpdate(req *types.UpdateProductBrandReq) (*types.BaseResp, error) {
 	_, err := l.svcCtx.BrandService.UpdateBrand(l.ctx, &pmsclient.UpdateBrandReq{
 		Id:              req.Id,
 		Name:            req.Name,            // 品牌名称
@@ -87,8 +88,5 @@ func (l *ProductBrandUpdateLogic) ProductBrandUpdate(req *types.UpdateProductBra
 		}
 	}
 
-	return &types.UpdateProductBrandResp{
-		Code:    "000000",
-		Message: "更新商品品牌成功",
-	}, nil
+	return res.Success()
 }

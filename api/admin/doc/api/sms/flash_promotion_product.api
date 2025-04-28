@@ -1,3 +1,5 @@
+import "../base/base.api"
+
 info (
 	desc:   "限时购和商品关系管理"
 	author: "koobe"
@@ -16,10 +18,6 @@ type (
 		FlashPromotionProductRelationCount     int32 `json:"stock"` // 限时购数量
 		FlashPromotionProductRelationLimit     int32 `json:"promotionPerLimit"` // 每人限购数量
 		Sort                                   int32 ` json:"sort"`
-	}
-	AddFlashPromotionProductRelationResp {
-		Code    string `json:"code"`
-		Message string `json:"message"`
 	}
 	ListFlashPromotionProductRelationReq {
 		Current                                int64 `form:"current,default=1"`
@@ -61,17 +59,9 @@ type (
 		FlashPromotionProductRelationLimit     int32 `json:"flashPromotionLimit"` // 每人限购数量
 		Sort                                   int32 ` json:"sort"`
 	}
-	UpdateFlashPromotionProductRelationResp {
-		Code    string `json:"code"`
-		Message string `json:"message"`
-	}
 	DeleteFlashPromotionProductRelationReq {
 		Ids              []int64 `form:"ids"`
 		FlashPromotionId int64   `form:"flashPromotionId"`
-	}
-	DeleteFlashPromotionProductRelationResp {
-		Code    string `json:"code"`
-		Message string `json:"message"`
 	}
 )
 
@@ -84,7 +74,7 @@ type (
 service admin-api {
 	//添加限时购和商品关系
 	@handler FlashPromotionProductRelationAdd
-	post /addFlashPromotionProductRelation (AddFlashPromotionProductRelationReq) returns (AddFlashPromotionProductRelationResp)
+	post /addFlashPromotionProductRelation (AddFlashPromotionProductRelationReq) returns (BaseResp)
 
 	//分页查询不同场次关联及商品信息
 	@handler FlashPromotionProductRelationList
@@ -92,10 +82,10 @@ service admin-api {
 
 	//更新限时购和商品关系
 	@handler FlashPromotionProductRelationUpdate
-	post /updateFlashPromotionProductRelation (UpdateFlashPromotionProductRelationReq) returns (UpdateFlashPromotionProductRelationResp)
+	post /updateFlashPromotionProductRelation (UpdateFlashPromotionProductRelationReq) returns (BaseResp)
 
 	//删除限时购和商品关系
 	@handler FlashPromotionProductRelationDelete
-	get /deleteFlashPromotionProductRelation (DeleteFlashPromotionProductRelationReq) returns (DeleteFlashPromotionProductRelationResp)
+	get /deleteFlashPromotionProductRelation (DeleteFlashPromotionProductRelationReq) returns (BaseResp)
 }
 

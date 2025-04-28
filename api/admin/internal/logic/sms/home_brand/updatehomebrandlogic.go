@@ -3,6 +3,7 @@ package home_brand
 import (
 	"context"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
+	"github.com/feihua/zero-admin/api/admin/internal/common/res"
 	"github.com/feihua/zero-admin/rpc/sms/smsclient"
 	"github.com/zeromicro/go-zero/core/logc"
 	"google.golang.org/grpc/status"
@@ -33,7 +34,7 @@ func NewUpdateHomeBrandLogic(ctx context.Context, svcCtx *svc.ServiceContext) *U
 }
 
 // UpdateHomeBrand 修改推荐品牌排序
-func (l *UpdateHomeBrandLogic) UpdateHomeBrand(req *types.UpdateHomeBrandReq) (resp *types.UpdateHomeBrandResp, err error) {
+func (l *UpdateHomeBrandLogic) UpdateHomeBrand(req *types.UpdateHomeBrandReq) (resp *types.BaseResp, err error) {
 	_, err = l.svcCtx.HomeBrandService.UpdateHomeBrandSort(l.ctx, &smsclient.UpdateHomeBrandSortReq{
 		Id:   req.Id,
 		Sort: req.Sort,
@@ -45,8 +46,5 @@ func (l *UpdateHomeBrandLogic) UpdateHomeBrand(req *types.UpdateHomeBrandReq) (r
 		return nil, errorx.NewDefaultError(s.Message())
 	}
 
-	return &types.UpdateHomeBrandResp{
-		Code:    "000000",
-		Message: "更新首页品牌排序成功",
-	}, nil
+	return res.Success()
 }

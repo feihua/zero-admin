@@ -3,6 +3,7 @@ package order
 import (
 	"context"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
+	"github.com/feihua/zero-admin/api/admin/internal/common/res"
 	"github.com/feihua/zero-admin/rpc/oms/omsclient"
 	"github.com/zeromicro/go-zero/core/logc"
 
@@ -32,7 +33,7 @@ func NewDeliveryLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Delivery
 }
 
 // Delivery 批量发货
-func (l *DeliveryLogic) Delivery(req *types.DeliveryReq) (resp *types.DeliveryResp, err error) {
+func (l *DeliveryLogic) Delivery(req *types.DeliveryReq) (resp *types.BaseResp, err error) {
 	_, err = l.svcCtx.OrderService.Delivery(l.ctx, &omsclient.DeliveryReq{
 		OrderId:         req.OrderId,
 		DeliveryCompany: req.DeliveryCompany,
@@ -45,8 +46,5 @@ func (l *DeliveryLogic) Delivery(req *types.DeliveryReq) (resp *types.DeliveryRe
 		return nil, errorx.NewDefaultError("批量发货失败")
 	}
 
-	return &types.DeliveryResp{
-		Code:    "000000",
-		Message: "批量发货成功",
-	}, nil
+	return res.Success()
 }

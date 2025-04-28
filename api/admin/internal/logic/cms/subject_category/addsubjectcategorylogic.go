@@ -3,6 +3,7 @@ package subject_category
 import (
 	"context"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
+	"github.com/feihua/zero-admin/api/admin/internal/common/res"
 	"github.com/feihua/zero-admin/api/admin/internal/svc"
 	"github.com/feihua/zero-admin/api/admin/internal/types"
 	"github.com/feihua/zero-admin/rpc/cms/cmsclient"
@@ -32,7 +33,7 @@ func NewAddSubjectCategoryLogic(ctx context.Context, svcCtx *svc.ServiceContext)
 }
 
 // AddSubjectCategory 添加专题分类表
-func (l *AddSubjectCategoryLogic) AddSubjectCategory(req *types.AddSubjectCategoryReq) (resp *types.AddSubjectCategoryResp, err error) {
+func (l *AddSubjectCategoryLogic) AddSubjectCategory(req *types.AddSubjectCategoryReq) (resp *types.BaseResp, err error) {
 
 	_, err = l.svcCtx.SubjectCategoryService.AddSubjectCategory(l.ctx, &cmsclient.AddSubjectCategoryReq{
 		Name:       req.Name,       // 专题分类名称
@@ -48,8 +49,5 @@ func (l *AddSubjectCategoryLogic) AddSubjectCategory(req *types.AddSubjectCatego
 		return nil, errorx.NewDefaultError(s.Message())
 	}
 
-	return &types.AddSubjectCategoryResp{
-		Code:    "000000",
-		Message: "添加专题分类表成功",
-	}, nil
+	return res.Success()
 }

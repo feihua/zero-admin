@@ -3,6 +3,7 @@ package home_advertise
 import (
 	"context"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
+	"github.com/feihua/zero-admin/api/admin/internal/common/res"
 	"github.com/feihua/zero-admin/rpc/sms/smsclient"
 	"github.com/zeromicro/go-zero/core/logc"
 	"google.golang.org/grpc/status"
@@ -33,7 +34,7 @@ func NewHomeAdvertiseAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) H
 }
 
 // HomeAdvertiseAdd 添加首页轮播广告
-func (l *HomeAdvertiseAddLogic) HomeAdvertiseAdd(req *types.AddHomeAdvertiseReq) (*types.AddHomeAdvertiseResp, error) {
+func (l *HomeAdvertiseAddLogic) HomeAdvertiseAdd(req *types.AddHomeAdvertiseReq) (*types.BaseResp, error) {
 	_, err := l.svcCtx.HomeAdvertiseService.AddHomeAdvertise(l.ctx, &smsclient.AddHomeAdvertiseReq{
 
 		Name:      req.Name,                                                                          // 名称
@@ -53,8 +54,5 @@ func (l *HomeAdvertiseAddLogic) HomeAdvertiseAdd(req *types.AddHomeAdvertiseReq)
 		return nil, errorx.NewDefaultError(s.Message())
 	}
 
-	return &types.AddHomeAdvertiseResp{
-		Code:    "000000",
-		Message: "添加首页广告成功",
-	}, nil
+	return res.Success()
 }

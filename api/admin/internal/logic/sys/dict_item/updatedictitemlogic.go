@@ -3,6 +3,7 @@ package dict_item
 import (
 	"context"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
+	"github.com/feihua/zero-admin/api/admin/internal/common/res"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
 	"github.com/zeromicro/go-zero/core/logc"
 	"google.golang.org/grpc/status"
@@ -33,7 +34,7 @@ func NewUpdateDictItemLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Up
 }
 
 // UpdateDictItem 更新字典数据
-func (l *UpdateDictItemLogic) UpdateDictItem(req *types.UpdateDictItemReq) (resp *types.UpdateDictItemResp, err error) {
+func (l *UpdateDictItemLogic) UpdateDictItem(req *types.UpdateDictItemReq) (resp *types.BaseResp, err error) {
 	_, err = l.svcCtx.DictItemService.UpdateDictItem(l.ctx, &sysclient.UpdateDictItemReq{
 		Id:        req.Id,        // 字典数据id
 		DictSort:  req.DictSort,  // 字典排序
@@ -54,8 +55,5 @@ func (l *UpdateDictItemLogic) UpdateDictItem(req *types.UpdateDictItemReq) (resp
 		return nil, errorx.NewDefaultError(s.Message())
 	}
 
-	return &types.UpdateDictItemResp{
-		Code:    "000000",
-		Message: "更新字典项成功",
-	}, nil
+	return res.Success()
 }

@@ -3,6 +3,7 @@ package dict_type
 import (
 	"context"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
+	"github.com/feihua/zero-admin/api/admin/internal/common/res"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
 	"github.com/zeromicro/go-zero/core/logc"
 	"google.golang.org/grpc/status"
@@ -33,7 +34,7 @@ func NewDeleteDictTypeLogic(ctx context.Context, svcCtx *svc.ServiceContext) Del
 }
 
 // DeleteDictType 删除字典类型信息
-func (l *DeleteDictTypeLogic) DeleteDictType(req *types.DeleteDictTypeReq) (*types.DeleteDictTypeResp, error) {
+func (l *DeleteDictTypeLogic) DeleteDictType(req *types.DeleteDictTypeReq) (*types.BaseResp, error) {
 	_, err := l.svcCtx.DictTypeService.DeleteDictType(l.ctx, &sysclient.DeleteDictTypeReq{
 		Ids: req.Ids, // 编号
 	})
@@ -44,8 +45,5 @@ func (l *DeleteDictTypeLogic) DeleteDictType(req *types.DeleteDictTypeReq) (*typ
 		return nil, errorx.NewDefaultError(s.Message())
 	}
 
-	return &types.DeleteDictTypeResp{
-		Code:    "000000",
-		Message: "删除字典类型成功",
-	}, nil
+	return res.Success()
 }

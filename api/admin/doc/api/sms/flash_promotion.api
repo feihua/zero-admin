@@ -1,3 +1,5 @@
+import "../base/base.api"
+
 info (
 	desc:   "限时购表"
 	author: "liufeihua"
@@ -12,17 +14,9 @@ type (
 		EndDate   string `json:"endDate"` //结束日期
 		Status    int32  `json:"status"` //上下线状态
 	}
-	AddFlashPromotionResp {
-		Code    string `json:"code"`
-		Message string `json:"message"`
-	}
 	// 删除限时购表请求参数
 	DeleteFlashPromotionReq {
 		Ids []int64 `form:"ids"`
-	}
-	DeleteFlashPromotionResp {
-		Code    string `json:"code"`
-		Message string `json:"message"`
 	}
 	// 更新限时购表请求参数
 	UpdateFlashPromotionReq {
@@ -32,18 +26,10 @@ type (
 		EndDate   string `json:"endDate"` //结束日期
 		Status    int32  `json:"status"` //上下线状态
 	}
-	UpdateFlashPromotionResp {
-		Code    string `json:"code"`
-		Message string `json:"message"`
-	}
 	// 更新限时购表状态请求参数
 	UpdateFlashPromotionStatusReq {
 		Ids    []int64 `json:"ids"` //编号
 		Status int32   `json:"status"` //上下线状态
-	}
-	UpdateFlashPromotionStatusResp {
-		Code    string `json:"code"`
-		Message string `json:"message"`
 	}
 	// 查询限时购表详情请求参数
 	QueryFlashPromotionDetailReq {
@@ -99,19 +85,19 @@ type (
 service admin-api {
 	// 添加限时购表
 	@handler AddFlashPromotion
-	post /addFlashPromotion (AddFlashPromotionReq) returns (AddFlashPromotionResp)
+	post /addFlashPromotion (AddFlashPromotionReq) returns (BaseResp)
 
 	// 删除限时购表
 	@handler DeleteFlashPromotion
-	get /deleteFlashPromotion (DeleteFlashPromotionReq) returns (DeleteFlashPromotionResp)
+	get /deleteFlashPromotion (DeleteFlashPromotionReq) returns (BaseResp)
 
 	// 更新限时购表
 	@handler UpdateFlashPromotion
-	post /updateFlashPromotion (UpdateFlashPromotionReq) returns (UpdateFlashPromotionResp)
+	post /updateFlashPromotion (UpdateFlashPromotionReq) returns (BaseResp)
 
 	// 更新限时购表状态
 	@handler UpdateFlashPromotionStatus
-	post /updateFlashPromotionStatus (UpdateFlashPromotionStatusReq) returns (UpdateFlashPromotionStatusResp)
+	post /updateFlashPromotionStatus (UpdateFlashPromotionStatusReq) returns (BaseResp)
 
 	// 查询限时购表详情
 	@handler QueryFlashPromotionDetail

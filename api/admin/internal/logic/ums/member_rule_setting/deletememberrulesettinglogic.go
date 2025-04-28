@@ -3,6 +3,7 @@ package member_rule_setting
 import (
 	"context"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
+	"github.com/feihua/zero-admin/api/admin/internal/common/res"
 	"github.com/feihua/zero-admin/rpc/ums/umsclient"
 	"github.com/zeromicro/go-zero/core/logc"
 
@@ -32,7 +33,7 @@ func NewDeleteMemberRuleSettingLogic(ctx context.Context, svcCtx *svc.ServiceCon
 }
 
 // DeleteMemberRuleSetting 删除积分规则
-func (l *DeleteMemberRuleSettingLogic) DeleteMemberRuleSetting(req *types.DeleteMemberRuleSettingReq) (resp *types.DeleteMemberRuleSettingResp, err error) {
+func (l *DeleteMemberRuleSettingLogic) DeleteMemberRuleSetting(req *types.DeleteMemberRuleSettingReq) (resp *types.BaseResp, err error) {
 	_, err = l.svcCtx.MemberRuleSettingService.DeleteMemberRuleSetting(l.ctx, &umsclient.DeleteMemberRuleSettingReq{
 		Ids: req.Ids,
 	})
@@ -41,8 +42,5 @@ func (l *DeleteMemberRuleSettingLogic) DeleteMemberRuleSetting(req *types.Delete
 		logc.Errorf(l.ctx, "根据Id: %+v,删除积分规则异常:%s", req, err.Error())
 		return nil, errorx.NewDefaultError("删除积分规则失败")
 	}
-	return &types.DeleteMemberRuleSettingResp{
-		Code:    "000000",
-		Message: "删除积分规则成功",
-	}, nil
+	return res.Success()
 }

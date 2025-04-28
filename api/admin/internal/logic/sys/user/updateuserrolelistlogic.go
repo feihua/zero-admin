@@ -3,6 +3,7 @@ package user
 import (
 	"context"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
+	"github.com/feihua/zero-admin/api/admin/internal/common/res"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
 	"github.com/zeromicro/go-zero/core/logc"
 	"google.golang.org/grpc/status"
@@ -33,7 +34,7 @@ func NewUpdateUserRoleListLogic(ctx context.Context, svcCtx *svc.ServiceContext)
 }
 
 // UpdateUserRoleList 分配用户角色
-func (l *UpdateUserRoleListLogic) UpdateUserRoleList(req *types.UpdateUserRoleReq) (resp *types.UpdateUserRoleResp, err error) {
+func (l *UpdateUserRoleListLogic) UpdateUserRoleList(req *types.UpdateUserRoleReq) (resp *types.BaseResp, err error) {
 	_, err = l.svcCtx.UserService.UpdateUserRoleList(l.ctx, &sysclient.UpdateUserRoleListReq{
 		UserId:  req.UserId,  // 用户id
 		RoleIds: req.RoleIds, // 角色id
@@ -45,8 +46,5 @@ func (l *UpdateUserRoleListLogic) UpdateUserRoleList(req *types.UpdateUserRoleRe
 		return nil, errorx.NewDefaultError(s.Message())
 	}
 
-	return &types.UpdateUserRoleResp{
-		Code:    "000000",
-		Message: "分配用户角色成功",
-	}, nil
+	return res.Success()
 }

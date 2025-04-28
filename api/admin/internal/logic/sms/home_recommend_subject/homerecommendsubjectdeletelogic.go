@@ -3,6 +3,7 @@ package home_recommend_subject
 import (
 	"context"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
+	"github.com/feihua/zero-admin/api/admin/internal/common/res"
 	"github.com/feihua/zero-admin/rpc/cms/cmsclient"
 	"github.com/feihua/zero-admin/rpc/sms/smsclient"
 	"github.com/zeromicro/go-zero/core/logc"
@@ -36,7 +37,7 @@ func NewHomeRecommendSubjectDeleteLogic(ctx context.Context, svcCtx *svc.Service
 // HomeRecommendSubjectDelete 删除人气推荐专题
 // 1.删除sms_home_recommend_subject的记录(sms-rpc)
 // 2.修改cms_subject记录的状态为不推荐(cms-rpc)
-func (l *HomeRecommendSubjectDeleteLogic) HomeRecommendSubjectDelete(req *types.DeleteHomeRecommendSubjectReq) (*types.DeleteHomeRecommendSubjectResp, error) {
+func (l *HomeRecommendSubjectDeleteLogic) HomeRecommendSubjectDelete(req *types.DeleteHomeRecommendSubjectReq) (*types.BaseResp, error) {
 
 	// 1.删除sms_home_recommend_subject的记录(sms-rpc)
 	_, err := l.svcCtx.HomeRecommendSubjectService.DeleteHomeRecommendSubject(l.ctx, &smsclient.DeleteHomeRecommendSubjectReq{
@@ -60,8 +61,5 @@ func (l *HomeRecommendSubjectDeleteLogic) HomeRecommendSubjectDelete(req *types.
 		return nil, errorx.NewDefaultError(s.Message())
 	}
 
-	return &types.DeleteHomeRecommendSubjectResp{
-		Code:    "000000",
-		Message: "删除人气推荐专题成功",
-	}, nil
+	return res.Success()
 }

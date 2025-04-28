@@ -1,3 +1,5 @@
+import "../base/base.api"
+
 info (
 	desc:   "属性分类"
 	author: "koobe"
@@ -17,10 +19,6 @@ type (
 		RelatedStatus              int32  `json:"relatedStatus"` // 相同属性产品是否关联；0->不关联；1->关联
 		HandAddStatus              int32  `json:"handAddStatus"` // 是否支持手动新增；0->不支持；1->支持
 		Type                       int32  `json:"type"` // 属性的类型；0->规格；1->参数
-	}
-	AddProductAttributeResp {
-		Code    string `json:"code"`
-		Message string `json:"message"`
 	}
 	ListProductAttributeReq {
 		Current                    int64  `form:"current,default=1"`
@@ -78,16 +76,8 @@ type (
 		Message string                          `json:"message"`
 		Data    []*QueryByproductCategoryIdData `json:"data"`
 	}
-	UpdateProductAttributeResp {
-		Code    string `json:"code"`
-		Message string `json:"message"`
-	}
 	DeleteProductAttributeReq {
 		Ids []int64 `form:"ids"`
-	}
-	DeleteProductAttributeResp {
-		Code    string `json:"code"`
-		Message string `json:"message"`
 	}
 )
 
@@ -100,7 +90,7 @@ type (
 service admin-api {
 	//添加商品属性
 	@handler ProductAttributeAdd
-	post /addAttribute (AddProductAttributeReq) returns (AddProductAttributeResp)
+	post /addAttribute (AddProductAttributeReq) returns (BaseResp)
 
 	//查询商品属性
 	@handler ProductAttributeList
@@ -112,6 +102,6 @@ service admin-api {
 
 	//删除商品属性
 	@handler ProductAttributeDelete
-	get /deleteAttribute (DeleteProductAttributeReq) returns (DeleteProductAttributeResp)
+	get /deleteAttribute (DeleteProductAttributeReq) returns (BaseResp)
 }
 

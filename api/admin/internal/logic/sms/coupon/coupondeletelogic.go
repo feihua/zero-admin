@@ -3,6 +3,7 @@ package coupon
 import (
 	"context"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
+	"github.com/feihua/zero-admin/api/admin/internal/common/res"
 	"github.com/feihua/zero-admin/rpc/sms/smsclient"
 	"github.com/zeromicro/go-zero/core/logc"
 	"google.golang.org/grpc/status"
@@ -33,7 +34,7 @@ func NewCouponDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext) Coupo
 }
 
 // CouponDelete 删除优惠券
-func (l *CouponDeleteLogic) CouponDelete(req *types.DeleteCouponReq) (*types.DeleteCouponResp, error) {
+func (l *CouponDeleteLogic) CouponDelete(req *types.DeleteCouponReq) (*types.BaseResp, error) {
 	_, err := l.svcCtx.CouponService.DeleteCoupon(l.ctx, &smsclient.DeleteCouponReq{
 		Ids: req.Ids,
 	})
@@ -43,8 +44,5 @@ func (l *CouponDeleteLogic) CouponDelete(req *types.DeleteCouponReq) (*types.Del
 		s, _ := status.FromError(err)
 		return nil, errorx.NewDefaultError(s.Message())
 	}
-	return &types.DeleteCouponResp{
-		Code:    "000000",
-		Message: "优惠券成功",
-	}, nil
+	return res.Success()
 }

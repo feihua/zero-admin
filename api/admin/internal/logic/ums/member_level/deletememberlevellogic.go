@@ -3,6 +3,7 @@ package member_level
 import (
 	"context"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
+	"github.com/feihua/zero-admin/api/admin/internal/common/res"
 	"github.com/feihua/zero-admin/rpc/ums/umsclient"
 	"github.com/zeromicro/go-zero/core/logc"
 
@@ -32,7 +33,7 @@ func NewDeleteMemberLevelLogic(ctx context.Context, svcCtx *svc.ServiceContext) 
 }
 
 // DeleteMemberLevel 删除会员等级
-func (l *DeleteMemberLevelLogic) DeleteMemberLevel(req *types.DeleteMemberLevelReq) (resp *types.DeleteMemberLevelResp, err error) {
+func (l *DeleteMemberLevelLogic) DeleteMemberLevel(req *types.DeleteMemberLevelReq) (resp *types.BaseResp, err error) {
 	_, err = l.svcCtx.MemberLevelService.DeleteMemberLevel(l.ctx, &umsclient.DeleteMemberLevelReq{
 		Ids: req.Ids,
 	})
@@ -41,8 +42,5 @@ func (l *DeleteMemberLevelLogic) DeleteMemberLevel(req *types.DeleteMemberLevelR
 		logc.Errorf(l.ctx, "根据Id: %+v,删除会员等级异常:%s", req, err.Error())
 		return nil, errorx.NewDefaultError("删除会员等级失败")
 	}
-	return &types.DeleteMemberLevelResp{
-		Code:    "000000",
-		Message: "添加会员等级成功",
-	}, nil
+	return res.Success()
 }

@@ -3,6 +3,7 @@ package product_category
 import (
 	"context"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
+	"github.com/feihua/zero-admin/api/admin/internal/common/res"
 	"github.com/feihua/zero-admin/rpc/pms/pmsclient"
 	"github.com/zeromicro/go-zero/core/logc"
 
@@ -32,7 +33,7 @@ func NewProductCategoryAddLogic(ctx context.Context, svcCtx *svc.ServiceContext)
 }
 
 // ProductCategoryAdd 添加商品分类
-func (l *ProductCategoryAddLogic) ProductCategoryAdd(req *types.AddProductCategoryReq) (*types.AddProductCategoryResp, error) {
+func (l *ProductCategoryAddLogic) ProductCategoryAdd(req *types.AddProductCategoryReq) (*types.BaseResp, error) {
 	_, err := l.svcCtx.ProductCategoryService.AddProductCategory(l.ctx, &pmsclient.AddProductCategoryReq{
 		ParentId:     req.ParentId,    // 上机分类的编号：0表示一级分类
 		Name:         req.Name,        // 商品分类名称
@@ -52,8 +53,5 @@ func (l *ProductCategoryAddLogic) ProductCategoryAdd(req *types.AddProductCatego
 		return nil, errorx.NewDefaultError("添加商品分类失败")
 	}
 
-	return &types.AddProductCategoryResp{
-		Code:    "000000",
-		Message: "添加商品分类成功",
-	}, nil
+	return res.Success()
 }

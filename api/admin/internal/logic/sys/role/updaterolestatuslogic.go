@@ -3,6 +3,7 @@ package role
 import (
 	"context"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
+	"github.com/feihua/zero-admin/api/admin/internal/common/res"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
 	"github.com/zeromicro/go-zero/core/logc"
 	"google.golang.org/grpc/status"
@@ -33,7 +34,7 @@ func NewUpdateRoleStatusLogic(ctx context.Context, svcCtx *svc.ServiceContext) *
 }
 
 // UpdateRoleStatus 更新角色状态
-func (l *UpdateRoleStatusLogic) UpdateRoleStatus(req *types.UpdateRoleStatusReq) (resp *types.UpdateRoleStatusResp, err error) {
+func (l *UpdateRoleStatusLogic) UpdateRoleStatus(req *types.UpdateRoleStatusReq) (resp *types.BaseResp, err error) {
 	roleReq := sysclient.UpdateRoleStatusReq{
 		Ids:      req.Ids,    // 角色编号
 		Status:   req.Status, // 角色状态
@@ -47,8 +48,5 @@ func (l *UpdateRoleStatusLogic) UpdateRoleStatus(req *types.UpdateRoleStatusReq)
 		return nil, errorx.NewDefaultError(s.Message())
 	}
 
-	return &types.UpdateRoleStatusResp{
-		Code:    "000000",
-		Message: "更新角色状态成功",
-	}, nil
+	return res.Success()
 }

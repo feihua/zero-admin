@@ -3,6 +3,7 @@ package member_integration_setting
 import (
 	"context"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
+	"github.com/feihua/zero-admin/api/admin/internal/common/res"
 	"github.com/feihua/zero-admin/rpc/ums/umsclient"
 	"github.com/zeromicro/go-zero/core/logc"
 
@@ -32,7 +33,7 @@ func NewAddIntegrationConsumeSettingLogic(ctx context.Context, svcCtx *svc.Servi
 }
 
 // AddIntegrationConsumeSetting 添加积分消费设置
-func (l *AddIntegrationConsumeSettingLogic) AddIntegrationConsumeSetting(req *types.AddIntegrationConsumeSettingReq) (resp *types.AddIntegrationConsumeSettingResp, err error) {
+func (l *AddIntegrationConsumeSettingLogic) AddIntegrationConsumeSetting(req *types.AddIntegrationConsumeSettingReq) (resp *types.BaseResp, err error) {
 	_, err = l.svcCtx.IntegrationConsumeSettingService.AddIntegrationConsumeSetting(l.ctx, &umsclient.AddIntegrationConsumeSettingReq{
 		DeductionPerAmount: req.DeductionPerAmount, // 每一元需要抵扣的积分数量
 		MaxPercentPerOrder: req.MaxPercentPerOrder, // 每笔订单最高抵用百分比
@@ -46,8 +47,5 @@ func (l *AddIntegrationConsumeSettingLogic) AddIntegrationConsumeSetting(req *ty
 		return nil, errorx.NewDefaultError("添加积分消费设置失败")
 	}
 
-	return &types.AddIntegrationConsumeSettingResp{
-		Code:    "000000",
-		Message: "添加积分消费设置成功",
-	}, nil
+	return res.Success()
 }

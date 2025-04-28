@@ -3,6 +3,7 @@ package member_level
 import (
 	"context"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
+	"github.com/feihua/zero-admin/api/admin/internal/common/res"
 	"github.com/feihua/zero-admin/rpc/ums/umsclient"
 	"github.com/zeromicro/go-zero/core/logc"
 
@@ -32,7 +33,7 @@ func NewAddMemberLevelLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Ad
 }
 
 // AddMemberLevel 添加会员等级
-func (l *AddMemberLevelLogic) AddMemberLevel(req *types.AddMemberLevelReq) (resp *types.AddMemberLevelResp, err error) {
+func (l *AddMemberLevelLogic) AddMemberLevel(req *types.AddMemberLevelReq) (resp *types.BaseResp, err error) {
 	_, err = l.svcCtx.MemberLevelService.AddMemberLevel(l.ctx, &umsclient.AddMemberLevelReq{
 		LevelName:          req.LevelName,          // 等级名称
 		GrowthPoint:        req.GrowthPoint,        // 成长点
@@ -53,8 +54,5 @@ func (l *AddMemberLevelLogic) AddMemberLevel(req *types.AddMemberLevelReq) (resp
 		return nil, errorx.NewDefaultError("添加会员等级失败")
 	}
 
-	return &types.AddMemberLevelResp{
-		Code:    "000000",
-		Message: "添加会员等级成功",
-	}, nil
+	return res.Success()
 }

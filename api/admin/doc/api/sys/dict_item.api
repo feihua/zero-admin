@@ -1,3 +1,5 @@
+import "../base/base.api"
+
 info (
 	desc:   "字典数据"
 	author: "LiuFeiHua"
@@ -17,17 +19,9 @@ type (
 		Status    int32  `json:"status"` //状态（0：停用，1:正常）
 		Remark    string `json:"remark,optional"` //备注
 	}
-	AddDictItemResp {
-		Code    string `json:"code"`
-		Message string `json:"message"`
-	}
 	// 删除字典数据请求参数
 	DeleteDictItemReq {
 		Ids []int64 `form:"ids"`
-	}
-	DeleteDictItemResp {
-		Code    string `json:"code"`
-		Message string `json:"message"`
 	}
 	// 更新字典数据请求参数
 	UpdateDictItemReq {
@@ -42,18 +36,10 @@ type (
 		Status    int32  `json:"status"` //状态（0：停用，1:正常）
 		Remark    string `json:"remark,optional"` //备注
 	}
-	UpdateDictItemResp {
-		Code    string `json:"code"`
-		Message string `json:"message"`
-	}
 	// 更新字典数据状态请求参数
 	UpdateDictItemStatusReq {
 		Ids    []int64 `json:"ids"` //字典数据id
 		Status int32   `json:"status"` //状态（0：停用，1:正常）
-	}
-	UpdateDictItemStatusResp {
-		Code    string `json:"code"`
-		Message string `json:"message"`
 	}
 	// 查询字典数据详情请求参数
 	QueryDictItemDetailReq {
@@ -124,19 +110,19 @@ type (
 service admin-api {
 	// 添加字典数据
 	@handler AddDictItem
-	post /addDictItem (AddDictItemReq) returns (AddDictItemResp)
+	post /addDictItem (AddDictItemReq) returns (BaseResp)
 
 	// 删除字典数据
 	@handler DeleteDictItem
-	get /deleteDictItem (DeleteDictItemReq) returns (DeleteDictItemResp)
+	get /deleteDictItem (DeleteDictItemReq) returns (BaseResp)
 
 	// 更新字典数据
 	@handler UpdateDictItem
-	post /updateDictItem (UpdateDictItemReq) returns (UpdateDictItemResp)
+	post /updateDictItem (UpdateDictItemReq) returns (BaseResp)
 
 	// 更新字典数据状态
 	@handler UpdateDictItemStatus
-	post /updateDictItemStatus (UpdateDictItemStatusReq) returns (UpdateDictItemStatusResp)
+	post /updateDictItemStatus (UpdateDictItemStatusReq) returns (BaseResp)
 
 	// 查询字典数据详情
 	@handler QueryDictItemDetail

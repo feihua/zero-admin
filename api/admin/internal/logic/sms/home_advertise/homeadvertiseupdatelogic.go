@@ -3,6 +3,7 @@ package home_advertise
 import (
 	"context"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
+	"github.com/feihua/zero-admin/api/admin/internal/common/res"
 	"github.com/feihua/zero-admin/rpc/sms/smsclient"
 	"github.com/zeromicro/go-zero/core/logc"
 	"google.golang.org/grpc/status"
@@ -27,7 +28,7 @@ func NewHomeAdvertiseUpdateLogic(ctx context.Context, svcCtx *svc.ServiceContext
 	}
 }
 
-func (l *HomeAdvertiseUpdateLogic) HomeAdvertiseUpdate(req *types.UpdateHomeAdvertiseReq) (*types.UpdateHomeAdvertiseResp, error) {
+func (l *HomeAdvertiseUpdateLogic) HomeAdvertiseUpdate(req *types.UpdateHomeAdvertiseReq) (*types.BaseResp, error) {
 	_, err := l.svcCtx.HomeAdvertiseService.UpdateHomeAdvertise(l.ctx, &smsclient.UpdateHomeAdvertiseReq{
 		Id:        req.Id,
 		Name:      req.Name, // 名称
@@ -47,8 +48,5 @@ func (l *HomeAdvertiseUpdateLogic) HomeAdvertiseUpdate(req *types.UpdateHomeAdve
 		return nil, errorx.NewDefaultError(s.Message())
 	}
 
-	return &types.UpdateHomeAdvertiseResp{
-		Code:    "000000",
-		Message: "更新首页广告成功",
-	}, nil
+	return res.Success()
 }

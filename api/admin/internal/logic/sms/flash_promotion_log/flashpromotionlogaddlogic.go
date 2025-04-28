@@ -3,6 +3,7 @@ package flash_promotion_log
 import (
 	"context"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
+	"github.com/feihua/zero-admin/api/admin/internal/common/res"
 	"github.com/feihua/zero-admin/rpc/sms/smsclient"
 	"github.com/zeromicro/go-zero/core/logc"
 	"google.golang.org/grpc/status"
@@ -27,7 +28,7 @@ func NewFlashPromotionLogAddLogic(ctx context.Context, svcCtx *svc.ServiceContex
 	}
 }
 
-func (l *FlashPromotionLogAddLogic) FlashPromotionLogAdd(req *types.AddFlashPromotionLogReq) (*types.AddFlashPromotionLogResp, error) {
+func (l *FlashPromotionLogAddLogic) FlashPromotionLogAdd(req *types.AddFlashPromotionLogReq) (*types.BaseResp, error) {
 	_, err := l.svcCtx.FlashPromotionLogService.AddFlashPromotionLog(l.ctx, &smsclient.AddFlashPromotionLogReq{
 		MemberId:      req.MemberId,      // 会员id
 		ProductId:     req.ProductId,     // 商品id
@@ -42,8 +43,5 @@ func (l *FlashPromotionLogAddLogic) FlashPromotionLogAdd(req *types.AddFlashProm
 		return nil, errorx.NewDefaultError(s.Message())
 	}
 
-	return &types.AddFlashPromotionLogResp{
-		Code:    "000000",
-		Message: "添加限时购通知记录成功",
-	}, nil
+	return res.Success()
 }

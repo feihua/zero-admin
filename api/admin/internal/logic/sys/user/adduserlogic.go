@@ -3,6 +3,7 @@ package user
 import (
 	"context"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
+	"github.com/feihua/zero-admin/api/admin/internal/common/res"
 	"github.com/feihua/zero-admin/api/admin/internal/svc"
 	"github.com/feihua/zero-admin/api/admin/internal/types"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
@@ -32,7 +33,7 @@ func NewAddUserLogic(ctx context.Context, svcCtx *svc.ServiceContext) AddUserLog
 }
 
 // AddUser 新增用户
-func (l *AddUserLogic) AddUser(req *types.AddUserReq) (*types.AddUserResp, error) {
+func (l *AddUserLogic) AddUser(req *types.AddUserReq) (*types.BaseResp, error) {
 	userAddReq := sysclient.AddUserReq{
 		Mobile:   req.Mobile,   // 手机号码
 		UserName: req.UserName, // 用户账号
@@ -55,8 +56,5 @@ func (l *AddUserLogic) AddUser(req *types.AddUserReq) (*types.AddUserResp, error
 		return nil, errorx.NewDefaultError(s.Message())
 	}
 
-	return &types.AddUserResp{
-		Code:    "000000",
-		Message: "添加用户成功",
-	}, nil
+	return res.Success()
 }

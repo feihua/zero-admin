@@ -3,6 +3,7 @@ package home_recommend_product
 import (
 	"context"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
+	"github.com/feihua/zero-admin/api/admin/internal/common/res"
 	"github.com/feihua/zero-admin/rpc/sms/smsclient"
 	"github.com/zeromicro/go-zero/core/logc"
 	"google.golang.org/grpc/status"
@@ -33,7 +34,7 @@ func NewUpdateRecommendProductSortLogic(ctx context.Context, svcCtx *svc.Service
 }
 
 // UpdateRecommendProductSort 修改推荐排序
-func (l *UpdateRecommendProductSortLogic) UpdateRecommendProductSort(req *types.UpdateRecommendProductSortReq) (resp *types.UpdateRecommendProductSortResp, err error) {
+func (l *UpdateRecommendProductSortLogic) UpdateRecommendProductSort(req *types.UpdateRecommendProductSortReq) (resp *types.BaseResp, err error) {
 	_, err = l.svcCtx.HomeRecommendProductService.UpdateRecommendProductSort(l.ctx, &smsclient.UpdateRecommendProductSortReq{
 		Id:   req.Id,
 		Sort: req.Sort,
@@ -45,8 +46,5 @@ func (l *UpdateRecommendProductSortLogic) UpdateRecommendProductSort(req *types.
 		return nil, errorx.NewDefaultError(s.Message())
 	}
 
-	return &types.UpdateRecommendProductSortResp{
-		Code:    "000000",
-		Message: "修改推荐排序成功",
-	}, nil
+	return res.Success()
 }

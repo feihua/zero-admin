@@ -3,6 +3,7 @@ package company_address
 import (
 	"context"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
+	"github.com/feihua/zero-admin/api/admin/internal/common/res"
 	"github.com/feihua/zero-admin/rpc/oms/omsclient"
 	"github.com/zeromicro/go-zero/core/logc"
 	"google.golang.org/grpc/status"
@@ -33,7 +34,7 @@ func NewDeleteCompanyAddressLogic(ctx context.Context, svcCtx *svc.ServiceContex
 }
 
 // DeleteCompanyAddress 删除公司收货地址
-func (l *DeleteCompanyAddressLogic) DeleteCompanyAddress(req *types.DeleteCompanyAddressReq) (resp *types.DeleteCompanyAddressResp, err error) {
+func (l *DeleteCompanyAddressLogic) DeleteCompanyAddress(req *types.DeleteCompanyAddressReq) (resp *types.BaseResp, err error) {
 	_, err = l.svcCtx.CompanyAddressService.DeleteCompanyAddress(l.ctx, &omsclient.DeleteCompanyAddressReq{
 		Ids: req.Ids,
 	})
@@ -44,8 +45,5 @@ func (l *DeleteCompanyAddressLogic) DeleteCompanyAddress(req *types.DeleteCompan
 		return nil, errorx.NewDefaultError(s.Message())
 	}
 
-	return &types.DeleteCompanyAddressResp{
-		Code:    "000000",
-		Message: "删除公司收货地址成功",
-	}, nil
+	return res.Success()
 }

@@ -1,3 +1,5 @@
+import "../base/base.api"
+
 info (
 	desc:   "菜单信息"
 	author: "liufeihua"
@@ -23,17 +25,9 @@ type (
 		VueRedirect   string `json:"vueRedirect,optional"` //vue的路由重定向
 		BackgroundUrl string `json:"backgroundUrl,optional"` //接口地址
 	}
-	AddMenuResp {
-		Code    string `json:"code"`
-		Message string `json:"message"`
-	}
 	// 删除菜单信息
 	DeleteMenuReq {
 		Id int64 `form:"id"`
-	}
-	DeleteMenuResp {
-		Code    string `json:"code"`
-		Message string `json:"message"`
 	}
 	// 更新菜单信息
 	UpdateMenuReq {
@@ -54,18 +48,10 @@ type (
 		VueRedirect   string `json:"vueRedirect,optional"` //vue的路由重定向
 		BackgroundUrl string `json:"backgroundUrl,optional"` //接口地址
 	}
-	UpdateMenuResp {
-		Code    string `json:"code"`
-		Message string `json:"message"`
-	}
 	// 批量更新菜单信息状态
 	UpdateMenuStatusReq {
 		MenuId     int64 `json:"menuId"` //编号
 		MenuStatus int32 `json:"menuStatus"` //菜单状态
-	}
-	UpdateMenuStatusResp {
-		Code    string `json:"code"`
-		Message string `json:"message"`
 	}
 	// 查询菜单信息详情
 	QueryMenuDetailReq {
@@ -144,19 +130,19 @@ type (
 service admin-api {
 	// 添加菜单信息
 	@handler AddMenu
-	post /addMenu (AddMenuReq) returns (AddMenuResp)
+	post /addMenu (AddMenuReq) returns (BaseResp)
 
 	// 删除菜单信息
 	@handler DeleteMenu
-	get /deleteMenu (DeleteMenuReq) returns (DeleteMenuResp)
+	get /deleteMenu (DeleteMenuReq) returns (BaseResp)
 
 	// 更新菜单信息
 	@handler UpdateMenu
-	post /updateMenu (UpdateMenuReq) returns (UpdateMenuResp)
+	post /updateMenu (UpdateMenuReq) returns (BaseResp)
 
 	// 批量更新菜单信息状态
 	@handler UpdateMenuStatus
-	post /updateMenuStatus (UpdateMenuStatusReq) returns (UpdateMenuStatusResp)
+	post /updateMenuStatus (UpdateMenuStatusReq) returns (BaseResp)
 
 	// 查询菜单信息详情
 	@handler QueryMenuDetail

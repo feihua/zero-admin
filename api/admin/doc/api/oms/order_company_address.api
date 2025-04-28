@@ -1,3 +1,5 @@
+import "../base/base.api"
+
 info (
 	desc:   "公司收发货地址表"
 	author: "刘飞华"
@@ -17,17 +19,9 @@ type (
 		Region        string `json:"region"` //区
 		DetailAddress string `json:"detailAddress"` //详细地址
 	}
-	AddCompanyAddressResp {
-		Code    string `json:"code"`
-		Message string `json:"message"`
-	}
 	// 删除公司收发货地址表请求参数
 	DeleteCompanyAddressReq {
 		Ids []int64 `form:"ids"`
-	}
-	DeleteCompanyAddressResp {
-		Code    string `json:"code"`
-		Message string `json:"message"`
 	}
 	// 更新公司收发货地址表请求参数
 	UpdateCompanyAddressReq {
@@ -42,10 +36,6 @@ type (
 		Region        string `json:"region"` //区
 		DetailAddress string `json:"detailAddress"` //详细地址
 	}
-	UpdateCompanyAddressResp {
-		Code    string `json:"code"`
-		Message string `json:"message"`
-	}
 	// 更新公司收发货地址表状态
 	UpdateCompanyAddressReceiveStatusReq {
 		Id            int64 `json:"id"` //
@@ -54,10 +44,6 @@ type (
 	UpdateCompanyAddressSendStatusReq {
 		Id         int64 `json:"id"` //
 		SendStatus int32 `json:"sendStatus"` //默认发货地址：0->否；1->是
-	}
-	UpdateCompanyAddressStatusResp {
-		Code    string `json:"code"`
-		Message string `json:"message"`
 	}
 	// 查询公司收发货地址表详情请求参数
 	QueryCompanyAddressDetailReq {
@@ -130,23 +116,23 @@ type (
 service admin-api {
 	// 添加公司收发货地址表
 	@handler AddCompanyAddress
-	post /addCompanyAddress (AddCompanyAddressReq) returns (AddCompanyAddressResp)
+	post /addCompanyAddress (AddCompanyAddressReq) returns (BaseResp)
 
 	// 删除公司收发货地址表
 	@handler DeleteCompanyAddress
-	get /deleteCompanyAddress (DeleteCompanyAddressReq) returns (DeleteCompanyAddressResp)
+	get /deleteCompanyAddress (DeleteCompanyAddressReq) returns (BaseResp)
 
 	// 更新公司收发货地址表
 	@handler UpdateCompanyAddress
-	post /updateCompanyAddress (UpdateCompanyAddressReq) returns (UpdateCompanyAddressResp)
+	post /updateCompanyAddress (UpdateCompanyAddressReq) returns (BaseResp)
 
 	// 更新公司收发货地址表收货状态
 	@handler UpdateCompanyAddressReceiveStatus
-	post /updateCompanyAddressReceiveStatus (UpdateCompanyAddressReceiveStatusReq) returns (UpdateCompanyAddressStatusResp)
+	post /updateCompanyAddressReceiveStatus (UpdateCompanyAddressReceiveStatusReq) returns (BaseResp)
 
 	// 更新公司收发货地址表发货状态
 	@handler UpdateCompanyAddressSendStatus
-	post /updateCompanyAddressSendStatus (UpdateCompanyAddressSendStatusReq) returns (UpdateCompanyAddressStatusResp)
+	post /updateCompanyAddressSendStatus (UpdateCompanyAddressSendStatusReq) returns (BaseResp)
 
 	// 查询公司收发货地址表详情
 	@handler QueryCompanyAddressDetail

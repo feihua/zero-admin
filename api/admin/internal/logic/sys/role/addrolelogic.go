@@ -3,6 +3,7 @@ package role
 import (
 	"context"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
+	"github.com/feihua/zero-admin/api/admin/internal/common/res"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
 	"github.com/zeromicro/go-zero/core/logc"
 	"google.golang.org/grpc/status"
@@ -33,7 +34,7 @@ func NewAddRoleLogic(ctx context.Context, svcCtx *svc.ServiceContext) AddRoleLog
 }
 
 // AddRole 新增角色
-func (l *AddRoleLogic) AddRole(req *types.AddRoleReq) (*types.AddRoleResp, error) {
+func (l *AddRoleLogic) AddRole(req *types.AddRoleReq) (*types.BaseResp, error) {
 	roleAddReq := sysclient.AddRoleReq{
 		RoleName:  req.RoleName,  // 名称
 		RoleKey:   req.RoleKey,   // 角色权限字符串
@@ -51,8 +52,5 @@ func (l *AddRoleLogic) AddRole(req *types.AddRoleReq) (*types.AddRoleResp, error
 		return nil, errorx.NewDefaultError(s.Message())
 	}
 
-	return &types.AddRoleResp{
-		Code:    "000000",
-		Message: "添加角色成功",
-	}, nil
+	return res.Success()
 }

@@ -3,6 +3,7 @@ package product_category
 import (
 	"context"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
+	"github.com/feihua/zero-admin/api/admin/internal/common/res"
 	"github.com/feihua/zero-admin/rpc/pms/pmsclient"
 	"github.com/zeromicro/go-zero/core/logc"
 
@@ -32,7 +33,7 @@ func NewProductCategoryDeleteLogic(ctx context.Context, svcCtx *svc.ServiceConte
 }
 
 // ProductCategoryDelete 删除商品分类
-func (l *ProductCategoryDeleteLogic) ProductCategoryDelete(req *types.DeleteProductCategoryReq) (*types.DeleteProductCategoryResp, error) {
+func (l *ProductCategoryDeleteLogic) ProductCategoryDelete(req *types.DeleteProductCategoryReq) (*types.BaseResp, error) {
 	_, err := l.svcCtx.ProductCategoryService.DeleteProductCategory(l.ctx, &pmsclient.DeleteProductCategoryReq{
 		Ids: req.Ids,
 	})
@@ -42,8 +43,5 @@ func (l *ProductCategoryDeleteLogic) ProductCategoryDelete(req *types.DeleteProd
 		return nil, errorx.NewDefaultError("删除商品类别失败")
 	}
 
-	return &types.DeleteProductCategoryResp{
-		Code:    "000000",
-		Message: "",
-	}, nil
+	return res.Success()
 }

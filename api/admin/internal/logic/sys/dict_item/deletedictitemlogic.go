@@ -3,6 +3,7 @@ package dict_item
 import (
 	"context"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
+	"github.com/feihua/zero-admin/api/admin/internal/common/res"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
 	"github.com/zeromicro/go-zero/core/logc"
 	"google.golang.org/grpc/status"
@@ -33,7 +34,7 @@ func NewDeleteDictItemLogic(ctx context.Context, svcCtx *svc.ServiceContext) *De
 }
 
 // DeleteDictItem 删除字典数据
-func (l *DeleteDictItemLogic) DeleteDictItem(req *types.DeleteDictItemReq) (resp *types.DeleteDictItemResp, err error) {
+func (l *DeleteDictItemLogic) DeleteDictItem(req *types.DeleteDictItemReq) (resp *types.BaseResp, err error) {
 	_, err = l.svcCtx.DictItemService.DeleteDictItem(l.ctx, &sysclient.DeleteDictItemReq{
 		Ids: req.Ids, // 编号
 	})
@@ -44,8 +45,5 @@ func (l *DeleteDictItemLogic) DeleteDictItem(req *types.DeleteDictItemReq) (resp
 		return nil, errorx.NewDefaultError(s.Message())
 	}
 
-	return &types.DeleteDictItemResp{
-		Code:    "000000",
-		Message: "删除字典项成功",
-	}, nil
+	return res.Success()
 }

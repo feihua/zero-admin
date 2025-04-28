@@ -1,3 +1,5 @@
+import "../base/base.api"
+
 info (
 	desc:   "首页推荐主题"
 	author: "koobe"
@@ -7,10 +9,6 @@ info (
 type (
 	AddHomeRecommendSubjectReq {
 		SubjectIds []int64 `json:"subjectIds"` // 专题id
-	}
-	AddHomeRecommendSubjectResp {
-		Code    string `json:"code"`
-		Message string `json:"message"`
 	}
 	ListHomeRecommendSubjectReq {
 		Current         int64  `form:"current,default=1"`
@@ -38,26 +36,14 @@ type (
 		Id   int64 `json:"id"`
 		Sort int32 `json:"sort"` // 排序
 	}
-	UpdateRecommendSubjectSortResp {
-		Code    string `json:"code"`
-		Message string `json:"message"`
-	}
 	UpdateRecommendSubjectStatusReq {
 		Ids             []int64 `json:"ids"`
 		SubjectIds      []int64 `json:"subjectIds"`
 		RecommendStatus int32   `json:"recommendStatus"` // 推荐状态：0->不推荐;1->推荐
 	}
-	UpdateRecommendSubjectStatusResp {
-		Code    string `json:"code"`
-		Message string `json:"message"`
-	}
 	DeleteHomeRecommendSubjectReq {
 		Ids        []int64 `form:"ids"`
 		SubjectIds []int64 `form:"subjectIds"`
-	}
-	DeleteHomeRecommendSubjectResp {
-		Code    string `json:"code"`
-		Message string `json:"message"`
 	}
 )
 
@@ -70,7 +56,7 @@ type (
 service admin-api {
 	//添加首页专题推荐
 	@handler HomeRecommendSubjectAdd
-	post /addHomeRecommendSubject (AddHomeRecommendSubjectReq) returns (AddHomeRecommendSubjectResp)
+	post /addHomeRecommendSubject (AddHomeRecommendSubjectReq) returns (BaseResp)
 
 	//查询首页专题推荐
 	@handler HomeRecommendSubjectList
@@ -78,14 +64,14 @@ service admin-api {
 
 	//修改推荐排序
 	@handler UpdateRecommendSubjectSort
-	post /updateRecommendSubjectSort (UpdateRecommendSubjectSortReq) returns (UpdateRecommendSubjectSortResp)
+	post /updateRecommendSubjectSort (UpdateRecommendSubjectSortReq) returns (BaseResp)
 
 	//批量修改推荐状态
 	@handler UpdateRecommendSubjectStatus
-	post /updateRecommendSubjectStatus (UpdateRecommendSubjectStatusReq) returns (UpdateRecommendSubjectStatusResp)
+	post /updateRecommendSubjectStatus (UpdateRecommendSubjectStatusReq) returns (BaseResp)
 
 	//删除首页专题推荐
 	@handler HomeRecommendSubjectDelete
-	get /deleteHomeRecommendSubject (DeleteHomeRecommendSubjectReq) returns (DeleteHomeRecommendSubjectResp)
+	get /deleteHomeRecommendSubject (DeleteHomeRecommendSubjectReq) returns (BaseResp)
 }
 

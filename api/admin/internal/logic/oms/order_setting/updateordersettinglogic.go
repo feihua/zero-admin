@@ -3,6 +3,7 @@ package order_setting
 import (
 	"context"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
+	"github.com/feihua/zero-admin/api/admin/internal/common/res"
 	"github.com/feihua/zero-admin/rpc/oms/omsclient"
 	"github.com/zeromicro/go-zero/core/logc"
 
@@ -32,7 +33,7 @@ func NewUpdateOrderSettingLogic(ctx context.Context, svcCtx *svc.ServiceContext)
 }
 
 // UpdateOrderSetting 更新订单设置
-func (l *UpdateOrderSettingLogic) UpdateOrderSetting(req *types.UpdateOrderSettingReq) (resp *types.UpdateOrderSettingResp, err error) {
+func (l *UpdateOrderSettingLogic) UpdateOrderSetting(req *types.UpdateOrderSettingReq) (resp *types.BaseResp, err error) {
 	_, err = l.svcCtx.OrderSettingService.UpdateOrderSetting(l.ctx, &omsclient.UpdateOrderSettingReq{
 		Id:                  req.Id,                  // 主键
 		FlashOrderOvertime:  req.FlashOrderOvertime,  // 秒杀订单超时关闭时间(分)
@@ -49,8 +50,5 @@ func (l *UpdateOrderSettingLogic) UpdateOrderSetting(req *types.UpdateOrderSetti
 		return nil, errorx.NewDefaultError("更新订单设置失败")
 	}
 
-	return &types.UpdateOrderSettingResp{
-		Code:    "000000",
-		Message: "更新订单设置成功",
-	}, nil
+	return res.Success()
 }

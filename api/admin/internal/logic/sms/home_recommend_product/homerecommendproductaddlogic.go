@@ -3,6 +3,7 @@ package home_recommend_product
 import (
 	"context"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
+	"github.com/feihua/zero-admin/api/admin/internal/common/res"
 	"github.com/feihua/zero-admin/rpc/pms/pmsclient"
 	"github.com/feihua/zero-admin/rpc/sms/smsclient"
 	"github.com/zeromicro/go-zero/core/logc"
@@ -37,7 +38,7 @@ func NewHomeRecommendProductAddLogic(ctx context.Context, svcCtx *svc.ServiceCon
 // 1.根据productIds查询商品(pms-rpc)
 // 2.添加首页人气推荐记录(sms-rpc)
 // 3.修改商品的推荐状态(pms-rpc)
-func (l *HomeRecommendProductAddLogic) HomeRecommendProductAdd(req *types.AddHomeRecommendProductReq) (*types.AddHomeRecommendProductResp, error) {
+func (l *HomeRecommendProductAddLogic) HomeRecommendProductAdd(req *types.AddHomeRecommendProductReq) (*types.BaseResp, error) {
 	// 1.根据productIds查询商品(pms-rpc)
 	brandListResp, _ := l.svcCtx.ProductService.QueryProductListByIds(l.ctx, &pmsclient.QueryProductByIdsReq{Ids: req.ProductIds})
 
@@ -74,8 +75,5 @@ func (l *HomeRecommendProductAddLogic) HomeRecommendProductAdd(req *types.AddHom
 		s, _ := status.FromError(err)
 		return nil, errorx.NewDefaultError(s.Message())
 	}
-	return &types.AddHomeRecommendProductResp{
-		Code:    "000000",
-		Message: "添加人气推荐商品成功",
-	}, nil
+	return res.Success()
 }

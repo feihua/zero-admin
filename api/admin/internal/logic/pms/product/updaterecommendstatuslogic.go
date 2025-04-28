@@ -3,6 +3,7 @@ package product
 import (
 	"context"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
+	"github.com/feihua/zero-admin/api/admin/internal/common/res"
 	"github.com/feihua/zero-admin/rpc/pms/pmsclient"
 	"github.com/zeromicro/go-zero/core/logc"
 
@@ -32,7 +33,7 @@ func NewUpdateRecommendStatusLogic(ctx context.Context, svcCtx *svc.ServiceConte
 }
 
 // UpdateRecommendStatus 批量推荐商品
-func (l *UpdateRecommendStatusLogic) UpdateRecommendStatus(req *types.UpdateProductStatusReq) (resp *types.UpdateProductStatusResp, err error) {
+func (l *UpdateRecommendStatusLogic) UpdateRecommendStatus(req *types.UpdateProductStatusReq) (resp *types.BaseResp, err error) {
 	_, err = l.svcCtx.ProductService.UpdateRecommendStatus(l.ctx, &pmsclient.UpdateProductStatusReq{
 		Ids:    req.Ids,
 		Status: req.Status,
@@ -43,8 +44,5 @@ func (l *UpdateRecommendStatusLogic) UpdateRecommendStatus(req *types.UpdateProd
 		return nil, errorx.NewDefaultError("批量推荐商品失败")
 	}
 
-	return &types.UpdateProductStatusResp{
-		Code:    "000000",
-		Message: "批量推荐商品成功",
-	}, nil
+	return res.Success()
 }

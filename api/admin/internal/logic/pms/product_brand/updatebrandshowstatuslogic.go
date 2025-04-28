@@ -3,6 +3,7 @@ package product_brand
 import (
 	"context"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
+	"github.com/feihua/zero-admin/api/admin/internal/common/res"
 	"github.com/feihua/zero-admin/rpc/pms/pmsclient"
 	"github.com/zeromicro/go-zero/core/logc"
 
@@ -32,7 +33,7 @@ func NewUpdateBrandShowStatusLogic(ctx context.Context, svcCtx *svc.ServiceConte
 }
 
 // UpdateBrandShowStatus 批量更新显示状态
-func (l *UpdateBrandShowStatusLogic) UpdateBrandShowStatus(req *types.UpdateProductBrandStatusReq) (resp *types.UpdateProductBrandStatusResp, err error) {
+func (l *UpdateBrandShowStatusLogic) UpdateBrandShowStatus(req *types.UpdateProductBrandStatusReq) (resp *types.BaseResp, err error) {
 	_, err = l.svcCtx.BrandService.UpdateBrandShowStatus(l.ctx, &pmsclient.UpdateBrandShowStatusReq{
 		Ids:        req.Ids,
 		ShowStatus: req.Status,
@@ -43,8 +44,5 @@ func (l *UpdateBrandShowStatusLogic) UpdateBrandShowStatus(req *types.UpdateProd
 		return nil, errorx.NewDefaultError("批量更新显示状态失败")
 	}
 
-	return &types.UpdateProductBrandStatusResp{
-		Code:    "000000",
-		Message: "批量更新显示状态成功",
-	}, nil
+	return res.Success()
 }

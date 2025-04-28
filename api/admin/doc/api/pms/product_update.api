@@ -1,3 +1,5 @@
+import "../base/base.api"
+
 info (
 	desc:   "商品信息"
 	author: "koobe"
@@ -13,11 +15,6 @@ type UpdateProductReq {
 	ProductAttributeValueList        []UpdateProductAttributeValueList `json:"productAttributeValueList"`
 	SubjectProductRelationList       []int64                           `json:"subjectProductRelationList"`
 	PrefrenceAreaProductRelationList []int64                           `json:"prefrenceAreaProductRelationList"`
-}
-
-type UpdateProductResp {
-	Code    string `json:"code"`
-	Message string `json:"message"`
 }
 
 type UpdateProductData {
@@ -123,11 +120,6 @@ type UpdateProductStatusReq {
 	Detail string  `form:"detail"`
 }
 
-type UpdateProductStatusResp {
-	Code    string `json:"code"`
-	Message string `json:"message"`
-}
-
 @server (
 	jwt:        Auth
 	middleware: CheckUrl
@@ -137,26 +129,26 @@ type UpdateProductStatusResp {
 service admin-api {
 	//更新商品
 	@handler ProductUpdate
-	post /updateProduct (UpdateProductReq) returns (UpdateProductResp)
+	post /updateProduct (UpdateProductReq) returns (BaseResp)
 
 	//批量修改审核状态
 	@handler UpdateVerifyStatus
-	post /updateVerifyStatus (UpdateProductStatusReq) returns (UpdateProductStatusResp)
+	post /updateVerifyStatus (UpdateProductStatusReq) returns (BaseResp)
 
 	//批量上下架商品
 	@handler UpdatePublishStatus
-	post /updatePublishStatus (UpdateProductStatusReq) returns (UpdateProductStatusResp)
+	post /updatePublishStatus (UpdateProductStatusReq) returns (BaseResp)
 
 	//批量推荐商品
 	@handler UpdateRecommendStatus
-	post /updateRecommendStatus (UpdateProductStatusReq) returns (UpdateProductStatusResp)
+	post /updateRecommendStatus (UpdateProductStatusReq) returns (BaseResp)
 
 	//批量设为新品
 	@handler UpdateNewStatus
-	post /updateNewStatus (UpdateProductStatusReq) returns (UpdateProductStatusResp)
+	post /updateNewStatus (UpdateProductStatusReq) returns (BaseResp)
 
 	//批量修改删除状态
 	@handler UpdateDeleteStatus
-	get /updateDeleteStatus (UpdateProductStatusReq) returns (UpdateProductStatusResp)
+	get /updateDeleteStatus (UpdateProductStatusReq) returns (BaseResp)
 }
 

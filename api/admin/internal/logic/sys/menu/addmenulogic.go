@@ -3,6 +3,7 @@ package menu
 import (
 	"context"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
+	"github.com/feihua/zero-admin/api/admin/internal/common/res"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
 	"github.com/zeromicro/go-zero/core/logc"
 	"google.golang.org/grpc/status"
@@ -33,7 +34,7 @@ func NewAddMenuLogic(ctx context.Context, svcCtx *svc.ServiceContext) AddMenuLog
 }
 
 // AddMenu 新增菜单
-func (l *AddMenuLogic) AddMenu(req *types.AddMenuReq) (*types.AddMenuResp, error) {
+func (l *AddMenuLogic) AddMenu(req *types.AddMenuReq) (*types.BaseResp, error) {
 	createBy := l.ctx.Value("userName").(string)
 	menuAddReq := sysclient.AddMenuReq{
 		MenuName:      req.MenuName,      // 菜单名称
@@ -59,8 +60,5 @@ func (l *AddMenuLogic) AddMenu(req *types.AddMenuReq) (*types.AddMenuResp, error
 		return nil, errorx.NewDefaultError(s.Message())
 	}
 
-	return &types.AddMenuResp{
-		Code:    "000000",
-		Message: "添加菜单成功!",
-	}, nil
+	return res.Success()
 }

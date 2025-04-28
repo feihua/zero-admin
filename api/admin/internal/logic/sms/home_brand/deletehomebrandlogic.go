@@ -3,6 +3,7 @@ package home_brand
 import (
 	"context"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
+	"github.com/feihua/zero-admin/api/admin/internal/common/res"
 	"github.com/feihua/zero-admin/rpc/pms/pmsclient"
 	"github.com/feihua/zero-admin/rpc/sms/smsclient"
 	"github.com/zeromicro/go-zero/core/logc"
@@ -36,7 +37,7 @@ func NewDeleteHomeBrandLogic(ctx context.Context, svcCtx *svc.ServiceContext) De
 // DeleteHomeBrand 删除首页品牌信息
 // 1.删除sms_home_brand的记录(sms-rpc)
 // 2.修改pms_brand记录的状态为不推荐(pms-rpc)
-func (l *DeleteHomeBrandLogic) DeleteHomeBrand(req *types.DeleteHomeBrandReq) (*types.DeleteHomeBrandResp, error) {
+func (l *DeleteHomeBrandLogic) DeleteHomeBrand(req *types.DeleteHomeBrandReq) (*types.BaseResp, error) {
 	// 1.删除sms_home_brand的记录(sms-rpc)
 	_, err := l.svcCtx.HomeBrandService.DeleteHomeBrand(l.ctx, &smsclient.DeleteHomeBrandReq{
 		Ids: req.Ids,
@@ -59,8 +60,5 @@ func (l *DeleteHomeBrandLogic) DeleteHomeBrand(req *types.DeleteHomeBrandReq) (*
 		return nil, errorx.NewDefaultError(s.Message())
 	}
 
-	return &types.DeleteHomeBrandResp{
-		Code:    "000000",
-		Message: "删除首页品牌成功",
-	}, nil
+	return res.Success()
 }

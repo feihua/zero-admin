@@ -1,3 +1,5 @@
+import "../base/base.api"
+
 info (
 	desc:   "积分消费设置"
 	author: "liufeihua"
@@ -13,17 +15,9 @@ type (
 		IsDefault          int32 `json:"isDefault"` //是否默认：0->否；1->是
 		CouponStatus       int32 `json:"couponStatus"` //是否可以和优惠券同用；0->不可以；1->可以
 	}
-	AddIntegrationConsumeSettingResp {
-		Code    string `json:"code"`
-		Message string `json:"message"`
-	}
 	// 删除积分消费设置请求参数
 	DeleteIntegrationConsumeSettingReq {
 		Ids []int64 `form:"ids"`
-	}
-	DeleteIntegrationConsumeSettingResp {
-		Code    string `json:"code"`
-		Message string `json:"message"`
 	}
 	// 更新积分消费设置请求参数
 	UpdateIntegrationConsumeSettingReq {
@@ -34,18 +28,10 @@ type (
 		IsDefault          int32 `json:"isDefault"` //是否默认：0->否；1->是
 		CouponStatus       int32 `json:"couponStatus,default=2"` //是否可以和优惠券同用；0->不可以；1->可以
 	}
-	UpdateIntegrationConsumeSettingResp {
-		Code    string `json:"code"`
-		Message string `json:"message"`
-	}
 	// 更新积分消费设置状态请求参数
 	UpdateIntegrationConsumeSettingStatusReq {
 		Id        int64 `json:"id"` //
 		IsDefault int32 `json:"isDefault"` //是否默认：0->否；1->是
-	}
-	UpdateIntegrationConsumeSettingStatusResp {
-		Code    string `json:"code"`
-		Message string `json:"message"`
 	}
 	// 查询积分消费设置详情请求参数
 	QueryIntegrationConsumeSettingDetailReq {
@@ -97,19 +83,19 @@ type (
 service admin-api {
 	// 添加积分消费设置
 	@handler AddIntegrationConsumeSetting
-	post /addIntegrationConsumeSetting (AddIntegrationConsumeSettingReq) returns (AddIntegrationConsumeSettingResp)
+	post /addIntegrationConsumeSetting (AddIntegrationConsumeSettingReq) returns (BaseResp)
 
 	// 删除积分消费设置
 	@handler DeleteIntegrationConsumeSetting
-	get /deleteIntegrationConsumeSetting (DeleteIntegrationConsumeSettingReq) returns (DeleteIntegrationConsumeSettingResp)
+	get /deleteIntegrationConsumeSetting (DeleteIntegrationConsumeSettingReq) returns (BaseResp)
 
 	// 更新积分消费设置
 	@handler UpdateIntegrationConsumeSetting
-	post /updateIntegrationConsumeSetting (UpdateIntegrationConsumeSettingReq) returns (UpdateIntegrationConsumeSettingResp)
+	post /updateIntegrationConsumeSetting (UpdateIntegrationConsumeSettingReq) returns (BaseResp)
 
 	// 更新积分消费设置状态
 	@handler UpdateIntegrationConsumeSettingStatus
-	post /updateIntegrationConsumeSettingStatus (UpdateIntegrationConsumeSettingStatusReq) returns (UpdateIntegrationConsumeSettingStatusResp)
+	post /updateIntegrationConsumeSettingStatus (UpdateIntegrationConsumeSettingStatusReq) returns (BaseResp)
 
 	// 查询积分消费设置详情
 	@handler QueryIntegrationConsumeSettingDetail

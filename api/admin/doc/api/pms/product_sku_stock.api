@@ -1,3 +1,5 @@
+import "../base/base.api"
+
 info (
 	desc:   "商品库存"
 	author: "koobe"
@@ -43,10 +45,6 @@ type (
 	UpdateSkuStockReq {
 		SkuStockList []UpdateSkuStockData `json:"skuStockList"`
 	}
-	UpdateSkuStockResp {
-		Code    string `json:"code"`
-		Message string `json:"message"`
-	}
 )
 
 @server (
@@ -62,6 +60,6 @@ service admin-api {
 
 	//批量更新sku库存信息
 	@handler SkuStockUpdate
-	post /updateSkuStock (UpdateSkuStockReq) returns (UpdateSkuStockResp)
+	post /updateSkuStock (UpdateSkuStockReq) returns (BaseResp)
 }
 

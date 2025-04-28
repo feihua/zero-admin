@@ -1,3 +1,5 @@
+import "../base/base.api"
+
 info (
 	desc:   "字典类型"
 	author: "LiuFeiHua"
@@ -12,17 +14,9 @@ type (
 		Status   int32  `json:"status"` //状态（0：停用，1:正常）
 		Remark   string `json:"remark,optional"` //备注
 	}
-	AddDictTypeResp {
-		Code    string `json:"code"`
-		Message string `json:"message"`
-	}
 	// 删除字典类型请求参数
 	DeleteDictTypeReq {
 		Ids []int64 `form:"ids"`
-	}
-	DeleteDictTypeResp {
-		Code    string `json:"code"`
-		Message string `json:"message"`
 	}
 	// 更新字典类型请求参数
 	UpdateDictTypeReq {
@@ -32,18 +26,10 @@ type (
 		Status   int32  `json:"status"` //状态（0：停用，1:正常）
 		Remark   string `json:"remark,optional"` //备注
 	}
-	UpdateDictTypeResp {
-		Code    string `json:"code"`
-		Message string `json:"message"`
-	}
 	// 更新字典类型状态请求参数
 	UpdateDictTypeStatusReq {
 		Ids    []int64 `json:"ids"` //字典id
 		Status int32   `json:"status"` //状态
-	}
-	UpdateDictTypeStatusResp {
-		Code    string `json:"code"`
-		Message string `json:"message"`
 	}
 	// 查询字典类型详情请求参数
 	QueryDictTypeDetailReq {
@@ -104,19 +90,19 @@ type (
 service admin-api {
 	// 添加字典类型
 	@handler AddDictType
-	post /addDictType (AddDictTypeReq) returns (AddDictTypeResp)
+	post /addDictType (AddDictTypeReq) returns (BaseResp)
 
 	// 删除字典类型
 	@handler DeleteDictType
-	get /deleteDictType (DeleteDictTypeReq) returns (DeleteDictTypeResp)
+	get /deleteDictType (DeleteDictTypeReq) returns (BaseResp)
 
 	// 更新字典类型
 	@handler UpdateDictType
-	post /updateDictType (UpdateDictTypeReq) returns (UpdateDictTypeResp)
+	post /updateDictType (UpdateDictTypeReq) returns (BaseResp)
 
 	// 更新字典类型状态
 	@handler UpdateDictTypeStatus
-	post /updateDictTypeStatus (UpdateDictTypeStatusReq) returns (UpdateDictTypeStatusResp)
+	post /updateDictTypeStatus (UpdateDictTypeStatusReq) returns (BaseResp)
 
 	// 查询字典类型详情
 	@handler QueryDictTypeDetail

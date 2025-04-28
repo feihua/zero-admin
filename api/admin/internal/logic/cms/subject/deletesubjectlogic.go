@@ -3,6 +3,7 @@ package subject
 import (
 	"context"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
+	"github.com/feihua/zero-admin/api/admin/internal/common/res"
 	"github.com/feihua/zero-admin/api/admin/internal/svc"
 	"github.com/feihua/zero-admin/api/admin/internal/types"
 	"github.com/feihua/zero-admin/rpc/cms/cmsclient"
@@ -32,7 +33,7 @@ func NewDeleteSubjectLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Del
 }
 
 // DeleteSubject 删除专题表
-func (l *DeleteSubjectLogic) DeleteSubject(req *types.DeleteSubjectReq) (resp *types.DeleteSubjectResp, err error) {
+func (l *DeleteSubjectLogic) DeleteSubject(req *types.DeleteSubjectReq) (resp *types.BaseResp, err error) {
 	_, err = l.svcCtx.SubjectService.DeleteSubject(l.ctx, &cmsclient.DeleteSubjectReq{
 		Ids: req.Ids,
 	})
@@ -43,8 +44,5 @@ func (l *DeleteSubjectLogic) DeleteSubject(req *types.DeleteSubjectReq) (resp *t
 		return nil, errorx.NewDefaultError(s.Message())
 	}
 
-	return &types.DeleteSubjectResp{
-		Code:    "000000",
-		Message: "删除专题表成功",
-	}, nil
+	return res.Success()
 }

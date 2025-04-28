@@ -3,6 +3,7 @@ package home_new_product
 import (
 	"context"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
+	"github.com/feihua/zero-admin/api/admin/internal/common/res"
 	"github.com/feihua/zero-admin/rpc/pms/pmsclient"
 	"github.com/feihua/zero-admin/rpc/sms/smsclient"
 	"github.com/zeromicro/go-zero/core/logc"
@@ -36,7 +37,7 @@ func NewUpdateHomeNewProductStatusLogic(ctx context.Context, svcCtx *svc.Service
 // UpdateHomeNewProductStatus 批量修改推荐状态
 // 1.修改sms_home_new_product的记录(sms-rpc)
 // 2.修改pms_product记录的状态(pms-rpc)
-func (l *UpdateNewProductStatusLogic) UpdateHomeNewProductStatus(req *types.UpdateHomeNewProductStatusReq) (resp *types.UpdateHomeNewProductStatusResp, err error) {
+func (l *UpdateNewProductStatusLogic) UpdateHomeNewProductStatus(req *types.UpdateHomeNewProductStatusReq) (resp *types.BaseResp, err error) {
 	// 1.修改sms_home_new_product的记录(sms-rpc)
 	_, err = l.svcCtx.HomeNewProductService.UpdateHomeNewProductStatus(l.ctx, &smsclient.UpdateHomeNewProductStatusReq{
 		Ids:             req.Ids,
@@ -59,9 +60,6 @@ func (l *UpdateNewProductStatusLogic) UpdateHomeNewProductStatus(req *types.Upda
 		s, _ := status.FromError(err)
 		return nil, errorx.NewDefaultError(s.Message())
 	}
-	return &types.UpdateHomeNewProductStatusResp{
-		Code:    "000000",
-		Message: "批量修改推荐状态成功",
-	}, nil
+	return res.Success()
 
 }

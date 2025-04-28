@@ -1,3 +1,5 @@
+import "../base/base.api"
+
 info (
 	desc:   "退货原因表"
 	author: "liufeihua"
@@ -11,17 +13,9 @@ type (
 		Sort   int32  `json:"sort"` //排序
 		Status int32  `json:"status"` //状态：0->不启用；1->启用
 	}
-	AddOrderReturnReasonResp {
-		Code    string `json:"code"`
-		Message string `json:"message"`
-	}
 	// 删除退货原因表请求参数
 	DeleteOrderReturnReasonReq {
 		Ids []int64 `form:"ids"`
-	}
-	DeleteOrderReturnReasonResp {
-		Code    string `json:"code"`
-		Message string `json:"message"`
 	}
 	// 更新退货原因表请求参数
 	UpdateOrderReturnReasonReq {
@@ -30,18 +24,10 @@ type (
 		Sort   int32  `json:"sort"` //排序
 		Status int32  `json:"status"` //状态：0->不启用；1->启用
 	}
-	UpdateOrderReturnReasonResp {
-		Code    string `json:"code"`
-		Message string `json:"message"`
-	}
 	// 更新退货原因表状态请求参数
 	UpdateOrderReturnReasonStatusReq {
 		Ids    []int64 `json:"ids"` //
 		Status int32   `json:"status"` //状态：0->不启用；1->启用
-	}
-	UpdateOrderReturnReasonStatusResp {
-		Code    string `json:"code"`
-		Message string `json:"message"`
 	}
 	// 查询退货原因表详情请求参数
 	QueryOrderReturnReasonDetailReq {
@@ -93,19 +79,19 @@ type (
 service admin-api {
 	// 添加退货原因表
 	@handler AddOrderReturnReason
-	post /addOrderReturnReason (AddOrderReturnReasonReq) returns (AddOrderReturnReasonResp)
+	post /addOrderReturnReason (AddOrderReturnReasonReq) returns (BaseResp)
 
 	// 删除退货原因表
 	@handler DeleteOrderReturnReason
-	get /deleteOrderReturnReason (DeleteOrderReturnReasonReq) returns (DeleteOrderReturnReasonResp)
+	get /deleteOrderReturnReason (DeleteOrderReturnReasonReq) returns (BaseResp)
 
 	// 更新退货原因表
 	@handler UpdateOrderReturnReason
-	post /updateOrderReturnReason (UpdateOrderReturnReasonReq) returns (UpdateOrderReturnReasonResp)
+	post /updateOrderReturnReason (UpdateOrderReturnReasonReq) returns (BaseResp)
 
 	// 更新退货原因表状态
 	@handler UpdateOrderReturnReasonStatus
-	post /updateOrderReturnReasonStatus (UpdateOrderReturnReasonStatusReq) returns (UpdateOrderReturnReasonStatusResp)
+	post /updateOrderReturnReasonStatus (UpdateOrderReturnReasonStatusReq) returns (BaseResp)
 
 	// 查询退货原因表详情
 	@handler QueryOrderReturnReasonDetail

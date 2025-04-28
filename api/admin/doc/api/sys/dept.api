@@ -1,3 +1,5 @@
+import "../base/base.api"
+
 info (
 	desc:   "部门"
 	author: "LiuFeiHua"
@@ -16,17 +18,9 @@ type (
 		Status   int32  `json:"status"` //部门状态（0：停用，1:正常）
 		Remark   string `json:"remark,optional"` //备注信息
 	}
-	AddDeptResp {
-		Code    string `json:"code"`
-		Message string `json:"message"`
-	}
 	// 删除部门请求参数
 	DeleteDeptReq {
 		Id int64 `form:"id"`
-	}
-	DeleteDeptResp {
-		Code    string `json:"code"`
-		Message string `json:"message"`
 	}
 	// 更新部门请求参数
 	UpdateDeptReq {
@@ -40,18 +34,10 @@ type (
 		Status   int32  `json:"status"` //部门状态（0：停用，1:正常）
 		Remark   string `json:"remark,optional"` //备注信息
 	}
-	UpdateDeptResp {
-		Code    string `json:"code"`
-		Message string `json:"message"`
-	}
 	// 更新部门状态请求参数
 	UpdateDeptStatusReq {
 		Id     int64 `json:"id"` //部门id
 		Status int32 `json:"status"` //部门状态（0：停用，1:正常）
-	}
-	UpdateDeptStatusResp {
-		Code    string `json:"code"`
-		Message string `json:"message"`
 	}
 	// 查询部门详情请求参数
 	QueryDeptDetailReq {
@@ -115,19 +101,19 @@ type (
 service admin-api {
 	// 添加部门
 	@handler AddDept
-	post /addDept (AddDeptReq) returns (AddDeptResp)
+	post /addDept (AddDeptReq) returns (BaseResp)
 
 	// 删除部门
 	@handler DeleteDept
-	get /deleteDept (DeleteDeptReq) returns (DeleteDeptResp)
+	get /deleteDept (DeleteDeptReq) returns (BaseResp)
 
 	// 更新部门
 	@handler UpdateDept
-	post /updateDept (UpdateDeptReq) returns (UpdateDeptResp)
+	post /updateDept (UpdateDeptReq) returns (BaseResp)
 
 	// 更新部门状态
 	@handler UpdateDeptStatus
-	post /updateDeptStatus (UpdateDeptStatusReq) returns (UpdateDeptStatusResp)
+	post /updateDeptStatus (UpdateDeptStatusReq) returns (BaseResp)
 
 	// 查询部门详情
 	@handler QueryDeptDetail

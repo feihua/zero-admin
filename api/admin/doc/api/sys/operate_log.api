@@ -1,3 +1,5 @@
+import "../base/base.api"
+
 info (
 	desc:   "系统操作日志"
 	author: "LiuFeiHua"
@@ -8,10 +10,6 @@ type (
 	// 删除系统操作日志请求参数
 	DeleteOperateLogReq {
 		Ids []int64 `form:"ids"`
-	}
-	DeleteOperateLogResp {
-		Code    string `json:"code"`
-		Message string `json:"message"`
 	}
 	// 查询系统操作日志详情请求参数
 	QueryOperateLogDetailReq {
@@ -117,7 +115,7 @@ type (
 service admin-api {
 	// 删除系统操作日志
 	@handler DeleteOperateLog
-	get /deleteOperateLog (DeleteOperateLogReq) returns (DeleteOperateLogResp)
+	get /deleteOperateLog (DeleteOperateLogReq) returns (BaseResp)
 
 	// 查询系统操作日志详情
 	@handler QueryOperateLogDetail

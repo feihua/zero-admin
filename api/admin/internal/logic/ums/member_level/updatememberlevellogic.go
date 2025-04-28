@@ -3,6 +3,7 @@ package member_level
 import (
 	"context"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
+	"github.com/feihua/zero-admin/api/admin/internal/common/res"
 	"github.com/feihua/zero-admin/rpc/ums/umsclient"
 	"github.com/zeromicro/go-zero/core/logc"
 
@@ -32,7 +33,7 @@ func NewUpdateMemberLevelLogic(ctx context.Context, svcCtx *svc.ServiceContext) 
 }
 
 // UpdateMemberLevel 更新会员等级
-func (l *UpdateMemberLevelLogic) UpdateMemberLevel(req *types.UpdateMemberLevelReq) (resp *types.UpdateMemberLevelResp, err error) {
+func (l *UpdateMemberLevelLogic) UpdateMemberLevel(req *types.UpdateMemberLevelReq) (resp *types.BaseResp, err error) {
 	_, err = l.svcCtx.MemberLevelService.UpdateMemberLevel(l.ctx, &umsclient.UpdateMemberLevelReq{
 		Id:                 req.Id,                 //
 		LevelName:          req.LevelName,          // 等级名称
@@ -54,8 +55,5 @@ func (l *UpdateMemberLevelLogic) UpdateMemberLevel(req *types.UpdateMemberLevelR
 		return nil, errorx.NewDefaultError("更新会员等级失败")
 	}
 
-	return &types.UpdateMemberLevelResp{
-		Code:    "000000",
-		Message: "更新会员等级成功",
-	}, nil
+	return res.Success()
 }

@@ -3,6 +3,7 @@ package prefrence_area
 import (
 	"context"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
+	"github.com/feihua/zero-admin/api/admin/internal/common/res"
 	"github.com/feihua/zero-admin/api/admin/internal/svc"
 	"github.com/feihua/zero-admin/api/admin/internal/types"
 	"github.com/feihua/zero-admin/rpc/cms/cmsclient"
@@ -32,7 +33,7 @@ func NewDeletePreferredAreaLogic(ctx context.Context, svcCtx *svc.ServiceContext
 }
 
 // DeletePreferredArea 删除优选专区
-func (l *DeletePreferredAreaLogic) DeletePreferredArea(req *types.DeletePreferredAreaReq) (resp *types.DeletePreferredAreaResp, err error) {
+func (l *DeletePreferredAreaLogic) DeletePreferredArea(req *types.DeletePreferredAreaReq) (resp *types.BaseResp, err error) {
 	_, err = l.svcCtx.PreferredAreaService.DeletePreferredArea(l.ctx, &cmsclient.DeletePreferredAreaReq{
 		Ids: req.Ids,
 	})
@@ -43,8 +44,5 @@ func (l *DeletePreferredAreaLogic) DeletePreferredArea(req *types.DeletePreferre
 		return nil, errorx.NewDefaultError(s.Message())
 	}
 
-	return &types.DeletePreferredAreaResp{
-		Code:    "000000",
-		Message: "删除优选专区成功",
-	}, nil
+	return res.Success()
 }

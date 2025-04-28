@@ -1,3 +1,5 @@
+import "../base/base.api"
+
 info (
 	desc:   "订单退货申请"
 	author: "liufeihua"
@@ -9,10 +11,6 @@ type (
 	DeleteOrderReturnApplyReq {
 		Ids []int64 `form:"ids"`
 	}
-	DeleteOrderReturnApplyResp {
-		Code    string `json:"code"`
-		Message string `json:"message"`
-	}
 	// 更新订单退货申请状态
 	UpdateOrderReturnApplyStatusReq {
 		Id               int64  `json:"id"`
@@ -21,10 +19,6 @@ type (
 		HandleNote       string `json:"handleNote,optional"` // 处理备注
 		ReceiveNote      string `json:"receiveNote,optional"` // 收货备注
 		ReturnAmount     int64  `json:"returnAmount,optional"` // 退款金额
-	}
-	UpdateOrderReturnApplyStatusResp {
-		Code    string `json:"code"`
-		Message string `json:"message"`
 	}
 	// 查询订单退货申请详情
 	QueryOrderReturnApplyDetailReq {
@@ -126,11 +120,11 @@ type (
 service admin-api {
 	// 删除订单退货申请
 	@handler DeleteOrderReturnApply
-	get /deleteOrderReturnApply (DeleteOrderReturnApplyReq) returns (DeleteOrderReturnApplyResp)
+	get /deleteOrderReturnApply (DeleteOrderReturnApplyReq) returns (BaseResp)
 
 	// 更新订单退货申请状态
 	@handler UpdateOrderReturnApplyStatus
-	post /updateOrderReturnApplyStatus (UpdateOrderReturnApplyStatusReq) returns (UpdateOrderReturnApplyStatusResp)
+	post /updateOrderReturnApplyStatus (UpdateOrderReturnApplyStatusReq) returns (BaseResp)
 
 	// 查询订单退货申请详情
 	@handler QueryOrderReturnApplyDetail
