@@ -1,3 +1,5 @@
+import "../base/base.api"
+
 info (
 	desc:   "用户信息"
 	author: "liufeihua"
@@ -269,7 +271,7 @@ service admin-api {
 
 	// 删除用户信息
 	@handler DeleteUser
-	get /deleteUser (DeleteUserReq) returns (DeleteUserResp)
+	get /deleteUser (DeleteUserReq) returns (BaseResp)
 
 	// 更新用户信息
 	@handler UpdateUser

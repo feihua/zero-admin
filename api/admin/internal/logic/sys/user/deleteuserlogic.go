@@ -34,7 +34,7 @@ func NewDeleteUserLogic(ctx context.Context, svcCtx *svc.ServiceContext) DeleteU
 }
 
 // DeleteUser 删除用户
-func (l *DeleteUserLogic) DeleteUser(req *types.DeleteUserReq) (*types.DeleteUserResp, error) {
+func (l *DeleteUserLogic) DeleteUser(req *types.DeleteUserReq) (*types.BaseResp, error) {
 	userId, _ := l.ctx.Value("userId").(json.Number).Int64()
 	for _, id := range req.Ids {
 		if id == userId {
@@ -52,7 +52,7 @@ func (l *DeleteUserLogic) DeleteUser(req *types.DeleteUserReq) (*types.DeleteUse
 		return nil, errorx.NewDefaultError(s.Message())
 	}
 
-	return &types.DeleteUserResp{
+	return &types.BaseResp{
 		Code:    "000000",
 		Message: "删除用户成功",
 	}, nil
