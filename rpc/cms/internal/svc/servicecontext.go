@@ -17,7 +17,7 @@ type ServiceContext struct {
 
 func NewServiceContext(c config.Config) *ServiceContext {
 
-	DB, err := gorm.Open(mysql.Open(c.Mysql.Datasource), &gorm.Config{
+	db, err := gorm.Open(mysql.Open(c.Mysql.Datasource), &gorm.Config{
 		SkipDefaultTransaction: true,
 		PrepareStmt:            true,
 		Logger:                 settingLogConfig(),
@@ -27,11 +27,11 @@ func NewServiceContext(c config.Config) *ServiceContext {
 	}
 
 	logx.Debug("mysql已连接")
-	query.SetDefault(DB)
+	query.SetDefault(db)
 
 	return &ServiceContext{
 		Config: c,
-		DB:     DB,
+		DB:     db,
 	}
 }
 

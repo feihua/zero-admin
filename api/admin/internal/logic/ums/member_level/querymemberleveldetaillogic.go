@@ -45,19 +45,21 @@ func (l *QueryMemberLevelDetailLogic) QueryMemberLevelDetail(req *types.QueryMem
 	}
 
 	data := types.QueryMemberLevelDetailData{
-		Id:                 detail.Id,                 //
-		LevelName:          detail.LevelName,          // 等级名称
-		GrowthPoint:        detail.GrowthPoint,        // 成长点
-		DefaultStatus:      detail.DefaultStatus,      // 是否为默认等级：0->不是；1->是
-		FreeFreightPoint:   detail.FreeFreightPoint,   // 免运费标准
-		CommentGrowthPoint: detail.CommentGrowthPoint, // 每次评价获取的成长值
-		IsFreeFreight:      detail.IsFreeFreight,      // 是否有免邮特权
-		IsSignIn:           detail.IsSignIn,           // 是否有签到特权
-		IsComment:          detail.IsComment,          // 是否有评论获奖励特权
-		IsPromotion:        detail.IsPromotion,        // 是否有专享活动特权
-		IsMemberPrice:      detail.IsMemberPrice,      // 是否有会员价格特权
-		IsBirthday:         detail.IsBirthday,         // 是否有生日特权
-		Remark:             detail.Remark,             // 备注
+		Id:           detail.Id,           // 主键ID
+		Name:         detail.Name,         // 等级名称
+		Level:        detail.Level,        // 等级
+		GrowthPoint:  detail.GrowthPoint,  // 升级所需成长值
+		DiscountRate: detail.DiscountRate, // 折扣率(0-100)
+		FreeFreight:  detail.FreeFreight,  // 是否免运费
+		CommentExtra: detail.CommentExtra, // 是否可评论获取奖励
+		Privileges:   detail.Privileges,   // 会员特权JSON
+		Remark:       detail.Remark,       // 备注
+		IsEnabled:    detail.IsEnabled,    // 是否启用
+		CreateBy:     detail.CreateBy,     // 创建人ID
+		CreateTime:   detail.CreateTime,   // 创建时间
+		UpdateBy:     detail.UpdateBy,     // 更新人ID
+		UpdateTime:   detail.UpdateTime,   // 更新时间
+		IsDeleted:    detail.IsDeleted,    // 是否删除
 	}
 	return &types.QueryMemberLevelDetailResp{
 		Code:    "000000",

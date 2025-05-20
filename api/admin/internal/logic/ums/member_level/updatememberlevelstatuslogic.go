@@ -35,8 +35,8 @@ func NewUpdateMemberLevelStatusLogic(ctx context.Context, svcCtx *svc.ServiceCon
 // UpdateMemberLevelStatus 更新会员等级表状态
 func (l *UpdateMemberLevelStatusLogic) UpdateMemberLevelStatus(req *types.UpdateMemberLevelStatusReq) (resp *types.BaseResp, err error) {
 	_, err = l.svcCtx.MemberLevelService.UpdateMemberLevelStatus(l.ctx, &umsclient.UpdateMemberLevelStatusReq{
-		Id:            req.Id,            //
-		DefaultStatus: req.DefaultStatus, // 是否为默认等级：0->不是；1->是
+		Id:        req.Id,        //
+		IsEnabled: req.IsEnabled, // 是否启用
 
 	})
 

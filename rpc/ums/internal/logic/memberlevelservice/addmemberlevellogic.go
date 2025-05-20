@@ -3,6 +3,7 @@ package memberlevelservicelogic
 import (
 	"context"
 	"errors"
+	"fmt"
 	"github.com/feihua/zero-admin/rpc/ums/gen/model"
 	"github.com/feihua/zero-admin/rpc/ums/gen/query"
 	"github.com/zeromicro/go-zero/core/logc"
@@ -34,19 +35,27 @@ func NewAddMemberLevelLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Ad
 
 // AddMemberLevel 添加会员等级
 func (l *AddMemberLevelLogic) AddMemberLevel(in *umsclient.AddMemberLevelReq) (*umsclient.AddMemberLevelResp, error) {
-	err := query.UmsMemberLevel.WithContext(l.ctx).Create(&model.UmsMemberLevel{
-		LevelName:          in.LevelName,          // 等级名称
-		GrowthPoint:        in.GrowthPoint,        // 成长点
-		DefaultStatus:      in.DefaultStatus,      // 是否为默认等级：0->不是；1->是
-		FreeFreightPoint:   in.FreeFreightPoint,   // 免运费标准
-		CommentGrowthPoint: in.CommentGrowthPoint, // 每次评价获取的成长值
-		IsFreeFreight:      in.IsFreeFreight,      // 是否有免邮特权
-		IsSignIn:           in.IsSignIn,           // 是否有签到特权
-		IsComment:          in.IsComment,          // 是否有评论获奖励特权
-		IsPromotion:        in.IsPromotion,        // 是否有专享活动特权
-		IsMemberPrice:      in.IsMemberPrice,      // 是否有会员价格特权
-		IsBirthday:         in.IsBirthday,         // 是否有生日特权
-		Remark:             in.Remark,             // 备注
+	q := query.UmsMemberLevel
+	count, err := q.WithContext(l.ctx).Where(q.Name.Eq(in.Name)).Count()
+	if count > 0 {
+		return nil, errors.New(fmt.Sprintf("会员等级名称：%s,已存在", in.Name))
+	}
+	count, err = q.WithContext(l.ctx).Where(q.Level.Eq(in.Level)).Count()
+	if count > 0 {
+		return nil, errors.New(fmt.Sprintf("会员等级：%d,已存在", in.Level))
+	}
+
+	err = q.WithContext(l.ctx).Create(&model.UmsMemberLevel{
+		Name:         in.Name,                  // 等级名称
+		Level:        in.Level,                 // 等级
+		GrowthPoint:  in.GrowthPoint,           // 升级所需成长值
+		DiscountRate: float64(in.DiscountRate), // 折扣率(0-100)
+		FreeFreight:  in.FreeFreight,           // 是否免运费
+		CommentExtra: in.CommentExtra,          // 是否可评论获取奖励
+		Privileges:   in.Privileges,            // 会员特权JSON
+		Remark:       in.Remark,                // 备注
+		IsEnabled:    in.IsEnabled,             // 是否启用
+		CreateBy:     in.CreateBy,              // 创建人ID
 	})
 
 	if err != nil {

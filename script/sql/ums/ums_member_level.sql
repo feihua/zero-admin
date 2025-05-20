@@ -1,35 +1,93 @@
-create table ums_member_level
+drop table if exists ums_member_level;
+-- 会员等级表
+create table gozero.ums_member_level
 (
-    id                   bigint auto_increment
-        primary key,
-    level_name           varchar(100)            not null comment '等级名称',
-    growth_point         int                     not null comment '成长点',
-    default_status       tinyint                 not null comment '是否为默认等级：0->不是；1->是',
-    free_freight_point   bigint                  not null comment '免运费标准',
-    comment_growth_point int                     not null comment '每次评价获取的成长值',
-    is_free_freight      tinyint                 not null comment '是否有免邮特权',
-    is_sign_in           tinyint                 not null comment '是否有签到特权',
-    is_comment           tinyint                 not null comment '是否有评论获奖励特权',
-    is_promotion         tinyint                 not null comment '是否有专享活动特权',
-    is_member_price      tinyint                 not null comment '是否有会员价格特权',
-    is_birthday          tinyint                 not null comment '是否有生日特权',
-    remark               varchar(200) default '' not null comment '备注'
+    id            bigint auto_increment
+        primary key comment '主键ID',
+    name          varchar(50)                             not null comment '等级名称',
+    level         int                                     not null comment '等级',
+    growth_point  int                                     not null comment '升级所需成长值',
+    discount_rate decimal(5, 2) default 100.00            not null comment '折扣率(0-100)',
+    free_freight  tinyint       default 0                 not null comment '是否免运费',
+    comment_extra tinyint       default 0                 not null comment '是否可评论获取奖励',
+    privileges    varchar(500)  default ''                not null comment '会员特权JSON',
+    remark        varchar(200)  default ''                not null comment '备注',
+    is_enabled    tinyint       default 1                 not null comment '是否启用',
+    create_by     bigint                                  not null comment '创建人ID',
+    create_time   datetime      default CURRENT_TIMESTAMP not null comment '创建时间',
+    update_by     bigint                                  null comment '更新人ID',
+    update_time   datetime                                null on update CURRENT_TIMESTAMP comment '更新时间',
+    is_deleted    tinyint       default 0                 not null comment '是否删除',
+    constraint uk_level
+        unique (level, is_deleted)
 )
     comment '会员等级表';
 
-INSERT INTO ums_member_level (id, level_name, growth_point, default_status, free_freight_point, comment_growth_point,
-                              is_free_freight, is_sign_in, is_comment, is_promotion, is_member_price, is_birthday,
-                              remark)
-VALUES (1, '黄金会员', 1000, 0, 19900, 5, 1, 1, 1, 1, 1, 1, 'remarks');
-INSERT INTO ums_member_level (id, level_name, growth_point, default_status, free_freight_point, comment_growth_point,
-                              is_free_freight, is_sign_in, is_comment, is_promotion, is_member_price, is_birthday,
-                              remark)
-VALUES (2, '白金会员', 5000, 0, 9900, 10, 1, 1, 1, 1, 1, 1, 'remarks');
-INSERT INTO ums_member_level (id, level_name, growth_point, default_status, free_freight_point, comment_growth_point,
-                              is_free_freight, is_sign_in, is_comment, is_promotion, is_member_price, is_birthday,
-                              remark)
-VALUES (3, '钻石会员', 15000, 0, 6900, 15, 1, 1, 1, 1, 1, 1, 'remarks');
-INSERT INTO ums_member_level (id, level_name, growth_point, default_status, free_freight_point, comment_growth_point,
-                              is_free_freight, is_sign_in, is_comment, is_promotion, is_member_price, is_birthday,
-                              remark)
-VALUES (4, '普通会员', 1, 1, 19900, 20, 1, 1, 1, 1, 0, 0, 'remarks');
+#特权字段说明：
+# {
+#     "priority_service": 0,      // 优先客服：0-无，1-普通优先，2-高优先级，3-专属客服
+#     "birthday_gift": 0,         // 生日礼包：0-无，1-普通礼包，2-高级礼包，3-豪华礼包
+#     "exclusive_price": 0,       // 专属价格：0-无，1-有
+#     "vip_room": 0,             // VIP专区：0-无，1-有
+#     "free_return": 0,          // 免费退换：0-无，1-有
+#     "personal_butler": 0,       // 专属管家：0-无，1-有
+#     "early_access": 0,         // 新品优先购：0-无，1-提前1天，2-提前3天，3-提前7天
+#     "point_rate": 1.0          // 积分倍率：1.0-1倍，1.2-1.2倍，以此类推
+# }
+
+-- 添加会员等级
+INSERT INTO gozero.ums_member_level (id, name, level, growth_point, discount_rate, free_freight, comment_extra, privileges, remark, create_by)
+VALUES (1, '普通会员', 1, 0, 100.00, 0, 0, '{
+    "priority_service": 0,
+    "birthday_gift": 0,
+    "exclusive_price": 0,
+    "vip_room": 0,
+    "free_return": 0,
+    "personal_butler": 0,
+    "early_access": 0,
+    "point_rate": 1.0
+ }', '新注册会员默认等级', 1);
+INSERT INTO gozero.ums_member_level (id, name, level, growth_point, discount_rate, free_freight, comment_extra, privileges, remark, create_by)
+VALUES (2, '银卡会员', 2, 1000, 98.00, 0, 1, '{
+    "priority_service": 1,
+    "birthday_gift": 1,
+    "exclusive_price": 0,
+    "vip_room": 0,
+    "free_return": 0,
+    "personal_butler": 0,
+    "early_access": 1,
+    "point_rate": 1.2
+ }', '消费满1000成长值可升级', 1);
+INSERT INTO gozero.ums_member_level (id, name, level, growth_point, discount_rate, free_freight, comment_extra, privileges, remark, create_by)
+VALUES (3, '金卡会员', 3, 3000, 95.00, 1, 1, '{
+    "priority_service": 2,
+    "birthday_gift": 2,
+    "exclusive_price": 1,
+    "vip_room": 0,
+    "free_return": 1,
+    "personal_butler": 0,
+    "early_access": 2,
+    "point_rate": 1.5
+ }', '消费满3000成长值可升级', 1);
+INSERT INTO gozero.ums_member_level (id, name, level, growth_point, discount_rate, free_freight, comment_extra, privileges, remark, create_by)
+VALUES (4, '钻石会员', 4, 10000, 92.00, 1, 1, '{
+    "priority_service": 2,
+    "birthday_gift": 2,
+    "exclusive_price": 1,
+    "vip_room": 1,
+    "free_return": 1,
+    "personal_butler": 0,
+    "early_access": 2,
+    "point_rate": 2.0
+ }', '消费满10000成长值可升级', 1);
+INSERT INTO gozero.ums_member_level (id, name, level, growth_point, discount_rate, free_freight, comment_extra, privileges, remark, create_by)
+VALUES (5, '黑金会员', 5, 50000, 88.00, 1, 1, '{
+    "priority_service": 3,
+    "birthday_gift": 3,
+    "exclusive_price": 1,
+    "vip_room": 1,
+    "free_return": 1,
+    "personal_butler": 1,
+    "early_access": 3,
+    "point_rate": 3.0
+ }', '年消费达到50000可升级', 1);

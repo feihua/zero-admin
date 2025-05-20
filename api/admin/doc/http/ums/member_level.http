@@ -11,51 +11,49 @@ Content-Type: application/json
 %}
 
 ### 添加会员等级
-POST {{host}}/api/member/level/addMemberLevel
+POST {{host}}/api/ums/level/addMemberLevel
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {
-  "name": "test123",
-  "growthPoint": 1,
-  "defaultStatus": 1,
-  "freeFreightPoint": 19900,
-  "commentGrowthPoint": 20,
-  "isFreeFreight": 1,
-  "isSignIn": 1,
-  "isComment": 1,
-  "isPromotion": 1,
-  "isMemberPrice": 0,
-  "isBirthday": 0,
-  "note": "remarks"
+  "name": "普通会员ss",
+  "level": 8,
+  "growthPoint": 0,
+  "discountRate": 100,
+  "freeFreight": 0,
+  "commentExtra": 0,
+  "privileges": "{\r\n    \"priority_service\": 0,\r\n    \"birthday_gift\": 0,\r\n    \"exclusive_price\": 0,\r\n    \"vip_room\": 0,\r\n    \"free_return\": 0,\r\n    \"personal_butler\": 0,\r\n    \"early_access\": 0,\r\n    \"point_rate\": 1.0\r\n }",
+  "remark": "新注册会员默认等级",
+  "isEnabled": 0
 }
 
 ### 删除会员等级
-GET {{host}}/api/member/level/deleteMemberLevel?ids=[5]
+GET {{host}}/api/ums/level/deleteMemberLevel?ids=7
 Authorization: Bearer {{token}}
 
 
 ### 修改会员等级
-POST {{host}}/api/member/level/updateMemberLevel
+POST {{host}}/api/ums/level/updateMemberLevel
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {
-  "id": 5,
-  "name": "test123",
-  "growthPoint": 1,
-  "defaultStatus": 1,
-  "freeFreightPoint": 19900,
-  "commentGrowthPoint": 20,
-  "isFreeFreight": 1,
-  "isSignIn": 1,
-  "isComment": 1,
-  "isPromotion": 1,
-  "isMemberPrice": 0,
-  "isBirthday": 0,
-  "note": "remarks"
+  "id": 1,
+  "name": "普通会员",
+  "level": 1,
+  "growthPoint": 0,
+  "discountRate": 100,
+  "freeFreight": 0,
+  "commentExtra": 0,
+  "privileges": "{\r\n    \"priority_service\": 0,\r\n    \"birthday_gift\": 0,\r\n    \"exclusive_price\": 0,\r\n    \"vip_room\": 0,\r\n    \"free_return\": 0,\r\n    \"personal_butler\": 0,\r\n    \"early_access\": 0,\r\n    \"point_rate\": 1.0\r\n }",
+  "remark": "新注册会员默认等级",
+  "isEnabled": 0
 }
 
+### 根据id查询会员等级
+GET {{host}}/api/ums/level/queryMemberLevelDetail?id=1
+Authorization: Bearer {{token}}
+
 ### 查询会员等级列表
-GET {{host}}/api/member/level/queryMemberLevelList
+GET {{host}}/api/ums/level/queryMemberLevelList?name=普通
 Authorization: Bearer {{token}}

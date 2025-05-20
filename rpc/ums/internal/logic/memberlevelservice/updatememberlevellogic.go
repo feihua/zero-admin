@@ -3,9 +3,11 @@ package memberlevelservicelogic
 import (
 	"context"
 	"errors"
+	"fmt"
 	"github.com/feihua/zero-admin/rpc/ums/gen/model"
 	"github.com/feihua/zero-admin/rpc/ums/gen/query"
 	"github.com/zeromicro/go-zero/core/logc"
+	"time"
 
 	"github.com/feihua/zero-admin/rpc/ums/internal/svc"
 	"github.com/feihua/zero-admin/rpc/ums/umsclient"
@@ -34,24 +36,49 @@ func NewUpdateMemberLevelLogic(ctx context.Context, svcCtx *svc.ServiceContext) 
 
 // UpdateMemberLevel 更新会员等级
 func (l *UpdateMemberLevelLogic) UpdateMemberLevel(in *umsclient.UpdateMemberLevelReq) (*umsclient.UpdateMemberLevelResp, error) {
-	_, err := query.UmsMemberLevel.WithContext(l.ctx).Updates(&model.UmsMemberLevel{
-		ID:                 in.Id,
-		LevelName:          in.LevelName,          // 等级名称
-		GrowthPoint:        in.GrowthPoint,        // 成长点
-		DefaultStatus:      in.DefaultStatus,      // 是否为默认等级：0->不是；1->是
-		FreeFreightPoint:   in.FreeFreightPoint,   // 免运费标准
-		CommentGrowthPoint: in.CommentGrowthPoint, // 每次评价获取的成长值
-		IsFreeFreight:      in.IsFreeFreight,      // 是否有免邮特权
-		IsSignIn:           in.IsSignIn,           // 是否有签到特权
-		IsComment:          in.IsComment,          // 是否有评论获奖励特权
-		IsPromotion:        in.IsPromotion,        // 是否有专享活动特权
-		IsMemberPrice:      in.IsMemberPrice,      // 是否有会员价格特权
-		IsBirthday:         in.IsBirthday,         // 是否有生日特权
-		Remark:             in.Remark,             // 备注
-	})
+	q := query.UmsMemberLevel
+
+	// 1.根据会员等级id查询会员等级是否已存在
+	item, err := q.WithContext(l.ctx).Where(query.UmsMemberLevel.ID.Eq(in.Id)).First()
 
 	if err != nil {
-		logc.Errorf(l.ctx, "更新会员等级失败,参数:%+v,异常:%s", in, err.Error())
+		logc.Errorf(l.ctx, "根据会员等级id：%d,查询会员等级失败,异常:%s", in.Id, err.Error())
+		return nil, errors.New(fmt.Sprintf("查询会员等级失败"))
+	}
+
+	count, err := q.WithContext(l.ctx).Where(q.ID.Neq(in.Id), q.Name.Eq(in.Name)).Count()
+	if count > 0 {
+		return nil, errors.New(fmt.Sprintf("会员等级名称：%s,已存在", in.Name))
+	}
+	count, err = q.WithContext(l.ctx).Where(q.ID.Neq(in.Id), q.Level.Eq(in.Level)).Count()
+	if count > 0 {
+		return nil, errors.New(fmt.Sprintf("会员等级：%d,已存在", in.Level))
+	}
+
+	now := time.Now()
+	level := &model.UmsMemberLevel{
+		ID:           in.Id,                    // 主键ID
+		Name:         in.Name,                  // 等级名称
+		Level:        in.Level,                 // 等级
+		GrowthPoint:  in.GrowthPoint,           // 升级所需成长值
+		DiscountRate: float64(in.DiscountRate), // 折扣率(0-100)
+		FreeFreight:  in.FreeFreight,           // 是否免运费
+		CommentExtra: in.CommentExtra,          // 是否可评论获取奖励
+		Privileges:   in.Privileges,            // 会员特权JSON
+		Remark:       in.Remark,                // 备注
+		IsEnabled:    in.IsEnabled,             // 是否启用
+		CreateBy:     item.CreateBy,            // 创建者
+		CreateTime:   item.CreateTime,          // 创建时间
+		UpdateBy:     &in.UpdateBy,             // 更新者
+		UpdateTime:   &now,                     // 更新时间
+		IsDeleted:    item.IsDeleted,
+	}
+
+	// 2.会员等级存在时,则直接更新会员等级
+	err = l.svcCtx.DB.Model(&model.UmsMemberLevel{}).WithContext(l.ctx).Where(query.UmsMemberLevel.ID.Eq(in.Id)).Save(level).Error
+
+	if err != nil {
+		logc.Errorf(l.ctx, "更新会员等级失败,参数:%+v,异常:%s", item, err.Error())
 		return nil, errors.New("更新会员等级失败")
 	}
 

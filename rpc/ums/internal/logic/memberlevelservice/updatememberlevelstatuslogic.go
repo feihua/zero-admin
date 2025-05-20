@@ -2,6 +2,9 @@ package memberlevelservicelogic
 
 import (
 	"context"
+	"errors"
+	"github.com/feihua/zero-admin/rpc/ums/gen/query"
+	"github.com/zeromicro/go-zero/core/logc"
 
 	"github.com/feihua/zero-admin/rpc/ums/internal/svc"
 	"github.com/feihua/zero-admin/rpc/ums/umsclient"
@@ -9,6 +12,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+// UpdateMemberLevelStatusLogic 更新会员等级状态
+/*
+Author: LiuFeiHua
+Date: 2025/5/20 15:18
+*/
 type UpdateMemberLevelStatusLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
@@ -23,9 +31,16 @@ func NewUpdateMemberLevelStatusLogic(ctx context.Context, svcCtx *svc.ServiceCon
 	}
 }
 
-// 更新会员等级状态
+// UpdateMemberLevelStatus 更新会员等级状态
 func (l *UpdateMemberLevelStatusLogic) UpdateMemberLevelStatus(in *umsclient.UpdateMemberLevelStatusReq) (*umsclient.UpdateMemberLevelStatusResp, error) {
-	// todo: add your logic here and delete this line
+	q := query.UmsMemberLevel
+
+	_, err := q.WithContext(l.ctx).Where(q.ID.Eq(in.Id)).Update(q.IsEnabled, in.IsEnabled)
+
+	if err != nil {
+		logc.Errorf(l.ctx, "更新会员等级状态失败,参数:%+v,异常:%s", in, err.Error())
+		return nil, errors.New("更新会员等级状态失败")
+	}
 
 	return &umsclient.UpdateMemberLevelStatusResp{}, nil
 }

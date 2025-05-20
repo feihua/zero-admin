@@ -13,26 +13,10 @@ import (
 type ServiceContext struct {
 	Config config.Config
 	DB     *gorm.DB
-	//UmsGrowthChangeHistoryModel           umsmodel.UmsGrowthChangeHistoryModel
-	//UmsIntegrationChangeHistoryModel      umsmodel.UmsIntegrationChangeHistoryModel
-	//UmsIntegrationConsumeSettingModel     umsmodel.UmsIntegrationConsumeSettingModel
-	//UmsMemberModel                        umsmodel.UmsMemberModel
-	//UmsMemberLevelModel                   umsmodel.UmsMemberLevelModel
-	//UmsMemberLoginLogModel                umsmodel.UmsMemberLoginLogModel
-	//UmsMemberMemberTagRelationModel       umsmodel.UmsMemberMemberTagRelationModel
-	//UmsMemberProductCategoryRelationModel umsmodel.UmsMemberProductCategoryRelationModel
-	//UmsMemberReceiveAddressModel          umsmodel.UmsMemberReceiveAddressModel
-	//UmsMemberRuleSettingModel             umsmodel.UmsMemberRuleSettingModel
-	//UmsMemberStatisticsInfoModel          umsmodel.UmsMemberStatisticsInfoModel
-	//UmsMemberTaskModel                    umsmodel.UmsMemberTaskModel
-	//UmsMemberTagModel                     umsmodel.UmsMemberTagModel
-	//UmsMemberReadHistoryModel             umsmodel.UmsMemberReadHistoryModel
-	//UmsMemberProductCollectionModel       umsmodel.UmsMemberProductCollectionModel
-	//UmsMemberBrandAttentionModel          umsmodel.UmsMemberBrandAttentionModel
 }
 
 func NewServiceContext(c config.Config) *ServiceContext {
-	DB, err := gorm.Open(mysql.Open(c.Mysql.Datasource), &gorm.Config{
+	db, err := gorm.Open(mysql.Open(c.Mysql.Datasource), &gorm.Config{
 		SkipDefaultTransaction: true,
 		PrepareStmt:            true,
 		Logger:                 settingLogConfig(),
@@ -42,27 +26,10 @@ func NewServiceContext(c config.Config) *ServiceContext {
 	}
 
 	logx.Debug("mysql已连接")
-	query.SetDefault(DB)
-	//sqlConn := sqlx.NewMysql(c.Mysql.Datasource)
+	query.SetDefault(db)
 	return &ServiceContext{
 		Config: c,
-
-		//UmsGrowthChangeHistoryModel:           umsmodel.NewUmsGrowthChangeHistoryModel(sqlConn),
-		//UmsIntegrationChangeHistoryModel:      umsmodel.NewUmsIntegrationChangeHistoryModel(sqlConn),
-		//UmsIntegrationConsumeSettingModel:     umsmodel.NewUmsIntegrationConsumeSettingModel(sqlConn),
-		//UmsMemberModel:                        umsmodel.NewUmsMemberModel(sqlConn),
-		//UmsMemberLevelModel:                   umsmodel.NewUmsMemberLevelModel(sqlConn),
-		//UmsMemberLoginLogModel:                umsmodel.NewUmsMemberLoginLogModel(sqlConn),
-		//UmsMemberMemberTagRelationModel:       umsmodel.NewUmsMemberMemberTagRelationModel(sqlConn),
-		//UmsMemberProductCategoryRelationModel: umsmodel.NewUmsMemberProductCategoryRelationModel(sqlConn),
-		//UmsMemberReceiveAddressModel:          umsmodel.NewUmsMemberReceiveAddressModel(sqlConn),
-		//UmsMemberRuleSettingModel:             umsmodel.NewUmsMemberRuleSettingModel(sqlConn),
-		//UmsMemberStatisticsInfoModel:          umsmodel.NewUmsMemberStatisticsInfoModel(sqlConn),
-		//UmsMemberTaskModel:                    umsmodel.NewUmsMemberTaskModel(sqlConn),
-		//UmsMemberTagModel:                     umsmodel.NewUmsMemberTagModel(sqlConn),
-		//UmsMemberReadHistoryModel:             umsmodel.NewUmsMemberReadHistoryModel(sqlConn),
-		//UmsMemberProductCollectionModel:       umsmodel.NewUmsMemberProductCollectionModel(sqlConn),
-		//UmsMemberBrandAttentionModel:          umsmodel.NewUmsMemberBrandAttentionModel(sqlConn),
+		DB:     db,
 	}
 }
 

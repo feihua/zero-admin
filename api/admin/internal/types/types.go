@@ -118,18 +118,15 @@ type AddIntegrationConsumeSettingReq struct {
 }
 
 type AddMemberLevelReq struct {
-	LevelName          string `json:"levelName"`          //等级名称
-	GrowthPoint        int32  `json:"growthPoint"`        //成长点
-	DefaultStatus      int32  `json:"defaultStatus"`      //是否为默认等级：0->不是；1->是
-	FreeFreightPoint   int64  `json:"freeFreightPoint"`   //免运费标准
-	CommentGrowthPoint int32  `json:"commentGrowthPoint"` //每次评价获取的成长值
-	IsFreeFreight      int32  `json:"isFreeFreight"`      //是否有免邮特权
-	IsSignIn           int32  `json:"isSignIn"`           //是否有签到特权
-	IsComment          int32  `json:"isComment"`          //是否有评论获奖励特权
-	IsPromotion        int32  `json:"isPromotion"`        //是否有专享活动特权
-	IsMemberPrice      int32  `json:"isMemberPrice"`      //是否有会员价格特权
-	IsBirthday         int32  `json:"isBirthday"`         //是否有生日特权
-	Remark             string `json:"remark,optional"`    //备注
+	Name         string  `json:"name"`            //等级名称
+	Level        int32   `json:"level"`           //等级
+	GrowthPoint  int32   `json:"growthPoint"`     //升级所需成长值
+	DiscountRate float32 `json:"discountRate"`    //折扣率(0-100)
+	FreeFreight  int32   `json:"freeFreight"`     //是否免运费
+	CommentExtra int32   `json:"commentExtra"`    //是否可评论获取奖励
+	Privileges   string  `json:"privileges"`      //会员特权JSON
+	Remark       string  `json:"remark,optional"` //备注
+	IsEnabled    int32   `json:"isEnabled"`       //是否启用
 }
 
 type AddMemberPriceList struct {
@@ -1978,19 +1975,21 @@ type QueryLoginLogListResp struct {
 }
 
 type QueryMemberLevelDetailData struct {
-	Id                 int64  `json:"id"`                 //
-	LevelName          string `json:"levelName"`          //等级名称
-	GrowthPoint        int32  `json:"growthPoint"`        //成长点
-	DefaultStatus      int32  `json:"defaultStatus"`      //是否为默认等级：0->不是；1->是
-	FreeFreightPoint   int64  `json:"freeFreightPoint"`   //免运费标准
-	CommentGrowthPoint int32  `json:"commentGrowthPoint"` //每次评价获取的成长值
-	IsFreeFreight      int32  `json:"isFreeFreight"`      //是否有免邮特权
-	IsSignIn           int32  `json:"isSignIn"`           //是否有签到特权
-	IsComment          int32  `json:"isComment"`          //是否有评论获奖励特权
-	IsPromotion        int32  `json:"isPromotion"`        //是否有专享活动特权
-	IsMemberPrice      int32  `json:"isMemberPrice"`      //是否有会员价格特权
-	IsBirthday         int32  `json:"isBirthday"`         //是否有生日特权
-	Remark             string `json:"remark"`             //备注
+	Id           int64   `json:"id"`           //主键ID
+	Name         string  `json:"name"`         //等级名称
+	Level        int32   `json:"level"`        //等级
+	GrowthPoint  int32   `json:"growthPoint"`  //升级所需成长值
+	DiscountRate float32 `json:"discountRate"` //折扣率(0-100)
+	FreeFreight  int32   `json:"freeFreight"`  //是否免运费
+	CommentExtra int32   `json:"commentExtra"` //是否可评论获取奖励
+	Privileges   string  `json:"privileges"`   //会员特权JSON
+	Remark       string  `json:"remark"`       //备注
+	IsEnabled    int32   `json:"isEnabled"`    //是否启用
+	CreateBy     int64   `json:"createBy"`     //创建人ID
+	CreateTime   string  `json:"createTime"`   //创建时间
+	UpdateBy     int64   `json:"updateBy"`     //更新人ID
+	UpdateTime   string  `json:"updateTime"`   //更新时间
+	IsDeleted    int32   `json:"isDeleted"`    //是否删除
 }
 
 type QueryMemberLevelDetailReq struct {
@@ -2004,25 +2003,27 @@ type QueryMemberLevelDetailResp struct {
 }
 
 type QueryMemberLevelListData struct {
-	Id                 int64  `json:"id"`                 //
-	LevelName          string `json:"levelName"`          //等级名称
-	GrowthPoint        int32  `json:"growthPoint"`        //成长点
-	DefaultStatus      int32  `json:"defaultStatus"`      //是否为默认等级：0->不是；1->是
-	FreeFreightPoint   int64  `json:"freeFreightPoint"`   //免运费标准
-	CommentGrowthPoint int32  `json:"commentGrowthPoint"` //每次评价获取的成长值
-	IsFreeFreight      int32  `json:"isFreeFreight"`      //是否有免邮特权
-	IsSignIn           int32  `json:"isSignIn"`           //是否有签到特权
-	IsComment          int32  `json:"isComment"`          //是否有评论获奖励特权
-	IsPromotion        int32  `json:"isPromotion"`        //是否有专享活动特权
-	IsMemberPrice      int32  `json:"isMemberPrice"`      //是否有会员价格特权
-	IsBirthday         int32  `json:"isBirthday"`         //是否有生日特权
-	Remark             string `json:"remark"`             //备注
+	Id           int64   `json:"id"`           //主键ID
+	Name         string  `json:"name"`         //等级名称
+	Level        int32   `json:"level"`        //等级
+	GrowthPoint  int32   `json:"growthPoint"`  //升级所需成长值
+	DiscountRate float32 `json:"discountRate"` //折扣率(0-100)
+	FreeFreight  int32   `json:"freeFreight"`  //是否免运费
+	CommentExtra int32   `json:"commentExtra"` //是否可评论获取奖励
+	Privileges   string  `json:"privileges"`   //会员特权JSON
+	Remark       string  `json:"remark"`       //备注
+	IsEnabled    int32   `json:"isEnabled"`    //是否启用
+	CreateBy     int64   `json:"createBy"`     //创建人ID
+	CreateTime   string  `json:"createTime"`   //创建时间
+	UpdateBy     int64   `json:"updateBy"`     //更新人ID
+	UpdateTime   string  `json:"updateTime"`   //更新时间
+	IsDeleted    int32   `json:"isDeleted"`    //是否删除
 }
 
 type QueryMemberLevelListReq struct {
-	Current   int64  `form:"current,default=1"`   //第几页
-	PageSize  int64  `form:"pageSize,default=20"` //每页的数量
-	LevelName string `form:"levelName,optional"`  //等级名称
+	Current  int64  `form:"current,default=1"`   //第几页
+	PageSize int64  `form:"pageSize,default=20"` //每页的数量
+	Name     string `form:"name,optional"`       //等级名称
 }
 
 type QueryMemberLevelListResp struct {
@@ -3296,24 +3297,21 @@ type UpdateIntegrationConsumeSettingStatusReq struct {
 }
 
 type UpdateMemberLevelReq struct {
-	Id                 int64  `json:"id"`                 //
-	LevelName          string `json:"levelName"`          //等级名称
-	GrowthPoint        int32  `json:"growthPoint"`        //成长点
-	DefaultStatus      int32  `json:"defaultStatus"`      //是否为默认等级：0->不是；1->是
-	FreeFreightPoint   int64  `json:"freeFreightPoint"`   //免运费标准
-	CommentGrowthPoint int32  `json:"commentGrowthPoint"` //每次评价获取的成长值
-	IsFreeFreight      int32  `json:"isFreeFreight"`      //是否有免邮特权
-	IsSignIn           int32  `json:"isSignIn"`           //是否有签到特权
-	IsComment          int32  `json:"isComment"`          //是否有评论获奖励特权
-	IsPromotion        int32  `json:"isPromotion"`        //是否有专享活动特权
-	IsMemberPrice      int32  `json:"isMemberPrice"`      //是否有会员价格特权
-	IsBirthday         int32  `json:"isBirthday"`         //是否有生日特权
-	Remark             string `json:"remark,optional"`    //备注
+	Id           int64   `json:"id"`              //主键ID
+	Name         string  `json:"name"`            //等级名称
+	Level        int32   `json:"level"`           //等级
+	GrowthPoint  int32   `json:"growthPoint"`     //升级所需成长值
+	DiscountRate float32 `json:"discountRate"`    //折扣率(0-100)
+	FreeFreight  int32   `json:"freeFreight"`     //是否免运费
+	CommentExtra int32   `json:"commentExtra"`    //是否可评论获取奖励
+	Privileges   string  `json:"privileges"`      //会员特权JSON
+	Remark       string  `json:"remark,optional"` //备注
+	IsEnabled    int32   `json:"isEnabled"`       //是否启用
 }
 
 type UpdateMemberLevelStatusReq struct {
-	Id            int64 `json:"id"`            //
-	DefaultStatus int32 `json:"defaultStatus"` //是否为默认等级：0->不是；1->是
+	Id        int64 `json:"id"`        //主键ID
+	IsEnabled int32 `json:"isEnabled"` //是否启用
 }
 
 type UpdateMemberPriceList struct {

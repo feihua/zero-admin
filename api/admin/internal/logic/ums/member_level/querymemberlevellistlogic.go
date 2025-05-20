@@ -5,6 +5,7 @@ import (
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
 	"github.com/feihua/zero-admin/rpc/ums/umsclient"
 	"github.com/zeromicro/go-zero/core/logc"
+	"google.golang.org/grpc/status"
 	"strings"
 
 	"github.com/feihua/zero-admin/api/admin/internal/svc"
@@ -35,33 +36,36 @@ func NewQueryMemberLevelListLogic(ctx context.Context, svcCtx *svc.ServiceContex
 // QueryMemberLevelList 查询会员等级列表
 func (l *QueryMemberLevelListLogic) QueryMemberLevelList(req *types.QueryMemberLevelListReq) (resp *types.QueryMemberLevelListResp, err error) {
 	result, err := l.svcCtx.MemberLevelService.QueryMemberLevelList(l.ctx, &umsclient.QueryMemberLevelListReq{
-		PageNum:   req.Current,
-		PageSize:  req.PageSize,
-		LevelName: strings.TrimSpace(req.LevelName),
+		PageNum:  req.Current,
+		PageSize: req.PageSize,
+		Name:     strings.TrimSpace(req.Name),
 	})
 
 	if err != nil {
 		logc.Errorf(l.ctx, "参数: %+v,查询会员等级列表异常:%s", req, err.Error())
-		return nil, errorx.NewDefaultError("查询会员等级失败")
+		s, _ := status.FromError(err)
+		return nil, errorx.NewDefaultError(s.Message())
 	}
 
 	var list []*types.QueryMemberLevelListData
 
-	for _, item := range result.List {
+	for _, detail := range result.List {
 		list = append(list, &types.QueryMemberLevelListData{
-			Id:                 item.Id,                 //
-			LevelName:          item.LevelName,          // 等级名称
-			GrowthPoint:        item.GrowthPoint,        // 成长点
-			DefaultStatus:      item.DefaultStatus,      // 是否为默认等级：0->不是；1->是
-			FreeFreightPoint:   item.FreeFreightPoint,   // 免运费标准
-			CommentGrowthPoint: item.CommentGrowthPoint, // 每次评价获取的成长值
-			IsFreeFreight:      item.IsFreeFreight,      // 是否有免邮特权
-			IsSignIn:           item.IsSignIn,           // 是否有签到特权
-			IsComment:          item.IsComment,          // 是否有评论获奖励特权
-			IsPromotion:        item.IsPromotion,        // 是否有专享活动特权
-			IsMemberPrice:      item.IsMemberPrice,      // 是否有会员价格特权
-			IsBirthday:         item.IsBirthday,         // 是否有生日特权
-			Remark:             item.Remark,             // 备注
+			Id:           detail.Id,           // 主键ID
+			Name:         detail.Name,         // 等级名称
+			Level:        detail.Level,        // 等级
+			GrowthPoint:  detail.GrowthPoint,  // 升级所需成长值
+			DiscountRate: detail.DiscountRate, // 折扣率(0-100)
+			FreeFreight:  detail.FreeFreight,  // 是否免运费
+			CommentExtra: detail.CommentExtra, // 是否可评论获取奖励
+			Privileges:   detail.Privileges,   // 会员特权JSON
+			Remark:       detail.Remark,       // 备注
+			IsEnabled:    detail.IsEnabled,    // 是否启用
+			CreateBy:     detail.CreateBy,     // 创建人ID
+			CreateTime:   detail.CreateTime,   // 创建时间
+			UpdateBy:     detail.UpdateBy,     // 更新人ID
+			UpdateTime:   detail.UpdateTime,   // 更新时间
+			IsDeleted:    detail.IsDeleted,    // 是否删除
 		})
 	}
 

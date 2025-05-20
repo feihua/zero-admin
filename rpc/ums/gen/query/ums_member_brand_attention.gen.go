@@ -6,6 +6,7 @@ package query
 
 import (
 	"context"
+	"database/sql"
 
 	"gorm.io/gorm"
 	"gorm.io/gorm/clause"
@@ -188,6 +189,8 @@ type IUmsMemberBrandAttentionDo interface {
 	FirstOrCreate() (*model.UmsMemberBrandAttention, error)
 	FindByPage(offset int, limit int) (result []*model.UmsMemberBrandAttention, count int64, err error)
 	ScanByPage(result interface{}, offset int, limit int) (count int64, err error)
+	Rows() (*sql.Rows, error)
+	Row() *sql.Row
 	Scan(result interface{}) (err error)
 	Returning(value interface{}, columns ...string) IUmsMemberBrandAttentionDo
 	UnderlyingDB() *gorm.DB

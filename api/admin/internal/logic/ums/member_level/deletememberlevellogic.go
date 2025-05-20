@@ -6,6 +6,7 @@ import (
 	"github.com/feihua/zero-admin/api/admin/internal/common/res"
 	"github.com/feihua/zero-admin/rpc/ums/umsclient"
 	"github.com/zeromicro/go-zero/core/logc"
+	"google.golang.org/grpc/status"
 
 	"github.com/feihua/zero-admin/api/admin/internal/svc"
 	"github.com/feihua/zero-admin/api/admin/internal/types"
@@ -40,7 +41,8 @@ func (l *DeleteMemberLevelLogic) DeleteMemberLevel(req *types.DeleteMemberLevelR
 
 	if err != nil {
 		logc.Errorf(l.ctx, "根据Id: %+v,删除会员等级异常:%s", req, err.Error())
-		return nil, errorx.NewDefaultError("删除会员等级失败")
+		s, _ := status.FromError(err)
+		return nil, errorx.NewDefaultError(s.Message())
 	}
 	return res.Success()
 }

@@ -76,7 +76,7 @@ func (l *QueryMemberDetailLogic) QueryMemberDetail(in *umsclient.QueryMemberDeta
 		Growth:                member.Growth,
 		LotteryCount:          member.LotteryCount,
 		HistoryIntegration:    member.HistoryIntegration,
-		MemberLevel:           memberLevel.LevelName,
+		MemberLevel:           memberLevel.Name,
 	}
 
 	return resp, nil

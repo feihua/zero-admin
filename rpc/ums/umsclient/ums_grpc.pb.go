@@ -1314,17 +1314,17 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type MemberLevelServiceClient interface {
-	// 添加会员等级表
+	// 添加会员等级
 	AddMemberLevel(ctx context.Context, in *AddMemberLevelReq, opts ...grpc.CallOption) (*AddMemberLevelResp, error)
-	// 删除会员等级表
+	// 删除会员等级
 	DeleteMemberLevel(ctx context.Context, in *DeleteMemberLevelReq, opts ...grpc.CallOption) (*DeleteMemberLevelResp, error)
-	// 更新会员等级表
+	// 更新会员等级
 	UpdateMemberLevel(ctx context.Context, in *UpdateMemberLevelReq, opts ...grpc.CallOption) (*UpdateMemberLevelResp, error)
-	// 更新会员等级表状态
+	// 更新会员等级状态
 	UpdateMemberLevelStatus(ctx context.Context, in *UpdateMemberLevelStatusReq, opts ...grpc.CallOption) (*UpdateMemberLevelStatusResp, error)
-	// 查询会员等级表详情
+	// 查询会员等级详情
 	QueryMemberLevelDetail(ctx context.Context, in *QueryMemberLevelDetailReq, opts ...grpc.CallOption) (*QueryMemberLevelDetailResp, error)
-	// 查询会员等级表列表
+	// 查询会员等级列表
 	QueryMemberLevelList(ctx context.Context, in *QueryMemberLevelListReq, opts ...grpc.CallOption) (*QueryMemberLevelListResp, error)
 }
 
@@ -1394,17 +1394,17 @@ func (c *memberLevelServiceClient) QueryMemberLevelList(ctx context.Context, in 
 // All implementations must embed UnimplementedMemberLevelServiceServer
 // for forward compatibility
 type MemberLevelServiceServer interface {
-	// 添加会员等级表
+	// 添加会员等级
 	AddMemberLevel(context.Context, *AddMemberLevelReq) (*AddMemberLevelResp, error)
-	// 删除会员等级表
+	// 删除会员等级
 	DeleteMemberLevel(context.Context, *DeleteMemberLevelReq) (*DeleteMemberLevelResp, error)
-	// 更新会员等级表
+	// 更新会员等级
 	UpdateMemberLevel(context.Context, *UpdateMemberLevelReq) (*UpdateMemberLevelResp, error)
-	// 更新会员等级表状态
+	// 更新会员等级状态
 	UpdateMemberLevelStatus(context.Context, *UpdateMemberLevelStatusReq) (*UpdateMemberLevelStatusResp, error)
-	// 查询会员等级表详情
+	// 查询会员等级详情
 	QueryMemberLevelDetail(context.Context, *QueryMemberLevelDetailReq) (*QueryMemberLevelDetailResp, error)
-	// 查询会员等级表列表
+	// 查询会员等级列表
 	QueryMemberLevelList(context.Context, *QueryMemberLevelListReq) (*QueryMemberLevelListResp, error)
 	mustEmbedUnimplementedMemberLevelServiceServer()
 }
