@@ -4,6 +4,7 @@ import "home.api"
 import "brand.api"
 import "cart.api"
 import "product.api"
+import "address.api"
 
 info (
 	title:  "zero-web"

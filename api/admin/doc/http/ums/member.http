@@ -11,38 +11,43 @@ Content-Type: application/json
 %}
 
 ### 删除会员信息
-GET {{host}}/api/member/deleteMember?ids=[5]
+GET {{host}}/api/ums/member/deleteMember?ids=1
 Authorization: Bearer {{token}}
 
 
 ### 修改会员信息
-POST {{host}}/api/member/updateMember
+POST {{host}}/api/ums/member/updateMember
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {
-  "id": 2,
-  "memberLevelId": 1,
-  "username": "koobe1",
-  "nickname": "koobe1",
-  "phone": "18613030351",
-  "status": 0,
-  "createTime": "2024-05-11 10:45:37",
-  "icon": "",
-  "gender": 0,
-  "birthday": "2022-06-22 00:00:00",
-  "city": "",
-  "job": "",
-  "personalizedSignature": "",
-  "sourceType": 0,
-  "integration": 0,
-  "growth": 0,
-  "luckeyCount": 0,
-  "historyIntegration": 11
+  "id": 1,
+  "nickname": "张三",
+  "mobile": "13800138001",
+  "source": 0,
+  "avatar": "https://example.com/avatar/001.jpg",
+  "signature": "生活就是购物~",
+  "gender": 1,
+  "birthday": "1990-01-15",
+  "isEnabled": 1
 }
 
+### 修改会员状态
+POST {{host}}/api/ums/member/updateMemberStatus
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "ids": [1],
+  "isEnabled": 1
+}
+
+### 根据会员id查询会员详情
+GET {{host}}/api/ums/member/queryMemberDetail?memberId=1001
+Authorization: Bearer {{token}}
+
 ### 查询会员信息列表
-GET {{host}}/api/member/queryMemberList
+GET {{host}}/api/ums/member/queryMemberList
 Authorization: Bearer {{token}}
 
 ### 查询会员的登录日志

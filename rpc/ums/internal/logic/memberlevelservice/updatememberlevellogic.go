@@ -7,6 +7,7 @@ import (
 	"github.com/feihua/zero-admin/rpc/ums/gen/model"
 	"github.com/feihua/zero-admin/rpc/ums/gen/query"
 	"github.com/zeromicro/go-zero/core/logc"
+	"gorm.io/gorm"
 	"time"
 
 	"github.com/feihua/zero-admin/rpc/ums/internal/svc"
@@ -41,9 +42,13 @@ func (l *UpdateMemberLevelLogic) UpdateMemberLevel(in *umsclient.UpdateMemberLev
 	// 1.根据会员等级id查询会员等级是否已存在
 	item, err := q.WithContext(l.ctx).Where(query.UmsMemberLevel.ID.Eq(in.Id)).First()
 
-	if err != nil {
-		logc.Errorf(l.ctx, "根据会员等级id：%d,查询会员等级失败,异常:%s", in.Id, err.Error())
-		return nil, errors.New(fmt.Sprintf("查询会员等级失败"))
+	switch {
+	case errors.Is(err, gorm.ErrRecordNotFound):
+		logc.Errorf(l.ctx, "会员等级不存在, 请求参数：%+v, 异常信息: %s", in, err.Error())
+		return nil, errors.New("会员等级不存在")
+	case err != nil:
+		logc.Errorf(l.ctx, "查询会员等级异常, 请求参数：%+v, 异常信息: %s", in, err.Error())
+		return nil, errors.New("查询会员等级异常")
 	}
 
 	count, err := q.WithContext(l.ctx).Where(q.ID.Neq(in.Id), q.Name.Eq(in.Name)).Count()

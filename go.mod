@@ -7,6 +7,7 @@ toolchain go1.23.8
 require (
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
 	github.com/jinzhu/copier v0.4.0
+	github.com/pkg/errors v0.9.1
 	github.com/smartwalle/alipay/v3 v3.2.25
 	github.com/ua-parser/uap-go v0.0.0-20250326155420-f7f5a2f9f5bc
 	github.com/zeromicro/go-zero v1.8.2

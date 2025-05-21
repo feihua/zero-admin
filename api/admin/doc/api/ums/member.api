@@ -7,65 +7,102 @@ info (
 )
 
 type (
-	ListMemberReq {
-		Current  int64  `form:"current,default=1"`
-		PageSize int64  `form:"pageSize,default=20"`
-		Username string `form:"username,optional"` // 用户名
-		Phone    string `form:"phone,optional"` // 手机号码
-		Status   int32  `form:"status,default=2"` // 帐号启用状态:0->禁用；1->启用
-	}
-	ListMemberData {
-		Id                    int64  `json:"id"` //
-		MemberLevelId         int64  `json:"memberLevelId"` //会员等级id
-		MemberName            string `json:"memberName"` //用户名
-		Nickname              string `json:"nickname"` //昵称
-		Phone                 string `json:"phone"` //手机号码
-		MemberStatus          int32  `json:"memberStatus"` //帐号启用状态:0->禁用；1->启用
-		Icon                  string `json:"icon"` //头像
-		Gender                int32  `json:"gender"` //性别：0->未知；1->男；2->女
-		Birthday              string `json:"birthday"` //生日
-		City                  string `json:"city"` //所做城市
-		Job                   string `json:"job"` //职业
-		PersonalizedSignature string `json:"personalizedSignature"` //个性签名
-		SourceType            int32  `json:"sourceType"` //用户来源
-		Integration           int32  `json:"integration"` //积分
-		Growth                int32  `json:"growth"` //成长值
-		LotteryCount          int32  `json:"lotteryCount"` //剩余抽奖次数
-		HistoryIntegration    int32  `json:"historyIntegration"` //历史积分数量
-		CreateTime            string `json:"createTime"` //创建时间
-		UpdateTime            string `json:"updateTime"` //更新时间
-	}
-	ListMemberResp {
-		Code     string            `json:"code"`
-		Message  string            `json:"message"`
-		Current  int64             `json:"current,default=1"`
-		Data     []*ListMemberData `json:"data"`
-		PageSize int64             `json:"pageSize,default=20"`
-		Success  bool              `json:"success"`
-		Total    int64             `json:"total"`
-	}
-	UpdateMemberReq {
-		Id                    int64  `json:"id"` //
-		MemberLevelId         int64  `json:"memberLevelId"` //会员等级id
-		MemberName            string `json:"memberName"` //用户名
-		Password              string `json:"password"` //密码
-		Nickname              string `json:"nickname"` //昵称
-		Phone                 string `json:"phone"` //手机号码
-		MemberStatus          int32  `json:"memberStatus"` //帐号启用状态:0->禁用；1->启用
-		Icon                  string `json:"icon"` //头像
-		Gender                int32  `json:"gender"` //性别：0->未知；1->男；2->女
-		Birthday              string `json:"birthday"` //生日
-		City                  string `json:"city"` //所做城市
-		Job                   string `json:"job"` //职业
-		PersonalizedSignature string `json:"personalizedSignature"` //个性签名
-		SourceType            int32  `json:"sourceType"` //用户来源
-		Integration           int32  `json:"integration"` //积分
-		Growth                int32  `json:"growth"` //成长值
-		LotteryCount          int32  `json:"lotteryCount"` //剩余抽奖次数
-		HistoryIntegration    int32  `json:"historyIntegration"` //历史积分数量
-	}
-	DeleteMemberReq {
+	// 删除会员信息请求参数
+	DeleteMemberInfoReq {
 		Ids []int64 `form:"ids"`
+	}
+	// 更新会员信息请求参数
+	UpdateMemberInfoReq {
+		Id        int64  `json:"id"` //主键ID
+		Nickname  string `json:"nickname"` //昵称
+		Mobile    string `json:"mobile"` //手机号码
+		Avatar    string `json:"avatar"` //头像
+		Signature string `json:"signature"` //个性签名
+		Gender    int32  `json:"gender"` //性别：1-男，2-女
+		Birthday  string `json:"birthday,optional"` //生日
+	}
+	// 更新会员信息状态请求参数
+	UpdateMemberInfoStatusReq {
+		Ids       []int64 `json:"ids"` //主键ID
+		IsEnabled int32   `json:"isEnabled"` //是否启用：0-禁用，1-启用
+	}
+	// 查询会员信息详情请求参数
+	QueryMemberInfoDetailReq {
+		MemberId int64 `form:"memberId"`
+	}
+	QueryMemberInfoDetailData {
+		Id           int64   `json:"id"` //主键ID
+		MemberId     int64   `json:"memberId"` //会员ID
+		LevelId      int64   `json:"levelId"` //等级ID
+		Nickname     string  `json:"nickname"` //昵称
+		Mobile       string  `json:"mobile"` //手机号码
+		Source       int32   `json:"source"` //注册来源：0-PC，1-APP，2-小程序
+		Avatar       string  `json:"avatar"` //头像
+		Signature    string  `json:"signature"` //个性签名
+		Gender       int32   `json:"gender"` //性别：0-未知，1-男，2-女
+		Birthday     string  `json:"birthday"` //生日
+		GrowthPoint  int32   `json:"growthPoint"` //成长值
+		Points       int32   `json:"points"` //积分
+		TotalPoints  int32   `json:"totalPoints"` //累计获得积分
+		SpendAmount  float64 `json:"spendAmount"` //累计消费金额
+		OrderCount   int32   `json:"orderCount"` //订单数
+		CouponCount  int32   `json:"couponCount"` //优惠券数量
+		CommentCount int32   `json:"commentCount"` //评价数
+		ReturnCount  int32   `json:"returnCount"` //退货数
+		LotteryTimes int32   `json:"lotteryTimes"` //剩余抽奖次数
+		LastLogin    string  `json:"lastLogin"` //最后登录
+		IsEnabled    int32   `json:"isEnabled"` //是否启用：0-禁用，1-启用
+		CreateTime   string  `json:"createTime"` //创建时间
+		UpdateTime   string  `json:"updateTime"` //更新时间
+	}
+	QueryMemberInfoDetailResp {
+		Code    string                    `json:"code"`
+		Message string                    `json:"message"`
+		Data    QueryMemberInfoDetailData `json:"data"`
+	}
+	// 分页查询会员信息列表请求参数
+	QueryMemberInfoListReq {
+		Current   int32  `form:"current,default=1"` //第几页
+		PageSize  int32  `form:"pageSize,default=20"` //每页的数量
+		MemberId  int64  `form:"memberId,default=0"` //会员ID
+		Nickname  string `form:"nickname,optional"` //昵称
+		Mobile    string `form:"mobile,optional"` //手机号码
+		Source    int32  `form:"source,default=3"` //注册来源：0-PC，1-APP，2-小程序
+		IsEnabled int32  `form:"isEnabled,default=2"` //是否启用：0-禁用，1-启用
+	}
+	QueryMemberInfoListData {
+		Id           int64   `json:"id"` //主键ID
+		MemberId     int64   `json:"memberId"` //会员ID
+		LevelId      int64   `json:"levelId"` //等级ID
+		Nickname     string  `json:"nickname"` //昵称
+		Mobile       string  `json:"mobile"` //手机号码
+		Source       int32   `json:"source"` //注册来源：0-PC，1-APP，2-小程序
+		Avatar       string  `json:"avatar"` //头像
+		Signature    string  `json:"signature"` //个性签名
+		Gender       int32   `json:"gender"` //性别：0-未知，1-男，2-女
+		Birthday     string  `json:"birthday"` //生日
+		GrowthPoint  int32   `json:"growthPoint"` //成长值
+		Points       int32   `json:"points"` //积分
+		TotalPoints  int32   `json:"totalPoints"` //累计获得积分
+		SpendAmount  float64 `json:"spendAmount"` //累计消费金额
+		OrderCount   int32   `json:"orderCount"` //订单数
+		CouponCount  int32   `json:"couponCount"` //优惠券数量
+		CommentCount int32   `json:"commentCount"` //评价数
+		ReturnCount  int32   `json:"returnCount"` //退货数
+		LotteryTimes int32   `json:"lotteryTimes"` //剩余抽奖次数
+		LastLogin    string  `json:"lastLogin"` //最后登录
+		IsEnabled    int32   `json:"isEnabled"` //是否启用：0-禁用，1-启用
+		CreateTime   string  `json:"createTime"` //创建时间
+		UpdateTime   string  `json:"updateTime"` //更新时间
+	}
+	QueryMemberInfoListResp {
+		Code     string                     `json:"code"`
+		Message  string                     `json:"message"`
+		Current  int32                      `json:"current,default=1"`
+		Data     []*QueryMemberInfoListData `json:"data"`
+		PageSize int32                      `json:"pageSize,default=20"`
+		Success  bool                       `json:"success"`
+		Total    int64                      `json:"total"`
 	}
 	ListMemberLoginLogReq {
 		Current  int64 `form:"current,default=1"`
@@ -123,17 +160,25 @@ type (
 	prefix:     /api/ums/member
 )
 service admin-api {
-	//分页查询会员信息
-	@handler QueryMemberList
-	get /queryMemberList (ListMemberReq) returns (ListMemberResp)
+	// 删除会员信息
+	@handler DeleteMemberInfo
+	get /deleteMember (DeleteMemberInfoReq) returns (BaseResp)
 
-	//更新查询会员信息
-	@handler UpdateMember
-	post /updateMember (UpdateMemberReq) returns (BaseResp)
+	// 更新会员信息
+	@handler UpdateMemberInfo
+	post /updateMember (UpdateMemberInfoReq) returns (BaseResp)
 
-	//删除查询会员信息
-	@handler DeleteMember
-	get /deleteMember (DeleteMemberReq) returns (BaseResp)
+	// 更新会员信息状态
+	@handler UpdateMemberInfoStatus
+	post /updateMemberStatus (UpdateMemberInfoStatusReq) returns (BaseResp)
+
+	// 查询会员信息详情
+	@handler QueryMemberInfoDetail
+	get /queryMemberDetail (QueryMemberInfoDetailReq) returns (QueryMemberInfoDetailResp)
+
+	// 分页查询会员信息列表
+	@handler QueryMemberInfoList
+	get /queryMemberList (QueryMemberInfoListReq) returns (QueryMemberInfoListResp)
 
 	//查询会员的登录日志
 	@handler QueryMemberLoginLogList

@@ -14,18 +14,19 @@ Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {
-  "name": "koobe",
-  "phoneNumber": "13144410222",
-  "defaultStatus": 0,
-  "postCode": "228000",
+  "receiverName": "张三111111111111",
+  "receiverPhone": "13800138001",
   "province": "广东省",
-  "city": "广州市",
-  "region": "天河区",
-  "detailAddress": "测试详细地址2"
+  "city": "深圳市",
+  "district": "南山区",
+  "detailAddress": "科技园科兴科学园B座",
+  "postalCode": "518057",
+  "tag": "公司",
+  "isDefault": 1
 }
 
 ### 删除会员个人的收货地址
-GET {{host}}/api/member/address/deleteMemberAddress?ids=5
+GET {{host}}/api/member/address/deleteMemberAddress?ids=16
 Authorization: Bearer {{token}}
 
 ### 修改会员个人的收货地址
@@ -34,17 +35,31 @@ Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {
-  "id": 4,
-  "memberId": 2,
-  "name": "koobe",
-  "phoneNumber": "13144410222",
-  "defaultStatus": 0,
-  "postCode": "647000",
+  "id": 13,
+  "receiverName": "张三1123213",
+  "receiverPhone": "13800138001",
   "province": "广东省",
-  "city": "广州市",
-  "region": "天河区",
-  "detailAddress": "测试详细地址2"
+  "city": "深圳市",
+  "district": "南山区",
+  "detailAddress": "科技园科兴科学园B座",
+  "postalCode": "518057",
+  "tag": "公司",
+  "isDefault": 1
 }
+
+### 修改会员个人的收货地址状态
+POST {{host}}/api/member/address/updateMemberAddressStatus
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "id": 1,
+  "isDefault": 1
+}
+
+### 根据会员id获取会员个人的收货地址详细信息
+GET {{host}}/api/member/address/queryMemberAddressDetail?id=15
+Authorization: Bearer {{token}}
 
 ### 获取会员个人的收货地址
 GET {{host}}/api/member/address/queryMemberAddressList

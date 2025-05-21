@@ -38,7 +38,7 @@ func (l *AddReadHistoryLogic) AddReadHistory(req *types.AddReadHistoryReq) (resp
 	if err != nil {
 		return nil, err
 	}
-	member, err := l.svcCtx.MemberService.QueryMemberDetail(l.ctx, &umsclient.QueryMemberDetailReq{Id: memberId})
+	member, err := l.svcCtx.MemberService.QueryMemberInfoDetail(l.ctx, &umsclient.QueryMemberInfoDetailReq{MemberId: memberId})
 
 	if err != nil {
 		logc.Errorf(l.ctx, "查询会员信息失败,参数memberId: %+v,异常：%s", memberId, err.Error())
@@ -48,7 +48,7 @@ func (l *AddReadHistoryLogic) AddReadHistory(req *types.AddReadHistoryReq) (resp
 	_, err = l.svcCtx.MemberReadHistoryService.AddMemberReadHistory(l.ctx, &umsclient.AddMemberReadHistoryReq{
 		MemberId:        member.Id,
 		MemberNickName:  member.Nickname,
-		MemberIcon:      member.Icon,
+		MemberIcon:      member.Avatar,
 		ProductId:       req.ProductId,
 		ProductName:     req.ProductName,
 		ProductPic:      req.ProductPic,

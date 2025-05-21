@@ -33,7 +33,7 @@ func NewQueryMemberAddressListLogic(ctx context.Context, svcCtx *svc.ServiceCont
 
 // QueryMemberAddressList 查询会员地址
 func (l *QueryMemberAddressListLogic) QueryMemberAddressList(req *types.ListMemberAddressReq) (resp *types.ListMemberAddressResp, err error) {
-	result, err := l.svcCtx.MemberReceiveAddressService.QueryMemberReceiveAddressList(l.ctx, &umsclient.QueryMemberReceiveAddressListReq{
+	result, err := l.svcCtx.MemberAddressService.QueryMemberAddressList(l.ctx, &umsclient.QueryMemberAddressListReq{
 		PageNum:  req.Current,
 		PageSize: req.PageSize,
 		MemberId: req.MemberId,
@@ -46,20 +46,22 @@ func (l *QueryMemberAddressListLogic) QueryMemberAddressList(req *types.ListMemb
 
 	var list []*types.ListMemberAddressData
 
-	for _, item := range result.List {
+	for _, detail := range result.List {
 		list = append(list, &types.ListMemberAddressData{
-			Id:            item.Id,            //
-			MemberId:      item.MemberId,      // 会员id
-			MemberName:    item.MemberName,    // 收货人名称
-			PhoneNumber:   item.PhoneNumber,   // 收货人电话
-			DefaultStatus: item.DefaultStatus, // 是否为默认
-			PostCode:      item.PostCode,      // 邮政编码
-			Province:      item.Province,      // 省份/直辖市
-			City:          item.City,          // 城市
-			Region:        item.Region,        // 区
-			DetailAddress: item.DetailAddress, // 详细地址(街道)
-			CreateTime:    item.CreateTime,    // 创建时间
-			UpdateTime:    item.UpdateTime,    // 更新时间
+			Id:            detail.Id,            // 主键ID
+			MemberId:      detail.MemberId,      // 会员ID
+			ReceiverName:  detail.ReceiverName,  // 收货人姓名
+			ReceiverPhone: detail.ReceiverPhone, // 收货人电话
+			Province:      detail.Province,      // 省份
+			City:          detail.City,          // 城市
+			District:      detail.District,      // 区县
+			DetailAddress: detail.DetailAddress, // 详细地址
+			PostalCode:    detail.PostalCode,    // 邮政编码
+			Tag:           detail.Tag,           // 地址标签：家、公司等
+			IsDefault:     detail.IsDefault,     // 是否默认地址
+			CreateTime:    detail.CreateTime,    // 创建时间
+			UpdateTime:    detail.UpdateTime,    // 更新时间
+			IsDeleted:     detail.IsDeleted,     // 是否删除
 		})
 	}
 

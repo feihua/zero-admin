@@ -36,8 +36,8 @@ create table gozero.ums_member_level
 # }
 
 -- 添加会员等级
-INSERT INTO gozero.ums_member_level (id, name, level, growth_point, discount_rate, free_freight, comment_extra, privileges, remark, create_by)
-VALUES (1, '普通会员', 1, 0, 100.00, 0, 0, '{
+insert into gozero.ums_member_level (id, name, level, growth_point, discount_rate, free_freight, comment_extra, privileges, remark, is_enabled, create_by)
+values (1, '普通会员', 1, 0, 100.00, 0, 0, '{
     "priority_service": 0,
     "birthday_gift": 0,
     "exclusive_price": 0,
@@ -46,9 +46,8 @@ VALUES (1, '普通会员', 1, 0, 100.00, 0, 0, '{
     "personal_butler": 0,
     "early_access": 0,
     "point_rate": 1.0
- }', '新注册会员默认等级', 1);
-INSERT INTO gozero.ums_member_level (id, name, level, growth_point, discount_rate, free_freight, comment_extra, privileges, remark, create_by)
-VALUES (2, '银卡会员', 2, 1000, 98.00, 0, 1, '{
+ }', '新注册会员默认等级', 1, 1),
+       (2, '银卡会员', 2, 1000, 98.00, 0, 1, '{
     "priority_service": 1,
     "birthday_gift": 1,
     "exclusive_price": 0,
@@ -57,9 +56,8 @@ VALUES (2, '银卡会员', 2, 1000, 98.00, 0, 1, '{
     "personal_butler": 0,
     "early_access": 1,
     "point_rate": 1.2
- }', '消费满1000成长值可升级', 1);
-INSERT INTO gozero.ums_member_level (id, name, level, growth_point, discount_rate, free_freight, comment_extra, privileges, remark, create_by)
-VALUES (3, '金卡会员', 3, 3000, 95.00, 1, 1, '{
+ }', '消费满1000成长值可升级', 1, 1),
+       (3, '金卡会员', 3, 3000, 95.00, 1, 1, '{
     "priority_service": 2,
     "birthday_gift": 2,
     "exclusive_price": 1,
@@ -68,9 +66,8 @@ VALUES (3, '金卡会员', 3, 3000, 95.00, 1, 1, '{
     "personal_butler": 0,
     "early_access": 2,
     "point_rate": 1.5
- }', '消费满3000成长值可升级', 1);
-INSERT INTO gozero.ums_member_level (id, name, level, growth_point, discount_rate, free_freight, comment_extra, privileges, remark, create_by)
-VALUES (4, '钻石会员', 4, 10000, 92.00, 1, 1, '{
+ }', '消费满3000成长值可升级', 1, 1),
+       (4, '钻石会员', 4, 10000, 92.00, 1, 1, '{
     "priority_service": 2,
     "birthday_gift": 2,
     "exclusive_price": 1,
@@ -79,9 +76,8 @@ VALUES (4, '钻石会员', 4, 10000, 92.00, 1, 1, '{
     "personal_butler": 0,
     "early_access": 2,
     "point_rate": 2.0
- }', '消费满10000成长值可升级', 1);
-INSERT INTO gozero.ums_member_level (id, name, level, growth_point, discount_rate, free_freight, comment_extra, privileges, remark, create_by)
-VALUES (5, '黑金会员', 5, 50000, 88.00, 1, 1, '{
+ }', '消费满10000成长值可升级', 1, 1),
+       (5, '黑金会员', 5, 50000, 88.00, 1, 1, '{
     "priority_service": 3,
     "birthday_gift": 3,
     "exclusive_price": 1,
@@ -90,4 +86,4 @@ VALUES (5, '黑金会员', 5, 50000, 88.00, 1, 1, '{
     "personal_butler": 1,
     "early_access": 3,
     "point_rate": 3.0
- }', '年消费达到50000可升级', 1);
+ }', '年消费达到50000可升级', 1, 1);

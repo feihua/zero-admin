@@ -3,21 +3,20 @@ package address
 import (
 	"context"
 	"github.com/feihua/zero-admin/api/front/internal/logic/common"
+	"github.com/feihua/zero-admin/api/front/internal/svc"
+	"github.com/feihua/zero-admin/api/front/internal/types"
 	"github.com/feihua/zero-admin/pkg/errorx"
 	"github.com/feihua/zero-admin/rpc/ums/umsclient"
 	"github.com/zeromicro/go-zero/core/logc"
 	"google.golang.org/grpc/status"
 
-	"github.com/feihua/zero-admin/api/front/internal/svc"
-	"github.com/feihua/zero-admin/api/front/internal/types"
-
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// QueryMemberAddressListLogic 获取所有收货地址
+// QueryMemberAddressListLogic 查询会员收货地址列表
 /*
 Author: LiuFeiHua
-Date: 2024/5/16 13:58
+Date: 2025/05/21 10:37:06
 */
 type QueryMemberAddressListLogic struct {
 	logx.Logger
@@ -33,45 +32,53 @@ func NewQueryMemberAddressListLogic(ctx context.Context, svcCtx *svc.ServiceCont
 	}
 }
 
-// QueryMemberAddressList 获取所有收货地址
-func (l *QueryMemberAddressListLogic) QueryMemberAddressList() (resp *types.ListMemberAddressResp, err error) {
+// QueryMemberAddressList 查询会员收货地址列表
+func (l *QueryMemberAddressListLogic) QueryMemberAddressList(req *types.QueryMemberAddressListReq) (resp *types.QueryMemberAddressListResp, err error) {
 	memberId, err := common.GetMemberId(l.ctx)
 	if err != nil {
 		return nil, err
 	}
-	addressList, err := l.svcCtx.MemberReceiveAddressService.QueryMemberReceiveAddressList(l.ctx, &umsclient.QueryMemberReceiveAddressListReq{
-		PageNum:  1,
-		PageSize: 100,
-		MemberId: memberId,
+	result, err := l.svcCtx.MemberAddressService.QueryMemberAddressList(l.ctx, &umsclient.QueryMemberAddressListReq{
+		PageNum:  req.Current,
+		PageSize: req.PageSize,
+		MemberId: memberId, // 会员ID
 	})
 
 	if err != nil {
-		logc.Errorf(l.ctx, "获取所有收货地址失败,参数memberId: %d,异常：%s", memberId, err.Error())
+		logc.Errorf(l.ctx, "查询字会员收货地址列表失败,参数：%+v,响应：%s", req, err.Error())
 		s, _ := status.FromError(err)
 		return nil, errorx.NewDefaultError(s.Message())
 	}
 
-	var list []types.ListMemberAddressData
+	var list []*types.QueryMemberAddressListData
 
-	for _, member := range addressList.List {
-		list = append(list, types.ListMemberAddressData{
-			Id:            member.Id,
-			MemberId:      member.MemberId,
-			Name:          member.MemberName,
-			PhoneNumber:   member.PhoneNumber,
-			DefaultStatus: member.DefaultStatus,
-			PostCode:      member.PostCode,
-			Province:      member.Province,
-			City:          member.City,
-			Region:        member.Region,
-			DetailAddress: member.DetailAddress,
+	for _, detail := range result.List {
+		list = append(list, &types.QueryMemberAddressListData{
+			Id:            detail.Id,            // 主键ID
+			MemberId:      detail.MemberId,      // 会员ID
+			ReceiverName:  detail.ReceiverName,  // 收货人姓名
+			ReceiverPhone: detail.ReceiverPhone, // 收货人电话
+			Province:      detail.Province,      // 省份
+			City:          detail.City,          // 城市
+			District:      detail.District,      // 区县
+			DetailAddress: detail.DetailAddress, // 详细地址
+			PostalCode:    detail.PostalCode,    // 邮政编码
+			Tag:           detail.Tag,           // 地址标签：家、公司等
+			IsDefault:     detail.IsDefault,     // 是否默认地址
+			CreateTime:    detail.CreateTime,    // 创建时间
+			UpdateTime:    detail.UpdateTime,    // 更新时间
+			IsDeleted:     detail.IsDeleted,     // 是否删除
+
 		})
 	}
 
-	return &types.ListMemberAddressResp{
-		Data:    list,
-		Success: true,
-		Code:    0,
-		Message: "操作成功",
+	return &types.QueryMemberAddressListResp{
+		Code:     0,
+		Message:  "查询会员收货地址列表成功",
+		Current:  req.Current,
+		Data:     list,
+		PageSize: req.PageSize,
+		Success:  true,
+		Total:    result.Total,
 	}, nil
 }

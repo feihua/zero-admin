@@ -1,0 +1,136 @@
+syntax = "proto3";
+
+package main;
+
+option go_package = "./proto";
+
+// 添加会员收货地址
+message AddMemberAddressReq {
+  int64 id = 1; //主键ID
+  int64 member_id = 2; //会员ID
+  string receiver_name = 3; //收货人姓名
+  string receiver_phone = 4; //收货人电话
+  string province = 5; //省份
+  string city = 6; //城市
+  string district = 7; //区县
+  string detail_address = 8; //详细地址
+  string postal_code = 9; //邮政编码
+  string tag = 10; //地址标签：家、公司等
+  int32 is_default = 11; //是否默认地址
+}
+
+message AddMemberAddressResp {
+  string pong = 1;
+}
+
+// 删除会员收货地址
+message DeleteMemberAddressReq {
+  repeated int64 ids = 1;
+  int64 member_id = 2; //会员ID
+}
+
+message DeleteMemberAddressResp {
+  string pong = 1;
+}
+
+// 更新会员收货地址
+message UpdateMemberAddressReq {
+  int64 id = 1; //主键ID
+  int64 member_id = 2; //会员ID
+  string receiver_name = 3; //收货人姓名
+  string receiver_phone = 4; //收货人电话
+  string province = 5; //省份
+  string city = 6; //城市
+  string district = 7; //区县
+  string detail_address = 8; //详细地址
+  string postal_code = 9; //邮政编码
+  string tag = 10; //地址标签：家、公司等
+  int32 is_default = 11; //是否默认地址
+}
+
+message UpdateMemberAddressResp {
+  string pong = 1;
+}
+
+// 更新会员默认的收货地址
+message UpdateMemberAddressStatusReq {
+  int64 id = 1; //主键ID
+  int64 member_id = 2; //会员ID
+  int32 is_default = 3; //是否默认地址
+}
+
+message UpdateMemberAddressStatusResp {
+  string pong = 1;
+}
+
+// 查询会员收货地址详情
+message QueryMemberAddressDetailReq {
+  int64 id = 1;
+  int64 member_id = 2; //会员ID
+}
+
+message QueryMemberAddressDetailResp {
+  int64 id = 1; //主键ID
+  int64 member_id = 2; //会员ID
+  string receiver_name = 3; //收货人姓名
+  string receiver_phone = 4; //收货人电话
+  string province = 5; //省份
+  string city = 6; //城市
+  string district = 7; //区县
+  string detail_address = 8; //详细地址
+  string postal_code = 9; //邮政编码
+  string tag = 10; //地址标签：家、公司等
+  int32 is_default = 11; //是否默认地址
+  string create_time = 12; //创建时间
+  string update_time = 13; //更新时间
+  int32 is_deleted = 14; //是否删除
+
+}
+
+// 分页查询会员收货地址列表
+message QueryMemberAddressListReq {
+  int64 member_id = 1; //会员ID
+  int64 page_num = 2; //第几页
+  int64 page_size = 3; //每页的数量
+}
+
+message MemberAddressListData {
+  int64 id = 1; //主键ID
+  int64 member_id = 2; //会员ID
+  string receiver_name = 3; //收货人姓名
+  string receiver_phone = 4; //收货人电话
+  string province = 5; //省份
+  string city = 6; //城市
+  string district = 7; //区县
+  string detail_address = 8; //详细地址
+  string postal_code = 9; //邮政编码
+  string tag = 10; //地址标签：家、公司等
+  int32 is_default = 11; //是否默认地址
+  string create_time = 12; //创建时间
+  string update_time = 13; //更新时间
+  int32 is_deleted = 14; //是否删除
+
+}
+
+message QueryMemberAddressListResp {
+  int64 total = 1;
+  repeated  MemberAddressListData list = 2;
+}
+
+// 会员收货地址
+service MemberAddressService {
+  // 添加会员收货地址
+  rpc AddMemberAddress(AddMemberAddressReq) returns (AddMemberAddressResp){}
+  // 删除会员收货地址
+  rpc DeleteMemberAddress(DeleteMemberAddressReq) returns (DeleteMemberAddressResp){}
+  // 更新会员收货地址
+  rpc UpdateMemberAddress(UpdateMemberAddressReq) returns (UpdateMemberAddressResp ){}
+  // 更新会员默认的收货地址
+  rpc UpdateMemberAddressStatus(UpdateMemberAddressStatusReq) returns (UpdateMemberAddressStatusResp ){}
+  // 查询会员收货地址详情
+   rpc QueryMemberAddressDetail(QueryMemberAddressDetailReq) returns (QueryMemberAddressDetailResp){}
+  // 查询会员收货地址列表
+  rpc QueryMemberAddressList(QueryMemberAddressListReq) returns (QueryMemberAddressListResp){}
+
+
+}

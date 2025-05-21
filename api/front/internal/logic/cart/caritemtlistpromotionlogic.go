@@ -161,14 +161,14 @@ func QueryCartListPromotion(ids []int64, ctx context.Context, svcCtx *svc.Servic
 			// 从pms_member_price表中查询
 		} else if promotionType == 2 {
 			// 获取会员等级
-			member, _ := svcCtx.MemberService.QueryMemberDetail(ctx, &umsclient.QueryMemberDetailReq{
-				Id: memberId,
+			member, _ := svcCtx.MemberService.QueryMemberInfoDetail(ctx, &umsclient.QueryMemberInfoDetailReq{
+				MemberId: memberId,
 			})
 			// 获取会员价格
 			var memberPrice int64
 			memberPriceList := promotionProduct.MemberPriceList
 			for _, item := range memberPriceList {
-				if item.MemberLevelId == member.MemberLevelId {
+				if item.MemberLevelId == member.LevelId {
 					memberPrice = item.MemberPrice
 				}
 			}

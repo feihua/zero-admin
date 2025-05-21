@@ -4,7 +4,6 @@ import (
 	"context"
 	"github.com/feihua/zero-admin/api/front/internal/logic/common"
 	"github.com/feihua/zero-admin/pkg/errorx"
-	"github.com/feihua/zero-admin/rpc/sms/smsclient"
 	"github.com/feihua/zero-admin/rpc/ums/umsclient"
 	"github.com/zeromicro/go-zero/core/logc"
 	"google.golang.org/grpc/status"
@@ -40,7 +39,7 @@ func (l *InfoLogic) Info() (resp *types.InfoResp, err error) {
 	if err != nil {
 		return nil, err
 	}
-	member, err := l.svcCtx.MemberService.QueryMemberDetail(l.ctx, &umsclient.QueryMemberDetailReq{Id: memberId})
+	detail, err := l.svcCtx.MemberService.QueryMemberInfoDetail(l.ctx, &umsclient.QueryMemberInfoDetailReq{MemberId: memberId})
 
 	if err != nil {
 		logc.Errorf(l.ctx, "获取个人信息失败,参数memberId：%d,异常：%s", memberId, err.Error())
@@ -48,45 +47,33 @@ func (l *InfoLogic) Info() (resp *types.InfoResp, err error) {
 		return nil, errorx.NewDefaultError(s.Message())
 	}
 
-	// 获取用户优惠券
-	result, err := l.svcCtx.CouponHistoryService.QueryCouponCount(l.ctx, &smsclient.QueryCouponCountReq{
-		MemberId: memberId,
-	})
-
-	if err != nil {
-		logc.Errorf(l.ctx, "获取用户优惠券失败,参数memberId：%d,异常：%s", memberId, err.Error())
-		// 为了兼容，这里不返回错误
-	}
-
-	var count int32 = 0
-	// 获取不到优惠券数量的时候,默认返回0
-	if result != nil {
-		count = int32(result.Total)
-	}
 	return &types.InfoResp{
 		Code:    0,
 		Message: "查询会员信息",
 		Data: types.MemberData{
-			Id:                    member.Id,
-			MemberLevelId:         member.MemberLevelId,
-			Username:              member.MemberName,
-			Nickname:              member.Nickname,
-			Phone:                 member.Phone,
-			Status:                member.MemberStatus,
-			CreateTime:            member.CreateTime,
-			Icon:                  member.Icon,
-			Gender:                member.Gender,
-			Birthday:              member.Birthday,
-			City:                  member.City,
-			Job:                   member.Job,
-			PersonalizedSignature: member.PersonalizedSignature,
-			SourceType:            member.SourceType,
-			Integration:           member.Integration,
-			Growth:                member.Growth,
-			LuckeyCount:           member.LotteryCount,
-			HistoryIntegration:    member.HistoryIntegration,
-			CouponCount:           count,
-			MemberLevel:           member.MemberLevel,
+			Id:           detail.Id,                   // 主键ID
+			MemberId:     detail.MemberId,             // 会员ID
+			LevelId:      detail.LevelId,              // 等级ID
+			Nickname:     detail.Nickname,             // 昵称
+			Mobile:       detail.Mobile,               // 手机号码
+			Source:       detail.Source,               // 注册来源：0-PC，1-APP，2-小程序
+			Avatar:       detail.Avatar,               // 头像
+			Signature:    detail.Signature,            // 个性签名
+			Gender:       detail.Gender,               // 性别：0-未知，1-男，2-女
+			Birthday:     detail.Birthday,             // 生日
+			GrowthPoint:  detail.GrowthPoint,          // 成长值
+			Points:       detail.Points,               // 积分
+			TotalPoints:  detail.TotalPoints,          // 累计获得积分
+			SpendAmount:  float64(detail.SpendAmount), // 累计消费金额
+			OrderCount:   detail.OrderCount,           // 订单数
+			CouponCount:  detail.CouponCount,          // 优惠券数量
+			CommentCount: detail.CommentCount,         // 评价数
+			ReturnCount:  detail.ReturnCount,          // 退货数
+			LotteryTimes: detail.LotteryTimes,         // 剩余抽奖次数
+			LastLogin:    detail.LastLogin,            // 最后登录
+			IsEnabled:    detail.IsEnabled,            // 是否启用：0-禁用，1-启用
+			CreateTime:   detail.CreateTime,           // 创建时间
+			UpdateTime:   detail.UpdateTime,           // 更新时间
 		},
 	}, nil
 }

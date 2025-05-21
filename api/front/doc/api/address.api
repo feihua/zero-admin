@@ -1,63 +1,114 @@
 info (
-	desc:   "会员地址"
-	author: "koobe"
+	desc:   "会员收货地址"
+	author: "LiuFeiHua"
 	email:  "1002219331@qq.com"
 )
 
 type (
+	// 添加会员收货地址请求参数
 	AddMemberAddressReq {
-		Name          string `json:"name"` // 收货人名称
-		PhoneNumber   string `json:"phoneNumber"`
-		DefaultStatus int32  `json:"defaultStatus"` // 是否为默认
-		PostCode      string `json:"postCode"` // 邮政编码
-		Province      string `json:"province"` // 省份/直辖市
-		City          string `json:"city"` // 城市
-		Region        string `json:"region"` // 区
-		DetailAddress string `json:"detailAddress"` // 详细地址(街道)
+		ReceiverName  string `json:"receiverName"` //收货人姓名
+		ReceiverPhone string `json:"receiverPhone"` //收货人电话
+		Province      string `json:"province"` //省份
+		City          string `json:"city"` //城市
+		District      string `json:"district"` //区县
+		DetailAddress string `json:"detailAddress"` //详细地址
+		PostalCode    string `json:"postalCode"` //邮政编码
+		Tag           string `json:"tag"` //地址标签：家、公司等
+		IsDefault     int32  `json:"isDefault"` //是否默认地址
 	}
 	AddMemberAddressResp {
 		Code    int64  `json:"code"`
 		Message string `json:"message"`
 	}
-	ListMemberAddressData {
-		Id            int64  `json:"id"`
-		MemberId      int64  `json:"memberId"`
-		Name          string `json:"name"` // 收货人名称
-		PhoneNumber   string `json:"phoneNumber"`
-		DefaultStatus int32  `json:"defaultStatus"` // 是否为默认
-		PostCode      string `json:"postCode"` // 邮政编码
-		Province      string `json:"province"` // 省份/直辖市
-		City          string `json:"city"` // 城市
-		Region        string `json:"region"` // 区
-		DetailAddress string `json:"detailAddress"` // 详细地址(街道)
-	}
-	ListMemberAddressResp {
-		Data    []ListMemberAddressData `json:"data"`
-		Success bool                    `json:"success"`
-		Code    int64                   `json:"code"`
-		Message string                  `json:"message"`
-	}
-	UpdateMemberAddressReq {
-		Id            int64  `json:"id"`
-		Name          string `json:"name"` // 收货人名称
-		PhoneNumber   string `json:"phoneNumber"`
-		DefaultStatus int32  `json:"defaultStatus"` // 是否为默认
-		PostCode      string `json:"postCode"` // 邮政编码
-		Province      string `json:"province"` // 省份/直辖市
-		City          string `json:"city"` // 城市
-		Region        string `json:"region"` // 区
-		DetailAddress string `json:"detailAddress"` // 详细地址(街道)
-	}
-	UpdateMemberAddressResp {
-		Code    int64  `json:"code"`
-		Message string `json:"message"`
-	}
+	// 删除会员收货地址请求参数
 	DeleteMemberAddressReq {
 		Ids []int64 `form:"ids"`
 	}
 	DeleteMemberAddressResp {
 		Code    int64  `json:"code"`
 		Message string `json:"message"`
+	}
+	// 更新会员收货地址请求参数
+	UpdateMemberAddressReq {
+		Id            int64  `json:"id"` //主键ID
+		ReceiverName  string `json:"receiverName"` //收货人姓名
+		ReceiverPhone string `json:"receiverPhone"` //收货人电话
+		Province      string `json:"province"` //省份
+		City          string `json:"city"` //城市
+		District      string `json:"district"` //区县
+		DetailAddress string `json:"detailAddress"` //详细地址
+		PostalCode    string `json:"postalCode"` //邮政编码
+		Tag           string `json:"tag"` //地址标签：家、公司等
+		IsDefault     int32  `json:"isDefault"` //是否默认地址
+	}
+	UpdateMemberAddressResp {
+		Code    int64  `json:"code"`
+		Message string `json:"message"`
+	}
+	// 更新会员收货地址状态请求参数
+	UpdateMemberAddressStatusReq {
+		Id        int64 `json:"id"` //主键ID
+		IsDefault int32 `json:"isDefault"` //是否默认地址
+	}
+	UpdateMemberAddressStatusResp {
+		Code    int64  `json:"code"`
+		Message string `json:"message"`
+	}
+	// 查询会员收货地址详情请求参数
+	QueryMemberAddressDetailReq {
+		Id int64 `form:"id"`
+	}
+	QueryMemberAddressDetailData {
+		Id            int64  `json:"id"` //主键ID
+		MemberId      int64  `json:"memberId"` //会员ID
+		ReceiverName  string `json:"receiverName"` //收货人姓名
+		ReceiverPhone string `json:"receiverPhone"` //收货人电话
+		Province      string `json:"province"` //省份
+		City          string `json:"city"` //城市
+		District      string `json:"district"` //区县
+		DetailAddress string `json:"detailAddress"` //详细地址
+		PostalCode    string `json:"postalCode"` //邮政编码
+		Tag           string `json:"tag"` //地址标签：家、公司等
+		IsDefault     int32  `json:"isDefault"` //是否默认地址
+		CreateTime    string `json:"createTime"` //创建时间
+		UpdateTime    string `json:"updateTime"` //更新时间
+		IsDeleted     int32  `json:"isDeleted"` //是否删除
+	}
+	QueryMemberAddressDetailResp {
+		Code    int64                        `json:"code"`
+		Message string                       `json:"message"`
+		Data    QueryMemberAddressDetailData `json:"data"`
+	}
+	// 分页查询会员收货地址列表请求参数
+	QueryMemberAddressListReq {
+		Current  int64 `form:"current,default=1"` //第几页
+		PageSize int64 `form:"pageSize,default=20"` //每页的数量
+	}
+	QueryMemberAddressListData {
+		Id            int64  `json:"id"` //主键ID
+		MemberId      int64  `json:"memberId"` //会员ID
+		ReceiverName  string `json:"receiverName"` //收货人姓名
+		ReceiverPhone string `json:"receiverPhone"` //收货人电话
+		Province      string `json:"province"` //省份
+		City          string `json:"city"` //城市
+		District      string `json:"district"` //区县
+		DetailAddress string `json:"detailAddress"` //详细地址
+		PostalCode    string `json:"postalCode"` //邮政编码
+		Tag           string `json:"tag"` //地址标签：家、公司等
+		IsDefault     int32  `json:"isDefault"` //是否默认地址
+		CreateTime    string `json:"createTime"` //创建时间
+		UpdateTime    string `json:"updateTime"` //更新时间
+		IsDeleted     int32  `json:"isDeleted"` //是否删除
+	}
+	QueryMemberAddressListResp {
+		Code     int64                         `json:"code"`
+		Message  string                        `json:"message"`
+		Current  int64                         `json:"current,default=1"`
+		Data     []*QueryMemberAddressListData `json:"data"`
+		PageSize int64                         `json:"pageSize,default=20"`
+		Success  bool                          `json:"success"`
+		Total    int64                         `json:"total"`
 	}
 )
 
@@ -67,20 +118,28 @@ type (
 	prefix: /api/member/address
 )
 service front-api {
-	//添加收货地址
+	//添加会员收货地址
 	@handler AddMemberAddress
 	post /addMemberAddress (AddMemberAddressReq) returns (AddMemberAddressResp)
 
-	//获取所有收货地址
-	@handler QueryMemberAddressList
-	get /queryMemberAddressList returns (ListMemberAddressResp)
+	// 删除会员收货地址
+	@handler DeleteMemberAddress
+	get /deleteMemberAddress (DeleteMemberAddressReq) returns (DeleteMemberAddressResp)
 
-	//修改收货地址
+	// 更新会员收货地址
 	@handler UpdateMemberAddress
 	post /updateMemberAddress (UpdateMemberAddressReq) returns (UpdateMemberAddressResp)
 
-	//删除收货地址
-	@handler DeleteMemberAddress
-	get /deleteMemberAddress (DeleteMemberAddressReq) returns (DeleteMemberAddressResp)
+	// 更新会员收货地址状态
+	@handler UpdateMemberAddressStatus
+	post /updateMemberAddressStatus (UpdateMemberAddressStatusReq) returns (UpdateMemberAddressStatusResp)
+
+	// 查询会员收货地址详情
+	@handler QueryMemberAddressDetail
+	get /queryMemberAddressDetail (QueryMemberAddressDetailReq) returns (QueryMemberAddressDetailResp)
+
+	// 分页查询会员收货地址列表
+	@handler QueryMemberAddressList
+	get /queryMemberAddressList (QueryMemberAddressListReq) returns (QueryMemberAddressListResp)
 }
 

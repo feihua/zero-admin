@@ -65,16 +65,19 @@ type IntegrationConsumeSetting {
 }
 
 type MemberReceiveAddressList {
-	Id            int64  `json:"id"`
-	MemberId      int64  `json:"memberId"`
-	Name          string `json:"name"`
-	PhoneNumber   string `json:"phoneNumber"`
-	DefaultStatus int32  `json:"defaultStatus"`
-	PostCode      string `json:"postCode"`
-	Province      string `json:"province"`
-	City          string `json:"city"`
-	Region        string `json:"region"`
-	DetailAddress string `json:"detailAddress"`
+	Id            int64  `json:"id"` //主键ID
+	MemberId      int64  `json:"memberId"` //会员ID
+	ReceiverName  string `json:"receiverName"` //收货人姓名
+	ReceiverPhone string `json:"receiverPhone"` //收货人电话
+	Province      string `json:"province"` //省份
+	City          string `json:"city"` //城市
+	District      string `json:"district"` //区县
+	DetailAddress string `json:"detailAddress"` //详细地址
+	PostalCode    string `json:"postalCode"` //邮政编码
+	Tag           string `json:"tag"` //地址标签：家、公司等
+	IsDefault     int32  `json:"isDefault"` //是否默认地址
+	CreateTime    string `json:"createTime"` //创建时间
+	UpdateTime    string `json:"updateTime"` //更新时间
 }
 
 type GenerateOrderReq {

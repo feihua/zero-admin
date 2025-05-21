@@ -3,14 +3,13 @@ POST {{host}}/api/member/register
 Content-Type: application/json
 
 {
-  "username": "test",
+  "nickname": "test",
   "mobile": "18613030355",
   "confirmPassword": "123456",
-  "password": "123456"
+  "password": "123456",
+  "source": 1
 }
-> {%
-    client.global.set("token", response.body.data.token);
-%}
+> {% client.global.set("token", response.body.data.token); %}
 
 
 ### app会员登录
@@ -18,12 +17,10 @@ POST {{host}}/api/member/login
 Content-Type: application/json
 
 {
-  "account": "18613030352",
+  "mobile": "13800138001",
   "password": "123456"
 }
-> {%
-    client.global.set("token", response.body.data.token);
-%}
+> {% client.global.set("token", response.body.data.token); %}
 
 ### 获取会员个人信息
 GET {{host}}/api/member/info

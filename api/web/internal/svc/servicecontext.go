@@ -43,16 +43,16 @@ import (
 	"github.com/feihua/zero-admin/rpc/ums/client/growthchangehistoryservice"
 	"github.com/feihua/zero-admin/rpc/ums/client/integrationchangehistoryservice"
 	"github.com/feihua/zero-admin/rpc/ums/client/integrationconsumesettingservice"
+	"github.com/feihua/zero-admin/rpc/ums/client/memberaddressservice"
 	"github.com/feihua/zero-admin/rpc/ums/client/memberbrandattentionservice"
+	"github.com/feihua/zero-admin/rpc/ums/client/memberinfoservice"
 	"github.com/feihua/zero-admin/rpc/ums/client/memberlevelservice"
 	"github.com/feihua/zero-admin/rpc/ums/client/memberloginlogservice"
 	"github.com/feihua/zero-admin/rpc/ums/client/membermembertagrelationservice"
 	"github.com/feihua/zero-admin/rpc/ums/client/memberproductcategoryrelationservice"
 	"github.com/feihua/zero-admin/rpc/ums/client/memberproductcollectionservice"
 	"github.com/feihua/zero-admin/rpc/ums/client/memberreadhistoryservice"
-	"github.com/feihua/zero-admin/rpc/ums/client/memberreceiveaddressservice"
 	"github.com/feihua/zero-admin/rpc/ums/client/memberrulesettingservice"
-	"github.com/feihua/zero-admin/rpc/ums/client/memberservice"
 	"github.com/feihua/zero-admin/rpc/ums/client/memberstatisticsinfoservice"
 	"github.com/feihua/zero-admin/rpc/ums/client/membertagservice"
 	"github.com/feihua/zero-admin/rpc/ums/client/membertaskservice"
@@ -63,7 +63,7 @@ import (
 type ServiceContext struct {
 	Config config.Config
 
-	//会员相关
+	// 会员相关
 	GrowthChangeHistoryService           growthchangehistoryservice.GrowthChangeHistoryService
 	IntegrationChangeHistoryService      integrationchangehistoryservice.IntegrationChangeHistoryService
 	IntegrationConsumeSettingService     integrationconsumesettingservice.IntegrationConsumeSettingService
@@ -73,15 +73,15 @@ type ServiceContext struct {
 	MemberProductCategoryRelationService memberproductcategoryrelationservice.MemberProductCategoryRelationService
 	MemberProductCollectionService       memberproductcollectionservice.MemberProductCollectionService
 	MemberReadHistoryService             memberreadhistoryservice.MemberReadHistoryService
-	MemberReceiveAddressService          memberreceiveaddressservice.MemberReceiveAddressService
+	MemberAddressService                 memberaddressservice.MemberAddressService
 	MemberRuleSettingService             memberrulesettingservice.MemberRuleSettingService
-	MemberService                        memberservice.MemberService
+	MemberService                        memberinfoservice.MemberInfoService
 	MemberStatisticsInfoService          memberstatisticsinfoservice.MemberStatisticsInfoService
 	MemberTagService                     membertagservice.MemberTagService
 	MemberTaskService                    membertaskservice.MemberTaskService
 	MemberBrandAttentionService          memberbrandattentionservice.MemberBrandAttentionService
 
-	//商品相关
+	// 商品相关
 	BrandService                            brandservice.BrandService
 	CommentReplayService                    commentreplayservice.CommentReplayService
 	CommentService                          commentservice.CommentService
@@ -97,7 +97,7 @@ type ServiceContext struct {
 	ProductService                          productservice.ProductService
 	ProductVertifyRecordService             productvertifyrecordservice.ProductVertifyRecordService
 	SkuStockService                         skustockservice.SkuStockService
-	//订单相关
+	// 订单相关
 	CartItemService            cartitemservice.CartItemService
 	CompanyAddressService      companyaddressservice.CompanyAddressService
 	OrderItemService           orderitemservice.OrderItemService
@@ -106,7 +106,7 @@ type ServiceContext struct {
 	OrderReturnReasonService   orderreturnreasonservice.OrderReturnReasonService
 	OrderService               orderservice.OrderService
 	OrderSettingService        ordersettingservice.OrderSettingService
-	//营销相关
+	// 营销相关
 	CouponHistoryService                 couponhistoryservice.CouponHistoryService
 	CouponService                        couponservice.CouponService
 	FlashPromotionLogService             flashpromotionlogservice.FlashPromotionLogService
@@ -118,7 +118,7 @@ type ServiceContext struct {
 	HomeNewProductService                homenewproductservice.HomeNewProductService
 	HomeRecommendProductService          homerecommendproductservice.HomeRecommendProductService
 	HomeRecommendSubjectService          homerecommendsubjectservice.HomeRecommendSubjectService
-	//内容相关
+	// 内容相关
 	SubjectService                      subjectservice.SubjectService
 	SubjectProductRelationService       subjectproductrelationservice.SubjectProductRelationService
 	PreferredAreaService                preferredareaservice.PreferredAreaService
@@ -128,7 +128,7 @@ type ServiceContext struct {
 }
 
 func NewServiceContext(c config.Config) *ServiceContext {
-	//初始化支付宝客户端
+	// 初始化支付宝客户端
 	client, err := alipay.New(c.Alipay.AppId, c.Alipay.PrivateKey, c.Alipay.IsProduction)
 	if err != nil {
 		print("初始化支付宝失败")
@@ -149,9 +149,9 @@ func NewServiceContext(c config.Config) *ServiceContext {
 		MemberProductCategoryRelationService: memberproductcategoryrelationservice.NewMemberProductCategoryRelationService(umsClient),
 		MemberProductCollectionService:       memberproductcollectionservice.NewMemberProductCollectionService(umsClient),
 		MemberReadHistoryService:             memberreadhistoryservice.NewMemberReadHistoryService(umsClient),
-		MemberReceiveAddressService:          memberreceiveaddressservice.NewMemberReceiveAddressService(umsClient),
+		MemberAddressService:                 memberaddressservice.NewMemberAddressService(umsClient),
 		MemberRuleSettingService:             memberrulesettingservice.NewMemberRuleSettingService(umsClient),
-		MemberService:                        memberservice.NewMemberService(umsClient),
+		MemberService:                        memberinfoservice.NewMemberInfoService(umsClient),
 		MemberStatisticsInfoService:          memberstatisticsinfoservice.NewMemberStatisticsInfoService(umsClient),
 		MemberTagService:                     membertagservice.NewMemberTagService(umsClient),
 		MemberTaskService:                    membertaskservice.NewMemberTaskService(umsClient),

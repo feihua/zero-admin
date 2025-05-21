@@ -272,174 +272,135 @@ service IntegrationConsumeSettingService {
 }
 
 
-// 添加会员表
-message AddMemberReq {
-  string member_name = 1; //用户名
-  string password = 2; //密码
-  string phone = 3; //手机号码
-
+// 添加会员收货地址
+message AddMemberAddressReq {
+  int64 id = 1; //主键ID
+  int64 member_id = 2; //会员ID
+  string receiver_name = 3; //收货人姓名
+  string receiver_phone = 4; //收货人电话
+  string province = 5; //省份
+  string city = 6; //城市
+  string district = 7; //区县
+  string detail_address = 8; //详细地址
+  string postal_code = 9; //邮政编码
+  string tag = 10; //地址标签：家、公司等
+  int32 is_default = 11; //是否默认地址
 }
 
-message AddMemberResp {
-  string token = 1;
+message AddMemberAddressResp {
+  string pong = 1;
 }
 
-// 删除会员表
-message DeleteMemberReq {
+// 删除会员收货地址
+message DeleteMemberAddressReq {
   repeated int64 ids = 1;
+  int64 member_id = 2; //会员ID
 }
 
-message DeleteMemberResp {
+message DeleteMemberAddressResp {
   string pong = 1;
 }
 
-// 更新会员表
-message UpdateMemberReq {
-  int64 id = 1; //
-  int64 member_level_id = 2; //会员等级id
-  string member_name = 3; //用户名
-  string password = 4; //密码
-  string nickname = 5; //昵称
-  string phone = 6; //手机号码
-  int32 member_status = 7; //帐号启用状态:0->禁用；1->启用
-  string icon = 8; //头像
-  int32 gender = 9; //性别：0->未知；1->男；2->女
-  string birthday = 10; //生日
-  string city = 11; //所做城市
-  string job = 12; //职业
-  string personalized_signature = 13; //个性签名
-  int32 source_type = 14; //用户来源
-  int32 integration = 15; //积分
-  int32 growth = 16; //成长值
-  int32 lottery_count = 17; //剩余抽奖次数
-  int32 history_integration = 18; //历史积分数量
-
+// 更新会员收货地址
+message UpdateMemberAddressReq {
+  int64 id = 1; //主键ID
+  int64 member_id = 2; //会员ID
+  string receiver_name = 3; //收货人姓名
+  string receiver_phone = 4; //收货人电话
+  string province = 5; //省份
+  string city = 6; //城市
+  string district = 7; //区县
+  string detail_address = 8; //详细地址
+  string postal_code = 9; //邮政编码
+  string tag = 10; //地址标签：家、公司等
+  int32 is_default = 11; //是否默认地址
 }
 
-message UpdateMemberResp {
+message UpdateMemberAddressResp {
   string pong = 1;
 }
 
-// 更新会员表状态
-message UpdateMemberStatusReq {
-  repeated int64 ids = 1; //
-  int32 member_status = 2; //帐号启用状态:0->禁用；1->启用
-
+// 更新会员默认的收货地址
+message UpdateMemberAddressStatusReq {
+  int64 id = 1; //主键ID
+  int64 member_id = 2; //会员ID
+  int32 is_default = 3; //是否默认地址
 }
 
-message UpdateMemberStatusResp {
+message UpdateMemberAddressStatusResp {
   string pong = 1;
 }
 
-// 查询会员表详情
-message QueryMemberDetailReq {
-    int64 id = 1;
-}
-
-message QueryMemberDetailResp {
-  int64 id = 1; //
-  int64 member_level_id = 2; //会员等级id
-  string member_name = 3; //用户名
-  string password = 4; //密码
-  string nickname = 5; //昵称
-  string phone = 6; //手机号码
-  int32 member_status = 7; //帐号启用状态:0->禁用；1->启用
-  string icon = 8; //头像
-  int32 gender = 9; //性别：0->未知；1->男；2->女
-  string birthday = 10; //生日
-  string city = 11; //所做城市
-  string job = 12; //职业
-  string personalized_signature = 13; //个性签名
-  int32 source_type = 14; //用户来源
-  int32 integration = 15; //积分
-  int32 growth = 16; //成长值
-  int32 lottery_count = 17; //剩余抽奖次数
-  int32 history_integration = 18; //历史积分数量
-  string create_time = 19; //创建时间
-  string update_time = 20; //更新时间
-  string member_level = 21; //会员等级名称
-
-}
-
-// 分页查询会员表列表
-message QueryMemberListReq {
-  int64 page_num = 1; //第几页
-  int64 page_size = 2; //每页的数量
-  string member_name = 3; //用户名
-  int32 member_status = 4; //帐号启用状态:0->禁用；1->启用
-  string phone = 5; //手机号码
-
-}
-
-message MemberListData {
-  int64 id = 1; //
-  int64 member_level_id = 2; //会员等级id
-  string member_name = 3; //用户名
-  string password = 4; //密码
-  string nickname = 5; //昵称
-  string phone = 6; //手机号码
-  int32 member_status = 7; //帐号启用状态:0->禁用；1->启用
-  string icon = 8; //头像
-  int32 gender = 9; //性别：0->未知；1->男；2->女
-  string birthday = 10; //生日
-  string city = 11; //所做城市
-  string job = 12; //职业
-  string personalized_signature = 13; //个性签名
-  int32 source_type = 14; //用户来源
-  int32 integration = 15; //积分
-  int32 growth = 16; //成长值
-  int32 lottery_count = 17; //剩余抽奖次数
-  int32 history_integration = 18; //历史积分数量
-  string create_time = 19; //创建时间
-  string update_time = 20; //更新时间
-
-}
-
-message QueryMemberListResp {
-  int64 total = 1;
-  repeated  MemberListData list = 2;
-}
-
-message MemberLoginReq {
-  string      Account = 1;
-  string      Password = 2;
-  string      Ip = 3;
-  int32      LoginType = 4;
-}
-
-message MemberLoginResp {
-  string Token = 1;
-}
-
-message UpdateMemberIntegrationReq {
+// 查询会员收货地址详情
+message QueryMemberAddressDetailReq {
   int64 id = 1;
-  int64 Integration = 2;
+  int64 member_id = 2; //会员ID
 }
 
-message UpdateMemberIntegrationResp {
-  string pong = 1;
+message QueryMemberAddressDetailResp {
+  int64 id = 1; //主键ID
+  int64 member_id = 2; //会员ID
+  string receiver_name = 3; //收货人姓名
+  string receiver_phone = 4; //收货人电话
+  string province = 5; //省份
+  string city = 6; //城市
+  string district = 7; //区县
+  string detail_address = 8; //详细地址
+  string postal_code = 9; //邮政编码
+  string tag = 10; //地址标签：家、公司等
+  int32 is_default = 11; //是否默认地址
+  string create_time = 12; //创建时间
+  string update_time = 13; //更新时间
+  int32 is_deleted = 14; //是否删除
+
 }
 
-// 会员表
-service MemberService {
-  // 添加会员表
-  rpc AddMember(AddMemberReq) returns (AddMemberResp){}
-  // 删除会员表
-  rpc DeleteMember(DeleteMemberReq) returns (DeleteMemberResp){}
-  // 更新会员表
-  rpc UpdateMember(UpdateMemberReq) returns (UpdateMemberResp ){}
-  // 更新会员表状态
-  rpc UpdateMemberStatus(UpdateMemberStatusReq) returns (UpdateMemberStatusResp ){}
-  // 查询会员表详情
-   rpc QueryMemberDetail(QueryMemberDetailReq) returns (QueryMemberDetailResp){}
-  // 查询会员表列表
-  rpc QueryMemberList(QueryMemberListReq) returns (QueryMemberListResp){}
+// 分页查询会员收货地址列表
+message QueryMemberAddressListReq {
+  int64 member_id = 1; //会员ID
+  int64 page_num = 2; //第几页
+  int64 page_size = 3; //每页的数量
+}
+
+message MemberAddressListData {
+  int64 id = 1; //主键ID
+  int64 member_id = 2; //会员ID
+  string receiver_name = 3; //收货人姓名
+  string receiver_phone = 4; //收货人电话
+  string province = 5; //省份
+  string city = 6; //城市
+  string district = 7; //区县
+  string detail_address = 8; //详细地址
+  string postal_code = 9; //邮政编码
+  string tag = 10; //地址标签：家、公司等
+  int32 is_default = 11; //是否默认地址
+  string create_time = 12; //创建时间
+  string update_time = 13; //更新时间
+  int32 is_deleted = 14; //是否删除
+
+}
+
+message QueryMemberAddressListResp {
+  int64 total = 1;
+  repeated  MemberAddressListData list = 2;
+}
+
+// 会员收货地址
+service MemberAddressService {
+  // 添加会员收货地址
+  rpc AddMemberAddress(AddMemberAddressReq) returns (AddMemberAddressResp){}
+  // 删除会员收货地址
+  rpc DeleteMemberAddress(DeleteMemberAddressReq) returns (DeleteMemberAddressResp){}
+  // 更新会员收货地址
+  rpc UpdateMemberAddress(UpdateMemberAddressReq) returns (UpdateMemberAddressResp ){}
+  // 更新会员默认的收货地址
+  rpc UpdateMemberAddressStatus(UpdateMemberAddressStatusReq) returns (UpdateMemberAddressStatusResp ){}
+  // 查询会员收货地址详情
+   rpc QueryMemberAddressDetail(QueryMemberAddressDetailReq) returns (QueryMemberAddressDetailResp){}
+  // 查询会员收货地址列表
+  rpc QueryMemberAddressList(QueryMemberAddressListReq) returns (QueryMemberAddressListResp){}
 
 
-  //会员登录
-  rpc MemberLogin(MemberLoginReq) returns(MemberLoginResp);
-  //更新会员积分
-  rpc UpdateMemberIntegration(UpdateMemberIntegrationReq) returns(UpdateMemberIntegrationResp);
 }
 
 
@@ -520,6 +481,170 @@ service MemberBrandAttentionService {
   // 查询会员关注品牌列表
   rpc QueryMemberBrandAttentionList(QueryMemberBrandAttentionListReq) returns (QueryMemberBrandAttentionListResp){}
 
+
+}
+
+
+// 添加会员信息
+message RegisterReq {
+  string nickname = 1; //昵称
+  string mobile = 2; //手机号码
+  int32 source = 3; //注册来源：0-PC，1-APP，2-小程序
+  string password = 4; //密码
+}
+
+message RegisterResp {
+  string token = 1;
+}
+
+// 删除会员信息
+message DeleteMemberInfoReq {
+  repeated int64 ids = 1;
+}
+
+message DeleteMemberInfoResp {
+  string pong = 1;
+}
+
+// 更新会员信息
+message UpdateMemberInfoReq {
+  int64 id = 1; //主键ID
+  string nickname = 2; //昵称
+  string mobile = 3; //手机号码
+  string avatar = 4; //头像
+  string signature = 5; //个性签名
+  int32 gender = 6; //性别：0-未知，1-男，2-女
+  string birthday = 7; //生日
+}
+
+message UpdateMemberInfoResp {
+  string pong = 1;
+}
+
+// 更新会员信息状态
+message UpdateMemberInfoStatusReq {
+  repeated int64 ids = 1; //主键ID
+  int32 is_enabled = 22; //是否启用：0-禁用，1-启用
+}
+
+message UpdateMemberInfoStatusResp {
+  string pong = 1;
+}
+
+// 查询会员信息详情
+message QueryMemberInfoDetailReq {
+  int64 member_id = 1; //会员ID
+}
+
+message QueryMemberInfoDetailResp {
+  int64 id = 1; //主键ID
+  int64 member_id = 2; //会员ID
+  int64 level_id = 3; //等级ID
+  string nickname = 4; //昵称
+  string mobile = 5; //手机号码
+  int32 source = 6; //注册来源：0-PC，1-APP，2-小程序
+  string avatar = 8; //头像
+  string signature = 9; //个性签名
+  int32 gender = 10; //性别：0-未知，1-男，2-女
+  string birthday = 11; //生日
+  int32 growth_point = 12; //成长值
+  int32 points = 13; //积分
+  int32 total_points = 14; //累计获得积分
+  float spend_amount = 15; //累计消费金额
+  int32 order_count = 16; //订单数
+  int32 coupon_count = 17; //优惠券数量
+  int32 comment_count = 18; //评价数
+  int32 return_count = 19; //退货数
+  int32 lottery_times = 20; //剩余抽奖次数
+  string last_login = 21; //最后登录
+  int32 is_enabled = 22; //是否启用：0-禁用，1-启用
+  string create_time = 23; //创建时间
+  string update_time = 24; //更新时间
+
+}
+
+// 分页查询会员信息列表
+message QueryMemberInfoListReq {
+  int64 member_id = 1; //会员ID
+  string nickname = 2; //昵称
+  string mobile = 3; //手机号码
+  int32 source = 4; //注册来源：0-PC，1-APP，2-小程序
+  int32 is_enabled = 5; //是否启用：0-禁用，1-启用
+  int32 page_num = 6; //第几页
+  int32 page_size = 7; //每页的数量
+}
+
+message MemberInfoListData {
+  int64 id = 1; //主键ID
+  int64 member_id = 2; //会员ID
+  int64 level_id = 3; //等级ID
+  string nickname = 4; //昵称
+  string mobile = 5; //手机号码
+  int32 source = 6; //注册来源：0-PC，1-APP，2-小程序
+  string avatar = 8; //头像
+  string signature = 9; //个性签名
+  int32 gender = 10; //性别：0-未知，1-男，2-女
+  string birthday = 11; //生日
+  int32 growth_point = 12; //成长值
+  int32 points = 13; //积分
+  int32 total_points = 14; //累计获得积分
+  float spend_amount = 15; //累计消费金额
+  int32 order_count = 16; //订单数
+  int32 coupon_count = 17; //优惠券数量
+  int32 comment_count = 18; //评价数
+  int32 return_count = 19; //退货数
+  int32 lottery_times = 20; //剩余抽奖次数
+  string last_login = 21; //最后登录
+  int32 is_enabled = 22; //是否启用：0-禁用，1-启用
+  string create_time = 23; //创建时间
+  string update_time = 24; //更新时间
+
+}
+
+message QueryMemberInfoListResp {
+  int64 total = 1;
+  repeated  MemberInfoListData list = 2;
+}
+
+message LoginReq {
+  string      mobile = 1; //手机号码
+  string      password = 2; //密码
+  string      ip = 3; //登录IP
+  int32      source = 4; //登录来源：0-PC，1-APP，2-小程序
+}
+
+message LoginResp {
+  string Token = 1;
+}
+
+message UpdateMemberPointsReq {
+  int64 member_id = 1; //会员ID
+  int32 points = 2; //积分
+}
+
+message UpdateMemberPointsResp {
+  string pong = 1;
+}
+
+// 会员信息
+service MemberInfoService {
+  // 注册会员信息
+  rpc Register(RegisterReq) returns (RegisterResp){}
+  // 删除会员信息
+  rpc DeleteMemberInfo(DeleteMemberInfoReq) returns (DeleteMemberInfoResp){}
+  // 更新会员信息
+  rpc UpdateMemberInfo(UpdateMemberInfoReq) returns (UpdateMemberInfoResp){}
+  // 更新会员信息状态
+  rpc UpdateMemberInfoStatus(UpdateMemberInfoStatusReq) returns (UpdateMemberInfoStatusResp){}
+  // 查询会员信息详情
+  rpc QueryMemberInfoDetail(QueryMemberInfoDetailReq) returns (QueryMemberInfoDetailResp){}
+  // 查询会员信息列表
+  rpc QueryMemberInfoList(QueryMemberInfoListReq) returns (QueryMemberInfoListResp){}
+
+  //会员登录
+  rpc Login(LoginReq) returns(LoginResp);
+  //更新会员积分
+  rpc UpdateMemberPoints(UpdateMemberPointsReq) returns(UpdateMemberPointsResp);
 
 }
 
@@ -969,136 +1094,6 @@ service MemberReadHistoryService {
    rpc QueryMemberReadHistoryDetail(QueryMemberReadHistoryDetailReq) returns (QueryMemberReadHistoryDetailResp){}
   // 查询用户商品浏览历史记录列表
   rpc QueryMemberReadHistoryList(QueryMemberReadHistoryListReq) returns (QueryMemberReadHistoryListResp){}
-
-
-}
-
-
-// 添加会员收货地址表
-message AddMemberReceiveAddressReq {
-  int64 id = 1; //
-  int64 member_id = 2; //会员id
-  string member_name = 3; //收货人名称
-  string phone_number = 4; //收货人电话
-  int32 default_status = 5; //是否为默认
-  string post_code = 6; //邮政编码
-  string province = 7; //省份/直辖市
-  string city = 8; //城市
-  string region = 9; //区
-  string detail_address = 10; //详细地址(街道)
-
-}
-
-message AddMemberReceiveAddressResp {
-  string pong = 1;
-}
-
-// 删除会员收货地址表
-message DeleteMemberReceiveAddressReq {
-  repeated int64 ids = 1;
-  int64 member_id = 2; //会员id
-}
-
-message DeleteMemberReceiveAddressResp {
-  string pong = 1;
-}
-
-// 更新会员收货地址表
-message UpdateMemberReceiveAddressReq {
-  int64 id = 1; //
-  int64 member_id = 2; //会员id
-  string member_name = 3; //收货人名称
-  string phone_number = 4; //收货人电话
-  int32 default_status = 5; //是否为默认
-  string post_code = 6; //邮政编码
-  string province = 7; //省份/直辖市
-  string city = 8; //城市
-  string region = 9; //区
-  string detail_address = 10; //详细地址(街道)
-
-
-}
-
-message UpdateMemberReceiveAddressResp {
-  string pong = 1;
-}
-
-// 更新会员收货地址表状态
-message UpdateMemberReceiveAddressStatusReq {
-  int32 default_status = 1; //是否为默认
-  int64 id = 2; //
-  int64 member_id = 3; //会员id
-
-}
-
-message UpdateMemberReceiveAddressStatusResp {
-  string pong = 1;
-}
-
-// 查询会员收货地址表详情
-message QueryMemberReceiveAddressDetailReq {
-  int64 id = 1;
-  int64 member_id = 3; //会员id
-}
-
-message QueryMemberReceiveAddressDetailResp {
-  int64 id = 1; //
-  int64 member_id = 2; //会员id
-  string member_name = 3; //收货人名称
-  string phone_number = 4; //收货人电话
-  int32 default_status = 5; //是否为默认
-  string post_code = 6; //邮政编码
-  string province = 7; //省份/直辖市
-  string city = 8; //城市
-  string region = 9; //区
-  string detail_address = 10; //详细地址(街道)
-  string create_time = 11; //创建时间
-  string update_time = 12; //更新时间
-
-}
-
-// 分页查询会员收货地址表列表
-message QueryMemberReceiveAddressListReq {
-  int64 page_num = 1; //第几页
-  int64 page_size = 2; //每页的数量
-  int64 member_id = 3; //会员id
-}
-
-message MemberReceiveAddressListData {
-  int64 id = 1; //
-  int64 member_id = 2; //会员id
-  string member_name = 3; //收货人名称
-  string phone_number = 4; //收货人电话
-  int32 default_status = 5; //是否为默认
-  string post_code = 6; //邮政编码
-  string province = 7; //省份/直辖市
-  string city = 8; //城市
-  string region = 9; //区
-  string detail_address = 10; //详细地址(街道)
-  string create_time = 11; //创建时间
-  string update_time = 12; //更新时间
-
-}
-
-message QueryMemberReceiveAddressListResp {
-  int64 total = 1;
-  repeated  MemberReceiveAddressListData list = 2;
-}
-
-// 会员收货地址表
-service MemberReceiveAddressService {
-  // 添加会员收货地址表
-  rpc AddMemberReceiveAddress(AddMemberReceiveAddressReq) returns (AddMemberReceiveAddressResp){}
-  // 删除会员收货地址表
-  rpc DeleteMemberReceiveAddress(DeleteMemberReceiveAddressReq) returns (DeleteMemberReceiveAddressResp){}
-  // 更新会员收货地址表
-  rpc UpdateMemberReceiveAddress(UpdateMemberReceiveAddressReq) returns (UpdateMemberReceiveAddressResp){}
-  // 更新会员收货地址表状态
-  rpc UpdateMemberReceiveAddressStatus(UpdateMemberReceiveAddressStatusReq) returns (UpdateMemberReceiveAddressStatusResp){}
-  // 查询会员收货地址表详情
-  rpc QueryMemberReceiveAddressDetail(QueryMemberReceiveAddressDetailReq) returns (QueryMemberReceiveAddressDetailResp){}
-  // 查询会员收货地址表列表
-  rpc QueryMemberReceiveAddressList(QueryMemberReceiveAddressListReq) returns (QueryMemberReceiveAddressListResp){}
 
 
 }

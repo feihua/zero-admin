@@ -727,364 +727,286 @@ var IntegrationConsumeSettingService_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	MemberService_AddMember_FullMethodName               = "/umsclient.MemberService/AddMember"
-	MemberService_DeleteMember_FullMethodName            = "/umsclient.MemberService/DeleteMember"
-	MemberService_UpdateMember_FullMethodName            = "/umsclient.MemberService/UpdateMember"
-	MemberService_UpdateMemberStatus_FullMethodName      = "/umsclient.MemberService/UpdateMemberStatus"
-	MemberService_QueryMemberDetail_FullMethodName       = "/umsclient.MemberService/QueryMemberDetail"
-	MemberService_QueryMemberList_FullMethodName         = "/umsclient.MemberService/QueryMemberList"
-	MemberService_MemberLogin_FullMethodName             = "/umsclient.MemberService/MemberLogin"
-	MemberService_UpdateMemberIntegration_FullMethodName = "/umsclient.MemberService/UpdateMemberIntegration"
+	MemberAddressService_AddMemberAddress_FullMethodName          = "/umsclient.MemberAddressService/AddMemberAddress"
+	MemberAddressService_DeleteMemberAddress_FullMethodName       = "/umsclient.MemberAddressService/DeleteMemberAddress"
+	MemberAddressService_UpdateMemberAddress_FullMethodName       = "/umsclient.MemberAddressService/UpdateMemberAddress"
+	MemberAddressService_UpdateMemberAddressStatus_FullMethodName = "/umsclient.MemberAddressService/UpdateMemberAddressStatus"
+	MemberAddressService_QueryMemberAddressDetail_FullMethodName  = "/umsclient.MemberAddressService/QueryMemberAddressDetail"
+	MemberAddressService_QueryMemberAddressList_FullMethodName    = "/umsclient.MemberAddressService/QueryMemberAddressList"
 )
 
-// MemberServiceClient is the client API for MemberService service.
+// MemberAddressServiceClient is the client API for MemberAddressService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type MemberServiceClient interface {
-	// 添加会员表
-	AddMember(ctx context.Context, in *AddMemberReq, opts ...grpc.CallOption) (*AddMemberResp, error)
-	// 删除会员表
-	DeleteMember(ctx context.Context, in *DeleteMemberReq, opts ...grpc.CallOption) (*DeleteMemberResp, error)
-	// 更新会员表
-	UpdateMember(ctx context.Context, in *UpdateMemberReq, opts ...grpc.CallOption) (*UpdateMemberResp, error)
-	// 更新会员表状态
-	UpdateMemberStatus(ctx context.Context, in *UpdateMemberStatusReq, opts ...grpc.CallOption) (*UpdateMemberStatusResp, error)
-	// 查询会员表详情
-	QueryMemberDetail(ctx context.Context, in *QueryMemberDetailReq, opts ...grpc.CallOption) (*QueryMemberDetailResp, error)
-	// 查询会员表列表
-	QueryMemberList(ctx context.Context, in *QueryMemberListReq, opts ...grpc.CallOption) (*QueryMemberListResp, error)
-	// 会员登录
-	MemberLogin(ctx context.Context, in *MemberLoginReq, opts ...grpc.CallOption) (*MemberLoginResp, error)
-	// 更新会员积分
-	UpdateMemberIntegration(ctx context.Context, in *UpdateMemberIntegrationReq, opts ...grpc.CallOption) (*UpdateMemberIntegrationResp, error)
+type MemberAddressServiceClient interface {
+	// 添加会员收货地址
+	AddMemberAddress(ctx context.Context, in *AddMemberAddressReq, opts ...grpc.CallOption) (*AddMemberAddressResp, error)
+	// 删除会员收货地址
+	DeleteMemberAddress(ctx context.Context, in *DeleteMemberAddressReq, opts ...grpc.CallOption) (*DeleteMemberAddressResp, error)
+	// 更新会员收货地址
+	UpdateMemberAddress(ctx context.Context, in *UpdateMemberAddressReq, opts ...grpc.CallOption) (*UpdateMemberAddressResp, error)
+	// 更新会员默认的收货地址
+	UpdateMemberAddressStatus(ctx context.Context, in *UpdateMemberAddressStatusReq, opts ...grpc.CallOption) (*UpdateMemberAddressStatusResp, error)
+	// 查询会员收货地址详情
+	QueryMemberAddressDetail(ctx context.Context, in *QueryMemberAddressDetailReq, opts ...grpc.CallOption) (*QueryMemberAddressDetailResp, error)
+	// 查询会员收货地址列表
+	QueryMemberAddressList(ctx context.Context, in *QueryMemberAddressListReq, opts ...grpc.CallOption) (*QueryMemberAddressListResp, error)
 }
 
-type memberServiceClient struct {
+type memberAddressServiceClient struct {
 	cc grpc.ClientConnInterface
 }
 
-func NewMemberServiceClient(cc grpc.ClientConnInterface) MemberServiceClient {
-	return &memberServiceClient{cc}
+func NewMemberAddressServiceClient(cc grpc.ClientConnInterface) MemberAddressServiceClient {
+	return &memberAddressServiceClient{cc}
 }
 
-func (c *memberServiceClient) AddMember(ctx context.Context, in *AddMemberReq, opts ...grpc.CallOption) (*AddMemberResp, error) {
-	out := new(AddMemberResp)
-	err := c.cc.Invoke(ctx, MemberService_AddMember_FullMethodName, in, out, opts...)
+func (c *memberAddressServiceClient) AddMemberAddress(ctx context.Context, in *AddMemberAddressReq, opts ...grpc.CallOption) (*AddMemberAddressResp, error) {
+	out := new(AddMemberAddressResp)
+	err := c.cc.Invoke(ctx, MemberAddressService_AddMemberAddress_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *memberServiceClient) DeleteMember(ctx context.Context, in *DeleteMemberReq, opts ...grpc.CallOption) (*DeleteMemberResp, error) {
-	out := new(DeleteMemberResp)
-	err := c.cc.Invoke(ctx, MemberService_DeleteMember_FullMethodName, in, out, opts...)
+func (c *memberAddressServiceClient) DeleteMemberAddress(ctx context.Context, in *DeleteMemberAddressReq, opts ...grpc.CallOption) (*DeleteMemberAddressResp, error) {
+	out := new(DeleteMemberAddressResp)
+	err := c.cc.Invoke(ctx, MemberAddressService_DeleteMemberAddress_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *memberServiceClient) UpdateMember(ctx context.Context, in *UpdateMemberReq, opts ...grpc.CallOption) (*UpdateMemberResp, error) {
-	out := new(UpdateMemberResp)
-	err := c.cc.Invoke(ctx, MemberService_UpdateMember_FullMethodName, in, out, opts...)
+func (c *memberAddressServiceClient) UpdateMemberAddress(ctx context.Context, in *UpdateMemberAddressReq, opts ...grpc.CallOption) (*UpdateMemberAddressResp, error) {
+	out := new(UpdateMemberAddressResp)
+	err := c.cc.Invoke(ctx, MemberAddressService_UpdateMemberAddress_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *memberServiceClient) UpdateMemberStatus(ctx context.Context, in *UpdateMemberStatusReq, opts ...grpc.CallOption) (*UpdateMemberStatusResp, error) {
-	out := new(UpdateMemberStatusResp)
-	err := c.cc.Invoke(ctx, MemberService_UpdateMemberStatus_FullMethodName, in, out, opts...)
+func (c *memberAddressServiceClient) UpdateMemberAddressStatus(ctx context.Context, in *UpdateMemberAddressStatusReq, opts ...grpc.CallOption) (*UpdateMemberAddressStatusResp, error) {
+	out := new(UpdateMemberAddressStatusResp)
+	err := c.cc.Invoke(ctx, MemberAddressService_UpdateMemberAddressStatus_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *memberServiceClient) QueryMemberDetail(ctx context.Context, in *QueryMemberDetailReq, opts ...grpc.CallOption) (*QueryMemberDetailResp, error) {
-	out := new(QueryMemberDetailResp)
-	err := c.cc.Invoke(ctx, MemberService_QueryMemberDetail_FullMethodName, in, out, opts...)
+func (c *memberAddressServiceClient) QueryMemberAddressDetail(ctx context.Context, in *QueryMemberAddressDetailReq, opts ...grpc.CallOption) (*QueryMemberAddressDetailResp, error) {
+	out := new(QueryMemberAddressDetailResp)
+	err := c.cc.Invoke(ctx, MemberAddressService_QueryMemberAddressDetail_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *memberServiceClient) QueryMemberList(ctx context.Context, in *QueryMemberListReq, opts ...grpc.CallOption) (*QueryMemberListResp, error) {
-	out := new(QueryMemberListResp)
-	err := c.cc.Invoke(ctx, MemberService_QueryMemberList_FullMethodName, in, out, opts...)
+func (c *memberAddressServiceClient) QueryMemberAddressList(ctx context.Context, in *QueryMemberAddressListReq, opts ...grpc.CallOption) (*QueryMemberAddressListResp, error) {
+	out := new(QueryMemberAddressListResp)
+	err := c.cc.Invoke(ctx, MemberAddressService_QueryMemberAddressList_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *memberServiceClient) MemberLogin(ctx context.Context, in *MemberLoginReq, opts ...grpc.CallOption) (*MemberLoginResp, error) {
-	out := new(MemberLoginResp)
-	err := c.cc.Invoke(ctx, MemberService_MemberLogin_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *memberServiceClient) UpdateMemberIntegration(ctx context.Context, in *UpdateMemberIntegrationReq, opts ...grpc.CallOption) (*UpdateMemberIntegrationResp, error) {
-	out := new(UpdateMemberIntegrationResp)
-	err := c.cc.Invoke(ctx, MemberService_UpdateMemberIntegration_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-// MemberServiceServer is the server API for MemberService service.
-// All implementations must embed UnimplementedMemberServiceServer
+// MemberAddressServiceServer is the server API for MemberAddressService service.
+// All implementations must embed UnimplementedMemberAddressServiceServer
 // for forward compatibility
-type MemberServiceServer interface {
-	// 添加会员表
-	AddMember(context.Context, *AddMemberReq) (*AddMemberResp, error)
-	// 删除会员表
-	DeleteMember(context.Context, *DeleteMemberReq) (*DeleteMemberResp, error)
-	// 更新会员表
-	UpdateMember(context.Context, *UpdateMemberReq) (*UpdateMemberResp, error)
-	// 更新会员表状态
-	UpdateMemberStatus(context.Context, *UpdateMemberStatusReq) (*UpdateMemberStatusResp, error)
-	// 查询会员表详情
-	QueryMemberDetail(context.Context, *QueryMemberDetailReq) (*QueryMemberDetailResp, error)
-	// 查询会员表列表
-	QueryMemberList(context.Context, *QueryMemberListReq) (*QueryMemberListResp, error)
-	// 会员登录
-	MemberLogin(context.Context, *MemberLoginReq) (*MemberLoginResp, error)
-	// 更新会员积分
-	UpdateMemberIntegration(context.Context, *UpdateMemberIntegrationReq) (*UpdateMemberIntegrationResp, error)
-	mustEmbedUnimplementedMemberServiceServer()
+type MemberAddressServiceServer interface {
+	// 添加会员收货地址
+	AddMemberAddress(context.Context, *AddMemberAddressReq) (*AddMemberAddressResp, error)
+	// 删除会员收货地址
+	DeleteMemberAddress(context.Context, *DeleteMemberAddressReq) (*DeleteMemberAddressResp, error)
+	// 更新会员收货地址
+	UpdateMemberAddress(context.Context, *UpdateMemberAddressReq) (*UpdateMemberAddressResp, error)
+	// 更新会员默认的收货地址
+	UpdateMemberAddressStatus(context.Context, *UpdateMemberAddressStatusReq) (*UpdateMemberAddressStatusResp, error)
+	// 查询会员收货地址详情
+	QueryMemberAddressDetail(context.Context, *QueryMemberAddressDetailReq) (*QueryMemberAddressDetailResp, error)
+	// 查询会员收货地址列表
+	QueryMemberAddressList(context.Context, *QueryMemberAddressListReq) (*QueryMemberAddressListResp, error)
+	mustEmbedUnimplementedMemberAddressServiceServer()
 }
 
-// UnimplementedMemberServiceServer must be embedded to have forward compatible implementations.
-type UnimplementedMemberServiceServer struct {
+// UnimplementedMemberAddressServiceServer must be embedded to have forward compatible implementations.
+type UnimplementedMemberAddressServiceServer struct {
 }
 
-func (UnimplementedMemberServiceServer) AddMember(context.Context, *AddMemberReq) (*AddMemberResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method AddMember not implemented")
+func (UnimplementedMemberAddressServiceServer) AddMemberAddress(context.Context, *AddMemberAddressReq) (*AddMemberAddressResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AddMemberAddress not implemented")
 }
-func (UnimplementedMemberServiceServer) DeleteMember(context.Context, *DeleteMemberReq) (*DeleteMemberResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method DeleteMember not implemented")
+func (UnimplementedMemberAddressServiceServer) DeleteMemberAddress(context.Context, *DeleteMemberAddressReq) (*DeleteMemberAddressResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteMemberAddress not implemented")
 }
-func (UnimplementedMemberServiceServer) UpdateMember(context.Context, *UpdateMemberReq) (*UpdateMemberResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateMember not implemented")
+func (UnimplementedMemberAddressServiceServer) UpdateMemberAddress(context.Context, *UpdateMemberAddressReq) (*UpdateMemberAddressResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateMemberAddress not implemented")
 }
-func (UnimplementedMemberServiceServer) UpdateMemberStatus(context.Context, *UpdateMemberStatusReq) (*UpdateMemberStatusResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateMemberStatus not implemented")
+func (UnimplementedMemberAddressServiceServer) UpdateMemberAddressStatus(context.Context, *UpdateMemberAddressStatusReq) (*UpdateMemberAddressStatusResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateMemberAddressStatus not implemented")
 }
-func (UnimplementedMemberServiceServer) QueryMemberDetail(context.Context, *QueryMemberDetailReq) (*QueryMemberDetailResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method QueryMemberDetail not implemented")
+func (UnimplementedMemberAddressServiceServer) QueryMemberAddressDetail(context.Context, *QueryMemberAddressDetailReq) (*QueryMemberAddressDetailResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method QueryMemberAddressDetail not implemented")
 }
-func (UnimplementedMemberServiceServer) QueryMemberList(context.Context, *QueryMemberListReq) (*QueryMemberListResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method QueryMemberList not implemented")
+func (UnimplementedMemberAddressServiceServer) QueryMemberAddressList(context.Context, *QueryMemberAddressListReq) (*QueryMemberAddressListResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method QueryMemberAddressList not implemented")
 }
-func (UnimplementedMemberServiceServer) MemberLogin(context.Context, *MemberLoginReq) (*MemberLoginResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method MemberLogin not implemented")
-}
-func (UnimplementedMemberServiceServer) UpdateMemberIntegration(context.Context, *UpdateMemberIntegrationReq) (*UpdateMemberIntegrationResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateMemberIntegration not implemented")
-}
-func (UnimplementedMemberServiceServer) mustEmbedUnimplementedMemberServiceServer() {}
+func (UnimplementedMemberAddressServiceServer) mustEmbedUnimplementedMemberAddressServiceServer() {}
 
-// UnsafeMemberServiceServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to MemberServiceServer will
+// UnsafeMemberAddressServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to MemberAddressServiceServer will
 // result in compilation errors.
-type UnsafeMemberServiceServer interface {
-	mustEmbedUnimplementedMemberServiceServer()
+type UnsafeMemberAddressServiceServer interface {
+	mustEmbedUnimplementedMemberAddressServiceServer()
 }
 
-func RegisterMemberServiceServer(s grpc.ServiceRegistrar, srv MemberServiceServer) {
-	s.RegisterService(&MemberService_ServiceDesc, srv)
+func RegisterMemberAddressServiceServer(s grpc.ServiceRegistrar, srv MemberAddressServiceServer) {
+	s.RegisterService(&MemberAddressService_ServiceDesc, srv)
 }
 
-func _MemberService_AddMember_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(AddMemberReq)
+func _MemberAddressService_AddMemberAddress_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddMemberAddressReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(MemberServiceServer).AddMember(ctx, in)
+		return srv.(MemberAddressServiceServer).AddMemberAddress(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: MemberService_AddMember_FullMethodName,
+		FullMethod: MemberAddressService_AddMemberAddress_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MemberServiceServer).AddMember(ctx, req.(*AddMemberReq))
+		return srv.(MemberAddressServiceServer).AddMemberAddress(ctx, req.(*AddMemberAddressReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _MemberService_DeleteMember_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(DeleteMemberReq)
+func _MemberAddressService_DeleteMemberAddress_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteMemberAddressReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(MemberServiceServer).DeleteMember(ctx, in)
+		return srv.(MemberAddressServiceServer).DeleteMemberAddress(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: MemberService_DeleteMember_FullMethodName,
+		FullMethod: MemberAddressService_DeleteMemberAddress_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MemberServiceServer).DeleteMember(ctx, req.(*DeleteMemberReq))
+		return srv.(MemberAddressServiceServer).DeleteMemberAddress(ctx, req.(*DeleteMemberAddressReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _MemberService_UpdateMember_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UpdateMemberReq)
+func _MemberAddressService_UpdateMemberAddress_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateMemberAddressReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(MemberServiceServer).UpdateMember(ctx, in)
+		return srv.(MemberAddressServiceServer).UpdateMemberAddress(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: MemberService_UpdateMember_FullMethodName,
+		FullMethod: MemberAddressService_UpdateMemberAddress_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MemberServiceServer).UpdateMember(ctx, req.(*UpdateMemberReq))
+		return srv.(MemberAddressServiceServer).UpdateMemberAddress(ctx, req.(*UpdateMemberAddressReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _MemberService_UpdateMemberStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UpdateMemberStatusReq)
+func _MemberAddressService_UpdateMemberAddressStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateMemberAddressStatusReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(MemberServiceServer).UpdateMemberStatus(ctx, in)
+		return srv.(MemberAddressServiceServer).UpdateMemberAddressStatus(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: MemberService_UpdateMemberStatus_FullMethodName,
+		FullMethod: MemberAddressService_UpdateMemberAddressStatus_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MemberServiceServer).UpdateMemberStatus(ctx, req.(*UpdateMemberStatusReq))
+		return srv.(MemberAddressServiceServer).UpdateMemberAddressStatus(ctx, req.(*UpdateMemberAddressStatusReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _MemberService_QueryMemberDetail_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(QueryMemberDetailReq)
+func _MemberAddressService_QueryMemberAddressDetail_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryMemberAddressDetailReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(MemberServiceServer).QueryMemberDetail(ctx, in)
+		return srv.(MemberAddressServiceServer).QueryMemberAddressDetail(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: MemberService_QueryMemberDetail_FullMethodName,
+		FullMethod: MemberAddressService_QueryMemberAddressDetail_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MemberServiceServer).QueryMemberDetail(ctx, req.(*QueryMemberDetailReq))
+		return srv.(MemberAddressServiceServer).QueryMemberAddressDetail(ctx, req.(*QueryMemberAddressDetailReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _MemberService_QueryMemberList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(QueryMemberListReq)
+func _MemberAddressService_QueryMemberAddressList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryMemberAddressListReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(MemberServiceServer).QueryMemberList(ctx, in)
+		return srv.(MemberAddressServiceServer).QueryMemberAddressList(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: MemberService_QueryMemberList_FullMethodName,
+		FullMethod: MemberAddressService_QueryMemberAddressList_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MemberServiceServer).QueryMemberList(ctx, req.(*QueryMemberListReq))
+		return srv.(MemberAddressServiceServer).QueryMemberAddressList(ctx, req.(*QueryMemberAddressListReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _MemberService_MemberLogin_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(MemberLoginReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(MemberServiceServer).MemberLogin(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: MemberService_MemberLogin_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MemberServiceServer).MemberLogin(ctx, req.(*MemberLoginReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _MemberService_UpdateMemberIntegration_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UpdateMemberIntegrationReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(MemberServiceServer).UpdateMemberIntegration(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: MemberService_UpdateMemberIntegration_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MemberServiceServer).UpdateMemberIntegration(ctx, req.(*UpdateMemberIntegrationReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-// MemberService_ServiceDesc is the grpc.ServiceDesc for MemberService service.
+// MemberAddressService_ServiceDesc is the grpc.ServiceDesc for MemberAddressService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
-var MemberService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "umsclient.MemberService",
-	HandlerType: (*MemberServiceServer)(nil),
+var MemberAddressService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "umsclient.MemberAddressService",
+	HandlerType: (*MemberAddressServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "AddMember",
-			Handler:    _MemberService_AddMember_Handler,
+			MethodName: "AddMemberAddress",
+			Handler:    _MemberAddressService_AddMemberAddress_Handler,
 		},
 		{
-			MethodName: "DeleteMember",
-			Handler:    _MemberService_DeleteMember_Handler,
+			MethodName: "DeleteMemberAddress",
+			Handler:    _MemberAddressService_DeleteMemberAddress_Handler,
 		},
 		{
-			MethodName: "UpdateMember",
-			Handler:    _MemberService_UpdateMember_Handler,
+			MethodName: "UpdateMemberAddress",
+			Handler:    _MemberAddressService_UpdateMemberAddress_Handler,
 		},
 		{
-			MethodName: "UpdateMemberStatus",
-			Handler:    _MemberService_UpdateMemberStatus_Handler,
+			MethodName: "UpdateMemberAddressStatus",
+			Handler:    _MemberAddressService_UpdateMemberAddressStatus_Handler,
 		},
 		{
-			MethodName: "QueryMemberDetail",
-			Handler:    _MemberService_QueryMemberDetail_Handler,
+			MethodName: "QueryMemberAddressDetail",
+			Handler:    _MemberAddressService_QueryMemberAddressDetail_Handler,
 		},
 		{
-			MethodName: "QueryMemberList",
-			Handler:    _MemberService_QueryMemberList_Handler,
-		},
-		{
-			MethodName: "MemberLogin",
-			Handler:    _MemberService_MemberLogin_Handler,
-		},
-		{
-			MethodName: "UpdateMemberIntegration",
-			Handler:    _MemberService_UpdateMemberIntegration_Handler,
+			MethodName: "QueryMemberAddressList",
+			Handler:    _MemberAddressService_QueryMemberAddressList_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
@@ -1295,6 +1217,371 @@ var MemberBrandAttentionService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "QueryMemberBrandAttentionList",
 			Handler:    _MemberBrandAttentionService_QueryMemberBrandAttentionList_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "rpc/ums/ums.proto",
+}
+
+const (
+	MemberInfoService_Register_FullMethodName               = "/umsclient.MemberInfoService/Register"
+	MemberInfoService_DeleteMemberInfo_FullMethodName       = "/umsclient.MemberInfoService/DeleteMemberInfo"
+	MemberInfoService_UpdateMemberInfo_FullMethodName       = "/umsclient.MemberInfoService/UpdateMemberInfo"
+	MemberInfoService_UpdateMemberInfoStatus_FullMethodName = "/umsclient.MemberInfoService/UpdateMemberInfoStatus"
+	MemberInfoService_QueryMemberInfoDetail_FullMethodName  = "/umsclient.MemberInfoService/QueryMemberInfoDetail"
+	MemberInfoService_QueryMemberInfoList_FullMethodName    = "/umsclient.MemberInfoService/QueryMemberInfoList"
+	MemberInfoService_Login_FullMethodName                  = "/umsclient.MemberInfoService/Login"
+	MemberInfoService_UpdateMemberPoints_FullMethodName     = "/umsclient.MemberInfoService/UpdateMemberPoints"
+)
+
+// MemberInfoServiceClient is the client API for MemberInfoService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type MemberInfoServiceClient interface {
+	// 注册会员信息
+	Register(ctx context.Context, in *RegisterReq, opts ...grpc.CallOption) (*RegisterResp, error)
+	// 删除会员信息
+	DeleteMemberInfo(ctx context.Context, in *DeleteMemberInfoReq, opts ...grpc.CallOption) (*DeleteMemberInfoResp, error)
+	// 更新会员信息
+	UpdateMemberInfo(ctx context.Context, in *UpdateMemberInfoReq, opts ...grpc.CallOption) (*UpdateMemberInfoResp, error)
+	// 更新会员信息状态
+	UpdateMemberInfoStatus(ctx context.Context, in *UpdateMemberInfoStatusReq, opts ...grpc.CallOption) (*UpdateMemberInfoStatusResp, error)
+	// 查询会员信息详情
+	QueryMemberInfoDetail(ctx context.Context, in *QueryMemberInfoDetailReq, opts ...grpc.CallOption) (*QueryMemberInfoDetailResp, error)
+	// 查询会员信息列表
+	QueryMemberInfoList(ctx context.Context, in *QueryMemberInfoListReq, opts ...grpc.CallOption) (*QueryMemberInfoListResp, error)
+	// 会员登录
+	Login(ctx context.Context, in *LoginReq, opts ...grpc.CallOption) (*LoginResp, error)
+	// 更新会员积分
+	UpdateMemberPoints(ctx context.Context, in *UpdateMemberPointsReq, opts ...grpc.CallOption) (*UpdateMemberPointsResp, error)
+}
+
+type memberInfoServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewMemberInfoServiceClient(cc grpc.ClientConnInterface) MemberInfoServiceClient {
+	return &memberInfoServiceClient{cc}
+}
+
+func (c *memberInfoServiceClient) Register(ctx context.Context, in *RegisterReq, opts ...grpc.CallOption) (*RegisterResp, error) {
+	out := new(RegisterResp)
+	err := c.cc.Invoke(ctx, MemberInfoService_Register_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *memberInfoServiceClient) DeleteMemberInfo(ctx context.Context, in *DeleteMemberInfoReq, opts ...grpc.CallOption) (*DeleteMemberInfoResp, error) {
+	out := new(DeleteMemberInfoResp)
+	err := c.cc.Invoke(ctx, MemberInfoService_DeleteMemberInfo_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *memberInfoServiceClient) UpdateMemberInfo(ctx context.Context, in *UpdateMemberInfoReq, opts ...grpc.CallOption) (*UpdateMemberInfoResp, error) {
+	out := new(UpdateMemberInfoResp)
+	err := c.cc.Invoke(ctx, MemberInfoService_UpdateMemberInfo_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *memberInfoServiceClient) UpdateMemberInfoStatus(ctx context.Context, in *UpdateMemberInfoStatusReq, opts ...grpc.CallOption) (*UpdateMemberInfoStatusResp, error) {
+	out := new(UpdateMemberInfoStatusResp)
+	err := c.cc.Invoke(ctx, MemberInfoService_UpdateMemberInfoStatus_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *memberInfoServiceClient) QueryMemberInfoDetail(ctx context.Context, in *QueryMemberInfoDetailReq, opts ...grpc.CallOption) (*QueryMemberInfoDetailResp, error) {
+	out := new(QueryMemberInfoDetailResp)
+	err := c.cc.Invoke(ctx, MemberInfoService_QueryMemberInfoDetail_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *memberInfoServiceClient) QueryMemberInfoList(ctx context.Context, in *QueryMemberInfoListReq, opts ...grpc.CallOption) (*QueryMemberInfoListResp, error) {
+	out := new(QueryMemberInfoListResp)
+	err := c.cc.Invoke(ctx, MemberInfoService_QueryMemberInfoList_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *memberInfoServiceClient) Login(ctx context.Context, in *LoginReq, opts ...grpc.CallOption) (*LoginResp, error) {
+	out := new(LoginResp)
+	err := c.cc.Invoke(ctx, MemberInfoService_Login_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *memberInfoServiceClient) UpdateMemberPoints(ctx context.Context, in *UpdateMemberPointsReq, opts ...grpc.CallOption) (*UpdateMemberPointsResp, error) {
+	out := new(UpdateMemberPointsResp)
+	err := c.cc.Invoke(ctx, MemberInfoService_UpdateMemberPoints_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// MemberInfoServiceServer is the server API for MemberInfoService service.
+// All implementations must embed UnimplementedMemberInfoServiceServer
+// for forward compatibility
+type MemberInfoServiceServer interface {
+	// 注册会员信息
+	Register(context.Context, *RegisterReq) (*RegisterResp, error)
+	// 删除会员信息
+	DeleteMemberInfo(context.Context, *DeleteMemberInfoReq) (*DeleteMemberInfoResp, error)
+	// 更新会员信息
+	UpdateMemberInfo(context.Context, *UpdateMemberInfoReq) (*UpdateMemberInfoResp, error)
+	// 更新会员信息状态
+	UpdateMemberInfoStatus(context.Context, *UpdateMemberInfoStatusReq) (*UpdateMemberInfoStatusResp, error)
+	// 查询会员信息详情
+	QueryMemberInfoDetail(context.Context, *QueryMemberInfoDetailReq) (*QueryMemberInfoDetailResp, error)
+	// 查询会员信息列表
+	QueryMemberInfoList(context.Context, *QueryMemberInfoListReq) (*QueryMemberInfoListResp, error)
+	// 会员登录
+	Login(context.Context, *LoginReq) (*LoginResp, error)
+	// 更新会员积分
+	UpdateMemberPoints(context.Context, *UpdateMemberPointsReq) (*UpdateMemberPointsResp, error)
+	mustEmbedUnimplementedMemberInfoServiceServer()
+}
+
+// UnimplementedMemberInfoServiceServer must be embedded to have forward compatible implementations.
+type UnimplementedMemberInfoServiceServer struct {
+}
+
+func (UnimplementedMemberInfoServiceServer) Register(context.Context, *RegisterReq) (*RegisterResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Register not implemented")
+}
+func (UnimplementedMemberInfoServiceServer) DeleteMemberInfo(context.Context, *DeleteMemberInfoReq) (*DeleteMemberInfoResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteMemberInfo not implemented")
+}
+func (UnimplementedMemberInfoServiceServer) UpdateMemberInfo(context.Context, *UpdateMemberInfoReq) (*UpdateMemberInfoResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateMemberInfo not implemented")
+}
+func (UnimplementedMemberInfoServiceServer) UpdateMemberInfoStatus(context.Context, *UpdateMemberInfoStatusReq) (*UpdateMemberInfoStatusResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateMemberInfoStatus not implemented")
+}
+func (UnimplementedMemberInfoServiceServer) QueryMemberInfoDetail(context.Context, *QueryMemberInfoDetailReq) (*QueryMemberInfoDetailResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method QueryMemberInfoDetail not implemented")
+}
+func (UnimplementedMemberInfoServiceServer) QueryMemberInfoList(context.Context, *QueryMemberInfoListReq) (*QueryMemberInfoListResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method QueryMemberInfoList not implemented")
+}
+func (UnimplementedMemberInfoServiceServer) Login(context.Context, *LoginReq) (*LoginResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Login not implemented")
+}
+func (UnimplementedMemberInfoServiceServer) UpdateMemberPoints(context.Context, *UpdateMemberPointsReq) (*UpdateMemberPointsResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateMemberPoints not implemented")
+}
+func (UnimplementedMemberInfoServiceServer) mustEmbedUnimplementedMemberInfoServiceServer() {}
+
+// UnsafeMemberInfoServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to MemberInfoServiceServer will
+// result in compilation errors.
+type UnsafeMemberInfoServiceServer interface {
+	mustEmbedUnimplementedMemberInfoServiceServer()
+}
+
+func RegisterMemberInfoServiceServer(s grpc.ServiceRegistrar, srv MemberInfoServiceServer) {
+	s.RegisterService(&MemberInfoService_ServiceDesc, srv)
+}
+
+func _MemberInfoService_Register_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RegisterReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MemberInfoServiceServer).Register(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: MemberInfoService_Register_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MemberInfoServiceServer).Register(ctx, req.(*RegisterReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _MemberInfoService_DeleteMemberInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteMemberInfoReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MemberInfoServiceServer).DeleteMemberInfo(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: MemberInfoService_DeleteMemberInfo_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MemberInfoServiceServer).DeleteMemberInfo(ctx, req.(*DeleteMemberInfoReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _MemberInfoService_UpdateMemberInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateMemberInfoReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MemberInfoServiceServer).UpdateMemberInfo(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: MemberInfoService_UpdateMemberInfo_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MemberInfoServiceServer).UpdateMemberInfo(ctx, req.(*UpdateMemberInfoReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _MemberInfoService_UpdateMemberInfoStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateMemberInfoStatusReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MemberInfoServiceServer).UpdateMemberInfoStatus(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: MemberInfoService_UpdateMemberInfoStatus_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MemberInfoServiceServer).UpdateMemberInfoStatus(ctx, req.(*UpdateMemberInfoStatusReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _MemberInfoService_QueryMemberInfoDetail_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryMemberInfoDetailReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MemberInfoServiceServer).QueryMemberInfoDetail(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: MemberInfoService_QueryMemberInfoDetail_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MemberInfoServiceServer).QueryMemberInfoDetail(ctx, req.(*QueryMemberInfoDetailReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _MemberInfoService_QueryMemberInfoList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryMemberInfoListReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MemberInfoServiceServer).QueryMemberInfoList(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: MemberInfoService_QueryMemberInfoList_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MemberInfoServiceServer).QueryMemberInfoList(ctx, req.(*QueryMemberInfoListReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _MemberInfoService_Login_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(LoginReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MemberInfoServiceServer).Login(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: MemberInfoService_Login_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MemberInfoServiceServer).Login(ctx, req.(*LoginReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _MemberInfoService_UpdateMemberPoints_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateMemberPointsReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MemberInfoServiceServer).UpdateMemberPoints(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: MemberInfoService_UpdateMemberPoints_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MemberInfoServiceServer).UpdateMemberPoints(ctx, req.(*UpdateMemberPointsReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// MemberInfoService_ServiceDesc is the grpc.ServiceDesc for MemberInfoService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var MemberInfoService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "umsclient.MemberInfoService",
+	HandlerType: (*MemberInfoServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "Register",
+			Handler:    _MemberInfoService_Register_Handler,
+		},
+		{
+			MethodName: "DeleteMemberInfo",
+			Handler:    _MemberInfoService_DeleteMemberInfo_Handler,
+		},
+		{
+			MethodName: "UpdateMemberInfo",
+			Handler:    _MemberInfoService_UpdateMemberInfo_Handler,
+		},
+		{
+			MethodName: "UpdateMemberInfoStatus",
+			Handler:    _MemberInfoService_UpdateMemberInfoStatus_Handler,
+		},
+		{
+			MethodName: "QueryMemberInfoDetail",
+			Handler:    _MemberInfoService_QueryMemberInfoDetail_Handler,
+		},
+		{
+			MethodName: "QueryMemberInfoList",
+			Handler:    _MemberInfoService_QueryMemberInfoList_Handler,
+		},
+		{
+			MethodName: "Login",
+			Handler:    _MemberInfoService_Login_Handler,
+		},
+		{
+			MethodName: "UpdateMemberPoints",
+			Handler:    _MemberInfoService_UpdateMemberPoints_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
@@ -2436,294 +2723,6 @@ var MemberReadHistoryService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "QueryMemberReadHistoryList",
 			Handler:    _MemberReadHistoryService_QueryMemberReadHistoryList_Handler,
-		},
-	},
-	Streams:  []grpc.StreamDesc{},
-	Metadata: "rpc/ums/ums.proto",
-}
-
-const (
-	MemberReceiveAddressService_AddMemberReceiveAddress_FullMethodName          = "/umsclient.MemberReceiveAddressService/AddMemberReceiveAddress"
-	MemberReceiveAddressService_DeleteMemberReceiveAddress_FullMethodName       = "/umsclient.MemberReceiveAddressService/DeleteMemberReceiveAddress"
-	MemberReceiveAddressService_UpdateMemberReceiveAddress_FullMethodName       = "/umsclient.MemberReceiveAddressService/UpdateMemberReceiveAddress"
-	MemberReceiveAddressService_UpdateMemberReceiveAddressStatus_FullMethodName = "/umsclient.MemberReceiveAddressService/UpdateMemberReceiveAddressStatus"
-	MemberReceiveAddressService_QueryMemberReceiveAddressDetail_FullMethodName  = "/umsclient.MemberReceiveAddressService/QueryMemberReceiveAddressDetail"
-	MemberReceiveAddressService_QueryMemberReceiveAddressList_FullMethodName    = "/umsclient.MemberReceiveAddressService/QueryMemberReceiveAddressList"
-)
-
-// MemberReceiveAddressServiceClient is the client API for MemberReceiveAddressService service.
-//
-// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type MemberReceiveAddressServiceClient interface {
-	// 添加会员收货地址表
-	AddMemberReceiveAddress(ctx context.Context, in *AddMemberReceiveAddressReq, opts ...grpc.CallOption) (*AddMemberReceiveAddressResp, error)
-	// 删除会员收货地址表
-	DeleteMemberReceiveAddress(ctx context.Context, in *DeleteMemberReceiveAddressReq, opts ...grpc.CallOption) (*DeleteMemberReceiveAddressResp, error)
-	// 更新会员收货地址表
-	UpdateMemberReceiveAddress(ctx context.Context, in *UpdateMemberReceiveAddressReq, opts ...grpc.CallOption) (*UpdateMemberReceiveAddressResp, error)
-	// 更新会员收货地址表状态
-	UpdateMemberReceiveAddressStatus(ctx context.Context, in *UpdateMemberReceiveAddressStatusReq, opts ...grpc.CallOption) (*UpdateMemberReceiveAddressStatusResp, error)
-	// 查询会员收货地址表详情
-	QueryMemberReceiveAddressDetail(ctx context.Context, in *QueryMemberReceiveAddressDetailReq, opts ...grpc.CallOption) (*QueryMemberReceiveAddressDetailResp, error)
-	// 查询会员收货地址表列表
-	QueryMemberReceiveAddressList(ctx context.Context, in *QueryMemberReceiveAddressListReq, opts ...grpc.CallOption) (*QueryMemberReceiveAddressListResp, error)
-}
-
-type memberReceiveAddressServiceClient struct {
-	cc grpc.ClientConnInterface
-}
-
-func NewMemberReceiveAddressServiceClient(cc grpc.ClientConnInterface) MemberReceiveAddressServiceClient {
-	return &memberReceiveAddressServiceClient{cc}
-}
-
-func (c *memberReceiveAddressServiceClient) AddMemberReceiveAddress(ctx context.Context, in *AddMemberReceiveAddressReq, opts ...grpc.CallOption) (*AddMemberReceiveAddressResp, error) {
-	out := new(AddMemberReceiveAddressResp)
-	err := c.cc.Invoke(ctx, MemberReceiveAddressService_AddMemberReceiveAddress_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *memberReceiveAddressServiceClient) DeleteMemberReceiveAddress(ctx context.Context, in *DeleteMemberReceiveAddressReq, opts ...grpc.CallOption) (*DeleteMemberReceiveAddressResp, error) {
-	out := new(DeleteMemberReceiveAddressResp)
-	err := c.cc.Invoke(ctx, MemberReceiveAddressService_DeleteMemberReceiveAddress_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *memberReceiveAddressServiceClient) UpdateMemberReceiveAddress(ctx context.Context, in *UpdateMemberReceiveAddressReq, opts ...grpc.CallOption) (*UpdateMemberReceiveAddressResp, error) {
-	out := new(UpdateMemberReceiveAddressResp)
-	err := c.cc.Invoke(ctx, MemberReceiveAddressService_UpdateMemberReceiveAddress_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *memberReceiveAddressServiceClient) UpdateMemberReceiveAddressStatus(ctx context.Context, in *UpdateMemberReceiveAddressStatusReq, opts ...grpc.CallOption) (*UpdateMemberReceiveAddressStatusResp, error) {
-	out := new(UpdateMemberReceiveAddressStatusResp)
-	err := c.cc.Invoke(ctx, MemberReceiveAddressService_UpdateMemberReceiveAddressStatus_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *memberReceiveAddressServiceClient) QueryMemberReceiveAddressDetail(ctx context.Context, in *QueryMemberReceiveAddressDetailReq, opts ...grpc.CallOption) (*QueryMemberReceiveAddressDetailResp, error) {
-	out := new(QueryMemberReceiveAddressDetailResp)
-	err := c.cc.Invoke(ctx, MemberReceiveAddressService_QueryMemberReceiveAddressDetail_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *memberReceiveAddressServiceClient) QueryMemberReceiveAddressList(ctx context.Context, in *QueryMemberReceiveAddressListReq, opts ...grpc.CallOption) (*QueryMemberReceiveAddressListResp, error) {
-	out := new(QueryMemberReceiveAddressListResp)
-	err := c.cc.Invoke(ctx, MemberReceiveAddressService_QueryMemberReceiveAddressList_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-// MemberReceiveAddressServiceServer is the server API for MemberReceiveAddressService service.
-// All implementations must embed UnimplementedMemberReceiveAddressServiceServer
-// for forward compatibility
-type MemberReceiveAddressServiceServer interface {
-	// 添加会员收货地址表
-	AddMemberReceiveAddress(context.Context, *AddMemberReceiveAddressReq) (*AddMemberReceiveAddressResp, error)
-	// 删除会员收货地址表
-	DeleteMemberReceiveAddress(context.Context, *DeleteMemberReceiveAddressReq) (*DeleteMemberReceiveAddressResp, error)
-	// 更新会员收货地址表
-	UpdateMemberReceiveAddress(context.Context, *UpdateMemberReceiveAddressReq) (*UpdateMemberReceiveAddressResp, error)
-	// 更新会员收货地址表状态
-	UpdateMemberReceiveAddressStatus(context.Context, *UpdateMemberReceiveAddressStatusReq) (*UpdateMemberReceiveAddressStatusResp, error)
-	// 查询会员收货地址表详情
-	QueryMemberReceiveAddressDetail(context.Context, *QueryMemberReceiveAddressDetailReq) (*QueryMemberReceiveAddressDetailResp, error)
-	// 查询会员收货地址表列表
-	QueryMemberReceiveAddressList(context.Context, *QueryMemberReceiveAddressListReq) (*QueryMemberReceiveAddressListResp, error)
-	mustEmbedUnimplementedMemberReceiveAddressServiceServer()
-}
-
-// UnimplementedMemberReceiveAddressServiceServer must be embedded to have forward compatible implementations.
-type UnimplementedMemberReceiveAddressServiceServer struct {
-}
-
-func (UnimplementedMemberReceiveAddressServiceServer) AddMemberReceiveAddress(context.Context, *AddMemberReceiveAddressReq) (*AddMemberReceiveAddressResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method AddMemberReceiveAddress not implemented")
-}
-func (UnimplementedMemberReceiveAddressServiceServer) DeleteMemberReceiveAddress(context.Context, *DeleteMemberReceiveAddressReq) (*DeleteMemberReceiveAddressResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method DeleteMemberReceiveAddress not implemented")
-}
-func (UnimplementedMemberReceiveAddressServiceServer) UpdateMemberReceiveAddress(context.Context, *UpdateMemberReceiveAddressReq) (*UpdateMemberReceiveAddressResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateMemberReceiveAddress not implemented")
-}
-func (UnimplementedMemberReceiveAddressServiceServer) UpdateMemberReceiveAddressStatus(context.Context, *UpdateMemberReceiveAddressStatusReq) (*UpdateMemberReceiveAddressStatusResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateMemberReceiveAddressStatus not implemented")
-}
-func (UnimplementedMemberReceiveAddressServiceServer) QueryMemberReceiveAddressDetail(context.Context, *QueryMemberReceiveAddressDetailReq) (*QueryMemberReceiveAddressDetailResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method QueryMemberReceiveAddressDetail not implemented")
-}
-func (UnimplementedMemberReceiveAddressServiceServer) QueryMemberReceiveAddressList(context.Context, *QueryMemberReceiveAddressListReq) (*QueryMemberReceiveAddressListResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method QueryMemberReceiveAddressList not implemented")
-}
-func (UnimplementedMemberReceiveAddressServiceServer) mustEmbedUnimplementedMemberReceiveAddressServiceServer() {
-}
-
-// UnsafeMemberReceiveAddressServiceServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to MemberReceiveAddressServiceServer will
-// result in compilation errors.
-type UnsafeMemberReceiveAddressServiceServer interface {
-	mustEmbedUnimplementedMemberReceiveAddressServiceServer()
-}
-
-func RegisterMemberReceiveAddressServiceServer(s grpc.ServiceRegistrar, srv MemberReceiveAddressServiceServer) {
-	s.RegisterService(&MemberReceiveAddressService_ServiceDesc, srv)
-}
-
-func _MemberReceiveAddressService_AddMemberReceiveAddress_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(AddMemberReceiveAddressReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(MemberReceiveAddressServiceServer).AddMemberReceiveAddress(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: MemberReceiveAddressService_AddMemberReceiveAddress_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MemberReceiveAddressServiceServer).AddMemberReceiveAddress(ctx, req.(*AddMemberReceiveAddressReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _MemberReceiveAddressService_DeleteMemberReceiveAddress_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(DeleteMemberReceiveAddressReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(MemberReceiveAddressServiceServer).DeleteMemberReceiveAddress(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: MemberReceiveAddressService_DeleteMemberReceiveAddress_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MemberReceiveAddressServiceServer).DeleteMemberReceiveAddress(ctx, req.(*DeleteMemberReceiveAddressReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _MemberReceiveAddressService_UpdateMemberReceiveAddress_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UpdateMemberReceiveAddressReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(MemberReceiveAddressServiceServer).UpdateMemberReceiveAddress(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: MemberReceiveAddressService_UpdateMemberReceiveAddress_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MemberReceiveAddressServiceServer).UpdateMemberReceiveAddress(ctx, req.(*UpdateMemberReceiveAddressReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _MemberReceiveAddressService_UpdateMemberReceiveAddressStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UpdateMemberReceiveAddressStatusReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(MemberReceiveAddressServiceServer).UpdateMemberReceiveAddressStatus(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: MemberReceiveAddressService_UpdateMemberReceiveAddressStatus_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MemberReceiveAddressServiceServer).UpdateMemberReceiveAddressStatus(ctx, req.(*UpdateMemberReceiveAddressStatusReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _MemberReceiveAddressService_QueryMemberReceiveAddressDetail_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(QueryMemberReceiveAddressDetailReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(MemberReceiveAddressServiceServer).QueryMemberReceiveAddressDetail(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: MemberReceiveAddressService_QueryMemberReceiveAddressDetail_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MemberReceiveAddressServiceServer).QueryMemberReceiveAddressDetail(ctx, req.(*QueryMemberReceiveAddressDetailReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _MemberReceiveAddressService_QueryMemberReceiveAddressList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(QueryMemberReceiveAddressListReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(MemberReceiveAddressServiceServer).QueryMemberReceiveAddressList(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: MemberReceiveAddressService_QueryMemberReceiveAddressList_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MemberReceiveAddressServiceServer).QueryMemberReceiveAddressList(ctx, req.(*QueryMemberReceiveAddressListReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-// MemberReceiveAddressService_ServiceDesc is the grpc.ServiceDesc for MemberReceiveAddressService service.
-// It's only intended for direct use with grpc.RegisterService,
-// and not to be introspected or modified (even as a copy)
-var MemberReceiveAddressService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "umsclient.MemberReceiveAddressService",
-	HandlerType: (*MemberReceiveAddressServiceServer)(nil),
-	Methods: []grpc.MethodDesc{
-		{
-			MethodName: "AddMemberReceiveAddress",
-			Handler:    _MemberReceiveAddressService_AddMemberReceiveAddress_Handler,
-		},
-		{
-			MethodName: "DeleteMemberReceiveAddress",
-			Handler:    _MemberReceiveAddressService_DeleteMemberReceiveAddress_Handler,
-		},
-		{
-			MethodName: "UpdateMemberReceiveAddress",
-			Handler:    _MemberReceiveAddressService_UpdateMemberReceiveAddress_Handler,
-		},
-		{
-			MethodName: "UpdateMemberReceiveAddressStatus",
-			Handler:    _MemberReceiveAddressService_UpdateMemberReceiveAddressStatus_Handler,
-		},
-		{
-			MethodName: "QueryMemberReceiveAddressDetail",
-			Handler:    _MemberReceiveAddressService_QueryMemberReceiveAddressDetail_Handler,
-		},
-		{
-			MethodName: "QueryMemberReceiveAddressList",
-			Handler:    _MemberReceiveAddressService_QueryMemberReceiveAddressList_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

@@ -7,6 +7,7 @@ import (
 	"github.com/feihua/zero-admin/pkg/time_util"
 	"github.com/feihua/zero-admin/rpc/ums/gen/query"
 	"github.com/zeromicro/go-zero/core/logc"
+	"gorm.io/gorm"
 
 	"github.com/feihua/zero-admin/rpc/ums/internal/svc"
 	"github.com/feihua/zero-admin/rpc/ums/umsclient"
@@ -37,9 +38,13 @@ func NewQueryMemberLevelDetailLogic(ctx context.Context, svcCtx *svc.ServiceCont
 func (l *QueryMemberLevelDetailLogic) QueryMemberLevelDetail(in *umsclient.QueryMemberLevelDetailReq) (*umsclient.QueryMemberLevelDetailResp, error) {
 	item, err := query.UmsMemberLevel.WithContext(l.ctx).Where(query.UmsMemberLevel.ID.Eq(in.Id)).First()
 
-	if err != nil {
-		logc.Errorf(l.ctx, "查询会员等级详情失败,参数:%+v,异常:%s", in, err.Error())
-		return nil, errors.New("查询会员等级详情失败")
+	switch {
+	case errors.Is(err, gorm.ErrRecordNotFound):
+		logc.Errorf(l.ctx, "会员等级不存在, 请求参数：%+v, 异常信息: %s", in, err.Error())
+		return nil, errors.New("会员等级不存在")
+	case err != nil:
+		logc.Errorf(l.ctx, "查询会员等级异常, 请求参数：%+v, 异常信息: %s", in, err.Error())
+		return nil, errors.New("查询会员等级异常")
 	}
 
 	data := &umsclient.QueryMemberLevelDetailResp{

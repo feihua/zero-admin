@@ -248,3 +248,8 @@ INSERT INTO sys_menu (id, menu_name, parent_id, menu_path, menu_perms, menu_type
 
 INSERT INTO sys_menu (id, menu_name, parent_id, menu_path, menu_perms, menu_type, menu_icon, menu_sort, create_by, create_time, update_by, update_time, is_deleted, vue_path, vue_component, vue_icon, vue_redirect, background_url) VALUES (188, '查询会员等级详情', 13, '', '', 2, '', 3, 'liufeihua', current_time, 'liufeihua', current_time, 1, '', '', '', '', '/api/ums/level/queryMemberLevelDetail');
 INSERT INTO sys_menu (id, menu_name, parent_id, menu_path, menu_perms, menu_type, menu_icon, menu_sort, create_by, create_time, update_by, update_time, is_deleted, vue_path, vue_component, vue_icon, vue_redirect, background_url) VALUES (189, '更新会员等级状态', 13, '', '', 2, '', 3, 'liufeihua', current_time, 'liufeihua', current_time, 1, '', '', '', '', '/api/ums/level/updateMemberLevelStatus');
+
+INSERT INTO sys_menu (id, menu_name, parent_id, menu_path, menu_perms, menu_type, menu_icon, menu_sort, create_by, create_time, update_by, update_time, is_deleted, vue_path, vue_component, vue_icon, vue_redirect, background_url) VALUES (190, '查询会员详情', 12, '', '', 2, '', 3, 'liufeihua', current_time, 'liufeihua', current_time, 1, '', '', '', '', '/api/ums/member/queryMemberDetail');
+INSERT INTO sys_menu (id, menu_name, parent_id, menu_path, menu_perms, menu_type, menu_icon, menu_sort, create_by, create_time, update_by, update_time, is_deleted, vue_path, vue_component, vue_icon, vue_redirect, background_url) VALUES (191, '更新会员状态', 12, '', '', 2, '', 3, 'liufeihua', current_time, 'liufeihua', current_time, 1, '', '', '', '', '/api/ums/member/updateMemberStatus');
+
+

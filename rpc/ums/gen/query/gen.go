@@ -21,14 +21,15 @@ var (
 	UmsIntegrationChangeHistory      *umsIntegrationChangeHistory
 	UmsIntegrationConsumeSetting     *umsIntegrationConsumeSetting
 	UmsMember                        *umsMember
+	UmsMemberAddress                 *umsMemberAddress
 	UmsMemberBrandAttention          *umsMemberBrandAttention
+	UmsMemberInfo                    *umsMemberInfo
 	UmsMemberLevel                   *umsMemberLevel
 	UmsMemberLoginLog                *umsMemberLoginLog
 	UmsMemberMemberTagRelation       *umsMemberMemberTagRelation
 	UmsMemberProductCategoryRelation *umsMemberProductCategoryRelation
 	UmsMemberProductCollection       *umsMemberProductCollection
 	UmsMemberReadHistory             *umsMemberReadHistory
-	UmsMemberReceiveAddress          *umsMemberReceiveAddress
 	UmsMemberRuleSetting             *umsMemberRuleSetting
 	UmsMemberStatisticsInfo          *umsMemberStatisticsInfo
 	UmsMemberTag                     *umsMemberTag
@@ -41,14 +42,15 @@ func SetDefault(db *gorm.DB, opts ...gen.DOOption) {
 	UmsIntegrationChangeHistory = &Q.UmsIntegrationChangeHistory
 	UmsIntegrationConsumeSetting = &Q.UmsIntegrationConsumeSetting
 	UmsMember = &Q.UmsMember
+	UmsMemberAddress = &Q.UmsMemberAddress
 	UmsMemberBrandAttention = &Q.UmsMemberBrandAttention
+	UmsMemberInfo = &Q.UmsMemberInfo
 	UmsMemberLevel = &Q.UmsMemberLevel
 	UmsMemberLoginLog = &Q.UmsMemberLoginLog
 	UmsMemberMemberTagRelation = &Q.UmsMemberMemberTagRelation
 	UmsMemberProductCategoryRelation = &Q.UmsMemberProductCategoryRelation
 	UmsMemberProductCollection = &Q.UmsMemberProductCollection
 	UmsMemberReadHistory = &Q.UmsMemberReadHistory
-	UmsMemberReceiveAddress = &Q.UmsMemberReceiveAddress
 	UmsMemberRuleSetting = &Q.UmsMemberRuleSetting
 	UmsMemberStatisticsInfo = &Q.UmsMemberStatisticsInfo
 	UmsMemberTag = &Q.UmsMemberTag
@@ -62,14 +64,15 @@ func Use(db *gorm.DB, opts ...gen.DOOption) *Query {
 		UmsIntegrationChangeHistory:      newUmsIntegrationChangeHistory(db, opts...),
 		UmsIntegrationConsumeSetting:     newUmsIntegrationConsumeSetting(db, opts...),
 		UmsMember:                        newUmsMember(db, opts...),
+		UmsMemberAddress:                 newUmsMemberAddress(db, opts...),
 		UmsMemberBrandAttention:          newUmsMemberBrandAttention(db, opts...),
+		UmsMemberInfo:                    newUmsMemberInfo(db, opts...),
 		UmsMemberLevel:                   newUmsMemberLevel(db, opts...),
 		UmsMemberLoginLog:                newUmsMemberLoginLog(db, opts...),
 		UmsMemberMemberTagRelation:       newUmsMemberMemberTagRelation(db, opts...),
 		UmsMemberProductCategoryRelation: newUmsMemberProductCategoryRelation(db, opts...),
 		UmsMemberProductCollection:       newUmsMemberProductCollection(db, opts...),
 		UmsMemberReadHistory:             newUmsMemberReadHistory(db, opts...),
-		UmsMemberReceiveAddress:          newUmsMemberReceiveAddress(db, opts...),
 		UmsMemberRuleSetting:             newUmsMemberRuleSetting(db, opts...),
 		UmsMemberStatisticsInfo:          newUmsMemberStatisticsInfo(db, opts...),
 		UmsMemberTag:                     newUmsMemberTag(db, opts...),
@@ -84,14 +87,15 @@ type Query struct {
 	UmsIntegrationChangeHistory      umsIntegrationChangeHistory
 	UmsIntegrationConsumeSetting     umsIntegrationConsumeSetting
 	UmsMember                        umsMember
+	UmsMemberAddress                 umsMemberAddress
 	UmsMemberBrandAttention          umsMemberBrandAttention
+	UmsMemberInfo                    umsMemberInfo
 	UmsMemberLevel                   umsMemberLevel
 	UmsMemberLoginLog                umsMemberLoginLog
 	UmsMemberMemberTagRelation       umsMemberMemberTagRelation
 	UmsMemberProductCategoryRelation umsMemberProductCategoryRelation
 	UmsMemberProductCollection       umsMemberProductCollection
 	UmsMemberReadHistory             umsMemberReadHistory
-	UmsMemberReceiveAddress          umsMemberReceiveAddress
 	UmsMemberRuleSetting             umsMemberRuleSetting
 	UmsMemberStatisticsInfo          umsMemberStatisticsInfo
 	UmsMemberTag                     umsMemberTag
@@ -107,14 +111,15 @@ func (q *Query) clone(db *gorm.DB) *Query {
 		UmsIntegrationChangeHistory:      q.UmsIntegrationChangeHistory.clone(db),
 		UmsIntegrationConsumeSetting:     q.UmsIntegrationConsumeSetting.clone(db),
 		UmsMember:                        q.UmsMember.clone(db),
+		UmsMemberAddress:                 q.UmsMemberAddress.clone(db),
 		UmsMemberBrandAttention:          q.UmsMemberBrandAttention.clone(db),
+		UmsMemberInfo:                    q.UmsMemberInfo.clone(db),
 		UmsMemberLevel:                   q.UmsMemberLevel.clone(db),
 		UmsMemberLoginLog:                q.UmsMemberLoginLog.clone(db),
 		UmsMemberMemberTagRelation:       q.UmsMemberMemberTagRelation.clone(db),
 		UmsMemberProductCategoryRelation: q.UmsMemberProductCategoryRelation.clone(db),
 		UmsMemberProductCollection:       q.UmsMemberProductCollection.clone(db),
 		UmsMemberReadHistory:             q.UmsMemberReadHistory.clone(db),
-		UmsMemberReceiveAddress:          q.UmsMemberReceiveAddress.clone(db),
 		UmsMemberRuleSetting:             q.UmsMemberRuleSetting.clone(db),
 		UmsMemberStatisticsInfo:          q.UmsMemberStatisticsInfo.clone(db),
 		UmsMemberTag:                     q.UmsMemberTag.clone(db),
@@ -137,14 +142,15 @@ func (q *Query) ReplaceDB(db *gorm.DB) *Query {
 		UmsIntegrationChangeHistory:      q.UmsIntegrationChangeHistory.replaceDB(db),
 		UmsIntegrationConsumeSetting:     q.UmsIntegrationConsumeSetting.replaceDB(db),
 		UmsMember:                        q.UmsMember.replaceDB(db),
+		UmsMemberAddress:                 q.UmsMemberAddress.replaceDB(db),
 		UmsMemberBrandAttention:          q.UmsMemberBrandAttention.replaceDB(db),
+		UmsMemberInfo:                    q.UmsMemberInfo.replaceDB(db),
 		UmsMemberLevel:                   q.UmsMemberLevel.replaceDB(db),
 		UmsMemberLoginLog:                q.UmsMemberLoginLog.replaceDB(db),
 		UmsMemberMemberTagRelation:       q.UmsMemberMemberTagRelation.replaceDB(db),
 		UmsMemberProductCategoryRelation: q.UmsMemberProductCategoryRelation.replaceDB(db),
 		UmsMemberProductCollection:       q.UmsMemberProductCollection.replaceDB(db),
 		UmsMemberReadHistory:             q.UmsMemberReadHistory.replaceDB(db),
-		UmsMemberReceiveAddress:          q.UmsMemberReceiveAddress.replaceDB(db),
 		UmsMemberRuleSetting:             q.UmsMemberRuleSetting.replaceDB(db),
 		UmsMemberStatisticsInfo:          q.UmsMemberStatisticsInfo.replaceDB(db),
 		UmsMemberTag:                     q.UmsMemberTag.replaceDB(db),
@@ -157,14 +163,15 @@ type queryCtx struct {
 	UmsIntegrationChangeHistory      IUmsIntegrationChangeHistoryDo
 	UmsIntegrationConsumeSetting     IUmsIntegrationConsumeSettingDo
 	UmsMember                        IUmsMemberDo
+	UmsMemberAddress                 IUmsMemberAddressDo
 	UmsMemberBrandAttention          IUmsMemberBrandAttentionDo
+	UmsMemberInfo                    IUmsMemberInfoDo
 	UmsMemberLevel                   IUmsMemberLevelDo
 	UmsMemberLoginLog                IUmsMemberLoginLogDo
 	UmsMemberMemberTagRelation       IUmsMemberMemberTagRelationDo
 	UmsMemberProductCategoryRelation IUmsMemberProductCategoryRelationDo
 	UmsMemberProductCollection       IUmsMemberProductCollectionDo
 	UmsMemberReadHistory             IUmsMemberReadHistoryDo
-	UmsMemberReceiveAddress          IUmsMemberReceiveAddressDo
 	UmsMemberRuleSetting             IUmsMemberRuleSettingDo
 	UmsMemberStatisticsInfo          IUmsMemberStatisticsInfoDo
 	UmsMemberTag                     IUmsMemberTagDo
@@ -177,14 +184,15 @@ func (q *Query) WithContext(ctx context.Context) *queryCtx {
 		UmsIntegrationChangeHistory:      q.UmsIntegrationChangeHistory.WithContext(ctx),
 		UmsIntegrationConsumeSetting:     q.UmsIntegrationConsumeSetting.WithContext(ctx),
 		UmsMember:                        q.UmsMember.WithContext(ctx),
+		UmsMemberAddress:                 q.UmsMemberAddress.WithContext(ctx),
 		UmsMemberBrandAttention:          q.UmsMemberBrandAttention.WithContext(ctx),
+		UmsMemberInfo:                    q.UmsMemberInfo.WithContext(ctx),
 		UmsMemberLevel:                   q.UmsMemberLevel.WithContext(ctx),
 		UmsMemberLoginLog:                q.UmsMemberLoginLog.WithContext(ctx),
 		UmsMemberMemberTagRelation:       q.UmsMemberMemberTagRelation.WithContext(ctx),
 		UmsMemberProductCategoryRelation: q.UmsMemberProductCategoryRelation.WithContext(ctx),
 		UmsMemberProductCollection:       q.UmsMemberProductCollection.WithContext(ctx),
 		UmsMemberReadHistory:             q.UmsMemberReadHistory.WithContext(ctx),
-		UmsMemberReceiveAddress:          q.UmsMemberReceiveAddress.WithContext(ctx),
 		UmsMemberRuleSetting:             q.UmsMemberRuleSetting.WithContext(ctx),
 		UmsMemberStatisticsInfo:          q.UmsMemberStatisticsInfo.WithContext(ctx),
 		UmsMemberTag:                     q.UmsMemberTag.WithContext(ctx),

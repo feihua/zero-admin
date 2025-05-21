@@ -54,15 +54,15 @@ import (
 	"github.com/feihua/zero-admin/rpc/ums/client/growthchangehistoryservice"
 	"github.com/feihua/zero-admin/rpc/ums/client/integrationchangehistoryservice"
 	"github.com/feihua/zero-admin/rpc/ums/client/integrationconsumesettingservice"
+	"github.com/feihua/zero-admin/rpc/ums/client/memberaddressservice"
+	"github.com/feihua/zero-admin/rpc/ums/client/memberinfoservice"
 	"github.com/feihua/zero-admin/rpc/ums/client/memberlevelservice"
 	"github.com/feihua/zero-admin/rpc/ums/client/memberloginlogservice"
 	"github.com/feihua/zero-admin/rpc/ums/client/membermembertagrelationservice"
 	"github.com/feihua/zero-admin/rpc/ums/client/memberproductcategoryrelationservice"
 	"github.com/feihua/zero-admin/rpc/ums/client/memberproductcollectionservice"
 	"github.com/feihua/zero-admin/rpc/ums/client/memberreadhistoryservice"
-	"github.com/feihua/zero-admin/rpc/ums/client/memberreceiveaddressservice"
 	"github.com/feihua/zero-admin/rpc/ums/client/memberrulesettingservice"
-	"github.com/feihua/zero-admin/rpc/ums/client/memberservice"
 	"github.com/feihua/zero-admin/rpc/ums/client/memberstatisticsinfoservice"
 	"github.com/feihua/zero-admin/rpc/ums/client/membertagservice"
 	"github.com/feihua/zero-admin/rpc/ums/client/membertaskservice"
@@ -85,9 +85,9 @@ type ServiceContext struct {
 	MemberProductCategoryRelationService memberproductcategoryrelationservice.MemberProductCategoryRelationService
 	MemberProductCollectionService       memberproductcollectionservice.MemberProductCollectionService
 	MemberReadHistoryService             memberreadhistoryservice.MemberReadHistoryService
-	MemberReceiveAddressService          memberreceiveaddressservice.MemberReceiveAddressService
+	MemberAddressService                 memberaddressservice.MemberAddressService
 	MemberRuleSettingService             memberrulesettingservice.MemberRuleSettingService
-	MemberService                        memberservice.MemberService
+	MemberInfoService                    memberinfoservice.MemberInfoService
 	MemberStatisticsInfoService          memberstatisticsinfoservice.MemberStatisticsInfoService
 	MemberTagService                     membertagservice.MemberTagService
 	MemberTaskService                    membertaskservice.MemberTaskService
@@ -167,9 +167,9 @@ func NewServiceContext(c config.Config) *ServiceContext {
 		MemberProductCategoryRelationService: memberproductcategoryrelationservice.NewMemberProductCategoryRelationService(umsClient),
 		MemberProductCollectionService:       memberproductcollectionservice.NewMemberProductCollectionService(umsClient),
 		MemberReadHistoryService:             memberreadhistoryservice.NewMemberReadHistoryService(umsClient),
-		MemberReceiveAddressService:          memberreceiveaddressservice.NewMemberReceiveAddressService(umsClient),
+		MemberAddressService:                 memberaddressservice.NewMemberAddressService(umsClient),
 		MemberRuleSettingService:             memberrulesettingservice.NewMemberRuleSettingService(umsClient),
-		MemberService:                        memberservice.NewMemberService(umsClient),
+		MemberInfoService:                    memberinfoservice.NewMemberInfoService(umsClient),
 		MemberStatisticsInfoService:          memberstatisticsinfoservice.NewMemberStatisticsInfoService(umsClient),
 		MemberTagService:                     membertagservice.NewMemberTagService(umsClient),
 		MemberTaskService:                    membertaskservice.NewMemberTaskService(umsClient),

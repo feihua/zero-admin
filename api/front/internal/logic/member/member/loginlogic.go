@@ -35,11 +35,11 @@ func NewLoginLogic(ctx context.Context, svcCtx *svc.ServiceContext) *LoginLogic 
 // Login 会员登录
 func (l *LoginLogic) Login(req *types.LoginReq, ip string) (resp *types.LoginResp, err1 error) {
 	// 根据用户名,密码和手机号调用rpc会员登录方法
-	result, err := l.svcCtx.MemberService.MemberLogin(l.ctx, &umsclient.MemberLoginReq{
-		Account:   req.Account,
-		Password:  req.Password,
-		Ip:        ip,
-		LoginType: req.LoginType,
+	result, err := l.svcCtx.MemberService.Login(l.ctx, &umsclient.LoginReq{
+		Mobile:   req.Mobile,
+		Password: req.Password,
+		Ip:       ip,
+		Source:   req.Source,
 	})
 
 	if err != nil {

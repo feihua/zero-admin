@@ -11,5 +11,5 @@ Content-Type: application/json
 %}
 
 ### 分页查询会员地址
-GET {{host}}/api/member/address/queryMemberAddressList
+GET {{host}}/api/ums/address/queryMemberAddressList?memberId=1001
 Authorization: Bearer {{token}}

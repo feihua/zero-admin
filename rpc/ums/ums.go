@@ -7,16 +7,16 @@ import (
 	growthchangehistoryserviceServer "github.com/feihua/zero-admin/rpc/ums/internal/server/growthchangehistoryservice"
 	integrationchangehistoryserviceServer "github.com/feihua/zero-admin/rpc/ums/internal/server/integrationchangehistoryservice"
 	integrationconsumesettingserviceServer "github.com/feihua/zero-admin/rpc/ums/internal/server/integrationconsumesettingservice"
+	memberaddressserviceServer "github.com/feihua/zero-admin/rpc/ums/internal/server/memberaddressservice"
 	memberbrandattentionserviceServer "github.com/feihua/zero-admin/rpc/ums/internal/server/memberbrandattentionservice"
+	memberinfoserviceServer "github.com/feihua/zero-admin/rpc/ums/internal/server/memberinfoservice"
 	memberlevelserviceServer "github.com/feihua/zero-admin/rpc/ums/internal/server/memberlevelservice"
 	memberloginlogserviceServer "github.com/feihua/zero-admin/rpc/ums/internal/server/memberloginlogservice"
 	membermembertagrelationserviceServer "github.com/feihua/zero-admin/rpc/ums/internal/server/membermembertagrelationservice"
 	memberproductcategoryrelationserviceServer "github.com/feihua/zero-admin/rpc/ums/internal/server/memberproductcategoryrelationservice"
 	memberproductcollectionserviceServer "github.com/feihua/zero-admin/rpc/ums/internal/server/memberproductcollectionservice"
 	memberreadhistoryserviceServer "github.com/feihua/zero-admin/rpc/ums/internal/server/memberreadhistoryservice"
-	memberreceiveaddressserviceServer "github.com/feihua/zero-admin/rpc/ums/internal/server/memberreceiveaddressservice"
 	memberrulesettingserviceServer "github.com/feihua/zero-admin/rpc/ums/internal/server/memberrulesettingservice"
-	memberserviceServer "github.com/feihua/zero-admin/rpc/ums/internal/server/memberservice"
 	memberstatisticsinfoserviceServer "github.com/feihua/zero-admin/rpc/ums/internal/server/memberstatisticsinfoservice"
 	membertagserviceServer "github.com/feihua/zero-admin/rpc/ums/internal/server/membertagservice"
 	membertaskserviceServer "github.com/feihua/zero-admin/rpc/ums/internal/server/membertaskservice"
@@ -44,7 +44,7 @@ func main() {
 	ctx := svc.NewServiceContext(c)
 
 	s := zrpc.MustNewServer(c.RpcServerConf, func(grpcServer *grpc.Server) {
-		umsclient.RegisterMemberServiceServer(grpcServer, memberserviceServer.NewMemberServiceServer(ctx))
+		umsclient.RegisterMemberInfoServiceServer(grpcServer, memberinfoserviceServer.NewMemberInfoServiceServer(ctx))
 		umsclient.RegisterGrowthChangeHistoryServiceServer(grpcServer, growthchangehistoryserviceServer.NewGrowthChangeHistoryServiceServer(ctx))
 		umsclient.RegisterIntegrationChangeHistoryServiceServer(grpcServer, integrationchangehistoryserviceServer.NewIntegrationChangeHistoryServiceServer(ctx))
 		umsclient.RegisterIntegrationConsumeSettingServiceServer(grpcServer, integrationconsumesettingserviceServer.NewIntegrationConsumeSettingServiceServer(ctx))
@@ -52,7 +52,7 @@ func main() {
 		umsclient.RegisterMemberLoginLogServiceServer(grpcServer, memberloginlogserviceServer.NewMemberLoginLogServiceServer(ctx))
 		umsclient.RegisterMemberMemberTagRelationServiceServer(grpcServer, membermembertagrelationserviceServer.NewMemberMemberTagRelationServiceServer(ctx))
 		umsclient.RegisterMemberProductCategoryRelationServiceServer(grpcServer, memberproductcategoryrelationserviceServer.NewMemberProductCategoryRelationServiceServer(ctx))
-		umsclient.RegisterMemberReceiveAddressServiceServer(grpcServer, memberreceiveaddressserviceServer.NewMemberReceiveAddressServiceServer(ctx))
+		umsclient.RegisterMemberAddressServiceServer(grpcServer, memberaddressserviceServer.NewMemberAddressServiceServer(ctx))
 		umsclient.RegisterMemberRuleSettingServiceServer(grpcServer, memberrulesettingserviceServer.NewMemberRuleSettingServiceServer(ctx))
 		umsclient.RegisterMemberStatisticsInfoServiceServer(grpcServer, memberstatisticsinfoserviceServer.NewMemberStatisticsInfoServiceServer(ctx))
 		umsclient.RegisterMemberTaskServiceServer(grpcServer, membertaskserviceServer.NewMemberTaskServiceServer(ctx))

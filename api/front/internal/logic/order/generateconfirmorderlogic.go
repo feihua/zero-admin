@@ -80,32 +80,35 @@ func (l *GenerateConfirmOrderLogic) GenerateConfirmOrder(req *types.GenerateConf
 	}
 
 	// 2.获取用户收货地址列表
-	addressListResp, _ := l.svcCtx.MemberReceiveAddressService.QueryMemberReceiveAddressList(l.ctx, &umsclient.QueryMemberReceiveAddressListReq{
+	addressListResp, _ := l.svcCtx.MemberAddressService.QueryMemberAddressList(l.ctx, &umsclient.QueryMemberAddressListReq{
 		PageNum:  1,
 		PageSize: 100,
 		MemberId: memberId,
 	})
 
 	memberReceiveAddressList := make([]types.MemberReceiveAddressList, 0)
-	for _, item := range addressListResp.List {
+	for _, detail := range addressListResp.List {
 		memberReceiveAddressList = append(memberReceiveAddressList, types.MemberReceiveAddressList{
-			Id:            item.Id,
-			MemberId:      item.MemberId,
-			Name:          item.MemberName,
-			PhoneNumber:   item.PhoneNumber,
-			DefaultStatus: item.DefaultStatus,
-			PostCode:      item.PostCode,
-			Province:      item.Province,
-			City:          item.City,
-			Region:        item.Region,
-			DetailAddress: item.DetailAddress,
+			Id:            detail.Id,            // 主键ID
+			MemberId:      detail.MemberId,      // 会员ID
+			ReceiverName:  detail.ReceiverName,  // 收货人姓名
+			ReceiverPhone: detail.ReceiverPhone, // 收货人电话
+			Province:      detail.Province,      // 省份
+			City:          detail.City,          // 城市
+			District:      detail.District,      // 区县
+			DetailAddress: detail.DetailAddress, // 详细地址
+			PostalCode:    detail.PostalCode,    // 邮政编码
+			Tag:           detail.Tag,           // 地址标签：家、公司等
+			IsDefault:     detail.IsDefault,     // 是否默认地址
+			CreateTime:    detail.CreateTime,    // 创建时间
+			UpdateTime:    detail.UpdateTime,    // 更新时间
 		})
 	}
 	// 3.获取该用户所有未使用优惠券
 	enableList, disableList := coupon.QueryCouponList(l.svcCtx, l.ctx, cartPromotionItemList)
 	// 4.获取用户积分
-	memberInfo, _ := l.svcCtx.MemberService.QueryMemberDetail(l.ctx, &umsclient.QueryMemberDetailReq{
-		Id: memberId,
+	memberInfo, _ := l.svcCtx.MemberService.QueryMemberInfoDetail(l.ctx, &umsclient.QueryMemberInfoDetailReq{
+		MemberId: memberId,
 	})
 	// 5.获取积分使用规则
 	settingInfo, _ := l.svcCtx.IntegrationConsumeSettingService.QueryIntegrationConsumeSettingDetail(l.ctx, &umsclient.QueryIntegrationConsumeSettingDetailReq{
@@ -138,7 +141,7 @@ func (l *GenerateConfirmOrderLogic) GenerateConfirmOrder(req *types.GenerateConf
 				UseUnit:            settingInfo.UseUnit,
 				CouponStatus:       settingInfo.CouponStatus,
 			},
-			MemberIntegration: int64(memberInfo.Integration),
+			MemberIntegration: int64(memberInfo.Points),
 			CalcAmount: types.CalcAmount{
 				TotalAmount:     totalAmount,
 				FreightAmount:   freightAmount,

@@ -544,11 +544,11 @@ type DeleteLoginLogReq struct {
 	Ids []int64 `form:"ids"`
 }
 
-type DeleteMemberLevelReq struct {
+type DeleteMemberInfoReq struct {
 	Ids []int64 `form:"ids"`
 }
 
-type DeleteMemberReq struct {
+type DeleteMemberLevelReq struct {
 	Ids []int64 `form:"ids"`
 }
 
@@ -914,18 +914,20 @@ type ListHomeRecommendSubjectResp struct {
 }
 
 type ListMemberAddressData struct {
-	Id            int64  `json:"id"`            //
-	MemberId      int64  `json:"memberId"`      //会员id
-	MemberName    string `json:"memberName"`    //收货人名称
-	PhoneNumber   string `json:"phoneNumber"`   //收货人电话
-	DefaultStatus int32  `json:"defaultStatus"` //是否为默认
-	PostCode      string `json:"postCode"`      //邮政编码
-	Province      string `json:"province"`      //省份/直辖市
+	Id            int64  `json:"id"`            //主键ID
+	MemberId      int64  `json:"memberId"`      //会员ID
+	ReceiverName  string `json:"receiverName"`  //收货人姓名
+	ReceiverPhone string `json:"receiverPhone"` //收货人电话
+	Province      string `json:"province"`      //省份
 	City          string `json:"city"`          //城市
-	Region        string `json:"region"`        //区
-	DetailAddress string `json:"detailAddress"` //详细地址(街道)
+	District      string `json:"district"`      //区县
+	DetailAddress string `json:"detailAddress"` //详细地址
+	PostalCode    string `json:"postalCode"`    //邮政编码
+	Tag           string `json:"tag"`           //地址标签：家、公司等
+	IsDefault     int32  `json:"isDefault"`     //是否默认地址
 	CreateTime    string `json:"createTime"`    //创建时间
 	UpdateTime    string `json:"updateTime"`    //更新时间
+	IsDeleted     int32  `json:"isDeleted"`     //是否删除
 }
 
 type ListMemberAddressReq struct {
@@ -942,28 +944,6 @@ type ListMemberAddressResp struct {
 	Total    int64                    `json:"total"`
 	Code     string                   `json:"code"`
 	Message  string                   `json:"message"`
-}
-
-type ListMemberData struct {
-	Id                    int64  `json:"id"`                    //
-	MemberLevelId         int64  `json:"memberLevelId"`         //会员等级id
-	MemberName            string `json:"memberName"`            //用户名
-	Nickname              string `json:"nickname"`              //昵称
-	Phone                 string `json:"phone"`                 //手机号码
-	MemberStatus          int32  `json:"memberStatus"`          //帐号启用状态:0->禁用；1->启用
-	Icon                  string `json:"icon"`                  //头像
-	Gender                int32  `json:"gender"`                //性别：0->未知；1->男；2->女
-	Birthday              string `json:"birthday"`              //生日
-	City                  string `json:"city"`                  //所做城市
-	Job                   string `json:"job"`                   //职业
-	PersonalizedSignature string `json:"personalizedSignature"` //个性签名
-	SourceType            int32  `json:"sourceType"`            //用户来源
-	Integration           int32  `json:"integration"`           //积分
-	Growth                int32  `json:"growth"`                //成长值
-	LotteryCount          int32  `json:"lotteryCount"`          //剩余抽奖次数
-	HistoryIntegration    int32  `json:"historyIntegration"`    //历史积分数量
-	CreateTime            string `json:"createTime"`            //创建时间
-	UpdateTime            string `json:"updateTime"`            //更新时间
 }
 
 type ListMemberLoginLogData struct {
@@ -990,24 +970,6 @@ type ListMemberLoginLogResp struct {
 	PageSize int64                     `json:"pageSize,default=20"`
 	Success  bool                      `json:"success"`
 	Total    int64                     `json:"total"`
-}
-
-type ListMemberReq struct {
-	Current  int64  `form:"current,default=1"`
-	PageSize int64  `form:"pageSize,default=20"`
-	Username string `form:"username,optional"` // 用户名
-	Phone    string `form:"phone,optional"`    // 手机号码
-	Status   int32  `form:"status,default=2"`  // 帐号启用状态:0->禁用；1->启用
-}
-
-type ListMemberResp struct {
-	Code     string            `json:"code"`
-	Message  string            `json:"message"`
-	Current  int64             `json:"current,default=1"`
-	Data     []*ListMemberData `json:"data"`
-	PageSize int64             `json:"pageSize,default=20"`
-	Success  bool              `json:"success"`
-	Total    int64             `json:"total"`
 }
 
 type ListMemberStatisticsInfoReq struct {
@@ -1972,6 +1934,88 @@ type QueryLoginLogListResp struct {
 	PageSize int64                    `json:"pageSize,default=20"`
 	Success  bool                     `json:"success"`
 	Total    int64                    `json:"total"`
+}
+
+type QueryMemberInfoDetailData struct {
+	Id           int64   `json:"id"`           //主键ID
+	MemberId     int64   `json:"memberId"`     //会员ID
+	LevelId      int64   `json:"levelId"`      //等级ID
+	Nickname     string  `json:"nickname"`     //昵称
+	Mobile       string  `json:"mobile"`       //手机号码
+	Source       int32   `json:"source"`       //注册来源：0-PC，1-APP，2-小程序
+	Avatar       string  `json:"avatar"`       //头像
+	Signature    string  `json:"signature"`    //个性签名
+	Gender       int32   `json:"gender"`       //性别：0-未知，1-男，2-女
+	Birthday     string  `json:"birthday"`     //生日
+	GrowthPoint  int32   `json:"growthPoint"`  //成长值
+	Points       int32   `json:"points"`       //积分
+	TotalPoints  int32   `json:"totalPoints"`  //累计获得积分
+	SpendAmount  float64 `json:"spendAmount"`  //累计消费金额
+	OrderCount   int32   `json:"orderCount"`   //订单数
+	CouponCount  int32   `json:"couponCount"`  //优惠券数量
+	CommentCount int32   `json:"commentCount"` //评价数
+	ReturnCount  int32   `json:"returnCount"`  //退货数
+	LotteryTimes int32   `json:"lotteryTimes"` //剩余抽奖次数
+	LastLogin    string  `json:"lastLogin"`    //最后登录
+	IsEnabled    int32   `json:"isEnabled"`    //是否启用：0-禁用，1-启用
+	CreateTime   string  `json:"createTime"`   //创建时间
+	UpdateTime   string  `json:"updateTime"`   //更新时间
+}
+
+type QueryMemberInfoDetailReq struct {
+	MemberId int64 `form:"memberId"`
+}
+
+type QueryMemberInfoDetailResp struct {
+	Code    string                    `json:"code"`
+	Message string                    `json:"message"`
+	Data    QueryMemberInfoDetailData `json:"data"`
+}
+
+type QueryMemberInfoListData struct {
+	Id           int64   `json:"id"`           //主键ID
+	MemberId     int64   `json:"memberId"`     //会员ID
+	LevelId      int64   `json:"levelId"`      //等级ID
+	Nickname     string  `json:"nickname"`     //昵称
+	Mobile       string  `json:"mobile"`       //手机号码
+	Source       int32   `json:"source"`       //注册来源：0-PC，1-APP，2-小程序
+	Avatar       string  `json:"avatar"`       //头像
+	Signature    string  `json:"signature"`    //个性签名
+	Gender       int32   `json:"gender"`       //性别：0-未知，1-男，2-女
+	Birthday     string  `json:"birthday"`     //生日
+	GrowthPoint  int32   `json:"growthPoint"`  //成长值
+	Points       int32   `json:"points"`       //积分
+	TotalPoints  int32   `json:"totalPoints"`  //累计获得积分
+	SpendAmount  float64 `json:"spendAmount"`  //累计消费金额
+	OrderCount   int32   `json:"orderCount"`   //订单数
+	CouponCount  int32   `json:"couponCount"`  //优惠券数量
+	CommentCount int32   `json:"commentCount"` //评价数
+	ReturnCount  int32   `json:"returnCount"`  //退货数
+	LotteryTimes int32   `json:"lotteryTimes"` //剩余抽奖次数
+	LastLogin    string  `json:"lastLogin"`    //最后登录
+	IsEnabled    int32   `json:"isEnabled"`    //是否启用：0-禁用，1-启用
+	CreateTime   string  `json:"createTime"`   //创建时间
+	UpdateTime   string  `json:"updateTime"`   //更新时间
+}
+
+type QueryMemberInfoListReq struct {
+	Current   int32  `form:"current,default=1"`   //第几页
+	PageSize  int32  `form:"pageSize,default=20"` //每页的数量
+	MemberId  int64  `form:"memberId,default=0"`  //会员ID
+	Nickname  string `form:"nickname,optional"`   //昵称
+	Mobile    string `form:"mobile,optional"`     //手机号码
+	Source    int32  `form:"source,default=3"`    //注册来源：0-PC，1-APP，2-小程序
+	IsEnabled int32  `form:"isEnabled,default=2"` //是否启用：0-禁用，1-启用
+}
+
+type QueryMemberInfoListResp struct {
+	Code     string                     `json:"code"`
+	Message  string                     `json:"message"`
+	Current  int32                      `json:"current,default=1"`
+	Data     []*QueryMemberInfoListData `json:"data"`
+	PageSize int32                      `json:"pageSize,default=20"`
+	Success  bool                       `json:"success"`
+	Total    int64                      `json:"total"`
 }
 
 type QueryMemberLevelDetailData struct {
@@ -3296,6 +3340,21 @@ type UpdateIntegrationConsumeSettingStatusReq struct {
 	IsDefault int32 `json:"isDefault"` //是否默认：0->否；1->是
 }
 
+type UpdateMemberInfoReq struct {
+	Id        int64  `json:"id"`                //主键ID
+	Nickname  string `json:"nickname"`          //昵称
+	Mobile    string `json:"mobile"`            //手机号码
+	Avatar    string `json:"avatar"`            //头像
+	Signature string `json:"signature"`         //个性签名
+	Gender    int32  `json:"gender"`            //性别：1-男，2-女
+	Birthday  string `json:"birthday,optional"` //生日
+}
+
+type UpdateMemberInfoStatusReq struct {
+	Ids       []int64 `json:"ids"`       //主键ID
+	IsEnabled int32   `json:"isEnabled"` //是否启用：0-禁用，1-启用
+}
+
 type UpdateMemberLevelReq struct {
 	Id           int64   `json:"id"`              //主键ID
 	Name         string  `json:"name"`            //等级名称
@@ -3320,27 +3379,6 @@ type UpdateMemberPriceList struct {
 	MemberLevelId   int64  `json:"memberLevelId"`
 	MemberPrice     int64  `json:"memberPrice"`
 	MemberLevelName string `json:"memberLevelName"`
-}
-
-type UpdateMemberReq struct {
-	Id                    int64  `json:"id"`                    //
-	MemberLevelId         int64  `json:"memberLevelId"`         //会员等级id
-	MemberName            string `json:"memberName"`            //用户名
-	Password              string `json:"password"`              //密码
-	Nickname              string `json:"nickname"`              //昵称
-	Phone                 string `json:"phone"`                 //手机号码
-	MemberStatus          int32  `json:"memberStatus"`          //帐号启用状态:0->禁用；1->启用
-	Icon                  string `json:"icon"`                  //头像
-	Gender                int32  `json:"gender"`                //性别：0->未知；1->男；2->女
-	Birthday              string `json:"birthday"`              //生日
-	City                  string `json:"city"`                  //所做城市
-	Job                   string `json:"job"`                   //职业
-	PersonalizedSignature string `json:"personalizedSignature"` //个性签名
-	SourceType            int32  `json:"sourceType"`            //用户来源
-	Integration           int32  `json:"integration"`           //积分
-	Growth                int32  `json:"growth"`                //成长值
-	LotteryCount          int32  `json:"lotteryCount"`          //剩余抽奖次数
-	HistoryIntegration    int32  `json:"historyIntegration"`    //历史积分数量
 }
 
 type UpdateMemberRuleSettingReq struct {

@@ -3,21 +3,20 @@ package address
 import (
 	"context"
 	"github.com/feihua/zero-admin/api/front/internal/logic/common"
+	"github.com/feihua/zero-admin/api/front/internal/svc"
+	"github.com/feihua/zero-admin/api/front/internal/types"
 	"github.com/feihua/zero-admin/pkg/errorx"
 	"github.com/feihua/zero-admin/rpc/ums/umsclient"
 	"github.com/zeromicro/go-zero/core/logc"
 	"google.golang.org/grpc/status"
 
-	"github.com/feihua/zero-admin/api/front/internal/svc"
-	"github.com/feihua/zero-admin/api/front/internal/types"
-
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// AddMemberAddressLogic 添加收货地址
+// AddMemberAddressLogic 添加会员收货地址
 /*
 Author: LiuFeiHua
-Date: 2024/5/16 13:58
+Date: 2025/05/21 10:37:06
 */
 type AddMemberAddressLogic struct {
 	logx.Logger
@@ -33,31 +32,33 @@ func NewAddMemberAddressLogic(ctx context.Context, svcCtx *svc.ServiceContext) *
 	}
 }
 
-// AddMemberAddress 添加收货地址
+// AddMemberAddress 添加会员收货地址
 func (l *AddMemberAddressLogic) AddMemberAddress(req *types.AddMemberAddressReq) (resp *types.AddMemberAddressResp, err error) {
 	memberId, err := common.GetMemberId(l.ctx)
 	if err != nil {
 		return nil, err
 	}
-	_, err = l.svcCtx.MemberReceiveAddressService.AddMemberReceiveAddress(l.ctx, &umsclient.AddMemberReceiveAddressReq{
-		MemberId:      memberId,
-		MemberName:    req.Name,
-		PhoneNumber:   req.PhoneNumber,
-		DefaultStatus: req.DefaultStatus,
-		PostCode:      req.PostCode,
-		Province:      req.Province,
-		City:          req.City,
-		Region:        req.Region,
-		DetailAddress: req.DetailAddress,
+	_, err = l.svcCtx.MemberAddressService.AddMemberAddress(l.ctx, &umsclient.AddMemberAddressReq{
+		MemberId:      memberId,          // 会员ID
+		ReceiverName:  req.ReceiverName,  // 收货人姓名
+		ReceiverPhone: req.ReceiverPhone, // 收货人电话
+		Province:      req.Province,      // 省份
+		City:          req.City,          // 城市
+		District:      req.District,      // 区县
+		DetailAddress: req.DetailAddress, // 详细地址
+		PostalCode:    req.PostalCode,    // 邮政编码
+		Tag:           req.Tag,           // 地址标签：家、公司等
+		IsDefault:     req.IsDefault,     // 是否默认地址
 	})
+
 	if err != nil {
-		logc.Errorf(l.ctx, "添加收货地址失败,参数: %+v,异常：%s", req, err.Error())
+		logc.Errorf(l.ctx, "添加会员收货地址失败,参数：%+v,响应：%s", req, err.Error())
 		s, _ := status.FromError(err)
 		return nil, errorx.NewDefaultError(s.Message())
 	}
 
 	return &types.AddMemberAddressResp{
 		Code:    0,
-		Message: "操作成功",
+		Message: "添加会员收货地址成功",
 	}, nil
 }

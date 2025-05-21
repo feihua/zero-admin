@@ -82,9 +82,9 @@ func (l *CancelUserOrderLogic) CancelUserOrder(req *types.CancelUserOrderReq) (*
 	}
 
 	// 5.返还使用积分
-	member, _ := l.svcCtx.MemberService.QueryMemberDetail(l.ctx, &umsclient.QueryMemberDetailReq{Id: memberId})
-	i := member.Integration + int32(integration)
-	_, err = l.svcCtx.MemberService.UpdateMemberIntegration(l.ctx, &umsclient.UpdateMemberIntegrationReq{Id: memberId, Integration: int64(i)})
+	member, _ := l.svcCtx.MemberService.QueryMemberInfoDetail(l.ctx, &umsclient.QueryMemberInfoDetailReq{MemberId: memberId})
+	i := member.Points + integration
+	_, err = l.svcCtx.MemberService.UpdateMemberPoints(l.ctx, &umsclient.UpdateMemberPointsReq{MemberId: memberId, Points: i})
 	if err != nil {
 		return nil, err
 	}

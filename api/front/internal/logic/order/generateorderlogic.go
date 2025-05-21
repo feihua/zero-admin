@@ -56,7 +56,7 @@ func (l *GenerateOrderLogic) GenerateOrder(req *types.GenerateOrderReq) (*types.
 	if err != nil {
 		return nil, err
 	}
-	memberInfo, _ := l.svcCtx.MemberService.QueryMemberDetail(l.ctx, &umsclient.QueryMemberDetailReq{Id: memberId})
+	memberInfo, _ := l.svcCtx.MemberService.QueryMemberInfoDetail(l.ctx, &umsclient.QueryMemberInfoDetailReq{MemberId: memberId})
 	// 1.获取购物车及优惠信息
 	cartPromotionItemList, err := cart.QueryCartListPromotion(req.CartIds, l.ctx, l.svcCtx)
 	if err != nil {
@@ -170,7 +170,7 @@ func (l *GenerateOrderLogic) GenerateOrder(req *types.GenerateOrderReq) (*types.
 	if req.UseIntegration > 0 {
 		// 1.先计算出积分的总金额
 		// 1.1判断用户是否有这么多积分
-		if req.UseIntegration > memberInfo.Integration {
+		if req.UseIntegration > memberInfo.Points {
 			return result(1, "积分大于用户拥有有积分"), nil
 		}
 		// 1.2根据积分使用规则判断是否可用
@@ -240,7 +240,7 @@ func (l *GenerateOrderLogic) GenerateOrder(req *types.GenerateOrderReq) (*types.
 	}
 	// 计算订单应付金额
 	payAmount := totalAmount - promotionAmount - couponAmount - integrationAmount
-	address, err := l.svcCtx.MemberReceiveAddressService.QueryMemberReceiveAddressDetail(l.ctx, &umsclient.QueryMemberReceiveAddressDetailReq{
+	address, err := l.svcCtx.MemberAddressService.QueryMemberAddressDetail(l.ctx, &umsclient.QueryMemberAddressDetailReq{
 		MemberId: memberId,
 		Id:       req.MemberReceiveAddressId,
 	})
@@ -260,7 +260,7 @@ func (l *GenerateOrderLogic) GenerateOrder(req *types.GenerateOrderReq) (*types.
 		MemberId:              memberId,                                 // 会员id
 		CouponId:              req.CouponId,                             // 优惠券id
 		OrderSn:               "",                                       // 生成订单号
-		MemberUsername:        memberInfo.MemberName,                    // 会员名称
+		MemberUsername:        memberInfo.Nickname,                      // 会员名称
 		TotalAmount:           totalAmount,                              // 订单总金额
 		PayAmount:             payAmount,                                // 订单应付金额
 		FreightAmount:         0,                                        // 运费金额
@@ -283,12 +283,12 @@ func (l *GenerateOrderLogic) GenerateOrder(req *types.GenerateOrderReq) (*types.
 		BillContent:           "",                                       //
 		BillReceiverPhone:     "",                                       //
 		BillReceiverEmail:     "",                                       //
-		ReceiverName:          address.MemberName,                       // 收货人名称
-		ReceiverPhone:         address.PhoneNumber,                      // 收货人电话
-		ReceiverPostCode:      address.PostCode,                         // 邮政编码
+		ReceiverName:          address.ReceiverName,                     // 收货人名称
+		ReceiverPhone:         address.ReceiverPhone,                    // 收货人电话
+		ReceiverPostCode:      address.PostalCode,                       // 邮政编码
 		ReceiverProvince:      address.Province,                         // 省份/直辖市
 		ReceiverCity:          address.City,                             // 城市
-		ReceiverRegion:        address.Region,                           // 区
+		ReceiverRegion:        address.District,                         // 区
 		ReceiverDetailAddress: address.DetailAddress,                    // 详细地址(街道)
 		Note:                  "",                                       //
 		ConfirmStatus:         0,                                        // 确认收货状态：0->未确认；1->已确认
@@ -315,8 +315,8 @@ func (l *GenerateOrderLogic) GenerateOrder(req *types.GenerateOrderReq) (*types.
 		}
 	}
 	// 11.如果使用积分,需要扣除积分
-	i := memberInfo.Integration - req.UseIntegration
-	_, err = l.svcCtx.MemberService.UpdateMemberIntegration(l.ctx, &umsclient.UpdateMemberIntegrationReq{Id: memberId, Integration: int64(i)})
+	i := memberInfo.Points - req.UseIntegration
+	_, err = l.svcCtx.MemberService.UpdateMemberPoints(l.ctx, &umsclient.UpdateMemberPointsReq{MemberId: memberId, Points: i})
 	if err != nil {
 		return result(1, "扣除积分异常"), nil
 	}
@@ -328,7 +328,7 @@ func (l *GenerateOrderLogic) GenerateOrder(req *types.GenerateOrderReq) (*types.
 		Data: types.GenerateOrderData{
 			Id:                orderAddResp.Id,
 			MemberId:          memberId,
-			MemberUsername:    memberInfo.MemberName,
+			MemberUsername:    memberInfo.Nickname,
 			TotalAmount:       orderInfo.TotalAmount,
 			PayAmount:         orderInfo.PayAmount,
 			FreightAmount:     orderInfo.FreightAmount,

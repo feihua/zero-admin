@@ -34,23 +34,14 @@ func NewUpdateMemberLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Upda
 
 // UpdateMember 更新会员信息
 func (l *UpdateMemberLogic) UpdateMember(req *types.UpdateMemberReq) (resp *types.UpdateMemberResp, err error) {
-	_, err = l.svcCtx.MemberService.UpdateMember(l.ctx, &umsclient.UpdateMemberReq{
-		Id:                    req.Id,
-		MemberLevelId:         req.MemberLevelId,
-		MemberName:            req.Username,
-		Phone:                 req.Phone,
-		MemberStatus:          req.Status,
-		Icon:                  req.Icon,
-		Gender:                req.Gender,
-		Birthday:              req.Birthday,
-		City:                  req.City,
-		Job:                   req.Job,
-		PersonalizedSignature: req.PersonalizedSignature,
-		SourceType:            req.SourceType,
-		Integration:           req.Integration,
-		Growth:                req.Growth,
-		LotteryCount:          req.LuckeyCount,
-		HistoryIntegration:    req.HistoryIntegration,
+	_, err = l.svcCtx.MemberService.UpdateMemberInfo(l.ctx, &umsclient.UpdateMemberInfoReq{
+		Id:        req.Id,        // 主键ID
+		Nickname:  req.Nickname,  // 昵称
+		Mobile:    req.Mobile,    // 手机号码
+		Avatar:    req.Avatar,    // 头像
+		Signature: req.Signature, // 个性签名
+		Gender:    req.Gender,    // 性别：0-未知，1-男，2-女
+		Birthday:  req.Birthday,  // 生日
 	})
 
 	if err != nil {
