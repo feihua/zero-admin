@@ -11,5 +11,5 @@ Content-Type: application/json
 %}
 
 ### 查询订单设置
-GET {{host}}/api/order/setting/queryOrderSettingList
-Authorization: Bearer {{token}}
+GET {{host}}/api/oms/setting/queryOrderSettingList
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkZXB0SUQiOjEsImRlcHROYW1lIjoi5rWL6K-V56eR5oqAIiwiZXhwIjoxNzQ3MTQ3NjYzLCJpYXQiOjE3NDcwNjEyNjMsInVzZXJJZCI6MSwidXNlck5hbWUiOiJhZG1pbiJ9.lB9XdTG2ipoM6HMgx_0AEFGJdpedTmfD-qREqUrpNmY

@@ -54,7 +54,7 @@ func (l *QueryMemberInfoDetailLogic) QueryMemberInfoDetail(in *umsclient.QueryMe
 		Avatar:       item.Avatar,                             // 头像
 		Signature:    item.Signature,                          // 个性签名
 		Gender:       item.Gender,                             // 性别：0-未知，1-男，2-女
-		Birthday:     time_util.TimeToString(item.Birthday),   // 生日
+		Birthday:     time_util.TimeToString1(item.Birthday),  // 生日
 		GrowthPoint:  item.GrowthPoint,                        // 成长值
 		Points:       item.Points,                             // 积分
 		TotalPoints:  item.TotalPoints,                        // 累计获得积分
