@@ -1,0 +1,73 @@
+info (
+	desc:   "会员成长值记录"
+	author: "LiuFeiHua"
+	email:  "1002219331@qq.com"
+)
+
+type (
+	// 查询会员成长值记录详情请求参数
+	QueryMemberGrowthLogDetailReq {
+		Id int64 `form:"id"`
+	}
+	QueryMemberGrowthLogDetailData {
+		Id           int64  `json:"id"` //
+		MemberId     int64  `json:"memberId"` //会员ID
+		ChangeType   int32  `json:"changeType"` //变更类型：1-添加成长值，2-减少成长值
+		ChangeGrowth int32  `json:"changeGrowth"` //变更成长值
+		SourceType   int32  `json:"sourceType"` //来源类型：0-其他，1-订单，2-活动，3-签到，4-管理员修改
+		Description  string `json:"description"` //描述
+		OperateMan   string `json:"operateMan"` //操作人员
+		OperateNote  string `json:"operateNote"` //操作备注
+		CreateTime   string `json:"createTime"` //创建时间
+	}
+	QueryMemberGrowthLogDetailResp {
+		Code    string                         `json:"code"`
+		Message string                         `json:"message"`
+		Data    QueryMemberGrowthLogDetailData `json:"data"`
+	}
+	// 分页查询会员成长值记录列表请求参数
+	QueryMemberGrowthLogListReq {
+		Current    int32 `form:"current,default=1"` //第几页
+		PageSize   int32 `form:"pageSize,default=20"` //每页的数量
+		MemberId   int64 `form:"memberId,default=0"` //会员ID
+		ChangeType int32 `form:"changeType,default=0"` //变更类型：1-添加成长值，2-减少成长值
+		SourceType int32 `form:"sourceType,default=5"` //来源类型：0-其他，1-订单，2-活动，3-签到，4-管理员修改
+	}
+	QueryMemberGrowthLogListData {
+		Id           int64  `json:"id"` //
+		MemberId     int64  `json:"memberId"` //会员ID
+		ChangeType   int32  `json:"changeType"` //变更类型：1-添加成长值，2-减少成长值
+		ChangeGrowth int32  `json:"changeGrowth"` //变更成长值
+		SourceType   int32  `json:"sourceType"` //来源类型：0-其他，1-订单，2-活动，3-签到，4-管理员修改
+		Description  string `json:"description"` //描述
+		OperateMan   string `json:"operateMan"` //操作人员
+		OperateNote  string `json:"operateNote"` //操作备注
+		CreateTime   string `json:"createTime"` //创建时间
+	}
+	QueryMemberGrowthLogListResp {
+		Code     string                          `json:"code"`
+		Message  string                          `json:"message"`
+		Current  int32                           `json:"current,default=1"`
+		Data     []*QueryMemberGrowthLogListData `json:"data"`
+		PageSize int32                           `json:"pageSize,default=20"`
+		Success  bool                            `json:"success"`
+		Total    int64                           `json:"total"`
+	}
+)
+
+@server (
+	jwt:        Auth
+	middleware: CheckUrl
+	group:      ums/member_growth
+	prefix:     /api/ums/growthLog
+)
+service admin-api {
+	// 查询会员成长值记录详情
+	@handler QueryMemberGrowthLogDetail
+	get /queryMemberGrowthLogDetail (QueryMemberGrowthLogDetailReq) returns (QueryMemberGrowthLogDetailResp)
+
+	// 分页查询会员成长值记录列表
+	@handler QueryMemberGrowthLogList
+	get /queryMemberGrowthLogList (QueryMemberGrowthLogListReq) returns (QueryMemberGrowthLogListResp)
+}
+

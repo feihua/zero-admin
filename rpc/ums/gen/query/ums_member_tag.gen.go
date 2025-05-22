@@ -30,9 +30,15 @@ func newUmsMemberTag(db *gorm.DB, opts ...gen.DOOption) umsMemberTag {
 	_umsMemberTag.ALL = field.NewAsterisk(tableName)
 	_umsMemberTag.ID = field.NewInt64(tableName, "id")
 	_umsMemberTag.TagName = field.NewString(tableName, "tag_name")
+	_umsMemberTag.Description = field.NewString(tableName, "description")
 	_umsMemberTag.FinishOrderCount = field.NewInt32(tableName, "finish_order_count")
+	_umsMemberTag.FinishOrderAmount = field.NewFloat64(tableName, "finish_order_amount")
 	_umsMemberTag.Status = field.NewInt32(tableName, "status")
-	_umsMemberTag.FinishOrderAmount = field.NewInt64(tableName, "finish_order_amount")
+	_umsMemberTag.CreateBy = field.NewInt64(tableName, "create_by")
+	_umsMemberTag.CreateTime = field.NewTime(tableName, "create_time")
+	_umsMemberTag.UpdateBy = field.NewInt64(tableName, "update_by")
+	_umsMemberTag.UpdateTime = field.NewTime(tableName, "update_time")
+	_umsMemberTag.IsDeleted = field.NewInt32(tableName, "is_deleted")
 
 	_umsMemberTag.fillFieldMap()
 
@@ -44,11 +50,17 @@ type umsMemberTag struct {
 	umsMemberTagDo umsMemberTagDo
 
 	ALL               field.Asterisk
-	ID                field.Int64
-	TagName           field.String // 标签名称
-	FinishOrderCount  field.Int32  // 自动打标签完成订单数量
-	Status            field.Int32  // 状态：0->禁用；1->启用
-	FinishOrderAmount field.Int64  // 自动打标签完成订单金额
+	ID                field.Int64   // 主键ID
+	TagName           field.String  // 标签名称
+	Description       field.String  // 标签描述
+	FinishOrderCount  field.Int32   // 自动打标签完成订单数量
+	FinishOrderAmount field.Float64 // 自动打标签完成订单金额
+	Status            field.Int32   // 状态：0-禁用，1-启用
+	CreateBy          field.Int64   // 创建人ID
+	CreateTime        field.Time    // 创建时间
+	UpdateBy          field.Int64   // 更新人ID
+	UpdateTime        field.Time    // 更新时间
+	IsDeleted         field.Int32   // 是否删除
 
 	fieldMap map[string]field.Expr
 }
@@ -67,9 +79,15 @@ func (u *umsMemberTag) updateTableName(table string) *umsMemberTag {
 	u.ALL = field.NewAsterisk(table)
 	u.ID = field.NewInt64(table, "id")
 	u.TagName = field.NewString(table, "tag_name")
+	u.Description = field.NewString(table, "description")
 	u.FinishOrderCount = field.NewInt32(table, "finish_order_count")
+	u.FinishOrderAmount = field.NewFloat64(table, "finish_order_amount")
 	u.Status = field.NewInt32(table, "status")
-	u.FinishOrderAmount = field.NewInt64(table, "finish_order_amount")
+	u.CreateBy = field.NewInt64(table, "create_by")
+	u.CreateTime = field.NewTime(table, "create_time")
+	u.UpdateBy = field.NewInt64(table, "update_by")
+	u.UpdateTime = field.NewTime(table, "update_time")
+	u.IsDeleted = field.NewInt32(table, "is_deleted")
 
 	u.fillFieldMap()
 
@@ -98,12 +116,18 @@ func (u *umsMemberTag) GetFieldByName(fieldName string) (field.OrderExpr, bool) 
 }
 
 func (u *umsMemberTag) fillFieldMap() {
-	u.fieldMap = make(map[string]field.Expr, 5)
+	u.fieldMap = make(map[string]field.Expr, 11)
 	u.fieldMap["id"] = u.ID
 	u.fieldMap["tag_name"] = u.TagName
+	u.fieldMap["description"] = u.Description
 	u.fieldMap["finish_order_count"] = u.FinishOrderCount
-	u.fieldMap["status"] = u.Status
 	u.fieldMap["finish_order_amount"] = u.FinishOrderAmount
+	u.fieldMap["status"] = u.Status
+	u.fieldMap["create_by"] = u.CreateBy
+	u.fieldMap["create_time"] = u.CreateTime
+	u.fieldMap["update_by"] = u.UpdateBy
+	u.fieldMap["update_time"] = u.UpdateTime
+	u.fieldMap["is_deleted"] = u.IsDeleted
 }
 
 func (u umsMemberTag) clone(db *gorm.DB) umsMemberTag {

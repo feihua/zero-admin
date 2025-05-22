@@ -14,20 +14,18 @@ import (
 )
 
 type (
-	AddGrowthChangeHistoryReq                  = umsclient.AddGrowthChangeHistoryReq
-	AddGrowthChangeHistoryResp                 = umsclient.AddGrowthChangeHistoryResp
-	AddIntegrationChangeHistoryReq             = umsclient.AddIntegrationChangeHistoryReq
-	AddIntegrationChangeHistoryResp            = umsclient.AddIntegrationChangeHistoryResp
 	AddIntegrationConsumeSettingReq            = umsclient.AddIntegrationConsumeSettingReq
 	AddIntegrationConsumeSettingResp           = umsclient.AddIntegrationConsumeSettingResp
 	AddMemberAddressReq                        = umsclient.AddMemberAddressReq
 	AddMemberAddressResp                       = umsclient.AddMemberAddressResp
 	AddMemberBrandAttentionReq                 = umsclient.AddMemberBrandAttentionReq
 	AddMemberBrandAttentionResp                = umsclient.AddMemberBrandAttentionResp
+	AddMemberGrowthLogReq                      = umsclient.AddMemberGrowthLogReq
+	AddMemberGrowthLogResp                     = umsclient.AddMemberGrowthLogResp
 	AddMemberLevelReq                          = umsclient.AddMemberLevelReq
 	AddMemberLevelResp                         = umsclient.AddMemberLevelResp
-	AddMemberMemberTagRelationReq              = umsclient.AddMemberMemberTagRelationReq
-	AddMemberMemberTagRelationResp             = umsclient.AddMemberMemberTagRelationResp
+	AddMemberPointsLogReq                      = umsclient.AddMemberPointsLogReq
+	AddMemberPointsLogResp                     = umsclient.AddMemberPointsLogResp
 	AddMemberProductCategoryRelationReq        = umsclient.AddMemberProductCategoryRelationReq
 	AddMemberProductCategoryRelationResp       = umsclient.AddMemberProductCategoryRelationResp
 	AddMemberProductCollectionReq              = umsclient.AddMemberProductCollectionReq
@@ -36,16 +34,18 @@ type (
 	AddMemberReadHistoryResp                   = umsclient.AddMemberReadHistoryResp
 	AddMemberRuleSettingReq                    = umsclient.AddMemberRuleSettingReq
 	AddMemberRuleSettingResp                   = umsclient.AddMemberRuleSettingResp
+	AddMemberSignLogReq                        = umsclient.AddMemberSignLogReq
+	AddMemberSignLogResp                       = umsclient.AddMemberSignLogResp
 	AddMemberStatisticsInfoReq                 = umsclient.AddMemberStatisticsInfoReq
 	AddMemberStatisticsInfoResp                = umsclient.AddMemberStatisticsInfoResp
+	AddMemberTagRelationReq                    = umsclient.AddMemberTagRelationReq
+	AddMemberTagRelationResp                   = umsclient.AddMemberTagRelationResp
 	AddMemberTagReq                            = umsclient.AddMemberTagReq
 	AddMemberTagResp                           = umsclient.AddMemberTagResp
+	AddMemberTaskRelationReq                   = umsclient.AddMemberTaskRelationReq
+	AddMemberTaskRelationResp                  = umsclient.AddMemberTaskRelationResp
 	AddMemberTaskReq                           = umsclient.AddMemberTaskReq
 	AddMemberTaskResp                          = umsclient.AddMemberTaskResp
-	DeleteGrowthChangeHistoryReq               = umsclient.DeleteGrowthChangeHistoryReq
-	DeleteGrowthChangeHistoryResp              = umsclient.DeleteGrowthChangeHistoryResp
-	DeleteIntegrationChangeHistoryReq          = umsclient.DeleteIntegrationChangeHistoryReq
-	DeleteIntegrationChangeHistoryResp         = umsclient.DeleteIntegrationChangeHistoryResp
 	DeleteIntegrationConsumeSettingReq         = umsclient.DeleteIntegrationConsumeSettingReq
 	DeleteIntegrationConsumeSettingResp        = umsclient.DeleteIntegrationConsumeSettingResp
 	DeleteMemberAddressReq                     = umsclient.DeleteMemberAddressReq
@@ -58,8 +58,6 @@ type (
 	DeleteMemberLevelResp                      = umsclient.DeleteMemberLevelResp
 	DeleteMemberLoginLogReq                    = umsclient.DeleteMemberLoginLogReq
 	DeleteMemberLoginLogResp                   = umsclient.DeleteMemberLoginLogResp
-	DeleteMemberMemberTagRelationReq           = umsclient.DeleteMemberMemberTagRelationReq
-	DeleteMemberMemberTagRelationResp          = umsclient.DeleteMemberMemberTagRelationResp
 	DeleteMemberProductCollectionReq           = umsclient.DeleteMemberProductCollectionReq
 	DeleteMemberProductCollectionResp          = umsclient.DeleteMemberProductCollectionResp
 	DeleteMemberReadHistoryReq                 = umsclient.DeleteMemberReadHistoryReq
@@ -70,31 +68,25 @@ type (
 	DeleteMemberTagResp                        = umsclient.DeleteMemberTagResp
 	DeleteMemberTaskReq                        = umsclient.DeleteMemberTaskReq
 	DeleteMemberTaskResp                       = umsclient.DeleteMemberTaskResp
-	GrowthChangeHistoryListData                = umsclient.GrowthChangeHistoryListData
-	IntegrationChangeHistoryListData           = umsclient.IntegrationChangeHistoryListData
 	IntegrationConsumeSettingListData          = umsclient.IntegrationConsumeSettingListData
 	LoginReq                                   = umsclient.LoginReq
 	LoginResp                                  = umsclient.LoginResp
 	MemberAddressListData                      = umsclient.MemberAddressListData
 	MemberBrandAttentionListData               = umsclient.MemberBrandAttentionListData
+	MemberGrowthLogListData                    = umsclient.MemberGrowthLogListData
 	MemberInfoListData                         = umsclient.MemberInfoListData
 	MemberLevelListData                        = umsclient.MemberLevelListData
 	MemberLoginLogListData                     = umsclient.MemberLoginLogListData
-	MemberMemberTagRelationListData            = umsclient.MemberMemberTagRelationListData
+	MemberPointsLogListData                    = umsclient.MemberPointsLogListData
 	MemberProductCategoryRelationListData      = umsclient.MemberProductCategoryRelationListData
 	MemberProductCollectionListData            = umsclient.MemberProductCollectionListData
 	MemberReadHistoryListData                  = umsclient.MemberReadHistoryListData
 	MemberRuleSettingListData                  = umsclient.MemberRuleSettingListData
+	MemberSignLogListData                      = umsclient.MemberSignLogListData
 	MemberTagListData                          = umsclient.MemberTagListData
+	MemberTagRelationListData                  = umsclient.MemberTagRelationListData
 	MemberTaskListData                         = umsclient.MemberTaskListData
-	QueryGrowthChangeHistoryDetailReq          = umsclient.QueryGrowthChangeHistoryDetailReq
-	QueryGrowthChangeHistoryDetailResp         = umsclient.QueryGrowthChangeHistoryDetailResp
-	QueryGrowthChangeHistoryListReq            = umsclient.QueryGrowthChangeHistoryListReq
-	QueryGrowthChangeHistoryListResp           = umsclient.QueryGrowthChangeHistoryListResp
-	QueryIntegrationChangeHistoryDetailReq     = umsclient.QueryIntegrationChangeHistoryDetailReq
-	QueryIntegrationChangeHistoryDetailResp    = umsclient.QueryIntegrationChangeHistoryDetailResp
-	QueryIntegrationChangeHistoryListReq       = umsclient.QueryIntegrationChangeHistoryListReq
-	QueryIntegrationChangeHistoryListResp      = umsclient.QueryIntegrationChangeHistoryListResp
+	MemberTaskRelationListData                 = umsclient.MemberTaskRelationListData
 	QueryIntegrationConsumeSettingDetailReq    = umsclient.QueryIntegrationConsumeSettingDetailReq
 	QueryIntegrationConsumeSettingDetailResp   = umsclient.QueryIntegrationConsumeSettingDetailResp
 	QueryIntegrationConsumeSettingListReq      = umsclient.QueryIntegrationConsumeSettingListReq
@@ -107,6 +99,10 @@ type (
 	QueryMemberBrandAttentionDetailResp        = umsclient.QueryMemberBrandAttentionDetailResp
 	QueryMemberBrandAttentionListReq           = umsclient.QueryMemberBrandAttentionListReq
 	QueryMemberBrandAttentionListResp          = umsclient.QueryMemberBrandAttentionListResp
+	QueryMemberGrowthLogDetailReq              = umsclient.QueryMemberGrowthLogDetailReq
+	QueryMemberGrowthLogDetailResp             = umsclient.QueryMemberGrowthLogDetailResp
+	QueryMemberGrowthLogListReq                = umsclient.QueryMemberGrowthLogListReq
+	QueryMemberGrowthLogListResp               = umsclient.QueryMemberGrowthLogListResp
 	QueryMemberInfoDetailReq                   = umsclient.QueryMemberInfoDetailReq
 	QueryMemberInfoDetailResp                  = umsclient.QueryMemberInfoDetailResp
 	QueryMemberInfoListReq                     = umsclient.QueryMemberInfoListReq
@@ -117,8 +113,10 @@ type (
 	QueryMemberLevelListResp                   = umsclient.QueryMemberLevelListResp
 	QueryMemberLoginLogListReq                 = umsclient.QueryMemberLoginLogListReq
 	QueryMemberLoginLogListResp                = umsclient.QueryMemberLoginLogListResp
-	QueryMemberMemberTagRelationListReq        = umsclient.QueryMemberMemberTagRelationListReq
-	QueryMemberMemberTagRelationListResp       = umsclient.QueryMemberMemberTagRelationListResp
+	QueryMemberPointsLogDetailReq              = umsclient.QueryMemberPointsLogDetailReq
+	QueryMemberPointsLogDetailResp             = umsclient.QueryMemberPointsLogDetailResp
+	QueryMemberPointsLogListReq                = umsclient.QueryMemberPointsLogListReq
+	QueryMemberPointsLogListResp               = umsclient.QueryMemberPointsLogListResp
 	QueryMemberProductCategoryRelationListReq  = umsclient.QueryMemberProductCategoryRelationListReq
 	QueryMemberProductCategoryRelationListResp = umsclient.QueryMemberProductCategoryRelationListResp
 	QueryMemberProductCollectionDetailReq      = umsclient.QueryMemberProductCollectionDetailReq
@@ -133,6 +131,10 @@ type (
 	QueryMemberRuleSettingDetailResp           = umsclient.QueryMemberRuleSettingDetailResp
 	QueryMemberRuleSettingListReq              = umsclient.QueryMemberRuleSettingListReq
 	QueryMemberRuleSettingListResp             = umsclient.QueryMemberRuleSettingListResp
+	QueryMemberSignLogDetailReq                = umsclient.QueryMemberSignLogDetailReq
+	QueryMemberSignLogDetailResp               = umsclient.QueryMemberSignLogDetailResp
+	QueryMemberSignLogListReq                  = umsclient.QueryMemberSignLogListReq
+	QueryMemberSignLogListResp                 = umsclient.QueryMemberSignLogListResp
 	QueryMemberStatisticsInfoDetailReq         = umsclient.QueryMemberStatisticsInfoDetailReq
 	QueryMemberStatisticsInfoDetailResp        = umsclient.QueryMemberStatisticsInfoDetailResp
 	QueryMemberStatisticsInfoListData          = umsclient.QueryMemberStatisticsInfoListData
@@ -142,10 +144,18 @@ type (
 	QueryMemberTagDetailResp                   = umsclient.QueryMemberTagDetailResp
 	QueryMemberTagListReq                      = umsclient.QueryMemberTagListReq
 	QueryMemberTagListResp                     = umsclient.QueryMemberTagListResp
+	QueryMemberTagRelationDetailReq            = umsclient.QueryMemberTagRelationDetailReq
+	QueryMemberTagRelationDetailResp           = umsclient.QueryMemberTagRelationDetailResp
+	QueryMemberTagRelationListReq              = umsclient.QueryMemberTagRelationListReq
+	QueryMemberTagRelationListResp             = umsclient.QueryMemberTagRelationListResp
 	QueryMemberTaskDetailReq                   = umsclient.QueryMemberTaskDetailReq
 	QueryMemberTaskDetailResp                  = umsclient.QueryMemberTaskDetailResp
 	QueryMemberTaskListReq                     = umsclient.QueryMemberTaskListReq
 	QueryMemberTaskListResp                    = umsclient.QueryMemberTaskListResp
+	QueryMemberTaskRelationDetailReq           = umsclient.QueryMemberTaskRelationDetailReq
+	QueryMemberTaskRelationDetailResp          = umsclient.QueryMemberTaskRelationDetailResp
+	QueryMemberTaskRelationListReq             = umsclient.QueryMemberTaskRelationListReq
+	QueryMemberTaskRelationListResp            = umsclient.QueryMemberTaskRelationListResp
 	RegisterReq                                = umsclient.RegisterReq
 	RegisterResp                               = umsclient.RegisterResp
 	UpdateIntegrationConsumeSettingReq         = umsclient.UpdateIntegrationConsumeSettingReq
@@ -174,23 +184,24 @@ type (
 	UpdateMemberTagResp                        = umsclient.UpdateMemberTagResp
 	UpdateMemberTagStatusReq                   = umsclient.UpdateMemberTagStatusReq
 	UpdateMemberTagStatusResp                  = umsclient.UpdateMemberTagStatusResp
+	UpdateMemberTaskRelationStatusResp         = umsclient.UpdateMemberTaskRelationStatusResp
 	UpdateMemberTaskReq                        = umsclient.UpdateMemberTaskReq
 	UpdateMemberTaskResp                       = umsclient.UpdateMemberTaskResp
 	UpdateMemberTaskStatusReq                  = umsclient.UpdateMemberTaskStatusReq
 	UpdateMemberTaskStatusResp                 = umsclient.UpdateMemberTaskStatusResp
 
 	MemberTaskService interface {
-		// 添加会员任务表
+		// 添加会员任务
 		AddMemberTask(ctx context.Context, in *AddMemberTaskReq, opts ...grpc.CallOption) (*AddMemberTaskResp, error)
-		// 删除会员任务表
+		// 删除会员任务
 		DeleteMemberTask(ctx context.Context, in *DeleteMemberTaskReq, opts ...grpc.CallOption) (*DeleteMemberTaskResp, error)
-		// 更新会员任务表
+		// 更新会员任务
 		UpdateMemberTask(ctx context.Context, in *UpdateMemberTaskReq, opts ...grpc.CallOption) (*UpdateMemberTaskResp, error)
-		// 更新会员任务表状态
+		// 更新会员任务状态
 		UpdateMemberTaskStatus(ctx context.Context, in *UpdateMemberTaskStatusReq, opts ...grpc.CallOption) (*UpdateMemberTaskStatusResp, error)
-		// 查询会员任务表详情
+		// 查询会员任务详情
 		QueryMemberTaskDetail(ctx context.Context, in *QueryMemberTaskDetailReq, opts ...grpc.CallOption) (*QueryMemberTaskDetailResp, error)
-		// 查询会员任务表列表
+		// 查询会员任务列表
 		QueryMemberTaskList(ctx context.Context, in *QueryMemberTaskListReq, opts ...grpc.CallOption) (*QueryMemberTaskListResp, error)
 	}
 
@@ -205,37 +216,37 @@ func NewMemberTaskService(cli zrpc.Client) MemberTaskService {
 	}
 }
 
-// 添加会员任务表
+// 添加会员任务
 func (m *defaultMemberTaskService) AddMemberTask(ctx context.Context, in *AddMemberTaskReq, opts ...grpc.CallOption) (*AddMemberTaskResp, error) {
 	client := umsclient.NewMemberTaskServiceClient(m.cli.Conn())
 	return client.AddMemberTask(ctx, in, opts...)
 }
 
-// 删除会员任务表
+// 删除会员任务
 func (m *defaultMemberTaskService) DeleteMemberTask(ctx context.Context, in *DeleteMemberTaskReq, opts ...grpc.CallOption) (*DeleteMemberTaskResp, error) {
 	client := umsclient.NewMemberTaskServiceClient(m.cli.Conn())
 	return client.DeleteMemberTask(ctx, in, opts...)
 }
 
-// 更新会员任务表
+// 更新会员任务
 func (m *defaultMemberTaskService) UpdateMemberTask(ctx context.Context, in *UpdateMemberTaskReq, opts ...grpc.CallOption) (*UpdateMemberTaskResp, error) {
 	client := umsclient.NewMemberTaskServiceClient(m.cli.Conn())
 	return client.UpdateMemberTask(ctx, in, opts...)
 }
 
-// 更新会员任务表状态
+// 更新会员任务状态
 func (m *defaultMemberTaskService) UpdateMemberTaskStatus(ctx context.Context, in *UpdateMemberTaskStatusReq, opts ...grpc.CallOption) (*UpdateMemberTaskStatusResp, error) {
 	client := umsclient.NewMemberTaskServiceClient(m.cli.Conn())
 	return client.UpdateMemberTaskStatus(ctx, in, opts...)
 }
 
-// 查询会员任务表详情
+// 查询会员任务详情
 func (m *defaultMemberTaskService) QueryMemberTaskDetail(ctx context.Context, in *QueryMemberTaskDetailReq, opts ...grpc.CallOption) (*QueryMemberTaskDetailResp, error) {
 	client := umsclient.NewMemberTaskServiceClient(m.cli.Conn())
 	return client.QueryMemberTaskDetail(ctx, in, opts...)
 }
 
-// 查询会员任务表列表
+// 查询会员任务列表
 func (m *defaultMemberTaskService) QueryMemberTaskList(ctx context.Context, in *QueryMemberTaskListReq, opts ...grpc.CallOption) (*QueryMemberTaskListResp, error) {
 	client := umsclient.NewMemberTaskServiceClient(m.cli.Conn())
 	return client.QueryMemberTaskList(ctx, in, opts...)

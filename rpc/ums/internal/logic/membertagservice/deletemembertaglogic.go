@@ -13,7 +13,7 @@ import (
 // DeleteMemberTagLogic 删除用户标签
 /*
 Author: LiuFeiHua
-Date: 2025/01/24 10:32:59
+Date: 2025/05/22 10:44:59
 */
 type DeleteMemberTagLogic struct {
 	ctx    context.Context
@@ -40,6 +40,5 @@ func (l *DeleteMemberTagLogic) DeleteMemberTag(in *umsclient.DeleteMemberTagReq)
 		return nil, errors.New("删除用户标签失败")
 	}
 
-	logc.Infof(l.ctx, "删除用户标签成功,参数：%+v", in)
 	return &umsclient.DeleteMemberTagResp{}, nil
 }

@@ -44,6 +44,9 @@ import "ums/member_task.api"
 import "cms/subject.api"
 import "cms/prefrence_area.api"
 import "cms/subject_category.api"
+import "ums/member_sign_log.api"
+import "ums/member_points_log.api"
+import "ums/member_growth_log.api"
 
 info (
 	desc:   "zero admin"

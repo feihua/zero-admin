@@ -1,0 +1,15 @@
+###用户登录
+POST {{host}}/api/sys/user/login
+Content-Type: application/json
+
+{
+  "account": "admin",
+  "password": "123456"
+}
+> {%
+    client.global.set("token", response.body.data.token);
+%}
+
+### 分页查询会员积分记录
+GET {{host}}/api/ums/pointsLog/queryMemberPointsLogList?memberId=1001
+Authorization: Bearer {{token}}

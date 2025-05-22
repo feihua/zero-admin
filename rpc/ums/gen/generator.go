@@ -24,24 +24,25 @@ func main() {
 	g.UseDB(db)
 
 	g.ApplyBasic(
-		g.GenerateModel("ums_growth_change_history"),
-		g.GenerateModel("ums_integration_change_history"),
-		g.GenerateModel("ums_integration_consume_setting"),
-		g.GenerateModel("ums_member"),
 		g.GenerateModel("ums_member_info"),
-		g.GenerateModel("ums_member_brand_attention"),
 		g.GenerateModel("ums_member_level"),
+		g.GenerateModel("ums_member_address"),
+		g.GenerateModel("ums_member_tag"),
+		g.GenerateModel("ums_member_tag_relation"),
+		g.GenerateModel("ums_member_task"),
+		g.GenerateModel("ums_member_task_relation"),
+		g.GenerateModel("ums_member_sign_log"),
+		g.GenerateModel("ums_member_points_log"),
+		g.GenerateModel("ums_member_growth_log"),
+
+		g.GenerateModel("ums_integration_consume_setting"),
+		g.GenerateModel("ums_member_brand_attention"),
 		g.GenerateModel("ums_member_login_log"),
-		g.GenerateModel("ums_member_member_tag_relation"),
 		g.GenerateModel("ums_member_product_category_relation"),
 		g.GenerateModel("ums_member_product_collection"),
 		g.GenerateModel("ums_member_read_history"),
-
-		g.GenerateModel("ums_member_address"),
 		g.GenerateModel("ums_member_rule_setting"),
 		g.GenerateModel("ums_member_statistics_info"),
-		g.GenerateModel("ums_member_tag"),
-		g.GenerateModel("ums_member_task"),
 	)
 
 	// Execute the generator

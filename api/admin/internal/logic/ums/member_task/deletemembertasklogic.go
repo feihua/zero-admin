@@ -3,12 +3,11 @@ package member_task
 import (
 	"context"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
-	"github.com/feihua/zero-admin/api/admin/internal/common/res"
-	"github.com/feihua/zero-admin/rpc/ums/umsclient"
-	"github.com/zeromicro/go-zero/core/logc"
-
 	"github.com/feihua/zero-admin/api/admin/internal/svc"
 	"github.com/feihua/zero-admin/api/admin/internal/types"
+	"github.com/feihua/zero-admin/rpc/ums/umsclient"
+	"github.com/zeromicro/go-zero/core/logc"
+	"google.golang.org/grpc/status"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -16,7 +15,7 @@ import (
 // DeleteMemberTaskLogic 删除会员任务
 /*
 Author: LiuFeiHua
-Date: 2024/5/23 9:12
+Date: 2025/05/22 10:44:59
 */
 type DeleteMemberTaskLogic struct {
 	logx.Logger
@@ -39,9 +38,13 @@ func (l *DeleteMemberTaskLogic) DeleteMemberTask(req *types.DeleteMemberTaskReq)
 	})
 
 	if err != nil {
-		logc.Errorf(l.ctx, "根据Ids: %+v,删除会员任务异常:%s", req, err.Error())
-		return nil, errorx.NewDefaultError("删除会员任务失败")
+		logc.Errorf(l.ctx, "删除会员任务失败,参数：%+v,响应：%s", req, err.Error())
+		s, _ := status.FromError(err)
+		return nil, errorx.NewDefaultError(s.Message())
 	}
 
-	return res.Success()
+	return &types.BaseResp{
+		Code:    "000000",
+		Message: "删除会员任务成功",
+	}, nil
 }

@@ -12,10 +12,10 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// QueryMemberTagDetailLogic 查询用户标签表详情
+// QueryMemberTagDetailLogic 查询用户标签详情
 /*
-Author: 刘飞华
-Date: 2025/02/05 10:34:53
+Author: LiuFeiHua
+Date: 2025/05/22 10:44:59
 */
 type QueryMemberTagDetailLogic struct {
 	logx.Logger
@@ -31,7 +31,7 @@ func NewQueryMemberTagDetailLogic(ctx context.Context, svcCtx *svc.ServiceContex
 	}
 }
 
-// QueryMemberTagDetail 查询用户标签表详情
+// QueryMemberTagDetail 查询用户标签详情
 func (l *QueryMemberTagDetailLogic) QueryMemberTagDetail(req *types.QueryMemberTagDetailReq) (resp *types.QueryMemberTagDetailResp, err error) {
 
 	detail, err := l.svcCtx.MemberTagService.QueryMemberTagDetail(l.ctx, &umsclient.QueryMemberTagDetailReq{
@@ -39,21 +39,27 @@ func (l *QueryMemberTagDetailLogic) QueryMemberTagDetail(req *types.QueryMemberT
 	})
 
 	if err != nil {
-		logc.Errorf(l.ctx, "查询用户标签表详情失败,参数：%+v,响应：%s", req, err.Error())
+		logc.Errorf(l.ctx, "查询用户标签详情失败,参数：%+v,响应：%s", req, err.Error())
 		s, _ := status.FromError(err)
 		return nil, errorx.NewDefaultError(s.Message())
 	}
 
 	data := types.QueryMemberTagDetailData{
-		Id:                detail.Id,                //
-		TagName:           detail.TagName,           // 标签名称
-		FinishOrderCount:  detail.FinishOrderCount,  // 自动打标签完成订单数量
-		Status:            detail.Status,            // 状态：0->禁用；1->启用
-		FinishOrderAmount: detail.FinishOrderAmount, // 自动打标签完成订单金额
+		Id:                detail.Id,                         // 主键ID
+		TagName:           detail.TagName,                    // 标签名称
+		Description:       detail.Description,                // 标签描述
+		FinishOrderCount:  detail.FinishOrderCount,           // 自动打标签完成订单数量
+		FinishOrderAmount: float64(detail.FinishOrderAmount), // 自动打标签完成订单金额
+		Status:            detail.Status,                     // 状态：0-禁用，1-启用
+		CreateBy:          detail.CreateBy,                   // 创建人ID
+		CreateTime:        detail.CreateTime,                 // 创建时间
+		UpdateBy:          detail.UpdateBy,                   // 更新人ID
+		UpdateTime:        detail.UpdateTime,                 // 更新时间
+
 	}
 	return &types.QueryMemberTagDetailResp{
 		Code:    "000000",
-		Message: "查询用户标签表成功",
+		Message: "查询用户标签成功",
 		Data:    data,
 	}, nil
 }

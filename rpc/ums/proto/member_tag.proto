@@ -4,21 +4,22 @@ package main;
 
 option go_package = "./proto";
 
-// 添加用户标签表
+// 添加用户标签
 message AddMemberTagReq {
-  int64 id = 1; //
+  int64 id = 1; //主键ID
   string tag_name = 2; //标签名称
-  int32 finish_order_count = 3; //自动打标签完成订单数量
-  int32 status = 4; //状态：0->禁用；1->启用
-  int64 finish_order_amount = 5; //自动打标签完成订单金额
-
+  string description = 3; //标签描述
+  int32 finish_order_count = 4; //自动打标签完成订单数量
+  float finish_order_amount = 5; //自动打标签完成订单金额
+  int32 status = 6; //状态：0-禁用，1-启用
+  int64 create_by = 7; //创建人ID
 }
 
 message AddMemberTagResp {
   string pong = 1;
 }
 
-// 删除用户标签表
+// 删除用户标签
 message DeleteMemberTagReq {
   repeated int64 ids = 1;
 }
@@ -27,59 +28,70 @@ message DeleteMemberTagResp {
   string pong = 1;
 }
 
-// 更新用户标签表
+// 更新用户标签
 message UpdateMemberTagReq {
-  int64 id = 1; //
+  int64 id = 1; //主键ID
   string tag_name = 2; //标签名称
-  int32 finish_order_count = 3; //自动打标签完成订单数量
-  int32 status = 4; //状态：0->禁用；1->启用
-  int64 finish_order_amount = 5; //自动打标签完成订单金额
+  string description = 3; //标签描述
+  int32 finish_order_count = 4; //自动打标签完成订单数量
+  float finish_order_amount = 5; //自动打标签完成订单金额
+  int32 status = 6; //状态：0-禁用，1-启用
+  int64 update_by = 9; //更新人ID
 }
 
 message UpdateMemberTagResp {
   string pong = 1;
 }
 
-// 更新用户标签表状态
+// 更新用户标签状态
 message UpdateMemberTagStatusReq {
-  repeated int64 ids = 1;
-  int32 status = 4; //状态：0->禁用；1->启用
-
+  repeated int64 ids = 1; //主键ID
+  int32 status = 6; //状态：0-禁用，1-启用
+  int64 update_by = 9; //更新人ID
 }
 
 message UpdateMemberTagStatusResp {
   string pong = 1;
 }
 
-// 查询用户标签表详情
+// 查询用户标签详情
 message QueryMemberTagDetailReq {
     int64 id = 1;
 }
 
 message QueryMemberTagDetailResp {
-  int64 id = 1; //
+  int64 id = 1; //主键ID
   string tag_name = 2; //标签名称
-  int32 finish_order_count = 3; //自动打标签完成订单数量
-  int32 status = 4; //状态：0->禁用；1->启用
-  int64 finish_order_amount = 5; //自动打标签完成订单金额
+  string description = 3; //标签描述
+  int32 finish_order_count = 4; //自动打标签完成订单数量
+  float finish_order_amount = 5; //自动打标签完成订单金额
+  int32 status = 6; //状态：0-禁用，1-启用
+  int64 create_by = 7; //创建人ID
+  string create_time = 8; //创建时间
+  int64 update_by = 9; //更新人ID
+  string update_time = 10; //更新时间
 
 }
 
-// 分页查询用户标签表列表
+// 分页查询用户标签列表
 message QueryMemberTagListReq {
-  int64 page_num = 1; //第几页
-  int64 page_size = 2; //每页的数量
-  int32 status = 4; //状态：0->禁用；1->启用
-  string tag_name = 5; //标签名称
-
+  string tag_name = 1; //标签名称
+  int32 status = 2; //状态：0-禁用，1-启用
+  int32 page_num = 7; //第几页
+  int32 page_size = 8; //每页的数量
 }
 
 message MemberTagListData {
-  int64 id = 1; //
+  int64 id = 1; //主键ID
   string tag_name = 2; //标签名称
-  int32 finish_order_count = 3; //自动打标签完成订单数量
-  int32 status = 4; //状态：0->禁用；1->启用
-  int64 finish_order_amount = 5; //自动打标签完成订单金额
+  string description = 3; //标签描述
+  int32 finish_order_count = 4; //自动打标签完成订单数量
+  float finish_order_amount = 5; //自动打标签完成订单金额
+  int32 status = 6; //状态：0-禁用，1-启用
+  int64 create_by = 7; //创建人ID
+  string create_time = 8; //创建时间
+  int64 update_by = 9; //更新人ID
+  string update_time = 10; //更新时间
 
 }
 
@@ -88,19 +100,19 @@ message QueryMemberTagListResp {
   repeated  MemberTagListData list = 2;
 }
 
-// 用户标签表
+// 用户标签
 service MemberTagService {
-  // 添加用户标签表
+  // 添加用户标签
   rpc AddMemberTag(AddMemberTagReq) returns (AddMemberTagResp){}
-  // 删除用户标签表
+  // 删除用户标签
   rpc DeleteMemberTag(DeleteMemberTagReq) returns (DeleteMemberTagResp){}
-  // 更新用户标签表
+  // 更新用户标签
   rpc UpdateMemberTag(UpdateMemberTagReq) returns (UpdateMemberTagResp ){}
-  // 更新用户标签表状态
+  // 更新用户标签状态
   rpc UpdateMemberTagStatus(UpdateMemberTagStatusReq) returns (UpdateMemberTagStatusResp ){}
-  // 查询用户标签表详情
+  // 查询用户标签详情
    rpc QueryMemberTagDetail(QueryMemberTagDetailReq) returns (QueryMemberTagDetailResp){}
-  // 查询用户标签表列表
+  // 查询用户标签列表
   rpc QueryMemberTagList(QueryMemberTagListReq) returns (QueryMemberTagListResp){}
 
 

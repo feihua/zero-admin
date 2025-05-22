@@ -4,15 +4,25 @@
 
 package model
 
+import (
+	"time"
+)
+
 const TableNameUmsMemberTag = "ums_member_tag"
 
 // UmsMemberTag 用户标签表
 type UmsMemberTag struct {
-	ID                int64  `gorm:"column:id;primaryKey;autoIncrement:true" json:"id"`
-	TagName           string `gorm:"column:tag_name;not null;comment:标签名称" json:"tag_name"`                              // 标签名称
-	FinishOrderCount  int32  `gorm:"column:finish_order_count;not null;comment:自动打标签完成订单数量" json:"finish_order_count"`   // 自动打标签完成订单数量
-	Status            int32  `gorm:"column:status;not null;default:1;comment:状态：0->禁用；1->启用" json:"status"`              // 状态：0->禁用；1->启用
-	FinishOrderAmount int64  `gorm:"column:finish_order_amount;not null;comment:自动打标签完成订单金额" json:"finish_order_amount"` // 自动打标签完成订单金额
+	ID                int64      `gorm:"column:id;primaryKey;autoIncrement:true;comment:主键ID" json:"id"`                                  // 主键ID
+	TagName           string     `gorm:"column:tag_name;not null;comment:标签名称" json:"tag_name"`                                           // 标签名称
+	Description       string     `gorm:"column:description;not null;comment:标签描述" json:"description"`                                     // 标签描述
+	FinishOrderCount  int32      `gorm:"column:finish_order_count;not null;comment:自动打标签完成订单数量" json:"finish_order_count"`                // 自动打标签完成订单数量
+	FinishOrderAmount float64    `gorm:"column:finish_order_amount;not null;default:0.00;comment:自动打标签完成订单金额" json:"finish_order_amount"` // 自动打标签完成订单金额
+	Status            int32      `gorm:"column:status;not null;default:1;comment:状态：0-禁用，1-启用" json:"status"`                             // 状态：0-禁用，1-启用
+	CreateBy          int64      `gorm:"column:create_by;not null;comment:创建人ID" json:"create_by"`                                        // 创建人ID
+	CreateTime        time.Time  `gorm:"column:create_time;not null;default:CURRENT_TIMESTAMP;comment:创建时间" json:"create_time"`           // 创建时间
+	UpdateBy          *int64     `gorm:"column:update_by;comment:更新人ID" json:"update_by"`                                                 // 更新人ID
+	UpdateTime        *time.Time `gorm:"column:update_time;comment:更新时间" json:"update_time"`                                              // 更新时间
+	IsDeleted         int32      `gorm:"column:is_deleted;not null;comment:是否删除" json:"is_deleted"`                                       // 是否删除
 }
 
 // TableName UmsMemberTag's table name

@@ -1,0 +1,62 @@
+syntax = "proto3";
+
+package main;
+
+option go_package = "./proto";
+
+// 添加会员标签关联
+message AddMemberTagRelationReq {
+  int64 id = 1; //主键ID
+  int64 member_id = 2; //会员ID
+  int64 tag_id = 3; //标签ID
+}
+
+message AddMemberTagRelationResp {
+  string pong = 1;
+}
+
+// 查询会员标签关联详情
+message QueryMemberTagRelationDetailReq {
+  int64 id = 1;
+}
+
+message QueryMemberTagRelationDetailResp {
+  int64 id = 1; //主键ID
+  int64 member_id = 2; //会员ID
+  int64 tag_id = 3; //标签ID
+  string create_time = 4; //创建时间
+
+}
+
+// 分页查询会员标签关联列表
+message QueryMemberTagRelationListReq {
+  int64 member_id = 1; //会员ID
+  int64 tag_id = 2; //标签ID
+  int32 page_num = 3; //第几页
+  int32 page_size = 4; //每页的数量
+}
+
+message MemberTagRelationListData {
+  int64 id = 1; //主键ID
+  int64 member_id = 2; //会员ID
+  int64 tag_id = 3; //标签ID
+  string create_time = 4; //创建时间
+
+}
+
+message QueryMemberTagRelationListResp {
+  int64 total = 1;
+  repeated  MemberTagRelationListData list = 2;
+}
+
+// 会员标签关联
+service MemberTagRelationService {
+  // 添加会员标签关联
+  rpc AddMemberTagRelation(AddMemberTagRelationReq) returns (AddMemberTagRelationResp){}
+  // 查询会员标签关联详情
+  rpc QueryMemberTagRelationDetail(QueryMemberTagRelationDetailReq) returns (QueryMemberTagRelationDetailResp){}
+  // 查询会员标签关联列表
+  rpc QueryMemberTagRelationList(QueryMemberTagRelationListReq) returns (QueryMemberTagRelationListResp){}
+
+
+}

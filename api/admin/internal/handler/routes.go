@@ -42,9 +42,12 @@ import (
 	sysuser "github.com/feihua/zero-admin/api/admin/internal/handler/sys/user"
 	umsmember "github.com/feihua/zero-admin/api/admin/internal/handler/ums/member"
 	umsmember_address "github.com/feihua/zero-admin/api/admin/internal/handler/ums/member_address"
+	umsmember_growth "github.com/feihua/zero-admin/api/admin/internal/handler/ums/member_growth"
 	umsmember_integration_setting "github.com/feihua/zero-admin/api/admin/internal/handler/ums/member_integration_setting"
 	umsmember_level "github.com/feihua/zero-admin/api/admin/internal/handler/ums/member_level"
+	umsmember_points "github.com/feihua/zero-admin/api/admin/internal/handler/ums/member_points"
 	umsmember_rule_setting "github.com/feihua/zero-admin/api/admin/internal/handler/ums/member_rule_setting"
+	umsmember_sign "github.com/feihua/zero-admin/api/admin/internal/handler/ums/member_sign"
 	umsmember_statistics "github.com/feihua/zero-admin/api/admin/internal/handler/ums/member_statistics"
 	umsmember_tag "github.com/feihua/zero-admin/api/admin/internal/handler/ums/member_tag"
 	umsmember_task "github.com/feihua/zero-admin/api/admin/internal/handler/ums/member_task"
@@ -430,8 +433,8 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			[]rest.Route{
 				{
 					Method:  http.MethodGet,
-					Path:    "/queryProductList",
-					Handler: pmsproduct.QueryProductListHandler(serverCtx),
+					Path:    "/queryProductDetail",
+					Handler: pmsproduct.QueryProductDetailHandler(serverCtx),
 				},
 			}...,
 		),
@@ -445,8 +448,8 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			[]rest.Route{
 				{
 					Method:  http.MethodGet,
-					Path:    "/queryProductDetail",
-					Handler: pmsproduct.QueryProductDetailHandler(serverCtx),
+					Path:    "/queryProductList",
+					Handler: pmsproduct.QueryProductListHandler(serverCtx),
 				},
 			}...,
 		),
@@ -1125,18 +1128,18 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			[]rest.Route{
 				{
 					Method:  http.MethodGet,
-					Path:    "/deleteOperateLog",
-					Handler: syslog.DeleteOperateLogHandler(serverCtx),
+					Path:    "/deleteLoginLog",
+					Handler: syslog.DeleteLoginLogHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodGet,
-					Path:    "/queryOperateLogDetail",
-					Handler: syslog.QueryOperateLogDetailHandler(serverCtx),
+					Path:    "/queryLoginLogDetail",
+					Handler: syslog.QueryLoginLogDetailHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodGet,
-					Path:    "/queryOperateLogList",
-					Handler: syslog.QueryOperateLogListHandler(serverCtx),
+					Path:    "/queryLoginLogList",
+					Handler: syslog.QueryLoginLogListHandler(serverCtx),
 				},
 			}...,
 		),
@@ -1150,18 +1153,18 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			[]rest.Route{
 				{
 					Method:  http.MethodGet,
-					Path:    "/deleteLoginLog",
-					Handler: syslog.DeleteLoginLogHandler(serverCtx),
+					Path:    "/deleteOperateLog",
+					Handler: syslog.DeleteOperateLogHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodGet,
-					Path:    "/queryLoginLogDetail",
-					Handler: syslog.QueryLoginLogDetailHandler(serverCtx),
+					Path:    "/queryOperateLogDetail",
+					Handler: syslog.QueryOperateLogDetailHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodGet,
-					Path:    "/queryLoginLogList",
-					Handler: syslog.QueryLoginLogListHandler(serverCtx),
+					Path:    "/queryOperateLogList",
+					Handler: syslog.QueryOperateLogListHandler(serverCtx),
 				},
 			}...,
 		),
@@ -1410,16 +1413,6 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				},
 				{
 					Method:  http.MethodGet,
-					Path:    "/queryGrowthChangeHistoryList",
-					Handler: umsmember.QueryGrowthChangeHistoryListHandler(serverCtx),
-				},
-				{
-					Method:  http.MethodGet,
-					Path:    "/queryIntegrationChangeHistoryList",
-					Handler: umsmember.QueryIntegrationChangeHistoryListHandler(serverCtx),
-				},
-				{
-					Method:  http.MethodGet,
 					Path:    "/queryMemberDetail",
 					Handler: umsmember.QueryMemberInfoDetailHandler(serverCtx),
 				},
@@ -1462,6 +1455,26 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 		),
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
 		rest.WithPrefix("/api/ums/address"),
+	)
+
+	server.AddRoutes(
+		rest.WithMiddlewares(
+			[]rest.Middleware{serverCtx.CheckUrl},
+			[]rest.Route{
+				{
+					Method:  http.MethodGet,
+					Path:    "/queryMemberGrowthLogDetail",
+					Handler: umsmember_growth.QueryMemberGrowthLogDetailHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodGet,
+					Path:    "/queryMemberGrowthLogList",
+					Handler: umsmember_growth.QueryMemberGrowthLogListHandler(serverCtx),
+				},
+			}...,
+		),
+		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
+		rest.WithPrefix("/api/ums/growthLog"),
 	)
 
 	server.AddRoutes(
@@ -1549,6 +1562,26 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			[]rest.Middleware{serverCtx.CheckUrl},
 			[]rest.Route{
 				{
+					Method:  http.MethodGet,
+					Path:    "/queryMemberPointsLogDetail",
+					Handler: umsmember_points.QueryMemberPointsLogDetailHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodGet,
+					Path:    "/queryMemberPointsLogList",
+					Handler: umsmember_points.QueryMemberPointsLogListHandler(serverCtx),
+				},
+			}...,
+		),
+		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
+		rest.WithPrefix("/api/ums/pointsLog"),
+	)
+
+	server.AddRoutes(
+		rest.WithMiddlewares(
+			[]rest.Middleware{serverCtx.CheckUrl},
+			[]rest.Route{
+				{
 					Method:  http.MethodPost,
 					Path:    "/addMemberRuleSetting",
 					Handler: umsmember_rule_setting.AddMemberRuleSettingHandler(serverCtx),
@@ -1582,6 +1615,26 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 		),
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
 		rest.WithPrefix("/api/ums/ruleSetting"),
+	)
+
+	server.AddRoutes(
+		rest.WithMiddlewares(
+			[]rest.Middleware{serverCtx.CheckUrl},
+			[]rest.Route{
+				{
+					Method:  http.MethodGet,
+					Path:    "/queryMemberSignLogDetail",
+					Handler: umsmember_sign.QueryMemberSignLogDetailHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodGet,
+					Path:    "/queryMemberSignLogList",
+					Handler: umsmember_sign.QueryMemberSignLogListHandler(serverCtx),
+				},
+			}...,
+		),
+		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
+		rest.WithPrefix("/api/ums/sign"),
 	)
 
 	server.AddRoutes(

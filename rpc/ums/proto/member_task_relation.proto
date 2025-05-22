@@ -1,0 +1,66 @@
+syntax = "proto3";
+
+package main;
+
+option go_package = "./proto";
+
+// 添加会员任务关联
+message AddMemberTaskRelationReq {
+  int64 id = 1; //主键ID
+  int64 member_id = 2; //会员ID
+  int64 task_id = 3; //任务ID
+}
+
+message AddMemberTaskRelationResp {
+  string pong = 1;
+}
+
+message UpdateMemberTaskRelationStatusResp {
+  string pong = 1;
+}
+
+// 查询会员任务关联详情
+message QueryMemberTaskRelationDetailReq {
+    int64 id = 1;
+}
+
+message QueryMemberTaskRelationDetailResp {
+  int64 id = 1; //主键ID
+  int64 member_id = 2; //会员ID
+  int64 task_id = 3; //任务ID
+  string create_time = 4; //创建时间
+
+}
+
+// 分页查询会员任务关联列表
+message QueryMemberTaskRelationListReq {
+  int64 member_id = 1; //会员ID
+  int64 task_id = 2; //任务ID
+  int32 page_num = 3; //第几页
+  int32 page_size = 4; //每页的数量
+}
+
+message MemberTaskRelationListData {
+  int64 id = 1; //主键ID
+  int64 member_id = 2; //会员ID
+  int64 task_id = 3; //任务ID
+  string create_time = 4; //创建时间
+
+}
+
+message QueryMemberTaskRelationListResp {
+  int64 total = 1;
+  repeated  MemberTaskRelationListData list = 2;
+}
+
+// 会员任务关联
+service MemberTaskRelationService {
+  // 添加会员任务关联
+  rpc AddMemberTaskRelation(AddMemberTaskRelationReq) returns (AddMemberTaskRelationResp){}
+  // 查询会员任务关联详情
+   rpc QueryMemberTaskRelationDetail(QueryMemberTaskRelationDetailReq) returns (QueryMemberTaskRelationDetailResp){}
+  // 查询会员任务关联列表
+  rpc QueryMemberTaskRelationList(QueryMemberTaskRelationListReq) returns (QueryMemberTaskRelationListResp){}
+
+
+}

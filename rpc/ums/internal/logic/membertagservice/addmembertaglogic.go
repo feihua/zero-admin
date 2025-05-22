@@ -14,7 +14,7 @@ import (
 // AddMemberTagLogic 添加用户标签
 /*
 Author: LiuFeiHua
-Date: 2025/01/24 10:32:59
+Date: 2025/05/22 10:44:59
 */
 type AddMemberTagLogic struct {
 	ctx    context.Context
@@ -35,10 +35,12 @@ func (l *AddMemberTagLogic) AddMemberTag(in *umsclient.AddMemberTagReq) (*umscli
 	q := query.UmsMemberTag
 
 	item := &model.UmsMemberTag{
-		TagName:           in.TagName,           // 标签名称
-		FinishOrderCount:  in.FinishOrderCount,  // 自动打标签完成订单数量
-		Status:            in.Status,            // 状态：0->禁用；1->启用
-		FinishOrderAmount: in.FinishOrderAmount, // 自动打标签完成订单金额
+		TagName:           in.TagName,                    // 标签名称
+		Description:       in.Description,                // 标签描述
+		FinishOrderCount:  in.FinishOrderCount,           // 自动打标签完成订单数量
+		FinishOrderAmount: float64(in.FinishOrderAmount), // 自动打标签完成订单金额
+		Status:            in.Status,                     // 状态：0-禁用，1-启用
+		CreateBy:          in.CreateBy,                   // 创建人ID
 	}
 
 	err := q.WithContext(l.ctx).Create(item)
@@ -47,6 +49,5 @@ func (l *AddMemberTagLogic) AddMemberTag(in *umsclient.AddMemberTagReq) (*umscli
 		return nil, errors.New("添加用户标签失败")
 	}
 
-	logc.Infof(l.ctx, "添加用户标签成功,参数：%+v", in)
 	return &umsclient.AddMemberTagResp{}, nil
 }

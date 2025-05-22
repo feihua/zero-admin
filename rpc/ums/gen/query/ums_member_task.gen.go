@@ -30,14 +30,22 @@ func newUmsMemberTask(db *gorm.DB, opts ...gen.DOOption) umsMemberTask {
 	_umsMemberTask.ALL = field.NewAsterisk(tableName)
 	_umsMemberTask.ID = field.NewInt64(tableName, "id")
 	_umsMemberTask.TaskName = field.NewString(tableName, "task_name")
+	_umsMemberTask.TaskDesc = field.NewString(tableName, "task_desc")
 	_umsMemberTask.TaskGrowth = field.NewInt32(tableName, "task_growth")
 	_umsMemberTask.TaskIntegral = field.NewInt32(tableName, "task_integral")
 	_umsMemberTask.TaskType = field.NewInt32(tableName, "task_type")
+	_umsMemberTask.CompleteCount = field.NewInt32(tableName, "complete_count")
+	_umsMemberTask.RewardType = field.NewInt32(tableName, "reward_type")
+	_umsMemberTask.RewardParams = field.NewString(tableName, "reward_params")
+	_umsMemberTask.StartTime = field.NewTime(tableName, "start_time")
+	_umsMemberTask.EndTime = field.NewTime(tableName, "end_time")
 	_umsMemberTask.Status = field.NewInt32(tableName, "status")
-	_umsMemberTask.CreateBy = field.NewString(tableName, "create_by")
+	_umsMemberTask.Sort = field.NewInt32(tableName, "sort")
+	_umsMemberTask.CreateBy = field.NewInt64(tableName, "create_by")
 	_umsMemberTask.CreateTime = field.NewTime(tableName, "create_time")
-	_umsMemberTask.UpdateBy = field.NewString(tableName, "update_by")
+	_umsMemberTask.UpdateBy = field.NewInt64(tableName, "update_by")
 	_umsMemberTask.UpdateTime = field.NewTime(tableName, "update_time")
+	_umsMemberTask.IsDeleted = field.NewInt32(tableName, "is_deleted")
 
 	_umsMemberTask.fillFieldMap()
 
@@ -48,17 +56,25 @@ func newUmsMemberTask(db *gorm.DB, opts ...gen.DOOption) umsMemberTask {
 type umsMemberTask struct {
 	umsMemberTaskDo umsMemberTaskDo
 
-	ALL          field.Asterisk
-	ID           field.Int64
-	TaskName     field.String // 任务名称
-	TaskGrowth   field.Int32  // 赠送成长值
-	TaskIntegral field.Int32  // 赠送积分
-	TaskType     field.Int32  // 任务类型：0->新手任务；1->日常任务
-	Status       field.Int32  // 状态：0->禁用；1->启用
-	CreateBy     field.String // 创建者
-	CreateTime   field.Time   // 创建时间
-	UpdateBy     field.String // 更新者
-	UpdateTime   field.Time   // 更新时间
+	ALL           field.Asterisk
+	ID            field.Int64  // 主键ID
+	TaskName      field.String // 任务名称
+	TaskDesc      field.String // 任务描述
+	TaskGrowth    field.Int32  // 赠送成长值
+	TaskIntegral  field.Int32  // 赠送积分
+	TaskType      field.Int32  // 任务类型：0-新手任务，1-日常任务，2-周常任务，3-月常任务
+	CompleteCount field.Int32  // 需要完成次数
+	RewardType    field.Int32  // 奖励类型：0-积分成长值，1-优惠券，2-抽奖次数
+	RewardParams  field.String // 奖励参数JSON
+	StartTime     field.Time   // 任务开始时间
+	EndTime       field.Time   // 任务结束时间
+	Status        field.Int32  // 状态：0-禁用，1-启用
+	Sort          field.Int32  // 排序
+	CreateBy      field.Int64  // 创建人ID
+	CreateTime    field.Time   // 创建时间
+	UpdateBy      field.Int64  // 更新人ID
+	UpdateTime    field.Time   // 更新时间
+	IsDeleted     field.Int32  // 是否删除
 
 	fieldMap map[string]field.Expr
 }
@@ -77,14 +93,22 @@ func (u *umsMemberTask) updateTableName(table string) *umsMemberTask {
 	u.ALL = field.NewAsterisk(table)
 	u.ID = field.NewInt64(table, "id")
 	u.TaskName = field.NewString(table, "task_name")
+	u.TaskDesc = field.NewString(table, "task_desc")
 	u.TaskGrowth = field.NewInt32(table, "task_growth")
 	u.TaskIntegral = field.NewInt32(table, "task_integral")
 	u.TaskType = field.NewInt32(table, "task_type")
+	u.CompleteCount = field.NewInt32(table, "complete_count")
+	u.RewardType = field.NewInt32(table, "reward_type")
+	u.RewardParams = field.NewString(table, "reward_params")
+	u.StartTime = field.NewTime(table, "start_time")
+	u.EndTime = field.NewTime(table, "end_time")
 	u.Status = field.NewInt32(table, "status")
-	u.CreateBy = field.NewString(table, "create_by")
+	u.Sort = field.NewInt32(table, "sort")
+	u.CreateBy = field.NewInt64(table, "create_by")
 	u.CreateTime = field.NewTime(table, "create_time")
-	u.UpdateBy = field.NewString(table, "update_by")
+	u.UpdateBy = field.NewInt64(table, "update_by")
 	u.UpdateTime = field.NewTime(table, "update_time")
+	u.IsDeleted = field.NewInt32(table, "is_deleted")
 
 	u.fillFieldMap()
 
@@ -113,17 +137,25 @@ func (u *umsMemberTask) GetFieldByName(fieldName string) (field.OrderExpr, bool)
 }
 
 func (u *umsMemberTask) fillFieldMap() {
-	u.fieldMap = make(map[string]field.Expr, 10)
+	u.fieldMap = make(map[string]field.Expr, 18)
 	u.fieldMap["id"] = u.ID
 	u.fieldMap["task_name"] = u.TaskName
+	u.fieldMap["task_desc"] = u.TaskDesc
 	u.fieldMap["task_growth"] = u.TaskGrowth
 	u.fieldMap["task_integral"] = u.TaskIntegral
 	u.fieldMap["task_type"] = u.TaskType
+	u.fieldMap["complete_count"] = u.CompleteCount
+	u.fieldMap["reward_type"] = u.RewardType
+	u.fieldMap["reward_params"] = u.RewardParams
+	u.fieldMap["start_time"] = u.StartTime
+	u.fieldMap["end_time"] = u.EndTime
 	u.fieldMap["status"] = u.Status
+	u.fieldMap["sort"] = u.Sort
 	u.fieldMap["create_by"] = u.CreateBy
 	u.fieldMap["create_time"] = u.CreateTime
 	u.fieldMap["update_by"] = u.UpdateBy
 	u.fieldMap["update_time"] = u.UpdateTime
+	u.fieldMap["is_deleted"] = u.IsDeleted
 }
 
 func (u umsMemberTask) clone(db *gorm.DB) umsMemberTask {

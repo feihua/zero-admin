@@ -1,0 +1,80 @@
+syntax = "proto3";
+
+package main;
+
+option go_package = "./proto";
+
+// 添加会员积分记录
+message AddMemberPointsLogReq {
+  int64 id = 1; //
+  int64 member_id = 2; //会员ID
+  int32 change_type = 3; //变更类型：1-添加积分，2-减少积分
+  int32 change_points = 4; //变更积分
+  int32 source_type = 5; //来源类型：0-其他，1-订单，2-活动，3-签到，4-管理员修改
+  string description = 6; //描述
+  string operate_man = 7; //操作人员
+  string operate_note = 8; //操作备注
+}
+
+message AddMemberPointsLogResp {
+  string pong = 1;
+}
+
+
+// 查询会员积分记录详情
+message QueryMemberPointsLogDetailReq {
+    int64 id = 1;
+}
+
+message QueryMemberPointsLogDetailResp {
+  int64 id = 1; //
+  int64 member_id = 2; //会员ID
+  int32 change_type = 3; //变更类型：1-添加积分，2-减少积分
+  int32 change_points = 4; //变更积分
+  int32 source_type = 5; //来源类型：0-其他，1-订单，2-活动，3-签到，4-管理员修改
+  string description = 6; //描述
+  string operate_man = 7; //操作人员
+  string operate_note = 8; //操作备注
+  string create_time = 9; //创建时间
+
+}
+
+// 分页查询会员积分记录列表
+message QueryMemberPointsLogListReq {
+  int64 member_id = 1; //会员ID
+  int32 change_type = 2; //变更类型：1-添加积分，2-减少积分
+  int32 source_type = 3; //来源类型：0-其他，1-订单，2-活动，3-签到，4-管理员修改
+  int32 page_num = 4; //第几页
+  int32 page_size = 5; //每页的数量
+}
+
+message MemberPointsLogListData {
+  int64 id = 1; //
+  int64 member_id = 2; //会员ID
+  int32 change_type = 3; //变更类型：1-添加积分，2-减少积分
+  int32 change_points = 4; //变更积分
+  int32 source_type = 5; //来源类型：0-其他，1-订单，2-活动，3-签到，4-管理员修改
+  string description = 6; //描述
+  string operate_man = 7; //操作人员
+  string operate_note = 8; //操作备注
+  string create_time = 9; //创建时间
+
+}
+
+message QueryMemberPointsLogListResp {
+  int64 total = 1;
+  repeated  MemberPointsLogListData list = 2;
+}
+
+// 会员积分记录
+service MemberPointsLogService {
+  // 添加会员积分记录
+  rpc AddMemberPointsLog(AddMemberPointsLogReq) returns (AddMemberPointsLogResp){}
+
+  // 查询会员积分记录详情
+   rpc QueryMemberPointsLogDetail(QueryMemberPointsLogDetailReq) returns (QueryMemberPointsLogDetailResp){}
+  // 查询会员积分记录列表
+  rpc QueryMemberPointsLogList(QueryMemberPointsLogListReq) returns (QueryMemberPointsLogListResp){}
+
+
+}

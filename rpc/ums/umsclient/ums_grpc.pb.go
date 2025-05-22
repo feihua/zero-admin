@@ -19,426 +19,6 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	GrowthChangeHistoryService_AddGrowthChangeHistory_FullMethodName         = "/umsclient.GrowthChangeHistoryService/AddGrowthChangeHistory"
-	GrowthChangeHistoryService_DeleteGrowthChangeHistory_FullMethodName      = "/umsclient.GrowthChangeHistoryService/DeleteGrowthChangeHistory"
-	GrowthChangeHistoryService_QueryGrowthChangeHistoryDetail_FullMethodName = "/umsclient.GrowthChangeHistoryService/QueryGrowthChangeHistoryDetail"
-	GrowthChangeHistoryService_QueryGrowthChangeHistoryList_FullMethodName   = "/umsclient.GrowthChangeHistoryService/QueryGrowthChangeHistoryList"
-)
-
-// GrowthChangeHistoryServiceClient is the client API for GrowthChangeHistoryService service.
-//
-// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type GrowthChangeHistoryServiceClient interface {
-	// 添加成长值变化历史记录表
-	AddGrowthChangeHistory(ctx context.Context, in *AddGrowthChangeHistoryReq, opts ...grpc.CallOption) (*AddGrowthChangeHistoryResp, error)
-	// 删除成长值变化历史记录表
-	DeleteGrowthChangeHistory(ctx context.Context, in *DeleteGrowthChangeHistoryReq, opts ...grpc.CallOption) (*DeleteGrowthChangeHistoryResp, error)
-	// 查询成长值变化历史记录表详情
-	QueryGrowthChangeHistoryDetail(ctx context.Context, in *QueryGrowthChangeHistoryDetailReq, opts ...grpc.CallOption) (*QueryGrowthChangeHistoryDetailResp, error)
-	// 查询成长值变化历史记录表列表
-	QueryGrowthChangeHistoryList(ctx context.Context, in *QueryGrowthChangeHistoryListReq, opts ...grpc.CallOption) (*QueryGrowthChangeHistoryListResp, error)
-}
-
-type growthChangeHistoryServiceClient struct {
-	cc grpc.ClientConnInterface
-}
-
-func NewGrowthChangeHistoryServiceClient(cc grpc.ClientConnInterface) GrowthChangeHistoryServiceClient {
-	return &growthChangeHistoryServiceClient{cc}
-}
-
-func (c *growthChangeHistoryServiceClient) AddGrowthChangeHistory(ctx context.Context, in *AddGrowthChangeHistoryReq, opts ...grpc.CallOption) (*AddGrowthChangeHistoryResp, error) {
-	out := new(AddGrowthChangeHistoryResp)
-	err := c.cc.Invoke(ctx, GrowthChangeHistoryService_AddGrowthChangeHistory_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *growthChangeHistoryServiceClient) DeleteGrowthChangeHistory(ctx context.Context, in *DeleteGrowthChangeHistoryReq, opts ...grpc.CallOption) (*DeleteGrowthChangeHistoryResp, error) {
-	out := new(DeleteGrowthChangeHistoryResp)
-	err := c.cc.Invoke(ctx, GrowthChangeHistoryService_DeleteGrowthChangeHistory_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *growthChangeHistoryServiceClient) QueryGrowthChangeHistoryDetail(ctx context.Context, in *QueryGrowthChangeHistoryDetailReq, opts ...grpc.CallOption) (*QueryGrowthChangeHistoryDetailResp, error) {
-	out := new(QueryGrowthChangeHistoryDetailResp)
-	err := c.cc.Invoke(ctx, GrowthChangeHistoryService_QueryGrowthChangeHistoryDetail_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *growthChangeHistoryServiceClient) QueryGrowthChangeHistoryList(ctx context.Context, in *QueryGrowthChangeHistoryListReq, opts ...grpc.CallOption) (*QueryGrowthChangeHistoryListResp, error) {
-	out := new(QueryGrowthChangeHistoryListResp)
-	err := c.cc.Invoke(ctx, GrowthChangeHistoryService_QueryGrowthChangeHistoryList_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-// GrowthChangeHistoryServiceServer is the server API for GrowthChangeHistoryService service.
-// All implementations must embed UnimplementedGrowthChangeHistoryServiceServer
-// for forward compatibility
-type GrowthChangeHistoryServiceServer interface {
-	// 添加成长值变化历史记录表
-	AddGrowthChangeHistory(context.Context, *AddGrowthChangeHistoryReq) (*AddGrowthChangeHistoryResp, error)
-	// 删除成长值变化历史记录表
-	DeleteGrowthChangeHistory(context.Context, *DeleteGrowthChangeHistoryReq) (*DeleteGrowthChangeHistoryResp, error)
-	// 查询成长值变化历史记录表详情
-	QueryGrowthChangeHistoryDetail(context.Context, *QueryGrowthChangeHistoryDetailReq) (*QueryGrowthChangeHistoryDetailResp, error)
-	// 查询成长值变化历史记录表列表
-	QueryGrowthChangeHistoryList(context.Context, *QueryGrowthChangeHistoryListReq) (*QueryGrowthChangeHistoryListResp, error)
-	mustEmbedUnimplementedGrowthChangeHistoryServiceServer()
-}
-
-// UnimplementedGrowthChangeHistoryServiceServer must be embedded to have forward compatible implementations.
-type UnimplementedGrowthChangeHistoryServiceServer struct {
-}
-
-func (UnimplementedGrowthChangeHistoryServiceServer) AddGrowthChangeHistory(context.Context, *AddGrowthChangeHistoryReq) (*AddGrowthChangeHistoryResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method AddGrowthChangeHistory not implemented")
-}
-func (UnimplementedGrowthChangeHistoryServiceServer) DeleteGrowthChangeHistory(context.Context, *DeleteGrowthChangeHistoryReq) (*DeleteGrowthChangeHistoryResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method DeleteGrowthChangeHistory not implemented")
-}
-func (UnimplementedGrowthChangeHistoryServiceServer) QueryGrowthChangeHistoryDetail(context.Context, *QueryGrowthChangeHistoryDetailReq) (*QueryGrowthChangeHistoryDetailResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method QueryGrowthChangeHistoryDetail not implemented")
-}
-func (UnimplementedGrowthChangeHistoryServiceServer) QueryGrowthChangeHistoryList(context.Context, *QueryGrowthChangeHistoryListReq) (*QueryGrowthChangeHistoryListResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method QueryGrowthChangeHistoryList not implemented")
-}
-func (UnimplementedGrowthChangeHistoryServiceServer) mustEmbedUnimplementedGrowthChangeHistoryServiceServer() {
-}
-
-// UnsafeGrowthChangeHistoryServiceServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to GrowthChangeHistoryServiceServer will
-// result in compilation errors.
-type UnsafeGrowthChangeHistoryServiceServer interface {
-	mustEmbedUnimplementedGrowthChangeHistoryServiceServer()
-}
-
-func RegisterGrowthChangeHistoryServiceServer(s grpc.ServiceRegistrar, srv GrowthChangeHistoryServiceServer) {
-	s.RegisterService(&GrowthChangeHistoryService_ServiceDesc, srv)
-}
-
-func _GrowthChangeHistoryService_AddGrowthChangeHistory_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(AddGrowthChangeHistoryReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(GrowthChangeHistoryServiceServer).AddGrowthChangeHistory(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: GrowthChangeHistoryService_AddGrowthChangeHistory_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(GrowthChangeHistoryServiceServer).AddGrowthChangeHistory(ctx, req.(*AddGrowthChangeHistoryReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _GrowthChangeHistoryService_DeleteGrowthChangeHistory_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(DeleteGrowthChangeHistoryReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(GrowthChangeHistoryServiceServer).DeleteGrowthChangeHistory(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: GrowthChangeHistoryService_DeleteGrowthChangeHistory_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(GrowthChangeHistoryServiceServer).DeleteGrowthChangeHistory(ctx, req.(*DeleteGrowthChangeHistoryReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _GrowthChangeHistoryService_QueryGrowthChangeHistoryDetail_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(QueryGrowthChangeHistoryDetailReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(GrowthChangeHistoryServiceServer).QueryGrowthChangeHistoryDetail(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: GrowthChangeHistoryService_QueryGrowthChangeHistoryDetail_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(GrowthChangeHistoryServiceServer).QueryGrowthChangeHistoryDetail(ctx, req.(*QueryGrowthChangeHistoryDetailReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _GrowthChangeHistoryService_QueryGrowthChangeHistoryList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(QueryGrowthChangeHistoryListReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(GrowthChangeHistoryServiceServer).QueryGrowthChangeHistoryList(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: GrowthChangeHistoryService_QueryGrowthChangeHistoryList_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(GrowthChangeHistoryServiceServer).QueryGrowthChangeHistoryList(ctx, req.(*QueryGrowthChangeHistoryListReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-// GrowthChangeHistoryService_ServiceDesc is the grpc.ServiceDesc for GrowthChangeHistoryService service.
-// It's only intended for direct use with grpc.RegisterService,
-// and not to be introspected or modified (even as a copy)
-var GrowthChangeHistoryService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "umsclient.GrowthChangeHistoryService",
-	HandlerType: (*GrowthChangeHistoryServiceServer)(nil),
-	Methods: []grpc.MethodDesc{
-		{
-			MethodName: "AddGrowthChangeHistory",
-			Handler:    _GrowthChangeHistoryService_AddGrowthChangeHistory_Handler,
-		},
-		{
-			MethodName: "DeleteGrowthChangeHistory",
-			Handler:    _GrowthChangeHistoryService_DeleteGrowthChangeHistory_Handler,
-		},
-		{
-			MethodName: "QueryGrowthChangeHistoryDetail",
-			Handler:    _GrowthChangeHistoryService_QueryGrowthChangeHistoryDetail_Handler,
-		},
-		{
-			MethodName: "QueryGrowthChangeHistoryList",
-			Handler:    _GrowthChangeHistoryService_QueryGrowthChangeHistoryList_Handler,
-		},
-	},
-	Streams:  []grpc.StreamDesc{},
-	Metadata: "rpc/ums/ums.proto",
-}
-
-const (
-	IntegrationChangeHistoryService_AddIntegrationChangeHistory_FullMethodName         = "/umsclient.IntegrationChangeHistoryService/AddIntegrationChangeHistory"
-	IntegrationChangeHistoryService_DeleteIntegrationChangeHistory_FullMethodName      = "/umsclient.IntegrationChangeHistoryService/DeleteIntegrationChangeHistory"
-	IntegrationChangeHistoryService_QueryIntegrationChangeHistoryDetail_FullMethodName = "/umsclient.IntegrationChangeHistoryService/QueryIntegrationChangeHistoryDetail"
-	IntegrationChangeHistoryService_QueryIntegrationChangeHistoryList_FullMethodName   = "/umsclient.IntegrationChangeHistoryService/QueryIntegrationChangeHistoryList"
-)
-
-// IntegrationChangeHistoryServiceClient is the client API for IntegrationChangeHistoryService service.
-//
-// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type IntegrationChangeHistoryServiceClient interface {
-	// 添加积分变化历史记录表
-	AddIntegrationChangeHistory(ctx context.Context, in *AddIntegrationChangeHistoryReq, opts ...grpc.CallOption) (*AddIntegrationChangeHistoryResp, error)
-	// 删除积分变化历史记录表
-	DeleteIntegrationChangeHistory(ctx context.Context, in *DeleteIntegrationChangeHistoryReq, opts ...grpc.CallOption) (*DeleteIntegrationChangeHistoryResp, error)
-	// 查询积分变化历史记录表详情
-	QueryIntegrationChangeHistoryDetail(ctx context.Context, in *QueryIntegrationChangeHistoryDetailReq, opts ...grpc.CallOption) (*QueryIntegrationChangeHistoryDetailResp, error)
-	// 查询积分变化历史记录表列表
-	QueryIntegrationChangeHistoryList(ctx context.Context, in *QueryIntegrationChangeHistoryListReq, opts ...grpc.CallOption) (*QueryIntegrationChangeHistoryListResp, error)
-}
-
-type integrationChangeHistoryServiceClient struct {
-	cc grpc.ClientConnInterface
-}
-
-func NewIntegrationChangeHistoryServiceClient(cc grpc.ClientConnInterface) IntegrationChangeHistoryServiceClient {
-	return &integrationChangeHistoryServiceClient{cc}
-}
-
-func (c *integrationChangeHistoryServiceClient) AddIntegrationChangeHistory(ctx context.Context, in *AddIntegrationChangeHistoryReq, opts ...grpc.CallOption) (*AddIntegrationChangeHistoryResp, error) {
-	out := new(AddIntegrationChangeHistoryResp)
-	err := c.cc.Invoke(ctx, IntegrationChangeHistoryService_AddIntegrationChangeHistory_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *integrationChangeHistoryServiceClient) DeleteIntegrationChangeHistory(ctx context.Context, in *DeleteIntegrationChangeHistoryReq, opts ...grpc.CallOption) (*DeleteIntegrationChangeHistoryResp, error) {
-	out := new(DeleteIntegrationChangeHistoryResp)
-	err := c.cc.Invoke(ctx, IntegrationChangeHistoryService_DeleteIntegrationChangeHistory_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *integrationChangeHistoryServiceClient) QueryIntegrationChangeHistoryDetail(ctx context.Context, in *QueryIntegrationChangeHistoryDetailReq, opts ...grpc.CallOption) (*QueryIntegrationChangeHistoryDetailResp, error) {
-	out := new(QueryIntegrationChangeHistoryDetailResp)
-	err := c.cc.Invoke(ctx, IntegrationChangeHistoryService_QueryIntegrationChangeHistoryDetail_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *integrationChangeHistoryServiceClient) QueryIntegrationChangeHistoryList(ctx context.Context, in *QueryIntegrationChangeHistoryListReq, opts ...grpc.CallOption) (*QueryIntegrationChangeHistoryListResp, error) {
-	out := new(QueryIntegrationChangeHistoryListResp)
-	err := c.cc.Invoke(ctx, IntegrationChangeHistoryService_QueryIntegrationChangeHistoryList_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-// IntegrationChangeHistoryServiceServer is the server API for IntegrationChangeHistoryService service.
-// All implementations must embed UnimplementedIntegrationChangeHistoryServiceServer
-// for forward compatibility
-type IntegrationChangeHistoryServiceServer interface {
-	// 添加积分变化历史记录表
-	AddIntegrationChangeHistory(context.Context, *AddIntegrationChangeHistoryReq) (*AddIntegrationChangeHistoryResp, error)
-	// 删除积分变化历史记录表
-	DeleteIntegrationChangeHistory(context.Context, *DeleteIntegrationChangeHistoryReq) (*DeleteIntegrationChangeHistoryResp, error)
-	// 查询积分变化历史记录表详情
-	QueryIntegrationChangeHistoryDetail(context.Context, *QueryIntegrationChangeHistoryDetailReq) (*QueryIntegrationChangeHistoryDetailResp, error)
-	// 查询积分变化历史记录表列表
-	QueryIntegrationChangeHistoryList(context.Context, *QueryIntegrationChangeHistoryListReq) (*QueryIntegrationChangeHistoryListResp, error)
-	mustEmbedUnimplementedIntegrationChangeHistoryServiceServer()
-}
-
-// UnimplementedIntegrationChangeHistoryServiceServer must be embedded to have forward compatible implementations.
-type UnimplementedIntegrationChangeHistoryServiceServer struct {
-}
-
-func (UnimplementedIntegrationChangeHistoryServiceServer) AddIntegrationChangeHistory(context.Context, *AddIntegrationChangeHistoryReq) (*AddIntegrationChangeHistoryResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method AddIntegrationChangeHistory not implemented")
-}
-func (UnimplementedIntegrationChangeHistoryServiceServer) DeleteIntegrationChangeHistory(context.Context, *DeleteIntegrationChangeHistoryReq) (*DeleteIntegrationChangeHistoryResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method DeleteIntegrationChangeHistory not implemented")
-}
-func (UnimplementedIntegrationChangeHistoryServiceServer) QueryIntegrationChangeHistoryDetail(context.Context, *QueryIntegrationChangeHistoryDetailReq) (*QueryIntegrationChangeHistoryDetailResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method QueryIntegrationChangeHistoryDetail not implemented")
-}
-func (UnimplementedIntegrationChangeHistoryServiceServer) QueryIntegrationChangeHistoryList(context.Context, *QueryIntegrationChangeHistoryListReq) (*QueryIntegrationChangeHistoryListResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method QueryIntegrationChangeHistoryList not implemented")
-}
-func (UnimplementedIntegrationChangeHistoryServiceServer) mustEmbedUnimplementedIntegrationChangeHistoryServiceServer() {
-}
-
-// UnsafeIntegrationChangeHistoryServiceServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to IntegrationChangeHistoryServiceServer will
-// result in compilation errors.
-type UnsafeIntegrationChangeHistoryServiceServer interface {
-	mustEmbedUnimplementedIntegrationChangeHistoryServiceServer()
-}
-
-func RegisterIntegrationChangeHistoryServiceServer(s grpc.ServiceRegistrar, srv IntegrationChangeHistoryServiceServer) {
-	s.RegisterService(&IntegrationChangeHistoryService_ServiceDesc, srv)
-}
-
-func _IntegrationChangeHistoryService_AddIntegrationChangeHistory_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(AddIntegrationChangeHistoryReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(IntegrationChangeHistoryServiceServer).AddIntegrationChangeHistory(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: IntegrationChangeHistoryService_AddIntegrationChangeHistory_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(IntegrationChangeHistoryServiceServer).AddIntegrationChangeHistory(ctx, req.(*AddIntegrationChangeHistoryReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _IntegrationChangeHistoryService_DeleteIntegrationChangeHistory_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(DeleteIntegrationChangeHistoryReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(IntegrationChangeHistoryServiceServer).DeleteIntegrationChangeHistory(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: IntegrationChangeHistoryService_DeleteIntegrationChangeHistory_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(IntegrationChangeHistoryServiceServer).DeleteIntegrationChangeHistory(ctx, req.(*DeleteIntegrationChangeHistoryReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _IntegrationChangeHistoryService_QueryIntegrationChangeHistoryDetail_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(QueryIntegrationChangeHistoryDetailReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(IntegrationChangeHistoryServiceServer).QueryIntegrationChangeHistoryDetail(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: IntegrationChangeHistoryService_QueryIntegrationChangeHistoryDetail_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(IntegrationChangeHistoryServiceServer).QueryIntegrationChangeHistoryDetail(ctx, req.(*QueryIntegrationChangeHistoryDetailReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _IntegrationChangeHistoryService_QueryIntegrationChangeHistoryList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(QueryIntegrationChangeHistoryListReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(IntegrationChangeHistoryServiceServer).QueryIntegrationChangeHistoryList(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: IntegrationChangeHistoryService_QueryIntegrationChangeHistoryList_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(IntegrationChangeHistoryServiceServer).QueryIntegrationChangeHistoryList(ctx, req.(*QueryIntegrationChangeHistoryListReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-// IntegrationChangeHistoryService_ServiceDesc is the grpc.ServiceDesc for IntegrationChangeHistoryService service.
-// It's only intended for direct use with grpc.RegisterService,
-// and not to be introspected or modified (even as a copy)
-var IntegrationChangeHistoryService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "umsclient.IntegrationChangeHistoryService",
-	HandlerType: (*IntegrationChangeHistoryServiceServer)(nil),
-	Methods: []grpc.MethodDesc{
-		{
-			MethodName: "AddIntegrationChangeHistory",
-			Handler:    _IntegrationChangeHistoryService_AddIntegrationChangeHistory_Handler,
-		},
-		{
-			MethodName: "DeleteIntegrationChangeHistory",
-			Handler:    _IntegrationChangeHistoryService_DeleteIntegrationChangeHistory_Handler,
-		},
-		{
-			MethodName: "QueryIntegrationChangeHistoryDetail",
-			Handler:    _IntegrationChangeHistoryService_QueryIntegrationChangeHistoryDetail_Handler,
-		},
-		{
-			MethodName: "QueryIntegrationChangeHistoryList",
-			Handler:    _IntegrationChangeHistoryService_QueryIntegrationChangeHistoryList_Handler,
-		},
-	},
-	Streams:  []grpc.StreamDesc{},
-	Metadata: "rpc/ums/ums.proto",
-}
-
-const (
 	IntegrationConsumeSettingService_AddIntegrationConsumeSetting_FullMethodName          = "/umsclient.IntegrationConsumeSettingService/AddIntegrationConsumeSetting"
 	IntegrationConsumeSettingService_DeleteIntegrationConsumeSetting_FullMethodName       = "/umsclient.IntegrationConsumeSettingService/DeleteIntegrationConsumeSetting"
 	IntegrationConsumeSettingService_UpdateIntegrationConsumeSetting_FullMethodName       = "/umsclient.IntegrationConsumeSettingService/UpdateIntegrationConsumeSetting"
@@ -1217,6 +797,177 @@ var MemberBrandAttentionService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "QueryMemberBrandAttentionList",
 			Handler:    _MemberBrandAttentionService_QueryMemberBrandAttentionList_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "rpc/ums/ums.proto",
+}
+
+const (
+	MemberGrowthLogService_AddMemberGrowthLog_FullMethodName         = "/umsclient.MemberGrowthLogService/AddMemberGrowthLog"
+	MemberGrowthLogService_QueryMemberGrowthLogDetail_FullMethodName = "/umsclient.MemberGrowthLogService/QueryMemberGrowthLogDetail"
+	MemberGrowthLogService_QueryMemberGrowthLogList_FullMethodName   = "/umsclient.MemberGrowthLogService/QueryMemberGrowthLogList"
+)
+
+// MemberGrowthLogServiceClient is the client API for MemberGrowthLogService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type MemberGrowthLogServiceClient interface {
+	// 添加会员成长值记录
+	AddMemberGrowthLog(ctx context.Context, in *AddMemberGrowthLogReq, opts ...grpc.CallOption) (*AddMemberGrowthLogResp, error)
+	// 查询会员成长值记录详情
+	QueryMemberGrowthLogDetail(ctx context.Context, in *QueryMemberGrowthLogDetailReq, opts ...grpc.CallOption) (*QueryMemberGrowthLogDetailResp, error)
+	// 查询会员成长值记录列表
+	QueryMemberGrowthLogList(ctx context.Context, in *QueryMemberGrowthLogListReq, opts ...grpc.CallOption) (*QueryMemberGrowthLogListResp, error)
+}
+
+type memberGrowthLogServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewMemberGrowthLogServiceClient(cc grpc.ClientConnInterface) MemberGrowthLogServiceClient {
+	return &memberGrowthLogServiceClient{cc}
+}
+
+func (c *memberGrowthLogServiceClient) AddMemberGrowthLog(ctx context.Context, in *AddMemberGrowthLogReq, opts ...grpc.CallOption) (*AddMemberGrowthLogResp, error) {
+	out := new(AddMemberGrowthLogResp)
+	err := c.cc.Invoke(ctx, MemberGrowthLogService_AddMemberGrowthLog_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *memberGrowthLogServiceClient) QueryMemberGrowthLogDetail(ctx context.Context, in *QueryMemberGrowthLogDetailReq, opts ...grpc.CallOption) (*QueryMemberGrowthLogDetailResp, error) {
+	out := new(QueryMemberGrowthLogDetailResp)
+	err := c.cc.Invoke(ctx, MemberGrowthLogService_QueryMemberGrowthLogDetail_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *memberGrowthLogServiceClient) QueryMemberGrowthLogList(ctx context.Context, in *QueryMemberGrowthLogListReq, opts ...grpc.CallOption) (*QueryMemberGrowthLogListResp, error) {
+	out := new(QueryMemberGrowthLogListResp)
+	err := c.cc.Invoke(ctx, MemberGrowthLogService_QueryMemberGrowthLogList_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// MemberGrowthLogServiceServer is the server API for MemberGrowthLogService service.
+// All implementations must embed UnimplementedMemberGrowthLogServiceServer
+// for forward compatibility
+type MemberGrowthLogServiceServer interface {
+	// 添加会员成长值记录
+	AddMemberGrowthLog(context.Context, *AddMemberGrowthLogReq) (*AddMemberGrowthLogResp, error)
+	// 查询会员成长值记录详情
+	QueryMemberGrowthLogDetail(context.Context, *QueryMemberGrowthLogDetailReq) (*QueryMemberGrowthLogDetailResp, error)
+	// 查询会员成长值记录列表
+	QueryMemberGrowthLogList(context.Context, *QueryMemberGrowthLogListReq) (*QueryMemberGrowthLogListResp, error)
+	mustEmbedUnimplementedMemberGrowthLogServiceServer()
+}
+
+// UnimplementedMemberGrowthLogServiceServer must be embedded to have forward compatible implementations.
+type UnimplementedMemberGrowthLogServiceServer struct {
+}
+
+func (UnimplementedMemberGrowthLogServiceServer) AddMemberGrowthLog(context.Context, *AddMemberGrowthLogReq) (*AddMemberGrowthLogResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AddMemberGrowthLog not implemented")
+}
+func (UnimplementedMemberGrowthLogServiceServer) QueryMemberGrowthLogDetail(context.Context, *QueryMemberGrowthLogDetailReq) (*QueryMemberGrowthLogDetailResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method QueryMemberGrowthLogDetail not implemented")
+}
+func (UnimplementedMemberGrowthLogServiceServer) QueryMemberGrowthLogList(context.Context, *QueryMemberGrowthLogListReq) (*QueryMemberGrowthLogListResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method QueryMemberGrowthLogList not implemented")
+}
+func (UnimplementedMemberGrowthLogServiceServer) mustEmbedUnimplementedMemberGrowthLogServiceServer() {
+}
+
+// UnsafeMemberGrowthLogServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to MemberGrowthLogServiceServer will
+// result in compilation errors.
+type UnsafeMemberGrowthLogServiceServer interface {
+	mustEmbedUnimplementedMemberGrowthLogServiceServer()
+}
+
+func RegisterMemberGrowthLogServiceServer(s grpc.ServiceRegistrar, srv MemberGrowthLogServiceServer) {
+	s.RegisterService(&MemberGrowthLogService_ServiceDesc, srv)
+}
+
+func _MemberGrowthLogService_AddMemberGrowthLog_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddMemberGrowthLogReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MemberGrowthLogServiceServer).AddMemberGrowthLog(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: MemberGrowthLogService_AddMemberGrowthLog_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MemberGrowthLogServiceServer).AddMemberGrowthLog(ctx, req.(*AddMemberGrowthLogReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _MemberGrowthLogService_QueryMemberGrowthLogDetail_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryMemberGrowthLogDetailReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MemberGrowthLogServiceServer).QueryMemberGrowthLogDetail(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: MemberGrowthLogService_QueryMemberGrowthLogDetail_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MemberGrowthLogServiceServer).QueryMemberGrowthLogDetail(ctx, req.(*QueryMemberGrowthLogDetailReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _MemberGrowthLogService_QueryMemberGrowthLogList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryMemberGrowthLogListReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MemberGrowthLogServiceServer).QueryMemberGrowthLogList(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: MemberGrowthLogService_QueryMemberGrowthLogList_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MemberGrowthLogServiceServer).QueryMemberGrowthLogList(ctx, req.(*QueryMemberGrowthLogListReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// MemberGrowthLogService_ServiceDesc is the grpc.ServiceDesc for MemberGrowthLogService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var MemberGrowthLogService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "umsclient.MemberGrowthLogService",
+	HandlerType: (*MemberGrowthLogServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "AddMemberGrowthLog",
+			Handler:    _MemberGrowthLogService_AddMemberGrowthLog_Handler,
+		},
+		{
+			MethodName: "QueryMemberGrowthLogDetail",
+			Handler:    _MemberGrowthLogService_QueryMemberGrowthLogDetail_Handler,
+		},
+		{
+			MethodName: "QueryMemberGrowthLogList",
+			Handler:    _MemberGrowthLogService_QueryMemberGrowthLogList_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
@@ -2007,170 +1758,170 @@ var MemberLoginLogService_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	MemberMemberTagRelationService_AddMemberMemberTagRelation_FullMethodName       = "/umsclient.MemberMemberTagRelationService/AddMemberMemberTagRelation"
-	MemberMemberTagRelationService_DeleteMemberMemberTagRelation_FullMethodName    = "/umsclient.MemberMemberTagRelationService/DeleteMemberMemberTagRelation"
-	MemberMemberTagRelationService_QueryMemberMemberTagRelationList_FullMethodName = "/umsclient.MemberMemberTagRelationService/QueryMemberMemberTagRelationList"
+	MemberPointsLogService_AddMemberPointsLog_FullMethodName         = "/umsclient.MemberPointsLogService/AddMemberPointsLog"
+	MemberPointsLogService_QueryMemberPointsLogDetail_FullMethodName = "/umsclient.MemberPointsLogService/QueryMemberPointsLogDetail"
+	MemberPointsLogService_QueryMemberPointsLogList_FullMethodName   = "/umsclient.MemberPointsLogService/QueryMemberPointsLogList"
 )
 
-// MemberMemberTagRelationServiceClient is the client API for MemberMemberTagRelationService service.
+// MemberPointsLogServiceClient is the client API for MemberPointsLogService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type MemberMemberTagRelationServiceClient interface {
-	// 添加用户和标签关系表
-	AddMemberMemberTagRelation(ctx context.Context, in *AddMemberMemberTagRelationReq, opts ...grpc.CallOption) (*AddMemberMemberTagRelationResp, error)
-	// 删除用户和标签关系表
-	DeleteMemberMemberTagRelation(ctx context.Context, in *DeleteMemberMemberTagRelationReq, opts ...grpc.CallOption) (*DeleteMemberMemberTagRelationResp, error)
-	// 查询用户和标签关系表列表
-	QueryMemberMemberTagRelationList(ctx context.Context, in *QueryMemberMemberTagRelationListReq, opts ...grpc.CallOption) (*QueryMemberMemberTagRelationListResp, error)
+type MemberPointsLogServiceClient interface {
+	// 添加会员积分记录
+	AddMemberPointsLog(ctx context.Context, in *AddMemberPointsLogReq, opts ...grpc.CallOption) (*AddMemberPointsLogResp, error)
+	// 查询会员积分记录详情
+	QueryMemberPointsLogDetail(ctx context.Context, in *QueryMemberPointsLogDetailReq, opts ...grpc.CallOption) (*QueryMemberPointsLogDetailResp, error)
+	// 查询会员积分记录列表
+	QueryMemberPointsLogList(ctx context.Context, in *QueryMemberPointsLogListReq, opts ...grpc.CallOption) (*QueryMemberPointsLogListResp, error)
 }
 
-type memberMemberTagRelationServiceClient struct {
+type memberPointsLogServiceClient struct {
 	cc grpc.ClientConnInterface
 }
 
-func NewMemberMemberTagRelationServiceClient(cc grpc.ClientConnInterface) MemberMemberTagRelationServiceClient {
-	return &memberMemberTagRelationServiceClient{cc}
+func NewMemberPointsLogServiceClient(cc grpc.ClientConnInterface) MemberPointsLogServiceClient {
+	return &memberPointsLogServiceClient{cc}
 }
 
-func (c *memberMemberTagRelationServiceClient) AddMemberMemberTagRelation(ctx context.Context, in *AddMemberMemberTagRelationReq, opts ...grpc.CallOption) (*AddMemberMemberTagRelationResp, error) {
-	out := new(AddMemberMemberTagRelationResp)
-	err := c.cc.Invoke(ctx, MemberMemberTagRelationService_AddMemberMemberTagRelation_FullMethodName, in, out, opts...)
+func (c *memberPointsLogServiceClient) AddMemberPointsLog(ctx context.Context, in *AddMemberPointsLogReq, opts ...grpc.CallOption) (*AddMemberPointsLogResp, error) {
+	out := new(AddMemberPointsLogResp)
+	err := c.cc.Invoke(ctx, MemberPointsLogService_AddMemberPointsLog_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *memberMemberTagRelationServiceClient) DeleteMemberMemberTagRelation(ctx context.Context, in *DeleteMemberMemberTagRelationReq, opts ...grpc.CallOption) (*DeleteMemberMemberTagRelationResp, error) {
-	out := new(DeleteMemberMemberTagRelationResp)
-	err := c.cc.Invoke(ctx, MemberMemberTagRelationService_DeleteMemberMemberTagRelation_FullMethodName, in, out, opts...)
+func (c *memberPointsLogServiceClient) QueryMemberPointsLogDetail(ctx context.Context, in *QueryMemberPointsLogDetailReq, opts ...grpc.CallOption) (*QueryMemberPointsLogDetailResp, error) {
+	out := new(QueryMemberPointsLogDetailResp)
+	err := c.cc.Invoke(ctx, MemberPointsLogService_QueryMemberPointsLogDetail_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *memberMemberTagRelationServiceClient) QueryMemberMemberTagRelationList(ctx context.Context, in *QueryMemberMemberTagRelationListReq, opts ...grpc.CallOption) (*QueryMemberMemberTagRelationListResp, error) {
-	out := new(QueryMemberMemberTagRelationListResp)
-	err := c.cc.Invoke(ctx, MemberMemberTagRelationService_QueryMemberMemberTagRelationList_FullMethodName, in, out, opts...)
+func (c *memberPointsLogServiceClient) QueryMemberPointsLogList(ctx context.Context, in *QueryMemberPointsLogListReq, opts ...grpc.CallOption) (*QueryMemberPointsLogListResp, error) {
+	out := new(QueryMemberPointsLogListResp)
+	err := c.cc.Invoke(ctx, MemberPointsLogService_QueryMemberPointsLogList_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-// MemberMemberTagRelationServiceServer is the server API for MemberMemberTagRelationService service.
-// All implementations must embed UnimplementedMemberMemberTagRelationServiceServer
+// MemberPointsLogServiceServer is the server API for MemberPointsLogService service.
+// All implementations must embed UnimplementedMemberPointsLogServiceServer
 // for forward compatibility
-type MemberMemberTagRelationServiceServer interface {
-	// 添加用户和标签关系表
-	AddMemberMemberTagRelation(context.Context, *AddMemberMemberTagRelationReq) (*AddMemberMemberTagRelationResp, error)
-	// 删除用户和标签关系表
-	DeleteMemberMemberTagRelation(context.Context, *DeleteMemberMemberTagRelationReq) (*DeleteMemberMemberTagRelationResp, error)
-	// 查询用户和标签关系表列表
-	QueryMemberMemberTagRelationList(context.Context, *QueryMemberMemberTagRelationListReq) (*QueryMemberMemberTagRelationListResp, error)
-	mustEmbedUnimplementedMemberMemberTagRelationServiceServer()
+type MemberPointsLogServiceServer interface {
+	// 添加会员积分记录
+	AddMemberPointsLog(context.Context, *AddMemberPointsLogReq) (*AddMemberPointsLogResp, error)
+	// 查询会员积分记录详情
+	QueryMemberPointsLogDetail(context.Context, *QueryMemberPointsLogDetailReq) (*QueryMemberPointsLogDetailResp, error)
+	// 查询会员积分记录列表
+	QueryMemberPointsLogList(context.Context, *QueryMemberPointsLogListReq) (*QueryMemberPointsLogListResp, error)
+	mustEmbedUnimplementedMemberPointsLogServiceServer()
 }
 
-// UnimplementedMemberMemberTagRelationServiceServer must be embedded to have forward compatible implementations.
-type UnimplementedMemberMemberTagRelationServiceServer struct {
+// UnimplementedMemberPointsLogServiceServer must be embedded to have forward compatible implementations.
+type UnimplementedMemberPointsLogServiceServer struct {
 }
 
-func (UnimplementedMemberMemberTagRelationServiceServer) AddMemberMemberTagRelation(context.Context, *AddMemberMemberTagRelationReq) (*AddMemberMemberTagRelationResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method AddMemberMemberTagRelation not implemented")
+func (UnimplementedMemberPointsLogServiceServer) AddMemberPointsLog(context.Context, *AddMemberPointsLogReq) (*AddMemberPointsLogResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AddMemberPointsLog not implemented")
 }
-func (UnimplementedMemberMemberTagRelationServiceServer) DeleteMemberMemberTagRelation(context.Context, *DeleteMemberMemberTagRelationReq) (*DeleteMemberMemberTagRelationResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method DeleteMemberMemberTagRelation not implemented")
+func (UnimplementedMemberPointsLogServiceServer) QueryMemberPointsLogDetail(context.Context, *QueryMemberPointsLogDetailReq) (*QueryMemberPointsLogDetailResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method QueryMemberPointsLogDetail not implemented")
 }
-func (UnimplementedMemberMemberTagRelationServiceServer) QueryMemberMemberTagRelationList(context.Context, *QueryMemberMemberTagRelationListReq) (*QueryMemberMemberTagRelationListResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method QueryMemberMemberTagRelationList not implemented")
+func (UnimplementedMemberPointsLogServiceServer) QueryMemberPointsLogList(context.Context, *QueryMemberPointsLogListReq) (*QueryMemberPointsLogListResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method QueryMemberPointsLogList not implemented")
 }
-func (UnimplementedMemberMemberTagRelationServiceServer) mustEmbedUnimplementedMemberMemberTagRelationServiceServer() {
+func (UnimplementedMemberPointsLogServiceServer) mustEmbedUnimplementedMemberPointsLogServiceServer() {
 }
 
-// UnsafeMemberMemberTagRelationServiceServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to MemberMemberTagRelationServiceServer will
+// UnsafeMemberPointsLogServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to MemberPointsLogServiceServer will
 // result in compilation errors.
-type UnsafeMemberMemberTagRelationServiceServer interface {
-	mustEmbedUnimplementedMemberMemberTagRelationServiceServer()
+type UnsafeMemberPointsLogServiceServer interface {
+	mustEmbedUnimplementedMemberPointsLogServiceServer()
 }
 
-func RegisterMemberMemberTagRelationServiceServer(s grpc.ServiceRegistrar, srv MemberMemberTagRelationServiceServer) {
-	s.RegisterService(&MemberMemberTagRelationService_ServiceDesc, srv)
+func RegisterMemberPointsLogServiceServer(s grpc.ServiceRegistrar, srv MemberPointsLogServiceServer) {
+	s.RegisterService(&MemberPointsLogService_ServiceDesc, srv)
 }
 
-func _MemberMemberTagRelationService_AddMemberMemberTagRelation_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(AddMemberMemberTagRelationReq)
+func _MemberPointsLogService_AddMemberPointsLog_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddMemberPointsLogReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(MemberMemberTagRelationServiceServer).AddMemberMemberTagRelation(ctx, in)
+		return srv.(MemberPointsLogServiceServer).AddMemberPointsLog(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: MemberMemberTagRelationService_AddMemberMemberTagRelation_FullMethodName,
+		FullMethod: MemberPointsLogService_AddMemberPointsLog_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MemberMemberTagRelationServiceServer).AddMemberMemberTagRelation(ctx, req.(*AddMemberMemberTagRelationReq))
+		return srv.(MemberPointsLogServiceServer).AddMemberPointsLog(ctx, req.(*AddMemberPointsLogReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _MemberMemberTagRelationService_DeleteMemberMemberTagRelation_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(DeleteMemberMemberTagRelationReq)
+func _MemberPointsLogService_QueryMemberPointsLogDetail_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryMemberPointsLogDetailReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(MemberMemberTagRelationServiceServer).DeleteMemberMemberTagRelation(ctx, in)
+		return srv.(MemberPointsLogServiceServer).QueryMemberPointsLogDetail(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: MemberMemberTagRelationService_DeleteMemberMemberTagRelation_FullMethodName,
+		FullMethod: MemberPointsLogService_QueryMemberPointsLogDetail_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MemberMemberTagRelationServiceServer).DeleteMemberMemberTagRelation(ctx, req.(*DeleteMemberMemberTagRelationReq))
+		return srv.(MemberPointsLogServiceServer).QueryMemberPointsLogDetail(ctx, req.(*QueryMemberPointsLogDetailReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _MemberMemberTagRelationService_QueryMemberMemberTagRelationList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(QueryMemberMemberTagRelationListReq)
+func _MemberPointsLogService_QueryMemberPointsLogList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryMemberPointsLogListReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(MemberMemberTagRelationServiceServer).QueryMemberMemberTagRelationList(ctx, in)
+		return srv.(MemberPointsLogServiceServer).QueryMemberPointsLogList(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: MemberMemberTagRelationService_QueryMemberMemberTagRelationList_FullMethodName,
+		FullMethod: MemberPointsLogService_QueryMemberPointsLogList_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MemberMemberTagRelationServiceServer).QueryMemberMemberTagRelationList(ctx, req.(*QueryMemberMemberTagRelationListReq))
+		return srv.(MemberPointsLogServiceServer).QueryMemberPointsLogList(ctx, req.(*QueryMemberPointsLogListReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-// MemberMemberTagRelationService_ServiceDesc is the grpc.ServiceDesc for MemberMemberTagRelationService service.
+// MemberPointsLogService_ServiceDesc is the grpc.ServiceDesc for MemberPointsLogService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
-var MemberMemberTagRelationService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "umsclient.MemberMemberTagRelationService",
-	HandlerType: (*MemberMemberTagRelationServiceServer)(nil),
+var MemberPointsLogService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "umsclient.MemberPointsLogService",
+	HandlerType: (*MemberPointsLogServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "AddMemberMemberTagRelation",
-			Handler:    _MemberMemberTagRelationService_AddMemberMemberTagRelation_Handler,
+			MethodName: "AddMemberPointsLog",
+			Handler:    _MemberPointsLogService_AddMemberPointsLog_Handler,
 		},
 		{
-			MethodName: "DeleteMemberMemberTagRelation",
-			Handler:    _MemberMemberTagRelationService_DeleteMemberMemberTagRelation_Handler,
+			MethodName: "QueryMemberPointsLogDetail",
+			Handler:    _MemberPointsLogService_QueryMemberPointsLogDetail_Handler,
 		},
 		{
-			MethodName: "QueryMemberMemberTagRelationList",
-			Handler:    _MemberMemberTagRelationService_QueryMemberMemberTagRelationList_Handler,
+			MethodName: "QueryMemberPointsLogList",
+			Handler:    _MemberPointsLogService_QueryMemberPointsLogList_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
@@ -3018,6 +2769,176 @@ var MemberRuleSettingService_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
+	MemberSignLogService_AddMemberSignLog_FullMethodName         = "/umsclient.MemberSignLogService/AddMemberSignLog"
+	MemberSignLogService_QueryMemberSignLogDetail_FullMethodName = "/umsclient.MemberSignLogService/QueryMemberSignLogDetail"
+	MemberSignLogService_QueryMemberSignLogList_FullMethodName   = "/umsclient.MemberSignLogService/QueryMemberSignLogList"
+)
+
+// MemberSignLogServiceClient is the client API for MemberSignLogService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type MemberSignLogServiceClient interface {
+	// 添加会员签到记录
+	AddMemberSignLog(ctx context.Context, in *AddMemberSignLogReq, opts ...grpc.CallOption) (*AddMemberSignLogResp, error)
+	// 查询会员签到记录详情
+	QueryMemberSignLogDetail(ctx context.Context, in *QueryMemberSignLogDetailReq, opts ...grpc.CallOption) (*QueryMemberSignLogDetailResp, error)
+	// 查询会员签到记录列表
+	QueryMemberSignLogList(ctx context.Context, in *QueryMemberSignLogListReq, opts ...grpc.CallOption) (*QueryMemberSignLogListResp, error)
+}
+
+type memberSignLogServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewMemberSignLogServiceClient(cc grpc.ClientConnInterface) MemberSignLogServiceClient {
+	return &memberSignLogServiceClient{cc}
+}
+
+func (c *memberSignLogServiceClient) AddMemberSignLog(ctx context.Context, in *AddMemberSignLogReq, opts ...grpc.CallOption) (*AddMemberSignLogResp, error) {
+	out := new(AddMemberSignLogResp)
+	err := c.cc.Invoke(ctx, MemberSignLogService_AddMemberSignLog_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *memberSignLogServiceClient) QueryMemberSignLogDetail(ctx context.Context, in *QueryMemberSignLogDetailReq, opts ...grpc.CallOption) (*QueryMemberSignLogDetailResp, error) {
+	out := new(QueryMemberSignLogDetailResp)
+	err := c.cc.Invoke(ctx, MemberSignLogService_QueryMemberSignLogDetail_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *memberSignLogServiceClient) QueryMemberSignLogList(ctx context.Context, in *QueryMemberSignLogListReq, opts ...grpc.CallOption) (*QueryMemberSignLogListResp, error) {
+	out := new(QueryMemberSignLogListResp)
+	err := c.cc.Invoke(ctx, MemberSignLogService_QueryMemberSignLogList_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// MemberSignLogServiceServer is the server API for MemberSignLogService service.
+// All implementations must embed UnimplementedMemberSignLogServiceServer
+// for forward compatibility
+type MemberSignLogServiceServer interface {
+	// 添加会员签到记录
+	AddMemberSignLog(context.Context, *AddMemberSignLogReq) (*AddMemberSignLogResp, error)
+	// 查询会员签到记录详情
+	QueryMemberSignLogDetail(context.Context, *QueryMemberSignLogDetailReq) (*QueryMemberSignLogDetailResp, error)
+	// 查询会员签到记录列表
+	QueryMemberSignLogList(context.Context, *QueryMemberSignLogListReq) (*QueryMemberSignLogListResp, error)
+	mustEmbedUnimplementedMemberSignLogServiceServer()
+}
+
+// UnimplementedMemberSignLogServiceServer must be embedded to have forward compatible implementations.
+type UnimplementedMemberSignLogServiceServer struct {
+}
+
+func (UnimplementedMemberSignLogServiceServer) AddMemberSignLog(context.Context, *AddMemberSignLogReq) (*AddMemberSignLogResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AddMemberSignLog not implemented")
+}
+func (UnimplementedMemberSignLogServiceServer) QueryMemberSignLogDetail(context.Context, *QueryMemberSignLogDetailReq) (*QueryMemberSignLogDetailResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method QueryMemberSignLogDetail not implemented")
+}
+func (UnimplementedMemberSignLogServiceServer) QueryMemberSignLogList(context.Context, *QueryMemberSignLogListReq) (*QueryMemberSignLogListResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method QueryMemberSignLogList not implemented")
+}
+func (UnimplementedMemberSignLogServiceServer) mustEmbedUnimplementedMemberSignLogServiceServer() {}
+
+// UnsafeMemberSignLogServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to MemberSignLogServiceServer will
+// result in compilation errors.
+type UnsafeMemberSignLogServiceServer interface {
+	mustEmbedUnimplementedMemberSignLogServiceServer()
+}
+
+func RegisterMemberSignLogServiceServer(s grpc.ServiceRegistrar, srv MemberSignLogServiceServer) {
+	s.RegisterService(&MemberSignLogService_ServiceDesc, srv)
+}
+
+func _MemberSignLogService_AddMemberSignLog_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddMemberSignLogReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MemberSignLogServiceServer).AddMemberSignLog(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: MemberSignLogService_AddMemberSignLog_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MemberSignLogServiceServer).AddMemberSignLog(ctx, req.(*AddMemberSignLogReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _MemberSignLogService_QueryMemberSignLogDetail_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryMemberSignLogDetailReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MemberSignLogServiceServer).QueryMemberSignLogDetail(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: MemberSignLogService_QueryMemberSignLogDetail_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MemberSignLogServiceServer).QueryMemberSignLogDetail(ctx, req.(*QueryMemberSignLogDetailReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _MemberSignLogService_QueryMemberSignLogList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryMemberSignLogListReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MemberSignLogServiceServer).QueryMemberSignLogList(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: MemberSignLogService_QueryMemberSignLogList_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MemberSignLogServiceServer).QueryMemberSignLogList(ctx, req.(*QueryMemberSignLogListReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// MemberSignLogService_ServiceDesc is the grpc.ServiceDesc for MemberSignLogService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var MemberSignLogService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "umsclient.MemberSignLogService",
+	HandlerType: (*MemberSignLogServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "AddMemberSignLog",
+			Handler:    _MemberSignLogService_AddMemberSignLog_Handler,
+		},
+		{
+			MethodName: "QueryMemberSignLogDetail",
+			Handler:    _MemberSignLogService_QueryMemberSignLogDetail_Handler,
+		},
+		{
+			MethodName: "QueryMemberSignLogList",
+			Handler:    _MemberSignLogService_QueryMemberSignLogList_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "rpc/ums/ums.proto",
+}
+
+const (
 	MemberStatisticsInfoService_AddMemberStatisticsInfo_FullMethodName         = "/umsclient.MemberStatisticsInfoService/AddMemberStatisticsInfo"
 	MemberStatisticsInfoService_QueryMemberStatisticsInfoDetail_FullMethodName = "/umsclient.MemberStatisticsInfoService/QueryMemberStatisticsInfoDetail"
 	MemberStatisticsInfoService_QueryMemberStatisticsInfoList_FullMethodName   = "/umsclient.MemberStatisticsInfoService/QueryMemberStatisticsInfoList"
@@ -3201,17 +3122,17 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type MemberTagServiceClient interface {
-	// 添加用户标签表
+	// 添加用户标签
 	AddMemberTag(ctx context.Context, in *AddMemberTagReq, opts ...grpc.CallOption) (*AddMemberTagResp, error)
-	// 删除用户标签表
+	// 删除用户标签
 	DeleteMemberTag(ctx context.Context, in *DeleteMemberTagReq, opts ...grpc.CallOption) (*DeleteMemberTagResp, error)
-	// 更新用户标签表
+	// 更新用户标签
 	UpdateMemberTag(ctx context.Context, in *UpdateMemberTagReq, opts ...grpc.CallOption) (*UpdateMemberTagResp, error)
-	// 更新用户标签表状态
+	// 更新用户标签状态
 	UpdateMemberTagStatus(ctx context.Context, in *UpdateMemberTagStatusReq, opts ...grpc.CallOption) (*UpdateMemberTagStatusResp, error)
-	// 查询用户标签表详情
+	// 查询用户标签详情
 	QueryMemberTagDetail(ctx context.Context, in *QueryMemberTagDetailReq, opts ...grpc.CallOption) (*QueryMemberTagDetailResp, error)
-	// 查询用户标签表列表
+	// 查询用户标签列表
 	QueryMemberTagList(ctx context.Context, in *QueryMemberTagListReq, opts ...grpc.CallOption) (*QueryMemberTagListResp, error)
 }
 
@@ -3281,17 +3202,17 @@ func (c *memberTagServiceClient) QueryMemberTagList(ctx context.Context, in *Que
 // All implementations must embed UnimplementedMemberTagServiceServer
 // for forward compatibility
 type MemberTagServiceServer interface {
-	// 添加用户标签表
+	// 添加用户标签
 	AddMemberTag(context.Context, *AddMemberTagReq) (*AddMemberTagResp, error)
-	// 删除用户标签表
+	// 删除用户标签
 	DeleteMemberTag(context.Context, *DeleteMemberTagReq) (*DeleteMemberTagResp, error)
-	// 更新用户标签表
+	// 更新用户标签
 	UpdateMemberTag(context.Context, *UpdateMemberTagReq) (*UpdateMemberTagResp, error)
-	// 更新用户标签表状态
+	// 更新用户标签状态
 	UpdateMemberTagStatus(context.Context, *UpdateMemberTagStatusReq) (*UpdateMemberTagStatusResp, error)
-	// 查询用户标签表详情
+	// 查询用户标签详情
 	QueryMemberTagDetail(context.Context, *QueryMemberTagDetailReq) (*QueryMemberTagDetailResp, error)
-	// 查询用户标签表列表
+	// 查询用户标签列表
 	QueryMemberTagList(context.Context, *QueryMemberTagListReq) (*QueryMemberTagListResp, error)
 	mustEmbedUnimplementedMemberTagServiceServer()
 }
@@ -3476,6 +3397,177 @@ var MemberTagService_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
+	MemberTagRelationService_AddMemberTagRelation_FullMethodName         = "/umsclient.MemberTagRelationService/AddMemberTagRelation"
+	MemberTagRelationService_QueryMemberTagRelationDetail_FullMethodName = "/umsclient.MemberTagRelationService/QueryMemberTagRelationDetail"
+	MemberTagRelationService_QueryMemberTagRelationList_FullMethodName   = "/umsclient.MemberTagRelationService/QueryMemberTagRelationList"
+)
+
+// MemberTagRelationServiceClient is the client API for MemberTagRelationService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type MemberTagRelationServiceClient interface {
+	// 添加会员标签关联
+	AddMemberTagRelation(ctx context.Context, in *AddMemberTagRelationReq, opts ...grpc.CallOption) (*AddMemberTagRelationResp, error)
+	// 查询会员标签关联详情
+	QueryMemberTagRelationDetail(ctx context.Context, in *QueryMemberTagRelationDetailReq, opts ...grpc.CallOption) (*QueryMemberTagRelationDetailResp, error)
+	// 查询会员标签关联列表
+	QueryMemberTagRelationList(ctx context.Context, in *QueryMemberTagRelationListReq, opts ...grpc.CallOption) (*QueryMemberTagRelationListResp, error)
+}
+
+type memberTagRelationServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewMemberTagRelationServiceClient(cc grpc.ClientConnInterface) MemberTagRelationServiceClient {
+	return &memberTagRelationServiceClient{cc}
+}
+
+func (c *memberTagRelationServiceClient) AddMemberTagRelation(ctx context.Context, in *AddMemberTagRelationReq, opts ...grpc.CallOption) (*AddMemberTagRelationResp, error) {
+	out := new(AddMemberTagRelationResp)
+	err := c.cc.Invoke(ctx, MemberTagRelationService_AddMemberTagRelation_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *memberTagRelationServiceClient) QueryMemberTagRelationDetail(ctx context.Context, in *QueryMemberTagRelationDetailReq, opts ...grpc.CallOption) (*QueryMemberTagRelationDetailResp, error) {
+	out := new(QueryMemberTagRelationDetailResp)
+	err := c.cc.Invoke(ctx, MemberTagRelationService_QueryMemberTagRelationDetail_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *memberTagRelationServiceClient) QueryMemberTagRelationList(ctx context.Context, in *QueryMemberTagRelationListReq, opts ...grpc.CallOption) (*QueryMemberTagRelationListResp, error) {
+	out := new(QueryMemberTagRelationListResp)
+	err := c.cc.Invoke(ctx, MemberTagRelationService_QueryMemberTagRelationList_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// MemberTagRelationServiceServer is the server API for MemberTagRelationService service.
+// All implementations must embed UnimplementedMemberTagRelationServiceServer
+// for forward compatibility
+type MemberTagRelationServiceServer interface {
+	// 添加会员标签关联
+	AddMemberTagRelation(context.Context, *AddMemberTagRelationReq) (*AddMemberTagRelationResp, error)
+	// 查询会员标签关联详情
+	QueryMemberTagRelationDetail(context.Context, *QueryMemberTagRelationDetailReq) (*QueryMemberTagRelationDetailResp, error)
+	// 查询会员标签关联列表
+	QueryMemberTagRelationList(context.Context, *QueryMemberTagRelationListReq) (*QueryMemberTagRelationListResp, error)
+	mustEmbedUnimplementedMemberTagRelationServiceServer()
+}
+
+// UnimplementedMemberTagRelationServiceServer must be embedded to have forward compatible implementations.
+type UnimplementedMemberTagRelationServiceServer struct {
+}
+
+func (UnimplementedMemberTagRelationServiceServer) AddMemberTagRelation(context.Context, *AddMemberTagRelationReq) (*AddMemberTagRelationResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AddMemberTagRelation not implemented")
+}
+func (UnimplementedMemberTagRelationServiceServer) QueryMemberTagRelationDetail(context.Context, *QueryMemberTagRelationDetailReq) (*QueryMemberTagRelationDetailResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method QueryMemberTagRelationDetail not implemented")
+}
+func (UnimplementedMemberTagRelationServiceServer) QueryMemberTagRelationList(context.Context, *QueryMemberTagRelationListReq) (*QueryMemberTagRelationListResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method QueryMemberTagRelationList not implemented")
+}
+func (UnimplementedMemberTagRelationServiceServer) mustEmbedUnimplementedMemberTagRelationServiceServer() {
+}
+
+// UnsafeMemberTagRelationServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to MemberTagRelationServiceServer will
+// result in compilation errors.
+type UnsafeMemberTagRelationServiceServer interface {
+	mustEmbedUnimplementedMemberTagRelationServiceServer()
+}
+
+func RegisterMemberTagRelationServiceServer(s grpc.ServiceRegistrar, srv MemberTagRelationServiceServer) {
+	s.RegisterService(&MemberTagRelationService_ServiceDesc, srv)
+}
+
+func _MemberTagRelationService_AddMemberTagRelation_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddMemberTagRelationReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MemberTagRelationServiceServer).AddMemberTagRelation(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: MemberTagRelationService_AddMemberTagRelation_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MemberTagRelationServiceServer).AddMemberTagRelation(ctx, req.(*AddMemberTagRelationReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _MemberTagRelationService_QueryMemberTagRelationDetail_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryMemberTagRelationDetailReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MemberTagRelationServiceServer).QueryMemberTagRelationDetail(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: MemberTagRelationService_QueryMemberTagRelationDetail_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MemberTagRelationServiceServer).QueryMemberTagRelationDetail(ctx, req.(*QueryMemberTagRelationDetailReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _MemberTagRelationService_QueryMemberTagRelationList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryMemberTagRelationListReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MemberTagRelationServiceServer).QueryMemberTagRelationList(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: MemberTagRelationService_QueryMemberTagRelationList_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MemberTagRelationServiceServer).QueryMemberTagRelationList(ctx, req.(*QueryMemberTagRelationListReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// MemberTagRelationService_ServiceDesc is the grpc.ServiceDesc for MemberTagRelationService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var MemberTagRelationService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "umsclient.MemberTagRelationService",
+	HandlerType: (*MemberTagRelationServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "AddMemberTagRelation",
+			Handler:    _MemberTagRelationService_AddMemberTagRelation_Handler,
+		},
+		{
+			MethodName: "QueryMemberTagRelationDetail",
+			Handler:    _MemberTagRelationService_QueryMemberTagRelationDetail_Handler,
+		},
+		{
+			MethodName: "QueryMemberTagRelationList",
+			Handler:    _MemberTagRelationService_QueryMemberTagRelationList_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "rpc/ums/ums.proto",
+}
+
+const (
 	MemberTaskService_AddMemberTask_FullMethodName          = "/umsclient.MemberTaskService/AddMemberTask"
 	MemberTaskService_DeleteMemberTask_FullMethodName       = "/umsclient.MemberTaskService/DeleteMemberTask"
 	MemberTaskService_UpdateMemberTask_FullMethodName       = "/umsclient.MemberTaskService/UpdateMemberTask"
@@ -3488,17 +3580,17 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type MemberTaskServiceClient interface {
-	// 添加会员任务表
+	// 添加会员任务
 	AddMemberTask(ctx context.Context, in *AddMemberTaskReq, opts ...grpc.CallOption) (*AddMemberTaskResp, error)
-	// 删除会员任务表
+	// 删除会员任务
 	DeleteMemberTask(ctx context.Context, in *DeleteMemberTaskReq, opts ...grpc.CallOption) (*DeleteMemberTaskResp, error)
-	// 更新会员任务表
+	// 更新会员任务
 	UpdateMemberTask(ctx context.Context, in *UpdateMemberTaskReq, opts ...grpc.CallOption) (*UpdateMemberTaskResp, error)
-	// 更新会员任务表状态
+	// 更新会员任务状态
 	UpdateMemberTaskStatus(ctx context.Context, in *UpdateMemberTaskStatusReq, opts ...grpc.CallOption) (*UpdateMemberTaskStatusResp, error)
-	// 查询会员任务表详情
+	// 查询会员任务详情
 	QueryMemberTaskDetail(ctx context.Context, in *QueryMemberTaskDetailReq, opts ...grpc.CallOption) (*QueryMemberTaskDetailResp, error)
-	// 查询会员任务表列表
+	// 查询会员任务列表
 	QueryMemberTaskList(ctx context.Context, in *QueryMemberTaskListReq, opts ...grpc.CallOption) (*QueryMemberTaskListResp, error)
 }
 
@@ -3568,17 +3660,17 @@ func (c *memberTaskServiceClient) QueryMemberTaskList(ctx context.Context, in *Q
 // All implementations must embed UnimplementedMemberTaskServiceServer
 // for forward compatibility
 type MemberTaskServiceServer interface {
-	// 添加会员任务表
+	// 添加会员任务
 	AddMemberTask(context.Context, *AddMemberTaskReq) (*AddMemberTaskResp, error)
-	// 删除会员任务表
+	// 删除会员任务
 	DeleteMemberTask(context.Context, *DeleteMemberTaskReq) (*DeleteMemberTaskResp, error)
-	// 更新会员任务表
+	// 更新会员任务
 	UpdateMemberTask(context.Context, *UpdateMemberTaskReq) (*UpdateMemberTaskResp, error)
-	// 更新会员任务表状态
+	// 更新会员任务状态
 	UpdateMemberTaskStatus(context.Context, *UpdateMemberTaskStatusReq) (*UpdateMemberTaskStatusResp, error)
-	// 查询会员任务表详情
+	// 查询会员任务详情
 	QueryMemberTaskDetail(context.Context, *QueryMemberTaskDetailReq) (*QueryMemberTaskDetailResp, error)
-	// 查询会员任务表列表
+	// 查询会员任务列表
 	QueryMemberTaskList(context.Context, *QueryMemberTaskListReq) (*QueryMemberTaskListResp, error)
 	mustEmbedUnimplementedMemberTaskServiceServer()
 }
@@ -3756,6 +3848,177 @@ var MemberTaskService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "QueryMemberTaskList",
 			Handler:    _MemberTaskService_QueryMemberTaskList_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "rpc/ums/ums.proto",
+}
+
+const (
+	MemberTaskRelationService_AddMemberTaskRelation_FullMethodName         = "/umsclient.MemberTaskRelationService/AddMemberTaskRelation"
+	MemberTaskRelationService_QueryMemberTaskRelationDetail_FullMethodName = "/umsclient.MemberTaskRelationService/QueryMemberTaskRelationDetail"
+	MemberTaskRelationService_QueryMemberTaskRelationList_FullMethodName   = "/umsclient.MemberTaskRelationService/QueryMemberTaskRelationList"
+)
+
+// MemberTaskRelationServiceClient is the client API for MemberTaskRelationService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type MemberTaskRelationServiceClient interface {
+	// 添加会员任务关联
+	AddMemberTaskRelation(ctx context.Context, in *AddMemberTaskRelationReq, opts ...grpc.CallOption) (*AddMemberTaskRelationResp, error)
+	// 查询会员任务关联详情
+	QueryMemberTaskRelationDetail(ctx context.Context, in *QueryMemberTaskRelationDetailReq, opts ...grpc.CallOption) (*QueryMemberTaskRelationDetailResp, error)
+	// 查询会员任务关联列表
+	QueryMemberTaskRelationList(ctx context.Context, in *QueryMemberTaskRelationListReq, opts ...grpc.CallOption) (*QueryMemberTaskRelationListResp, error)
+}
+
+type memberTaskRelationServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewMemberTaskRelationServiceClient(cc grpc.ClientConnInterface) MemberTaskRelationServiceClient {
+	return &memberTaskRelationServiceClient{cc}
+}
+
+func (c *memberTaskRelationServiceClient) AddMemberTaskRelation(ctx context.Context, in *AddMemberTaskRelationReq, opts ...grpc.CallOption) (*AddMemberTaskRelationResp, error) {
+	out := new(AddMemberTaskRelationResp)
+	err := c.cc.Invoke(ctx, MemberTaskRelationService_AddMemberTaskRelation_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *memberTaskRelationServiceClient) QueryMemberTaskRelationDetail(ctx context.Context, in *QueryMemberTaskRelationDetailReq, opts ...grpc.CallOption) (*QueryMemberTaskRelationDetailResp, error) {
+	out := new(QueryMemberTaskRelationDetailResp)
+	err := c.cc.Invoke(ctx, MemberTaskRelationService_QueryMemberTaskRelationDetail_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *memberTaskRelationServiceClient) QueryMemberTaskRelationList(ctx context.Context, in *QueryMemberTaskRelationListReq, opts ...grpc.CallOption) (*QueryMemberTaskRelationListResp, error) {
+	out := new(QueryMemberTaskRelationListResp)
+	err := c.cc.Invoke(ctx, MemberTaskRelationService_QueryMemberTaskRelationList_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// MemberTaskRelationServiceServer is the server API for MemberTaskRelationService service.
+// All implementations must embed UnimplementedMemberTaskRelationServiceServer
+// for forward compatibility
+type MemberTaskRelationServiceServer interface {
+	// 添加会员任务关联
+	AddMemberTaskRelation(context.Context, *AddMemberTaskRelationReq) (*AddMemberTaskRelationResp, error)
+	// 查询会员任务关联详情
+	QueryMemberTaskRelationDetail(context.Context, *QueryMemberTaskRelationDetailReq) (*QueryMemberTaskRelationDetailResp, error)
+	// 查询会员任务关联列表
+	QueryMemberTaskRelationList(context.Context, *QueryMemberTaskRelationListReq) (*QueryMemberTaskRelationListResp, error)
+	mustEmbedUnimplementedMemberTaskRelationServiceServer()
+}
+
+// UnimplementedMemberTaskRelationServiceServer must be embedded to have forward compatible implementations.
+type UnimplementedMemberTaskRelationServiceServer struct {
+}
+
+func (UnimplementedMemberTaskRelationServiceServer) AddMemberTaskRelation(context.Context, *AddMemberTaskRelationReq) (*AddMemberTaskRelationResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AddMemberTaskRelation not implemented")
+}
+func (UnimplementedMemberTaskRelationServiceServer) QueryMemberTaskRelationDetail(context.Context, *QueryMemberTaskRelationDetailReq) (*QueryMemberTaskRelationDetailResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method QueryMemberTaskRelationDetail not implemented")
+}
+func (UnimplementedMemberTaskRelationServiceServer) QueryMemberTaskRelationList(context.Context, *QueryMemberTaskRelationListReq) (*QueryMemberTaskRelationListResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method QueryMemberTaskRelationList not implemented")
+}
+func (UnimplementedMemberTaskRelationServiceServer) mustEmbedUnimplementedMemberTaskRelationServiceServer() {
+}
+
+// UnsafeMemberTaskRelationServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to MemberTaskRelationServiceServer will
+// result in compilation errors.
+type UnsafeMemberTaskRelationServiceServer interface {
+	mustEmbedUnimplementedMemberTaskRelationServiceServer()
+}
+
+func RegisterMemberTaskRelationServiceServer(s grpc.ServiceRegistrar, srv MemberTaskRelationServiceServer) {
+	s.RegisterService(&MemberTaskRelationService_ServiceDesc, srv)
+}
+
+func _MemberTaskRelationService_AddMemberTaskRelation_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddMemberTaskRelationReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MemberTaskRelationServiceServer).AddMemberTaskRelation(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: MemberTaskRelationService_AddMemberTaskRelation_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MemberTaskRelationServiceServer).AddMemberTaskRelation(ctx, req.(*AddMemberTaskRelationReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _MemberTaskRelationService_QueryMemberTaskRelationDetail_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryMemberTaskRelationDetailReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MemberTaskRelationServiceServer).QueryMemberTaskRelationDetail(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: MemberTaskRelationService_QueryMemberTaskRelationDetail_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MemberTaskRelationServiceServer).QueryMemberTaskRelationDetail(ctx, req.(*QueryMemberTaskRelationDetailReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _MemberTaskRelationService_QueryMemberTaskRelationList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryMemberTaskRelationListReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MemberTaskRelationServiceServer).QueryMemberTaskRelationList(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: MemberTaskRelationService_QueryMemberTaskRelationList_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MemberTaskRelationServiceServer).QueryMemberTaskRelationList(ctx, req.(*QueryMemberTaskRelationListReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// MemberTaskRelationService_ServiceDesc is the grpc.ServiceDesc for MemberTaskRelationService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var MemberTaskRelationService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "umsclient.MemberTaskRelationService",
+	HandlerType: (*MemberTaskRelationServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "AddMemberTaskRelation",
+			Handler:    _MemberTaskRelationService_AddMemberTaskRelation_Handler,
+		},
+		{
+			MethodName: "QueryMemberTaskRelationDetail",
+			Handler:    _MemberTaskRelationService_QueryMemberTaskRelationDetail_Handler,
+		},
+		{
+			MethodName: "QueryMemberTaskRelationList",
+			Handler:    _MemberTaskRelationService_QueryMemberTaskRelationList_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

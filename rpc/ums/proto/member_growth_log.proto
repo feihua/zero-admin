@@ -1,0 +1,79 @@
+syntax = "proto3";
+
+package main;
+
+option go_package = "./proto";
+
+// 添加会员成长值记录
+message AddMemberGrowthLogReq {
+  int64 id = 1; //
+  int64 member_id = 2; //会员ID
+  int32 change_type = 3; //变更类型：1-添加成长值，2-减少成长值
+  int32 change_growth = 4; //变更成长值
+  int32 source_type = 5; //来源类型：0-其他，1-订单，2-活动，3-签到，4-管理员修改
+  string description = 6; //描述
+  string operate_man = 7; //操作人员
+  string operate_note = 8; //操作备注
+}
+
+message AddMemberGrowthLogResp {
+  string pong = 1;
+}
+
+// 查询会员成长值记录详情
+message QueryMemberGrowthLogDetailReq {
+    int64 id = 1;
+}
+
+message QueryMemberGrowthLogDetailResp {
+  int64 id = 1; //
+  int64 member_id = 2; //会员ID
+  int32 change_type = 3; //变更类型：1-添加成长值，2-减少成长值
+  int32 change_growth = 4; //变更成长值
+  int32 source_type = 5; //来源类型：0-其他，1-订单，2-活动，3-签到，4-管理员修改
+  string description = 6; //描述
+  string operate_man = 7; //操作人员
+  string operate_note = 8; //操作备注
+  string create_time = 9; //创建时间
+
+}
+
+// 分页查询会员成长值记录列表
+message QueryMemberGrowthLogListReq {
+  int64 member_id = 1; //会员ID
+  int32 change_type = 2; //变更类型：1-添加成长值，2-减少成长值
+  int32 source_type = 3; //来源类型：0-其他，1-订单，2-活动，3-签到，4-管理员修改
+  int32 page_num = 4; //第几页
+  int32 page_size = 5; //每页的数量
+}
+
+message MemberGrowthLogListData {
+  int64 id = 1; //
+  int64 member_id = 2; //会员ID
+  int32 change_type = 3; //变更类型：1-添加成长值，2-减少成长值
+  int32 change_growth = 4; //变更成长值
+  int32 source_type = 5; //来源类型：0-其他，1-订单，2-活动，3-签到，4-管理员修改
+  string description = 6; //描述
+  string operate_man = 7; //操作人员
+  string operate_note = 8; //操作备注
+  string create_time = 9; //创建时间
+
+}
+
+message QueryMemberGrowthLogListResp {
+  int64 total = 1;
+  repeated  MemberGrowthLogListData list = 2;
+}
+
+// 会员成长值记录
+service MemberGrowthLogService {
+  // 添加会员成长值记录
+  rpc AddMemberGrowthLog(AddMemberGrowthLogReq) returns (AddMemberGrowthLogResp){}
+
+  // 查询会员成长值记录详情
+   rpc QueryMemberGrowthLogDetail(QueryMemberGrowthLogDetailReq) returns (QueryMemberGrowthLogDetailResp){}
+  // 查询会员成长值记录列表
+  rpc QueryMemberGrowthLogList(QueryMemberGrowthLogListReq) returns (QueryMemberGrowthLogListResp){}
+
+
+}

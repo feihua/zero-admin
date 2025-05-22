@@ -12,16 +12,24 @@ const TableNameUmsMemberTask = "ums_member_task"
 
 // UmsMemberTask 会员任务表
 type UmsMemberTask struct {
-	ID           int64      `gorm:"column:id;primaryKey;autoIncrement:true" json:"id"`
-	TaskName     string     `gorm:"column:task_name;not null;comment:任务名称" json:"task_name"`                               // 任务名称
-	TaskGrowth   int32      `gorm:"column:task_growth;not null;comment:赠送成长值" json:"task_growth"`                          // 赠送成长值
-	TaskIntegral int32      `gorm:"column:task_integral;not null;comment:赠送积分" json:"task_integral"`                       // 赠送积分
-	TaskType     int32      `gorm:"column:task_type;not null;comment:任务类型：0->新手任务；1->日常任务" json:"task_type"`               // 任务类型：0->新手任务；1->日常任务
-	Status       int32      `gorm:"column:status;not null;default:1;comment:状态：0->禁用；1->启用" json:"status"`                 // 状态：0->禁用；1->启用
-	CreateBy     string     `gorm:"column:create_by;not null;comment:创建者" json:"create_by"`                                // 创建者
-	CreateTime   time.Time  `gorm:"column:create_time;not null;default:CURRENT_TIMESTAMP;comment:创建时间" json:"create_time"` // 创建时间
-	UpdateBy     string     `gorm:"column:update_by;not null;comment:更新者" json:"update_by"`                                // 更新者
-	UpdateTime   *time.Time `gorm:"column:update_time;comment:更新时间" json:"update_time"`                                    // 更新时间
+	ID            int64      `gorm:"column:id;primaryKey;autoIncrement:true;comment:主键ID" json:"id"`                        // 主键ID
+	TaskName      string     `gorm:"column:task_name;not null;comment:任务名称" json:"task_name"`                               // 任务名称
+	TaskDesc      string     `gorm:"column:task_desc;not null;comment:任务描述" json:"task_desc"`                               // 任务描述
+	TaskGrowth    int32      `gorm:"column:task_growth;not null;comment:赠送成长值" json:"task_growth"`                          // 赠送成长值
+	TaskIntegral  int32      `gorm:"column:task_integral;not null;comment:赠送积分" json:"task_integral"`                       // 赠送积分
+	TaskType      int32      `gorm:"column:task_type;not null;comment:任务类型：0-新手任务，1-日常任务，2-周常任务，3-月常任务" json:"task_type"`   // 任务类型：0-新手任务，1-日常任务，2-周常任务，3-月常任务
+	CompleteCount int32      `gorm:"column:complete_count;not null;default:1;comment:需要完成次数" json:"complete_count"`         // 需要完成次数
+	RewardType    int32      `gorm:"column:reward_type;not null;comment:奖励类型：0-积分成长值，1-优惠券，2-抽奖次数" json:"reward_type"`      // 奖励类型：0-积分成长值，1-优惠券，2-抽奖次数
+	RewardParams  string     `gorm:"column:reward_params;not null;comment:奖励参数JSON" json:"reward_params"`                   // 奖励参数JSON
+	StartTime     time.Time  `gorm:"column:start_time;not null;comment:任务开始时间" json:"start_time"`                           // 任务开始时间
+	EndTime       time.Time  `gorm:"column:end_time;not null;comment:任务结束时间" json:"end_time"`                               // 任务结束时间
+	Status        int32      `gorm:"column:status;not null;default:1;comment:状态：0-禁用，1-启用" json:"status"`                   // 状态：0-禁用，1-启用
+	Sort          int32      `gorm:"column:sort;not null;comment:排序" json:"sort"`                                           // 排序
+	CreateBy      int64      `gorm:"column:create_by;not null;comment:创建人ID" json:"create_by"`                              // 创建人ID
+	CreateTime    time.Time  `gorm:"column:create_time;not null;default:CURRENT_TIMESTAMP;comment:创建时间" json:"create_time"` // 创建时间
+	UpdateBy      *int64     `gorm:"column:update_by;comment:更新人ID" json:"update_by"`                                       // 更新人ID
+	UpdateTime    *time.Time `gorm:"column:update_time;comment:更新时间" json:"update_time"`                                    // 更新时间
+	IsDeleted     int32      `gorm:"column:is_deleted;not null;comment:是否删除" json:"is_deleted"`                             // 是否删除
 }
 
 // TableName UmsMemberTask's table name

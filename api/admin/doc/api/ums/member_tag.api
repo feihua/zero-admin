@@ -2,17 +2,18 @@ import "../base/base.api"
 
 info (
 	desc:   "用户标签"
-	author: "liufeihua"
+	author: "LiuFeiHua"
 	email:  "1002219331@qq.com"
 )
 
 type (
 	// 添加用户标签请求参数
 	AddMemberTagReq {
-		TagName           string `json:"tagName"` //标签名称
-		FinishOrderCount  int32  `json:"finishOrderCount"` //自动打标签完成订单数量
-		Status            int32  `json:"status"` //状态：0->禁用；1->启用
-		FinishOrderAmount int64  `json:"finishOrderAmount"` //自动打标签完成订单金额
+		TagName           string  `json:"tagName"` //标签名称
+		Description       string  `json:"description"` //标签描述
+		FinishOrderCount  int32   `json:"finishOrderCount"` //自动打标签完成订单数量
+		FinishOrderAmount float64 `json:"finishOrderAmount"` //自动打标签完成订单金额
+		Status            int32   `json:"status"` //状态：0-禁用，1-启用
 	}
 	// 删除用户标签请求参数
 	DeleteMemberTagReq {
@@ -20,27 +21,33 @@ type (
 	}
 	// 更新用户标签请求参数
 	UpdateMemberTagReq {
-		Id                int64  `json:"id"` //
-		TagName           string `json:"tagName"` //标签名称
-		FinishOrderCount  int32  `json:"finishOrderCount"` //自动打标签完成订单数量
-		Status            int32  `json:"status"` //状态：0->禁用；1->启用
-		FinishOrderAmount int64  `json:"finishOrderAmount"` //自动打标签完成订单金额
+		Id                int64   `json:"id"` //主键ID
+		TagName           string  `json:"tagName"` //标签名称
+		Description       string  `json:"description"` //标签描述
+		FinishOrderCount  int32   `json:"finishOrderCount"` //自动打标签完成订单数量
+		FinishOrderAmount float64 `json:"finishOrderAmount"` //自动打标签完成订单金额
+		Status            int32   `json:"status"` //状态：0-禁用，1-启用
 	}
 	// 更新用户标签状态请求参数
 	UpdateMemberTagStatusReq {
-		Ids    []int64 `json:"ids"` //
-		Status int32   `json:"status"` //状态：0->禁用；1->启用
+		Ids    []int64 `json:"ids"` //主键ID
+		Status int32   `json:"status"` //状态：0-禁用，1-启用
 	}
 	// 查询用户标签详情请求参数
 	QueryMemberTagDetailReq {
 		Id int64 `form:"id"`
 	}
 	QueryMemberTagDetailData {
-		Id                int64  `json:"id"` //
-		TagName           string `json:"tagName"` //标签名称
-		FinishOrderCount  int32  `json:"finishOrderCount"` //自动打标签完成订单数量
-		Status            int32  `json:"status"` //状态：0->禁用；1->启用
-		FinishOrderAmount int64  `json:"finishOrderAmount"` //自动打标签完成订单金额
+		Id                int64   `json:"id"` //主键ID
+		TagName           string  `json:"tagName"` //标签名称
+		Description       string  `json:"description"` //标签描述
+		FinishOrderCount  int32   `json:"finishOrderCount"` //自动打标签完成订单数量
+		FinishOrderAmount float64 `json:"finishOrderAmount"` //自动打标签完成订单金额
+		Status            int32   `json:"status"` //状态：0-禁用，1-启用
+		CreateBy          int64   `json:"createBy"` //创建人ID
+		CreateTime        string  `json:"createTime"` //创建时间
+		UpdateBy          int64   `json:"updateBy"` //更新人ID
+		UpdateTime        string  `json:"updateTime"` //更新时间
 	}
 	QueryMemberTagDetailResp {
 		Code    string                   `json:"code"`
@@ -49,24 +56,29 @@ type (
 	}
 	// 分页查询用户标签列表请求参数
 	QueryMemberTagListReq {
-		Current  int64  `form:"current,default=1"` //第几页
-		PageSize int64  `form:"pageSize,default=20"` //每页的数量
-		TagName  string `form:"tagName,optional"` //标签名称
-		Status   int32  `form:"status,default=2"` //状态：0->禁用；1->启用
+		Current  int32  `form:"current,default=1"` //第几页
+		PageSize int32  `form:"pageSize,default=20"` //每页的数量
+		TagName  string `json:"tagName,optional"` //标签名称
+		Status   int32  `json:"status,default=2"` //状态：0-禁用，1-启用
 	}
 	QueryMemberTagListData {
-		Id                int64  `json:"id"` //
-		TagName           string `json:"tagName"` //标签名称
-		FinishOrderCount  int32  `json:"finishOrderCount"` //自动打标签完成订单数量
-		Status            int32  `json:"status"` //状态：0->禁用；1->启用
-		FinishOrderAmount int64  `json:"finishOrderAmount"` //自动打标签完成订单金额
+		Id                int64   `json:"id"` //主键ID
+		TagName           string  `json:"tagName"` //标签名称
+		Description       string  `json:"description"` //标签描述
+		FinishOrderCount  int32   `json:"finishOrderCount"` //自动打标签完成订单数量
+		FinishOrderAmount float64 `json:"finishOrderAmount"` //自动打标签完成订单金额
+		Status            int32   `json:"status"` //状态：0-禁用，1-启用
+		CreateBy          int64   `json:"createBy"` //创建人ID
+		CreateTime        string  `json:"createTime"` //创建时间
+		UpdateBy          int64   `json:"updateBy"` //更新人ID
+		UpdateTime        string  `json:"updateTime"` //更新时间
 	}
 	QueryMemberTagListResp {
 		Code     string                    `json:"code"`
 		Message  string                    `json:"message"`
-		Current  int64                     `json:"current,default=1"`
+		Current  int32                     `json:"current,default=1"`
 		Data     []*QueryMemberTagListData `json:"data"`
-		PageSize int64                     `json:"pageSize,default=20"`
+		PageSize int32                     `json:"pageSize,default=20"`
 		Success  bool                      `json:"success"`
 		Total    int64                     `json:"total"`
 	}

@@ -1,6 +1,6 @@
 drop table if exists ums_member_level;
 -- 会员等级表
-create table gozero.ums_member_level
+create table ums_member_level
 (
     id            bigint auto_increment
         primary key comment '主键ID',
@@ -36,7 +36,7 @@ create table gozero.ums_member_level
 # }
 
 -- 添加会员等级
-insert into gozero.ums_member_level (id, name, level, growth_point, discount_rate, free_freight, comment_extra, privileges, remark, is_enabled, create_by)
+insert into ums_member_level (id, name, level, growth_point, discount_rate, free_freight, comment_extra, privileges, remark, is_enabled, create_by)
 values (1, '普通会员', 1, 0, 100.00, 0, 0, '{
     "priority_service": 0,
     "birthday_gift": 0,

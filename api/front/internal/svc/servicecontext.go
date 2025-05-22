@@ -45,21 +45,22 @@ import (
 	"github.com/feihua/zero-admin/rpc/sys/client/menuservice"
 	"github.com/feihua/zero-admin/rpc/sys/client/roleservice"
 	"github.com/feihua/zero-admin/rpc/sys/client/userservice"
-	"github.com/feihua/zero-admin/rpc/ums/client/growthchangehistoryservice"
-	"github.com/feihua/zero-admin/rpc/ums/client/integrationchangehistoryservice"
 	"github.com/feihua/zero-admin/rpc/ums/client/integrationconsumesettingservice"
 	"github.com/feihua/zero-admin/rpc/ums/client/memberaddressservice"
 	"github.com/feihua/zero-admin/rpc/ums/client/memberbrandattentionservice"
+	"github.com/feihua/zero-admin/rpc/ums/client/membergrowthlogservice"
 	"github.com/feihua/zero-admin/rpc/ums/client/memberinfoservice"
 	"github.com/feihua/zero-admin/rpc/ums/client/memberlevelservice"
 	"github.com/feihua/zero-admin/rpc/ums/client/memberloginlogservice"
-	"github.com/feihua/zero-admin/rpc/ums/client/membermembertagrelationservice"
+	"github.com/feihua/zero-admin/rpc/ums/client/memberpointslogservice"
 	"github.com/feihua/zero-admin/rpc/ums/client/memberproductcategoryrelationservice"
 	"github.com/feihua/zero-admin/rpc/ums/client/memberproductcollectionservice"
 	"github.com/feihua/zero-admin/rpc/ums/client/memberreadhistoryservice"
 	"github.com/feihua/zero-admin/rpc/ums/client/memberrulesettingservice"
 	"github.com/feihua/zero-admin/rpc/ums/client/memberstatisticsinfoservice"
+	"github.com/feihua/zero-admin/rpc/ums/client/membertagrelationservice"
 	"github.com/feihua/zero-admin/rpc/ums/client/membertagservice"
+	"github.com/feihua/zero-admin/rpc/ums/client/membertaskrelationservice"
 	"github.com/feihua/zero-admin/rpc/ums/client/membertaskservice"
 	"github.com/smartwalle/alipay/v3"
 	"github.com/zeromicro/go-zero/zrpc"
@@ -69,12 +70,11 @@ type ServiceContext struct {
 	Config config.Config
 
 	// 会员相关
-	GrowthChangeHistoryService           growthchangehistoryservice.GrowthChangeHistoryService
-	IntegrationChangeHistoryService      integrationchangehistoryservice.IntegrationChangeHistoryService
+	MemberGrowthLogService               membergrowthlogservice.MemberGrowthLogService
+	MemberPointsLogService               memberpointslogservice.MemberPointsLogService
 	IntegrationConsumeSettingService     integrationconsumesettingservice.IntegrationConsumeSettingService
 	MemberLevelService                   memberlevelservice.MemberLevelService
 	MemberLoginLogService                memberloginlogservice.MemberLoginLogService
-	MemberMemberTagRelationService       membermembertagrelationservice.MemberMemberTagRelationService
 	MemberProductCategoryRelationService memberproductcategoryrelationservice.MemberProductCategoryRelationService
 	MemberProductCollectionService       memberproductcollectionservice.MemberProductCollectionService
 	MemberReadHistoryService             memberreadhistoryservice.MemberReadHistoryService
@@ -83,7 +83,9 @@ type ServiceContext struct {
 	MemberService                        memberinfoservice.MemberInfoService
 	MemberStatisticsInfoService          memberstatisticsinfoservice.MemberStatisticsInfoService
 	MemberTagService                     membertagservice.MemberTagService
+	MemberTagRelationService             membertagrelationservice.MemberTagRelationService
 	MemberTaskService                    membertaskservice.MemberTaskService
+	MemberTaskRelationService            membertaskrelationservice.MemberTaskRelationService
 	MemberBrandAttentionService          memberbrandattentionservice.MemberBrandAttentionService
 
 	// 系统相关
@@ -152,12 +154,11 @@ func NewServiceContext(c config.Config) *ServiceContext {
 	cmsClient := zrpc.MustNewClient(c.CmsRpc)
 	return &ServiceContext{
 		Config:                               c,
-		GrowthChangeHistoryService:           growthchangehistoryservice.NewGrowthChangeHistoryService(umsClient),
-		IntegrationChangeHistoryService:      integrationchangehistoryservice.NewIntegrationChangeHistoryService(umsClient),
+		MemberGrowthLogService:               membergrowthlogservice.NewMemberGrowthLogService(umsClient),
+		MemberPointsLogService:               memberpointslogservice.NewMemberPointsLogService(umsClient),
 		IntegrationConsumeSettingService:     integrationconsumesettingservice.NewIntegrationConsumeSettingService(umsClient),
 		MemberLevelService:                   memberlevelservice.NewMemberLevelService(umsClient),
 		MemberLoginLogService:                memberloginlogservice.NewMemberLoginLogService(umsClient),
-		MemberMemberTagRelationService:       membermembertagrelationservice.NewMemberMemberTagRelationService(umsClient),
 		MemberProductCategoryRelationService: memberproductcategoryrelationservice.NewMemberProductCategoryRelationService(umsClient),
 		MemberProductCollectionService:       memberproductcollectionservice.NewMemberProductCollectionService(umsClient),
 		MemberReadHistoryService:             memberreadhistoryservice.NewMemberReadHistoryService(umsClient),
@@ -166,7 +167,9 @@ func NewServiceContext(c config.Config) *ServiceContext {
 		MemberService:                        memberinfoservice.NewMemberInfoService(umsClient),
 		MemberStatisticsInfoService:          memberstatisticsinfoservice.NewMemberStatisticsInfoService(umsClient),
 		MemberTagService:                     membertagservice.NewMemberTagService(umsClient),
+		MemberTagRelationService:             membertagrelationservice.NewMemberTagRelationService(umsClient),
 		MemberTaskService:                    membertaskservice.NewMemberTaskService(umsClient),
+		MemberTaskRelationService:            membertaskrelationservice.NewMemberTaskRelationService(umsClient),
 		MemberBrandAttentionService:          memberbrandattentionservice.NewMemberBrandAttentionService(umsClient),
 
 		DeptService:     deptservice.NewDeptService(sysClient),

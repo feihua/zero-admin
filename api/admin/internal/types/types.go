@@ -146,18 +146,26 @@ type AddMemberRuleSettingReq struct {
 }
 
 type AddMemberTagReq struct {
-	TagName           string `json:"tagName"`           //标签名称
-	FinishOrderCount  int32  `json:"finishOrderCount"`  //自动打标签完成订单数量
-	Status            int32  `json:"status"`            //状态：0->禁用；1->启用
-	FinishOrderAmount int64  `json:"finishOrderAmount"` //自动打标签完成订单金额
+	TagName           string  `json:"tagName"`           //标签名称
+	Description       string  `json:"description"`       //标签描述
+	FinishOrderCount  int32   `json:"finishOrderCount"`  //自动打标签完成订单数量
+	FinishOrderAmount float64 `json:"finishOrderAmount"` //自动打标签完成订单金额
+	Status            int32   `json:"status"`            //状态：0-禁用，1-启用
 }
 
 type AddMemberTaskReq struct {
-	TaskName     string `json:"taskName"`     //任务名称
-	TaskGrowth   int32  `json:"taskGrowth"`   //赠送成长值
-	TaskIntegral int32  `json:"taskIntegral"` //赠送积分
-	TaskType     int32  `json:"taskType"`     //任务类型：0->新手任务；1->日常任务
-	Status       int32  `json:"status"`       //状态：0->禁用；1->启用
+	TaskName      string `json:"taskName"`      //任务名称
+	TaskDesc      string `json:"taskDesc"`      //任务描述
+	TaskGrowth    int32  `json:"taskGrowth"`    //赠送成长值
+	TaskIntegral  int32  `json:"taskIntegral"`  //赠送积分
+	TaskType      int32  `json:"taskType"`      //任务类型：0-新手任务，1-日常任务，2-周常任务，3-月常任务
+	CompleteCount int32  `json:"completeCount"` //需要完成次数
+	RewardType    int32  `json:"rewardType"`    //奖励类型：0-积分成长值，1-优惠券，2-抽奖次数
+	RewardParams  string `json:"rewardParams"`  //奖励参数JSON
+	StartTime     string `json:"startTime"`     //任务开始时间
+	EndTime       string `json:"endTime"`       //任务结束时间
+	Status        int32  `json:"status"`        //状态：0-禁用，1-启用
+	Sort          int32  `json:"sort"`          //排序
 }
 
 type AddMenuReq struct {
@@ -640,33 +648,6 @@ type DeptList struct {
 	Value    string `json:"value"`
 	Title    string `json:"title"`
 	ParentId int64  `json:"parentId"`
-}
-
-type ListChangeHistoryData struct {
-	Id          int64  `json:"id"`          //
-	MemberId    int64  `json:"memberId"`    //会员id
-	ChangeType  int32  `json:"changeType"`  //改变类型：0->增加；1->减少
-	ChangeCount int32  `json:"changeCount"` //积分改变数量
-	OperateMan  string `json:"operateMan"`  //操作人员
-	OperateNote string `json:"operateNote"` //操作备注
-	SourceType  int32  `json:"sourceType"`  //积分来源：0->购物；1->管理员修改
-	CreateTime  string `json:"createTime"`  //创建时间
-}
-
-type ListChangeHistoryReq struct {
-	Current  int64 `form:"current,default=1"`
-	PageSize int64 `form:"pageSize,default=20"`
-	MemberId int64 `form:"memberId"`
-}
-
-type ListChangeHistoryResp struct {
-	Current  int64                    `json:"current,default=1"`
-	Data     []*ListChangeHistoryData `json:"data"`
-	PageSize int64                    `json:"pageSize,default=20"`
-	Success  bool                     `json:"success"`
-	Total    int64                    `json:"total"`
-	Code     string                   `json:"code"`
-	Message  string                   `json:"message"`
 }
 
 type ListCouponData struct {
@@ -1936,6 +1917,58 @@ type QueryLoginLogListResp struct {
 	Total    int64                    `json:"total"`
 }
 
+type QueryMemberGrowthLogDetailData struct {
+	Id           int64  `json:"id"`           //
+	MemberId     int64  `json:"memberId"`     //会员ID
+	ChangeType   int32  `json:"changeType"`   //变更类型：1-添加成长值，2-减少成长值
+	ChangeGrowth int32  `json:"changeGrowth"` //变更成长值
+	SourceType   int32  `json:"sourceType"`   //来源类型：0-其他，1-订单，2-活动，3-签到，4-管理员修改
+	Description  string `json:"description"`  //描述
+	OperateMan   string `json:"operateMan"`   //操作人员
+	OperateNote  string `json:"operateNote"`  //操作备注
+	CreateTime   string `json:"createTime"`   //创建时间
+}
+
+type QueryMemberGrowthLogDetailReq struct {
+	Id int64 `form:"id"`
+}
+
+type QueryMemberGrowthLogDetailResp struct {
+	Code    string                         `json:"code"`
+	Message string                         `json:"message"`
+	Data    QueryMemberGrowthLogDetailData `json:"data"`
+}
+
+type QueryMemberGrowthLogListData struct {
+	Id           int64  `json:"id"`           //
+	MemberId     int64  `json:"memberId"`     //会员ID
+	ChangeType   int32  `json:"changeType"`   //变更类型：1-添加成长值，2-减少成长值
+	ChangeGrowth int32  `json:"changeGrowth"` //变更成长值
+	SourceType   int32  `json:"sourceType"`   //来源类型：0-其他，1-订单，2-活动，3-签到，4-管理员修改
+	Description  string `json:"description"`  //描述
+	OperateMan   string `json:"operateMan"`   //操作人员
+	OperateNote  string `json:"operateNote"`  //操作备注
+	CreateTime   string `json:"createTime"`   //创建时间
+}
+
+type QueryMemberGrowthLogListReq struct {
+	Current    int32 `form:"current,default=1"`    //第几页
+	PageSize   int32 `form:"pageSize,default=20"`  //每页的数量
+	MemberId   int64 `form:"memberId,default=0"`   //会员ID
+	ChangeType int32 `form:"changeType,default=0"` //变更类型：1-添加成长值，2-减少成长值
+	SourceType int32 `form:"sourceType,default=5"` //来源类型：0-其他，1-订单，2-活动，3-签到，4-管理员修改
+}
+
+type QueryMemberGrowthLogListResp struct {
+	Code     string                          `json:"code"`
+	Message  string                          `json:"message"`
+	Current  int32                           `json:"current,default=1"`
+	Data     []*QueryMemberGrowthLogListData `json:"data"`
+	PageSize int32                           `json:"pageSize,default=20"`
+	Success  bool                            `json:"success"`
+	Total    int64                           `json:"total"`
+}
+
 type QueryMemberInfoDetailData struct {
 	Id           int64   `json:"id"`           //主键ID
 	MemberId     int64   `json:"memberId"`     //会员ID
@@ -2080,6 +2113,58 @@ type QueryMemberLevelListResp struct {
 	Total    int64                       `json:"total"`
 }
 
+type QueryMemberPointsLogDetailData struct {
+	Id           int64  `json:"id"`           //
+	MemberId     int64  `json:"memberId"`     //会员ID
+	ChangeType   int32  `json:"changeType"`   //变更类型：1-添加积分，2-减少积分
+	ChangePoints int32  `json:"changePoints"` //变更积分
+	SourceType   int32  `json:"sourceType"`   //来源类型：0-其他，1-订单，2-活动，3-签到，4-管理员修改
+	Description  string `json:"description"`  //描述
+	OperateMan   string `json:"operateMan"`   //操作人员
+	OperateNote  string `json:"operateNote"`  //操作备注
+	CreateTime   string `json:"createTime"`   //创建时间
+}
+
+type QueryMemberPointsLogDetailReq struct {
+	Id int64 `form:"id"`
+}
+
+type QueryMemberPointsLogDetailResp struct {
+	Code    string                         `json:"code"`
+	Message string                         `json:"message"`
+	Data    QueryMemberPointsLogDetailData `json:"data"`
+}
+
+type QueryMemberPointsLogListData struct {
+	Id           int64  `json:"id"`           //
+	MemberId     int64  `json:"memberId"`     //会员ID
+	ChangeType   int32  `json:"changeType"`   //变更类型：1-添加积分，2-减少积分
+	ChangePoints int32  `json:"changePoints"` //变更积分
+	SourceType   int32  `json:"sourceType"`   //来源类型：0-其他，1-订单，2-活动，3-签到，4-管理员修改
+	Description  string `json:"description"`  //描述
+	OperateMan   string `json:"operateMan"`   //操作人员
+	OperateNote  string `json:"operateNote"`  //操作备注
+	CreateTime   string `json:"createTime"`   //创建时间
+}
+
+type QueryMemberPointsLogListReq struct {
+	Current    int32 `form:"current,default=1"`    //第几页
+	PageSize   int32 `form:"pageSize,default=20"`  //每页的数量
+	MemberId   int64 `form:"memberId,default=0"`   //会员ID
+	ChangeType int32 `form:"changeType,default=0"` //变更类型：1-添加积分，2-减少积分
+	SourceType int32 `form:"sourceType,default=5"` //来源类型：0-其他，1-订单，2-活动，3-签到，4-管理员修改
+}
+
+type QueryMemberPointsLogListResp struct {
+	Code     string                          `json:"code"`
+	Message  string                          `json:"message"`
+	Current  int32                           `json:"current,default=1"`
+	Data     []*QueryMemberPointsLogListData `json:"data"`
+	PageSize int32                           `json:"pageSize,default=20"`
+	Success  bool                            `json:"success"`
+	Total    int64                           `json:"total"`
+}
+
 type QueryMemberRuleSettingDetailData struct {
 	Id                int64  `json:"id"`                //
 	ContinueSignDay   int32  `json:"continueSignDay"`   //连续签到天数
@@ -2137,6 +2222,51 @@ type QueryMemberRuleSettingListResp struct {
 	Total    int64                             `json:"total"`
 }
 
+type QueryMemberSignLogDetailData struct {
+	Id           int64  `json:"id"`           //
+	MemberId     int64  `json:"memberId"`     //会员ID
+	SignDate     string `json:"signDate"`     //签到日期
+	ContinueDays int32  `json:"continueDays"` //连续签到天数
+	Points       int32  `json:"points"`       //获得积分
+	CreateTime   string `json:"createTime"`   //
+}
+
+type QueryMemberSignLogDetailReq struct {
+	Id int64 `form:"id"`
+}
+
+type QueryMemberSignLogDetailResp struct {
+	Code    string                       `json:"code"`
+	Message string                       `json:"message"`
+	Data    QueryMemberSignLogDetailData `json:"data"`
+}
+
+type QueryMemberSignLogListData struct {
+	Id           int64  `json:"id"`           //
+	MemberId     int64  `json:"memberId"`     //会员ID
+	SignDate     string `json:"signDate"`     //签到日期
+	ContinueDays int32  `json:"continueDays"` //连续签到天数
+	Points       int32  `json:"points"`       //获得积分
+	CreateTime   string `json:"createTime"`   //
+}
+
+type QueryMemberSignLogListReq struct {
+	Current  int32  `form:"current,default=1"`   //第几页
+	PageSize int32  `form:"pageSize,default=20"` //每页的数量
+	MemberId int64  `form:"memberId,optional"`   //会员ID
+	SignDate string `form:"signDate,optional"`   //签到日期
+}
+
+type QueryMemberSignLogListResp struct {
+	Code     string                        `json:"code"`
+	Message  string                        `json:"message"`
+	Current  int32                         `json:"current,default=1"`
+	Data     []*QueryMemberSignLogListData `json:"data"`
+	PageSize int32                         `json:"pageSize,default=20"`
+	Success  bool                          `json:"success"`
+	Total    int64                         `json:"total"`
+}
+
 type QueryMemberStatisticsInfoDetailData struct {
 	Id                  int64  `json:"id"`                  //
 	MemberId            int64  `json:"memberId"`            //会员id
@@ -2186,11 +2316,16 @@ type QueryMemberStatisticsInfoListData struct {
 }
 
 type QueryMemberTagDetailData struct {
-	Id                int64  `json:"id"`                //
-	TagName           string `json:"tagName"`           //标签名称
-	FinishOrderCount  int32  `json:"finishOrderCount"`  //自动打标签完成订单数量
-	Status            int32  `json:"status"`            //状态：0->禁用；1->启用
-	FinishOrderAmount int64  `json:"finishOrderAmount"` //自动打标签完成订单金额
+	Id                int64   `json:"id"`                //主键ID
+	TagName           string  `json:"tagName"`           //标签名称
+	Description       string  `json:"description"`       //标签描述
+	FinishOrderCount  int32   `json:"finishOrderCount"`  //自动打标签完成订单数量
+	FinishOrderAmount float64 `json:"finishOrderAmount"` //自动打标签完成订单金额
+	Status            int32   `json:"status"`            //状态：0-禁用，1-启用
+	CreateBy          int64   `json:"createBy"`          //创建人ID
+	CreateTime        string  `json:"createTime"`        //创建时间
+	UpdateBy          int64   `json:"updateBy"`          //更新人ID
+	UpdateTime        string  `json:"updateTime"`        //更新时间
 }
 
 type QueryMemberTagDetailReq struct {
@@ -2204,41 +2339,53 @@ type QueryMemberTagDetailResp struct {
 }
 
 type QueryMemberTagListData struct {
-	Id                int64  `json:"id"`                //
-	TagName           string `json:"tagName"`           //标签名称
-	FinishOrderCount  int32  `json:"finishOrderCount"`  //自动打标签完成订单数量
-	Status            int32  `json:"status"`            //状态：0->禁用；1->启用
-	FinishOrderAmount int64  `json:"finishOrderAmount"` //自动打标签完成订单金额
+	Id                int64   `json:"id"`                //主键ID
+	TagName           string  `json:"tagName"`           //标签名称
+	Description       string  `json:"description"`       //标签描述
+	FinishOrderCount  int32   `json:"finishOrderCount"`  //自动打标签完成订单数量
+	FinishOrderAmount float64 `json:"finishOrderAmount"` //自动打标签完成订单金额
+	Status            int32   `json:"status"`            //状态：0-禁用，1-启用
+	CreateBy          int64   `json:"createBy"`          //创建人ID
+	CreateTime        string  `json:"createTime"`        //创建时间
+	UpdateBy          int64   `json:"updateBy"`          //更新人ID
+	UpdateTime        string  `json:"updateTime"`        //更新时间
 }
 
 type QueryMemberTagListReq struct {
-	Current  int64  `form:"current,default=1"`   //第几页
-	PageSize int64  `form:"pageSize,default=20"` //每页的数量
-	TagName  string `form:"tagName,optional"`    //标签名称
-	Status   int32  `form:"status,default=2"`    //状态：0->禁用；1->启用
+	Current  int32  `form:"current,default=1"`   //第几页
+	PageSize int32  `form:"pageSize,default=20"` //每页的数量
+	TagName  string `json:"tagName,optional"`    //标签名称
+	Status   int32  `json:"status,default=2"`    //状态：0-禁用，1-启用
 }
 
 type QueryMemberTagListResp struct {
 	Code     string                    `json:"code"`
 	Message  string                    `json:"message"`
-	Current  int64                     `json:"current,default=1"`
+	Current  int32                     `json:"current,default=1"`
 	Data     []*QueryMemberTagListData `json:"data"`
-	PageSize int64                     `json:"pageSize,default=20"`
+	PageSize int32                     `json:"pageSize,default=20"`
 	Success  bool                      `json:"success"`
 	Total    int64                     `json:"total"`
 }
 
 type QueryMemberTaskDetailData struct {
-	Id           int64  `json:"id"`           //
-	TaskName     string `json:"taskName"`     //任务名称
-	TaskGrowth   int32  `json:"taskGrowth"`   //赠送成长值
-	TaskIntegral int32  `json:"taskIntegral"` //赠送积分
-	TaskType     int32  `json:"taskType"`     //任务类型：0->新手任务；1->日常任务
-	Status       int32  `json:"status"`       //状态：0->禁用；1->启用
-	CreateBy     string `json:"createBy"`     //创建者
-	CreateTime   string `json:"createTime"`   //创建时间
-	UpdateBy     string `json:"updateBy"`     //更新者
-	UpdateTime   string `json:"updateTime"`   //更新时间
+	Id            int64  `json:"id"`            //主键ID
+	TaskName      string `json:"taskName"`      //任务名称
+	TaskDesc      string `json:"taskDesc"`      //任务描述
+	TaskGrowth    int32  `json:"taskGrowth"`    //赠送成长值
+	TaskIntegral  int32  `json:"taskIntegral"`  //赠送积分
+	TaskType      int32  `json:"taskType"`      //任务类型：0-新手任务，1-日常任务，2-周常任务，3-月常任务
+	CompleteCount int32  `json:"completeCount"` //需要完成次数
+	RewardType    int32  `json:"rewardType"`    //奖励类型：0-积分成长值，1-优惠券，2-抽奖次数
+	RewardParams  string `json:"rewardParams"`  //奖励参数JSON
+	StartTime     string `json:"startTime"`     //任务开始时间
+	EndTime       string `json:"endTime"`       //任务结束时间
+	Status        int32  `json:"status"`        //状态：0-禁用，1-启用
+	Sort          int32  `json:"sort"`          //排序
+	CreateBy      int64  `json:"createBy"`      //创建人ID
+	CreateTime    string `json:"createTime"`    //创建时间
+	UpdateBy      int64  `json:"updateBy"`      //更新人ID
+	UpdateTime    string `json:"updateTime"`    //更新时间
 }
 
 type QueryMemberTaskDetailReq struct {
@@ -2252,32 +2399,42 @@ type QueryMemberTaskDetailResp struct {
 }
 
 type QueryMemberTaskListData struct {
-	Id           int64  `json:"id"`           //
-	TaskName     string `json:"taskName"`     //任务名称
-	TaskGrowth   int32  `json:"taskGrowth"`   //赠送成长值
-	TaskIntegral int32  `json:"taskIntegral"` //赠送积分
-	TaskType     int32  `json:"taskType"`     //任务类型：0->新手任务；1->日常任务
-	Status       int32  `json:"status"`       //状态：0->禁用；1->启用
-	CreateBy     string `json:"createBy"`     //创建者
-	CreateTime   string `json:"createTime"`   //创建时间
-	UpdateBy     string `json:"updateBy"`     //更新者
-	UpdateTime   string `json:"updateTime"`   //更新时间
+	Id            int64  `json:"id"`            //主键ID
+	TaskName      string `json:"taskName"`      //任务名称
+	TaskDesc      string `json:"taskDesc"`      //任务描述
+	TaskGrowth    int32  `json:"taskGrowth"`    //赠送成长值
+	TaskIntegral  int32  `json:"taskIntegral"`  //赠送积分
+	TaskType      int32  `json:"taskType"`      //任务类型：0-新手任务，1-日常任务，2-周常任务，3-月常任务
+	CompleteCount int32  `json:"completeCount"` //需要完成次数
+	RewardType    int32  `json:"rewardType"`    //奖励类型：0-积分成长值，1-优惠券，2-抽奖次数
+	RewardParams  string `json:"rewardParams"`  //奖励参数JSON
+	StartTime     string `json:"startTime"`     //任务开始时间
+	EndTime       string `json:"endTime"`       //任务结束时间
+	Status        int32  `json:"status"`        //状态：0-禁用，1-启用
+	Sort          int32  `json:"sort"`          //排序
+	CreateBy      int64  `json:"createBy"`      //创建人ID
+	CreateTime    string `json:"createTime"`    //创建时间
+	UpdateBy      int64  `json:"updateBy"`      //更新人ID
+	UpdateTime    string `json:"updateTime"`    //更新时间
 }
 
 type QueryMemberTaskListReq struct {
-	Current  int64  `form:"current,default=1"`   //第几页
-	PageSize int64  `form:"pageSize,default=20"` //每页的数量
-	TaskName string `form:"taskName,optional"`   //任务名称
-	TaskType int32  `form:"taskType,optional"`   //任务类型：0->新手任务；1->日常任务
-	Status   int32  `form:"status,default=2"`    //状态：0->禁用；1->启用
+	Current    int32  `form:"current,default=1"`   //第几页
+	PageSize   int32  `form:"pageSize,default=20"` //每页的数量
+	TaskName   string `json:"taskName,optional"`   //任务名称
+	TaskType   int32  `json:"taskType,optional"`   //任务类型：0-新手任务，1-日常任务，2-周常任务，3-月常任务
+	RewardType int32  `json:"rewardType,optional"` //奖励类型：0-积分成长值，1-优惠券，2-抽奖次数
+	StartTime  string `json:"startTime,optional"`  //任务开始时间
+	EndTime    string `json:"endTime,optional"`    //任务结束时间
+	Status     int32  `json:"status,default=2"`    //状态：0-禁用，1-启用
 }
 
 type QueryMemberTaskListResp struct {
 	Code     string                     `json:"code"`
 	Message  string                     `json:"message"`
-	Current  int64                      `json:"current,default=1"`
+	Current  int32                      `json:"current,default=1"`
 	Data     []*QueryMemberTaskListData `json:"data"`
-	PageSize int64                      `json:"pageSize,default=20"`
+	PageSize int32                      `json:"pageSize,default=20"`
 	Success  bool                       `json:"success"`
 	Total    int64                      `json:"total"`
 }
@@ -3398,30 +3555,38 @@ type UpdateMemberRuleSettingStatusReq struct {
 }
 
 type UpdateMemberTagReq struct {
-	Id                int64  `json:"id"`                //
-	TagName           string `json:"tagName"`           //标签名称
-	FinishOrderCount  int32  `json:"finishOrderCount"`  //自动打标签完成订单数量
-	Status            int32  `json:"status"`            //状态：0->禁用；1->启用
-	FinishOrderAmount int64  `json:"finishOrderAmount"` //自动打标签完成订单金额
+	Id                int64   `json:"id"`                //主键ID
+	TagName           string  `json:"tagName"`           //标签名称
+	Description       string  `json:"description"`       //标签描述
+	FinishOrderCount  int32   `json:"finishOrderCount"`  //自动打标签完成订单数量
+	FinishOrderAmount float64 `json:"finishOrderAmount"` //自动打标签完成订单金额
+	Status            int32   `json:"status"`            //状态：0-禁用，1-启用
 }
 
 type UpdateMemberTagStatusReq struct {
-	Ids    []int64 `json:"ids"`    //
-	Status int32   `json:"status"` //状态：0->禁用；1->启用
+	Ids    []int64 `json:"ids"`    //主键ID
+	Status int32   `json:"status"` //状态：0-禁用，1-启用
 }
 
 type UpdateMemberTaskReq struct {
-	Id           int64  `json:"id"`           //
-	TaskName     string `json:"taskName"`     //任务名称
-	TaskGrowth   int32  `json:"taskGrowth"`   //赠送成长值
-	TaskIntegral int32  `json:"taskIntegral"` //赠送积分
-	TaskType     int32  `json:"taskType"`     //任务类型：0->新手任务；1->日常任务
-	Status       int32  `json:"status"`       //状态：0->禁用；1->启用
+	Id            int64  `json:"id"`            //主键ID
+	TaskName      string `json:"taskName"`      //任务名称
+	TaskDesc      string `json:"taskDesc"`      //任务描述
+	TaskGrowth    int32  `json:"taskGrowth"`    //赠送成长值
+	TaskIntegral  int32  `json:"taskIntegral"`  //赠送积分
+	TaskType      int32  `json:"taskType"`      //任务类型：0-新手任务，1-日常任务，2-周常任务，3-月常任务
+	CompleteCount int32  `json:"completeCount"` //需要完成次数
+	RewardType    int32  `json:"rewardType"`    //奖励类型：0-积分成长值，1-优惠券，2-抽奖次数
+	RewardParams  string `json:"rewardParams"`  //奖励参数JSON
+	StartTime     string `json:"startTime"`     //任务开始时间
+	EndTime       string `json:"endTime"`       //任务结束时间
+	Status        int32  `json:"status"`        //状态：0-禁用，1-启用
+	Sort          int32  `json:"sort"`          //排序
 }
 
 type UpdateMemberTaskStatusReq struct {
-	Ids    []int64 `json:"ids"`    //
-	Status int32   `json:"status"` //状态：0->禁用；1->启用
+	Ids    []int64 `json:"ids"`    //主键ID
+	Status int32   `json:"status"` //状态：0-禁用，1-启用
 }
 
 type UpdateMenuReq struct {
