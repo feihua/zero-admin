@@ -1,5 +1,5 @@
-drop table if exists ums_points_consume_setting;
-create table ums_points_consume_setting
+drop table if exists ums_member_consume_setting;
+create table ums_member_consume_setting
 (
     id                    bigint auto_increment
         primary key,
@@ -16,7 +16,7 @@ create table ums_points_consume_setting
     comment '积分消费设置';
 
 -- 向积分消费设置表添加模拟数据
-INSERT INTO ums_points_consume_setting
+INSERT INTO ums_member_consume_setting
 (deduction_per_amount, max_percent_per_order, use_unit, coupon_status, status, create_by)
 VALUES (10, 50, 100, 0, 1, 1), -- 每1元抵扣10积分，最高抵扣订单金额的50%，最小使用单位100积分，不可与优惠券同用
        (20, 70, 100, 1, 0, 1), -- 每1元抵扣20积分，最高抵扣订单金额的70%，最小使用单位100积分，可与优惠券同用
