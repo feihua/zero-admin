@@ -33,9 +33,9 @@ create index idx_type_status
 -- 插入会员任务数据
 insert into ums_member_task (id, task_name, task_desc, task_growth, task_integral, task_type, complete_count, reward_type, reward_params, start_time, end_time, status, sort, create_by, is_deleted)
 values (1, '注册奖励', '完成注册即可获得奖励', 100, 50, 0, 1, 0, '{"coupon_id": null}', '2024-01-01 00:00:00', '2024-12-31 23:59:59', 1, 1, 1, 0),
-       (2, '每日签到', '每日签到可获得成长值和积分', 10, 5, 1, 1, 0, '{"coupon_id": null}', '2024-01-01 00:00:00', '2024-12-31 23:59:59', 1, 2, 1, 0),
-       (3, '每周购物', '每周购物满100元可获得奖励', 50, 20, 2, 1, 0, '{"coupon_id": null}', '2024-01-01 00:00:00', '2024-12-31 23:59:59', 1, 3, 1, 0),
-       (4, '每月评价', '每月评价满5次可获得奖励', 30, 15, 3, 5, 0, '{"coupon_id": null}', '2024-01-01 00:00:00', '2024-12-31 23:59:59', 1, 4, 1, 0);
+       (2, '每日签到', '每日签到可获得成长值和积分', 10, 5, 1, 1, 1, '{"coupon_id": null}', '2024-01-01 00:00:00', '2024-12-31 23:59:59', 1, 2, 1, 0),
+       (3, '每周购物', '每周购物满100元可获得奖励', 50, 20, 2, 1, 2, '{"coupon_id": null}', '2024-01-01 00:00:00', '2024-12-31 23:59:59', 1, 3, 1, 0),
+       (4, '每月评价', '每月评价满5次可获得奖励', 30, 15, 3, 5, 1, '{"coupon_id": null}', '2024-01-01 00:00:00', '2024-12-31 23:59:59', 1, 4, 1, 0);
 
 # 注册奖励和每日签到的任务，触发时机：
 #  1.实时触发 ：
@@ -55,7 +55,7 @@ CREATE TABLE `ums_member_task_relation`
 (
     `id`        BIGINT                             NOT NULL AUTO_INCREMENT COMMENT '主键ID',
     `member_id` BIGINT                             NOT NULL COMMENT '会员ID',
-    `task_id`   BIGINT                             NOT NULL COMMENT '任务ID',
+    `task_id`   BIGINT                             NOT NULL COMMENT '任务ID', 
     create_time datetime default CURRENT_TIMESTAMP not null comment '创建时间',
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB

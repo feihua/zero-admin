@@ -39,11 +39,11 @@ func (l *QueryMemberTaskListLogic) QueryMemberTaskList(in *umsclient.QueryMember
 		q = q.Where(memberTask.TaskName.Like("%" + in.TaskName + "%"))
 	}
 
-	if in.TaskType != 2 {
+	if in.TaskType != 4 {
 		q = q.Where(memberTask.TaskType.Eq(in.TaskType))
 	}
 
-	if in.RewardType != 2 {
+	if in.RewardType != 3 {
 		q = q.Where(memberTask.RewardType.Eq(in.RewardType))
 	}
 

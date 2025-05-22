@@ -37,7 +37,7 @@ func (l *UpdateMemberTaskLogic) UpdateMemberTask(in *umsclient.UpdateMemberTaskR
 	q := query.UmsMemberTask.WithContext(l.ctx)
 
 	// 1.根据会员任务id查询会员任务是否已存在
-	_, err := q.Where(query.UmsMemberTask.ID.Eq(in.Id)).First()
+	task, err := q.Where(query.UmsMemberTask.ID.Eq(in.Id)).First()
 
 	switch {
 	case errors.Is(err, gorm.ErrRecordNotFound):
@@ -50,6 +50,7 @@ func (l *UpdateMemberTaskLogic) UpdateMemberTask(in *umsclient.UpdateMemberTaskR
 
 	startTime, _ := time.Parse("2006-01-02 15:04:05", in.StartTime)
 	endTime, _ := time.Parse("2006-01-02 15:04:05", in.EndTime)
+	now := time.Now()
 	item := &model.UmsMemberTask{
 		ID:            in.Id,            // 主键ID
 		TaskName:      in.TaskName,      // 任务名称
@@ -64,11 +65,14 @@ func (l *UpdateMemberTaskLogic) UpdateMemberTask(in *umsclient.UpdateMemberTaskR
 		EndTime:       endTime,          // 任务结束时间
 		Status:        in.Status,        // 状态：0-禁用，1-启用
 		Sort:          in.Sort,          // 排序
+		CreateBy:      task.CreateBy,    // 创建人ID
+		CreateTime:    task.CreateTime,  // 创建时间
 		UpdateBy:      &in.UpdateBy,     // 更新人ID
+		UpdateTime:    &now,             // 更新时间
 	}
 
 	// 2.会员任务存在时,则直接更新会员任务
-	_, err = q.Updates(item)
+	err = l.svcCtx.DB.Model(&model.UmsMemberTask{}).WithContext(l.ctx).Where(query.UmsMemberTask.ID.Eq(in.Id)).Save(item).Error
 
 	if err != nil {
 		logc.Errorf(l.ctx, "更新会员任务失败,参数:%+v,异常:%s", item, err.Error())

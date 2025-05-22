@@ -10,6 +10,7 @@ import (
 	"github.com/zeromicro/go-zero/core/logc"
 	"github.com/zeromicro/go-zero/core/logx"
 	"gorm.io/gorm"
+	"time"
 )
 
 // UpdateMemberTagLogic 更新用户标签
@@ -36,7 +37,7 @@ func (l *UpdateMemberTagLogic) UpdateMemberTag(in *umsclient.UpdateMemberTagReq)
 	q := query.UmsMemberTag.WithContext(l.ctx)
 
 	// 1.根据用户标签id查询用户标签是否已存在
-	_, err := q.Where(query.UmsMemberTag.ID.Eq(in.Id)).First()
+	tag, err := q.Where(query.UmsMemberTag.ID.Eq(in.Id)).First()
 
 	switch {
 	case errors.Is(err, gorm.ErrRecordNotFound):
@@ -47,6 +48,7 @@ func (l *UpdateMemberTagLogic) UpdateMemberTag(in *umsclient.UpdateMemberTagReq)
 		return nil, errors.New("查询用户标签异常")
 	}
 
+	now := time.Now()
 	item := &model.UmsMemberTag{
 		ID:                in.Id,                         // 主键ID
 		TagName:           in.TagName,                    // 标签名称
@@ -54,12 +56,15 @@ func (l *UpdateMemberTagLogic) UpdateMemberTag(in *umsclient.UpdateMemberTagReq)
 		FinishOrderCount:  in.FinishOrderCount,           // 自动打标签完成订单数量
 		FinishOrderAmount: float64(in.FinishOrderAmount), // 自动打标签完成订单金额
 		Status:            in.Status,                     // 状态：0-禁用，1-启用
+		CreateBy:          tag.CreateBy,                  // 创建人ID
+		CreateTime:        tag.CreateTime,                // 创建时间
 		UpdateBy:          &in.UpdateBy,                  // 更新人ID
+		UpdateTime:        &now,                          // 更新时间
 
 	}
 
 	// 2.用户标签存在时,则直接更新用户标签
-	_, err = q.Updates(item)
+	err = l.svcCtx.DB.Model(&model.UmsMemberTag{}).WithContext(l.ctx).Where(query.UmsMemberTag.ID.Eq(in.Id)).Save(item).Error
 
 	if err != nil {
 		logc.Errorf(l.ctx, "更新用户标签失败,参数:%+v,异常:%s", item, err.Error())

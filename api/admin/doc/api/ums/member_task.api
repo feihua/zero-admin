@@ -79,12 +79,12 @@ type (
 	QueryMemberTaskListReq {
 		Current    int32  `form:"current,default=1"` //第几页
 		PageSize   int32  `form:"pageSize,default=20"` //每页的数量
-		TaskName   string `json:"taskName,optional"` //任务名称
-		TaskType   int32  `json:"taskType,optional"` //任务类型：0-新手任务，1-日常任务，2-周常任务，3-月常任务
-		RewardType int32  `json:"rewardType,optional"` //奖励类型：0-积分成长值，1-优惠券，2-抽奖次数
-		StartTime  string `json:"startTime,optional"` //任务开始时间
-		EndTime    string `json:"endTime,optional"` //任务结束时间
-		Status     int32  `json:"status,default=2"` //状态：0-禁用，1-启用
+		TaskName   string `form:"taskName,optional"` //任务名称
+		TaskType   int32  `form:"taskType,default=4"` //任务类型：0-新手任务，1-日常任务，2-周常任务，3-月常任务
+		RewardType int32  `form:"rewardType,default=3"` //奖励类型：0-积分成长值，1-优惠券，2-抽奖次数
+		StartTime  string `form:"startTime,optional"` //任务开始时间
+		EndTime    string `form:"endTime,optional"` //任务结束时间
+		Status     int32  `form:"status,default=2"` //状态：0-禁用，1-启用
 	}
 	QueryMemberTaskListData {
 		Id            int64  `json:"id"` //主键ID

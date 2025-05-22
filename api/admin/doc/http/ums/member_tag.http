@@ -39,5 +39,5 @@ Authorization: Bearer {{token}}
 }
 
 ### 查询会员标签列表
-GET {{host}}/api/member/tag/queryMemberTagList
+GET {{host}}/api/ums/tag/queryMemberTagList
 Authorization: Bearer {{token}}

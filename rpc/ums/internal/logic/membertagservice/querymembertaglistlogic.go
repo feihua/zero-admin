@@ -4,6 +4,7 @@ import (
 	"context"
 	"errors"
 	"github.com/feihua/zero-admin/pkg/pointerprocess"
+	"github.com/feihua/zero-admin/pkg/time_util"
 	"github.com/feihua/zero-admin/rpc/ums/gen/query"
 	"github.com/feihua/zero-admin/rpc/ums/internal/svc"
 	"github.com/feihua/zero-admin/rpc/ums/umsclient"
@@ -62,7 +63,7 @@ func (l *QueryMemberTagListLogic) QueryMemberTagList(in *umsclient.QueryMemberTa
 			CreateBy:          item.CreateBy,                                    // 创建人ID
 			CreateTime:        item.CreateTime.Format("2006-01-02 15:04:05"),    // 创建时间
 			UpdateBy:          pointerprocess.DefaltData(item.UpdateBy).(int64), // 更新人ID
-			UpdateTime:        item.UpdateTime.Format("2006-01-02 15:04:05"),    // 更新时间
+			UpdateTime:        time_util.TimeToString(item.UpdateTime),          // 更新时间
 
 		})
 	}
