@@ -83,6 +83,8 @@ stop: ## 停止目标
 
 restart: stop start ## 重启项目
 
+test: build restart ## 快速测试
+
 
 .DEFAULT_GOAL := all ## 默认构建目标是
 
