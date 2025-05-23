@@ -30,7 +30,9 @@ func NewQueryMemberStatisticsInfoListLogic(ctx context.Context, svcCtx *svc.Serv
 // QueryMemberStatisticsInfoList 查询会员统计信息列表
 func (l *QueryMemberStatisticsInfoListLogic) QueryMemberStatisticsInfoList(in *umsclient.QueryMemberStatisticsInfoListReq) (*umsclient.QueryMemberStatisticsInfoListResp, error) {
 	q := query.UmsMemberStatisticsInfo.WithContext(l.ctx)
-
+	if in.MemberId != 0 {
+		q = q.Where(query.UmsMemberStatisticsInfo.MemberID.Eq(in.MemberId))
+	}
 	offset := (in.PageNum - 1) * in.PageSize
 	result, err := q.Offset(int(offset)).Limit(int(in.PageSize)).Find()
 	count, err := q.Count()

@@ -111,7 +111,7 @@ func (l *GenerateConfirmOrderLogic) GenerateConfirmOrder(req *types.GenerateConf
 		MemberId: memberId,
 	})
 	// 5.获取积分使用规则
-	settingInfo, _ := l.svcCtx.IntegrationConsumeSettingService.QueryIntegrationConsumeSettingDetail(l.ctx, &umsclient.QueryIntegrationConsumeSettingDetailReq{
+	settingInfo, _ := l.svcCtx.MemberConsumeSettingService.QueryMemberConsumeSettingDetail(l.ctx, &umsclient.QueryMemberConsumeSettingDetailReq{
 		Id: 1,
 	})
 	// 6.计算总金额、活动优惠、应付金额

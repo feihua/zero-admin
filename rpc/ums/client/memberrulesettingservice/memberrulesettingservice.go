@@ -14,12 +14,12 @@ import (
 )
 
 type (
-	AddIntegrationConsumeSettingReq            = umsclient.AddIntegrationConsumeSettingReq
-	AddIntegrationConsumeSettingResp           = umsclient.AddIntegrationConsumeSettingResp
 	AddMemberAddressReq                        = umsclient.AddMemberAddressReq
 	AddMemberAddressResp                       = umsclient.AddMemberAddressResp
 	AddMemberBrandAttentionReq                 = umsclient.AddMemberBrandAttentionReq
 	AddMemberBrandAttentionResp                = umsclient.AddMemberBrandAttentionResp
+	AddMemberConsumeSettingReq                 = umsclient.AddMemberConsumeSettingReq
+	AddMemberConsumeSettingResp                = umsclient.AddMemberConsumeSettingResp
 	AddMemberGrowthLogReq                      = umsclient.AddMemberGrowthLogReq
 	AddMemberGrowthLogResp                     = umsclient.AddMemberGrowthLogResp
 	AddMemberLevelReq                          = umsclient.AddMemberLevelReq
@@ -46,12 +46,12 @@ type (
 	AddMemberTaskRelationResp                  = umsclient.AddMemberTaskRelationResp
 	AddMemberTaskReq                           = umsclient.AddMemberTaskReq
 	AddMemberTaskResp                          = umsclient.AddMemberTaskResp
-	DeleteIntegrationConsumeSettingReq         = umsclient.DeleteIntegrationConsumeSettingReq
-	DeleteIntegrationConsumeSettingResp        = umsclient.DeleteIntegrationConsumeSettingResp
 	DeleteMemberAddressReq                     = umsclient.DeleteMemberAddressReq
 	DeleteMemberAddressResp                    = umsclient.DeleteMemberAddressResp
 	DeleteMemberBrandAttentionReq              = umsclient.DeleteMemberBrandAttentionReq
 	DeleteMemberBrandAttentionResp             = umsclient.DeleteMemberBrandAttentionResp
+	DeleteMemberConsumeSettingReq              = umsclient.DeleteMemberConsumeSettingReq
+	DeleteMemberConsumeSettingResp             = umsclient.DeleteMemberConsumeSettingResp
 	DeleteMemberInfoReq                        = umsclient.DeleteMemberInfoReq
 	DeleteMemberInfoResp                       = umsclient.DeleteMemberInfoResp
 	DeleteMemberLevelReq                       = umsclient.DeleteMemberLevelReq
@@ -68,11 +68,11 @@ type (
 	DeleteMemberTagResp                        = umsclient.DeleteMemberTagResp
 	DeleteMemberTaskReq                        = umsclient.DeleteMemberTaskReq
 	DeleteMemberTaskResp                       = umsclient.DeleteMemberTaskResp
-	IntegrationConsumeSettingListData          = umsclient.IntegrationConsumeSettingListData
 	LoginReq                                   = umsclient.LoginReq
 	LoginResp                                  = umsclient.LoginResp
 	MemberAddressListData                      = umsclient.MemberAddressListData
 	MemberBrandAttentionListData               = umsclient.MemberBrandAttentionListData
+	MemberConsumeSettingListData               = umsclient.MemberConsumeSettingListData
 	MemberGrowthLogListData                    = umsclient.MemberGrowthLogListData
 	MemberInfoListData                         = umsclient.MemberInfoListData
 	MemberLevelListData                        = umsclient.MemberLevelListData
@@ -87,10 +87,6 @@ type (
 	MemberTagRelationListData                  = umsclient.MemberTagRelationListData
 	MemberTaskListData                         = umsclient.MemberTaskListData
 	MemberTaskRelationListData                 = umsclient.MemberTaskRelationListData
-	QueryIntegrationConsumeSettingDetailReq    = umsclient.QueryIntegrationConsumeSettingDetailReq
-	QueryIntegrationConsumeSettingDetailResp   = umsclient.QueryIntegrationConsumeSettingDetailResp
-	QueryIntegrationConsumeSettingListReq      = umsclient.QueryIntegrationConsumeSettingListReq
-	QueryIntegrationConsumeSettingListResp     = umsclient.QueryIntegrationConsumeSettingListResp
 	QueryMemberAddressDetailReq                = umsclient.QueryMemberAddressDetailReq
 	QueryMemberAddressDetailResp               = umsclient.QueryMemberAddressDetailResp
 	QueryMemberAddressListReq                  = umsclient.QueryMemberAddressListReq
@@ -99,6 +95,10 @@ type (
 	QueryMemberBrandAttentionDetailResp        = umsclient.QueryMemberBrandAttentionDetailResp
 	QueryMemberBrandAttentionListReq           = umsclient.QueryMemberBrandAttentionListReq
 	QueryMemberBrandAttentionListResp          = umsclient.QueryMemberBrandAttentionListResp
+	QueryMemberConsumeSettingDetailReq         = umsclient.QueryMemberConsumeSettingDetailReq
+	QueryMemberConsumeSettingDetailResp        = umsclient.QueryMemberConsumeSettingDetailResp
+	QueryMemberConsumeSettingListReq           = umsclient.QueryMemberConsumeSettingListReq
+	QueryMemberConsumeSettingListResp          = umsclient.QueryMemberConsumeSettingListResp
 	QueryMemberGrowthLogDetailReq              = umsclient.QueryMemberGrowthLogDetailReq
 	QueryMemberGrowthLogDetailResp             = umsclient.QueryMemberGrowthLogDetailResp
 	QueryMemberGrowthLogListReq                = umsclient.QueryMemberGrowthLogListReq
@@ -158,14 +158,14 @@ type (
 	QueryMemberTaskRelationListResp            = umsclient.QueryMemberTaskRelationListResp
 	RegisterReq                                = umsclient.RegisterReq
 	RegisterResp                               = umsclient.RegisterResp
-	UpdateIntegrationConsumeSettingReq         = umsclient.UpdateIntegrationConsumeSettingReq
-	UpdateIntegrationConsumeSettingResp        = umsclient.UpdateIntegrationConsumeSettingResp
-	UpdateIntegrationConsumeSettingStatusReq   = umsclient.UpdateIntegrationConsumeSettingStatusReq
-	UpdateIntegrationConsumeSettingStatusResp  = umsclient.UpdateIntegrationConsumeSettingStatusResp
+	UpdateCouponStatusReq                      = umsclient.UpdateCouponStatusReq
 	UpdateMemberAddressReq                     = umsclient.UpdateMemberAddressReq
 	UpdateMemberAddressResp                    = umsclient.UpdateMemberAddressResp
 	UpdateMemberAddressStatusReq               = umsclient.UpdateMemberAddressStatusReq
 	UpdateMemberAddressStatusResp              = umsclient.UpdateMemberAddressStatusResp
+	UpdateMemberConsumeSettingReq              = umsclient.UpdateMemberConsumeSettingReq
+	UpdateMemberConsumeSettingResp             = umsclient.UpdateMemberConsumeSettingResp
+	UpdateMemberConsumeSettingStatusResp       = umsclient.UpdateMemberConsumeSettingStatusResp
 	UpdateMemberInfoReq                        = umsclient.UpdateMemberInfoReq
 	UpdateMemberInfoResp                       = umsclient.UpdateMemberInfoResp
 	UpdateMemberInfoStatusReq                  = umsclient.UpdateMemberInfoStatusReq
@@ -189,19 +189,20 @@ type (
 	UpdateMemberTaskResp                       = umsclient.UpdateMemberTaskResp
 	UpdateMemberTaskStatusReq                  = umsclient.UpdateMemberTaskStatusReq
 	UpdateMemberTaskStatusResp                 = umsclient.UpdateMemberTaskStatusResp
+	UpdateStatusReq                            = umsclient.UpdateStatusReq
 
 	MemberRuleSettingService interface {
-		// 添加会员积分成长规则表
+		// 添加会员积分成长规则
 		AddMemberRuleSetting(ctx context.Context, in *AddMemberRuleSettingReq, opts ...grpc.CallOption) (*AddMemberRuleSettingResp, error)
-		// 删除会员积分成长规则表
+		// 删除会员积分成长规则
 		DeleteMemberRuleSetting(ctx context.Context, in *DeleteMemberRuleSettingReq, opts ...grpc.CallOption) (*DeleteMemberRuleSettingResp, error)
-		// 更新会员积分成长规则表
+		// 更新会员积分成长规则
 		UpdateMemberRuleSetting(ctx context.Context, in *UpdateMemberRuleSettingReq, opts ...grpc.CallOption) (*UpdateMemberRuleSettingResp, error)
-		// 更新会员积分成长规则表状态
+		// 更新会员积分成长规则状态
 		UpdateMemberRuleSettingStatus(ctx context.Context, in *UpdateMemberRuleSettingStatusReq, opts ...grpc.CallOption) (*UpdateMemberRuleSettingStatusResp, error)
-		// 查询会员积分成长规则表详情
+		// 查询会员积分成长规则详情
 		QueryMemberRuleSettingDetail(ctx context.Context, in *QueryMemberRuleSettingDetailReq, opts ...grpc.CallOption) (*QueryMemberRuleSettingDetailResp, error)
-		// 查询会员积分成长规则表列表
+		// 查询会员积分成长规则列表
 		QueryMemberRuleSettingList(ctx context.Context, in *QueryMemberRuleSettingListReq, opts ...grpc.CallOption) (*QueryMemberRuleSettingListResp, error)
 	}
 
@@ -216,37 +217,37 @@ func NewMemberRuleSettingService(cli zrpc.Client) MemberRuleSettingService {
 	}
 }
 
-// 添加会员积分成长规则表
+// 添加会员积分成长规则
 func (m *defaultMemberRuleSettingService) AddMemberRuleSetting(ctx context.Context, in *AddMemberRuleSettingReq, opts ...grpc.CallOption) (*AddMemberRuleSettingResp, error) {
 	client := umsclient.NewMemberRuleSettingServiceClient(m.cli.Conn())
 	return client.AddMemberRuleSetting(ctx, in, opts...)
 }
 
-// 删除会员积分成长规则表
+// 删除会员积分成长规则
 func (m *defaultMemberRuleSettingService) DeleteMemberRuleSetting(ctx context.Context, in *DeleteMemberRuleSettingReq, opts ...grpc.CallOption) (*DeleteMemberRuleSettingResp, error) {
 	client := umsclient.NewMemberRuleSettingServiceClient(m.cli.Conn())
 	return client.DeleteMemberRuleSetting(ctx, in, opts...)
 }
 
-// 更新会员积分成长规则表
+// 更新会员积分成长规则
 func (m *defaultMemberRuleSettingService) UpdateMemberRuleSetting(ctx context.Context, in *UpdateMemberRuleSettingReq, opts ...grpc.CallOption) (*UpdateMemberRuleSettingResp, error) {
 	client := umsclient.NewMemberRuleSettingServiceClient(m.cli.Conn())
 	return client.UpdateMemberRuleSetting(ctx, in, opts...)
 }
 
-// 更新会员积分成长规则表状态
+// 更新会员积分成长规则状态
 func (m *defaultMemberRuleSettingService) UpdateMemberRuleSettingStatus(ctx context.Context, in *UpdateMemberRuleSettingStatusReq, opts ...grpc.CallOption) (*UpdateMemberRuleSettingStatusResp, error) {
 	client := umsclient.NewMemberRuleSettingServiceClient(m.cli.Conn())
 	return client.UpdateMemberRuleSettingStatus(ctx, in, opts...)
 }
 
-// 查询会员积分成长规则表详情
+// 查询会员积分成长规则详情
 func (m *defaultMemberRuleSettingService) QueryMemberRuleSettingDetail(ctx context.Context, in *QueryMemberRuleSettingDetailReq, opts ...grpc.CallOption) (*QueryMemberRuleSettingDetailResp, error) {
 	client := umsclient.NewMemberRuleSettingServiceClient(m.cli.Conn())
 	return client.QueryMemberRuleSettingDetail(ctx, in, opts...)
 }
 
-// 查询会员积分成长规则表列表
+// 查询会员积分成长规则列表
 func (m *defaultMemberRuleSettingService) QueryMemberRuleSettingList(ctx context.Context, in *QueryMemberRuleSettingListReq, opts ...grpc.CallOption) (*QueryMemberRuleSettingListResp, error) {
 	client := umsclient.NewMemberRuleSettingServiceClient(m.cli.Conn())
 	return client.QueryMemberRuleSettingList(ctx, in, opts...)

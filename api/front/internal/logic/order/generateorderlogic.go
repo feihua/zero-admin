@@ -175,7 +175,7 @@ func (l *GenerateOrderLogic) GenerateOrder(req *types.GenerateOrderReq) (*types.
 		}
 		// 1.2根据积分使用规则判断是否可用
 		// 是否可与优惠券共用
-		consumeSetting, _ := l.svcCtx.IntegrationConsumeSettingService.QueryIntegrationConsumeSettingDetail(l.ctx, &umsclient.QueryIntegrationConsumeSettingDetailReq{Id: 1})
+		consumeSetting, _ := l.svcCtx.MemberConsumeSettingService.QueryMemberConsumeSettingDetail(l.ctx, &umsclient.QueryMemberConsumeSettingDetailReq{Id: 1})
 		if req.CouponId > 0 && consumeSetting.CouponStatus == 0 {
 			return result(1, "不可与优惠券共用"), nil
 		}

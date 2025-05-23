@@ -59,7 +59,7 @@ message QueryMemberStatisticsInfoDetailResp {
 message QueryMemberStatisticsInfoListReq {
   int64 page_num = 1; //第几页
   int64 page_size = 2; //每页的数量
-
+  int64 member_id = 3; //
 }
 
 message QueryMemberStatisticsInfoListData {

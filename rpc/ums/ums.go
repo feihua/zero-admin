@@ -4,9 +4,9 @@ import (
 	"flag"
 	"fmt"
 	"github.com/feihua/zero-admin/rpc/ums/internal/config"
-	integrationconsumesettingserviceServer "github.com/feihua/zero-admin/rpc/ums/internal/server/integrationconsumesettingservice"
 	memberaddressserviceServer "github.com/feihua/zero-admin/rpc/ums/internal/server/memberaddressservice"
 	memberbrandattentionserviceServer "github.com/feihua/zero-admin/rpc/ums/internal/server/memberbrandattentionservice"
+	memberconsumesettingserviceServer "github.com/feihua/zero-admin/rpc/ums/internal/server/memberconsumesettingservice"
 	membergrowthlogserviceServer "github.com/feihua/zero-admin/rpc/ums/internal/server/membergrowthlogservice"
 	memberinfoserviceServer "github.com/feihua/zero-admin/rpc/ums/internal/server/memberinfoservice"
 	memberlevelserviceServer "github.com/feihua/zero-admin/rpc/ums/internal/server/memberlevelservice"
@@ -47,7 +47,6 @@ func main() {
 
 	s := zrpc.MustNewServer(c.RpcServerConf, func(grpcServer *grpc.Server) {
 		umsclient.RegisterMemberInfoServiceServer(grpcServer, memberinfoserviceServer.NewMemberInfoServiceServer(ctx))
-		umsclient.RegisterIntegrationConsumeSettingServiceServer(grpcServer, integrationconsumesettingserviceServer.NewIntegrationConsumeSettingServiceServer(ctx))
 		umsclient.RegisterMemberLevelServiceServer(grpcServer, memberlevelserviceServer.NewMemberLevelServiceServer(ctx))
 		umsclient.RegisterMemberLoginLogServiceServer(grpcServer, memberloginlogserviceServer.NewMemberLoginLogServiceServer(ctx))
 		umsclient.RegisterMemberTagRelationServiceServer(grpcServer, membertagrelationserviceServer.NewMemberTagRelationServiceServer(ctx))
@@ -64,6 +63,7 @@ func main() {
 		umsclient.RegisterMemberSignLogServiceServer(grpcServer, membersignlogserviceServer.NewMemberSignLogServiceServer(ctx))
 		umsclient.RegisterMemberGrowthLogServiceServer(grpcServer, membergrowthlogserviceServer.NewMemberGrowthLogServiceServer(ctx))
 		umsclient.RegisterMemberPointsLogServiceServer(grpcServer, memberpointslogserviceServer.NewMemberPointsLogServiceServer(ctx))
+		umsclient.RegisterMemberConsumeSettingServiceServer(grpcServer, memberconsumesettingserviceServer.NewMemberConsumeSettingServiceServer(ctx))
 
 		if c.Mode == service.DevMode || c.Mode == service.TestMode {
 			reflection.Register(grpcServer)

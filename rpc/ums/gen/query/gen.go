@@ -20,6 +20,7 @@ var (
 	UmsIntegrationConsumeSetting     *umsIntegrationConsumeSetting
 	UmsMemberAddress                 *umsMemberAddress
 	UmsMemberBrandAttention          *umsMemberBrandAttention
+	UmsMemberConsumeSetting          *umsMemberConsumeSetting
 	UmsMemberGrowthLog               *umsMemberGrowthLog
 	UmsMemberInfo                    *umsMemberInfo
 	UmsMemberLevel                   *umsMemberLevel
@@ -42,6 +43,7 @@ func SetDefault(db *gorm.DB, opts ...gen.DOOption) {
 	UmsIntegrationConsumeSetting = &Q.UmsIntegrationConsumeSetting
 	UmsMemberAddress = &Q.UmsMemberAddress
 	UmsMemberBrandAttention = &Q.UmsMemberBrandAttention
+	UmsMemberConsumeSetting = &Q.UmsMemberConsumeSetting
 	UmsMemberGrowthLog = &Q.UmsMemberGrowthLog
 	UmsMemberInfo = &Q.UmsMemberInfo
 	UmsMemberLevel = &Q.UmsMemberLevel
@@ -65,6 +67,7 @@ func Use(db *gorm.DB, opts ...gen.DOOption) *Query {
 		UmsIntegrationConsumeSetting:     newUmsIntegrationConsumeSetting(db, opts...),
 		UmsMemberAddress:                 newUmsMemberAddress(db, opts...),
 		UmsMemberBrandAttention:          newUmsMemberBrandAttention(db, opts...),
+		UmsMemberConsumeSetting:          newUmsMemberConsumeSetting(db, opts...),
 		UmsMemberGrowthLog:               newUmsMemberGrowthLog(db, opts...),
 		UmsMemberInfo:                    newUmsMemberInfo(db, opts...),
 		UmsMemberLevel:                   newUmsMemberLevel(db, opts...),
@@ -89,6 +92,7 @@ type Query struct {
 	UmsIntegrationConsumeSetting     umsIntegrationConsumeSetting
 	UmsMemberAddress                 umsMemberAddress
 	UmsMemberBrandAttention          umsMemberBrandAttention
+	UmsMemberConsumeSetting          umsMemberConsumeSetting
 	UmsMemberGrowthLog               umsMemberGrowthLog
 	UmsMemberInfo                    umsMemberInfo
 	UmsMemberLevel                   umsMemberLevel
@@ -114,6 +118,7 @@ func (q *Query) clone(db *gorm.DB) *Query {
 		UmsIntegrationConsumeSetting:     q.UmsIntegrationConsumeSetting.clone(db),
 		UmsMemberAddress:                 q.UmsMemberAddress.clone(db),
 		UmsMemberBrandAttention:          q.UmsMemberBrandAttention.clone(db),
+		UmsMemberConsumeSetting:          q.UmsMemberConsumeSetting.clone(db),
 		UmsMemberGrowthLog:               q.UmsMemberGrowthLog.clone(db),
 		UmsMemberInfo:                    q.UmsMemberInfo.clone(db),
 		UmsMemberLevel:                   q.UmsMemberLevel.clone(db),
@@ -146,6 +151,7 @@ func (q *Query) ReplaceDB(db *gorm.DB) *Query {
 		UmsIntegrationConsumeSetting:     q.UmsIntegrationConsumeSetting.replaceDB(db),
 		UmsMemberAddress:                 q.UmsMemberAddress.replaceDB(db),
 		UmsMemberBrandAttention:          q.UmsMemberBrandAttention.replaceDB(db),
+		UmsMemberConsumeSetting:          q.UmsMemberConsumeSetting.replaceDB(db),
 		UmsMemberGrowthLog:               q.UmsMemberGrowthLog.replaceDB(db),
 		UmsMemberInfo:                    q.UmsMemberInfo.replaceDB(db),
 		UmsMemberLevel:                   q.UmsMemberLevel.replaceDB(db),
@@ -168,6 +174,7 @@ type queryCtx struct {
 	UmsIntegrationConsumeSetting     IUmsIntegrationConsumeSettingDo
 	UmsMemberAddress                 IUmsMemberAddressDo
 	UmsMemberBrandAttention          IUmsMemberBrandAttentionDo
+	UmsMemberConsumeSetting          IUmsMemberConsumeSettingDo
 	UmsMemberGrowthLog               IUmsMemberGrowthLogDo
 	UmsMemberInfo                    IUmsMemberInfoDo
 	UmsMemberLevel                   IUmsMemberLevelDo
@@ -190,6 +197,7 @@ func (q *Query) WithContext(ctx context.Context) *queryCtx {
 		UmsIntegrationConsumeSetting:     q.UmsIntegrationConsumeSetting.WithContext(ctx),
 		UmsMemberAddress:                 q.UmsMemberAddress.WithContext(ctx),
 		UmsMemberBrandAttention:          q.UmsMemberBrandAttention.WithContext(ctx),
+		UmsMemberConsumeSetting:          q.UmsMemberConsumeSetting.WithContext(ctx),
 		UmsMemberGrowthLog:               q.UmsMemberGrowthLog.WithContext(ctx),
 		UmsMemberInfo:                    q.UmsMemberInfo.WithContext(ctx),
 		UmsMemberLevel:                   q.UmsMemberLevel.WithContext(ctx),

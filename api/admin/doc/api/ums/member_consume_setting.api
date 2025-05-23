@@ -1,0 +1,124 @@
+info (
+	desc:   "积分消费设置"
+	author: "LiuFeiHua"
+	email:  "1002219331@qq.com"
+)
+
+type (
+	// 添加积分消费设置请求参数
+	AddMemberConsumeSettingReq {
+		DeductionPerAmount int32 `json:"deductionPerAmount"` //每一元需要抵扣的积分数量
+		MaxPercentPerOrder int32 `json:"maxPercentPerOrder"` //每笔订单最高抵用百分比
+		UseUnit            int32 `json:"useUnit"` //每次使用积分最小单位100
+		CouponStatus       int32 `json:"couponStatus"` //是否可以和优惠券同用；0->不可以；1->可以
+		Status             int32 `json:"status"` //状态：0->禁用；1->启用
+	}
+	// 删除积分消费设置请求参数
+	DeleteMemberConsumeSettingReq {
+		Id int64 `form:"id"`
+	}
+	// 更新积分消费设置请求参数
+	UpdateMemberConsumeSettingReq {
+		Id                 int64 `json:"id"` //
+		DeductionPerAmount int32 `json:"deductionPerAmount"` //每一元需要抵扣的积分数量
+		MaxPercentPerOrder int32 `json:"maxPercentPerOrder"` //每笔订单最高抵用百分比
+		UseUnit            int32 `json:"useUnit"` //每次使用积分最小单位100
+		CouponStatus       int32 `json:"couponStatus"` //是否可以和优惠券同用；0->不可以；1->可以
+		Status             int32 `json:"status"` //状态：0->禁用；1->启用
+	}
+	// 更新积分消费设置状态请求参数
+	UpdateStatusReq {
+		Id     int64 `json:"id"` //
+		Status int32 `json:"status"` //状态：0->禁用；1->启用
+	}
+	UpdateCouponStatusReq {
+		Id           int64 `json:"id"` //
+		CouponStatus int32 `json:"couponStatus"` //是否可以和优惠券同用；0->不可以；1->可以
+	}
+	// 查询积分消费设置详情请求参数
+	QueryMemberConsumeSettingDetailReq {
+		Id int64 `form:"id"`
+	}
+	QueryMemberConsumeSettingDetailData {
+		Id                 int64  `json:"id"` //
+		DeductionPerAmount int32  `json:"deductionPerAmount"` //每一元需要抵扣的积分数量
+		MaxPercentPerOrder int32  `json:"maxPercentPerOrder"` //每笔订单最高抵用百分比
+		UseUnit            int32  `json:"useUnit"` //每次使用积分最小单位100
+		CouponStatus       int32  `json:"couponStatus"` //是否可以和优惠券同用；0->不可以；1->可以
+		Status             int32  `json:"status"` //状态：0->禁用；1->启用
+		CreateBy           int64  `json:"createBy"` //创建人ID
+		CreateTime         string `json:"createTime"` //创建时间
+		UpdateBy           int64  `json:"updateBy"` //更新人ID
+		UpdateTime         string `json:"updateTime"` //更新时间
+	}
+	QueryMemberConsumeSettingDetailResp {
+		Code    string                              `json:"code"`
+		Message string                              `json:"message"`
+		Data    QueryMemberConsumeSettingDetailData `json:"data"`
+	}
+	// 分页查询积分消费设置列表请求参数
+	QueryMemberConsumeSettingListReq {
+		Current      int32 `form:"current,default=1"` //第几页
+		PageSize     int32 `form:"pageSize,default=20"` //每页的数量
+		CouponStatus int32 `form:"couponStatus,default=2"` //是否可以和优惠券同用；0->不可以；1->可以
+		Status       int32 `form:"status,default=2"` //状态：0->禁用；1->启用
+	}
+	QueryMemberConsumeSettingListData {
+		Id                 int64  `json:"id"` //
+		DeductionPerAmount int32  `json:"deductionPerAmount"` //每一元需要抵扣的积分数量
+		MaxPercentPerOrder int32  `json:"maxPercentPerOrder"` //每笔订单最高抵用百分比
+		UseUnit            int32  `json:"useUnit"` //每次使用积分最小单位100
+		CouponStatus       int32  `json:"couponStatus"` //是否可以和优惠券同用；0->不可以；1->可以
+		Status             int32  `json:"status"` //状态：0->禁用；1->启用
+		CreateBy           int64  `json:"createBy"` //创建人ID
+		CreateTime         string `json:"createTime"` //创建时间
+		UpdateBy           int64  `json:"updateBy"` //更新人ID
+		UpdateTime         string `json:"updateTime"` //更新时间
+	}
+	QueryMemberConsumeSettingListResp {
+		Code     string                               `json:"code"`
+		Message  string                               `json:"message"`
+		Current  int32                                `json:"current,default=1"`
+		Data     []*QueryMemberConsumeSettingListData `json:"data"`
+		PageSize int32                                `json:"pageSize,default=20"`
+		Success  bool                                 `json:"success"`
+		Total    int64                                `json:"total"`
+	}
+)
+
+@server (
+	jwt:        Auth
+	middleware: CheckUrl
+	group:      ums/member_consume_setting
+	prefix:     /api/ums/consumeSetting
+)
+service admin-api {
+	// 添加积分消费设置
+	@handler AddMemberConsumeSetting
+	post /addMemberConsumeSetting (AddMemberConsumeSettingReq) returns (BaseResp)
+
+	// 删除积分消费设置
+	@handler DeleteMemberConsumeSetting
+	get /deleteMemberConsumeSetting (DeleteMemberConsumeSettingReq) returns (BaseResp)
+
+	// 更新积分消费设置
+	@handler UpdateMemberConsumeSetting
+	post /updateMemberConsumeSetting (UpdateMemberConsumeSettingReq) returns (BaseResp)
+
+	// 更新积分消费设置状态
+	@handler updateStatus
+	post /updateStatus (UpdateStatusReq) returns (BaseResp)
+
+	// 更新是否可以和优惠券同用
+	@handler updateCouponStatus
+	post /updateCouponStatus (UpdateCouponStatusReq) returns (BaseResp)
+
+	// 查询积分消费设置详情
+	@handler QueryMemberConsumeSettingDetail
+	get /queryMemberConsumeSettingDetail (QueryMemberConsumeSettingDetailReq) returns (QueryMemberConsumeSettingDetailResp)
+
+	// 分页查询积分消费设置列表
+	@handler QueryMemberConsumeSettingList
+	get /queryMemberConsumeSettingList (QueryMemberConsumeSettingListReq) returns (QueryMemberConsumeSettingListResp)
+}
+

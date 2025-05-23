@@ -45,18 +45,16 @@ func (l *QueryMemberRuleSettingDetailLogic) QueryMemberRuleSettingDetail(req *ty
 	}
 
 	data := types.QueryMemberRuleSettingDetailData{
-		Id:                detail.Id,                //
-		ContinueSignDay:   detail.ContinueSignDay,   // 连续签到天数
-		ContinueSignPoint: detail.ContinueSignPoint, // 连续签到赠送数量
-		ConsumePerPoint:   detail.ConsumePerPoint,   // 每消费多少元获取1个点
-		LowOrderAmount:    detail.LowOrderAmount,    // 最低获取点数的订单金额
-		MaxPointPerOrder:  detail.MaxPointPerOrder,  // 每笔订单最高获取点数
-		RuleType:          detail.RuleType,          // 类型：0->积分规则；1->成长值规则
-		Status:            detail.Status,            // 状态：0->禁用；1->启用
-		CreateBy:          detail.CreateBy,          // 创建者
-		CreateTime:        detail.CreateTime,        // 创建时间
-		UpdateBy:          detail.UpdateBy,          // 更新者
-		UpdateTime:        detail.UpdateTime,        // 更新时间
+		Id:               detail.Id,               //
+		ConsumePerPoint:  detail.ConsumePerPoint,  // 每消费多少元获取1个点
+		LowOrderAmount:   detail.LowOrderAmount,   // 最低获取点数的订单金额
+		MaxPointPerOrder: detail.MaxPointPerOrder, // 每笔订单最高获取点数
+		RuleType:         detail.RuleType,         // 类型：0->积分规则；1->成长值规则
+		Status:           detail.Status,           // 状态：0->禁用；1->启用
+		CreateBy:         detail.CreateBy,         // 创建者
+		CreateTime:       detail.CreateTime,       // 创建时间
+		UpdateBy:         detail.UpdateBy,         // 更新者
+		UpdateTime:       detail.UpdateTime,       // 更新时间
 	}
 	return &types.QueryMemberRuleSettingDetailResp{
 		Code:    "000000",

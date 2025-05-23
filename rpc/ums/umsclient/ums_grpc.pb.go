@@ -19,294 +19,6 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	IntegrationConsumeSettingService_AddIntegrationConsumeSetting_FullMethodName          = "/umsclient.IntegrationConsumeSettingService/AddIntegrationConsumeSetting"
-	IntegrationConsumeSettingService_DeleteIntegrationConsumeSetting_FullMethodName       = "/umsclient.IntegrationConsumeSettingService/DeleteIntegrationConsumeSetting"
-	IntegrationConsumeSettingService_UpdateIntegrationConsumeSetting_FullMethodName       = "/umsclient.IntegrationConsumeSettingService/UpdateIntegrationConsumeSetting"
-	IntegrationConsumeSettingService_UpdateIntegrationConsumeSettingStatus_FullMethodName = "/umsclient.IntegrationConsumeSettingService/UpdateIntegrationConsumeSettingStatus"
-	IntegrationConsumeSettingService_QueryIntegrationConsumeSettingDetail_FullMethodName  = "/umsclient.IntegrationConsumeSettingService/QueryIntegrationConsumeSettingDetail"
-	IntegrationConsumeSettingService_QueryIntegrationConsumeSettingList_FullMethodName    = "/umsclient.IntegrationConsumeSettingService/QueryIntegrationConsumeSettingList"
-)
-
-// IntegrationConsumeSettingServiceClient is the client API for IntegrationConsumeSettingService service.
-//
-// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type IntegrationConsumeSettingServiceClient interface {
-	// 添加积分消费设置
-	AddIntegrationConsumeSetting(ctx context.Context, in *AddIntegrationConsumeSettingReq, opts ...grpc.CallOption) (*AddIntegrationConsumeSettingResp, error)
-	// 删除积分消费设置
-	DeleteIntegrationConsumeSetting(ctx context.Context, in *DeleteIntegrationConsumeSettingReq, opts ...grpc.CallOption) (*DeleteIntegrationConsumeSettingResp, error)
-	// 更新积分消费设置
-	UpdateIntegrationConsumeSetting(ctx context.Context, in *UpdateIntegrationConsumeSettingReq, opts ...grpc.CallOption) (*UpdateIntegrationConsumeSettingResp, error)
-	// 更新积分消费设置状态
-	UpdateIntegrationConsumeSettingStatus(ctx context.Context, in *UpdateIntegrationConsumeSettingStatusReq, opts ...grpc.CallOption) (*UpdateIntegrationConsumeSettingStatusResp, error)
-	// 查询积分消费设置详情
-	QueryIntegrationConsumeSettingDetail(ctx context.Context, in *QueryIntegrationConsumeSettingDetailReq, opts ...grpc.CallOption) (*QueryIntegrationConsumeSettingDetailResp, error)
-	// 查询积分消费设置列表
-	QueryIntegrationConsumeSettingList(ctx context.Context, in *QueryIntegrationConsumeSettingListReq, opts ...grpc.CallOption) (*QueryIntegrationConsumeSettingListResp, error)
-}
-
-type integrationConsumeSettingServiceClient struct {
-	cc grpc.ClientConnInterface
-}
-
-func NewIntegrationConsumeSettingServiceClient(cc grpc.ClientConnInterface) IntegrationConsumeSettingServiceClient {
-	return &integrationConsumeSettingServiceClient{cc}
-}
-
-func (c *integrationConsumeSettingServiceClient) AddIntegrationConsumeSetting(ctx context.Context, in *AddIntegrationConsumeSettingReq, opts ...grpc.CallOption) (*AddIntegrationConsumeSettingResp, error) {
-	out := new(AddIntegrationConsumeSettingResp)
-	err := c.cc.Invoke(ctx, IntegrationConsumeSettingService_AddIntegrationConsumeSetting_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *integrationConsumeSettingServiceClient) DeleteIntegrationConsumeSetting(ctx context.Context, in *DeleteIntegrationConsumeSettingReq, opts ...grpc.CallOption) (*DeleteIntegrationConsumeSettingResp, error) {
-	out := new(DeleteIntegrationConsumeSettingResp)
-	err := c.cc.Invoke(ctx, IntegrationConsumeSettingService_DeleteIntegrationConsumeSetting_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *integrationConsumeSettingServiceClient) UpdateIntegrationConsumeSetting(ctx context.Context, in *UpdateIntegrationConsumeSettingReq, opts ...grpc.CallOption) (*UpdateIntegrationConsumeSettingResp, error) {
-	out := new(UpdateIntegrationConsumeSettingResp)
-	err := c.cc.Invoke(ctx, IntegrationConsumeSettingService_UpdateIntegrationConsumeSetting_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *integrationConsumeSettingServiceClient) UpdateIntegrationConsumeSettingStatus(ctx context.Context, in *UpdateIntegrationConsumeSettingStatusReq, opts ...grpc.CallOption) (*UpdateIntegrationConsumeSettingStatusResp, error) {
-	out := new(UpdateIntegrationConsumeSettingStatusResp)
-	err := c.cc.Invoke(ctx, IntegrationConsumeSettingService_UpdateIntegrationConsumeSettingStatus_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *integrationConsumeSettingServiceClient) QueryIntegrationConsumeSettingDetail(ctx context.Context, in *QueryIntegrationConsumeSettingDetailReq, opts ...grpc.CallOption) (*QueryIntegrationConsumeSettingDetailResp, error) {
-	out := new(QueryIntegrationConsumeSettingDetailResp)
-	err := c.cc.Invoke(ctx, IntegrationConsumeSettingService_QueryIntegrationConsumeSettingDetail_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *integrationConsumeSettingServiceClient) QueryIntegrationConsumeSettingList(ctx context.Context, in *QueryIntegrationConsumeSettingListReq, opts ...grpc.CallOption) (*QueryIntegrationConsumeSettingListResp, error) {
-	out := new(QueryIntegrationConsumeSettingListResp)
-	err := c.cc.Invoke(ctx, IntegrationConsumeSettingService_QueryIntegrationConsumeSettingList_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-// IntegrationConsumeSettingServiceServer is the server API for IntegrationConsumeSettingService service.
-// All implementations must embed UnimplementedIntegrationConsumeSettingServiceServer
-// for forward compatibility
-type IntegrationConsumeSettingServiceServer interface {
-	// 添加积分消费设置
-	AddIntegrationConsumeSetting(context.Context, *AddIntegrationConsumeSettingReq) (*AddIntegrationConsumeSettingResp, error)
-	// 删除积分消费设置
-	DeleteIntegrationConsumeSetting(context.Context, *DeleteIntegrationConsumeSettingReq) (*DeleteIntegrationConsumeSettingResp, error)
-	// 更新积分消费设置
-	UpdateIntegrationConsumeSetting(context.Context, *UpdateIntegrationConsumeSettingReq) (*UpdateIntegrationConsumeSettingResp, error)
-	// 更新积分消费设置状态
-	UpdateIntegrationConsumeSettingStatus(context.Context, *UpdateIntegrationConsumeSettingStatusReq) (*UpdateIntegrationConsumeSettingStatusResp, error)
-	// 查询积分消费设置详情
-	QueryIntegrationConsumeSettingDetail(context.Context, *QueryIntegrationConsumeSettingDetailReq) (*QueryIntegrationConsumeSettingDetailResp, error)
-	// 查询积分消费设置列表
-	QueryIntegrationConsumeSettingList(context.Context, *QueryIntegrationConsumeSettingListReq) (*QueryIntegrationConsumeSettingListResp, error)
-	mustEmbedUnimplementedIntegrationConsumeSettingServiceServer()
-}
-
-// UnimplementedIntegrationConsumeSettingServiceServer must be embedded to have forward compatible implementations.
-type UnimplementedIntegrationConsumeSettingServiceServer struct {
-}
-
-func (UnimplementedIntegrationConsumeSettingServiceServer) AddIntegrationConsumeSetting(context.Context, *AddIntegrationConsumeSettingReq) (*AddIntegrationConsumeSettingResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method AddIntegrationConsumeSetting not implemented")
-}
-func (UnimplementedIntegrationConsumeSettingServiceServer) DeleteIntegrationConsumeSetting(context.Context, *DeleteIntegrationConsumeSettingReq) (*DeleteIntegrationConsumeSettingResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method DeleteIntegrationConsumeSetting not implemented")
-}
-func (UnimplementedIntegrationConsumeSettingServiceServer) UpdateIntegrationConsumeSetting(context.Context, *UpdateIntegrationConsumeSettingReq) (*UpdateIntegrationConsumeSettingResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateIntegrationConsumeSetting not implemented")
-}
-func (UnimplementedIntegrationConsumeSettingServiceServer) UpdateIntegrationConsumeSettingStatus(context.Context, *UpdateIntegrationConsumeSettingStatusReq) (*UpdateIntegrationConsumeSettingStatusResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateIntegrationConsumeSettingStatus not implemented")
-}
-func (UnimplementedIntegrationConsumeSettingServiceServer) QueryIntegrationConsumeSettingDetail(context.Context, *QueryIntegrationConsumeSettingDetailReq) (*QueryIntegrationConsumeSettingDetailResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method QueryIntegrationConsumeSettingDetail not implemented")
-}
-func (UnimplementedIntegrationConsumeSettingServiceServer) QueryIntegrationConsumeSettingList(context.Context, *QueryIntegrationConsumeSettingListReq) (*QueryIntegrationConsumeSettingListResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method QueryIntegrationConsumeSettingList not implemented")
-}
-func (UnimplementedIntegrationConsumeSettingServiceServer) mustEmbedUnimplementedIntegrationConsumeSettingServiceServer() {
-}
-
-// UnsafeIntegrationConsumeSettingServiceServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to IntegrationConsumeSettingServiceServer will
-// result in compilation errors.
-type UnsafeIntegrationConsumeSettingServiceServer interface {
-	mustEmbedUnimplementedIntegrationConsumeSettingServiceServer()
-}
-
-func RegisterIntegrationConsumeSettingServiceServer(s grpc.ServiceRegistrar, srv IntegrationConsumeSettingServiceServer) {
-	s.RegisterService(&IntegrationConsumeSettingService_ServiceDesc, srv)
-}
-
-func _IntegrationConsumeSettingService_AddIntegrationConsumeSetting_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(AddIntegrationConsumeSettingReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(IntegrationConsumeSettingServiceServer).AddIntegrationConsumeSetting(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: IntegrationConsumeSettingService_AddIntegrationConsumeSetting_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(IntegrationConsumeSettingServiceServer).AddIntegrationConsumeSetting(ctx, req.(*AddIntegrationConsumeSettingReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _IntegrationConsumeSettingService_DeleteIntegrationConsumeSetting_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(DeleteIntegrationConsumeSettingReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(IntegrationConsumeSettingServiceServer).DeleteIntegrationConsumeSetting(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: IntegrationConsumeSettingService_DeleteIntegrationConsumeSetting_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(IntegrationConsumeSettingServiceServer).DeleteIntegrationConsumeSetting(ctx, req.(*DeleteIntegrationConsumeSettingReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _IntegrationConsumeSettingService_UpdateIntegrationConsumeSetting_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UpdateIntegrationConsumeSettingReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(IntegrationConsumeSettingServiceServer).UpdateIntegrationConsumeSetting(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: IntegrationConsumeSettingService_UpdateIntegrationConsumeSetting_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(IntegrationConsumeSettingServiceServer).UpdateIntegrationConsumeSetting(ctx, req.(*UpdateIntegrationConsumeSettingReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _IntegrationConsumeSettingService_UpdateIntegrationConsumeSettingStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UpdateIntegrationConsumeSettingStatusReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(IntegrationConsumeSettingServiceServer).UpdateIntegrationConsumeSettingStatus(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: IntegrationConsumeSettingService_UpdateIntegrationConsumeSettingStatus_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(IntegrationConsumeSettingServiceServer).UpdateIntegrationConsumeSettingStatus(ctx, req.(*UpdateIntegrationConsumeSettingStatusReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _IntegrationConsumeSettingService_QueryIntegrationConsumeSettingDetail_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(QueryIntegrationConsumeSettingDetailReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(IntegrationConsumeSettingServiceServer).QueryIntegrationConsumeSettingDetail(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: IntegrationConsumeSettingService_QueryIntegrationConsumeSettingDetail_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(IntegrationConsumeSettingServiceServer).QueryIntegrationConsumeSettingDetail(ctx, req.(*QueryIntegrationConsumeSettingDetailReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _IntegrationConsumeSettingService_QueryIntegrationConsumeSettingList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(QueryIntegrationConsumeSettingListReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(IntegrationConsumeSettingServiceServer).QueryIntegrationConsumeSettingList(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: IntegrationConsumeSettingService_QueryIntegrationConsumeSettingList_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(IntegrationConsumeSettingServiceServer).QueryIntegrationConsumeSettingList(ctx, req.(*QueryIntegrationConsumeSettingListReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-// IntegrationConsumeSettingService_ServiceDesc is the grpc.ServiceDesc for IntegrationConsumeSettingService service.
-// It's only intended for direct use with grpc.RegisterService,
-// and not to be introspected or modified (even as a copy)
-var IntegrationConsumeSettingService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "umsclient.IntegrationConsumeSettingService",
-	HandlerType: (*IntegrationConsumeSettingServiceServer)(nil),
-	Methods: []grpc.MethodDesc{
-		{
-			MethodName: "AddIntegrationConsumeSetting",
-			Handler:    _IntegrationConsumeSettingService_AddIntegrationConsumeSetting_Handler,
-		},
-		{
-			MethodName: "DeleteIntegrationConsumeSetting",
-			Handler:    _IntegrationConsumeSettingService_DeleteIntegrationConsumeSetting_Handler,
-		},
-		{
-			MethodName: "UpdateIntegrationConsumeSetting",
-			Handler:    _IntegrationConsumeSettingService_UpdateIntegrationConsumeSetting_Handler,
-		},
-		{
-			MethodName: "UpdateIntegrationConsumeSettingStatus",
-			Handler:    _IntegrationConsumeSettingService_UpdateIntegrationConsumeSettingStatus_Handler,
-		},
-		{
-			MethodName: "QueryIntegrationConsumeSettingDetail",
-			Handler:    _IntegrationConsumeSettingService_QueryIntegrationConsumeSettingDetail_Handler,
-		},
-		{
-			MethodName: "QueryIntegrationConsumeSettingList",
-			Handler:    _IntegrationConsumeSettingService_QueryIntegrationConsumeSettingList_Handler,
-		},
-	},
-	Streams:  []grpc.StreamDesc{},
-	Metadata: "rpc/ums/ums.proto",
-}
-
-const (
 	MemberAddressService_AddMemberAddress_FullMethodName          = "/umsclient.MemberAddressService/AddMemberAddress"
 	MemberAddressService_DeleteMemberAddress_FullMethodName       = "/umsclient.MemberAddressService/DeleteMemberAddress"
 	MemberAddressService_UpdateMemberAddress_FullMethodName       = "/umsclient.MemberAddressService/UpdateMemberAddress"
@@ -797,6 +509,333 @@ var MemberBrandAttentionService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "QueryMemberBrandAttentionList",
 			Handler:    _MemberBrandAttentionService_QueryMemberBrandAttentionList_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "rpc/ums/ums.proto",
+}
+
+const (
+	MemberConsumeSettingService_AddMemberConsumeSetting_FullMethodName         = "/umsclient.MemberConsumeSettingService/AddMemberConsumeSetting"
+	MemberConsumeSettingService_DeleteMemberConsumeSetting_FullMethodName      = "/umsclient.MemberConsumeSettingService/DeleteMemberConsumeSetting"
+	MemberConsumeSettingService_UpdateMemberConsumeSetting_FullMethodName      = "/umsclient.MemberConsumeSettingService/UpdateMemberConsumeSetting"
+	MemberConsumeSettingService_UpdateStatus_FullMethodName                    = "/umsclient.MemberConsumeSettingService/UpdateStatus"
+	MemberConsumeSettingService_UpdateCouponStatus_FullMethodName              = "/umsclient.MemberConsumeSettingService/UpdateCouponStatus"
+	MemberConsumeSettingService_QueryMemberConsumeSettingDetail_FullMethodName = "/umsclient.MemberConsumeSettingService/QueryMemberConsumeSettingDetail"
+	MemberConsumeSettingService_QueryMemberConsumeSettingList_FullMethodName   = "/umsclient.MemberConsumeSettingService/QueryMemberConsumeSettingList"
+)
+
+// MemberConsumeSettingServiceClient is the client API for MemberConsumeSettingService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type MemberConsumeSettingServiceClient interface {
+	// 添加积分消费设置
+	AddMemberConsumeSetting(ctx context.Context, in *AddMemberConsumeSettingReq, opts ...grpc.CallOption) (*AddMemberConsumeSettingResp, error)
+	// 删除积分消费设置
+	DeleteMemberConsumeSetting(ctx context.Context, in *DeleteMemberConsumeSettingReq, opts ...grpc.CallOption) (*DeleteMemberConsumeSettingResp, error)
+	// 更新积分消费设置
+	UpdateMemberConsumeSetting(ctx context.Context, in *UpdateMemberConsumeSettingReq, opts ...grpc.CallOption) (*UpdateMemberConsumeSettingResp, error)
+	// 更新积分消费设置状态
+	UpdateStatus(ctx context.Context, in *UpdateStatusReq, opts ...grpc.CallOption) (*UpdateMemberConsumeSettingStatusResp, error)
+	// 更新是否可以和优惠券同用
+	UpdateCouponStatus(ctx context.Context, in *UpdateCouponStatusReq, opts ...grpc.CallOption) (*UpdateMemberConsumeSettingStatusResp, error)
+	// 查询积分消费设置详情
+	QueryMemberConsumeSettingDetail(ctx context.Context, in *QueryMemberConsumeSettingDetailReq, opts ...grpc.CallOption) (*QueryMemberConsumeSettingDetailResp, error)
+	// 查询积分消费设置列表
+	QueryMemberConsumeSettingList(ctx context.Context, in *QueryMemberConsumeSettingListReq, opts ...grpc.CallOption) (*QueryMemberConsumeSettingListResp, error)
+}
+
+type memberConsumeSettingServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewMemberConsumeSettingServiceClient(cc grpc.ClientConnInterface) MemberConsumeSettingServiceClient {
+	return &memberConsumeSettingServiceClient{cc}
+}
+
+func (c *memberConsumeSettingServiceClient) AddMemberConsumeSetting(ctx context.Context, in *AddMemberConsumeSettingReq, opts ...grpc.CallOption) (*AddMemberConsumeSettingResp, error) {
+	out := new(AddMemberConsumeSettingResp)
+	err := c.cc.Invoke(ctx, MemberConsumeSettingService_AddMemberConsumeSetting_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *memberConsumeSettingServiceClient) DeleteMemberConsumeSetting(ctx context.Context, in *DeleteMemberConsumeSettingReq, opts ...grpc.CallOption) (*DeleteMemberConsumeSettingResp, error) {
+	out := new(DeleteMemberConsumeSettingResp)
+	err := c.cc.Invoke(ctx, MemberConsumeSettingService_DeleteMemberConsumeSetting_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *memberConsumeSettingServiceClient) UpdateMemberConsumeSetting(ctx context.Context, in *UpdateMemberConsumeSettingReq, opts ...grpc.CallOption) (*UpdateMemberConsumeSettingResp, error) {
+	out := new(UpdateMemberConsumeSettingResp)
+	err := c.cc.Invoke(ctx, MemberConsumeSettingService_UpdateMemberConsumeSetting_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *memberConsumeSettingServiceClient) UpdateStatus(ctx context.Context, in *UpdateStatusReq, opts ...grpc.CallOption) (*UpdateMemberConsumeSettingStatusResp, error) {
+	out := new(UpdateMemberConsumeSettingStatusResp)
+	err := c.cc.Invoke(ctx, MemberConsumeSettingService_UpdateStatus_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *memberConsumeSettingServiceClient) UpdateCouponStatus(ctx context.Context, in *UpdateCouponStatusReq, opts ...grpc.CallOption) (*UpdateMemberConsumeSettingStatusResp, error) {
+	out := new(UpdateMemberConsumeSettingStatusResp)
+	err := c.cc.Invoke(ctx, MemberConsumeSettingService_UpdateCouponStatus_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *memberConsumeSettingServiceClient) QueryMemberConsumeSettingDetail(ctx context.Context, in *QueryMemberConsumeSettingDetailReq, opts ...grpc.CallOption) (*QueryMemberConsumeSettingDetailResp, error) {
+	out := new(QueryMemberConsumeSettingDetailResp)
+	err := c.cc.Invoke(ctx, MemberConsumeSettingService_QueryMemberConsumeSettingDetail_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *memberConsumeSettingServiceClient) QueryMemberConsumeSettingList(ctx context.Context, in *QueryMemberConsumeSettingListReq, opts ...grpc.CallOption) (*QueryMemberConsumeSettingListResp, error) {
+	out := new(QueryMemberConsumeSettingListResp)
+	err := c.cc.Invoke(ctx, MemberConsumeSettingService_QueryMemberConsumeSettingList_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// MemberConsumeSettingServiceServer is the server API for MemberConsumeSettingService service.
+// All implementations must embed UnimplementedMemberConsumeSettingServiceServer
+// for forward compatibility
+type MemberConsumeSettingServiceServer interface {
+	// 添加积分消费设置
+	AddMemberConsumeSetting(context.Context, *AddMemberConsumeSettingReq) (*AddMemberConsumeSettingResp, error)
+	// 删除积分消费设置
+	DeleteMemberConsumeSetting(context.Context, *DeleteMemberConsumeSettingReq) (*DeleteMemberConsumeSettingResp, error)
+	// 更新积分消费设置
+	UpdateMemberConsumeSetting(context.Context, *UpdateMemberConsumeSettingReq) (*UpdateMemberConsumeSettingResp, error)
+	// 更新积分消费设置状态
+	UpdateStatus(context.Context, *UpdateStatusReq) (*UpdateMemberConsumeSettingStatusResp, error)
+	// 更新是否可以和优惠券同用
+	UpdateCouponStatus(context.Context, *UpdateCouponStatusReq) (*UpdateMemberConsumeSettingStatusResp, error)
+	// 查询积分消费设置详情
+	QueryMemberConsumeSettingDetail(context.Context, *QueryMemberConsumeSettingDetailReq) (*QueryMemberConsumeSettingDetailResp, error)
+	// 查询积分消费设置列表
+	QueryMemberConsumeSettingList(context.Context, *QueryMemberConsumeSettingListReq) (*QueryMemberConsumeSettingListResp, error)
+	mustEmbedUnimplementedMemberConsumeSettingServiceServer()
+}
+
+// UnimplementedMemberConsumeSettingServiceServer must be embedded to have forward compatible implementations.
+type UnimplementedMemberConsumeSettingServiceServer struct {
+}
+
+func (UnimplementedMemberConsumeSettingServiceServer) AddMemberConsumeSetting(context.Context, *AddMemberConsumeSettingReq) (*AddMemberConsumeSettingResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AddMemberConsumeSetting not implemented")
+}
+func (UnimplementedMemberConsumeSettingServiceServer) DeleteMemberConsumeSetting(context.Context, *DeleteMemberConsumeSettingReq) (*DeleteMemberConsumeSettingResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteMemberConsumeSetting not implemented")
+}
+func (UnimplementedMemberConsumeSettingServiceServer) UpdateMemberConsumeSetting(context.Context, *UpdateMemberConsumeSettingReq) (*UpdateMemberConsumeSettingResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateMemberConsumeSetting not implemented")
+}
+func (UnimplementedMemberConsumeSettingServiceServer) UpdateStatus(context.Context, *UpdateStatusReq) (*UpdateMemberConsumeSettingStatusResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateStatus not implemented")
+}
+func (UnimplementedMemberConsumeSettingServiceServer) UpdateCouponStatus(context.Context, *UpdateCouponStatusReq) (*UpdateMemberConsumeSettingStatusResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateCouponStatus not implemented")
+}
+func (UnimplementedMemberConsumeSettingServiceServer) QueryMemberConsumeSettingDetail(context.Context, *QueryMemberConsumeSettingDetailReq) (*QueryMemberConsumeSettingDetailResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method QueryMemberConsumeSettingDetail not implemented")
+}
+func (UnimplementedMemberConsumeSettingServiceServer) QueryMemberConsumeSettingList(context.Context, *QueryMemberConsumeSettingListReq) (*QueryMemberConsumeSettingListResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method QueryMemberConsumeSettingList not implemented")
+}
+func (UnimplementedMemberConsumeSettingServiceServer) mustEmbedUnimplementedMemberConsumeSettingServiceServer() {
+}
+
+// UnsafeMemberConsumeSettingServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to MemberConsumeSettingServiceServer will
+// result in compilation errors.
+type UnsafeMemberConsumeSettingServiceServer interface {
+	mustEmbedUnimplementedMemberConsumeSettingServiceServer()
+}
+
+func RegisterMemberConsumeSettingServiceServer(s grpc.ServiceRegistrar, srv MemberConsumeSettingServiceServer) {
+	s.RegisterService(&MemberConsumeSettingService_ServiceDesc, srv)
+}
+
+func _MemberConsumeSettingService_AddMemberConsumeSetting_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddMemberConsumeSettingReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MemberConsumeSettingServiceServer).AddMemberConsumeSetting(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: MemberConsumeSettingService_AddMemberConsumeSetting_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MemberConsumeSettingServiceServer).AddMemberConsumeSetting(ctx, req.(*AddMemberConsumeSettingReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _MemberConsumeSettingService_DeleteMemberConsumeSetting_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteMemberConsumeSettingReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MemberConsumeSettingServiceServer).DeleteMemberConsumeSetting(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: MemberConsumeSettingService_DeleteMemberConsumeSetting_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MemberConsumeSettingServiceServer).DeleteMemberConsumeSetting(ctx, req.(*DeleteMemberConsumeSettingReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _MemberConsumeSettingService_UpdateMemberConsumeSetting_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateMemberConsumeSettingReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MemberConsumeSettingServiceServer).UpdateMemberConsumeSetting(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: MemberConsumeSettingService_UpdateMemberConsumeSetting_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MemberConsumeSettingServiceServer).UpdateMemberConsumeSetting(ctx, req.(*UpdateMemberConsumeSettingReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _MemberConsumeSettingService_UpdateStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateStatusReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MemberConsumeSettingServiceServer).UpdateStatus(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: MemberConsumeSettingService_UpdateStatus_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MemberConsumeSettingServiceServer).UpdateStatus(ctx, req.(*UpdateStatusReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _MemberConsumeSettingService_UpdateCouponStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateCouponStatusReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MemberConsumeSettingServiceServer).UpdateCouponStatus(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: MemberConsumeSettingService_UpdateCouponStatus_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MemberConsumeSettingServiceServer).UpdateCouponStatus(ctx, req.(*UpdateCouponStatusReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _MemberConsumeSettingService_QueryMemberConsumeSettingDetail_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryMemberConsumeSettingDetailReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MemberConsumeSettingServiceServer).QueryMemberConsumeSettingDetail(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: MemberConsumeSettingService_QueryMemberConsumeSettingDetail_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MemberConsumeSettingServiceServer).QueryMemberConsumeSettingDetail(ctx, req.(*QueryMemberConsumeSettingDetailReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _MemberConsumeSettingService_QueryMemberConsumeSettingList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryMemberConsumeSettingListReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MemberConsumeSettingServiceServer).QueryMemberConsumeSettingList(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: MemberConsumeSettingService_QueryMemberConsumeSettingList_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MemberConsumeSettingServiceServer).QueryMemberConsumeSettingList(ctx, req.(*QueryMemberConsumeSettingListReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// MemberConsumeSettingService_ServiceDesc is the grpc.ServiceDesc for MemberConsumeSettingService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var MemberConsumeSettingService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "umsclient.MemberConsumeSettingService",
+	HandlerType: (*MemberConsumeSettingServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "AddMemberConsumeSetting",
+			Handler:    _MemberConsumeSettingService_AddMemberConsumeSetting_Handler,
+		},
+		{
+			MethodName: "DeleteMemberConsumeSetting",
+			Handler:    _MemberConsumeSettingService_DeleteMemberConsumeSetting_Handler,
+		},
+		{
+			MethodName: "UpdateMemberConsumeSetting",
+			Handler:    _MemberConsumeSettingService_UpdateMemberConsumeSetting_Handler,
+		},
+		{
+			MethodName: "UpdateStatus",
+			Handler:    _MemberConsumeSettingService_UpdateStatus_Handler,
+		},
+		{
+			MethodName: "UpdateCouponStatus",
+			Handler:    _MemberConsumeSettingService_UpdateCouponStatus_Handler,
+		},
+		{
+			MethodName: "QueryMemberConsumeSettingDetail",
+			Handler:    _MemberConsumeSettingService_QueryMemberConsumeSettingDetail_Handler,
+		},
+		{
+			MethodName: "QueryMemberConsumeSettingList",
+			Handler:    _MemberConsumeSettingService_QueryMemberConsumeSettingList_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
@@ -2493,17 +2532,17 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type MemberRuleSettingServiceClient interface {
-	// 添加会员积分成长规则表
+	// 添加会员积分成长规则
 	AddMemberRuleSetting(ctx context.Context, in *AddMemberRuleSettingReq, opts ...grpc.CallOption) (*AddMemberRuleSettingResp, error)
-	// 删除会员积分成长规则表
+	// 删除会员积分成长规则
 	DeleteMemberRuleSetting(ctx context.Context, in *DeleteMemberRuleSettingReq, opts ...grpc.CallOption) (*DeleteMemberRuleSettingResp, error)
-	// 更新会员积分成长规则表
+	// 更新会员积分成长规则
 	UpdateMemberRuleSetting(ctx context.Context, in *UpdateMemberRuleSettingReq, opts ...grpc.CallOption) (*UpdateMemberRuleSettingResp, error)
-	// 更新会员积分成长规则表状态
+	// 更新会员积分成长规则状态
 	UpdateMemberRuleSettingStatus(ctx context.Context, in *UpdateMemberRuleSettingStatusReq, opts ...grpc.CallOption) (*UpdateMemberRuleSettingStatusResp, error)
-	// 查询会员积分成长规则表详情
+	// 查询会员积分成长规则详情
 	QueryMemberRuleSettingDetail(ctx context.Context, in *QueryMemberRuleSettingDetailReq, opts ...grpc.CallOption) (*QueryMemberRuleSettingDetailResp, error)
-	// 查询会员积分成长规则表列表
+	// 查询会员积分成长规则列表
 	QueryMemberRuleSettingList(ctx context.Context, in *QueryMemberRuleSettingListReq, opts ...grpc.CallOption) (*QueryMemberRuleSettingListResp, error)
 }
 
@@ -2573,17 +2612,17 @@ func (c *memberRuleSettingServiceClient) QueryMemberRuleSettingList(ctx context.
 // All implementations must embed UnimplementedMemberRuleSettingServiceServer
 // for forward compatibility
 type MemberRuleSettingServiceServer interface {
-	// 添加会员积分成长规则表
+	// 添加会员积分成长规则
 	AddMemberRuleSetting(context.Context, *AddMemberRuleSettingReq) (*AddMemberRuleSettingResp, error)
-	// 删除会员积分成长规则表
+	// 删除会员积分成长规则
 	DeleteMemberRuleSetting(context.Context, *DeleteMemberRuleSettingReq) (*DeleteMemberRuleSettingResp, error)
-	// 更新会员积分成长规则表
+	// 更新会员积分成长规则
 	UpdateMemberRuleSetting(context.Context, *UpdateMemberRuleSettingReq) (*UpdateMemberRuleSettingResp, error)
-	// 更新会员积分成长规则表状态
+	// 更新会员积分成长规则状态
 	UpdateMemberRuleSettingStatus(context.Context, *UpdateMemberRuleSettingStatusReq) (*UpdateMemberRuleSettingStatusResp, error)
-	// 查询会员积分成长规则表详情
+	// 查询会员积分成长规则详情
 	QueryMemberRuleSettingDetail(context.Context, *QueryMemberRuleSettingDetailReq) (*QueryMemberRuleSettingDetailResp, error)
-	// 查询会员积分成长规则表列表
+	// 查询会员积分成长规则列表
 	QueryMemberRuleSettingList(context.Context, *QueryMemberRuleSettingListReq) (*QueryMemberRuleSettingListResp, error)
 	mustEmbedUnimplementedMemberRuleSettingServiceServer()
 }

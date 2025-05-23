@@ -2,7 +2,7 @@
 // goctl 1.8.2
 // Source: ums.proto
 
-package integrationconsumesettingservice
+package memberconsumesettingservice
 
 import (
 	"context"
@@ -14,12 +14,12 @@ import (
 )
 
 type (
-	AddIntegrationConsumeSettingReq            = umsclient.AddIntegrationConsumeSettingReq
-	AddIntegrationConsumeSettingResp           = umsclient.AddIntegrationConsumeSettingResp
 	AddMemberAddressReq                        = umsclient.AddMemberAddressReq
 	AddMemberAddressResp                       = umsclient.AddMemberAddressResp
 	AddMemberBrandAttentionReq                 = umsclient.AddMemberBrandAttentionReq
 	AddMemberBrandAttentionResp                = umsclient.AddMemberBrandAttentionResp
+	AddMemberConsumeSettingReq                 = umsclient.AddMemberConsumeSettingReq
+	AddMemberConsumeSettingResp                = umsclient.AddMemberConsumeSettingResp
 	AddMemberGrowthLogReq                      = umsclient.AddMemberGrowthLogReq
 	AddMemberGrowthLogResp                     = umsclient.AddMemberGrowthLogResp
 	AddMemberLevelReq                          = umsclient.AddMemberLevelReq
@@ -46,12 +46,12 @@ type (
 	AddMemberTaskRelationResp                  = umsclient.AddMemberTaskRelationResp
 	AddMemberTaskReq                           = umsclient.AddMemberTaskReq
 	AddMemberTaskResp                          = umsclient.AddMemberTaskResp
-	DeleteIntegrationConsumeSettingReq         = umsclient.DeleteIntegrationConsumeSettingReq
-	DeleteIntegrationConsumeSettingResp        = umsclient.DeleteIntegrationConsumeSettingResp
 	DeleteMemberAddressReq                     = umsclient.DeleteMemberAddressReq
 	DeleteMemberAddressResp                    = umsclient.DeleteMemberAddressResp
 	DeleteMemberBrandAttentionReq              = umsclient.DeleteMemberBrandAttentionReq
 	DeleteMemberBrandAttentionResp             = umsclient.DeleteMemberBrandAttentionResp
+	DeleteMemberConsumeSettingReq              = umsclient.DeleteMemberConsumeSettingReq
+	DeleteMemberConsumeSettingResp             = umsclient.DeleteMemberConsumeSettingResp
 	DeleteMemberInfoReq                        = umsclient.DeleteMemberInfoReq
 	DeleteMemberInfoResp                       = umsclient.DeleteMemberInfoResp
 	DeleteMemberLevelReq                       = umsclient.DeleteMemberLevelReq
@@ -68,11 +68,11 @@ type (
 	DeleteMemberTagResp                        = umsclient.DeleteMemberTagResp
 	DeleteMemberTaskReq                        = umsclient.DeleteMemberTaskReq
 	DeleteMemberTaskResp                       = umsclient.DeleteMemberTaskResp
-	IntegrationConsumeSettingListData          = umsclient.IntegrationConsumeSettingListData
 	LoginReq                                   = umsclient.LoginReq
 	LoginResp                                  = umsclient.LoginResp
 	MemberAddressListData                      = umsclient.MemberAddressListData
 	MemberBrandAttentionListData               = umsclient.MemberBrandAttentionListData
+	MemberConsumeSettingListData               = umsclient.MemberConsumeSettingListData
 	MemberGrowthLogListData                    = umsclient.MemberGrowthLogListData
 	MemberInfoListData                         = umsclient.MemberInfoListData
 	MemberLevelListData                        = umsclient.MemberLevelListData
@@ -87,10 +87,6 @@ type (
 	MemberTagRelationListData                  = umsclient.MemberTagRelationListData
 	MemberTaskListData                         = umsclient.MemberTaskListData
 	MemberTaskRelationListData                 = umsclient.MemberTaskRelationListData
-	QueryIntegrationConsumeSettingDetailReq    = umsclient.QueryIntegrationConsumeSettingDetailReq
-	QueryIntegrationConsumeSettingDetailResp   = umsclient.QueryIntegrationConsumeSettingDetailResp
-	QueryIntegrationConsumeSettingListReq      = umsclient.QueryIntegrationConsumeSettingListReq
-	QueryIntegrationConsumeSettingListResp     = umsclient.QueryIntegrationConsumeSettingListResp
 	QueryMemberAddressDetailReq                = umsclient.QueryMemberAddressDetailReq
 	QueryMemberAddressDetailResp               = umsclient.QueryMemberAddressDetailResp
 	QueryMemberAddressListReq                  = umsclient.QueryMemberAddressListReq
@@ -99,6 +95,10 @@ type (
 	QueryMemberBrandAttentionDetailResp        = umsclient.QueryMemberBrandAttentionDetailResp
 	QueryMemberBrandAttentionListReq           = umsclient.QueryMemberBrandAttentionListReq
 	QueryMemberBrandAttentionListResp          = umsclient.QueryMemberBrandAttentionListResp
+	QueryMemberConsumeSettingDetailReq         = umsclient.QueryMemberConsumeSettingDetailReq
+	QueryMemberConsumeSettingDetailResp        = umsclient.QueryMemberConsumeSettingDetailResp
+	QueryMemberConsumeSettingListReq           = umsclient.QueryMemberConsumeSettingListReq
+	QueryMemberConsumeSettingListResp          = umsclient.QueryMemberConsumeSettingListResp
 	QueryMemberGrowthLogDetailReq              = umsclient.QueryMemberGrowthLogDetailReq
 	QueryMemberGrowthLogDetailResp             = umsclient.QueryMemberGrowthLogDetailResp
 	QueryMemberGrowthLogListReq                = umsclient.QueryMemberGrowthLogListReq
@@ -158,14 +158,14 @@ type (
 	QueryMemberTaskRelationListResp            = umsclient.QueryMemberTaskRelationListResp
 	RegisterReq                                = umsclient.RegisterReq
 	RegisterResp                               = umsclient.RegisterResp
-	UpdateIntegrationConsumeSettingReq         = umsclient.UpdateIntegrationConsumeSettingReq
-	UpdateIntegrationConsumeSettingResp        = umsclient.UpdateIntegrationConsumeSettingResp
-	UpdateIntegrationConsumeSettingStatusReq   = umsclient.UpdateIntegrationConsumeSettingStatusReq
-	UpdateIntegrationConsumeSettingStatusResp  = umsclient.UpdateIntegrationConsumeSettingStatusResp
+	UpdateCouponStatusReq                      = umsclient.UpdateCouponStatusReq
 	UpdateMemberAddressReq                     = umsclient.UpdateMemberAddressReq
 	UpdateMemberAddressResp                    = umsclient.UpdateMemberAddressResp
 	UpdateMemberAddressStatusReq               = umsclient.UpdateMemberAddressStatusReq
 	UpdateMemberAddressStatusResp              = umsclient.UpdateMemberAddressStatusResp
+	UpdateMemberConsumeSettingReq              = umsclient.UpdateMemberConsumeSettingReq
+	UpdateMemberConsumeSettingResp             = umsclient.UpdateMemberConsumeSettingResp
+	UpdateMemberConsumeSettingStatusResp       = umsclient.UpdateMemberConsumeSettingStatusResp
 	UpdateMemberInfoReq                        = umsclient.UpdateMemberInfoReq
 	UpdateMemberInfoResp                       = umsclient.UpdateMemberInfoResp
 	UpdateMemberInfoStatusReq                  = umsclient.UpdateMemberInfoStatusReq
@@ -189,65 +189,74 @@ type (
 	UpdateMemberTaskResp                       = umsclient.UpdateMemberTaskResp
 	UpdateMemberTaskStatusReq                  = umsclient.UpdateMemberTaskStatusReq
 	UpdateMemberTaskStatusResp                 = umsclient.UpdateMemberTaskStatusResp
+	UpdateStatusReq                            = umsclient.UpdateStatusReq
 
-	IntegrationConsumeSettingService interface {
+	MemberConsumeSettingService interface {
 		// 添加积分消费设置
-		AddIntegrationConsumeSetting(ctx context.Context, in *AddIntegrationConsumeSettingReq, opts ...grpc.CallOption) (*AddIntegrationConsumeSettingResp, error)
+		AddMemberConsumeSetting(ctx context.Context, in *AddMemberConsumeSettingReq, opts ...grpc.CallOption) (*AddMemberConsumeSettingResp, error)
 		// 删除积分消费设置
-		DeleteIntegrationConsumeSetting(ctx context.Context, in *DeleteIntegrationConsumeSettingReq, opts ...grpc.CallOption) (*DeleteIntegrationConsumeSettingResp, error)
+		DeleteMemberConsumeSetting(ctx context.Context, in *DeleteMemberConsumeSettingReq, opts ...grpc.CallOption) (*DeleteMemberConsumeSettingResp, error)
 		// 更新积分消费设置
-		UpdateIntegrationConsumeSetting(ctx context.Context, in *UpdateIntegrationConsumeSettingReq, opts ...grpc.CallOption) (*UpdateIntegrationConsumeSettingResp, error)
+		UpdateMemberConsumeSetting(ctx context.Context, in *UpdateMemberConsumeSettingReq, opts ...grpc.CallOption) (*UpdateMemberConsumeSettingResp, error)
 		// 更新积分消费设置状态
-		UpdateIntegrationConsumeSettingStatus(ctx context.Context, in *UpdateIntegrationConsumeSettingStatusReq, opts ...grpc.CallOption) (*UpdateIntegrationConsumeSettingStatusResp, error)
+		UpdateStatus(ctx context.Context, in *UpdateStatusReq, opts ...grpc.CallOption) (*UpdateMemberConsumeSettingStatusResp, error)
+		// 更新是否可以和优惠券同用
+		UpdateCouponStatus(ctx context.Context, in *UpdateCouponStatusReq, opts ...grpc.CallOption) (*UpdateMemberConsumeSettingStatusResp, error)
 		// 查询积分消费设置详情
-		QueryIntegrationConsumeSettingDetail(ctx context.Context, in *QueryIntegrationConsumeSettingDetailReq, opts ...grpc.CallOption) (*QueryIntegrationConsumeSettingDetailResp, error)
+		QueryMemberConsumeSettingDetail(ctx context.Context, in *QueryMemberConsumeSettingDetailReq, opts ...grpc.CallOption) (*QueryMemberConsumeSettingDetailResp, error)
 		// 查询积分消费设置列表
-		QueryIntegrationConsumeSettingList(ctx context.Context, in *QueryIntegrationConsumeSettingListReq, opts ...grpc.CallOption) (*QueryIntegrationConsumeSettingListResp, error)
+		QueryMemberConsumeSettingList(ctx context.Context, in *QueryMemberConsumeSettingListReq, opts ...grpc.CallOption) (*QueryMemberConsumeSettingListResp, error)
 	}
 
-	defaultIntegrationConsumeSettingService struct {
+	defaultMemberConsumeSettingService struct {
 		cli zrpc.Client
 	}
 )
 
-func NewIntegrationConsumeSettingService(cli zrpc.Client) IntegrationConsumeSettingService {
-	return &defaultIntegrationConsumeSettingService{
+func NewMemberConsumeSettingService(cli zrpc.Client) MemberConsumeSettingService {
+	return &defaultMemberConsumeSettingService{
 		cli: cli,
 	}
 }
 
 // 添加积分消费设置
-func (m *defaultIntegrationConsumeSettingService) AddIntegrationConsumeSetting(ctx context.Context, in *AddIntegrationConsumeSettingReq, opts ...grpc.CallOption) (*AddIntegrationConsumeSettingResp, error) {
-	client := umsclient.NewIntegrationConsumeSettingServiceClient(m.cli.Conn())
-	return client.AddIntegrationConsumeSetting(ctx, in, opts...)
+func (m *defaultMemberConsumeSettingService) AddMemberConsumeSetting(ctx context.Context, in *AddMemberConsumeSettingReq, opts ...grpc.CallOption) (*AddMemberConsumeSettingResp, error) {
+	client := umsclient.NewMemberConsumeSettingServiceClient(m.cli.Conn())
+	return client.AddMemberConsumeSetting(ctx, in, opts...)
 }
 
 // 删除积分消费设置
-func (m *defaultIntegrationConsumeSettingService) DeleteIntegrationConsumeSetting(ctx context.Context, in *DeleteIntegrationConsumeSettingReq, opts ...grpc.CallOption) (*DeleteIntegrationConsumeSettingResp, error) {
-	client := umsclient.NewIntegrationConsumeSettingServiceClient(m.cli.Conn())
-	return client.DeleteIntegrationConsumeSetting(ctx, in, opts...)
+func (m *defaultMemberConsumeSettingService) DeleteMemberConsumeSetting(ctx context.Context, in *DeleteMemberConsumeSettingReq, opts ...grpc.CallOption) (*DeleteMemberConsumeSettingResp, error) {
+	client := umsclient.NewMemberConsumeSettingServiceClient(m.cli.Conn())
+	return client.DeleteMemberConsumeSetting(ctx, in, opts...)
 }
 
 // 更新积分消费设置
-func (m *defaultIntegrationConsumeSettingService) UpdateIntegrationConsumeSetting(ctx context.Context, in *UpdateIntegrationConsumeSettingReq, opts ...grpc.CallOption) (*UpdateIntegrationConsumeSettingResp, error) {
-	client := umsclient.NewIntegrationConsumeSettingServiceClient(m.cli.Conn())
-	return client.UpdateIntegrationConsumeSetting(ctx, in, opts...)
+func (m *defaultMemberConsumeSettingService) UpdateMemberConsumeSetting(ctx context.Context, in *UpdateMemberConsumeSettingReq, opts ...grpc.CallOption) (*UpdateMemberConsumeSettingResp, error) {
+	client := umsclient.NewMemberConsumeSettingServiceClient(m.cli.Conn())
+	return client.UpdateMemberConsumeSetting(ctx, in, opts...)
 }
 
 // 更新积分消费设置状态
-func (m *defaultIntegrationConsumeSettingService) UpdateIntegrationConsumeSettingStatus(ctx context.Context, in *UpdateIntegrationConsumeSettingStatusReq, opts ...grpc.CallOption) (*UpdateIntegrationConsumeSettingStatusResp, error) {
-	client := umsclient.NewIntegrationConsumeSettingServiceClient(m.cli.Conn())
-	return client.UpdateIntegrationConsumeSettingStatus(ctx, in, opts...)
+func (m *defaultMemberConsumeSettingService) UpdateStatus(ctx context.Context, in *UpdateStatusReq, opts ...grpc.CallOption) (*UpdateMemberConsumeSettingStatusResp, error) {
+	client := umsclient.NewMemberConsumeSettingServiceClient(m.cli.Conn())
+	return client.UpdateStatus(ctx, in, opts...)
+}
+
+// 更新是否可以和优惠券同用
+func (m *defaultMemberConsumeSettingService) UpdateCouponStatus(ctx context.Context, in *UpdateCouponStatusReq, opts ...grpc.CallOption) (*UpdateMemberConsumeSettingStatusResp, error) {
+	client := umsclient.NewMemberConsumeSettingServiceClient(m.cli.Conn())
+	return client.UpdateCouponStatus(ctx, in, opts...)
 }
 
 // 查询积分消费设置详情
-func (m *defaultIntegrationConsumeSettingService) QueryIntegrationConsumeSettingDetail(ctx context.Context, in *QueryIntegrationConsumeSettingDetailReq, opts ...grpc.CallOption) (*QueryIntegrationConsumeSettingDetailResp, error) {
-	client := umsclient.NewIntegrationConsumeSettingServiceClient(m.cli.Conn())
-	return client.QueryIntegrationConsumeSettingDetail(ctx, in, opts...)
+func (m *defaultMemberConsumeSettingService) QueryMemberConsumeSettingDetail(ctx context.Context, in *QueryMemberConsumeSettingDetailReq, opts ...grpc.CallOption) (*QueryMemberConsumeSettingDetailResp, error) {
+	client := umsclient.NewMemberConsumeSettingServiceClient(m.cli.Conn())
+	return client.QueryMemberConsumeSettingDetail(ctx, in, opts...)
 }
 
 // 查询积分消费设置列表
-func (m *defaultIntegrationConsumeSettingService) QueryIntegrationConsumeSettingList(ctx context.Context, in *QueryIntegrationConsumeSettingListReq, opts ...grpc.CallOption) (*QueryIntegrationConsumeSettingListResp, error) {
-	client := umsclient.NewIntegrationConsumeSettingServiceClient(m.cli.Conn())
-	return client.QueryIntegrationConsumeSettingList(ctx, in, opts...)
+func (m *defaultMemberConsumeSettingService) QueryMemberConsumeSettingList(ctx context.Context, in *QueryMemberConsumeSettingListReq, opts ...grpc.CallOption) (*QueryMemberConsumeSettingListResp, error) {
+	client := umsclient.NewMemberConsumeSettingServiceClient(m.cli.Conn())
+	return client.QueryMemberConsumeSettingList(ctx, in, opts...)
 }

@@ -29,16 +29,14 @@ func newUmsMemberRuleSetting(db *gorm.DB, opts ...gen.DOOption) umsMemberRuleSet
 	tableName := _umsMemberRuleSetting.umsMemberRuleSettingDo.TableName()
 	_umsMemberRuleSetting.ALL = field.NewAsterisk(tableName)
 	_umsMemberRuleSetting.ID = field.NewInt64(tableName, "id")
-	_umsMemberRuleSetting.ContinueSignDay = field.NewInt32(tableName, "continue_sign_day")
-	_umsMemberRuleSetting.ContinueSignPoint = field.NewInt32(tableName, "continue_sign_point")
 	_umsMemberRuleSetting.ConsumePerPoint = field.NewInt64(tableName, "consume_per_point")
 	_umsMemberRuleSetting.LowOrderAmount = field.NewInt64(tableName, "low_order_amount")
 	_umsMemberRuleSetting.MaxPointPerOrder = field.NewInt32(tableName, "max_point_per_order")
 	_umsMemberRuleSetting.RuleType = field.NewInt32(tableName, "rule_type")
 	_umsMemberRuleSetting.Status = field.NewInt32(tableName, "status")
-	_umsMemberRuleSetting.CreateBy = field.NewString(tableName, "create_by")
+	_umsMemberRuleSetting.CreateBy = field.NewInt64(tableName, "create_by")
 	_umsMemberRuleSetting.CreateTime = field.NewTime(tableName, "create_time")
-	_umsMemberRuleSetting.UpdateBy = field.NewString(tableName, "update_by")
+	_umsMemberRuleSetting.UpdateBy = field.NewInt64(tableName, "update_by")
 	_umsMemberRuleSetting.UpdateTime = field.NewTime(tableName, "update_time")
 
 	_umsMemberRuleSetting.fillFieldMap()
@@ -50,19 +48,17 @@ func newUmsMemberRuleSetting(db *gorm.DB, opts ...gen.DOOption) umsMemberRuleSet
 type umsMemberRuleSetting struct {
 	umsMemberRuleSettingDo umsMemberRuleSettingDo
 
-	ALL               field.Asterisk
-	ID                field.Int64
-	ContinueSignDay   field.Int32  // 连续签到天数
-	ContinueSignPoint field.Int32  // 连续签到赠送数量
-	ConsumePerPoint   field.Int64  // 每消费多少元获取1个点
-	LowOrderAmount    field.Int64  // 最低获取点数的订单金额
-	MaxPointPerOrder  field.Int32  // 每笔订单最高获取点数
-	RuleType          field.Int32  // 类型：0->积分规则；1->成长值规则
-	Status            field.Int32  // 状态：0->禁用；1->启用
-	CreateBy          field.String // 创建者
-	CreateTime        field.Time   // 创建时间
-	UpdateBy          field.String // 更新者
-	UpdateTime        field.Time   // 更新时间
+	ALL              field.Asterisk
+	ID               field.Int64
+	ConsumePerPoint  field.Int64 // 每消费多少元获取1个点
+	LowOrderAmount   field.Int64 // 最低获取点数的订单金额
+	MaxPointPerOrder field.Int32 // 每笔订单最高获取点数
+	RuleType         field.Int32 // 类型：0->积分规则；1->成长值规则
+	Status           field.Int32 // 状态：0->禁用；1->启用
+	CreateBy         field.Int64 // 创建人ID
+	CreateTime       field.Time  // 创建时间
+	UpdateBy         field.Int64 // 更新人ID
+	UpdateTime       field.Time  // 更新时间
 
 	fieldMap map[string]field.Expr
 }
@@ -80,16 +76,14 @@ func (u umsMemberRuleSetting) As(alias string) *umsMemberRuleSetting {
 func (u *umsMemberRuleSetting) updateTableName(table string) *umsMemberRuleSetting {
 	u.ALL = field.NewAsterisk(table)
 	u.ID = field.NewInt64(table, "id")
-	u.ContinueSignDay = field.NewInt32(table, "continue_sign_day")
-	u.ContinueSignPoint = field.NewInt32(table, "continue_sign_point")
 	u.ConsumePerPoint = field.NewInt64(table, "consume_per_point")
 	u.LowOrderAmount = field.NewInt64(table, "low_order_amount")
 	u.MaxPointPerOrder = field.NewInt32(table, "max_point_per_order")
 	u.RuleType = field.NewInt32(table, "rule_type")
 	u.Status = field.NewInt32(table, "status")
-	u.CreateBy = field.NewString(table, "create_by")
+	u.CreateBy = field.NewInt64(table, "create_by")
 	u.CreateTime = field.NewTime(table, "create_time")
-	u.UpdateBy = field.NewString(table, "update_by")
+	u.UpdateBy = field.NewInt64(table, "update_by")
 	u.UpdateTime = field.NewTime(table, "update_time")
 
 	u.fillFieldMap()
@@ -119,10 +113,8 @@ func (u *umsMemberRuleSetting) GetFieldByName(fieldName string) (field.OrderExpr
 }
 
 func (u *umsMemberRuleSetting) fillFieldMap() {
-	u.fieldMap = make(map[string]field.Expr, 12)
+	u.fieldMap = make(map[string]field.Expr, 10)
 	u.fieldMap["id"] = u.ID
-	u.fieldMap["continue_sign_day"] = u.ContinueSignDay
-	u.fieldMap["continue_sign_point"] = u.ContinueSignPoint
 	u.fieldMap["consume_per_point"] = u.ConsumePerPoint
 	u.fieldMap["low_order_amount"] = u.LowOrderAmount
 	u.fieldMap["max_point_per_order"] = u.MaxPointPerOrder

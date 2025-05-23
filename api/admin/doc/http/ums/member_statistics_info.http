@@ -12,5 +12,5 @@ Content-Type: application/json
 
 
 ### 查询会员的统计信息
-GET {{host}}/api/member/statistics/queryMemberStatisticsInfoList
+GET {{host}}/api/ums/statistics/queryMemberStatisticsInfoList
 Authorization: Bearer {{token}}

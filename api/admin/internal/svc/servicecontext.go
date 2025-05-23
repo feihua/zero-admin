@@ -51,8 +51,8 @@ import (
 	"github.com/feihua/zero-admin/rpc/sys/client/postservice"
 	"github.com/feihua/zero-admin/rpc/sys/client/roleservice"
 	"github.com/feihua/zero-admin/rpc/sys/client/userservice"
-	"github.com/feihua/zero-admin/rpc/ums/client/integrationconsumesettingservice"
 	"github.com/feihua/zero-admin/rpc/ums/client/memberaddressservice"
+	"github.com/feihua/zero-admin/rpc/ums/client/memberconsumesettingservice"
 	"github.com/feihua/zero-admin/rpc/ums/client/membergrowthlogservice"
 	"github.com/feihua/zero-admin/rpc/ums/client/memberinfoservice"
 	"github.com/feihua/zero-admin/rpc/ums/client/memberlevelservice"
@@ -80,7 +80,7 @@ type ServiceContext struct {
 	// 会员相关
 	MemberGrowthLogService               membergrowthlogservice.MemberGrowthLogService
 	MemberPointsLogService               memberpointslogservice.MemberPointsLogService
-	IntegrationConsumeSettingService     integrationconsumesettingservice.IntegrationConsumeSettingService
+	MemberConsumeSettingService          memberconsumesettingservice.MemberConsumeSettingService
 	MemberLevelService                   memberlevelservice.MemberLevelService
 	MemberLoginLogService                memberloginlogservice.MemberLoginLogService
 	MemberTagRelationService             membertagrelationservice.MemberTagRelationService
@@ -164,7 +164,7 @@ func NewServiceContext(c config.Config) *ServiceContext {
 		Config:                               c,
 		MemberGrowthLogService:               membergrowthlogservice.NewMemberGrowthLogService(umsClient),
 		MemberPointsLogService:               memberpointslogservice.NewMemberPointsLogService(umsClient),
-		IntegrationConsumeSettingService:     integrationconsumesettingservice.NewIntegrationConsumeSettingService(umsClient),
+		MemberConsumeSettingService:          memberconsumesettingservice.NewMemberConsumeSettingService(umsClient),
 		MemberLevelService:                   memberlevelservice.NewMemberLevelService(umsClient),
 		MemberLoginLogService:                memberloginlogservice.NewMemberLoginLogService(umsClient),
 		MemberTagRelationService:             membertagrelationservice.NewMemberTagRelationService(umsClient),

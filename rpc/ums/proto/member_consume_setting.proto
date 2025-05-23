@@ -1,0 +1,128 @@
+syntax = "proto3";
+
+package main;
+
+option go_package = "./proto";
+
+// 添加积分消费设置
+message AddMemberConsumeSettingReq {
+  int64 id = 1; //
+  int32 deduction_per_amount = 2; //每一元需要抵扣的积分数量
+  int32 max_percent_per_order = 3; //每笔订单最高抵用百分比
+  int32 use_unit = 4; //每次使用积分最小单位100
+  int32 coupon_status = 5; //是否可以和优惠券同用；0->不可以；1->可以
+  int32 status = 6; //状态：0->禁用；1->启用
+  int64 create_by = 7; //创建人ID
+}
+
+message AddMemberConsumeSettingResp {
+  string pong = 1;
+}
+
+// 删除积分消费设置
+message DeleteMemberConsumeSettingReq {
+  int64 id = 1;
+}
+
+message DeleteMemberConsumeSettingResp {
+  string pong = 1;
+}
+
+// 更新积分消费设置
+message UpdateMemberConsumeSettingReq {
+  int64 id = 1; //
+  int32 deduction_per_amount = 2; //每一元需要抵扣的积分数量
+  int32 max_percent_per_order = 3; //每笔订单最高抵用百分比
+  int32 use_unit = 4; //每次使用积分最小单位100
+  int32 coupon_status = 5; //是否可以和优惠券同用；0->不可以；1->可以
+  int32 status = 6; //状态：0->禁用；1->启用
+  int64 update_by = 9; //更新人ID
+}
+
+message UpdateMemberConsumeSettingResp {
+  string pong = 1;
+}
+
+// 更新积分消费设置状态
+message UpdateStatusReq {
+  int64 id = 1; //
+  int32 status = 2; //状态：0->禁用；1->启用
+  int64 update_by = 3; //更新人ID
+}
+
+// 更新积分消费设置状态
+message UpdateCouponStatusReq {
+  int64 id = 1; //
+  int32 coupon_status = 2; //是否可以和优惠券同用；0->不可以；1->可以
+  int64 update_by = 3; //更新人ID
+}
+
+message UpdateMemberConsumeSettingStatusResp {
+  string pong = 1;
+}
+
+// 查询积分消费设置详情
+message QueryMemberConsumeSettingDetailReq {
+    int64 id = 1;
+}
+
+message QueryMemberConsumeSettingDetailResp {
+  int64 id = 1; //
+  int32 deduction_per_amount = 2; //每一元需要抵扣的积分数量
+  int32 max_percent_per_order = 3; //每笔订单最高抵用百分比
+  int32 use_unit = 4; //每次使用积分最小单位100
+  int32 coupon_status = 5; //是否可以和优惠券同用；0->不可以；1->可以
+  int32 status = 6; //状态：0->禁用；1->启用
+  int64 create_by = 7; //创建人ID
+  string create_time = 8; //创建时间
+  int64 update_by = 9; //更新人ID
+  string update_time = 10; //更新时间
+
+}
+
+// 分页查询积分消费设置列表
+message QueryMemberConsumeSettingListReq {
+  int32 coupon_status = 1; //是否可以和优惠券同用；0->不可以；1->可以
+  int32 status = 2; //状态：0->禁用；1->启用
+  int32 page_num = 3; //第几页
+  int32 page_size = 4; //每页的数量
+}
+
+message MemberConsumeSettingListData {
+  int64 id = 1; //
+  int32 deduction_per_amount = 2; //每一元需要抵扣的积分数量
+  int32 max_percent_per_order = 3; //每笔订单最高抵用百分比
+  int32 use_unit = 4; //每次使用积分最小单位100
+  int32 coupon_status = 5; //是否可以和优惠券同用；0->不可以；1->可以
+  int32 status = 6; //状态：0->禁用；1->启用
+  int64 create_by = 7; //创建人ID
+  string create_time = 8; //创建时间
+  int64 update_by = 9; //更新人ID
+  string update_time = 10; //更新时间
+
+}
+
+message QueryMemberConsumeSettingListResp {
+  int64 total = 1;
+  repeated  MemberConsumeSettingListData list = 2;
+}
+
+// 积分消费设置
+service MemberConsumeSettingService {
+  // 添加积分消费设置
+  rpc AddMemberConsumeSetting(AddMemberConsumeSettingReq) returns (AddMemberConsumeSettingResp){}
+  // 删除积分消费设置
+  rpc DeleteMemberConsumeSetting(DeleteMemberConsumeSettingReq) returns (DeleteMemberConsumeSettingResp){}
+  // 更新积分消费设置
+  rpc UpdateMemberConsumeSetting(UpdateMemberConsumeSettingReq) returns (UpdateMemberConsumeSettingResp ){}
+  // 更新积分消费设置状态
+  rpc UpdateStatus(UpdateStatusReq) returns (UpdateMemberConsumeSettingStatusResp ){}
+  // 更新是否可以和优惠券同用
+  rpc UpdateCouponStatus(UpdateCouponStatusReq) returns (UpdateMemberConsumeSettingStatusResp ){}
+  // 查询积分消费设置详情
+   rpc QueryMemberConsumeSettingDetail(QueryMemberConsumeSettingDetailReq) returns (QueryMemberConsumeSettingDetailResp){}
+  // 查询积分消费设置列表
+  rpc QueryMemberConsumeSettingList(QueryMemberConsumeSettingListReq) returns (QueryMemberConsumeSettingListResp){}
+
+
+}

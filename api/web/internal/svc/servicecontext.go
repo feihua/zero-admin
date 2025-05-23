@@ -40,9 +40,9 @@ import (
 	"github.com/feihua/zero-admin/rpc/sms/client/homenewproductservice"
 	"github.com/feihua/zero-admin/rpc/sms/client/homerecommendproductservice"
 	"github.com/feihua/zero-admin/rpc/sms/client/homerecommendsubjectservice"
-	"github.com/feihua/zero-admin/rpc/ums/client/integrationconsumesettingservice"
 	"github.com/feihua/zero-admin/rpc/ums/client/memberaddressservice"
 	"github.com/feihua/zero-admin/rpc/ums/client/memberbrandattentionservice"
+	"github.com/feihua/zero-admin/rpc/ums/client/memberconsumesettingservice"
 	"github.com/feihua/zero-admin/rpc/ums/client/membergrowthlogservice"
 	"github.com/feihua/zero-admin/rpc/ums/client/memberinfoservice"
 	"github.com/feihua/zero-admin/rpc/ums/client/memberlevelservice"
@@ -67,7 +67,7 @@ type ServiceContext struct {
 	// 会员相关
 	MemberGrowthLogService               membergrowthlogservice.MemberGrowthLogService
 	MemberPointsLogService               memberpointslogservice.MemberPointsLogService
-	IntegrationConsumeSettingService     integrationconsumesettingservice.IntegrationConsumeSettingService
+	MemberConsumeSettingService          memberconsumesettingservice.MemberConsumeSettingService
 	MemberLevelService                   memberlevelservice.MemberLevelService
 	MemberLoginLogService                memberloginlogservice.MemberLoginLogService
 	MemberProductCategoryRelationService memberproductcategoryrelationservice.MemberProductCategoryRelationService
@@ -144,7 +144,7 @@ func NewServiceContext(c config.Config) *ServiceContext {
 		Config:                               c,
 		MemberGrowthLogService:               membergrowthlogservice.NewMemberGrowthLogService(umsClient),
 		MemberPointsLogService:               memberpointslogservice.NewMemberPointsLogService(umsClient),
-		IntegrationConsumeSettingService:     integrationconsumesettingservice.NewIntegrationConsumeSettingService(umsClient),
+		MemberConsumeSettingService:          memberconsumesettingservice.NewMemberConsumeSettingService(umsClient),
 		MemberLevelService:                   memberlevelservice.NewMemberLevelService(umsClient),
 		MemberLoginLogService:                memberloginlogservice.NewMemberLoginLogService(umsClient),
 		MemberProductCategoryRelationService: memberproductcategoryrelationservice.NewMemberProductCategoryRelationService(umsClient),

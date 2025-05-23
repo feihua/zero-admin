@@ -13,6 +13,10 @@ import (
 )
 
 // QueryMemberStatisticsInfoListLogic 查询会员统计信息
+/*
+Author: LiuFeiHua
+Date: 2025/5/23 14:36
+*/
 type QueryMemberStatisticsInfoListLogic struct {
 	logx.Logger
 	ctx    context.Context
@@ -32,6 +36,7 @@ func (l *QueryMemberStatisticsInfoListLogic) QueryMemberStatisticsInfoList(req *
 	result, err := l.svcCtx.MemberStatisticsInfoService.QueryMemberStatisticsInfoList(l.ctx, &umsclient.QueryMemberStatisticsInfoListReq{
 		PageNum:  req.Current,
 		PageSize: req.PageSize,
+		MemberId: req.MemberId,
 	})
 
 	if err != nil {

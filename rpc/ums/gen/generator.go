@@ -34,6 +34,7 @@ func main() {
 		g.GenerateModel("ums_member_sign_log"),
 		g.GenerateModel("ums_member_points_log"),
 		g.GenerateModel("ums_member_growth_log"),
+		g.GenerateModel("ums_member_consume_setting"),
 
 		g.GenerateModel("ums_integration_consume_setting"),
 		g.GenerateModel("ums_member_brand_attention"),
