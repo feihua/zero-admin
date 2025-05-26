@@ -1,0 +1,52 @@
+package product_brand
+
+import (
+	"context"
+	"github.com/feihua/zero-admin/api/admin/internal/common"
+	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
+	"github.com/feihua/zero-admin/rpc/pms/pmsclient"
+	"github.com/zeromicro/go-zero/core/logc"
+	"google.golang.org/grpc/status"
+
+	"github.com/feihua/zero-admin/api/admin/internal/svc"
+	"github.com/feihua/zero-admin/api/admin/internal/types"
+
+	"github.com/zeromicro/go-zero/core/logx"
+)
+
+type UpdateProductBrandRecommendStatusLogic struct {
+	logx.Logger
+	ctx    context.Context
+	svcCtx *svc.ServiceContext
+}
+
+func NewUpdateProductBrandRecommendStatusLogic(ctx context.Context, svcCtx *svc.ServiceContext) *UpdateProductBrandRecommendStatusLogic {
+	return &UpdateProductBrandRecommendStatusLogic{
+		Logger: logx.WithContext(ctx),
+		ctx:    ctx,
+		svcCtx: svcCtx,
+	}
+}
+
+func (l *UpdateProductBrandRecommendStatusLogic) UpdateProductBrandRecommendStatus(req *types.UpdateProductBrandStatusReq) (resp *types.BaseResp, err error) {
+	userId, err := common.GetUserId(l.ctx)
+	if err != nil {
+		return nil, err
+	}
+	_, err = l.svcCtx.ProductBrandService.UpdateBrandRecommendStatus(l.ctx, &pmsclient.UpdateProductBrandStatusReq{
+		Ids:      req.Ids,    //
+		Status:   req.Status, // 状态
+		UpdateBy: userId,
+	})
+
+	if err != nil {
+		logc.Errorf(l.ctx, "更新商品品牌状态失败,参数：%+v,响应：%s", req, err.Error())
+		s, _ := status.FromError(err)
+		return nil, errorx.NewDefaultError(s.Message())
+	}
+
+	return &types.BaseResp{
+		Code:    "000000",
+		Message: "更新商品品牌状态成功",
+	}, nil
+}

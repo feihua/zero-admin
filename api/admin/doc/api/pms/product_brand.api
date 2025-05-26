@@ -131,5 +131,9 @@ service admin-api {
 	// 分页查询商品品牌列表
 	@handler QueryProductBrandList
 	get /queryProductBrandList (QueryProductBrandListReq) returns (QueryProductBrandListResp)
+
+	// 更新商品品牌推荐状态
+	@handler UpdateProductBrandRecommendStatus
+	post /updateProductBrandRecommendStatus (UpdateProductBrandStatusReq) returns (BaseResp)
 }
 

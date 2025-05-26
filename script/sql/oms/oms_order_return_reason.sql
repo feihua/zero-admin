@@ -1,4 +1,4 @@
-drop table oms_order_return_reason;
+drop table if exists oms_order_return_reason;
 create table oms_order_return_reason
 (
     id          bigint auto_increment

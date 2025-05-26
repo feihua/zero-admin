@@ -70,11 +70,11 @@ type (
 	QueryCompanyAddressListReq {
 		Current       int32  `form:"current,default=1"` //第几页
 		PageSize      int32  `form:"pageSize,default=20"` //每页的数量
-		AddressName   string `json:"addressName,optional"` //地址名称
-		Name          string `json:"name,optional"` //收发货人姓名
-		Phone         string `json:"phone,optional"` //收货人电话
-		SendStatus    int32  `json:"sendStatus,default=2"` //默认发货地址：0->否；1->是
-		ReceiveStatus int32  `json:"receiveStatus,default=2"` //默认收货地址：0->否；1->是
+		AddressName   string `form:"addressName,optional"` //地址名称
+		Name          string `form:"name,optional"` //收发货人姓名
+		Phone         string `form:"phone,optional"` //收货人电话
+		SendStatus    int32  `form:"sendStatus,default=2"` //默认发货地址：0->否；1->是
+		ReceiveStatus int32  `form:"receiveStatus,default=2"` //默认收货地址：0->否；1->是
 	}
 	QueryCompanyAddressListData {
 		Id            int64  `json:"id"` //主键ID
