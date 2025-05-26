@@ -1,5 +1,5 @@
 drop table if exists ums_member_sign_log;
-create table gozero.ums_member_sign_log
+create table ums_member_sign_log
 (
     id            bigint auto_increment
         primary key,
@@ -15,7 +15,7 @@ create table gozero.ums_member_sign_log
 
 
 -- 插入会员签到记录数据
-insert into gozero.ums_member_sign_log (id, member_id, sign_date, continue_days, points)
+insert into ums_member_sign_log (id, member_id, sign_date, continue_days, points)
 values (1, 1001, '2024-01-01', 1, 10),
        (2, 1002, '2024-01-02', 2, 20),
        (3, 1003, '2024-01-03', 3, 30),

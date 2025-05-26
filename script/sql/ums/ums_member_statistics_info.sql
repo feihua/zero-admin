@@ -22,7 +22,7 @@ create table ums_member_statistics_info
     comment '会员统计信息';
 
 -- 插入会员统计信息数据
-insert into gozero.ums_member_statistics_info (id, member_id, consume_amount, order_count, coupon_count, comment_count, return_order_count, login_count, attend_count, fans_count, collect_product_count, collect_subject_count, collect_topic_count, collect_comment_count, invite_friend_count, recent_order_time)
+insert into ums_member_statistics_info (id, member_id, consume_amount, order_count, coupon_count, comment_count, return_order_count, login_count, attend_count, fans_count, collect_product_count, collect_subject_count, collect_topic_count, collect_comment_count, invite_friend_count, recent_order_time)
 values (1, 1001, 5000, 10, 5, 20, 2, 50, 10, 100, 15, 5, 3, 8, 2, '2024-01-01 10:00:00'),
        (2, 1002, 3000, 8, 3, 15, 1, 30, 5, 50, 10, 3, 2, 5, 1, '2024-01-02 11:00:00'),
        (3, 1003, 7000, 15, 7, 25, 3, 70, 20, 150, 20, 10, 5, 12, 4, '2024-01-03 12:00:00'),
