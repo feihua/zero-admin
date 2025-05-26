@@ -11,44 +11,48 @@ Content-Type: application/json
 %}
 
 ### 添加退货原因
-POST {{host}}/api/order/returnreason/addReturnReson
+POST {{host}}/api/oms/returnReason/addReturnReason
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {
-  "name": "test",
+  "name": "售后问题1",
   "sort": 0,
   "status": 1
 }
 
 ### 删除退货原因
-GET {{host}}/api/order/returnreason/deleteReturnReson
+GET {{host}}/api/oms/returnreason/deleteReturnReason
 Authorization: Bearer {{token}}
 
 
 ### 修改退货原因
-POST {{host}}/api/order/returnreason/updateReturnReson
+POST {{host}}/api/oms/returnReason/updateReturnReason
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {
   "id": 16,
-  "name": "test123",
+  "name": "售后问题11",
   "sort": 0,
   "status": 1
 }
 
 ### 批量更新退货原因状态
-POST {{host}}/api/order/returnreason/updateReturnResonStatus
+POST {{host}}/api/oms/returnReason/updateReturnReasonStatus
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {
   "ids": [16],
-  "status": 0
+  "status": 1
 
 }
 
+### 根据id查询退货原因详情
+GET {{host}}/api/oms/returnReason/queryReturnReasonDetail?id=16
+Authorization: Bearer {{token}}
+
 ### 查询退货原因列表
-GET {{host}}/api/order/returnreason/queryReturnResonList
+GET {{host}}/api/oms/returnReason/queryReturnReasonList
 Authorization: Bearer {{token}}

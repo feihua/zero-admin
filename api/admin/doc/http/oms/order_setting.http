@@ -10,6 +10,67 @@ Content-Type: application/json
     client.global.set("token", response.body.data.token);
 %}
 
-### 查询订单设置
+### 添加订单设置
+POST {{host}}/api/oms/setting/addOrderSetting
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "flashOrderOvertime": 60,
+  "normalOrderOvertime": 120,
+  "confirmOvertime": 5,
+  "finishOvertime": 10,
+  "status": 0,
+  "isDefault": 0,
+  "commentOvertime": 5
+
+}
+
+### 删除订单设置
+GET {{host}}/api/oms/returnreason/deleteOrderSetting
+Authorization: Bearer {{token}}
+
+
+### 修改订单设置
+POST {{host}}/api/oms/setting/updateOrderSetting
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "id": 4,
+  "flashOrderOvertime": 60,
+  "normalOrderOvertime": 120,
+  "confirmOvertime": 5,
+  "finishOvertime": 10,
+  "status": 0,
+  "isDefault": 0,
+  "commentOvertime": 5
+}
+
+### 批量更新订单设置状态
+POST {{host}}/api/oms/setting/updateOrderSettingStatus
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "id": 4,
+  "status": 1
+
+}
+### 更新订单设置表是否默认状态
+POST {{host}}/api/oms/setting/updateOrderSettingIsDefault
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "id": 4,
+  "status": 1
+
+}
+### 根据id查询订单设置详情
+GET {{host}}/api/oms/setting/queryOrderSettingDetail?id=4
+Authorization: Bearer {{token}}
+
+### 查询订单设置列表
 GET {{host}}/api/oms/setting/queryOrderSettingList
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkZXB0SUQiOjEsImRlcHROYW1lIjoi5rWL6K-V56eR5oqAIiwiZXhwIjoxNzQ3MTQ3NjYzLCJpYXQiOjE3NDcwNjEyNjMsInVzZXJJZCI6MSwidXNlck5hbWUiOiJhZG1pbiJ9.lB9XdTG2ipoM6HMgx_0AEFGJdpedTmfD-qREqUrpNmY
+Authorization: Bearer {{token}}

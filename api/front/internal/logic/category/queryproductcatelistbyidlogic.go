@@ -35,10 +35,10 @@ func NewQueryProductCateListByIdLogic(ctx context.Context, svcCtx *svc.ServiceCo
 // QueryProductCateListById 根据parentId查询分类
 func (l *QueryProductCateListByIdLogic) QueryProductCateListById(req *types.QueryProductCateListByIdReq) (resp *types.QueryProductCateListResp, err error) {
 	categoryListResp, err := l.svcCtx.ProductCategoryService.QueryProductCategoryList(l.ctx, &pmsclient.QueryProductCategoryListReq{
-		PageNum:    0,
-		PageSize:   100,
-		ParentId:   req.ParentId,
-		ShowStatus: 1, // 显示状态：0->不显示；1->显示
+		PageNum:   0,
+		PageSize:  100,
+		ParentId:  req.ParentId,
+		IsEnabled: 1, // 显示状态：0->不显示；1->显示
 	})
 
 	if err != nil {

@@ -6,6 +6,7 @@ package query
 
 import (
 	"context"
+	"database/sql"
 
 	"gorm.io/gorm"
 	"gorm.io/gorm/clause"
@@ -35,6 +36,11 @@ func newOmsOrderSetting(db *gorm.DB, opts ...gen.DOOption) omsOrderSetting {
 	_omsOrderSetting.Status = field.NewInt32(tableName, "status")
 	_omsOrderSetting.IsDefault = field.NewInt32(tableName, "is_default")
 	_omsOrderSetting.CommentOvertime = field.NewInt32(tableName, "comment_overtime")
+	_omsOrderSetting.CreateBy = field.NewInt64(tableName, "create_by")
+	_omsOrderSetting.CreateTime = field.NewTime(tableName, "create_time")
+	_omsOrderSetting.UpdateBy = field.NewInt64(tableName, "update_by")
+	_omsOrderSetting.UpdateTime = field.NewTime(tableName, "update_time")
+	_omsOrderSetting.IsDeleted = field.NewInt32(tableName, "is_deleted")
 
 	_omsOrderSetting.fillFieldMap()
 
@@ -46,7 +52,7 @@ type omsOrderSetting struct {
 	omsOrderSettingDo omsOrderSettingDo
 
 	ALL                 field.Asterisk
-	ID                  field.Int64
+	ID                  field.Int64 // 主键ID
 	FlashOrderOvertime  field.Int32 // 秒杀订单超时关闭时间(分)
 	NormalOrderOvertime field.Int32 // 正常订单超时时间(分)
 	ConfirmOvertime     field.Int32 // 发货后自动确认收货时间（天）
@@ -54,6 +60,11 @@ type omsOrderSetting struct {
 	Status              field.Int32 // 状态：0->禁用；1->启用
 	IsDefault           field.Int32 // 是否默认：0->否；1->是
 	CommentOvertime     field.Int32 // 订单完成后自动好评时间（天）
+	CreateBy            field.Int64 // 创建人ID
+	CreateTime          field.Time  // 创建时间
+	UpdateBy            field.Int64 // 更新人ID
+	UpdateTime          field.Time  // 更新时间
+	IsDeleted           field.Int32 // 是否删除
 
 	fieldMap map[string]field.Expr
 }
@@ -78,6 +89,11 @@ func (o *omsOrderSetting) updateTableName(table string) *omsOrderSetting {
 	o.Status = field.NewInt32(table, "status")
 	o.IsDefault = field.NewInt32(table, "is_default")
 	o.CommentOvertime = field.NewInt32(table, "comment_overtime")
+	o.CreateBy = field.NewInt64(table, "create_by")
+	o.CreateTime = field.NewTime(table, "create_time")
+	o.UpdateBy = field.NewInt64(table, "update_by")
+	o.UpdateTime = field.NewTime(table, "update_time")
+	o.IsDeleted = field.NewInt32(table, "is_deleted")
 
 	o.fillFieldMap()
 
@@ -106,7 +122,7 @@ func (o *omsOrderSetting) GetFieldByName(fieldName string) (field.OrderExpr, boo
 }
 
 func (o *omsOrderSetting) fillFieldMap() {
-	o.fieldMap = make(map[string]field.Expr, 8)
+	o.fieldMap = make(map[string]field.Expr, 13)
 	o.fieldMap["id"] = o.ID
 	o.fieldMap["flash_order_overtime"] = o.FlashOrderOvertime
 	o.fieldMap["normal_order_overtime"] = o.NormalOrderOvertime
@@ -115,6 +131,11 @@ func (o *omsOrderSetting) fillFieldMap() {
 	o.fieldMap["status"] = o.Status
 	o.fieldMap["is_default"] = o.IsDefault
 	o.fieldMap["comment_overtime"] = o.CommentOvertime
+	o.fieldMap["create_by"] = o.CreateBy
+	o.fieldMap["create_time"] = o.CreateTime
+	o.fieldMap["update_by"] = o.UpdateBy
+	o.fieldMap["update_time"] = o.UpdateTime
+	o.fieldMap["is_deleted"] = o.IsDeleted
 }
 
 func (o omsOrderSetting) clone(db *gorm.DB) omsOrderSetting {
@@ -184,6 +205,8 @@ type IOmsOrderSettingDo interface {
 	FirstOrCreate() (*model.OmsOrderSetting, error)
 	FindByPage(offset int, limit int) (result []*model.OmsOrderSetting, count int64, err error)
 	ScanByPage(result interface{}, offset int, limit int) (count int64, err error)
+	Rows() (*sql.Rows, error)
+	Row() *sql.Row
 	Scan(result interface{}) (err error)
 	Returning(value interface{}, columns ...string) IOmsOrderSettingDo
 	UnderlyingDB() *gorm.DB

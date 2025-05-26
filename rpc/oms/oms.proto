@@ -153,26 +153,26 @@ service CartItemService {
 }
 
 
-// 添加公司收发货地址表
+// 添加公司收发货地址
 message AddCompanyAddressReq {
-  int64 id = 1; //
+  int64 id = 1; //主键ID
   string address_name = 2; //地址名称
-  int32 send_status = 3; //默认发货地址：0->否；1->是
-  int32 receive_status = 4; //是否默认收货地址：0->否；1->是
-  string name = 5; //收发货人姓名
-  string phone = 6; //收货人电话
-  string province = 7; //省/直辖市
-  string city = 8; //市
-  string region = 9; //区
-  string detail_address = 10; //详细地址
-  string create_by = 11; //创建者
+  string name = 3; //收发货人姓名
+  string phone = 4; //收货人电话
+  string province = 5; //省/直辖市
+  string city = 6; //市
+  string region = 7; //区
+  string detail_address = 8; //详细地址
+  int32 send_status = 9; //默认发货地址：0->否；1->是
+  int32 receive_status = 10; //默认收货地址：0->否；1->是
+  int64 create_by = 11; //创建人ID
 }
 
 message AddCompanyAddressResp {
   string pong = 1;
 }
 
-// 删除公司收发货地址表
+// 删除公司收发货地址
 message DeleteCompanyAddressReq {
   repeated int64 ids = 1;
 }
@@ -181,87 +181,84 @@ message DeleteCompanyAddressResp {
   string pong = 1;
 }
 
-// 更新公司收发货地址表
+// 更新公司收发货地址
 message UpdateCompanyAddressReq {
-  int64 id = 1; //
+  int64 id = 1; //主键ID
   string address_name = 2; //地址名称
-  int32 send_status = 3; //默认发货地址：0->否；1->是
-  int32 receive_status = 4; //是否默认收货地址：0->否；1->是
-  string name = 5; //收发货人姓名
-  string phone = 6; //收货人电话
-  string province = 7; //省/直辖市
-  string city = 8; //市
-  string region = 9; //区
-  string detail_address = 10; //详细地址
-  string update_by = 13; //更新者
+  string name = 3; //收发货人姓名
+  string phone = 4; //收货人电话
+  string province = 5; //省/直辖市
+  string city = 6; //市
+  string region = 7; //区
+  string detail_address = 8; //详细地址
+  int32 send_status = 9; //默认发货地址：0->否；1->是
+  int32 receive_status = 10; //默认收货地址：0->否；1->是
+  int64 update_by = 13; //更新人ID
 }
 
 message UpdateCompanyAddressResp {
   string pong = 1;
 }
 
-// 更新公司收发货地址表状态
-message UpdateCompanyAddressReceiveStatusReq {
-  int64 id = 1;
-  int32 receive_status = 2; //是否默认收货地址：0->否；1->是
-  string update_by = 3; //更新者
+// 更新公司收发货地址状态
+message UpdateCompanyAddressStatusReq {
+  int64 id = 1; //主键ID
+  int32 status = 2; //默认发货地址：0->否；1->是
+  int64 update_by = 4; //更新人ID
 }
-// 更新公司收发货地址表状态
-message UpdateCompanyAddressSendStatusReq {
-  int64 id = 1;
-  int32 send_status = 2; //默认发货地址：0->否；1->是
-  string update_by = 3; //更新者
-}
+
 message UpdateCompanyAddressStatusResp {
   string pong = 1;
 }
 
-// 查询公司收发货地址表详情
+// 查询公司收发货地址详情
 message QueryCompanyAddressDetailReq {
     int64 id = 1;
 }
 
 message QueryCompanyAddressDetailResp {
-  int64 id = 1; //
+  int64 id = 1; //主键ID
   string address_name = 2; //地址名称
-  int32 send_status = 3; //默认发货地址：0->否；1->是
-  int32 receive_status = 4; //是否默认收货地址：0->否；1->是
-  string name = 5; //收发货人姓名
-  string phone = 6; //收货人电话
-  string province = 7; //省/直辖市
-  string city = 8; //市
-  string region = 9; //区
-  string detail_address = 10; //详细地址
-  string create_by = 11; //创建者
+  string name = 3; //收发货人姓名
+  string phone = 4; //收货人电话
+  string province = 5; //省/直辖市
+  string city = 6; //市
+  string region = 7; //区
+  string detail_address = 8; //详细地址
+  int32 send_status = 9; //默认发货地址：0->否；1->是
+  int32 receive_status = 10; //默认收货地址：0->否；1->是
+  int64 create_by = 11; //创建人ID
   string create_time = 12; //创建时间
-  string update_by = 13; //更新者
+  int64 update_by = 13; //更新人ID
   string update_time = 14; //更新时间
 
 }
 
-// 分页查询公司收发货地址表列表
+// 分页查询公司收发货地址列表
 message QueryCompanyAddressListReq {
-  int64 page_num = 1; //第几页
-  int64 page_size = 2; //每页的数量
-  string address_name = 3; //地址名称
-  string name = 4; //收发货人姓名
-  string phone = 5; //收货人电话
+  string address_name = 1; //地址名称
+  string name = 2; //收发货人姓名
+  string phone = 3; //收货人电话
+  int32 send_status = 4; //默认发货地址：0->否；1->是
+  int32 receive_status = 5; //默认收货地址：0->否；1->是
+  int32 page_num = 6; //第几页
+  int32 page_size = 7; //每页的数量
 }
 
 message CompanyAddressListData {
-  int64 id = 1; //
+  int64 id = 1; //主键ID
   string address_name = 2; //地址名称
-  int32 send_status = 3; //默认发货地址：0->否；1->是
-  int32 receive_status = 4; //是否默认收货地址：0->否；1->是
-  string name = 5; //收发货人姓名
-  string phone = 6; //收货人电话
-  string province = 7; //省/直辖市
-  string city = 8; //市
-  string region = 9; //区
-  string detail_address = 10; //详细地址
-  string create_by = 11; //创建者
+  string name = 3; //收发货人姓名
+  string phone = 4; //收货人电话
+  string province = 5; //省/直辖市
+  string city = 6; //市
+  string region = 7; //区
+  string detail_address = 8; //详细地址
+  int32 send_status = 9; //默认发货地址：0->否；1->是
+  int32 receive_status = 10; //默认收货地址：0->否；1->是
+  int64 create_by = 11; //创建人ID
   string create_time = 12; //创建时间
-  string update_by = 13; //更新者
+  int64 update_by = 13; //更新人ID
   string update_time = 14; //更新时间
 
 }
@@ -271,24 +268,24 @@ message QueryCompanyAddressListResp {
   repeated  CompanyAddressListData list = 2;
 }
 
-// 公司收发货地址表
+// 公司收发货地址
 service CompanyAddressService {
-  // 添加公司收发货地址表
+  // 添加公司收发货地址
   rpc AddCompanyAddress(AddCompanyAddressReq) returns (AddCompanyAddressResp){}
-  // 删除公司收发货地址表
+  // 删除公司收发货地址
   rpc DeleteCompanyAddress(DeleteCompanyAddressReq) returns (DeleteCompanyAddressResp){}
-  // 更新公司收发货地址表
+  // 更新公司收发货地址
   rpc UpdateCompanyAddress(UpdateCompanyAddressReq) returns (UpdateCompanyAddressResp ){}
-  // 更新公司收发货地址表状态
-  rpc UpdateCompanyAddressReceiveStatus(UpdateCompanyAddressReceiveStatusReq) returns (UpdateCompanyAddressStatusResp ){}
-  // 更新公司收发货地址表状态
-  rpc UpdateCompanyAddressSendStatus(UpdateCompanyAddressSendStatusReq) returns (UpdateCompanyAddressStatusResp ){}
-  // 查询公司收发货地址表详情
+
+  // 查询公司收发货地址详情
    rpc QueryCompanyAddressDetail(QueryCompanyAddressDetailReq) returns (QueryCompanyAddressDetailResp){}
-  // 查询公司收发货地址表列表
+  // 查询公司收发货地址列表
   rpc QueryCompanyAddressList(QueryCompanyAddressListReq) returns (QueryCompanyAddressListResp){}
 
-
+  // 更新公司默认发货地址
+  rpc UpdateCompanyAddressSendStatus(UpdateCompanyAddressStatusReq) returns (UpdateCompanyAddressStatusResp ){}
+  // 更新公司默认收货地址
+  rpc UpdateCompanyAddressReceiveStatus(UpdateCompanyAddressStatusReq) returns (UpdateCompanyAddressStatusResp ){}
 }
 
 
@@ -632,6 +629,130 @@ service OrderService {
 
 
 
+// 添加订单收货地址
+message AddOrderDeliveryReq {
+  int64 id = 1; //
+  int64 order_id = 2; //订单ID
+  string order_no = 3; //订单编号
+  string receiver_name = 4; //收货人姓名
+  string receiver_phone = 5; //收货人电话
+  string receiver_province = 6; //省份
+  string receiver_city = 7; //城市
+  string receiver_district = 8; //区县
+  string receiver_address = 9; //详细地址
+  string delivery_company = 10; //物流公司
+  string delivery_no = 11; //物流单号
+}
+
+message AddOrderDeliveryResp {
+  string pong = 1;
+}
+
+// 删除订单收货地址
+message DeleteOrderDeliveryReq {
+  repeated int64 ids = 1;
+}
+
+message DeleteOrderDeliveryResp {
+  string pong = 1;
+}
+
+// 更新订单收货地址
+message UpdateOrderDeliveryReq {
+  int64 id = 1; //
+  int64 order_id = 2; //订单ID
+  string order_no = 3; //订单编号
+  string receiver_name = 4; //收货人姓名
+  string receiver_phone = 5; //收货人电话
+  string receiver_province = 6; //省份
+  string receiver_city = 7; //城市
+  string receiver_district = 8; //区县
+  string receiver_address = 9; //详细地址
+  string delivery_company = 10; //物流公司
+  string delivery_no = 11; //物流单号
+}
+
+message UpdateOrderDeliveryResp {
+  string pong = 1;
+}
+
+
+// 查询订单收货地址详情
+message QueryOrderDeliveryDetailReq {
+    int64 id = 1;
+}
+
+message QueryOrderDeliveryDetailResp {
+  int64 id = 1; //
+  int64 order_id = 2; //订单ID
+  string order_no = 3; //订单编号
+  string receiver_name = 4; //收货人姓名
+  string receiver_phone = 5; //收货人电话
+  string receiver_province = 6; //省份
+  string receiver_city = 7; //城市
+  string receiver_district = 8; //区县
+  string receiver_address = 9; //详细地址
+  string delivery_company = 10; //物流公司
+  string delivery_no = 11; //物流单号
+  string create_time = 12; //创建时间
+  string update_time = 13; //更新时间
+
+}
+
+// 分页查询订单收货地址列表
+message QueryOrderDeliveryListReq {
+  int64 order_id = 1; //订单ID
+  string order_no = 2; //订单编号
+  string receiver_name = 3; //收货人姓名
+  string receiver_phone = 4; //收货人电话
+  string receiver_address = 5; //详细地址
+  string delivery_company = 6; //物流公司
+  string delivery_no = 7; //物流单号
+  int32 page_num = 8; //第几页
+  int32 page_size = 9; //每页的数量
+}
+
+message OrderDeliveryListData {
+  int64 id = 1; //
+  int64 order_id = 2; //订单ID
+  string order_no = 3; //订单编号
+  string receiver_name = 4; //收货人姓名
+  string receiver_phone = 5; //收货人电话
+  string receiver_province = 6; //省份
+  string receiver_city = 7; //城市
+  string receiver_district = 8; //区县
+  string receiver_address = 9; //详细地址
+  string delivery_company = 10; //物流公司
+  string delivery_no = 11; //物流单号
+  string create_time = 12; //创建时间
+  string update_time = 13; //更新时间
+  int32 is_deleted = 14; //是否删除
+
+}
+
+message QueryOrderDeliveryListResp {
+  int64 total = 1;
+  repeated  OrderDeliveryListData list = 2;
+}
+
+// 订单收货地址
+service OrderDeliveryService {
+  // 添加订单收货地址
+  rpc AddOrderDelivery(AddOrderDeliveryReq) returns (AddOrderDeliveryResp){}
+  // 删除订单收货地址
+  rpc DeleteOrderDelivery(DeleteOrderDeliveryReq) returns (DeleteOrderDeliveryResp){}
+  // 更新订单收货地址
+  rpc UpdateOrderDelivery(UpdateOrderDeliveryReq) returns (UpdateOrderDeliveryResp ){}
+
+  // 查询订单收货地址详情
+   rpc QueryOrderDeliveryDetail(QueryOrderDeliveryDetailReq) returns (QueryOrderDeliveryDetailResp){}
+  // 查询订单收货地址列表
+  rpc QueryOrderDeliveryList(QueryOrderDeliveryListReq) returns (QueryOrderDeliveryListResp){}
+
+
+}
+
+
 // 添加订单中所包含的商品
 message AddOrderItemReq {
   int64 id = 1; //
@@ -965,19 +1086,20 @@ service OrderReturnApplyService {
 }
 
 
-// 添加退货原因表
+// 添加退货原因
 message AddOrderReturnReasonReq {
-  int64 id = 1; //
+  int64 id = 1; //主键ID
   string name = 2; //退货类型
   int32 sort = 3; //排序
   int32 status = 4; //状态：0->不启用；1->启用
+  int64 create_by = 5; //创建人ID
 }
 
 message AddOrderReturnReasonResp {
   string pong = 1;
 }
 
-// 删除退货原因表
+// 删除退货原因
 message DeleteOrderReturnReasonReq {
   repeated int64 ids = 1;
 }
@@ -986,60 +1108,64 @@ message DeleteOrderReturnReasonResp {
   string pong = 1;
 }
 
-// 更新退货原因表
+// 更新退货原因
 message UpdateOrderReturnReasonReq {
-  int64 id = 1; //
+  int64 id = 1; //主键ID
   string name = 2; //退货类型
   int32 sort = 3; //排序
   int32 status = 4; //状态：0->不启用；1->启用
-
+  int64 update_by = 7; //更新人ID
 }
 
 message UpdateOrderReturnReasonResp {
   string pong = 1;
 }
 
-// 更新退货原因表状态
+// 更新退货原因状态
 message UpdateOrderReturnReasonStatusReq {
-  repeated int64 ids = 1;
+  repeated int64 ids = 1; //主键ID
   int32 status = 2; //状态：0->不启用；1->启用
-
+  int64 update_by = 3; //更新人ID
 }
 
 message UpdateOrderReturnReasonStatusResp {
   string pong = 1;
 }
 
-// 查询退货原因表详情
+// 查询退货原因详情
 message QueryOrderReturnReasonDetailReq {
     int64 id = 1;
 }
 
 message QueryOrderReturnReasonDetailResp {
-  int64 id = 1; //
+  int64 id = 1; //主键ID
   string name = 2; //退货类型
   int32 sort = 3; //排序
   int32 status = 4; //状态：0->不启用；1->启用
-  string create_time = 5; //创建时间
-
+  int64 create_by = 5; //创建人ID
+  string create_time = 6; //创建时间
+  int64 update_by = 7; //更新人ID
+  string update_time = 8; //更新时间
 
 }
 
-// 分页查询退货原因表列表
+// 分页查询退货原因列表
 message QueryOrderReturnReasonListReq {
-  int64 page_num = 1; //第几页
-  int64 page_size = 2; //每页的数量
-  string name = 3; //退货类型
-  int32 status = 4; //状态：0->不启用；1->启用
-
+  string name = 1; //退货类型
+  int32 status = 2; //状态：0->不启用；1->启用
+  int32 page_num = 3; //第几页
+  int32 page_size = 4; //每页的数量
 }
 
 message OrderReturnReasonListData {
-  int64 id = 1; //
+  int64 id = 1; //主键ID
   string name = 2; //退货类型
   int32 sort = 3; //排序
   int32 status = 4; //状态：0->不启用；1->启用
-  string create_time = 5; //创建时间
+  int64 create_by = 5; //创建人ID
+  string create_time = 6; //创建时间
+  int64 update_by = 7; //更新人ID
+  string update_time = 8; //更新时间
 
 }
 
@@ -1048,28 +1174,28 @@ message QueryOrderReturnReasonListResp {
   repeated  OrderReturnReasonListData list = 2;
 }
 
-// 退货原因表
+// 退货原因
 service OrderReturnReasonService {
-  // 添加退货原因表
+  // 添加退货原因
   rpc AddOrderReturnReason(AddOrderReturnReasonReq) returns (AddOrderReturnReasonResp){}
-  // 删除退货原因表
+  // 删除退货原因
   rpc DeleteOrderReturnReason(DeleteOrderReturnReasonReq) returns (DeleteOrderReturnReasonResp){}
-  // 更新退货原因表
+  // 更新退货原因
   rpc UpdateOrderReturnReason(UpdateOrderReturnReasonReq) returns (UpdateOrderReturnReasonResp ){}
-  // 更新退货原因表状态
+  // 更新退货原因状态
   rpc UpdateOrderReturnReasonStatus(UpdateOrderReturnReasonStatusReq) returns (UpdateOrderReturnReasonStatusResp ){}
-  // 查询退货原因表详情
+  // 查询退货原因详情
    rpc QueryOrderReturnReasonDetail(QueryOrderReturnReasonDetailReq) returns (QueryOrderReturnReasonDetailResp){}
-  // 查询退货原因表列表
+  // 查询退货原因列表
   rpc QueryOrderReturnReasonList(QueryOrderReturnReasonListReq) returns (QueryOrderReturnReasonListResp){}
 
 
 }
 
 
-// 添加订单设置表
+// 添加订单设置
 message AddOrderSettingReq {
-  int64 id = 1; //
+  int64 id = 1; //主键ID
   int32 flash_order_overtime = 2; //秒杀订单超时关闭时间(分)
   int32 normal_order_overtime = 3; //正常订单超时时间(分)
   int32 confirm_overtime = 4; //发货后自动确认收货时间（天）
@@ -1077,13 +1203,14 @@ message AddOrderSettingReq {
   int32 status = 6; //状态：0->禁用；1->启用
   int32 is_default = 7; //是否默认：0->否；1->是
   int32 comment_overtime = 8; //订单完成后自动好评时间（天）
+  int64 create_by = 9; //创建人ID
 }
 
 message AddOrderSettingResp {
   string pong = 1;
 }
 
-// 删除订单设置表
+// 删除订单设置
 message DeleteOrderSettingReq {
   repeated int64 ids = 1;
 }
@@ -1092,9 +1219,9 @@ message DeleteOrderSettingResp {
   string pong = 1;
 }
 
-// 更新订单设置表
+// 更新订单设置
 message UpdateOrderSettingReq {
-  int64 id = 1; //
+  int64 id = 1; //主键ID
   int32 flash_order_overtime = 2; //秒杀订单超时关闭时间(分)
   int32 normal_order_overtime = 3; //正常订单超时时间(分)
   int32 confirm_overtime = 4; //发货后自动确认收货时间（天）
@@ -1102,37 +1229,31 @@ message UpdateOrderSettingReq {
   int32 status = 6; //状态：0->禁用；1->启用
   int32 is_default = 7; //是否默认：0->否；1->是
   int32 comment_overtime = 8; //订单完成后自动好评时间（天）
-
+  int64 update_by = 11; //更新人ID
 }
 
 message UpdateOrderSettingResp {
   string pong = 1;
 }
 
-// 更新订单设置表状态
-message UpdateOrderSettingIsDefaultReq {
-  int64 id = 1; //
-  int32 is_default = 2; //是否默认：0->否；1->是
-
-}
+// 更新订单设置状态
 message UpdateOrderSettingStatusReq {
-
-  repeated int64 ids = 5; //
-  int32 status = 8; //状态：0->禁用；1->启用
-
+  int64 id = 1; //主键ID
+  int32 status = 2; //状态
+  int64 update_by = 3; //更新人ID
 }
 
 message UpdateOrderSettingStatusResp {
   string pong = 1;
 }
 
-// 查询订单设置表详情
+// 查询订单设置详情
 message QueryOrderSettingDetailReq {
-  int64 id = 1;
+    int64 id = 1;
 }
 
 message QueryOrderSettingDetailResp {
-  int64 id = 1; //
+  int64 id = 1; //主键ID
   int32 flash_order_overtime = 2; //秒杀订单超时关闭时间(分)
   int32 normal_order_overtime = 3; //正常订单超时时间(分)
   int32 confirm_overtime = 4; //发货后自动确认收货时间（天）
@@ -1140,19 +1261,23 @@ message QueryOrderSettingDetailResp {
   int32 status = 6; //状态：0->禁用；1->启用
   int32 is_default = 7; //是否默认：0->否；1->是
   int32 comment_overtime = 8; //订单完成后自动好评时间（天）
+  int64 create_by = 9; //创建人ID
+  string create_time = 10; //创建时间
+  int64 update_by = 11; //更新人ID
+  string update_time = 12; //更新时间
 
 }
 
-// 分页查询订单设置表列表
+// 分页查询订单设置列表
 message QueryOrderSettingListReq {
-  int64 page_num = 1; //第几页
-  int64 page_size = 2; //每页的数量
-  int32 status = 4; //状态：0->禁用；1->启用
-
+  int32 status = 1; //状态：0->禁用；1->启用
+  int32 is_default = 2; //是否默认：0->否；1->是
+  int32 page_num = 3; //第几页
+  int32 page_size = 4; //每页的数量
 }
 
 message OrderSettingListData {
-  int64 id = 1; //
+  int64 id = 1; //主键ID
   int32 flash_order_overtime = 2; //秒杀订单超时关闭时间(分)
   int32 normal_order_overtime = 3; //正常订单超时时间(分)
   int32 confirm_overtime = 4; //发货后自动确认收货时间（天）
@@ -1160,6 +1285,10 @@ message OrderSettingListData {
   int32 status = 6; //状态：0->禁用；1->启用
   int32 is_default = 7; //是否默认：0->否；1->是
   int32 comment_overtime = 8; //订单完成后自动好评时间（天）
+  int64 create_by = 9; //创建人ID
+  string create_time = 10; //创建时间
+  int64 update_by = 11; //更新人ID
+  string update_time = 12; //更新时间
 
 }
 
@@ -1168,22 +1297,21 @@ message QueryOrderSettingListResp {
   repeated  OrderSettingListData list = 2;
 }
 
-// 订单设置表
+// 订单设置
 service OrderSettingService {
-  // 添加订单设置表
+  // 添加订单设置
   rpc AddOrderSetting(AddOrderSettingReq) returns (AddOrderSettingResp){}
-  // 删除订单设置表
+  // 删除订单设置
   rpc DeleteOrderSetting(DeleteOrderSettingReq) returns (DeleteOrderSettingResp){}
-  // 更新订单设置表
-  rpc UpdateOrderSetting(UpdateOrderSettingReq) returns (UpdateOrderSettingResp){}
-  // 更新订单设置表是否为默认
-  rpc UpdateOrderSettingIsDefault(UpdateOrderSettingIsDefaultReq) returns (UpdateOrderSettingStatusResp){}
-  // 更新订单设置表状态
-  rpc UpdateOrderSettingStatus(UpdateOrderSettingStatusReq) returns (UpdateOrderSettingStatusResp){}
-  // 查询订单设置表详情
-  rpc QueryOrderSettingDetail(QueryOrderSettingDetailReq) returns (QueryOrderSettingDetailResp){}
-  // 查询订单设置表列表
+  // 更新订单设置
+  rpc UpdateOrderSetting(UpdateOrderSettingReq) returns (UpdateOrderSettingResp ){}
+  // 更新订单设置状态
+  rpc UpdateOrderSettingStatus(UpdateOrderSettingStatusReq) returns (UpdateOrderSettingStatusResp ){}
+  // 查询订单设置详情
+   rpc QueryOrderSettingDetail(QueryOrderSettingDetailReq) returns (QueryOrderSettingDetailResp){}
+  // 查询订单设置列表
   rpc QueryOrderSettingList(QueryOrderSettingListReq) returns (QueryOrderSettingListResp){}
 
-
+  // 更新订单设置默认状态
+  rpc UpdateOrderSettingDefaultStatus(UpdateOrderSettingStatusReq) returns (UpdateOrderSettingStatusResp ){}
 }

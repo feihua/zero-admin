@@ -2,6 +2,7 @@ package company_address
 
 import (
 	"context"
+	"github.com/feihua/zero-admin/api/admin/internal/common"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
 	"github.com/feihua/zero-admin/api/admin/internal/common/res"
 	"github.com/feihua/zero-admin/rpc/oms/omsclient"
@@ -34,11 +35,15 @@ func NewUpdateCompanyAddressSendStatusLogic(ctx context.Context, svcCtx *svc.Ser
 }
 
 // UpdateCompanyAddressSendStatus 更新公司默认发货地址状态
-func (l *UpdateCompanyAddressSendStatusLogic) UpdateCompanyAddressSendStatus(req *types.UpdateCompanyAddressSendStatusReq) (resp *types.BaseResp, err error) {
-	_, err = l.svcCtx.CompanyAddressService.UpdateCompanyAddressSendStatus(l.ctx, &omsclient.UpdateCompanyAddressSendStatusReq{
-		Id:         req.Id,
-		SendStatus: req.SendStatus, // 默认发货地址：0->否；1->是
-		UpdateBy:   l.ctx.Value("userName").(string),
+func (l *UpdateCompanyAddressSendStatusLogic) UpdateCompanyAddressSendStatus(req *types.UpdateCompanyAddressStatusReq) (resp *types.BaseResp, err error) {
+	userId, err := common.GetUserId(l.ctx)
+	if err != nil {
+		return nil, err
+	}
+	_, err = l.svcCtx.CompanyAddressService.UpdateCompanyAddressSendStatus(l.ctx, &omsclient.UpdateCompanyAddressStatusReq{
+		Id:       req.Id,
+		Status:   req.Status, // 默认发货地址：0->否；1->是
+		UpdateBy: userId,
 	})
 
 	if err != nil {

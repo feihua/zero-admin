@@ -12,10 +12,10 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// QueryOrderReturnReasonDetailLogic 查询退货原因表详情
+// QueryOrderReturnReasonDetailLogic 查询退货原因详情
 /*
-Author: 刘飞华
-Date: 2025/02/05 11:40:41
+Author: LiuFeiHua
+Date: 2025/05/26 15:21:44
 */
 type QueryOrderReturnReasonDetailLogic struct {
 	logx.Logger
@@ -31,7 +31,7 @@ func NewQueryOrderReturnReasonDetailLogic(ctx context.Context, svcCtx *svc.Servi
 	}
 }
 
-// QueryOrderReturnReasonDetail 查询退货原因表详情
+// QueryOrderReturnReasonDetail 查询退货原因详情
 func (l *QueryOrderReturnReasonDetailLogic) QueryOrderReturnReasonDetail(req *types.QueryOrderReturnReasonDetailReq) (resp *types.QueryOrderReturnReasonDetailResp, err error) {
 
 	detail, err := l.svcCtx.OrderReturnReasonService.QueryOrderReturnReasonDetail(l.ctx, &omsclient.QueryOrderReturnReasonDetailReq{
@@ -39,21 +39,25 @@ func (l *QueryOrderReturnReasonDetailLogic) QueryOrderReturnReasonDetail(req *ty
 	})
 
 	if err != nil {
-		logc.Errorf(l.ctx, "查询退货原因表详情失败,参数：%+v,响应：%s", req, err.Error())
+		logc.Errorf(l.ctx, "查询退货原因详情失败,参数：%+v,响应：%s", req, err.Error())
 		s, _ := status.FromError(err)
 		return nil, errorx.NewDefaultError(s.Message())
 	}
 
 	data := types.QueryOrderReturnReasonDetailData{
-		Id:         detail.Id,         //
+		Id:         detail.Id,         // 主键ID
 		Name:       detail.Name,       // 退货类型
 		Sort:       detail.Sort,       // 排序
 		Status:     detail.Status,     // 状态：0->不启用；1->启用
+		CreateBy:   detail.CreateBy,   // 创建人ID
 		CreateTime: detail.CreateTime, // 创建时间
+		UpdateBy:   detail.UpdateBy,   // 更新人ID
+		UpdateTime: detail.UpdateTime, // 更新时间
+
 	}
 	return &types.QueryOrderReturnReasonDetailResp{
 		Code:    "000000",
-		Message: "查询退货原因表成功",
+		Message: "查询退货原因成功",
 		Data:    data,
 	}, nil
 }

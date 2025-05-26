@@ -6,6 +6,7 @@ package query
 
 import (
 	"context"
+	"database/sql"
 
 	"gorm.io/gorm"
 	"gorm.io/gorm/clause"
@@ -29,18 +30,19 @@ func newOmsCompanyAddress(db *gorm.DB, opts ...gen.DOOption) omsCompanyAddress {
 	_omsCompanyAddress.ALL = field.NewAsterisk(tableName)
 	_omsCompanyAddress.ID = field.NewInt64(tableName, "id")
 	_omsCompanyAddress.AddressName = field.NewString(tableName, "address_name")
-	_omsCompanyAddress.SendStatus = field.NewInt32(tableName, "send_status")
-	_omsCompanyAddress.ReceiveStatus = field.NewInt32(tableName, "receive_status")
 	_omsCompanyAddress.Name = field.NewString(tableName, "name")
 	_omsCompanyAddress.Phone = field.NewString(tableName, "phone")
 	_omsCompanyAddress.Province = field.NewString(tableName, "province")
 	_omsCompanyAddress.City = field.NewString(tableName, "city")
 	_omsCompanyAddress.Region = field.NewString(tableName, "region")
 	_omsCompanyAddress.DetailAddress = field.NewString(tableName, "detail_address")
-	_omsCompanyAddress.CreateBy = field.NewString(tableName, "create_by")
+	_omsCompanyAddress.SendStatus = field.NewInt32(tableName, "send_status")
+	_omsCompanyAddress.ReceiveStatus = field.NewInt32(tableName, "receive_status")
+	_omsCompanyAddress.CreateBy = field.NewInt64(tableName, "create_by")
 	_omsCompanyAddress.CreateTime = field.NewTime(tableName, "create_time")
-	_omsCompanyAddress.UpdateBy = field.NewString(tableName, "update_by")
+	_omsCompanyAddress.UpdateBy = field.NewInt64(tableName, "update_by")
 	_omsCompanyAddress.UpdateTime = field.NewTime(tableName, "update_time")
+	_omsCompanyAddress.IsDeleted = field.NewInt32(tableName, "is_deleted")
 
 	_omsCompanyAddress.fillFieldMap()
 
@@ -52,20 +54,21 @@ type omsCompanyAddress struct {
 	omsCompanyAddressDo omsCompanyAddressDo
 
 	ALL           field.Asterisk
-	ID            field.Int64
+	ID            field.Int64  // 主键ID
 	AddressName   field.String // 地址名称
-	SendStatus    field.Int32  // 默认发货地址：0->否；1->是
-	ReceiveStatus field.Int32  // 是否默认收货地址：0->否；1->是
 	Name          field.String // 收发货人姓名
 	Phone         field.String // 收货人电话
 	Province      field.String // 省/直辖市
 	City          field.String // 市
 	Region        field.String // 区
 	DetailAddress field.String // 详细地址
-	CreateBy      field.String // 创建者
+	SendStatus    field.Int32  // 默认发货地址：0->否；1->是
+	ReceiveStatus field.Int32  // 默认收货地址：0->否；1->是
+	CreateBy      field.Int64  // 创建人ID
 	CreateTime    field.Time   // 创建时间
-	UpdateBy      field.String // 更新者
+	UpdateBy      field.Int64  // 更新人ID
 	UpdateTime    field.Time   // 更新时间
+	IsDeleted     field.Int32  // 是否删除
 
 	fieldMap map[string]field.Expr
 }
@@ -84,18 +87,19 @@ func (o *omsCompanyAddress) updateTableName(table string) *omsCompanyAddress {
 	o.ALL = field.NewAsterisk(table)
 	o.ID = field.NewInt64(table, "id")
 	o.AddressName = field.NewString(table, "address_name")
-	o.SendStatus = field.NewInt32(table, "send_status")
-	o.ReceiveStatus = field.NewInt32(table, "receive_status")
 	o.Name = field.NewString(table, "name")
 	o.Phone = field.NewString(table, "phone")
 	o.Province = field.NewString(table, "province")
 	o.City = field.NewString(table, "city")
 	o.Region = field.NewString(table, "region")
 	o.DetailAddress = field.NewString(table, "detail_address")
-	o.CreateBy = field.NewString(table, "create_by")
+	o.SendStatus = field.NewInt32(table, "send_status")
+	o.ReceiveStatus = field.NewInt32(table, "receive_status")
+	o.CreateBy = field.NewInt64(table, "create_by")
 	o.CreateTime = field.NewTime(table, "create_time")
-	o.UpdateBy = field.NewString(table, "update_by")
+	o.UpdateBy = field.NewInt64(table, "update_by")
 	o.UpdateTime = field.NewTime(table, "update_time")
+	o.IsDeleted = field.NewInt32(table, "is_deleted")
 
 	o.fillFieldMap()
 
@@ -124,21 +128,22 @@ func (o *omsCompanyAddress) GetFieldByName(fieldName string) (field.OrderExpr, b
 }
 
 func (o *omsCompanyAddress) fillFieldMap() {
-	o.fieldMap = make(map[string]field.Expr, 14)
+	o.fieldMap = make(map[string]field.Expr, 15)
 	o.fieldMap["id"] = o.ID
 	o.fieldMap["address_name"] = o.AddressName
-	o.fieldMap["send_status"] = o.SendStatus
-	o.fieldMap["receive_status"] = o.ReceiveStatus
 	o.fieldMap["name"] = o.Name
 	o.fieldMap["phone"] = o.Phone
 	o.fieldMap["province"] = o.Province
 	o.fieldMap["city"] = o.City
 	o.fieldMap["region"] = o.Region
 	o.fieldMap["detail_address"] = o.DetailAddress
+	o.fieldMap["send_status"] = o.SendStatus
+	o.fieldMap["receive_status"] = o.ReceiveStatus
 	o.fieldMap["create_by"] = o.CreateBy
 	o.fieldMap["create_time"] = o.CreateTime
 	o.fieldMap["update_by"] = o.UpdateBy
 	o.fieldMap["update_time"] = o.UpdateTime
+	o.fieldMap["is_deleted"] = o.IsDeleted
 }
 
 func (o omsCompanyAddress) clone(db *gorm.DB) omsCompanyAddress {
@@ -208,6 +213,8 @@ type IOmsCompanyAddressDo interface {
 	FirstOrCreate() (*model.OmsCompanyAddress, error)
 	FindByPage(offset int, limit int) (result []*model.OmsCompanyAddress, count int64, err error)
 	ScanByPage(result interface{}, offset int, limit int) (count int64, err error)
+	Rows() (*sql.Rows, error)
+	Row() *sql.Row
 	Scan(result interface{}) (err error)
 	Returning(value interface{}, columns ...string) IOmsCompanyAddressDo
 	UnderlyingDB() *gorm.DB

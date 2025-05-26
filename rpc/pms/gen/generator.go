@@ -24,9 +24,7 @@ func main() {
 	g.UseDB(db)
 
 	g.ApplyBasic(
-		g.GenerateModel("pms_album"),
-		g.GenerateModel("pms_album_pic"),
-		g.GenerateModel("pms_brand"),
+		g.GenerateModel("pms_product_brand"),
 		g.GenerateModel("pms_comment"),
 		g.GenerateModel("pms_comment_replay"),
 		g.GenerateModel("pms_feight_template"),

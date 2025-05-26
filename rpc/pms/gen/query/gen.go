@@ -17,9 +17,6 @@ import (
 
 var (
 	Q                                   = new(Query)
-	PmsAlbum                            *pmsAlbum
-	PmsAlbumPic                         *pmsAlbumPic
-	PmsBrand                            *pmsBrand
 	PmsComment                          *pmsComment
 	PmsCommentReplay                    *pmsCommentReplay
 	PmsFeightTemplate                   *pmsFeightTemplate
@@ -28,6 +25,7 @@ var (
 	PmsProductAttribute                 *pmsProductAttribute
 	PmsProductAttributeCategory         *pmsProductAttributeCategory
 	PmsProductAttributeValue            *pmsProductAttributeValue
+	PmsProductBrand                     *pmsProductBrand
 	PmsProductCategory                  *pmsProductCategory
 	PmsProductCategoryAttributeRelation *pmsProductCategoryAttributeRelation
 	PmsProductCollect                   *pmsProductCollect
@@ -40,9 +38,6 @@ var (
 
 func SetDefault(db *gorm.DB, opts ...gen.DOOption) {
 	*Q = *Use(db, opts...)
-	PmsAlbum = &Q.PmsAlbum
-	PmsAlbumPic = &Q.PmsAlbumPic
-	PmsBrand = &Q.PmsBrand
 	PmsComment = &Q.PmsComment
 	PmsCommentReplay = &Q.PmsCommentReplay
 	PmsFeightTemplate = &Q.PmsFeightTemplate
@@ -51,6 +46,7 @@ func SetDefault(db *gorm.DB, opts ...gen.DOOption) {
 	PmsProductAttribute = &Q.PmsProductAttribute
 	PmsProductAttributeCategory = &Q.PmsProductAttributeCategory
 	PmsProductAttributeValue = &Q.PmsProductAttributeValue
+	PmsProductBrand = &Q.PmsProductBrand
 	PmsProductCategory = &Q.PmsProductCategory
 	PmsProductCategoryAttributeRelation = &Q.PmsProductCategoryAttributeRelation
 	PmsProductCollect = &Q.PmsProductCollect
@@ -64,9 +60,6 @@ func SetDefault(db *gorm.DB, opts ...gen.DOOption) {
 func Use(db *gorm.DB, opts ...gen.DOOption) *Query {
 	return &Query{
 		db:                                  db,
-		PmsAlbum:                            newPmsAlbum(db, opts...),
-		PmsAlbumPic:                         newPmsAlbumPic(db, opts...),
-		PmsBrand:                            newPmsBrand(db, opts...),
 		PmsComment:                          newPmsComment(db, opts...),
 		PmsCommentReplay:                    newPmsCommentReplay(db, opts...),
 		PmsFeightTemplate:                   newPmsFeightTemplate(db, opts...),
@@ -75,6 +68,7 @@ func Use(db *gorm.DB, opts ...gen.DOOption) *Query {
 		PmsProductAttribute:                 newPmsProductAttribute(db, opts...),
 		PmsProductAttributeCategory:         newPmsProductAttributeCategory(db, opts...),
 		PmsProductAttributeValue:            newPmsProductAttributeValue(db, opts...),
+		PmsProductBrand:                     newPmsProductBrand(db, opts...),
 		PmsProductCategory:                  newPmsProductCategory(db, opts...),
 		PmsProductCategoryAttributeRelation: newPmsProductCategoryAttributeRelation(db, opts...),
 		PmsProductCollect:                   newPmsProductCollect(db, opts...),
@@ -89,9 +83,6 @@ func Use(db *gorm.DB, opts ...gen.DOOption) *Query {
 type Query struct {
 	db *gorm.DB
 
-	PmsAlbum                            pmsAlbum
-	PmsAlbumPic                         pmsAlbumPic
-	PmsBrand                            pmsBrand
 	PmsComment                          pmsComment
 	PmsCommentReplay                    pmsCommentReplay
 	PmsFeightTemplate                   pmsFeightTemplate
@@ -100,6 +91,7 @@ type Query struct {
 	PmsProductAttribute                 pmsProductAttribute
 	PmsProductAttributeCategory         pmsProductAttributeCategory
 	PmsProductAttributeValue            pmsProductAttributeValue
+	PmsProductBrand                     pmsProductBrand
 	PmsProductCategory                  pmsProductCategory
 	PmsProductCategoryAttributeRelation pmsProductCategoryAttributeRelation
 	PmsProductCollect                   pmsProductCollect
@@ -115,9 +107,6 @@ func (q *Query) Available() bool { return q.db != nil }
 func (q *Query) clone(db *gorm.DB) *Query {
 	return &Query{
 		db:                                  db,
-		PmsAlbum:                            q.PmsAlbum.clone(db),
-		PmsAlbumPic:                         q.PmsAlbumPic.clone(db),
-		PmsBrand:                            q.PmsBrand.clone(db),
 		PmsComment:                          q.PmsComment.clone(db),
 		PmsCommentReplay:                    q.PmsCommentReplay.clone(db),
 		PmsFeightTemplate:                   q.PmsFeightTemplate.clone(db),
@@ -126,6 +115,7 @@ func (q *Query) clone(db *gorm.DB) *Query {
 		PmsProductAttribute:                 q.PmsProductAttribute.clone(db),
 		PmsProductAttributeCategory:         q.PmsProductAttributeCategory.clone(db),
 		PmsProductAttributeValue:            q.PmsProductAttributeValue.clone(db),
+		PmsProductBrand:                     q.PmsProductBrand.clone(db),
 		PmsProductCategory:                  q.PmsProductCategory.clone(db),
 		PmsProductCategoryAttributeRelation: q.PmsProductCategoryAttributeRelation.clone(db),
 		PmsProductCollect:                   q.PmsProductCollect.clone(db),
@@ -148,9 +138,6 @@ func (q *Query) WriteDB() *Query {
 func (q *Query) ReplaceDB(db *gorm.DB) *Query {
 	return &Query{
 		db:                                  db,
-		PmsAlbum:                            q.PmsAlbum.replaceDB(db),
-		PmsAlbumPic:                         q.PmsAlbumPic.replaceDB(db),
-		PmsBrand:                            q.PmsBrand.replaceDB(db),
 		PmsComment:                          q.PmsComment.replaceDB(db),
 		PmsCommentReplay:                    q.PmsCommentReplay.replaceDB(db),
 		PmsFeightTemplate:                   q.PmsFeightTemplate.replaceDB(db),
@@ -159,6 +146,7 @@ func (q *Query) ReplaceDB(db *gorm.DB) *Query {
 		PmsProductAttribute:                 q.PmsProductAttribute.replaceDB(db),
 		PmsProductAttributeCategory:         q.PmsProductAttributeCategory.replaceDB(db),
 		PmsProductAttributeValue:            q.PmsProductAttributeValue.replaceDB(db),
+		PmsProductBrand:                     q.PmsProductBrand.replaceDB(db),
 		PmsProductCategory:                  q.PmsProductCategory.replaceDB(db),
 		PmsProductCategoryAttributeRelation: q.PmsProductCategoryAttributeRelation.replaceDB(db),
 		PmsProductCollect:                   q.PmsProductCollect.replaceDB(db),
@@ -171,9 +159,6 @@ func (q *Query) ReplaceDB(db *gorm.DB) *Query {
 }
 
 type queryCtx struct {
-	PmsAlbum                            IPmsAlbumDo
-	PmsAlbumPic                         IPmsAlbumPicDo
-	PmsBrand                            IPmsBrandDo
 	PmsComment                          IPmsCommentDo
 	PmsCommentReplay                    IPmsCommentReplayDo
 	PmsFeightTemplate                   IPmsFeightTemplateDo
@@ -182,6 +167,7 @@ type queryCtx struct {
 	PmsProductAttribute                 IPmsProductAttributeDo
 	PmsProductAttributeCategory         IPmsProductAttributeCategoryDo
 	PmsProductAttributeValue            IPmsProductAttributeValueDo
+	PmsProductBrand                     IPmsProductBrandDo
 	PmsProductCategory                  IPmsProductCategoryDo
 	PmsProductCategoryAttributeRelation IPmsProductCategoryAttributeRelationDo
 	PmsProductCollect                   IPmsProductCollectDo
@@ -194,9 +180,6 @@ type queryCtx struct {
 
 func (q *Query) WithContext(ctx context.Context) *queryCtx {
 	return &queryCtx{
-		PmsAlbum:                            q.PmsAlbum.WithContext(ctx),
-		PmsAlbumPic:                         q.PmsAlbumPic.WithContext(ctx),
-		PmsBrand:                            q.PmsBrand.WithContext(ctx),
 		PmsComment:                          q.PmsComment.WithContext(ctx),
 		PmsCommentReplay:                    q.PmsCommentReplay.WithContext(ctx),
 		PmsFeightTemplate:                   q.PmsFeightTemplate.WithContext(ctx),
@@ -205,6 +188,7 @@ func (q *Query) WithContext(ctx context.Context) *queryCtx {
 		PmsProductAttribute:                 q.PmsProductAttribute.WithContext(ctx),
 		PmsProductAttributeCategory:         q.PmsProductAttributeCategory.WithContext(ctx),
 		PmsProductAttributeValue:            q.PmsProductAttributeValue.WithContext(ctx),
+		PmsProductBrand:                     q.PmsProductBrand.WithContext(ctx),
 		PmsProductCategory:                  q.PmsProductCategory.WithContext(ctx),
 		PmsProductCategoryAttributeRelation: q.PmsProductCategoryAttributeRelation.WithContext(ctx),
 		PmsProductCollect:                   q.PmsProductCollect.WithContext(ctx),

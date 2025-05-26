@@ -33,10 +33,10 @@ func NewUpdateOrderSettingIsDefaultLogic(ctx context.Context, svcCtx *svc.Servic
 }
 
 // UpdateOrderSettingIsDefault 更新订单设置默认状态
-func (l *UpdateOrderSettingIsDefaultLogic) UpdateOrderSettingIsDefault(req *types.UpdateOrderSettingIsDefaultReq) (resp *types.BaseResp, err error) {
-	_, err = l.svcCtx.OrderSettingService.UpdateOrderSettingIsDefault(l.ctx, &omsclient.UpdateOrderSettingIsDefaultReq{
-		Id:        req.Id,
-		IsDefault: req.IsDefault,
+func (l *UpdateOrderSettingIsDefaultLogic) UpdateOrderSettingIsDefault(req *types.UpdateOrderSettingStatusReq) (resp *types.BaseResp, err error) {
+	_, err = l.svcCtx.OrderSettingService.UpdateOrderSettingDefaultStatus(l.ctx, &omsclient.UpdateOrderSettingStatusReq{
+		Id:     req.Id,
+		Status: req.Status,
 	})
 
 	if err != nil {

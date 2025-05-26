@@ -91,8 +91,8 @@ func (l *AddProductLogic) AddProduct(in *pmsclient.AddProductReq) (*pmsclient.Ad
 		DetailDesc:                 in.DetailDesc,                 // 详情描述
 		DetailHTML:                 in.DetailHtml,                 // 产品详情网页内容
 		DetailMobileHTML:           in.DetailMobileHtml,           // 移动端网页详情
-		PromotionStartTime:         PromotionStartTime,            // 促销开始时间
-		PromotionEndTime:           PromotionEndTime,              // 促销结束时间
+		PromotionStartTime:         &PromotionStartTime,           // 促销开始时间
+		PromotionEndTime:           &PromotionEndTime,             // 促销结束时间
 		PromotionPerLimit:          in.PromotionPerLimit,          // 活动限购数量
 		PromotionType:              in.PromotionType,              // 促销类型：0->没有促销使用原价;1->使用促销价；2->使用会员价；3->使用阶梯价格；4->使用满减价格；5->限时购
 		BrandName:                  in.BrandName,                  // 品牌名称

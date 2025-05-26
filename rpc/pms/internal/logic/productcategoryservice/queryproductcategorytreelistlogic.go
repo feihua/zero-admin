@@ -49,7 +49,7 @@ func (l *QueryProductCategoryTreeListLogic) QueryProductCategoryTreeList(in *pms
 func queryLevel2(l *QueryProductCategoryTreeListLogic, id int64) []*pmsclient.QueryProductCategoryListTreeData {
 	q := query.PmsProductCategory.WithContext(l.ctx)
 
-	q = q.Where(query.PmsProductCategory.ShowStatus.Eq(1))
+	q = q.Where(query.PmsProductCategory.IsEnabled.Eq(1))
 	if id != 2000 {
 		q = q.Where(query.PmsProductCategory.ParentID.Eq(id))
 	}

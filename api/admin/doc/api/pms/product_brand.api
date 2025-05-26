@@ -2,75 +2,102 @@ import "../base/base.api"
 
 info (
 	desc:   "商品品牌"
-	author: "koobe"
+	author: "LiuFeiHua"
 	email:  "1002219331@qq.com"
 )
 
 type (
+	// 添加商品品牌请求参数
 	AddProductBrandReq {
-		Name            string `json:"brandName"` //品牌名称
-		FirstLetter     string `json:"firstLetter"` //首字母
-		Sort            int32  `json:"sort"` //排序
-		FactoryStatus   int32  `json:"factoryStatus"` //是否为品牌制造商：0->不是；1->是
-		ShowStatus      int32  `json:"showStatus"` //品牌显示状态
-		RecommendStatus int32  `json:"recommendStatus"` //推荐状态
+		Name            string `json:"name"` //品牌名称
 		Logo            string `json:"logo"` //品牌logo
 		BigPic          string `json:"bigPic"` //专区大图
-		BrandStory      string `json:"brandStory"` //品牌故事
+		Description     string `json:"description"` //描述
+		FirstLetter     string `json:"firstLetter"` //首字母
+		Sort            int32  `json:"sort"` //排序
+		RecommendStatus int32  `json:"recommendStatus"` //推荐状态
+		IsEnabled       int32  `json:"isEnabled"` //是否启用
 	}
-	ListProductBrandReq {
-		Current         int64  `form:"current,default=1"`
-		PageSize        int64  `form:"pageSize,default=20"`
-		Name            string `form:"brandName,optional"`
-		FactoryStatus   int32  `form:"factoryStatus,default=2"` // 是否为品牌制造商：0->不是；1->是
-		ShowStatus      int32  `form:"showStatus,default=2"`
-		RecommendStatus int32  `form:"recommendStatus,default=2"` //推荐状态
+	// 删除商品品牌请求参数
+	DeleteProductBrandReq {
+		Ids []int64 `form:"ids"`
 	}
-	ListProductBrandData {
+	// 更新商品品牌请求参数
+	UpdateProductBrandReq {
+		Id              int64  `json:"id"` //
+		Name            string `json:"name"` //品牌名称
+		Logo            string `json:"logo"` //品牌logo
+		BigPic          string `json:"bigPic"` //专区大图
+		Description     string `json:"description"` //描述
+		FirstLetter     string `json:"firstLetter"` //首字母
+		Sort            int32  `json:"sort"` //排序
+		RecommendStatus int32  `json:"recommendStatus"` //推荐状态
+		IsEnabled       int32  `json:"isEnabled"` //是否启用
+	}
+	// 更新商品品牌状态请求参数
+	UpdateProductBrandStatusReq {
+		Ids    []int64 `json:"ids"` //
+		Status int32   `json:"status"` //推荐状态
+	}
+	// 查询商品品牌详情请求参数
+	QueryProductBrandDetailReq {
+		Id int64 `form:"id"`
+	}
+	QueryProductBrandDetailData {
 		Id                  int64  `json:"id"` //
-		Name                string `json:"brandName"` //品牌名称
+		Name                string `json:"name"` //品牌名称
+		Logo                string `json:"logo"` //品牌logo
+		BigPic              string `json:"bigPic"` //专区大图
+		Description         string `json:"description"` //描述
 		FirstLetter         string `json:"firstLetter"` //首字母
 		Sort                int32  `json:"sort"` //排序
-		FactoryStatus       int32  `json:"factoryStatus"` //是否为品牌制造商：0->不是；1->是
-		ShowStatus          int32  `json:"showStatus"` //品牌显示状态
 		RecommendStatus     int32  `json:"recommendStatus"` //推荐状态
 		ProductCount        int32  `json:"productCount"` //产品数量
 		ProductCommentCount int32  `json:"productCommentCount"` //产品评论数量
-		Logo                string `json:"logo"` //品牌logo
-		BigPic              string `json:"bigPic"` //专区大图
-		BrandStory          string `json:"brandStory"` //品牌故事
-		CreateBy            string `json:"createBy"` //创建者
+		IsEnabled           int32  `json:"isEnabled"` //是否启用
+		CreateBy            int64  `json:"createBy"` //创建人ID
 		CreateTime          string `json:"createTime"` //创建时间
-		UpdateBy            string `json:"updateBy"` //更新者
+		UpdateBy            int64  `json:"updateBy"` //更新人ID
 		UpdateTime          string `json:"updateTime"` //更新时间
 	}
-	ListProductBrandResp {
-		Current  int64                   `json:"current,default=1"`
-		Data     []*ListProductBrandData `json:"data"`
-		PageSize int64                   `json:"pageSize,default=20"`
-		Success  bool                    `json:"success"`
-		Total    int64                   `json:"total"`
-		Code     string                  `json:"code"`
-		Message  string                  `json:"message"`
+	QueryProductBrandDetailResp {
+		Code    string                      `json:"code"`
+		Message string                      `json:"message"`
+		Data    QueryProductBrandDetailData `json:"data"`
 	}
-	UpdateProductBrandReq {
-		Id              int64  `json:"id"`
-		Name            string `json:"brandName"` //品牌名称
-		FirstLetter     string `json:"firstLetter"` //首字母
-		Sort            int32  `json:"sort"` //排序
-		FactoryStatus   int32  `json:"factoryStatus"` //是否为品牌制造商：0->不是；1->是
-		ShowStatus      int32  `json:"showStatus"` //品牌显示状态
-		RecommendStatus int32  `json:"recommendStatus"` //推荐状态
-		Logo            string `json:"logo"` //品牌logo
-		BigPic          string `json:"bigPic"` //专区大图
-		BrandStory      string `json:"brandStory"` //品牌故事
+	// 分页查询商品品牌列表请求参数
+	QueryProductBrandListReq {
+		Current         int32  `form:"current,default=1"` //第几页
+		PageSize        int32  `form:"pageSize,default=20"` //每页的数量
+		Name            string `form:"name,optional"` //品牌名称
+		RecommendStatus int32  `form:"recommendStatus,default=2"` //推荐状态
+		IsEnabled       int32  `form:"isEnabled,,default=2"` //是否启用
 	}
-	UpdateProductBrandStatusReq {
-		Ids    []int64 `json:"ids"`
-		status int32   `json:"status"`
+	QueryProductBrandListData {
+		Id                  int64  `json:"id"` //
+		Name                string `json:"name"` //品牌名称
+		Logo                string `json:"logo"` //品牌logo
+		BigPic              string `json:"bigPic"` //专区大图
+		Description         string `json:"description"` //描述
+		FirstLetter         string `json:"firstLetter"` //首字母
+		Sort                int32  `json:"sort"` //排序
+		RecommendStatus     int32  `json:"recommendStatus"` //推荐状态
+		ProductCount        int32  `json:"productCount"` //产品数量
+		ProductCommentCount int32  `json:"productCommentCount"` //产品评论数量
+		IsEnabled           int32  `json:"isEnabled"` //是否启用
+		CreateBy            int64  `json:"createBy"` //创建人ID
+		CreateTime          string `json:"createTime"` //创建时间
+		UpdateBy            int64  `json:"updateBy"` //更新人ID
+		UpdateTime          string `json:"updateTime"` //更新时间
 	}
-	DeleteProductBrandReq {
-		Ids []int64 `form:"ids"`
+	QueryProductBrandListResp {
+		Code     string                       `json:"code"`
+		Message  string                       `json:"message"`
+		Current  int32                        `json:"current,default=1"`
+		Data     []*QueryProductBrandListData `json:"data"`
+		PageSize int32                        `json:"pageSize,default=20"`
+		Success  bool                         `json:"success"`
+		Total    int64                        `json:"total"`
 	}
 )
 
@@ -81,28 +108,28 @@ type (
 	prefix:     /api/pms/brand
 )
 service admin-api {
-	//添加商品品牌
-	@handler ProductBrandAdd
+	// 添加商品品牌
+	@handler AddProductBrand
 	post /addProductBrand (AddProductBrandReq) returns (BaseResp)
 
-	//查询商品品牌
-	@handler ProductBrandList
-	get /queryProductBrandList (ListProductBrandReq) returns (ListProductBrandResp)
+	// 删除商品品牌
+	@handler DeleteProductBrand
+	get /deleteProductBrand (DeleteProductBrandReq) returns (BaseResp)
 
-	//更新商品品牌
-	@handler ProductBrandUpdate
+	// 更新商品品牌
+	@handler UpdateProductBrand
 	post /updateProductBrand (UpdateProductBrandReq) returns (BaseResp)
 
-	//批量更新显示状态
-	@handler UpdateBrandShowStatus
-	post /updateBrandShowStatus (UpdateProductBrandStatusReq) returns (BaseResp)
+	// 更新商品品牌状态
+	@handler UpdateProductBrandStatus
+	post /updateProductBrandStatus (UpdateProductBrandStatusReq) returns (BaseResp)
 
-	//批量更新厂家制造商状态
-	@handler UpdateBrandFactoryStatus
-	post /updateBrandFactoryStatus (UpdateProductBrandStatusReq) returns (BaseResp)
+	// 查询商品品牌详情
+	@handler QueryProductBrandDetail
+	get /queryProductBrandDetail (QueryProductBrandDetailReq) returns (QueryProductBrandDetailResp)
 
-	//删除商品品牌
-	@handler ProductBrandDelete
-	get /deleteProductBrand (DeleteProductBrandReq) returns (BaseResp)
+	// 分页查询商品品牌列表
+	@handler QueryProductBrandList
+	get /queryProductBrandList (QueryProductBrandListReq) returns (QueryProductBrandListResp)
 }
 

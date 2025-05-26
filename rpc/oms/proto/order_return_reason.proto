@@ -4,19 +4,20 @@ package main;
 
 option go_package = "./proto";
 
-// 添加退货原因表
+// 添加退货原因
 message AddOrderReturnReasonReq {
-  int64 id = 1; //
+  int64 id = 1; //主键ID
   string name = 2; //退货类型
   int32 sort = 3; //排序
   int32 status = 4; //状态：0->不启用；1->启用
+  int64 create_by = 5; //创建人ID
 }
 
 message AddOrderReturnReasonResp {
   string pong = 1;
 }
 
-// 删除退货原因表
+// 删除退货原因
 message DeleteOrderReturnReasonReq {
   repeated int64 ids = 1;
 }
@@ -25,60 +26,64 @@ message DeleteOrderReturnReasonResp {
   string pong = 1;
 }
 
-// 更新退货原因表
+// 更新退货原因
 message UpdateOrderReturnReasonReq {
-  int64 id = 1; //
+  int64 id = 1; //主键ID
   string name = 2; //退货类型
   int32 sort = 3; //排序
   int32 status = 4; //状态：0->不启用；1->启用
-
+  int64 update_by = 7; //更新人ID
 }
 
 message UpdateOrderReturnReasonResp {
   string pong = 1;
 }
 
-// 更新退货原因表状态
+// 更新退货原因状态
 message UpdateOrderReturnReasonStatusReq {
-  repeated int64 ids = 1;
+  repeated int64 ids = 1; //主键ID
   int32 status = 2; //状态：0->不启用；1->启用
-
+  int64 update_by = 3; //更新人ID
 }
 
 message UpdateOrderReturnReasonStatusResp {
   string pong = 1;
 }
 
-// 查询退货原因表详情
+// 查询退货原因详情
 message QueryOrderReturnReasonDetailReq {
     int64 id = 1;
 }
 
 message QueryOrderReturnReasonDetailResp {
-  int64 id = 1; //
+  int64 id = 1; //主键ID
   string name = 2; //退货类型
   int32 sort = 3; //排序
   int32 status = 4; //状态：0->不启用；1->启用
-  string create_time = 5; //创建时间
-
+  int64 create_by = 5; //创建人ID
+  string create_time = 6; //创建时间
+  int64 update_by = 7; //更新人ID
+  string update_time = 8; //更新时间
 
 }
 
-// 分页查询退货原因表列表
+// 分页查询退货原因列表
 message QueryOrderReturnReasonListReq {
-  int64 page_num = 1; //第几页
-  int64 page_size = 2; //每页的数量
-  string name = 3; //退货类型
-  int32 status = 4; //状态：0->不启用；1->启用
-
+  string name = 1; //退货类型
+  int32 status = 2; //状态：0->不启用；1->启用
+  int32 page_num = 3; //第几页
+  int32 page_size = 4; //每页的数量
 }
 
 message OrderReturnReasonListData {
-  int64 id = 1; //
+  int64 id = 1; //主键ID
   string name = 2; //退货类型
   int32 sort = 3; //排序
   int32 status = 4; //状态：0->不启用；1->启用
-  string create_time = 5; //创建时间
+  int64 create_by = 5; //创建人ID
+  string create_time = 6; //创建时间
+  int64 update_by = 7; //更新人ID
+  string update_time = 8; //更新时间
 
 }
 
@@ -87,19 +92,19 @@ message QueryOrderReturnReasonListResp {
   repeated  OrderReturnReasonListData list = 2;
 }
 
-// 退货原因表
+// 退货原因
 service OrderReturnReasonService {
-  // 添加退货原因表
+  // 添加退货原因
   rpc AddOrderReturnReason(AddOrderReturnReasonReq) returns (AddOrderReturnReasonResp){}
-  // 删除退货原因表
+  // 删除退货原因
   rpc DeleteOrderReturnReason(DeleteOrderReturnReasonReq) returns (DeleteOrderReturnReasonResp){}
-  // 更新退货原因表
+  // 更新退货原因
   rpc UpdateOrderReturnReason(UpdateOrderReturnReasonReq) returns (UpdateOrderReturnReasonResp ){}
-  // 更新退货原因表状态
+  // 更新退货原因状态
   rpc UpdateOrderReturnReasonStatus(UpdateOrderReturnReasonStatusReq) returns (UpdateOrderReturnReasonStatusResp ){}
-  // 查询退货原因表详情
+  // 查询退货原因详情
    rpc QueryOrderReturnReasonDetail(QueryOrderReturnReasonDetailReq) returns (QueryOrderReturnReasonDetailResp){}
-  // 查询退货原因表列表
+  // 查询退货原因列表
   rpc QueryOrderReturnReasonList(QueryOrderReturnReasonListReq) returns (QueryOrderReturnReasonListResp){}
 
 

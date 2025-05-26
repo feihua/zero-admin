@@ -13,19 +13,22 @@ const TableNamePmsProductCategory = "pms_product_category"
 // PmsProductCategory 产品分类
 type PmsProductCategory struct {
 	ID           int64      `gorm:"column:id;primaryKey;autoIncrement:true" json:"id"`
-	ParentID     int64      `gorm:"column:parent_id;not null;comment:上机分类的编号：0表示一级分类" json:"parent_id"`                    // 上机分类的编号：0表示一级分类
+	ParentID     int64      `gorm:"column:parent_id;not null;comment:上级分类的编号：0表示一级分类" json:"parent_id"`                    // 上级分类的编号：0表示一级分类
 	Name         string     `gorm:"column:name;not null;comment:商品分类名称" json:"name"`                                       // 商品分类名称
 	Level        int32      `gorm:"column:level;not null;comment:分类级别：0->1级；1->2级" json:"level"`                           // 分类级别：0->1级；1->2级
 	ProductCount int32      `gorm:"column:product_count;not null;comment:商品数量" json:"product_count"`                       // 商品数量
-	ProductUnit  string     `gorm:"column:product_unit;not null;comment:商品数量" json:"product_unit"`                         // 商品数量
+	ProductUnit  string     `gorm:"column:product_unit;not null;default:件;comment:商品单位" json:"product_unit"`               // 商品单位
 	NavStatus    int32      `gorm:"column:nav_status;not null;comment:是否显示在导航栏：0->不显示；1->显示" json:"nav_status"`            // 是否显示在导航栏：0->不显示；1->显示
-	ShowStatus   int32      `gorm:"column:show_status;not null;comment:显示状态：0->不显示；1->显示" json:"show_status"`              // 显示状态：0->不显示；1->显示
 	Sort         int32      `gorm:"column:sort;not null;comment:排序" json:"sort"`                                           // 排序
 	Icon         string     `gorm:"column:icon;not null;comment:图标" json:"icon"`                                           // 图标
 	Keywords     string     `gorm:"column:keywords;not null;comment:关键字" json:"keywords"`                                  // 关键字
 	Description  string     `gorm:"column:description;not null;comment:描述" json:"description"`                             // 描述
+	IsEnabled    int32      `gorm:"column:is_enabled;not null;default:1;comment:是否启用" json:"is_enabled"`                   // 是否启用
+	CreateBy     int64      `gorm:"column:create_by;not null;comment:创建人ID" json:"create_by"`                              // 创建人ID
 	CreateTime   time.Time  `gorm:"column:create_time;not null;default:CURRENT_TIMESTAMP;comment:创建时间" json:"create_time"` // 创建时间
+	UpdateBy     *int64     `gorm:"column:update_by;comment:更新人ID" json:"update_by"`                                       // 更新人ID
 	UpdateTime   *time.Time `gorm:"column:update_time;comment:更新时间" json:"update_time"`                                    // 更新时间
+	IsDeleted    int32      `gorm:"column:is_deleted;not null;comment:是否删除" json:"is_deleted"`                             // 是否删除
 }
 
 // TableName PmsProductCategory's table name

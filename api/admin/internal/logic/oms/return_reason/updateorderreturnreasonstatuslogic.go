@@ -2,21 +2,21 @@ package return_reason
 
 import (
 	"context"
+	"github.com/feihua/zero-admin/api/admin/internal/common"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
-	"github.com/feihua/zero-admin/api/admin/internal/common/res"
-	"github.com/feihua/zero-admin/rpc/oms/omsclient"
-	"github.com/zeromicro/go-zero/core/logc"
-
 	"github.com/feihua/zero-admin/api/admin/internal/svc"
 	"github.com/feihua/zero-admin/api/admin/internal/types"
+	"github.com/feihua/zero-admin/rpc/oms/omsclient"
+	"github.com/zeromicro/go-zero/core/logc"
+	"google.golang.org/grpc/status"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// UpdateOrderReturnReasonStatusLogic 批量更新退货原因状态
+// UpdateOrderReturnReasonStatusLogic 更新退货原因状态状态
 /*
 Author: LiuFeiHua
-Date: 2024/6/15 11:44
+Date: 2025/05/26 15:21:44
 */
 type UpdateOrderReturnReasonStatusLogic struct {
 	logx.Logger
@@ -32,17 +32,26 @@ func NewUpdateOrderReturnReasonStatusLogic(ctx context.Context, svcCtx *svc.Serv
 	}
 }
 
-// UpdateOrderReturnReasonStatus 批量更新退货原因状态
+// UpdateOrderReturnReasonStatus 更新退货原因状态
 func (l *UpdateOrderReturnReasonStatusLogic) UpdateOrderReturnReasonStatus(req *types.UpdateOrderReturnReasonStatusReq) (resp *types.BaseResp, err error) {
+	userId, err := common.GetUserId(l.ctx)
+	if err != nil {
+		return nil, err
+	}
 	_, err = l.svcCtx.OrderReturnReasonService.UpdateOrderReturnReasonStatus(l.ctx, &omsclient.UpdateOrderReturnReasonStatusReq{
-		Ids:    req.Ids,
-		Status: req.Status,
+		Ids:      req.Ids,    // 主键ID
+		Status:   req.Status, // 状态：0->不启用；1->启用
+		UpdateBy: userId,
 	})
 
 	if err != nil {
-		logc.Errorf(l.ctx, "批量更新退货原因状态失败,参数：%+v,响应：%s", req, err.Error())
-		return nil, errorx.NewDefaultError("批量更新退货原因状态失败")
+		logc.Errorf(l.ctx, "更新退货原因状态失败,参数：%+v,响应：%s", req, err.Error())
+		s, _ := status.FromError(err)
+		return nil, errorx.NewDefaultError(s.Message())
 	}
 
-	return res.Success()
+	return &types.BaseResp{
+		Code:    "000000",
+		Message: "更新退货原因状态成功",
+	}, nil
 }

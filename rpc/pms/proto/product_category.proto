@@ -7,18 +7,18 @@ option go_package = "./proto";
 // 添加产品分类
 message AddProductCategoryReq {
   int64 id = 1; //
-  int64 parent_id = 2; //上机分类的编号：0表示一级分类
+  int64 parent_id = 2; //上级分类的编号：0表示一级分类
   string name = 3; //商品分类名称
   int32 level = 4; //分类级别：0->1级；1->2级
-  int32 product_count = 5; //商品数量
-  string product_unit = 6; //商品数量
+  string product_unit = 6; //商品单位
   int32 nav_status = 7; //是否显示在导航栏：0->不显示；1->显示
-  int32 show_status = 8; //显示状态：0->不显示；1->显示
-  int32 sort = 9; //排序
-  string icon = 10; //图标
-  string keywords = 11; //关键字
-  string description = 12; //描述/
-  repeated int64 ProductAttributeIdList = 13;
+  int32 sort = 8; //排序
+  string icon = 9; //图标
+  string keywords = 10; //关键字
+  string description = 11; //描述
+  int32 is_enabled = 12; //是否启用
+  int64 create_by = 13; //创建人ID
+  repeated int64 ProductAttributeIdList = 14;
 }
 
 message AddProductCategoryResp {
@@ -37,18 +37,18 @@ message DeleteProductCategoryResp {
 // 更新产品分类
 message UpdateProductCategoryReq {
   int64 id = 1; //
-  int64 parent_id = 2; //上机分类的编号：0表示一级分类
+  int64 parent_id = 2; //上级分类的编号：0表示一级分类
   string name = 3; //商品分类名称
   int32 level = 4; //分类级别：0->1级；1->2级
-  int32 product_count = 5; //商品数量
-  string product_unit = 6; //商品数量
+  string product_unit = 6; //商品单位
   int32 nav_status = 7; //是否显示在导航栏：0->不显示；1->显示
-  int32 show_status = 8; //显示状态：0->不显示；1->显示
-  int32 sort = 9; //排序
-  string icon = 10; //图标
-  string keywords = 11; //关键字
-  string description = 12; //描述
-  repeated int64 ProductAttributeIdList = 13;
+  int32 sort = 8; //排序
+  string icon = 9; //图标
+  string keywords = 10; //关键字
+  string description = 11; //描述
+  int32 is_enabled = 12; //是否启用
+  int64 update_by = 13; //更新人ID
+  repeated int64 ProductAttributeIdList = 14;
 }
 
 message UpdateProductCategoryResp {
@@ -58,9 +58,8 @@ message UpdateProductCategoryResp {
 // 更新产品分类状态
 message UpdateProductCategoryStatusReq {
   repeated int64 ids = 1; //
-  int32 status = 2;
-
-
+  int32 status = 2; //是否显示在导航栏：0->不显示；1->显示
+  int64 update_by = 3; //更新人ID
 }
 
 message UpdateProductCategoryStatusResp {
@@ -74,43 +73,52 @@ message QueryProductCategoryDetailReq {
 
 message QueryProductCategoryDetailResp {
   int64 id = 1; //
-  int64 parent_id = 2; //上机分类的编号：0表示一级分类
+  int64 parent_id = 2; //上级分类的编号：0表示一级分类
   string name = 3; //商品分类名称
   int32 level = 4; //分类级别：0->1级；1->2级
   int32 product_count = 5; //商品数量
-  string product_unit = 6; //商品数量
+  string product_unit = 6; //商品单位
   int32 nav_status = 7; //是否显示在导航栏：0->不显示；1->显示
-  int32 show_status = 8; //显示状态：0->不显示；1->显示
-  int32 sort = 9; //排序
-  string icon = 10; //图标
-  string keywords = 11; //关键字
-  string description = 12; //描述
+  int32 sort = 8; //排序
+  string icon = 9; //图标
+  string keywords = 10; //关键字
+  string description = 11; //描述
+  int32 is_enabled = 12; //是否启用
+  int64 create_by = 13; //创建人ID
+  string create_time = 14; //创建时间
+  int64 update_by = 15; //更新人ID
+  string update_time = 16; //更新时间
 
 }
 
 // 分页查询产品分类列表
 message QueryProductCategoryListReq {
-  int64 page_num = 1; //第几页
-  int64 page_size = 2; //每页的数量
-  string name = 3; //
-  int32 nav_status = 4; //是否显示在导航栏：0->不显示；1->显示
-  int32 show_status = 5; //显示状态：0->不显示；1->显示
-  int64 parent_id = 6; //上机分类的编号：0表示一级分类
+  string name = 1; //商品分类名称
+  int32 nav_status = 2; //是否显示在导航栏：0->不显示；1->显示
+  string keywords = 3; //关键字
+  int32 is_enabled = 4; //是否启用
+  int32 page_num = 5; //第几页
+  int32 page_size = 6; //每页的数量
+  int64 parent_id = 7; //上级分类的编号：0表示一级分类
 }
 
 message ProductCategoryListData {
   int64 id = 1; //
-  int64 parent_id = 2; //上机分类的编号：0表示一级分类
+  int64 parent_id = 2; //上级分类的编号：0表示一级分类
   string name = 3; //商品分类名称
   int32 level = 4; //分类级别：0->1级；1->2级
   int32 product_count = 5; //商品数量
-  string product_unit = 6; //商品数量
+  string product_unit = 6; //商品单位
   int32 nav_status = 7; //是否显示在导航栏：0->不显示；1->显示
-  int32 show_status = 8; //显示状态：0->不显示；1->显示
-  int32 sort = 9; //排序
-  string icon = 10; //图标
-  string keywords = 11; //关键字
-  string description = 12; //描述
+  int32 sort = 8; //排序
+  string icon = 9; //图标
+  string keywords = 10; //关键字
+  string description = 11; //描述
+  int32 is_enabled = 12; //是否启用
+  int64 create_by = 13; //创建人ID
+  string create_time = 14; //创建时间
+  int64 update_by = 15; //更新人ID
+  string update_time = 16; //更新时间
 
 }
 
@@ -143,7 +151,7 @@ service ProductCategoryService {
   //更新商品分类导航显示状态
   rpc UpdateCategoryNavStatus(UpdateProductCategoryStatusReq) returns(UpdateProductCategoryStatusResp);
   //更新商品分类显示状态
-  rpc UpdateCategoryShowStatus(UpdateProductCategoryStatusReq) returns(UpdateProductCategoryStatusResp);
+  rpc UpdateProductCategoryStatus(UpdateProductCategoryStatusReq) returns(UpdateProductCategoryStatusResp);
   // 查询产品分类详情
    rpc QueryProductCategoryDetail(QueryProductCategoryDetailReq) returns (QueryProductCategoryDetailResp){}
   // 查询产品分类列表

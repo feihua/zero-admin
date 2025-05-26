@@ -26,17 +26,21 @@ type ProductData {
 }
 
 type Brand {
-	Id                  int64  `json:"id"`
-	Name                string `json:"name"`
-	FirstLetter         string `json:"firstLetter"`
-	Sort                int32  `json:"sort"`
-	FactoryStatus       int32  `json:"factoryStatus"`
-	ShowStatus          int32  `json:"showStatus"`
-	ProductCount        int32  `json:"productCount"`
-	ProductCommentCount int32  `json:"productCommentCount"`
-	Logo                string `json:"logo"`
-	BigPic              string `json:"bigPic"`
-	BrandStory          string `json:"brandStory"`
+	Id                  int64  `json:"id"` //
+	Name                string `json:"name"` //品牌名称
+	Logo                string `json:"logo"` //品牌logo
+	BigPic              string `json:"bigPic"` //专区大图
+	Description         string `json:"description"` //描述
+	FirstLetter         string `json:"firstLetter"` //首字母
+	Sort                int32  `json:"sort"` //排序
+	RecommendStatus     int32  `json:"recommendStatus"` //推荐状态
+	ProductCount        int32  `json:"productCount"` //产品数量
+	ProductCommentCount int32  `json:"productCommentCount"` //产品评论数量
+	IsEnabled           int32  `json:"isEnabled"` //是否启用
+	CreateBy            int64  `json:"createBy"` //创建人ID
+	CreateTime          string `json:"createTime"` //创建时间
+	UpdateBy            int64  `json:"updateBy"` //更新人ID
+	UpdateTime          string `json:"updateTime"` //更新时间
 }
 
 type CouponList {

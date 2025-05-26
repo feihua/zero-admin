@@ -12,11 +12,15 @@ const TableNameOmsOrderReturnReason = "oms_order_return_reason"
 
 // OmsOrderReturnReason 退货原因表
 type OmsOrderReturnReason struct {
-	ID         int64     `gorm:"column:id;primaryKey;autoIncrement:true" json:"id"`
-	Name       string    `gorm:"column:name;not null;comment:退货类型" json:"name"`                                         // 退货类型
-	Sort       int32     `gorm:"column:sort;not null;comment:排序" json:"sort"`                                           // 排序
-	Status     int32     `gorm:"column:status;not null;comment:状态：0->不启用；1->启用" json:"status"`                          // 状态：0->不启用；1->启用
-	CreateTime time.Time `gorm:"column:create_time;not null;default:CURRENT_TIMESTAMP;comment:创建时间" json:"create_time"` // 创建时间
+	ID         int64      `gorm:"column:id;primaryKey;autoIncrement:true;comment:主键ID" json:"id"`                        // 主键ID
+	Name       string     `gorm:"column:name;not null;comment:退货类型" json:"name"`                                         // 退货类型
+	Sort       int32      `gorm:"column:sort;not null;comment:排序" json:"sort"`                                           // 排序
+	Status     int32      `gorm:"column:status;not null;comment:状态：0->不启用；1->启用" json:"status"`                          // 状态：0->不启用；1->启用
+	CreateBy   int64      `gorm:"column:create_by;not null;comment:创建人ID" json:"create_by"`                              // 创建人ID
+	CreateTime time.Time  `gorm:"column:create_time;not null;default:CURRENT_TIMESTAMP;comment:创建时间" json:"create_time"` // 创建时间
+	UpdateBy   *int64     `gorm:"column:update_by;comment:更新人ID" json:"update_by"`                                       // 更新人ID
+	UpdateTime *time.Time `gorm:"column:update_time;comment:更新时间" json:"update_time"`                                    // 更新时间
+	IsDeleted  int32      `gorm:"column:is_deleted;not null;comment:是否删除" json:"is_deleted"`                             // 是否删除
 }
 
 // TableName OmsOrderReturnReason's table name

@@ -4,18 +4,16 @@ import (
 	"context"
 	"errors"
 	"github.com/feihua/zero-admin/rpc/oms/gen/query"
-	"github.com/zeromicro/go-zero/core/logc"
-
 	"github.com/feihua/zero-admin/rpc/oms/internal/svc"
 	"github.com/feihua/zero-admin/rpc/oms/omsclient"
-
+	"github.com/zeromicro/go-zero/core/logc"
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
 // DeleteCompanyAddressLogic 删除公司收发货地址
 /*
 Author: LiuFeiHua
-Date: 2024/6/12 10:10
+Date: 2025/05/26 15:21:43
 */
 type DeleteCompanyAddressLogic struct {
 	ctx    context.Context
@@ -34,6 +32,7 @@ func NewDeleteCompanyAddressLogic(ctx context.Context, svcCtx *svc.ServiceContex
 // DeleteCompanyAddress 删除公司收发货地址
 func (l *DeleteCompanyAddressLogic) DeleteCompanyAddress(in *omsclient.DeleteCompanyAddressReq) (*omsclient.DeleteCompanyAddressResp, error) {
 	q := query.OmsCompanyAddress
+
 	_, err := q.WithContext(l.ctx).Where(q.ID.In(in.Ids...)).Delete()
 
 	if err != nil {

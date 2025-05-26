@@ -1,70 +1,76 @@
 import "../base/base.api"
 
 info (
-	desc:   "退货原因表"
-	author: "liufeihua"
+	desc:   "退货原因"
+	author: "LiuFeiHua"
 	email:  "1002219331@qq.com"
 )
 
 type (
-	// 添加退货原因表请求参数
+	// 添加退货原因请求参数
 	AddOrderReturnReasonReq {
 		Name   string `json:"name"` //退货类型
 		Sort   int32  `json:"sort"` //排序
 		Status int32  `json:"status"` //状态：0->不启用；1->启用
 	}
-	// 删除退货原因表请求参数
+	// 删除退货原因请求参数
 	DeleteOrderReturnReasonReq {
 		Ids []int64 `form:"ids"`
 	}
-	// 更新退货原因表请求参数
+	// 更新退货原因请求参数
 	UpdateOrderReturnReasonReq {
-		Id     int64  `json:"id"` //
+		Id     int64  `json:"id"` //主键ID
 		Name   string `json:"name"` //退货类型
 		Sort   int32  `json:"sort"` //排序
 		Status int32  `json:"status"` //状态：0->不启用；1->启用
 	}
-	// 更新退货原因表状态请求参数
+	// 更新退货原因状态请求参数
 	UpdateOrderReturnReasonStatusReq {
-		Ids    []int64 `json:"ids"` //
+		Ids    []int64 `json:"ids"` //主键ID
 		Status int32   `json:"status"` //状态：0->不启用；1->启用
 	}
-	// 查询退货原因表详情请求参数
+	// 查询退货原因详情请求参数
 	QueryOrderReturnReasonDetailReq {
 		Id int64 `form:"id"`
 	}
 	QueryOrderReturnReasonDetailData {
-		Id         int64  `json:"id"` //
+		Id         int64  `json:"id"` //主键ID
 		Name       string `json:"name"` //退货类型
 		Sort       int32  `json:"sort"` //排序
 		Status     int32  `json:"status"` //状态：0->不启用；1->启用
+		CreateBy   int64  `json:"createBy"` //创建人ID
 		CreateTime string `json:"createTime"` //创建时间
+		UpdateBy   int64  `json:"updateBy"` //更新人ID
+		UpdateTime string `json:"updateTime"` //更新时间
 	}
 	QueryOrderReturnReasonDetailResp {
 		Code    string                           `json:"code"`
 		Message string                           `json:"message"`
 		Data    QueryOrderReturnReasonDetailData `json:"data"`
 	}
-	// 分页查询退货原因表列表请求参数
+	// 分页查询退货原因列表请求参数
 	QueryOrderReturnReasonListReq {
-		Current  int64  `form:"current,default=1"` //第几页
-		PageSize int64  `form:"pageSize,default=20"` //每页的数量
+		Current  int32  `form:"current,default=1"` //第几页
+		PageSize int32  `form:"pageSize,default=20"` //每页的数量
 		Name     string `form:"name,optional"` //退货类型
 		Status   int32  `form:"status,default=2"` //状态：0->不启用；1->启用
 	}
 	QueryOrderReturnReasonListData {
-		Id         int64  `json:"id"` //
+		Id         int64  `json:"id"` //主键ID
 		Name       string `json:"name"` //退货类型
 		Sort       int32  `json:"sort"` //排序
 		Status     int32  `json:"status"` //状态：0->不启用；1->启用
+		CreateBy   int64  `json:"createBy"` //创建人ID
 		CreateTime string `json:"createTime"` //创建时间
+		UpdateBy   int64  `json:"updateBy"` //更新人ID
+		UpdateTime string `json:"updateTime"` //更新时间
 	}
 	QueryOrderReturnReasonListResp {
 		Code     string                            `json:"code"`
 		Message  string                            `json:"message"`
-		Current  int64                             `json:"current,default=1"`
+		Current  int32                             `json:"current,default=1"`
 		Data     []*QueryOrderReturnReasonListData `json:"data"`
-		PageSize int64                             `json:"pageSize,default=20"`
+		PageSize int32                             `json:"pageSize,default=20"`
 		Success  bool                              `json:"success"`
 		Total    int64                             `json:"total"`
 	}
@@ -77,28 +83,28 @@ type (
 	prefix:     /api/oms/returnReason
 )
 service admin-api {
-	// 添加退货原因表
+	// 添加退货原因
 	@handler AddOrderReturnReason
-	post /addOrderReturnReason (AddOrderReturnReasonReq) returns (BaseResp)
+	post /addReturnReason (AddOrderReturnReasonReq) returns (BaseResp)
 
-	// 删除退货原因表
+	// 删除退货原因
 	@handler DeleteOrderReturnReason
-	get /deleteOrderReturnReason (DeleteOrderReturnReasonReq) returns (BaseResp)
+	get /deleteReturnReason (DeleteOrderReturnReasonReq) returns (BaseResp)
 
-	// 更新退货原因表
+	// 更新退货原因
 	@handler UpdateOrderReturnReason
-	post /updateOrderReturnReason (UpdateOrderReturnReasonReq) returns (BaseResp)
+	post /updateReturnReason (UpdateOrderReturnReasonReq) returns (BaseResp)
 
-	// 更新退货原因表状态
+	// 更新退货原因状态
 	@handler UpdateOrderReturnReasonStatus
-	post /updateOrderReturnReasonStatus (UpdateOrderReturnReasonStatusReq) returns (BaseResp)
+	post /updateReturnReasonStatus (UpdateOrderReturnReasonStatusReq) returns (BaseResp)
 
-	// 查询退货原因表详情
+	// 查询退货原因详情
 	@handler QueryOrderReturnReasonDetail
-	get /queryOrderReturnReasonDetail (QueryOrderReturnReasonDetailReq) returns (QueryOrderReturnReasonDetailResp)
+	get /queryReturnReasonDetail (QueryOrderReturnReasonDetailReq) returns (QueryOrderReturnReasonDetailResp)
 
-	// 分页查询退货原因表列表
+	// 分页查询退货原因列表
 	@handler QueryOrderReturnReasonList
-	get /queryOrderReturnReasonList (QueryOrderReturnReasonListReq) returns (QueryOrderReturnReasonListResp)
+	get /queryReturnReasonList (QueryOrderReturnReasonListReq) returns (QueryOrderReturnReasonListResp)
 }
 

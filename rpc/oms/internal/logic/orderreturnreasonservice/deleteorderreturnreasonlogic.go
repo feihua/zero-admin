@@ -4,18 +4,16 @@ import (
 	"context"
 	"errors"
 	"github.com/feihua/zero-admin/rpc/oms/gen/query"
-	"github.com/zeromicro/go-zero/core/logc"
-
 	"github.com/feihua/zero-admin/rpc/oms/internal/svc"
 	"github.com/feihua/zero-admin/rpc/oms/omsclient"
-
+	"github.com/zeromicro/go-zero/core/logc"
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
 // DeleteOrderReturnReasonLogic 删除退货原因
 /*
 Author: LiuFeiHua
-Date: 2024/6/12 10:18
+Date: 2025/05/26 15:21:44
 */
 type DeleteOrderReturnReasonLogic struct {
 	ctx    context.Context
@@ -34,6 +32,7 @@ func NewDeleteOrderReturnReasonLogic(ctx context.Context, svcCtx *svc.ServiceCon
 // DeleteOrderReturnReason 删除退货原因
 func (l *DeleteOrderReturnReasonLogic) DeleteOrderReturnReason(in *omsclient.DeleteOrderReturnReasonReq) (*omsclient.DeleteOrderReturnReasonResp, error) {
 	q := query.OmsOrderReturnReason
+
 	_, err := q.WithContext(l.ctx).Where(q.ID.In(in.Ids...)).Delete()
 
 	if err != nil {

@@ -2,7 +2,7 @@ import "../base/base.api"
 
 info (
 	desc:   "订单设置"
-	author: "liufeihua"
+	author: "LiuFeiHua"
 	email:  "1002219331@qq.com"
 )
 
@@ -23,7 +23,7 @@ type (
 	}
 	// 更新订单设置请求参数
 	UpdateOrderSettingReq {
-		Id                  int64 `json:"id"` //
+		Id                  int64 `json:"id"` //主键ID
 		FlashOrderOvertime  int32 `json:"flashOrderOvertime"` //秒杀订单超时关闭时间(分)
 		NormalOrderOvertime int32 `json:"normalOrderOvertime"` //正常订单超时时间(分)
 		ConfirmOvertime     int32 `json:"confirmOvertime"` //发货后自动确认收货时间（天）
@@ -32,29 +32,28 @@ type (
 		IsDefault           int32 `json:"isDefault"` //是否默认：0->否；1->是
 		CommentOvertime     int32 `json:"commentOvertime"` //订单完成后自动好评时间（天）
 	}
-	// 更新订单设置表状态
-	UpdateOrderSettingIsDefaultReq {
-		Id        int64 `json:"id"` //
-		IsDefault int32 `json:"isDefault"` //是否默认：0->否；1->是
-	}
 	// 更新订单设置状态请求参数
 	UpdateOrderSettingStatusReq {
-		Ids    []int64 `json:"ids"` //
-		Status int32   `json:"status,default=2"` //状态：0->禁用；1->启用
+		Id     int64 `json:"id"` //主键ID
+		Status int32 `json:"status"` //状态：0->禁用；1->启用
 	}
 	// 查询订单设置详情请求参数
 	QueryOrderSettingDetailReq {
 		Id int64 `form:"id"`
 	}
 	QueryOrderSettingDetailData {
-		Id                  int64 `json:"id"` //
-		FlashOrderOvertime  int32 `json:"flashOrderOvertime"` //秒杀订单超时关闭时间(分)
-		NormalOrderOvertime int32 `json:"normalOrderOvertime"` //正常订单超时时间(分)
-		ConfirmOvertime     int32 `json:"confirmOvertime"` //发货后自动确认收货时间（天）
-		FinishOvertime      int32 `json:"finishOvertime"` //自动完成交易时间，不能申请售后（天）
-		Status              int32 `json:"status"` //状态：0->禁用；1->启用
-		IsDefault           int32 `json:"isDefault"` //是否默认：0->否；1->是
-		CommentOvertime     int32 `json:"commentOvertime"` //订单完成后自动好评时间（天）
+		Id                  int64  `json:"id"` //主键ID
+		FlashOrderOvertime  int32  `json:"flashOrderOvertime"` //秒杀订单超时关闭时间(分)
+		NormalOrderOvertime int32  `json:"normalOrderOvertime"` //正常订单超时时间(分)
+		ConfirmOvertime     int32  `json:"confirmOvertime"` //发货后自动确认收货时间（天）
+		FinishOvertime      int32  `json:"finishOvertime"` //自动完成交易时间，不能申请售后（天）
+		Status              int32  `json:"status"` //状态：0->禁用；1->启用
+		IsDefault           int32  `json:"isDefault"` //是否默认：0->否；1->是
+		CommentOvertime     int32  `json:"commentOvertime"` //订单完成后自动好评时间（天）
+		CreateBy            int64  `json:"createBy"` //创建人ID
+		CreateTime          string `json:"createTime"` //创建时间
+		UpdateBy            int64  `json:"updateBy"` //更新人ID
+		UpdateTime          string `json:"updateTime"` //更新时间
 	}
 	QueryOrderSettingDetailResp {
 		Code    string                      `json:"code"`
@@ -63,26 +62,36 @@ type (
 	}
 	// 分页查询订单设置列表请求参数
 	QueryOrderSettingListReq {
-		Current  int64 `form:"current,default=1"` //第几页
-		PageSize int64 `form:"pageSize,default=20"` //每页的数量
-		Status   int32 `form:"status,default=2"` //状态：0->禁用；1->启用
+		Current             int32 `form:"current,default=1"` //第几页
+		PageSize            int32 `form:"pageSize,default=20"` //每页的数量
+		FlashOrderOvertime  int32 `json:"flashOrderOvertime,optional"` //秒杀订单超时关闭时间(分)
+		NormalOrderOvertime int32 `json:"normalOrderOvertime,optional"` //正常订单超时时间(分)
+		ConfirmOvertime     int32 `json:"confirmOvertime,optional"` //发货后自动确认收货时间（天）
+		FinishOvertime      int32 `json:"finishOvertime,optional"` //自动完成交易时间，不能申请售后（天）
+		Status              int32 `json:"status,default=2"` //状态：0->禁用；1->启用
+		IsDefault           int32 `json:"isDefault,optional"` //是否默认：0->否；1->是
+		CommentOvertime     int32 `json:"commentOvertime,optional"` //订单完成后自动好评时间（天）
 	}
 	QueryOrderSettingListData {
-		Id                  int64 `json:"id"` //
-		FlashOrderOvertime  int32 `json:"flashOrderOvertime"` //秒杀订单超时关闭时间(分)
-		NormalOrderOvertime int32 `json:"normalOrderOvertime"` //正常订单超时时间(分)
-		ConfirmOvertime     int32 `json:"confirmOvertime"` //发货后自动确认收货时间（天）
-		FinishOvertime      int32 `json:"finishOvertime"` //自动完成交易时间，不能申请售后（天）
-		Status              int32 `json:"status"` //状态：0->禁用；1->启用
-		IsDefault           int32 `json:"isDefault"` //是否默认：0->否；1->是
-		CommentOvertime     int32 `json:"commentOvertime"` //订单完成后自动好评时间（天）
+		Id                  int64  `json:"id"` //主键ID
+		FlashOrderOvertime  int32  `json:"flashOrderOvertime"` //秒杀订单超时关闭时间(分)
+		NormalOrderOvertime int32  `json:"normalOrderOvertime"` //正常订单超时时间(分)
+		ConfirmOvertime     int32  `json:"confirmOvertime"` //发货后自动确认收货时间（天）
+		FinishOvertime      int32  `json:"finishOvertime"` //自动完成交易时间，不能申请售后（天）
+		Status              int32  `json:"status"` //状态：0->禁用；1->启用
+		IsDefault           int32  `json:"isDefault"` //是否默认：0->否；1->是
+		CommentOvertime     int32  `json:"commentOvertime"` //订单完成后自动好评时间（天）
+		CreateBy            int64  `json:"createBy"` //创建人ID
+		CreateTime          string `json:"createTime"` //创建时间
+		UpdateBy            int64  `json:"updateBy"` //更新人ID
+		UpdateTime          string `json:"updateTime"` //更新时间
 	}
 	QueryOrderSettingListResp {
 		Code     string                       `json:"code"`
 		Message  string                       `json:"message"`
-		Current  int64                        `json:"current,default=1"`
+		Current  int32                        `json:"current,default=1"`
 		Data     []*QueryOrderSettingListData `json:"data"`
-		PageSize int64                        `json:"pageSize,default=20"`
+		PageSize int32                        `json:"pageSize,default=20"`
 		Success  bool                         `json:"success"`
 		Total    int64                        `json:"total"`
 	}
@@ -109,7 +118,7 @@ service admin-api {
 
 	// 更新订单设置表是否默认状态
 	@handler UpdateOrderSettingIsDefault
-	post /updateOrderSettingIsDefault (UpdateOrderSettingIsDefaultReq) returns (BaseResp)
+	post /updateOrderSettingIsDefault (UpdateOrderSettingStatusReq) returns (BaseResp)
 
 	// 更新订单设置状态
 	@handler UpdateOrderSettingStatus

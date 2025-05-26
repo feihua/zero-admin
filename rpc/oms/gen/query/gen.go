@@ -20,6 +20,7 @@ var (
 	OmsCartItem            *omsCartItem
 	OmsCompanyAddress      *omsCompanyAddress
 	OmsOrder               *omsOrder
+	OmsOrderDelivery       *omsOrderDelivery
 	OmsOrderItem           *omsOrderItem
 	OmsOrderOperateHistory *omsOrderOperateHistory
 	OmsOrderReturnApply    *omsOrderReturnApply
@@ -32,6 +33,7 @@ func SetDefault(db *gorm.DB, opts ...gen.DOOption) {
 	OmsCartItem = &Q.OmsCartItem
 	OmsCompanyAddress = &Q.OmsCompanyAddress
 	OmsOrder = &Q.OmsOrder
+	OmsOrderDelivery = &Q.OmsOrderDelivery
 	OmsOrderItem = &Q.OmsOrderItem
 	OmsOrderOperateHistory = &Q.OmsOrderOperateHistory
 	OmsOrderReturnApply = &Q.OmsOrderReturnApply
@@ -45,6 +47,7 @@ func Use(db *gorm.DB, opts ...gen.DOOption) *Query {
 		OmsCartItem:            newOmsCartItem(db, opts...),
 		OmsCompanyAddress:      newOmsCompanyAddress(db, opts...),
 		OmsOrder:               newOmsOrder(db, opts...),
+		OmsOrderDelivery:       newOmsOrderDelivery(db, opts...),
 		OmsOrderItem:           newOmsOrderItem(db, opts...),
 		OmsOrderOperateHistory: newOmsOrderOperateHistory(db, opts...),
 		OmsOrderReturnApply:    newOmsOrderReturnApply(db, opts...),
@@ -59,6 +62,7 @@ type Query struct {
 	OmsCartItem            omsCartItem
 	OmsCompanyAddress      omsCompanyAddress
 	OmsOrder               omsOrder
+	OmsOrderDelivery       omsOrderDelivery
 	OmsOrderItem           omsOrderItem
 	OmsOrderOperateHistory omsOrderOperateHistory
 	OmsOrderReturnApply    omsOrderReturnApply
@@ -74,6 +78,7 @@ func (q *Query) clone(db *gorm.DB) *Query {
 		OmsCartItem:            q.OmsCartItem.clone(db),
 		OmsCompanyAddress:      q.OmsCompanyAddress.clone(db),
 		OmsOrder:               q.OmsOrder.clone(db),
+		OmsOrderDelivery:       q.OmsOrderDelivery.clone(db),
 		OmsOrderItem:           q.OmsOrderItem.clone(db),
 		OmsOrderOperateHistory: q.OmsOrderOperateHistory.clone(db),
 		OmsOrderReturnApply:    q.OmsOrderReturnApply.clone(db),
@@ -96,6 +101,7 @@ func (q *Query) ReplaceDB(db *gorm.DB) *Query {
 		OmsCartItem:            q.OmsCartItem.replaceDB(db),
 		OmsCompanyAddress:      q.OmsCompanyAddress.replaceDB(db),
 		OmsOrder:               q.OmsOrder.replaceDB(db),
+		OmsOrderDelivery:       q.OmsOrderDelivery.replaceDB(db),
 		OmsOrderItem:           q.OmsOrderItem.replaceDB(db),
 		OmsOrderOperateHistory: q.OmsOrderOperateHistory.replaceDB(db),
 		OmsOrderReturnApply:    q.OmsOrderReturnApply.replaceDB(db),
@@ -108,6 +114,7 @@ type queryCtx struct {
 	OmsCartItem            IOmsCartItemDo
 	OmsCompanyAddress      IOmsCompanyAddressDo
 	OmsOrder               IOmsOrderDo
+	OmsOrderDelivery       IOmsOrderDeliveryDo
 	OmsOrderItem           IOmsOrderItemDo
 	OmsOrderOperateHistory IOmsOrderOperateHistoryDo
 	OmsOrderReturnApply    IOmsOrderReturnApplyDo
@@ -120,6 +127,7 @@ func (q *Query) WithContext(ctx context.Context) *queryCtx {
 		OmsCartItem:            q.OmsCartItem.WithContext(ctx),
 		OmsCompanyAddress:      q.OmsCompanyAddress.WithContext(ctx),
 		OmsOrder:               q.OmsOrder.WithContext(ctx),
+		OmsOrderDelivery:       q.OmsOrderDelivery.WithContext(ctx),
 		OmsOrderItem:           q.OmsOrderItem.WithContext(ctx),
 		OmsOrderOperateHistory: q.OmsOrderOperateHistory.WithContext(ctx),
 		OmsOrderReturnApply:    q.OmsOrderReturnApply.WithContext(ctx),

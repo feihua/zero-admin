@@ -33,14 +33,13 @@ func NewBrandListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *BrandLi
 
 // BrandList 品牌列表
 func (l *BrandListLogic) BrandList() (*types.BrandListResp, error) {
-	req := &pmsclient.QueryBrandListReq{
-		PageNum:       1,
-		PageSize:      100,
-		Name:          "",
-		FactoryStatus: 2,
-		ShowStatus:    1,
+	req := &pmsclient.QueryProductBrandListReq{
+		PageNum:   1,
+		PageSize:  100,
+		Name:      "",
+		IsEnabled: 1,
 	}
-	resp, err := l.svcCtx.BrandService.QueryBrandList(l.ctx, req)
+	resp, err := l.svcCtx.ProductBrandService.QueryProductBrandList(l.ctx, req)
 
 	if err != nil {
 		logc.Errorf(l.ctx, "参数: %+v,查询商品品牌列表异常:%s", req, err.Error())

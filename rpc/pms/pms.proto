@@ -4,168 +4,6 @@ package pmsclient;
 
 option go_package = "./pmsclient";
 
-// 添加品牌表
-message AddBrandReq {
-  int64 id = 1; //
-  string name = 2; //品牌名称
-  string first_letter = 3; //首字母
-  int32 sort = 4; //排序
-  int32 factory_status = 5; //是否为品牌制造商：0->不是；1->是
-  int32 show_status = 6; //品牌显示状态
-  int32 recommend_status = 7; //推荐状态
-  int32 product_count = 8; //产品数量
-  int32 product_comment_count = 9; //产品评论数量
-  string logo = 10; //品牌logo
-  string big_pic = 11; //专区大图
-  string brand_story = 12; //品牌故事
-  string create_by = 13; //创建者
-}
-
-message AddBrandResp {
-  int64 brand_id = 1;
-}
-
-// 删除品牌表
-message DeleteBrandReq {
-  repeated int64 ids = 1;
-}
-
-message DeleteBrandResp {
-  string pong = 1;
-}
-
-// 更新品牌表
-message UpdateBrandReq {
-  int64 id = 1; //
-  string name = 2; //品牌名称
-  string first_letter = 3; //首字母
-  int32 sort = 4; //排序
-  int32 factory_status = 5; //是否为品牌制造商：0->不是；1->是
-  int32 show_status = 6; //品牌显示状态
-  int32 recommend_status = 7; //推荐状态
-  int32 product_count = 8; //产品数量
-  int32 product_comment_count = 9; //产品评论数量
-  string logo = 10; //品牌logo
-  string big_pic = 11; //专区大图
-  string brand_story = 12; //品牌故事
-  string update_by = 15; //更新者
-
-
-}
-
-message UpdateBrandResp {
-  string pong = 1;
-}
-
-
-
-// 查询品牌表详情
-message QueryBrandDetailReq {
-    int64 id = 1;
-}
-
-message QueryBrandDetailResp {
-  int64 id = 1; //
-  string name = 2; //品牌名称
-  string first_letter = 3; //首字母
-  int32 sort = 4; //排序
-  int32 factory_status = 5; //是否为品牌制造商：0->不是；1->是
-  int32 show_status = 6; //品牌显示状态
-  int32 recommend_status = 7; //推荐状态
-  int32 product_count = 8; //产品数量
-  int32 product_comment_count = 9; //产品评论数量
-  string logo = 10; //品牌logo
-  string big_pic = 11; //专区大图
-  string brand_story = 12; //品牌故事
-  string create_by = 13; //创建者
-  string create_time = 14; //创建时间
-  string update_by = 15; //更新者
-  string update_time = 16; //更新时间
-
-}
-
-// 分页查询品牌表列表
-message QueryBrandListReq {
-  int64 page_num = 1; //第几页
-  int64 page_size = 2; //每页的数量
-  int32 factory_status = 3; //是否为品牌制造商：0->不是；1->是
-  int32 recommend_status = 4; //推荐状态
-  int32 show_status = 5; //品牌显示状态
-  string name = 6; //品牌名称
-}
-
-message BrandListData {
-  int64 id = 1; //
-  string name = 2; //品牌名称
-  string first_letter = 3; //首字母
-  int32 sort = 4; //排序
-  int32 factory_status = 5; //是否为品牌制造商：0->不是；1->是
-  int32 show_status = 6; //品牌显示状态
-  int32 recommend_status = 7; //推荐状态
-  int32 product_count = 8; //产品数量
-  int32 product_comment_count = 9; //产品评论数量
-  string logo = 10; //品牌logo
-  string big_pic = 11; //专区大图
-  string brand_story = 12; //品牌故事
-  string create_by = 13; //创建者
-  string create_time = 14; //创建时间
-  string update_by = 15; //更新者
-  string update_time = 16; //更新时间
-
-}
-
-message QueryBrandListResp {
-  int64 total = 1;
-  repeated  BrandListData list = 2;
-}
-
-message QueryBrandListByIdsReq {
-  repeated int64 ids = 1;
-}
-message UpdateBrandShowStatusReq {
-  repeated int64    Ids = 1;
-  int32    ShowStatus = 2;
-}
-
-
-message UpdateBrandFactoryStatusReq {
-  repeated int64    Ids = 1;
-  int32    FactoryStatus = 2;
-}
-
-message UpdateBrandRecommendStatusReq {
-  repeated int64    Ids = 1;
-  int32    RecommendStatus = 2;
-}
-
-message UpdateBrandStatusResp {
-  string pong = 1;
-}
-
-// 品牌表
-service BrandService {
-  // 添加品牌表
-  rpc AddBrand(AddBrandReq) returns (AddBrandResp){}
-  // 删除品牌表
-  rpc DeleteBrand(DeleteBrandReq) returns (DeleteBrandResp){}
-  // 更新品牌表
-  rpc UpdateBrand(UpdateBrandReq) returns (UpdateBrandResp ){}
-  // 查询品牌表详情
-   rpc QueryBrandDetail(QueryBrandDetailReq) returns (QueryBrandDetailResp){}
-  // 查询品牌表列表
-  rpc QueryBrandList(QueryBrandListReq) returns (QueryBrandListResp){}
-
-  rpc QueryBrandListByIds(QueryBrandListByIdsReq) returns(QueryBrandListResp);
-  //更新品牌的显示状态
-  rpc UpdateBrandShowStatus(UpdateBrandShowStatusReq) returns(UpdateBrandStatusResp);
-  //更新品牌是否为品牌制造商
-  rpc UpdateBrandFactoryStatus(UpdateBrandFactoryStatusReq) returns(UpdateBrandStatusResp);
-  //更新品牌的推荐状态
-  rpc UpdateBrandRecommendStatus(UpdateBrandRecommendStatusReq) returns(UpdateBrandStatusResp);
-
-}
-
-
 // 添加商品评价表
 message AddCommentReq {
   int64 id = 1; //
@@ -714,20 +552,19 @@ message QueryProductDetailByIdReq {
 message BrandData {
   int64 id = 1; //
   string name = 2; //品牌名称
-  string first_letter = 3; //首字母
-  int32 sort = 4; //排序
-  int32 factory_status = 5; //是否为品牌制造商：0->不是；1->是
-  int32 show_status = 6; //品牌显示状态
-  int32 recommend_status = 7; //推荐状态
-  int32 product_count = 8; //产品数量
-  int32 product_comment_count = 9; //产品评论数量
-  string logo = 10; //品牌logo
-  string big_pic = 11; //专区大图
-  string brand_story = 12; //品牌故事
-  string create_by = 13; //创建者
-  string create_time = 14; //创建时间
-  string update_by = 15; //更新者
-  string update_time = 16; //更新时间
+  string logo = 3; //品牌logo
+  string big_pic = 4; //专区大图
+  string description = 5; //描述
+  string first_letter = 6; //首字母
+  int32 sort = 7; //排序
+  int32 recommend_status = 8; //推荐状态
+  int32 product_count = 9; //产品数量
+  int32 product_comment_count = 10; //产品评论数量
+  int32 is_enabled = 11; //是否启用
+  int64 create_by = 12; //创建人ID
+  string create_time = 13; //创建时间
+  int64 update_by = 14; //更新人ID
+  string update_time = 15; //更新时间
 
 }
 message ProductAttributeDataList {
@@ -1085,21 +922,164 @@ service ProductAttributeValueService {
 }
 
 
+// 添加商品品牌
+message AddProductBrandReq {
+  int64 id = 1; //
+  string name = 2; //品牌名称
+  string logo = 3; //品牌logo
+  string big_pic = 4; //专区大图
+  string description = 5; //描述
+  string first_letter = 6; //首字母
+  int32 sort = 7; //排序
+  int32 recommend_status = 8; //推荐状态
+  int32 product_count = 9; //产品数量
+  int32 product_comment_count = 10; //产品评论数量
+  int32 is_enabled = 11; //是否启用
+  int64 create_by = 12; //创建人ID
+}
+
+message AddProductBrandResp {
+  int64 brand_id = 1;
+}
+
+// 删除商品品牌
+message DeleteProductBrandReq {
+  repeated int64 ids = 1;
+}
+
+message DeleteProductBrandResp {
+  string pong = 1;
+}
+
+// 更新商品品牌
+message UpdateProductBrandReq {
+  int64 id = 1; //
+  string name = 2; //品牌名称
+  string logo = 3; //品牌logo
+  string big_pic = 4; //专区大图
+  string description = 5; //描述
+  string first_letter = 6; //首字母
+  int32 sort = 7; //排序
+  int32 recommend_status = 8; //推荐状态
+  int32 product_count = 9; //产品数量
+  int32 product_comment_count = 10; //产品评论数量
+  int32 is_enabled = 11; //是否启用
+  int64 update_by = 14; //更新人ID
+}
+
+message UpdateProductBrandResp {
+  string pong = 1;
+}
+
+// 更新商品品牌状态
+message UpdateProductBrandStatusReq {
+  repeated int64 ids = 1; //
+  int32 status = 2; //推荐状态
+  int64 update_by = 3; //更新人ID
+}
+
+message UpdateProductBrandStatusResp {
+  string pong = 1;
+}
+
+// 查询商品品牌详情
+message QueryProductBrandDetailReq {
+    int64 id = 1;
+}
+
+message QueryProductBrandDetailResp {
+  int64 id = 1; //
+  string name = 2; //品牌名称
+  string logo = 3; //品牌logo
+  string big_pic = 4; //专区大图
+  string description = 5; //描述
+  string first_letter = 6; //首字母
+  int32 sort = 7; //排序
+  int32 recommend_status = 8; //推荐状态
+  int32 product_count = 9; //产品数量
+  int32 product_comment_count = 10; //产品评论数量
+  int32 is_enabled = 11; //是否启用
+  int64 create_by = 12; //创建人ID
+  string create_time = 13; //创建时间
+  int64 update_by = 14; //更新人ID
+  string update_time = 15; //更新时间
+
+}
+
+// 分页查询商品品牌列表
+message QueryProductBrandListReq {
+  string name = 1; //品牌名称
+  int32 recommend_status = 2; //推荐状态
+  int32 is_enabled = 3; //是否启用
+  int32 page_num = 4; //第几页
+  int32 page_size = 5; //每页的数量
+}
+
+message ProductBrandListData {
+  int64 id = 1; //
+  string name = 2; //品牌名称
+  string logo = 3; //品牌logo
+  string big_pic = 4; //专区大图
+  string description = 5; //描述
+  string first_letter = 6; //首字母
+  int32 sort = 7; //排序
+  int32 recommend_status = 8; //推荐状态
+  int32 product_count = 9; //产品数量
+  int32 product_comment_count = 10; //产品评论数量
+  int32 is_enabled = 11; //是否启用
+  int64 create_by = 12; //创建人ID
+  string create_time = 13; //创建时间
+  int64 update_by = 14; //更新人ID
+  string update_time = 15; //更新时间
+
+}
+
+message QueryProductBrandListResp {
+  int64 total = 1;
+  repeated  ProductBrandListData list = 2;
+}
+
+message QueryBrandListByIdsReq {
+  repeated int64 ids = 1;
+}
+
+// 商品品牌
+service ProductBrandService {
+  // 添加商品品牌
+  rpc AddProductBrand(AddProductBrandReq) returns (AddProductBrandResp){}
+  // 删除商品品牌
+  rpc DeleteProductBrand(DeleteProductBrandReq) returns (DeleteProductBrandResp){}
+  // 更新商品品牌
+  rpc UpdateProductBrand(UpdateProductBrandReq) returns (UpdateProductBrandResp ){}
+  // 更新商品品牌状态
+  rpc UpdateProductBrandStatus(UpdateProductBrandStatusReq) returns (UpdateProductBrandStatusResp ){}
+  // 查询商品品牌详情
+   rpc QueryProductBrandDetail(QueryProductBrandDetailReq) returns (QueryProductBrandDetailResp){}
+  // 查询商品品牌列表
+  rpc QueryProductBrandList(QueryProductBrandListReq) returns (QueryProductBrandListResp){}
+
+  rpc QueryBrandListByIds(QueryBrandListByIdsReq) returns(QueryProductBrandListResp);
+  //更新品牌的推荐状态
+  rpc UpdateBrandRecommendStatus(UpdateProductBrandStatusReq) returns(UpdateProductBrandStatusResp);
+
+}
+
+
 // 添加产品分类
 message AddProductCategoryReq {
   int64 id = 1; //
-  int64 parent_id = 2; //上机分类的编号：0表示一级分类
+  int64 parent_id = 2; //上级分类的编号：0表示一级分类
   string name = 3; //商品分类名称
   int32 level = 4; //分类级别：0->1级；1->2级
-  int32 product_count = 5; //商品数量
-  string product_unit = 6; //商品数量
+  string product_unit = 6; //商品单位
   int32 nav_status = 7; //是否显示在导航栏：0->不显示；1->显示
-  int32 show_status = 8; //显示状态：0->不显示；1->显示
-  int32 sort = 9; //排序
-  string icon = 10; //图标
-  string keywords = 11; //关键字
-  string description = 12; //描述/
-  repeated int64 ProductAttributeIdList = 13;
+  int32 sort = 8; //排序
+  string icon = 9; //图标
+  string keywords = 10; //关键字
+  string description = 11; //描述
+  int32 is_enabled = 12; //是否启用
+  int64 create_by = 13; //创建人ID
+  repeated int64 ProductAttributeIdList = 14;
 }
 
 message AddProductCategoryResp {
@@ -1118,18 +1098,18 @@ message DeleteProductCategoryResp {
 // 更新产品分类
 message UpdateProductCategoryReq {
   int64 id = 1; //
-  int64 parent_id = 2; //上机分类的编号：0表示一级分类
+  int64 parent_id = 2; //上级分类的编号：0表示一级分类
   string name = 3; //商品分类名称
   int32 level = 4; //分类级别：0->1级；1->2级
-  int32 product_count = 5; //商品数量
-  string product_unit = 6; //商品数量
+  string product_unit = 6; //商品单位
   int32 nav_status = 7; //是否显示在导航栏：0->不显示；1->显示
-  int32 show_status = 8; //显示状态：0->不显示；1->显示
-  int32 sort = 9; //排序
-  string icon = 10; //图标
-  string keywords = 11; //关键字
-  string description = 12; //描述
-  repeated int64 ProductAttributeIdList = 13;
+  int32 sort = 8; //排序
+  string icon = 9; //图标
+  string keywords = 10; //关键字
+  string description = 11; //描述
+  int32 is_enabled = 12; //是否启用
+  int64 update_by = 13; //更新人ID
+  repeated int64 ProductAttributeIdList = 14;
 }
 
 message UpdateProductCategoryResp {
@@ -1139,9 +1119,8 @@ message UpdateProductCategoryResp {
 // 更新产品分类状态
 message UpdateProductCategoryStatusReq {
   repeated int64 ids = 1; //
-  int32 status = 2;
-
-
+  int32 status = 2; //是否显示在导航栏：0->不显示；1->显示
+  int64 update_by = 3; //更新人ID
 }
 
 message UpdateProductCategoryStatusResp {
@@ -1155,43 +1134,52 @@ message QueryProductCategoryDetailReq {
 
 message QueryProductCategoryDetailResp {
   int64 id = 1; //
-  int64 parent_id = 2; //上机分类的编号：0表示一级分类
+  int64 parent_id = 2; //上级分类的编号：0表示一级分类
   string name = 3; //商品分类名称
   int32 level = 4; //分类级别：0->1级；1->2级
   int32 product_count = 5; //商品数量
-  string product_unit = 6; //商品数量
+  string product_unit = 6; //商品单位
   int32 nav_status = 7; //是否显示在导航栏：0->不显示；1->显示
-  int32 show_status = 8; //显示状态：0->不显示；1->显示
-  int32 sort = 9; //排序
-  string icon = 10; //图标
-  string keywords = 11; //关键字
-  string description = 12; //描述
+  int32 sort = 8; //排序
+  string icon = 9; //图标
+  string keywords = 10; //关键字
+  string description = 11; //描述
+  int32 is_enabled = 12; //是否启用
+  int64 create_by = 13; //创建人ID
+  string create_time = 14; //创建时间
+  int64 update_by = 15; //更新人ID
+  string update_time = 16; //更新时间
 
 }
 
 // 分页查询产品分类列表
 message QueryProductCategoryListReq {
-  int64 page_num = 1; //第几页
-  int64 page_size = 2; //每页的数量
-  string name = 3; //
-  int32 nav_status = 4; //是否显示在导航栏：0->不显示；1->显示
-  int32 show_status = 5; //显示状态：0->不显示；1->显示
-  int64 parent_id = 6; //上机分类的编号：0表示一级分类
+  string name = 1; //商品分类名称
+  int32 nav_status = 2; //是否显示在导航栏：0->不显示；1->显示
+  string keywords = 3; //关键字
+  int32 is_enabled = 4; //是否启用
+  int32 page_num = 5; //第几页
+  int32 page_size = 6; //每页的数量
+  int64 parent_id = 7; //上级分类的编号：0表示一级分类
 }
 
 message ProductCategoryListData {
   int64 id = 1; //
-  int64 parent_id = 2; //上机分类的编号：0表示一级分类
+  int64 parent_id = 2; //上级分类的编号：0表示一级分类
   string name = 3; //商品分类名称
   int32 level = 4; //分类级别：0->1级；1->2级
   int32 product_count = 5; //商品数量
-  string product_unit = 6; //商品数量
+  string product_unit = 6; //商品单位
   int32 nav_status = 7; //是否显示在导航栏：0->不显示；1->显示
-  int32 show_status = 8; //显示状态：0->不显示；1->显示
-  int32 sort = 9; //排序
-  string icon = 10; //图标
-  string keywords = 11; //关键字
-  string description = 12; //描述
+  int32 sort = 8; //排序
+  string icon = 9; //图标
+  string keywords = 10; //关键字
+  string description = 11; //描述
+  int32 is_enabled = 12; //是否启用
+  int64 create_by = 13; //创建人ID
+  string create_time = 14; //创建时间
+  int64 update_by = 15; //更新人ID
+  string update_time = 16; //更新时间
 
 }
 
@@ -1224,7 +1212,7 @@ service ProductCategoryService {
   //更新商品分类导航显示状态
   rpc UpdateCategoryNavStatus(UpdateProductCategoryStatusReq) returns(UpdateProductCategoryStatusResp);
   //更新商品分类显示状态
-  rpc UpdateCategoryShowStatus(UpdateProductCategoryStatusReq) returns(UpdateProductCategoryStatusResp);
+  rpc UpdateProductCategoryStatus(UpdateProductCategoryStatusReq) returns(UpdateProductCategoryStatusResp);
   // 查询产品分类详情
    rpc QueryProductCategoryDetail(QueryProductCategoryDetailReq) returns (QueryProductCategoryDetailResp){}
   // 查询产品分类列表

@@ -7,70 +7,107 @@ info (
 )
 
 type (
+	// 添加产品分类请求参数
 	AddProductCategoryReq {
-		ParentId               int64   `json:"parentId"` //上机分类的编号：0表示一级分类
+		ParentId               int64   `json:"parentId"` //上级分类的编号：0表示一级分类
 		Name                   string  `json:"name"` //商品分类名称
 		Level                  int32   `json:"level"` //分类级别：0->1级；1->2级
+		ProductUnit            string  `json:"productUnit"` //商品单位
 		NavStatus              int32   `json:"navStatus"` //是否显示在导航栏：0->不显示；1->显示
-		ShowStatus             int32   `json:"showStatus"` //显示状态：0->不显示；1->显示
-		ProductUnit            string  `json:"productUnit"`
 		Sort                   int32   `json:"sort"` //排序
 		Icon                   string  `json:"icon"` //图标
 		Keywords               string  `json:"keywords"` //关键字
 		Description            string  `json:"description"` //描述
+		IsEnabled              int32   `json:"isEnabled"` //是否启用
 		ProductAttributeIdList []int64 `json:"productAttributeIdList,optional"` // 商品相关筛选属性集合
 	}
-	ListProductCategoryReq {
-		Current    int64  `form:"current,default=1"`
-		PageSize   int64  `form:"pageSize,default=20"`
-		Name       string `form:"name,optional"`
-		ParentId   int64  `form:"parentId,default=2000"` // 上级分类的编号：0表示一级分类(默认值是无意义的,只是在查询的时候当一个标志使用)
-		ShowStatus int32  `form:"showStatus,default=2"` // 显示状态：0->不显示；1->显示
+	// 删除产品分类请求参数
+	DeleteProductCategoryReq {
+		Ids []int64 `form:"ids"`
 	}
-	ListProductCategoryData {
+	// 更新产品分类请求参数
+	UpdateProductCategoryReq {
+		Id                     int64   `json:"id"` //
+		ParentId               int64   `json:"parentId"` //上级分类的编号：0表示一级分类
+		Name                   string  `json:"name"` //商品分类名称
+		Level                  int32   `json:"level"` //分类级别：0->1级；1->2级
+		ProductUnit            string  `json:"productUnit"` //商品单位
+		NavStatus              int32   `json:"navStatus"` //是否显示在导航栏：0->不显示；1->显示
+		Sort                   int32   `json:"sort"` //排序
+		Icon                   string  `json:"icon"` //图标
+		Keywords               string  `json:"keywords"` //关键字
+		Description            string  `json:"description"` //描述
+		IsEnabled              int32   `json:"isEnabled"` //是否启用
+		ProductAttributeIdList []int64 `json:"productAttributeIdList,optional"` // 商品相关筛选属性集合
+	}
+	// 更新产品分类状态请求参数
+	UpdateProductCategoryStatusReq {
+		Ids    []int64 `json:"ids"` //
+		status int32   `json:"status"` //是否
+	}
+	// 查询产品分类详情请求参数
+	QueryProductCategoryDetailReq {
+		Id int64 `form:"id"`
+	}
+	QueryProductCategoryDetailData {
 		Id           int64  `json:"id"` //
-		ParentId     int64  `json:"parentId"` //上机分类的编号：0表示一级分类
+		ParentId     int64  `json:"parentId"` //上级分类的编号：0表示一级分类
 		Name         string `json:"name"` //商品分类名称
 		Level        int32  `json:"level"` //分类级别：0->1级；1->2级
 		ProductCount int32  `json:"productCount"` //商品数量
-		ProductUnit  string `json:"productUnit"` //商品数量
+		ProductUnit  string `json:"productUnit"` //商品单位
 		NavStatus    int32  `json:"navStatus"` //是否显示在导航栏：0->不显示；1->显示
-		ShowStatus   int32  `json:"showStatus"` //显示状态：0->不显示；1->显示
 		Sort         int32  `json:"sort"` //排序
 		Icon         string `json:"icon"` //图标
 		Keywords     string `json:"keywords"` //关键字
 		Description  string `json:"description"` //描述
+		IsEnabled    int32  `json:"isEnabled"` //是否启用
+		CreateBy     int64  `json:"createBy"` //创建人ID
+		CreateTime   string `json:"createTime"` //创建时间
+		UpdateBy     int64  `json:"updateBy"` //更新人ID
+		UpdateTime   string `json:"updateTime"` //更新时间
 	}
-	ListProductCategoryResp {
-		Code     string                     `json:"code"`
-		Message  string                     `json:"message"`
-		Current  int64                      `json:"current,default=1"`
-		Data     []*ListProductCategoryData `json:"data"`
-		PageSize int64                      `json:"pageSize,default=20"`
-		Success  bool                       `json:"success"`
-		Total    int64                      `json:"total"`
+	QueryProductCategoryDetailResp {
+		Code    string                         `json:"code"`
+		Message string                         `json:"message"`
+		Data    QueryProductCategoryDetailData `json:"data"`
 	}
-	UpdateProductCategoryReq {
-		Id                     int64   `json:"id"`
-		ParentId               int64   `json:"parentId"` //上机分类的编号：0表示一级分类
-		Name                   string  `json:"name"` //商品分类名称
-		Level                  int32   `json:"level"` //分类级别：0->1级；1->2级
-		ProductCount           int32   `json:"productCount"` //商品数量
-		ProductUnit            string  `json:"productUnit"` //商品数量
-		NavStatus              int32   `json:"navStatus"` //是否显示在导航栏：0->不显示；1->显示
-		ShowStatus             int32   `json:"showStatus"` //显示状态：0->不显示；1->显示
-		Sort                   int32   `json:"sort"` //排序
-		Icon                   string  `json:"icon"` //图标
-		Keywords               string  `json:"keywords"` //关键字
-		Description            string  `json:"description"` //描述
-		ProductAttributeIdList []int64 `json:"productAttributeIdList,optional"` // 商品相关筛选属性集合
+	// 分页查询产品分类列表请求参数
+	QueryProductCategoryListReq {
+		Current   int32  `form:"current,default=1"` //第几页
+		PageSize  int32  `form:"pageSize,default=20"` //每页的数量
+		ParentId  int64  `form:"parentId,default=1000"` //上级分类的编号：0表示一级分类
+		Name      string `form:"name,optional"` //商品分类名称
+		NavStatus int32  `form:"navStatus,default=2"` //是否显示在导航栏：0->不显示；1->显示
+		Keywords  string `form:"keywords,optional"` //关键字
+		IsEnabled int32  `form:"isEnabled,default=2"` //是否启用
 	}
-	UpdateProductCategoryStatusReq {
-		Ids    []int64 `json:"ids"`
-		Status int32   `json:"status"` //0->不显示；1->显示
+	QueryProductCategoryListData {
+		Id           int64  `json:"id"` //
+		ParentId     int64  `json:"parentId"` //上级分类的编号：0表示一级分类
+		Name         string `json:"name"` //商品分类名称
+		Level        int32  `json:"level"` //分类级别：0->1级；1->2级
+		ProductCount int32  `json:"productCount"` //商品数量
+		ProductUnit  string `json:"productUnit"` //商品单位
+		NavStatus    int32  `json:"navStatus"` //是否显示在导航栏：0->不显示；1->显示
+		Sort         int32  `json:"sort"` //排序
+		Icon         string `json:"icon"` //图标
+		Keywords     string `json:"keywords"` //关键字
+		Description  string `json:"description"` //描述
+		IsEnabled    int32  `json:"isEnabled"` //是否启用
+		CreateBy     int64  `json:"createBy"` //创建人ID
+		CreateTime   string `json:"createTime"` //创建时间
+		UpdateBy     int64  `json:"updateBy"` //更新人ID
+		UpdateTime   string `json:"updateTime"` //更新时间
 	}
-	DeleteProductCategoryReq {
-		Ids []int64 `form:"ids"`
+	QueryProductCategoryListResp {
+		Code     string                          `json:"code"`
+		Message  string                          `json:"message"`
+		Current  int32                           `json:"current,default=1"`
+		Data     []*QueryProductCategoryListData `json:"data"`
+		PageSize int32                           `json:"pageSize,default=20"`
+		Success  bool                            `json:"success"`
+		Total    int64                           `json:"total"`
 	}
 )
 
@@ -81,28 +118,32 @@ type (
 	prefix:     /api/pms/category
 )
 service admin-api {
-	//添加商品分类
-	@handler ProductCategoryAdd
+	// 添加产品分类
+	@handler AddProductCategory
 	post /addProductCategory (AddProductCategoryReq) returns (BaseResp)
 
-	//查询商品分类
-	@handler ProductCategoryList
-	get /queryProductCategoryList (ListProductCategoryReq) returns (ListProductCategoryResp)
+	// 删除产品分类
+	@handler DeleteProductCategory
+	get /deleteProductCategory (DeleteProductCategoryReq) returns (BaseResp)
 
-	//更新商品分类-是否显示在导航栏：0->不显示；1->显示
-	@handler ProductCategoryUpdate
+	// 更新产品分类
+	@handler UpdateProductCategory
 	post /updateProductCategory (UpdateProductCategoryReq) returns (BaseResp)
 
-	//更新商品分类-是否显示在导航栏：0->不显示；1->显示
-	@handler UpdateCategoryNavStatus
-	post /updateCategoryNavStatus (UpdateProductCategoryStatusReq) returns (BaseResp)
+	// 更新产品分类状态
+	@handler UpdateProductCategoryStatus
+	post /updateProductCategoryStatus (UpdateProductCategoryStatusReq) returns (BaseResp)
 
-	//更新商品分类-显示状态：0->不显示；1->显示
-	@handler UpdateCategoryShowStatus
-	post /updateCategoryShowStatus (UpdateProductCategoryStatusReq) returns (BaseResp)
+	// 更新产品分类状态
+	@handler UpdateProductCategoryNavStatus
+	post /updateProductCategoryNavStatus (UpdateProductCategoryStatusReq) returns (BaseResp)
 
-	//删除商品分类
-	@handler ProductCategoryDelete
-	get /deleteProductCategory (DeleteProductCategoryReq) returns (BaseResp)
+	// 查询产品分类详情
+	@handler QueryProductCategoryDetail
+	get /queryProductCategoryDetail (QueryProductCategoryDetailReq) returns (QueryProductCategoryDetailResp)
+
+	// 分页查询产品分类列表
+	@handler QueryProductCategoryList
+	get /queryProductCategoryList (QueryProductCategoryListReq) returns (QueryProductCategoryListResp)
 }
 

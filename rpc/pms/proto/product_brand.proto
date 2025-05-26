@@ -1,0 +1,147 @@
+syntax = "proto3";
+
+package main;
+
+option go_package = "./proto";
+
+// 添加商品品牌
+message AddProductBrandReq {
+  int64 id = 1; //
+  string name = 2; //品牌名称
+  string logo = 3; //品牌logo
+  string big_pic = 4; //专区大图
+  string description = 5; //描述
+  string first_letter = 6; //首字母
+  int32 sort = 7; //排序
+  int32 recommend_status = 8; //推荐状态
+  int32 product_count = 9; //产品数量
+  int32 product_comment_count = 10; //产品评论数量
+  int32 is_enabled = 11; //是否启用
+  int64 create_by = 12; //创建人ID
+}
+
+message AddProductBrandResp {
+  int64 brand_id = 1;
+}
+
+// 删除商品品牌
+message DeleteProductBrandReq {
+  repeated int64 ids = 1;
+}
+
+message DeleteProductBrandResp {
+  string pong = 1;
+}
+
+// 更新商品品牌
+message UpdateProductBrandReq {
+  int64 id = 1; //
+  string name = 2; //品牌名称
+  string logo = 3; //品牌logo
+  string big_pic = 4; //专区大图
+  string description = 5; //描述
+  string first_letter = 6; //首字母
+  int32 sort = 7; //排序
+  int32 recommend_status = 8; //推荐状态
+  int32 product_count = 9; //产品数量
+  int32 product_comment_count = 10; //产品评论数量
+  int32 is_enabled = 11; //是否启用
+  int64 update_by = 14; //更新人ID
+}
+
+message UpdateProductBrandResp {
+  string pong = 1;
+}
+
+// 更新商品品牌状态
+message UpdateProductBrandStatusReq {
+  repeated int64 ids = 1; //
+  int32 status = 2; //推荐状态
+  int64 update_by = 3; //更新人ID
+}
+
+message UpdateProductBrandStatusResp {
+  string pong = 1;
+}
+
+// 查询商品品牌详情
+message QueryProductBrandDetailReq {
+    int64 id = 1;
+}
+
+message QueryProductBrandDetailResp {
+  int64 id = 1; //
+  string name = 2; //品牌名称
+  string logo = 3; //品牌logo
+  string big_pic = 4; //专区大图
+  string description = 5; //描述
+  string first_letter = 6; //首字母
+  int32 sort = 7; //排序
+  int32 recommend_status = 8; //推荐状态
+  int32 product_count = 9; //产品数量
+  int32 product_comment_count = 10; //产品评论数量
+  int32 is_enabled = 11; //是否启用
+  int64 create_by = 12; //创建人ID
+  string create_time = 13; //创建时间
+  int64 update_by = 14; //更新人ID
+  string update_time = 15; //更新时间
+
+}
+
+// 分页查询商品品牌列表
+message QueryProductBrandListReq {
+  string name = 1; //品牌名称
+  int32 recommend_status = 2; //推荐状态
+  int32 is_enabled = 3; //是否启用
+  int32 page_num = 4; //第几页
+  int32 page_size = 5; //每页的数量
+}
+
+message ProductBrandListData {
+  int64 id = 1; //
+  string name = 2; //品牌名称
+  string logo = 3; //品牌logo
+  string big_pic = 4; //专区大图
+  string description = 5; //描述
+  string first_letter = 6; //首字母
+  int32 sort = 7; //排序
+  int32 recommend_status = 8; //推荐状态
+  int32 product_count = 9; //产品数量
+  int32 product_comment_count = 10; //产品评论数量
+  int32 is_enabled = 11; //是否启用
+  int64 create_by = 12; //创建人ID
+  string create_time = 13; //创建时间
+  int64 update_by = 14; //更新人ID
+  string update_time = 15; //更新时间
+
+}
+
+message QueryProductBrandListResp {
+  int64 total = 1;
+  repeated  ProductBrandListData list = 2;
+}
+
+message QueryBrandListByIdsReq {
+  repeated int64 ids = 1;
+}
+
+// 商品品牌
+service ProductBrandService {
+  // 添加商品品牌
+  rpc AddProductBrand(AddProductBrandReq) returns (AddProductBrandResp){}
+  // 删除商品品牌
+  rpc DeleteProductBrand(DeleteProductBrandReq) returns (DeleteProductBrandResp){}
+  // 更新商品品牌
+  rpc UpdateProductBrand(UpdateProductBrandReq) returns (UpdateProductBrandResp ){}
+  // 更新商品品牌状态
+  rpc UpdateProductBrandStatus(UpdateProductBrandStatusReq) returns (UpdateProductBrandStatusResp ){}
+  // 查询商品品牌详情
+   rpc QueryProductBrandDetail(QueryProductBrandDetailReq) returns (QueryProductBrandDetailResp){}
+  // 查询商品品牌列表
+  rpc QueryProductBrandList(QueryProductBrandListReq) returns (QueryProductBrandListResp){}
+
+  rpc QueryBrandListByIds(QueryBrandListByIdsReq) returns(QueryProductBrandListResp);
+  //更新品牌的推荐状态
+  rpc UpdateBrandRecommendStatus(UpdateProductBrandStatusReq) returns(UpdateProductBrandStatusResp);
+
+}

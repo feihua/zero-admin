@@ -48,8 +48,8 @@ type PmsProduct struct {
 	DetailDesc                 string     `gorm:"column:detail_desc;not null;comment:详情描述" json:"detail_desc"`                                                                // 详情描述
 	DetailHTML                 string     `gorm:"column:detail_html;not null;comment:产品详情网页内容" json:"detail_html"`                                                            // 产品详情网页内容
 	DetailMobileHTML           string     `gorm:"column:detail_mobile_html;not null;comment:移动端网页详情" json:"detail_mobile_html"`                                               // 移动端网页详情
-	PromotionStartTime         time.Time  `gorm:"column:promotion_start_time;not null;comment:促销开始时间" json:"promotion_start_time"`                                            // 促销开始时间
-	PromotionEndTime           time.Time  `gorm:"column:promotion_end_time;not null;comment:促销结束时间" json:"promotion_end_time"`                                                // 促销结束时间
+	PromotionStartTime         *time.Time `gorm:"column:promotion_start_time;comment:促销开始时间" json:"promotion_start_time"`                                                     // 促销开始时间
+	PromotionEndTime           *time.Time `gorm:"column:promotion_end_time;comment:促销结束时间" json:"promotion_end_time"`                                                         // 促销结束时间
 	PromotionPerLimit          int32      `gorm:"column:promotion_per_limit;not null;comment:活动限购数量" json:"promotion_per_limit"`                                              // 活动限购数量
 	PromotionType              int32      `gorm:"column:promotion_type;not null;comment:促销类型：0->没有促销使用原价;1->使用促销价；2->使用会员价；3->使用阶梯价格；4->使用满减价格；5->限时购" json:"promotion_type"` // 促销类型：0->没有促销使用原价;1->使用促销价；2->使用会员价；3->使用阶梯价格；4->使用满减价格；5->限时购
 	BrandName                  string     `gorm:"column:brand_name;not null;comment:品牌名称" json:"brand_name"`                                                                  // 品牌名称

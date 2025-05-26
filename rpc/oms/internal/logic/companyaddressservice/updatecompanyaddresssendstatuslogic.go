@@ -33,10 +33,10 @@ func NewUpdateCompanyAddressSendStatusLogic(ctx context.Context, svcCtx *svc.Ser
 }
 
 // UpdateCompanyAddressSendStatus 更新公司收发货地址状态
-func (l *UpdateCompanyAddressSendStatusLogic) UpdateCompanyAddressSendStatus(in *omsclient.UpdateCompanyAddressSendStatusReq) (*omsclient.UpdateCompanyAddressStatusResp, error) {
+func (l *UpdateCompanyAddressSendStatusLogic) UpdateCompanyAddressSendStatus(in *omsclient.UpdateCompanyAddressStatusReq) (*omsclient.UpdateCompanyAddressStatusResp, error) {
 	err := query.Q.Transaction(func(tx *query.Query) error {
 		q := tx.OmsCompanyAddress
-		address, err := q.WithContext(l.ctx).Where(q.ID.Eq(in.Id)).First()
+		_, err := q.WithContext(l.ctx).Where(q.ID.Eq(in.Id)).First()
 
 		switch {
 		case errors.Is(err, gorm.ErrRecordNotFound):
@@ -45,15 +45,14 @@ func (l *UpdateCompanyAddressSendStatusLogic) UpdateCompanyAddressSendStatus(in 
 			logc.Errorf(l.ctx, "查询公司收发货地址异常, 请求参数：%+v, 异常信息: %s", in, err.Error())
 			return errors.New("查询公司收发货地址异常")
 		}
-		if in.SendStatus == 1 {
-			_, err = q.WithContext(l.ctx).Where(q.SendStatus.Eq(1)).Update(q.SendStatus, 0)
+		if in.Status == 1 {
+			_, err = q.WithContext(l.ctx).Where(q.SendStatus.Eq(1)).UpdateSimple(q.SendStatus.Value(0), q.UpdateBy.Value(in.UpdateBy))
 			if err != nil {
 				return err
 			}
 		}
-		address.SendStatus = in.SendStatus
-		address.UpdateBy = in.UpdateBy
-		_, err = q.WithContext(l.ctx).Where(q.ID.Eq(in.Id)).Updates(address)
+
+		_, err = q.WithContext(l.ctx).Where(q.ID.Eq(in.Id)).UpdateSimple(q.SendStatus.Value(in.Status), q.UpdateBy.Value(in.UpdateBy))
 		return err
 	})
 

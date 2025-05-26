@@ -6,6 +6,7 @@ package query
 
 import (
 	"context"
+	"database/sql"
 
 	"gorm.io/gorm"
 	"gorm.io/gorm/clause"
@@ -34,13 +35,16 @@ func newPmsProductCategory(db *gorm.DB, opts ...gen.DOOption) pmsProductCategory
 	_pmsProductCategory.ProductCount = field.NewInt32(tableName, "product_count")
 	_pmsProductCategory.ProductUnit = field.NewString(tableName, "product_unit")
 	_pmsProductCategory.NavStatus = field.NewInt32(tableName, "nav_status")
-	_pmsProductCategory.ShowStatus = field.NewInt32(tableName, "show_status")
 	_pmsProductCategory.Sort = field.NewInt32(tableName, "sort")
 	_pmsProductCategory.Icon = field.NewString(tableName, "icon")
 	_pmsProductCategory.Keywords = field.NewString(tableName, "keywords")
 	_pmsProductCategory.Description = field.NewString(tableName, "description")
+	_pmsProductCategory.IsEnabled = field.NewInt32(tableName, "is_enabled")
+	_pmsProductCategory.CreateBy = field.NewInt64(tableName, "create_by")
 	_pmsProductCategory.CreateTime = field.NewTime(tableName, "create_time")
+	_pmsProductCategory.UpdateBy = field.NewInt64(tableName, "update_by")
 	_pmsProductCategory.UpdateTime = field.NewTime(tableName, "update_time")
+	_pmsProductCategory.IsDeleted = field.NewInt32(tableName, "is_deleted")
 
 	_pmsProductCategory.fillFieldMap()
 
@@ -53,19 +57,22 @@ type pmsProductCategory struct {
 
 	ALL          field.Asterisk
 	ID           field.Int64
-	ParentID     field.Int64  // 上机分类的编号：0表示一级分类
+	ParentID     field.Int64  // 上级分类的编号：0表示一级分类
 	Name         field.String // 商品分类名称
 	Level        field.Int32  // 分类级别：0->1级；1->2级
 	ProductCount field.Int32  // 商品数量
-	ProductUnit  field.String // 商品数量
+	ProductUnit  field.String // 商品单位
 	NavStatus    field.Int32  // 是否显示在导航栏：0->不显示；1->显示
-	ShowStatus   field.Int32  // 显示状态：0->不显示；1->显示
 	Sort         field.Int32  // 排序
 	Icon         field.String // 图标
 	Keywords     field.String // 关键字
 	Description  field.String // 描述
+	IsEnabled    field.Int32  // 是否启用
+	CreateBy     field.Int64  // 创建人ID
 	CreateTime   field.Time   // 创建时间
+	UpdateBy     field.Int64  // 更新人ID
 	UpdateTime   field.Time   // 更新时间
+	IsDeleted    field.Int32  // 是否删除
 
 	fieldMap map[string]field.Expr
 }
@@ -89,13 +96,16 @@ func (p *pmsProductCategory) updateTableName(table string) *pmsProductCategory {
 	p.ProductCount = field.NewInt32(table, "product_count")
 	p.ProductUnit = field.NewString(table, "product_unit")
 	p.NavStatus = field.NewInt32(table, "nav_status")
-	p.ShowStatus = field.NewInt32(table, "show_status")
 	p.Sort = field.NewInt32(table, "sort")
 	p.Icon = field.NewString(table, "icon")
 	p.Keywords = field.NewString(table, "keywords")
 	p.Description = field.NewString(table, "description")
+	p.IsEnabled = field.NewInt32(table, "is_enabled")
+	p.CreateBy = field.NewInt64(table, "create_by")
 	p.CreateTime = field.NewTime(table, "create_time")
+	p.UpdateBy = field.NewInt64(table, "update_by")
 	p.UpdateTime = field.NewTime(table, "update_time")
+	p.IsDeleted = field.NewInt32(table, "is_deleted")
 
 	p.fillFieldMap()
 
@@ -124,7 +134,7 @@ func (p *pmsProductCategory) GetFieldByName(fieldName string) (field.OrderExpr, 
 }
 
 func (p *pmsProductCategory) fillFieldMap() {
-	p.fieldMap = make(map[string]field.Expr, 14)
+	p.fieldMap = make(map[string]field.Expr, 17)
 	p.fieldMap["id"] = p.ID
 	p.fieldMap["parent_id"] = p.ParentID
 	p.fieldMap["name"] = p.Name
@@ -132,13 +142,16 @@ func (p *pmsProductCategory) fillFieldMap() {
 	p.fieldMap["product_count"] = p.ProductCount
 	p.fieldMap["product_unit"] = p.ProductUnit
 	p.fieldMap["nav_status"] = p.NavStatus
-	p.fieldMap["show_status"] = p.ShowStatus
 	p.fieldMap["sort"] = p.Sort
 	p.fieldMap["icon"] = p.Icon
 	p.fieldMap["keywords"] = p.Keywords
 	p.fieldMap["description"] = p.Description
+	p.fieldMap["is_enabled"] = p.IsEnabled
+	p.fieldMap["create_by"] = p.CreateBy
 	p.fieldMap["create_time"] = p.CreateTime
+	p.fieldMap["update_by"] = p.UpdateBy
 	p.fieldMap["update_time"] = p.UpdateTime
+	p.fieldMap["is_deleted"] = p.IsDeleted
 }
 
 func (p pmsProductCategory) clone(db *gorm.DB) pmsProductCategory {
@@ -208,6 +221,8 @@ type IPmsProductCategoryDo interface {
 	FirstOrCreate() (*model.PmsProductCategory, error)
 	FindByPage(offset int, limit int) (result []*model.PmsProductCategory, count int64, err error)
 	ScanByPage(result interface{}, offset int, limit int) (count int64, err error)
+	Rows() (*sql.Rows, error)
+	Row() *sql.Row
 	Scan(result interface{}) (err error)
 	Returning(value interface{}, columns ...string) IPmsProductCategoryDo
 	UnderlyingDB() *gorm.DB

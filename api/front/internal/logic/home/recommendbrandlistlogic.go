@@ -50,26 +50,31 @@ func (l *RecommendBrandListLogic) RecommendBrandList(req *types.RecommendBrandLi
 		brandIdLists = append(brandIdLists, item.BrandId)
 	}
 
-	brandListResp, err := l.svcCtx.BrandService.QueryBrandListByIds(l.ctx, &pmsclient.QueryBrandListByIdsReq{Ids: brandIdLists})
+	brandListResp, err := l.svcCtx.ProductBrandService.QueryBrandListByIds(l.ctx, &pmsclient.QueryBrandListByIdsReq{Ids: brandIdLists})
 	if err != nil {
 		logc.Errorf(l.ctx, "分页获取推荐品牌失败,参数: %+v,异常：%s", req, err.Error())
 		s, _ := status.FromError(err)
 		return nil, errorx.NewDefaultError(s.Message())
 	}
 	var brandLists []types.BrandList
-	for _, item := range brandListResp.List {
+	for _, detail := range brandListResp.List {
 
 		brandLists = append(brandLists, types.BrandList{
-			ID:                  item.Id,
-			Name:                item.Name,
-			FirstLetter:         item.FirstLetter,
-			Sort:                item.Sort,
-			FactoryStatus:       item.FactoryStatus,
-			ShowStatus:          item.ShowStatus,
-			ProductCount:        item.ProductCount,
-			ProductCommentCount: item.ProductCommentCount,
-			Logo:                item.Logo,
-			BigPic:              item.BigPic,
+			Id:                  detail.Id,                  //
+			Name:                detail.Name,                // 品牌名称
+			Logo:                detail.Logo,                // 品牌logo
+			BigPic:              detail.BigPic,              // 专区大图
+			Description:         detail.Description,         // 描述
+			FirstLetter:         detail.FirstLetter,         // 首字母
+			Sort:                detail.Sort,                // 排序
+			RecommendStatus:     detail.RecommendStatus,     // 推荐状态
+			ProductCount:        detail.ProductCount,        // 产品数量
+			ProductCommentCount: detail.ProductCommentCount, // 产品评论数量
+			IsEnabled:           detail.IsEnabled,           // 是否启用
+			CreateBy:            detail.CreateBy,            // 创建人ID
+			CreateTime:          detail.CreateTime,          // 创建时间
+			UpdateBy:            detail.UpdateBy,            // 更新人ID
+			UpdateTime:          detail.UpdateTime,          // 更新时间
 		})
 	}
 

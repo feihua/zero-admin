@@ -1,0 +1,128 @@
+syntax = "proto3";
+
+package main;
+
+option go_package = "./proto";
+
+// 添加订单收货地址
+message AddOrderDeliveryReq {
+  int64 id = 1; //
+  int64 order_id = 2; //订单ID
+  string order_no = 3; //订单编号
+  string receiver_name = 4; //收货人姓名
+  string receiver_phone = 5; //收货人电话
+  string receiver_province = 6; //省份
+  string receiver_city = 7; //城市
+  string receiver_district = 8; //区县
+  string receiver_address = 9; //详细地址
+  string delivery_company = 10; //物流公司
+  string delivery_no = 11; //物流单号
+}
+
+message AddOrderDeliveryResp {
+  string pong = 1;
+}
+
+// 删除订单收货地址
+message DeleteOrderDeliveryReq {
+  repeated int64 ids = 1;
+}
+
+message DeleteOrderDeliveryResp {
+  string pong = 1;
+}
+
+// 更新订单收货地址
+message UpdateOrderDeliveryReq {
+  int64 id = 1; //
+  int64 order_id = 2; //订单ID
+  string order_no = 3; //订单编号
+  string receiver_name = 4; //收货人姓名
+  string receiver_phone = 5; //收货人电话
+  string receiver_province = 6; //省份
+  string receiver_city = 7; //城市
+  string receiver_district = 8; //区县
+  string receiver_address = 9; //详细地址
+  string delivery_company = 10; //物流公司
+  string delivery_no = 11; //物流单号
+}
+
+message UpdateOrderDeliveryResp {
+  string pong = 1;
+}
+
+
+// 查询订单收货地址详情
+message QueryOrderDeliveryDetailReq {
+    int64 id = 1;
+}
+
+message QueryOrderDeliveryDetailResp {
+  int64 id = 1; //
+  int64 order_id = 2; //订单ID
+  string order_no = 3; //订单编号
+  string receiver_name = 4; //收货人姓名
+  string receiver_phone = 5; //收货人电话
+  string receiver_province = 6; //省份
+  string receiver_city = 7; //城市
+  string receiver_district = 8; //区县
+  string receiver_address = 9; //详细地址
+  string delivery_company = 10; //物流公司
+  string delivery_no = 11; //物流单号
+  string create_time = 12; //创建时间
+  string update_time = 13; //更新时间
+
+}
+
+// 分页查询订单收货地址列表
+message QueryOrderDeliveryListReq {
+  int64 order_id = 1; //订单ID
+  string order_no = 2; //订单编号
+  string receiver_name = 3; //收货人姓名
+  string receiver_phone = 4; //收货人电话
+  string receiver_address = 5; //详细地址
+  string delivery_company = 6; //物流公司
+  string delivery_no = 7; //物流单号
+  int32 page_num = 8; //第几页
+  int32 page_size = 9; //每页的数量
+}
+
+message OrderDeliveryListData {
+  int64 id = 1; //
+  int64 order_id = 2; //订单ID
+  string order_no = 3; //订单编号
+  string receiver_name = 4; //收货人姓名
+  string receiver_phone = 5; //收货人电话
+  string receiver_province = 6; //省份
+  string receiver_city = 7; //城市
+  string receiver_district = 8; //区县
+  string receiver_address = 9; //详细地址
+  string delivery_company = 10; //物流公司
+  string delivery_no = 11; //物流单号
+  string create_time = 12; //创建时间
+  string update_time = 13; //更新时间
+  int32 is_deleted = 14; //是否删除
+
+}
+
+message QueryOrderDeliveryListResp {
+  int64 total = 1;
+  repeated  OrderDeliveryListData list = 2;
+}
+
+// 订单收货地址
+service OrderDeliveryService {
+  // 添加订单收货地址
+  rpc AddOrderDelivery(AddOrderDeliveryReq) returns (AddOrderDeliveryResp){}
+  // 删除订单收货地址
+  rpc DeleteOrderDelivery(DeleteOrderDeliveryReq) returns (DeleteOrderDeliveryResp){}
+  // 更新订单收货地址
+  rpc UpdateOrderDelivery(UpdateOrderDeliveryReq) returns (UpdateOrderDeliveryResp ){}
+
+  // 查询订单收货地址详情
+   rpc QueryOrderDeliveryDetail(QueryOrderDeliveryDetailReq) returns (QueryOrderDeliveryDetailResp){}
+  // 查询订单收货地址列表
+  rpc QueryOrderDeliveryList(QueryOrderDeliveryListReq) returns (QueryOrderDeliveryListResp){}
+
+
+}

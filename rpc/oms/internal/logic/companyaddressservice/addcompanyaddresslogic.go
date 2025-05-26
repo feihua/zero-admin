@@ -6,18 +6,16 @@ import (
 	"fmt"
 	"github.com/feihua/zero-admin/rpc/oms/gen/model"
 	"github.com/feihua/zero-admin/rpc/oms/gen/query"
-	"github.com/zeromicro/go-zero/core/logc"
-
 	"github.com/feihua/zero-admin/rpc/oms/internal/svc"
 	"github.com/feihua/zero-admin/rpc/oms/omsclient"
-
+	"github.com/zeromicro/go-zero/core/logc"
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
 // AddCompanyAddressLogic 添加公司收发货地址
 /*
 Author: LiuFeiHua
-Date: 2024/6/12 10:10
+Date: 2025/05/26 15:21:43
 */
 type AddCompanyAddressLogic struct {
 	ctx    context.Context
@@ -46,13 +44,13 @@ func (l *AddCompanyAddressLogic) AddCompanyAddress(in *omsclient.AddCompanyAddre
 		if in.ReceiveStatus == 1 {
 			_, err = q.WithContext(l.ctx).Where(q.ReceiveStatus.Eq(1)).Update(q.ReceiveStatus, 0)
 			if err != nil {
-				return err
+				return errors.New(fmt.Sprintf("更新公司默认收货地址失败"))
 			}
 		}
 		if in.SendStatus == 1 {
 			_, err = q.WithContext(l.ctx).Where(q.SendStatus.Eq(1)).Update(q.SendStatus, 0)
 			if err != nil {
-				return err
+				return errors.New(fmt.Sprintf("更新公司默认发货地址失败"))
 			}
 		}
 
@@ -73,7 +71,7 @@ func (l *AddCompanyAddressLogic) AddCompanyAddress(in *omsclient.AddCompanyAddre
 
 	if err != nil {
 		logc.Errorf(l.ctx, "添加公司收发货地址失败,参数:%+v,异常:%s", in, err.Error())
-		return nil, errors.New("添加公司收发货地址失败")
+		return nil, errors.New(err.Error())
 	}
 
 	return &omsclient.AddCompanyAddressResp{}, nil

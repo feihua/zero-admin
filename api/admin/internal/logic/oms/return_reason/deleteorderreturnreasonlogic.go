@@ -3,12 +3,11 @@ package return_reason
 import (
 	"context"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
-	"github.com/feihua/zero-admin/api/admin/internal/common/res"
-	"github.com/feihua/zero-admin/rpc/oms/omsclient"
-	"github.com/zeromicro/go-zero/core/logc"
-
 	"github.com/feihua/zero-admin/api/admin/internal/svc"
 	"github.com/feihua/zero-admin/api/admin/internal/types"
+	"github.com/feihua/zero-admin/rpc/oms/omsclient"
+	"github.com/zeromicro/go-zero/core/logc"
+	"google.golang.org/grpc/status"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -16,7 +15,7 @@ import (
 // DeleteOrderReturnReasonLogic 删除退货原因
 /*
 Author: LiuFeiHua
-Date: 2024/6/15 11:41
+Date: 2025/05/26 15:21:44
 */
 type DeleteOrderReturnReasonLogic struct {
 	logx.Logger
@@ -39,8 +38,13 @@ func (l *DeleteOrderReturnReasonLogic) DeleteOrderReturnReason(req *types.Delete
 	})
 
 	if err != nil {
-		logc.Errorf(l.ctx, "根据Id: %+v,删除退货原因异常:%s", req, err.Error())
-		return nil, errorx.NewDefaultError("删除退货原因失败")
+		logc.Errorf(l.ctx, "删除退货原因失败,参数：%+v,响应：%s", req, err.Error())
+		s, _ := status.FromError(err)
+		return nil, errorx.NewDefaultError(s.Message())
 	}
-	return res.Success()
+
+	return &types.BaseResp{
+		Code:    "000000",
+		Message: "删除退货原因成功",
+	}, nil
 }

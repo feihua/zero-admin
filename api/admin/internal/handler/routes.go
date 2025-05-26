@@ -353,32 +353,32 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			[]rest.Route{
 				{
 					Method:  http.MethodPost,
-					Path:    "/addOrderReturnReason",
+					Path:    "/addReturnReason",
 					Handler: omsreturn_reason.AddOrderReturnReasonHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodGet,
-					Path:    "/deleteOrderReturnReason",
+					Path:    "/deleteReturnReason",
 					Handler: omsreturn_reason.DeleteOrderReturnReasonHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodGet,
-					Path:    "/queryOrderReturnReasonDetail",
+					Path:    "/queryReturnReasonDetail",
 					Handler: omsreturn_reason.QueryOrderReturnReasonDetailHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodGet,
-					Path:    "/queryOrderReturnReasonList",
+					Path:    "/queryReturnReasonList",
 					Handler: omsreturn_reason.QueryOrderReturnReasonListHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
-					Path:    "/updateOrderReturnReason",
+					Path:    "/updateReturnReason",
 					Handler: omsreturn_reason.UpdateOrderReturnReasonHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
-					Path:    "/updateOrderReturnReasonStatus",
+					Path:    "/updateReturnReasonStatus",
 					Handler: omsreturn_reason.UpdateOrderReturnReasonStatusHandler(serverCtx),
 				},
 			}...,
@@ -447,9 +447,9 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			[]rest.Middleware{serverCtx.CheckUrl},
 			[]rest.Route{
 				{
-					Method:  http.MethodPost,
-					Path:    "/addProduct",
-					Handler: pmsproduct.ProductAddHandler(serverCtx),
+					Method:  http.MethodGet,
+					Path:    "/queryProductList",
+					Handler: pmsproduct.QueryProductListHandler(serverCtx),
 				},
 			}...,
 		),
@@ -462,9 +462,9 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			[]rest.Middleware{serverCtx.CheckUrl},
 			[]rest.Route{
 				{
-					Method:  http.MethodGet,
-					Path:    "/queryProductList",
-					Handler: pmsproduct.QueryProductListHandler(serverCtx),
+					Method:  http.MethodPost,
+					Path:    "/addProduct",
+					Handler: pmsproduct.ProductAddHandler(serverCtx),
 				},
 			}...,
 		),
@@ -544,32 +544,32 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				{
 					Method:  http.MethodPost,
 					Path:    "/addProductBrand",
-					Handler: pmsproduct_brand.ProductBrandAddHandler(serverCtx),
+					Handler: pmsproduct_brand.AddProductBrandHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodGet,
 					Path:    "/deleteProductBrand",
-					Handler: pmsproduct_brand.ProductBrandDeleteHandler(serverCtx),
+					Handler: pmsproduct_brand.DeleteProductBrandHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodGet,
+					Path:    "/queryProductBrandDetail",
+					Handler: pmsproduct_brand.QueryProductBrandDetailHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodGet,
 					Path:    "/queryProductBrandList",
-					Handler: pmsproduct_brand.ProductBrandListHandler(serverCtx),
-				},
-				{
-					Method:  http.MethodPost,
-					Path:    "/updateBrandFactoryStatus",
-					Handler: pmsproduct_brand.UpdateBrandFactoryStatusHandler(serverCtx),
-				},
-				{
-					Method:  http.MethodPost,
-					Path:    "/updateBrandShowStatus",
-					Handler: pmsproduct_brand.UpdateBrandShowStatusHandler(serverCtx),
+					Handler: pmsproduct_brand.QueryProductBrandListHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
 					Path:    "/updateProductBrand",
-					Handler: pmsproduct_brand.ProductBrandUpdateHandler(serverCtx),
+					Handler: pmsproduct_brand.UpdateProductBrandHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodPost,
+					Path:    "/updateProductBrandStatus",
+					Handler: pmsproduct_brand.UpdateProductBrandStatusHandler(serverCtx),
 				},
 			}...,
 		),
@@ -584,32 +584,37 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				{
 					Method:  http.MethodPost,
 					Path:    "/addProductCategory",
-					Handler: pmsproduct_category.ProductCategoryAddHandler(serverCtx),
+					Handler: pmsproduct_category.AddProductCategoryHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodGet,
 					Path:    "/deleteProductCategory",
-					Handler: pmsproduct_category.ProductCategoryDeleteHandler(serverCtx),
+					Handler: pmsproduct_category.DeleteProductCategoryHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodGet,
+					Path:    "/queryProductCategoryDetail",
+					Handler: pmsproduct_category.QueryProductCategoryDetailHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodGet,
 					Path:    "/queryProductCategoryList",
-					Handler: pmsproduct_category.ProductCategoryListHandler(serverCtx),
-				},
-				{
-					Method:  http.MethodPost,
-					Path:    "/updateCategoryNavStatus",
-					Handler: pmsproduct_category.UpdateCategoryNavStatusHandler(serverCtx),
-				},
-				{
-					Method:  http.MethodPost,
-					Path:    "/updateCategoryShowStatus",
-					Handler: pmsproduct_category.UpdateCategoryShowStatusHandler(serverCtx),
+					Handler: pmsproduct_category.QueryProductCategoryListHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
 					Path:    "/updateProductCategory",
-					Handler: pmsproduct_category.ProductCategoryUpdateHandler(serverCtx),
+					Handler: pmsproduct_category.UpdateProductCategoryHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodPost,
+					Path:    "/updateProductCategoryNavStatus",
+					Handler: pmsproduct_category.UpdateProductCategoryNavStatusHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodPost,
+					Path:    "/updateProductCategoryStatus",
+					Handler: pmsproduct_category.UpdateProductCategoryStatusHandler(serverCtx),
 				},
 			}...,
 		),

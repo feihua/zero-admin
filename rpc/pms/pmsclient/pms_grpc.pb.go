@@ -19,408 +19,6 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	BrandService_AddBrand_FullMethodName                   = "/pmsclient.BrandService/AddBrand"
-	BrandService_DeleteBrand_FullMethodName                = "/pmsclient.BrandService/DeleteBrand"
-	BrandService_UpdateBrand_FullMethodName                = "/pmsclient.BrandService/UpdateBrand"
-	BrandService_QueryBrandDetail_FullMethodName           = "/pmsclient.BrandService/QueryBrandDetail"
-	BrandService_QueryBrandList_FullMethodName             = "/pmsclient.BrandService/QueryBrandList"
-	BrandService_QueryBrandListByIds_FullMethodName        = "/pmsclient.BrandService/QueryBrandListByIds"
-	BrandService_UpdateBrandShowStatus_FullMethodName      = "/pmsclient.BrandService/UpdateBrandShowStatus"
-	BrandService_UpdateBrandFactoryStatus_FullMethodName   = "/pmsclient.BrandService/UpdateBrandFactoryStatus"
-	BrandService_UpdateBrandRecommendStatus_FullMethodName = "/pmsclient.BrandService/UpdateBrandRecommendStatus"
-)
-
-// BrandServiceClient is the client API for BrandService service.
-//
-// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type BrandServiceClient interface {
-	// 添加品牌表
-	AddBrand(ctx context.Context, in *AddBrandReq, opts ...grpc.CallOption) (*AddBrandResp, error)
-	// 删除品牌表
-	DeleteBrand(ctx context.Context, in *DeleteBrandReq, opts ...grpc.CallOption) (*DeleteBrandResp, error)
-	// 更新品牌表
-	UpdateBrand(ctx context.Context, in *UpdateBrandReq, opts ...grpc.CallOption) (*UpdateBrandResp, error)
-	// 查询品牌表详情
-	QueryBrandDetail(ctx context.Context, in *QueryBrandDetailReq, opts ...grpc.CallOption) (*QueryBrandDetailResp, error)
-	// 查询品牌表列表
-	QueryBrandList(ctx context.Context, in *QueryBrandListReq, opts ...grpc.CallOption) (*QueryBrandListResp, error)
-	QueryBrandListByIds(ctx context.Context, in *QueryBrandListByIdsReq, opts ...grpc.CallOption) (*QueryBrandListResp, error)
-	// 更新品牌的显示状态
-	UpdateBrandShowStatus(ctx context.Context, in *UpdateBrandShowStatusReq, opts ...grpc.CallOption) (*UpdateBrandStatusResp, error)
-	// 更新品牌是否为品牌制造商
-	UpdateBrandFactoryStatus(ctx context.Context, in *UpdateBrandFactoryStatusReq, opts ...grpc.CallOption) (*UpdateBrandStatusResp, error)
-	// 更新品牌的推荐状态
-	UpdateBrandRecommendStatus(ctx context.Context, in *UpdateBrandRecommendStatusReq, opts ...grpc.CallOption) (*UpdateBrandStatusResp, error)
-}
-
-type brandServiceClient struct {
-	cc grpc.ClientConnInterface
-}
-
-func NewBrandServiceClient(cc grpc.ClientConnInterface) BrandServiceClient {
-	return &brandServiceClient{cc}
-}
-
-func (c *brandServiceClient) AddBrand(ctx context.Context, in *AddBrandReq, opts ...grpc.CallOption) (*AddBrandResp, error) {
-	out := new(AddBrandResp)
-	err := c.cc.Invoke(ctx, BrandService_AddBrand_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *brandServiceClient) DeleteBrand(ctx context.Context, in *DeleteBrandReq, opts ...grpc.CallOption) (*DeleteBrandResp, error) {
-	out := new(DeleteBrandResp)
-	err := c.cc.Invoke(ctx, BrandService_DeleteBrand_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *brandServiceClient) UpdateBrand(ctx context.Context, in *UpdateBrandReq, opts ...grpc.CallOption) (*UpdateBrandResp, error) {
-	out := new(UpdateBrandResp)
-	err := c.cc.Invoke(ctx, BrandService_UpdateBrand_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *brandServiceClient) QueryBrandDetail(ctx context.Context, in *QueryBrandDetailReq, opts ...grpc.CallOption) (*QueryBrandDetailResp, error) {
-	out := new(QueryBrandDetailResp)
-	err := c.cc.Invoke(ctx, BrandService_QueryBrandDetail_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *brandServiceClient) QueryBrandList(ctx context.Context, in *QueryBrandListReq, opts ...grpc.CallOption) (*QueryBrandListResp, error) {
-	out := new(QueryBrandListResp)
-	err := c.cc.Invoke(ctx, BrandService_QueryBrandList_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *brandServiceClient) QueryBrandListByIds(ctx context.Context, in *QueryBrandListByIdsReq, opts ...grpc.CallOption) (*QueryBrandListResp, error) {
-	out := new(QueryBrandListResp)
-	err := c.cc.Invoke(ctx, BrandService_QueryBrandListByIds_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *brandServiceClient) UpdateBrandShowStatus(ctx context.Context, in *UpdateBrandShowStatusReq, opts ...grpc.CallOption) (*UpdateBrandStatusResp, error) {
-	out := new(UpdateBrandStatusResp)
-	err := c.cc.Invoke(ctx, BrandService_UpdateBrandShowStatus_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *brandServiceClient) UpdateBrandFactoryStatus(ctx context.Context, in *UpdateBrandFactoryStatusReq, opts ...grpc.CallOption) (*UpdateBrandStatusResp, error) {
-	out := new(UpdateBrandStatusResp)
-	err := c.cc.Invoke(ctx, BrandService_UpdateBrandFactoryStatus_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *brandServiceClient) UpdateBrandRecommendStatus(ctx context.Context, in *UpdateBrandRecommendStatusReq, opts ...grpc.CallOption) (*UpdateBrandStatusResp, error) {
-	out := new(UpdateBrandStatusResp)
-	err := c.cc.Invoke(ctx, BrandService_UpdateBrandRecommendStatus_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-// BrandServiceServer is the server API for BrandService service.
-// All implementations must embed UnimplementedBrandServiceServer
-// for forward compatibility
-type BrandServiceServer interface {
-	// 添加品牌表
-	AddBrand(context.Context, *AddBrandReq) (*AddBrandResp, error)
-	// 删除品牌表
-	DeleteBrand(context.Context, *DeleteBrandReq) (*DeleteBrandResp, error)
-	// 更新品牌表
-	UpdateBrand(context.Context, *UpdateBrandReq) (*UpdateBrandResp, error)
-	// 查询品牌表详情
-	QueryBrandDetail(context.Context, *QueryBrandDetailReq) (*QueryBrandDetailResp, error)
-	// 查询品牌表列表
-	QueryBrandList(context.Context, *QueryBrandListReq) (*QueryBrandListResp, error)
-	QueryBrandListByIds(context.Context, *QueryBrandListByIdsReq) (*QueryBrandListResp, error)
-	// 更新品牌的显示状态
-	UpdateBrandShowStatus(context.Context, *UpdateBrandShowStatusReq) (*UpdateBrandStatusResp, error)
-	// 更新品牌是否为品牌制造商
-	UpdateBrandFactoryStatus(context.Context, *UpdateBrandFactoryStatusReq) (*UpdateBrandStatusResp, error)
-	// 更新品牌的推荐状态
-	UpdateBrandRecommendStatus(context.Context, *UpdateBrandRecommendStatusReq) (*UpdateBrandStatusResp, error)
-	mustEmbedUnimplementedBrandServiceServer()
-}
-
-// UnimplementedBrandServiceServer must be embedded to have forward compatible implementations.
-type UnimplementedBrandServiceServer struct {
-}
-
-func (UnimplementedBrandServiceServer) AddBrand(context.Context, *AddBrandReq) (*AddBrandResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method AddBrand not implemented")
-}
-func (UnimplementedBrandServiceServer) DeleteBrand(context.Context, *DeleteBrandReq) (*DeleteBrandResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method DeleteBrand not implemented")
-}
-func (UnimplementedBrandServiceServer) UpdateBrand(context.Context, *UpdateBrandReq) (*UpdateBrandResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateBrand not implemented")
-}
-func (UnimplementedBrandServiceServer) QueryBrandDetail(context.Context, *QueryBrandDetailReq) (*QueryBrandDetailResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method QueryBrandDetail not implemented")
-}
-func (UnimplementedBrandServiceServer) QueryBrandList(context.Context, *QueryBrandListReq) (*QueryBrandListResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method QueryBrandList not implemented")
-}
-func (UnimplementedBrandServiceServer) QueryBrandListByIds(context.Context, *QueryBrandListByIdsReq) (*QueryBrandListResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method QueryBrandListByIds not implemented")
-}
-func (UnimplementedBrandServiceServer) UpdateBrandShowStatus(context.Context, *UpdateBrandShowStatusReq) (*UpdateBrandStatusResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateBrandShowStatus not implemented")
-}
-func (UnimplementedBrandServiceServer) UpdateBrandFactoryStatus(context.Context, *UpdateBrandFactoryStatusReq) (*UpdateBrandStatusResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateBrandFactoryStatus not implemented")
-}
-func (UnimplementedBrandServiceServer) UpdateBrandRecommendStatus(context.Context, *UpdateBrandRecommendStatusReq) (*UpdateBrandStatusResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateBrandRecommendStatus not implemented")
-}
-func (UnimplementedBrandServiceServer) mustEmbedUnimplementedBrandServiceServer() {}
-
-// UnsafeBrandServiceServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to BrandServiceServer will
-// result in compilation errors.
-type UnsafeBrandServiceServer interface {
-	mustEmbedUnimplementedBrandServiceServer()
-}
-
-func RegisterBrandServiceServer(s grpc.ServiceRegistrar, srv BrandServiceServer) {
-	s.RegisterService(&BrandService_ServiceDesc, srv)
-}
-
-func _BrandService_AddBrand_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(AddBrandReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(BrandServiceServer).AddBrand(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: BrandService_AddBrand_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BrandServiceServer).AddBrand(ctx, req.(*AddBrandReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _BrandService_DeleteBrand_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(DeleteBrandReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(BrandServiceServer).DeleteBrand(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: BrandService_DeleteBrand_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BrandServiceServer).DeleteBrand(ctx, req.(*DeleteBrandReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _BrandService_UpdateBrand_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UpdateBrandReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(BrandServiceServer).UpdateBrand(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: BrandService_UpdateBrand_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BrandServiceServer).UpdateBrand(ctx, req.(*UpdateBrandReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _BrandService_QueryBrandDetail_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(QueryBrandDetailReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(BrandServiceServer).QueryBrandDetail(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: BrandService_QueryBrandDetail_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BrandServiceServer).QueryBrandDetail(ctx, req.(*QueryBrandDetailReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _BrandService_QueryBrandList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(QueryBrandListReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(BrandServiceServer).QueryBrandList(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: BrandService_QueryBrandList_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BrandServiceServer).QueryBrandList(ctx, req.(*QueryBrandListReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _BrandService_QueryBrandListByIds_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(QueryBrandListByIdsReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(BrandServiceServer).QueryBrandListByIds(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: BrandService_QueryBrandListByIds_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BrandServiceServer).QueryBrandListByIds(ctx, req.(*QueryBrandListByIdsReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _BrandService_UpdateBrandShowStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UpdateBrandShowStatusReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(BrandServiceServer).UpdateBrandShowStatus(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: BrandService_UpdateBrandShowStatus_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BrandServiceServer).UpdateBrandShowStatus(ctx, req.(*UpdateBrandShowStatusReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _BrandService_UpdateBrandFactoryStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UpdateBrandFactoryStatusReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(BrandServiceServer).UpdateBrandFactoryStatus(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: BrandService_UpdateBrandFactoryStatus_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BrandServiceServer).UpdateBrandFactoryStatus(ctx, req.(*UpdateBrandFactoryStatusReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _BrandService_UpdateBrandRecommendStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UpdateBrandRecommendStatusReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(BrandServiceServer).UpdateBrandRecommendStatus(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: BrandService_UpdateBrandRecommendStatus_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BrandServiceServer).UpdateBrandRecommendStatus(ctx, req.(*UpdateBrandRecommendStatusReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-// BrandService_ServiceDesc is the grpc.ServiceDesc for BrandService service.
-// It's only intended for direct use with grpc.RegisterService,
-// and not to be introspected or modified (even as a copy)
-var BrandService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "pmsclient.BrandService",
-	HandlerType: (*BrandServiceServer)(nil),
-	Methods: []grpc.MethodDesc{
-		{
-			MethodName: "AddBrand",
-			Handler:    _BrandService_AddBrand_Handler,
-		},
-		{
-			MethodName: "DeleteBrand",
-			Handler:    _BrandService_DeleteBrand_Handler,
-		},
-		{
-			MethodName: "UpdateBrand",
-			Handler:    _BrandService_UpdateBrand_Handler,
-		},
-		{
-			MethodName: "QueryBrandDetail",
-			Handler:    _BrandService_QueryBrandDetail_Handler,
-		},
-		{
-			MethodName: "QueryBrandList",
-			Handler:    _BrandService_QueryBrandList_Handler,
-		},
-		{
-			MethodName: "QueryBrandListByIds",
-			Handler:    _BrandService_QueryBrandListByIds_Handler,
-		},
-		{
-			MethodName: "UpdateBrandShowStatus",
-			Handler:    _BrandService_UpdateBrandShowStatus_Handler,
-		},
-		{
-			MethodName: "UpdateBrandFactoryStatus",
-			Handler:    _BrandService_UpdateBrandFactoryStatus_Handler,
-		},
-		{
-			MethodName: "UpdateBrandRecommendStatus",
-			Handler:    _BrandService_UpdateBrandRecommendStatus_Handler,
-		},
-	},
-	Streams:  []grpc.StreamDesc{},
-	Metadata: "rpc/pms/pms.proto",
-}
-
-const (
 	CommentService_AddComment_FullMethodName         = "/pmsclient.CommentService/AddComment"
 	CommentService_DeleteComment_FullMethodName      = "/pmsclient.CommentService/DeleteComment"
 	CommentService_UpdateComment_FullMethodName      = "/pmsclient.CommentService/UpdateComment"
@@ -2308,11 +1906,374 @@ var ProductAttributeValueService_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
+	ProductBrandService_AddProductBrand_FullMethodName            = "/pmsclient.ProductBrandService/AddProductBrand"
+	ProductBrandService_DeleteProductBrand_FullMethodName         = "/pmsclient.ProductBrandService/DeleteProductBrand"
+	ProductBrandService_UpdateProductBrand_FullMethodName         = "/pmsclient.ProductBrandService/UpdateProductBrand"
+	ProductBrandService_UpdateProductBrandStatus_FullMethodName   = "/pmsclient.ProductBrandService/UpdateProductBrandStatus"
+	ProductBrandService_QueryProductBrandDetail_FullMethodName    = "/pmsclient.ProductBrandService/QueryProductBrandDetail"
+	ProductBrandService_QueryProductBrandList_FullMethodName      = "/pmsclient.ProductBrandService/QueryProductBrandList"
+	ProductBrandService_QueryBrandListByIds_FullMethodName        = "/pmsclient.ProductBrandService/QueryBrandListByIds"
+	ProductBrandService_UpdateBrandRecommendStatus_FullMethodName = "/pmsclient.ProductBrandService/UpdateBrandRecommendStatus"
+)
+
+// ProductBrandServiceClient is the client API for ProductBrandService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type ProductBrandServiceClient interface {
+	// 添加商品品牌
+	AddProductBrand(ctx context.Context, in *AddProductBrandReq, opts ...grpc.CallOption) (*AddProductBrandResp, error)
+	// 删除商品品牌
+	DeleteProductBrand(ctx context.Context, in *DeleteProductBrandReq, opts ...grpc.CallOption) (*DeleteProductBrandResp, error)
+	// 更新商品品牌
+	UpdateProductBrand(ctx context.Context, in *UpdateProductBrandReq, opts ...grpc.CallOption) (*UpdateProductBrandResp, error)
+	// 更新商品品牌状态
+	UpdateProductBrandStatus(ctx context.Context, in *UpdateProductBrandStatusReq, opts ...grpc.CallOption) (*UpdateProductBrandStatusResp, error)
+	// 查询商品品牌详情
+	QueryProductBrandDetail(ctx context.Context, in *QueryProductBrandDetailReq, opts ...grpc.CallOption) (*QueryProductBrandDetailResp, error)
+	// 查询商品品牌列表
+	QueryProductBrandList(ctx context.Context, in *QueryProductBrandListReq, opts ...grpc.CallOption) (*QueryProductBrandListResp, error)
+	QueryBrandListByIds(ctx context.Context, in *QueryBrandListByIdsReq, opts ...grpc.CallOption) (*QueryProductBrandListResp, error)
+	// 更新品牌的推荐状态
+	UpdateBrandRecommendStatus(ctx context.Context, in *UpdateProductBrandStatusReq, opts ...grpc.CallOption) (*UpdateProductBrandStatusResp, error)
+}
+
+type productBrandServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewProductBrandServiceClient(cc grpc.ClientConnInterface) ProductBrandServiceClient {
+	return &productBrandServiceClient{cc}
+}
+
+func (c *productBrandServiceClient) AddProductBrand(ctx context.Context, in *AddProductBrandReq, opts ...grpc.CallOption) (*AddProductBrandResp, error) {
+	out := new(AddProductBrandResp)
+	err := c.cc.Invoke(ctx, ProductBrandService_AddProductBrand_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *productBrandServiceClient) DeleteProductBrand(ctx context.Context, in *DeleteProductBrandReq, opts ...grpc.CallOption) (*DeleteProductBrandResp, error) {
+	out := new(DeleteProductBrandResp)
+	err := c.cc.Invoke(ctx, ProductBrandService_DeleteProductBrand_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *productBrandServiceClient) UpdateProductBrand(ctx context.Context, in *UpdateProductBrandReq, opts ...grpc.CallOption) (*UpdateProductBrandResp, error) {
+	out := new(UpdateProductBrandResp)
+	err := c.cc.Invoke(ctx, ProductBrandService_UpdateProductBrand_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *productBrandServiceClient) UpdateProductBrandStatus(ctx context.Context, in *UpdateProductBrandStatusReq, opts ...grpc.CallOption) (*UpdateProductBrandStatusResp, error) {
+	out := new(UpdateProductBrandStatusResp)
+	err := c.cc.Invoke(ctx, ProductBrandService_UpdateProductBrandStatus_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *productBrandServiceClient) QueryProductBrandDetail(ctx context.Context, in *QueryProductBrandDetailReq, opts ...grpc.CallOption) (*QueryProductBrandDetailResp, error) {
+	out := new(QueryProductBrandDetailResp)
+	err := c.cc.Invoke(ctx, ProductBrandService_QueryProductBrandDetail_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *productBrandServiceClient) QueryProductBrandList(ctx context.Context, in *QueryProductBrandListReq, opts ...grpc.CallOption) (*QueryProductBrandListResp, error) {
+	out := new(QueryProductBrandListResp)
+	err := c.cc.Invoke(ctx, ProductBrandService_QueryProductBrandList_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *productBrandServiceClient) QueryBrandListByIds(ctx context.Context, in *QueryBrandListByIdsReq, opts ...grpc.CallOption) (*QueryProductBrandListResp, error) {
+	out := new(QueryProductBrandListResp)
+	err := c.cc.Invoke(ctx, ProductBrandService_QueryBrandListByIds_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *productBrandServiceClient) UpdateBrandRecommendStatus(ctx context.Context, in *UpdateProductBrandStatusReq, opts ...grpc.CallOption) (*UpdateProductBrandStatusResp, error) {
+	out := new(UpdateProductBrandStatusResp)
+	err := c.cc.Invoke(ctx, ProductBrandService_UpdateBrandRecommendStatus_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// ProductBrandServiceServer is the server API for ProductBrandService service.
+// All implementations must embed UnimplementedProductBrandServiceServer
+// for forward compatibility
+type ProductBrandServiceServer interface {
+	// 添加商品品牌
+	AddProductBrand(context.Context, *AddProductBrandReq) (*AddProductBrandResp, error)
+	// 删除商品品牌
+	DeleteProductBrand(context.Context, *DeleteProductBrandReq) (*DeleteProductBrandResp, error)
+	// 更新商品品牌
+	UpdateProductBrand(context.Context, *UpdateProductBrandReq) (*UpdateProductBrandResp, error)
+	// 更新商品品牌状态
+	UpdateProductBrandStatus(context.Context, *UpdateProductBrandStatusReq) (*UpdateProductBrandStatusResp, error)
+	// 查询商品品牌详情
+	QueryProductBrandDetail(context.Context, *QueryProductBrandDetailReq) (*QueryProductBrandDetailResp, error)
+	// 查询商品品牌列表
+	QueryProductBrandList(context.Context, *QueryProductBrandListReq) (*QueryProductBrandListResp, error)
+	QueryBrandListByIds(context.Context, *QueryBrandListByIdsReq) (*QueryProductBrandListResp, error)
+	// 更新品牌的推荐状态
+	UpdateBrandRecommendStatus(context.Context, *UpdateProductBrandStatusReq) (*UpdateProductBrandStatusResp, error)
+	mustEmbedUnimplementedProductBrandServiceServer()
+}
+
+// UnimplementedProductBrandServiceServer must be embedded to have forward compatible implementations.
+type UnimplementedProductBrandServiceServer struct {
+}
+
+func (UnimplementedProductBrandServiceServer) AddProductBrand(context.Context, *AddProductBrandReq) (*AddProductBrandResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AddProductBrand not implemented")
+}
+func (UnimplementedProductBrandServiceServer) DeleteProductBrand(context.Context, *DeleteProductBrandReq) (*DeleteProductBrandResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteProductBrand not implemented")
+}
+func (UnimplementedProductBrandServiceServer) UpdateProductBrand(context.Context, *UpdateProductBrandReq) (*UpdateProductBrandResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateProductBrand not implemented")
+}
+func (UnimplementedProductBrandServiceServer) UpdateProductBrandStatus(context.Context, *UpdateProductBrandStatusReq) (*UpdateProductBrandStatusResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateProductBrandStatus not implemented")
+}
+func (UnimplementedProductBrandServiceServer) QueryProductBrandDetail(context.Context, *QueryProductBrandDetailReq) (*QueryProductBrandDetailResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method QueryProductBrandDetail not implemented")
+}
+func (UnimplementedProductBrandServiceServer) QueryProductBrandList(context.Context, *QueryProductBrandListReq) (*QueryProductBrandListResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method QueryProductBrandList not implemented")
+}
+func (UnimplementedProductBrandServiceServer) QueryBrandListByIds(context.Context, *QueryBrandListByIdsReq) (*QueryProductBrandListResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method QueryBrandListByIds not implemented")
+}
+func (UnimplementedProductBrandServiceServer) UpdateBrandRecommendStatus(context.Context, *UpdateProductBrandStatusReq) (*UpdateProductBrandStatusResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateBrandRecommendStatus not implemented")
+}
+func (UnimplementedProductBrandServiceServer) mustEmbedUnimplementedProductBrandServiceServer() {}
+
+// UnsafeProductBrandServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to ProductBrandServiceServer will
+// result in compilation errors.
+type UnsafeProductBrandServiceServer interface {
+	mustEmbedUnimplementedProductBrandServiceServer()
+}
+
+func RegisterProductBrandServiceServer(s grpc.ServiceRegistrar, srv ProductBrandServiceServer) {
+	s.RegisterService(&ProductBrandService_ServiceDesc, srv)
+}
+
+func _ProductBrandService_AddProductBrand_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddProductBrandReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ProductBrandServiceServer).AddProductBrand(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ProductBrandService_AddProductBrand_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ProductBrandServiceServer).AddProductBrand(ctx, req.(*AddProductBrandReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ProductBrandService_DeleteProductBrand_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteProductBrandReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ProductBrandServiceServer).DeleteProductBrand(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ProductBrandService_DeleteProductBrand_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ProductBrandServiceServer).DeleteProductBrand(ctx, req.(*DeleteProductBrandReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ProductBrandService_UpdateProductBrand_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateProductBrandReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ProductBrandServiceServer).UpdateProductBrand(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ProductBrandService_UpdateProductBrand_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ProductBrandServiceServer).UpdateProductBrand(ctx, req.(*UpdateProductBrandReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ProductBrandService_UpdateProductBrandStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateProductBrandStatusReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ProductBrandServiceServer).UpdateProductBrandStatus(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ProductBrandService_UpdateProductBrandStatus_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ProductBrandServiceServer).UpdateProductBrandStatus(ctx, req.(*UpdateProductBrandStatusReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ProductBrandService_QueryProductBrandDetail_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryProductBrandDetailReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ProductBrandServiceServer).QueryProductBrandDetail(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ProductBrandService_QueryProductBrandDetail_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ProductBrandServiceServer).QueryProductBrandDetail(ctx, req.(*QueryProductBrandDetailReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ProductBrandService_QueryProductBrandList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryProductBrandListReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ProductBrandServiceServer).QueryProductBrandList(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ProductBrandService_QueryProductBrandList_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ProductBrandServiceServer).QueryProductBrandList(ctx, req.(*QueryProductBrandListReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ProductBrandService_QueryBrandListByIds_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryBrandListByIdsReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ProductBrandServiceServer).QueryBrandListByIds(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ProductBrandService_QueryBrandListByIds_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ProductBrandServiceServer).QueryBrandListByIds(ctx, req.(*QueryBrandListByIdsReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ProductBrandService_UpdateBrandRecommendStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateProductBrandStatusReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ProductBrandServiceServer).UpdateBrandRecommendStatus(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ProductBrandService_UpdateBrandRecommendStatus_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ProductBrandServiceServer).UpdateBrandRecommendStatus(ctx, req.(*UpdateProductBrandStatusReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// ProductBrandService_ServiceDesc is the grpc.ServiceDesc for ProductBrandService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var ProductBrandService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "pmsclient.ProductBrandService",
+	HandlerType: (*ProductBrandServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "AddProductBrand",
+			Handler:    _ProductBrandService_AddProductBrand_Handler,
+		},
+		{
+			MethodName: "DeleteProductBrand",
+			Handler:    _ProductBrandService_DeleteProductBrand_Handler,
+		},
+		{
+			MethodName: "UpdateProductBrand",
+			Handler:    _ProductBrandService_UpdateProductBrand_Handler,
+		},
+		{
+			MethodName: "UpdateProductBrandStatus",
+			Handler:    _ProductBrandService_UpdateProductBrandStatus_Handler,
+		},
+		{
+			MethodName: "QueryProductBrandDetail",
+			Handler:    _ProductBrandService_QueryProductBrandDetail_Handler,
+		},
+		{
+			MethodName: "QueryProductBrandList",
+			Handler:    _ProductBrandService_QueryProductBrandList_Handler,
+		},
+		{
+			MethodName: "QueryBrandListByIds",
+			Handler:    _ProductBrandService_QueryBrandListByIds_Handler,
+		},
+		{
+			MethodName: "UpdateBrandRecommendStatus",
+			Handler:    _ProductBrandService_UpdateBrandRecommendStatus_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "rpc/pms/pms.proto",
+}
+
+const (
 	ProductCategoryService_AddProductCategory_FullMethodName           = "/pmsclient.ProductCategoryService/AddProductCategory"
 	ProductCategoryService_DeleteProductCategory_FullMethodName        = "/pmsclient.ProductCategoryService/DeleteProductCategory"
 	ProductCategoryService_UpdateProductCategory_FullMethodName        = "/pmsclient.ProductCategoryService/UpdateProductCategory"
 	ProductCategoryService_UpdateCategoryNavStatus_FullMethodName      = "/pmsclient.ProductCategoryService/UpdateCategoryNavStatus"
-	ProductCategoryService_UpdateCategoryShowStatus_FullMethodName     = "/pmsclient.ProductCategoryService/UpdateCategoryShowStatus"
+	ProductCategoryService_UpdateProductCategoryStatus_FullMethodName  = "/pmsclient.ProductCategoryService/UpdateProductCategoryStatus"
 	ProductCategoryService_QueryProductCategoryDetail_FullMethodName   = "/pmsclient.ProductCategoryService/QueryProductCategoryDetail"
 	ProductCategoryService_QueryProductCategoryList_FullMethodName     = "/pmsclient.ProductCategoryService/QueryProductCategoryList"
 	ProductCategoryService_QueryProductCategoryTreeList_FullMethodName = "/pmsclient.ProductCategoryService/QueryProductCategoryTreeList"
@@ -2331,7 +2292,7 @@ type ProductCategoryServiceClient interface {
 	// 更新商品分类导航显示状态
 	UpdateCategoryNavStatus(ctx context.Context, in *UpdateProductCategoryStatusReq, opts ...grpc.CallOption) (*UpdateProductCategoryStatusResp, error)
 	// 更新商品分类显示状态
-	UpdateCategoryShowStatus(ctx context.Context, in *UpdateProductCategoryStatusReq, opts ...grpc.CallOption) (*UpdateProductCategoryStatusResp, error)
+	UpdateProductCategoryStatus(ctx context.Context, in *UpdateProductCategoryStatusReq, opts ...grpc.CallOption) (*UpdateProductCategoryStatusResp, error)
 	// 查询产品分类详情
 	QueryProductCategoryDetail(ctx context.Context, in *QueryProductCategoryDetailReq, opts ...grpc.CallOption) (*QueryProductCategoryDetailResp, error)
 	// 查询产品分类列表
@@ -2384,9 +2345,9 @@ func (c *productCategoryServiceClient) UpdateCategoryNavStatus(ctx context.Conte
 	return out, nil
 }
 
-func (c *productCategoryServiceClient) UpdateCategoryShowStatus(ctx context.Context, in *UpdateProductCategoryStatusReq, opts ...grpc.CallOption) (*UpdateProductCategoryStatusResp, error) {
+func (c *productCategoryServiceClient) UpdateProductCategoryStatus(ctx context.Context, in *UpdateProductCategoryStatusReq, opts ...grpc.CallOption) (*UpdateProductCategoryStatusResp, error) {
 	out := new(UpdateProductCategoryStatusResp)
-	err := c.cc.Invoke(ctx, ProductCategoryService_UpdateCategoryShowStatus_FullMethodName, in, out, opts...)
+	err := c.cc.Invoke(ctx, ProductCategoryService_UpdateProductCategoryStatus_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -2433,7 +2394,7 @@ type ProductCategoryServiceServer interface {
 	// 更新商品分类导航显示状态
 	UpdateCategoryNavStatus(context.Context, *UpdateProductCategoryStatusReq) (*UpdateProductCategoryStatusResp, error)
 	// 更新商品分类显示状态
-	UpdateCategoryShowStatus(context.Context, *UpdateProductCategoryStatusReq) (*UpdateProductCategoryStatusResp, error)
+	UpdateProductCategoryStatus(context.Context, *UpdateProductCategoryStatusReq) (*UpdateProductCategoryStatusResp, error)
 	// 查询产品分类详情
 	QueryProductCategoryDetail(context.Context, *QueryProductCategoryDetailReq) (*QueryProductCategoryDetailResp, error)
 	// 查询产品分类列表
@@ -2459,8 +2420,8 @@ func (UnimplementedProductCategoryServiceServer) UpdateProductCategory(context.C
 func (UnimplementedProductCategoryServiceServer) UpdateCategoryNavStatus(context.Context, *UpdateProductCategoryStatusReq) (*UpdateProductCategoryStatusResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateCategoryNavStatus not implemented")
 }
-func (UnimplementedProductCategoryServiceServer) UpdateCategoryShowStatus(context.Context, *UpdateProductCategoryStatusReq) (*UpdateProductCategoryStatusResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateCategoryShowStatus not implemented")
+func (UnimplementedProductCategoryServiceServer) UpdateProductCategoryStatus(context.Context, *UpdateProductCategoryStatusReq) (*UpdateProductCategoryStatusResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateProductCategoryStatus not implemented")
 }
 func (UnimplementedProductCategoryServiceServer) QueryProductCategoryDetail(context.Context, *QueryProductCategoryDetailReq) (*QueryProductCategoryDetailResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method QueryProductCategoryDetail not implemented")
@@ -2557,20 +2518,20 @@ func _ProductCategoryService_UpdateCategoryNavStatus_Handler(srv interface{}, ct
 	return interceptor(ctx, in, info, handler)
 }
 
-func _ProductCategoryService_UpdateCategoryShowStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _ProductCategoryService_UpdateProductCategoryStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(UpdateProductCategoryStatusReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ProductCategoryServiceServer).UpdateCategoryShowStatus(ctx, in)
+		return srv.(ProductCategoryServiceServer).UpdateProductCategoryStatus(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: ProductCategoryService_UpdateCategoryShowStatus_FullMethodName,
+		FullMethod: ProductCategoryService_UpdateProductCategoryStatus_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ProductCategoryServiceServer).UpdateCategoryShowStatus(ctx, req.(*UpdateProductCategoryStatusReq))
+		return srv.(ProductCategoryServiceServer).UpdateProductCategoryStatus(ctx, req.(*UpdateProductCategoryStatusReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -2653,8 +2614,8 @@ var ProductCategoryService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _ProductCategoryService_UpdateCategoryNavStatus_Handler,
 		},
 		{
-			MethodName: "UpdateCategoryShowStatus",
-			Handler:    _ProductCategoryService_UpdateCategoryShowStatus_Handler,
+			MethodName: "UpdateProductCategoryStatus",
+			Handler:    _ProductCategoryService_UpdateProductCategoryStatus_Handler,
 		},
 		{
 			MethodName: "QueryProductCategoryDetail",

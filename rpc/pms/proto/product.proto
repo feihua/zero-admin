@@ -226,20 +226,19 @@ message QueryProductDetailByIdReq {
 message BrandData {
   int64 id = 1; //
   string name = 2; //品牌名称
-  string first_letter = 3; //首字母
-  int32 sort = 4; //排序
-  int32 factory_status = 5; //是否为品牌制造商：0->不是；1->是
-  int32 show_status = 6; //品牌显示状态
-  int32 recommend_status = 7; //推荐状态
-  int32 product_count = 8; //产品数量
-  int32 product_comment_count = 9; //产品评论数量
-  string logo = 10; //品牌logo
-  string big_pic = 11; //专区大图
-  string brand_story = 12; //品牌故事
-  string create_by = 13; //创建者
-  string create_time = 14; //创建时间
-  string update_by = 15; //更新者
-  string update_time = 16; //更新时间
+  string logo = 3; //品牌logo
+  string big_pic = 4; //专区大图
+  string description = 5; //描述
+  string first_letter = 6; //首字母
+  int32 sort = 7; //排序
+  int32 recommend_status = 8; //推荐状态
+  int32 product_count = 9; //产品数量
+  int32 product_comment_count = 10; //产品评论数量
+  int32 is_enabled = 11; //是否启用
+  int64 create_by = 12; //创建人ID
+  string create_time = 13; //创建时间
+  int64 update_by = 14; //更新人ID
+  string update_time = 15; //更新时间
 
 }
 message ProductAttributeDataList {

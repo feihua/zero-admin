@@ -11,66 +11,57 @@ Content-Type: application/json
 %}
 
 ### 添加商品品牌
-POST {{host}}/api/product/brand/addProductBrand
+POST {{host}}/api/pms/brand/addProductBrand
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {
-  "name": "test",
-  "firstLetter": "N",
-  "sort": 0,
-  "factoryStatus": 1,
-  "showStatus": 1,
-  "productCount": 33,
-  "productCommentCount": 100,
-  "logo": "http://macro-oss.oss-cn-shenzhen.aliyuncs.com/mall/images/20180615/timg (51).jpg",
-  "bigPic": "",
-  "brandStory": "NIKE的故事"
+  "name": "华为1",
+  "logo": "http://129.204.203.29/big.png",
+  "bigPic": "http://129.204.203.29/big.png",
+  "description": "华为的描述",
+  "firstLetter": "H",
+  "sort": 1,
+  "recommendStatus": 1,
+  "isEnabled": 1
 }
 ### 删除商品品牌
-GET {{host}}/api/product/brand/deleteCompanyAddress?ids=[]
+GET {{host}}/api/pms/brand/deleteCompanyAddress?ids=[]
 Authorization: Bearer {{token}}
 
 
 ### 修改商品品牌
-POST {{host}}/api/product/brand/updateProductBrand
+POST {{host}}/api/pms/brand/updateProductBrand
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {
-  "id": 59,
-  "name": "test123",
-  "firstLetter": "N",
-  "sort": 0,
-  "factoryStatus": 1,
-  "showStatus": 1,
-  "productCount": 0,
-  "productCommentCount": 0,
-  "logo": "http://macro-oss.oss-cn-shenzhen.aliyuncs.com/mall/images/20180615/timg (51).jpg",
-  "bigPic": "",
-  "brandStory": "NIKE的故事"
+  "id": 12,
+  "name": "华为",
+  "logo": "http://129.204.203.29/big.png",
+  "bigPic": "http://129.204.203.29/big.png",
+  "description": "华为的描述",
+  "firstLetter": "H",
+  "sort": 1,
+  "recommendStatus": 1,
+  "isEnabled": 0
 }
 
-### 批量更新显示状态
-POST {{host}}/api/product/brand/updateBrandShowStatus
+### 更新显示状态
+POST {{host}}/api/pms/brand/updateProductBrandStatus
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {
-  "ids": [58,59],
-  "status": 0
+  "ids": [12],
+  "status": 1
 }
 
-### 批量更新厂家制造商状态
-POST {{host}}/api/product/brand/updateBrandFactoryStatus
-Content-Type: application/json
+
+### 根据id查询商品品牌详情
+GET {{host}}/api/pms/brand/queryProductBrandDetail?id=12
 Authorization: Bearer {{token}}
-
-{
-  "ids": [58,59],
-  "status": 0
-}
 
 ### 查询商品品牌列表
-GET {{host}}/api/product/brand/queryProductBrandList
+GET {{host}}/api/pms/brand/queryProductBrandList
 Authorization: Bearer {{token}}

@@ -50,9 +50,9 @@ func (l *UpdateHomeBrandStatusLogic) UpdateHomeBrandStatus(req *types.UpdateHome
 	}
 
 	// 2.修改品牌的推荐状态(pms-rpc)
-	_, err = l.svcCtx.BrandService.UpdateBrandRecommendStatus(l.ctx, &pmsclient.UpdateBrandRecommendStatusReq{
-		Ids:             req.BrandIds,
-		RecommendStatus: req.RecommendStatus,
+	_, err = l.svcCtx.ProductBrandService.UpdateBrandRecommendStatus(l.ctx, &pmsclient.UpdateProductBrandStatusReq{
+		Ids:    req.BrandIds,
+		Status: req.RecommendStatus,
 	})
 	if err != nil {
 		logc.Errorf(l.ctx, "根据Ids: %+v,修改品牌的推荐状态异常:%s", req, err.Error())
