@@ -134,7 +134,7 @@ service admin-api {
 	@handler UpdateProductCategoryStatus
 	post /updateProductCategoryStatus (UpdateProductCategoryStatusReq) returns (BaseResp)
 
-	// 更新产品分类状态
+	// 更新是否显示在导航栏
 	@handler UpdateProductCategoryNavStatus
 	post /updateProductCategoryNavStatus (UpdateProductCategoryStatusReq) returns (BaseResp)
 
