@@ -1,4 +1,7 @@
 {
-  "go.goroot": "/root/go2/go",
-  "go.toolsGopath": "/root/go2/go/pkg/tool/linux_amd64/",
+//  "go.goroot": "/root/go",
+//  "go.toolsGopath": "/root/go/pkg/tool/linux_amd64/",
+  "go.toolsEnvVars": {
+    "GOPROXY": "https://goproxy.cn,direct"
+  }
 }
