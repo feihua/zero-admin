@@ -1,8 +1,6 @@
 module github.com/feihua/zero-admin
 
-go 1.23
-
-toolchain go1.23.8
+go 1.24
 
 require (
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
@@ -10,12 +8,12 @@ require (
 	github.com/pkg/errors v0.9.1
 	github.com/smartwalle/alipay/v3 v3.2.25
 	github.com/ua-parser/uap-go v0.0.0-20250326155420-f7f5a2f9f5bc
-	github.com/zeromicro/go-zero v1.8.2
-	google.golang.org/grpc v1.72.0
+	github.com/zeromicro/go-zero v1.8.3
+	google.golang.org/grpc v1.72.2
 	google.golang.org/protobuf v1.36.6
 	gorm.io/driver/mysql v1.5.7
 	gorm.io/gen v0.3.27
-	gorm.io/gorm v1.26.0
+	gorm.io/gorm v1.30.0
 	gorm.io/plugin/dbresolver v1.6.0
 )
 
@@ -63,7 +61,7 @@ require (
 	github.com/prometheus/client_model v0.6.1 // indirect
 	github.com/prometheus/common v0.62.0 // indirect
 	github.com/prometheus/procfs v0.15.1 // indirect
-	github.com/redis/go-redis/v9 v9.7.3 // indirect
+	github.com/redis/go-redis/v9 v9.8.0 // indirect
 	github.com/smartwalle/ncrypto v1.0.4 // indirect
 	github.com/smartwalle/ngx v1.0.9 // indirect
 	github.com/smartwalle/nsign v1.0.9 // indirect
