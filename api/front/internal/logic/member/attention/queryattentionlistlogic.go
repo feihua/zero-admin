@@ -51,14 +51,17 @@ func (l *QueryAttentionListLogic) QueryAttentionList() (resp *types.ListAttentio
 
 	var list []types.ListAttentionData
 
-	for _, item := range attentionList.List {
+	for _, detail := range attentionList.List {
 		list = append(list, types.ListAttentionData{
-			Id:         item.Id,
-			BrandId:    item.BrandId,
-			BrandName:  item.BrandName,
-			BrandLogo:  item.BrandLogo,
-			BrandCity:  item.BrandCity,
-			CreateTime: item.CreateTime,
+			Id:             detail.Id,             //
+			MemberId:       detail.MemberId,       // 会员id
+			MemberNickName: detail.MemberNickName, // 会员姓名
+			MemberIcon:     detail.MemberIcon,     // 会员头像
+			BrandId:        detail.BrandId,        // 品牌id
+			BrandName:      detail.BrandName,      // 品牌名称
+			BrandLogo:      detail.BrandLogo,      // 品牌Logo
+			BrandCity:      detail.BrandCity,      // 品牌所在城市
+			CreateTime:     detail.CreateTime,     // 关注时间
 		})
 	}
 

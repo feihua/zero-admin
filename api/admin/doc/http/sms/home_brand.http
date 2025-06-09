@@ -11,45 +11,32 @@ Content-Type: application/json
 %}
 
 ### 添加推荐品牌
-POST {{host}}/api/sms/homebrand/addHomeBrand
+POST {{host}}/api/sms/homeBrand/addHomeBrand
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {
   "brandIds": [
-    1,
-    2
+    8
   ]
 }
 
 ### 删除推荐品牌
-GET {{host}}/api/sms/homebrand/deleteHomeBrand?ids=[39]
+GET {{host}}/api/sms/homeBrand/deleteHomeBrand?brandIds=8
 Authorization: Bearer {{token}}
 
 
 ### 修改推荐品牌排序
-POST {{host}}/api/sms/homebrand/updateHomeBrandSort
+POST {{host}}/api/sms/homeBrand/updateHomeBrandSort
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {
-  "id": 38,
+  "brandId": 13,
   "sort": 200
 }
 
-### 批量修改推荐品牌状态
-POST {{host}}/api/sms/homebrand/updateHomeBrandStatus
-Content-Type: application/json
-Authorization: Bearer {{token}}
-
-{
-  "ids": [
-    38,
-    39
-  ],
-  "recommendStatus": 0
-}
 
 ### 查询推荐品牌列表
-GET {{host}}/api/sms/homebrand/queryHomeBrandList
+GET {{host}}/api/sms/homeBrand/queryHomeBrandList
 Authorization: Bearer {{token}}

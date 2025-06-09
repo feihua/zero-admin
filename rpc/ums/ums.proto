@@ -138,7 +138,7 @@ service MemberAddressService {
 
 // 添加会员关注品牌
 message AddMemberBrandAttentionReq {
-  int64 id = 1; //
+  string id = 1; //
   int64 member_id = 2; //会员id
   int64 brand_id = 5; //品牌id
   string brand_name = 6; //品牌名称
@@ -152,7 +152,7 @@ message AddMemberBrandAttentionResp {
 
 // 删除会员关注品牌
 message DeleteMemberBrandAttentionReq {
-  repeated int64 ids = 1;
+  repeated int64 brandIds = 1;
   int64 MemberId = 2; //会员id
 }
 
@@ -162,11 +162,11 @@ message DeleteMemberBrandAttentionResp {
 
 // 查询会员关注品牌详情
 message QueryMemberBrandAttentionDetailReq {
-    int64 id = 1;
+  string id = 1;
 }
 
 message QueryMemberBrandAttentionDetailResp {
-  int64 id = 1; //
+  string id = 1; //
   int64 member_id = 2; //会员id
   string member_nick_name = 3; //会员姓名
   string member_icon = 4; //会员头像
@@ -181,11 +181,12 @@ message QueryMemberBrandAttentionDetailResp {
 // 分页查询会员关注品牌列表
 message QueryMemberBrandAttentionListReq {
   int64 member_id = 1; //会员id
-  
+  int64 page_num = 2; //第几页
+  int64 page_size = 3; //每页的数量
 }
 
 message MemberBrandAttentionListData {
-  int64 id = 1; //
+  string id = 1; //
   int64 member_id = 2; //会员id
   string member_nick_name = 3; //会员姓名
   string member_icon = 4; //会员头像
@@ -198,8 +199,7 @@ message MemberBrandAttentionListData {
 }
 
 message QueryMemberBrandAttentionListResp {
-  int64 total = 1;
-  repeated  MemberBrandAttentionListData list = 2;
+  repeated  MemberBrandAttentionListData list = 1;
 }
 
 // 会员关注品牌
@@ -838,7 +838,7 @@ service MemberPointsLogService {
 
 // 添加会员与产品分类关系表（用户喜欢的分类）
 message AddMemberProductCategoryRelationReq {
-  int64 id = 1; //
+  string id = 1; //
   int64 member_id = 2; //会员id
   int64 product_category_id = 3; //商品分类id
 
@@ -855,15 +855,14 @@ message QueryMemberProductCategoryRelationListReq {
 }
 
 message MemberProductCategoryRelationListData {
-  int64 id = 1; //
+  string id = 1; //
   int64 member_id = 2; //会员id
   int64 product_category_id = 3; //商品分类id
 
 }
 
 message QueryMemberProductCategoryRelationListResp {
-  int64 total = 1;
-  repeated  MemberProductCategoryRelationListData list = 2;
+  repeated  MemberProductCategoryRelationListData list = 1;
 }
 
 // 会员与产品分类关系表（用户喜欢的分类）
@@ -878,7 +877,7 @@ service MemberProductCategoryRelationService {
 
 // 添加用户收藏的商品
 message AddMemberProductCollectionReq {
-  int64 id = 1; //
+  string id = 1; //
   int64 member_id = 2; //会员id
   string member_nick_name = 3; //会员姓名
   string member_icon = 4; //会员头像
@@ -895,7 +894,7 @@ message AddMemberProductCollectionResp {
 
 // 删除用户收藏的商品
 message DeleteMemberProductCollectionReq {
-  repeated int64 ids = 1;
+  repeated string ids = 1;
   int64 MemberId = 2; //会员id
 }
 
@@ -905,11 +904,11 @@ message DeleteMemberProductCollectionResp {
 
 // 查询用户收藏的商品详情
 message QueryMemberProductCollectionDetailReq {
-    int64 id = 1;
+  string id = 1;
 }
 
 message QueryMemberProductCollectionDetailResp {
-  int64 id = 1; //
+  string id = 1; //
   int64 member_id = 2; //会员id
   string member_nick_name = 3; //会员姓名
   string member_icon = 4; //会员头像
@@ -932,7 +931,7 @@ message QueryMemberProductCollectionListReq {
 }
 
 message MemberProductCollectionListData {
-  int64 id = 1; //
+  string id = 1; //
   int64 member_id = 2; //会员id
   string member_nick_name = 3; //会员姓名
   string member_icon = 4; //会员头像
@@ -946,8 +945,7 @@ message MemberProductCollectionListData {
 }
 
 message QueryMemberProductCollectionListResp {
-  int64 total = 1;
-  repeated  MemberProductCollectionListData list = 2;
+  repeated  MemberProductCollectionListData list = 1;
 }
 
 // 用户收藏的商品
@@ -967,7 +965,7 @@ service MemberProductCollectionService {
 
 // 添加用户商品浏览历史记录
 message AddMemberReadHistoryReq {
-  int64 id = 1; //
+  string id = 1; //
   int64 member_id = 2; //会员id
   string member_nick_name = 3; //会员姓名
   string member_icon = 4; //会员头像
@@ -985,7 +983,7 @@ message AddMemberReadHistoryResp {
 
 // 删除用户商品浏览历史记录
 message DeleteMemberReadHistoryReq {
-  repeated int64 ids = 1;
+  repeated string ids = 1;
   int64 MemberId = 2; //会员id
 }
 
@@ -995,11 +993,11 @@ message DeleteMemberReadHistoryResp {
 
 // 查询用户商品浏览历史记录详情
 message QueryMemberReadHistoryDetailReq {
-    int64 id = 1;
+  string id = 1;
 }
 
 message QueryMemberReadHistoryDetailResp {
-  int64 id = 1; //
+  string id = 1; //
   int64 member_id = 2; //会员id
   string member_nick_name = 3; //会员姓名
   string member_icon = 4; //会员头像
@@ -1021,7 +1019,7 @@ message QueryMemberReadHistoryListReq {
 }
 
 message MemberReadHistoryListData {
-  int64 id = 1; //
+  string id = 1; //
   int64 member_id = 2; //会员id
   string member_nick_name = 3; //会员姓名
   string member_icon = 4; //会员头像
@@ -1035,8 +1033,7 @@ message MemberReadHistoryListData {
 }
 
 message QueryMemberReadHistoryListResp {
-  int64 total = 1;
-  repeated  MemberReadHistoryListData list = 2;
+  repeated  MemberReadHistoryListData list = 1;
 }
 
 // 用户商品浏览历史记录

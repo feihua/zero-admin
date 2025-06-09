@@ -25,18 +25,14 @@ func main() {
 
 	g.ApplyBasic(
 		g.GenerateModel("sms_coupon"),
-		g.GenerateModel("sms_coupon_history"),
-		g.GenerateModel("sms_coupon_product_category_relation"),
-		g.GenerateModel("sms_coupon_product_relation"),
-		g.GenerateModel("sms_flash_promotion_log"),
-		g.GenerateModel("sms_flash_promotion"),
-		g.GenerateModel("sms_flash_promotion_product_relation"),
-		g.GenerateModel("sms_flash_promotion_session"),
+		g.GenerateModel("sms_coupon_record"),
+		g.GenerateModel("sms_coupon_scope"),
+		g.GenerateModel("sms_coupon_type"),
+		g.GenerateModel("sms_seckill_session"),
+		g.GenerateModel("sms_seckill_activity"),
+		g.GenerateModel("sms_seckill_product"),
+		g.GenerateModel("sms_seckill_reservation"),
 		g.GenerateModel("sms_home_advertise"),
-		g.GenerateModel("sms_home_brand"),
-		g.GenerateModel("sms_home_new_product"),
-		g.GenerateModel("sms_home_recommend_product"),
-		g.GenerateModel("sms_home_recommend_subject"),
 	)
 
 	// Execute the generator

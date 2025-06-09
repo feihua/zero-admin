@@ -7,17 +7,15 @@ import (
 	"os"
 
 	"github.com/feihua/zero-admin/rpc/sms/internal/config"
-	couponhistoryserviceServer "github.com/feihua/zero-admin/rpc/sms/internal/server/couponhistoryservice"
+	couponrecordserviceServer "github.com/feihua/zero-admin/rpc/sms/internal/server/couponrecordservice"
+	couponscopeserviceServer "github.com/feihua/zero-admin/rpc/sms/internal/server/couponscopeservice"
 	couponserviceServer "github.com/feihua/zero-admin/rpc/sms/internal/server/couponservice"
-	flashpromotionlogserviceServer "github.com/feihua/zero-admin/rpc/sms/internal/server/flashpromotionlogservice"
-	flashpromotionproductrelationserviceServer "github.com/feihua/zero-admin/rpc/sms/internal/server/flashpromotionproductrelationservice"
-	flashpromotionserviceServer "github.com/feihua/zero-admin/rpc/sms/internal/server/flashpromotionservice"
-	flashpromotionsessionserviceServer "github.com/feihua/zero-admin/rpc/sms/internal/server/flashpromotionsessionservice"
+	coupontypeserviceServer "github.com/feihua/zero-admin/rpc/sms/internal/server/coupontypeservice"
 	homeadvertiseserviceServer "github.com/feihua/zero-admin/rpc/sms/internal/server/homeadvertiseservice"
-	homebrandserviceServer "github.com/feihua/zero-admin/rpc/sms/internal/server/homebrandservice"
-	homenewproductserviceServer "github.com/feihua/zero-admin/rpc/sms/internal/server/homenewproductservice"
-	homerecommendproductserviceServer "github.com/feihua/zero-admin/rpc/sms/internal/server/homerecommendproductservice"
-	homerecommendsubjectserviceServer "github.com/feihua/zero-admin/rpc/sms/internal/server/homerecommendsubjectservice"
+	seckillactivityserviceServer "github.com/feihua/zero-admin/rpc/sms/internal/server/seckillactivityservice"
+	seckillproductserviceServer "github.com/feihua/zero-admin/rpc/sms/internal/server/seckillproductservice"
+	seckillreservationserviceServer "github.com/feihua/zero-admin/rpc/sms/internal/server/seckillreservationservice"
+	seckillsessionserviceServer "github.com/feihua/zero-admin/rpc/sms/internal/server/seckillsessionservice"
 	"github.com/feihua/zero-admin/rpc/sms/internal/svc"
 	"github.com/feihua/zero-admin/rpc/sms/smsclient"
 
@@ -40,17 +38,15 @@ func main() {
 	ctx := svc.NewServiceContext(c)
 
 	s := zrpc.MustNewServer(c.RpcServerConf, func(grpcServer *grpc.Server) {
+		smsclient.RegisterCouponRecordServiceServer(grpcServer, couponrecordserviceServer.NewCouponRecordServiceServer(ctx))
+		smsclient.RegisterCouponScopeServiceServer(grpcServer, couponscopeserviceServer.NewCouponScopeServiceServer(ctx))
 		smsclient.RegisterCouponServiceServer(grpcServer, couponserviceServer.NewCouponServiceServer(ctx))
-		smsclient.RegisterCouponHistoryServiceServer(grpcServer, couponhistoryserviceServer.NewCouponHistoryServiceServer(ctx))
-		smsclient.RegisterFlashPromotionServiceServer(grpcServer, flashpromotionserviceServer.NewFlashPromotionServiceServer(ctx))
-		smsclient.RegisterFlashPromotionLogServiceServer(grpcServer, flashpromotionlogserviceServer.NewFlashPromotionLogServiceServer(ctx))
-		smsclient.RegisterFlashPromotionProductRelationServiceServer(grpcServer, flashpromotionproductrelationserviceServer.NewFlashPromotionProductRelationServiceServer(ctx))
-		smsclient.RegisterFlashPromotionSessionServiceServer(grpcServer, flashpromotionsessionserviceServer.NewFlashPromotionSessionServiceServer(ctx))
+		smsclient.RegisterCouponTypeServiceServer(grpcServer, coupontypeserviceServer.NewCouponTypeServiceServer(ctx))
 		smsclient.RegisterHomeAdvertiseServiceServer(grpcServer, homeadvertiseserviceServer.NewHomeAdvertiseServiceServer(ctx))
-		smsclient.RegisterHomeBrandServiceServer(grpcServer, homebrandserviceServer.NewHomeBrandServiceServer(ctx))
-		smsclient.RegisterHomeNewProductServiceServer(grpcServer, homenewproductserviceServer.NewHomeNewProductServiceServer(ctx))
-		smsclient.RegisterHomeRecommendProductServiceServer(grpcServer, homerecommendproductserviceServer.NewHomeRecommendProductServiceServer(ctx))
-		smsclient.RegisterHomeRecommendSubjectServiceServer(grpcServer, homerecommendsubjectserviceServer.NewHomeRecommendSubjectServiceServer(ctx))
+		smsclient.RegisterSeckillActivityServiceServer(grpcServer, seckillactivityserviceServer.NewSeckillActivityServiceServer(ctx))
+		smsclient.RegisterSeckillProductServiceServer(grpcServer, seckillproductserviceServer.NewSeckillProductServiceServer(ctx))
+		smsclient.RegisterSeckillReservationServiceServer(grpcServer, seckillreservationserviceServer.NewSeckillReservationServiceServer(ctx))
+		smsclient.RegisterSeckillSessionServiceServer(grpcServer, seckillsessionserviceServer.NewSeckillSessionServiceServer(ctx))
 
 		if c.Mode == service.DevMode || c.Mode == service.TestMode {
 			reflection.Register(grpcServer)

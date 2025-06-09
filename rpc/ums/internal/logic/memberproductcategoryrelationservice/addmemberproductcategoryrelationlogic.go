@@ -3,8 +3,7 @@ package memberproductcategoryrelationservicelogic
 import (
 	"context"
 	"errors"
-	"github.com/feihua/zero-admin/rpc/ums/gen/model"
-	"github.com/feihua/zero-admin/rpc/ums/gen/query"
+	mymongo "github.com/feihua/zero-admin/rpc/ums/gen/mongo"
 	"github.com/zeromicro/go-zero/core/logc"
 
 	"github.com/feihua/zero-admin/rpc/ums/internal/svc"
@@ -34,11 +33,11 @@ func NewAddMemberProductCategoryRelationLogic(ctx context.Context, svcCtx *svc.S
 
 // AddMemberProductCategoryRelation 添加会员与产品分类关系（用户喜欢的分类）
 func (l *AddMemberProductCategoryRelationLogic) AddMemberProductCategoryRelation(in *umsclient.AddMemberProductCategoryRelationReq) (*umsclient.AddMemberProductCategoryRelationResp, error) {
-	err := query.UmsMemberProductCategoryRelation.WithContext(l.ctx).Create(&model.UmsMemberProductCategoryRelation{
-		MemberID:          in.MemberId,          // 会员id
-		ProductCategoryID: in.ProductCategoryId, // 商品分类id
-	})
 
+	err := l.svcCtx.MemberProductCategoryRelationModel.Insert(l.ctx, &mymongo.MemberProductCategoryRelation{
+		MemberId:          in.MemberId,          // 会员id
+		ProductCategoryId: in.ProductCategoryId, // 商品分类id
+	})
 	if err != nil {
 		logc.Errorf(l.ctx, "添加会员与产品分类关系失败,参数:%+v,异常:%s", in, err.Error())
 		return nil, errors.New("添加会员与产品分类关系失败")

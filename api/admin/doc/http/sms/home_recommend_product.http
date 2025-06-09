@@ -11,45 +11,31 @@ Content-Type: application/json
 %}
 
 ### 添加人气商品推荐
-POST {{host}}/api/sms/homerecommendproduct/addHomeRecommendProduct
+POST {{host}}/api/sms/homeRecommendProduct/addHomeRecommendProduct
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {
   "productIds": [
-    1,
-    2
+    36
   ]
 }
 
 ### 删除人气商品推荐
-GET {{host}}/api/sms/homerecommendproduct/deleteHomeRecommendProduct?ids=[39]
+GET {{host}}/api/sms/homeRecommendProduct/deleteHomeRecommendProduct?productIds=36
 Authorization: Bearer {{token}}
 
 
 ### 修改人气商品推荐排序
-POST {{host}}/api/sms/homerecommendproduct/updateRecommendProductSort
+POST {{host}}/api/sms/homeRecommendProduct/updateRecommendProductSort
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {
-  "id": 38,
-  "sort": 200
-}
-
-### 批量修改人气商品推荐状态
-POST {{host}}/api/sms/homerecommendproduct/updateRecommendProductStatus
-Content-Type: application/json
-Authorization: Bearer {{token}}
-
-{
-  "ids": [
-    38,
-    39
-  ],
-  "recommendStatus": 0
+  "productId": 36,
+  "sort": 21
 }
 
 ### 查询人气商品推荐列表
-GET {{host}}/api/sms/homerecommendproduct/queryHomeRecommendProductList
+GET {{host}}/api/sms/homeRecommendProduct/queryHomeRecommendProductList
 Authorization: Bearer {{token}}

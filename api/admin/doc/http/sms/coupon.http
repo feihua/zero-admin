@@ -10,7 +10,70 @@ Content-Type: application/json
     client.global.set("token", response.body.data.token);
 %}
 
+### 添加优惠券
+POST {{host}}/api/sms/coupon/addCoupon
+Content-Type: application/json
+Authorization: Bearer {{token}}
 
-### 获取优惠券
+{
+  "typeId": 5,
+  "name": "双十一折扣券",
+  "code": "DOUBLE11",
+  "amount": 10,
+  "minAmount": 100,
+  "startTime": "2023-11-11 00:00:00",
+  "endTime": "2029-11-11 23:59:59",
+  "totalCount": 500,
+  "receivedCount": 0,
+  "usedCount": 0,
+  "perLimit": 2,
+  "status": 1,
+  "isEnabled": 1,
+  "description": "双十一当天使用"
+}
+
+### 删除优惠券
+GET {{host}}/api/sms/coupon/deleteCoupon?ids=22
+Authorization: Bearer {{token}}
+
+
+### 更新优惠券
+POST {{host}}/api/sms/coupon/updateCoupon
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "id": 3,
+  "typeId": 5,
+  "name": "双十一折扣券",
+  "code": "DOUBLE11",
+  "amount": 10,
+  "minAmount": 100,
+  "startTime": "2023-11-11 00:00:00",
+  "endTime": "2029-11-11 23:59:59",
+  "totalCount": 500,
+  "receivedCount": 0,
+  "usedCount": 0,
+  "perLimit": 2,
+  "status": 0,
+  "isEnabled": 1,
+  "description": "双十一当天使用"
+}
+### 更新优惠券状态
+POST {{host}}/api/sms/coupon/updateCouponStatus
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "ids": [3],
+  "status": 1
+
+}
+
+### 查询优惠券详情
+GET {{host}}/api/sms/coupon/queryCouponDetail?id=3
+Authorization: Bearer {{token}}
+
+### 查询优惠券列表
 GET {{host}}/api/sms/coupon/queryCouponList
 Authorization: Bearer {{token}}

@@ -1,0 +1,132 @@
+syntax = "proto3";
+
+package main;
+
+option go_package = "./proto";
+
+// 添加秒杀场次
+message AddSeckillSessionReq {
+  int64 id = 1; //秒杀场次ID
+  string name = 2; //场次名称
+  string start_time = 3; //开始时间
+  string end_time = 4; //结束时间
+  int32 status = 5; //状态：0-禁用，1-启用
+  int32 sort = 6; //排序
+  int64 create_by = 7; //创建人ID
+}
+
+message AddSeckillSessionResp {
+  string pong = 1;
+}
+
+// 删除秒杀场次
+message DeleteSeckillSessionReq {
+  repeated int64 ids = 1;
+}
+
+message DeleteSeckillSessionResp {
+  string pong = 1;
+}
+
+// 更新秒杀场次
+message UpdateSeckillSessionReq {
+  int64 id = 1; //秒杀场次ID
+  string name = 2; //场次名称
+  string start_time = 3; //开始时间
+  string end_time = 4; //结束时间
+  int32 status = 5; //状态：0-禁用，1-启用
+  int32 sort = 6; //排序
+  int64 update_by = 9; //更新人ID
+}
+
+message UpdateSeckillSessionResp {
+  string pong = 1;
+}
+
+// 更新秒杀场次状态
+message UpdateSeckillSessionStatusReq {
+  repeated int64 ids = 1; //秒杀场次ID
+  int32 status = 5; //状态：0-禁用，1-启用
+  int64 update_by = 9; //更新人ID
+}
+
+message UpdateSeckillSessionStatusResp {
+  string pong = 1;
+}
+
+// 查询秒杀场次详情
+message QuerySeckillSessionDetailReq {
+    int64 id = 1;
+}
+
+message QuerySeckillSessionDetailResp {
+  int64 id = 1; //秒杀场次ID
+  string name = 2; //场次名称
+  string start_time = 3; //开始时间
+  string end_time = 4; //结束时间
+  int32 status = 5; //状态：0-禁用，1-启用
+  int32 sort = 6; //排序
+  int64 create_by = 7; //创建人ID
+  string create_time = 8; //创建时间
+  int64 update_by = 9; //更新人ID
+  string update_time = 10; //更新时间
+  int32 is_deleted = 11; //是否删除
+
+}
+
+// 分页查询秒杀场次列表
+message QuerySeckillSessionListReq {
+  string name = 1; //场次名称
+  string start_time = 2; //开始时间
+  string end_time = 3; //结束时间
+  int32 status = 4; //状态：0-禁用，1-启用
+  int32 page_num = 5; //第几页
+  int32 page_size = 6; //每页的数量
+}
+
+message SeckillSessionListData {
+  int64 id = 1; //秒杀场次ID
+  string name = 2; //场次名称
+  string start_time = 3; //开始时间
+  string end_time = 4; //结束时间
+  int32 status = 5; //状态：0-禁用，1-启用
+  int32 sort = 6; //排序
+  int64 create_by = 7; //创建人ID
+  string create_time = 8; //创建时间
+  int64 update_by = 9; //更新人ID
+  string update_time = 10; //更新时间
+
+}
+
+message QuerySeckillSessionListResp {
+  int64 total = 1;
+  repeated  SeckillSessionListData list = 2;
+}
+
+message QuerySeckillSessionListByTimeReq {
+  string currentTIme = 1;
+}
+
+message QuerySeckillSessionListByTimeResp {
+  repeated  SeckillSessionListData list = 1;
+}
+
+// 秒杀场次
+service SeckillSessionService {
+  // 添加秒杀场次
+  rpc AddSeckillSession(AddSeckillSessionReq) returns (AddSeckillSessionResp){}
+  // 删除秒杀场次
+  rpc DeleteSeckillSession(DeleteSeckillSessionReq) returns (DeleteSeckillSessionResp){}
+  // 更新秒杀场次
+  rpc UpdateSeckillSession(UpdateSeckillSessionReq) returns (UpdateSeckillSessionResp ){}
+  // 更新秒杀场次状态
+  rpc UpdateSeckillSessionStatus(UpdateSeckillSessionStatusReq) returns (UpdateSeckillSessionStatusResp ){}
+  // 查询秒杀场次详情
+   rpc QuerySeckillSessionDetail(QuerySeckillSessionDetailReq) returns (QuerySeckillSessionDetailResp){}
+  // 查询秒杀场次列表
+  rpc QuerySeckillSessionList(QuerySeckillSessionListReq) returns (QuerySeckillSessionListResp){}
+
+  //根据时间查询限时购场次
+  rpc QuerySeckillSessionListByTime(QuerySeckillSessionListByTimeReq) returns(QuerySeckillSessionListByTimeResp);
+
+}

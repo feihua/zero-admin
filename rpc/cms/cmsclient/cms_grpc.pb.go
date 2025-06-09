@@ -1307,6 +1307,7 @@ const (
 	SubjectService_QuerySubjectList_FullMethodName             = "/cmsclient.SubjectService/QuerySubjectList"
 	SubjectService_SubjectListByIds_FullMethodName             = "/cmsclient.SubjectService/SubjectListByIds"
 	SubjectService_UpdateSubjectRecommendStatus_FullMethodName = "/cmsclient.SubjectService/UpdateSubjectRecommendStatus"
+	SubjectService_UpdateSubjectSort_FullMethodName            = "/cmsclient.SubjectService/UpdateSubjectSort"
 )
 
 // SubjectServiceClient is the client API for SubjectService service.
@@ -1328,6 +1329,8 @@ type SubjectServiceClient interface {
 	SubjectListByIds(ctx context.Context, in *SubjectListByIdsReq, opts ...grpc.CallOption) (*QuerySubjectListResp, error)
 	// 批量更新状态
 	UpdateSubjectRecommendStatus(ctx context.Context, in *UpdateSubjectRecommendStatusReq, opts ...grpc.CallOption) (*UpdateSubjectRecommendStatusResp, error)
+	// 更新排序
+	UpdateSubjectSort(ctx context.Context, in *UpdateSubjectSortReq, opts ...grpc.CallOption) (*UpdateSubjectResp, error)
 }
 
 type subjectServiceClient struct {
@@ -1410,6 +1413,15 @@ func (c *subjectServiceClient) UpdateSubjectRecommendStatus(ctx context.Context,
 	return out, nil
 }
 
+func (c *subjectServiceClient) UpdateSubjectSort(ctx context.Context, in *UpdateSubjectSortReq, opts ...grpc.CallOption) (*UpdateSubjectResp, error) {
+	out := new(UpdateSubjectResp)
+	err := c.cc.Invoke(ctx, SubjectService_UpdateSubjectSort_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // SubjectServiceServer is the server API for SubjectService service.
 // All implementations must embed UnimplementedSubjectServiceServer
 // for forward compatibility
@@ -1429,6 +1441,8 @@ type SubjectServiceServer interface {
 	SubjectListByIds(context.Context, *SubjectListByIdsReq) (*QuerySubjectListResp, error)
 	// 批量更新状态
 	UpdateSubjectRecommendStatus(context.Context, *UpdateSubjectRecommendStatusReq) (*UpdateSubjectRecommendStatusResp, error)
+	// 更新排序
+	UpdateSubjectSort(context.Context, *UpdateSubjectSortReq) (*UpdateSubjectResp, error)
 	mustEmbedUnimplementedSubjectServiceServer()
 }
 
@@ -1459,6 +1473,9 @@ func (UnimplementedSubjectServiceServer) SubjectListByIds(context.Context, *Subj
 }
 func (UnimplementedSubjectServiceServer) UpdateSubjectRecommendStatus(context.Context, *UpdateSubjectRecommendStatusReq) (*UpdateSubjectRecommendStatusResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateSubjectRecommendStatus not implemented")
+}
+func (UnimplementedSubjectServiceServer) UpdateSubjectSort(context.Context, *UpdateSubjectSortReq) (*UpdateSubjectResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateSubjectSort not implemented")
 }
 func (UnimplementedSubjectServiceServer) mustEmbedUnimplementedSubjectServiceServer() {}
 
@@ -1617,6 +1634,24 @@ func _SubjectService_UpdateSubjectRecommendStatus_Handler(srv interface{}, ctx c
 	return interceptor(ctx, in, info, handler)
 }
 
+func _SubjectService_UpdateSubjectSort_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateSubjectSortReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SubjectServiceServer).UpdateSubjectSort(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: SubjectService_UpdateSubjectSort_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SubjectServiceServer).UpdateSubjectSort(ctx, req.(*UpdateSubjectSortReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // SubjectService_ServiceDesc is the grpc.ServiceDesc for SubjectService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -1655,6 +1690,10 @@ var SubjectService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateSubjectRecommendStatus",
 			Handler:    _SubjectService_UpdateSubjectRecommendStatus_Handler,
+		},
+		{
+			MethodName: "UpdateSubjectSort",
+			Handler:    _SubjectService_UpdateSubjectSort_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

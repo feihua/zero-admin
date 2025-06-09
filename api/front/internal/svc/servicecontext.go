@@ -29,17 +29,15 @@ import (
 	"github.com/feihua/zero-admin/rpc/pms/client/productservice"
 	"github.com/feihua/zero-admin/rpc/pms/client/productvertifyrecordservice"
 	"github.com/feihua/zero-admin/rpc/pms/client/skustockservice"
-	"github.com/feihua/zero-admin/rpc/sms/client/couponhistoryservice"
+	"github.com/feihua/zero-admin/rpc/sms/client/couponrecordservice"
+	"github.com/feihua/zero-admin/rpc/sms/client/couponscopeservice"
 	"github.com/feihua/zero-admin/rpc/sms/client/couponservice"
-	"github.com/feihua/zero-admin/rpc/sms/client/flashpromotionlogservice"
-	"github.com/feihua/zero-admin/rpc/sms/client/flashpromotionproductrelationservice"
-	"github.com/feihua/zero-admin/rpc/sms/client/flashpromotionservice"
-	"github.com/feihua/zero-admin/rpc/sms/client/flashpromotionsessionservice"
+	"github.com/feihua/zero-admin/rpc/sms/client/coupontypeservice"
 	"github.com/feihua/zero-admin/rpc/sms/client/homeadvertiseservice"
-	"github.com/feihua/zero-admin/rpc/sms/client/homebrandservice"
-	"github.com/feihua/zero-admin/rpc/sms/client/homenewproductservice"
-	"github.com/feihua/zero-admin/rpc/sms/client/homerecommendproductservice"
-	"github.com/feihua/zero-admin/rpc/sms/client/homerecommendsubjectservice"
+	"github.com/feihua/zero-admin/rpc/sms/client/seckillactivityservice"
+	"github.com/feihua/zero-admin/rpc/sms/client/seckillproductservice"
+	"github.com/feihua/zero-admin/rpc/sms/client/seckillreservationservice"
+	"github.com/feihua/zero-admin/rpc/sms/client/seckillsessionservice"
 	"github.com/feihua/zero-admin/rpc/sys/client/deptservice"
 	"github.com/feihua/zero-admin/rpc/sys/client/loginlogservice"
 	"github.com/feihua/zero-admin/rpc/sys/client/menuservice"
@@ -120,17 +118,15 @@ type ServiceContext struct {
 	OrderService               orderservice.OrderService
 	OrderSettingService        ordersettingservice.OrderSettingService
 	// 营销相关
-	CouponHistoryService                 couponhistoryservice.CouponHistoryService
-	CouponService                        couponservice.CouponService
-	FlashPromotionLogService             flashpromotionlogservice.FlashPromotionLogService
-	FlashPromotionProductRelationService flashpromotionproductrelationservice.FlashPromotionProductRelationService
-	FlashPromotionService                flashpromotionservice.FlashPromotionService
-	FlashPromotionSessionService         flashpromotionsessionservice.FlashPromotionSessionService
-	HomeAdvertiseService                 homeadvertiseservice.HomeAdvertiseService
-	HomeBrandService                     homebrandservice.HomeBrandService
-	HomeNewProductService                homenewproductservice.HomeNewProductService
-	HomeRecommendProductService          homerecommendproductservice.HomeRecommendProductService
-	HomeRecommendSubjectService          homerecommendsubjectservice.HomeRecommendSubjectService
+	CouponRecordService       couponrecordservice.CouponRecordService
+	CouponScopeService        couponscopeservice.CouponScopeService
+	CouponService             couponservice.CouponService
+	CouponTypeService         coupontypeservice.CouponTypeService
+	HomeAdvertiseService      homeadvertiseservice.HomeAdvertiseService
+	SeckillActivityService    seckillactivityservice.SeckillActivityService
+	SeckillProductService     seckillproductservice.SeckillProductService
+	SeckillReservationService seckillreservationservice.SeckillReservationService
+	SeckillSessionService     seckillsessionservice.SeckillSessionService
 	// 内容相关
 	SubjectService                      subjectservice.SubjectService
 	SubjectProductRelationService       subjectproductrelationservice.SubjectProductRelationService
@@ -203,17 +199,15 @@ func NewServiceContext(c config.Config) *ServiceContext {
 		OrderService:               orderservice.NewOrderService(omsClient),
 		OrderSettingService:        ordersettingservice.NewOrderSettingService(omsClient),
 
-		CouponHistoryService:                 couponhistoryservice.NewCouponHistoryService(smsClient),
-		CouponService:                        couponservice.NewCouponService(smsClient),
-		FlashPromotionLogService:             flashpromotionlogservice.NewFlashPromotionLogService(smsClient),
-		FlashPromotionProductRelationService: flashpromotionproductrelationservice.NewFlashPromotionProductRelationService(smsClient),
-		FlashPromotionService:                flashpromotionservice.NewFlashPromotionService(smsClient),
-		FlashPromotionSessionService:         flashpromotionsessionservice.NewFlashPromotionSessionService(smsClient),
-		HomeAdvertiseService:                 homeadvertiseservice.NewHomeAdvertiseService(smsClient),
-		HomeBrandService:                     homebrandservice.NewHomeBrandService(smsClient),
-		HomeNewProductService:                homenewproductservice.NewHomeNewProductService(smsClient),
-		HomeRecommendProductService:          homerecommendproductservice.NewHomeRecommendProductService(smsClient),
-		HomeRecommendSubjectService:          homerecommendsubjectservice.NewHomeRecommendSubjectService(smsClient),
+		CouponRecordService:       couponrecordservice.NewCouponRecordService(smsClient),
+		CouponScopeService:        couponscopeservice.NewCouponScopeService(smsClient),
+		CouponService:             couponservice.NewCouponService(smsClient),
+		CouponTypeService:         coupontypeservice.NewCouponTypeService(smsClient),
+		HomeAdvertiseService:      homeadvertiseservice.NewHomeAdvertiseService(smsClient),
+		SeckillActivityService:    seckillactivityservice.NewSeckillActivityService(smsClient),
+		SeckillProductService:     seckillproductservice.NewSeckillProductService(smsClient),
+		SeckillReservationService: seckillreservationservice.NewSeckillReservationService(smsClient),
+		SeckillSessionService:     seckillsessionservice.NewSeckillSessionService(smsClient),
 
 		SubjectService:                      subjectservice.NewSubjectService(cmsClient),
 		SubjectProductRelationService:       subjectproductrelationservice.NewSubjectProductRelationService(cmsClient),

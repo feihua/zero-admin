@@ -4,7 +4,7 @@ import (
 	"context"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
 	"github.com/feihua/zero-admin/api/admin/internal/common/res"
-	"github.com/feihua/zero-admin/rpc/sms/smsclient"
+	"github.com/feihua/zero-admin/rpc/cms/cmsclient"
 	"github.com/zeromicro/go-zero/core/logc"
 	"google.golang.org/grpc/status"
 
@@ -35,8 +35,8 @@ func NewUpdateRecommendSubjectSortLogic(ctx context.Context, svcCtx *svc.Service
 
 // UpdateRecommendSubjectSort 修改推荐排序
 func (l *UpdateRecommendSubjectSortLogic) UpdateRecommendSubjectSort(req *types.UpdateRecommendSubjectSortReq) (resp *types.BaseResp, err error) {
-	_, err = l.svcCtx.HomeRecommendSubjectService.UpdateRecommendSubjectSort(l.ctx, &smsclient.UpdateRecommendSubjectSortReq{
-		Id:   req.Id,
+	_, err = l.svcCtx.SubjectService.UpdateSubjectSort(l.ctx, &cmsclient.UpdateSubjectSortReq{
+		Id:   req.SubjectId,
 		Sort: req.Sort,
 	})
 
@@ -45,6 +45,5 @@ func (l *UpdateRecommendSubjectSortLogic) UpdateRecommendSubjectSort(req *types.
 		s, _ := status.FromError(err)
 		return nil, errorx.NewDefaultError(s.Message())
 	}
-
 	return res.Success()
 }

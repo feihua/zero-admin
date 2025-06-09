@@ -1,0 +1,136 @@
+syntax = "proto3";
+
+package main;
+
+option go_package = "./proto";
+
+// 添加秒杀活动
+message AddSeckillActivityReq {
+  int64 id = 1; //编号
+  string name = 2; //活动名称
+  string description = 3; //活动描述
+  string start_time = 4; //开始时间
+  string end_time = 5; //结束时间
+  int32 status = 6; //活动状态：0-未开始，1-进行中，2-已结束，3-已取消
+  int32 is_enabled = 7; //是否启用
+  int64 create_by = 8; //创建人ID
+}
+
+message AddSeckillActivityResp {
+  string pong = 1;
+}
+
+// 删除秒杀活动
+message DeleteSeckillActivityReq {
+  repeated int64 ids = 1;
+}
+
+message DeleteSeckillActivityResp {
+  string pong = 1;
+}
+
+// 更新秒杀活动
+message UpdateSeckillActivityReq {
+  int64 id = 1; //编号
+  string name = 2; //活动名称
+  string description = 3; //活动描述
+  string start_time = 4; //开始时间
+  string end_time = 5; //结束时间
+  int32 status = 6; //活动状态：0-未开始，1-进行中，2-已结束，3-已取消
+  int32 is_enabled = 7; //是否启用
+  int64 update_by = 10; //更新人ID
+}
+
+message UpdateSeckillActivityResp {
+  string pong = 1;
+}
+
+// 更新秒杀活动状态
+message UpdateSeckillActivityStatusReq {
+  repeated int64 ids = 1; //编号
+  int32 status = 6; //活动状态：0-未开始，1-进行中，2-已结束，3-已取消
+  int64 update_by = 10; //更新人ID
+}
+
+message UpdateSeckillActivityStatusResp {
+  string pong = 1;
+}
+
+// 查询秒杀活动详情
+message QuerySeckillActivityDetailReq {
+  int64 id = 1;
+}
+
+message QuerySeckillActivityDetailResp {
+  int64 id = 1; //编号
+  string name = 2; //活动名称
+  string description = 3; //活动描述
+  string start_time = 4; //开始时间
+  string end_time = 5; //结束时间
+  int32 status = 6; //活动状态：0-未开始，1-进行中，2-已结束，3-已取消
+  int32 is_enabled = 7; //是否启用
+  int64 create_by = 8; //创建人ID
+  string create_time = 9; //创建时间
+  int64 update_by = 10; //更新人ID
+  string update_time = 11; //更新时间
+
+}
+
+// 分页查询秒杀活动列表
+message QuerySeckillActivityListReq {
+  string name = 1; //活动名称
+  string start_time = 2; //开始时间
+  string end_time = 3; //结束时间
+  int32 status = 4; //活动状态：0-未开始，1-进行中，2-已结束，3-已取消
+  int32 is_enabled = 5; //是否启用
+  int32 page_num = 6; //第几页
+  int32 page_size = 7; //每页的数量
+}
+
+message SeckillActivityListData {
+  int64 id = 1; //编号
+  string name = 2; //活动名称
+  string description = 3; //活动描述
+  string start_time = 4; //开始时间
+  string end_time = 5; //结束时间
+  int32 status = 6; //活动状态：0-未开始，1-进行中，2-已结束，3-已取消
+  int32 is_enabled = 7; //是否启用
+  int64 create_by = 8; //创建人ID
+  string create_time = 9; //创建时间
+  int64 update_by = 10; //更新人ID
+  string update_time = 11; //更新时间
+
+}
+
+message QuerySeckillActivityListResp {
+  int64 total = 1;
+  repeated  SeckillActivityListData list = 2;
+}
+
+message QuerySeckillActivityListByDateReq {
+  string currentDate = 1;
+}
+
+message QueryFlashPromotionListByDateResp {
+  repeated  SeckillActivityListData list = 1;
+}
+
+// 秒杀活动
+service SeckillActivityService {
+  // 添加秒杀活动
+  rpc AddSeckillActivity(AddSeckillActivityReq) returns (AddSeckillActivityResp){}
+  // 删除秒杀活动
+  rpc DeleteSeckillActivity(DeleteSeckillActivityReq) returns (DeleteSeckillActivityResp){}
+  // 更新秒杀活动
+  rpc UpdateSeckillActivity(UpdateSeckillActivityReq) returns (UpdateSeckillActivityResp){}
+  // 更新秒杀活动状态
+  rpc UpdateSeckillActivityStatus(UpdateSeckillActivityStatusReq) returns (UpdateSeckillActivityStatusResp){}
+  // 查询秒杀活动详情
+  rpc QuerySeckillActivityDetail(QuerySeckillActivityDetailReq) returns (QuerySeckillActivityDetailResp){}
+  // 查询秒杀活动列表
+  rpc QuerySeckillActivityList(QuerySeckillActivityListReq) returns (QuerySeckillActivityListResp){}
+
+  //查询当前时间是否有秒杀活动
+  rpc QuerySeckillActivityListByDate(QuerySeckillActivityListByDateReq) returns(QueryFlashPromotionListByDateResp);
+
+}

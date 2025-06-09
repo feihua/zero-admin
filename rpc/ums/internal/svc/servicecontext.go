@@ -1,6 +1,7 @@
 package svc
 
 import (
+	mymongo "github.com/feihua/zero-admin/rpc/ums/gen/mongo"
 	"github.com/feihua/zero-admin/rpc/ums/gen/query"
 	"github.com/feihua/zero-admin/rpc/ums/internal/config"
 	"github.com/zeromicro/go-zero/core/logx"
@@ -11,8 +12,12 @@ import (
 )
 
 type ServiceContext struct {
-	Config config.Config
-	DB     *gorm.DB
+	Config                             config.Config
+	DB                                 *gorm.DB
+	MemberBrandAttentionModel          mymongo.MemberBrandAttentionModel
+	MemberBrowseRecordModel            mymongo.MemberBrowseRecordModel
+	MemberProductCategoryRelationModel mymongo.MemberProductCategoryRelationModel
+	MemberProductCollectionModel       mymongo.MemberProductCollectionModel
 }
 
 func NewServiceContext(c config.Config) *ServiceContext {
@@ -27,9 +32,18 @@ func NewServiceContext(c config.Config) *ServiceContext {
 
 	logx.Debug("mysql已连接")
 	query.SetDefault(db)
+
+	MemberBrandAttention := mymongo.NewMemberBrandAttentionModel(c.Mongo.Datasource, c.Mongo.Db, "ums_member_brand_attention")
+	MemberBrowseRecordModel := mymongo.NewMemberBrowseRecordModel(c.Mongo.Datasource, c.Mongo.Db, "ums_member_browse_record")
+	MemberProductCategoryRelationModel := mymongo.NewMemberProductCategoryRelationModel(c.Mongo.Datasource, c.Mongo.Db, "ums_member_product_category_relation")
+	MemberProductCollectionModel := mymongo.NewMemberProductCollectionModel(c.Mongo.Datasource, c.Mongo.Db, "ums_member_product_collection")
 	return &ServiceContext{
-		Config: c,
-		DB:     db,
+		Config:                             c,
+		DB:                                 db,
+		MemberBrandAttentionModel:          MemberBrandAttention,
+		MemberBrowseRecordModel:            MemberBrowseRecordModel,
+		MemberProductCategoryRelationModel: MemberProductCategoryRelationModel,
+		MemberProductCollectionModel:       MemberProductCollectionModel,
 	}
 }
 

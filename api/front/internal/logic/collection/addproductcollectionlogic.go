@@ -64,7 +64,7 @@ func (l *AddProductCollectionLogic) AddProductCollection(req *types.AddProductCo
 	// 如果查询不到收藏记录,则添加
 	if len(collectionList.List) == 0 {
 		_, err = l.svcCtx.MemberProductCollectionService.AddMemberProductCollection(l.ctx, &umsclient.AddMemberProductCollectionReq{
-			MemberId:        member.Id,
+			MemberId:        member.MemberId,
 			MemberNickName:  member.Nickname,
 			MemberIcon:      member.Avatar,
 			ProductId:       req.ProductId,

@@ -40,7 +40,7 @@ func (l *DeleteAttentionLogic) DeleteAttention(req *types.DeleteAttentionReq) (r
 		return nil, err
 	}
 	_, err = l.svcCtx.MemberBrandAttentionService.DeleteMemberBrandAttention(l.ctx, &umsclient.DeleteMemberBrandAttentionReq{
-		Ids:      req.BrandIds,
+		BrandIds: req.BrandIds,
 		MemberId: memberId,
 	})
 

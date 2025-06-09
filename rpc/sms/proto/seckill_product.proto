@@ -1,0 +1,144 @@
+syntax = "proto3";
+
+package main;
+
+option go_package = "./proto";
+
+// 添加秒杀商品
+message AddSeckillProductReq {
+  repeated AddSeckillProductData data= 1;
+
+}
+
+message AddSeckillProductData {
+  int64 id = 1; //ID
+  int64 activity_id = 2; //活动ID
+  int64 session_id = 3; //秒杀场次ID
+  int64 sku_id = 4; //商品SKU ID
+  float seckill_price = 5; //秒杀价格
+  int32 seckill_stock = 6; //秒杀库存
+  int32 stock_locked = 7; //锁定库存
+  int32 per_limit = 8; //每人限购数量
+  int32 sort = 9; //排序
+  int32 status = 10; //状态：0-未上架，1-已上架
+  int64 create_by = 11; //创建人ID
+  string sku_name = 12; //商品名称
+}
+
+message AddSeckillProductResp {
+  string pong = 1;
+}
+
+// 删除秒杀商品
+message DeleteSeckillProductReq {
+  repeated int64 ids = 1;
+}
+
+message DeleteSeckillProductResp {
+  string pong = 1;
+}
+
+// 更新秒杀商品
+message UpdateSeckillProductReq {
+  int64 id = 1; //ID
+  int64 activity_id = 2; //活动ID
+  int64 session_id = 3; //秒杀场次ID
+  int64 sku_id = 4; //商品SKU ID
+  float seckill_price = 5; //秒杀价格
+  int32 seckill_stock = 6; //秒杀库存
+  int32 stock_locked = 7; //锁定库存
+  int32 per_limit = 8; //每人限购数量
+  int32 sort = 9; //排序
+  int32 status = 10; //状态：0-未上架，1-已上架
+  int64 update_by = 13; //更新人ID
+  string sku_name = 14; //商品名称
+}
+
+message UpdateSeckillProductResp {
+  string pong = 1;
+}
+
+// 更新秒杀商品状态
+message UpdateSeckillProductStatusReq {
+  repeated int64 ids = 1; //ID
+  int32 status = 10; //状态：0-未上架，1-已上架
+  int64 update_by = 13; //更新人ID
+}
+
+message UpdateSeckillProductStatusResp {
+  string pong = 1;
+}
+
+// 查询秒杀商品详情
+message QuerySeckillProductDetailReq {
+    int64 id = 1;
+}
+
+message QuerySeckillProductDetailResp {
+  int64 id = 1; //ID
+  int64 activity_id = 2; //活动ID
+  int64 session_id = 3; //秒杀场次ID
+  int64 sku_id = 4; //商品SKU ID
+  float seckill_price = 5; //秒杀价格
+  int32 seckill_stock = 6; //秒杀库存
+  int32 stock_locked = 7; //锁定库存
+  int32 per_limit = 8; //每人限购数量
+  int32 sort = 9; //排序
+  int32 status = 10; //状态：0-未上架，1-已上架
+  int64 create_by = 11; //创建人ID
+  string create_time = 12; //创建时间
+  int64 update_by = 13; //更新人ID
+  string update_time = 14; //更新时间
+  string sku_name = 15; //商品名称
+
+}
+
+// 分页查询秒杀商品列表
+message QuerySeckillProductListReq {
+  int64 activity_id = 1; //活动ID
+  int64 session_id = 2; //秒杀场次ID
+  int32 status = 8; //状态：0-未上架，1-已上架
+  int32 page_num = 10; //第几页
+  int32 page_size = 11; //每页的数量
+}
+
+message SeckillProductListData {
+  int64 id = 1; //ID
+  int64 activity_id = 2; //活动ID
+  int64 session_id = 3; //秒杀场次ID
+  int64 sku_id = 4; //商品SKU ID
+  float seckill_price = 5; //秒杀价格
+  int32 seckill_stock = 6; //秒杀库存
+  int32 stock_locked = 7; //锁定库存
+  int32 per_limit = 8; //每人限购数量
+  int32 sort = 9; //排序
+  int32 status = 10; //状态：0-未上架，1-已上架
+  int64 create_by = 11; //创建人ID
+  string create_time = 12; //创建时间
+  int64 update_by = 13; //更新人ID
+  string update_time = 14; //更新时间
+  string sku_name = 15; //商品名称
+}
+
+message QuerySeckillProductListResp {
+  int64 total = 1;
+  repeated  SeckillProductListData list = 2;
+}
+
+// 秒杀商品
+service SeckillProductService {
+  // 添加秒杀商品
+  rpc AddSeckillProduct(AddSeckillProductReq) returns (AddSeckillProductResp){}
+  // 删除秒杀商品
+  rpc DeleteSeckillProduct(DeleteSeckillProductReq) returns (DeleteSeckillProductResp){}
+  // 更新秒杀商品
+  rpc UpdateSeckillProduct(UpdateSeckillProductReq) returns (UpdateSeckillProductResp ){}
+  // 更新秒杀商品状态
+  rpc UpdateSeckillProductStatus(UpdateSeckillProductStatusReq) returns (UpdateSeckillProductStatusResp ){}
+  // 查询秒杀商品详情
+   rpc QuerySeckillProductDetail(QuerySeckillProductDetailReq) returns (QuerySeckillProductDetailResp){}
+  // 查询秒杀商品列表
+  rpc QuerySeckillProductList(QuerySeckillProductListReq) returns (QuerySeckillProductListResp){}
+
+
+}

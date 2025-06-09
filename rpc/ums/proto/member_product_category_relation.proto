@@ -6,7 +6,7 @@ option go_package = "./proto";
 
 // 添加会员与产品分类关系表（用户喜欢的分类）
 message AddMemberProductCategoryRelationReq {
-  int64 id = 1; //
+  string id = 1; //
   int64 member_id = 2; //会员id
   int64 product_category_id = 3; //商品分类id
 
@@ -23,15 +23,14 @@ message QueryMemberProductCategoryRelationListReq {
 }
 
 message MemberProductCategoryRelationListData {
-  int64 id = 1; //
+  string id = 1; //
   int64 member_id = 2; //会员id
   int64 product_category_id = 3; //商品分类id
 
 }
 
 message QueryMemberProductCategoryRelationListResp {
-  int64 total = 1;
-  repeated  MemberProductCategoryRelationListData list = 2;
+  repeated  MemberProductCategoryRelationListData list = 1;
 }
 
 // 会员与产品分类关系表（用户喜欢的分类）

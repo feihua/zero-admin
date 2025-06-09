@@ -9,6 +9,10 @@ type Config struct {
 		Datasource string
 	}
 
+	Mongo struct {
+		Datasource string
+		Db         string
+	}
 	JWT struct {
 		AccessSecret string
 		AccessExpire int64

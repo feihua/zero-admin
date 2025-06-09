@@ -10,28 +10,28 @@ import (
 
 const TableNameSmsCoupon = "sms_coupon"
 
-// SmsCoupon 优惠券
+// SmsCoupon 优惠券表
 type SmsCoupon struct {
-	ID           int64      `gorm:"column:id;primaryKey;autoIncrement:true" json:"id"`
-	Type         int32      `gorm:"column:type;not null;comment:优惠券类型；0->全场赠券；1->会员赠券；2->购物赠券；3->注册赠券" json:"type"`        // 优惠券类型；0->全场赠券；1->会员赠券；2->购物赠券；3->注册赠券
-	Name         string     `gorm:"column:name;not null;comment:名称" json:"name"`                                           // 名称
-	Platform     int32      `gorm:"column:platform;not null;comment:使用平台：0->全部；1->移动；2->PC" json:"platform"`               // 使用平台：0->全部；1->移动；2->PC
-	Count        int32      `gorm:"column:count;not null;comment:数量" json:"count"`                                         // 数量
-	Amount       int64      `gorm:"column:amount;not null;comment:金额" json:"amount"`                                       // 金额
-	PerLimit     int32      `gorm:"column:per_limit;not null;comment:每人限领张数" json:"per_limit"`                             // 每人限领张数
-	MinPoint     int64      `gorm:"column:min_point;not null;comment:使用门槛；0表示无门槛" json:"min_point"`                        // 使用门槛；0表示无门槛
-	StartTime    time.Time  `gorm:"column:start_time;not null;comment:开始时间" json:"start_time"`                             // 开始时间
-	EndTime      time.Time  `gorm:"column:end_time;not null;comment:结束时间" json:"end_time"`                                 // 结束时间
-	UseType      int32      `gorm:"column:use_type;not null;comment:使用类型：0->全场通用；1->指定分类；2->指定商品" json:"use_type"`         // 使用类型：0->全场通用；1->指定分类；2->指定商品
-	Note         string     `gorm:"column:note;not null;comment:备注" json:"note"`                                           // 备注
-	PublishCount int32      `gorm:"column:publish_count;not null;comment:发行数量" json:"publish_count"`                       // 发行数量
-	UseCount     int32      `gorm:"column:use_count;not null;comment:已使用数量" json:"use_count"`                              // 已使用数量
-	ReceiveCount int32      `gorm:"column:receive_count;not null;comment:领取数量" json:"receive_count"`                       // 领取数量
-	EnableTime   time.Time  `gorm:"column:enable_time;not null;comment:可以领取的日期" json:"enable_time"`                        // 可以领取的日期
-	Code         string     `gorm:"column:code;not null;comment:优惠码" json:"code"`                                          // 优惠码
-	MemberLevel  int32      `gorm:"column:member_level;not null;comment:可领取的会员类型：0->无限时" json:"member_level"`              // 可领取的会员类型：0->无限时
-	CreateTime   time.Time  `gorm:"column:create_time;not null;default:CURRENT_TIMESTAMP;comment:创建时间" json:"create_time"` // 创建时间
-	UpdateTime   *time.Time `gorm:"column:update_time;comment:更新时间" json:"update_time"`                                    // 更新时间
+	ID            int64      `gorm:"column:id;primaryKey;autoIncrement:true;comment:优惠券ID" json:"id"`                       // 优惠券ID
+	TypeID        int64      `gorm:"column:type_id;not null;comment:优惠券类型ID" json:"type_id"`                                // 优惠券类型ID
+	Name          string     `gorm:"column:name;not null;comment:优惠券名称" json:"name"`                                        // 优惠券名称
+	Code          string     `gorm:"column:code;not null;comment:优惠券码" json:"code"`                                         // 优惠券码
+	Amount        float64    `gorm:"column:amount;not null;comment:优惠金额/折扣率" json:"amount"`                                 // 优惠金额/折扣率
+	MinAmount     float64    `gorm:"column:min_amount;not null;comment:最低使用金额" json:"min_amount"`                           // 最低使用金额
+	StartTime     time.Time  `gorm:"column:start_time;not null;comment:生效时间" json:"start_time"`                             // 生效时间
+	EndTime       time.Time  `gorm:"column:end_time;not null;comment:失效时间" json:"end_time"`                                 // 失效时间
+	TotalCount    int32      `gorm:"column:total_count;not null;comment:发放总量" json:"total_count"`                           // 发放总量
+	ReceivedCount int32      `gorm:"column:received_count;not null;comment:已领取数量" json:"received_count"`                    // 已领取数量
+	UsedCount     int32      `gorm:"column:used_count;not null;comment:已使用数量" json:"used_count"`                            // 已使用数量
+	PerLimit      int32      `gorm:"column:per_limit;not null;default:1;comment:每人限领数量" json:"per_limit"`                   // 每人限领数量
+	Status        int32      `gorm:"column:status;not null;comment:状态：0-未开始，1-进行中，2-已结束，3-已取消" json:"status"`               // 状态：0-未开始，1-进行中，2-已结束，3-已取消
+	IsEnabled     int32      `gorm:"column:is_enabled;not null;default:1;comment:是否启用" json:"is_enabled"`                   // 是否启用
+	Description   string     `gorm:"column:description;not null;comment:使用说明" json:"description"`                           // 使用说明
+	CreateBy      int64      `gorm:"column:create_by;not null;comment:创建人ID" json:"create_by"`                              // 创建人ID
+	CreateTime    time.Time  `gorm:"column:create_time;not null;default:CURRENT_TIMESTAMP;comment:创建时间" json:"create_time"` // 创建时间
+	UpdateBy      *int64     `gorm:"column:update_by;comment:更新人ID" json:"update_by"`                                       // 更新人ID
+	UpdateTime    *time.Time `gorm:"column:update_time;comment:更新时间" json:"update_time"`                                    // 更新时间
+	IsDeleted     int32      `gorm:"column:is_deleted;not null;comment:是否删除" json:"is_deleted"`                             // 是否删除
 }
 
 // TableName SmsCoupon's table name

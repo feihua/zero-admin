@@ -4,7 +4,6 @@ import (
 	"context"
 	"errors"
 	"github.com/feihua/zero-admin/pkg/time_util"
-	"github.com/feihua/zero-admin/rpc/ums/gen/query"
 	"github.com/zeromicro/go-zero/core/logc"
 
 	"github.com/feihua/zero-admin/rpc/ums/internal/svc"
@@ -34,15 +33,7 @@ func NewQueryMemberProductCollectionListLogic(ctx context.Context, svcCtx *svc.S
 
 // QueryMemberProductCollectionList 查询用户收藏的商品列表
 func (l *QueryMemberProductCollectionListLogic) QueryMemberProductCollectionList(in *umsclient.QueryMemberProductCollectionListReq) (*umsclient.QueryMemberProductCollectionListResp, error) {
-	q := query.UmsMemberProductCollection.WithContext(l.ctx)
-	if in.MemberId != 0 {
-		q = q.Where(query.UmsMemberProductCollection.MemberID.Eq(in.MemberId))
-	}
-	if in.ProductId != 0 {
-		q = q.Where(query.UmsMemberProductCollection.ProductID.Eq(in.ProductId))
-	}
-
-	result, count, err := q.FindByPage(int((in.PageNum-1)*in.PageSize), int(in.PageSize))
+	result, err := l.svcCtx.MemberProductCollectionModel.FindPage(l.ctx, in.MemberId, in.PageNum, in.PageSize)
 
 	if err != nil {
 		logc.Errorf(l.ctx, "查询用户收藏的商品列表失败,参数:%+v,异常:%s", in, err.Error())
@@ -53,21 +44,20 @@ func (l *QueryMemberProductCollectionListLogic) QueryMemberProductCollectionList
 	for _, item := range result {
 
 		list = append(list, &umsclient.MemberProductCollectionListData{
-			Id:              item.ID,                              //
-			MemberId:        item.MemberID,                        // 会员id
-			MemberNickName:  item.MemberNickName,                  // 会员姓名
-			MemberIcon:      item.MemberIcon,                      // 会员头像
-			ProductId:       item.ProductID,                       // 商品id
-			ProductName:     item.ProductName,                     // 商品名称
-			ProductPic:      item.ProductPic,                      // 商品图片
-			ProductSubTitle: item.ProductSubTitle,                 // 商品标题
-			ProductPrice:    item.ProductPrice,                    // 商品价格
-			CreateTime:      time_util.TimeToStr(item.CreateTime), // 收藏时间
+			Id:              item.ID.Hex(),                      //
+			MemberId:        item.MemberId,                      // 会员id
+			MemberNickName:  item.MemberNickName,                // 会员姓名
+			MemberIcon:      item.MemberIcon,                    // 会员头像
+			ProductId:       item.ProductId,                     // 商品id
+			ProductName:     item.ProductName,                   // 商品名称
+			ProductPic:      item.ProductPic,                    // 商品图片
+			ProductSubTitle: item.ProductSubTitle,               // 商品标题
+			ProductPrice:    item.ProductPrice,                  // 商品价格
+			CreateTime:      time_util.TimeToStr(item.CreateAt), // 收藏时间
 		})
 	}
 
 	return &umsclient.QueryMemberProductCollectionListResp{
-		Total: count,
-		List:  list,
+		List: list,
 	}, nil
 }

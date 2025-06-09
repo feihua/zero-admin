@@ -162,7 +162,10 @@ message SubjectListByIdsReq {
   repeated int64 ids = 1;
 
 }
-
+message UpdateSubjectSortReq {
+  int64 id = 1;
+  int32 Sort = 2;
+}
 // 专题
 service SubjectService {
   // 添加专题
@@ -183,5 +186,7 @@ service SubjectService {
   //批量更新状态
   rpc UpdateSubjectRecommendStatus(UpdateSubjectRecommendStatusReq) returns (UpdateSubjectRecommendStatusResp){}
 
+  //更新排序
+  rpc UpdateSubjectSort(UpdateSubjectSortReq) returns (UpdateSubjectResp){}
 
 }

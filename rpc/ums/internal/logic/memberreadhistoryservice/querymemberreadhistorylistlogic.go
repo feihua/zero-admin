@@ -4,7 +4,6 @@ import (
 	"context"
 	"errors"
 	"github.com/feihua/zero-admin/pkg/time_util"
-	"github.com/feihua/zero-admin/rpc/ums/gen/query"
 	"github.com/zeromicro/go-zero/core/logc"
 
 	"github.com/feihua/zero-admin/rpc/ums/internal/svc"
@@ -34,13 +33,7 @@ func NewQueryMemberReadHistoryListLogic(ctx context.Context, svcCtx *svc.Service
 
 // QueryMemberReadHistoryList 查询用户商品浏览历史记录列表
 func (l *QueryMemberReadHistoryListLogic) QueryMemberReadHistoryList(in *umsclient.QueryMemberReadHistoryListReq) (*umsclient.QueryMemberReadHistoryListResp, error) {
-	q := query.UmsMemberReadHistory.WithContext(l.ctx)
-	if in.MemberId != 0 {
-		q = q.Where(query.UmsMemberReadHistory.MemberID.Eq(in.MemberId))
-	}
-
-	result, count, err := q.FindByPage(int((in.PageNum-1)*in.PageSize), int(in.PageSize))
-
+	result, err := l.svcCtx.MemberBrowseRecordModel.FindPage(l.ctx, in.MemberId, in.PageNum, in.PageSize)
 	if err != nil {
 		logc.Errorf(l.ctx, "查询用户商品浏览历史记录列表失败,参数:%+v,异常:%s", in, err.Error())
 		return nil, errors.New("查询用户商品浏览历史记录列表失败")
@@ -50,22 +43,21 @@ func (l *QueryMemberReadHistoryListLogic) QueryMemberReadHistoryList(in *umsclie
 	for _, item := range result {
 
 		list = append(list, &umsclient.MemberReadHistoryListData{
-			Id:              item.ID,                              //
-			MemberId:        item.MemberID,                        // 会员id
-			MemberNickName:  item.MemberNickName,                  // 会员姓名
-			MemberIcon:      item.MemberIcon,                      // 会员头像
-			ProductId:       item.ProductID,                       // 商品id
-			ProductName:     item.ProductName,                     // 商品名称
-			ProductPic:      item.ProductPic,                      // 商品图片
-			ProductSubTitle: item.ProductSubTitle,                 // 商品标题
-			ProductPrice:    item.ProductPrice,                    // 商品价格
-			CreateTime:      time_util.TimeToStr(item.CreateTime), // 浏览时间
+			Id:              item.ID.Hex(),                      //
+			MemberId:        item.MemberId,                      // 会员id
+			MemberNickName:  item.MemberNickName,                // 会员姓名
+			MemberIcon:      item.MemberIcon,                    // 会员头像
+			ProductId:       item.ProductId,                     // 商品id
+			ProductName:     item.ProductName,                   // 商品名称
+			ProductPic:      item.ProductPic,                    // 商品图片
+			ProductSubTitle: item.ProductSubTitle,               // 商品标题
+			ProductPrice:    item.ProductPrice,                  // 商品价格
+			CreateTime:      time_util.TimeToStr(item.CreateAt), // 浏览时间
 		})
 	}
 
 	return &umsclient.QueryMemberReadHistoryListResp{
-		Total: count,
-		List:  list,
+		List: list,
 	}, nil
 
 }

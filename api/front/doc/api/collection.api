@@ -18,7 +18,7 @@ type AddProductCollectionResp {
 }
 
 type ProductCollectionDeleteReq {
-	Ids []int64 `form:"ids"`
+	Ids []string `form:"ids"`
 }
 
 type ProductCollectionDeleteResp {
@@ -33,7 +33,7 @@ type ProductCollectionListResp {
 }
 
 type ProductCollectionList {
-	Id              int64  `json:"id"` // 编号
+	Id              string `json:"id"` // 编号
 	MemberId        int64  `json:"memberId"` // 会员id
 	MemberNickName  string `json:"memberNickName"` // 会员姓名
 	MemberIcon      string `json:"memberIcon"` // 会员头像

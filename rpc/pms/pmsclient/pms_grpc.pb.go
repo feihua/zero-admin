@@ -774,6 +774,7 @@ const (
 	ProductService_UpdateRecommendStatus_FullMethodName  = "/pmsclient.ProductService/UpdateRecommendStatus"
 	ProductService_UpdateNewStatus_FullMethodName        = "/pmsclient.ProductService/UpdateNewStatus"
 	ProductService_UpdateDeleteStatus_FullMethodName     = "/pmsclient.ProductService/UpdateDeleteStatus"
+	ProductService_UpdateProductSort_FullMethodName      = "/pmsclient.ProductService/UpdateProductSort"
 )
 
 // ProductServiceClient is the client API for ProductService service.
@@ -798,6 +799,8 @@ type ProductServiceClient interface {
 	UpdateNewStatus(ctx context.Context, in *UpdateProductStatusReq, opts ...grpc.CallOption) (*UpdateProductStatusResp, error)
 	// 批量修改删除状态
 	UpdateDeleteStatus(ctx context.Context, in *UpdateProductStatusReq, opts ...grpc.CallOption) (*UpdateProductStatusResp, error)
+	// 更新排序
+	UpdateProductSort(ctx context.Context, in *UpdateProductSortReq, opts ...grpc.CallOption) (*UpdateProductResp, error)
 }
 
 type productServiceClient struct {
@@ -907,6 +910,15 @@ func (c *productServiceClient) UpdateDeleteStatus(ctx context.Context, in *Updat
 	return out, nil
 }
 
+func (c *productServiceClient) UpdateProductSort(ctx context.Context, in *UpdateProductSortReq, opts ...grpc.CallOption) (*UpdateProductResp, error) {
+	out := new(UpdateProductResp)
+	err := c.cc.Invoke(ctx, ProductService_UpdateProductSort_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ProductServiceServer is the server API for ProductService service.
 // All implementations must embed UnimplementedProductServiceServer
 // for forward compatibility
@@ -929,6 +941,8 @@ type ProductServiceServer interface {
 	UpdateNewStatus(context.Context, *UpdateProductStatusReq) (*UpdateProductStatusResp, error)
 	// 批量修改删除状态
 	UpdateDeleteStatus(context.Context, *UpdateProductStatusReq) (*UpdateProductStatusResp, error)
+	// 更新排序
+	UpdateProductSort(context.Context, *UpdateProductSortReq) (*UpdateProductResp, error)
 	mustEmbedUnimplementedProductServiceServer()
 }
 
@@ -968,6 +982,9 @@ func (UnimplementedProductServiceServer) UpdateNewStatus(context.Context, *Updat
 }
 func (UnimplementedProductServiceServer) UpdateDeleteStatus(context.Context, *UpdateProductStatusReq) (*UpdateProductStatusResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateDeleteStatus not implemented")
+}
+func (UnimplementedProductServiceServer) UpdateProductSort(context.Context, *UpdateProductSortReq) (*UpdateProductResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateProductSort not implemented")
 }
 func (UnimplementedProductServiceServer) mustEmbedUnimplementedProductServiceServer() {}
 
@@ -1180,6 +1197,24 @@ func _ProductService_UpdateDeleteStatus_Handler(srv interface{}, ctx context.Con
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ProductService_UpdateProductSort_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateProductSortReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ProductServiceServer).UpdateProductSort(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ProductService_UpdateProductSort_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ProductServiceServer).UpdateProductSort(ctx, req.(*UpdateProductSortReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // ProductService_ServiceDesc is the grpc.ServiceDesc for ProductService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -1230,6 +1265,10 @@ var ProductService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateDeleteStatus",
 			Handler:    _ProductService_UpdateDeleteStatus_Handler,
+		},
+		{
+			MethodName: "UpdateProductSort",
+			Handler:    _ProductService_UpdateProductSort_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
@@ -1914,6 +1953,7 @@ const (
 	ProductBrandService_QueryProductBrandList_FullMethodName      = "/pmsclient.ProductBrandService/QueryProductBrandList"
 	ProductBrandService_QueryBrandListByIds_FullMethodName        = "/pmsclient.ProductBrandService/QueryBrandListByIds"
 	ProductBrandService_UpdateBrandRecommendStatus_FullMethodName = "/pmsclient.ProductBrandService/UpdateBrandRecommendStatus"
+	ProductBrandService_UpdateBrandSort_FullMethodName            = "/pmsclient.ProductBrandService/UpdateBrandSort"
 )
 
 // ProductBrandServiceClient is the client API for ProductBrandService service.
@@ -1935,6 +1975,8 @@ type ProductBrandServiceClient interface {
 	QueryBrandListByIds(ctx context.Context, in *QueryBrandListByIdsReq, opts ...grpc.CallOption) (*QueryProductBrandListResp, error)
 	// 更新品牌的推荐状态
 	UpdateBrandRecommendStatus(ctx context.Context, in *UpdateProductBrandStatusReq, opts ...grpc.CallOption) (*UpdateProductBrandStatusResp, error)
+	// 更新品牌的排序
+	UpdateBrandSort(ctx context.Context, in *UpdateProductBrandSortReq, opts ...grpc.CallOption) (*UpdateProductBrandStatusResp, error)
 }
 
 type productBrandServiceClient struct {
@@ -2017,6 +2059,15 @@ func (c *productBrandServiceClient) UpdateBrandRecommendStatus(ctx context.Conte
 	return out, nil
 }
 
+func (c *productBrandServiceClient) UpdateBrandSort(ctx context.Context, in *UpdateProductBrandSortReq, opts ...grpc.CallOption) (*UpdateProductBrandStatusResp, error) {
+	out := new(UpdateProductBrandStatusResp)
+	err := c.cc.Invoke(ctx, ProductBrandService_UpdateBrandSort_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ProductBrandServiceServer is the server API for ProductBrandService service.
 // All implementations must embed UnimplementedProductBrandServiceServer
 // for forward compatibility
@@ -2036,6 +2087,8 @@ type ProductBrandServiceServer interface {
 	QueryBrandListByIds(context.Context, *QueryBrandListByIdsReq) (*QueryProductBrandListResp, error)
 	// 更新品牌的推荐状态
 	UpdateBrandRecommendStatus(context.Context, *UpdateProductBrandStatusReq) (*UpdateProductBrandStatusResp, error)
+	// 更新品牌的排序
+	UpdateBrandSort(context.Context, *UpdateProductBrandSortReq) (*UpdateProductBrandStatusResp, error)
 	mustEmbedUnimplementedProductBrandServiceServer()
 }
 
@@ -2066,6 +2119,9 @@ func (UnimplementedProductBrandServiceServer) QueryBrandListByIds(context.Contex
 }
 func (UnimplementedProductBrandServiceServer) UpdateBrandRecommendStatus(context.Context, *UpdateProductBrandStatusReq) (*UpdateProductBrandStatusResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateBrandRecommendStatus not implemented")
+}
+func (UnimplementedProductBrandServiceServer) UpdateBrandSort(context.Context, *UpdateProductBrandSortReq) (*UpdateProductBrandStatusResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateBrandSort not implemented")
 }
 func (UnimplementedProductBrandServiceServer) mustEmbedUnimplementedProductBrandServiceServer() {}
 
@@ -2224,6 +2280,24 @@ func _ProductBrandService_UpdateBrandRecommendStatus_Handler(srv interface{}, ct
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ProductBrandService_UpdateBrandSort_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateProductBrandSortReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ProductBrandServiceServer).UpdateBrandSort(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ProductBrandService_UpdateBrandSort_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ProductBrandServiceServer).UpdateBrandSort(ctx, req.(*UpdateProductBrandSortReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // ProductBrandService_ServiceDesc is the grpc.ServiceDesc for ProductBrandService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -2262,6 +2336,10 @@ var ProductBrandService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateBrandRecommendStatus",
 			Handler:    _ProductBrandService_UpdateBrandRecommendStatus_Handler,
+		},
+		{
+			MethodName: "UpdateBrandSort",
+			Handler:    _ProductBrandService_UpdateBrandSort_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

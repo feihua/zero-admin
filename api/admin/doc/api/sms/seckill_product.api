@@ -1,0 +1,144 @@
+import "../base/base.api"
+
+info (
+	desc:   "秒杀商品"
+	author: "LiuFeiHua"
+	email:  "1002219331@qq.com"
+)
+
+type (
+	// 添加秒杀商品请求参数
+	AddSeckillProductData {
+		ActivityId   int64   `json:"activityId"` //活动ID
+		SessionId    int64   `json:"sessionId"` //秒杀场次ID
+		SkuId        int64   `json:"skuId"` //商品SKU ID
+		SkuName      string  `json:"skuName"` //商品名称
+		SeckillPrice float64 `json:"seckillPrice"` //秒杀价格
+		SeckillStock int32   `json:"seckillStock"` //秒杀库存
+		StockLocked  int32   `json:"stockLocked"` //锁定库存
+		PerLimit     int32   `json:"perLimit"` //每人限购数量
+		Sort         int32   `json:"sort"` //排序
+		Status       int32   `json:"status"` //状态：0-未上架，1-已上架
+	}
+	// 添加秒杀商品请求参数
+	AddSeckillProductReq {
+		Data []AddSeckillProductData `json:"data"`
+	}
+	// 删除秒杀商品请求参数
+	DeleteSeckillProductReq {
+		Ids []int64 `form:"ids"`
+	}
+	// 更新秒杀商品请求参数
+	UpdateSeckillProductReq {
+		Id           int64   `json:"id"` //ID
+		ActivityId   int64   `json:"activityId"` //活动ID
+		SessionId    int64   `json:"sessionId"` //秒杀场次ID
+		SkuId        int64   `json:"skuId"` //商品SKU ID
+		SkuName      string  `json:"skuName"` //商品名称
+		SeckillPrice float64 `json:"seckillPrice"` //秒杀价格
+		SeckillStock int32   `json:"seckillStock"` //秒杀库存
+		StockLocked  int32   `json:"stockLocked"` //锁定库存
+		PerLimit     int32   `json:"perLimit"` //每人限购数量
+		Sort         int32   `json:"sort"` //排序
+		Status       int32   `json:"status"` //状态：0-未上架，1-已上架
+	}
+	// 更新秒杀商品状态请求参数
+	UpdateSeckillProductStatusReq {
+		Ids    []int64 `json:"ids"` //ID
+		Status int32   `json:"status"` //状态：0-未上架，1-已上架
+	}
+	// 查询秒杀商品详情请求参数
+	QuerySeckillProductDetailReq {
+		Id int64 `form:"id"`
+	}
+	QuerySeckillProductDetailData {
+		Id           int64   `json:"id"` //ID
+		ActivityId   int64   `json:"activityId"` //活动ID
+		SessionId    int64   `json:"sessionId"` //秒杀场次ID
+		SkuId        int64   `json:"skuId"` //商品SKU ID
+		SkuName      string  `json:"skuName"` //商品名称
+		SeckillPrice float64 `json:"seckillPrice"` //秒杀价格
+		SeckillStock int32   `json:"seckillStock"` //秒杀库存
+		StockLocked  int32   `json:"stockLocked"` //锁定库存
+		PerLimit     int32   `json:"perLimit"` //每人限购数量
+		Sort         int32   `json:"sort"` //排序
+		Status       int32   `json:"status"` //状态：0-未上架，1-已上架
+		CreateBy     int64   `json:"createBy"` //创建人ID
+		CreateTime   string  `json:"createTime"` //创建时间
+		UpdateBy     int64   `json:"updateBy"` //更新人ID
+		UpdateTime   string  `json:"updateTime"` //更新时间
+	}
+	QuerySeckillProductDetailResp {
+		Code    string                        `json:"code"`
+		Message string                        `json:"message"`
+		Data    QuerySeckillProductDetailData `json:"data"`
+	}
+	// 分页查询秒杀商品列表请求参数
+	QuerySeckillProductListReq {
+		Current    int32 `form:"current,default=1"` //第几页
+		PageSize   int32 `form:"pageSize,default=20"` //每页的数量
+		ActivityId int64 `form:"activityId,default=0"` //活动ID
+		SessionId  int64 `form:"sessionId,default=0"` //秒杀场次ID
+		SkuId      int64 `form:"skuId,default=0"` //商品SKU ID
+		Status     int32 `form:"status,default=2"` //状态：0-未上架，1-已上架
+	}
+	QuerySeckillProductListData {
+		Id           int64   `json:"id"` //ID
+		ActivityId   int64   `json:"activityId"` //活动ID
+		SessionId    int64   `json:"sessionId"` //秒杀场次ID
+		SkuId        int64   `json:"skuId"` //商品SKU ID
+		SkuName      string  `json:"skuName"` //商品名称
+		SeckillPrice float64 `json:"seckillPrice"` //秒杀价格
+		SeckillStock int32   `json:"seckillStock"` //秒杀库存
+		StockLocked  int32   `json:"stockLocked"` //锁定库存
+		PerLimit     int32   `json:"perLimit"` //每人限购数量
+		Sort         int32   `json:"sort"` //排序
+		Status       int32   `json:"status"` //状态：0-未上架，1-已上架
+		CreateBy     int64   `json:"createBy"` //创建人ID
+		CreateTime   string  `json:"createTime"` //创建时间
+		UpdateBy     int64   `json:"updateBy"` //更新人ID
+		UpdateTime   string  `json:"updateTime"` //更新时间
+	}
+	QuerySeckillProductListResp {
+		Code     string                         `json:"code"`
+		Message  string                         `json:"message"`
+		Current  int32                          `json:"current,default=1"`
+		Data     []*QuerySeckillProductListData `json:"data"`
+		PageSize int32                          `json:"pageSize,default=20"`
+		Success  bool                           `json:"success"`
+		Total    int64                          `json:"total"`
+	}
+)
+
+@server (
+	jwt:        Auth
+	middleware: CheckUrl
+	group:      sms/seckill_product
+	prefix:     /api/sms/seckillProduct
+)
+service admin-api {
+	// 添加秒杀商品
+	@handler AddSeckillProduct
+	post /addSeckillProduct (AddSeckillProductReq) returns (BaseResp)
+
+	// 删除秒杀商品
+	@handler DeleteSeckillProduct
+	get /deleteSeckillProduct (DeleteSeckillProductReq) returns (BaseResp)
+
+	// 更新秒杀商品
+	@handler UpdateSeckillProduct
+	post /updateSeckillProduct (UpdateSeckillProductReq) returns (BaseResp)
+
+	// 更新秒杀商品状态
+	@handler UpdateSeckillProductStatus
+	post /updateSeckillProductStatus (UpdateSeckillProductStatusReq) returns (BaseResp)
+
+	// 查询秒杀商品详情
+	@handler QuerySeckillProductDetail
+	get /querySeckillProductDetail (QuerySeckillProductDetailReq) returns (QuerySeckillProductDetailResp)
+
+	// 分页查询秒杀商品列表
+	@handler QuerySeckillProductList
+	get /querySeckillProductList (QuerySeckillProductListReq) returns (QuerySeckillProductListResp)
+}
+

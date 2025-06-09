@@ -11,7 +11,7 @@ Content-Type: application/json
 %}
 
 ### 添加首页广告
-POST {{host}}/api/sms/homeadvertise/addHomeAdvertise
+POST {{host}}/api/sms/homeAdvertise/addHomeAdvertise
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
@@ -30,40 +30,40 @@ Authorization: Bearer {{token}}
 }
 
 ### 删除首页广告
-GET {{host}}/api/sms/homeadvertise/deleteHomeAdvertise?ids=[11]
+GET {{host}}/api/sms/homeAdvertise/deleteHomeAdvertise?ids=4
 Authorization: Bearer {{token}}
 
 
 ### 更新首页轮播广告
-POST {{host}}/api/sms/homeadvertise/updateHomeAdvertise
+POST {{host}}/api/sms/homeAdvertise/updateHomeAdvertise
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {
-  "id": 11,
-  "name": "OPPO推荐广告12",
+  "id": 5,
+  "name": "OPPO推荐广告",
   "type": 1,
   "pic": "http://macro-oss.oss-cn-shenzhen.aliyuncs.com/mall/images/20221108/oppo_banner_01.png",
-  "startTime": "2024-05-11 10:48:39",
-  "endTime": "2024-05-11 10:48:39",
+  "startTime": "2024-05-11 18:48:39",
+  "endTime": "2024-05-11 18:48:39",
   "status": 1,
   "clickCount": 0,
   "orderCount": 0,
   "url": "www.baidu.com",
-  "note": "电影推荐广告1",
+  "remark": "",
   "sort": 99
 }
 ### 更新首页轮播广告状态
-POST {{host}}/api/sms/homeadvertise/updateHomeAdvertiseStatus
+POST {{host}}/api/sms/homeAdvertise/updateHomeAdvertiseStatus
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {
-  "id": 11,
-  "status": 0
+  "ids": [5],
+  "status": 1
 
 }
 
 ### 查询首页广告列表
-GET {{host}}/api/sms/homeadvertise/queryHomeAdvertiseList
+GET {{host}}/api/sms/homeAdvertise/queryHomeAdvertiseList
 Authorization: Bearer {{token}}

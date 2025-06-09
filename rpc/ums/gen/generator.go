@@ -36,12 +36,12 @@ func main() {
 		g.GenerateModel("ums_member_growth_log"),
 		g.GenerateModel("ums_member_consume_setting"),
 
-		g.GenerateModel("ums_integration_consume_setting"),
-		g.GenerateModel("ums_member_brand_attention"),
+		// g.GenerateModel("ums_integration_consume_setting"),
+		// g.GenerateModel("ums_member_brand_attention"),
 		g.GenerateModel("ums_member_login_log"),
-		g.GenerateModel("ums_member_product_category_relation"),
-		g.GenerateModel("ums_member_product_collection"),
-		g.GenerateModel("ums_member_read_history"),
+		// g.GenerateModel("ums_member_product_category_relation"),
+		// g.GenerateModel("ums_member_product_collection"),
+		// g.GenerateModel("ums_member_read_history"),
 		g.GenerateModel("ums_member_rule_setting"),
 		g.GenerateModel("ums_member_statistics_info"),
 	)

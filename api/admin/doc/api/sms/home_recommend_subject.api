@@ -17,11 +17,25 @@ type (
 		RecommendStatus int32  `form:"recommendStatus,default=2"` // 推荐状态：0->不推荐;1->推荐
 	}
 	ListHomeRecommendSubjectData {
-		Id              int64  `json:"id"`
-		SubjectId       int64  `json:"subjectId"` // 专题id
-		SubjectName     string `json:"subjectName"` // 专题名称
-		RecommendStatus int32  `json:"recommendStatus"` // 推荐状态：0->不推荐;1->推荐
-		Sort            int32  `json:"sort"` // 排序
+		Id              int64  `json:"id"` //专题id
+		CategoryId      int64  `json:"categoryId"` //专题分类id
+		Title           string `json:"title"` //专题标题
+		Pic             string `json:"pic"` //专题主图
+		ProductCount    int32  `json:"productCount"` //关联产品数量
+		RecommendStatus int32  `json:"recommendStatus"` //推荐状态：0->不推荐；1->推荐
+		CollectCount    int32  `json:"collectCount"` //收藏数
+		ReadCount       int32  `json:"readCount"` //阅读数
+		CommentCount    int32  `json:"commentCount"` //评论数
+		AlbumPics       string `json:"albumPics"` //画册图片用逗号分割
+		Description     string `json:"description"` //专题内容
+		ShowStatus      int32  `json:"showStatus"` //显示状态：0->不显示；1->显示
+		Content         string `json:"content"` //专题内容
+		ForwardCount    int32  `json:"forwardCount"` //转发数
+		CategoryName    string `json:"categoryName"` //专题分类名称
+		CreateBy        string `json:"createBy"` //创建者
+		CreateTime      string `json:"createTime"` //创建时间
+		UpdateBy        string `json:"updateBy"` //更新者
+		UpdateTime      string `json:"updateTime"` //更新时间
 	}
 	ListHomeRecommendSubjectResp {
 		Code     string                          `json:"code"`
@@ -33,16 +47,10 @@ type (
 		Total    int64                           `json:"total"`
 	}
 	UpdateRecommendSubjectSortReq {
-		Id   int64 `json:"id"`
-		Sort int32 `json:"sort"` // 排序
-	}
-	UpdateRecommendSubjectStatusReq {
-		Ids             []int64 `json:"ids"`
-		SubjectIds      []int64 `json:"subjectIds"`
-		RecommendStatus int32   `json:"recommendStatus"` // 推荐状态：0->不推荐;1->推荐
+		SubjectId int64 `json:"subjectId"`
+		Sort      int32 `json:"sort"` // 排序
 	}
 	DeleteHomeRecommendSubjectReq {
-		Ids        []int64 `form:"ids"`
 		SubjectIds []int64 `form:"subjectIds"`
 	}
 )
@@ -58,20 +66,16 @@ service admin-api {
 	@handler HomeRecommendSubjectAdd
 	post /addHomeRecommendSubject (AddHomeRecommendSubjectReq) returns (BaseResp)
 
-	//查询首页专题推荐
-	@handler HomeRecommendSubjectList
-	get /queryHomeRecommendSubjectList (ListHomeRecommendSubjectReq) returns (ListHomeRecommendSubjectResp)
+	//删除首页专题推荐
+	@handler HomeRecommendSubjectDelete
+	get /deleteHomeRecommendSubject (DeleteHomeRecommendSubjectReq) returns (BaseResp)
 
 	//修改推荐排序
 	@handler UpdateRecommendSubjectSort
 	post /updateRecommendSubjectSort (UpdateRecommendSubjectSortReq) returns (BaseResp)
 
-	//批量修改推荐状态
-	@handler UpdateRecommendSubjectStatus
-	post /updateRecommendSubjectStatus (UpdateRecommendSubjectStatusReq) returns (BaseResp)
-
-	//删除首页专题推荐
-	@handler HomeRecommendSubjectDelete
-	get /deleteHomeRecommendSubject (DeleteHomeRecommendSubjectReq) returns (BaseResp)
+	//查询首页专题推荐
+	@handler HomeRecommendSubjectList
+	get /queryHomeRecommendSubjectList (ListHomeRecommendSubjectReq) returns (ListHomeRecommendSubjectResp)
 }
 

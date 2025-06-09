@@ -54,7 +54,12 @@ func (l *QueryProductListLogic) QueryProductList(in *pmsclient.QueryProductListR
 	if in.PublishStatus != 2 {
 		q = q.Where(query.PmsProduct.PublishStatus.Eq(in.PublishStatus))
 	}
-
+	if in.RecommendStatus != 2 {
+		q = q.Where(query.PmsProduct.RecommandStatus.Eq(in.RecommendStatus))
+	}
+	if in.NewStatus != 2 {
+		q = q.Where(query.PmsProduct.NewStatus.Eq(in.NewStatus))
+	}
 	result, count, err := q.FindByPage(int((in.Current-1)*in.PageSize), int(in.PageSize))
 
 	if err != nil {

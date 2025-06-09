@@ -6,7 +6,7 @@ option go_package = "./proto";
 
 // 添加用户收藏的商品
 message AddMemberProductCollectionReq {
-  int64 id = 1; //
+  string id = 1; //
   int64 member_id = 2; //会员id
   string member_nick_name = 3; //会员姓名
   string member_icon = 4; //会员头像
@@ -23,7 +23,7 @@ message AddMemberProductCollectionResp {
 
 // 删除用户收藏的商品
 message DeleteMemberProductCollectionReq {
-  repeated int64 ids = 1;
+  repeated string ids = 1;
   int64 MemberId = 2; //会员id
 }
 
@@ -33,11 +33,11 @@ message DeleteMemberProductCollectionResp {
 
 // 查询用户收藏的商品详情
 message QueryMemberProductCollectionDetailReq {
-    int64 id = 1;
+  string id = 1;
 }
 
 message QueryMemberProductCollectionDetailResp {
-  int64 id = 1; //
+  string id = 1; //
   int64 member_id = 2; //会员id
   string member_nick_name = 3; //会员姓名
   string member_icon = 4; //会员头像
@@ -60,7 +60,7 @@ message QueryMemberProductCollectionListReq {
 }
 
 message MemberProductCollectionListData {
-  int64 id = 1; //
+  string id = 1; //
   int64 member_id = 2; //会员id
   string member_nick_name = 3; //会员姓名
   string member_icon = 4; //会员头像
@@ -74,8 +74,7 @@ message MemberProductCollectionListData {
 }
 
 message QueryMemberProductCollectionListResp {
-  int64 total = 1;
-  repeated  MemberProductCollectionListData list = 2;
+  repeated  MemberProductCollectionListData list = 1;
 }
 
 // 用户收藏的商品

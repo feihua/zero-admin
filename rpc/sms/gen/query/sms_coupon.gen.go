@@ -6,6 +6,7 @@ package query
 
 import (
 	"context"
+	"database/sql"
 
 	"gorm.io/gorm"
 	"gorm.io/gorm/clause"
@@ -28,56 +29,56 @@ func newSmsCoupon(db *gorm.DB, opts ...gen.DOOption) smsCoupon {
 	tableName := _smsCoupon.smsCouponDo.TableName()
 	_smsCoupon.ALL = field.NewAsterisk(tableName)
 	_smsCoupon.ID = field.NewInt64(tableName, "id")
-	_smsCoupon.Type = field.NewInt32(tableName, "type")
+	_smsCoupon.TypeID = field.NewInt64(tableName, "type_id")
 	_smsCoupon.Name = field.NewString(tableName, "name")
-	_smsCoupon.Platform = field.NewInt32(tableName, "platform")
-	_smsCoupon.Count = field.NewInt32(tableName, "count")
-	_smsCoupon.Amount = field.NewInt64(tableName, "amount")
-	_smsCoupon.PerLimit = field.NewInt32(tableName, "per_limit")
-	_smsCoupon.MinPoint = field.NewInt64(tableName, "min_point")
+	_smsCoupon.Code = field.NewString(tableName, "code")
+	_smsCoupon.Amount = field.NewFloat64(tableName, "amount")
+	_smsCoupon.MinAmount = field.NewFloat64(tableName, "min_amount")
 	_smsCoupon.StartTime = field.NewTime(tableName, "start_time")
 	_smsCoupon.EndTime = field.NewTime(tableName, "end_time")
-	_smsCoupon.UseType = field.NewInt32(tableName, "use_type")
-	_smsCoupon.Note = field.NewString(tableName, "note")
-	_smsCoupon.PublishCount = field.NewInt32(tableName, "publish_count")
-	_smsCoupon.UseCount = field.NewInt32(tableName, "use_count")
-	_smsCoupon.ReceiveCount = field.NewInt32(tableName, "receive_count")
-	_smsCoupon.EnableTime = field.NewTime(tableName, "enable_time")
-	_smsCoupon.Code = field.NewString(tableName, "code")
-	_smsCoupon.MemberLevel = field.NewInt32(tableName, "member_level")
+	_smsCoupon.TotalCount = field.NewInt32(tableName, "total_count")
+	_smsCoupon.ReceivedCount = field.NewInt32(tableName, "received_count")
+	_smsCoupon.UsedCount = field.NewInt32(tableName, "used_count")
+	_smsCoupon.PerLimit = field.NewInt32(tableName, "per_limit")
+	_smsCoupon.Status = field.NewInt32(tableName, "status")
+	_smsCoupon.IsEnabled = field.NewInt32(tableName, "is_enabled")
+	_smsCoupon.Description = field.NewString(tableName, "description")
+	_smsCoupon.CreateBy = field.NewInt64(tableName, "create_by")
 	_smsCoupon.CreateTime = field.NewTime(tableName, "create_time")
+	_smsCoupon.UpdateBy = field.NewInt64(tableName, "update_by")
 	_smsCoupon.UpdateTime = field.NewTime(tableName, "update_time")
+	_smsCoupon.IsDeleted = field.NewInt32(tableName, "is_deleted")
 
 	_smsCoupon.fillFieldMap()
 
 	return _smsCoupon
 }
 
-// smsCoupon 优惠券
+// smsCoupon 优惠券表
 type smsCoupon struct {
 	smsCouponDo smsCouponDo
 
-	ALL          field.Asterisk
-	ID           field.Int64
-	Type         field.Int32  // 优惠券类型；0->全场赠券；1->会员赠券；2->购物赠券；3->注册赠券
-	Name         field.String // 名称
-	Platform     field.Int32  // 使用平台：0->全部；1->移动；2->PC
-	Count        field.Int32  // 数量
-	Amount       field.Int64  // 金额
-	PerLimit     field.Int32  // 每人限领张数
-	MinPoint     field.Int64  // 使用门槛；0表示无门槛
-	StartTime    field.Time   // 开始时间
-	EndTime      field.Time   // 结束时间
-	UseType      field.Int32  // 使用类型：0->全场通用；1->指定分类；2->指定商品
-	Note         field.String // 备注
-	PublishCount field.Int32  // 发行数量
-	UseCount     field.Int32  // 已使用数量
-	ReceiveCount field.Int32  // 领取数量
-	EnableTime   field.Time   // 可以领取的日期
-	Code         field.String // 优惠码
-	MemberLevel  field.Int32  // 可领取的会员类型：0->无限时
-	CreateTime   field.Time   // 创建时间
-	UpdateTime   field.Time   // 更新时间
+	ALL           field.Asterisk
+	ID            field.Int64   // 优惠券ID
+	TypeID        field.Int64   // 优惠券类型ID
+	Name          field.String  // 优惠券名称
+	Code          field.String  // 优惠券码
+	Amount        field.Float64 // 优惠金额/折扣率
+	MinAmount     field.Float64 // 最低使用金额
+	StartTime     field.Time    // 生效时间
+	EndTime       field.Time    // 失效时间
+	TotalCount    field.Int32   // 发放总量
+	ReceivedCount field.Int32   // 已领取数量
+	UsedCount     field.Int32   // 已使用数量
+	PerLimit      field.Int32   // 每人限领数量
+	Status        field.Int32   // 状态：0-未开始，1-进行中，2-已结束，3-已取消
+	IsEnabled     field.Int32   // 是否启用
+	Description   field.String  // 使用说明
+	CreateBy      field.Int64   // 创建人ID
+	CreateTime    field.Time    // 创建时间
+	UpdateBy      field.Int64   // 更新人ID
+	UpdateTime    field.Time    // 更新时间
+	IsDeleted     field.Int32   // 是否删除
 
 	fieldMap map[string]field.Expr
 }
@@ -95,25 +96,25 @@ func (s smsCoupon) As(alias string) *smsCoupon {
 func (s *smsCoupon) updateTableName(table string) *smsCoupon {
 	s.ALL = field.NewAsterisk(table)
 	s.ID = field.NewInt64(table, "id")
-	s.Type = field.NewInt32(table, "type")
+	s.TypeID = field.NewInt64(table, "type_id")
 	s.Name = field.NewString(table, "name")
-	s.Platform = field.NewInt32(table, "platform")
-	s.Count = field.NewInt32(table, "count")
-	s.Amount = field.NewInt64(table, "amount")
-	s.PerLimit = field.NewInt32(table, "per_limit")
-	s.MinPoint = field.NewInt64(table, "min_point")
+	s.Code = field.NewString(table, "code")
+	s.Amount = field.NewFloat64(table, "amount")
+	s.MinAmount = field.NewFloat64(table, "min_amount")
 	s.StartTime = field.NewTime(table, "start_time")
 	s.EndTime = field.NewTime(table, "end_time")
-	s.UseType = field.NewInt32(table, "use_type")
-	s.Note = field.NewString(table, "note")
-	s.PublishCount = field.NewInt32(table, "publish_count")
-	s.UseCount = field.NewInt32(table, "use_count")
-	s.ReceiveCount = field.NewInt32(table, "receive_count")
-	s.EnableTime = field.NewTime(table, "enable_time")
-	s.Code = field.NewString(table, "code")
-	s.MemberLevel = field.NewInt32(table, "member_level")
+	s.TotalCount = field.NewInt32(table, "total_count")
+	s.ReceivedCount = field.NewInt32(table, "received_count")
+	s.UsedCount = field.NewInt32(table, "used_count")
+	s.PerLimit = field.NewInt32(table, "per_limit")
+	s.Status = field.NewInt32(table, "status")
+	s.IsEnabled = field.NewInt32(table, "is_enabled")
+	s.Description = field.NewString(table, "description")
+	s.CreateBy = field.NewInt64(table, "create_by")
 	s.CreateTime = field.NewTime(table, "create_time")
+	s.UpdateBy = field.NewInt64(table, "update_by")
 	s.UpdateTime = field.NewTime(table, "update_time")
+	s.IsDeleted = field.NewInt32(table, "is_deleted")
 
 	s.fillFieldMap()
 
@@ -142,25 +143,25 @@ func (s *smsCoupon) GetFieldByName(fieldName string) (field.OrderExpr, bool) {
 func (s *smsCoupon) fillFieldMap() {
 	s.fieldMap = make(map[string]field.Expr, 20)
 	s.fieldMap["id"] = s.ID
-	s.fieldMap["type"] = s.Type
+	s.fieldMap["type_id"] = s.TypeID
 	s.fieldMap["name"] = s.Name
-	s.fieldMap["platform"] = s.Platform
-	s.fieldMap["count"] = s.Count
+	s.fieldMap["code"] = s.Code
 	s.fieldMap["amount"] = s.Amount
-	s.fieldMap["per_limit"] = s.PerLimit
-	s.fieldMap["min_point"] = s.MinPoint
+	s.fieldMap["min_amount"] = s.MinAmount
 	s.fieldMap["start_time"] = s.StartTime
 	s.fieldMap["end_time"] = s.EndTime
-	s.fieldMap["use_type"] = s.UseType
-	s.fieldMap["note"] = s.Note
-	s.fieldMap["publish_count"] = s.PublishCount
-	s.fieldMap["use_count"] = s.UseCount
-	s.fieldMap["receive_count"] = s.ReceiveCount
-	s.fieldMap["enable_time"] = s.EnableTime
-	s.fieldMap["code"] = s.Code
-	s.fieldMap["member_level"] = s.MemberLevel
+	s.fieldMap["total_count"] = s.TotalCount
+	s.fieldMap["received_count"] = s.ReceivedCount
+	s.fieldMap["used_count"] = s.UsedCount
+	s.fieldMap["per_limit"] = s.PerLimit
+	s.fieldMap["status"] = s.Status
+	s.fieldMap["is_enabled"] = s.IsEnabled
+	s.fieldMap["description"] = s.Description
+	s.fieldMap["create_by"] = s.CreateBy
 	s.fieldMap["create_time"] = s.CreateTime
+	s.fieldMap["update_by"] = s.UpdateBy
 	s.fieldMap["update_time"] = s.UpdateTime
+	s.fieldMap["is_deleted"] = s.IsDeleted
 }
 
 func (s smsCoupon) clone(db *gorm.DB) smsCoupon {
@@ -230,6 +231,8 @@ type ISmsCouponDo interface {
 	FirstOrCreate() (*model.SmsCoupon, error)
 	FindByPage(offset int, limit int) (result []*model.SmsCoupon, count int64, err error)
 	ScanByPage(result interface{}, offset int, limit int) (count int64, err error)
+	Rows() (*sql.Rows, error)
+	Row() *sql.Row
 	Scan(result interface{}) (err error)
 	Returning(value interface{}, columns ...string) ISmsCouponDo
 	UnderlyingDB() *gorm.DB

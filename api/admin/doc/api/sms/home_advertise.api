@@ -1,73 +1,105 @@
 import "../base/base.api"
 
 info (
-	desc:   "首页广告"
-	author: "koobe"
+	desc:   "首页轮播广告"
+	author: "LiuFeiHua"
 	email:  "1002219331@qq.com"
 )
 
 type (
+	// 添加首页轮播广告请求参数
 	AddHomeAdvertiseReq {
-		Name      string `json:"name"` // 名称
-		Type      int32  `json:"type"` // 轮播位置：0->PC首页轮播；1->app首页轮播
-		Pic       string `json:"pic,optional"` // 图片地址
-		StartTime string `json:"startTime"` // 开始时间
-		EndTime   string `json:"endTime"` // 结束时间
-		Status    int32  `json:"status"` // 上下线状态：0->下线；1->上线
-		Url       string `json:"url"` // 链接地址
-		Note      string `json:"note,optional"` // 备注
-		Sort      int32  `json:"sort"` // 排序
+		Name      string `json:"name"` //名称
+		Type      int32  `json:"type"` //轮播位置：0->PC首页轮播；1->app首页轮播
+		Pic       string `json:"pic"` //图片地址
+		StartTime string `json:"startTime"` //开始时间
+		EndTime   string `json:"endTime"` //结束时间
+		Status    int32  `json:"status"` //上下线状态：0->下线；1->上线
+		Url       string `json:"url"` //链接地址
+		Remark    string `json:"remark,optional"` //备注
+		Sort      int32  `json:"sort"` //排序
 	}
-	ListHomeAdvertiseReq {
-		Current   int64  `form:"current,default=1"`
-		PageSize  int64  `form:"pageSize,default=20"`
-		Name      string `form:"name,optional"` // 名称
-		Type      int32  `form:"type,default=2"` // 轮播位置：0->PC首页轮播；1->app首页轮播
-		StartTime string `form:"startTime,optional"` // 开始时间
-		EndTime   string `form:"endTime,optional"` // 结束时间
-		Status    int32  `form:"status,default=2"` // 上下线状态：0->下线；1->上线
-	}
-	ListHomeAdvertiseData {
-		Id         int64  `json:"id"`
-		Name       string `json:"name"` // 名称
-		Type       int32  `json:"type"` // 轮播位置：0->PC首页轮播；1->app首页轮播
-		Pic        string `json:"pic"` // 图片地址
-		StartTime  string `json:"startTime"` // 开始时间
-		EndTime    string `json:"endTime"` // 结束时间
-		Status     int32  `json:"status"` // 上下线状态：0->下线；1->上线
-		ClickCount int32  `json:"clickCount"` // 点击数
-		OrderCount int32  `json:"orderCount"` // 下单数
-		Url        string `json:"url"` // 链接地址
-		Note       string `json:"note"` // 备注
-		Sort       int32  `json:"sort"` // 排序
-	}
-	ListHomeAdvertiseResp {
-		Code     string                   `json:"code"`
-		Message  string                   `json:"message"`
-		Current  int64                    `json:"current,default=1"`
-		Data     []*ListHomeAdvertiseData `json:"data"`
-		PageSize int64                    `json:"pageSize,default=20"`
-		Success  bool                     `json:"success"`
-		Total    int64                    `json:"total"`
-	}
-	UpdateHomeAdvertiseStatusReq {
-		Ids    []int64 `json:"ids"`
-		Status int32   `json:"status"` // 上下线状态：0->下线；1->上线
-	}
-	UpdateHomeAdvertiseReq {
-		Id        int64  `json:"id"`
-		Name      string `json:"name"` // 名称
-		Type      int32  `json:"type"` // 轮播位置：0->PC首页轮播；1->app首页轮播
-		Pic       string `json:"pic,optional"` // 图片地址
-		StartTime string `json:"startTime"` // 开始时间
-		EndTime   string `json:"endTime"` // 结束时间
-		Status    int32  `json:"status"` // 上下线状态：0->下线；1->上线
-		Url       string `json:"url"` // 链接地址
-		Note      string `json:"note,optional"` // 备注
-		Sort      int32  `json:"sort"` // 排序
-	}
+	// 删除首页轮播广告请求参数
 	DeleteHomeAdvertiseReq {
 		Ids []int64 `form:"ids"`
+	}
+	// 更新首页轮播广告请求参数
+	UpdateHomeAdvertiseReq {
+		Id        int64  `json:"id"` //编号
+		Name      string `json:"name"` //名称
+		Type      int32  `json:"type"` //轮播位置：0->PC首页轮播；1->app首页轮播
+		Pic       string `json:"pic"` //图片地址
+		StartTime string `json:"startTime"` //开始时间
+		EndTime   string `json:"endTime"` //结束时间
+		Status    int32  `json:"status"` //上下线状态：0->下线；1->上线
+		Url       string `json:"url"` //链接地址
+		Remark    string `json:"remark,optional"` //备注
+		Sort      int32  `json:"sort"` //排序
+	}
+	// 更新首页轮播广告状态请求参数
+	UpdateHomeAdvertiseStatusReq {
+		Ids    []int64 `json:"ids"` //编号
+		Status int32   `json:"status"` //上下线状态：0->下线；1->上线
+	}
+	// 查询首页轮播广告详情请求参数
+	QueryHomeAdvertiseDetailReq {
+		Id int64 `form:"id"`
+	}
+	QueryHomeAdvertiseDetailData {
+		Id         int64  `json:"id"` //编号
+		Name       string `json:"name"` //名称
+		Type       int32  `json:"type"` //轮播位置：0->PC首页轮播；1->app首页轮播
+		Pic        string `json:"pic"` //图片地址
+		StartTime  string `json:"startTime"` //开始时间
+		EndTime    string `json:"endTime"` //结束时间
+		Status     int32  `json:"status"` //上下线状态：0->下线；1->上线
+		ClickCount int32  `json:"clickCount"` //点击数
+		OrderCount int32  `json:"orderCount"` //下单数
+		Url        string `json:"url"` //链接地址
+		Remark     string `json:"remark"` //备注
+		Sort       int32  `json:"sort"` //排序
+		CreateTime string `json:"createTime"` //创建时间
+		UpdateTime string `json:"updateTime"` //更新时间
+	}
+	QueryHomeAdvertiseDetailResp {
+		Code    string                       `json:"code"`
+		Message string                       `json:"message"`
+		Data    QueryHomeAdvertiseDetailData `json:"data"`
+	}
+	// 分页查询首页轮播广告列表请求参数
+	QueryHomeAdvertiseListReq {
+		Current   int32  `form:"current,default=1"` //第几页
+		PageSize  int32  `form:"pageSize,default=20"` //每页的数量
+		Name      string `form:"name,optional"` //名称
+		Type      int32  `form:"type,default=2"` //轮播位置：0->PC首页轮播；1->app首页轮播
+		StartTime string `form:"startTime,optional"` //开始时间
+		EndTime   string `form:"endTime,optional"` //结束时间
+		Status    int32  `form:"status,default=2"` //上下线状态：0->下线；1->上线
+	}
+	QueryHomeAdvertiseListData {
+		Id         int64  `json:"id"` //编号
+		Name       string `json:"name"` //名称
+		Type       int32  `json:"type"` //轮播位置：0->PC首页轮播；1->app首页轮播
+		Pic        string `json:"pic"` //图片地址
+		StartTime  string `json:"startTime"` //开始时间
+		EndTime    string `json:"endTime"` //结束时间
+		Status     int32  `json:"status"` //上下线状态：0->下线；1->上线
+		ClickCount int32  `json:"clickCount"` //点击数
+		OrderCount int32  `json:"orderCount"` //下单数
+		Url        string `json:"url"` //链接地址
+		Remark     string `json:"remark"` //备注
+		Sort       int32  `json:"sort"` //排序
+		CreateTime string `json:"createTime"` //创建时间
+		UpdateTime string `json:"updateTime"` //更新时间
+	}
+	QueryHomeAdvertiseListResp {
+		Code     string                        `json:"code"`
+		Message  string                        `json:"message"`
+		Current  int32                         `json:"current,default=1"`
+		Data     []*QueryHomeAdvertiseListData `json:"data"`
+		PageSize int32                         `json:"pageSize,default=20"`
+		Success  bool                          `json:"success"`
+		Total    int64                         `json:"total"`
 	}
 )
 
@@ -78,24 +110,28 @@ type (
 	prefix:     /api/sms/homeAdvertise
 )
 service admin-api {
-	//添加首页轮播广告
-	@handler HomeAdvertiseAdd
+	// 添加首页轮播广告
+	@handler AddHomeAdvertise
 	post /addHomeAdvertise (AddHomeAdvertiseReq) returns (BaseResp)
 
-	//查询首页轮播广告
-	@handler HomeAdvertiseList
-	get /queryHomeAdvertiseList (ListHomeAdvertiseReq) returns (ListHomeAdvertiseResp)
+	// 删除首页轮播广告
+	@handler DeleteHomeAdvertise
+	get /deleteHomeAdvertise (DeleteHomeAdvertiseReq) returns (BaseResp)
 
-	//更新首页轮播广告
-	@handler HomeAdvertiseUpdate
+	// 更新首页轮播广告
+	@handler UpdateHomeAdvertise
 	post /updateHomeAdvertise (UpdateHomeAdvertiseReq) returns (BaseResp)
 
-	//更新首页轮播广告状态
+	// 更新首页轮播广告状态
 	@handler UpdateHomeAdvertiseStatus
 	post /updateHomeAdvertiseStatus (UpdateHomeAdvertiseStatusReq) returns (BaseResp)
 
-	//删除首页轮播广告
-	@handler HomeAdvertiseDelete
-	get /deleteHomeAdvertise (DeleteHomeAdvertiseReq) returns (BaseResp)
+	// 查询首页轮播广告详情
+	@handler QueryHomeAdvertiseDetail
+	get /queryHomeAdvertiseDetail (QueryHomeAdvertiseDetailReq) returns (QueryHomeAdvertiseDetailResp)
+
+	// 分页查询首页轮播广告列表
+	@handler QueryHomeAdvertiseList
+	get /queryHomeAdvertiseList (QueryHomeAdvertiseListReq) returns (QueryHomeAdvertiseListResp)
 }
 

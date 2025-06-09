@@ -54,18 +54,18 @@ func (l *QueryProductCollectionListLogic) QueryProductCollectionList() (resp *ty
 
 	var list []types.ProductCollectionList
 
-	for _, member := range collectionList.List {
+	for _, detail := range collectionList.List {
 		list = append(list, types.ProductCollectionList{
-			Id:              member.Id,
-			MemberId:        member.MemberId,
-			MemberNickName:  member.MemberNickName,
-			MemberIcon:      member.MemberIcon,
-			ProductId:       member.ProductId,
-			ProductName:     member.ProductName,
-			ProductPic:      member.ProductPic,
-			ProductSubTitle: member.ProductSubTitle,
-			ProductPrice:    member.ProductPrice,
-			CreateTime:      member.CreateTime,
+			Id:              detail.Id,              //
+			MemberId:        detail.MemberId,        // 会员id
+			MemberNickName:  detail.MemberNickName,  // 会员姓名
+			MemberIcon:      detail.MemberIcon,      // 会员头像
+			ProductId:       detail.ProductId,       // 商品id
+			ProductName:     detail.ProductName,     // 商品名称
+			ProductPic:      detail.ProductPic,      // 商品图片
+			ProductSubTitle: detail.ProductSubTitle, // 商品标题
+			ProductPrice:    detail.ProductPrice,    // 商品价格
+			CreateTime:      detail.CreateTime,      // 收藏时间
 		})
 	}
 

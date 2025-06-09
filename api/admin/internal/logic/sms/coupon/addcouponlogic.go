@@ -1,0 +1,67 @@
+package coupon
+
+import (
+	"context"
+	"github.com/feihua/zero-admin/api/admin/internal/common"
+	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
+	"github.com/feihua/zero-admin/api/admin/internal/svc"
+	"github.com/feihua/zero-admin/api/admin/internal/types"
+	"github.com/feihua/zero-admin/rpc/sms/smsclient"
+	"github.com/zeromicro/go-zero/core/logc"
+	"google.golang.org/grpc/status"
+
+	"github.com/zeromicro/go-zero/core/logx"
+)
+
+// AddCouponLogic 添加优惠券
+/*
+Author: LiuFeiHua
+Date: 2025/06/12 10:40:14
+*/
+type AddCouponLogic struct {
+	logx.Logger
+	ctx    context.Context
+	svcCtx *svc.ServiceContext
+}
+
+func NewAddCouponLogic(ctx context.Context, svcCtx *svc.ServiceContext) *AddCouponLogic {
+	return &AddCouponLogic{
+		Logger: logx.WithContext(ctx),
+		ctx:    ctx,
+		svcCtx: svcCtx,
+	}
+}
+
+// AddCoupon 添加优惠券
+func (l *AddCouponLogic) AddCoupon(req *types.AddCouponReq) (resp *types.BaseResp, err error) {
+	userId, err := common.GetUserId(l.ctx)
+	if err != nil {
+		return nil, err
+	}
+	_, err = l.svcCtx.CouponService.AddCoupon(l.ctx, &smsclient.AddCouponReq{
+		TypeId:      req.TypeId,      // 优惠券类型ID
+		Name:        req.Name,        // 优惠券名称
+		Code:        req.Code,        // 优惠券码
+		Amount:      req.Amount,      // 优惠金额/折扣率
+		MinAmount:   req.MinAmount,   // 最低使用金额
+		StartTime:   req.StartTime,   // 生效时间
+		EndTime:     req.EndTime,     // 失效时间
+		TotalCount:  req.TotalCount,  // 发放总量
+		PerLimit:    req.PerLimit,    // 每人限领数量
+		Status:      req.Status,      // 状态：0-未开始，1-进行中，2-已结束，3-已取消
+		IsEnabled:   req.IsEnabled,   // 是否启用
+		Description: req.Description, // 使用说明
+		CreateBy:    userId,          // 创建人ID
+	})
+
+	if err != nil {
+		logc.Errorf(l.ctx, "添加优惠券失败,参数：%+v,响应：%s", req, err.Error())
+		s, _ := status.FromError(err)
+		return nil, errorx.NewDefaultError(s.Message())
+	}
+
+	return &types.BaseResp{
+		Code:    "000000",
+		Message: "添加优惠券成功",
+	}, nil
+}

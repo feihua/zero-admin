@@ -6,7 +6,7 @@ option go_package = "./proto";
 
 // 添加会员关注品牌
 message AddMemberBrandAttentionReq {
-  int64 id = 1; //
+  string id = 1; //
   int64 member_id = 2; //会员id
   int64 brand_id = 5; //品牌id
   string brand_name = 6; //品牌名称
@@ -20,7 +20,7 @@ message AddMemberBrandAttentionResp {
 
 // 删除会员关注品牌
 message DeleteMemberBrandAttentionReq {
-  repeated int64 ids = 1;
+  repeated int64 brandIds = 1;
   int64 MemberId = 2; //会员id
 }
 
@@ -30,11 +30,11 @@ message DeleteMemberBrandAttentionResp {
 
 // 查询会员关注品牌详情
 message QueryMemberBrandAttentionDetailReq {
-    int64 id = 1;
+  string id = 1;
 }
 
 message QueryMemberBrandAttentionDetailResp {
-  int64 id = 1; //
+  string id = 1; //
   int64 member_id = 2; //会员id
   string member_nick_name = 3; //会员姓名
   string member_icon = 4; //会员头像
@@ -49,11 +49,12 @@ message QueryMemberBrandAttentionDetailResp {
 // 分页查询会员关注品牌列表
 message QueryMemberBrandAttentionListReq {
   int64 member_id = 1; //会员id
-  
+  int64 page_num = 2; //第几页
+  int64 page_size = 3; //每页的数量
 }
 
 message MemberBrandAttentionListData {
-  int64 id = 1; //
+  string id = 1; //
   int64 member_id = 2; //会员id
   string member_nick_name = 3; //会员姓名
   string member_icon = 4; //会员头像
@@ -66,8 +67,7 @@ message MemberBrandAttentionListData {
 }
 
 message QueryMemberBrandAttentionListResp {
-  int64 total = 1;
-  repeated  MemberBrandAttentionListData list = 2;
+  repeated  MemberBrandAttentionListData list = 1;
 }
 
 // 会员关注品牌

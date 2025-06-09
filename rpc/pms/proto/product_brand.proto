@@ -124,7 +124,12 @@ message QueryProductBrandListResp {
 message QueryBrandListByIdsReq {
   repeated int64 ids = 1;
 }
-
+// 更新品牌的排序
+message UpdateProductBrandSortReq {
+  int64 id = 1; //
+  int32 sort  = 2; //排序
+  int64 update_by = 3; //更新人ID
+}
 // 商品品牌
 service ProductBrandService {
   // 添加商品品牌
@@ -143,5 +148,7 @@ service ProductBrandService {
   rpc QueryBrandListByIds(QueryBrandListByIdsReq) returns(QueryProductBrandListResp);
   //更新品牌的推荐状态
   rpc UpdateBrandRecommendStatus(UpdateProductBrandStatusReq) returns(UpdateProductBrandStatusResp);
+  //更新品牌的排序
+  rpc UpdateBrandSort(UpdateProductBrandSortReq) returns(UpdateProductBrandStatusResp);
 
 }

@@ -4,27 +4,25 @@ package main;
 
 option go_package = "./proto";
 
-// 添加首页轮播广告表
+// 添加首页轮播广告
 message AddHomeAdvertiseReq {
-  int64 id = 1; //
+  int64 id = 1; //编号
   string name = 2; //名称
   int32 type = 3; //轮播位置：0->PC首页轮播；1->app首页轮播
   string pic = 4; //图片地址
   string start_time = 5; //开始时间
   string end_time = 6; //结束时间
   int32 status = 7; //上下线状态：0->下线；1->上线
-  int32 click_count = 8; //点击数
-  int32 order_count = 9; //下单数
-  string url = 10; //链接地址
-  string note = 11; //备注
-  int32 sort = 12; //排序
+  string url = 8; //链接地址
+  string remark = 9; //备注
+  int32 sort = 10; //排序
 }
 
 message AddHomeAdvertiseResp {
   string pong = 1;
 }
 
-// 删除首页轮播广告表
+// 删除首页轮播广告
 message DeleteHomeAdvertiseReq {
   repeated int64 ids = 1;
 }
@@ -33,19 +31,17 @@ message DeleteHomeAdvertiseResp {
   string pong = 1;
 }
 
-// 更新首页轮播广告表
+// 更新首页轮播广告
 message UpdateHomeAdvertiseReq {
-  int64 id = 1; //
+  int64 id = 1; //编号
   string name = 2; //名称
   int32 type = 3; //轮播位置：0->PC首页轮播；1->app首页轮播
   string pic = 4; //图片地址
   string start_time = 5; //开始时间
   string end_time = 6; //结束时间
   int32 status = 7; //上下线状态：0->下线；1->上线
-  int32 click_count = 8; //点击数
-  int32 order_count = 9; //下单数
   string url = 10; //链接地址
-  string note = 11; //备注
+  string remark = 11; //备注
   int32 sort = 12; //排序
 }
 
@@ -53,24 +49,23 @@ message UpdateHomeAdvertiseResp {
   string pong = 1;
 }
 
-// 更新首页轮播广告表状态
+// 更新首页轮播广告状态
 message UpdateHomeAdvertiseStatusReq {
-  repeated int64 Ids = 1; //
-  int32 Status = 2; //上下线状态：0->下线；1->上线
-
+  repeated int64 ids = 1; //编号
+  int32 status = 2; //上下线状态：0->下线；1->上线
 }
 
 message UpdateHomeAdvertiseStatusResp {
   string pong = 1;
 }
 
-// 查询首页轮播广告表详情
+// 查询首页轮播广告详情
 message QueryHomeAdvertiseDetailReq {
     int64 id = 1;
 }
 
 message QueryHomeAdvertiseDetailResp {
-  int64 id = 1; //
+  int64 id = 1; //编号
   string name = 2; //名称
   int32 type = 3; //轮播位置：0->PC首页轮播；1->app首页轮播
   string pic = 4; //图片地址
@@ -80,25 +75,26 @@ message QueryHomeAdvertiseDetailResp {
   int32 click_count = 8; //点击数
   int32 order_count = 9; //下单数
   string url = 10; //链接地址
-  string note = 11; //备注
+  string remark = 11; //备注
   int32 sort = 12; //排序
+  string create_time = 13; //创建时间
+  string update_time = 14; //更新时间
 
 }
 
-// 分页查询首页轮播广告表列表
+// 分页查询首页轮播广告列表
 message QueryHomeAdvertiseListReq {
-  int64 page_num = 1; //第几页
-  int64 page_size = 2; //每页的数量
-  string end_time = 3; //结束时间
-  string name = 4; //名称
-  string start_time =5; //开始时间
-  int32 status = 6; //上下线状态：0->下线；1->上线
-  int32 type = 7; //轮播位置：0->PC首页轮播；1->app首页轮播
-
+  string name = 1; //名称
+  int32 type = 2; //轮播位置：0->PC首页轮播；1->app首页轮播
+  string start_time = 3; //开始时间
+  string end_time = 4; //结束时间
+  int32 status = 5; //上下线状态：0->下线；1->上线
+  int32 page_num = 6; //第几页
+  int32 page_size = 7; //每页的数量
 }
 
 message HomeAdvertiseListData {
-  int64 id = 1; //
+  int64 id = 1; //编号
   string name = 2; //名称
   int32 type = 3; //轮播位置：0->PC首页轮播；1->app首页轮播
   string pic = 4; //图片地址
@@ -108,8 +104,10 @@ message HomeAdvertiseListData {
   int32 click_count = 8; //点击数
   int32 order_count = 9; //下单数
   string url = 10; //链接地址
-  string note = 11; //备注
+  string remark = 11; //备注
   int32 sort = 12; //排序
+  string create_time = 13; //创建时间
+  string update_time = 14; //更新时间
 
 }
 
@@ -118,19 +116,19 @@ message QueryHomeAdvertiseListResp {
   repeated  HomeAdvertiseListData list = 2;
 }
 
-// 首页轮播广告表
+// 首页轮播广告
 service HomeAdvertiseService {
-  // 添加首页轮播广告表
+  // 添加首页轮播广告
   rpc AddHomeAdvertise(AddHomeAdvertiseReq) returns (AddHomeAdvertiseResp){}
-  // 删除首页轮播广告表
+  // 删除首页轮播广告
   rpc DeleteHomeAdvertise(DeleteHomeAdvertiseReq) returns (DeleteHomeAdvertiseResp){}
-  // 更新首页轮播广告表
+  // 更新首页轮播广告
   rpc UpdateHomeAdvertise(UpdateHomeAdvertiseReq) returns (UpdateHomeAdvertiseResp ){}
-  // 更新首页轮播广告表状态
+  // 更新首页轮播广告状态
   rpc UpdateHomeAdvertiseStatus(UpdateHomeAdvertiseStatusReq) returns (UpdateHomeAdvertiseStatusResp ){}
-  // 查询首页轮播广告表详情
+  // 查询首页轮播广告详情
    rpc QueryHomeAdvertiseDetail(QueryHomeAdvertiseDetailReq) returns (QueryHomeAdvertiseDetailResp){}
-  // 查询首页轮播广告表列表
+  // 查询首页轮播广告列表
   rpc QueryHomeAdvertiseList(QueryHomeAdvertiseListReq) returns (QueryHomeAdvertiseListResp){}
 
 

@@ -1,0 +1,140 @@
+syntax = "proto3";
+
+package main;
+
+option go_package = "./proto";
+
+// 添加优惠券领取记录
+message AddCouponRecordReq {
+  int64 coupon_id = 1; //优惠券ID
+  int64 member_id = 2; //用户ID
+  string get_time = 3; //领取时间
+  int32 get_type = 4; //获取类型：0->后台赠送；1->主动获取
+
+
+}
+
+message AddCouponRecordResp {
+  string pong = 1;
+}
+
+// 删除优惠券领取记录
+message DeleteCouponRecordReq {
+  repeated int64 ids = 1;
+}
+
+message DeleteCouponRecordResp {
+  string pong = 1;
+}
+
+// 更新优惠券领取记录
+message UpdateCouponRecordReq {
+  int64 coupon_id = 1; //优惠券ID
+  int64 member_id = 2; //用户ID
+  int64 order_id = 3; //使用订单ID
+  float order_amount = 4; //订单金额
+  float discount_amount = 5; //优惠金额
+  int32 status = 6; //状态：0-未使用，1-已使用，2-已过期，3-已失效
+  string invalid_time = 7; //失效时间
+  string invalid_reason = 8; //失效原因
+}
+
+message UpdateCouponRecordResp {
+  string pong = 1;
+}
+
+
+// 查询优惠券领取记录详情
+message QueryCouponRecordDetailReq {
+    int64 id = 1;
+}
+
+message QueryCouponRecordDetailResp {
+  int64 id = 1; //
+  int64 coupon_id = 2; //优惠券ID
+  int64 member_id = 3; //用户ID
+  string get_time = 4; //领取时间
+  int32 get_type = 5; //获取类型：0->后台赠送；1->主动获取
+  string use_time = 6; //使用时间
+  int64 order_id = 7; //使用订单ID
+  float order_amount = 8; //订单金额
+  float discount_amount = 9; //优惠金额
+  int32 status = 10; //状态：0-未使用，1-已使用，2-已过期，3-已失效
+  string invalid_time = 11; //失效时间
+  string invalid_reason = 12; //失效原因
+  string create_time = 13; //
+
+}
+
+// 分页查询优惠券领取记录列表
+message QueryCouponRecordListReq {
+  int64 coupon_id = 1; //优惠券ID
+  int64 member_id = 2; //用户ID
+  int32 get_type = 3; //获取类型：0->后台赠送；1->主动获取
+  int64 order_id = 4; //使用订单ID
+  int32 status = 5; //状态：0-未使用，1-已使用，2-已过期，3-已失效
+  int32 page_num = 6; //第几页
+  int32 page_size = 7; //每页的数量
+}
+
+message CouponRecordListData {
+  int64 id = 1; //
+  int64 coupon_id = 2; //优惠券ID
+  int64 member_id = 3; //用户ID
+  string get_time = 4; //领取时间
+  int32 get_type = 5; //获取类型：0->后台赠送；1->主动获取
+  string use_time = 6; //使用时间
+  int64 order_id = 7; //使用订单ID
+  float order_amount = 8; //订单金额
+  float discount_amount = 9; //优惠金额
+  int32 status = 10; //状态：0-未使用，1-已使用，2-已过期，3-已失效
+  string invalid_time = 11; //失效时间
+  string invalid_reason = 12; //失效原因
+  string create_time = 13; //
+
+}
+
+message QueryCouponRecordListResp {
+  int64 total = 1;
+  repeated  CouponRecordListData list = 2;
+}
+
+message QueryMemberCouponListReq {
+  int64 memberId = 1;
+  int32  Status = 2;
+}
+message QueryCouponData {
+  int64 id = 1; //优惠券ID
+  int64 type_id = 2; //优惠券类型ID
+  string name = 3; //优惠券名称
+  string code = 4; //优惠券码
+  float amount = 5; //优惠金额/折扣率
+  float min_amount = 6; //最低使用金额
+  string start_time = 7; //生效时间
+  string end_time = 8; //失效时间
+  int32 per_limit = 12; //每人限领数量
+  int32 status = 13; //状态：0-未开始，1-进行中，2-已结束，3-已取消
+  string description = 15; //使用说明
+
+}
+message QueryMemberCouponListResp {
+  repeated  QueryCouponData list = 1;
+}
+
+// 优惠券领取记录
+service CouponRecordService {
+  // 添加优惠券领取记录
+  rpc AddCouponRecord(AddCouponRecordReq) returns (AddCouponRecordResp){}
+  // 删除优惠券领取记录
+  rpc DeleteCouponRecord(DeleteCouponRecordReq) returns (DeleteCouponRecordResp){}
+  // 更新优惠券领取记录
+  rpc UpdateCouponRecord(UpdateCouponRecordReq) returns (UpdateCouponRecordResp ){}
+  // 查询优惠券领取记录详情
+   rpc QueryCouponRecordDetail(QueryCouponRecordDetailReq) returns (QueryCouponRecordDetailResp){}
+  // 查询优惠券领取记录列表
+  rpc QueryCouponRecordList(QueryCouponRecordListReq) returns (QueryCouponRecordListResp){}
+
+  //获取会员优惠券
+  rpc QueryMemberCouponList(QueryMemberCouponListReq) returns(QueryMemberCouponListResp);
+
+}

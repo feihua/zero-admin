@@ -1,0 +1,58 @@
+import "../base/base.api"
+
+info (
+	desc:   "优惠券领取记录"
+	author: "LiuFeiHua"
+	email:  "1002219331@qq.com"
+)
+
+type (
+	// 分页查询优惠券领取记录列表请求参数
+	QueryCouponRecordListReq {
+		Current  int32 `form:"current,default=1"` //第几页
+		PageSize int32 `form:"pageSize,default=20"` //每页的数量
+		CouponId int64 `form:"couponId"` //优惠券ID
+		MemberId int64 `form:"memberId,default=0"` //用户ID
+		GetType  int32 `form:"getType,default=2"` //获取类型：0->后台赠送；1->主动获取
+		OrderId  int64 `form:"orderId,default=0"` //使用订单ID
+		Status   int32 `form:"status,default=2"` //状态：0-未使用，1-已使用，2-已过期，3-已失效
+	}
+	QueryCouponRecordListData {
+		Id             int64   `json:"id"` //
+		CouponId       int64   `json:"couponId"` //优惠券ID
+		MemberId       int64   `json:"memberId"` //用户ID
+		GetTime        string  `json:"getTime"` //领取时间
+		GetType        int32   `json:"getType"` //获取类型：0->后台赠送；1->主动获取
+		UseTime        string  `json:"useTime"` //使用时间
+		OrderId        int64   `json:"orderId"` //使用订单ID
+		OrderAmount    float32 `json:"orderAmount"` //订单金额
+		DiscountAmount float32 `json:"discountAmount"` //优惠金额
+		Status         int32   `json:"status"` //状态：0-未使用，1-已使用，2-已过期，3-已失效
+		InvalidTime    string  `json:"invalidTime"` //失效时间
+		InvalidReason  string  `json:"invalidReason"` //失效原因
+		CreateTime     string  `json:"createTime"` //
+		IsDeleted      int32   `json:"isDeleted"` //是否删除
+	}
+	QueryCouponRecordListResp {
+		Code     string                       `json:"code"`
+		Message  string                       `json:"message"`
+		Current  int32                        `json:"current,default=1"`
+		Data     []*QueryCouponRecordListData `json:"data"`
+		PageSize int32                        `json:"pageSize,default=20"`
+		Success  bool                         `json:"success"`
+		Total    int64                        `json:"total"`
+	}
+)
+
+@server (
+	jwt:        Auth
+	middleware: CheckUrl
+	group:      sms/coupon_record
+	prefix:     /api/sms/couponRecord
+)
+service admin-api {
+	// 分页查询优惠券领取记录列表
+	@handler QueryCouponRecordList
+	get /queryCouponRecordList (QueryCouponRecordListReq) returns (QueryCouponRecordListResp)
+}
+

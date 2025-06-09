@@ -3,7 +3,6 @@ package memberproductcollectionservicelogic
 import (
 	"context"
 	"errors"
-	"github.com/feihua/zero-admin/rpc/ums/gen/query"
 	"github.com/zeromicro/go-zero/core/logc"
 
 	"github.com/feihua/zero-admin/rpc/ums/internal/svc"
@@ -33,15 +32,12 @@ func NewDeleteMemberProductCollectionLogic(ctx context.Context, svcCtx *svc.Serv
 
 // DeleteMemberProductCollection 删除商品收藏/清空当前用户商品收藏列表
 func (l *DeleteMemberProductCollectionLogic) DeleteMemberProductCollection(in *umsclient.DeleteMemberProductCollectionReq) (*umsclient.DeleteMemberProductCollectionResp, error) {
-	q := query.UmsMemberProductCollection
-	collectionDo := q.WithContext(l.ctx).Where(q.MemberID.Eq(in.MemberId))
-	if len(in.Ids) > 0 {
-		collectionDo = collectionDo.Where(q.ID.In(in.Ids...))
-	}
-	_, err := collectionDo.Delete()
-	if err != nil {
-		logc.Errorf(l.ctx, "删除商品收藏失败,参数:%+v,异常:%s", in, err.Error())
-		return nil, errors.New("删除商品收藏失败")
+	for _, id := range in.Ids {
+		_, err := l.svcCtx.MemberProductCollectionModel.Deletes(l.ctx, id, in.MemberId)
+		if err != nil {
+			logc.Errorf(l.ctx, "删除商品收藏失败,参数:%+v,异常:%s", in, err.Error())
+			return nil, errors.New("删除商品收藏失败")
+		}
 	}
 
 	return &umsclient.DeleteMemberProductCollectionResp{}, nil

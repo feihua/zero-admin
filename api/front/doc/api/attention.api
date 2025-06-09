@@ -16,7 +16,7 @@ type (
 		Message string `json:"message"`
 	}
 	ListAttentionData {
-		Id             int64  `json:"id"`
+		Id             string `json:"id"`
 		MemberId       int64  `json:"memberId"` // 会员id
 		MemberNickName string `json:"memberNickName"` // 会员姓名
 		MemberIcon     string `json:"memberIcon"` // 会员头像

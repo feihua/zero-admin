@@ -16,94 +16,74 @@ import (
 )
 
 var (
-	Q                                = new(Query)
-	SmsCoupon                        *smsCoupon
-	SmsCouponHistory                 *smsCouponHistory
-	SmsCouponProductCategoryRelation *smsCouponProductCategoryRelation
-	SmsCouponProductRelation         *smsCouponProductRelation
-	SmsFlashPromotion                *smsFlashPromotion
-	SmsFlashPromotionLog             *smsFlashPromotionLog
-	SmsFlashPromotionProductRelation *smsFlashPromotionProductRelation
-	SmsFlashPromotionSession         *smsFlashPromotionSession
-	SmsHomeAdvertise                 *smsHomeAdvertise
-	SmsHomeBrand                     *smsHomeBrand
-	SmsHomeNewProduct                *smsHomeNewProduct
-	SmsHomeRecommendProduct          *smsHomeRecommendProduct
-	SmsHomeRecommendSubject          *smsHomeRecommendSubject
+	Q                     = new(Query)
+	SmsCoupon             *smsCoupon
+	SmsCouponRecord       *smsCouponRecord
+	SmsCouponScope        *smsCouponScope
+	SmsCouponType         *smsCouponType
+	SmsHomeAdvertise      *smsHomeAdvertise
+	SmsSeckillActivity    *smsSeckillActivity
+	SmsSeckillProduct     *smsSeckillProduct
+	SmsSeckillReservation *smsSeckillReservation
+	SmsSeckillSession     *smsSeckillSession
 )
 
 func SetDefault(db *gorm.DB, opts ...gen.DOOption) {
 	*Q = *Use(db, opts...)
 	SmsCoupon = &Q.SmsCoupon
-	SmsCouponHistory = &Q.SmsCouponHistory
-	SmsCouponProductCategoryRelation = &Q.SmsCouponProductCategoryRelation
-	SmsCouponProductRelation = &Q.SmsCouponProductRelation
-	SmsFlashPromotion = &Q.SmsFlashPromotion
-	SmsFlashPromotionLog = &Q.SmsFlashPromotionLog
-	SmsFlashPromotionProductRelation = &Q.SmsFlashPromotionProductRelation
-	SmsFlashPromotionSession = &Q.SmsFlashPromotionSession
+	SmsCouponRecord = &Q.SmsCouponRecord
+	SmsCouponScope = &Q.SmsCouponScope
+	SmsCouponType = &Q.SmsCouponType
 	SmsHomeAdvertise = &Q.SmsHomeAdvertise
-	SmsHomeBrand = &Q.SmsHomeBrand
-	SmsHomeNewProduct = &Q.SmsHomeNewProduct
-	SmsHomeRecommendProduct = &Q.SmsHomeRecommendProduct
-	SmsHomeRecommendSubject = &Q.SmsHomeRecommendSubject
+	SmsSeckillActivity = &Q.SmsSeckillActivity
+	SmsSeckillProduct = &Q.SmsSeckillProduct
+	SmsSeckillReservation = &Q.SmsSeckillReservation
+	SmsSeckillSession = &Q.SmsSeckillSession
 }
 
 func Use(db *gorm.DB, opts ...gen.DOOption) *Query {
 	return &Query{
-		db:                               db,
-		SmsCoupon:                        newSmsCoupon(db, opts...),
-		SmsCouponHistory:                 newSmsCouponHistory(db, opts...),
-		SmsCouponProductCategoryRelation: newSmsCouponProductCategoryRelation(db, opts...),
-		SmsCouponProductRelation:         newSmsCouponProductRelation(db, opts...),
-		SmsFlashPromotion:                newSmsFlashPromotion(db, opts...),
-		SmsFlashPromotionLog:             newSmsFlashPromotionLog(db, opts...),
-		SmsFlashPromotionProductRelation: newSmsFlashPromotionProductRelation(db, opts...),
-		SmsFlashPromotionSession:         newSmsFlashPromotionSession(db, opts...),
-		SmsHomeAdvertise:                 newSmsHomeAdvertise(db, opts...),
-		SmsHomeBrand:                     newSmsHomeBrand(db, opts...),
-		SmsHomeNewProduct:                newSmsHomeNewProduct(db, opts...),
-		SmsHomeRecommendProduct:          newSmsHomeRecommendProduct(db, opts...),
-		SmsHomeRecommendSubject:          newSmsHomeRecommendSubject(db, opts...),
+		db:                    db,
+		SmsCoupon:             newSmsCoupon(db, opts...),
+		SmsCouponRecord:       newSmsCouponRecord(db, opts...),
+		SmsCouponScope:        newSmsCouponScope(db, opts...),
+		SmsCouponType:         newSmsCouponType(db, opts...),
+		SmsHomeAdvertise:      newSmsHomeAdvertise(db, opts...),
+		SmsSeckillActivity:    newSmsSeckillActivity(db, opts...),
+		SmsSeckillProduct:     newSmsSeckillProduct(db, opts...),
+		SmsSeckillReservation: newSmsSeckillReservation(db, opts...),
+		SmsSeckillSession:     newSmsSeckillSession(db, opts...),
 	}
 }
 
 type Query struct {
 	db *gorm.DB
 
-	SmsCoupon                        smsCoupon
-	SmsCouponHistory                 smsCouponHistory
-	SmsCouponProductCategoryRelation smsCouponProductCategoryRelation
-	SmsCouponProductRelation         smsCouponProductRelation
-	SmsFlashPromotion                smsFlashPromotion
-	SmsFlashPromotionLog             smsFlashPromotionLog
-	SmsFlashPromotionProductRelation smsFlashPromotionProductRelation
-	SmsFlashPromotionSession         smsFlashPromotionSession
-	SmsHomeAdvertise                 smsHomeAdvertise
-	SmsHomeBrand                     smsHomeBrand
-	SmsHomeNewProduct                smsHomeNewProduct
-	SmsHomeRecommendProduct          smsHomeRecommendProduct
-	SmsHomeRecommendSubject          smsHomeRecommendSubject
+	SmsCoupon             smsCoupon
+	SmsCouponRecord       smsCouponRecord
+	SmsCouponScope        smsCouponScope
+	SmsCouponType         smsCouponType
+	SmsHomeAdvertise      smsHomeAdvertise
+	SmsSeckillActivity    smsSeckillActivity
+	SmsSeckillProduct     smsSeckillProduct
+	SmsSeckillReservation smsSeckillReservation
+	SmsSeckillSession     smsSeckillSession
 }
 
 func (q *Query) Available() bool { return q.db != nil }
 
 func (q *Query) clone(db *gorm.DB) *Query {
 	return &Query{
-		db:                               db,
-		SmsCoupon:                        q.SmsCoupon.clone(db),
-		SmsCouponHistory:                 q.SmsCouponHistory.clone(db),
-		SmsCouponProductCategoryRelation: q.SmsCouponProductCategoryRelation.clone(db),
-		SmsCouponProductRelation:         q.SmsCouponProductRelation.clone(db),
-		SmsFlashPromotion:                q.SmsFlashPromotion.clone(db),
-		SmsFlashPromotionLog:             q.SmsFlashPromotionLog.clone(db),
-		SmsFlashPromotionProductRelation: q.SmsFlashPromotionProductRelation.clone(db),
-		SmsFlashPromotionSession:         q.SmsFlashPromotionSession.clone(db),
-		SmsHomeAdvertise:                 q.SmsHomeAdvertise.clone(db),
-		SmsHomeBrand:                     q.SmsHomeBrand.clone(db),
-		SmsHomeNewProduct:                q.SmsHomeNewProduct.clone(db),
-		SmsHomeRecommendProduct:          q.SmsHomeRecommendProduct.clone(db),
-		SmsHomeRecommendSubject:          q.SmsHomeRecommendSubject.clone(db),
+		db:                    db,
+		SmsCoupon:             q.SmsCoupon.clone(db),
+		SmsCouponRecord:       q.SmsCouponRecord.clone(db),
+		SmsCouponScope:        q.SmsCouponScope.clone(db),
+		SmsCouponType:         q.SmsCouponType.clone(db),
+		SmsHomeAdvertise:      q.SmsHomeAdvertise.clone(db),
+		SmsSeckillActivity:    q.SmsSeckillActivity.clone(db),
+		SmsSeckillProduct:     q.SmsSeckillProduct.clone(db),
+		SmsSeckillReservation: q.SmsSeckillReservation.clone(db),
+		SmsSeckillSession:     q.SmsSeckillSession.clone(db),
 	}
 }
 
@@ -117,54 +97,42 @@ func (q *Query) WriteDB() *Query {
 
 func (q *Query) ReplaceDB(db *gorm.DB) *Query {
 	return &Query{
-		db:                               db,
-		SmsCoupon:                        q.SmsCoupon.replaceDB(db),
-		SmsCouponHistory:                 q.SmsCouponHistory.replaceDB(db),
-		SmsCouponProductCategoryRelation: q.SmsCouponProductCategoryRelation.replaceDB(db),
-		SmsCouponProductRelation:         q.SmsCouponProductRelation.replaceDB(db),
-		SmsFlashPromotion:                q.SmsFlashPromotion.replaceDB(db),
-		SmsFlashPromotionLog:             q.SmsFlashPromotionLog.replaceDB(db),
-		SmsFlashPromotionProductRelation: q.SmsFlashPromotionProductRelation.replaceDB(db),
-		SmsFlashPromotionSession:         q.SmsFlashPromotionSession.replaceDB(db),
-		SmsHomeAdvertise:                 q.SmsHomeAdvertise.replaceDB(db),
-		SmsHomeBrand:                     q.SmsHomeBrand.replaceDB(db),
-		SmsHomeNewProduct:                q.SmsHomeNewProduct.replaceDB(db),
-		SmsHomeRecommendProduct:          q.SmsHomeRecommendProduct.replaceDB(db),
-		SmsHomeRecommendSubject:          q.SmsHomeRecommendSubject.replaceDB(db),
+		db:                    db,
+		SmsCoupon:             q.SmsCoupon.replaceDB(db),
+		SmsCouponRecord:       q.SmsCouponRecord.replaceDB(db),
+		SmsCouponScope:        q.SmsCouponScope.replaceDB(db),
+		SmsCouponType:         q.SmsCouponType.replaceDB(db),
+		SmsHomeAdvertise:      q.SmsHomeAdvertise.replaceDB(db),
+		SmsSeckillActivity:    q.SmsSeckillActivity.replaceDB(db),
+		SmsSeckillProduct:     q.SmsSeckillProduct.replaceDB(db),
+		SmsSeckillReservation: q.SmsSeckillReservation.replaceDB(db),
+		SmsSeckillSession:     q.SmsSeckillSession.replaceDB(db),
 	}
 }
 
 type queryCtx struct {
-	SmsCoupon                        ISmsCouponDo
-	SmsCouponHistory                 ISmsCouponHistoryDo
-	SmsCouponProductCategoryRelation ISmsCouponProductCategoryRelationDo
-	SmsCouponProductRelation         ISmsCouponProductRelationDo
-	SmsFlashPromotion                ISmsFlashPromotionDo
-	SmsFlashPromotionLog             ISmsFlashPromotionLogDo
-	SmsFlashPromotionProductRelation ISmsFlashPromotionProductRelationDo
-	SmsFlashPromotionSession         ISmsFlashPromotionSessionDo
-	SmsHomeAdvertise                 ISmsHomeAdvertiseDo
-	SmsHomeBrand                     ISmsHomeBrandDo
-	SmsHomeNewProduct                ISmsHomeNewProductDo
-	SmsHomeRecommendProduct          ISmsHomeRecommendProductDo
-	SmsHomeRecommendSubject          ISmsHomeRecommendSubjectDo
+	SmsCoupon             ISmsCouponDo
+	SmsCouponRecord       ISmsCouponRecordDo
+	SmsCouponScope        ISmsCouponScopeDo
+	SmsCouponType         ISmsCouponTypeDo
+	SmsHomeAdvertise      ISmsHomeAdvertiseDo
+	SmsSeckillActivity    ISmsSeckillActivityDo
+	SmsSeckillProduct     ISmsSeckillProductDo
+	SmsSeckillReservation ISmsSeckillReservationDo
+	SmsSeckillSession     ISmsSeckillSessionDo
 }
 
 func (q *Query) WithContext(ctx context.Context) *queryCtx {
 	return &queryCtx{
-		SmsCoupon:                        q.SmsCoupon.WithContext(ctx),
-		SmsCouponHistory:                 q.SmsCouponHistory.WithContext(ctx),
-		SmsCouponProductCategoryRelation: q.SmsCouponProductCategoryRelation.WithContext(ctx),
-		SmsCouponProductRelation:         q.SmsCouponProductRelation.WithContext(ctx),
-		SmsFlashPromotion:                q.SmsFlashPromotion.WithContext(ctx),
-		SmsFlashPromotionLog:             q.SmsFlashPromotionLog.WithContext(ctx),
-		SmsFlashPromotionProductRelation: q.SmsFlashPromotionProductRelation.WithContext(ctx),
-		SmsFlashPromotionSession:         q.SmsFlashPromotionSession.WithContext(ctx),
-		SmsHomeAdvertise:                 q.SmsHomeAdvertise.WithContext(ctx),
-		SmsHomeBrand:                     q.SmsHomeBrand.WithContext(ctx),
-		SmsHomeNewProduct:                q.SmsHomeNewProduct.WithContext(ctx),
-		SmsHomeRecommendProduct:          q.SmsHomeRecommendProduct.WithContext(ctx),
-		SmsHomeRecommendSubject:          q.SmsHomeRecommendSubject.WithContext(ctx),
+		SmsCoupon:             q.SmsCoupon.WithContext(ctx),
+		SmsCouponRecord:       q.SmsCouponRecord.WithContext(ctx),
+		SmsCouponScope:        q.SmsCouponScope.WithContext(ctx),
+		SmsCouponType:         q.SmsCouponType.WithContext(ctx),
+		SmsHomeAdvertise:      q.SmsHomeAdvertise.WithContext(ctx),
+		SmsSeckillActivity:    q.SmsSeckillActivity.WithContext(ctx),
+		SmsSeckillProduct:     q.SmsSeckillProduct.WithContext(ctx),
+		SmsSeckillReservation: q.SmsSeckillReservation.WithContext(ctx),
+		SmsSeckillSession:     q.SmsSeckillSession.WithContext(ctx),
 	}
 }
 

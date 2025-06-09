@@ -8,7 +8,6 @@ import (
 	"github.com/feihua/zero-admin/api/admin/internal/svc"
 	"github.com/feihua/zero-admin/api/admin/internal/types"
 	"github.com/feihua/zero-admin/rpc/pms/pmsclient"
-	"github.com/feihua/zero-admin/rpc/sms/smsclient"
 	"github.com/zeromicro/go-zero/core/logc"
 	"google.golang.org/grpc/status"
 
@@ -40,7 +39,7 @@ func (l *AddProductBrandLogic) AddProductBrand(req *types.AddProductBrandReq) (r
 	if err != nil {
 		return nil, err
 	}
-	result, err := l.svcCtx.ProductBrandService.AddProductBrand(l.ctx, &pmsclient.AddProductBrandReq{
+	_, err = l.svcCtx.ProductBrandService.AddProductBrand(l.ctx, &pmsclient.AddProductBrandReq{
 		Name:            req.Name,            // 品牌名称
 		Logo:            req.Logo,            // 品牌logo
 		BigPic:          req.BigPic,          // 专区大图
@@ -56,25 +55,6 @@ func (l *AddProductBrandLogic) AddProductBrand(req *types.AddProductBrandReq) (r
 		logc.Errorf(l.ctx, "添加商品品牌失败,参数：%+v,响应：%s", req, err.Error())
 		s, _ := status.FromError(err)
 		return nil, errorx.NewDefaultError(s.Message())
-	}
-	if req.RecommendStatus == 1 {
-		var list []*smsclient.HomeBrandAddData
-		list = append(list, &smsclient.HomeBrandAddData{
-			BrandId:         result.BrandId,      // 商品品牌id
-			BrandName:       req.Name,            // 商品品牌名称
-			RecommendStatus: req.RecommendStatus, // 推荐状态：0->不推荐;1->推荐
-			Sort:            req.Sort,            // 排序
-		})
-
-		_, err = l.svcCtx.HomeBrandService.AddHomeBrand(l.ctx, &smsclient.AddHomeBrandReq{
-			BrandAddData: list,
-		})
-
-		if err != nil {
-			logc.Errorf(l.ctx, "添加首页品牌信息失败,参数：%+v,响应：%s", req, err.Error())
-			s, _ := status.FromError(err)
-			return nil, errorx.NewDefaultError(s.Message())
-		}
 	}
 
 	return res.Success()

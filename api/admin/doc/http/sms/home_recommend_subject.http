@@ -11,45 +11,32 @@ Content-Type: application/json
 %}
 
 ### 添加专题推荐
-POST {{host}}/api/sms/homerecommendsubject/addHomeRecommendSubject
+POST {{host}}/api/sms/homeRecommendSubject/addHomeRecommendSubject
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {
   "subjectIds": [
-    1,
-    2
+    6
   ]
 }
 
 ### 删除专题推荐
-GET {{host}}/api/sms/homerecommendsubject/deleteHomeRecommendSubject?ids=[39]
+GET {{host}}/api/sms/homeRecommendSubject/deleteHomeRecommendSubject?subjectIds=6
 Authorization: Bearer {{token}}
+
 
 
 ### 修改专题推荐排序
-POST {{host}}/api/sms/homerecommendsubject/updateRecommendSubjectSort
+POST {{host}}/api/sms/homeRecommendSubject/updateRecommendSubjectSort
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {
-  "id": 21,
-  "sort": 200
-}
-
-### 批量修改专题推荐状态
-POST {{host}}/api/sms/homerecommendsubject/updateRecommendSubjectStatus
-Content-Type: application/json
-Authorization: Bearer {{token}}
-
-{
-  "ids": [
-    38,
-    39
-  ],
-  "recommendStatus": 0
+  "subjectId": 6,
+  "sort": 1
 }
 
 ### 查询专题推荐列表
-GET {{host}}/api/sms/homerecommendsubject/queryHomeRecommendSubjectList
+GET {{host}}/api/sms/homeRecommendSubject/queryHomeRecommendSubjectList
 Authorization: Bearer {{token}}

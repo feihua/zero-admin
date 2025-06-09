@@ -1,0 +1,98 @@
+syntax = "proto3";
+
+package main;
+
+option go_package = "./proto";
+
+// 添加优惠券使用范围
+message AddCouponScopeReq {
+  repeated AddCouponScopeData data = 1; //
+
+}
+
+message AddCouponScopeData {
+  int64 id = 1; //
+  int64 coupon_id = 2; //优惠券ID
+  int32 scope_type = 3; //范围类型：0-全场，1-分类，2-商品
+  int64 scope_id = 4; //范围ID（分类ID或商品ID）
+}
+
+message AddCouponScopeResp {
+  string pong = 1;
+}
+
+// 删除优惠券使用范围
+message DeleteCouponScopeReq {
+  repeated int64 ids = 1;
+}
+
+message DeleteCouponScopeResp {
+  string pong = 1;
+}
+
+// 更新优惠券使用范围
+message UpdateCouponScopeReq {
+  int64 id = 1; //
+  int64 coupon_id = 2; //优惠券ID
+  int32 scope_type = 3; //范围类型：0-全场，1-分类，2-商品
+  int64 scope_id = 4; //范围ID（分类ID或商品ID）
+}
+
+message UpdateCouponScopeResp {
+  string pong = 1;
+}
+
+
+// 查询优惠券使用范围详情
+message QueryCouponScopeDetailReq {
+    int64 id = 1;
+}
+
+message QueryCouponScopeDetailResp {
+  int64 id = 1; //
+  int64 coupon_id = 2; //优惠券ID
+  int32 scope_type = 3; //范围类型：0-全场，1-分类，2-商品
+  int64 scope_id = 4; //范围ID（分类ID或商品ID）
+  string create_time = 5; //创建时间
+
+}
+
+// 分页查询优惠券使用范围列表
+message QueryCouponScopeListReq {
+  int64 coupon_id = 1; //优惠券ID
+  int32 scope_type = 2; //范围类型：0-全场，1-分类，2-商品
+  int64 scope_id = 3; //范围ID（分类ID或商品ID）
+  int32 page_num = 4; //第几页
+  int32 page_size = 5; //每页的数量
+}
+
+message CouponScopeListData {
+  int64 id = 1; //
+  int64 coupon_id = 2; //优惠券ID
+  int32 scope_type = 3; //范围类型：0-全场，1-分类，2-商品
+  int64 scope_id = 4; //范围ID（分类ID或商品ID）
+  string create_time = 5; //创建时间
+
+}
+
+message QueryCouponScopeListResp {
+  int64 total = 1;
+  repeated  CouponScopeListData list = 2;
+}
+
+// 优惠券使用范围
+service CouponScopeService {
+  // 添加优惠券使用范围
+  rpc AddCouponScope(AddCouponScopeReq) returns (AddCouponScopeResp){}
+  // 删除优惠券使用范围
+  rpc DeleteCouponScope(DeleteCouponScopeReq) returns (DeleteCouponScopeResp){}
+  // 更新优惠券使用范围
+  rpc UpdateCouponScope(UpdateCouponScopeReq) returns (UpdateCouponScopeResp ){}
+
+  // 查询优惠券使用范围详情
+   rpc QueryCouponScopeDetail(QueryCouponScopeDetailReq) returns (QueryCouponScopeDetailResp){}
+  // 查询优惠券使用范围列表
+  rpc QueryCouponScopeList(QueryCouponScopeListReq) returns (QueryCouponScopeListResp){}
+
+
+}

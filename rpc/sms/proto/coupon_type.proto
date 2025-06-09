@@ -1,0 +1,125 @@
+syntax = "proto3";
+
+package main;
+
+option go_package = "./proto";
+
+// 添加优惠券类型
+message AddCouponTypeReq {
+  int64 id = 1; //主键ID
+  string name = 2; //类型名称
+  string code = 3; //类型编码
+  string description = 4; //描述
+  int32 discount_type = 5; //优惠方式：1-固定金额，2-折扣率，3-第N件特惠，4-买赠，5-特价，6-套装优惠，7-搭配优惠，8-积分抵现，9-积分倍率，10-免运费，11-运费减免，12-限时特权，13-会员特权
+  int32 status = 6; //是否启用
+  int32 sort = 7; //排序
+  int64 create_by = 8; //创建人ID
+}
+
+message AddCouponTypeResp {
+  string pong = 1;
+}
+
+// 删除优惠券类型
+message DeleteCouponTypeReq {
+  repeated int64 ids = 1;
+}
+
+message DeleteCouponTypeResp {
+  string pong = 1;
+}
+
+// 更新优惠券类型
+message UpdateCouponTypeReq {
+  int64 id = 1; //主键ID
+  string name = 2; //类型名称
+  string code = 3; //类型编码
+  string description = 4; //描述
+  int32 discount_type = 5; //优惠方式：1-固定金额，2-折扣率，3-第N件特惠，4-买赠，5-特价，6-套装优惠，7-搭配优惠，8-积分抵现，9-积分倍率，10-免运费，11-运费减免，12-限时特权，13-会员特权
+  int32 status = 6; //是否启用
+  int32 sort = 7; //排序
+  int64 update_by = 10; //更新人ID
+}
+
+message UpdateCouponTypeResp {
+  string pong = 1;
+}
+
+// 更新优惠券类型状态
+message UpdateCouponTypeStatusReq {
+  repeated int64 ids = 1; //主键ID
+  int32 status = 6; //是否启用
+  int64 update_by = 10; //更新人ID
+}
+
+message UpdateCouponTypeStatusResp {
+  string pong = 1;
+}
+
+// 查询优惠券类型详情
+message QueryCouponTypeDetailReq {
+    int64 id = 1;
+}
+
+message QueryCouponTypeDetailResp {
+  int64 id = 1; //主键ID
+  string name = 2; //类型名称
+  string code = 3; //类型编码
+  string description = 4; //描述
+  int32 discount_type = 5; //优惠方式：1-固定金额，2-折扣率，3-第N件特惠，4-买赠，5-特价，6-套装优惠，7-搭配优惠，8-积分抵现，9-积分倍率，10-免运费，11-运费减免，12-限时特权，13-会员特权
+  int32 status = 6; //是否启用
+  int32 sort = 7; //排序
+  int64 create_by = 8; //创建人ID
+  string create_time = 9; //创建时间
+  int64 update_by = 10; //更新人ID
+  string update_time = 11; //更新时间
+
+}
+
+// 分页查询优惠券类型列表
+message QueryCouponTypeListReq {
+  string name = 1; //类型名称
+  string code = 2; //类型编码
+  int32 discount_type = 3; //优惠方式：1-固定金额，2-折扣率，3-第N件特惠，4-买赠，5-特价，6-套装优惠，7-搭配优惠，8-积分抵现，9-积分倍率，10-免运费，11-运费减免，12-限时特权，13-会员特权
+  int32 status = 4; //是否启用
+  int32 page_num = 5; //第几页
+  int32 page_size = 6; //每页的数量
+}
+
+message CouponTypeListData {
+  int64 id = 1; //主键ID
+  string name = 2; //类型名称
+  string code = 3; //类型编码
+  string description = 4; //描述
+  int32 discount_type = 5; //优惠方式：1-固定金额，2-折扣率，3-第N件特惠，4-买赠，5-特价，6-套装优惠，7-搭配优惠，8-积分抵现，9-积分倍率，10-免运费，11-运费减免，12-限时特权，13-会员特权
+  int32 status = 6; //是否启用
+  int32 sort = 7; //排序
+  int64 create_by = 8; //创建人ID
+  string create_time = 9; //创建时间
+  int64 update_by = 10; //更新人ID
+  string update_time = 11; //更新时间
+
+}
+
+message QueryCouponTypeListResp {
+  int64 total = 1;
+  repeated  CouponTypeListData list = 2;
+}
+
+// 优惠券类型
+service CouponTypeService {
+  // 添加优惠券类型
+  rpc AddCouponType(AddCouponTypeReq) returns (AddCouponTypeResp){}
+  // 删除优惠券类型
+  rpc DeleteCouponType(DeleteCouponTypeReq) returns (DeleteCouponTypeResp){}
+  // 更新优惠券类型
+  rpc UpdateCouponType(UpdateCouponTypeReq) returns (UpdateCouponTypeResp ){}
+  // 更新优惠券类型状态
+  rpc UpdateCouponTypeStatus(UpdateCouponTypeStatusReq) returns (UpdateCouponTypeStatusResp ){}
+  // 查询优惠券类型详情
+   rpc QueryCouponTypeDetail(QueryCouponTypeDetailReq) returns (QueryCouponTypeDetailResp){}
+  // 查询优惠券类型列表
+  rpc QueryCouponTypeList(QueryCouponTypeListReq) returns (QueryCouponTypeListResp){}
+
+
+}

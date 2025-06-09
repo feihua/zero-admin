@@ -4,7 +4,7 @@ import (
 	"context"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
 	"github.com/feihua/zero-admin/api/admin/internal/common/res"
-	"github.com/feihua/zero-admin/rpc/sms/smsclient"
+	"github.com/feihua/zero-admin/rpc/pms/pmsclient"
 	"github.com/zeromicro/go-zero/core/logc"
 	"google.golang.org/grpc/status"
 
@@ -35,8 +35,8 @@ func NewUpdateNewProductSortLogic(ctx context.Context, svcCtx *svc.ServiceContex
 
 // UpdateNewProductSort 修改推荐排序
 func (l *UpdateNewProductSortLogic) UpdateNewProductSort(req *types.UpdateNewProductSortReq) (resp *types.BaseResp, err error) {
-	_, err = l.svcCtx.HomeNewProductService.UpdateNewProductSort(l.ctx, &smsclient.UpdateNewProductSortReq{
-		Id:   req.Id,
+	_, err = l.svcCtx.ProductService.UpdateProductSort(l.ctx, &pmsclient.UpdateProductSortReq{
+		Id:   req.ProductId,
 		Sort: req.Sort,
 	})
 

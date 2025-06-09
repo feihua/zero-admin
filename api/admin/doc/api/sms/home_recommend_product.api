@@ -17,11 +17,49 @@ type (
 		RecommendStatus int32  `form:"recommendStatus,default=2"` // 推荐状态：0->不推荐;1->推荐
 	}
 	ListHomeRecommendProductData {
-		Id              int64  `json:"id"`
-		ProductId       int64  `json:"productId"` // 商品id
-		ProductName     string `json:"productName"` // 商品名称
-		RecommendStatus int32  `json:"recommendStatus"` // 推荐状态：0->不推荐;1->推荐
-		Sort            int32  `json:"sort"` // 排序
+		Id                         int64   `json:"id"` //
+		BrandId                    int64   `json:"brandId"` //品牌id
+		ProductCategoryId          int64   `json:"productCategoryId"` //商品分类id
+		FeightTemplateId           int64   `json:"feightTemplateId"` //商品运费模板id
+		ProductAttributeCategoryId int64   `json:"productAttributeCategoryId"` //商品属性分类id
+		Name                       string  `json:"name"` //商品名称
+		Pic                        string  `json:"pic"` //商品图片
+		ProductSn                  string  `json:"productSn"` //货号
+		DeleteStatus               int32   `json:"deleteStatus"` //删除状态：0->未删除；1->已删除
+		PublishStatus              int32   `json:"publishStatus"` //上架状态：0->下架；1->上架
+		NewStatus                  int32   `json:"newStatus"` //新品状态:0->不是新品；1->新品
+		RecommandStatus            int32   `json:"recommandStatus"` //推荐状态；0->不推荐；1->推荐
+		VerifyStatus               int32   `json:"verifyStatus"` //审核状态：0->未审核；1->审核通过
+		Sort                       int32   `json:"sort"` //排序
+		Sale                       int32   `json:"sale"` //销量
+		Price                      int64   `json:"price"` //商品价格
+		PromotionPrice             int64   `json:"promotionPrice"` //促销价格
+		GiftGrowth                 int32   `json:"giftGrowth"` //赠送的成长值
+		GiftPoint                  int32   `json:"giftPoint"` //赠送的积分
+		UsePointLimit              int32   `json:"usePointLimit"` //限制使用的积分数
+		SubTitle                   string  `json:"subTitle"` //副标题
+		Description                string  `json:"description"` //商品描述
+		OriginalPrice              int64   `json:"originalPrice"` //市场价
+		Stock                      int32   `json:"stock"` //库存
+		LowStock                   int32   `json:"lowStock"` //库存预警值
+		Unit                       string  `json:"unit"` //单位
+		Weight                     int64   `json:"weight"` //商品重量，默认为克
+		PreviewStatus              int32   `json:"previewStatus"` //是否为预告商品：0->不是；1->是
+		ServiceIds                 string  `json:"serviceIds"` //以逗号分割的产品服务：1->无忧退货；2->快速退款；3->免费包邮
+		Keywords                   string  `json:"keywords"` //搜索关键字
+		Note                       string  `json:"note"` //备注
+		AlbumPics                  string  `json:"albumPics"` //画册图片，连产品图片限制为5张，以逗号分割
+		DetailTitle                string  `json:"detailTitle"` //详情标题
+		DetailDesc                 string  `json:"detailDesc"` //详情描述
+		DetailHtml                 string  `json:"detailHtml"` //产品详情网页内容
+		DetailMobileHtml           string  `json:"detailMobileHtml"` //移动端网页详情
+		PromotionStartTime         string  `json:"promotionStartTime"` //促销开始时间
+		PromotionEndTime           string  `json:"promotionEndTime"` //促销结束时间
+		PromotionPerLimit          int32   `json:"promotionPerLimit"` //活动限购数量
+		PromotionType              int32   `json:"promotionType"` //促销类型：0->没有促销使用原价;1->使用促销价；2->使用会员价；3->使用阶梯价格；4->使用满减价格；5->限时购
+		BrandName                  string  `json:"brandName"` //品牌名称
+		ProductCategoryName        string  `json:"productCategoryName"` //商品分类名称
+		ProductCategoryIdArray     []int64 `json:"productCategoryIdArray"` //商品分类id字符串
 	}
 	ListHomeRecommendProductResp {
 		Code     string                          `json:"code"`
@@ -33,16 +71,10 @@ type (
 		Total    int64                           `json:"total"`
 	}
 	UpdateRecommendProductSortReq {
-		Id   int64 `json:"id"`
-		Sort int32 `json:"sort"` // 排序
-	}
-	UpdateRecommendProductStatusReq {
-		Ids             []int64 `json:"ids"`
-		ProductIds      []int64 `json:"productIds"` // 商品id
-		RecommendStatus int32   `json:"recommendStatus"` // 推荐状态：0->不推荐;1->推荐
+		ProductId int64 `json:"productId"`
+		Sort      int32 `json:"sort"` // 排序
 	}
 	DeleteHomeRecommendProductReq {
-		Ids        []int64 `form:"ids"`
 		ProductIds []int64 `form:"productIds"` // 商品id
 	}
 )
@@ -58,20 +90,16 @@ service admin-api {
 	@handler HomeRecommendProductAdd
 	post /addHomeRecommendProduct (AddHomeRecommendProductReq) returns (BaseResp)
 
-	//查询首页人气推荐
-	@handler HomeRecommendProductList
-	get /queryHomeRecommendProductList (ListHomeRecommendProductReq) returns (ListHomeRecommendProductResp)
+	//删除首页人气推荐
+	@handler HomeRecommendProductDelete
+	get /deleteHomeRecommendProduct (DeleteHomeRecommendProductReq) returns (BaseResp)
 
 	//修改推荐排序
 	@handler UpdateRecommendProductSort
 	post /updateRecommendProductSort (UpdateRecommendProductSortReq) returns (BaseResp)
 
-	//批量修改推荐状态
-	@handler UpdateRecommendProductStatus
-	post /updateRecommendProductStatus (UpdateRecommendProductStatusReq) returns (BaseResp)
-
-	//删除首页人气推荐
-	@handler HomeRecommendProductDelete
-	get /deleteHomeRecommendProduct (DeleteHomeRecommendProductReq) returns (BaseResp)
+	//查询首页人气推荐
+	@handler HomeRecommendProductList
+	get /queryHomeRecommendProductList (ListHomeRecommendProductReq) returns (ListHomeRecommendProductResp)
 }
 

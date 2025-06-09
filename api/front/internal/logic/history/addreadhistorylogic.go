@@ -46,7 +46,7 @@ func (l *AddReadHistoryLogic) AddReadHistory(req *types.AddReadHistoryReq) (resp
 		return nil, errorx.NewDefaultError(s.Message())
 	}
 	_, err = l.svcCtx.MemberReadHistoryService.AddMemberReadHistory(l.ctx, &umsclient.AddMemberReadHistoryReq{
-		MemberId:        member.Id,
+		MemberId:        member.MemberId,
 		MemberNickName:  member.Nickname,
 		MemberIcon:      member.Avatar,
 		ProductId:       req.ProductId,

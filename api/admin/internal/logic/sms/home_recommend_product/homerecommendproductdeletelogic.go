@@ -5,7 +5,6 @@ import (
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
 	"github.com/feihua/zero-admin/api/admin/internal/common/res"
 	"github.com/feihua/zero-admin/rpc/pms/pmsclient"
-	"github.com/feihua/zero-admin/rpc/sms/smsclient"
 	"github.com/zeromicro/go-zero/core/logc"
 	"google.golang.org/grpc/status"
 
@@ -35,21 +34,9 @@ func NewHomeRecommendProductDeleteLogic(ctx context.Context, svcCtx *svc.Service
 }
 
 // HomeRecommendProductDelete 删除人气推荐商品
-// 1.删除sms_home_recommend_product的记录(sms-rpc)
-// 2.修改pms_product记录的状态为不推荐(pms-rpc)
 func (l *HomeRecommendProductDeleteLogic) HomeRecommendProductDelete(req *types.DeleteHomeRecommendProductReq) (*types.BaseResp, error) {
-	// 1.删除sms_home_recommend_product的记录(sms-rpc)
-	_, err := l.svcCtx.HomeRecommendProductService.DeleteHomeRecommendProduct(l.ctx, &smsclient.DeleteHomeRecommendProductReq{
-		Ids: req.Ids,
-	})
 
-	if err != nil {
-		logc.Errorf(l.ctx, "根据Id: %+v,删除人气推荐商品异常:%s", req, err.Error())
-		s, _ := status.FromError(err)
-		return nil, errorx.NewDefaultError(s.Message())
-	}
-	// 2.修改pms_product记录的状态为不推荐(pms-rpc)
-	_, err = l.svcCtx.ProductService.UpdateRecommendStatus(l.ctx, &pmsclient.UpdateProductStatusReq{
+	_, err := l.svcCtx.ProductService.UpdateRecommendStatus(l.ctx, &pmsclient.UpdateProductStatusReq{
 		Ids:    req.ProductIds,
 		Status: 0, // 推荐状态：0->不推荐;1->推荐
 	})

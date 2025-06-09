@@ -6,7 +6,6 @@ import (
 	"github.com/feihua/zero-admin/api/admin/internal/svc"
 	"github.com/feihua/zero-admin/api/admin/internal/types"
 	"github.com/feihua/zero-admin/rpc/pms/pmsclient"
-	"github.com/feihua/zero-admin/rpc/sms/smsclient"
 	"github.com/zeromicro/go-zero/core/logc"
 	"google.golang.org/grpc/status"
 
@@ -43,15 +42,7 @@ func (l *DeleteProductBrandLogic) DeleteProductBrand(req *types.DeleteProductBra
 		s, _ := status.FromError(err)
 		return nil, errorx.NewDefaultError(s.Message())
 	}
-	_, err = l.svcCtx.HomeBrandService.DeleteHomeBrand(l.ctx, &smsclient.DeleteHomeBrandReq{
-		Ids: req.Ids,
-	})
 
-	if err != nil {
-		logc.Errorf(l.ctx, "根据Id: %+v,删除首页品牌异常:%s", req, err.Error())
-		s, _ := status.FromError(err)
-		return nil, errorx.NewDefaultError(s.Message())
-	}
 	return &types.BaseResp{
 		Code:    "000000",
 		Message: "删除商品品牌成功",

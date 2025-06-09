@@ -98,6 +98,8 @@ message QueryProductListReq {
   int32       PublishStatus = 6;
   int64       BrandId = 7;
   string ProductSn = 8;
+  int32 recommend_status = 9; //推荐状态；0->不推荐；1->推荐
+  int32 new_status = 10; //新品状态:0->不是新品；1->新品
 }
 
 message QueryProductByIdsReq {
@@ -324,6 +326,11 @@ message UpdateProductStatusResp {
   string pong = 1;
 }
 
+message UpdateProductSortReq {
+  int64 id = 1;
+  int32 sort = 2;
+}
+
 service ProductService {
 
   rpc AddProduct(AddProductReq) returns(AddProductResp);
@@ -347,6 +354,7 @@ service ProductService {
   //批量修改删除状态
   rpc UpdateDeleteStatus(UpdateProductStatusReq) returns(UpdateProductStatusResp);
 
-
+  //更新排序
+  rpc UpdateProductSort(UpdateProductSortReq) returns(UpdateProductResp);
 }
 

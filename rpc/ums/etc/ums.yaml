@@ -8,6 +8,8 @@ Etcd:
 Mysql:
   Datasource: root:12341qweqfsd2356@tcp(127.0.0.1:3306)/gozero?charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai
 
+Mongo:
+  Datasource: mongodb://admin:123467@127.0.0.1:27017
 JWT:
   AccessSecret: ad879037-c7a4-4063-9236-6bfc35d54b7d
   AccessExpire: 86400

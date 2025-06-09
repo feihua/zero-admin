@@ -61,9 +61,12 @@ func (l *QueryProductDetailLogic) QueryProductDetail(req *types.QueryProductDeta
 	})
 
 	// 10.商品可用优惠券(根据商品id和分类id查询)
-	couponList, _ := l.svcCtx.CouponService.QueryCouponFindByProductIdAndProductCategoryId(l.ctx, &smsclient.CouponFindByProductIdAndProductCategoryIdReq{
-		ProductId:         req.ProductId,
-		ProductCategoryId: productResp.Product.ProductCategoryId,
+	couponList, _ := l.svcCtx.CouponService.QueryCouponById(l.ctx, &smsclient.QueryCouponByIdReq{
+		Id: req.ProductId,
+	})
+
+	productCategory, _ := l.svcCtx.CouponService.QueryCouponById(l.ctx, &smsclient.QueryCouponByIdReq{
+		Id: productResp.Product.ProductCategoryId,
 	})
 
 	return &types.QueryProductDetailResp{
@@ -79,7 +82,7 @@ func (l *QueryProductDetailLogic) QueryProductDetail(req *types.QueryProductDeta
 			ProductAttributeValueList:        buildProductAttributeValueListData(productResp),
 			SubjectProductRelationList:       subjectRelationList.SubjectIds,
 			PrefrenceAreaProductRelationList: areaRelationList.PreferredAreaIds,
-			CouponList:                       buildCouponListData(couponList),
+			CouponList:                       buildCouponListData(append(productCategory.List, couponList.List...)),
 		},
 	}, nil
 }
@@ -252,26 +255,27 @@ func buildProductAttributeValueListData(resp *pmsclient.QueryProductDetailByIdRe
 }
 
 // 10.商品优惠券
-func buildCouponListData(resp *smsclient.CouponFindByProductIdAndProductCategoryIdResp) []types.CouponList {
+func buildCouponListData(resp []*smsclient.CouponListData) []types.CouponList {
 	list := make([]types.CouponList, 0)
-	for _, item := range resp.List {
+	for _, detail := range resp {
 
 		list = append(list, types.CouponList{
-			Id:           item.Id,
-			Type:         item.Type,
-			Name:         item.Name,
-			Platform:     item.Platform,
-			Count:        item.Count,
-			Amount:       item.Amount,
-			PerLimit:     item.PerLimit,
-			MinPoint:     item.MinPoint,
-			StartTime:    item.StartTime,
-			EndTime:      item.EndTime,
-			UseType:      item.UseType,
-			PublishCount: item.PublishCount,
-			UseCount:     item.UseCount,
-			ReceiveCount: item.ReceiveCount,
-			EnableTime:   item.EnableTime,
+			Id:            detail.Id,            // 优惠券ID
+			TypeId:        detail.TypeId,        // 优惠券类型ID
+			Name:          detail.Name,          // 优惠券名称
+			Code:          detail.Code,          // 优惠券码
+			Amount:        detail.Amount,        // 优惠金额/折扣率
+			MinAmount:     detail.MinAmount,     // 最低使用金额
+			StartTime:     detail.StartTime,     // 生效时间
+			EndTime:       detail.EndTime,       // 失效时间
+			TotalCount:    detail.TotalCount,    // 发放总量
+			ReceivedCount: detail.ReceivedCount, // 已领取数量
+			UsedCount:     detail.UsedCount,     // 已使用数量
+			PerLimit:      detail.PerLimit,      // 每人限领数量
+			Status:        detail.Status,        // 状态：0-未开始，1-进行中，2-已结束，3-已取消
+			IsEnabled:     detail.IsEnabled,     // 是否启用
+			Description:   detail.Description,   // 使用说明
+
 		})
 	}
 	return list

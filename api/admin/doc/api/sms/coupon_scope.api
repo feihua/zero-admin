@@ -1,0 +1,99 @@
+import "../base/base.api"
+
+info (
+	desc:   "优惠券使用范围"
+	author: "LiuFeiHua"
+	email:  "1002219331@qq.com"
+)
+
+type (
+	// 添加优惠券使用范围请求参数
+	AddCouponScopeData {
+		CouponId  int64 `json:"couponId"` //优惠券ID
+		ScopeType int32 `json:"scopeType"` //范围类型：0-全场，1-分类，2-商品
+		ScopeId   int64 `json:"scopeId,optional"` //范围ID（分类ID或商品ID）
+	}
+	AddCouponScopeReq {
+		Data []AddCouponScopeData `json:"data"`
+	}
+	// 删除优惠券使用范围请求参数
+	DeleteCouponScopeReq {
+		Ids []int64 `form:"ids"`
+	}
+	// 更新优惠券使用范围请求参数
+	UpdateCouponScopeReq {
+		Id        int64 `json:"id"` //
+		CouponId  int64 `json:"couponId"` //优惠券ID
+		ScopeType int32 `json:"scopeType"` //范围类型：0-全场，1-分类，2-商品
+		ScopeId   int64 `json:"scopeId,optional"` //范围ID（分类ID或商品ID）
+	}
+	// 查询优惠券使用范围详情请求参数
+	QueryCouponScopeDetailReq {
+		Id int64 `form:"id"`
+	}
+	QueryCouponScopeDetailData {
+		Id         int64  `json:"id"` //
+		CouponId   int64  `json:"couponId"` //优惠券ID
+		ScopeType  int32  `json:"scopeType"` //范围类型：0-全场，1-分类，2-商品
+		ScopeId    int64  `json:"scopeId"` //范围ID（分类ID或商品ID）
+		CreateTime string `json:"createTime"` //创建时间
+	}
+	QueryCouponScopeDetailResp {
+		Code    string                     `json:"code"`
+		Message string                     `json:"message"`
+		Data    QueryCouponScopeDetailData `json:"data"`
+	}
+	// 分页查询优惠券使用范围列表请求参数
+	QueryCouponScopeListReq {
+		Current   int32 `form:"current,default=1"` //第几页
+		PageSize  int32 `form:"pageSize,default=20"` //每页的数量
+		CouponId  int64 `form:"couponId"` //优惠券ID
+		ScopeType int32 `form:"scopeType,default=3"` //范围类型：0-全场，1-分类，2-商品
+		ScopeId   int64 `form:"scopeId,optional"` //范围ID（分类ID或商品ID）
+	}
+	QueryCouponScopeListData {
+		Id         int64  `json:"id"` //
+		CouponId   int64  `json:"couponId"` //优惠券ID
+		ScopeType  int32  `json:"scopeType"` //范围类型：0-全场，1-分类，2-商品
+		ScopeId    int64  `json:"scopeId"` //范围ID（分类ID或商品ID）
+		CreateTime string `json:"createTime"` //创建时间
+	}
+	QueryCouponScopeListResp {
+		Code     string                      `json:"code"`
+		Message  string                      `json:"message"`
+		Current  int32                       `json:"current,default=1"`
+		Data     []*QueryCouponScopeListData `json:"data"`
+		PageSize int32                       `json:"pageSize,default=20"`
+		Success  bool                        `json:"success"`
+		Total    int64                       `json:"total"`
+	}
+)
+
+@server (
+	jwt:        Auth
+	middleware: CheckUrl
+	group:      sms/coupon_scope
+	prefix:     /api/sms/couponScope
+)
+service admin-api {
+	// 添加优惠券使用范围
+	@handler AddCouponScope
+	post /addCouponScope (AddCouponScopeReq) returns (BaseResp)
+
+	// 删除优惠券使用范围
+	@handler DeleteCouponScope
+	get /deleteCouponScope (DeleteCouponScopeReq) returns (BaseResp)
+
+	// 更新优惠券使用范围
+	@handler UpdateCouponScope
+	post /updateCouponScope (UpdateCouponScopeReq) returns (BaseResp)
+
+	// 查询优惠券使用范围详情
+	@handler QueryCouponScopeDetail
+	get /queryCouponScopeDetail (QueryCouponScopeDetailReq) returns (QueryCouponScopeDetailResp)
+
+	// 分页查询优惠券使用范围列表
+	@handler QueryCouponScopeList
+	get /queryCouponScopeList (QueryCouponScopeListReq) returns (QueryCouponScopeListResp)
+}
+

@@ -4,7 +4,7 @@ import (
 	"context"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
 	"github.com/feihua/zero-admin/api/admin/internal/common/res"
-	"github.com/feihua/zero-admin/rpc/sms/smsclient"
+	"github.com/feihua/zero-admin/rpc/pms/pmsclient"
 	"github.com/zeromicro/go-zero/core/logc"
 	"google.golang.org/grpc/status"
 
@@ -35,8 +35,8 @@ func NewUpdateHomeBrandLogic(ctx context.Context, svcCtx *svc.ServiceContext) *U
 
 // UpdateHomeBrand 修改推荐品牌排序
 func (l *UpdateHomeBrandLogic) UpdateHomeBrand(req *types.UpdateHomeBrandReq) (resp *types.BaseResp, err error) {
-	_, err = l.svcCtx.HomeBrandService.UpdateHomeBrandSort(l.ctx, &smsclient.UpdateHomeBrandSortReq{
-		Id:   req.Id,
+	_, err = l.svcCtx.ProductBrandService.UpdateBrandSort(l.ctx, &pmsclient.UpdateProductBrandSortReq{
+		Id:   req.BrandId,
 		Sort: req.Sort,
 	})
 

@@ -6,6 +6,7 @@ package query
 
 import (
 	"context"
+	"database/sql"
 
 	"gorm.io/gorm"
 	"gorm.io/gorm/clause"
@@ -37,8 +38,11 @@ func newSmsHomeAdvertise(db *gorm.DB, opts ...gen.DOOption) smsHomeAdvertise {
 	_smsHomeAdvertise.ClickCount = field.NewInt32(tableName, "click_count")
 	_smsHomeAdvertise.OrderCount = field.NewInt32(tableName, "order_count")
 	_smsHomeAdvertise.URL = field.NewString(tableName, "url")
-	_smsHomeAdvertise.Note = field.NewString(tableName, "note")
+	_smsHomeAdvertise.Remark = field.NewString(tableName, "remark")
 	_smsHomeAdvertise.Sort = field.NewInt32(tableName, "sort")
+	_smsHomeAdvertise.CreateTime = field.NewTime(tableName, "create_time")
+	_smsHomeAdvertise.UpdateTime = field.NewTime(tableName, "update_time")
+	_smsHomeAdvertise.IsDeleted = field.NewInt32(tableName, "is_deleted")
 
 	_smsHomeAdvertise.fillFieldMap()
 
@@ -50,7 +54,7 @@ type smsHomeAdvertise struct {
 	smsHomeAdvertiseDo smsHomeAdvertiseDo
 
 	ALL        field.Asterisk
-	ID         field.Int64
+	ID         field.Int64  // 编号
 	Name       field.String // 名称
 	Type       field.Int32  // 轮播位置：0->PC首页轮播；1->app首页轮播
 	Pic        field.String // 图片地址
@@ -60,8 +64,11 @@ type smsHomeAdvertise struct {
 	ClickCount field.Int32  // 点击数
 	OrderCount field.Int32  // 下单数
 	URL        field.String // 链接地址
-	Note       field.String // 备注
+	Remark     field.String // 备注
 	Sort       field.Int32  // 排序
+	CreateTime field.Time   // 创建时间
+	UpdateTime field.Time   // 更新时间
+	IsDeleted  field.Int32  // 是否删除
 
 	fieldMap map[string]field.Expr
 }
@@ -88,8 +95,11 @@ func (s *smsHomeAdvertise) updateTableName(table string) *smsHomeAdvertise {
 	s.ClickCount = field.NewInt32(table, "click_count")
 	s.OrderCount = field.NewInt32(table, "order_count")
 	s.URL = field.NewString(table, "url")
-	s.Note = field.NewString(table, "note")
+	s.Remark = field.NewString(table, "remark")
 	s.Sort = field.NewInt32(table, "sort")
+	s.CreateTime = field.NewTime(table, "create_time")
+	s.UpdateTime = field.NewTime(table, "update_time")
+	s.IsDeleted = field.NewInt32(table, "is_deleted")
 
 	s.fillFieldMap()
 
@@ -118,7 +128,7 @@ func (s *smsHomeAdvertise) GetFieldByName(fieldName string) (field.OrderExpr, bo
 }
 
 func (s *smsHomeAdvertise) fillFieldMap() {
-	s.fieldMap = make(map[string]field.Expr, 12)
+	s.fieldMap = make(map[string]field.Expr, 15)
 	s.fieldMap["id"] = s.ID
 	s.fieldMap["name"] = s.Name
 	s.fieldMap["type"] = s.Type
@@ -129,8 +139,11 @@ func (s *smsHomeAdvertise) fillFieldMap() {
 	s.fieldMap["click_count"] = s.ClickCount
 	s.fieldMap["order_count"] = s.OrderCount
 	s.fieldMap["url"] = s.URL
-	s.fieldMap["note"] = s.Note
+	s.fieldMap["remark"] = s.Remark
 	s.fieldMap["sort"] = s.Sort
+	s.fieldMap["create_time"] = s.CreateTime
+	s.fieldMap["update_time"] = s.UpdateTime
+	s.fieldMap["is_deleted"] = s.IsDeleted
 }
 
 func (s smsHomeAdvertise) clone(db *gorm.DB) smsHomeAdvertise {
@@ -200,6 +213,8 @@ type ISmsHomeAdvertiseDo interface {
 	FirstOrCreate() (*model.SmsHomeAdvertise, error)
 	FindByPage(offset int, limit int) (result []*model.SmsHomeAdvertise, count int64, err error)
 	ScanByPage(result interface{}, offset int, limit int) (count int64, err error)
+	Rows() (*sql.Rows, error)
+	Row() *sql.Row
 	Scan(result interface{}) (err error)
 	Returning(value interface{}, columns ...string) ISmsHomeAdvertiseDo
 	UnderlyingDB() *gorm.DB

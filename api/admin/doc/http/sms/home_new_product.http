@@ -11,45 +11,32 @@ Content-Type: application/json
 %}
 
 ### 添加首页新品推荐
-POST {{host}}/api/sms/homenewproduct/addHomeNewProduct
+POST {{host}}/api/sms/homeNewProduct/addHomeNewProduct
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {
   "productIds": [
-    1,
-    2
+    24
   ]
 }
 
 ### 删除首页新品推荐
-GET {{host}}/api/sms/homenewproduct/deleteHomeNewProduct?ids=[39]
+GET {{host}}/api/sms/homeNewProduct/deleteHomeNewProduct?productIds=24
 Authorization: Bearer {{token}}
 
 
 ### 修改首页新品推荐排序
-POST {{host}}/api/sms/homenewproduct/updateNewProductSort
+POST {{host}}/api/sms/homeNewProduct/updateNewProductSort
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {
-  "id": 13,
-  "sort": 200
+  "productId": 36,
+  "sort": 201
 }
 
-### 批量修改首页新品推荐状态
-POST {{host}}/api/sms/homenewproduct/updateNewProductStatus
-Content-Type: application/json
-Authorization: Bearer {{token}}
-
-{
-  "ids": [
-    13,
-    14
-  ],
-  "recommendStatus": 1
-}
 
 ### 查询首页新品推荐列表
-GET {{host}}/api/sms/homenewproduct/queryHomeNewProductList
+GET {{host}}/api/sms/homeNewProduct/queryHomeNewProductList
 Authorization: Bearer {{token}}

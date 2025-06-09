@@ -33,7 +33,7 @@ func NewUpdateProductBrandStatusLogic(ctx context.Context, svcCtx *svc.ServiceCo
 func (l *UpdateProductBrandStatusLogic) UpdateProductBrandStatus(in *pmsclient.UpdateProductBrandStatusReq) (*pmsclient.UpdateProductBrandStatusResp, error) {
 	q := query.PmsProductBrand
 
-	_, err := q.WithContext(l.ctx).Where(q.ID.In(in.Ids...)).Update(q.IsEnabled, in.Status)
+	_, err := q.WithContext(l.ctx).Where(q.ID.In(in.Ids...)).UpdateSimple(q.IsEnabled.Value(in.Status), q.UpdateBy.Value(in.UpdateBy))
 
 	if err != nil {
 		logc.Errorf(l.ctx, "更新商品品牌状态失败,参数:%+v,异常:%s", in, err.Error())

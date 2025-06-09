@@ -6,7 +6,7 @@ option go_package = "./proto";
 
 // 添加用户商品浏览历史记录
 message AddMemberReadHistoryReq {
-  int64 id = 1; //
+  string id = 1; //
   int64 member_id = 2; //会员id
   string member_nick_name = 3; //会员姓名
   string member_icon = 4; //会员头像
@@ -24,7 +24,7 @@ message AddMemberReadHistoryResp {
 
 // 删除用户商品浏览历史记录
 message DeleteMemberReadHistoryReq {
-  repeated int64 ids = 1;
+  repeated string ids = 1;
   int64 MemberId = 2; //会员id
 }
 
@@ -34,11 +34,11 @@ message DeleteMemberReadHistoryResp {
 
 // 查询用户商品浏览历史记录详情
 message QueryMemberReadHistoryDetailReq {
-    int64 id = 1;
+  string id = 1;
 }
 
 message QueryMemberReadHistoryDetailResp {
-  int64 id = 1; //
+  string id = 1; //
   int64 member_id = 2; //会员id
   string member_nick_name = 3; //会员姓名
   string member_icon = 4; //会员头像
@@ -60,7 +60,7 @@ message QueryMemberReadHistoryListReq {
 }
 
 message MemberReadHistoryListData {
-  int64 id = 1; //
+  string id = 1; //
   int64 member_id = 2; //会员id
   string member_nick_name = 3; //会员姓名
   string member_icon = 4; //会员头像
@@ -74,8 +74,7 @@ message MemberReadHistoryListData {
 }
 
 message QueryMemberReadHistoryListResp {
-  int64 total = 1;
-  repeated  MemberReadHistoryListData list = 2;
+  repeated  MemberReadHistoryListData list = 1;
 }
 
 // 用户商品浏览历史记录
