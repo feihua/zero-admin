@@ -48,6 +48,7 @@ func newUmsMemberInfo(db *gorm.DB, opts ...gen.DOOption) umsMemberInfo {
 	_umsMemberInfo.CommentCount = field.NewInt32(tableName, "comment_count")
 	_umsMemberInfo.ReturnCount = field.NewInt32(tableName, "return_count")
 	_umsMemberInfo.LotteryTimes = field.NewInt32(tableName, "lottery_times")
+	_umsMemberInfo.FirstLoginStatus = field.NewInt32(tableName, "first_login_status")
 	_umsMemberInfo.LastLogin = field.NewTime(tableName, "last_login")
 	_umsMemberInfo.IsEnabled = field.NewInt32(tableName, "is_enabled")
 	_umsMemberInfo.CreateTime = field.NewTime(tableName, "create_time")
@@ -63,32 +64,33 @@ func newUmsMemberInfo(db *gorm.DB, opts ...gen.DOOption) umsMemberInfo {
 type umsMemberInfo struct {
 	umsMemberInfoDo umsMemberInfoDo
 
-	ALL          field.Asterisk
-	ID           field.Int64   // 主键ID
-	MemberID     field.Int64   // 会员ID
-	LevelID      field.Int64   // 等级ID
-	Nickname     field.String  // 昵称
-	Mobile       field.String  // 手机号码
-	Source       field.Int32   // 注册来源：0-PC，1-APP，2-小程序
-	Password     field.String  // 密码
-	Avatar       field.String  // 头像
-	Signature    field.String  // 个性签名
-	Gender       field.Int32   // 性别：0-未知，1-男，2-女
-	Birthday     field.Time    // 生日
-	GrowthPoint  field.Int32   // 成长值
-	Points       field.Int32   // 积分
-	TotalPoints  field.Int32   // 累计获得积分
-	SpendAmount  field.Float64 // 累计消费金额
-	OrderCount   field.Int32   // 订单数
-	CouponCount  field.Int32   // 优惠券数量
-	CommentCount field.Int32   // 评价数
-	ReturnCount  field.Int32   // 退货数
-	LotteryTimes field.Int32   // 剩余抽奖次数
-	LastLogin    field.Time    // 最后登录
-	IsEnabled    field.Int32   // 是否启用：0-禁用，1-启用
-	CreateTime   field.Time    // 创建时间
-	UpdateTime   field.Time    // 更新时间
-	IsDeleted    field.Int32   // 是否删除
+	ALL              field.Asterisk
+	ID               field.Int64   // 主键ID
+	MemberID         field.Int64   // 会员ID
+	LevelID          field.Int64   // 等级ID
+	Nickname         field.String  // 昵称
+	Mobile           field.String  // 手机号码
+	Source           field.Int32   // 注册来源：0-PC，1-APP，2-小程序
+	Password         field.String  // 密码
+	Avatar           field.String  // 头像
+	Signature        field.String  // 个性签名
+	Gender           field.Int32   // 性别：0-未知，1-男，2-女
+	Birthday         field.Time    // 生日
+	GrowthPoint      field.Int32   // 成长值
+	Points           field.Int32   // 积分
+	TotalPoints      field.Int32   // 累计获得积分
+	SpendAmount      field.Float64 // 累计消费金额
+	OrderCount       field.Int32   // 订单数
+	CouponCount      field.Int32   // 优惠券数量
+	CommentCount     field.Int32   // 评价数
+	ReturnCount      field.Int32   // 退货数
+	LotteryTimes     field.Int32   // 剩余抽奖次数
+	FirstLoginStatus field.Int32   // 1:未登录过,2:已登录过
+	LastLogin        field.Time    // 最后登录
+	IsEnabled        field.Int32   // 是否启用：0-禁用，1-启用
+	CreateTime       field.Time    // 创建时间
+	UpdateTime       field.Time    // 更新时间
+	IsDeleted        field.Int32   // 是否删除
 
 	fieldMap map[string]field.Expr
 }
@@ -125,6 +127,7 @@ func (u *umsMemberInfo) updateTableName(table string) *umsMemberInfo {
 	u.CommentCount = field.NewInt32(table, "comment_count")
 	u.ReturnCount = field.NewInt32(table, "return_count")
 	u.LotteryTimes = field.NewInt32(table, "lottery_times")
+	u.FirstLoginStatus = field.NewInt32(table, "first_login_status")
 	u.LastLogin = field.NewTime(table, "last_login")
 	u.IsEnabled = field.NewInt32(table, "is_enabled")
 	u.CreateTime = field.NewTime(table, "create_time")
@@ -158,7 +161,7 @@ func (u *umsMemberInfo) GetFieldByName(fieldName string) (field.OrderExpr, bool)
 }
 
 func (u *umsMemberInfo) fillFieldMap() {
-	u.fieldMap = make(map[string]field.Expr, 25)
+	u.fieldMap = make(map[string]field.Expr, 26)
 	u.fieldMap["id"] = u.ID
 	u.fieldMap["member_id"] = u.MemberID
 	u.fieldMap["level_id"] = u.LevelID
@@ -179,6 +182,7 @@ func (u *umsMemberInfo) fillFieldMap() {
 	u.fieldMap["comment_count"] = u.CommentCount
 	u.fieldMap["return_count"] = u.ReturnCount
 	u.fieldMap["lottery_times"] = u.LotteryTimes
+	u.fieldMap["first_login_status"] = u.FirstLoginStatus
 	u.fieldMap["last_login"] = u.LastLogin
 	u.fieldMap["is_enabled"] = u.IsEnabled
 	u.fieldMap["create_time"] = u.CreateTime

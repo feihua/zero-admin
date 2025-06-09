@@ -56,7 +56,7 @@ type umsMemberStatisticsInfo struct {
 
 	ALL                 field.Asterisk
 	ID                  field.Int64
-	MemberID            field.Int64
+	MemberID            field.Int64 // 会员id
 	ConsumeAmount       field.Int64 // 累计消费金额
 	OrderCount          field.Int32 // 订单数量
 	CouponCount         field.Int32 // 优惠券数量

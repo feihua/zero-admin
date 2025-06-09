@@ -13,7 +13,7 @@ const TableNameUmsMemberStatisticsInfo = "ums_member_statistics_info"
 // UmsMemberStatisticsInfo 会员统计信息
 type UmsMemberStatisticsInfo struct {
 	ID                  int64     `gorm:"column:id;primaryKey;autoIncrement:true" json:"id"`
-	MemberID            int64     `gorm:"column:member_id;not null" json:"member_id"`
+	MemberID            int64     `gorm:"column:member_id;not null;comment:会员id" json:"member_id"`                              // 会员id
 	ConsumeAmount       int64     `gorm:"column:consume_amount;not null;comment:累计消费金额" json:"consume_amount"`                  // 累计消费金额
 	OrderCount          int32     `gorm:"column:order_count;not null;comment:订单数量" json:"order_count"`                          // 订单数量
 	CouponCount         int32     `gorm:"column:coupon_count;not null;comment:优惠券数量" json:"coupon_count"`                       // 优惠券数量
