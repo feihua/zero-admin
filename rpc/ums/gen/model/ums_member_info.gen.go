@@ -14,6 +14,7 @@ const TableNameUmsMemberInfo = "ums_member_info"
 type UmsMemberInfo struct {
 	ID               int64      `gorm:"column:id;primaryKey;autoIncrement:true;comment:主键ID" json:"id"`                               // 主键ID
 	MemberID         int64      `gorm:"column:member_id;not null;comment:会员ID" json:"member_id"`                                      // 会员ID
+	WxOpenid         string     `gorm:"column:wx_openid;not null;comment:微信openid" json:"wx_openid"`                                  // 微信openid
 	LevelID          int64      `gorm:"column:level_id;not null;comment:等级ID" json:"level_id"`                                        // 等级ID
 	Nickname         string     `gorm:"column:nickname;not null;comment:昵称" json:"nickname"`                                          // 昵称
 	Mobile           string     `gorm:"column:mobile;not null;comment:手机号码" json:"mobile"`                                            // 手机号码

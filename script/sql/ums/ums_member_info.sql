@@ -4,6 +4,7 @@ create table ums_member_info
     id                 bigint auto_increment comment '主键ID'
         primary key,
     member_id          bigint                                   not null comment '会员ID',
+    wx_openid          varchar(64)    default ''                not null comment '微信openid',
     level_id           bigint                                   not null comment '等级ID',
     nickname           varchar(50)                              not null comment '昵称',
     mobile             varchar(11)                              not null comment '手机号码',

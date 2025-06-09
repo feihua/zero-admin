@@ -30,6 +30,7 @@ func newUmsMemberInfo(db *gorm.DB, opts ...gen.DOOption) umsMemberInfo {
 	_umsMemberInfo.ALL = field.NewAsterisk(tableName)
 	_umsMemberInfo.ID = field.NewInt64(tableName, "id")
 	_umsMemberInfo.MemberID = field.NewInt64(tableName, "member_id")
+	_umsMemberInfo.WxOpenid = field.NewString(tableName, "wx_openid")
 	_umsMemberInfo.LevelID = field.NewInt64(tableName, "level_id")
 	_umsMemberInfo.Nickname = field.NewString(tableName, "nickname")
 	_umsMemberInfo.Mobile = field.NewString(tableName, "mobile")
@@ -67,6 +68,7 @@ type umsMemberInfo struct {
 	ALL              field.Asterisk
 	ID               field.Int64   // 主键ID
 	MemberID         field.Int64   // 会员ID
+	WxOpenid         field.String  // 微信openid
 	LevelID          field.Int64   // 等级ID
 	Nickname         field.String  // 昵称
 	Mobile           field.String  // 手机号码
@@ -109,6 +111,7 @@ func (u *umsMemberInfo) updateTableName(table string) *umsMemberInfo {
 	u.ALL = field.NewAsterisk(table)
 	u.ID = field.NewInt64(table, "id")
 	u.MemberID = field.NewInt64(table, "member_id")
+	u.WxOpenid = field.NewString(table, "wx_openid")
 	u.LevelID = field.NewInt64(table, "level_id")
 	u.Nickname = field.NewString(table, "nickname")
 	u.Mobile = field.NewString(table, "mobile")
@@ -161,9 +164,10 @@ func (u *umsMemberInfo) GetFieldByName(fieldName string) (field.OrderExpr, bool)
 }
 
 func (u *umsMemberInfo) fillFieldMap() {
-	u.fieldMap = make(map[string]field.Expr, 26)
+	u.fieldMap = make(map[string]field.Expr, 27)
 	u.fieldMap["id"] = u.ID
 	u.fieldMap["member_id"] = u.MemberID
+	u.fieldMap["wx_openid"] = u.WxOpenid
 	u.fieldMap["level_id"] = u.LevelID
 	u.fieldMap["nickname"] = u.Nickname
 	u.fieldMap["mobile"] = u.Mobile
