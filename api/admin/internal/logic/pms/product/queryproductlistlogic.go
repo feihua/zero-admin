@@ -44,6 +44,8 @@ func (l *QueryProductListLogic) QueryProductList(req *types.QueryProductListReq)
 		PublishStatus:     req.PublishStatus,
 		BrandId:           req.BrandId,
 		ProductSn:         strings.TrimSpace(req.ProductSn),
+		RecommendStatus:   req.RecommendStatus,
+		NewStatus:         req.NewStatus,
 	})
 
 	if err != nil {
