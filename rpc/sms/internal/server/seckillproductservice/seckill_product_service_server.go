@@ -58,3 +58,9 @@ func (s *SeckillProductServiceServer) QuerySeckillProductList(ctx context.Contex
 	l := seckillproductservicelogic.NewQuerySeckillProductListLogic(ctx, s.svcCtx)
 	return l.QuerySeckillProductList(in)
 }
+
+// 查询秒杀商品详情(app)
+func (s *SeckillProductServiceServer) QuerySeckillProductByProductId(ctx context.Context, in *smsclient.QuerySeckillProductByProductIdReq) (*smsclient.QuerySeckillProductDetailResp, error) {
+	l := seckillproductservicelogic.NewQuerySeckillProductByProductIdLogic(ctx, s.svcCtx)
+	return l.QuerySeckillProductByProductId(in)
+}

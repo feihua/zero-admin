@@ -1781,12 +1781,13 @@ var SeckillActivityService_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	SeckillProductService_AddSeckillProduct_FullMethodName          = "/smsclient.SeckillProductService/AddSeckillProduct"
-	SeckillProductService_DeleteSeckillProduct_FullMethodName       = "/smsclient.SeckillProductService/DeleteSeckillProduct"
-	SeckillProductService_UpdateSeckillProduct_FullMethodName       = "/smsclient.SeckillProductService/UpdateSeckillProduct"
-	SeckillProductService_UpdateSeckillProductStatus_FullMethodName = "/smsclient.SeckillProductService/UpdateSeckillProductStatus"
-	SeckillProductService_QuerySeckillProductDetail_FullMethodName  = "/smsclient.SeckillProductService/QuerySeckillProductDetail"
-	SeckillProductService_QuerySeckillProductList_FullMethodName    = "/smsclient.SeckillProductService/QuerySeckillProductList"
+	SeckillProductService_AddSeckillProduct_FullMethodName              = "/smsclient.SeckillProductService/AddSeckillProduct"
+	SeckillProductService_DeleteSeckillProduct_FullMethodName           = "/smsclient.SeckillProductService/DeleteSeckillProduct"
+	SeckillProductService_UpdateSeckillProduct_FullMethodName           = "/smsclient.SeckillProductService/UpdateSeckillProduct"
+	SeckillProductService_UpdateSeckillProductStatus_FullMethodName     = "/smsclient.SeckillProductService/UpdateSeckillProductStatus"
+	SeckillProductService_QuerySeckillProductDetail_FullMethodName      = "/smsclient.SeckillProductService/QuerySeckillProductDetail"
+	SeckillProductService_QuerySeckillProductList_FullMethodName        = "/smsclient.SeckillProductService/QuerySeckillProductList"
+	SeckillProductService_QuerySeckillProductByProductId_FullMethodName = "/smsclient.SeckillProductService/QuerySeckillProductByProductId"
 )
 
 // SeckillProductServiceClient is the client API for SeckillProductService service.
@@ -1805,6 +1806,8 @@ type SeckillProductServiceClient interface {
 	QuerySeckillProductDetail(ctx context.Context, in *QuerySeckillProductDetailReq, opts ...grpc.CallOption) (*QuerySeckillProductDetailResp, error)
 	// 查询秒杀商品列表
 	QuerySeckillProductList(ctx context.Context, in *QuerySeckillProductListReq, opts ...grpc.CallOption) (*QuerySeckillProductListResp, error)
+	// 查询秒杀商品详情(app)
+	QuerySeckillProductByProductId(ctx context.Context, in *QuerySeckillProductByProductIdReq, opts ...grpc.CallOption) (*QuerySeckillProductDetailResp, error)
 }
 
 type seckillProductServiceClient struct {
@@ -1869,6 +1872,15 @@ func (c *seckillProductServiceClient) QuerySeckillProductList(ctx context.Contex
 	return out, nil
 }
 
+func (c *seckillProductServiceClient) QuerySeckillProductByProductId(ctx context.Context, in *QuerySeckillProductByProductIdReq, opts ...grpc.CallOption) (*QuerySeckillProductDetailResp, error) {
+	out := new(QuerySeckillProductDetailResp)
+	err := c.cc.Invoke(ctx, SeckillProductService_QuerySeckillProductByProductId_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // SeckillProductServiceServer is the server API for SeckillProductService service.
 // All implementations must embed UnimplementedSeckillProductServiceServer
 // for forward compatibility
@@ -1885,6 +1897,8 @@ type SeckillProductServiceServer interface {
 	QuerySeckillProductDetail(context.Context, *QuerySeckillProductDetailReq) (*QuerySeckillProductDetailResp, error)
 	// 查询秒杀商品列表
 	QuerySeckillProductList(context.Context, *QuerySeckillProductListReq) (*QuerySeckillProductListResp, error)
+	// 查询秒杀商品详情(app)
+	QuerySeckillProductByProductId(context.Context, *QuerySeckillProductByProductIdReq) (*QuerySeckillProductDetailResp, error)
 	mustEmbedUnimplementedSeckillProductServiceServer()
 }
 
@@ -1909,6 +1923,9 @@ func (UnimplementedSeckillProductServiceServer) QuerySeckillProductDetail(contex
 }
 func (UnimplementedSeckillProductServiceServer) QuerySeckillProductList(context.Context, *QuerySeckillProductListReq) (*QuerySeckillProductListResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method QuerySeckillProductList not implemented")
+}
+func (UnimplementedSeckillProductServiceServer) QuerySeckillProductByProductId(context.Context, *QuerySeckillProductByProductIdReq) (*QuerySeckillProductDetailResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method QuerySeckillProductByProductId not implemented")
 }
 func (UnimplementedSeckillProductServiceServer) mustEmbedUnimplementedSeckillProductServiceServer() {}
 
@@ -2031,6 +2048,24 @@ func _SeckillProductService_QuerySeckillProductList_Handler(srv interface{}, ctx
 	return interceptor(ctx, in, info, handler)
 }
 
+func _SeckillProductService_QuerySeckillProductByProductId_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QuerySeckillProductByProductIdReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SeckillProductServiceServer).QuerySeckillProductByProductId(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: SeckillProductService_QuerySeckillProductByProductId_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SeckillProductServiceServer).QuerySeckillProductByProductId(ctx, req.(*QuerySeckillProductByProductIdReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // SeckillProductService_ServiceDesc is the grpc.ServiceDesc for SeckillProductService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -2061,6 +2096,10 @@ var SeckillProductService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "QuerySeckillProductList",
 			Handler:    _SeckillProductService_QuerySeckillProductList_Handler,
+		},
+		{
+			MethodName: "QuerySeckillProductByProductId",
+			Handler:    _SeckillProductService_QuerySeckillProductByProductId_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

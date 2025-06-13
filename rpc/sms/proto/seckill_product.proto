@@ -125,6 +125,10 @@ message QuerySeckillProductListResp {
   repeated  SeckillProductListData list = 2;
 }
 
+// 查询秒杀商品详情
+message QuerySeckillProductByProductIdReq {
+  int64 sku_id = 1;
+}
 // 秒杀商品
 service SeckillProductService {
   // 添加秒杀商品
@@ -140,5 +144,6 @@ service SeckillProductService {
   // 查询秒杀商品列表
   rpc QuerySeckillProductList(QuerySeckillProductListReq) returns (QuerySeckillProductListResp){}
 
-
+  // 查询秒杀商品详情(app)
+  rpc QuerySeckillProductByProductId(QuerySeckillProductByProductIdReq) returns (QuerySeckillProductDetailResp){}
 }
