@@ -1,0 +1,26 @@
+drop table if exists pms_product_sku;
+CREATE TABLE `pms_product_sku` (
+                               `id`              BIGINT          NOT NULL AUTO_INCREMENT,
+                               `spu_id`          BIGINT          NOT NULL COMMENT 'SPU ID',
+                               `name`            VARCHAR(200)    NOT NULL COMMENT 'SKU名称',
+                               `sku_code`        VARCHAR(50)     NOT NULL COMMENT 'SKU编码',
+                               `main_pic`        VARCHAR(255)    NOT NULL COMMENT '主图',
+                               `album_pics`      VARCHAR(1000)   NULL COMMENT '图片集',
+                               `price`           DECIMAL(10,2)   NOT NULL COMMENT '价格',
+                               `stock`           INT             NOT NULL DEFAULT 0 COMMENT '库存',
+                               `low_stock`       INT             NOT NULL DEFAULT 0 COMMENT '预警库存',
+                               `spec_data`       JSON            NOT NULL COMMENT '规格数据',
+                               `weight`          DECIMAL(10,2)   NULL COMMENT '重量(kg)',
+                               `publish_status`  TINYINT(1)      NOT NULL DEFAULT 0 COMMENT '上架状态：0-下架，1-上架',
+                               `verify_status`   TINYINT(1)      NOT NULL DEFAULT 0 COMMENT '审核状态：0-未审核，1-审核通过，2-审核不通过',
+                               `sort`            INT             NOT NULL DEFAULT 0 COMMENT '排序',
+                               `sales`           INT             NOT NULL DEFAULT 0 COMMENT '销量',
+                               `create_time`     DATETIME(3)     NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+                               `update_time`     DATETIME(3)     NULL ON UPDATE CURRENT_TIMESTAMP(3),
+                               `creator_id`      BIGINT          NOT NULL COMMENT '创建人ID',
+                               `updater_id`      BIGINT          NULL COMMENT '更新人ID',
+                               `is_deleted`      TINYINT(1)      NOT NULL DEFAULT 0 COMMENT '是否删除',
+                               PRIMARY KEY (`id`),
+                               UNIQUE KEY `uk_sku_code` (`sku_code`, `is_deleted`),
+                               KEY `idx_spu_id` (`spu_id`, `is_deleted`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='商品SKU表';

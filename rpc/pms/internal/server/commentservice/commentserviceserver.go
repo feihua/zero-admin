@@ -23,31 +23,31 @@ func NewCommentServiceServer(svcCtx *svc.ServiceContext) *CommentServiceServer {
 	}
 }
 
-// 添加商品评价表
+// 添加商品评价
 func (s *CommentServiceServer) AddComment(ctx context.Context, in *pmsclient.AddCommentReq) (*pmsclient.AddCommentResp, error) {
 	l := commentservicelogic.NewAddCommentLogic(ctx, s.svcCtx)
 	return l.AddComment(in)
 }
 
-// 删除商品评价表
+// 删除商品评价
 func (s *CommentServiceServer) DeleteComment(ctx context.Context, in *pmsclient.DeleteCommentReq) (*pmsclient.DeleteCommentResp, error) {
 	l := commentservicelogic.NewDeleteCommentLogic(ctx, s.svcCtx)
 	return l.DeleteComment(in)
 }
 
-// 更新商品评价表
+// 更新商品评价
 func (s *CommentServiceServer) UpdateComment(ctx context.Context, in *pmsclient.UpdateCommentReq) (*pmsclient.UpdateCommentResp, error) {
 	l := commentservicelogic.NewUpdateCommentLogic(ctx, s.svcCtx)
 	return l.UpdateComment(in)
 }
 
-// 查询商品评价表详情
+// 查询商品评价详情
 func (s *CommentServiceServer) QueryCommentDetail(ctx context.Context, in *pmsclient.QueryCommentDetailReq) (*pmsclient.QueryCommentDetailResp, error) {
 	l := commentservicelogic.NewQueryCommentDetailLogic(ctx, s.svcCtx)
 	return l.QueryCommentDetail(in)
 }
 
-// 查询商品评价表列表
+// 查询商品评价列表
 func (s *CommentServiceServer) QueryCommentList(ctx context.Context, in *pmsclient.QueryCommentListReq) (*pmsclient.QueryCommentListResp, error) {
 	l := commentservicelogic.NewQueryCommentListLogic(ctx, s.svcCtx)
 	return l.QueryCommentList(in)

@@ -4,10 +4,10 @@ import (
 	"context"
 	"errors"
 	"github.com/feihua/zero-admin/rpc/pms/gen/model"
-	"github.com/feihua/zero-admin/rpc/pms/gen/query"
 	"github.com/feihua/zero-admin/rpc/pms/internal/svc"
 	"github.com/feihua/zero-admin/rpc/pms/pmsclient"
 	"github.com/zeromicro/go-zero/core/logc"
+	"go.mongodb.org/mongo-driver/bson/primitive"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -33,10 +33,10 @@ func NewUpdateCommentReplayLogic(ctx context.Context, svcCtx *svc.ServiceContext
 
 // UpdateCommentReplay 更新产品评价回复
 func (l *UpdateCommentReplayLogic) UpdateCommentReplay(in *pmsclient.UpdateCommentReplayReq) (*pmsclient.UpdateCommentReplayResp, error) {
-	q := query.PmsCommentReplay
-	_, err := q.WithContext(l.ctx).Updates(&model.PmsCommentReplay{
-		ID:             in.Id,             //
-		CommentID:      in.CommentId,      // 评论id
+	objectID, _ := primitive.ObjectIDFromHex(in.Id)
+	_, err := l.svcCtx.ProductCommentReplayModel.Update(l.ctx, &model.ProductCommentReplay{
+		ID:             objectID,          //
+		CommentId:      in.CommentId,      // 评论id
 		MemberNickName: in.MemberNickName, // 评论人员昵称
 		MemberIcon:     in.MemberIcon,     // 评论人员头像
 		Content:        in.Content,        // 内容

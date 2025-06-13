@@ -75,8 +75,6 @@ type (
 	DeleteProductOperateLogResp                   = pmsclient.DeleteProductOperateLogResp
 	DeleteProductReq                              = pmsclient.DeleteProductReq
 	DeleteProductResp                             = pmsclient.DeleteProductResp
-	DeleteProductVertifyRecordReq                 = pmsclient.DeleteProductVertifyRecordReq
-	DeleteProductVertifyRecordResp                = pmsclient.DeleteProductVertifyRecordResp
 	DeleteSkuStockReq                             = pmsclient.DeleteSkuStockReq
 	DeleteSkuStockResp                            = pmsclient.DeleteSkuStockResp
 	FeightTemplateListData                        = pmsclient.FeightTemplateListData
@@ -200,10 +198,6 @@ type (
 	UpdateProductSortReq                          = pmsclient.UpdateProductSortReq
 	UpdateProductStatusReq                        = pmsclient.UpdateProductStatusReq
 	UpdateProductStatusResp                       = pmsclient.UpdateProductStatusResp
-	UpdateProductVertifyRecordReq                 = pmsclient.UpdateProductVertifyRecordReq
-	UpdateProductVertifyRecordResp                = pmsclient.UpdateProductVertifyRecordResp
-	UpdateProductVertifyRecordStatusReq           = pmsclient.UpdateProductVertifyRecordStatusReq
-	UpdateProductVertifyRecordStatusResp          = pmsclient.UpdateProductVertifyRecordStatusResp
 	UpdateSkuStockData                            = pmsclient.UpdateSkuStockData
 	UpdateSkuStockReq                             = pmsclient.UpdateSkuStockReq
 	UpdateSkuStockResp                            = pmsclient.UpdateSkuStockResp
@@ -211,12 +205,6 @@ type (
 	ProductVertifyRecordService interface {
 		// 添加商品审核记录
 		AddProductVertifyRecord(ctx context.Context, in *AddProductVertifyRecordReq, opts ...grpc.CallOption) (*AddProductVertifyRecordResp, error)
-		// 删除商品审核记录
-		DeleteProductVertifyRecord(ctx context.Context, in *DeleteProductVertifyRecordReq, opts ...grpc.CallOption) (*DeleteProductVertifyRecordResp, error)
-		// 更新商品审核记录
-		UpdateProductVertifyRecord(ctx context.Context, in *UpdateProductVertifyRecordReq, opts ...grpc.CallOption) (*UpdateProductVertifyRecordResp, error)
-		// 更新商品审核记录状态
-		UpdateProductVertifyRecordStatus(ctx context.Context, in *UpdateProductVertifyRecordStatusReq, opts ...grpc.CallOption) (*UpdateProductVertifyRecordStatusResp, error)
 		// 查询商品审核记录详情
 		QueryProductVertifyRecordDetail(ctx context.Context, in *QueryProductVertifyRecordDetailReq, opts ...grpc.CallOption) (*QueryProductVertifyRecordDetailResp, error)
 		// 查询商品审核记录列表
@@ -238,24 +226,6 @@ func NewProductVertifyRecordService(cli zrpc.Client) ProductVertifyRecordService
 func (m *defaultProductVertifyRecordService) AddProductVertifyRecord(ctx context.Context, in *AddProductVertifyRecordReq, opts ...grpc.CallOption) (*AddProductVertifyRecordResp, error) {
 	client := pmsclient.NewProductVertifyRecordServiceClient(m.cli.Conn())
 	return client.AddProductVertifyRecord(ctx, in, opts...)
-}
-
-// 删除商品审核记录
-func (m *defaultProductVertifyRecordService) DeleteProductVertifyRecord(ctx context.Context, in *DeleteProductVertifyRecordReq, opts ...grpc.CallOption) (*DeleteProductVertifyRecordResp, error) {
-	client := pmsclient.NewProductVertifyRecordServiceClient(m.cli.Conn())
-	return client.DeleteProductVertifyRecord(ctx, in, opts...)
-}
-
-// 更新商品审核记录
-func (m *defaultProductVertifyRecordService) UpdateProductVertifyRecord(ctx context.Context, in *UpdateProductVertifyRecordReq, opts ...grpc.CallOption) (*UpdateProductVertifyRecordResp, error) {
-	client := pmsclient.NewProductVertifyRecordServiceClient(m.cli.Conn())
-	return client.UpdateProductVertifyRecord(ctx, in, opts...)
-}
-
-// 更新商品审核记录状态
-func (m *defaultProductVertifyRecordService) UpdateProductVertifyRecordStatus(ctx context.Context, in *UpdateProductVertifyRecordStatusReq, opts ...grpc.CallOption) (*UpdateProductVertifyRecordStatusResp, error) {
-	client := pmsclient.NewProductVertifyRecordServiceClient(m.cli.Conn())
-	return client.UpdateProductVertifyRecordStatus(ctx, in, opts...)
 }
 
 // 查询商品审核记录详情

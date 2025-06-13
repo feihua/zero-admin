@@ -75,8 +75,6 @@ type (
 	DeleteProductOperateLogResp                   = pmsclient.DeleteProductOperateLogResp
 	DeleteProductReq                              = pmsclient.DeleteProductReq
 	DeleteProductResp                             = pmsclient.DeleteProductResp
-	DeleteProductVertifyRecordReq                 = pmsclient.DeleteProductVertifyRecordReq
-	DeleteProductVertifyRecordResp                = pmsclient.DeleteProductVertifyRecordResp
 	DeleteSkuStockReq                             = pmsclient.DeleteSkuStockReq
 	DeleteSkuStockResp                            = pmsclient.DeleteSkuStockResp
 	FeightTemplateListData                        = pmsclient.FeightTemplateListData
@@ -200,10 +198,6 @@ type (
 	UpdateProductSortReq                          = pmsclient.UpdateProductSortReq
 	UpdateProductStatusReq                        = pmsclient.UpdateProductStatusReq
 	UpdateProductStatusResp                       = pmsclient.UpdateProductStatusResp
-	UpdateProductVertifyRecordReq                 = pmsclient.UpdateProductVertifyRecordReq
-	UpdateProductVertifyRecordResp                = pmsclient.UpdateProductVertifyRecordResp
-	UpdateProductVertifyRecordStatusReq           = pmsclient.UpdateProductVertifyRecordStatusReq
-	UpdateProductVertifyRecordStatusResp          = pmsclient.UpdateProductVertifyRecordStatusResp
 	UpdateSkuStockData                            = pmsclient.UpdateSkuStockData
 	UpdateSkuStockReq                             = pmsclient.UpdateSkuStockReq
 	UpdateSkuStockResp                            = pmsclient.UpdateSkuStockResp

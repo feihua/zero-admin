@@ -42,17 +42,17 @@ func (l *AddSeckillProductLogic) AddSeckillProduct(req *types.AddSeckillProductR
 	var list []*smsclient.AddSeckillProductData
 	for _, item := range req.Data {
 		list = append(list, &smsclient.AddSeckillProductData{
-			ActivityId:   item.ActivityId,            // 活动ID
-			SessionId:    item.SessionId,             // 秒杀场次ID
-			SkuId:        item.SkuId,                 // 商品SKU ID
-			SkuName:      item.SkuName,               // 商品名称
-			SeckillPrice: float32(item.SeckillPrice), // 秒杀价格
-			SeckillStock: item.SeckillStock,          // 秒杀库存
-			StockLocked:  item.StockLocked,           // 锁定库存
-			PerLimit:     item.PerLimit,              // 每人限购数量
-			Sort:         item.Sort,                  // 排序
-			Status:       item.Status,                // 状态：0-未上架，1-已上架
-			CreateBy:     userId,                     // 创建人ID
+			ActivityId:   item.ActivityId,   // 活动ID
+			SessionId:    item.SessionId,    // 秒杀场次ID
+			SkuId:        item.SkuId,        // 商品SKU ID
+			SkuName:      item.SkuName,      // 商品名称
+			SeckillPrice: item.SeckillPrice, // 秒杀价格
+			SeckillStock: item.SeckillStock, // 秒杀库存
+			StockLocked:  item.StockLocked,  // 锁定库存
+			PerLimit:     item.PerLimit,     // 每人限购数量
+			Sort:         item.Sort,         // 排序
+			Status:       item.Status,       // 状态：0-未上架，1-已上架
+			CreateBy:     userId,            // 创建人ID
 		})
 	}
 	_, err = l.svcCtx.SeckillProductService.AddSeckillProduct(l.ctx, &smsclient.AddSeckillProductReq{

@@ -4,9 +4,9 @@ package main;
 
 option go_package = "./proto";
 
-// 添加
+// 添加商品操作日志
 message AddProductOperateLogReq {
-  int64 id = 1; //
+  string id = 1; //
   int64 product_id = 2; //产品id
   int64 price_old = 3; //原价
   int64 price_new = 4; //新价格
@@ -23,22 +23,22 @@ message AddProductOperateLogResp {
   string pong = 1;
 }
 
-// 删除
+// 删除商品操作日志
 message DeleteProductOperateLogReq {
-  repeated int64 ids = 1;
+  string id = 1;
 }
 
 message DeleteProductOperateLogResp {
   string pong = 1;
 }
 
-// 查询详情
+// 查询商品操作日志详情
 message QueryProductOperateLogDetailReq {
-    int64 id = 1;
+  string id = 1;
 }
 
 message QueryProductOperateLogDetailResp {
-  int64 id = 1; //
+  string id = 1; //
   int64 product_id = 2; //产品id
   int64 price_old = 3; //原价
   int64 price_new = 4; //新价格
@@ -50,16 +50,18 @@ message QueryProductOperateLogDetailResp {
   int32 use_point_limit_new = 10; //新的使用积分限制
   string operate_man = 11; //操作人
   string create_time = 12; //创建时间
+
 }
 
-// 分页查询列表
+// 分页查询商品操作日志列表
 message QueryProductOperateLogListReq {
- int64 page_num = 1; //第几页
-  int64 page_size = 2; //每页的数量
+  int64 product_id = 1; //产品id
+  int64 page_num = 11; //第几页
+  int64 page_size = 12; //每页的数量
 }
 
 message ProductOperateLogListData {
-  int64 id = 1; //
+  string id = 1; //
   int64 product_id = 2; //产品id
   int64 price_old = 3; //原价
   int64 price_new = 4; //新价格
@@ -71,6 +73,7 @@ message ProductOperateLogListData {
   int32 use_point_limit_new = 10; //新的使用积分限制
   string operate_man = 11; //操作人
   string create_time = 12; //创建时间
+
 }
 
 message QueryProductOperateLogListResp {
@@ -78,15 +81,15 @@ message QueryProductOperateLogListResp {
   repeated  ProductOperateLogListData list = 2;
 }
 
-// 
+// 商品操作日志
 service ProductOperateLogService {
-  // 添加
+  // 添加商品操作日志
   rpc AddProductOperateLog(AddProductOperateLogReq) returns (AddProductOperateLogResp){}
-  // 删除
+  // 删除商品操作日志
   rpc DeleteProductOperateLog(DeleteProductOperateLogReq) returns (DeleteProductOperateLogResp){}
-  // 查询详情
-   rpc QueryProductOperateLogDetail(QueryProductOperateLogDetailReq) returns (QueryProductOperateLogDetailResp){}
-  // 查询列表
+  // 查询商品操作日志详情
+  rpc QueryProductOperateLogDetail(QueryProductOperateLogDetailReq) returns (QueryProductOperateLogDetailResp){}
+  // 查询商品操作日志列表
   rpc QueryProductOperateLogList(QueryProductOperateLogListReq) returns (QueryProductOperateLogListResp){}
 
 

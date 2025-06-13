@@ -8,4 +8,8 @@ type Config struct {
 	Mysql struct {
 		Datasource string
 	}
+	Mongo struct {
+		Datasource string
+		Db         string
+	}
 }

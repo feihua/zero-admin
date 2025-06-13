@@ -3,7 +3,7 @@ package memberproductcollectionservicelogic
 import (
 	"context"
 	"errors"
-	mymongo "github.com/feihua/zero-admin/rpc/ums/gen/mongo"
+	"github.com/feihua/zero-admin/rpc/ums/gen/model"
 	"github.com/feihua/zero-admin/rpc/ums/internal/svc"
 	"github.com/feihua/zero-admin/rpc/ums/umsclient"
 	"github.com/zeromicro/go-zero/core/logc"
@@ -33,7 +33,7 @@ func NewAddMemberProductCollectionLogic(ctx context.Context, svcCtx *svc.Service
 
 // AddMemberProductCollection 添加用户收藏的商品
 func (l *AddMemberProductCollectionLogic) AddMemberProductCollection(in *umsclient.AddMemberProductCollectionReq) (*umsclient.AddMemberProductCollectionResp, error) {
-	err := l.svcCtx.MemberProductCollectionModel.Insert(l.ctx, &mymongo.MemberProductCollection{
+	err := l.svcCtx.MemberProductCollectionModel.Insert(l.ctx, &model.MemberProductCollection{
 		MemberId:        in.MemberId,        // 会员id
 		MemberNickName:  in.MemberNickName,  // 会员姓名
 		MemberIcon:      in.MemberIcon,      // 会员头像

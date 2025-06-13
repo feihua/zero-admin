@@ -42,19 +42,19 @@ func (l *UpdateVerifyStatusLogic) UpdateVerifyStatus(in *pmsclient.UpdateProduct
 	}
 
 	// 修改完审核状态后插入审核记录
-	var list []*model.PmsProductVertifyRecord
+
 	for _, id := range in.Ids {
-		list = append(list, &model.PmsProductVertifyRecord{
-			ProductID: id,            // 商品id
+		err = l.svcCtx.ProductVertifyRecordModel.Insert(l.ctx, &model.ProductVertifyRecord{
+			ProductId: id,            // 商品id
 			ReviewMan: in.VertifyMan, // 审核人
 			Status:    in.Status,     // 审核状态：0->未通过；1->通过
 			Detail:    in.Detail,     // 反馈详情
 		})
-	}
-	err = query.PmsProductVertifyRecord.WithContext(l.ctx).CreateInBatches(list, len(list))
-	if err != nil {
-		logc.Errorf(l.ctx, "批量修改审核状态失败,参数:%+v,异常:%s", in, err.Error())
-		return nil, errors.New("批量修改审核状态失败")
+
+		if err != nil {
+			logc.Errorf(l.ctx, "批量修改审核状态失败,参数:%+v,异常:%s", in, err.Error())
+			return nil, errors.New("批量修改审核状态失败")
+		}
 	}
 
 	return &pmsclient.UpdateProductStatusResp{}, nil

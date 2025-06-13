@@ -1,3 +1,4 @@
+drop table if exists pms_feight_template;
 create table pms_feight_template
 (
     id              bigint auto_increment
@@ -15,3 +16,9 @@ create table pms_feight_template
 )
     comment '运费模版';
 
+INSERT INTO pms_feight_template (name, charge_type, first_weight, first_fee, continue_weight, continue_fee, dest)
+VALUES
+    ('北京标准运费模板', 0, 1000, 2000, 500, 500, '北京'),
+    ('上海快递专用模板', 1, 1, 1500, 1, 300, '上海'),
+    ('广东经济型运费模板', 0, 2000, 3000, 1000, 800, '广东'),
+    ('浙江自提免运费模板', 1, 1, 1000, 1, 200, '浙江');

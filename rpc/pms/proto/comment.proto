@@ -4,9 +4,9 @@ package main;
 
 option go_package = "./proto";
 
-// 添加商品评价表
+// 添加商品评价
 message AddCommentReq {
-  int64 id = 1; //
+  int32 replay_count = 1; //回复数量
   int64 product_id = 2; //商品id
   string member_nick_name = 3; //评价者昵称
   string product_name = 4; //商品名称
@@ -19,7 +19,6 @@ message AddCommentReq {
   string content = 12; //内容
   string pics = 13; //上传图片地址，以逗号隔开
   string member_icon = 14; //评论用户头像
-  int32 replay_count = 15; //回复数量
 
 }
 
@@ -27,18 +26,18 @@ message AddCommentResp {
   string pong = 1;
 }
 
-// 删除商品评价表
+// 删除商品评价
 message DeleteCommentReq {
-  repeated int64 ids = 1;
+  string id = 1;
 }
 
 message DeleteCommentResp {
   string pong = 1;
 }
 
-// 更新商品评价表
+// 更新商品评价
 message UpdateCommentReq {
-  int64 id = 1; //
+  string id = 1; //
   int64 product_id = 2; //商品id
   string member_nick_name = 3; //评价者昵称
   string product_name = 4; //商品名称
@@ -52,8 +51,6 @@ message UpdateCommentReq {
   string pics = 13; //上传图片地址，以逗号隔开
   string member_icon = 14; //评论用户头像
   int32 replay_count = 15; //回复数量
-
-
 }
 
 message UpdateCommentResp {
@@ -61,13 +58,13 @@ message UpdateCommentResp {
 }
 
 
-// 查询商品评价表详情
+// 查询商品评价详情
 message QueryCommentDetailReq {
-    int64 id = 1;
+  string id = 1;
 }
 
 message QueryCommentDetailResp {
-  int64 id = 1; //
+  string id = 1; //
   int64 product_id = 2; //商品id
   string member_nick_name = 3; //评价者昵称
   string product_name = 4; //商品名称
@@ -85,17 +82,15 @@ message QueryCommentDetailResp {
 
 }
 
-// 分页查询商品评价表列表
+// 分页查询商品评价列表
 message QueryCommentListReq {
   int64 page_num = 1; //第几页
   int64 page_size = 2; //每页的数量
-  int64 product_id = 3; //
-
-
+  int64 product_id = 3;
 }
 
 message CommentListData {
-  int64 id = 1; //
+  string id = 1; //
   int64 product_id = 2; //商品id
   string member_nick_name = 3; //评价者昵称
   string product_name = 4; //商品名称
@@ -118,17 +113,17 @@ message QueryCommentListResp {
   repeated  CommentListData list = 2;
 }
 
-// 商品评价表
+// 商品评价
 service CommentService {
-  // 添加商品评价表
+  // 添加商品评价
   rpc AddComment(AddCommentReq) returns (AddCommentResp){}
-  // 删除商品评价表
+  // 删除商品评价
   rpc DeleteComment(DeleteCommentReq) returns (DeleteCommentResp){}
-  // 更新商品评价表
+  // 更新商品评价
   rpc UpdateComment(UpdateCommentReq) returns (UpdateCommentResp ){}
-  // 查询商品评价表详情
-   rpc QueryCommentDetail(QueryCommentDetailReq) returns (QueryCommentDetailResp){}
-  // 查询商品评价表列表
+  // 查询商品评价详情
+  rpc QueryCommentDetail(QueryCommentDetailReq) returns (QueryCommentDetailResp){}
+  // 查询商品评价列表
   rpc QueryCommentList(QueryCommentListReq) returns (QueryCommentListResp){}
 
 

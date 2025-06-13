@@ -6,8 +6,7 @@ option go_package = "./proto";
 
 // 添加收藏表
 message AddProductCollectReq {
-  int32 id = 1; //
-  int32 user_id = 2; //用户表的用户ID
+  int64 user_id = 2; //用户表的用户ID
   int32 value_id = 3; //如果type=0，则是商品ID；如果type=1，则是专题ID
   int32 collect_type = 4; //收藏类型，如果type=0，则是商品ID；如果type=1，则是专题ID
   string add_time = 5; //创建时间
@@ -21,7 +20,8 @@ message AddProductCollectResp {
 
 // 删除收藏表
 message DeleteProductCollectReq {
-  repeated int64 ids = 1;
+  repeated string ids = 1;
+  int64 user_id = 2; //用户表的用户ID
 }
 
 message DeleteProductCollectResp {
@@ -30,12 +30,12 @@ message DeleteProductCollectResp {
 
 // 查询收藏表详情
 message QueryProductCollectDetailReq {
-    int64 id = 1;
+  string id = 1;
 }
 
 message QueryProductCollectDetailResp {
-  int32 id = 1; //
-  int32 user_id = 2; //用户表的用户ID
+  string id = 1; //
+  int64 user_id = 2; //用户表的用户ID
   int32 value_id = 3; //如果type=0，则是商品ID；如果type=1，则是专题ID
   int32 collect_type = 4; //收藏类型，如果type=0，则是商品ID；如果type=1，则是专题ID
   string add_time = 5; //创建时间
@@ -47,14 +47,14 @@ message QueryProductCollectDetailResp {
 message QueryProductCollectListReq {
   int64 page_num = 1; //第几页
   int64 page_size = 2; //每页的数量
-  int32 user_id = 3; //用户表的用户ID
+  int64 user_id = 3; //用户表的用户ID
 
 
 }
 
 message ProductCollectListData {
-  int32 id = 1; //
-  int32 user_id = 2; //用户表的用户ID
+  string id = 1; //
+  int64 user_id = 2; //用户表的用户ID
   int32 value_id = 3; //如果type=0，则是商品ID；如果type=1，则是专题ID
   int32 collect_type = 4; //收藏类型，如果type=0，则是商品ID；如果type=1，则是专题ID
   string add_time = 5; //创建时间

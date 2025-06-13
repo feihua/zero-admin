@@ -4,10 +4,10 @@ import (
 	"context"
 	"errors"
 	"github.com/feihua/zero-admin/rpc/pms/gen/model"
-	"github.com/feihua/zero-admin/rpc/pms/gen/query"
 	"github.com/feihua/zero-admin/rpc/pms/internal/svc"
 	"github.com/feihua/zero-admin/rpc/pms/pmsclient"
 	"github.com/zeromicro/go-zero/core/logc"
+	"go.mongodb.org/mongo-driver/bson/primitive"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -33,14 +33,14 @@ func NewUpdateCommentLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Upd
 
 // UpdateComment 更新商品评价
 func (l *UpdateCommentLogic) UpdateComment(in *pmsclient.UpdateCommentReq) (*pmsclient.UpdateCommentResp, error) {
-	q := query.PmsComment
-	_, err := q.WithContext(l.ctx).Updates(&model.PmsComment{
-		ID:               in.Id,               //
-		ProductID:        in.ProductId,        // 商品id
+	objectID, _ := primitive.ObjectIDFromHex(in.Id)
+	_, err := l.svcCtx.ProductCommentModel.Update(l.ctx, &model.ProductComment{
+		ID:               objectID,            //
+		ProductId:        in.ProductId,        // 商品id
 		MemberNickName:   in.MemberNickName,   // 评价者昵称
 		ProductName:      in.ProductName,      // 商品名称
 		Star:             in.Star,             // 评价星数：0->5
-		MemberIP:         in.MemberIp,         // 评价的ip
+		MemberIp:         in.MemberIp,         // 评价的ip
 		ShowStatus:       in.ShowStatus,       // 是否显示，0-不显示，1-显示
 		ProductAttribute: in.ProductAttribute, // 购买时的商品属性
 		CollectCount:     in.CollectCount,     // 点赞数

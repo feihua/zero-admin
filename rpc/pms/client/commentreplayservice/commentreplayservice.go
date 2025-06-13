@@ -75,8 +75,6 @@ type (
 	DeleteProductOperateLogResp                   = pmsclient.DeleteProductOperateLogResp
 	DeleteProductReq                              = pmsclient.DeleteProductReq
 	DeleteProductResp                             = pmsclient.DeleteProductResp
-	DeleteProductVertifyRecordReq                 = pmsclient.DeleteProductVertifyRecordReq
-	DeleteProductVertifyRecordResp                = pmsclient.DeleteProductVertifyRecordResp
 	DeleteSkuStockReq                             = pmsclient.DeleteSkuStockReq
 	DeleteSkuStockResp                            = pmsclient.DeleteSkuStockResp
 	FeightTemplateListData                        = pmsclient.FeightTemplateListData
@@ -200,24 +198,20 @@ type (
 	UpdateProductSortReq                          = pmsclient.UpdateProductSortReq
 	UpdateProductStatusReq                        = pmsclient.UpdateProductStatusReq
 	UpdateProductStatusResp                       = pmsclient.UpdateProductStatusResp
-	UpdateProductVertifyRecordReq                 = pmsclient.UpdateProductVertifyRecordReq
-	UpdateProductVertifyRecordResp                = pmsclient.UpdateProductVertifyRecordResp
-	UpdateProductVertifyRecordStatusReq           = pmsclient.UpdateProductVertifyRecordStatusReq
-	UpdateProductVertifyRecordStatusResp          = pmsclient.UpdateProductVertifyRecordStatusResp
 	UpdateSkuStockData                            = pmsclient.UpdateSkuStockData
 	UpdateSkuStockReq                             = pmsclient.UpdateSkuStockReq
 	UpdateSkuStockResp                            = pmsclient.UpdateSkuStockResp
 
 	CommentReplayService interface {
-		// 添加产品评价回复表
+		// 添加产品评价回复
 		AddCommentReplay(ctx context.Context, in *AddCommentReplayReq, opts ...grpc.CallOption) (*AddCommentReplayResp, error)
-		// 删除产品评价回复表
+		// 删除产品评价回复
 		DeleteCommentReplay(ctx context.Context, in *DeleteCommentReplayReq, opts ...grpc.CallOption) (*DeleteCommentReplayResp, error)
-		// 更新产品评价回复表
+		// 更新产品评价回复
 		UpdateCommentReplay(ctx context.Context, in *UpdateCommentReplayReq, opts ...grpc.CallOption) (*UpdateCommentReplayResp, error)
-		// 查询产品评价回复表详情
+		// 查询产品评价回复详情
 		QueryCommentReplayDetail(ctx context.Context, in *QueryCommentReplayDetailReq, opts ...grpc.CallOption) (*QueryCommentReplayDetailResp, error)
-		// 查询产品评价回复表列表
+		// 查询产品评价回复列表
 		QueryCommentReplayList(ctx context.Context, in *QueryCommentReplayListReq, opts ...grpc.CallOption) (*QueryCommentReplayListResp, error)
 	}
 
@@ -232,31 +226,31 @@ func NewCommentReplayService(cli zrpc.Client) CommentReplayService {
 	}
 }
 
-// 添加产品评价回复表
+// 添加产品评价回复
 func (m *defaultCommentReplayService) AddCommentReplay(ctx context.Context, in *AddCommentReplayReq, opts ...grpc.CallOption) (*AddCommentReplayResp, error) {
 	client := pmsclient.NewCommentReplayServiceClient(m.cli.Conn())
 	return client.AddCommentReplay(ctx, in, opts...)
 }
 
-// 删除产品评价回复表
+// 删除产品评价回复
 func (m *defaultCommentReplayService) DeleteCommentReplay(ctx context.Context, in *DeleteCommentReplayReq, opts ...grpc.CallOption) (*DeleteCommentReplayResp, error) {
 	client := pmsclient.NewCommentReplayServiceClient(m.cli.Conn())
 	return client.DeleteCommentReplay(ctx, in, opts...)
 }
 
-// 更新产品评价回复表
+// 更新产品评价回复
 func (m *defaultCommentReplayService) UpdateCommentReplay(ctx context.Context, in *UpdateCommentReplayReq, opts ...grpc.CallOption) (*UpdateCommentReplayResp, error) {
 	client := pmsclient.NewCommentReplayServiceClient(m.cli.Conn())
 	return client.UpdateCommentReplay(ctx, in, opts...)
 }
 
-// 查询产品评价回复表详情
+// 查询产品评价回复详情
 func (m *defaultCommentReplayService) QueryCommentReplayDetail(ctx context.Context, in *QueryCommentReplayDetailReq, opts ...grpc.CallOption) (*QueryCommentReplayDetailResp, error) {
 	client := pmsclient.NewCommentReplayServiceClient(m.cli.Conn())
 	return client.QueryCommentReplayDetail(ctx, in, opts...)
 }
 
-// 查询产品评价回复表列表
+// 查询产品评价回复列表
 func (m *defaultCommentReplayService) QueryCommentReplayList(ctx context.Context, in *QueryCommentReplayListReq, opts ...grpc.CallOption) (*QueryCommentReplayListResp, error) {
 	client := pmsclient.NewCommentReplayServiceClient(m.cli.Conn())
 	return client.QueryCommentReplayList(ctx, in, opts...)

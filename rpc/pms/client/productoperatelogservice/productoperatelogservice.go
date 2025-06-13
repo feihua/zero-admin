@@ -75,8 +75,6 @@ type (
 	DeleteProductOperateLogResp                   = pmsclient.DeleteProductOperateLogResp
 	DeleteProductReq                              = pmsclient.DeleteProductReq
 	DeleteProductResp                             = pmsclient.DeleteProductResp
-	DeleteProductVertifyRecordReq                 = pmsclient.DeleteProductVertifyRecordReq
-	DeleteProductVertifyRecordResp                = pmsclient.DeleteProductVertifyRecordResp
 	DeleteSkuStockReq                             = pmsclient.DeleteSkuStockReq
 	DeleteSkuStockResp                            = pmsclient.DeleteSkuStockResp
 	FeightTemplateListData                        = pmsclient.FeightTemplateListData
@@ -200,22 +198,18 @@ type (
 	UpdateProductSortReq                          = pmsclient.UpdateProductSortReq
 	UpdateProductStatusReq                        = pmsclient.UpdateProductStatusReq
 	UpdateProductStatusResp                       = pmsclient.UpdateProductStatusResp
-	UpdateProductVertifyRecordReq                 = pmsclient.UpdateProductVertifyRecordReq
-	UpdateProductVertifyRecordResp                = pmsclient.UpdateProductVertifyRecordResp
-	UpdateProductVertifyRecordStatusReq           = pmsclient.UpdateProductVertifyRecordStatusReq
-	UpdateProductVertifyRecordStatusResp          = pmsclient.UpdateProductVertifyRecordStatusResp
 	UpdateSkuStockData                            = pmsclient.UpdateSkuStockData
 	UpdateSkuStockReq                             = pmsclient.UpdateSkuStockReq
 	UpdateSkuStockResp                            = pmsclient.UpdateSkuStockResp
 
 	ProductOperateLogService interface {
-		// 添加
+		// 添加商品操作日志
 		AddProductOperateLog(ctx context.Context, in *AddProductOperateLogReq, opts ...grpc.CallOption) (*AddProductOperateLogResp, error)
-		// 删除
+		// 删除商品操作日志
 		DeleteProductOperateLog(ctx context.Context, in *DeleteProductOperateLogReq, opts ...grpc.CallOption) (*DeleteProductOperateLogResp, error)
-		// 查询详情
+		// 查询商品操作日志详情
 		QueryProductOperateLogDetail(ctx context.Context, in *QueryProductOperateLogDetailReq, opts ...grpc.CallOption) (*QueryProductOperateLogDetailResp, error)
-		// 查询列表
+		// 查询商品操作日志列表
 		QueryProductOperateLogList(ctx context.Context, in *QueryProductOperateLogListReq, opts ...grpc.CallOption) (*QueryProductOperateLogListResp, error)
 	}
 
@@ -230,25 +224,25 @@ func NewProductOperateLogService(cli zrpc.Client) ProductOperateLogService {
 	}
 }
 
-// 添加
+// 添加商品操作日志
 func (m *defaultProductOperateLogService) AddProductOperateLog(ctx context.Context, in *AddProductOperateLogReq, opts ...grpc.CallOption) (*AddProductOperateLogResp, error) {
 	client := pmsclient.NewProductOperateLogServiceClient(m.cli.Conn())
 	return client.AddProductOperateLog(ctx, in, opts...)
 }
 
-// 删除
+// 删除商品操作日志
 func (m *defaultProductOperateLogService) DeleteProductOperateLog(ctx context.Context, in *DeleteProductOperateLogReq, opts ...grpc.CallOption) (*DeleteProductOperateLogResp, error) {
 	client := pmsclient.NewProductOperateLogServiceClient(m.cli.Conn())
 	return client.DeleteProductOperateLog(ctx, in, opts...)
 }
 
-// 查询详情
+// 查询商品操作日志详情
 func (m *defaultProductOperateLogService) QueryProductOperateLogDetail(ctx context.Context, in *QueryProductOperateLogDetailReq, opts ...grpc.CallOption) (*QueryProductOperateLogDetailResp, error) {
 	client := pmsclient.NewProductOperateLogServiceClient(m.cli.Conn())
 	return client.QueryProductOperateLogDetail(ctx, in, opts...)
 }
 
-// 查询列表
+// 查询商品操作日志列表
 func (m *defaultProductOperateLogService) QueryProductOperateLogList(ctx context.Context, in *QueryProductOperateLogListReq, opts ...grpc.CallOption) (*QueryProductOperateLogListResp, error) {
 	client := pmsclient.NewProductOperateLogServiceClient(m.cli.Conn())
 	return client.QueryProductOperateLogList(ctx, in, opts...)

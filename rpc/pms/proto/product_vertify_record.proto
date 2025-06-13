@@ -6,7 +6,6 @@ option go_package = "./proto";
 
 // 添加商品审核记录
 message AddProductVertifyRecordReq {
-  int64 id = 1; //
   int64 product_id = 2; //商品id
   string review_man = 4; //审核人
   int32 status = 5; //审核状态：0->未通过；1->通过
@@ -17,50 +16,13 @@ message AddProductVertifyRecordResp {
   string pong = 1;
 }
 
-// 删除商品审核记录
-message DeleteProductVertifyRecordReq {
-  repeated int64 ids = 1;
-}
-
-message DeleteProductVertifyRecordResp {
-  string pong = 1;
-}
-
-// 更新商品审核记录
-message UpdateProductVertifyRecordReq {
-  int64 id = 1; //
-  int64 product_id = 2; //商品id
-  string review_man = 4; //审核人
-  int32 status = 5; //审核状态：0->未通过；1->通过
-  string detail = 6; //反馈详情
-}
-
-message UpdateProductVertifyRecordResp {
-  string pong = 1;
-}
-
-// 更新商品审核记录状态
-message UpdateProductVertifyRecordStatusReq {
-  string create_time = 1; //
-  string detail = 2; //反馈详情
-  int64 id = 3; //
-  int64 product_id = 4; //
-  int32 status = 5; //
-  string vertify_man = 6; //审核人
-
-}
-
-message UpdateProductVertifyRecordStatusResp {
-  string pong = 1;
-}
-
 // 查询商品审核记录详情
 message QueryProductVertifyRecordDetailReq {
-    int64 id = 1;
+  string id = 1;
 }
 
 message QueryProductVertifyRecordDetailResp {
-  int64 id = 1; //
+  string id = 1; //
   int64 product_id = 2; //商品id
   string create_time = 3; //创建时间
   string review_man = 4; //审核人
@@ -70,12 +32,11 @@ message QueryProductVertifyRecordDetailResp {
 
 // 分页查询商品审核记录列表
 message QueryProductVertifyRecordListReq {
- int64 page_num = 1; //第几页
-  int64 page_size = 2; //每页的数量
+  int64 product_id = 2; //商品id
 }
 
 message ProductVertifyRecordListData {
-  int64 id = 1; //
+  string id = 1; //
   int64 product_id = 2; //商品id
   string create_time = 3; //创建时间
   string review_man = 4; //审核人
@@ -93,12 +54,6 @@ message QueryProductVertifyRecordListResp {
 service ProductVertifyRecordService {
   // 添加商品审核记录
   rpc AddProductVertifyRecord(AddProductVertifyRecordReq) returns (AddProductVertifyRecordResp){}
-  // 删除商品审核记录
-  rpc DeleteProductVertifyRecord(DeleteProductVertifyRecordReq) returns (DeleteProductVertifyRecordResp){}
-  // 更新商品审核记录
-  rpc UpdateProductVertifyRecord(UpdateProductVertifyRecordReq) returns (UpdateProductVertifyRecordResp ){}
-  // 更新商品审核记录状态
-  rpc UpdateProductVertifyRecordStatus(UpdateProductVertifyRecordStatusReq) returns (UpdateProductVertifyRecordStatusResp ){}
   // 查询商品审核记录详情
    rpc QueryProductVertifyRecordDetail(QueryProductVertifyRecordDetailReq) returns (QueryProductVertifyRecordDetailResp){}
   // 查询商品审核记录列表

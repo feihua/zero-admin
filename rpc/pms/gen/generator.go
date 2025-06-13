@@ -25,8 +25,6 @@ func main() {
 
 	g.ApplyBasic(
 		g.GenerateModel("pms_product_brand"),
-		g.GenerateModel("pms_comment"),
-		g.GenerateModel("pms_comment_replay"),
 		g.GenerateModel("pms_feight_template"),
 		g.GenerateModel("pms_member_price"),
 		g.GenerateModel("pms_product"),
@@ -35,11 +33,8 @@ func main() {
 		g.GenerateModel("pms_product_attribute_value"),
 		g.GenerateModel("pms_product_category"),
 		g.GenerateModel("pms_product_category_attribute_relation"),
-		g.GenerateModel("pms_product_collect"),
 		g.GenerateModel("pms_product_full_reduction"),
 		g.GenerateModel("pms_product_ladder"),
-		g.GenerateModel("pms_product_operate_log"),
-		g.GenerateModel("pms_product_vertify_record"),
 		g.GenerateModel("pms_sku_stock"),
 	)
 

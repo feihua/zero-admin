@@ -13,7 +13,7 @@ type (
 		SessionId    int64   `json:"sessionId"` //秒杀场次ID
 		SkuId        int64   `json:"skuId"` //商品SKU ID
 		SkuName      string  `json:"skuName"` //商品名称
-		SeckillPrice float64 `json:"seckillPrice"` //秒杀价格
+		SeckillPrice float32 `json:"seckillPrice"` //秒杀价格
 		SeckillStock int32   `json:"seckillStock"` //秒杀库存
 		StockLocked  int32   `json:"stockLocked"` //锁定库存
 		PerLimit     int32   `json:"perLimit"` //每人限购数量
@@ -35,7 +35,7 @@ type (
 		SessionId    int64   `json:"sessionId"` //秒杀场次ID
 		SkuId        int64   `json:"skuId"` //商品SKU ID
 		SkuName      string  `json:"skuName"` //商品名称
-		SeckillPrice float64 `json:"seckillPrice"` //秒杀价格
+		SeckillPrice float32 `json:"seckillPrice"` //秒杀价格
 		SeckillStock int32   `json:"seckillStock"` //秒杀库存
 		StockLocked  int32   `json:"stockLocked"` //锁定库存
 		PerLimit     int32   `json:"perLimit"` //每人限购数量
@@ -57,7 +57,7 @@ type (
 		SessionId    int64   `json:"sessionId"` //秒杀场次ID
 		SkuId        int64   `json:"skuId"` //商品SKU ID
 		SkuName      string  `json:"skuName"` //商品名称
-		SeckillPrice float64 `json:"seckillPrice"` //秒杀价格
+		SeckillPrice float32 `json:"seckillPrice"` //秒杀价格
 		SeckillStock int32   `json:"seckillStock"` //秒杀库存
 		StockLocked  int32   `json:"stockLocked"` //锁定库存
 		PerLimit     int32   `json:"perLimit"` //每人限购数量
@@ -88,7 +88,7 @@ type (
 		SessionId    int64   `json:"sessionId"` //秒杀场次ID
 		SkuId        int64   `json:"skuId"` //商品SKU ID
 		SkuName      string  `json:"skuName"` //商品名称
-		SeckillPrice float64 `json:"seckillPrice"` //秒杀价格
+		SeckillPrice float32 `json:"seckillPrice"` //秒杀价格
 		SeckillStock int32   `json:"seckillStock"` //秒杀库存
 		StockLocked  int32   `json:"stockLocked"` //锁定库存
 		PerLimit     int32   `json:"perLimit"` //每人限购数量

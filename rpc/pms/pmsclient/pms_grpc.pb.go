@@ -30,15 +30,15 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type CommentServiceClient interface {
-	// 添加商品评价表
+	// 添加商品评价
 	AddComment(ctx context.Context, in *AddCommentReq, opts ...grpc.CallOption) (*AddCommentResp, error)
-	// 删除商品评价表
+	// 删除商品评价
 	DeleteComment(ctx context.Context, in *DeleteCommentReq, opts ...grpc.CallOption) (*DeleteCommentResp, error)
-	// 更新商品评价表
+	// 更新商品评价
 	UpdateComment(ctx context.Context, in *UpdateCommentReq, opts ...grpc.CallOption) (*UpdateCommentResp, error)
-	// 查询商品评价表详情
+	// 查询商品评价详情
 	QueryCommentDetail(ctx context.Context, in *QueryCommentDetailReq, opts ...grpc.CallOption) (*QueryCommentDetailResp, error)
-	// 查询商品评价表列表
+	// 查询商品评价列表
 	QueryCommentList(ctx context.Context, in *QueryCommentListReq, opts ...grpc.CallOption) (*QueryCommentListResp, error)
 }
 
@@ -99,15 +99,15 @@ func (c *commentServiceClient) QueryCommentList(ctx context.Context, in *QueryCo
 // All implementations must embed UnimplementedCommentServiceServer
 // for forward compatibility
 type CommentServiceServer interface {
-	// 添加商品评价表
+	// 添加商品评价
 	AddComment(context.Context, *AddCommentReq) (*AddCommentResp, error)
-	// 删除商品评价表
+	// 删除商品评价
 	DeleteComment(context.Context, *DeleteCommentReq) (*DeleteCommentResp, error)
-	// 更新商品评价表
+	// 更新商品评价
 	UpdateComment(context.Context, *UpdateCommentReq) (*UpdateCommentResp, error)
-	// 查询商品评价表详情
+	// 查询商品评价详情
 	QueryCommentDetail(context.Context, *QueryCommentDetailReq) (*QueryCommentDetailResp, error)
-	// 查询商品评价表列表
+	// 查询商品评价列表
 	QueryCommentList(context.Context, *QueryCommentListReq) (*QueryCommentListResp, error)
 	mustEmbedUnimplementedCommentServiceServer()
 }
@@ -278,15 +278,15 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type CommentReplayServiceClient interface {
-	// 添加产品评价回复表
+	// 添加产品评价回复
 	AddCommentReplay(ctx context.Context, in *AddCommentReplayReq, opts ...grpc.CallOption) (*AddCommentReplayResp, error)
-	// 删除产品评价回复表
+	// 删除产品评价回复
 	DeleteCommentReplay(ctx context.Context, in *DeleteCommentReplayReq, opts ...grpc.CallOption) (*DeleteCommentReplayResp, error)
-	// 更新产品评价回复表
+	// 更新产品评价回复
 	UpdateCommentReplay(ctx context.Context, in *UpdateCommentReplayReq, opts ...grpc.CallOption) (*UpdateCommentReplayResp, error)
-	// 查询产品评价回复表详情
+	// 查询产品评价回复详情
 	QueryCommentReplayDetail(ctx context.Context, in *QueryCommentReplayDetailReq, opts ...grpc.CallOption) (*QueryCommentReplayDetailResp, error)
-	// 查询产品评价回复表列表
+	// 查询产品评价回复列表
 	QueryCommentReplayList(ctx context.Context, in *QueryCommentReplayListReq, opts ...grpc.CallOption) (*QueryCommentReplayListResp, error)
 }
 
@@ -347,15 +347,15 @@ func (c *commentReplayServiceClient) QueryCommentReplayList(ctx context.Context,
 // All implementations must embed UnimplementedCommentReplayServiceServer
 // for forward compatibility
 type CommentReplayServiceServer interface {
-	// 添加产品评价回复表
+	// 添加产品评价回复
 	AddCommentReplay(context.Context, *AddCommentReplayReq) (*AddCommentReplayResp, error)
-	// 删除产品评价回复表
+	// 删除产品评价回复
 	DeleteCommentReplay(context.Context, *DeleteCommentReplayReq) (*DeleteCommentReplayResp, error)
-	// 更新产品评价回复表
+	// 更新产品评价回复
 	UpdateCommentReplay(context.Context, *UpdateCommentReplayReq) (*UpdateCommentReplayResp, error)
-	// 查询产品评价回复表详情
+	// 查询产品评价回复详情
 	QueryCommentReplayDetail(context.Context, *QueryCommentReplayDetailReq) (*QueryCommentReplayDetailResp, error)
-	// 查询产品评价回复表列表
+	// 查询产品评价回复列表
 	QueryCommentReplayList(context.Context, *QueryCommentReplayListReq) (*QueryCommentReplayListResp, error)
 	mustEmbedUnimplementedCommentReplayServiceServer()
 }
@@ -3483,13 +3483,13 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type ProductOperateLogServiceClient interface {
-	// 添加
+	// 添加商品操作日志
 	AddProductOperateLog(ctx context.Context, in *AddProductOperateLogReq, opts ...grpc.CallOption) (*AddProductOperateLogResp, error)
-	// 删除
+	// 删除商品操作日志
 	DeleteProductOperateLog(ctx context.Context, in *DeleteProductOperateLogReq, opts ...grpc.CallOption) (*DeleteProductOperateLogResp, error)
-	// 查询详情
+	// 查询商品操作日志详情
 	QueryProductOperateLogDetail(ctx context.Context, in *QueryProductOperateLogDetailReq, opts ...grpc.CallOption) (*QueryProductOperateLogDetailResp, error)
-	// 查询列表
+	// 查询商品操作日志列表
 	QueryProductOperateLogList(ctx context.Context, in *QueryProductOperateLogListReq, opts ...grpc.CallOption) (*QueryProductOperateLogListResp, error)
 }
 
@@ -3541,13 +3541,13 @@ func (c *productOperateLogServiceClient) QueryProductOperateLogList(ctx context.
 // All implementations must embed UnimplementedProductOperateLogServiceServer
 // for forward compatibility
 type ProductOperateLogServiceServer interface {
-	// 添加
+	// 添加商品操作日志
 	AddProductOperateLog(context.Context, *AddProductOperateLogReq) (*AddProductOperateLogResp, error)
-	// 删除
+	// 删除商品操作日志
 	DeleteProductOperateLog(context.Context, *DeleteProductOperateLogReq) (*DeleteProductOperateLogResp, error)
-	// 查询详情
+	// 查询商品操作日志详情
 	QueryProductOperateLogDetail(context.Context, *QueryProductOperateLogDetailReq) (*QueryProductOperateLogDetailResp, error)
-	// 查询列表
+	// 查询商品操作日志列表
 	QueryProductOperateLogList(context.Context, *QueryProductOperateLogListReq) (*QueryProductOperateLogListResp, error)
 	mustEmbedUnimplementedProductOperateLogServiceServer()
 }
@@ -3683,12 +3683,9 @@ var ProductOperateLogService_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	ProductVertifyRecordService_AddProductVertifyRecord_FullMethodName          = "/pmsclient.ProductVertifyRecordService/AddProductVertifyRecord"
-	ProductVertifyRecordService_DeleteProductVertifyRecord_FullMethodName       = "/pmsclient.ProductVertifyRecordService/DeleteProductVertifyRecord"
-	ProductVertifyRecordService_UpdateProductVertifyRecord_FullMethodName       = "/pmsclient.ProductVertifyRecordService/UpdateProductVertifyRecord"
-	ProductVertifyRecordService_UpdateProductVertifyRecordStatus_FullMethodName = "/pmsclient.ProductVertifyRecordService/UpdateProductVertifyRecordStatus"
-	ProductVertifyRecordService_QueryProductVertifyRecordDetail_FullMethodName  = "/pmsclient.ProductVertifyRecordService/QueryProductVertifyRecordDetail"
-	ProductVertifyRecordService_QueryProductVertifyRecordList_FullMethodName    = "/pmsclient.ProductVertifyRecordService/QueryProductVertifyRecordList"
+	ProductVertifyRecordService_AddProductVertifyRecord_FullMethodName         = "/pmsclient.ProductVertifyRecordService/AddProductVertifyRecord"
+	ProductVertifyRecordService_QueryProductVertifyRecordDetail_FullMethodName = "/pmsclient.ProductVertifyRecordService/QueryProductVertifyRecordDetail"
+	ProductVertifyRecordService_QueryProductVertifyRecordList_FullMethodName   = "/pmsclient.ProductVertifyRecordService/QueryProductVertifyRecordList"
 )
 
 // ProductVertifyRecordServiceClient is the client API for ProductVertifyRecordService service.
@@ -3697,12 +3694,6 @@ const (
 type ProductVertifyRecordServiceClient interface {
 	// 添加商品审核记录
 	AddProductVertifyRecord(ctx context.Context, in *AddProductVertifyRecordReq, opts ...grpc.CallOption) (*AddProductVertifyRecordResp, error)
-	// 删除商品审核记录
-	DeleteProductVertifyRecord(ctx context.Context, in *DeleteProductVertifyRecordReq, opts ...grpc.CallOption) (*DeleteProductVertifyRecordResp, error)
-	// 更新商品审核记录
-	UpdateProductVertifyRecord(ctx context.Context, in *UpdateProductVertifyRecordReq, opts ...grpc.CallOption) (*UpdateProductVertifyRecordResp, error)
-	// 更新商品审核记录状态
-	UpdateProductVertifyRecordStatus(ctx context.Context, in *UpdateProductVertifyRecordStatusReq, opts ...grpc.CallOption) (*UpdateProductVertifyRecordStatusResp, error)
 	// 查询商品审核记录详情
 	QueryProductVertifyRecordDetail(ctx context.Context, in *QueryProductVertifyRecordDetailReq, opts ...grpc.CallOption) (*QueryProductVertifyRecordDetailResp, error)
 	// 查询商品审核记录列表
@@ -3720,33 +3711,6 @@ func NewProductVertifyRecordServiceClient(cc grpc.ClientConnInterface) ProductVe
 func (c *productVertifyRecordServiceClient) AddProductVertifyRecord(ctx context.Context, in *AddProductVertifyRecordReq, opts ...grpc.CallOption) (*AddProductVertifyRecordResp, error) {
 	out := new(AddProductVertifyRecordResp)
 	err := c.cc.Invoke(ctx, ProductVertifyRecordService_AddProductVertifyRecord_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *productVertifyRecordServiceClient) DeleteProductVertifyRecord(ctx context.Context, in *DeleteProductVertifyRecordReq, opts ...grpc.CallOption) (*DeleteProductVertifyRecordResp, error) {
-	out := new(DeleteProductVertifyRecordResp)
-	err := c.cc.Invoke(ctx, ProductVertifyRecordService_DeleteProductVertifyRecord_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *productVertifyRecordServiceClient) UpdateProductVertifyRecord(ctx context.Context, in *UpdateProductVertifyRecordReq, opts ...grpc.CallOption) (*UpdateProductVertifyRecordResp, error) {
-	out := new(UpdateProductVertifyRecordResp)
-	err := c.cc.Invoke(ctx, ProductVertifyRecordService_UpdateProductVertifyRecord_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *productVertifyRecordServiceClient) UpdateProductVertifyRecordStatus(ctx context.Context, in *UpdateProductVertifyRecordStatusReq, opts ...grpc.CallOption) (*UpdateProductVertifyRecordStatusResp, error) {
-	out := new(UpdateProductVertifyRecordStatusResp)
-	err := c.cc.Invoke(ctx, ProductVertifyRecordService_UpdateProductVertifyRecordStatus_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -3777,12 +3741,6 @@ func (c *productVertifyRecordServiceClient) QueryProductVertifyRecordList(ctx co
 type ProductVertifyRecordServiceServer interface {
 	// 添加商品审核记录
 	AddProductVertifyRecord(context.Context, *AddProductVertifyRecordReq) (*AddProductVertifyRecordResp, error)
-	// 删除商品审核记录
-	DeleteProductVertifyRecord(context.Context, *DeleteProductVertifyRecordReq) (*DeleteProductVertifyRecordResp, error)
-	// 更新商品审核记录
-	UpdateProductVertifyRecord(context.Context, *UpdateProductVertifyRecordReq) (*UpdateProductVertifyRecordResp, error)
-	// 更新商品审核记录状态
-	UpdateProductVertifyRecordStatus(context.Context, *UpdateProductVertifyRecordStatusReq) (*UpdateProductVertifyRecordStatusResp, error)
 	// 查询商品审核记录详情
 	QueryProductVertifyRecordDetail(context.Context, *QueryProductVertifyRecordDetailReq) (*QueryProductVertifyRecordDetailResp, error)
 	// 查询商品审核记录列表
@@ -3796,15 +3754,6 @@ type UnimplementedProductVertifyRecordServiceServer struct {
 
 func (UnimplementedProductVertifyRecordServiceServer) AddProductVertifyRecord(context.Context, *AddProductVertifyRecordReq) (*AddProductVertifyRecordResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AddProductVertifyRecord not implemented")
-}
-func (UnimplementedProductVertifyRecordServiceServer) DeleteProductVertifyRecord(context.Context, *DeleteProductVertifyRecordReq) (*DeleteProductVertifyRecordResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method DeleteProductVertifyRecord not implemented")
-}
-func (UnimplementedProductVertifyRecordServiceServer) UpdateProductVertifyRecord(context.Context, *UpdateProductVertifyRecordReq) (*UpdateProductVertifyRecordResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateProductVertifyRecord not implemented")
-}
-func (UnimplementedProductVertifyRecordServiceServer) UpdateProductVertifyRecordStatus(context.Context, *UpdateProductVertifyRecordStatusReq) (*UpdateProductVertifyRecordStatusResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateProductVertifyRecordStatus not implemented")
 }
 func (UnimplementedProductVertifyRecordServiceServer) QueryProductVertifyRecordDetail(context.Context, *QueryProductVertifyRecordDetailReq) (*QueryProductVertifyRecordDetailResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method QueryProductVertifyRecordDetail not implemented")
@@ -3840,60 +3789,6 @@ func _ProductVertifyRecordService_AddProductVertifyRecord_Handler(srv interface{
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ProductVertifyRecordServiceServer).AddProductVertifyRecord(ctx, req.(*AddProductVertifyRecordReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _ProductVertifyRecordService_DeleteProductVertifyRecord_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(DeleteProductVertifyRecordReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ProductVertifyRecordServiceServer).DeleteProductVertifyRecord(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: ProductVertifyRecordService_DeleteProductVertifyRecord_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ProductVertifyRecordServiceServer).DeleteProductVertifyRecord(ctx, req.(*DeleteProductVertifyRecordReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _ProductVertifyRecordService_UpdateProductVertifyRecord_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UpdateProductVertifyRecordReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ProductVertifyRecordServiceServer).UpdateProductVertifyRecord(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: ProductVertifyRecordService_UpdateProductVertifyRecord_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ProductVertifyRecordServiceServer).UpdateProductVertifyRecord(ctx, req.(*UpdateProductVertifyRecordReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _ProductVertifyRecordService_UpdateProductVertifyRecordStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UpdateProductVertifyRecordStatusReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ProductVertifyRecordServiceServer).UpdateProductVertifyRecordStatus(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: ProductVertifyRecordService_UpdateProductVertifyRecordStatus_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ProductVertifyRecordServiceServer).UpdateProductVertifyRecordStatus(ctx, req.(*UpdateProductVertifyRecordStatusReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -3944,18 +3839,6 @@ var ProductVertifyRecordService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "AddProductVertifyRecord",
 			Handler:    _ProductVertifyRecordService_AddProductVertifyRecord_Handler,
-		},
-		{
-			MethodName: "DeleteProductVertifyRecord",
-			Handler:    _ProductVertifyRecordService_DeleteProductVertifyRecord_Handler,
-		},
-		{
-			MethodName: "UpdateProductVertifyRecord",
-			Handler:    _ProductVertifyRecordService_UpdateProductVertifyRecord_Handler,
-		},
-		{
-			MethodName: "UpdateProductVertifyRecordStatus",
-			Handler:    _ProductVertifyRecordService_UpdateProductVertifyRecordStatus_Handler,
 		},
 		{
 			MethodName: "QueryProductVertifyRecordDetail",

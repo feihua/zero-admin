@@ -1,6 +1,7 @@
 package svc
 
 import (
+	"github.com/feihua/zero-admin/rpc/pms/gen/model"
 	"github.com/feihua/zero-admin/rpc/pms/gen/query"
 	"github.com/feihua/zero-admin/rpc/pms/internal/config"
 	"github.com/zeromicro/go-zero/core/logx"
@@ -14,25 +15,11 @@ type ServiceContext struct {
 	c  config.Config
 	DB *gorm.DB
 
-	//PmsAlbumModel                            pmsmodel.PmsAlbumModel
-	//PmsAlbumPicModel                         pmsmodel.PmsAlbumPicModel
-	//PmsBrandModel                            pmsmodel.PmsBrandModel
-	//PmsCommentModel                          pmsmodel.PmsCommentModel
-	//PmsCommentReplayModel                    pmsmodel.PmsCommentReplayModel
-	//PmsFeightTemplateModel                   pmsmodel.PmsFeightTemplateModel
-	//PmsMemberPriceModel                      pmsmodel.PmsMemberPriceModel
-	//PmsProductAttributeCategoryModel         pmsmodel.PmsProductAttributeCategoryModel
-	//PmsProductAttributeModel                 pmsmodel.PmsProductAttributeModel
-	//PmsProductAttributeValueModel            pmsmodel.PmsProductAttributeValueModel
-	//PmsProductCategoryAttributeRelationModel pmsmodel.PmsProductCategoryAttributeRelationModel
-	//PmsProductCategoryModel                  pmsmodel.PmsProductCategoryModel
-	//PmsProductFullReductionModel             pmsmodel.PmsProductFullReductionModel
-	//PmsProductLadderModel                    pmsmodel.PmsProductLadderModel
-	//PmsProductModel                          pmsmodel.PmsProductModel
-	//PmsProductOperateLogModel                pmsmodel.PmsProductOperateLogModel
-	//PmsProductVertifyRecordModel             pmsmodel.PmsProductVertifyRecordModel
-	//PmsSkuStockModel                         pmsmodel.PmsSkuStockModel
-	//PmsCollectModel                          pmsmodel.PmsProductCollectModel
+	ProductCommentModel       model.ProductCommentModel
+	ProductCommentReplayModel model.ProductCommentReplayModel
+	ProductOperateLogModel    model.ProductOperateLogModel
+	ProductVertifyRecordModel model.ProductVertifyRecordModel
+	ProductCollectModel       model.ProductCollectModel
 }
 
 func NewServiceContext(c config.Config) *ServiceContext {
@@ -48,30 +35,20 @@ func NewServiceContext(c config.Config) *ServiceContext {
 	logx.Debug("mysql已连接")
 	query.SetDefault(DB)
 
-	//sqlConn := sqlx.NewMysql(c.Mysql.Datasource)
+	ProductCommentModel := model.NewProductCommentModel(c.Mongo.Datasource, c.Mongo.Db, "product_comment")
+	ProductCommentReplayModel := model.NewProductCommentReplayModel(c.Mongo.Datasource, c.Mongo.Db, "product_comment_replay")
+	ProductOperateLogModel := model.NewProductOperateLogModel(c.Mongo.Datasource, c.Mongo.Db, "product_operate_log")
+	ProductVertifyRecordModel := model.NewProductVertifyRecordModel(c.Mongo.Datasource, c.Mongo.Db, "product_vertify_record")
+	ProductCollectModel := model.NewProductCollectModel(c.Mongo.Datasource, c.Mongo.Db, "product_collect")
 	return &ServiceContext{
 		c:  c,
 		DB: DB,
 
-		//PmsAlbumModel:                            pmsmodel.NewPmsAlbumModel(sqlConn),
-		//PmsAlbumPicModel:                         pmsmodel.NewPmsAlbumPicModel(sqlConn),
-		//PmsBrandModel:                            pmsmodel.NewPmsBrandModel(sqlConn),
-		//PmsCommentModel:                          pmsmodel.NewPmsCommentModel(sqlConn),
-		//PmsCommentReplayModel:                    pmsmodel.NewPmsCommentReplayModel(sqlConn),
-		//PmsFeightTemplateModel:                   pmsmodel.NewPmsFeightTemplateModel(sqlConn),
-		//PmsMemberPriceModel:                      pmsmodel.NewPmsMemberPriceModel(sqlConn),
-		//PmsProductAttributeCategoryModel:         pmsmodel.NewPmsProductAttributeCategoryModel(sqlConn),
-		//PmsProductAttributeModel:                 pmsmodel.NewPmsProductAttributeModel(sqlConn),
-		//PmsProductAttributeValueModel:            pmsmodel.NewPmsProductAttributeValueModel(sqlConn),
-		//PmsProductCategoryAttributeRelationModel: pmsmodel.NewPmsProductCategoryAttributeRelationModel(sqlConn),
-		//PmsProductCategoryModel:                  pmsmodel.NewPmsProductCategoryModel(sqlConn),
-		//PmsProductFullReductionModel:             pmsmodel.NewPmsProductFullReductionModel(sqlConn),
-		//PmsProductLadderModel:                    pmsmodel.NewPmsProductLadderModel(sqlConn),
-		//PmsProductModel:                          pmsmodel.NewPmsProductModel(sqlConn),
-		//PmsProductOperateLogModel:                pmsmodel.NewPmsProductOperateLogModel(sqlConn),
-		//PmsProductVertifyRecordModel:             pmsmodel.NewPmsProductVertifyRecordModel(sqlConn),
-		//PmsSkuStockModel:                         pmsmodel.NewPmsSkuStockModel(sqlConn),
-		//PmsCollectModel:                          pmsmodel.NewPmsProductCollectModel(sqlConn),
+		ProductCommentModel:       ProductCommentModel,
+		ProductCommentReplayModel: ProductCommentReplayModel,
+		ProductOperateLogModel:    ProductOperateLogModel,
+		ProductVertifyRecordModel: ProductVertifyRecordModel,
+		ProductCollectModel:       ProductCollectModel,
 	}
 }
 

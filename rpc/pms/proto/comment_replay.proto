@@ -4,14 +4,13 @@ package main;
 
 option go_package = "./proto";
 
-// 添加产品评价回复表
+// 添加产品评价回复
 message AddCommentReplayReq {
-  int64 id = 1; //
+  int32 type = 1; //评论人员类型；0->会员；1->管理员
   int64 comment_id = 2; //评论id
   string member_nick_name = 3; //评论人员昵称
   string member_icon = 4; //评论人员头像
   string content = 5; //内容
-  int32 type = 7; //评论人员类型；0->会员；1->管理员
 
 }
 
@@ -19,36 +18,36 @@ message AddCommentReplayResp {
   string pong = 1;
 }
 
-// 删除产品评价回复表
+// 删除产品评价回复
 message DeleteCommentReplayReq {
-  repeated int64 ids = 1;
+  string id = 1;
 }
 
 message DeleteCommentReplayResp {
   string pong = 1;
 }
 
-// 更新产品评价回复表
+// 更新产品评价回复
 message UpdateCommentReplayReq {
-  int64 id = 1; //
+  string id = 1; //
   int64 comment_id = 2; //评论id
   string member_nick_name = 3; //评论人员昵称
   string member_icon = 4; //评论人员头像
   string content = 5; //内容
   int32 type = 7; //评论人员类型；0->会员；1->管理员
-
 }
 
 message UpdateCommentReplayResp {
   string pong = 1;
 }
-// 查询产品评价回复表详情
+
+// 查询产品评价回复详情
 message QueryCommentReplayDetailReq {
-    int64 id = 1;
+  string id = 1;
 }
 
 message QueryCommentReplayDetailResp {
-  int64 id = 1; //
+  string id = 1; //
   int64 comment_id = 2; //评论id
   string member_nick_name = 3; //评论人员昵称
   string member_icon = 4; //评论人员头像
@@ -58,16 +57,15 @@ message QueryCommentReplayDetailResp {
 
 }
 
-// 分页查询产品评价回复表列表
+// 分页查询产品评价回复列表
 message QueryCommentReplayListReq {
   int64 page_num = 1; //第几页
   int64 page_size = 2; //每页的数量
   int64 comment_id = 3; //
-
 }
 
 message CommentReplayListData {
-  int64 id = 1; //
+  string id = 1; //
   int64 comment_id = 2; //评论id
   string member_nick_name = 3; //评论人员昵称
   string member_icon = 4; //评论人员头像
@@ -82,17 +80,17 @@ message QueryCommentReplayListResp {
   repeated  CommentReplayListData list = 2;
 }
 
-// 产品评价回复表
+// 产品评价回复
 service CommentReplayService {
-  // 添加产品评价回复表
+  // 添加产品评价回复
   rpc AddCommentReplay(AddCommentReplayReq) returns (AddCommentReplayResp){}
-  // 删除产品评价回复表
+  // 删除产品评价回复
   rpc DeleteCommentReplay(DeleteCommentReplayReq) returns (DeleteCommentReplayResp){}
-  // 更新产品评价回复表
+  // 更新产品评价回复
   rpc UpdateCommentReplay(UpdateCommentReplayReq) returns (UpdateCommentReplayResp ){}
-  // 查询产品评价回复表详情
-   rpc QueryCommentReplayDetail(QueryCommentReplayDetailReq) returns (QueryCommentReplayDetailResp){}
-  // 查询产品评价回复表列表
+  // 查询产品评价回复详情
+  rpc QueryCommentReplayDetail(QueryCommentReplayDetailReq) returns (QueryCommentReplayDetailResp){}
+  // 查询产品评价回复列表
   rpc QueryCommentReplayList(QueryCommentReplayListReq) returns (QueryCommentReplayListResp){}
 
 

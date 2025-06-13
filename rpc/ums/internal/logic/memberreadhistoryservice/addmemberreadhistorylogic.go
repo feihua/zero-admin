@@ -3,7 +3,7 @@ package memberreadhistoryservicelogic
 import (
 	"context"
 	"errors"
-	mymongo "github.com/feihua/zero-admin/rpc/ums/gen/mongo"
+	"github.com/feihua/zero-admin/rpc/ums/gen/model"
 	"github.com/feihua/zero-admin/rpc/ums/internal/svc"
 	"github.com/feihua/zero-admin/rpc/ums/umsclient"
 	"github.com/zeromicro/go-zero/core/logc"
@@ -33,7 +33,7 @@ func NewAddMemberReadHistoryLogic(ctx context.Context, svcCtx *svc.ServiceContex
 
 // AddMemberReadHistory 添加用户商品浏览历史记录
 func (l *AddMemberReadHistoryLogic) AddMemberReadHistory(in *umsclient.AddMemberReadHistoryReq) (*umsclient.AddMemberReadHistoryResp, error) {
-	err := l.svcCtx.MemberBrowseRecordModel.Insert(l.ctx, &mymongo.MemberBrowseRecord{
+	err := l.svcCtx.MemberBrowseRecordModel.Insert(l.ctx, &model.MemberBrowseRecord{
 		MemberId:        in.MemberId,        // 会员id
 		MemberNickName:  in.MemberNickName,  // 会员姓名
 		MemberIcon:      in.MemberIcon,      // 会员头像

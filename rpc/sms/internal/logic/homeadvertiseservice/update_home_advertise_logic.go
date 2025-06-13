@@ -72,8 +72,8 @@ func (l *UpdateHomeAdvertiseLogic) UpdateHomeAdvertise(in *smsclient.UpdateHomeA
 		StartTime:  startTime,     // 开始时间
 		EndTime:    endTime,       // 结束时间
 		Status:     in.Status,     // 上下线状态：0->下线；1->上线
-		ClickCount: in.ClickCount, // 点击数
-		OrderCount: in.OrderCount, // 下单数
+		ClickCount: ad.ClickCount, // 点击数
+		OrderCount: ad.OrderCount, // 下单数
 		URL:        in.Url,        // 链接地址
 		Remark:     in.Remark,     // 备注
 		Sort:       in.Sort,       // 排序

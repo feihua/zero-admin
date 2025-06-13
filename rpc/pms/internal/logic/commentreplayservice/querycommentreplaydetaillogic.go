@@ -4,7 +4,6 @@ import (
 	"context"
 	"errors"
 	"github.com/feihua/zero-admin/pkg/time_util"
-	"github.com/feihua/zero-admin/rpc/pms/gen/query"
 	"github.com/feihua/zero-admin/rpc/pms/internal/svc"
 	"github.com/feihua/zero-admin/rpc/pms/pmsclient"
 	"github.com/zeromicro/go-zero/core/logc"
@@ -32,7 +31,7 @@ func NewQueryCommentReplayDetailLogic(ctx context.Context, svcCtx *svc.ServiceCo
 
 // QueryCommentReplayDetail 查询产品评价回复详情
 func (l *QueryCommentReplayDetailLogic) QueryCommentReplayDetail(in *pmsclient.QueryCommentReplayDetailReq) (*pmsclient.QueryCommentReplayDetailResp, error) {
-	item, err := query.PmsCommentReplay.WithContext(l.ctx).Where(query.PmsCommentReplay.ID.Eq(in.Id)).First()
+	item, err := l.svcCtx.ProductCommentReplayModel.FindOne(l.ctx, in.Id)
 
 	if err != nil {
 		logc.Errorf(l.ctx, "查询产品评价回复详情失败,参数:%+v,异常:%s", in, err.Error())
@@ -40,13 +39,13 @@ func (l *QueryCommentReplayDetailLogic) QueryCommentReplayDetail(in *pmsclient.Q
 	}
 
 	data := &pmsclient.QueryCommentReplayDetailResp{
-		Id:             item.ID,                              //
-		CommentId:      item.CommentID,                       // 评论id
-		MemberNickName: item.MemberNickName,                  // 评论人员昵称
-		MemberIcon:     item.MemberIcon,                      // 评论人员头像
-		Content:        item.Content,                         // 内容
-		CreateTime:     time_util.TimeToStr(item.CreateTime), // 评论时间
-		Type:           item.Type,                            // 评论人员类型；0->会员；1->管理员
+		Id:             item.ID.Hex(),                      //
+		CommentId:      item.CommentId,                     // 评论id
+		MemberNickName: item.MemberNickName,                // 评论人员昵称
+		MemberIcon:     item.MemberIcon,                    // 评论人员头像
+		Content:        item.Content,                       // 内容
+		CreateTime:     time_util.TimeToStr(item.CreateAt), // 评论时间
+		Type:           item.Type,                          // 评论人员类型；0->会员；1->管理员
 	}
 
 	return data, nil

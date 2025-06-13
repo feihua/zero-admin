@@ -88,7 +88,7 @@ type (
 	QuerySeckillActivityListByDateReq  = smsclient.QuerySeckillActivityListByDateReq
 	QuerySeckillActivityListReq        = smsclient.QuerySeckillActivityListReq
 	QuerySeckillActivityListResp       = smsclient.QuerySeckillActivityListResp
-	QuerySeckillProductByProductIdReq  = smsclient.QuerySeckillProductByProductIdReq
+	QuerySeckillProductBySkuIdReq      = smsclient.QuerySeckillProductBySkuIdReq
 	QuerySeckillProductDetailReq       = smsclient.QuerySeckillProductDetailReq
 	QuerySeckillProductDetailResp      = smsclient.QuerySeckillProductDetailResp
 	QuerySeckillProductListReq         = smsclient.QuerySeckillProductListReq

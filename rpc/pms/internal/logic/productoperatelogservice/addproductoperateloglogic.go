@@ -4,7 +4,6 @@ import (
 	"context"
 	"errors"
 	"github.com/feihua/zero-admin/rpc/pms/gen/model"
-	"github.com/feihua/zero-admin/rpc/pms/gen/query"
 	"github.com/feihua/zero-admin/rpc/pms/internal/svc"
 	"github.com/feihua/zero-admin/rpc/pms/pmsclient"
 	"github.com/zeromicro/go-zero/core/logc"
@@ -33,8 +32,8 @@ func NewAddProductOperateLogLogic(ctx context.Context, svcCtx *svc.ServiceContex
 
 // AddProductOperateLog 添加商品操作日志
 func (l *AddProductOperateLogLogic) AddProductOperateLog(in *pmsclient.AddProductOperateLogReq) (*pmsclient.AddProductOperateLogResp, error) {
-	err := query.PmsProductOperateLog.WithContext(l.ctx).Create(&model.PmsProductOperateLog{
-		ProductID:        in.ProductId,        // 产品id
+	err := l.svcCtx.ProductOperateLogModel.Insert(l.ctx, &model.ProductOperateLog{
+		ProductId:        in.ProductId,        // 产品id
 		PriceOld:         in.PriceOld,         // 原价
 		PriceNew:         in.PriceNew,         // 新价格
 		SalePriceOld:     in.SalePriceOld,     // 原售价

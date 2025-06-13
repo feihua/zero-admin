@@ -17,8 +17,6 @@ import (
 
 var (
 	Q                                   = new(Query)
-	PmsComment                          *pmsComment
-	PmsCommentReplay                    *pmsCommentReplay
 	PmsFeightTemplate                   *pmsFeightTemplate
 	PmsMemberPrice                      *pmsMemberPrice
 	PmsProduct                          *pmsProduct
@@ -28,18 +26,13 @@ var (
 	PmsProductBrand                     *pmsProductBrand
 	PmsProductCategory                  *pmsProductCategory
 	PmsProductCategoryAttributeRelation *pmsProductCategoryAttributeRelation
-	PmsProductCollect                   *pmsProductCollect
 	PmsProductFullReduction             *pmsProductFullReduction
 	PmsProductLadder                    *pmsProductLadder
-	PmsProductOperateLog                *pmsProductOperateLog
-	PmsProductVertifyRecord             *pmsProductVertifyRecord
 	PmsSkuStock                         *pmsSkuStock
 )
 
 func SetDefault(db *gorm.DB, opts ...gen.DOOption) {
 	*Q = *Use(db, opts...)
-	PmsComment = &Q.PmsComment
-	PmsCommentReplay = &Q.PmsCommentReplay
 	PmsFeightTemplate = &Q.PmsFeightTemplate
 	PmsMemberPrice = &Q.PmsMemberPrice
 	PmsProduct = &Q.PmsProduct
@@ -49,19 +42,14 @@ func SetDefault(db *gorm.DB, opts ...gen.DOOption) {
 	PmsProductBrand = &Q.PmsProductBrand
 	PmsProductCategory = &Q.PmsProductCategory
 	PmsProductCategoryAttributeRelation = &Q.PmsProductCategoryAttributeRelation
-	PmsProductCollect = &Q.PmsProductCollect
 	PmsProductFullReduction = &Q.PmsProductFullReduction
 	PmsProductLadder = &Q.PmsProductLadder
-	PmsProductOperateLog = &Q.PmsProductOperateLog
-	PmsProductVertifyRecord = &Q.PmsProductVertifyRecord
 	PmsSkuStock = &Q.PmsSkuStock
 }
 
 func Use(db *gorm.DB, opts ...gen.DOOption) *Query {
 	return &Query{
 		db:                                  db,
-		PmsComment:                          newPmsComment(db, opts...),
-		PmsCommentReplay:                    newPmsCommentReplay(db, opts...),
 		PmsFeightTemplate:                   newPmsFeightTemplate(db, opts...),
 		PmsMemberPrice:                      newPmsMemberPrice(db, opts...),
 		PmsProduct:                          newPmsProduct(db, opts...),
@@ -71,11 +59,8 @@ func Use(db *gorm.DB, opts ...gen.DOOption) *Query {
 		PmsProductBrand:                     newPmsProductBrand(db, opts...),
 		PmsProductCategory:                  newPmsProductCategory(db, opts...),
 		PmsProductCategoryAttributeRelation: newPmsProductCategoryAttributeRelation(db, opts...),
-		PmsProductCollect:                   newPmsProductCollect(db, opts...),
 		PmsProductFullReduction:             newPmsProductFullReduction(db, opts...),
 		PmsProductLadder:                    newPmsProductLadder(db, opts...),
-		PmsProductOperateLog:                newPmsProductOperateLog(db, opts...),
-		PmsProductVertifyRecord:             newPmsProductVertifyRecord(db, opts...),
 		PmsSkuStock:                         newPmsSkuStock(db, opts...),
 	}
 }
@@ -83,8 +68,6 @@ func Use(db *gorm.DB, opts ...gen.DOOption) *Query {
 type Query struct {
 	db *gorm.DB
 
-	PmsComment                          pmsComment
-	PmsCommentReplay                    pmsCommentReplay
 	PmsFeightTemplate                   pmsFeightTemplate
 	PmsMemberPrice                      pmsMemberPrice
 	PmsProduct                          pmsProduct
@@ -94,11 +77,8 @@ type Query struct {
 	PmsProductBrand                     pmsProductBrand
 	PmsProductCategory                  pmsProductCategory
 	PmsProductCategoryAttributeRelation pmsProductCategoryAttributeRelation
-	PmsProductCollect                   pmsProductCollect
 	PmsProductFullReduction             pmsProductFullReduction
 	PmsProductLadder                    pmsProductLadder
-	PmsProductOperateLog                pmsProductOperateLog
-	PmsProductVertifyRecord             pmsProductVertifyRecord
 	PmsSkuStock                         pmsSkuStock
 }
 
@@ -107,8 +87,6 @@ func (q *Query) Available() bool { return q.db != nil }
 func (q *Query) clone(db *gorm.DB) *Query {
 	return &Query{
 		db:                                  db,
-		PmsComment:                          q.PmsComment.clone(db),
-		PmsCommentReplay:                    q.PmsCommentReplay.clone(db),
 		PmsFeightTemplate:                   q.PmsFeightTemplate.clone(db),
 		PmsMemberPrice:                      q.PmsMemberPrice.clone(db),
 		PmsProduct:                          q.PmsProduct.clone(db),
@@ -118,11 +96,8 @@ func (q *Query) clone(db *gorm.DB) *Query {
 		PmsProductBrand:                     q.PmsProductBrand.clone(db),
 		PmsProductCategory:                  q.PmsProductCategory.clone(db),
 		PmsProductCategoryAttributeRelation: q.PmsProductCategoryAttributeRelation.clone(db),
-		PmsProductCollect:                   q.PmsProductCollect.clone(db),
 		PmsProductFullReduction:             q.PmsProductFullReduction.clone(db),
 		PmsProductLadder:                    q.PmsProductLadder.clone(db),
-		PmsProductOperateLog:                q.PmsProductOperateLog.clone(db),
-		PmsProductVertifyRecord:             q.PmsProductVertifyRecord.clone(db),
 		PmsSkuStock:                         q.PmsSkuStock.clone(db),
 	}
 }
@@ -138,8 +113,6 @@ func (q *Query) WriteDB() *Query {
 func (q *Query) ReplaceDB(db *gorm.DB) *Query {
 	return &Query{
 		db:                                  db,
-		PmsComment:                          q.PmsComment.replaceDB(db),
-		PmsCommentReplay:                    q.PmsCommentReplay.replaceDB(db),
 		PmsFeightTemplate:                   q.PmsFeightTemplate.replaceDB(db),
 		PmsMemberPrice:                      q.PmsMemberPrice.replaceDB(db),
 		PmsProduct:                          q.PmsProduct.replaceDB(db),
@@ -149,18 +122,13 @@ func (q *Query) ReplaceDB(db *gorm.DB) *Query {
 		PmsProductBrand:                     q.PmsProductBrand.replaceDB(db),
 		PmsProductCategory:                  q.PmsProductCategory.replaceDB(db),
 		PmsProductCategoryAttributeRelation: q.PmsProductCategoryAttributeRelation.replaceDB(db),
-		PmsProductCollect:                   q.PmsProductCollect.replaceDB(db),
 		PmsProductFullReduction:             q.PmsProductFullReduction.replaceDB(db),
 		PmsProductLadder:                    q.PmsProductLadder.replaceDB(db),
-		PmsProductOperateLog:                q.PmsProductOperateLog.replaceDB(db),
-		PmsProductVertifyRecord:             q.PmsProductVertifyRecord.replaceDB(db),
 		PmsSkuStock:                         q.PmsSkuStock.replaceDB(db),
 	}
 }
 
 type queryCtx struct {
-	PmsComment                          IPmsCommentDo
-	PmsCommentReplay                    IPmsCommentReplayDo
 	PmsFeightTemplate                   IPmsFeightTemplateDo
 	PmsMemberPrice                      IPmsMemberPriceDo
 	PmsProduct                          IPmsProductDo
@@ -170,18 +138,13 @@ type queryCtx struct {
 	PmsProductBrand                     IPmsProductBrandDo
 	PmsProductCategory                  IPmsProductCategoryDo
 	PmsProductCategoryAttributeRelation IPmsProductCategoryAttributeRelationDo
-	PmsProductCollect                   IPmsProductCollectDo
 	PmsProductFullReduction             IPmsProductFullReductionDo
 	PmsProductLadder                    IPmsProductLadderDo
-	PmsProductOperateLog                IPmsProductOperateLogDo
-	PmsProductVertifyRecord             IPmsProductVertifyRecordDo
 	PmsSkuStock                         IPmsSkuStockDo
 }
 
 func (q *Query) WithContext(ctx context.Context) *queryCtx {
 	return &queryCtx{
-		PmsComment:                          q.PmsComment.WithContext(ctx),
-		PmsCommentReplay:                    q.PmsCommentReplay.WithContext(ctx),
 		PmsFeightTemplate:                   q.PmsFeightTemplate.WithContext(ctx),
 		PmsMemberPrice:                      q.PmsMemberPrice.WithContext(ctx),
 		PmsProduct:                          q.PmsProduct.WithContext(ctx),
@@ -191,11 +154,8 @@ func (q *Query) WithContext(ctx context.Context) *queryCtx {
 		PmsProductBrand:                     q.PmsProductBrand.WithContext(ctx),
 		PmsProductCategory:                  q.PmsProductCategory.WithContext(ctx),
 		PmsProductCategoryAttributeRelation: q.PmsProductCategoryAttributeRelation.WithContext(ctx),
-		PmsProductCollect:                   q.PmsProductCollect.WithContext(ctx),
 		PmsProductFullReduction:             q.PmsProductFullReduction.WithContext(ctx),
 		PmsProductLadder:                    q.PmsProductLadder.WithContext(ctx),
-		PmsProductOperateLog:                q.PmsProductOperateLog.WithContext(ctx),
-		PmsProductVertifyRecord:             q.PmsProductVertifyRecord.WithContext(ctx),
 		PmsSkuStock:                         q.PmsSkuStock.WithContext(ctx),
 	}
 }

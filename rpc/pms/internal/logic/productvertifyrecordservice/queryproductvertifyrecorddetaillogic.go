@@ -4,7 +4,6 @@ import (
 	"context"
 	"errors"
 	"github.com/feihua/zero-admin/pkg/time_util"
-	"github.com/feihua/zero-admin/rpc/pms/gen/query"
 	"github.com/feihua/zero-admin/rpc/pms/internal/svc"
 	"github.com/feihua/zero-admin/rpc/pms/pmsclient"
 	"github.com/zeromicro/go-zero/core/logc"
@@ -32,7 +31,7 @@ func NewQueryProductVertifyRecordDetailLogic(ctx context.Context, svcCtx *svc.Se
 
 // QueryProductVertifyRecordDetail 查询商品审核记录详情
 func (l *QueryProductVertifyRecordDetailLogic) QueryProductVertifyRecordDetail(in *pmsclient.QueryProductVertifyRecordDetailReq) (*pmsclient.QueryProductVertifyRecordDetailResp, error) {
-	item, err := query.PmsProductVertifyRecord.WithContext(l.ctx).Where(query.PmsProductVertifyRecord.ID.Eq(in.Id)).First()
+	item, err := l.svcCtx.ProductVertifyRecordModel.FindOne(l.ctx, in.Id)
 
 	if err != nil {
 		logc.Errorf(l.ctx, "查询商品审核记录详情失败,参数:%+v,异常:%s", in, err.Error())
@@ -40,12 +39,12 @@ func (l *QueryProductVertifyRecordDetailLogic) QueryProductVertifyRecordDetail(i
 	}
 
 	data := &pmsclient.QueryProductVertifyRecordDetailResp{
-		Id:         item.ID,                              //
-		ProductId:  item.ProductID,                       // 商品id
-		CreateTime: time_util.TimeToStr(item.CreateTime), // 创建时间
-		ReviewMan:  item.ReviewMan,                       // 审核人
-		Status:     item.Status,                          // 审核状态：0->未通过；1->通过
-		Detail:     item.Detail,                          // 反馈详情
+		Id:         item.ID.Hex(),                      //
+		ProductId:  item.ProductId,                     // 商品id
+		CreateTime: time_util.TimeToStr(item.CreateAt), // 创建时间
+		ReviewMan:  item.ReviewMan,                     // 审核人
+		Status:     item.Status,                        // 审核状态：0->未通过；1->通过
+		Detail:     item.Detail,                        // 反馈详情
 	}
 
 	return data, nil

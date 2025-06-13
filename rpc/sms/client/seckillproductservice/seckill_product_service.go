@@ -88,7 +88,7 @@ type (
 	QuerySeckillActivityListByDateReq  = smsclient.QuerySeckillActivityListByDateReq
 	QuerySeckillActivityListReq        = smsclient.QuerySeckillActivityListReq
 	QuerySeckillActivityListResp       = smsclient.QuerySeckillActivityListResp
-	QuerySeckillProductByProductIdReq  = smsclient.QuerySeckillProductByProductIdReq
+	QuerySeckillProductBySkuIdReq      = smsclient.QuerySeckillProductBySkuIdReq
 	QuerySeckillProductDetailReq       = smsclient.QuerySeckillProductDetailReq
 	QuerySeckillProductDetailResp      = smsclient.QuerySeckillProductDetailResp
 	QuerySeckillProductListReq         = smsclient.QuerySeckillProductListReq
@@ -154,7 +154,7 @@ type (
 		// 查询秒杀商品列表
 		QuerySeckillProductList(ctx context.Context, in *QuerySeckillProductListReq, opts ...grpc.CallOption) (*QuerySeckillProductListResp, error)
 		// 查询秒杀商品详情(app)
-		QuerySeckillProductByProductId(ctx context.Context, in *QuerySeckillProductByProductIdReq, opts ...grpc.CallOption) (*QuerySeckillProductDetailResp, error)
+		QuerySeckillProductBySkuId(ctx context.Context, in *QuerySeckillProductBySkuIdReq, opts ...grpc.CallOption) (*QuerySeckillProductDetailResp, error)
 	}
 
 	defaultSeckillProductService struct {
@@ -205,7 +205,7 @@ func (m *defaultSeckillProductService) QuerySeckillProductList(ctx context.Conte
 }
 
 // 查询秒杀商品详情(app)
-func (m *defaultSeckillProductService) QuerySeckillProductByProductId(ctx context.Context, in *QuerySeckillProductByProductIdReq, opts ...grpc.CallOption) (*QuerySeckillProductDetailResp, error) {
+func (m *defaultSeckillProductService) QuerySeckillProductBySkuId(ctx context.Context, in *QuerySeckillProductBySkuIdReq, opts ...grpc.CallOption) (*QuerySeckillProductDetailResp, error) {
 	client := smsclient.NewSeckillProductServiceClient(m.cli.Conn())
-	return client.QuerySeckillProductByProductId(ctx, in, opts...)
+	return client.QuerySeckillProductBySkuId(ctx, in, opts...)
 }

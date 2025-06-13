@@ -4,7 +4,6 @@ import (
 	"context"
 	"errors"
 	"github.com/feihua/zero-admin/rpc/pms/gen/model"
-	"github.com/feihua/zero-admin/rpc/pms/gen/query"
 	"github.com/feihua/zero-admin/rpc/pms/internal/svc"
 	"github.com/feihua/zero-admin/rpc/pms/pmsclient"
 	"github.com/zeromicro/go-zero/core/logc"
@@ -33,8 +32,8 @@ func NewAddCommentReplayLogic(ctx context.Context, svcCtx *svc.ServiceContext) *
 
 // AddCommentReplay 添加产品评价回复
 func (l *AddCommentReplayLogic) AddCommentReplay(in *pmsclient.AddCommentReplayReq) (*pmsclient.AddCommentReplayResp, error) {
-	err := query.PmsCommentReplay.WithContext(l.ctx).Create(&model.PmsCommentReplay{
-		CommentID:      in.CommentId,      // 评论id
+	err := l.svcCtx.ProductCommentReplayModel.Insert(l.ctx, &model.ProductCommentReplay{
+		CommentId:      in.CommentId,      // 评论id
 		MemberNickName: in.MemberNickName, // 评论人员昵称
 		MemberIcon:     in.MemberIcon,     // 评论人员头像
 		Content:        in.Content,        // 内容

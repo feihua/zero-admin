@@ -45,21 +45,21 @@ func (l *QuerySeckillProductDetailLogic) QuerySeckillProductDetail(req *types.Qu
 	}
 
 	data := types.QuerySeckillProductDetailData{
-		Id:           detail.Id,                    // ID
-		ActivityId:   detail.ActivityId,            // 活动ID
-		SessionId:    detail.SessionId,             // 秒杀场次ID
-		SkuId:        detail.SkuId,                 // 商品SKU ID
-		SkuName:      detail.SkuName,               // 商品名称
-		SeckillPrice: float64(detail.SeckillPrice), // 秒杀价格
-		SeckillStock: detail.SeckillStock,          // 秒杀库存
-		StockLocked:  detail.StockLocked,           // 锁定库存
-		PerLimit:     detail.PerLimit,              // 每人限购数量
-		Sort:         detail.Sort,                  // 排序
-		Status:       detail.Status,                // 状态：0-未上架，1-已上架
-		CreateBy:     detail.CreateBy,              // 创建人ID
-		CreateTime:   detail.CreateTime,            // 创建时间
-		UpdateBy:     detail.UpdateBy,              // 更新人ID
-		UpdateTime:   detail.UpdateTime,            // 更新时间
+		Id:           detail.Id,           // ID
+		ActivityId:   detail.ActivityId,   // 活动ID
+		SessionId:    detail.SessionId,    // 秒杀场次ID
+		SkuId:        detail.SkuId,        // 商品SKU ID
+		SkuName:      detail.SkuName,      // 商品名称
+		SeckillPrice: detail.SeckillPrice, // 秒杀价格
+		SeckillStock: detail.SeckillStock, // 秒杀库存
+		StockLocked:  detail.StockLocked,  // 锁定库存
+		PerLimit:     detail.PerLimit,     // 每人限购数量
+		Sort:         detail.Sort,         // 排序
+		Status:       detail.Status,       // 状态：0-未上架，1-已上架
+		CreateBy:     detail.CreateBy,     // 创建人ID
+		CreateTime:   detail.CreateTime,   // 创建时间
+		UpdateBy:     detail.UpdateBy,     // 更新人ID
+		UpdateTime:   detail.UpdateTime,   // 更新时间
 
 	}
 	return &types.QuerySeckillProductDetailResp{

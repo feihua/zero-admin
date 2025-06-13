@@ -1,3 +1,4 @@
+drop table if exists pms_product_attribute;
 create table pms_product_attribute
 (
     id                            bigint auto_increment

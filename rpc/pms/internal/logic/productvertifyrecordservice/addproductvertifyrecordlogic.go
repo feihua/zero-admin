@@ -4,7 +4,6 @@ import (
 	"context"
 	"errors"
 	"github.com/feihua/zero-admin/rpc/pms/gen/model"
-	"github.com/feihua/zero-admin/rpc/pms/gen/query"
 	"github.com/feihua/zero-admin/rpc/pms/internal/svc"
 	"github.com/feihua/zero-admin/rpc/pms/pmsclient"
 	"github.com/zeromicro/go-zero/core/logc"
@@ -33,8 +32,8 @@ func NewAddProductVertifyRecordLogic(ctx context.Context, svcCtx *svc.ServiceCon
 
 // AddProductVertifyRecord 添加商品审核记录
 func (l *AddProductVertifyRecordLogic) AddProductVertifyRecord(in *pmsclient.AddProductVertifyRecordReq) (*pmsclient.AddProductVertifyRecordResp, error) {
-	err := query.PmsProductVertifyRecord.WithContext(l.ctx).Create(&model.PmsProductVertifyRecord{
-		ProductID: in.ProductId, // 商品id
+	err := l.svcCtx.ProductVertifyRecordModel.Insert(l.ctx, &model.ProductVertifyRecord{
+		ProductId: in.ProductId, // 商品id
 		ReviewMan: in.ReviewMan, // 审核人
 		Status:    in.Status,    // 审核状态：0->未通过；1->通过
 		Detail:    in.Detail,    // 反馈详情

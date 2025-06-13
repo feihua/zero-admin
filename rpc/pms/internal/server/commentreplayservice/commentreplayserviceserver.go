@@ -23,31 +23,31 @@ func NewCommentReplayServiceServer(svcCtx *svc.ServiceContext) *CommentReplaySer
 	}
 }
 
-// 添加产品评价回复表
+// 添加产品评价回复
 func (s *CommentReplayServiceServer) AddCommentReplay(ctx context.Context, in *pmsclient.AddCommentReplayReq) (*pmsclient.AddCommentReplayResp, error) {
 	l := commentreplayservicelogic.NewAddCommentReplayLogic(ctx, s.svcCtx)
 	return l.AddCommentReplay(in)
 }
 
-// 删除产品评价回复表
+// 删除产品评价回复
 func (s *CommentReplayServiceServer) DeleteCommentReplay(ctx context.Context, in *pmsclient.DeleteCommentReplayReq) (*pmsclient.DeleteCommentReplayResp, error) {
 	l := commentreplayservicelogic.NewDeleteCommentReplayLogic(ctx, s.svcCtx)
 	return l.DeleteCommentReplay(in)
 }
 
-// 更新产品评价回复表
+// 更新产品评价回复
 func (s *CommentReplayServiceServer) UpdateCommentReplay(ctx context.Context, in *pmsclient.UpdateCommentReplayReq) (*pmsclient.UpdateCommentReplayResp, error) {
 	l := commentreplayservicelogic.NewUpdateCommentReplayLogic(ctx, s.svcCtx)
 	return l.UpdateCommentReplay(in)
 }
 
-// 查询产品评价回复表详情
+// 查询产品评价回复详情
 func (s *CommentReplayServiceServer) QueryCommentReplayDetail(ctx context.Context, in *pmsclient.QueryCommentReplayDetailReq) (*pmsclient.QueryCommentReplayDetailResp, error) {
 	l := commentreplayservicelogic.NewQueryCommentReplayDetailLogic(ctx, s.svcCtx)
 	return l.QueryCommentReplayDetail(in)
 }
 
-// 查询产品评价回复表列表
+// 查询产品评价回复列表
 func (s *CommentReplayServiceServer) QueryCommentReplayList(ctx context.Context, in *pmsclient.QueryCommentReplayListReq) (*pmsclient.QueryCommentReplayListResp, error) {
 	l := commentreplayservicelogic.NewQueryCommentReplayListLogic(ctx, s.svcCtx)
 	return l.QueryCommentReplayList(in)

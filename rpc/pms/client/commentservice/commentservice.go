@@ -75,8 +75,6 @@ type (
 	DeleteProductOperateLogResp                   = pmsclient.DeleteProductOperateLogResp
 	DeleteProductReq                              = pmsclient.DeleteProductReq
 	DeleteProductResp                             = pmsclient.DeleteProductResp
-	DeleteProductVertifyRecordReq                 = pmsclient.DeleteProductVertifyRecordReq
-	DeleteProductVertifyRecordResp                = pmsclient.DeleteProductVertifyRecordResp
 	DeleteSkuStockReq                             = pmsclient.DeleteSkuStockReq
 	DeleteSkuStockResp                            = pmsclient.DeleteSkuStockResp
 	FeightTemplateListData                        = pmsclient.FeightTemplateListData
@@ -200,24 +198,20 @@ type (
 	UpdateProductSortReq                          = pmsclient.UpdateProductSortReq
 	UpdateProductStatusReq                        = pmsclient.UpdateProductStatusReq
 	UpdateProductStatusResp                       = pmsclient.UpdateProductStatusResp
-	UpdateProductVertifyRecordReq                 = pmsclient.UpdateProductVertifyRecordReq
-	UpdateProductVertifyRecordResp                = pmsclient.UpdateProductVertifyRecordResp
-	UpdateProductVertifyRecordStatusReq           = pmsclient.UpdateProductVertifyRecordStatusReq
-	UpdateProductVertifyRecordStatusResp          = pmsclient.UpdateProductVertifyRecordStatusResp
 	UpdateSkuStockData                            = pmsclient.UpdateSkuStockData
 	UpdateSkuStockReq                             = pmsclient.UpdateSkuStockReq
 	UpdateSkuStockResp                            = pmsclient.UpdateSkuStockResp
 
 	CommentService interface {
-		// 添加商品评价表
+		// 添加商品评价
 		AddComment(ctx context.Context, in *AddCommentReq, opts ...grpc.CallOption) (*AddCommentResp, error)
-		// 删除商品评价表
+		// 删除商品评价
 		DeleteComment(ctx context.Context, in *DeleteCommentReq, opts ...grpc.CallOption) (*DeleteCommentResp, error)
-		// 更新商品评价表
+		// 更新商品评价
 		UpdateComment(ctx context.Context, in *UpdateCommentReq, opts ...grpc.CallOption) (*UpdateCommentResp, error)
-		// 查询商品评价表详情
+		// 查询商品评价详情
 		QueryCommentDetail(ctx context.Context, in *QueryCommentDetailReq, opts ...grpc.CallOption) (*QueryCommentDetailResp, error)
-		// 查询商品评价表列表
+		// 查询商品评价列表
 		QueryCommentList(ctx context.Context, in *QueryCommentListReq, opts ...grpc.CallOption) (*QueryCommentListResp, error)
 	}
 
@@ -232,31 +226,31 @@ func NewCommentService(cli zrpc.Client) CommentService {
 	}
 }
 
-// 添加商品评价表
+// 添加商品评价
 func (m *defaultCommentService) AddComment(ctx context.Context, in *AddCommentReq, opts ...grpc.CallOption) (*AddCommentResp, error) {
 	client := pmsclient.NewCommentServiceClient(m.cli.Conn())
 	return client.AddComment(ctx, in, opts...)
 }
 
-// 删除商品评价表
+// 删除商品评价
 func (m *defaultCommentService) DeleteComment(ctx context.Context, in *DeleteCommentReq, opts ...grpc.CallOption) (*DeleteCommentResp, error) {
 	client := pmsclient.NewCommentServiceClient(m.cli.Conn())
 	return client.DeleteComment(ctx, in, opts...)
 }
 
-// 更新商品评价表
+// 更新商品评价
 func (m *defaultCommentService) UpdateComment(ctx context.Context, in *UpdateCommentReq, opts ...grpc.CallOption) (*UpdateCommentResp, error) {
 	client := pmsclient.NewCommentServiceClient(m.cli.Conn())
 	return client.UpdateComment(ctx, in, opts...)
 }
 
-// 查询商品评价表详情
+// 查询商品评价详情
 func (m *defaultCommentService) QueryCommentDetail(ctx context.Context, in *QueryCommentDetailReq, opts ...grpc.CallOption) (*QueryCommentDetailResp, error) {
 	client := pmsclient.NewCommentServiceClient(m.cli.Conn())
 	return client.QueryCommentDetail(ctx, in, opts...)
 }
 
-// 查询商品评价表列表
+// 查询商品评价列表
 func (m *defaultCommentService) QueryCommentList(ctx context.Context, in *QueryCommentListReq, opts ...grpc.CallOption) (*QueryCommentListResp, error) {
 	client := pmsclient.NewCommentServiceClient(m.cli.Conn())
 	return client.QueryCommentList(ctx, in, opts...)

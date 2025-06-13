@@ -3,7 +3,7 @@ package memberproductcategoryrelationservicelogic
 import (
 	"context"
 	"errors"
-	mymongo "github.com/feihua/zero-admin/rpc/ums/gen/mongo"
+	"github.com/feihua/zero-admin/rpc/ums/gen/model"
 	"github.com/zeromicro/go-zero/core/logc"
 
 	"github.com/feihua/zero-admin/rpc/ums/internal/svc"
@@ -34,7 +34,7 @@ func NewAddMemberProductCategoryRelationLogic(ctx context.Context, svcCtx *svc.S
 // AddMemberProductCategoryRelation 添加会员与产品分类关系（用户喜欢的分类）
 func (l *AddMemberProductCategoryRelationLogic) AddMemberProductCategoryRelation(in *umsclient.AddMemberProductCategoryRelationReq) (*umsclient.AddMemberProductCategoryRelationResp, error) {
 
-	err := l.svcCtx.MemberProductCategoryRelationModel.Insert(l.ctx, &mymongo.MemberProductCategoryRelation{
+	err := l.svcCtx.MemberProductCategoryRelationModel.Insert(l.ctx, &model.MemberProductCategoryRelation{
 		MemberId:          in.MemberId,          // 会员id
 		ProductCategoryId: in.ProductCategoryId, // 商品分类id
 	})

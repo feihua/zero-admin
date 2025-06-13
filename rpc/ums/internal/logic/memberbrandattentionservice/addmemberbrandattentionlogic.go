@@ -3,7 +3,7 @@ package memberbrandattentionservicelogic
 import (
 	"context"
 	"errors"
-	mymongo "github.com/feihua/zero-admin/rpc/ums/gen/mongo"
+	"github.com/feihua/zero-admin/rpc/ums/gen/model"
 	"github.com/feihua/zero-admin/rpc/ums/gen/query"
 	"github.com/feihua/zero-admin/rpc/ums/internal/svc"
 	"github.com/feihua/zero-admin/rpc/ums/umsclient"
@@ -38,7 +38,7 @@ func (l *AddMemberBrandAttentionLogic) AddMemberBrandAttention(in *umsclient.Add
 	member, _ := query.UmsMemberInfo.WithContext(l.ctx).Where(query.UmsMemberInfo.MemberID.Eq(in.MemberId)).First()
 
 	// 2.添加品牌关注
-	err := l.svcCtx.MemberBrandAttentionModel.Insert(l.ctx, &mymongo.MemberBrandAttention{
+	err := l.svcCtx.MemberBrandAttentionModel.Insert(l.ctx, &model.MemberBrandAttention{
 		ID:             primitive.ObjectID{},
 		MemberId:       in.MemberId,     // 会员id
 		MemberNickName: member.Nickname, // 会员姓名

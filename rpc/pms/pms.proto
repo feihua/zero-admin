@@ -4,9 +4,9 @@ package pmsclient;
 
 option go_package = "./pmsclient";
 
-// 添加商品评价表
+// 添加商品评价
 message AddCommentReq {
-  int64 id = 1; //
+  int32 replay_count = 1; //回复数量
   int64 product_id = 2; //商品id
   string member_nick_name = 3; //评价者昵称
   string product_name = 4; //商品名称
@@ -19,7 +19,6 @@ message AddCommentReq {
   string content = 12; //内容
   string pics = 13; //上传图片地址，以逗号隔开
   string member_icon = 14; //评论用户头像
-  int32 replay_count = 15; //回复数量
 
 }
 
@@ -27,18 +26,18 @@ message AddCommentResp {
   string pong = 1;
 }
 
-// 删除商品评价表
+// 删除商品评价
 message DeleteCommentReq {
-  repeated int64 ids = 1;
+  string id = 1;
 }
 
 message DeleteCommentResp {
   string pong = 1;
 }
 
-// 更新商品评价表
+// 更新商品评价
 message UpdateCommentReq {
-  int64 id = 1; //
+  string id = 1; //
   int64 product_id = 2; //商品id
   string member_nick_name = 3; //评价者昵称
   string product_name = 4; //商品名称
@@ -52,8 +51,6 @@ message UpdateCommentReq {
   string pics = 13; //上传图片地址，以逗号隔开
   string member_icon = 14; //评论用户头像
   int32 replay_count = 15; //回复数量
-
-
 }
 
 message UpdateCommentResp {
@@ -61,13 +58,13 @@ message UpdateCommentResp {
 }
 
 
-// 查询商品评价表详情
+// 查询商品评价详情
 message QueryCommentDetailReq {
-    int64 id = 1;
+  string id = 1;
 }
 
 message QueryCommentDetailResp {
-  int64 id = 1; //
+  string id = 1; //
   int64 product_id = 2; //商品id
   string member_nick_name = 3; //评价者昵称
   string product_name = 4; //商品名称
@@ -85,17 +82,15 @@ message QueryCommentDetailResp {
 
 }
 
-// 分页查询商品评价表列表
+// 分页查询商品评价列表
 message QueryCommentListReq {
   int64 page_num = 1; //第几页
   int64 page_size = 2; //每页的数量
-  int64 product_id = 3; //
-
-
+  int64 product_id = 3;
 }
 
 message CommentListData {
-  int64 id = 1; //
+  string id = 1; //
   int64 product_id = 2; //商品id
   string member_nick_name = 3; //评价者昵称
   string product_name = 4; //商品名称
@@ -118,31 +113,30 @@ message QueryCommentListResp {
   repeated  CommentListData list = 2;
 }
 
-// 商品评价表
+// 商品评价
 service CommentService {
-  // 添加商品评价表
+  // 添加商品评价
   rpc AddComment(AddCommentReq) returns (AddCommentResp){}
-  // 删除商品评价表
+  // 删除商品评价
   rpc DeleteComment(DeleteCommentReq) returns (DeleteCommentResp){}
-  // 更新商品评价表
+  // 更新商品评价
   rpc UpdateComment(UpdateCommentReq) returns (UpdateCommentResp ){}
-  // 查询商品评价表详情
-   rpc QueryCommentDetail(QueryCommentDetailReq) returns (QueryCommentDetailResp){}
-  // 查询商品评价表列表
+  // 查询商品评价详情
+  rpc QueryCommentDetail(QueryCommentDetailReq) returns (QueryCommentDetailResp){}
+  // 查询商品评价列表
   rpc QueryCommentList(QueryCommentListReq) returns (QueryCommentListResp){}
 
 
 }
 
 
-// 添加产品评价回复表
+// 添加产品评价回复
 message AddCommentReplayReq {
-  int64 id = 1; //
+  int32 type = 1; //评论人员类型；0->会员；1->管理员
   int64 comment_id = 2; //评论id
   string member_nick_name = 3; //评论人员昵称
   string member_icon = 4; //评论人员头像
   string content = 5; //内容
-  int32 type = 7; //评论人员类型；0->会员；1->管理员
 
 }
 
@@ -150,36 +144,36 @@ message AddCommentReplayResp {
   string pong = 1;
 }
 
-// 删除产品评价回复表
+// 删除产品评价回复
 message DeleteCommentReplayReq {
-  repeated int64 ids = 1;
+  string id = 1;
 }
 
 message DeleteCommentReplayResp {
   string pong = 1;
 }
 
-// 更新产品评价回复表
+// 更新产品评价回复
 message UpdateCommentReplayReq {
-  int64 id = 1; //
+  string id = 1; //
   int64 comment_id = 2; //评论id
   string member_nick_name = 3; //评论人员昵称
   string member_icon = 4; //评论人员头像
   string content = 5; //内容
   int32 type = 7; //评论人员类型；0->会员；1->管理员
-
 }
 
 message UpdateCommentReplayResp {
   string pong = 1;
 }
-// 查询产品评价回复表详情
+
+// 查询产品评价回复详情
 message QueryCommentReplayDetailReq {
-    int64 id = 1;
+  string id = 1;
 }
 
 message QueryCommentReplayDetailResp {
-  int64 id = 1; //
+  string id = 1; //
   int64 comment_id = 2; //评论id
   string member_nick_name = 3; //评论人员昵称
   string member_icon = 4; //评论人员头像
@@ -189,16 +183,15 @@ message QueryCommentReplayDetailResp {
 
 }
 
-// 分页查询产品评价回复表列表
+// 分页查询产品评价回复列表
 message QueryCommentReplayListReq {
   int64 page_num = 1; //第几页
   int64 page_size = 2; //每页的数量
   int64 comment_id = 3; //
-
 }
 
 message CommentReplayListData {
-  int64 id = 1; //
+  string id = 1; //
   int64 comment_id = 2; //评论id
   string member_nick_name = 3; //评论人员昵称
   string member_icon = 4; //评论人员头像
@@ -213,17 +206,17 @@ message QueryCommentReplayListResp {
   repeated  CommentReplayListData list = 2;
 }
 
-// 产品评价回复表
+// 产品评价回复
 service CommentReplayService {
-  // 添加产品评价回复表
+  // 添加产品评价回复
   rpc AddCommentReplay(AddCommentReplayReq) returns (AddCommentReplayResp){}
-  // 删除产品评价回复表
+  // 删除产品评价回复
   rpc DeleteCommentReplay(DeleteCommentReplayReq) returns (DeleteCommentReplayResp){}
-  // 更新产品评价回复表
+  // 更新产品评价回复
   rpc UpdateCommentReplay(UpdateCommentReplayReq) returns (UpdateCommentReplayResp ){}
-  // 查询产品评价回复表详情
-   rpc QueryCommentReplayDetail(QueryCommentReplayDetailReq) returns (QueryCommentReplayDetailResp){}
-  // 查询产品评价回复表列表
+  // 查询产品评价回复详情
+  rpc QueryCommentReplayDetail(QueryCommentReplayDetailReq) returns (QueryCommentReplayDetailResp){}
+  // 查询产品评价回复列表
   rpc QueryCommentReplayList(QueryCommentReplayListReq) returns (QueryCommentReplayListResp){}
 
 
@@ -1283,8 +1276,7 @@ service ProductCategoryAttributeRelationService {
 
 // 添加收藏表
 message AddProductCollectReq {
-  int32 id = 1; //
-  int32 user_id = 2; //用户表的用户ID
+  int64 user_id = 2; //用户表的用户ID
   int32 value_id = 3; //如果type=0，则是商品ID；如果type=1，则是专题ID
   int32 collect_type = 4; //收藏类型，如果type=0，则是商品ID；如果type=1，则是专题ID
   string add_time = 5; //创建时间
@@ -1298,7 +1290,8 @@ message AddProductCollectResp {
 
 // 删除收藏表
 message DeleteProductCollectReq {
-  repeated int64 ids = 1;
+  repeated string ids = 1;
+  int64 user_id = 2; //用户表的用户ID
 }
 
 message DeleteProductCollectResp {
@@ -1307,12 +1300,12 @@ message DeleteProductCollectResp {
 
 // 查询收藏表详情
 message QueryProductCollectDetailReq {
-    int64 id = 1;
+  string id = 1;
 }
 
 message QueryProductCollectDetailResp {
-  int32 id = 1; //
-  int32 user_id = 2; //用户表的用户ID
+  string id = 1; //
+  int64 user_id = 2; //用户表的用户ID
   int32 value_id = 3; //如果type=0，则是商品ID；如果type=1，则是专题ID
   int32 collect_type = 4; //收藏类型，如果type=0，则是商品ID；如果type=1，则是专题ID
   string add_time = 5; //创建时间
@@ -1324,14 +1317,14 @@ message QueryProductCollectDetailResp {
 message QueryProductCollectListReq {
   int64 page_num = 1; //第几页
   int64 page_size = 2; //每页的数量
-  int32 user_id = 3; //用户表的用户ID
+  int64 user_id = 3; //用户表的用户ID
 
 
 }
 
 message ProductCollectListData {
-  int32 id = 1; //
-  int32 user_id = 2; //用户表的用户ID
+  string id = 1; //
+  int64 user_id = 2; //用户表的用户ID
   int32 value_id = 3; //如果type=0，则是商品ID；如果type=1，则是专题ID
   int32 collect_type = 4; //收藏类型，如果type=0，则是商品ID；如果type=1，则是专题ID
   string add_time = 5; //创建时间
@@ -1500,9 +1493,9 @@ service ProductLadderService {
 }
 
 
-// 添加
+// 添加商品操作日志
 message AddProductOperateLogReq {
-  int64 id = 1; //
+  string id = 1; //
   int64 product_id = 2; //产品id
   int64 price_old = 3; //原价
   int64 price_new = 4; //新价格
@@ -1519,22 +1512,22 @@ message AddProductOperateLogResp {
   string pong = 1;
 }
 
-// 删除
+// 删除商品操作日志
 message DeleteProductOperateLogReq {
-  repeated int64 ids = 1;
+  string id = 1;
 }
 
 message DeleteProductOperateLogResp {
   string pong = 1;
 }
 
-// 查询详情
+// 查询商品操作日志详情
 message QueryProductOperateLogDetailReq {
-    int64 id = 1;
+  string id = 1;
 }
 
 message QueryProductOperateLogDetailResp {
-  int64 id = 1; //
+  string id = 1; //
   int64 product_id = 2; //产品id
   int64 price_old = 3; //原价
   int64 price_new = 4; //新价格
@@ -1546,16 +1539,18 @@ message QueryProductOperateLogDetailResp {
   int32 use_point_limit_new = 10; //新的使用积分限制
   string operate_man = 11; //操作人
   string create_time = 12; //创建时间
+
 }
 
-// 分页查询列表
+// 分页查询商品操作日志列表
 message QueryProductOperateLogListReq {
- int64 page_num = 1; //第几页
-  int64 page_size = 2; //每页的数量
+  int64 product_id = 1; //产品id
+  int64 page_num = 11; //第几页
+  int64 page_size = 12; //每页的数量
 }
 
 message ProductOperateLogListData {
-  int64 id = 1; //
+  string id = 1; //
   int64 product_id = 2; //产品id
   int64 price_old = 3; //原价
   int64 price_new = 4; //新价格
@@ -1567,6 +1562,7 @@ message ProductOperateLogListData {
   int32 use_point_limit_new = 10; //新的使用积分限制
   string operate_man = 11; //操作人
   string create_time = 12; //创建时间
+
 }
 
 message QueryProductOperateLogListResp {
@@ -1574,15 +1570,15 @@ message QueryProductOperateLogListResp {
   repeated  ProductOperateLogListData list = 2;
 }
 
-// 
+// 商品操作日志
 service ProductOperateLogService {
-  // 添加
+  // 添加商品操作日志
   rpc AddProductOperateLog(AddProductOperateLogReq) returns (AddProductOperateLogResp){}
-  // 删除
+  // 删除商品操作日志
   rpc DeleteProductOperateLog(DeleteProductOperateLogReq) returns (DeleteProductOperateLogResp){}
-  // 查询详情
-   rpc QueryProductOperateLogDetail(QueryProductOperateLogDetailReq) returns (QueryProductOperateLogDetailResp){}
-  // 查询列表
+  // 查询商品操作日志详情
+  rpc QueryProductOperateLogDetail(QueryProductOperateLogDetailReq) returns (QueryProductOperateLogDetailResp){}
+  // 查询商品操作日志列表
   rpc QueryProductOperateLogList(QueryProductOperateLogListReq) returns (QueryProductOperateLogListResp){}
 
 
@@ -1591,7 +1587,6 @@ service ProductOperateLogService {
 
 // 添加商品审核记录
 message AddProductVertifyRecordReq {
-  int64 id = 1; //
   int64 product_id = 2; //商品id
   string review_man = 4; //审核人
   int32 status = 5; //审核状态：0->未通过；1->通过
@@ -1602,50 +1597,13 @@ message AddProductVertifyRecordResp {
   string pong = 1;
 }
 
-// 删除商品审核记录
-message DeleteProductVertifyRecordReq {
-  repeated int64 ids = 1;
-}
-
-message DeleteProductVertifyRecordResp {
-  string pong = 1;
-}
-
-// 更新商品审核记录
-message UpdateProductVertifyRecordReq {
-  int64 id = 1; //
-  int64 product_id = 2; //商品id
-  string review_man = 4; //审核人
-  int32 status = 5; //审核状态：0->未通过；1->通过
-  string detail = 6; //反馈详情
-}
-
-message UpdateProductVertifyRecordResp {
-  string pong = 1;
-}
-
-// 更新商品审核记录状态
-message UpdateProductVertifyRecordStatusReq {
-  string create_time = 1; //
-  string detail = 2; //反馈详情
-  int64 id = 3; //
-  int64 product_id = 4; //
-  int32 status = 5; //
-  string vertify_man = 6; //审核人
-
-}
-
-message UpdateProductVertifyRecordStatusResp {
-  string pong = 1;
-}
-
 // 查询商品审核记录详情
 message QueryProductVertifyRecordDetailReq {
-    int64 id = 1;
+  string id = 1;
 }
 
 message QueryProductVertifyRecordDetailResp {
-  int64 id = 1; //
+  string id = 1; //
   int64 product_id = 2; //商品id
   string create_time = 3; //创建时间
   string review_man = 4; //审核人
@@ -1655,12 +1613,11 @@ message QueryProductVertifyRecordDetailResp {
 
 // 分页查询商品审核记录列表
 message QueryProductVertifyRecordListReq {
- int64 page_num = 1; //第几页
-  int64 page_size = 2; //每页的数量
+  int64 product_id = 2; //商品id
 }
 
 message ProductVertifyRecordListData {
-  int64 id = 1; //
+  string id = 1; //
   int64 product_id = 2; //商品id
   string create_time = 3; //创建时间
   string review_man = 4; //审核人
@@ -1678,12 +1635,6 @@ message QueryProductVertifyRecordListResp {
 service ProductVertifyRecordService {
   // 添加商品审核记录
   rpc AddProductVertifyRecord(AddProductVertifyRecordReq) returns (AddProductVertifyRecordResp){}
-  // 删除商品审核记录
-  rpc DeleteProductVertifyRecord(DeleteProductVertifyRecordReq) returns (DeleteProductVertifyRecordResp){}
-  // 更新商品审核记录
-  rpc UpdateProductVertifyRecord(UpdateProductVertifyRecordReq) returns (UpdateProductVertifyRecordResp ){}
-  // 更新商品审核记录状态
-  rpc UpdateProductVertifyRecordStatus(UpdateProductVertifyRecordStatusReq) returns (UpdateProductVertifyRecordStatusResp ){}
   // 查询商品审核记录详情
    rpc QueryProductVertifyRecordDetail(QueryProductVertifyRecordDetailReq) returns (QueryProductVertifyRecordDetailResp){}
   // 查询商品审核记录列表

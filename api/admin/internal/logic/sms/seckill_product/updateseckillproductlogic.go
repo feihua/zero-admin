@@ -39,18 +39,18 @@ func (l *UpdateSeckillProductLogic) UpdateSeckillProduct(req *types.UpdateSeckil
 		return nil, err
 	}
 	_, err = l.svcCtx.SeckillProductService.UpdateSeckillProduct(l.ctx, &smsclient.UpdateSeckillProductReq{
-		Id:           req.Id,                    // ID
-		ActivityId:   req.ActivityId,            // 活动ID
-		SessionId:    req.SessionId,             // 秒杀场次ID
-		SkuId:        req.SkuId,                 // 商品SKU ID
-		SkuName:      req.SkuName,               // 商品名称
-		SeckillPrice: float32(req.SeckillPrice), // 秒杀价格
-		SeckillStock: req.SeckillStock,          // 秒杀库存
-		StockLocked:  req.StockLocked,           // 锁定库存
-		PerLimit:     req.PerLimit,              // 每人限购数量
-		Sort:         req.Sort,                  // 排序
-		Status:       req.Status,                // 状态：0-未上架，1-已上架
-		UpdateBy:     userId,                    // 更新人ID
+		Id:           req.Id,           // ID
+		ActivityId:   req.ActivityId,   // 活动ID
+		SessionId:    req.SessionId,    // 秒杀场次ID
+		SkuId:        req.SkuId,        // 商品SKU ID
+		SkuName:      req.SkuName,      // 商品名称
+		SeckillPrice: req.SeckillPrice, // 秒杀价格
+		SeckillStock: req.SeckillStock, // 秒杀库存
+		StockLocked:  req.StockLocked,  // 锁定库存
+		PerLimit:     req.PerLimit,     // 每人限购数量
+		Sort:         req.Sort,         // 排序
+		Status:       req.Status,       // 状态：0-未上架，1-已上架
+		UpdateBy:     userId,           // 更新人ID
 	})
 
 	if err != nil {
