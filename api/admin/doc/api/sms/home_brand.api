@@ -50,7 +50,7 @@ type (
 	QueryHomeBrandListReq {
 		Current         int64  `form:"current,default=1"` //第几页
 		PageSize        int64  `form:"pageSize,default=20"` //每页的数量
-		BrandName       string `form:"brandName,optional"` //商品品牌名称
+		BrandName       string `form:"name,optional"` //商品品牌名称
 		RecommendStatus int32  `form:"recommendStatus,default=2"` //推荐状态：0->不推荐;1->推荐
 	}
 	QueryHomeBrandListData {

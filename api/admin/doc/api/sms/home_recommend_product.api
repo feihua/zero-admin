@@ -13,7 +13,7 @@ type (
 	ListHomeRecommendProductReq {
 		Current         int64  `form:"current,default=1"`
 		PageSize        int64  `form:"pageSize,default=20"`
-		ProductName     string `form:"productName,optional"` // 商品名称
+		ProductName     string `form:"name,optional"` // 商品名称
 		RecommendStatus int32  `form:"recommendStatus,default=2"` // 推荐状态：0->不推荐;1->推荐
 	}
 	ListHomeRecommendProductData {

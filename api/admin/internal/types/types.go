@@ -695,7 +695,7 @@ type ListHomeRecommendProductData struct {
 type ListHomeRecommendProductReq struct {
 	Current         int64  `form:"current,default=1"`
 	PageSize        int64  `form:"pageSize,default=20"`
-	ProductName     string `form:"productName,optional"`      // 商品名称
+	ProductName     string `form:"name,optional"`             // 商品名称
 	RecommendStatus int32  `form:"recommendStatus,default=2"` // 推荐状态：0->不推荐;1->推荐
 }
 
@@ -735,7 +735,7 @@ type ListHomeRecommendSubjectData struct {
 type ListHomeRecommendSubjectReq struct {
 	Current         int64  `form:"current,default=1"`
 	PageSize        int64  `form:"pageSize,default=20"`
-	SubjectName     string `form:"subjectName,optional"`      // 专题名称
+	SubjectName     string `form:"name,optional"`             // 专题名称
 	RecommendStatus int32  `form:"recommendStatus,default=2"` // 推荐状态：0->不推荐;1->推荐
 }
 
@@ -1771,7 +1771,7 @@ type QueryHomeBrandListData struct {
 type QueryHomeBrandListReq struct {
 	Current         int64  `form:"current,default=1"`         //第几页
 	PageSize        int64  `form:"pageSize,default=20"`       //每页的数量
-	BrandName       string `form:"brandName,optional"`        //商品品牌名称
+	BrandName       string `form:"name,optional"`             //商品品牌名称
 	RecommendStatus int32  `form:"recommendStatus,default=2"` //推荐状态：0->不推荐;1->推荐
 }
 
@@ -1834,7 +1834,7 @@ type QueryHomeNewProductListData struct {
 type QueryHomeNewProductListReq struct {
 	Current         int64  `form:"current,default=1"`         //第几页
 	PageSize        int64  `form:"pageSize,default=20"`       //每页的数量
-	ProductName     string `form:"productName,optional"`      //商品名称
+	ProductName     string `form:"name,optional"`             //商品名称
 	RecommendStatus int32  `form:"recommendStatus,default=2"` //推荐状态：0->不推荐;1->推荐
 }
 
