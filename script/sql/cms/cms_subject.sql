@@ -1,3 +1,4 @@
+drop table if exists cms_subject;
 create table cms_subject
 (
     id               bigint auto_increment
@@ -16,6 +17,7 @@ create table cms_subject
     content          text                                  not null comment '专题内容',
     forward_count    int                                   not null comment '转发数',
     category_name    varchar(200)                          not null comment '专题分类名称',
+    sort             int         default 1                 not null comment '排序',
     create_by        varchar(50)                           not null comment '创建者',
     create_time      datetime    default CURRENT_TIMESTAMP not null comment '创建时间',
     update_by        varchar(50) default ''                not null comment '更新者',
