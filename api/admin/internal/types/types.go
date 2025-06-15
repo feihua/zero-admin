@@ -349,8 +349,7 @@ type AddSeckillActivityReq struct {
 	Description string `json:"description,optional"` //活动描述
 	StartTime   string `json:"startTime"`            //开始时间
 	EndTime     string `json:"endTime"`              //结束时间
-	Status      int32  `json:"status"`               //活动状态：0-未开始，1-进行中，2-已结束，3-已取消
-	IsEnabled   int32  `json:"isEnabled"`            //是否启用
+	Status      int32  `json:"status"`               //状态:0-上线,1-下线
 }
 
 type AddSeckillProductData struct {
@@ -3289,7 +3288,7 @@ type QuerySeckillActivityDetailData struct {
 	Description string `json:"description"` //活动描述
 	StartTime   string `json:"startTime"`   //开始时间
 	EndTime     string `json:"endTime"`     //结束时间
-	Status      int32  `json:"status"`      //活动状态：0-未开始，1-进行中，2-已结束，3-已取消
+	Status      int32  `json:"status"`      //状态:0-上线,1-下线
 	IsEnabled   int32  `json:"isEnabled"`   //是否启用
 	CreateBy    int64  `json:"createBy"`    //创建人ID
 	CreateTime  string `json:"createTime"`  //创建时间
@@ -3313,7 +3312,7 @@ type QuerySeckillActivityListData struct {
 	Description string `json:"description"` //活动描述
 	StartTime   string `json:"startTime"`   //开始时间
 	EndTime     string `json:"endTime"`     //结束时间
-	Status      int32  `json:"status"`      //活动状态：0-未开始，1-进行中，2-已结束，3-已取消
+	Status      int32  `json:"status"`      //状态:0-上线,1-下线
 	IsEnabled   int32  `json:"isEnabled"`   //是否启用
 	CreateBy    int64  `json:"createBy"`    //创建人ID
 	CreateTime  string `json:"createTime"`  //创建时间
@@ -3328,7 +3327,7 @@ type QuerySeckillActivityListReq struct {
 	Name      string `form:"name,optional"`        //活动名称
 	StartTime string `form:"startTime,optional"`   //开始时间
 	EndTime   string `form:"endTime,optional"`     //结束时间
-	Status    int32  `form:"status,default=2"`     //活动状态：0-未开始，1-进行中，2-已结束，3-已取消
+	Status    int32  `form:"status,default=2"`     //状态:0-上线,1-下线
 	IsEnabled int32  `form:"isEnabled,,default=2"` //是否启用
 }
 
@@ -4302,13 +4301,12 @@ type UpdateSeckillActivityReq struct {
 	Description string `json:"description,optional"` //活动描述
 	StartTime   string `json:"startTime"`            //开始时间
 	EndTime     string `json:"endTime"`              //结束时间
-	Status      int32  `json:"status"`               //活动状态：0-未开始，1-进行中，2-已结束，3-已取消
-	IsEnabled   int32  `json:"isEnabled"`            //是否启用
+	Status      int32  `json:"status"`               //状态:0-上线,1-下线
 }
 
 type UpdateSeckillActivityStatusReq struct {
 	Ids    []int64 `json:"ids"`    //编号
-	Status int32   `json:"status"` //活动状态：0-未开始，1-进行中，2-已结束，3-已取消
+	Status int32   `json:"status"` //状态:0-上线,1-下线
 }
 
 type UpdateSeckillProductReq struct {

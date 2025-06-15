@@ -16,7 +16,7 @@ type SmsSeckillSession struct {
 	Name       string     `gorm:"column:name;not null;comment:场次名称" json:"name"`                                         // 场次名称
 	StartTime  string     `gorm:"column:start_time;not null;comment:开始时间" json:"start_time"`                             // 开始时间
 	EndTime    string     `gorm:"column:end_time;not null;comment:结束时间" json:"end_time"`                                 // 结束时间
-	Status     int32      `gorm:"column:status;not null;default:1;comment:状态：0-禁用，1-启用" json:"status"`                   // 状态：0-禁用，1-启用
+	Status     int32      `gorm:"column:status;not null;comment:状态：0-禁用，1-启用" json:"status"`                             // 状态：0-禁用，1-启用
 	Sort       int32      `gorm:"column:sort;not null;comment:排序" json:"sort"`                                           // 排序
 	CreateBy   int64      `gorm:"column:create_by;not null;comment:创建人ID" json:"create_by"`                              // 创建人ID
 	CreateTime time.Time  `gorm:"column:create_time;not null;default:CURRENT_TIMESTAMP;comment:创建时间" json:"create_time"` // 创建时间

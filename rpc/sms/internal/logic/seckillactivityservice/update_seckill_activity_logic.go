@@ -69,7 +69,7 @@ func (l *UpdateSeckillActivityLogic) UpdateSeckillActivity(in *smsclient.UpdateS
 		Description: in.Description,    // 活动描述
 		StartTime:   startTime,         // 开始时间
 		EndTime:     endTime,           // 结束时间
-		Status:      in.Status,         // 活动状态：0-未开始，1-进行中，2-已结束，3-已取消
+		Status:      in.Status,         // 状态:0-上线,1-下线
 		IsEnabled:   in.IsEnabled,      // 是否启用
 		CreateBy:    detail.CreateBy,   // 创建人ID
 		CreateTime:  detail.CreateTime, // 创建时间

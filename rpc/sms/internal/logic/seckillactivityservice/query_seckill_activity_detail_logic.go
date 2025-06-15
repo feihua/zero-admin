@@ -51,7 +51,7 @@ func (l *QuerySeckillActivityDetailLogic) QuerySeckillActivityDetail(in *smsclie
 		Description: item.Description,                                 // 活动描述
 		StartTime:   time_util.TimeToStr(item.StartTime),              // 开始时间
 		EndTime:     time_util.TimeToStr(item.EndTime),                // 结束时间
-		Status:      item.Status,                                      // 活动状态：0-未开始，1-进行中，2-已结束，3-已取消
+		Status:      item.Status,                                      // 状态:0-上线,1-下线
 		IsEnabled:   item.IsEnabled,                                   // 是否启用
 		CreateBy:    item.CreateBy,                                    // 创建人ID
 		CreateTime:  time_util.TimeToStr(item.CreateTime),             // 创建时间

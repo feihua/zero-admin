@@ -7,7 +7,7 @@ create table sms_seckill_activity
     description varchar(500) default ''                not null comment '活动描述',
     start_time  datetime                               not null comment '开始时间',
     end_time    datetime                               not null comment '结束时间',
-    status      tinyint      default 0                 not null comment '活动状态：0-未开始，1-进行中，2-已结束，3-已取消',
+    status      tinyint      default 0                 not null comment '状态:0-上线,1-下线',
     is_enabled  tinyint      default 1                 not null comment '是否启用',
     create_by   bigint                                 not null comment '创建人ID',
     create_time datetime     default CURRENT_TIMESTAMP not null comment '创建时间',

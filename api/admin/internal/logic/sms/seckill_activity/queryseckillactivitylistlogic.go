@@ -39,7 +39,7 @@ func (l *QuerySeckillActivityListLogic) QuerySeckillActivityList(req *types.Quer
 		Name:      req.Name,      // 活动名称
 		StartTime: req.StartTime, // 开始时间
 		EndTime:   req.EndTime,   // 结束时间
-		Status:    req.Status,    // 活动状态：0-未开始，1-进行中，2-已结束，3-已取消
+		Status:    req.Status,    // 状态:0-上线,1-下线
 		IsEnabled: req.IsEnabled, // 是否启用
 	})
 
@@ -58,7 +58,7 @@ func (l *QuerySeckillActivityListLogic) QuerySeckillActivityList(req *types.Quer
 			Description: detail.Description, // 活动描述
 			StartTime:   detail.StartTime,   // 开始时间
 			EndTime:     detail.EndTime,     // 结束时间
-			Status:      detail.Status,      // 活动状态：0-未开始，1-进行中，2-已结束，3-已取消
+			Status:      detail.Status,      // 状态:0-上线,1-下线
 			IsEnabled:   detail.IsEnabled,   // 是否启用
 			CreateBy:    detail.CreateBy,    // 创建人ID
 			CreateTime:  detail.CreateTime,  // 创建时间

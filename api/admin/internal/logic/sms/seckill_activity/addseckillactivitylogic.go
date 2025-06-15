@@ -43,8 +43,7 @@ func (l *AddSeckillActivityLogic) AddSeckillActivity(req *types.AddSeckillActivi
 		Description: req.Description, // 活动描述
 		StartTime:   req.StartTime,   // 开始时间
 		EndTime:     req.EndTime,     // 结束时间
-		Status:      req.Status,      // 活动状态：0-未开始，1-进行中，2-已结束，3-已取消
-		IsEnabled:   req.IsEnabled,   // 是否启用
+		Status:      req.Status,      // 状态:0-上线,1-下线
 		CreateBy:    userId,          // 创建人ID
 	})
 

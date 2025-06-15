@@ -67,6 +67,7 @@ func (l *UpdateSeckillSessionLogic) UpdateSeckillSession(in *smsclient.UpdateSec
 		Name:       in.Name,           // 场次名称
 		StartTime:  in.StartTime,      // 开始时间
 		EndTime:    in.EndTime,        // 结束时间
+		Status:     in.Status,         // 状态：0-禁用，1-启用
 		Sort:       in.Sort,           // 排序
 		CreateBy:   detail.CreateBy,   // 创建人ID
 		CreateTime: detail.CreateTime, // 创建时间

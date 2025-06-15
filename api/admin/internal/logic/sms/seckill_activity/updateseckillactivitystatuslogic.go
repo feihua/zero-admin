@@ -40,7 +40,7 @@ func (l *UpdateSeckillActivityStatusLogic) UpdateSeckillActivityStatus(req *type
 	}
 	_, err = l.svcCtx.SeckillActivityService.UpdateSeckillActivityStatus(l.ctx, &smsclient.UpdateSeckillActivityStatusReq{
 		Ids:      req.Ids,    // 编号
-		Status:   req.Status, // 活动状态：0-未开始，1-进行中，2-已结束，3-已取消
+		Status:   req.Status, // 状态:0-上线,1-下线
 		UpdateBy: userId,     // 更新人ID
 
 	})
