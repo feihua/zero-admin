@@ -29,40 +29,50 @@ func newPmsProductAttribute(db *gorm.DB, opts ...gen.DOOption) pmsProductAttribu
 	tableName := _pmsProductAttribute.pmsProductAttributeDo.TableName()
 	_pmsProductAttribute.ALL = field.NewAsterisk(tableName)
 	_pmsProductAttribute.ID = field.NewInt64(tableName, "id")
-	_pmsProductAttribute.ProductAttributeCategoryID = field.NewInt64(tableName, "product_attribute_category_id")
+	_pmsProductAttribute.GroupID = field.NewInt64(tableName, "group_id")
 	_pmsProductAttribute.Name = field.NewString(tableName, "name")
-	_pmsProductAttribute.SelectType = field.NewInt32(tableName, "select_type")
 	_pmsProductAttribute.InputType = field.NewInt32(tableName, "input_type")
+	_pmsProductAttribute.ValueType = field.NewInt32(tableName, "value_type")
 	_pmsProductAttribute.InputList = field.NewString(tableName, "input_list")
+	_pmsProductAttribute.Unit = field.NewString(tableName, "unit")
+	_pmsProductAttribute.IsRequired = field.NewInt32(tableName, "is_required")
+	_pmsProductAttribute.IsSearchable = field.NewInt32(tableName, "is_searchable")
+	_pmsProductAttribute.IsShow = field.NewInt32(tableName, "is_show")
 	_pmsProductAttribute.Sort = field.NewInt32(tableName, "sort")
-	_pmsProductAttribute.FilterType = field.NewInt32(tableName, "filter_type")
-	_pmsProductAttribute.SearchType = field.NewInt32(tableName, "search_type")
-	_pmsProductAttribute.RelatedStatus = field.NewInt32(tableName, "related_status")
-	_pmsProductAttribute.HandAddStatus = field.NewInt32(tableName, "hand_add_status")
-	_pmsProductAttribute.Type = field.NewInt32(tableName, "type")
+	_pmsProductAttribute.Status = field.NewInt32(tableName, "status")
+	_pmsProductAttribute.CreateBy = field.NewInt64(tableName, "create_by")
+	_pmsProductAttribute.CreateTime = field.NewTime(tableName, "create_time")
+	_pmsProductAttribute.UpdateBy = field.NewInt64(tableName, "update_by")
+	_pmsProductAttribute.UpdateTime = field.NewTime(tableName, "update_time")
+	_pmsProductAttribute.IsDeleted = field.NewInt32(tableName, "is_deleted")
 
 	_pmsProductAttribute.fillFieldMap()
 
 	return _pmsProductAttribute
 }
 
-// pmsProductAttribute 商品属性参数表
+// pmsProductAttribute 商品属性表
 type pmsProductAttribute struct {
 	pmsProductAttributeDo pmsProductAttributeDo
 
-	ALL                        field.Asterisk
-	ID                         field.Int64
-	ProductAttributeCategoryID field.Int64  // 商品属性分类id
-	Name                       field.String // 商品属性分类id
-	SelectType                 field.Int32  // 属性选择类型：0->唯一；1->单选；2->多选
-	InputType                  field.Int32  // 属性录入方式：0->手工录入；1->从列表中选取
-	InputList                  field.String // 可选值列表，以逗号隔开
-	Sort                       field.Int32  // 排序字段：最高的可以单独上传图片
-	FilterType                 field.Int32  // 分类筛选样式：1->普通；1->颜色
-	SearchType                 field.Int32  // 检索类型；0->不需要进行检索；1->关键字检索；2->范围检索
-	RelatedStatus              field.Int32  // 相同属性产品是否关联；0->不关联；1->关联
-	HandAddStatus              field.Int32  // 是否支持手动新增；0->不支持；1->支持
-	Type                       field.Int32  // 属性的类型；0->规格；1->参数
+	ALL          field.Asterisk
+	ID           field.Int64  // 主键id
+	GroupID      field.Int64  // 属性分组ID
+	Name         field.String // 属性名称
+	InputType    field.Int32  // 输入类型：1-手动输入，2-单选，3-多选
+	ValueType    field.Int32  // 值类型：1-文本，2-数字，3-日期
+	InputList    field.String // 可选值列表，用逗号分隔
+	Unit         field.String // 单位
+	IsRequired   field.Int32  // 是否必填
+	IsSearchable field.Int32  // 是否支持搜索
+	IsShow       field.Int32  // 是否显示
+	Sort         field.Int32  // 排序
+	Status       field.Int32  // 状态：0->禁用；1->启用
+	CreateBy     field.Int64  // 创建人ID
+	CreateTime   field.Time   // 创建时间
+	UpdateBy     field.Int64  // 更新人ID
+	UpdateTime   field.Time   // 更新时间
+	IsDeleted    field.Int32  // 是否删除
 
 	fieldMap map[string]field.Expr
 }
@@ -80,17 +90,22 @@ func (p pmsProductAttribute) As(alias string) *pmsProductAttribute {
 func (p *pmsProductAttribute) updateTableName(table string) *pmsProductAttribute {
 	p.ALL = field.NewAsterisk(table)
 	p.ID = field.NewInt64(table, "id")
-	p.ProductAttributeCategoryID = field.NewInt64(table, "product_attribute_category_id")
+	p.GroupID = field.NewInt64(table, "group_id")
 	p.Name = field.NewString(table, "name")
-	p.SelectType = field.NewInt32(table, "select_type")
 	p.InputType = field.NewInt32(table, "input_type")
+	p.ValueType = field.NewInt32(table, "value_type")
 	p.InputList = field.NewString(table, "input_list")
+	p.Unit = field.NewString(table, "unit")
+	p.IsRequired = field.NewInt32(table, "is_required")
+	p.IsSearchable = field.NewInt32(table, "is_searchable")
+	p.IsShow = field.NewInt32(table, "is_show")
 	p.Sort = field.NewInt32(table, "sort")
-	p.FilterType = field.NewInt32(table, "filter_type")
-	p.SearchType = field.NewInt32(table, "search_type")
-	p.RelatedStatus = field.NewInt32(table, "related_status")
-	p.HandAddStatus = field.NewInt32(table, "hand_add_status")
-	p.Type = field.NewInt32(table, "type")
+	p.Status = field.NewInt32(table, "status")
+	p.CreateBy = field.NewInt64(table, "create_by")
+	p.CreateTime = field.NewTime(table, "create_time")
+	p.UpdateBy = field.NewInt64(table, "update_by")
+	p.UpdateTime = field.NewTime(table, "update_time")
+	p.IsDeleted = field.NewInt32(table, "is_deleted")
 
 	p.fillFieldMap()
 
@@ -119,19 +134,24 @@ func (p *pmsProductAttribute) GetFieldByName(fieldName string) (field.OrderExpr,
 }
 
 func (p *pmsProductAttribute) fillFieldMap() {
-	p.fieldMap = make(map[string]field.Expr, 12)
+	p.fieldMap = make(map[string]field.Expr, 17)
 	p.fieldMap["id"] = p.ID
-	p.fieldMap["product_attribute_category_id"] = p.ProductAttributeCategoryID
+	p.fieldMap["group_id"] = p.GroupID
 	p.fieldMap["name"] = p.Name
-	p.fieldMap["select_type"] = p.SelectType
 	p.fieldMap["input_type"] = p.InputType
+	p.fieldMap["value_type"] = p.ValueType
 	p.fieldMap["input_list"] = p.InputList
+	p.fieldMap["unit"] = p.Unit
+	p.fieldMap["is_required"] = p.IsRequired
+	p.fieldMap["is_searchable"] = p.IsSearchable
+	p.fieldMap["is_show"] = p.IsShow
 	p.fieldMap["sort"] = p.Sort
-	p.fieldMap["filter_type"] = p.FilterType
-	p.fieldMap["search_type"] = p.SearchType
-	p.fieldMap["related_status"] = p.RelatedStatus
-	p.fieldMap["hand_add_status"] = p.HandAddStatus
-	p.fieldMap["type"] = p.Type
+	p.fieldMap["status"] = p.Status
+	p.fieldMap["create_by"] = p.CreateBy
+	p.fieldMap["create_time"] = p.CreateTime
+	p.fieldMap["update_by"] = p.UpdateBy
+	p.fieldMap["update_time"] = p.UpdateTime
+	p.fieldMap["is_deleted"] = p.IsDeleted
 }
 
 func (p pmsProductAttribute) clone(db *gorm.DB) pmsProductAttribute {

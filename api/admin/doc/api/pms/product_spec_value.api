@@ -1,0 +1,114 @@
+import "../base/base.api"
+
+info (
+	desc:   "商品规格值"
+	author: "LiuFeiHua"
+	email:  "1002219331@qq.com"
+)
+
+type (
+	// 添加商品规格值请求参数
+	AddProductSpecValueReq {
+		SpecId int64  `json:"specId"` //规格ID
+		Value  string `json:"value"` //规格值
+		Sort   int32  `json:"sort"` //排序
+		Status int32  `json:"status"` //状态：0->禁用；1->启用
+	}
+	// 删除商品规格值请求参数
+	DeleteProductSpecValueReq {
+		Ids []int64 `form:"ids"`
+	}
+	// 更新商品规格值请求参数
+	UpdateProductSpecValueReq {
+		Id     int64  `json:"id"` //
+		SpecId int64  `json:"specId"` //规格ID
+		Value  string `json:"value"` //规格值
+		Sort   int32  `json:"sort"` //排序
+		Status int32  `json:"status"` //状态：0->禁用；1->启用
+	}
+	// 更新商品规格值状态请求参数
+	UpdateProductSpecValueStatusReq {
+		Ids    []int64 `json:"ids"` //
+		Status int32   `json:"status"` //状态：0->禁用；1->启用
+	}
+	// 查询商品规格值详情请求参数
+	QueryProductSpecValueDetailReq {
+		Id int64 `form:"id"`
+	}
+	QueryProductSpecValueDetailData {
+		Id         int64  `json:"id"` //
+		SpecId     int64  `json:"specId"` //规格ID
+		Value      string `json:"value"` //规格值
+		Sort       int32  `json:"sort"` //排序
+		Status     int32  `json:"status"` //状态：0->禁用；1->启用
+		CreateBy   int64  `json:"createBy"` //创建人ID
+		CreateTime string `json:"createTime"` //创建时间
+		UpdateBy   int64  `json:"updateBy"` //更新人ID
+		UpdateTime string `json:"updateTime"` //更新时间
+	}
+	QueryProductSpecValueDetailResp {
+		Code    string                          `json:"code"`
+		Message string                          `json:"message"`
+		Data    QueryProductSpecValueDetailData `json:"data"`
+	}
+	// 分页查询商品规格值列表请求参数
+	QueryProductSpecValueListReq {
+		Current  int32 `form:"current,default=1"` //第几页
+		PageSize int32 `form:"pageSize,default=20"` //每页的数量
+		SpecId   int64 `form:"specId,optional"` //规格ID
+		Status   int32 `form:"status,default=2"` //状态：0-禁用，1-启用
+	}
+	QueryProductSpecValueListData {
+		Id         int64  `json:"id"` //
+		SpecId     int64  `json:"specId"` //规格ID
+		Value      string `json:"value"` //规格值
+		Sort       int32  `json:"sort"` //排序
+		Status     int32  `json:"status"` //状态：0->禁用；1->启用
+		CreateBy   int64  `json:"createBy"` //创建人ID
+		CreateTime string `json:"createTime"` //创建时间
+		UpdateBy   int64  `json:"updateBy"` //更新人ID
+		UpdateTime string `json:"updateTime"` //更新时间
+	}
+	QueryProductSpecValueListResp {
+		Code     string                           `json:"code"`
+		Message  string                           `json:"message"`
+		Data     []*QueryProductSpecValueListData `json:"data"`
+		Current  int32                            `json:"current,default=1"`
+		PageSize int32                            `json:"pageSize,default=20"`
+		Total    int64                            `json:"total"`
+		Success  bool                             `json:"success"`
+	}
+)
+
+@server (
+	jwt:        Auth
+	middleware: CheckUrl
+	group:      pms/product_spec_value
+	prefix:     /api/pms/productSpecValue
+)
+service admin-api {
+	// 添加商品规格值
+	@handler AddProductSpecValue
+	post /addSpecValue (AddProductSpecValueReq) returns (BaseResp)
+
+	// 删除商品规格值
+	@handler DeleteProductSpecValue
+	get /deleteSpecValue (DeleteProductSpecValueReq) returns (BaseResp)
+
+	// 更新商品规格值
+	@handler UpdateProductSpecValue
+	post /updateSpecValue (UpdateProductSpecValueReq) returns (BaseResp)
+
+	// 更新商品规格值状态
+	@handler UpdateProductSpecValueStatus
+	post /updateSpecValueStatus (UpdateProductSpecValueStatusReq) returns (BaseResp)
+
+	// 查询商品规格值详情
+	@handler QueryProductSpecValueDetail
+	get /querySpecValueDetail (QueryProductSpecValueDetailReq) returns (QueryProductSpecValueDetailResp)
+
+	// 分页查询商品规格值列表
+	@handler QueryProductSpecValueList
+	get /querySpecValueList (QueryProductSpecValueListReq) returns (QueryProductSpecValueListResp)
+}
+

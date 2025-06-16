@@ -140,11 +140,11 @@ message QueryCouponListResp {
   repeated  CouponListData list = 2;
 }
 
-message QueryCouponByIdReq {
-  int64 id = 1;
+message QueryCouponByScopeIdReq {
+  repeated int64 scope_ids = 1;
 }
 
-message QueryCouponByIdResp {
+message QueryCouponByScopeIdResp {
   repeated  CouponListData list = 1;
 }
 // 优惠券
@@ -162,7 +162,7 @@ service CouponService {
   // 查询优惠券列表
   rpc QueryCouponList(QueryCouponListReq) returns (QueryCouponListResp){}
 
-  //根据商品Id和分类id查询可用的优惠券(app)
-  rpc QueryCouponById(QueryCouponByIdReq) returns(QueryCouponByIdResp);
+  //根据商品Id和分类id查询可用的优惠券
+  rpc QueryCouponByScopeId(QueryCouponByScopeIdReq) returns(QueryCouponByScopeIdResp);
 
 }

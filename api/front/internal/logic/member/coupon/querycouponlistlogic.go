@@ -39,9 +39,9 @@ func (l *QueryCouponListLogic) QueryCouponList(req *types.ListCouponReq) (resp *
 	if err != nil {
 		return nil, err
 	}
-	couponList, err := l.svcCtx.CouponHistoryService.QueryMemberCouponList(l.ctx, &smsclient.QueryMemberCouponListReq{
-		MemberId:  memberId,
-		UseStatus: req.UseStatus,
+	couponList, err := l.svcCtx.CouponRecordService.QueryMemberCouponList(l.ctx, &smsclient.QueryMemberCouponListReq{
+		MemberId: memberId,
+		Status:   req.UseStatus,
 	})
 	if err != nil {
 		logc.Errorf(l.ctx, "获取用户优惠券列表失败,参数: %+v,异常：%s", req, err.Error())
@@ -51,26 +51,19 @@ func (l *QueryCouponListLogic) QueryCouponList(req *types.ListCouponReq) (resp *
 
 	var list []*types.ListCouponData
 
-	for _, item := range couponList.List {
+	for _, detail := range couponList.List {
 		list = append(list, &types.ListCouponData{
-			Id:           item.Id,
-			Type:         item.Type,
-			Name:         item.Name,
-			Platform:     item.Platform,
-			Count:        item.Count,
-			Amount:       item.Amount,
-			PerLimit:     item.PerLimit,
-			MinPoint:     item.MinPoint,
-			StartTime:    item.StartTime,
-			EndTime:      item.EndTime,
-			UseType:      item.UseType,
-			Note:         item.Note,
-			PublishCount: item.PublishCount,
-			UseCount:     item.UseCount,
-			ReceiveCount: item.ReceiveCount,
-			EnableTime:   item.EnableTime,
-			Code:         item.Code,
-			MemberLevel:  item.MemberLevel,
+			Id:          detail.Id,          // 优惠券ID
+			TypeId:      detail.TypeId,      // 优惠券类型ID
+			Name:        detail.Name,        // 优惠券名称
+			Code:        detail.Code,        // 优惠券码
+			Amount:      detail.Amount,      // 优惠金额/折扣率
+			MinAmount:   detail.MinAmount,   // 最低使用金额
+			StartTime:   detail.StartTime,   // 生效时间
+			EndTime:     detail.EndTime,     // 失效时间
+			PerLimit:    detail.PerLimit,    // 每人限领数量
+			Status:      detail.Status,      // 状态：0-未开始，1-进行中，2-已结束，3-已取消
+			Description: detail.Description, // 使用说明
 		})
 	}
 

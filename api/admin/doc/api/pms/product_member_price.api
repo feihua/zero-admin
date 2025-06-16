@@ -1,0 +1,22 @@
+info (
+	desc:   "商品会员价格"
+	author: "LiuFeiHua"
+	email:  "1002219331@qq.com"
+)
+
+type (
+	// 添加商品会员价格请求参数
+	MemberPriceReq {
+		MemberLevelId   int64  `json:"memberLevelId"` //会员等级id
+		MemberPrice     int64  `json:"memberPrice"` //会员价格
+		MemberLevelName string `json:"memberLevelName"` //会员等级名称
+	}
+	MemberPriceResp {
+		Id              int64  `json:"id"` //
+		ProductId       int64  `json:"productId"` //商品id
+		MemberLevelId   int64  `json:"memberLevelId"` //会员等级id
+		MemberPrice     int64  `json:"memberPrice"` //会员价格
+		MemberLevelName string `json:"memberLevelName"` //会员等级名称
+	}
+)
+

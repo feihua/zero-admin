@@ -140,11 +140,11 @@ message QueryCouponListResp {
   repeated  CouponListData list = 2;
 }
 
-message QueryCouponByIdReq {
-  int64 id = 1;
+message QueryCouponByScopeIdReq {
+  repeated int64 scope_ids = 1;
 }
 
-message QueryCouponByIdResp {
+message QueryCouponByScopeIdResp {
   repeated  CouponListData list = 1;
 }
 // 优惠券
@@ -162,8 +162,8 @@ service CouponService {
   // 查询优惠券列表
   rpc QueryCouponList(QueryCouponListReq) returns (QueryCouponListResp){}
 
-  //根据商品Id和分类id查询可用的优惠券(app)
-  rpc QueryCouponById(QueryCouponByIdReq) returns(QueryCouponByIdResp);
+  //根据商品Id和分类id查询可用的优惠券
+  rpc QueryCouponByScopeId(QueryCouponByScopeIdReq) returns(QueryCouponByScopeIdResp);
 
 }
 
@@ -172,7 +172,6 @@ service CouponService {
 message AddCouponRecordReq {
   int64 coupon_id = 1; //优惠券ID
   int64 member_id = 2; //用户ID
-  string get_time = 3; //领取时间
   int32 get_type = 4; //获取类型：0->后台赠送；1->主动获取
 
 
@@ -657,7 +656,7 @@ message AddSeckillActivityReq {
   string description = 3; //活动描述
   string start_time = 4; //开始时间
   string end_time = 5; //结束时间
-  int32 status = 6; //活动状态：0-未开始，1-进行中，2-已结束，3-已取消
+  int32 status = 6; //活动状态：状态:0-上线,1-下线
   int32 is_enabled = 7; //是否启用
   int64 create_by = 8; //创建人ID
 }
@@ -682,7 +681,7 @@ message UpdateSeckillActivityReq {
   string description = 3; //活动描述
   string start_time = 4; //开始时间
   string end_time = 5; //结束时间
-  int32 status = 6; //活动状态：0-未开始，1-进行中，2-已结束，3-已取消
+  int32 status = 6; //活动状态：状态:0-上线,1-下线
   int32 is_enabled = 7; //是否启用
   int64 update_by = 10; //更新人ID
 }
@@ -694,7 +693,7 @@ message UpdateSeckillActivityResp {
 // 更新秒杀活动状态
 message UpdateSeckillActivityStatusReq {
   repeated int64 ids = 1; //编号
-  int32 status = 6; //活动状态：0-未开始，1-进行中，2-已结束，3-已取消
+  int32 status = 6; //活动状态：状态:0-上线,1-下线
   int64 update_by = 10; //更新人ID
 }
 
@@ -713,7 +712,7 @@ message QuerySeckillActivityDetailResp {
   string description = 3; //活动描述
   string start_time = 4; //开始时间
   string end_time = 5; //结束时间
-  int32 status = 6; //活动状态：0-未开始，1-进行中，2-已结束，3-已取消
+  int32 status = 6; //活动状态：状态:0-上线,1-下线
   int32 is_enabled = 7; //是否启用
   int64 create_by = 8; //创建人ID
   string create_time = 9; //创建时间
@@ -727,7 +726,7 @@ message QuerySeckillActivityListReq {
   string name = 1; //活动名称
   string start_time = 2; //开始时间
   string end_time = 3; //结束时间
-  int32 status = 4; //活动状态：0-未开始，1-进行中，2-已结束，3-已取消
+  int32 status = 4; //活动状态：状态:0-上线,1-下线
   int32 is_enabled = 5; //是否启用
   int32 page_num = 6; //第几页
   int32 page_size = 7; //每页的数量
@@ -739,7 +738,7 @@ message SeckillActivityListData {
   string description = 3; //活动描述
   string start_time = 4; //开始时间
   string end_time = 5; //结束时间
-  int32 status = 6; //活动状态：0-未开始，1-进行中，2-已结束，3-已取消
+  int32 status = 6; //活动状态：状态:0-上线,1-下线
   int32 is_enabled = 7; //是否启用
   int64 create_by = 8; //创建人ID
   string create_time = 9; //创建时间

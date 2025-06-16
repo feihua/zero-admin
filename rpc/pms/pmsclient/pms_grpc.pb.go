@@ -19,1281 +19,30 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	CommentService_AddComment_FullMethodName         = "/pmsclient.CommentService/AddComment"
-	CommentService_DeleteComment_FullMethodName      = "/pmsclient.CommentService/DeleteComment"
-	CommentService_UpdateComment_FullMethodName      = "/pmsclient.CommentService/UpdateComment"
-	CommentService_QueryCommentDetail_FullMethodName = "/pmsclient.CommentService/QueryCommentDetail"
-	CommentService_QueryCommentList_FullMethodName   = "/pmsclient.CommentService/QueryCommentList"
-)
-
-// CommentServiceClient is the client API for CommentService service.
-//
-// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type CommentServiceClient interface {
-	// 添加商品评价
-	AddComment(ctx context.Context, in *AddCommentReq, opts ...grpc.CallOption) (*AddCommentResp, error)
-	// 删除商品评价
-	DeleteComment(ctx context.Context, in *DeleteCommentReq, opts ...grpc.CallOption) (*DeleteCommentResp, error)
-	// 更新商品评价
-	UpdateComment(ctx context.Context, in *UpdateCommentReq, opts ...grpc.CallOption) (*UpdateCommentResp, error)
-	// 查询商品评价详情
-	QueryCommentDetail(ctx context.Context, in *QueryCommentDetailReq, opts ...grpc.CallOption) (*QueryCommentDetailResp, error)
-	// 查询商品评价列表
-	QueryCommentList(ctx context.Context, in *QueryCommentListReq, opts ...grpc.CallOption) (*QueryCommentListResp, error)
-}
-
-type commentServiceClient struct {
-	cc grpc.ClientConnInterface
-}
-
-func NewCommentServiceClient(cc grpc.ClientConnInterface) CommentServiceClient {
-	return &commentServiceClient{cc}
-}
-
-func (c *commentServiceClient) AddComment(ctx context.Context, in *AddCommentReq, opts ...grpc.CallOption) (*AddCommentResp, error) {
-	out := new(AddCommentResp)
-	err := c.cc.Invoke(ctx, CommentService_AddComment_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *commentServiceClient) DeleteComment(ctx context.Context, in *DeleteCommentReq, opts ...grpc.CallOption) (*DeleteCommentResp, error) {
-	out := new(DeleteCommentResp)
-	err := c.cc.Invoke(ctx, CommentService_DeleteComment_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *commentServiceClient) UpdateComment(ctx context.Context, in *UpdateCommentReq, opts ...grpc.CallOption) (*UpdateCommentResp, error) {
-	out := new(UpdateCommentResp)
-	err := c.cc.Invoke(ctx, CommentService_UpdateComment_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *commentServiceClient) QueryCommentDetail(ctx context.Context, in *QueryCommentDetailReq, opts ...grpc.CallOption) (*QueryCommentDetailResp, error) {
-	out := new(QueryCommentDetailResp)
-	err := c.cc.Invoke(ctx, CommentService_QueryCommentDetail_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *commentServiceClient) QueryCommentList(ctx context.Context, in *QueryCommentListReq, opts ...grpc.CallOption) (*QueryCommentListResp, error) {
-	out := new(QueryCommentListResp)
-	err := c.cc.Invoke(ctx, CommentService_QueryCommentList_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-// CommentServiceServer is the server API for CommentService service.
-// All implementations must embed UnimplementedCommentServiceServer
-// for forward compatibility
-type CommentServiceServer interface {
-	// 添加商品评价
-	AddComment(context.Context, *AddCommentReq) (*AddCommentResp, error)
-	// 删除商品评价
-	DeleteComment(context.Context, *DeleteCommentReq) (*DeleteCommentResp, error)
-	// 更新商品评价
-	UpdateComment(context.Context, *UpdateCommentReq) (*UpdateCommentResp, error)
-	// 查询商品评价详情
-	QueryCommentDetail(context.Context, *QueryCommentDetailReq) (*QueryCommentDetailResp, error)
-	// 查询商品评价列表
-	QueryCommentList(context.Context, *QueryCommentListReq) (*QueryCommentListResp, error)
-	mustEmbedUnimplementedCommentServiceServer()
-}
-
-// UnimplementedCommentServiceServer must be embedded to have forward compatible implementations.
-type UnimplementedCommentServiceServer struct {
-}
-
-func (UnimplementedCommentServiceServer) AddComment(context.Context, *AddCommentReq) (*AddCommentResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method AddComment not implemented")
-}
-func (UnimplementedCommentServiceServer) DeleteComment(context.Context, *DeleteCommentReq) (*DeleteCommentResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method DeleteComment not implemented")
-}
-func (UnimplementedCommentServiceServer) UpdateComment(context.Context, *UpdateCommentReq) (*UpdateCommentResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateComment not implemented")
-}
-func (UnimplementedCommentServiceServer) QueryCommentDetail(context.Context, *QueryCommentDetailReq) (*QueryCommentDetailResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method QueryCommentDetail not implemented")
-}
-func (UnimplementedCommentServiceServer) QueryCommentList(context.Context, *QueryCommentListReq) (*QueryCommentListResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method QueryCommentList not implemented")
-}
-func (UnimplementedCommentServiceServer) mustEmbedUnimplementedCommentServiceServer() {}
-
-// UnsafeCommentServiceServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to CommentServiceServer will
-// result in compilation errors.
-type UnsafeCommentServiceServer interface {
-	mustEmbedUnimplementedCommentServiceServer()
-}
-
-func RegisterCommentServiceServer(s grpc.ServiceRegistrar, srv CommentServiceServer) {
-	s.RegisterService(&CommentService_ServiceDesc, srv)
-}
-
-func _CommentService_AddComment_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(AddCommentReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(CommentServiceServer).AddComment(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: CommentService_AddComment_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CommentServiceServer).AddComment(ctx, req.(*AddCommentReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _CommentService_DeleteComment_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(DeleteCommentReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(CommentServiceServer).DeleteComment(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: CommentService_DeleteComment_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CommentServiceServer).DeleteComment(ctx, req.(*DeleteCommentReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _CommentService_UpdateComment_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UpdateCommentReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(CommentServiceServer).UpdateComment(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: CommentService_UpdateComment_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CommentServiceServer).UpdateComment(ctx, req.(*UpdateCommentReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _CommentService_QueryCommentDetail_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(QueryCommentDetailReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(CommentServiceServer).QueryCommentDetail(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: CommentService_QueryCommentDetail_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CommentServiceServer).QueryCommentDetail(ctx, req.(*QueryCommentDetailReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _CommentService_QueryCommentList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(QueryCommentListReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(CommentServiceServer).QueryCommentList(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: CommentService_QueryCommentList_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CommentServiceServer).QueryCommentList(ctx, req.(*QueryCommentListReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-// CommentService_ServiceDesc is the grpc.ServiceDesc for CommentService service.
-// It's only intended for direct use with grpc.RegisterService,
-// and not to be introspected or modified (even as a copy)
-var CommentService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "pmsclient.CommentService",
-	HandlerType: (*CommentServiceServer)(nil),
-	Methods: []grpc.MethodDesc{
-		{
-			MethodName: "AddComment",
-			Handler:    _CommentService_AddComment_Handler,
-		},
-		{
-			MethodName: "DeleteComment",
-			Handler:    _CommentService_DeleteComment_Handler,
-		},
-		{
-			MethodName: "UpdateComment",
-			Handler:    _CommentService_UpdateComment_Handler,
-		},
-		{
-			MethodName: "QueryCommentDetail",
-			Handler:    _CommentService_QueryCommentDetail_Handler,
-		},
-		{
-			MethodName: "QueryCommentList",
-			Handler:    _CommentService_QueryCommentList_Handler,
-		},
-	},
-	Streams:  []grpc.StreamDesc{},
-	Metadata: "rpc/pms/pms.proto",
-}
-
-const (
-	CommentReplayService_AddCommentReplay_FullMethodName         = "/pmsclient.CommentReplayService/AddCommentReplay"
-	CommentReplayService_DeleteCommentReplay_FullMethodName      = "/pmsclient.CommentReplayService/DeleteCommentReplay"
-	CommentReplayService_UpdateCommentReplay_FullMethodName      = "/pmsclient.CommentReplayService/UpdateCommentReplay"
-	CommentReplayService_QueryCommentReplayDetail_FullMethodName = "/pmsclient.CommentReplayService/QueryCommentReplayDetail"
-	CommentReplayService_QueryCommentReplayList_FullMethodName   = "/pmsclient.CommentReplayService/QueryCommentReplayList"
-)
-
-// CommentReplayServiceClient is the client API for CommentReplayService service.
-//
-// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type CommentReplayServiceClient interface {
-	// 添加产品评价回复
-	AddCommentReplay(ctx context.Context, in *AddCommentReplayReq, opts ...grpc.CallOption) (*AddCommentReplayResp, error)
-	// 删除产品评价回复
-	DeleteCommentReplay(ctx context.Context, in *DeleteCommentReplayReq, opts ...grpc.CallOption) (*DeleteCommentReplayResp, error)
-	// 更新产品评价回复
-	UpdateCommentReplay(ctx context.Context, in *UpdateCommentReplayReq, opts ...grpc.CallOption) (*UpdateCommentReplayResp, error)
-	// 查询产品评价回复详情
-	QueryCommentReplayDetail(ctx context.Context, in *QueryCommentReplayDetailReq, opts ...grpc.CallOption) (*QueryCommentReplayDetailResp, error)
-	// 查询产品评价回复列表
-	QueryCommentReplayList(ctx context.Context, in *QueryCommentReplayListReq, opts ...grpc.CallOption) (*QueryCommentReplayListResp, error)
-}
-
-type commentReplayServiceClient struct {
-	cc grpc.ClientConnInterface
-}
-
-func NewCommentReplayServiceClient(cc grpc.ClientConnInterface) CommentReplayServiceClient {
-	return &commentReplayServiceClient{cc}
-}
-
-func (c *commentReplayServiceClient) AddCommentReplay(ctx context.Context, in *AddCommentReplayReq, opts ...grpc.CallOption) (*AddCommentReplayResp, error) {
-	out := new(AddCommentReplayResp)
-	err := c.cc.Invoke(ctx, CommentReplayService_AddCommentReplay_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *commentReplayServiceClient) DeleteCommentReplay(ctx context.Context, in *DeleteCommentReplayReq, opts ...grpc.CallOption) (*DeleteCommentReplayResp, error) {
-	out := new(DeleteCommentReplayResp)
-	err := c.cc.Invoke(ctx, CommentReplayService_DeleteCommentReplay_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *commentReplayServiceClient) UpdateCommentReplay(ctx context.Context, in *UpdateCommentReplayReq, opts ...grpc.CallOption) (*UpdateCommentReplayResp, error) {
-	out := new(UpdateCommentReplayResp)
-	err := c.cc.Invoke(ctx, CommentReplayService_UpdateCommentReplay_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *commentReplayServiceClient) QueryCommentReplayDetail(ctx context.Context, in *QueryCommentReplayDetailReq, opts ...grpc.CallOption) (*QueryCommentReplayDetailResp, error) {
-	out := new(QueryCommentReplayDetailResp)
-	err := c.cc.Invoke(ctx, CommentReplayService_QueryCommentReplayDetail_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *commentReplayServiceClient) QueryCommentReplayList(ctx context.Context, in *QueryCommentReplayListReq, opts ...grpc.CallOption) (*QueryCommentReplayListResp, error) {
-	out := new(QueryCommentReplayListResp)
-	err := c.cc.Invoke(ctx, CommentReplayService_QueryCommentReplayList_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-// CommentReplayServiceServer is the server API for CommentReplayService service.
-// All implementations must embed UnimplementedCommentReplayServiceServer
-// for forward compatibility
-type CommentReplayServiceServer interface {
-	// 添加产品评价回复
-	AddCommentReplay(context.Context, *AddCommentReplayReq) (*AddCommentReplayResp, error)
-	// 删除产品评价回复
-	DeleteCommentReplay(context.Context, *DeleteCommentReplayReq) (*DeleteCommentReplayResp, error)
-	// 更新产品评价回复
-	UpdateCommentReplay(context.Context, *UpdateCommentReplayReq) (*UpdateCommentReplayResp, error)
-	// 查询产品评价回复详情
-	QueryCommentReplayDetail(context.Context, *QueryCommentReplayDetailReq) (*QueryCommentReplayDetailResp, error)
-	// 查询产品评价回复列表
-	QueryCommentReplayList(context.Context, *QueryCommentReplayListReq) (*QueryCommentReplayListResp, error)
-	mustEmbedUnimplementedCommentReplayServiceServer()
-}
-
-// UnimplementedCommentReplayServiceServer must be embedded to have forward compatible implementations.
-type UnimplementedCommentReplayServiceServer struct {
-}
-
-func (UnimplementedCommentReplayServiceServer) AddCommentReplay(context.Context, *AddCommentReplayReq) (*AddCommentReplayResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method AddCommentReplay not implemented")
-}
-func (UnimplementedCommentReplayServiceServer) DeleteCommentReplay(context.Context, *DeleteCommentReplayReq) (*DeleteCommentReplayResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method DeleteCommentReplay not implemented")
-}
-func (UnimplementedCommentReplayServiceServer) UpdateCommentReplay(context.Context, *UpdateCommentReplayReq) (*UpdateCommentReplayResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateCommentReplay not implemented")
-}
-func (UnimplementedCommentReplayServiceServer) QueryCommentReplayDetail(context.Context, *QueryCommentReplayDetailReq) (*QueryCommentReplayDetailResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method QueryCommentReplayDetail not implemented")
-}
-func (UnimplementedCommentReplayServiceServer) QueryCommentReplayList(context.Context, *QueryCommentReplayListReq) (*QueryCommentReplayListResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method QueryCommentReplayList not implemented")
-}
-func (UnimplementedCommentReplayServiceServer) mustEmbedUnimplementedCommentReplayServiceServer() {}
-
-// UnsafeCommentReplayServiceServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to CommentReplayServiceServer will
-// result in compilation errors.
-type UnsafeCommentReplayServiceServer interface {
-	mustEmbedUnimplementedCommentReplayServiceServer()
-}
-
-func RegisterCommentReplayServiceServer(s grpc.ServiceRegistrar, srv CommentReplayServiceServer) {
-	s.RegisterService(&CommentReplayService_ServiceDesc, srv)
-}
-
-func _CommentReplayService_AddCommentReplay_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(AddCommentReplayReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(CommentReplayServiceServer).AddCommentReplay(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: CommentReplayService_AddCommentReplay_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CommentReplayServiceServer).AddCommentReplay(ctx, req.(*AddCommentReplayReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _CommentReplayService_DeleteCommentReplay_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(DeleteCommentReplayReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(CommentReplayServiceServer).DeleteCommentReplay(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: CommentReplayService_DeleteCommentReplay_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CommentReplayServiceServer).DeleteCommentReplay(ctx, req.(*DeleteCommentReplayReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _CommentReplayService_UpdateCommentReplay_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UpdateCommentReplayReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(CommentReplayServiceServer).UpdateCommentReplay(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: CommentReplayService_UpdateCommentReplay_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CommentReplayServiceServer).UpdateCommentReplay(ctx, req.(*UpdateCommentReplayReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _CommentReplayService_QueryCommentReplayDetail_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(QueryCommentReplayDetailReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(CommentReplayServiceServer).QueryCommentReplayDetail(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: CommentReplayService_QueryCommentReplayDetail_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CommentReplayServiceServer).QueryCommentReplayDetail(ctx, req.(*QueryCommentReplayDetailReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _CommentReplayService_QueryCommentReplayList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(QueryCommentReplayListReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(CommentReplayServiceServer).QueryCommentReplayList(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: CommentReplayService_QueryCommentReplayList_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CommentReplayServiceServer).QueryCommentReplayList(ctx, req.(*QueryCommentReplayListReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-// CommentReplayService_ServiceDesc is the grpc.ServiceDesc for CommentReplayService service.
-// It's only intended for direct use with grpc.RegisterService,
-// and not to be introspected or modified (even as a copy)
-var CommentReplayService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "pmsclient.CommentReplayService",
-	HandlerType: (*CommentReplayServiceServer)(nil),
-	Methods: []grpc.MethodDesc{
-		{
-			MethodName: "AddCommentReplay",
-			Handler:    _CommentReplayService_AddCommentReplay_Handler,
-		},
-		{
-			MethodName: "DeleteCommentReplay",
-			Handler:    _CommentReplayService_DeleteCommentReplay_Handler,
-		},
-		{
-			MethodName: "UpdateCommentReplay",
-			Handler:    _CommentReplayService_UpdateCommentReplay_Handler,
-		},
-		{
-			MethodName: "QueryCommentReplayDetail",
-			Handler:    _CommentReplayService_QueryCommentReplayDetail_Handler,
-		},
-		{
-			MethodName: "QueryCommentReplayList",
-			Handler:    _CommentReplayService_QueryCommentReplayList_Handler,
-		},
-	},
-	Streams:  []grpc.StreamDesc{},
-	Metadata: "rpc/pms/pms.proto",
-}
-
-const (
-	FeightTemplateService_AddFeightTemplate_FullMethodName         = "/pmsclient.FeightTemplateService/AddFeightTemplate"
-	FeightTemplateService_DeleteFeightTemplate_FullMethodName      = "/pmsclient.FeightTemplateService/DeleteFeightTemplate"
-	FeightTemplateService_UpdateFeightTemplate_FullMethodName      = "/pmsclient.FeightTemplateService/UpdateFeightTemplate"
-	FeightTemplateService_QueryFeightTemplateDetail_FullMethodName = "/pmsclient.FeightTemplateService/QueryFeightTemplateDetail"
-	FeightTemplateService_QueryFeightTemplateList_FullMethodName   = "/pmsclient.FeightTemplateService/QueryFeightTemplateList"
-)
-
-// FeightTemplateServiceClient is the client API for FeightTemplateService service.
-//
-// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type FeightTemplateServiceClient interface {
-	// 添加运费模版
-	AddFeightTemplate(ctx context.Context, in *AddFeightTemplateReq, opts ...grpc.CallOption) (*AddFeightTemplateResp, error)
-	// 删除运费模版
-	DeleteFeightTemplate(ctx context.Context, in *DeleteFeightTemplateReq, opts ...grpc.CallOption) (*DeleteFeightTemplateResp, error)
-	// 更新运费模版
-	UpdateFeightTemplate(ctx context.Context, in *UpdateFeightTemplateReq, opts ...grpc.CallOption) (*UpdateFeightTemplateResp, error)
-	// 查询运费模版详情
-	QueryFeightTemplateDetail(ctx context.Context, in *QueryFeightTemplateDetailReq, opts ...grpc.CallOption) (*QueryFeightTemplateDetailResp, error)
-	// 查询运费模版列表
-	QueryFeightTemplateList(ctx context.Context, in *QueryFeightTemplateListReq, opts ...grpc.CallOption) (*QueryFeightTemplateListResp, error)
-}
-
-type feightTemplateServiceClient struct {
-	cc grpc.ClientConnInterface
-}
-
-func NewFeightTemplateServiceClient(cc grpc.ClientConnInterface) FeightTemplateServiceClient {
-	return &feightTemplateServiceClient{cc}
-}
-
-func (c *feightTemplateServiceClient) AddFeightTemplate(ctx context.Context, in *AddFeightTemplateReq, opts ...grpc.CallOption) (*AddFeightTemplateResp, error) {
-	out := new(AddFeightTemplateResp)
-	err := c.cc.Invoke(ctx, FeightTemplateService_AddFeightTemplate_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *feightTemplateServiceClient) DeleteFeightTemplate(ctx context.Context, in *DeleteFeightTemplateReq, opts ...grpc.CallOption) (*DeleteFeightTemplateResp, error) {
-	out := new(DeleteFeightTemplateResp)
-	err := c.cc.Invoke(ctx, FeightTemplateService_DeleteFeightTemplate_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *feightTemplateServiceClient) UpdateFeightTemplate(ctx context.Context, in *UpdateFeightTemplateReq, opts ...grpc.CallOption) (*UpdateFeightTemplateResp, error) {
-	out := new(UpdateFeightTemplateResp)
-	err := c.cc.Invoke(ctx, FeightTemplateService_UpdateFeightTemplate_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *feightTemplateServiceClient) QueryFeightTemplateDetail(ctx context.Context, in *QueryFeightTemplateDetailReq, opts ...grpc.CallOption) (*QueryFeightTemplateDetailResp, error) {
-	out := new(QueryFeightTemplateDetailResp)
-	err := c.cc.Invoke(ctx, FeightTemplateService_QueryFeightTemplateDetail_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *feightTemplateServiceClient) QueryFeightTemplateList(ctx context.Context, in *QueryFeightTemplateListReq, opts ...grpc.CallOption) (*QueryFeightTemplateListResp, error) {
-	out := new(QueryFeightTemplateListResp)
-	err := c.cc.Invoke(ctx, FeightTemplateService_QueryFeightTemplateList_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-// FeightTemplateServiceServer is the server API for FeightTemplateService service.
-// All implementations must embed UnimplementedFeightTemplateServiceServer
-// for forward compatibility
-type FeightTemplateServiceServer interface {
-	// 添加运费模版
-	AddFeightTemplate(context.Context, *AddFeightTemplateReq) (*AddFeightTemplateResp, error)
-	// 删除运费模版
-	DeleteFeightTemplate(context.Context, *DeleteFeightTemplateReq) (*DeleteFeightTemplateResp, error)
-	// 更新运费模版
-	UpdateFeightTemplate(context.Context, *UpdateFeightTemplateReq) (*UpdateFeightTemplateResp, error)
-	// 查询运费模版详情
-	QueryFeightTemplateDetail(context.Context, *QueryFeightTemplateDetailReq) (*QueryFeightTemplateDetailResp, error)
-	// 查询运费模版列表
-	QueryFeightTemplateList(context.Context, *QueryFeightTemplateListReq) (*QueryFeightTemplateListResp, error)
-	mustEmbedUnimplementedFeightTemplateServiceServer()
-}
-
-// UnimplementedFeightTemplateServiceServer must be embedded to have forward compatible implementations.
-type UnimplementedFeightTemplateServiceServer struct {
-}
-
-func (UnimplementedFeightTemplateServiceServer) AddFeightTemplate(context.Context, *AddFeightTemplateReq) (*AddFeightTemplateResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method AddFeightTemplate not implemented")
-}
-func (UnimplementedFeightTemplateServiceServer) DeleteFeightTemplate(context.Context, *DeleteFeightTemplateReq) (*DeleteFeightTemplateResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method DeleteFeightTemplate not implemented")
-}
-func (UnimplementedFeightTemplateServiceServer) UpdateFeightTemplate(context.Context, *UpdateFeightTemplateReq) (*UpdateFeightTemplateResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateFeightTemplate not implemented")
-}
-func (UnimplementedFeightTemplateServiceServer) QueryFeightTemplateDetail(context.Context, *QueryFeightTemplateDetailReq) (*QueryFeightTemplateDetailResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method QueryFeightTemplateDetail not implemented")
-}
-func (UnimplementedFeightTemplateServiceServer) QueryFeightTemplateList(context.Context, *QueryFeightTemplateListReq) (*QueryFeightTemplateListResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method QueryFeightTemplateList not implemented")
-}
-func (UnimplementedFeightTemplateServiceServer) mustEmbedUnimplementedFeightTemplateServiceServer() {}
-
-// UnsafeFeightTemplateServiceServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to FeightTemplateServiceServer will
-// result in compilation errors.
-type UnsafeFeightTemplateServiceServer interface {
-	mustEmbedUnimplementedFeightTemplateServiceServer()
-}
-
-func RegisterFeightTemplateServiceServer(s grpc.ServiceRegistrar, srv FeightTemplateServiceServer) {
-	s.RegisterService(&FeightTemplateService_ServiceDesc, srv)
-}
-
-func _FeightTemplateService_AddFeightTemplate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(AddFeightTemplateReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(FeightTemplateServiceServer).AddFeightTemplate(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: FeightTemplateService_AddFeightTemplate_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(FeightTemplateServiceServer).AddFeightTemplate(ctx, req.(*AddFeightTemplateReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _FeightTemplateService_DeleteFeightTemplate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(DeleteFeightTemplateReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(FeightTemplateServiceServer).DeleteFeightTemplate(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: FeightTemplateService_DeleteFeightTemplate_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(FeightTemplateServiceServer).DeleteFeightTemplate(ctx, req.(*DeleteFeightTemplateReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _FeightTemplateService_UpdateFeightTemplate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UpdateFeightTemplateReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(FeightTemplateServiceServer).UpdateFeightTemplate(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: FeightTemplateService_UpdateFeightTemplate_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(FeightTemplateServiceServer).UpdateFeightTemplate(ctx, req.(*UpdateFeightTemplateReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _FeightTemplateService_QueryFeightTemplateDetail_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(QueryFeightTemplateDetailReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(FeightTemplateServiceServer).QueryFeightTemplateDetail(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: FeightTemplateService_QueryFeightTemplateDetail_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(FeightTemplateServiceServer).QueryFeightTemplateDetail(ctx, req.(*QueryFeightTemplateDetailReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _FeightTemplateService_QueryFeightTemplateList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(QueryFeightTemplateListReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(FeightTemplateServiceServer).QueryFeightTemplateList(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: FeightTemplateService_QueryFeightTemplateList_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(FeightTemplateServiceServer).QueryFeightTemplateList(ctx, req.(*QueryFeightTemplateListReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-// FeightTemplateService_ServiceDesc is the grpc.ServiceDesc for FeightTemplateService service.
-// It's only intended for direct use with grpc.RegisterService,
-// and not to be introspected or modified (even as a copy)
-var FeightTemplateService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "pmsclient.FeightTemplateService",
-	HandlerType: (*FeightTemplateServiceServer)(nil),
-	Methods: []grpc.MethodDesc{
-		{
-			MethodName: "AddFeightTemplate",
-			Handler:    _FeightTemplateService_AddFeightTemplate_Handler,
-		},
-		{
-			MethodName: "DeleteFeightTemplate",
-			Handler:    _FeightTemplateService_DeleteFeightTemplate_Handler,
-		},
-		{
-			MethodName: "UpdateFeightTemplate",
-			Handler:    _FeightTemplateService_UpdateFeightTemplate_Handler,
-		},
-		{
-			MethodName: "QueryFeightTemplateDetail",
-			Handler:    _FeightTemplateService_QueryFeightTemplateDetail_Handler,
-		},
-		{
-			MethodName: "QueryFeightTemplateList",
-			Handler:    _FeightTemplateService_QueryFeightTemplateList_Handler,
-		},
-	},
-	Streams:  []grpc.StreamDesc{},
-	Metadata: "rpc/pms/pms.proto",
-}
-
-const (
-	ProductService_AddProduct_FullMethodName             = "/pmsclient.ProductService/AddProduct"
-	ProductService_QueryProductList_FullMethodName       = "/pmsclient.ProductService/QueryProductList"
-	ProductService_QueryProductListByIds_FullMethodName  = "/pmsclient.ProductService/QueryProductListByIds"
-	ProductService_UpdateProduct_FullMethodName          = "/pmsclient.ProductService/UpdateProduct"
-	ProductService_DeleteProduct_FullMethodName          = "/pmsclient.ProductService/DeleteProduct"
-	ProductService_QueryProductDetailById_FullMethodName = "/pmsclient.ProductService/QueryProductDetailById"
-	ProductService_UpdateVerifyStatus_FullMethodName     = "/pmsclient.ProductService/UpdateVerifyStatus"
-	ProductService_UpdatePublishStatus_FullMethodName    = "/pmsclient.ProductService/UpdatePublishStatus"
-	ProductService_UpdateRecommendStatus_FullMethodName  = "/pmsclient.ProductService/UpdateRecommendStatus"
-	ProductService_UpdateNewStatus_FullMethodName        = "/pmsclient.ProductService/UpdateNewStatus"
-	ProductService_UpdateDeleteStatus_FullMethodName     = "/pmsclient.ProductService/UpdateDeleteStatus"
-	ProductService_UpdateProductSort_FullMethodName      = "/pmsclient.ProductService/UpdateProductSort"
-)
-
-// ProductServiceClient is the client API for ProductService service.
-//
-// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type ProductServiceClient interface {
-	AddProduct(ctx context.Context, in *AddProductReq, opts ...grpc.CallOption) (*AddProductResp, error)
-	// 查询商品列表
-	QueryProductList(ctx context.Context, in *QueryProductListReq, opts ...grpc.CallOption) (*QueryProductListResp, error)
-	QueryProductListByIds(ctx context.Context, in *QueryProductByIdsReq, opts ...grpc.CallOption) (*QueryProductListResp, error)
-	UpdateProduct(ctx context.Context, in *UpdateProductReq, opts ...grpc.CallOption) (*UpdateProductResp, error)
-	DeleteProduct(ctx context.Context, in *DeleteProductReq, opts ...grpc.CallOption) (*DeleteProductResp, error)
-	// 查询商品详情
-	QueryProductDetailById(ctx context.Context, in *QueryProductDetailByIdReq, opts ...grpc.CallOption) (*QueryProductDetailByIdResp, error)
-	// 批量修改审核状态
-	UpdateVerifyStatus(ctx context.Context, in *UpdateProductStatusReq, opts ...grpc.CallOption) (*UpdateProductStatusResp, error)
-	// 批量上下架商品
-	UpdatePublishStatus(ctx context.Context, in *UpdateProductStatusReq, opts ...grpc.CallOption) (*UpdateProductStatusResp, error)
-	// 批量推荐商品
-	UpdateRecommendStatus(ctx context.Context, in *UpdateProductStatusReq, opts ...grpc.CallOption) (*UpdateProductStatusResp, error)
-	// 批量设为新品
-	UpdateNewStatus(ctx context.Context, in *UpdateProductStatusReq, opts ...grpc.CallOption) (*UpdateProductStatusResp, error)
-	// 批量修改删除状态
-	UpdateDeleteStatus(ctx context.Context, in *UpdateProductStatusReq, opts ...grpc.CallOption) (*UpdateProductStatusResp, error)
-	// 更新排序
-	UpdateProductSort(ctx context.Context, in *UpdateProductSortReq, opts ...grpc.CallOption) (*UpdateProductResp, error)
-}
-
-type productServiceClient struct {
-	cc grpc.ClientConnInterface
-}
-
-func NewProductServiceClient(cc grpc.ClientConnInterface) ProductServiceClient {
-	return &productServiceClient{cc}
-}
-
-func (c *productServiceClient) AddProduct(ctx context.Context, in *AddProductReq, opts ...grpc.CallOption) (*AddProductResp, error) {
-	out := new(AddProductResp)
-	err := c.cc.Invoke(ctx, ProductService_AddProduct_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *productServiceClient) QueryProductList(ctx context.Context, in *QueryProductListReq, opts ...grpc.CallOption) (*QueryProductListResp, error) {
-	out := new(QueryProductListResp)
-	err := c.cc.Invoke(ctx, ProductService_QueryProductList_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *productServiceClient) QueryProductListByIds(ctx context.Context, in *QueryProductByIdsReq, opts ...grpc.CallOption) (*QueryProductListResp, error) {
-	out := new(QueryProductListResp)
-	err := c.cc.Invoke(ctx, ProductService_QueryProductListByIds_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *productServiceClient) UpdateProduct(ctx context.Context, in *UpdateProductReq, opts ...grpc.CallOption) (*UpdateProductResp, error) {
-	out := new(UpdateProductResp)
-	err := c.cc.Invoke(ctx, ProductService_UpdateProduct_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *productServiceClient) DeleteProduct(ctx context.Context, in *DeleteProductReq, opts ...grpc.CallOption) (*DeleteProductResp, error) {
-	out := new(DeleteProductResp)
-	err := c.cc.Invoke(ctx, ProductService_DeleteProduct_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *productServiceClient) QueryProductDetailById(ctx context.Context, in *QueryProductDetailByIdReq, opts ...grpc.CallOption) (*QueryProductDetailByIdResp, error) {
-	out := new(QueryProductDetailByIdResp)
-	err := c.cc.Invoke(ctx, ProductService_QueryProductDetailById_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *productServiceClient) UpdateVerifyStatus(ctx context.Context, in *UpdateProductStatusReq, opts ...grpc.CallOption) (*UpdateProductStatusResp, error) {
-	out := new(UpdateProductStatusResp)
-	err := c.cc.Invoke(ctx, ProductService_UpdateVerifyStatus_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *productServiceClient) UpdatePublishStatus(ctx context.Context, in *UpdateProductStatusReq, opts ...grpc.CallOption) (*UpdateProductStatusResp, error) {
-	out := new(UpdateProductStatusResp)
-	err := c.cc.Invoke(ctx, ProductService_UpdatePublishStatus_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *productServiceClient) UpdateRecommendStatus(ctx context.Context, in *UpdateProductStatusReq, opts ...grpc.CallOption) (*UpdateProductStatusResp, error) {
-	out := new(UpdateProductStatusResp)
-	err := c.cc.Invoke(ctx, ProductService_UpdateRecommendStatus_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *productServiceClient) UpdateNewStatus(ctx context.Context, in *UpdateProductStatusReq, opts ...grpc.CallOption) (*UpdateProductStatusResp, error) {
-	out := new(UpdateProductStatusResp)
-	err := c.cc.Invoke(ctx, ProductService_UpdateNewStatus_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *productServiceClient) UpdateDeleteStatus(ctx context.Context, in *UpdateProductStatusReq, opts ...grpc.CallOption) (*UpdateProductStatusResp, error) {
-	out := new(UpdateProductStatusResp)
-	err := c.cc.Invoke(ctx, ProductService_UpdateDeleteStatus_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *productServiceClient) UpdateProductSort(ctx context.Context, in *UpdateProductSortReq, opts ...grpc.CallOption) (*UpdateProductResp, error) {
-	out := new(UpdateProductResp)
-	err := c.cc.Invoke(ctx, ProductService_UpdateProductSort_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-// ProductServiceServer is the server API for ProductService service.
-// All implementations must embed UnimplementedProductServiceServer
-// for forward compatibility
-type ProductServiceServer interface {
-	AddProduct(context.Context, *AddProductReq) (*AddProductResp, error)
-	// 查询商品列表
-	QueryProductList(context.Context, *QueryProductListReq) (*QueryProductListResp, error)
-	QueryProductListByIds(context.Context, *QueryProductByIdsReq) (*QueryProductListResp, error)
-	UpdateProduct(context.Context, *UpdateProductReq) (*UpdateProductResp, error)
-	DeleteProduct(context.Context, *DeleteProductReq) (*DeleteProductResp, error)
-	// 查询商品详情
-	QueryProductDetailById(context.Context, *QueryProductDetailByIdReq) (*QueryProductDetailByIdResp, error)
-	// 批量修改审核状态
-	UpdateVerifyStatus(context.Context, *UpdateProductStatusReq) (*UpdateProductStatusResp, error)
-	// 批量上下架商品
-	UpdatePublishStatus(context.Context, *UpdateProductStatusReq) (*UpdateProductStatusResp, error)
-	// 批量推荐商品
-	UpdateRecommendStatus(context.Context, *UpdateProductStatusReq) (*UpdateProductStatusResp, error)
-	// 批量设为新品
-	UpdateNewStatus(context.Context, *UpdateProductStatusReq) (*UpdateProductStatusResp, error)
-	// 批量修改删除状态
-	UpdateDeleteStatus(context.Context, *UpdateProductStatusReq) (*UpdateProductStatusResp, error)
-	// 更新排序
-	UpdateProductSort(context.Context, *UpdateProductSortReq) (*UpdateProductResp, error)
-	mustEmbedUnimplementedProductServiceServer()
-}
-
-// UnimplementedProductServiceServer must be embedded to have forward compatible implementations.
-type UnimplementedProductServiceServer struct {
-}
-
-func (UnimplementedProductServiceServer) AddProduct(context.Context, *AddProductReq) (*AddProductResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method AddProduct not implemented")
-}
-func (UnimplementedProductServiceServer) QueryProductList(context.Context, *QueryProductListReq) (*QueryProductListResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method QueryProductList not implemented")
-}
-func (UnimplementedProductServiceServer) QueryProductListByIds(context.Context, *QueryProductByIdsReq) (*QueryProductListResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method QueryProductListByIds not implemented")
-}
-func (UnimplementedProductServiceServer) UpdateProduct(context.Context, *UpdateProductReq) (*UpdateProductResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateProduct not implemented")
-}
-func (UnimplementedProductServiceServer) DeleteProduct(context.Context, *DeleteProductReq) (*DeleteProductResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method DeleteProduct not implemented")
-}
-func (UnimplementedProductServiceServer) QueryProductDetailById(context.Context, *QueryProductDetailByIdReq) (*QueryProductDetailByIdResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method QueryProductDetailById not implemented")
-}
-func (UnimplementedProductServiceServer) UpdateVerifyStatus(context.Context, *UpdateProductStatusReq) (*UpdateProductStatusResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateVerifyStatus not implemented")
-}
-func (UnimplementedProductServiceServer) UpdatePublishStatus(context.Context, *UpdateProductStatusReq) (*UpdateProductStatusResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdatePublishStatus not implemented")
-}
-func (UnimplementedProductServiceServer) UpdateRecommendStatus(context.Context, *UpdateProductStatusReq) (*UpdateProductStatusResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateRecommendStatus not implemented")
-}
-func (UnimplementedProductServiceServer) UpdateNewStatus(context.Context, *UpdateProductStatusReq) (*UpdateProductStatusResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateNewStatus not implemented")
-}
-func (UnimplementedProductServiceServer) UpdateDeleteStatus(context.Context, *UpdateProductStatusReq) (*UpdateProductStatusResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateDeleteStatus not implemented")
-}
-func (UnimplementedProductServiceServer) UpdateProductSort(context.Context, *UpdateProductSortReq) (*UpdateProductResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateProductSort not implemented")
-}
-func (UnimplementedProductServiceServer) mustEmbedUnimplementedProductServiceServer() {}
-
-// UnsafeProductServiceServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to ProductServiceServer will
-// result in compilation errors.
-type UnsafeProductServiceServer interface {
-	mustEmbedUnimplementedProductServiceServer()
-}
-
-func RegisterProductServiceServer(s grpc.ServiceRegistrar, srv ProductServiceServer) {
-	s.RegisterService(&ProductService_ServiceDesc, srv)
-}
-
-func _ProductService_AddProduct_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(AddProductReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ProductServiceServer).AddProduct(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: ProductService_AddProduct_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ProductServiceServer).AddProduct(ctx, req.(*AddProductReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _ProductService_QueryProductList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(QueryProductListReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ProductServiceServer).QueryProductList(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: ProductService_QueryProductList_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ProductServiceServer).QueryProductList(ctx, req.(*QueryProductListReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _ProductService_QueryProductListByIds_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(QueryProductByIdsReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ProductServiceServer).QueryProductListByIds(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: ProductService_QueryProductListByIds_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ProductServiceServer).QueryProductListByIds(ctx, req.(*QueryProductByIdsReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _ProductService_UpdateProduct_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UpdateProductReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ProductServiceServer).UpdateProduct(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: ProductService_UpdateProduct_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ProductServiceServer).UpdateProduct(ctx, req.(*UpdateProductReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _ProductService_DeleteProduct_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(DeleteProductReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ProductServiceServer).DeleteProduct(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: ProductService_DeleteProduct_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ProductServiceServer).DeleteProduct(ctx, req.(*DeleteProductReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _ProductService_QueryProductDetailById_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(QueryProductDetailByIdReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ProductServiceServer).QueryProductDetailById(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: ProductService_QueryProductDetailById_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ProductServiceServer).QueryProductDetailById(ctx, req.(*QueryProductDetailByIdReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _ProductService_UpdateVerifyStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UpdateProductStatusReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ProductServiceServer).UpdateVerifyStatus(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: ProductService_UpdateVerifyStatus_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ProductServiceServer).UpdateVerifyStatus(ctx, req.(*UpdateProductStatusReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _ProductService_UpdatePublishStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UpdateProductStatusReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ProductServiceServer).UpdatePublishStatus(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: ProductService_UpdatePublishStatus_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ProductServiceServer).UpdatePublishStatus(ctx, req.(*UpdateProductStatusReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _ProductService_UpdateRecommendStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UpdateProductStatusReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ProductServiceServer).UpdateRecommendStatus(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: ProductService_UpdateRecommendStatus_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ProductServiceServer).UpdateRecommendStatus(ctx, req.(*UpdateProductStatusReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _ProductService_UpdateNewStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UpdateProductStatusReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ProductServiceServer).UpdateNewStatus(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: ProductService_UpdateNewStatus_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ProductServiceServer).UpdateNewStatus(ctx, req.(*UpdateProductStatusReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _ProductService_UpdateDeleteStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UpdateProductStatusReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ProductServiceServer).UpdateDeleteStatus(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: ProductService_UpdateDeleteStatus_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ProductServiceServer).UpdateDeleteStatus(ctx, req.(*UpdateProductStatusReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _ProductService_UpdateProductSort_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UpdateProductSortReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ProductServiceServer).UpdateProductSort(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: ProductService_UpdateProductSort_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ProductServiceServer).UpdateProductSort(ctx, req.(*UpdateProductSortReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-// ProductService_ServiceDesc is the grpc.ServiceDesc for ProductService service.
-// It's only intended for direct use with grpc.RegisterService,
-// and not to be introspected or modified (even as a copy)
-var ProductService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "pmsclient.ProductService",
-	HandlerType: (*ProductServiceServer)(nil),
-	Methods: []grpc.MethodDesc{
-		{
-			MethodName: "AddProduct",
-			Handler:    _ProductService_AddProduct_Handler,
-		},
-		{
-			MethodName: "QueryProductList",
-			Handler:    _ProductService_QueryProductList_Handler,
-		},
-		{
-			MethodName: "QueryProductListByIds",
-			Handler:    _ProductService_QueryProductListByIds_Handler,
-		},
-		{
-			MethodName: "UpdateProduct",
-			Handler:    _ProductService_UpdateProduct_Handler,
-		},
-		{
-			MethodName: "DeleteProduct",
-			Handler:    _ProductService_DeleteProduct_Handler,
-		},
-		{
-			MethodName: "QueryProductDetailById",
-			Handler:    _ProductService_QueryProductDetailById_Handler,
-		},
-		{
-			MethodName: "UpdateVerifyStatus",
-			Handler:    _ProductService_UpdateVerifyStatus_Handler,
-		},
-		{
-			MethodName: "UpdatePublishStatus",
-			Handler:    _ProductService_UpdatePublishStatus_Handler,
-		},
-		{
-			MethodName: "UpdateRecommendStatus",
-			Handler:    _ProductService_UpdateRecommendStatus_Handler,
-		},
-		{
-			MethodName: "UpdateNewStatus",
-			Handler:    _ProductService_UpdateNewStatus_Handler,
-		},
-		{
-			MethodName: "UpdateDeleteStatus",
-			Handler:    _ProductService_UpdateDeleteStatus_Handler,
-		},
-		{
-			MethodName: "UpdateProductSort",
-			Handler:    _ProductService_UpdateProductSort_Handler,
-		},
-	},
-	Streams:  []grpc.StreamDesc{},
-	Metadata: "rpc/pms/pms.proto",
-}
-
-const (
-	ProductAttributeService_AddProductAttribute_FullMethodName       = "/pmsclient.ProductAttributeService/AddProductAttribute"
-	ProductAttributeService_DeleteProductAttribute_FullMethodName    = "/pmsclient.ProductAttributeService/DeleteProductAttribute"
-	ProductAttributeService_QueryProductAttributeList_FullMethodName = "/pmsclient.ProductAttributeService/QueryProductAttributeList"
-	ProductAttributeService_QueryByproductCategoryId_FullMethodName  = "/pmsclient.ProductAttributeService/QueryByproductCategoryId"
+	ProductAttributeService_AddProductAttribute_FullMethodName          = "/pmsclient.ProductAttributeService/AddProductAttribute"
+	ProductAttributeService_DeleteProductAttribute_FullMethodName       = "/pmsclient.ProductAttributeService/DeleteProductAttribute"
+	ProductAttributeService_UpdateProductAttribute_FullMethodName       = "/pmsclient.ProductAttributeService/UpdateProductAttribute"
+	ProductAttributeService_UpdateProductAttributeStatus_FullMethodName = "/pmsclient.ProductAttributeService/UpdateProductAttributeStatus"
+	ProductAttributeService_QueryProductAttributeDetail_FullMethodName  = "/pmsclient.ProductAttributeService/QueryProductAttributeDetail"
+	ProductAttributeService_QueryProductAttributeList_FullMethodName    = "/pmsclient.ProductAttributeService/QueryProductAttributeList"
 )
 
 // ProductAttributeServiceClient is the client API for ProductAttributeService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type ProductAttributeServiceClient interface {
-	// 添加商品属性参数表
+	// 添加商品属性
 	AddProductAttribute(ctx context.Context, in *AddProductAttributeReq, opts ...grpc.CallOption) (*AddProductAttributeResp, error)
-	// 删除商品属性参数表
+	// 删除商品属性
 	DeleteProductAttribute(ctx context.Context, in *DeleteProductAttributeReq, opts ...grpc.CallOption) (*DeleteProductAttributeResp, error)
-	// 查询商品属性参数表列表
+	// 更新商品属性
+	UpdateProductAttribute(ctx context.Context, in *UpdateProductAttributeReq, opts ...grpc.CallOption) (*UpdateProductAttributeResp, error)
+	// 更新商品属性状态
+	UpdateProductAttributeStatus(ctx context.Context, in *UpdateProductAttributeStatusReq, opts ...grpc.CallOption) (*UpdateProductAttributeStatusResp, error)
+	// 查询商品属性详情
+	QueryProductAttributeDetail(ctx context.Context, in *QueryProductAttributeDetailReq, opts ...grpc.CallOption) (*QueryProductAttributeDetailResp, error)
+	// 查询商品属性列表
 	QueryProductAttributeList(ctx context.Context, in *QueryProductAttributeListReq, opts ...grpc.CallOption) (*QueryProductAttributeListResp, error)
-	// 根据商品分类的id获取商品属性及属性分类
-	QueryByproductCategoryId(ctx context.Context, in *QueryByproductCategoryIdReq, opts ...grpc.CallOption) (*QueryByproductCategoryIdResp, error)
 }
 
 type productAttributeServiceClient struct {
@@ -1322,18 +71,36 @@ func (c *productAttributeServiceClient) DeleteProductAttribute(ctx context.Conte
 	return out, nil
 }
 
-func (c *productAttributeServiceClient) QueryProductAttributeList(ctx context.Context, in *QueryProductAttributeListReq, opts ...grpc.CallOption) (*QueryProductAttributeListResp, error) {
-	out := new(QueryProductAttributeListResp)
-	err := c.cc.Invoke(ctx, ProductAttributeService_QueryProductAttributeList_FullMethodName, in, out, opts...)
+func (c *productAttributeServiceClient) UpdateProductAttribute(ctx context.Context, in *UpdateProductAttributeReq, opts ...grpc.CallOption) (*UpdateProductAttributeResp, error) {
+	out := new(UpdateProductAttributeResp)
+	err := c.cc.Invoke(ctx, ProductAttributeService_UpdateProductAttribute_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *productAttributeServiceClient) QueryByproductCategoryId(ctx context.Context, in *QueryByproductCategoryIdReq, opts ...grpc.CallOption) (*QueryByproductCategoryIdResp, error) {
-	out := new(QueryByproductCategoryIdResp)
-	err := c.cc.Invoke(ctx, ProductAttributeService_QueryByproductCategoryId_FullMethodName, in, out, opts...)
+func (c *productAttributeServiceClient) UpdateProductAttributeStatus(ctx context.Context, in *UpdateProductAttributeStatusReq, opts ...grpc.CallOption) (*UpdateProductAttributeStatusResp, error) {
+	out := new(UpdateProductAttributeStatusResp)
+	err := c.cc.Invoke(ctx, ProductAttributeService_UpdateProductAttributeStatus_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *productAttributeServiceClient) QueryProductAttributeDetail(ctx context.Context, in *QueryProductAttributeDetailReq, opts ...grpc.CallOption) (*QueryProductAttributeDetailResp, error) {
+	out := new(QueryProductAttributeDetailResp)
+	err := c.cc.Invoke(ctx, ProductAttributeService_QueryProductAttributeDetail_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *productAttributeServiceClient) QueryProductAttributeList(ctx context.Context, in *QueryProductAttributeListReq, opts ...grpc.CallOption) (*QueryProductAttributeListResp, error) {
+	out := new(QueryProductAttributeListResp)
+	err := c.cc.Invoke(ctx, ProductAttributeService_QueryProductAttributeList_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1344,14 +111,18 @@ func (c *productAttributeServiceClient) QueryByproductCategoryId(ctx context.Con
 // All implementations must embed UnimplementedProductAttributeServiceServer
 // for forward compatibility
 type ProductAttributeServiceServer interface {
-	// 添加商品属性参数表
+	// 添加商品属性
 	AddProductAttribute(context.Context, *AddProductAttributeReq) (*AddProductAttributeResp, error)
-	// 删除商品属性参数表
+	// 删除商品属性
 	DeleteProductAttribute(context.Context, *DeleteProductAttributeReq) (*DeleteProductAttributeResp, error)
-	// 查询商品属性参数表列表
+	// 更新商品属性
+	UpdateProductAttribute(context.Context, *UpdateProductAttributeReq) (*UpdateProductAttributeResp, error)
+	// 更新商品属性状态
+	UpdateProductAttributeStatus(context.Context, *UpdateProductAttributeStatusReq) (*UpdateProductAttributeStatusResp, error)
+	// 查询商品属性详情
+	QueryProductAttributeDetail(context.Context, *QueryProductAttributeDetailReq) (*QueryProductAttributeDetailResp, error)
+	// 查询商品属性列表
 	QueryProductAttributeList(context.Context, *QueryProductAttributeListReq) (*QueryProductAttributeListResp, error)
-	// 根据商品分类的id获取商品属性及属性分类
-	QueryByproductCategoryId(context.Context, *QueryByproductCategoryIdReq) (*QueryByproductCategoryIdResp, error)
 	mustEmbedUnimplementedProductAttributeServiceServer()
 }
 
@@ -1365,11 +136,17 @@ func (UnimplementedProductAttributeServiceServer) AddProductAttribute(context.Co
 func (UnimplementedProductAttributeServiceServer) DeleteProductAttribute(context.Context, *DeleteProductAttributeReq) (*DeleteProductAttributeResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteProductAttribute not implemented")
 }
+func (UnimplementedProductAttributeServiceServer) UpdateProductAttribute(context.Context, *UpdateProductAttributeReq) (*UpdateProductAttributeResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateProductAttribute not implemented")
+}
+func (UnimplementedProductAttributeServiceServer) UpdateProductAttributeStatus(context.Context, *UpdateProductAttributeStatusReq) (*UpdateProductAttributeStatusResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateProductAttributeStatus not implemented")
+}
+func (UnimplementedProductAttributeServiceServer) QueryProductAttributeDetail(context.Context, *QueryProductAttributeDetailReq) (*QueryProductAttributeDetailResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method QueryProductAttributeDetail not implemented")
+}
 func (UnimplementedProductAttributeServiceServer) QueryProductAttributeList(context.Context, *QueryProductAttributeListReq) (*QueryProductAttributeListResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method QueryProductAttributeList not implemented")
-}
-func (UnimplementedProductAttributeServiceServer) QueryByproductCategoryId(context.Context, *QueryByproductCategoryIdReq) (*QueryByproductCategoryIdResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method QueryByproductCategoryId not implemented")
 }
 func (UnimplementedProductAttributeServiceServer) mustEmbedUnimplementedProductAttributeServiceServer() {
 }
@@ -1421,6 +198,60 @@ func _ProductAttributeService_DeleteProductAttribute_Handler(srv interface{}, ct
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ProductAttributeService_UpdateProductAttribute_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateProductAttributeReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ProductAttributeServiceServer).UpdateProductAttribute(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ProductAttributeService_UpdateProductAttribute_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ProductAttributeServiceServer).UpdateProductAttribute(ctx, req.(*UpdateProductAttributeReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ProductAttributeService_UpdateProductAttributeStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateProductAttributeStatusReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ProductAttributeServiceServer).UpdateProductAttributeStatus(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ProductAttributeService_UpdateProductAttributeStatus_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ProductAttributeServiceServer).UpdateProductAttributeStatus(ctx, req.(*UpdateProductAttributeStatusReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ProductAttributeService_QueryProductAttributeDetail_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryProductAttributeDetailReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ProductAttributeServiceServer).QueryProductAttributeDetail(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ProductAttributeService_QueryProductAttributeDetail_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ProductAttributeServiceServer).QueryProductAttributeDetail(ctx, req.(*QueryProductAttributeDetailReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _ProductAttributeService_QueryProductAttributeList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(QueryProductAttributeListReq)
 	if err := dec(in); err != nil {
@@ -1435,24 +266,6 @@ func _ProductAttributeService_QueryProductAttributeList_Handler(srv interface{},
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ProductAttributeServiceServer).QueryProductAttributeList(ctx, req.(*QueryProductAttributeListReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _ProductAttributeService_QueryByproductCategoryId_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(QueryByproductCategoryIdReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ProductAttributeServiceServer).QueryByproductCategoryId(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: ProductAttributeService_QueryByproductCategoryId_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ProductAttributeServiceServer).QueryByproductCategoryId(ctx, req.(*QueryByproductCategoryIdReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1473,261 +286,308 @@ var ProductAttributeService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _ProductAttributeService_DeleteProductAttribute_Handler,
 		},
 		{
+			MethodName: "UpdateProductAttribute",
+			Handler:    _ProductAttributeService_UpdateProductAttribute_Handler,
+		},
+		{
+			MethodName: "UpdateProductAttributeStatus",
+			Handler:    _ProductAttributeService_UpdateProductAttributeStatus_Handler,
+		},
+		{
+			MethodName: "QueryProductAttributeDetail",
+			Handler:    _ProductAttributeService_QueryProductAttributeDetail_Handler,
+		},
+		{
 			MethodName: "QueryProductAttributeList",
 			Handler:    _ProductAttributeService_QueryProductAttributeList_Handler,
 		},
-		{
-			MethodName: "QueryByproductCategoryId",
-			Handler:    _ProductAttributeService_QueryByproductCategoryId_Handler,
-		},
 	},
 	Streams:  []grpc.StreamDesc{},
 	Metadata: "rpc/pms/pms.proto",
 }
 
 const (
-	ProductAttributeCategoryService_AddProductAttributeCategory_FullMethodName       = "/pmsclient.ProductAttributeCategoryService/AddProductAttributeCategory"
-	ProductAttributeCategoryService_DeleteProductAttributeCategory_FullMethodName    = "/pmsclient.ProductAttributeCategoryService/DeleteProductAttributeCategory"
-	ProductAttributeCategoryService_UpdateProductAttributeCategory_FullMethodName    = "/pmsclient.ProductAttributeCategoryService/UpdateProductAttributeCategory"
-	ProductAttributeCategoryService_QueryProductAttributeCategoryList_FullMethodName = "/pmsclient.ProductAttributeCategoryService/QueryProductAttributeCategoryList"
-	ProductAttributeCategoryService_QueryCategoryWithAttrList_FullMethodName         = "/pmsclient.ProductAttributeCategoryService/queryCategoryWithAttrList"
+	ProductAttributeGroupService_AddProductAttributeGroup_FullMethodName          = "/pmsclient.ProductAttributeGroupService/AddProductAttributeGroup"
+	ProductAttributeGroupService_DeleteProductAttributeGroup_FullMethodName       = "/pmsclient.ProductAttributeGroupService/DeleteProductAttributeGroup"
+	ProductAttributeGroupService_UpdateProductAttributeGroup_FullMethodName       = "/pmsclient.ProductAttributeGroupService/UpdateProductAttributeGroup"
+	ProductAttributeGroupService_UpdateProductAttributeGroupStatus_FullMethodName = "/pmsclient.ProductAttributeGroupService/UpdateProductAttributeGroupStatus"
+	ProductAttributeGroupService_QueryProductAttributeGroupDetail_FullMethodName  = "/pmsclient.ProductAttributeGroupService/QueryProductAttributeGroupDetail"
+	ProductAttributeGroupService_QueryProductAttributeGroupList_FullMethodName    = "/pmsclient.ProductAttributeGroupService/QueryProductAttributeGroupList"
 )
 
-// ProductAttributeCategoryServiceClient is the client API for ProductAttributeCategoryService service.
+// ProductAttributeGroupServiceClient is the client API for ProductAttributeGroupService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type ProductAttributeCategoryServiceClient interface {
-	// 添加产品属性分类表
-	AddProductAttributeCategory(ctx context.Context, in *AddProductAttributeCategoryReq, opts ...grpc.CallOption) (*AddProductAttributeCategoryResp, error)
-	// 删除产品属性分类表
-	DeleteProductAttributeCategory(ctx context.Context, in *DeleteProductAttributeCategoryReq, opts ...grpc.CallOption) (*DeleteProductAttributeCategoryResp, error)
-	// 更新产品属性分类表
-	UpdateProductAttributeCategory(ctx context.Context, in *UpdateProductAttributeCategoryReq, opts ...grpc.CallOption) (*UpdateProductAttributeCategoryResp, error)
-	// 查询产品属性分类表列表
-	QueryProductAttributeCategoryList(ctx context.Context, in *QueryProductAttributeCategoryListReq, opts ...grpc.CallOption) (*QueryProductAttributeCategoryListResp, error)
-	// 获取所有商品属性分类及其下属性
-	QueryCategoryWithAttrList(ctx context.Context, in *QueryProductAttributeCategoryListReq, opts ...grpc.CallOption) (*QueryProductAttributeCategoryListResp, error)
+type ProductAttributeGroupServiceClient interface {
+	// 添加商品属性分组
+	AddProductAttributeGroup(ctx context.Context, in *AddProductAttributeGroupReq, opts ...grpc.CallOption) (*AddProductAttributeGroupResp, error)
+	// 删除商品属性分组
+	DeleteProductAttributeGroup(ctx context.Context, in *DeleteProductAttributeGroupReq, opts ...grpc.CallOption) (*DeleteProductAttributeGroupResp, error)
+	// 更新商品属性分组
+	UpdateProductAttributeGroup(ctx context.Context, in *UpdateProductAttributeGroupReq, opts ...grpc.CallOption) (*UpdateProductAttributeGroupResp, error)
+	// 更新商品属性分组状态
+	UpdateProductAttributeGroupStatus(ctx context.Context, in *UpdateProductAttributeGroupStatusReq, opts ...grpc.CallOption) (*UpdateProductAttributeGroupStatusResp, error)
+	// 查询商品属性分组详情
+	QueryProductAttributeGroupDetail(ctx context.Context, in *QueryProductAttributeGroupDetailReq, opts ...grpc.CallOption) (*QueryProductAttributeGroupDetailResp, error)
+	// 查询商品属性分组列表
+	QueryProductAttributeGroupList(ctx context.Context, in *QueryProductAttributeGroupListReq, opts ...grpc.CallOption) (*QueryProductAttributeGroupListResp, error)
 }
 
-type productAttributeCategoryServiceClient struct {
+type productAttributeGroupServiceClient struct {
 	cc grpc.ClientConnInterface
 }
 
-func NewProductAttributeCategoryServiceClient(cc grpc.ClientConnInterface) ProductAttributeCategoryServiceClient {
-	return &productAttributeCategoryServiceClient{cc}
+func NewProductAttributeGroupServiceClient(cc grpc.ClientConnInterface) ProductAttributeGroupServiceClient {
+	return &productAttributeGroupServiceClient{cc}
 }
 
-func (c *productAttributeCategoryServiceClient) AddProductAttributeCategory(ctx context.Context, in *AddProductAttributeCategoryReq, opts ...grpc.CallOption) (*AddProductAttributeCategoryResp, error) {
-	out := new(AddProductAttributeCategoryResp)
-	err := c.cc.Invoke(ctx, ProductAttributeCategoryService_AddProductAttributeCategory_FullMethodName, in, out, opts...)
+func (c *productAttributeGroupServiceClient) AddProductAttributeGroup(ctx context.Context, in *AddProductAttributeGroupReq, opts ...grpc.CallOption) (*AddProductAttributeGroupResp, error) {
+	out := new(AddProductAttributeGroupResp)
+	err := c.cc.Invoke(ctx, ProductAttributeGroupService_AddProductAttributeGroup_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *productAttributeCategoryServiceClient) DeleteProductAttributeCategory(ctx context.Context, in *DeleteProductAttributeCategoryReq, opts ...grpc.CallOption) (*DeleteProductAttributeCategoryResp, error) {
-	out := new(DeleteProductAttributeCategoryResp)
-	err := c.cc.Invoke(ctx, ProductAttributeCategoryService_DeleteProductAttributeCategory_FullMethodName, in, out, opts...)
+func (c *productAttributeGroupServiceClient) DeleteProductAttributeGroup(ctx context.Context, in *DeleteProductAttributeGroupReq, opts ...grpc.CallOption) (*DeleteProductAttributeGroupResp, error) {
+	out := new(DeleteProductAttributeGroupResp)
+	err := c.cc.Invoke(ctx, ProductAttributeGroupService_DeleteProductAttributeGroup_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *productAttributeCategoryServiceClient) UpdateProductAttributeCategory(ctx context.Context, in *UpdateProductAttributeCategoryReq, opts ...grpc.CallOption) (*UpdateProductAttributeCategoryResp, error) {
-	out := new(UpdateProductAttributeCategoryResp)
-	err := c.cc.Invoke(ctx, ProductAttributeCategoryService_UpdateProductAttributeCategory_FullMethodName, in, out, opts...)
+func (c *productAttributeGroupServiceClient) UpdateProductAttributeGroup(ctx context.Context, in *UpdateProductAttributeGroupReq, opts ...grpc.CallOption) (*UpdateProductAttributeGroupResp, error) {
+	out := new(UpdateProductAttributeGroupResp)
+	err := c.cc.Invoke(ctx, ProductAttributeGroupService_UpdateProductAttributeGroup_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *productAttributeCategoryServiceClient) QueryProductAttributeCategoryList(ctx context.Context, in *QueryProductAttributeCategoryListReq, opts ...grpc.CallOption) (*QueryProductAttributeCategoryListResp, error) {
-	out := new(QueryProductAttributeCategoryListResp)
-	err := c.cc.Invoke(ctx, ProductAttributeCategoryService_QueryProductAttributeCategoryList_FullMethodName, in, out, opts...)
+func (c *productAttributeGroupServiceClient) UpdateProductAttributeGroupStatus(ctx context.Context, in *UpdateProductAttributeGroupStatusReq, opts ...grpc.CallOption) (*UpdateProductAttributeGroupStatusResp, error) {
+	out := new(UpdateProductAttributeGroupStatusResp)
+	err := c.cc.Invoke(ctx, ProductAttributeGroupService_UpdateProductAttributeGroupStatus_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *productAttributeCategoryServiceClient) QueryCategoryWithAttrList(ctx context.Context, in *QueryProductAttributeCategoryListReq, opts ...grpc.CallOption) (*QueryProductAttributeCategoryListResp, error) {
-	out := new(QueryProductAttributeCategoryListResp)
-	err := c.cc.Invoke(ctx, ProductAttributeCategoryService_QueryCategoryWithAttrList_FullMethodName, in, out, opts...)
+func (c *productAttributeGroupServiceClient) QueryProductAttributeGroupDetail(ctx context.Context, in *QueryProductAttributeGroupDetailReq, opts ...grpc.CallOption) (*QueryProductAttributeGroupDetailResp, error) {
+	out := new(QueryProductAttributeGroupDetailResp)
+	err := c.cc.Invoke(ctx, ProductAttributeGroupService_QueryProductAttributeGroupDetail_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-// ProductAttributeCategoryServiceServer is the server API for ProductAttributeCategoryService service.
-// All implementations must embed UnimplementedProductAttributeCategoryServiceServer
+func (c *productAttributeGroupServiceClient) QueryProductAttributeGroupList(ctx context.Context, in *QueryProductAttributeGroupListReq, opts ...grpc.CallOption) (*QueryProductAttributeGroupListResp, error) {
+	out := new(QueryProductAttributeGroupListResp)
+	err := c.cc.Invoke(ctx, ProductAttributeGroupService_QueryProductAttributeGroupList_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// ProductAttributeGroupServiceServer is the server API for ProductAttributeGroupService service.
+// All implementations must embed UnimplementedProductAttributeGroupServiceServer
 // for forward compatibility
-type ProductAttributeCategoryServiceServer interface {
-	// 添加产品属性分类表
-	AddProductAttributeCategory(context.Context, *AddProductAttributeCategoryReq) (*AddProductAttributeCategoryResp, error)
-	// 删除产品属性分类表
-	DeleteProductAttributeCategory(context.Context, *DeleteProductAttributeCategoryReq) (*DeleteProductAttributeCategoryResp, error)
-	// 更新产品属性分类表
-	UpdateProductAttributeCategory(context.Context, *UpdateProductAttributeCategoryReq) (*UpdateProductAttributeCategoryResp, error)
-	// 查询产品属性分类表列表
-	QueryProductAttributeCategoryList(context.Context, *QueryProductAttributeCategoryListReq) (*QueryProductAttributeCategoryListResp, error)
-	// 获取所有商品属性分类及其下属性
-	QueryCategoryWithAttrList(context.Context, *QueryProductAttributeCategoryListReq) (*QueryProductAttributeCategoryListResp, error)
-	mustEmbedUnimplementedProductAttributeCategoryServiceServer()
+type ProductAttributeGroupServiceServer interface {
+	// 添加商品属性分组
+	AddProductAttributeGroup(context.Context, *AddProductAttributeGroupReq) (*AddProductAttributeGroupResp, error)
+	// 删除商品属性分组
+	DeleteProductAttributeGroup(context.Context, *DeleteProductAttributeGroupReq) (*DeleteProductAttributeGroupResp, error)
+	// 更新商品属性分组
+	UpdateProductAttributeGroup(context.Context, *UpdateProductAttributeGroupReq) (*UpdateProductAttributeGroupResp, error)
+	// 更新商品属性分组状态
+	UpdateProductAttributeGroupStatus(context.Context, *UpdateProductAttributeGroupStatusReq) (*UpdateProductAttributeGroupStatusResp, error)
+	// 查询商品属性分组详情
+	QueryProductAttributeGroupDetail(context.Context, *QueryProductAttributeGroupDetailReq) (*QueryProductAttributeGroupDetailResp, error)
+	// 查询商品属性分组列表
+	QueryProductAttributeGroupList(context.Context, *QueryProductAttributeGroupListReq) (*QueryProductAttributeGroupListResp, error)
+	mustEmbedUnimplementedProductAttributeGroupServiceServer()
 }
 
-// UnimplementedProductAttributeCategoryServiceServer must be embedded to have forward compatible implementations.
-type UnimplementedProductAttributeCategoryServiceServer struct {
+// UnimplementedProductAttributeGroupServiceServer must be embedded to have forward compatible implementations.
+type UnimplementedProductAttributeGroupServiceServer struct {
 }
 
-func (UnimplementedProductAttributeCategoryServiceServer) AddProductAttributeCategory(context.Context, *AddProductAttributeCategoryReq) (*AddProductAttributeCategoryResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method AddProductAttributeCategory not implemented")
+func (UnimplementedProductAttributeGroupServiceServer) AddProductAttributeGroup(context.Context, *AddProductAttributeGroupReq) (*AddProductAttributeGroupResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AddProductAttributeGroup not implemented")
 }
-func (UnimplementedProductAttributeCategoryServiceServer) DeleteProductAttributeCategory(context.Context, *DeleteProductAttributeCategoryReq) (*DeleteProductAttributeCategoryResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method DeleteProductAttributeCategory not implemented")
+func (UnimplementedProductAttributeGroupServiceServer) DeleteProductAttributeGroup(context.Context, *DeleteProductAttributeGroupReq) (*DeleteProductAttributeGroupResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteProductAttributeGroup not implemented")
 }
-func (UnimplementedProductAttributeCategoryServiceServer) UpdateProductAttributeCategory(context.Context, *UpdateProductAttributeCategoryReq) (*UpdateProductAttributeCategoryResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateProductAttributeCategory not implemented")
+func (UnimplementedProductAttributeGroupServiceServer) UpdateProductAttributeGroup(context.Context, *UpdateProductAttributeGroupReq) (*UpdateProductAttributeGroupResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateProductAttributeGroup not implemented")
 }
-func (UnimplementedProductAttributeCategoryServiceServer) QueryProductAttributeCategoryList(context.Context, *QueryProductAttributeCategoryListReq) (*QueryProductAttributeCategoryListResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method QueryProductAttributeCategoryList not implemented")
+func (UnimplementedProductAttributeGroupServiceServer) UpdateProductAttributeGroupStatus(context.Context, *UpdateProductAttributeGroupStatusReq) (*UpdateProductAttributeGroupStatusResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateProductAttributeGroupStatus not implemented")
 }
-func (UnimplementedProductAttributeCategoryServiceServer) QueryCategoryWithAttrList(context.Context, *QueryProductAttributeCategoryListReq) (*QueryProductAttributeCategoryListResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method QueryCategoryWithAttrList not implemented")
+func (UnimplementedProductAttributeGroupServiceServer) QueryProductAttributeGroupDetail(context.Context, *QueryProductAttributeGroupDetailReq) (*QueryProductAttributeGroupDetailResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method QueryProductAttributeGroupDetail not implemented")
 }
-func (UnimplementedProductAttributeCategoryServiceServer) mustEmbedUnimplementedProductAttributeCategoryServiceServer() {
+func (UnimplementedProductAttributeGroupServiceServer) QueryProductAttributeGroupList(context.Context, *QueryProductAttributeGroupListReq) (*QueryProductAttributeGroupListResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method QueryProductAttributeGroupList not implemented")
+}
+func (UnimplementedProductAttributeGroupServiceServer) mustEmbedUnimplementedProductAttributeGroupServiceServer() {
 }
 
-// UnsafeProductAttributeCategoryServiceServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to ProductAttributeCategoryServiceServer will
+// UnsafeProductAttributeGroupServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to ProductAttributeGroupServiceServer will
 // result in compilation errors.
-type UnsafeProductAttributeCategoryServiceServer interface {
-	mustEmbedUnimplementedProductAttributeCategoryServiceServer()
+type UnsafeProductAttributeGroupServiceServer interface {
+	mustEmbedUnimplementedProductAttributeGroupServiceServer()
 }
 
-func RegisterProductAttributeCategoryServiceServer(s grpc.ServiceRegistrar, srv ProductAttributeCategoryServiceServer) {
-	s.RegisterService(&ProductAttributeCategoryService_ServiceDesc, srv)
+func RegisterProductAttributeGroupServiceServer(s grpc.ServiceRegistrar, srv ProductAttributeGroupServiceServer) {
+	s.RegisterService(&ProductAttributeGroupService_ServiceDesc, srv)
 }
 
-func _ProductAttributeCategoryService_AddProductAttributeCategory_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(AddProductAttributeCategoryReq)
+func _ProductAttributeGroupService_AddProductAttributeGroup_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddProductAttributeGroupReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ProductAttributeCategoryServiceServer).AddProductAttributeCategory(ctx, in)
+		return srv.(ProductAttributeGroupServiceServer).AddProductAttributeGroup(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: ProductAttributeCategoryService_AddProductAttributeCategory_FullMethodName,
+		FullMethod: ProductAttributeGroupService_AddProductAttributeGroup_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ProductAttributeCategoryServiceServer).AddProductAttributeCategory(ctx, req.(*AddProductAttributeCategoryReq))
+		return srv.(ProductAttributeGroupServiceServer).AddProductAttributeGroup(ctx, req.(*AddProductAttributeGroupReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _ProductAttributeCategoryService_DeleteProductAttributeCategory_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(DeleteProductAttributeCategoryReq)
+func _ProductAttributeGroupService_DeleteProductAttributeGroup_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteProductAttributeGroupReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ProductAttributeCategoryServiceServer).DeleteProductAttributeCategory(ctx, in)
+		return srv.(ProductAttributeGroupServiceServer).DeleteProductAttributeGroup(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: ProductAttributeCategoryService_DeleteProductAttributeCategory_FullMethodName,
+		FullMethod: ProductAttributeGroupService_DeleteProductAttributeGroup_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ProductAttributeCategoryServiceServer).DeleteProductAttributeCategory(ctx, req.(*DeleteProductAttributeCategoryReq))
+		return srv.(ProductAttributeGroupServiceServer).DeleteProductAttributeGroup(ctx, req.(*DeleteProductAttributeGroupReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _ProductAttributeCategoryService_UpdateProductAttributeCategory_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UpdateProductAttributeCategoryReq)
+func _ProductAttributeGroupService_UpdateProductAttributeGroup_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateProductAttributeGroupReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ProductAttributeCategoryServiceServer).UpdateProductAttributeCategory(ctx, in)
+		return srv.(ProductAttributeGroupServiceServer).UpdateProductAttributeGroup(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: ProductAttributeCategoryService_UpdateProductAttributeCategory_FullMethodName,
+		FullMethod: ProductAttributeGroupService_UpdateProductAttributeGroup_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ProductAttributeCategoryServiceServer).UpdateProductAttributeCategory(ctx, req.(*UpdateProductAttributeCategoryReq))
+		return srv.(ProductAttributeGroupServiceServer).UpdateProductAttributeGroup(ctx, req.(*UpdateProductAttributeGroupReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _ProductAttributeCategoryService_QueryProductAttributeCategoryList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(QueryProductAttributeCategoryListReq)
+func _ProductAttributeGroupService_UpdateProductAttributeGroupStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateProductAttributeGroupStatusReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ProductAttributeCategoryServiceServer).QueryProductAttributeCategoryList(ctx, in)
+		return srv.(ProductAttributeGroupServiceServer).UpdateProductAttributeGroupStatus(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: ProductAttributeCategoryService_QueryProductAttributeCategoryList_FullMethodName,
+		FullMethod: ProductAttributeGroupService_UpdateProductAttributeGroupStatus_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ProductAttributeCategoryServiceServer).QueryProductAttributeCategoryList(ctx, req.(*QueryProductAttributeCategoryListReq))
+		return srv.(ProductAttributeGroupServiceServer).UpdateProductAttributeGroupStatus(ctx, req.(*UpdateProductAttributeGroupStatusReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _ProductAttributeCategoryService_QueryCategoryWithAttrList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(QueryProductAttributeCategoryListReq)
+func _ProductAttributeGroupService_QueryProductAttributeGroupDetail_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryProductAttributeGroupDetailReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ProductAttributeCategoryServiceServer).QueryCategoryWithAttrList(ctx, in)
+		return srv.(ProductAttributeGroupServiceServer).QueryProductAttributeGroupDetail(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: ProductAttributeCategoryService_QueryCategoryWithAttrList_FullMethodName,
+		FullMethod: ProductAttributeGroupService_QueryProductAttributeGroupDetail_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ProductAttributeCategoryServiceServer).QueryCategoryWithAttrList(ctx, req.(*QueryProductAttributeCategoryListReq))
+		return srv.(ProductAttributeGroupServiceServer).QueryProductAttributeGroupDetail(ctx, req.(*QueryProductAttributeGroupDetailReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-// ProductAttributeCategoryService_ServiceDesc is the grpc.ServiceDesc for ProductAttributeCategoryService service.
+func _ProductAttributeGroupService_QueryProductAttributeGroupList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryProductAttributeGroupListReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ProductAttributeGroupServiceServer).QueryProductAttributeGroupList(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ProductAttributeGroupService_QueryProductAttributeGroupList_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ProductAttributeGroupServiceServer).QueryProductAttributeGroupList(ctx, req.(*QueryProductAttributeGroupListReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// ProductAttributeGroupService_ServiceDesc is the grpc.ServiceDesc for ProductAttributeGroupService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
-var ProductAttributeCategoryService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "pmsclient.ProductAttributeCategoryService",
-	HandlerType: (*ProductAttributeCategoryServiceServer)(nil),
+var ProductAttributeGroupService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "pmsclient.ProductAttributeGroupService",
+	HandlerType: (*ProductAttributeGroupServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "AddProductAttributeCategory",
-			Handler:    _ProductAttributeCategoryService_AddProductAttributeCategory_Handler,
+			MethodName: "AddProductAttributeGroup",
+			Handler:    _ProductAttributeGroupService_AddProductAttributeGroup_Handler,
 		},
 		{
-			MethodName: "DeleteProductAttributeCategory",
-			Handler:    _ProductAttributeCategoryService_DeleteProductAttributeCategory_Handler,
+			MethodName: "DeleteProductAttributeGroup",
+			Handler:    _ProductAttributeGroupService_DeleteProductAttributeGroup_Handler,
 		},
 		{
-			MethodName: "UpdateProductAttributeCategory",
-			Handler:    _ProductAttributeCategoryService_UpdateProductAttributeCategory_Handler,
+			MethodName: "UpdateProductAttributeGroup",
+			Handler:    _ProductAttributeGroupService_UpdateProductAttributeGroup_Handler,
 		},
 		{
-			MethodName: "QueryProductAttributeCategoryList",
-			Handler:    _ProductAttributeCategoryService_QueryProductAttributeCategoryList_Handler,
+			MethodName: "UpdateProductAttributeGroupStatus",
+			Handler:    _ProductAttributeGroupService_UpdateProductAttributeGroupStatus_Handler,
 		},
 		{
-			MethodName: "queryCategoryWithAttrList",
-			Handler:    _ProductAttributeCategoryService_QueryCategoryWithAttrList_Handler,
+			MethodName: "QueryProductAttributeGroupDetail",
+			Handler:    _ProductAttributeGroupService_QueryProductAttributeGroupDetail_Handler,
+		},
+		{
+			MethodName: "QueryProductAttributeGroupList",
+			Handler:    _ProductAttributeGroupService_QueryProductAttributeGroupList_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
@@ -1735,23 +595,29 @@ var ProductAttributeCategoryService_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	ProductAttributeValueService_AddProductAttributeValue_FullMethodName       = "/pmsclient.ProductAttributeValueService/AddProductAttributeValue"
-	ProductAttributeValueService_DeleteProductAttributeValue_FullMethodName    = "/pmsclient.ProductAttributeValueService/DeleteProductAttributeValue"
-	ProductAttributeValueService_UpdateProductAttributeValue_FullMethodName    = "/pmsclient.ProductAttributeValueService/UpdateProductAttributeValue"
-	ProductAttributeValueService_QueryProductAttributeValueList_FullMethodName = "/pmsclient.ProductAttributeValueService/QueryProductAttributeValueList"
+	ProductAttributeValueService_AddProductAttributeValue_FullMethodName          = "/pmsclient.ProductAttributeValueService/AddProductAttributeValue"
+	ProductAttributeValueService_DeleteProductAttributeValue_FullMethodName       = "/pmsclient.ProductAttributeValueService/DeleteProductAttributeValue"
+	ProductAttributeValueService_UpdateProductAttributeValue_FullMethodName       = "/pmsclient.ProductAttributeValueService/UpdateProductAttributeValue"
+	ProductAttributeValueService_UpdateProductAttributeValueStatus_FullMethodName = "/pmsclient.ProductAttributeValueService/UpdateProductAttributeValueStatus"
+	ProductAttributeValueService_QueryProductAttributeValueDetail_FullMethodName  = "/pmsclient.ProductAttributeValueService/QueryProductAttributeValueDetail"
+	ProductAttributeValueService_QueryProductAttributeValueList_FullMethodName    = "/pmsclient.ProductAttributeValueService/QueryProductAttributeValueList"
 )
 
 // ProductAttributeValueServiceClient is the client API for ProductAttributeValueService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type ProductAttributeValueServiceClient interface {
-	// 添加存储产品参数信息的表
+	// 添加商品属性值
 	AddProductAttributeValue(ctx context.Context, in *AddProductAttributeValueReq, opts ...grpc.CallOption) (*AddProductAttributeValueResp, error)
-	// 删除存储产品参数信息的表
+	// 删除商品属性值
 	DeleteProductAttributeValue(ctx context.Context, in *DeleteProductAttributeValueReq, opts ...grpc.CallOption) (*DeleteProductAttributeValueResp, error)
-	// 更新存储产品参数信息的表
+	// 更新商品属性值
 	UpdateProductAttributeValue(ctx context.Context, in *UpdateProductAttributeValueReq, opts ...grpc.CallOption) (*UpdateProductAttributeValueResp, error)
-	// 查询存储产品参数信息的表列表
+	// 更新商品属性值状态
+	UpdateProductAttributeValueStatus(ctx context.Context, in *UpdateProductAttributeValueStatusReq, opts ...grpc.CallOption) (*UpdateProductAttributeValueStatusResp, error)
+	// 查询商品属性值详情
+	QueryProductAttributeValueDetail(ctx context.Context, in *QueryProductAttributeValueDetailReq, opts ...grpc.CallOption) (*QueryProductAttributeValueDetailResp, error)
+	// 查询商品属性值列表
 	QueryProductAttributeValueList(ctx context.Context, in *QueryProductAttributeValueListReq, opts ...grpc.CallOption) (*QueryProductAttributeValueListResp, error)
 }
 
@@ -1790,6 +656,24 @@ func (c *productAttributeValueServiceClient) UpdateProductAttributeValue(ctx con
 	return out, nil
 }
 
+func (c *productAttributeValueServiceClient) UpdateProductAttributeValueStatus(ctx context.Context, in *UpdateProductAttributeValueStatusReq, opts ...grpc.CallOption) (*UpdateProductAttributeValueStatusResp, error) {
+	out := new(UpdateProductAttributeValueStatusResp)
+	err := c.cc.Invoke(ctx, ProductAttributeValueService_UpdateProductAttributeValueStatus_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *productAttributeValueServiceClient) QueryProductAttributeValueDetail(ctx context.Context, in *QueryProductAttributeValueDetailReq, opts ...grpc.CallOption) (*QueryProductAttributeValueDetailResp, error) {
+	out := new(QueryProductAttributeValueDetailResp)
+	err := c.cc.Invoke(ctx, ProductAttributeValueService_QueryProductAttributeValueDetail_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *productAttributeValueServiceClient) QueryProductAttributeValueList(ctx context.Context, in *QueryProductAttributeValueListReq, opts ...grpc.CallOption) (*QueryProductAttributeValueListResp, error) {
 	out := new(QueryProductAttributeValueListResp)
 	err := c.cc.Invoke(ctx, ProductAttributeValueService_QueryProductAttributeValueList_FullMethodName, in, out, opts...)
@@ -1803,13 +687,17 @@ func (c *productAttributeValueServiceClient) QueryProductAttributeValueList(ctx 
 // All implementations must embed UnimplementedProductAttributeValueServiceServer
 // for forward compatibility
 type ProductAttributeValueServiceServer interface {
-	// 添加存储产品参数信息的表
+	// 添加商品属性值
 	AddProductAttributeValue(context.Context, *AddProductAttributeValueReq) (*AddProductAttributeValueResp, error)
-	// 删除存储产品参数信息的表
+	// 删除商品属性值
 	DeleteProductAttributeValue(context.Context, *DeleteProductAttributeValueReq) (*DeleteProductAttributeValueResp, error)
-	// 更新存储产品参数信息的表
+	// 更新商品属性值
 	UpdateProductAttributeValue(context.Context, *UpdateProductAttributeValueReq) (*UpdateProductAttributeValueResp, error)
-	// 查询存储产品参数信息的表列表
+	// 更新商品属性值状态
+	UpdateProductAttributeValueStatus(context.Context, *UpdateProductAttributeValueStatusReq) (*UpdateProductAttributeValueStatusResp, error)
+	// 查询商品属性值详情
+	QueryProductAttributeValueDetail(context.Context, *QueryProductAttributeValueDetailReq) (*QueryProductAttributeValueDetailResp, error)
+	// 查询商品属性值列表
 	QueryProductAttributeValueList(context.Context, *QueryProductAttributeValueListReq) (*QueryProductAttributeValueListResp, error)
 	mustEmbedUnimplementedProductAttributeValueServiceServer()
 }
@@ -1826,6 +714,12 @@ func (UnimplementedProductAttributeValueServiceServer) DeleteProductAttributeVal
 }
 func (UnimplementedProductAttributeValueServiceServer) UpdateProductAttributeValue(context.Context, *UpdateProductAttributeValueReq) (*UpdateProductAttributeValueResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateProductAttributeValue not implemented")
+}
+func (UnimplementedProductAttributeValueServiceServer) UpdateProductAttributeValueStatus(context.Context, *UpdateProductAttributeValueStatusReq) (*UpdateProductAttributeValueStatusResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateProductAttributeValueStatus not implemented")
+}
+func (UnimplementedProductAttributeValueServiceServer) QueryProductAttributeValueDetail(context.Context, *QueryProductAttributeValueDetailReq) (*QueryProductAttributeValueDetailResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method QueryProductAttributeValueDetail not implemented")
 }
 func (UnimplementedProductAttributeValueServiceServer) QueryProductAttributeValueList(context.Context, *QueryProductAttributeValueListReq) (*QueryProductAttributeValueListResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method QueryProductAttributeValueList not implemented")
@@ -1898,6 +792,42 @@ func _ProductAttributeValueService_UpdateProductAttributeValue_Handler(srv inter
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ProductAttributeValueService_UpdateProductAttributeValueStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateProductAttributeValueStatusReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ProductAttributeValueServiceServer).UpdateProductAttributeValueStatus(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ProductAttributeValueService_UpdateProductAttributeValueStatus_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ProductAttributeValueServiceServer).UpdateProductAttributeValueStatus(ctx, req.(*UpdateProductAttributeValueStatusReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ProductAttributeValueService_QueryProductAttributeValueDetail_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryProductAttributeValueDetailReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ProductAttributeValueServiceServer).QueryProductAttributeValueDetail(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ProductAttributeValueService_QueryProductAttributeValueDetail_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ProductAttributeValueServiceServer).QueryProductAttributeValueDetail(ctx, req.(*QueryProductAttributeValueDetailReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _ProductAttributeValueService_QueryProductAttributeValueList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(QueryProductAttributeValueListReq)
 	if err := dec(in); err != nil {
@@ -1934,6 +864,14 @@ var ProductAttributeValueService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateProductAttributeValue",
 			Handler:    _ProductAttributeValueService_UpdateProductAttributeValue_Handler,
+		},
+		{
+			MethodName: "UpdateProductAttributeValueStatus",
+			Handler:    _ProductAttributeValueService_UpdateProductAttributeValueStatus_Handler,
+		},
+		{
+			MethodName: "QueryProductAttributeValueDetail",
+			Handler:    _ProductAttributeValueService_QueryProductAttributeValueDetail_Handler,
 		},
 		{
 			MethodName: "QueryProductAttributeValueList",
@@ -3054,6 +1992,750 @@ var ProductCollectService_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
+	CommentService_AddComment_FullMethodName         = "/pmsclient.CommentService/AddComment"
+	CommentService_DeleteComment_FullMethodName      = "/pmsclient.CommentService/DeleteComment"
+	CommentService_UpdateComment_FullMethodName      = "/pmsclient.CommentService/UpdateComment"
+	CommentService_QueryCommentDetail_FullMethodName = "/pmsclient.CommentService/QueryCommentDetail"
+	CommentService_QueryCommentList_FullMethodName   = "/pmsclient.CommentService/QueryCommentList"
+)
+
+// CommentServiceClient is the client API for CommentService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type CommentServiceClient interface {
+	// 添加商品评价
+	AddComment(ctx context.Context, in *AddCommentReq, opts ...grpc.CallOption) (*AddCommentResp, error)
+	// 删除商品评价
+	DeleteComment(ctx context.Context, in *DeleteCommentReq, opts ...grpc.CallOption) (*DeleteCommentResp, error)
+	// 更新商品评价
+	UpdateComment(ctx context.Context, in *UpdateCommentReq, opts ...grpc.CallOption) (*UpdateCommentResp, error)
+	// 查询商品评价详情
+	QueryCommentDetail(ctx context.Context, in *QueryCommentDetailReq, opts ...grpc.CallOption) (*QueryCommentDetailResp, error)
+	// 查询商品评价列表
+	QueryCommentList(ctx context.Context, in *QueryCommentListReq, opts ...grpc.CallOption) (*QueryCommentListResp, error)
+}
+
+type commentServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewCommentServiceClient(cc grpc.ClientConnInterface) CommentServiceClient {
+	return &commentServiceClient{cc}
+}
+
+func (c *commentServiceClient) AddComment(ctx context.Context, in *AddCommentReq, opts ...grpc.CallOption) (*AddCommentResp, error) {
+	out := new(AddCommentResp)
+	err := c.cc.Invoke(ctx, CommentService_AddComment_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *commentServiceClient) DeleteComment(ctx context.Context, in *DeleteCommentReq, opts ...grpc.CallOption) (*DeleteCommentResp, error) {
+	out := new(DeleteCommentResp)
+	err := c.cc.Invoke(ctx, CommentService_DeleteComment_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *commentServiceClient) UpdateComment(ctx context.Context, in *UpdateCommentReq, opts ...grpc.CallOption) (*UpdateCommentResp, error) {
+	out := new(UpdateCommentResp)
+	err := c.cc.Invoke(ctx, CommentService_UpdateComment_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *commentServiceClient) QueryCommentDetail(ctx context.Context, in *QueryCommentDetailReq, opts ...grpc.CallOption) (*QueryCommentDetailResp, error) {
+	out := new(QueryCommentDetailResp)
+	err := c.cc.Invoke(ctx, CommentService_QueryCommentDetail_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *commentServiceClient) QueryCommentList(ctx context.Context, in *QueryCommentListReq, opts ...grpc.CallOption) (*QueryCommentListResp, error) {
+	out := new(QueryCommentListResp)
+	err := c.cc.Invoke(ctx, CommentService_QueryCommentList_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// CommentServiceServer is the server API for CommentService service.
+// All implementations must embed UnimplementedCommentServiceServer
+// for forward compatibility
+type CommentServiceServer interface {
+	// 添加商品评价
+	AddComment(context.Context, *AddCommentReq) (*AddCommentResp, error)
+	// 删除商品评价
+	DeleteComment(context.Context, *DeleteCommentReq) (*DeleteCommentResp, error)
+	// 更新商品评价
+	UpdateComment(context.Context, *UpdateCommentReq) (*UpdateCommentResp, error)
+	// 查询商品评价详情
+	QueryCommentDetail(context.Context, *QueryCommentDetailReq) (*QueryCommentDetailResp, error)
+	// 查询商品评价列表
+	QueryCommentList(context.Context, *QueryCommentListReq) (*QueryCommentListResp, error)
+	mustEmbedUnimplementedCommentServiceServer()
+}
+
+// UnimplementedCommentServiceServer must be embedded to have forward compatible implementations.
+type UnimplementedCommentServiceServer struct {
+}
+
+func (UnimplementedCommentServiceServer) AddComment(context.Context, *AddCommentReq) (*AddCommentResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AddComment not implemented")
+}
+func (UnimplementedCommentServiceServer) DeleteComment(context.Context, *DeleteCommentReq) (*DeleteCommentResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteComment not implemented")
+}
+func (UnimplementedCommentServiceServer) UpdateComment(context.Context, *UpdateCommentReq) (*UpdateCommentResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateComment not implemented")
+}
+func (UnimplementedCommentServiceServer) QueryCommentDetail(context.Context, *QueryCommentDetailReq) (*QueryCommentDetailResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method QueryCommentDetail not implemented")
+}
+func (UnimplementedCommentServiceServer) QueryCommentList(context.Context, *QueryCommentListReq) (*QueryCommentListResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method QueryCommentList not implemented")
+}
+func (UnimplementedCommentServiceServer) mustEmbedUnimplementedCommentServiceServer() {}
+
+// UnsafeCommentServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to CommentServiceServer will
+// result in compilation errors.
+type UnsafeCommentServiceServer interface {
+	mustEmbedUnimplementedCommentServiceServer()
+}
+
+func RegisterCommentServiceServer(s grpc.ServiceRegistrar, srv CommentServiceServer) {
+	s.RegisterService(&CommentService_ServiceDesc, srv)
+}
+
+func _CommentService_AddComment_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddCommentReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CommentServiceServer).AddComment(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: CommentService_AddComment_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CommentServiceServer).AddComment(ctx, req.(*AddCommentReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _CommentService_DeleteComment_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteCommentReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CommentServiceServer).DeleteComment(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: CommentService_DeleteComment_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CommentServiceServer).DeleteComment(ctx, req.(*DeleteCommentReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _CommentService_UpdateComment_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateCommentReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CommentServiceServer).UpdateComment(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: CommentService_UpdateComment_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CommentServiceServer).UpdateComment(ctx, req.(*UpdateCommentReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _CommentService_QueryCommentDetail_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryCommentDetailReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CommentServiceServer).QueryCommentDetail(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: CommentService_QueryCommentDetail_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CommentServiceServer).QueryCommentDetail(ctx, req.(*QueryCommentDetailReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _CommentService_QueryCommentList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryCommentListReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CommentServiceServer).QueryCommentList(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: CommentService_QueryCommentList_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CommentServiceServer).QueryCommentList(ctx, req.(*QueryCommentListReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// CommentService_ServiceDesc is the grpc.ServiceDesc for CommentService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var CommentService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "pmsclient.CommentService",
+	HandlerType: (*CommentServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "AddComment",
+			Handler:    _CommentService_AddComment_Handler,
+		},
+		{
+			MethodName: "DeleteComment",
+			Handler:    _CommentService_DeleteComment_Handler,
+		},
+		{
+			MethodName: "UpdateComment",
+			Handler:    _CommentService_UpdateComment_Handler,
+		},
+		{
+			MethodName: "QueryCommentDetail",
+			Handler:    _CommentService_QueryCommentDetail_Handler,
+		},
+		{
+			MethodName: "QueryCommentList",
+			Handler:    _CommentService_QueryCommentList_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "rpc/pms/pms.proto",
+}
+
+const (
+	CommentReplayService_AddCommentReplay_FullMethodName         = "/pmsclient.CommentReplayService/AddCommentReplay"
+	CommentReplayService_DeleteCommentReplay_FullMethodName      = "/pmsclient.CommentReplayService/DeleteCommentReplay"
+	CommentReplayService_UpdateCommentReplay_FullMethodName      = "/pmsclient.CommentReplayService/UpdateCommentReplay"
+	CommentReplayService_QueryCommentReplayDetail_FullMethodName = "/pmsclient.CommentReplayService/QueryCommentReplayDetail"
+	CommentReplayService_QueryCommentReplayList_FullMethodName   = "/pmsclient.CommentReplayService/QueryCommentReplayList"
+)
+
+// CommentReplayServiceClient is the client API for CommentReplayService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type CommentReplayServiceClient interface {
+	// 添加产品评价回复
+	AddCommentReplay(ctx context.Context, in *AddCommentReplayReq, opts ...grpc.CallOption) (*AddCommentReplayResp, error)
+	// 删除产品评价回复
+	DeleteCommentReplay(ctx context.Context, in *DeleteCommentReplayReq, opts ...grpc.CallOption) (*DeleteCommentReplayResp, error)
+	// 更新产品评价回复
+	UpdateCommentReplay(ctx context.Context, in *UpdateCommentReplayReq, opts ...grpc.CallOption) (*UpdateCommentReplayResp, error)
+	// 查询产品评价回复详情
+	QueryCommentReplayDetail(ctx context.Context, in *QueryCommentReplayDetailReq, opts ...grpc.CallOption) (*QueryCommentReplayDetailResp, error)
+	// 查询产品评价回复列表
+	QueryCommentReplayList(ctx context.Context, in *QueryCommentReplayListReq, opts ...grpc.CallOption) (*QueryCommentReplayListResp, error)
+}
+
+type commentReplayServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewCommentReplayServiceClient(cc grpc.ClientConnInterface) CommentReplayServiceClient {
+	return &commentReplayServiceClient{cc}
+}
+
+func (c *commentReplayServiceClient) AddCommentReplay(ctx context.Context, in *AddCommentReplayReq, opts ...grpc.CallOption) (*AddCommentReplayResp, error) {
+	out := new(AddCommentReplayResp)
+	err := c.cc.Invoke(ctx, CommentReplayService_AddCommentReplay_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *commentReplayServiceClient) DeleteCommentReplay(ctx context.Context, in *DeleteCommentReplayReq, opts ...grpc.CallOption) (*DeleteCommentReplayResp, error) {
+	out := new(DeleteCommentReplayResp)
+	err := c.cc.Invoke(ctx, CommentReplayService_DeleteCommentReplay_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *commentReplayServiceClient) UpdateCommentReplay(ctx context.Context, in *UpdateCommentReplayReq, opts ...grpc.CallOption) (*UpdateCommentReplayResp, error) {
+	out := new(UpdateCommentReplayResp)
+	err := c.cc.Invoke(ctx, CommentReplayService_UpdateCommentReplay_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *commentReplayServiceClient) QueryCommentReplayDetail(ctx context.Context, in *QueryCommentReplayDetailReq, opts ...grpc.CallOption) (*QueryCommentReplayDetailResp, error) {
+	out := new(QueryCommentReplayDetailResp)
+	err := c.cc.Invoke(ctx, CommentReplayService_QueryCommentReplayDetail_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *commentReplayServiceClient) QueryCommentReplayList(ctx context.Context, in *QueryCommentReplayListReq, opts ...grpc.CallOption) (*QueryCommentReplayListResp, error) {
+	out := new(QueryCommentReplayListResp)
+	err := c.cc.Invoke(ctx, CommentReplayService_QueryCommentReplayList_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// CommentReplayServiceServer is the server API for CommentReplayService service.
+// All implementations must embed UnimplementedCommentReplayServiceServer
+// for forward compatibility
+type CommentReplayServiceServer interface {
+	// 添加产品评价回复
+	AddCommentReplay(context.Context, *AddCommentReplayReq) (*AddCommentReplayResp, error)
+	// 删除产品评价回复
+	DeleteCommentReplay(context.Context, *DeleteCommentReplayReq) (*DeleteCommentReplayResp, error)
+	// 更新产品评价回复
+	UpdateCommentReplay(context.Context, *UpdateCommentReplayReq) (*UpdateCommentReplayResp, error)
+	// 查询产品评价回复详情
+	QueryCommentReplayDetail(context.Context, *QueryCommentReplayDetailReq) (*QueryCommentReplayDetailResp, error)
+	// 查询产品评价回复列表
+	QueryCommentReplayList(context.Context, *QueryCommentReplayListReq) (*QueryCommentReplayListResp, error)
+	mustEmbedUnimplementedCommentReplayServiceServer()
+}
+
+// UnimplementedCommentReplayServiceServer must be embedded to have forward compatible implementations.
+type UnimplementedCommentReplayServiceServer struct {
+}
+
+func (UnimplementedCommentReplayServiceServer) AddCommentReplay(context.Context, *AddCommentReplayReq) (*AddCommentReplayResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AddCommentReplay not implemented")
+}
+func (UnimplementedCommentReplayServiceServer) DeleteCommentReplay(context.Context, *DeleteCommentReplayReq) (*DeleteCommentReplayResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteCommentReplay not implemented")
+}
+func (UnimplementedCommentReplayServiceServer) UpdateCommentReplay(context.Context, *UpdateCommentReplayReq) (*UpdateCommentReplayResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateCommentReplay not implemented")
+}
+func (UnimplementedCommentReplayServiceServer) QueryCommentReplayDetail(context.Context, *QueryCommentReplayDetailReq) (*QueryCommentReplayDetailResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method QueryCommentReplayDetail not implemented")
+}
+func (UnimplementedCommentReplayServiceServer) QueryCommentReplayList(context.Context, *QueryCommentReplayListReq) (*QueryCommentReplayListResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method QueryCommentReplayList not implemented")
+}
+func (UnimplementedCommentReplayServiceServer) mustEmbedUnimplementedCommentReplayServiceServer() {}
+
+// UnsafeCommentReplayServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to CommentReplayServiceServer will
+// result in compilation errors.
+type UnsafeCommentReplayServiceServer interface {
+	mustEmbedUnimplementedCommentReplayServiceServer()
+}
+
+func RegisterCommentReplayServiceServer(s grpc.ServiceRegistrar, srv CommentReplayServiceServer) {
+	s.RegisterService(&CommentReplayService_ServiceDesc, srv)
+}
+
+func _CommentReplayService_AddCommentReplay_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddCommentReplayReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CommentReplayServiceServer).AddCommentReplay(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: CommentReplayService_AddCommentReplay_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CommentReplayServiceServer).AddCommentReplay(ctx, req.(*AddCommentReplayReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _CommentReplayService_DeleteCommentReplay_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteCommentReplayReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CommentReplayServiceServer).DeleteCommentReplay(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: CommentReplayService_DeleteCommentReplay_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CommentReplayServiceServer).DeleteCommentReplay(ctx, req.(*DeleteCommentReplayReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _CommentReplayService_UpdateCommentReplay_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateCommentReplayReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CommentReplayServiceServer).UpdateCommentReplay(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: CommentReplayService_UpdateCommentReplay_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CommentReplayServiceServer).UpdateCommentReplay(ctx, req.(*UpdateCommentReplayReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _CommentReplayService_QueryCommentReplayDetail_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryCommentReplayDetailReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CommentReplayServiceServer).QueryCommentReplayDetail(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: CommentReplayService_QueryCommentReplayDetail_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CommentReplayServiceServer).QueryCommentReplayDetail(ctx, req.(*QueryCommentReplayDetailReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _CommentReplayService_QueryCommentReplayList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryCommentReplayListReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CommentReplayServiceServer).QueryCommentReplayList(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: CommentReplayService_QueryCommentReplayList_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CommentReplayServiceServer).QueryCommentReplayList(ctx, req.(*QueryCommentReplayListReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// CommentReplayService_ServiceDesc is the grpc.ServiceDesc for CommentReplayService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var CommentReplayService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "pmsclient.CommentReplayService",
+	HandlerType: (*CommentReplayServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "AddCommentReplay",
+			Handler:    _CommentReplayService_AddCommentReplay_Handler,
+		},
+		{
+			MethodName: "DeleteCommentReplay",
+			Handler:    _CommentReplayService_DeleteCommentReplay_Handler,
+		},
+		{
+			MethodName: "UpdateCommentReplay",
+			Handler:    _CommentReplayService_UpdateCommentReplay_Handler,
+		},
+		{
+			MethodName: "QueryCommentReplayDetail",
+			Handler:    _CommentReplayService_QueryCommentReplayDetail_Handler,
+		},
+		{
+			MethodName: "QueryCommentReplayList",
+			Handler:    _CommentReplayService_QueryCommentReplayList_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "rpc/pms/pms.proto",
+}
+
+const (
+	FeightTemplateService_AddFeightTemplate_FullMethodName         = "/pmsclient.FeightTemplateService/AddFeightTemplate"
+	FeightTemplateService_DeleteFeightTemplate_FullMethodName      = "/pmsclient.FeightTemplateService/DeleteFeightTemplate"
+	FeightTemplateService_UpdateFeightTemplate_FullMethodName      = "/pmsclient.FeightTemplateService/UpdateFeightTemplate"
+	FeightTemplateService_QueryFeightTemplateDetail_FullMethodName = "/pmsclient.FeightTemplateService/QueryFeightTemplateDetail"
+	FeightTemplateService_QueryFeightTemplateList_FullMethodName   = "/pmsclient.FeightTemplateService/QueryFeightTemplateList"
+)
+
+// FeightTemplateServiceClient is the client API for FeightTemplateService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type FeightTemplateServiceClient interface {
+	// 添加运费模版
+	AddFeightTemplate(ctx context.Context, in *AddFeightTemplateReq, opts ...grpc.CallOption) (*AddFeightTemplateResp, error)
+	// 删除运费模版
+	DeleteFeightTemplate(ctx context.Context, in *DeleteFeightTemplateReq, opts ...grpc.CallOption) (*DeleteFeightTemplateResp, error)
+	// 更新运费模版
+	UpdateFeightTemplate(ctx context.Context, in *UpdateFeightTemplateReq, opts ...grpc.CallOption) (*UpdateFeightTemplateResp, error)
+	// 查询运费模版详情
+	QueryFeightTemplateDetail(ctx context.Context, in *QueryFeightTemplateDetailReq, opts ...grpc.CallOption) (*QueryFeightTemplateDetailResp, error)
+	// 查询运费模版列表
+	QueryFeightTemplateList(ctx context.Context, in *QueryFeightTemplateListReq, opts ...grpc.CallOption) (*QueryFeightTemplateListResp, error)
+}
+
+type feightTemplateServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewFeightTemplateServiceClient(cc grpc.ClientConnInterface) FeightTemplateServiceClient {
+	return &feightTemplateServiceClient{cc}
+}
+
+func (c *feightTemplateServiceClient) AddFeightTemplate(ctx context.Context, in *AddFeightTemplateReq, opts ...grpc.CallOption) (*AddFeightTemplateResp, error) {
+	out := new(AddFeightTemplateResp)
+	err := c.cc.Invoke(ctx, FeightTemplateService_AddFeightTemplate_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *feightTemplateServiceClient) DeleteFeightTemplate(ctx context.Context, in *DeleteFeightTemplateReq, opts ...grpc.CallOption) (*DeleteFeightTemplateResp, error) {
+	out := new(DeleteFeightTemplateResp)
+	err := c.cc.Invoke(ctx, FeightTemplateService_DeleteFeightTemplate_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *feightTemplateServiceClient) UpdateFeightTemplate(ctx context.Context, in *UpdateFeightTemplateReq, opts ...grpc.CallOption) (*UpdateFeightTemplateResp, error) {
+	out := new(UpdateFeightTemplateResp)
+	err := c.cc.Invoke(ctx, FeightTemplateService_UpdateFeightTemplate_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *feightTemplateServiceClient) QueryFeightTemplateDetail(ctx context.Context, in *QueryFeightTemplateDetailReq, opts ...grpc.CallOption) (*QueryFeightTemplateDetailResp, error) {
+	out := new(QueryFeightTemplateDetailResp)
+	err := c.cc.Invoke(ctx, FeightTemplateService_QueryFeightTemplateDetail_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *feightTemplateServiceClient) QueryFeightTemplateList(ctx context.Context, in *QueryFeightTemplateListReq, opts ...grpc.CallOption) (*QueryFeightTemplateListResp, error) {
+	out := new(QueryFeightTemplateListResp)
+	err := c.cc.Invoke(ctx, FeightTemplateService_QueryFeightTemplateList_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// FeightTemplateServiceServer is the server API for FeightTemplateService service.
+// All implementations must embed UnimplementedFeightTemplateServiceServer
+// for forward compatibility
+type FeightTemplateServiceServer interface {
+	// 添加运费模版
+	AddFeightTemplate(context.Context, *AddFeightTemplateReq) (*AddFeightTemplateResp, error)
+	// 删除运费模版
+	DeleteFeightTemplate(context.Context, *DeleteFeightTemplateReq) (*DeleteFeightTemplateResp, error)
+	// 更新运费模版
+	UpdateFeightTemplate(context.Context, *UpdateFeightTemplateReq) (*UpdateFeightTemplateResp, error)
+	// 查询运费模版详情
+	QueryFeightTemplateDetail(context.Context, *QueryFeightTemplateDetailReq) (*QueryFeightTemplateDetailResp, error)
+	// 查询运费模版列表
+	QueryFeightTemplateList(context.Context, *QueryFeightTemplateListReq) (*QueryFeightTemplateListResp, error)
+	mustEmbedUnimplementedFeightTemplateServiceServer()
+}
+
+// UnimplementedFeightTemplateServiceServer must be embedded to have forward compatible implementations.
+type UnimplementedFeightTemplateServiceServer struct {
+}
+
+func (UnimplementedFeightTemplateServiceServer) AddFeightTemplate(context.Context, *AddFeightTemplateReq) (*AddFeightTemplateResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AddFeightTemplate not implemented")
+}
+func (UnimplementedFeightTemplateServiceServer) DeleteFeightTemplate(context.Context, *DeleteFeightTemplateReq) (*DeleteFeightTemplateResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteFeightTemplate not implemented")
+}
+func (UnimplementedFeightTemplateServiceServer) UpdateFeightTemplate(context.Context, *UpdateFeightTemplateReq) (*UpdateFeightTemplateResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateFeightTemplate not implemented")
+}
+func (UnimplementedFeightTemplateServiceServer) QueryFeightTemplateDetail(context.Context, *QueryFeightTemplateDetailReq) (*QueryFeightTemplateDetailResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method QueryFeightTemplateDetail not implemented")
+}
+func (UnimplementedFeightTemplateServiceServer) QueryFeightTemplateList(context.Context, *QueryFeightTemplateListReq) (*QueryFeightTemplateListResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method QueryFeightTemplateList not implemented")
+}
+func (UnimplementedFeightTemplateServiceServer) mustEmbedUnimplementedFeightTemplateServiceServer() {}
+
+// UnsafeFeightTemplateServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to FeightTemplateServiceServer will
+// result in compilation errors.
+type UnsafeFeightTemplateServiceServer interface {
+	mustEmbedUnimplementedFeightTemplateServiceServer()
+}
+
+func RegisterFeightTemplateServiceServer(s grpc.ServiceRegistrar, srv FeightTemplateServiceServer) {
+	s.RegisterService(&FeightTemplateService_ServiceDesc, srv)
+}
+
+func _FeightTemplateService_AddFeightTemplate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddFeightTemplateReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FeightTemplateServiceServer).AddFeightTemplate(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: FeightTemplateService_AddFeightTemplate_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FeightTemplateServiceServer).AddFeightTemplate(ctx, req.(*AddFeightTemplateReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _FeightTemplateService_DeleteFeightTemplate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteFeightTemplateReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FeightTemplateServiceServer).DeleteFeightTemplate(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: FeightTemplateService_DeleteFeightTemplate_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FeightTemplateServiceServer).DeleteFeightTemplate(ctx, req.(*DeleteFeightTemplateReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _FeightTemplateService_UpdateFeightTemplate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateFeightTemplateReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FeightTemplateServiceServer).UpdateFeightTemplate(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: FeightTemplateService_UpdateFeightTemplate_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FeightTemplateServiceServer).UpdateFeightTemplate(ctx, req.(*UpdateFeightTemplateReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _FeightTemplateService_QueryFeightTemplateDetail_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryFeightTemplateDetailReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FeightTemplateServiceServer).QueryFeightTemplateDetail(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: FeightTemplateService_QueryFeightTemplateDetail_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FeightTemplateServiceServer).QueryFeightTemplateDetail(ctx, req.(*QueryFeightTemplateDetailReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _FeightTemplateService_QueryFeightTemplateList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryFeightTemplateListReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FeightTemplateServiceServer).QueryFeightTemplateList(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: FeightTemplateService_QueryFeightTemplateList_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FeightTemplateServiceServer).QueryFeightTemplateList(ctx, req.(*QueryFeightTemplateListReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// FeightTemplateService_ServiceDesc is the grpc.ServiceDesc for FeightTemplateService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var FeightTemplateService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "pmsclient.FeightTemplateService",
+	HandlerType: (*FeightTemplateServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "AddFeightTemplate",
+			Handler:    _FeightTemplateService_AddFeightTemplate_Handler,
+		},
+		{
+			MethodName: "DeleteFeightTemplate",
+			Handler:    _FeightTemplateService_DeleteFeightTemplate_Handler,
+		},
+		{
+			MethodName: "UpdateFeightTemplate",
+			Handler:    _FeightTemplateService_UpdateFeightTemplate_Handler,
+		},
+		{
+			MethodName: "QueryFeightTemplateDetail",
+			Handler:    _FeightTemplateService_QueryFeightTemplateDetail_Handler,
+		},
+		{
+			MethodName: "QueryFeightTemplateList",
+			Handler:    _FeightTemplateService_QueryFeightTemplateList_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "rpc/pms/pms.proto",
+}
+
+const (
 	ProductFullReductionService_AddProductFullReduction_FullMethodName       = "/pmsclient.ProductFullReductionService/AddProductFullReduction"
 	ProductFullReductionService_DeleteProductFullReduction_FullMethodName    = "/pmsclient.ProductFullReductionService/DeleteProductFullReduction"
 	ProductFullReductionService_QueryProductFullReductionList_FullMethodName = "/pmsclient.ProductFullReductionService/QueryProductFullReductionList"
@@ -3683,6 +3365,1467 @@ var ProductOperateLogService_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
+	ProductSkuService_AddProductSku_FullMethodName         = "/pmsclient.ProductSkuService/AddProductSku"
+	ProductSkuService_DeleteProductSku_FullMethodName      = "/pmsclient.ProductSkuService/DeleteProductSku"
+	ProductSkuService_UpdateProductSku_FullMethodName      = "/pmsclient.ProductSkuService/UpdateProductSku"
+	ProductSkuService_QueryProductSkuDetail_FullMethodName = "/pmsclient.ProductSkuService/QueryProductSkuDetail"
+	ProductSkuService_QueryProductSkuList_FullMethodName   = "/pmsclient.ProductSkuService/QueryProductSkuList"
+	ProductSkuService_ReleaseSkuStockLock_FullMethodName   = "/pmsclient.ProductSkuService/ReleaseSkuStockLock"
+	ProductSkuService_LockSkuStockLock_FullMethodName      = "/pmsclient.ProductSkuService/LockSkuStockLock"
+)
+
+// ProductSkuServiceClient is the client API for ProductSkuService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type ProductSkuServiceClient interface {
+	// 添加商品SKU
+	AddProductSku(ctx context.Context, in *AddProductSkuReq, opts ...grpc.CallOption) (*AddProductSkuResp, error)
+	// 删除商品SKU
+	DeleteProductSku(ctx context.Context, in *DeleteProductSkuReq, opts ...grpc.CallOption) (*DeleteProductSkuResp, error)
+	// 更新商品SKU
+	UpdateProductSku(ctx context.Context, in *UpdateProductSkuReq, opts ...grpc.CallOption) (*UpdateProductSkuResp, error)
+	// 查询商品SKU详情
+	QueryProductSkuDetail(ctx context.Context, in *QueryProductSkuDetailReq, opts ...grpc.CallOption) (*QueryProductSkuDetailResp, error)
+	// 查询商品SKU列表
+	QueryProductSkuList(ctx context.Context, in *QueryProductSkuListReq, opts ...grpc.CallOption) (*QueryProductSkuListResp, error)
+	// 取消订单的时候,释放库存
+	ReleaseSkuStockLock(ctx context.Context, in *UpdateSkuStockReq, opts ...grpc.CallOption) (*UpdateSkuStockLockResp, error)
+	// 下单的时候,锁定库存
+	LockSkuStockLock(ctx context.Context, in *UpdateSkuStockReq, opts ...grpc.CallOption) (*UpdateSkuStockLockResp, error)
+}
+
+type productSkuServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewProductSkuServiceClient(cc grpc.ClientConnInterface) ProductSkuServiceClient {
+	return &productSkuServiceClient{cc}
+}
+
+func (c *productSkuServiceClient) AddProductSku(ctx context.Context, in *AddProductSkuReq, opts ...grpc.CallOption) (*AddProductSkuResp, error) {
+	out := new(AddProductSkuResp)
+	err := c.cc.Invoke(ctx, ProductSkuService_AddProductSku_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *productSkuServiceClient) DeleteProductSku(ctx context.Context, in *DeleteProductSkuReq, opts ...grpc.CallOption) (*DeleteProductSkuResp, error) {
+	out := new(DeleteProductSkuResp)
+	err := c.cc.Invoke(ctx, ProductSkuService_DeleteProductSku_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *productSkuServiceClient) UpdateProductSku(ctx context.Context, in *UpdateProductSkuReq, opts ...grpc.CallOption) (*UpdateProductSkuResp, error) {
+	out := new(UpdateProductSkuResp)
+	err := c.cc.Invoke(ctx, ProductSkuService_UpdateProductSku_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *productSkuServiceClient) QueryProductSkuDetail(ctx context.Context, in *QueryProductSkuDetailReq, opts ...grpc.CallOption) (*QueryProductSkuDetailResp, error) {
+	out := new(QueryProductSkuDetailResp)
+	err := c.cc.Invoke(ctx, ProductSkuService_QueryProductSkuDetail_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *productSkuServiceClient) QueryProductSkuList(ctx context.Context, in *QueryProductSkuListReq, opts ...grpc.CallOption) (*QueryProductSkuListResp, error) {
+	out := new(QueryProductSkuListResp)
+	err := c.cc.Invoke(ctx, ProductSkuService_QueryProductSkuList_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *productSkuServiceClient) ReleaseSkuStockLock(ctx context.Context, in *UpdateSkuStockReq, opts ...grpc.CallOption) (*UpdateSkuStockLockResp, error) {
+	out := new(UpdateSkuStockLockResp)
+	err := c.cc.Invoke(ctx, ProductSkuService_ReleaseSkuStockLock_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *productSkuServiceClient) LockSkuStockLock(ctx context.Context, in *UpdateSkuStockReq, opts ...grpc.CallOption) (*UpdateSkuStockLockResp, error) {
+	out := new(UpdateSkuStockLockResp)
+	err := c.cc.Invoke(ctx, ProductSkuService_LockSkuStockLock_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// ProductSkuServiceServer is the server API for ProductSkuService service.
+// All implementations must embed UnimplementedProductSkuServiceServer
+// for forward compatibility
+type ProductSkuServiceServer interface {
+	// 添加商品SKU
+	AddProductSku(context.Context, *AddProductSkuReq) (*AddProductSkuResp, error)
+	// 删除商品SKU
+	DeleteProductSku(context.Context, *DeleteProductSkuReq) (*DeleteProductSkuResp, error)
+	// 更新商品SKU
+	UpdateProductSku(context.Context, *UpdateProductSkuReq) (*UpdateProductSkuResp, error)
+	// 查询商品SKU详情
+	QueryProductSkuDetail(context.Context, *QueryProductSkuDetailReq) (*QueryProductSkuDetailResp, error)
+	// 查询商品SKU列表
+	QueryProductSkuList(context.Context, *QueryProductSkuListReq) (*QueryProductSkuListResp, error)
+	// 取消订单的时候,释放库存
+	ReleaseSkuStockLock(context.Context, *UpdateSkuStockReq) (*UpdateSkuStockLockResp, error)
+	// 下单的时候,锁定库存
+	LockSkuStockLock(context.Context, *UpdateSkuStockReq) (*UpdateSkuStockLockResp, error)
+	mustEmbedUnimplementedProductSkuServiceServer()
+}
+
+// UnimplementedProductSkuServiceServer must be embedded to have forward compatible implementations.
+type UnimplementedProductSkuServiceServer struct {
+}
+
+func (UnimplementedProductSkuServiceServer) AddProductSku(context.Context, *AddProductSkuReq) (*AddProductSkuResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AddProductSku not implemented")
+}
+func (UnimplementedProductSkuServiceServer) DeleteProductSku(context.Context, *DeleteProductSkuReq) (*DeleteProductSkuResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteProductSku not implemented")
+}
+func (UnimplementedProductSkuServiceServer) UpdateProductSku(context.Context, *UpdateProductSkuReq) (*UpdateProductSkuResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateProductSku not implemented")
+}
+func (UnimplementedProductSkuServiceServer) QueryProductSkuDetail(context.Context, *QueryProductSkuDetailReq) (*QueryProductSkuDetailResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method QueryProductSkuDetail not implemented")
+}
+func (UnimplementedProductSkuServiceServer) QueryProductSkuList(context.Context, *QueryProductSkuListReq) (*QueryProductSkuListResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method QueryProductSkuList not implemented")
+}
+func (UnimplementedProductSkuServiceServer) ReleaseSkuStockLock(context.Context, *UpdateSkuStockReq) (*UpdateSkuStockLockResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ReleaseSkuStockLock not implemented")
+}
+func (UnimplementedProductSkuServiceServer) LockSkuStockLock(context.Context, *UpdateSkuStockReq) (*UpdateSkuStockLockResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method LockSkuStockLock not implemented")
+}
+func (UnimplementedProductSkuServiceServer) mustEmbedUnimplementedProductSkuServiceServer() {}
+
+// UnsafeProductSkuServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to ProductSkuServiceServer will
+// result in compilation errors.
+type UnsafeProductSkuServiceServer interface {
+	mustEmbedUnimplementedProductSkuServiceServer()
+}
+
+func RegisterProductSkuServiceServer(s grpc.ServiceRegistrar, srv ProductSkuServiceServer) {
+	s.RegisterService(&ProductSkuService_ServiceDesc, srv)
+}
+
+func _ProductSkuService_AddProductSku_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddProductSkuReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ProductSkuServiceServer).AddProductSku(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ProductSkuService_AddProductSku_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ProductSkuServiceServer).AddProductSku(ctx, req.(*AddProductSkuReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ProductSkuService_DeleteProductSku_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteProductSkuReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ProductSkuServiceServer).DeleteProductSku(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ProductSkuService_DeleteProductSku_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ProductSkuServiceServer).DeleteProductSku(ctx, req.(*DeleteProductSkuReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ProductSkuService_UpdateProductSku_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateProductSkuReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ProductSkuServiceServer).UpdateProductSku(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ProductSkuService_UpdateProductSku_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ProductSkuServiceServer).UpdateProductSku(ctx, req.(*UpdateProductSkuReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ProductSkuService_QueryProductSkuDetail_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryProductSkuDetailReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ProductSkuServiceServer).QueryProductSkuDetail(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ProductSkuService_QueryProductSkuDetail_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ProductSkuServiceServer).QueryProductSkuDetail(ctx, req.(*QueryProductSkuDetailReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ProductSkuService_QueryProductSkuList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryProductSkuListReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ProductSkuServiceServer).QueryProductSkuList(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ProductSkuService_QueryProductSkuList_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ProductSkuServiceServer).QueryProductSkuList(ctx, req.(*QueryProductSkuListReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ProductSkuService_ReleaseSkuStockLock_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateSkuStockReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ProductSkuServiceServer).ReleaseSkuStockLock(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ProductSkuService_ReleaseSkuStockLock_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ProductSkuServiceServer).ReleaseSkuStockLock(ctx, req.(*UpdateSkuStockReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ProductSkuService_LockSkuStockLock_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateSkuStockReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ProductSkuServiceServer).LockSkuStockLock(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ProductSkuService_LockSkuStockLock_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ProductSkuServiceServer).LockSkuStockLock(ctx, req.(*UpdateSkuStockReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// ProductSkuService_ServiceDesc is the grpc.ServiceDesc for ProductSkuService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var ProductSkuService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "pmsclient.ProductSkuService",
+	HandlerType: (*ProductSkuServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "AddProductSku",
+			Handler:    _ProductSkuService_AddProductSku_Handler,
+		},
+		{
+			MethodName: "DeleteProductSku",
+			Handler:    _ProductSkuService_DeleteProductSku_Handler,
+		},
+		{
+			MethodName: "UpdateProductSku",
+			Handler:    _ProductSkuService_UpdateProductSku_Handler,
+		},
+		{
+			MethodName: "QueryProductSkuDetail",
+			Handler:    _ProductSkuService_QueryProductSkuDetail_Handler,
+		},
+		{
+			MethodName: "QueryProductSkuList",
+			Handler:    _ProductSkuService_QueryProductSkuList_Handler,
+		},
+		{
+			MethodName: "ReleaseSkuStockLock",
+			Handler:    _ProductSkuService_ReleaseSkuStockLock_Handler,
+		},
+		{
+			MethodName: "LockSkuStockLock",
+			Handler:    _ProductSkuService_LockSkuStockLock_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "rpc/pms/pms.proto",
+}
+
+const (
+	ProductSpecService_AddProductSpec_FullMethodName          = "/pmsclient.ProductSpecService/AddProductSpec"
+	ProductSpecService_DeleteProductSpec_FullMethodName       = "/pmsclient.ProductSpecService/DeleteProductSpec"
+	ProductSpecService_UpdateProductSpec_FullMethodName       = "/pmsclient.ProductSpecService/UpdateProductSpec"
+	ProductSpecService_UpdateProductSpecStatus_FullMethodName = "/pmsclient.ProductSpecService/UpdateProductSpecStatus"
+	ProductSpecService_QueryProductSpecDetail_FullMethodName  = "/pmsclient.ProductSpecService/QueryProductSpecDetail"
+	ProductSpecService_QueryProductSpecList_FullMethodName    = "/pmsclient.ProductSpecService/QueryProductSpecList"
+)
+
+// ProductSpecServiceClient is the client API for ProductSpecService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type ProductSpecServiceClient interface {
+	// 添加商品规格
+	AddProductSpec(ctx context.Context, in *AddProductSpecReq, opts ...grpc.CallOption) (*AddProductSpecResp, error)
+	// 删除商品规格
+	DeleteProductSpec(ctx context.Context, in *DeleteProductSpecReq, opts ...grpc.CallOption) (*DeleteProductSpecResp, error)
+	// 更新商品规格
+	UpdateProductSpec(ctx context.Context, in *UpdateProductSpecReq, opts ...grpc.CallOption) (*UpdateProductSpecResp, error)
+	// 更新商品规格状态
+	UpdateProductSpecStatus(ctx context.Context, in *UpdateProductSpecStatusReq, opts ...grpc.CallOption) (*UpdateProductSpecStatusResp, error)
+	// 查询商品规格详情
+	QueryProductSpecDetail(ctx context.Context, in *QueryProductSpecDetailReq, opts ...grpc.CallOption) (*QueryProductSpecDetailResp, error)
+	// 查询商品规格列表
+	QueryProductSpecList(ctx context.Context, in *QueryProductSpecListReq, opts ...grpc.CallOption) (*QueryProductSpecListResp, error)
+}
+
+type productSpecServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewProductSpecServiceClient(cc grpc.ClientConnInterface) ProductSpecServiceClient {
+	return &productSpecServiceClient{cc}
+}
+
+func (c *productSpecServiceClient) AddProductSpec(ctx context.Context, in *AddProductSpecReq, opts ...grpc.CallOption) (*AddProductSpecResp, error) {
+	out := new(AddProductSpecResp)
+	err := c.cc.Invoke(ctx, ProductSpecService_AddProductSpec_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *productSpecServiceClient) DeleteProductSpec(ctx context.Context, in *DeleteProductSpecReq, opts ...grpc.CallOption) (*DeleteProductSpecResp, error) {
+	out := new(DeleteProductSpecResp)
+	err := c.cc.Invoke(ctx, ProductSpecService_DeleteProductSpec_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *productSpecServiceClient) UpdateProductSpec(ctx context.Context, in *UpdateProductSpecReq, opts ...grpc.CallOption) (*UpdateProductSpecResp, error) {
+	out := new(UpdateProductSpecResp)
+	err := c.cc.Invoke(ctx, ProductSpecService_UpdateProductSpec_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *productSpecServiceClient) UpdateProductSpecStatus(ctx context.Context, in *UpdateProductSpecStatusReq, opts ...grpc.CallOption) (*UpdateProductSpecStatusResp, error) {
+	out := new(UpdateProductSpecStatusResp)
+	err := c.cc.Invoke(ctx, ProductSpecService_UpdateProductSpecStatus_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *productSpecServiceClient) QueryProductSpecDetail(ctx context.Context, in *QueryProductSpecDetailReq, opts ...grpc.CallOption) (*QueryProductSpecDetailResp, error) {
+	out := new(QueryProductSpecDetailResp)
+	err := c.cc.Invoke(ctx, ProductSpecService_QueryProductSpecDetail_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *productSpecServiceClient) QueryProductSpecList(ctx context.Context, in *QueryProductSpecListReq, opts ...grpc.CallOption) (*QueryProductSpecListResp, error) {
+	out := new(QueryProductSpecListResp)
+	err := c.cc.Invoke(ctx, ProductSpecService_QueryProductSpecList_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// ProductSpecServiceServer is the server API for ProductSpecService service.
+// All implementations must embed UnimplementedProductSpecServiceServer
+// for forward compatibility
+type ProductSpecServiceServer interface {
+	// 添加商品规格
+	AddProductSpec(context.Context, *AddProductSpecReq) (*AddProductSpecResp, error)
+	// 删除商品规格
+	DeleteProductSpec(context.Context, *DeleteProductSpecReq) (*DeleteProductSpecResp, error)
+	// 更新商品规格
+	UpdateProductSpec(context.Context, *UpdateProductSpecReq) (*UpdateProductSpecResp, error)
+	// 更新商品规格状态
+	UpdateProductSpecStatus(context.Context, *UpdateProductSpecStatusReq) (*UpdateProductSpecStatusResp, error)
+	// 查询商品规格详情
+	QueryProductSpecDetail(context.Context, *QueryProductSpecDetailReq) (*QueryProductSpecDetailResp, error)
+	// 查询商品规格列表
+	QueryProductSpecList(context.Context, *QueryProductSpecListReq) (*QueryProductSpecListResp, error)
+	mustEmbedUnimplementedProductSpecServiceServer()
+}
+
+// UnimplementedProductSpecServiceServer must be embedded to have forward compatible implementations.
+type UnimplementedProductSpecServiceServer struct {
+}
+
+func (UnimplementedProductSpecServiceServer) AddProductSpec(context.Context, *AddProductSpecReq) (*AddProductSpecResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AddProductSpec not implemented")
+}
+func (UnimplementedProductSpecServiceServer) DeleteProductSpec(context.Context, *DeleteProductSpecReq) (*DeleteProductSpecResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteProductSpec not implemented")
+}
+func (UnimplementedProductSpecServiceServer) UpdateProductSpec(context.Context, *UpdateProductSpecReq) (*UpdateProductSpecResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateProductSpec not implemented")
+}
+func (UnimplementedProductSpecServiceServer) UpdateProductSpecStatus(context.Context, *UpdateProductSpecStatusReq) (*UpdateProductSpecStatusResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateProductSpecStatus not implemented")
+}
+func (UnimplementedProductSpecServiceServer) QueryProductSpecDetail(context.Context, *QueryProductSpecDetailReq) (*QueryProductSpecDetailResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method QueryProductSpecDetail not implemented")
+}
+func (UnimplementedProductSpecServiceServer) QueryProductSpecList(context.Context, *QueryProductSpecListReq) (*QueryProductSpecListResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method QueryProductSpecList not implemented")
+}
+func (UnimplementedProductSpecServiceServer) mustEmbedUnimplementedProductSpecServiceServer() {}
+
+// UnsafeProductSpecServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to ProductSpecServiceServer will
+// result in compilation errors.
+type UnsafeProductSpecServiceServer interface {
+	mustEmbedUnimplementedProductSpecServiceServer()
+}
+
+func RegisterProductSpecServiceServer(s grpc.ServiceRegistrar, srv ProductSpecServiceServer) {
+	s.RegisterService(&ProductSpecService_ServiceDesc, srv)
+}
+
+func _ProductSpecService_AddProductSpec_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddProductSpecReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ProductSpecServiceServer).AddProductSpec(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ProductSpecService_AddProductSpec_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ProductSpecServiceServer).AddProductSpec(ctx, req.(*AddProductSpecReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ProductSpecService_DeleteProductSpec_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteProductSpecReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ProductSpecServiceServer).DeleteProductSpec(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ProductSpecService_DeleteProductSpec_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ProductSpecServiceServer).DeleteProductSpec(ctx, req.(*DeleteProductSpecReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ProductSpecService_UpdateProductSpec_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateProductSpecReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ProductSpecServiceServer).UpdateProductSpec(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ProductSpecService_UpdateProductSpec_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ProductSpecServiceServer).UpdateProductSpec(ctx, req.(*UpdateProductSpecReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ProductSpecService_UpdateProductSpecStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateProductSpecStatusReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ProductSpecServiceServer).UpdateProductSpecStatus(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ProductSpecService_UpdateProductSpecStatus_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ProductSpecServiceServer).UpdateProductSpecStatus(ctx, req.(*UpdateProductSpecStatusReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ProductSpecService_QueryProductSpecDetail_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryProductSpecDetailReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ProductSpecServiceServer).QueryProductSpecDetail(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ProductSpecService_QueryProductSpecDetail_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ProductSpecServiceServer).QueryProductSpecDetail(ctx, req.(*QueryProductSpecDetailReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ProductSpecService_QueryProductSpecList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryProductSpecListReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ProductSpecServiceServer).QueryProductSpecList(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ProductSpecService_QueryProductSpecList_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ProductSpecServiceServer).QueryProductSpecList(ctx, req.(*QueryProductSpecListReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// ProductSpecService_ServiceDesc is the grpc.ServiceDesc for ProductSpecService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var ProductSpecService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "pmsclient.ProductSpecService",
+	HandlerType: (*ProductSpecServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "AddProductSpec",
+			Handler:    _ProductSpecService_AddProductSpec_Handler,
+		},
+		{
+			MethodName: "DeleteProductSpec",
+			Handler:    _ProductSpecService_DeleteProductSpec_Handler,
+		},
+		{
+			MethodName: "UpdateProductSpec",
+			Handler:    _ProductSpecService_UpdateProductSpec_Handler,
+		},
+		{
+			MethodName: "UpdateProductSpecStatus",
+			Handler:    _ProductSpecService_UpdateProductSpecStatus_Handler,
+		},
+		{
+			MethodName: "QueryProductSpecDetail",
+			Handler:    _ProductSpecService_QueryProductSpecDetail_Handler,
+		},
+		{
+			MethodName: "QueryProductSpecList",
+			Handler:    _ProductSpecService_QueryProductSpecList_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "rpc/pms/pms.proto",
+}
+
+const (
+	ProductSpecValueService_AddProductSpecValue_FullMethodName          = "/pmsclient.ProductSpecValueService/AddProductSpecValue"
+	ProductSpecValueService_DeleteProductSpecValue_FullMethodName       = "/pmsclient.ProductSpecValueService/DeleteProductSpecValue"
+	ProductSpecValueService_UpdateProductSpecValue_FullMethodName       = "/pmsclient.ProductSpecValueService/UpdateProductSpecValue"
+	ProductSpecValueService_UpdateProductSpecValueStatus_FullMethodName = "/pmsclient.ProductSpecValueService/UpdateProductSpecValueStatus"
+	ProductSpecValueService_QueryProductSpecValueDetail_FullMethodName  = "/pmsclient.ProductSpecValueService/QueryProductSpecValueDetail"
+	ProductSpecValueService_QueryProductSpecValueList_FullMethodName    = "/pmsclient.ProductSpecValueService/QueryProductSpecValueList"
+)
+
+// ProductSpecValueServiceClient is the client API for ProductSpecValueService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type ProductSpecValueServiceClient interface {
+	// 添加商品规格值
+	AddProductSpecValue(ctx context.Context, in *AddProductSpecValueReq, opts ...grpc.CallOption) (*AddProductSpecValueResp, error)
+	// 删除商品规格值
+	DeleteProductSpecValue(ctx context.Context, in *DeleteProductSpecValueReq, opts ...grpc.CallOption) (*DeleteProductSpecValueResp, error)
+	// 更新商品规格值
+	UpdateProductSpecValue(ctx context.Context, in *UpdateProductSpecValueReq, opts ...grpc.CallOption) (*UpdateProductSpecValueResp, error)
+	// 更新商品规格值状态
+	UpdateProductSpecValueStatus(ctx context.Context, in *UpdateProductSpecValueStatusReq, opts ...grpc.CallOption) (*UpdateProductSpecValueStatusResp, error)
+	// 查询商品规格值详情
+	QueryProductSpecValueDetail(ctx context.Context, in *QueryProductSpecValueDetailReq, opts ...grpc.CallOption) (*QueryProductSpecValueDetailResp, error)
+	// 查询商品规格值列表
+	QueryProductSpecValueList(ctx context.Context, in *QueryProductSpecValueListReq, opts ...grpc.CallOption) (*QueryProductSpecValueListResp, error)
+}
+
+type productSpecValueServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewProductSpecValueServiceClient(cc grpc.ClientConnInterface) ProductSpecValueServiceClient {
+	return &productSpecValueServiceClient{cc}
+}
+
+func (c *productSpecValueServiceClient) AddProductSpecValue(ctx context.Context, in *AddProductSpecValueReq, opts ...grpc.CallOption) (*AddProductSpecValueResp, error) {
+	out := new(AddProductSpecValueResp)
+	err := c.cc.Invoke(ctx, ProductSpecValueService_AddProductSpecValue_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *productSpecValueServiceClient) DeleteProductSpecValue(ctx context.Context, in *DeleteProductSpecValueReq, opts ...grpc.CallOption) (*DeleteProductSpecValueResp, error) {
+	out := new(DeleteProductSpecValueResp)
+	err := c.cc.Invoke(ctx, ProductSpecValueService_DeleteProductSpecValue_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *productSpecValueServiceClient) UpdateProductSpecValue(ctx context.Context, in *UpdateProductSpecValueReq, opts ...grpc.CallOption) (*UpdateProductSpecValueResp, error) {
+	out := new(UpdateProductSpecValueResp)
+	err := c.cc.Invoke(ctx, ProductSpecValueService_UpdateProductSpecValue_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *productSpecValueServiceClient) UpdateProductSpecValueStatus(ctx context.Context, in *UpdateProductSpecValueStatusReq, opts ...grpc.CallOption) (*UpdateProductSpecValueStatusResp, error) {
+	out := new(UpdateProductSpecValueStatusResp)
+	err := c.cc.Invoke(ctx, ProductSpecValueService_UpdateProductSpecValueStatus_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *productSpecValueServiceClient) QueryProductSpecValueDetail(ctx context.Context, in *QueryProductSpecValueDetailReq, opts ...grpc.CallOption) (*QueryProductSpecValueDetailResp, error) {
+	out := new(QueryProductSpecValueDetailResp)
+	err := c.cc.Invoke(ctx, ProductSpecValueService_QueryProductSpecValueDetail_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *productSpecValueServiceClient) QueryProductSpecValueList(ctx context.Context, in *QueryProductSpecValueListReq, opts ...grpc.CallOption) (*QueryProductSpecValueListResp, error) {
+	out := new(QueryProductSpecValueListResp)
+	err := c.cc.Invoke(ctx, ProductSpecValueService_QueryProductSpecValueList_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// ProductSpecValueServiceServer is the server API for ProductSpecValueService service.
+// All implementations must embed UnimplementedProductSpecValueServiceServer
+// for forward compatibility
+type ProductSpecValueServiceServer interface {
+	// 添加商品规格值
+	AddProductSpecValue(context.Context, *AddProductSpecValueReq) (*AddProductSpecValueResp, error)
+	// 删除商品规格值
+	DeleteProductSpecValue(context.Context, *DeleteProductSpecValueReq) (*DeleteProductSpecValueResp, error)
+	// 更新商品规格值
+	UpdateProductSpecValue(context.Context, *UpdateProductSpecValueReq) (*UpdateProductSpecValueResp, error)
+	// 更新商品规格值状态
+	UpdateProductSpecValueStatus(context.Context, *UpdateProductSpecValueStatusReq) (*UpdateProductSpecValueStatusResp, error)
+	// 查询商品规格值详情
+	QueryProductSpecValueDetail(context.Context, *QueryProductSpecValueDetailReq) (*QueryProductSpecValueDetailResp, error)
+	// 查询商品规格值列表
+	QueryProductSpecValueList(context.Context, *QueryProductSpecValueListReq) (*QueryProductSpecValueListResp, error)
+	mustEmbedUnimplementedProductSpecValueServiceServer()
+}
+
+// UnimplementedProductSpecValueServiceServer must be embedded to have forward compatible implementations.
+type UnimplementedProductSpecValueServiceServer struct {
+}
+
+func (UnimplementedProductSpecValueServiceServer) AddProductSpecValue(context.Context, *AddProductSpecValueReq) (*AddProductSpecValueResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AddProductSpecValue not implemented")
+}
+func (UnimplementedProductSpecValueServiceServer) DeleteProductSpecValue(context.Context, *DeleteProductSpecValueReq) (*DeleteProductSpecValueResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteProductSpecValue not implemented")
+}
+func (UnimplementedProductSpecValueServiceServer) UpdateProductSpecValue(context.Context, *UpdateProductSpecValueReq) (*UpdateProductSpecValueResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateProductSpecValue not implemented")
+}
+func (UnimplementedProductSpecValueServiceServer) UpdateProductSpecValueStatus(context.Context, *UpdateProductSpecValueStatusReq) (*UpdateProductSpecValueStatusResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateProductSpecValueStatus not implemented")
+}
+func (UnimplementedProductSpecValueServiceServer) QueryProductSpecValueDetail(context.Context, *QueryProductSpecValueDetailReq) (*QueryProductSpecValueDetailResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method QueryProductSpecValueDetail not implemented")
+}
+func (UnimplementedProductSpecValueServiceServer) QueryProductSpecValueList(context.Context, *QueryProductSpecValueListReq) (*QueryProductSpecValueListResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method QueryProductSpecValueList not implemented")
+}
+func (UnimplementedProductSpecValueServiceServer) mustEmbedUnimplementedProductSpecValueServiceServer() {
+}
+
+// UnsafeProductSpecValueServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to ProductSpecValueServiceServer will
+// result in compilation errors.
+type UnsafeProductSpecValueServiceServer interface {
+	mustEmbedUnimplementedProductSpecValueServiceServer()
+}
+
+func RegisterProductSpecValueServiceServer(s grpc.ServiceRegistrar, srv ProductSpecValueServiceServer) {
+	s.RegisterService(&ProductSpecValueService_ServiceDesc, srv)
+}
+
+func _ProductSpecValueService_AddProductSpecValue_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddProductSpecValueReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ProductSpecValueServiceServer).AddProductSpecValue(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ProductSpecValueService_AddProductSpecValue_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ProductSpecValueServiceServer).AddProductSpecValue(ctx, req.(*AddProductSpecValueReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ProductSpecValueService_DeleteProductSpecValue_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteProductSpecValueReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ProductSpecValueServiceServer).DeleteProductSpecValue(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ProductSpecValueService_DeleteProductSpecValue_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ProductSpecValueServiceServer).DeleteProductSpecValue(ctx, req.(*DeleteProductSpecValueReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ProductSpecValueService_UpdateProductSpecValue_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateProductSpecValueReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ProductSpecValueServiceServer).UpdateProductSpecValue(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ProductSpecValueService_UpdateProductSpecValue_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ProductSpecValueServiceServer).UpdateProductSpecValue(ctx, req.(*UpdateProductSpecValueReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ProductSpecValueService_UpdateProductSpecValueStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateProductSpecValueStatusReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ProductSpecValueServiceServer).UpdateProductSpecValueStatus(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ProductSpecValueService_UpdateProductSpecValueStatus_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ProductSpecValueServiceServer).UpdateProductSpecValueStatus(ctx, req.(*UpdateProductSpecValueStatusReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ProductSpecValueService_QueryProductSpecValueDetail_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryProductSpecValueDetailReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ProductSpecValueServiceServer).QueryProductSpecValueDetail(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ProductSpecValueService_QueryProductSpecValueDetail_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ProductSpecValueServiceServer).QueryProductSpecValueDetail(ctx, req.(*QueryProductSpecValueDetailReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ProductSpecValueService_QueryProductSpecValueList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryProductSpecValueListReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ProductSpecValueServiceServer).QueryProductSpecValueList(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ProductSpecValueService_QueryProductSpecValueList_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ProductSpecValueServiceServer).QueryProductSpecValueList(ctx, req.(*QueryProductSpecValueListReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// ProductSpecValueService_ServiceDesc is the grpc.ServiceDesc for ProductSpecValueService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var ProductSpecValueService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "pmsclient.ProductSpecValueService",
+	HandlerType: (*ProductSpecValueServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "AddProductSpecValue",
+			Handler:    _ProductSpecValueService_AddProductSpecValue_Handler,
+		},
+		{
+			MethodName: "DeleteProductSpecValue",
+			Handler:    _ProductSpecValueService_DeleteProductSpecValue_Handler,
+		},
+		{
+			MethodName: "UpdateProductSpecValue",
+			Handler:    _ProductSpecValueService_UpdateProductSpecValue_Handler,
+		},
+		{
+			MethodName: "UpdateProductSpecValueStatus",
+			Handler:    _ProductSpecValueService_UpdateProductSpecValueStatus_Handler,
+		},
+		{
+			MethodName: "QueryProductSpecValueDetail",
+			Handler:    _ProductSpecValueService_QueryProductSpecValueDetail_Handler,
+		},
+		{
+			MethodName: "QueryProductSpecValueList",
+			Handler:    _ProductSpecValueService_QueryProductSpecValueList_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "rpc/pms/pms.proto",
+}
+
+const (
+	ProductSpuService_AddProductSpu_FullMethodName             = "/pmsclient.ProductSpuService/AddProductSpu"
+	ProductSpuService_DeleteProductSpu_FullMethodName          = "/pmsclient.ProductSpuService/DeleteProductSpu"
+	ProductSpuService_UpdateProductSpu_FullMethodName          = "/pmsclient.ProductSpuService/UpdateProductSpu"
+	ProductSpuService_QueryProductSpuDetail_FullMethodName     = "/pmsclient.ProductSpuService/QueryProductSpuDetail"
+	ProductSpuService_QueryProductSpuList_FullMethodName       = "/pmsclient.ProductSpuService/QueryProductSpuList"
+	ProductSpuService_UpdateVerifyStatus_FullMethodName        = "/pmsclient.ProductSpuService/UpdateVerifyStatus"
+	ProductSpuService_UpdatePublishStatus_FullMethodName       = "/pmsclient.ProductSpuService/UpdatePublishStatus"
+	ProductSpuService_UpdateRecommendStatus_FullMethodName     = "/pmsclient.ProductSpuService/UpdateRecommendStatus"
+	ProductSpuService_UpdateNewStatus_FullMethodName           = "/pmsclient.ProductSpuService/UpdateNewStatus"
+	ProductSpuService_UpdateDeleteStatus_FullMethodName        = "/pmsclient.ProductSpuService/UpdateDeleteStatus"
+	ProductSpuService_UpdateNewStatusSort_FullMethodName       = "/pmsclient.ProductSpuService/UpdateNewStatusSort"
+	ProductSpuService_UpdateRecommendStatusSort_FullMethodName = "/pmsclient.ProductSpuService/UpdateRecommendStatusSort"
+	ProductSpuService_QueryProductSpuListByIds_FullMethodName  = "/pmsclient.ProductSpuService/QueryProductSpuListByIds"
+)
+
+// ProductSpuServiceClient is the client API for ProductSpuService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type ProductSpuServiceClient interface {
+	// 添加商品SPU
+	AddProductSpu(ctx context.Context, in *AddProductSpuReq, opts ...grpc.CallOption) (*AddProductSpuResp, error)
+	// 删除商品SPU
+	DeleteProductSpu(ctx context.Context, in *DeleteProductSpuReq, opts ...grpc.CallOption) (*DeleteProductSpuResp, error)
+	// 更新商品SPU
+	UpdateProductSpu(ctx context.Context, in *UpdateProductSpuReq, opts ...grpc.CallOption) (*UpdateProductSpuResp, error)
+	// 查询商品SPU详情
+	QueryProductSpuDetail(ctx context.Context, in *QueryProductSpuDetailReq, opts ...grpc.CallOption) (*QueryProductSpuDetailResp, error)
+	// 查询商品SPU列表
+	QueryProductSpuList(ctx context.Context, in *QueryProductSpuListReq, opts ...grpc.CallOption) (*QueryProductSpuListResp, error)
+	// 修改审核状态
+	UpdateVerifyStatus(ctx context.Context, in *UpdateProductSpuStatusReq, opts ...grpc.CallOption) (*UpdateProductSpuStatusResp, error)
+	// 上下架商品
+	UpdatePublishStatus(ctx context.Context, in *UpdateProductSpuStatusReq, opts ...grpc.CallOption) (*UpdateProductSpuStatusResp, error)
+	// 推荐商品
+	UpdateRecommendStatus(ctx context.Context, in *UpdateProductSpuStatusReq, opts ...grpc.CallOption) (*UpdateProductSpuStatusResp, error)
+	// 设为新品
+	UpdateNewStatus(ctx context.Context, in *UpdateProductSpuStatusReq, opts ...grpc.CallOption) (*UpdateProductSpuStatusResp, error)
+	// 修改删除状态
+	UpdateDeleteStatus(ctx context.Context, in *UpdateProductSpuStatusReq, opts ...grpc.CallOption) (*UpdateProductSpuStatusResp, error)
+	// 更新新品排序
+	UpdateNewStatusSort(ctx context.Context, in *UpdateProductSortReq, opts ...grpc.CallOption) (*UpdateProductSpuStatusResp, error)
+	// 更新推荐排序
+	UpdateRecommendStatusSort(ctx context.Context, in *UpdateProductSortReq, opts ...grpc.CallOption) (*UpdateProductSpuStatusResp, error)
+	// 根据id集合查询商品信息
+	QueryProductSpuListByIds(ctx context.Context, in *QueryProductSpuByIdsReq, opts ...grpc.CallOption) (*QueryProductSpuListResp, error)
+}
+
+type productSpuServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewProductSpuServiceClient(cc grpc.ClientConnInterface) ProductSpuServiceClient {
+	return &productSpuServiceClient{cc}
+}
+
+func (c *productSpuServiceClient) AddProductSpu(ctx context.Context, in *AddProductSpuReq, opts ...grpc.CallOption) (*AddProductSpuResp, error) {
+	out := new(AddProductSpuResp)
+	err := c.cc.Invoke(ctx, ProductSpuService_AddProductSpu_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *productSpuServiceClient) DeleteProductSpu(ctx context.Context, in *DeleteProductSpuReq, opts ...grpc.CallOption) (*DeleteProductSpuResp, error) {
+	out := new(DeleteProductSpuResp)
+	err := c.cc.Invoke(ctx, ProductSpuService_DeleteProductSpu_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *productSpuServiceClient) UpdateProductSpu(ctx context.Context, in *UpdateProductSpuReq, opts ...grpc.CallOption) (*UpdateProductSpuResp, error) {
+	out := new(UpdateProductSpuResp)
+	err := c.cc.Invoke(ctx, ProductSpuService_UpdateProductSpu_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *productSpuServiceClient) QueryProductSpuDetail(ctx context.Context, in *QueryProductSpuDetailReq, opts ...grpc.CallOption) (*QueryProductSpuDetailResp, error) {
+	out := new(QueryProductSpuDetailResp)
+	err := c.cc.Invoke(ctx, ProductSpuService_QueryProductSpuDetail_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *productSpuServiceClient) QueryProductSpuList(ctx context.Context, in *QueryProductSpuListReq, opts ...grpc.CallOption) (*QueryProductSpuListResp, error) {
+	out := new(QueryProductSpuListResp)
+	err := c.cc.Invoke(ctx, ProductSpuService_QueryProductSpuList_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *productSpuServiceClient) UpdateVerifyStatus(ctx context.Context, in *UpdateProductSpuStatusReq, opts ...grpc.CallOption) (*UpdateProductSpuStatusResp, error) {
+	out := new(UpdateProductSpuStatusResp)
+	err := c.cc.Invoke(ctx, ProductSpuService_UpdateVerifyStatus_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *productSpuServiceClient) UpdatePublishStatus(ctx context.Context, in *UpdateProductSpuStatusReq, opts ...grpc.CallOption) (*UpdateProductSpuStatusResp, error) {
+	out := new(UpdateProductSpuStatusResp)
+	err := c.cc.Invoke(ctx, ProductSpuService_UpdatePublishStatus_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *productSpuServiceClient) UpdateRecommendStatus(ctx context.Context, in *UpdateProductSpuStatusReq, opts ...grpc.CallOption) (*UpdateProductSpuStatusResp, error) {
+	out := new(UpdateProductSpuStatusResp)
+	err := c.cc.Invoke(ctx, ProductSpuService_UpdateRecommendStatus_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *productSpuServiceClient) UpdateNewStatus(ctx context.Context, in *UpdateProductSpuStatusReq, opts ...grpc.CallOption) (*UpdateProductSpuStatusResp, error) {
+	out := new(UpdateProductSpuStatusResp)
+	err := c.cc.Invoke(ctx, ProductSpuService_UpdateNewStatus_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *productSpuServiceClient) UpdateDeleteStatus(ctx context.Context, in *UpdateProductSpuStatusReq, opts ...grpc.CallOption) (*UpdateProductSpuStatusResp, error) {
+	out := new(UpdateProductSpuStatusResp)
+	err := c.cc.Invoke(ctx, ProductSpuService_UpdateDeleteStatus_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *productSpuServiceClient) UpdateNewStatusSort(ctx context.Context, in *UpdateProductSortReq, opts ...grpc.CallOption) (*UpdateProductSpuStatusResp, error) {
+	out := new(UpdateProductSpuStatusResp)
+	err := c.cc.Invoke(ctx, ProductSpuService_UpdateNewStatusSort_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *productSpuServiceClient) UpdateRecommendStatusSort(ctx context.Context, in *UpdateProductSortReq, opts ...grpc.CallOption) (*UpdateProductSpuStatusResp, error) {
+	out := new(UpdateProductSpuStatusResp)
+	err := c.cc.Invoke(ctx, ProductSpuService_UpdateRecommendStatusSort_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *productSpuServiceClient) QueryProductSpuListByIds(ctx context.Context, in *QueryProductSpuByIdsReq, opts ...grpc.CallOption) (*QueryProductSpuListResp, error) {
+	out := new(QueryProductSpuListResp)
+	err := c.cc.Invoke(ctx, ProductSpuService_QueryProductSpuListByIds_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// ProductSpuServiceServer is the server API for ProductSpuService service.
+// All implementations must embed UnimplementedProductSpuServiceServer
+// for forward compatibility
+type ProductSpuServiceServer interface {
+	// 添加商品SPU
+	AddProductSpu(context.Context, *AddProductSpuReq) (*AddProductSpuResp, error)
+	// 删除商品SPU
+	DeleteProductSpu(context.Context, *DeleteProductSpuReq) (*DeleteProductSpuResp, error)
+	// 更新商品SPU
+	UpdateProductSpu(context.Context, *UpdateProductSpuReq) (*UpdateProductSpuResp, error)
+	// 查询商品SPU详情
+	QueryProductSpuDetail(context.Context, *QueryProductSpuDetailReq) (*QueryProductSpuDetailResp, error)
+	// 查询商品SPU列表
+	QueryProductSpuList(context.Context, *QueryProductSpuListReq) (*QueryProductSpuListResp, error)
+	// 修改审核状态
+	UpdateVerifyStatus(context.Context, *UpdateProductSpuStatusReq) (*UpdateProductSpuStatusResp, error)
+	// 上下架商品
+	UpdatePublishStatus(context.Context, *UpdateProductSpuStatusReq) (*UpdateProductSpuStatusResp, error)
+	// 推荐商品
+	UpdateRecommendStatus(context.Context, *UpdateProductSpuStatusReq) (*UpdateProductSpuStatusResp, error)
+	// 设为新品
+	UpdateNewStatus(context.Context, *UpdateProductSpuStatusReq) (*UpdateProductSpuStatusResp, error)
+	// 修改删除状态
+	UpdateDeleteStatus(context.Context, *UpdateProductSpuStatusReq) (*UpdateProductSpuStatusResp, error)
+	// 更新新品排序
+	UpdateNewStatusSort(context.Context, *UpdateProductSortReq) (*UpdateProductSpuStatusResp, error)
+	// 更新推荐排序
+	UpdateRecommendStatusSort(context.Context, *UpdateProductSortReq) (*UpdateProductSpuStatusResp, error)
+	// 根据id集合查询商品信息
+	QueryProductSpuListByIds(context.Context, *QueryProductSpuByIdsReq) (*QueryProductSpuListResp, error)
+	mustEmbedUnimplementedProductSpuServiceServer()
+}
+
+// UnimplementedProductSpuServiceServer must be embedded to have forward compatible implementations.
+type UnimplementedProductSpuServiceServer struct {
+}
+
+func (UnimplementedProductSpuServiceServer) AddProductSpu(context.Context, *AddProductSpuReq) (*AddProductSpuResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AddProductSpu not implemented")
+}
+func (UnimplementedProductSpuServiceServer) DeleteProductSpu(context.Context, *DeleteProductSpuReq) (*DeleteProductSpuResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteProductSpu not implemented")
+}
+func (UnimplementedProductSpuServiceServer) UpdateProductSpu(context.Context, *UpdateProductSpuReq) (*UpdateProductSpuResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateProductSpu not implemented")
+}
+func (UnimplementedProductSpuServiceServer) QueryProductSpuDetail(context.Context, *QueryProductSpuDetailReq) (*QueryProductSpuDetailResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method QueryProductSpuDetail not implemented")
+}
+func (UnimplementedProductSpuServiceServer) QueryProductSpuList(context.Context, *QueryProductSpuListReq) (*QueryProductSpuListResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method QueryProductSpuList not implemented")
+}
+func (UnimplementedProductSpuServiceServer) UpdateVerifyStatus(context.Context, *UpdateProductSpuStatusReq) (*UpdateProductSpuStatusResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateVerifyStatus not implemented")
+}
+func (UnimplementedProductSpuServiceServer) UpdatePublishStatus(context.Context, *UpdateProductSpuStatusReq) (*UpdateProductSpuStatusResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdatePublishStatus not implemented")
+}
+func (UnimplementedProductSpuServiceServer) UpdateRecommendStatus(context.Context, *UpdateProductSpuStatusReq) (*UpdateProductSpuStatusResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateRecommendStatus not implemented")
+}
+func (UnimplementedProductSpuServiceServer) UpdateNewStatus(context.Context, *UpdateProductSpuStatusReq) (*UpdateProductSpuStatusResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateNewStatus not implemented")
+}
+func (UnimplementedProductSpuServiceServer) UpdateDeleteStatus(context.Context, *UpdateProductSpuStatusReq) (*UpdateProductSpuStatusResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateDeleteStatus not implemented")
+}
+func (UnimplementedProductSpuServiceServer) UpdateNewStatusSort(context.Context, *UpdateProductSortReq) (*UpdateProductSpuStatusResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateNewStatusSort not implemented")
+}
+func (UnimplementedProductSpuServiceServer) UpdateRecommendStatusSort(context.Context, *UpdateProductSortReq) (*UpdateProductSpuStatusResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateRecommendStatusSort not implemented")
+}
+func (UnimplementedProductSpuServiceServer) QueryProductSpuListByIds(context.Context, *QueryProductSpuByIdsReq) (*QueryProductSpuListResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method QueryProductSpuListByIds not implemented")
+}
+func (UnimplementedProductSpuServiceServer) mustEmbedUnimplementedProductSpuServiceServer() {}
+
+// UnsafeProductSpuServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to ProductSpuServiceServer will
+// result in compilation errors.
+type UnsafeProductSpuServiceServer interface {
+	mustEmbedUnimplementedProductSpuServiceServer()
+}
+
+func RegisterProductSpuServiceServer(s grpc.ServiceRegistrar, srv ProductSpuServiceServer) {
+	s.RegisterService(&ProductSpuService_ServiceDesc, srv)
+}
+
+func _ProductSpuService_AddProductSpu_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddProductSpuReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ProductSpuServiceServer).AddProductSpu(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ProductSpuService_AddProductSpu_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ProductSpuServiceServer).AddProductSpu(ctx, req.(*AddProductSpuReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ProductSpuService_DeleteProductSpu_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteProductSpuReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ProductSpuServiceServer).DeleteProductSpu(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ProductSpuService_DeleteProductSpu_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ProductSpuServiceServer).DeleteProductSpu(ctx, req.(*DeleteProductSpuReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ProductSpuService_UpdateProductSpu_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateProductSpuReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ProductSpuServiceServer).UpdateProductSpu(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ProductSpuService_UpdateProductSpu_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ProductSpuServiceServer).UpdateProductSpu(ctx, req.(*UpdateProductSpuReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ProductSpuService_QueryProductSpuDetail_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryProductSpuDetailReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ProductSpuServiceServer).QueryProductSpuDetail(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ProductSpuService_QueryProductSpuDetail_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ProductSpuServiceServer).QueryProductSpuDetail(ctx, req.(*QueryProductSpuDetailReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ProductSpuService_QueryProductSpuList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryProductSpuListReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ProductSpuServiceServer).QueryProductSpuList(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ProductSpuService_QueryProductSpuList_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ProductSpuServiceServer).QueryProductSpuList(ctx, req.(*QueryProductSpuListReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ProductSpuService_UpdateVerifyStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateProductSpuStatusReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ProductSpuServiceServer).UpdateVerifyStatus(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ProductSpuService_UpdateVerifyStatus_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ProductSpuServiceServer).UpdateVerifyStatus(ctx, req.(*UpdateProductSpuStatusReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ProductSpuService_UpdatePublishStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateProductSpuStatusReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ProductSpuServiceServer).UpdatePublishStatus(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ProductSpuService_UpdatePublishStatus_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ProductSpuServiceServer).UpdatePublishStatus(ctx, req.(*UpdateProductSpuStatusReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ProductSpuService_UpdateRecommendStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateProductSpuStatusReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ProductSpuServiceServer).UpdateRecommendStatus(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ProductSpuService_UpdateRecommendStatus_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ProductSpuServiceServer).UpdateRecommendStatus(ctx, req.(*UpdateProductSpuStatusReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ProductSpuService_UpdateNewStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateProductSpuStatusReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ProductSpuServiceServer).UpdateNewStatus(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ProductSpuService_UpdateNewStatus_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ProductSpuServiceServer).UpdateNewStatus(ctx, req.(*UpdateProductSpuStatusReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ProductSpuService_UpdateDeleteStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateProductSpuStatusReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ProductSpuServiceServer).UpdateDeleteStatus(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ProductSpuService_UpdateDeleteStatus_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ProductSpuServiceServer).UpdateDeleteStatus(ctx, req.(*UpdateProductSpuStatusReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ProductSpuService_UpdateNewStatusSort_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateProductSortReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ProductSpuServiceServer).UpdateNewStatusSort(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ProductSpuService_UpdateNewStatusSort_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ProductSpuServiceServer).UpdateNewStatusSort(ctx, req.(*UpdateProductSortReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ProductSpuService_UpdateRecommendStatusSort_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateProductSortReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ProductSpuServiceServer).UpdateRecommendStatusSort(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ProductSpuService_UpdateRecommendStatusSort_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ProductSpuServiceServer).UpdateRecommendStatusSort(ctx, req.(*UpdateProductSortReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ProductSpuService_QueryProductSpuListByIds_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryProductSpuByIdsReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ProductSpuServiceServer).QueryProductSpuListByIds(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ProductSpuService_QueryProductSpuListByIds_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ProductSpuServiceServer).QueryProductSpuListByIds(ctx, req.(*QueryProductSpuByIdsReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// ProductSpuService_ServiceDesc is the grpc.ServiceDesc for ProductSpuService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var ProductSpuService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "pmsclient.ProductSpuService",
+	HandlerType: (*ProductSpuServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "AddProductSpu",
+			Handler:    _ProductSpuService_AddProductSpu_Handler,
+		},
+		{
+			MethodName: "DeleteProductSpu",
+			Handler:    _ProductSpuService_DeleteProductSpu_Handler,
+		},
+		{
+			MethodName: "UpdateProductSpu",
+			Handler:    _ProductSpuService_UpdateProductSpu_Handler,
+		},
+		{
+			MethodName: "QueryProductSpuDetail",
+			Handler:    _ProductSpuService_QueryProductSpuDetail_Handler,
+		},
+		{
+			MethodName: "QueryProductSpuList",
+			Handler:    _ProductSpuService_QueryProductSpuList_Handler,
+		},
+		{
+			MethodName: "UpdateVerifyStatus",
+			Handler:    _ProductSpuService_UpdateVerifyStatus_Handler,
+		},
+		{
+			MethodName: "UpdatePublishStatus",
+			Handler:    _ProductSpuService_UpdatePublishStatus_Handler,
+		},
+		{
+			MethodName: "UpdateRecommendStatus",
+			Handler:    _ProductSpuService_UpdateRecommendStatus_Handler,
+		},
+		{
+			MethodName: "UpdateNewStatus",
+			Handler:    _ProductSpuService_UpdateNewStatus_Handler,
+		},
+		{
+			MethodName: "UpdateDeleteStatus",
+			Handler:    _ProductSpuService_UpdateDeleteStatus_Handler,
+		},
+		{
+			MethodName: "UpdateNewStatusSort",
+			Handler:    _ProductSpuService_UpdateNewStatusSort_Handler,
+		},
+		{
+			MethodName: "UpdateRecommendStatusSort",
+			Handler:    _ProductSpuService_UpdateRecommendStatusSort_Handler,
+		},
+		{
+			MethodName: "QueryProductSpuListByIds",
+			Handler:    _ProductSpuService_QueryProductSpuListByIds_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "rpc/pms/pms.proto",
+}
+
+const (
 	ProductVertifyRecordService_AddProductVertifyRecord_FullMethodName         = "/pmsclient.ProductVertifyRecordService/AddProductVertifyRecord"
 	ProductVertifyRecordService_QueryProductVertifyRecordDetail_FullMethodName = "/pmsclient.ProductVertifyRecordService/QueryProductVertifyRecordDetail"
 	ProductVertifyRecordService_QueryProductVertifyRecordList_FullMethodName   = "/pmsclient.ProductVertifyRecordService/QueryProductVertifyRecordList"
@@ -3847,371 +4990,6 @@ var ProductVertifyRecordService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "QueryProductVertifyRecordList",
 			Handler:    _ProductVertifyRecordService_QueryProductVertifyRecordList_Handler,
-		},
-	},
-	Streams:  []grpc.StreamDesc{},
-	Metadata: "rpc/pms/pms.proto",
-}
-
-const (
-	SkuStockService_AddSkuStock_FullMethodName                 = "/pmsclient.SkuStockService/AddSkuStock"
-	SkuStockService_DeleteSkuStock_FullMethodName              = "/pmsclient.SkuStockService/DeleteSkuStock"
-	SkuStockService_UpdateSkuStock_FullMethodName              = "/pmsclient.SkuStockService/UpdateSkuStock"
-	SkuStockService_QuerySkuStockDetail_FullMethodName         = "/pmsclient.SkuStockService/QuerySkuStockDetail"
-	SkuStockService_QuerySkuStockList_FullMethodName           = "/pmsclient.SkuStockService/QuerySkuStockList"
-	SkuStockService_ReleaseSkuStockLock_FullMethodName         = "/pmsclient.SkuStockService/ReleaseSkuStockLock"
-	SkuStockService_LockSkuStockLock_FullMethodName            = "/pmsclient.SkuStockService/LockSkuStockLock"
-	SkuStockService_QuerySkuStockByProductSkuId_FullMethodName = "/pmsclient.SkuStockService/QuerySkuStockByProductSkuId"
-)
-
-// SkuStockServiceClient is the client API for SkuStockService service.
-//
-// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type SkuStockServiceClient interface {
-	// 添加sku的库存
-	AddSkuStock(ctx context.Context, in *AddSkuStockReq, opts ...grpc.CallOption) (*AddSkuStockResp, error)
-	// 删除sku的库存
-	DeleteSkuStock(ctx context.Context, in *DeleteSkuStockReq, opts ...grpc.CallOption) (*DeleteSkuStockResp, error)
-	// 更新sku的库存
-	UpdateSkuStock(ctx context.Context, in *UpdateSkuStockReq, opts ...grpc.CallOption) (*UpdateSkuStockResp, error)
-	// 查询sku的库存详情
-	QuerySkuStockDetail(ctx context.Context, in *QuerySkuStockDetailReq, opts ...grpc.CallOption) (*QuerySkuStockDetailResp, error)
-	// 查询sku的库存列表
-	QuerySkuStockList(ctx context.Context, in *QuerySkuStockListReq, opts ...grpc.CallOption) (*QuerySkuStockListResp, error)
-	// 取消订单的时候,释放库存
-	ReleaseSkuStockLock(ctx context.Context, in *ReleaseSkuStockLockReq, opts ...grpc.CallOption) (*ReleaseSkuStockLockResp, error)
-	// 下单的时候,锁定库存
-	LockSkuStockLock(ctx context.Context, in *LockSkuStockLockReq, opts ...grpc.CallOption) (*LockSkuStockLockResp, error)
-	// 根据ProductSkuId查询sku
-	QuerySkuStockByProductSkuId(ctx context.Context, in *QuerySkuStockByProductSkuIdReq, opts ...grpc.CallOption) (*SkuStockListData, error)
-}
-
-type skuStockServiceClient struct {
-	cc grpc.ClientConnInterface
-}
-
-func NewSkuStockServiceClient(cc grpc.ClientConnInterface) SkuStockServiceClient {
-	return &skuStockServiceClient{cc}
-}
-
-func (c *skuStockServiceClient) AddSkuStock(ctx context.Context, in *AddSkuStockReq, opts ...grpc.CallOption) (*AddSkuStockResp, error) {
-	out := new(AddSkuStockResp)
-	err := c.cc.Invoke(ctx, SkuStockService_AddSkuStock_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *skuStockServiceClient) DeleteSkuStock(ctx context.Context, in *DeleteSkuStockReq, opts ...grpc.CallOption) (*DeleteSkuStockResp, error) {
-	out := new(DeleteSkuStockResp)
-	err := c.cc.Invoke(ctx, SkuStockService_DeleteSkuStock_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *skuStockServiceClient) UpdateSkuStock(ctx context.Context, in *UpdateSkuStockReq, opts ...grpc.CallOption) (*UpdateSkuStockResp, error) {
-	out := new(UpdateSkuStockResp)
-	err := c.cc.Invoke(ctx, SkuStockService_UpdateSkuStock_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *skuStockServiceClient) QuerySkuStockDetail(ctx context.Context, in *QuerySkuStockDetailReq, opts ...grpc.CallOption) (*QuerySkuStockDetailResp, error) {
-	out := new(QuerySkuStockDetailResp)
-	err := c.cc.Invoke(ctx, SkuStockService_QuerySkuStockDetail_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *skuStockServiceClient) QuerySkuStockList(ctx context.Context, in *QuerySkuStockListReq, opts ...grpc.CallOption) (*QuerySkuStockListResp, error) {
-	out := new(QuerySkuStockListResp)
-	err := c.cc.Invoke(ctx, SkuStockService_QuerySkuStockList_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *skuStockServiceClient) ReleaseSkuStockLock(ctx context.Context, in *ReleaseSkuStockLockReq, opts ...grpc.CallOption) (*ReleaseSkuStockLockResp, error) {
-	out := new(ReleaseSkuStockLockResp)
-	err := c.cc.Invoke(ctx, SkuStockService_ReleaseSkuStockLock_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *skuStockServiceClient) LockSkuStockLock(ctx context.Context, in *LockSkuStockLockReq, opts ...grpc.CallOption) (*LockSkuStockLockResp, error) {
-	out := new(LockSkuStockLockResp)
-	err := c.cc.Invoke(ctx, SkuStockService_LockSkuStockLock_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *skuStockServiceClient) QuerySkuStockByProductSkuId(ctx context.Context, in *QuerySkuStockByProductSkuIdReq, opts ...grpc.CallOption) (*SkuStockListData, error) {
-	out := new(SkuStockListData)
-	err := c.cc.Invoke(ctx, SkuStockService_QuerySkuStockByProductSkuId_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-// SkuStockServiceServer is the server API for SkuStockService service.
-// All implementations must embed UnimplementedSkuStockServiceServer
-// for forward compatibility
-type SkuStockServiceServer interface {
-	// 添加sku的库存
-	AddSkuStock(context.Context, *AddSkuStockReq) (*AddSkuStockResp, error)
-	// 删除sku的库存
-	DeleteSkuStock(context.Context, *DeleteSkuStockReq) (*DeleteSkuStockResp, error)
-	// 更新sku的库存
-	UpdateSkuStock(context.Context, *UpdateSkuStockReq) (*UpdateSkuStockResp, error)
-	// 查询sku的库存详情
-	QuerySkuStockDetail(context.Context, *QuerySkuStockDetailReq) (*QuerySkuStockDetailResp, error)
-	// 查询sku的库存列表
-	QuerySkuStockList(context.Context, *QuerySkuStockListReq) (*QuerySkuStockListResp, error)
-	// 取消订单的时候,释放库存
-	ReleaseSkuStockLock(context.Context, *ReleaseSkuStockLockReq) (*ReleaseSkuStockLockResp, error)
-	// 下单的时候,锁定库存
-	LockSkuStockLock(context.Context, *LockSkuStockLockReq) (*LockSkuStockLockResp, error)
-	// 根据ProductSkuId查询sku
-	QuerySkuStockByProductSkuId(context.Context, *QuerySkuStockByProductSkuIdReq) (*SkuStockListData, error)
-	mustEmbedUnimplementedSkuStockServiceServer()
-}
-
-// UnimplementedSkuStockServiceServer must be embedded to have forward compatible implementations.
-type UnimplementedSkuStockServiceServer struct {
-}
-
-func (UnimplementedSkuStockServiceServer) AddSkuStock(context.Context, *AddSkuStockReq) (*AddSkuStockResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method AddSkuStock not implemented")
-}
-func (UnimplementedSkuStockServiceServer) DeleteSkuStock(context.Context, *DeleteSkuStockReq) (*DeleteSkuStockResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method DeleteSkuStock not implemented")
-}
-func (UnimplementedSkuStockServiceServer) UpdateSkuStock(context.Context, *UpdateSkuStockReq) (*UpdateSkuStockResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateSkuStock not implemented")
-}
-func (UnimplementedSkuStockServiceServer) QuerySkuStockDetail(context.Context, *QuerySkuStockDetailReq) (*QuerySkuStockDetailResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method QuerySkuStockDetail not implemented")
-}
-func (UnimplementedSkuStockServiceServer) QuerySkuStockList(context.Context, *QuerySkuStockListReq) (*QuerySkuStockListResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method QuerySkuStockList not implemented")
-}
-func (UnimplementedSkuStockServiceServer) ReleaseSkuStockLock(context.Context, *ReleaseSkuStockLockReq) (*ReleaseSkuStockLockResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ReleaseSkuStockLock not implemented")
-}
-func (UnimplementedSkuStockServiceServer) LockSkuStockLock(context.Context, *LockSkuStockLockReq) (*LockSkuStockLockResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method LockSkuStockLock not implemented")
-}
-func (UnimplementedSkuStockServiceServer) QuerySkuStockByProductSkuId(context.Context, *QuerySkuStockByProductSkuIdReq) (*SkuStockListData, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method QuerySkuStockByProductSkuId not implemented")
-}
-func (UnimplementedSkuStockServiceServer) mustEmbedUnimplementedSkuStockServiceServer() {}
-
-// UnsafeSkuStockServiceServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to SkuStockServiceServer will
-// result in compilation errors.
-type UnsafeSkuStockServiceServer interface {
-	mustEmbedUnimplementedSkuStockServiceServer()
-}
-
-func RegisterSkuStockServiceServer(s grpc.ServiceRegistrar, srv SkuStockServiceServer) {
-	s.RegisterService(&SkuStockService_ServiceDesc, srv)
-}
-
-func _SkuStockService_AddSkuStock_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(AddSkuStockReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(SkuStockServiceServer).AddSkuStock(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: SkuStockService_AddSkuStock_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SkuStockServiceServer).AddSkuStock(ctx, req.(*AddSkuStockReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _SkuStockService_DeleteSkuStock_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(DeleteSkuStockReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(SkuStockServiceServer).DeleteSkuStock(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: SkuStockService_DeleteSkuStock_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SkuStockServiceServer).DeleteSkuStock(ctx, req.(*DeleteSkuStockReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _SkuStockService_UpdateSkuStock_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UpdateSkuStockReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(SkuStockServiceServer).UpdateSkuStock(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: SkuStockService_UpdateSkuStock_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SkuStockServiceServer).UpdateSkuStock(ctx, req.(*UpdateSkuStockReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _SkuStockService_QuerySkuStockDetail_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(QuerySkuStockDetailReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(SkuStockServiceServer).QuerySkuStockDetail(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: SkuStockService_QuerySkuStockDetail_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SkuStockServiceServer).QuerySkuStockDetail(ctx, req.(*QuerySkuStockDetailReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _SkuStockService_QuerySkuStockList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(QuerySkuStockListReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(SkuStockServiceServer).QuerySkuStockList(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: SkuStockService_QuerySkuStockList_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SkuStockServiceServer).QuerySkuStockList(ctx, req.(*QuerySkuStockListReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _SkuStockService_ReleaseSkuStockLock_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ReleaseSkuStockLockReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(SkuStockServiceServer).ReleaseSkuStockLock(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: SkuStockService_ReleaseSkuStockLock_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SkuStockServiceServer).ReleaseSkuStockLock(ctx, req.(*ReleaseSkuStockLockReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _SkuStockService_LockSkuStockLock_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(LockSkuStockLockReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(SkuStockServiceServer).LockSkuStockLock(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: SkuStockService_LockSkuStockLock_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SkuStockServiceServer).LockSkuStockLock(ctx, req.(*LockSkuStockLockReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _SkuStockService_QuerySkuStockByProductSkuId_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(QuerySkuStockByProductSkuIdReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(SkuStockServiceServer).QuerySkuStockByProductSkuId(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: SkuStockService_QuerySkuStockByProductSkuId_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SkuStockServiceServer).QuerySkuStockByProductSkuId(ctx, req.(*QuerySkuStockByProductSkuIdReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-// SkuStockService_ServiceDesc is the grpc.ServiceDesc for SkuStockService service.
-// It's only intended for direct use with grpc.RegisterService,
-// and not to be introspected or modified (even as a copy)
-var SkuStockService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "pmsclient.SkuStockService",
-	HandlerType: (*SkuStockServiceServer)(nil),
-	Methods: []grpc.MethodDesc{
-		{
-			MethodName: "AddSkuStock",
-			Handler:    _SkuStockService_AddSkuStock_Handler,
-		},
-		{
-			MethodName: "DeleteSkuStock",
-			Handler:    _SkuStockService_DeleteSkuStock_Handler,
-		},
-		{
-			MethodName: "UpdateSkuStock",
-			Handler:    _SkuStockService_UpdateSkuStock_Handler,
-		},
-		{
-			MethodName: "QuerySkuStockDetail",
-			Handler:    _SkuStockService_QuerySkuStockDetail_Handler,
-		},
-		{
-			MethodName: "QuerySkuStockList",
-			Handler:    _SkuStockService_QuerySkuStockList_Handler,
-		},
-		{
-			MethodName: "ReleaseSkuStockLock",
-			Handler:    _SkuStockService_ReleaseSkuStockLock_Handler,
-		},
-		{
-			MethodName: "LockSkuStockLock",
-			Handler:    _SkuStockService_LockSkuStockLock_Handler,
-		},
-		{
-			MethodName: "QuerySkuStockByProductSkuId",
-			Handler:    _SkuStockService_QuerySkuStockByProductSkuId_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

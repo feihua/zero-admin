@@ -1,51 +1,73 @@
 drop table if exists pms_product_attribute;
 create table pms_product_attribute
 (
-    id                            bigint auto_increment
+    id            bigint auto_increment comment '主键id'
         primary key,
-    product_attribute_category_id bigint       not null comment '商品属性分类id',
-    name                          varchar(64)  not null comment '商品属性分类id',
-    select_type                   tinyint      not null comment '属性选择类型：0->唯一；1->单选；2->多选',
-    input_type                    tinyint      not null comment '属性录入方式：0->手工录入；1->从列表中选取',
-    input_list                    varchar(255) not null comment '可选值列表，以逗号隔开',
-    sort                          int          not null comment '排序字段：最高的可以单独上传图片',
-    filter_type                   tinyint      not null comment '分类筛选样式：1->普通；1->颜色',
-    search_type                   tinyint      not null comment '检索类型；0->不需要进行检索；1->关键字检索；2->范围检索',
-    related_status                tinyint      not null comment '相同属性产品是否关联；0->不关联；1->关联',
-    hand_add_status               tinyint      not null comment '是否支持手动新增；0->不支持；1->支持',
-    type                          tinyint      not null comment '属性的类型；0->规格；1->参数'
+    group_id      bigint                                 not null comment '属性分组ID',
+    name          varchar(50)                            not null comment '属性名称',
+    input_type    tinyint                                not null comment '输入类型：1-手动输入，2-单选，3-多选',
+    value_type    tinyint                                not null comment '值类型：1-文本，2-数字，3-日期',
+    input_list    varchar(500) default ''                not null comment '可选值列表，用逗号分隔',
+    unit          varchar(20)  default ''                not null comment '单位',
+    is_required   tinyint      default 0                 not null comment '是否必填',
+    is_searchable tinyint      default 0                 not null comment '是否支持搜索',
+    is_show       tinyint      default 1                 not null comment '是否显示',
+    sort          int          default 0                 not null comment '排序',
+    status        tinyint      default 0                 not null comment '状态：0->禁用；1->启用',
+    create_by     bigint                                 not null comment '创建人ID',
+    create_time   datetime     default CURRENT_TIMESTAMP not null comment '创建时间',
+    update_by     bigint                                 null comment '更新人ID',
+    update_time   datetime                               null on update CURRENT_TIMESTAMP comment '更新时间',
+    is_deleted    tinyint      default 0                 not null comment '是否删除'
 )
-    comment '商品属性参数表';
+    comment '商品属性表';
+
+create index idx_group
+    on pms_product_attribute (group_id, is_deleted);
+
+-- 插入商品属性数据
+INSERT INTO pms_product_attribute (group_id, name, input_type, value_type, input_list, unit, is_required, is_searchable, is_show, sort, create_by) VALUES
+-- 手机属性 (对应group_id为手机基本信息、主体参数等分组的ID)
+(4, '品牌', 2, 1, 'Apple,Samsung,Huawei,Xiaomi', '', 1, 1, 1, 1, 1),
+(4, '型号', 1, 1, '', '', 1, 1, 1, 2, 1),
+(4, '上市年份', 1, 2, '', '年', 1, 1, 1, 3, 1),
+(4, '机身颜色', 2, 1, '黑色,白色,金色,银色', '', 1, 1, 1, 4, 1),
+(4, '运行内存', 2, 2, '4GB,6GB,8GB,12GB', 'GB', 1, 1, 1, 5, 1),
+(4, '机身存储', 2, 2, '64GB,128GB,256GB,512GB', 'GB', 1, 1, 1, 6, 1),
+(4, '屏幕尺寸', 1, 2, '', '英寸', 1, 1, 1, 7, 1),
+(4, '电池容量', 1, 2, '', 'mAh', 1, 0, 1, 8, 1),
+
+-- 电脑属性
+(5, '品牌', 2, 1, 'Lenovo,HP,Dell,Apple', '', 1, 1, 1, 1, 1),
+(5, 'CPU型号', 2, 1, 'Intel i5,Intel i7,Intel i9,AMD', '', 1, 1, 1, 2, 1),
+(5, '内存容量', 2, 2, '8GB,16GB,32GB,64GB', 'GB', 1, 1, 1, 3, 1),
+(5, '硬盘容量', 2, 2, '256GB,512GB,1TB,2TB', 'GB', 1, 1, 1, 4, 1),
+(5, '显卡型号', 1, 1, '', '', 1, 1, 1, 5, 1),
+
+-- 服装通用属性
+(2, '品牌', 2, 1, 'Nike,Adidas,Uniqlo,H&M', '', 1, 1, 1, 1, 1),
+(2, '适用季节', 3, 1, '春季,夏季,秋季,冬季', '', 1, 1, 1, 2, 1),
+(2, '材质成分', 1, 1, '', '', 1, 0, 1, 3, 1),
+(2, '尺码', 2, 1, 'S,M,L,XL,XXL', '', 1, 1, 1, 4, 1),
+
+-- 食品通用属性
+(3, '品牌', 2, 1, '', '', 1, 1, 1, 1, 1),
+(3, '保质期', 1, 2, '', '天', 1, 0, 1, 2, 1),
+(3, '储存方式', 2, 1, '常温,冷藏,冷冻', '', 1, 0, 1, 3, 1),
+(3, '生产日期', 1, 3, '', '', 1, 0, 1, 4, 1),
+(3, '产地', 1, 1, '', '', 1, 1, 1, 5, 1),
+
+-- 家电通用属性
+(10, '品牌', 2, 1, 'Midea,Haier,Gree,Siemens', '', 1, 1, 1, 1, 1),
+(10, '型号', 1, 1, '', '', 1, 1, 1, 2, 1),
+(10, '功率', 1, 2, '', 'W', 1, 0, 1, 3, 1),
+(10, '能效等级', 2, 1, 'A+++,A++,A+,A,B', '', 1, 1, 1, 4, 1),
+(10, '质保期', 1, 2, '', '年', 1, 0, 1, 5, 1),
+
+-- 厨房电器属性
+(11, '容量', 1, 2, '', 'L', 1, 1, 1, 1, 1),
+(11, '控制方式', 2, 1, '按键式,触控式,旋钮式,智能控制', '', 1, 1, 1, 2, 1),
+(11, '特色功能', 3, 1, '预约,保温,除菌,智能控温', '', 0, 1, 1, 3, 1);
 
 
-INSERT INTO pms_product_attribute (id, product_attribute_category_id, name, select_type, input_type, input_list, sort, filter_type, search_type, related_status, hand_add_status, type) VALUES (1, 1, '尺寸', 2, 1, 'M,X,XL,2XL,3XL,4XL', 0, 0, 0, 0, 0, 0);
-INSERT INTO pms_product_attribute (id, product_attribute_category_id, name, select_type, input_type, input_list, sort, filter_type, search_type, related_status, hand_add_status, type) VALUES (7, 1, '颜色', 2, 1, '黑色,红色,白色,粉色', 100, 0, 0, 0, 1, 0);
-INSERT INTO pms_product_attribute (id, product_attribute_category_id, name, select_type, input_type, input_list, sort, filter_type, search_type, related_status, hand_add_status, type) VALUES (13, 0, '上市年份', 1, 1, '2013年,2014年,2015年,2016年,2017年', 0, 0, 0, 0, 0, 1);
-INSERT INTO pms_product_attribute (id, product_attribute_category_id, name, select_type, input_type, input_list, sort, filter_type, search_type, related_status, hand_add_status, type) VALUES (14, 0, '上市年份1', 1, 1, '2013年,2014年,2015年,2016年,2017年', 0, 0, 0, 0, 0, 1);
-INSERT INTO pms_product_attribute (id, product_attribute_category_id, name, select_type, input_type, input_list, sort, filter_type, search_type, related_status, hand_add_status, type) VALUES (15, 0, '上市年份2', 1, 1, '2013年,2014年,2015年,2016年,2017年', 0, 0, 0, 0, 0, 1);
-INSERT INTO pms_product_attribute (id, product_attribute_category_id, name, select_type, input_type, input_list, sort, filter_type, search_type, related_status, hand_add_status, type) VALUES (16, 0, '上市年份3', 1, 1, '2013年,2014年,2015年,2016年,2017年', 0, 0, 0, 0, 0, 1);
-INSERT INTO pms_product_attribute (id, product_attribute_category_id, name, select_type, input_type, input_list, sort, filter_type, search_type, related_status, hand_add_status, type) VALUES (17, 0, '上市年份4', 1, 1, '2013年,2014年,2015年,2016年,2017年', 0, 0, 0, 0, 0, 1);
-INSERT INTO pms_product_attribute (id, product_attribute_category_id, name, select_type, input_type, input_list, sort, filter_type, search_type, related_status, hand_add_status, type) VALUES (18, 0, '上市年份5', 1, 1, '2013年,2014年,2015年,2016年,2017年', 0, 0, 0, 0, 0, 1);
-INSERT INTO pms_product_attribute (id, product_attribute_category_id, name, select_type, input_type, input_list, sort, filter_type, search_type, related_status, hand_add_status, type) VALUES (19, 0, '适用对象', 1, 1, '青年女性,中年女性', 0, 0, 0, 0, 0, 1);
-INSERT INTO pms_product_attribute (id, product_attribute_category_id, name, select_type, input_type, input_list, sort, filter_type, search_type, related_status, hand_add_status, type) VALUES (20, 0, '适用对象1', 2, 1, '青年女性,中年女性', 0, 0, 0, 0, 0, 1);
-INSERT INTO pms_product_attribute (id, product_attribute_category_id, name, select_type, input_type, input_list, sort, filter_type, search_type, related_status, hand_add_status, type) VALUES (21, 0, '适用对象3', 2, 1, '青年女性,中年女性', 0, 0, 0, 0, 0, 1);
-INSERT INTO pms_product_attribute (id, product_attribute_category_id, name, select_type, input_type, input_list, sort, filter_type, search_type, related_status, hand_add_status, type) VALUES (24, 1, '商品编号', 1, 0, '', 0, 0, 0, 0, 0, 1);
-INSERT INTO pms_product_attribute (id, product_attribute_category_id, name, select_type, input_type, input_list, sort, filter_type, search_type, related_status, hand_add_status, type) VALUES (25, 1, '适用季节', 1, 1, '春季,夏季,秋季,冬季', 0, 0, 0, 0, 0, 1);
-INSERT INTO pms_product_attribute (id, product_attribute_category_id, name, select_type, input_type, input_list, sort, filter_type, search_type, related_status, hand_add_status, type) VALUES (32, 2, '适用人群', 0, 1, '老年,青年,中年', 0, 0, 0, 0, 0, 1);
-INSERT INTO pms_product_attribute (id, product_attribute_category_id, name, select_type, input_type, input_list, sort, filter_type, search_type, related_status, hand_add_status, type) VALUES (33, 2, '风格', 0, 1, '嘻哈风格,基础大众,商务正装', 0, 0, 0, 0, 0, 1);
-INSERT INTO pms_product_attribute (id, product_attribute_category_id, name, select_type, input_type, input_list, sort, filter_type, search_type, related_status, hand_add_status, type) VALUES (35, 2, '颜色', 0, 0, '', 100, 0, 0, 0, 1, 0);
-INSERT INTO pms_product_attribute (id, product_attribute_category_id, name, select_type, input_type, input_list, sort, filter_type, search_type, related_status, hand_add_status, type) VALUES (37, 1, '适用人群', 1, 1, '儿童,青年,中年,老年', 0, 0, 0, 0, 0, 1);
-INSERT INTO pms_product_attribute (id, product_attribute_category_id, name, select_type, input_type, input_list, sort, filter_type, search_type, related_status, hand_add_status, type) VALUES (38, 1, '上市时间', 1, 1, '2017年秋,2017年冬,2018年春,2018年夏', 0, 0, 0, 0, 0, 1);
-INSERT INTO pms_product_attribute (id, product_attribute_category_id, name, select_type, input_type, input_list, sort, filter_type, search_type, related_status, hand_add_status, type) VALUES (39, 1, '袖长', 1, 1, '短袖,长袖,中袖', 0, 0, 0, 0, 0, 1);
-INSERT INTO pms_product_attribute (id, product_attribute_category_id, name, select_type, input_type, input_list, sort, filter_type, search_type, related_status, hand_add_status, type) VALUES (40, 2, '尺码', 0, 1, '29,30,31,32,33,34', 0, 0, 0, 0, 0, 0);
-INSERT INTO pms_product_attribute (id, product_attribute_category_id, name, select_type, input_type, input_list, sort, filter_type, search_type, related_status, hand_add_status, type) VALUES (41, 2, '适用场景', 0, 1, '居家,运动,正装', 0, 0, 0, 0, 0, 1);
-INSERT INTO pms_product_attribute (id, product_attribute_category_id, name, select_type, input_type, input_list, sort, filter_type, search_type, related_status, hand_add_status, type) VALUES (42, 2, '上市时间', 0, 1, '2018年春,2018年夏', 0, 0, 0, 0, 0, 1);
-INSERT INTO pms_product_attribute (id, product_attribute_category_id, name, select_type, input_type, input_list, sort, filter_type, search_type, related_status, hand_add_status, type) VALUES (43, 3, '颜色', 0, 0, '', 100, 0, 0, 0, 1, 0);
-INSERT INTO pms_product_attribute (id, product_attribute_category_id, name, select_type, input_type, input_list, sort, filter_type, search_type, related_status, hand_add_status, type) VALUES (44, 3, '容量', 0, 1, '16G,32G,64G,128G', 0, 0, 0, 0, 0, 0);
-INSERT INTO pms_product_attribute (id, product_attribute_category_id, name, select_type, input_type, input_list, sort, filter_type, search_type, related_status, hand_add_status, type) VALUES (45, 3, '屏幕尺寸', 0, 0, '', 0, 0, 0, 0, 0, 1);
-INSERT INTO pms_product_attribute (id, product_attribute_category_id, name, select_type, input_type, input_list, sort, filter_type, search_type, related_status, hand_add_status, type) VALUES (46, 3, '网络', 0, 1, '3G,4G', 0, 0, 0, 0, 0, 1);
-INSERT INTO pms_product_attribute (id, product_attribute_category_id, name, select_type, input_type, input_list, sort, filter_type, search_type, related_status, hand_add_status, type) VALUES (47, 3, '系统', 0, 1, 'Android,IOS', 0, 0, 0, 0, 0, 1);
-INSERT INTO pms_product_attribute (id, product_attribute_category_id, name, select_type, input_type, input_list, sort, filter_type, search_type, related_status, hand_add_status, type) VALUES (48, 3, '电池容量', 0, 0, '', 0, 0, 0, 0, 0, 1);
-INSERT INTO pms_product_attribute (id, product_attribute_category_id, name, select_type, input_type, input_list, sort, filter_type, search_type, related_status, hand_add_status, type) VALUES (49, 11, '颜色', 0, 1, '红色,蓝色,绿色', 0, 1, 0, 0, 0, 0);
-INSERT INTO pms_product_attribute (id, product_attribute_category_id, name, select_type, input_type, input_list, sort, filter_type, search_type, related_status, hand_add_status, type) VALUES (50, 11, '尺寸', 0, 1, '38,39,40', 0, 0, 0, 0, 0, 0);
-INSERT INTO pms_product_attribute (id, product_attribute_category_id, name, select_type, input_type, input_list, sort, filter_type, search_type, related_status, hand_add_status, type) VALUES (51, 11, '风格', 0, 1, '夏季,秋季', 0, 0, 0, 0, 0, 0);
+

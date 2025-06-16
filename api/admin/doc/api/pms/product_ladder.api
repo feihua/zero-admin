@@ -1,0 +1,22 @@
+info (
+	desc:   "产品阶梯价格(只针对同商品)"
+	author: "LiuFeiHua"
+	email:  "1002219331@qq.com"
+)
+
+type (
+	// 添加产品阶梯价格(只针对同商品)请求参数
+	ProductLadderReq {
+		Count    int32 `json:"count"` //满足的商品数量
+		Discount int64 `json:"discount"` //折扣
+		Price    int64 `json:"price"` //折后价格
+	}
+	ProductLadderResp {
+		Id        int64 `json:"id"` //
+		ProductId int64 `json:"productId"` //商品id
+		Count     int32 `json:"count"` //满足的商品数量
+		Discount  int64 `json:"discount"` //折扣
+		Price     int64 `json:"price"` //折后价格
+	}
+)
+

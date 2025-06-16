@@ -34,7 +34,7 @@ func NewCartItemAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) *CartI
 }
 
 // CartItemAdd 添加商品进购物车
-func (l *CartItemAddLogic) CartItemAdd(req *types.CartItemAddReq) (resp *types.CartItemAddResp, err error) {
+func (l *CartItemAddLogic) CartItemAdd(req *types.CartItemReq) (resp *types.CartItemResp, err error) {
 	memberId, err := common.GetMemberId(l.ctx)
 	if err != nil {
 		return nil, err
@@ -62,7 +62,7 @@ func (l *CartItemAddLogic) CartItemAdd(req *types.CartItemAddReq) (resp *types.C
 		return nil, errorx.NewDefaultError(s.Message())
 	}
 
-	return &types.CartItemAddResp{
+	return &types.CartItemResp{
 		Code:    0,
 		Message: "操作成功",
 	}, nil

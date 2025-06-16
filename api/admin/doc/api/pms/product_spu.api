@@ -1,0 +1,211 @@
+import "../base/base.api"
+import "./product_full_reduction.api"
+import "./product_ladder.api"
+import "./product_member_price.api"
+import "./product_sku.api"
+import "./product_attribute_value.api"
+import "./product_brand.api"
+import "../sms/coupon.api"
+
+info (
+	desc:   "商品SPU"
+	author: "LiuFeiHua"
+	email:  "1002219331@qq.com"
+)
+
+type (
+	// 添加商品SPU请求参数
+	AddProductSpuReq {
+		ProductData        ProductSpuData                `json:"productData"` //商品基本信息
+		LadderList         []ProductLadderReq            `json:"ladderList,optional"` //商品阶梯价格
+		FullList           []ProductFullReductionReq     `json:"fullList,optional"` //商品满减
+		MemberPriceList    []MemberPriceReq              `json:"memberPriceList,optional"` //商品会员价格
+		SkuList            []AddProductSkuReq            `json:"skuList"` //商品SKU
+		AttributeValueList []AddProductAttributeValueReq `json:"attributeValueList"` //商品属性值
+		SubjectIds         []int64                       `json:"subjectIds,optional"` //专题
+		prefrenceAreaIds   []int64                       `json:"prefrenceAreaIds,optional"` //优先专区
+	}
+	ProductSpuData {
+		Id                  int64   `json:"id,optional"` //商品SpuId
+		Name                string  `json:"name"` //商品名称
+		CategoryId          int64   `json:"categoryId"` //商品分类ID
+		CategoryIds         string  `json:"categoryIds"` //商品分类ID集合
+		CategoryName        string  `json:"categoryName"` //商品分类名称
+		BrandId             int64   `json:"brandId"` //品牌ID
+		BrandName           string  `json:"brandName"` //品牌名称
+		Unit                string  `json:"unit"` //单位
+		Weight              float32 `json:"weight"` //重量(kg)
+		Keywords            string  `json:"keywords"` //关键词
+		Brief               string  `json:"brief"` //简介
+		Description         string  `json:"description"` //详细描述
+		AlbumPics           string  `json:"albumPics"` //画册图片，最多8张，以逗号分割
+		MainPic             string  `json:"mainPic"` //主图
+		PublishStatus       int32   `json:"publishStatus"` //上架状态：0-下架，1-上架
+		NewStatus           int32   `json:"newStatus"` //新品状态:0->不是新品；1->新品
+		RecommendStatus     int32   `json:"recommendStatus"` //推荐状态；0->不推荐；1->推荐
+		VerifyStatus        int32   `json:"verifyStatus"` //审核状态：0->未审核；1->审核通过
+		PreviewStatus       int32   `json:"previewStatus"` //是否为预告商品：0->不是；1->是
+		Sort                int32   `json:"sort"` //排序
+		NewStatusSort       int32   `json:"newStatusSort"` //新品排序
+		RecommendStatusSort int32   `json:"recommendStatusSort"` //推荐排序
+		Stock               int32   `json:"stock"` //库存
+		LowStock            int32   `json:"lowStock"` //预警库存
+		PromotionType       int32   `json:"promotionType"` //促销类型：0->没有促销使用原价;1->使用促销价；2->使用会员价；3->使用阶梯价格；4->使用满减价格；5->秒杀
+		DetailTitle         string  `json:"detailTitle"` //详情标题
+		DetailDesc          string  `json:"detailDesc"` //详情描述
+		DetailHtml          string  `json:"detailHtml"` //产品详情网页内容
+		DetailMobileHtml    string  `json:"detailMobileHtml"` //移动端网页详情
+	}
+	// 删除商品SPU请求参数
+	DeleteProductSpuReq {
+		Ids []int64 `form:"ids"`
+	}
+	// 更新商品SPU请求参数
+	UpdateProductSpuReq {
+		ProductData        ProductSpuData                `json:"productData"` //商品基本信息
+		LadderList         []ProductLadderReq            `json:"ladderList,optional"` //商品阶梯价格
+		FullList           []ProductFullReductionReq     `json:"fullList,optional"` //商品满减
+		MemberPriceList    []MemberPriceReq              `json:"memberPriceList,optional"` //商品会员价格
+		SkuList            []AddProductSkuReq            `json:"skuList"` //商品SKU
+		AttributeValueList []AddProductAttributeValueReq `json:"attributeValueList"` //商品属性值
+		SubjectIds         []int64                       `json:"subjectIds,optional"` //专题
+		prefrenceAreaIds   []int64                       `json:"prefrenceAreaIds,optional"` //优先专区
+	}
+	// 更新商品SPU状态请求参数
+	UpdateProductSpuStatusReq {
+		Ids    []int64 `json:"ids"` //商品SpuId
+		status int32   `json:"status"` //状态
+		Detail string  `form:"detail,optional"`
+	}
+	// 查询商品SPU详情请求参数
+	QueryProductSpuDetailReq {
+		Id int64 `form:"id"`
+	}
+	ProductSpuDetailData {
+		ProductData        QueryProductSpuListData                `json:"productData"` //商品基本信息
+		BrandData          QueryProductBrandDetailData            `json:"brandData"` //商品品牌
+		LadderList         []ProductLadderResp                    `json:"ladderList"` //商品阶梯价格
+		FullList           []ProductFullReductionResp             `json:"fullList"` //商品满减
+		MemberPriceList    []MemberPriceResp                      `json:"memberPriceList"` //商品会员价格
+		SkuList            []QueryProductSkuDetailData            `json:"skuList"` //商品SKU
+		AttributeValueList []QueryProductAttributeValueDetailData `json:"attributeValueList"` //商品属性值
+		SubjectIds         []int64                                `json:"subjectIds"` //专题
+		prefrenceAreaIds   []int64                                `json:"prefrenceAreaIds"` //优先专区
+		CouponList         []QueryCouponDetailData                `json:"couponList"` //优惠券
+	}
+	QueryProductSpuDetailResp {
+		Code    string               `json:"code"`
+		Message string               `json:"message"`
+		Data    ProductSpuDetailData `json:"data"`
+	}
+	// 分页查询商品SPU列表请求参数
+	QueryProductSpuListReq {
+		Current         int32  `form:"current,default=1"` //第几页
+		PageSize        int32  `form:"pageSize,default=20"` //每页的数量
+		Name            string `form:"name,optional"` //商品名称
+		CategoryId      int64  `form:"categoryId,optional"` //商品分类ID
+		BrandId         int64  `form:"brandId,optional"` //品牌ID
+		Keywords        string `form:"keywords,optional"` //关键词
+		PublishStatus   int32  `form:"publishStatus,default=2"` //上架状态：0-下架，1-上架
+		NewStatus       int32  `form:"newStatus,default=2"` //新品状态:0->不是新品；1->新品
+		RecommendStatus int32  `form:"recommendStatus,default=2"` //推荐状态；0->不推荐；1->推荐
+		VerifyStatus    int32  `form:"verifyStatus,default=2"` //审核状态：0->未审核；1->审核通过
+		PreviewStatus   int32  `form:"previewStatus,default=2"` //是否为预告商品：0->不是；1->是
+		PromotionType   int32  `form:"promotionType,default=6"` //促销类型：0->没有促销使用原价;1->使用促销价；2->使用会员价；3->使用阶梯价格；4->使用满减价格；5->秒杀
+	}
+	QueryProductSpuListData {
+		Id                  int64   `json:"id"` //商品SpuId
+		Name                string  `json:"name"` //商品名称
+		CategoryId          int64   `json:"categoryId"` //商品分类ID
+		CategoryIds         string  `json:"categoryIds"` //商品分类ID集合
+		CategoryName        string  `json:"categoryName"` //商品分类名称
+		BrandId             int64   `json:"brandId"` //品牌ID
+		BrandName           string  `json:"brandName"` //品牌名称
+		Unit                string  `json:"unit"` //单位
+		Weight              float32 `json:"weight"` //重量(kg)
+		Keywords            string  `json:"keywords"` //关键词
+		Brief               string  `json:"brief"` //简介
+		Description         string  `json:"description"` //详细描述
+		AlbumPics           string  `json:"albumPics"` //画册图片，最多8张，以逗号分割
+		MainPic             string  `json:"mainPic"` //主图
+		PriceRange          string  `json:"priceRange"` //价格区间
+		PublishStatus       int32   `json:"publishStatus"` //上架状态：0-下架，1-上架
+		NewStatus           int32   `json:"newStatus"` //新品状态:0->不是新品；1->新品
+		RecommendStatus     int32   `json:"recommendStatus"` //推荐状态；0->不推荐；1->推荐
+		VerifyStatus        int32   `json:"verifyStatus"` //审核状态：0->未审核；1->审核通过
+		PreviewStatus       int32   `json:"previewStatus"` //是否为预告商品：0->不是；1->是
+		Sort                int32   `json:"sort"` //排序
+		NewStatusSort       int32   `json:"newStatusSort"` //新品排序
+		RecommendStatusSort int32   `json:"recommendStatusSort"` //推荐排序
+		Sales               int32   `json:"sales"` //销量
+		Stock               int32   `json:"stock"` //库存
+		LowStock            int32   `json:"lowStock"` //预警库存
+		PromotionType       int32   `json:"promotionType"` //促销类型：0->没有促销使用原价;1->使用促销价；2->使用会员价；3->使用阶梯价格；4->使用满减价格；5->秒杀
+		DetailTitle         string  `json:"detailTitle"` //详情标题
+		DetailDesc          string  `json:"detailDesc"` //详情描述
+		DetailHtml          string  `json:"detailHtml"` //产品详情网页内容
+		DetailMobileHtml    string  `json:"detailMobileHtml"` //移动端网页详情
+		CreateBy            int64   `json:"createBy"` //创建人ID
+		CreateTime          string  `json:"createTime"` //创建时间
+		UpdateBy            int64   `json:"updateBy"` //更新人ID
+		UpdateTime          string  `json:"updateTime"` //更新时间
+	}
+	QueryProductSpuListResp {
+		Code     string                     `json:"code"`
+		Message  string                     `json:"message"`
+		Data     []*QueryProductSpuListData `json:"data"`
+		Current  int32                      `json:"current,default=1"`
+		PageSize int32                      `json:"pageSize,default=20"`
+		Total    int64                      `json:"total"`
+		Success  bool                       `json:"success"`
+	}
+)
+
+@server (
+	jwt:        Auth
+	middleware: CheckUrl
+	group:      pms/product_spu
+	prefix:     /api/pms/product
+)
+service admin-api {
+	// 添加商品SPU
+	@handler AddProductSpu
+	post /addProductSpu (AddProductSpuReq) returns (BaseResp)
+
+	// 删除商品SPU
+	@handler DeleteProductSpu
+	get /deleteProductSpu (DeleteProductSpuReq) returns (BaseResp)
+
+	// 更新商品SPU
+	@handler UpdateProductSpu
+	post /updateProductSpu (UpdateProductSpuReq) returns (BaseResp)
+
+	//修改审核状态
+	@handler UpdateVerifyStatus
+	post /updateVerifyStatus (UpdateProductSpuStatusReq) returns (BaseResp)
+
+	//上下架商品
+	@handler UpdatePublishStatus
+	post /updatePublishStatus (UpdateProductSpuStatusReq) returns (BaseResp)
+
+	//推荐商品
+	@handler UpdateRecommendStatus
+	post /updateRecommendStatus (UpdateProductSpuStatusReq) returns (BaseResp)
+
+	//设为新品
+	@handler UpdateNewStatus
+	post /updateNewStatus (UpdateProductSpuStatusReq) returns (BaseResp)
+
+	//修改删除状态
+	@handler UpdateDeleteStatus
+	post /updateDeleteStatus (UpdateProductSpuStatusReq) returns (BaseResp)
+
+	// 查询商品SPU详情
+	@handler QueryProductSpuDetail
+	get /queryProductSpuDetail (QueryProductSpuDetailReq) returns (QueryProductSpuDetailResp)
+
+	// 分页查询商品SPU列表
+	@handler QueryProductSpuList
+	get /queryProductSpuList (QueryProductSpuListReq) returns (QueryProductSpuListResp)
+}
+

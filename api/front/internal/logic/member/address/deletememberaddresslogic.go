@@ -33,7 +33,7 @@ func NewDeleteMemberAddressLogic(ctx context.Context, svcCtx *svc.ServiceContext
 }
 
 // DeleteMemberAddress 删除会员收货地址
-func (l *DeleteMemberAddressLogic) DeleteMemberAddress(req *types.DeleteMemberAddressReq) (resp *types.DeleteMemberAddressResp, err error) {
+func (l *DeleteMemberAddressLogic) DeleteMemberAddress(req *types.DeleteMemberAddressReq) (resp *types.MemberAddressResp, err error) {
 	memberId, err := common.GetMemberId(l.ctx)
 	if err != nil {
 		return nil, err
@@ -49,7 +49,7 @@ func (l *DeleteMemberAddressLogic) DeleteMemberAddress(req *types.DeleteMemberAd
 		return nil, errorx.NewDefaultError(s.Message())
 	}
 
-	return &types.DeleteMemberAddressResp{
+	return &types.MemberAddressResp{
 		Code:    0,
 		Message: "删除会员收货地址成功",
 	}, nil

@@ -51,7 +51,7 @@ func (l *UserLoginLogic) UserLogin(req *types.LoginReq, ip, browser, os string) 
 	}
 
 	// 把能访问的url存在在redis，在middleware中校验
-	key := "zero:mall:token:" + strconv.FormatInt(resp.Id, 10)
+	key := "zero:mall:token1:" + strconv.FormatInt(resp.Id, 10)
 	err = l.svcCtx.Redis.Set(key, strings.Join(resp.ApiUrls, ","))
 	if err != nil {
 		logc.Errorf(l.ctx, "设置用户：%s,权限到redis异常: %+v", resp.UserName, err)

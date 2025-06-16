@@ -5,18 +5,16 @@ import (
 	"errors"
 	"github.com/feihua/zero-admin/rpc/pms/gen/model"
 	"github.com/feihua/zero-admin/rpc/pms/gen/query"
-	"github.com/zeromicro/go-zero/core/logc"
-
 	"github.com/feihua/zero-admin/rpc/pms/internal/svc"
 	"github.com/feihua/zero-admin/rpc/pms/pmsclient"
-
+	"github.com/zeromicro/go-zero/core/logc"
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// AddProductAttributeValueLogic 添加存储产品参数信息
+// AddProductAttributeValueLogic 添加商品属性值
 /*
 Author: LiuFeiHua
-Date: 2024/6/12 16:49
+Date: 2025/06/16 14:37:37
 */
 type AddProductAttributeValueLogic struct {
 	ctx    context.Context
@@ -32,17 +30,22 @@ func NewAddProductAttributeValueLogic(ctx context.Context, svcCtx *svc.ServiceCo
 	}
 }
 
-// AddProductAttributeValue 添加存储产品参数信息
+// AddProductAttributeValue 添加商品属性值
 func (l *AddProductAttributeValueLogic) AddProductAttributeValue(in *pmsclient.AddProductAttributeValueReq) (*pmsclient.AddProductAttributeValueResp, error) {
-	err := query.PmsProductAttributeValue.WithContext(l.ctx).Create(&model.PmsProductAttributeValue{
-		ProductID:          in.ProductId,          // 商品id
-		ProductAttributeID: in.ProductAttributeId, // 商品属性id
-		Value:              in.Value,              // 手动添加规格或参数的值，参数单值，规格有多个时以逗号隔开
-	})
+	q := query.PmsProductAttributeValue
 
+	item := &model.PmsProductAttributeValue{
+		SpuID:       in.SpuId,       // 商品SPU ID
+		AttributeID: in.AttributeId, // 属性ID
+		Value:       in.Value,       // 属性值
+		Status:      in.Status,      // 状态：0->禁用；1->启用
+		CreateBy:    in.CreateBy,    // 创建人ID
+	}
+
+	err := q.WithContext(l.ctx).Create(item)
 	if err != nil {
-		logc.Errorf(l.ctx, "添加存储产品参数信息失败,参数:%+v,异常:%s", in, err.Error())
-		return nil, errors.New("添加存储产品参数信息失败")
+		logc.Errorf(l.ctx, "添加商品属性值失败,参数:%+v,异常:%s", item, err.Error())
+		return nil, errors.New("添加商品属性值失败")
 	}
 
 	return &pmsclient.AddProductAttributeValueResp{}, nil

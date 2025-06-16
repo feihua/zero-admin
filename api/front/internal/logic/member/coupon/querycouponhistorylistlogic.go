@@ -39,11 +39,11 @@ func (l *QueryCouponHistoryListLogic) QueryCouponHistoryList(req *types.ListCoup
 	if err != nil {
 		return nil, err
 	}
-	historyList, err := l.svcCtx.CouponHistoryService.QueryCouponHistoryList(l.ctx, &smsclient.QueryCouponHistoryListReq{
-		PageNum:   1,
-		PageSize:  100,
-		MemberId:  memberId,
-		UseStatus: req.UseStatus,
+	historyList, err := l.svcCtx.CouponRecordService.QueryCouponRecordList(l.ctx, &smsclient.QueryCouponRecordListReq{
+		PageNum:  1,
+		PageSize: 100,
+		MemberId: memberId,
+		Status:   req.UseStatus,
 	})
 	if err != nil {
 		logc.Errorf(l.ctx, "获取会员优惠券历史列表失败,参数: %+v,异常：%s", req, err.Error())
@@ -53,19 +53,21 @@ func (l *QueryCouponHistoryListLogic) QueryCouponHistoryList(req *types.ListCoup
 
 	var list []*types.ListCouponHistoryData
 
-	for _, item := range historyList.List {
+	for _, detail := range historyList.List {
 		list = append(list, &types.ListCouponHistoryData{
-			Id:             item.Id,
-			CouponId:       item.CouponId,
-			MemberId:       item.MemberId,
-			CouponCode:     item.CouponCode,
-			MemberNickname: item.MemberNickname,
-			GetType:        item.GetType,
-			CreateTime:     item.CreateTime,
-			UseStatus:      item.UseStatus,
-			UseTime:        item.UseTime,
-			OrderId:        item.OrderId,
-			OrderSn:        item.OrderSn,
+			Id:             detail.Id,             // 主键ID
+			CouponId:       detail.CouponId,       // 优惠券ID
+			MemberId:       detail.MemberId,       // 用户ID
+			GetTime:        detail.GetTime,        // 领取时间
+			GetType:        detail.GetType,        // 获取类型：0->后台赠送；1->主动获取
+			UseTime:        detail.UseTime,        // 使用时间
+			OrderId:        detail.OrderId,        // 使用订单ID
+			OrderAmount:    detail.OrderAmount,    // 订单金额
+			DiscountAmount: detail.DiscountAmount, // 优惠金额
+			Status:         detail.Status,         // 状态：0-未使用，1-已使用，2-已过期，3-已失效
+			InvalidTime:    detail.InvalidTime,    // 失效时间
+			InvalidReason:  detail.InvalidReason,  // 失效原因
+			CreateTime:     detail.CreateTime,     // 创建时间
 		})
 	}
 

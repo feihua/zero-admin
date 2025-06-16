@@ -1,3 +1,4 @@
+drop table if exists pms_product_full_reduction;
 create table pms_product_full_reduction
 (
     id           bigint(11) auto_increment

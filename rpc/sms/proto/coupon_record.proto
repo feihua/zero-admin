@@ -8,7 +8,6 @@ option go_package = "./proto";
 message AddCouponRecordReq {
   int64 coupon_id = 1; //优惠券ID
   int64 member_id = 2; //用户ID
-  string get_time = 3; //领取时间
   int32 get_type = 4; //获取类型：0->后台赠送；1->主动获取
 
 

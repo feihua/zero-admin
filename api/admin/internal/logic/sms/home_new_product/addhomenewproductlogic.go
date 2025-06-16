@@ -36,7 +36,7 @@ func NewAddHomeNewProductLogic(ctx context.Context, svcCtx *svc.ServiceContext) 
 // AddHomeNewProduct 添加首页新品
 func (l *HomeNewProductAddLogic) AddHomeNewProduct(req *types.AddHomeNewProductReq) (*types.BaseResp, error) {
 
-	_, err := l.svcCtx.ProductService.UpdateNewStatus(l.ctx, &pmsclient.UpdateProductStatusReq{
+	_, err := l.svcCtx.ProductSpuService.UpdateNewStatus(l.ctx, &pmsclient.UpdateProductSpuStatusReq{
 		Ids:    req.ProductIds,
 		Status: 1,
 	})

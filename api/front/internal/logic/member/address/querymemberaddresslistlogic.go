@@ -50,10 +50,10 @@ func (l *QueryMemberAddressListLogic) QueryMemberAddressList(req *types.QueryMem
 		return nil, errorx.NewDefaultError(s.Message())
 	}
 
-	var list []*types.QueryMemberAddressListData
+	var list []*types.QueryMemberAddressDetailData
 
 	for _, detail := range result.List {
-		list = append(list, &types.QueryMemberAddressListData{
+		list = append(list, &types.QueryMemberAddressDetailData{
 			Id:            detail.Id,            // 主键ID
 			MemberId:      detail.MemberId,      // 会员ID
 			ReceiverName:  detail.ReceiverName,  // 收货人姓名
@@ -67,7 +67,6 @@ func (l *QueryMemberAddressListLogic) QueryMemberAddressList(req *types.QueryMem
 			IsDefault:     detail.IsDefault,     // 是否默认地址
 			CreateTime:    detail.CreateTime,    // 创建时间
 			UpdateTime:    detail.UpdateTime,    // 更新时间
-			IsDeleted:     detail.IsDeleted,     // 是否删除
 
 		})
 	}

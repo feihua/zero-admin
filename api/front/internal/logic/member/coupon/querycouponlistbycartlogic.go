@@ -55,12 +55,12 @@ func (l *QueryCouponListByCartLogic) QueryCouponListByCart(req *types.CouponList
 
 func QueryCouponList(svcCtx *svc.ServiceContext, ctx context.Context, cartPromotionItemList []types.CarItemtPromotionListData) ([]*smsclient.CouponHistoryDetailListData, []*smsclient.CouponHistoryDetailListData) {
 	memberId, _ := ctx.Value("memberId").(json.Number).Int64()
-	historyDetailList, _ := svcCtx.CouponHistoryService.QueryCouponHistoryDetailList(ctx, &smsclient.QueryCouponHistoryDetailListReq{
+	historyDetailList, _ := svcCtx.CouponRecordService.QueryMemberCouponList(ctx, &smsclient.QueryMemberCouponListReq{
 		MemberId: memberId,
 	})
 
-	var enableList = make([]*smsclient.CouponHistoryDetailListData, 0)
-	var disableList = make([]*smsclient.CouponHistoryDetailListData, 0)
+	var enableList = make([]*smsclient.QueryCouponRecordDetailResp, 0)
+	var disableList = make([]*smsclient.QueryCouponRecordDetailResp, 0)
 	// 根据优惠券使用类型来判断优惠券是否可用
 	for _, couponHistoryDetail := range historyDetailList.List {
 		useType := couponHistoryDetail.CouponListData.UseType

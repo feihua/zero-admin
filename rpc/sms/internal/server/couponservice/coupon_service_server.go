@@ -59,8 +59,8 @@ func (s *CouponServiceServer) QueryCouponList(ctx context.Context, in *smsclient
 	return l.QueryCouponList(in)
 }
 
-// 根据商品Id和分类id查询可用的优惠券(app)
-func (s *CouponServiceServer) QueryCouponById(ctx context.Context, in *smsclient.QueryCouponByIdReq) (*smsclient.QueryCouponByIdResp, error) {
-	l := couponservicelogic.NewQueryCouponByIdLogic(ctx, s.svcCtx)
-	return l.QueryCouponById(in)
+// 根据商品Id和分类id查询可用的优惠券
+func (s *CouponServiceServer) QueryCouponByScopeId(ctx context.Context, in *smsclient.QueryCouponByScopeIdReq) (*smsclient.QueryCouponByScopeIdResp, error) {
+	l := couponservicelogic.NewQueryCouponByScopeIdLogic(ctx, s.svcCtx)
+	return l.QueryCouponByScopeId(in)
 }

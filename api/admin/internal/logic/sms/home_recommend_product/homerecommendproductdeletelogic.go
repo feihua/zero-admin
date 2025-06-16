@@ -36,7 +36,7 @@ func NewHomeRecommendProductDeleteLogic(ctx context.Context, svcCtx *svc.Service
 // HomeRecommendProductDelete 删除人气推荐商品
 func (l *HomeRecommendProductDeleteLogic) HomeRecommendProductDelete(req *types.DeleteHomeRecommendProductReq) (*types.BaseResp, error) {
 
-	_, err := l.svcCtx.ProductService.UpdateRecommendStatus(l.ctx, &pmsclient.UpdateProductStatusReq{
+	_, err := l.svcCtx.ProductSpuService.UpdateRecommendStatus(l.ctx, &pmsclient.UpdateProductSpuStatusReq{
 		Ids:    req.ProductIds,
 		Status: 0, // 推荐状态：0->不推荐;1->推荐
 	})

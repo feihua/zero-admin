@@ -1,0 +1,59 @@
+###用户登录
+POST {{host}}/api/sys/user/login
+Content-Type: application/json
+
+{
+  "account": "admin",
+  "password": "123456"
+}
+> {%
+    client.global.set("token", response.body.data.token);
+%}
+
+### 添加商品属性分组
+POST {{host}}/api/pms/attributeGroup/addAttributeGroup
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "categoryId": 1,
+  "name": "基本信息",
+  "sort": 1,
+  "status": 1
+}
+### 删除商品属性分组
+GET {{host}}/api/pms/attributeGroup/deleteAttributeGroup?ids=40
+Authorization: Bearer {{token}}
+
+
+### 修改商品属性分组
+POST {{host}}/api/pms/attributeGroup/updateAttributeGroup
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "id": 1,
+  "categoryId": 1,
+  "name": "基本信息test",
+  "sort": 1,
+  "status": 1
+}
+
+### 更新商品属性分组显示状态
+POST {{host}}/api/pms/attributeGroup/updateAttributeGroupStatus
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "ids": [1],
+  "status": 1
+}
+
+
+### 根据id查询商品属性分组详情
+GET {{host}}/api/pms/attributeGroup/queryAttributeGroupDetail?id=1
+Authorization: Bearer {{token}}
+
+### 查询商品属性分组列表
+GET {{host}}/api/pms/attributeGroup/queryAttributeGroupList
+Authorization: Bearer {{token}}

@@ -57,12 +57,11 @@ func (l *AddCouponRecordLogic) AddCouponRecord(in *smsclient.AddCouponRecordReq)
 		return nil, errors.New("您已经领取过该优惠券")
 	}
 
-	getTime, _ := time.Parse("2006-01-02 15:04:05", in.GetTime)
 	// 3.添加领取优惠券记录
 	item := &model.SmsCouponRecord{
 		CouponID: in.CouponId, // 优惠券ID
 		MemberID: in.MemberId, // 用户ID
-		GetTime:  getTime,     // 领取时间
+		GetTime:  time.Now(),  // 领取时间
 		GetType:  in.GetType,  // 获取类型：0->后台赠送；1->主动获取
 		Status:   0,           // 状态：0-未使用，1-已使用，2-已过期，3-已失效
 	}

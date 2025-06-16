@@ -1,61 +1,61 @@
 drop table if exists pms_product_attribute_value;
+
 create table pms_product_attribute_value
 (
-    id                   bigint auto_increment
+    id           bigint auto_increment comment '主键id'
         primary key,
-    product_id           bigint      not null comment '商品id',
-    product_attribute_id bigint      not null comment '商品属性id',
-    value                varchar(64) not null comment '手动添加规格或参数的值，参数单值，规格有多个时以逗号隔开'
+    spu_id       bigint                             not null comment '商品SPU ID',
+    attribute_id bigint                             not null comment '属性ID',
+    value        varchar(500)                       not null comment '属性值',
+    status       tinyint  default 0                 not null comment '状态：0->禁用；1->启用',
+    create_by    bigint                             not null comment '创建人ID',
+    create_time  datetime default CURRENT_TIMESTAMP not null comment '创建时间',
+    update_by    bigint                             null comment '更新人ID',
+    update_time  datetime                           null on update CURRENT_TIMESTAMP comment '更新时间',
+    is_deleted   tinyint  default 0                 not null comment '是否删除'
 )
-    comment '存储产品参数信息的表';
+    comment '商品属性值表';
 
-INSERT INTO pms_product_attribute_value (id, product_id, product_attribute_id, value) VALUES (1, 9, 1, 'X');
-INSERT INTO pms_product_attribute_value (id, product_id, product_attribute_id, value) VALUES (2, 10, 1, 'X');
-INSERT INTO pms_product_attribute_value (id, product_id, product_attribute_id, value) VALUES (3, 11, 1, 'X');
-INSERT INTO pms_product_attribute_value (id, product_id, product_attribute_id, value) VALUES (4, 12, 1, 'X');
-INSERT INTO pms_product_attribute_value (id, product_id, product_attribute_id, value) VALUES (5, 13, 1, 'X');
-INSERT INTO pms_product_attribute_value (id, product_id, product_attribute_id, value) VALUES (6, 14, 1, 'X');
-INSERT INTO pms_product_attribute_value (id, product_id, product_attribute_id, value) VALUES (7, 18, 1, 'X');
-INSERT INTO pms_product_attribute_value (id, product_id, product_attribute_id, value) VALUES (8, 7, 1, 'X');
-INSERT INTO pms_product_attribute_value (id, product_id, product_attribute_id, value) VALUES (9, 7, 1, 'XL');
-INSERT INTO pms_product_attribute_value (id, product_id, product_attribute_id, value) VALUES (10, 7, 1, 'XXL');
-INSERT INTO pms_product_attribute_value (id, product_id, product_attribute_id, value) VALUES (11, 22, 7, 'x,xx');
-INSERT INTO pms_product_attribute_value (id, product_id, product_attribute_id, value) VALUES (12, 22, 24, 'no110');
-INSERT INTO pms_product_attribute_value (id, product_id, product_attribute_id, value) VALUES (13, 22, 25, '春季');
-INSERT INTO pms_product_attribute_value (id, product_id, product_attribute_id, value) VALUES (14, 22, 37, '青年');
-INSERT INTO pms_product_attribute_value (id, product_id, product_attribute_id, value) VALUES (15, 22, 38, '2018年春');
-INSERT INTO pms_product_attribute_value (id, product_id, product_attribute_id, value) VALUES (16, 22, 39, '长袖');
-INSERT INTO pms_product_attribute_value (id, product_id, product_attribute_id, value) VALUES (124, 23, 7, '米白色,浅黄色');
-INSERT INTO pms_product_attribute_value (id, product_id, product_attribute_id, value) VALUES (125, 23, 24, 'no1098');
-INSERT INTO pms_product_attribute_value (id, product_id, product_attribute_id, value) VALUES (126, 23, 25, '春季');
-INSERT INTO pms_product_attribute_value (id, product_id, product_attribute_id, value) VALUES (127, 23, 37, '青年');
-INSERT INTO pms_product_attribute_value (id, product_id, product_attribute_id, value) VALUES (128, 23, 38, '2018年春');
-INSERT INTO pms_product_attribute_value (id, product_id, product_attribute_id, value) VALUES (129, 23, 39, '长袖');
-INSERT INTO pms_product_attribute_value (id, product_id, product_attribute_id, value) VALUES (184, 31, 25, '夏季');
-INSERT INTO pms_product_attribute_value (id, product_id, product_attribute_id, value) VALUES (185, 31, 37, '青年');
-INSERT INTO pms_product_attribute_value (id, product_id, product_attribute_id, value) VALUES (186, 31, 38, '2018年夏');
-INSERT INTO pms_product_attribute_value (id, product_id, product_attribute_id, value) VALUES (187, 31, 39, '短袖');
-INSERT INTO pms_product_attribute_value (id, product_id, product_attribute_id, value) VALUES (199, 30, 25, '夏季');
-INSERT INTO pms_product_attribute_value (id, product_id, product_attribute_id, value) VALUES (200, 30, 37, '青年');
-INSERT INTO pms_product_attribute_value (id, product_id, product_attribute_id, value) VALUES (201, 30, 38, '2018年夏');
-INSERT INTO pms_product_attribute_value (id, product_id, product_attribute_id, value) VALUES (202, 30, 39, '短袖');
-INSERT INTO pms_product_attribute_value (id, product_id, product_attribute_id, value) VALUES (213, 27, 43, '黑色,蓝色');
-INSERT INTO pms_product_attribute_value (id, product_id, product_attribute_id, value) VALUES (214, 27, 45, '5.8');
-INSERT INTO pms_product_attribute_value (id, product_id, product_attribute_id, value) VALUES (215, 27, 46, '4G');
-INSERT INTO pms_product_attribute_value (id, product_id, product_attribute_id, value) VALUES (216, 27, 47, 'Android');
-INSERT INTO pms_product_attribute_value (id, product_id, product_attribute_id, value) VALUES (217, 27, 48, '3000ml');
-INSERT INTO pms_product_attribute_value (id, product_id, product_attribute_id, value) VALUES (218, 28, 43, '金色,银色');
-INSERT INTO pms_product_attribute_value (id, product_id, product_attribute_id, value) VALUES (219, 28, 45, '5.0');
-INSERT INTO pms_product_attribute_value (id, product_id, product_attribute_id, value) VALUES (220, 28, 46, '4G');
-INSERT INTO pms_product_attribute_value (id, product_id, product_attribute_id, value) VALUES (221, 28, 47, 'Android');
-INSERT INTO pms_product_attribute_value (id, product_id, product_attribute_id, value) VALUES (222, 28, 48, '2800ml');
-INSERT INTO pms_product_attribute_value (id, product_id, product_attribute_id, value) VALUES (223, 29, 43, '金色,银色');
-INSERT INTO pms_product_attribute_value (id, product_id, product_attribute_id, value) VALUES (224, 29, 45, '4.7');
-INSERT INTO pms_product_attribute_value (id, product_id, product_attribute_id, value) VALUES (225, 29, 46, '4G');
-INSERT INTO pms_product_attribute_value (id, product_id, product_attribute_id, value) VALUES (226, 29, 47, 'IOS');
-INSERT INTO pms_product_attribute_value (id, product_id, product_attribute_id, value) VALUES (227, 29, 48, '1960ml');
-INSERT INTO pms_product_attribute_value (id, product_id, product_attribute_id, value) VALUES (228, 26, 43, '金色,银色');
-INSERT INTO pms_product_attribute_value (id, product_id, product_attribute_id, value) VALUES (229, 26, 45, '5.0');
-INSERT INTO pms_product_attribute_value (id, product_id, product_attribute_id, value) VALUES (230, 26, 46, '4G');
-INSERT INTO pms_product_attribute_value (id, product_id, product_attribute_id, value) VALUES (231, 26, 47, 'Android');
-INSERT INTO pms_product_attribute_value (id, product_id, product_attribute_id, value) VALUES (232, 26, 48, '3000');
+create index idx_attribute
+    on pms_product_attribute_value (attribute_id, is_deleted);
+
+create index idx_spu
+    on pms_product_attribute_value (spu_id, is_deleted);
+
+
+-- 插入商品属性值数据（假设iPhone 15 Pro的spu_id=1）
+INSERT INTO pms_product_attribute_value (spu_id, attribute_id, value, create_by) VALUES
+-- 基本信息属性值
+(1, 1, 'Apple', 1),                    -- 品牌
+(1, 2, 'iPhone 15 Pro', 1),           -- 型号
+(1, 3, '2023', 1),                    -- 上市年份
+(1, 4, '自然色', 1),                   -- 机身颜色
+(1, 5, '8GB', 1),                     -- 运行内存
+(1, 6, '256GB', 1),                   -- 机身存储
+
+-- 主体参数属性值
+(1, 7, 'A17 Pro', 1),                 -- 处理器
+(1, 8, '8GB', 1),                     -- 运行内存
+(1, 9, '256GB', 1),                   -- 机身存储
+(1, 10, '3274mAh', 1),                -- 电池容量
+(1, 11, '187g', 1),                   -- 机身重量
+
+-- 网络参数属性值
+(1, 12, '支持', 1),                    -- 5G网络
+(1, 13, 'GSM,WCDMA,LTE,5G', 1),       -- 网络制式
+(1, 14, '双卡双待', 1),                -- SIM卡类型
+(1, 15, 'WiFi 6E', 1),                -- WiFi
+
+-- 显示参数属性值
+(1, 16, '6.1', 1),                    -- 屏幕尺寸
+(1, 17, '2556x1179', 1),              -- 屏幕分辨率
+(1, 18, '120', 1),                    -- 屏幕刷新率
+(1, 19, 'OLED', 1),                   -- 屏幕类型
+(1, 20, '2000', 1),                   -- 屏幕亮度
+
+-- 摄像功能属性值
+(1, 21, '4800', 1),                   -- 主摄像头
+(1, 22, '1200', 1),                   -- 前置摄像头
+(1, 23, '3', 1),                      -- 摄像头数量
+(1, 24, '4K,1080P', 1),               -- 视频拍摄
+(1, 25, '光学防抖', 1);                -- 防抖功能

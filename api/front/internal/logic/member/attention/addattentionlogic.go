@@ -34,7 +34,7 @@ func NewAddAttentionLogic(ctx context.Context, svcCtx *svc.ServiceContext) *AddA
 }
 
 // AddAttention 添加会员关注的品牌
-func (l *AddAttentionLogic) AddAttention(req *types.AddAttentionReq) (resp *types.AddAttentionResp, err error) {
+func (l *AddAttentionLogic) AddAttention(req *types.AddAttentionReq) (resp *types.AttentionResp, err error) {
 	memberId, err := common.GetMemberId(l.ctx)
 	if err != nil {
 		return nil, err
@@ -53,7 +53,7 @@ func (l *AddAttentionLogic) AddAttention(req *types.AddAttentionReq) (resp *type
 		return nil, errorx.NewDefaultError(s.Message())
 	}
 
-	return &types.AddAttentionResp{
+	return &types.AttentionResp{
 		Code:    0,
 		Message: "操作成功",
 	}, nil

@@ -1,0 +1,116 @@
+syntax = "proto3";
+
+package main;
+
+option go_package = "./proto";
+
+// 添加商品规格
+message AddProductSpecReq {
+  int64 category_id = 1; //分类ID
+  string name = 2; //规格名称
+  int32 sort = 3; //排序
+  int32 status = 4; //状态：0->禁用；1->启用
+  int64 create_by = 5; //创建人ID
+}
+
+message AddProductSpecResp {
+  string pong = 1;
+}
+
+// 删除商品规格
+message DeleteProductSpecReq {
+  repeated int64 ids = 1;
+}
+
+message DeleteProductSpecResp {
+  string pong = 1;
+}
+
+// 更新商品规格
+message UpdateProductSpecReq {
+  int64 id = 1; //
+  int64 category_id = 2; //分类ID
+  string name = 3; //规格名称
+  int32 sort = 4; //排序
+  int32 status = 5; //状态：0->禁用；1->启用
+  int64 update_by = 8; //更新人ID
+}
+
+message UpdateProductSpecResp {
+  string pong = 1;
+}
+
+// 更新商品规格状态
+message UpdateProductSpecStatusReq {
+  repeated int64 ids = 1; //
+  int32 status = 5; //状态：0->禁用；1->启用
+  int64 update_by = 8; //更新人ID
+}
+
+message UpdateProductSpecStatusResp {
+  string pong = 1;
+}
+
+// 查询商品规格详情
+message QueryProductSpecDetailReq {
+    int64 id = 1;
+}
+
+message QueryProductSpecDetailResp {
+  int64 id = 1; //
+  int64 category_id = 2; //分类ID
+  string name = 3; //规格名称
+  int32 sort = 4; //排序
+  int32 status = 5; //状态：0->禁用；1->启用
+  int64 create_by = 6; //创建人ID
+  string create_time = 7; //创建时间
+  int64 update_by = 8; //更新人ID
+  string update_time = 9; //更新时间
+
+}
+
+// 分页查询商品规格列表
+message QueryProductSpecListReq {
+  int64 category_id = 1; //分类ID
+  string name = 2; //规格名称
+  int32 status = 3; //状态：0->禁用；1->启用
+  int32 page_num = 4; //第几页
+  int32 page_size = 5; //每页的数量
+}
+
+message ProductSpecListData {
+  int64 id = 1; //
+  int64 category_id = 2; //分类ID
+  string name = 3; //规格名称
+  int32 sort = 4; //排序
+  int32 status = 5; //状态：0->禁用；1->启用
+  int64 create_by = 6; //创建人ID
+  string create_time = 7; //创建时间
+  int64 update_by = 8; //更新人ID
+  string update_time = 9; //更新时间
+  int32 is_deleted = 10; //是否删除
+
+}
+
+message QueryProductSpecListResp {
+  int64 total = 1;
+  repeated  ProductSpecListData list = 2;
+}
+
+// 商品规格
+service ProductSpecService {
+  // 添加商品规格
+  rpc AddProductSpec(AddProductSpecReq) returns (AddProductSpecResp){}
+  // 删除商品规格
+  rpc DeleteProductSpec(DeleteProductSpecReq) returns (DeleteProductSpecResp){}
+  // 更新商品规格
+  rpc UpdateProductSpec(UpdateProductSpecReq) returns (UpdateProductSpecResp ){}
+  // 更新商品规格状态
+  rpc UpdateProductSpecStatus(UpdateProductSpecStatusReq) returns (UpdateProductSpecStatusResp ){}
+  // 查询商品规格详情
+   rpc QueryProductSpecDetail(QueryProductSpecDetailReq) returns (QueryProductSpecDetailResp){}
+  // 查询商品规格列表
+  rpc QueryProductSpecList(QueryProductSpecListReq) returns (QueryProductSpecListResp){}
+
+
+}

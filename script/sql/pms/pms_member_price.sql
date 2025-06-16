@@ -1,3 +1,4 @@
+drop table if exists pms_member_price;
 create table pms_member_price
 (
     id                bigint auto_increment

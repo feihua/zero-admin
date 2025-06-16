@@ -19,32 +19,36 @@ var (
 	Q                                   = new(Query)
 	PmsFeightTemplate                   *pmsFeightTemplate
 	PmsMemberPrice                      *pmsMemberPrice
-	PmsProduct                          *pmsProduct
 	PmsProductAttribute                 *pmsProductAttribute
-	PmsProductAttributeCategory         *pmsProductAttributeCategory
+	PmsProductAttributeGroup            *pmsProductAttributeGroup
 	PmsProductAttributeValue            *pmsProductAttributeValue
 	PmsProductBrand                     *pmsProductBrand
 	PmsProductCategory                  *pmsProductCategory
 	PmsProductCategoryAttributeRelation *pmsProductCategoryAttributeRelation
 	PmsProductFullReduction             *pmsProductFullReduction
 	PmsProductLadder                    *pmsProductLadder
-	PmsSkuStock                         *pmsSkuStock
+	PmsProductSku                       *pmsProductSku
+	PmsProductSpec                      *pmsProductSpec
+	PmsProductSpecValue                 *pmsProductSpecValue
+	PmsProductSpu                       *pmsProductSpu
 )
 
 func SetDefault(db *gorm.DB, opts ...gen.DOOption) {
 	*Q = *Use(db, opts...)
 	PmsFeightTemplate = &Q.PmsFeightTemplate
 	PmsMemberPrice = &Q.PmsMemberPrice
-	PmsProduct = &Q.PmsProduct
 	PmsProductAttribute = &Q.PmsProductAttribute
-	PmsProductAttributeCategory = &Q.PmsProductAttributeCategory
+	PmsProductAttributeGroup = &Q.PmsProductAttributeGroup
 	PmsProductAttributeValue = &Q.PmsProductAttributeValue
 	PmsProductBrand = &Q.PmsProductBrand
 	PmsProductCategory = &Q.PmsProductCategory
 	PmsProductCategoryAttributeRelation = &Q.PmsProductCategoryAttributeRelation
 	PmsProductFullReduction = &Q.PmsProductFullReduction
 	PmsProductLadder = &Q.PmsProductLadder
-	PmsSkuStock = &Q.PmsSkuStock
+	PmsProductSku = &Q.PmsProductSku
+	PmsProductSpec = &Q.PmsProductSpec
+	PmsProductSpecValue = &Q.PmsProductSpecValue
+	PmsProductSpu = &Q.PmsProductSpu
 }
 
 func Use(db *gorm.DB, opts ...gen.DOOption) *Query {
@@ -52,16 +56,18 @@ func Use(db *gorm.DB, opts ...gen.DOOption) *Query {
 		db:                                  db,
 		PmsFeightTemplate:                   newPmsFeightTemplate(db, opts...),
 		PmsMemberPrice:                      newPmsMemberPrice(db, opts...),
-		PmsProduct:                          newPmsProduct(db, opts...),
 		PmsProductAttribute:                 newPmsProductAttribute(db, opts...),
-		PmsProductAttributeCategory:         newPmsProductAttributeCategory(db, opts...),
+		PmsProductAttributeGroup:            newPmsProductAttributeGroup(db, opts...),
 		PmsProductAttributeValue:            newPmsProductAttributeValue(db, opts...),
 		PmsProductBrand:                     newPmsProductBrand(db, opts...),
 		PmsProductCategory:                  newPmsProductCategory(db, opts...),
 		PmsProductCategoryAttributeRelation: newPmsProductCategoryAttributeRelation(db, opts...),
 		PmsProductFullReduction:             newPmsProductFullReduction(db, opts...),
 		PmsProductLadder:                    newPmsProductLadder(db, opts...),
-		PmsSkuStock:                         newPmsSkuStock(db, opts...),
+		PmsProductSku:                       newPmsProductSku(db, opts...),
+		PmsProductSpec:                      newPmsProductSpec(db, opts...),
+		PmsProductSpecValue:                 newPmsProductSpecValue(db, opts...),
+		PmsProductSpu:                       newPmsProductSpu(db, opts...),
 	}
 }
 
@@ -70,16 +76,18 @@ type Query struct {
 
 	PmsFeightTemplate                   pmsFeightTemplate
 	PmsMemberPrice                      pmsMemberPrice
-	PmsProduct                          pmsProduct
 	PmsProductAttribute                 pmsProductAttribute
-	PmsProductAttributeCategory         pmsProductAttributeCategory
+	PmsProductAttributeGroup            pmsProductAttributeGroup
 	PmsProductAttributeValue            pmsProductAttributeValue
 	PmsProductBrand                     pmsProductBrand
 	PmsProductCategory                  pmsProductCategory
 	PmsProductCategoryAttributeRelation pmsProductCategoryAttributeRelation
 	PmsProductFullReduction             pmsProductFullReduction
 	PmsProductLadder                    pmsProductLadder
-	PmsSkuStock                         pmsSkuStock
+	PmsProductSku                       pmsProductSku
+	PmsProductSpec                      pmsProductSpec
+	PmsProductSpecValue                 pmsProductSpecValue
+	PmsProductSpu                       pmsProductSpu
 }
 
 func (q *Query) Available() bool { return q.db != nil }
@@ -89,16 +97,18 @@ func (q *Query) clone(db *gorm.DB) *Query {
 		db:                                  db,
 		PmsFeightTemplate:                   q.PmsFeightTemplate.clone(db),
 		PmsMemberPrice:                      q.PmsMemberPrice.clone(db),
-		PmsProduct:                          q.PmsProduct.clone(db),
 		PmsProductAttribute:                 q.PmsProductAttribute.clone(db),
-		PmsProductAttributeCategory:         q.PmsProductAttributeCategory.clone(db),
+		PmsProductAttributeGroup:            q.PmsProductAttributeGroup.clone(db),
 		PmsProductAttributeValue:            q.PmsProductAttributeValue.clone(db),
 		PmsProductBrand:                     q.PmsProductBrand.clone(db),
 		PmsProductCategory:                  q.PmsProductCategory.clone(db),
 		PmsProductCategoryAttributeRelation: q.PmsProductCategoryAttributeRelation.clone(db),
 		PmsProductFullReduction:             q.PmsProductFullReduction.clone(db),
 		PmsProductLadder:                    q.PmsProductLadder.clone(db),
-		PmsSkuStock:                         q.PmsSkuStock.clone(db),
+		PmsProductSku:                       q.PmsProductSku.clone(db),
+		PmsProductSpec:                      q.PmsProductSpec.clone(db),
+		PmsProductSpecValue:                 q.PmsProductSpecValue.clone(db),
+		PmsProductSpu:                       q.PmsProductSpu.clone(db),
 	}
 }
 
@@ -115,48 +125,54 @@ func (q *Query) ReplaceDB(db *gorm.DB) *Query {
 		db:                                  db,
 		PmsFeightTemplate:                   q.PmsFeightTemplate.replaceDB(db),
 		PmsMemberPrice:                      q.PmsMemberPrice.replaceDB(db),
-		PmsProduct:                          q.PmsProduct.replaceDB(db),
 		PmsProductAttribute:                 q.PmsProductAttribute.replaceDB(db),
-		PmsProductAttributeCategory:         q.PmsProductAttributeCategory.replaceDB(db),
+		PmsProductAttributeGroup:            q.PmsProductAttributeGroup.replaceDB(db),
 		PmsProductAttributeValue:            q.PmsProductAttributeValue.replaceDB(db),
 		PmsProductBrand:                     q.PmsProductBrand.replaceDB(db),
 		PmsProductCategory:                  q.PmsProductCategory.replaceDB(db),
 		PmsProductCategoryAttributeRelation: q.PmsProductCategoryAttributeRelation.replaceDB(db),
 		PmsProductFullReduction:             q.PmsProductFullReduction.replaceDB(db),
 		PmsProductLadder:                    q.PmsProductLadder.replaceDB(db),
-		PmsSkuStock:                         q.PmsSkuStock.replaceDB(db),
+		PmsProductSku:                       q.PmsProductSku.replaceDB(db),
+		PmsProductSpec:                      q.PmsProductSpec.replaceDB(db),
+		PmsProductSpecValue:                 q.PmsProductSpecValue.replaceDB(db),
+		PmsProductSpu:                       q.PmsProductSpu.replaceDB(db),
 	}
 }
 
 type queryCtx struct {
 	PmsFeightTemplate                   IPmsFeightTemplateDo
 	PmsMemberPrice                      IPmsMemberPriceDo
-	PmsProduct                          IPmsProductDo
 	PmsProductAttribute                 IPmsProductAttributeDo
-	PmsProductAttributeCategory         IPmsProductAttributeCategoryDo
+	PmsProductAttributeGroup            IPmsProductAttributeGroupDo
 	PmsProductAttributeValue            IPmsProductAttributeValueDo
 	PmsProductBrand                     IPmsProductBrandDo
 	PmsProductCategory                  IPmsProductCategoryDo
 	PmsProductCategoryAttributeRelation IPmsProductCategoryAttributeRelationDo
 	PmsProductFullReduction             IPmsProductFullReductionDo
 	PmsProductLadder                    IPmsProductLadderDo
-	PmsSkuStock                         IPmsSkuStockDo
+	PmsProductSku                       IPmsProductSkuDo
+	PmsProductSpec                      IPmsProductSpecDo
+	PmsProductSpecValue                 IPmsProductSpecValueDo
+	PmsProductSpu                       IPmsProductSpuDo
 }
 
 func (q *Query) WithContext(ctx context.Context) *queryCtx {
 	return &queryCtx{
 		PmsFeightTemplate:                   q.PmsFeightTemplate.WithContext(ctx),
 		PmsMemberPrice:                      q.PmsMemberPrice.WithContext(ctx),
-		PmsProduct:                          q.PmsProduct.WithContext(ctx),
 		PmsProductAttribute:                 q.PmsProductAttribute.WithContext(ctx),
-		PmsProductAttributeCategory:         q.PmsProductAttributeCategory.WithContext(ctx),
+		PmsProductAttributeGroup:            q.PmsProductAttributeGroup.WithContext(ctx),
 		PmsProductAttributeValue:            q.PmsProductAttributeValue.WithContext(ctx),
 		PmsProductBrand:                     q.PmsProductBrand.WithContext(ctx),
 		PmsProductCategory:                  q.PmsProductCategory.WithContext(ctx),
 		PmsProductCategoryAttributeRelation: q.PmsProductCategoryAttributeRelation.WithContext(ctx),
 		PmsProductFullReduction:             q.PmsProductFullReduction.WithContext(ctx),
 		PmsProductLadder:                    q.PmsProductLadder.WithContext(ctx),
-		PmsSkuStock:                         q.PmsSkuStock.WithContext(ctx),
+		PmsProductSku:                       q.PmsProductSku.WithContext(ctx),
+		PmsProductSpec:                      q.PmsProductSpec.WithContext(ctx),
+		PmsProductSpecValue:                 q.PmsProductSpecValue.WithContext(ctx),
+		PmsProductSpu:                       q.PmsProductSpu.WithContext(ctx),
 	}
 }
 

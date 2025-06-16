@@ -34,7 +34,7 @@ func NewCartUpdateAttrLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Ca
 }
 
 // CartUpdateAttr 修改购物车中商品的规格
-func (l *CartUpdateAttrLogic) CartUpdateAttr(req *types.CartItemUpdateAttrReq) (resp *types.CartItemUpdateResp, err error) {
+func (l *CartUpdateAttrLogic) CartUpdateAttr(req *types.CartItemReq) (resp *types.CartItemResp, err error) {
 	memberId, err := common.GetMemberId(l.ctx)
 	if err != nil {
 		return nil, err
@@ -63,7 +63,7 @@ func (l *CartUpdateAttrLogic) CartUpdateAttr(req *types.CartItemUpdateAttrReq) (
 		return nil, errorx.NewDefaultError(s.Message())
 	}
 
-	return &types.CartItemUpdateResp{
+	return &types.CartItemResp{
 		Code:    0,
 		Message: "操作成功",
 	}, nil

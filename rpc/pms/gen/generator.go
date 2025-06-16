@@ -25,17 +25,23 @@ func main() {
 
 	g.ApplyBasic(
 		g.GenerateModel("pms_product_brand"),
+		g.GenerateModel("pms_product_category"),
+
+		g.GenerateModel("pms_product_attribute_group"),
+		g.GenerateModel("pms_product_attribute"),
+		g.GenerateModel("pms_product_attribute_value"),
+
+		g.GenerateModel("pms_product_spec"),
+		g.GenerateModel("pms_product_spec_value"),
+
+		g.GenerateModel("pms_product_spu"),
+		g.GenerateModel("pms_product_sku"),
+
 		g.GenerateModel("pms_feight_template"),
 		g.GenerateModel("pms_member_price"),
-		g.GenerateModel("pms_product"),
-		g.GenerateModel("pms_product_attribute"),
-		g.GenerateModel("pms_product_attribute_category"),
-		g.GenerateModel("pms_product_attribute_value"),
-		g.GenerateModel("pms_product_category"),
 		g.GenerateModel("pms_product_category_attribute_relation"),
 		g.GenerateModel("pms_product_full_reduction"),
 		g.GenerateModel("pms_product_ladder"),
-		g.GenerateModel("pms_sku_stock"),
 	)
 
 	// Execute the generator

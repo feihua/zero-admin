@@ -1,0 +1,175 @@
+syntax = "proto3";
+
+package main;
+
+option go_package = "./proto";
+
+// 添加商品SKU
+message AddProductSkuReq {
+  int64 spu_id = 1; //商品SpuId
+  string name = 2; //SKU名称
+  string sku_code = 3; //SKU编码
+  string main_pic = 4; //主图
+  string album_pics = 5; //图片集
+  float price = 6; //价格
+  float promotion_price = 7; //单品促销价格
+  string promotion_start_time = 8; //促销开始时间
+  string promotion_end_time = 9; //促销结束时间
+  int32 stock = 10; //库存
+  int32 low_stock = 11; //预警库存
+  string spec_data = 12; //规格数据
+  float weight = 13; //重量(kg)
+  int32 publish_status = 14; //上架状态：0-下架，1-上架
+  int32 verify_status = 15; //审核状态：0-未审核，1-审核通过，2-审核不通过
+  int32 sort = 16; //排序
+  int64 create_by = 17; //创建人ID
+}
+
+message AddProductSkuResp {
+  string pong = 1;
+}
+
+// 删除商品SKU
+message DeleteProductSkuReq {
+  repeated int64 ids = 1;
+}
+
+message DeleteProductSkuResp {
+  string pong = 1;
+}
+
+// 更新商品SKU
+message UpdateProductSkuReq {
+  repeated UpdateProductSkuData data = 1;
+}
+message UpdateProductSkuData {
+  int64 id = 1; //商品SpuId
+  int64 spu_id = 2; //商品SpuId
+  string name = 3; //SKU名称
+  string sku_code = 4; //SKU编码
+  string main_pic = 5; //主图
+  string album_pics = 6; //图片集
+  float price = 7; //价格
+  float promotion_price = 8; //单品促销价格
+  string promotion_start_time = 9; //促销开始时间
+  string promotion_end_time = 10; //促销结束时间
+  int32 stock = 11; //库存
+  int32 low_stock = 12; //预警库存
+  string spec_data = 13; //规格数据
+  float weight = 14; //重量(kg)
+  int32 publish_status = 15; //上架状态：0-下架，1-上架
+  int32 verify_status = 16; //审核状态：0-未审核，1-审核通过，2-审核不通过
+  int32 sort = 17; //排序
+  int64 update_by = 18; //更新人ID
+}
+
+message UpdateProductSkuResp {
+  string pong = 1;
+}
+
+// 查询商品SKU详情
+message QueryProductSkuDetailReq {
+  int64 id = 1;
+}
+
+message QueryProductSkuDetailResp {
+  int64 id = 1; //商品SpuId
+  int64 spu_id = 2; //商品SpuId
+  string name = 3; //SKU名称
+  string sku_code = 4; //SKU编码
+  string main_pic = 5; //主图
+  string album_pics = 6; //图片集
+  float price = 7; //价格
+  float promotion_price = 8; //单品促销价格
+  string promotion_start_time = 9; //促销开始时间
+  string promotion_end_time = 10; //促销结束时间
+  int32 stock = 11; //库存
+  int32 low_stock = 12; //预警库存
+  string spec_data = 13; //规格数据
+  float weight = 14; //重量(kg)
+  int32 publish_status = 15; //上架状态：0-下架，1-上架
+  int32 verify_status = 16; //审核状态：0-未审核，1-审核通过，2-审核不通过
+  int32 sort = 17; //排序
+  int32 sales = 18; //销量
+  int64 create_by = 19; //创建人ID
+  string create_time = 20; //创建时间
+  int64 update_by = 21; //更新人ID
+  string update_time = 22; //更新时间
+
+}
+
+// 分页查询商品SKU列表
+message QueryProductSkuListReq {
+  int64 spu_id = 1; //商品SpuId
+  string name = 2; //SKU名称
+  string sku_code = 3; //SKU编码
+  string promotion_start_time = 4; //促销开始时间
+  string promotion_end_time = 5; //促销结束时间
+  int32 publish_status = 6; //上架状态：0-下架，1-上架
+  int32 verify_status = 7; //审核状态：0-未审核，1-审核通过，2-审核不通过
+  int32 page_num = 8; //第几页
+  int32 page_size = 9; //每页的数量
+}
+
+message ProductSkuListData {
+  int64 id = 1; //商品SpuId
+  int64 spu_id = 2; //商品SpuId
+  string name = 3; //SKU名称
+  string sku_code = 4; //SKU编码
+  string main_pic = 5; //主图
+  string album_pics = 6; //图片集
+  float price = 7; //价格
+  float promotion_price = 8; //单品促销价格
+  string promotion_start_time = 9; //促销开始时间
+  string promotion_end_time = 10; //促销结束时间
+  int32 stock = 11; //库存
+  int32 low_stock = 12; //预警库存
+  string spec_data = 13; //规格数据
+  float weight = 14; //重量(kg)
+  int32 publish_status = 15; //上架状态：0-下架，1-上架
+  int32 verify_status = 16; //审核状态：0-未审核，1-审核通过，2-审核不通过
+  int32 sort = 17; //排序
+  int32 sales = 18; //销量
+  int64 create_by = 19; //创建人ID
+  string create_time = 20; //创建时间
+  int64 update_by = 21; //更新人ID
+  string update_time = 22; //更新时间
+
+}
+
+message QueryProductSkuListResp {
+  int64 total = 1;
+  repeated  ProductSkuListData list = 2;
+}
+
+message UpdateSkuStockReq {
+  repeated UpdateSkuStockData data = 1;
+}
+
+message UpdateSkuStockData {
+  int64    id = 1;
+  int32    product_quantity = 2;
+}
+message UpdateSkuStockLockResp {
+  string pong = 1;
+}
+
+// 商品SKU
+service ProductSkuService {
+  // 添加商品SKU
+  rpc AddProductSku(AddProductSkuReq) returns (AddProductSkuResp){}
+  // 删除商品SKU
+  rpc DeleteProductSku(DeleteProductSkuReq) returns (DeleteProductSkuResp){}
+  // 更新商品SKU
+  rpc UpdateProductSku(UpdateProductSkuReq) returns (UpdateProductSkuResp ){}
+  // 查询商品SKU详情
+  rpc QueryProductSkuDetail(QueryProductSkuDetailReq) returns (QueryProductSkuDetailResp){}
+  // 查询商品SKU列表
+  rpc QueryProductSkuList(QueryProductSkuListReq) returns (QueryProductSkuListResp){}
+
+  //取消订单的时候,释放库存
+  rpc ReleaseSkuStockLock(UpdateSkuStockReq) returns(UpdateSkuStockLockResp);
+  //下单的时候,锁定库存
+  rpc LockSkuStockLock(UpdateSkuStockReq) returns(UpdateSkuStockLockResp);
+
+}

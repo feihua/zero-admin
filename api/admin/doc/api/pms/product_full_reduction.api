@@ -1,0 +1,21 @@
+info (
+	desc:   "产品满减(只针对同商品)"
+	author: "LiuFeiHua"
+	email:  "1002219331@qq.com"
+)
+
+type (
+	// 添加或者更新产品满减(只针对同商品)请求参数
+	ProductFullReductionReq {
+		FullPrice   int64 `json:"fullPrice"` //商品满多少
+		ReducePrice int64 `json:"reducePrice"` //商品减多少
+	}
+	// 查询产品满减(只针对同商品)响应参数
+	ProductFullReductionResp {
+		Id          int64 `json:"id"` //
+		ProductId   int64 `json:"productId"` //商品id
+		FullPrice   int64 `json:"fullPrice"` //商品满多少
+		ReducePrice int64 `json:"reducePrice"` //商品减多少
+	}
+)
+

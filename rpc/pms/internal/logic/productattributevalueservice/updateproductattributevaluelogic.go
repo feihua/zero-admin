@@ -3,19 +3,20 @@ package productattributevalueservicelogic
 import (
 	"context"
 	"errors"
-	"fmt"
 	"github.com/feihua/zero-admin/rpc/pms/gen/model"
 	"github.com/feihua/zero-admin/rpc/pms/gen/query"
 	"github.com/feihua/zero-admin/rpc/pms/internal/svc"
 	"github.com/feihua/zero-admin/rpc/pms/pmsclient"
 	"github.com/zeromicro/go-zero/core/logc"
 	"github.com/zeromicro/go-zero/core/logx"
+	"gorm.io/gorm"
+	"time"
 )
 
-// UpdateProductAttributeValueLogic 更新存储产品参数信息的
+// UpdateProductAttributeValueLogic 更新商品属性值
 /*
 Author: LiuFeiHua
-Date: 2025/01/24 09:08:06
+Date: 2025/06/16 14:37:37
 */
 type UpdateProductAttributeValueLogic struct {
 	ctx    context.Context
@@ -31,31 +32,42 @@ func NewUpdateProductAttributeValueLogic(ctx context.Context, svcCtx *svc.Servic
 	}
 }
 
-// UpdateProductAttributeValue 更新存储产品参数信息
+// UpdateProductAttributeValue 更新商品属性值
 func (l *UpdateProductAttributeValueLogic) UpdateProductAttributeValue(in *pmsclient.UpdateProductAttributeValueReq) (*pmsclient.UpdateProductAttributeValueResp, error) {
-	q := query.PmsProductAttributeValue.WithContext(l.ctx)
+	value := query.PmsProductAttributeValue
+	q := value.WithContext(l.ctx)
 
-	// 1.根据存储产品参数信息的id查询存储产品参数信息的是否已存在
-	_, err := q.Where(query.PmsProductAttributeValue.ID.Eq(in.Id)).First()
+	// 1.根据商品属性值id查询商品属性值是否已存在
+	detail, err := q.Where(value.ID.Eq(in.Id)).First()
 
-	if err != nil {
-		logc.Errorf(l.ctx, "根据存储产品参数信息的id：%d,查询存储产品参数信息的失败,异常:%s", in.Id, err.Error())
-		return nil, errors.New(fmt.Sprintf("查询存储产品参数信息的失败"))
+	switch {
+	case errors.Is(err, gorm.ErrRecordNotFound):
+		logc.Errorf(l.ctx, "商品属性值不存在, 请求参数：%+v, 异常信息: %s", in, err.Error())
+		return nil, errors.New("商品属性值不存在")
+	case err != nil:
+		logc.Errorf(l.ctx, "查询商品属性值异常, 请求参数：%+v, 异常信息: %s", in, err.Error())
+		return nil, errors.New("查询商品属性值异常")
 	}
 
+	now := time.Now()
 	item := &model.PmsProductAttributeValue{
-		ID:                 in.Id,                 //
-		ProductID:          in.ProductId,          // 商品id
-		ProductAttributeID: in.ProductAttributeId, // 商品属性id
-		Value:              in.Value,              // 手动添加规格或参数的值，参数单值，规格有多个时以逗号隔开
+		ID:          in.Id,             // 主键id
+		SpuID:       in.SpuId,          // 商品SPU ID
+		AttributeID: in.AttributeId,    // 属性ID
+		Value:       in.Value,          // 属性值
+		Status:      in.Status,         // 状态：0->禁用；1->启用
+		CreateBy:    detail.CreateBy,   // 创建人ID
+		CreateTime:  detail.CreateTime, // 创建时间
+		UpdateBy:    &in.UpdateBy,      // 更新人ID
+		UpdateTime:  &now,              // 更新时间
 	}
 
-	// 2.存储产品参数信息的存在时,则直接更新存储产品参数信息的
-	_, err = q.Updates(item)
+	// 2.商品属性值存在时,则直接更新商品属性值
+	err = l.svcCtx.DB.Model(&model.PmsProductAttributeValue{}).WithContext(l.ctx).Where(value.ID.Eq(in.Id)).Save(item).Error
 
 	if err != nil {
-		logc.Errorf(l.ctx, "更新存储产品参数信息的失败,参数:%+v,异常:%s", item, err.Error())
-		return nil, errors.New("更新存储产品参数信息的失败")
+		logc.Errorf(l.ctx, "更新商品属性值失败,参数:%+v,异常:%s", item, err.Error())
+		return nil, errors.New("更新商品属性值失败")
 	}
 
 	return &pmsclient.UpdateProductAttributeValueResp{}, nil

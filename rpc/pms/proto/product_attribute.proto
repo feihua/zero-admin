@@ -4,28 +4,28 @@ package main;
 
 option go_package = "./proto";
 
-// 添加商品属性参数表
+// 添加商品属性
 message AddProductAttributeReq {
-  int64 id = 1; //
-  int64 product_attribute_category_id = 2; //商品属性分类id
-  string name = 3; //商品属性分类id
-  int32 select_type = 4; //属性选择类型：0->唯一；1->单选；2->多选
-  int32 input_type = 5; //属性录入方式：0->手工录入；1->从列表中选取
-  string input_list = 6; //可选值列表，以逗号隔开
-  int32 sort = 7; //排序字段：最高的可以单独上传图片
-  int32 filter_type = 8; //分类筛选样式：1->普通；1->颜色
-  int32 search_type = 9; //检索类型；0->不需要进行检索；1->关键字检索；2->范围检索
-  int32 related_status = 10; //相同属性产品是否关联；0->不关联；1->关联
-  int32 hand_add_status = 11; //是否支持手动新增；0->不支持；1->支持
-  int32 type = 12; //属性的类型；0->规格；1->参数
-
+  int64 id = 1; //主键id
+  int64 group_id = 2; //属性分组ID
+  string name = 3; //属性名称
+  int32 input_type = 4; //输入类型：1-手动输入，2-单选，3-多选
+  int32 value_type = 5; //值类型：1-文本，2-数字，3-日期
+  string input_list = 6; //可选值列表，用逗号分隔
+  string unit = 7; //单位
+  int32 is_required = 8; //是否必填
+  int32 is_searchable = 9; //是否支持搜索
+  int32 is_show = 10; //是否显示
+  int32 sort = 11; //排序
+  int32 status = 12; //状态：0->禁用；1->启用
+  int64 create_by = 13; //创建人ID
 }
 
 message AddProductAttributeResp {
   string pong = 1;
 }
 
-// 删除商品属性参数表
+// 删除商品属性
 message DeleteProductAttributeReq {
   repeated int64 ids = 1;
 }
@@ -34,31 +34,93 @@ message DeleteProductAttributeResp {
   string pong = 1;
 }
 
+// 更新商品属性
+message UpdateProductAttributeReq {
+  int64 id = 1; //主键id
+  int64 group_id = 2; //属性分组ID
+  string name = 3; //属性名称
+  int32 input_type = 4; //输入类型：1-手动输入，2-单选，3-多选
+  int32 value_type = 5; //值类型：1-文本，2-数字，3-日期
+  string input_list = 6; //可选值列表，用逗号分隔
+  string unit = 7; //单位
+  int32 is_required = 8; //是否必填
+  int32 is_searchable = 9; //是否支持搜索
+  int32 is_show = 10; //是否显示
+  int32 sort = 11; //排序
+  int32 status = 12; //状态：0->禁用；1->启用
+  int64 update_by = 13; //更新人ID
+}
 
+message UpdateProductAttributeResp {
+  string pong = 1;
+}
 
-// 分页查询商品属性参数表列表
-message QueryProductAttributeListReq {
-  int64 page_num = 1; //第几页
-  int64 page_size = 2; //每页的数量
-  string name = 3; //
-  int64 product_attribute_category_id = 4; //
-  int32 type = 5; //属性的类型；0->规格；1->参数
+// 更新商品属性状态
+message UpdateProductAttributeStatusReq {
+  repeated int64 ids = 1; //主键id
+  int32 status = 12; //状态：0->禁用；1->启用
+  int64 update_by = 15; //更新人ID
+}
+
+message UpdateProductAttributeStatusResp {
+  string pong = 1;
+}
+
+// 查询商品属性详情
+message QueryProductAttributeDetailReq {
+    int64 id = 1;
+}
+
+message QueryProductAttributeDetailResp {
+  int64 id = 1; //主键id
+  int64 group_id = 2; //属性分组ID
+  string name = 3; //属性名称
+  int32 input_type = 4; //输入类型：1-手动输入，2-单选，3-多选
+  int32 value_type = 5; //值类型：1-文本，2-数字，3-日期
+  string input_list = 6; //可选值列表，用逗号分隔
+  string unit = 7; //单位
+  int32 is_required = 8; //是否必填
+  int32 is_searchable = 9; //是否支持搜索
+  int32 is_show = 10; //是否显示
+  int32 sort = 11; //排序
+  int32 status = 12; //状态：0->禁用；1->启用
+  int64 create_by = 13; //创建人ID
+  string create_time = 14; //创建时间
+  int64 update_by = 15; //更新人ID
+  string update_time = 16; //更新时间
 
 }
 
+// 分页查询商品属性列表
+message QueryProductAttributeListReq {
+  int64 group_id = 1; //属性分组ID
+  string name = 2; //属性名称
+  int32 input_type = 3; //输入类型：1-手动输入，2-单选，3-多选
+  int32 is_required = 4; //是否必填
+  int32 is_searchable = 5; //是否支持搜索
+  int32 is_show = 6; //是否显示
+  int32 page_num = 7; //第几页
+  int32 page_size = 8; //每页的数量
+  int32 status = 9; //状态：0->禁用；1->启用
+}
+
 message ProductAttributeListData {
-  int64 id = 1; //
-  int64 product_attribute_category_id = 2; //商品属性分类id
-  string name = 3; //商品属性分类id
-  int32 select_type = 4; //属性选择类型：0->唯一；1->单选；2->多选
-  int32 input_type = 5; //属性录入方式：0->手工录入；1->从列表中选取
-  string input_list = 6; //可选值列表，以逗号隔开
-  int32 sort = 7; //排序字段：最高的可以单独上传图片
-  int32 filter_type = 8; //分类筛选样式：1->普通；1->颜色
-  int32 search_type = 9; //检索类型；0->不需要进行检索；1->关键字检索；2->范围检索
-  int32 related_status = 10; //相同属性产品是否关联；0->不关联；1->关联
-  int32 hand_add_status = 11; //是否支持手动新增；0->不支持；1->支持
-  int32 type = 12; //属性的类型；0->规格；1->参数
+  int64 id = 1; //主键id
+  int64 group_id = 2; //属性分组ID
+  string name = 3; //属性名称
+  int32 input_type = 4; //输入类型：1-手动输入，2-单选，3-多选
+  int32 value_type = 5; //值类型：1-文本，2-数字，3-日期
+  string input_list = 6; //可选值列表，用逗号分隔
+  string unit = 7; //单位
+  int32 is_required = 8; //是否必填
+  int32 is_searchable = 9; //是否支持搜索
+  int32 is_show = 10; //是否显示
+  int32 sort = 11; //排序
+  int32 status = 12; //状态：0->禁用；1->启用
+  int64 create_by = 13; //创建人ID
+  string create_time = 14; //创建时间
+  int64 update_by = 15; //更新人ID
+  string update_time = 16; //更新时间
 
 }
 
@@ -67,28 +129,20 @@ message QueryProductAttributeListResp {
   repeated  ProductAttributeListData list = 2;
 }
 
-message QueryByproductCategoryIdReq {
-  int64 ProductCategoryId = 1;
-}
-message QueryByproductCategoryIdData{
-  int64    AttributeId = 1;
-  int64    AttributeCategoryId = 2;
-
-}
-message QueryByproductCategoryIdResp {
-  repeated  QueryByproductCategoryIdData list = 1;
-}
-
-// 商品属性参数表
+// 商品属性
 service ProductAttributeService {
-  // 添加商品属性参数表
+  // 添加商品属性
   rpc AddProductAttribute(AddProductAttributeReq) returns (AddProductAttributeResp){}
-  // 删除商品属性参数表
+  // 删除商品属性
   rpc DeleteProductAttribute(DeleteProductAttributeReq) returns (DeleteProductAttributeResp){}
-  // 查询商品属性参数表列表
+  // 更新商品属性
+  rpc UpdateProductAttribute(UpdateProductAttributeReq) returns (UpdateProductAttributeResp ){}
+  // 更新商品属性状态
+  rpc UpdateProductAttributeStatus(UpdateProductAttributeStatusReq) returns (UpdateProductAttributeStatusResp ){}
+  // 查询商品属性详情
+   rpc QueryProductAttributeDetail(QueryProductAttributeDetailReq) returns (QueryProductAttributeDetailResp){}
+  // 查询商品属性列表
   rpc QueryProductAttributeList(QueryProductAttributeListReq) returns (QueryProductAttributeListResp){}
 
-  //根据商品分类的id获取商品属性及属性分类
-  rpc QueryByproductCategoryId(QueryByproductCategoryIdReq) returns(QueryByproductCategoryIdResp);
 
 }

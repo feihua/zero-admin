@@ -33,7 +33,7 @@ func NewUpdateMemberAddressLogic(ctx context.Context, svcCtx *svc.ServiceContext
 }
 
 // UpdateMemberAddress 更新会员收货地址
-func (l *UpdateMemberAddressLogic) UpdateMemberAddress(req *types.UpdateMemberAddressReq) (resp *types.UpdateMemberAddressResp, err error) {
+func (l *UpdateMemberAddressLogic) UpdateMemberAddress(req *types.MemberAddressReq) (resp *types.MemberAddressResp, err error) {
 
 	memberId, err := common.GetMemberId(l.ctx)
 	if err != nil {
@@ -59,7 +59,7 @@ func (l *UpdateMemberAddressLogic) UpdateMemberAddress(req *types.UpdateMemberAd
 		return nil, errorx.NewDefaultError(s.Message())
 	}
 
-	return &types.UpdateMemberAddressResp{
+	return &types.MemberAddressResp{
 		Code:    0,
 		Message: "更新会员收货地址成功",
 	}, nil

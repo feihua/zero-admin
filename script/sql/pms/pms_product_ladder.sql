@@ -1,3 +1,4 @@
+drop table if exists pms_product_ladder;
 create table pms_product_ladder
 (
     id         bigint auto_increment

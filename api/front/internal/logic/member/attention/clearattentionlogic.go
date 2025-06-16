@@ -34,7 +34,7 @@ func NewClearAttentionLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Cl
 }
 
 // ClearAttention 清空当前用户品牌关注列表
-func (l *ClearAttentionLogic) ClearAttention() (resp *types.DeleteAttentionResp, err error) {
+func (l *ClearAttentionLogic) ClearAttention() (resp *types.AttentionResp, err error) {
 	memberId, err := common.GetMemberId(l.ctx)
 	if err != nil {
 		return nil, err
@@ -49,7 +49,7 @@ func (l *ClearAttentionLogic) ClearAttention() (resp *types.DeleteAttentionResp,
 		return nil, errorx.NewDefaultError(s.Message())
 	}
 
-	return &types.DeleteAttentionResp{
+	return &types.AttentionResp{
 		Code:    0,
 		Message: "操作成功",
 	}, nil

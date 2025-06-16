@@ -34,7 +34,7 @@ func NewCartUpdateQuantityLogic(ctx context.Context, svcCtx *svc.ServiceContext)
 }
 
 // CartUpdateQuantity 修改购物车中某个商品的数量
-func (l *CartUpdateQuantityLogic) CartUpdateQuantity(req *types.CartItemUpdateQuantityReq) (resp *types.CartItemUpdateResp, err error) {
+func (l *CartUpdateQuantityLogic) CartUpdateQuantity(req *types.CartItemUpdateQuantityReq) (resp *types.CartItemResp, err error) {
 	memberId, err := common.GetMemberId(l.ctx)
 	if err != nil {
 		return nil, err
@@ -47,7 +47,7 @@ func (l *CartUpdateQuantityLogic) CartUpdateQuantity(req *types.CartItemUpdateQu
 		return nil, errorx.NewDefaultError(s.Message())
 	}
 
-	return &types.CartItemUpdateResp{
+	return &types.CartItemResp{
 		Code:    0,
 		Message: "操作成功",
 	}, nil

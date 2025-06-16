@@ -1,0 +1,114 @@
+syntax = "proto3";
+
+package main;
+
+option go_package = "./proto";
+
+// 添加商品规格值
+message AddProductSpecValueReq {
+  int64 spec_id = 1; //规格ID
+  string value = 2; //规格值
+  int32 sort = 3; //排序
+  int32 status = 4; //状态：0->禁用；1->启用
+  int64 create_by = 5; //创建人ID
+}
+
+message AddProductSpecValueResp {
+  string pong = 1;
+}
+
+// 删除商品规格值
+message DeleteProductSpecValueReq {
+  repeated int64 ids = 1;
+}
+
+message DeleteProductSpecValueResp {
+  string pong = 1;
+}
+
+// 更新商品规格值
+message UpdateProductSpecValueReq {
+  int64 id = 1; //
+  int64 spec_id = 2; //规格ID
+  string value = 3; //规格值
+  int32 sort = 4; //排序
+  int32 status = 5; //状态：0->禁用；1->启用
+  int64 update_by = 8; //更新人ID
+}
+
+message UpdateProductSpecValueResp {
+  string pong = 1;
+}
+
+// 更新商品规格值状态
+message UpdateProductSpecValueStatusReq {
+  repeated int64 ids = 1; //
+  int32 status = 5; //状态：0->禁用；1->启用
+  int64 update_by = 8; //更新人ID
+}
+
+message UpdateProductSpecValueStatusResp {
+  string pong = 1;
+}
+
+// 查询商品规格值详情
+message QueryProductSpecValueDetailReq {
+    int64 id = 1;
+}
+
+message QueryProductSpecValueDetailResp {
+  int64 id = 1; //
+  int64 spec_id = 2; //规格ID
+  string value = 3; //规格值
+  int32 sort = 4; //排序
+  int32 status = 5; //状态：0->禁用；1->启用
+  int64 create_by = 6; //创建人ID
+  string create_time = 7; //创建时间
+  int64 update_by = 8; //更新人ID
+  string update_time = 9; //更新时间
+
+}
+
+// 分页查询商品规格值列表
+message QueryProductSpecValueListReq {
+  int64 spec_id = 1; //规格ID
+  int32 status = 2; //状态：0->禁用；1->启用
+  int32 page_num = 3; //第几页
+  int32 page_size = 4; //每页的数量
+}
+
+message ProductSpecValueListData {
+  int64 id = 1; //
+  int64 spec_id = 2; //规格ID
+  string value = 3; //规格值
+  int32 sort = 4; //排序
+  int32 status = 5; //状态：0->禁用；1->启用
+  int64 create_by = 6; //创建人ID
+  string create_time = 7; //创建时间
+  int64 update_by = 8; //更新人ID
+  string update_time = 9; //更新时间
+
+}
+
+message QueryProductSpecValueListResp {
+  int64 total = 1;
+  repeated  ProductSpecValueListData list = 2;
+}
+
+// 商品规格值
+service ProductSpecValueService {
+  // 添加商品规格值
+  rpc AddProductSpecValue(AddProductSpecValueReq) returns (AddProductSpecValueResp){}
+  // 删除商品规格值
+  rpc DeleteProductSpecValue(DeleteProductSpecValueReq) returns (DeleteProductSpecValueResp){}
+  // 更新商品规格值
+  rpc UpdateProductSpecValue(UpdateProductSpecValueReq) returns (UpdateProductSpecValueResp ){}
+  // 更新商品规格值状态
+  rpc UpdateProductSpecValueStatus(UpdateProductSpecValueStatusReq) returns (UpdateProductSpecValueStatusResp ){}
+  // 查询商品规格值详情
+   rpc QueryProductSpecValueDetail(QueryProductSpecValueDetailReq) returns (QueryProductSpecValueDetailResp){}
+  // 查询商品规格值列表
+  rpc QueryProductSpecValueList(QueryProductSpecValueListReq) returns (QueryProductSpecValueListResp){}
+
+
+}

@@ -34,7 +34,7 @@ func NewDeleteAttentionLogic(ctx context.Context, svcCtx *svc.ServiceContext) *D
 }
 
 // DeleteAttention //取消品牌关注
-func (l *DeleteAttentionLogic) DeleteAttention(req *types.DeleteAttentionReq) (resp *types.DeleteAttentionResp, err error) {
+func (l *DeleteAttentionLogic) DeleteAttention(req *types.DeleteAttentionReq) (resp *types.AttentionResp, err error) {
 	memberId, err := common.GetMemberId(l.ctx)
 	if err != nil {
 		return nil, err
@@ -50,7 +50,7 @@ func (l *DeleteAttentionLogic) DeleteAttention(req *types.DeleteAttentionReq) (r
 		return nil, errorx.NewDefaultError(s.Message())
 	}
 
-	return &types.DeleteAttentionResp{
+	return &types.AttentionResp{
 		Code:    0,
 		Message: "操作成功",
 	}, nil

@@ -4,703 +4,28 @@ package pmsclient;
 
 option go_package = "./pmsclient";
 
-// 添加商品评价
-message AddCommentReq {
-  int32 replay_count = 1; //回复数量
-  int64 product_id = 2; //商品id
-  string member_nick_name = 3; //评价者昵称
-  string product_name = 4; //商品名称
-  int32 star = 5; //评价星数：0->5
-  string member_ip = 6; //评价的ip
-  int32 show_status = 8; //是否显示，0-不显示，1-显示
-  string product_attribute = 9; //购买时的商品属性
-  int32 collect_count = 10; //点赞数
-  int32 read_count = 11; //阅读数
-  string content = 12; //内容
-  string pics = 13; //上传图片地址，以逗号隔开
-  string member_icon = 14; //评论用户头像
-
-}
-
-message AddCommentResp {
-  string pong = 1;
-}
-
-// 删除商品评价
-message DeleteCommentReq {
-  string id = 1;
-}
-
-message DeleteCommentResp {
-  string pong = 1;
-}
-
-// 更新商品评价
-message UpdateCommentReq {
-  string id = 1; //
-  int64 product_id = 2; //商品id
-  string member_nick_name = 3; //评价者昵称
-  string product_name = 4; //商品名称
-  int32 star = 5; //评价星数：0->5
-  string member_ip = 6; //评价的ip
-  int32 show_status = 8; //是否显示，0-不显示，1-显示
-  string product_attribute = 9; //购买时的商品属性
-  int32 collect_count = 10; //点赞数
-  int32 read_count = 11; //阅读数
-  string content = 12; //内容
-  string pics = 13; //上传图片地址，以逗号隔开
-  string member_icon = 14; //评论用户头像
-  int32 replay_count = 15; //回复数量
-}
-
-message UpdateCommentResp {
-  string pong = 1;
-}
-
-
-// 查询商品评价详情
-message QueryCommentDetailReq {
-  string id = 1;
-}
-
-message QueryCommentDetailResp {
-  string id = 1; //
-  int64 product_id = 2; //商品id
-  string member_nick_name = 3; //评价者昵称
-  string product_name = 4; //商品名称
-  int32 star = 5; //评价星数：0->5
-  string member_ip = 6; //评价的ip
-  string create_time = 7; //评价时间
-  int32 show_status = 8; //是否显示，0-不显示，1-显示
-  string product_attribute = 9; //购买时的商品属性
-  int32 collect_count = 10; //点赞数
-  int32 read_count = 11; //阅读数
-  string content = 12; //内容
-  string pics = 13; //上传图片地址，以逗号隔开
-  string member_icon = 14; //评论用户头像
-  int32 replay_count = 15; //回复数量
-
-}
-
-// 分页查询商品评价列表
-message QueryCommentListReq {
-  int64 page_num = 1; //第几页
-  int64 page_size = 2; //每页的数量
-  int64 product_id = 3;
-}
-
-message CommentListData {
-  string id = 1; //
-  int64 product_id = 2; //商品id
-  string member_nick_name = 3; //评价者昵称
-  string product_name = 4; //商品名称
-  int32 star = 5; //评价星数：0->5
-  string member_ip = 6; //评价的ip
-  string create_time = 7; //评价时间
-  int32 show_status = 8; //是否显示，0-不显示，1-显示
-  string product_attribute = 9; //购买时的商品属性
-  int32 collect_count = 10; //点赞数
-  int32 read_count = 11; //阅读数
-  string content = 12; //内容
-  string pics = 13; //上传图片地址，以逗号隔开
-  string member_icon = 14; //评论用户头像
-  int32 replay_count = 15; //回复数量
-
-}
-
-message QueryCommentListResp {
-  int64 total = 1;
-  repeated  CommentListData list = 2;
-}
-
-// 商品评价
-service CommentService {
-  // 添加商品评价
-  rpc AddComment(AddCommentReq) returns (AddCommentResp){}
-  // 删除商品评价
-  rpc DeleteComment(DeleteCommentReq) returns (DeleteCommentResp){}
-  // 更新商品评价
-  rpc UpdateComment(UpdateCommentReq) returns (UpdateCommentResp ){}
-  // 查询商品评价详情
-  rpc QueryCommentDetail(QueryCommentDetailReq) returns (QueryCommentDetailResp){}
-  // 查询商品评价列表
-  rpc QueryCommentList(QueryCommentListReq) returns (QueryCommentListResp){}
-
-
-}
-
-
-// 添加产品评价回复
-message AddCommentReplayReq {
-  int32 type = 1; //评论人员类型；0->会员；1->管理员
-  int64 comment_id = 2; //评论id
-  string member_nick_name = 3; //评论人员昵称
-  string member_icon = 4; //评论人员头像
-  string content = 5; //内容
-
-}
-
-message AddCommentReplayResp {
-  string pong = 1;
-}
-
-// 删除产品评价回复
-message DeleteCommentReplayReq {
-  string id = 1;
-}
-
-message DeleteCommentReplayResp {
-  string pong = 1;
-}
-
-// 更新产品评价回复
-message UpdateCommentReplayReq {
-  string id = 1; //
-  int64 comment_id = 2; //评论id
-  string member_nick_name = 3; //评论人员昵称
-  string member_icon = 4; //评论人员头像
-  string content = 5; //内容
-  int32 type = 7; //评论人员类型；0->会员；1->管理员
-}
-
-message UpdateCommentReplayResp {
-  string pong = 1;
-}
-
-// 查询产品评价回复详情
-message QueryCommentReplayDetailReq {
-  string id = 1;
-}
-
-message QueryCommentReplayDetailResp {
-  string id = 1; //
-  int64 comment_id = 2; //评论id
-  string member_nick_name = 3; //评论人员昵称
-  string member_icon = 4; //评论人员头像
-  string content = 5; //内容
-  string create_time = 6; //评论时间
-  int32 type = 7; //评论人员类型；0->会员；1->管理员
-
-}
-
-// 分页查询产品评价回复列表
-message QueryCommentReplayListReq {
-  int64 page_num = 1; //第几页
-  int64 page_size = 2; //每页的数量
-  int64 comment_id = 3; //
-}
-
-message CommentReplayListData {
-  string id = 1; //
-  int64 comment_id = 2; //评论id
-  string member_nick_name = 3; //评论人员昵称
-  string member_icon = 4; //评论人员头像
-  string content = 5; //内容
-  string create_time = 6; //评论时间
-  int32 type = 7; //评论人员类型；0->会员；1->管理员
-
-}
-
-message QueryCommentReplayListResp {
-  int64 total = 1;
-  repeated  CommentReplayListData list = 2;
-}
-
-// 产品评价回复
-service CommentReplayService {
-  // 添加产品评价回复
-  rpc AddCommentReplay(AddCommentReplayReq) returns (AddCommentReplayResp){}
-  // 删除产品评价回复
-  rpc DeleteCommentReplay(DeleteCommentReplayReq) returns (DeleteCommentReplayResp){}
-  // 更新产品评价回复
-  rpc UpdateCommentReplay(UpdateCommentReplayReq) returns (UpdateCommentReplayResp ){}
-  // 查询产品评价回复详情
-  rpc QueryCommentReplayDetail(QueryCommentReplayDetailReq) returns (QueryCommentReplayDetailResp){}
-  // 查询产品评价回复列表
-  rpc QueryCommentReplayList(QueryCommentReplayListReq) returns (QueryCommentReplayListResp){}
-
-
-}
-
-
-// 添加运费模版
-message AddFeightTemplateReq {
-  int64 id = 1; //
-  string name = 2; //运费模版名称
-  int32 charge_type = 3; //计费类型:0->按重量；1->按件数
-  int64 first_weight = 4; //首重kg
-  int64 first_fee = 5; //首费（元）
-  int64 continue_weight = 6; //续重kg
-  int64 continue_fee = 7; //续费（元）
-  string dest = 8; //目的地（省、市）
-
-}
-
-message AddFeightTemplateResp {
-  string pong = 1;
-}
-
-// 删除运费模版
-message DeleteFeightTemplateReq {
-  repeated int64 ids = 1;
-}
-
-message DeleteFeightTemplateResp {
-  string pong = 1;
-}
-
-// 更新运费模版
-message UpdateFeightTemplateReq {
-  int64 id = 1; //
-  string name = 2; //运费模版名称
-  int32 charge_type = 3; //计费类型:0->按重量；1->按件数
-  int64 first_weight = 4; //首重kg
-  int64 first_fee = 5; //首费（元）
-  int64 continue_weight = 6; //续重kg
-  int64 continue_fee = 7; //续费（元）
-  string dest = 8; //目的地（省、市）
-
-}
-
-message UpdateFeightTemplateResp {
-  string pong = 1;
-}
-
-
-// 查询运费模版详情
-message QueryFeightTemplateDetailReq {
-    int64 id = 1;
-}
-
-message QueryFeightTemplateDetailResp {
-  int64 id = 1; //
-  string name = 2; //运费模版名称
-  int32 charge_type = 3; //计费类型:0->按重量；1->按件数
-  int64 first_weight = 4; //首重kg
-  int64 first_fee = 5; //首费（元）
-  int64 continue_weight = 6; //续重kg
-  int64 continue_fee = 7; //续费（元）
-  string dest = 8; //目的地（省、市）
-}
-
-// 分页查询运费模版列表
-message QueryFeightTemplateListReq {
- int64 page_num = 1; //第几页
-  int64 page_size = 2; //每页的数量
-}
-
-message FeightTemplateListData {
-  int64 id = 1; //
-  string name = 2; //运费模版名称
-  int32 charge_type = 3; //计费类型:0->按重量；1->按件数
-  int64 first_weight = 4; //首重kg
-  int64 first_fee = 5; //首费（元）
-  int64 continue_weight = 6; //续重kg
-  int64 continue_fee = 7; //续费（元）
-  string dest = 8; //目的地（省、市）
-
-}
-
-message QueryFeightTemplateListResp {
-  int64 total = 1;
-  repeated  FeightTemplateListData list = 2;
-}
-
-// 运费模版
-service FeightTemplateService {
-  // 添加运费模版
-  rpc AddFeightTemplate(AddFeightTemplateReq) returns (AddFeightTemplateResp){}
-  // 删除运费模版
-  rpc DeleteFeightTemplate(DeleteFeightTemplateReq) returns (DeleteFeightTemplateResp){}
-  // 更新运费模版
-  rpc UpdateFeightTemplate(UpdateFeightTemplateReq) returns (UpdateFeightTemplateResp ){}
-  // 查询运费模版详情
-   rpc QueryFeightTemplateDetail(QueryFeightTemplateDetailReq) returns (QueryFeightTemplateDetailResp){}
-  // 查询运费模版列表
-  rpc QueryFeightTemplateList(QueryFeightTemplateListReq) returns (QueryFeightTemplateListResp){}
-
-
-}
-
-
-
-message MemberPriceList {
-  int64    MemberLevelId = 1;
-  int64  MemberPrice = 2;
-  string    MemberLevelName = 3;
-}
-message ProductAttributeValueList {
-  int64    ProductAttributeId = 1;
-  string  AttributeValues = 2;
-}
-message ProductFullReductionList {
-  int64  FullPrice = 1;
-  int64  ReducePrice = 2;
-}
-message ProductLadderList {
-  int32    Count = 2;
-  int64  Discount = 3;
-  int64  Price = 4;
-}
-message SkuStockList {
-  string    SkuCode = 1;
-  int64  Price = 2;
-  int32    Stock = 3;
-  int32    LowStock = 4;
-  string    Pic = 5;
-  int32    Sale = 6;
-  int64  PromotionPrice = 7;
-  int32    LockStock = 8;
-  string    SpData = 9;
-}
-message AddProductReq {
-  int64 id = 1; //
-  int64 brand_id = 2; //品牌id
-  int64 product_category_id = 3; //商品分类id
-  int64 feight_template_id = 4; //商品运费模板id
-  int64 product_attribute_category_id = 5; //商品属性分类id
-  string name = 6; //商品名称
-  string pic = 7; //商品图片
-  string product_sn = 8; //货号
-  int32 delete_status = 9; //删除状态：0->未删除；1->已删除
-  int32 publish_status = 10; //上架状态：0->下架；1->上架
-  int32 new_status = 11; //新品状态:0->不是新品；1->新品
-  int32 recommand_status = 12; //推荐状态；0->不推荐；1->推荐
-  int32 verify_status = 13; //审核状态：0->未审核；1->审核通过
-  int32 sort = 14; //排序
-  int32 sale = 15; //销量
-  int64 price = 16; //商品价格
-  int64 promotion_price = 17; //促销价格
-  int32 gift_growth = 18; //赠送的成长值
-  int32 gift_point = 19; //赠送的积分
-  int32 use_point_limit = 20; //限制使用的积分数
-  string sub_title = 21; //副标题
-  string description = 22; //商品描述
-  int64 original_price = 23; //市场价
-  int32 stock = 24; //库存
-  int32 low_stock = 25; //库存预警值
-  string unit = 26; //单位
-  int64 weight = 27; //商品重量，默认为克
-  int32 preview_status = 28; //是否为预告商品：0->不是；1->是
-  string service_ids = 29; //以逗号分割的产品服务：1->无忧退货；2->快速退款；3->免费包邮
-  string keywords = 30; //搜索关键字
-  string note = 31; //备注
-  string album_pics = 32; //画册图片，连产品图片限制为5张，以逗号分割
-  string detail_title = 33; //详情标题
-  string detail_desc = 34; //详情描述
-  string detail_html = 35; //产品详情网页内容
-  string detail_mobile_html = 36; //移动端网页详情
-  string promotion_start_time = 37; //促销开始时间
-  string promotion_end_time = 38; //促销结束时间
-  int32 promotion_per_limit = 39; //活动限购数量
-  int32 promotion_type = 40; //促销类型：0->没有促销使用原价;1->使用促销价；2->使用会员价；3->使用阶梯价格；4->使用满减价格；5->限时购
-  string brand_name = 41; //品牌名称
-  string product_category_name = 42; //商品分类名称
-  string product_category_id_array = 43; //商品分类id字符串
-  repeated MemberPriceList      MemberPriceList = 44;
-  repeated ProductAttributeValueList      ProductAttributeValueList = 45;
-  repeated ProductFullReductionList      ProductFullReductionList = 46;
-  repeated ProductLadderList      ProductLadderList = 47;
-  repeated SkuStockList      SkuStockList = 48;
-}
-
-message AddProductResp {
-  int64 productId = 1;
-}
-
-message QueryProductListReq {
-  int64 current = 1;
-  int64 pageSize = 2;
-  string Name = 3;
-  int32  VerifyStatus = 4;
-  int64  ProductCategoryId = 5;
-  int32       PublishStatus = 6;
-  int64       BrandId = 7;
-  string ProductSn = 8;
-  int32 recommend_status = 9; //推荐状态；0->不推荐；1->推荐
-  int32 new_status = 10; //新品状态:0->不是新品；1->新品
-}
-
-message QueryProductByIdsReq {
-  repeated int64  Ids = 1;
-}
-
-message ProductListData{
-  int64 id = 1; //
-  int64 brand_id = 2; //品牌id
-  int64 product_category_id = 3; //商品分类id
-  int64 feight_template_id = 4; //商品运费模板id
-  int64 product_attribute_category_id = 5; //商品属性分类id
-  string name = 6; //商品名称
-  string pic = 7; //商品图片
-  string product_sn = 8; //货号
-  int32 delete_status = 9; //删除状态：0->未删除；1->已删除
-  int32 publish_status = 10; //上架状态：0->下架；1->上架
-  int32 new_status = 11; //新品状态:0->不是新品；1->新品
-  int32 recommand_status = 12; //推荐状态；0->不推荐；1->推荐
-  int32 verify_status = 13; //审核状态：0->未审核；1->审核通过
-  int32 sort = 14; //排序
-  int32 sale = 15; //销量
-  int64 price = 16; //商品价格
-  int64 promotion_price = 17; //促销价格
-  int32 gift_growth = 18; //赠送的成长值
-  int32 gift_point = 19; //赠送的积分
-  int32 use_point_limit = 20; //限制使用的积分数
-  string sub_title = 21; //副标题
-  string description = 22; //商品描述
-  int64 original_price = 23; //市场价
-  int32 stock = 24; //库存
-  int32 low_stock = 25; //库存预警值
-  string unit = 26; //单位
-  int64 weight = 27; //商品重量，默认为克
-  int32 preview_status = 28; //是否为预告商品：0->不是；1->是
-  string service_ids = 29; //以逗号分割的产品服务：1->无忧退货；2->快速退款；3->免费包邮
-  string keywords = 30; //搜索关键字
-  string note = 31; //备注
-  string album_pics = 32; //画册图片，连产品图片限制为5张，以逗号分割
-  string detail_title = 33; //详情标题
-  string detail_desc = 34; //详情描述
-  string detail_html = 35; //产品详情网页内容
-  string detail_mobile_html = 36; //移动端网页详情
-  string promotion_start_time = 37; //促销开始时间
-  string promotion_end_time = 38; //促销结束时间
-  int32 promotion_per_limit = 39; //活动限购数量
-  int32 promotion_type = 40; //促销类型：0->没有促销使用原价;1->使用促销价；2->使用会员价；3->使用阶梯价格；4->使用满减价格；5->限时购
-  string brand_name = 41; //品牌名称
-  string product_category_name = 42; //商品分类名称
-  string product_category_id_array = 43; //商品分类id字符串
-
-}
-
-message QueryProductListResp {
-  int64 total = 1;
-  repeated  ProductListData list = 2;
-}
-
-message UpdateProductReq {
-  int64 id = 1; //
-  int64 brand_id = 2; //品牌id
-  int64 product_category_id = 3; //商品分类id
-  int64 feight_template_id = 4; //商品运费模板id
-  int64 product_attribute_category_id = 5; //商品属性分类id
-  string name = 6; //商品名称
-  string pic = 7; //商品图片
-  string product_sn = 8; //货号
-  int32 delete_status = 9; //删除状态：0->未删除；1->已删除
-  int32 publish_status = 10; //上架状态：0->下架；1->上架
-  int32 new_status = 11; //新品状态:0->不是新品；1->新品
-  int32 recommand_status = 12; //推荐状态；0->不推荐；1->推荐
-  int32 verify_status = 13; //审核状态：0->未审核；1->审核通过
-  int32 sort = 14; //排序
-  int32 sale = 15; //销量
-  int64 price = 16; //商品价格
-  int64 promotion_price = 17; //促销价格
-  int32 gift_growth = 18; //赠送的成长值
-  int32 gift_point = 19; //赠送的积分
-  int32 use_point_limit = 20; //限制使用的积分数
-  string sub_title = 21; //副标题
-  string description = 22; //商品描述
-  int64 original_price = 23; //市场价
-  int32 stock = 24; //库存
-  int32 low_stock = 25; //库存预警值
-  string unit = 26; //单位
-  int64 weight = 27; //商品重量，默认为克
-  int32 preview_status = 28; //是否为预告商品：0->不是；1->是
-  string service_ids = 29; //以逗号分割的产品服务：1->无忧退货；2->快速退款；3->免费包邮
-  string keywords = 30; //搜索关键字
-  string note = 31; //备注
-  string album_pics = 32; //画册图片，连产品图片限制为5张，以逗号分割
-  string detail_title = 33; //详情标题
-  string detail_desc = 34; //详情描述
-  string detail_html = 35; //产品详情网页内容
-  string detail_mobile_html = 36; //移动端网页详情
-  string promotion_start_time = 37; //促销开始时间
-  string promotion_end_time = 38; //促销结束时间
-  int32 promotion_per_limit = 39; //活动限购数量
-  int32 promotion_type = 40; //促销类型：0->没有促销使用原价;1->使用促销价；2->使用会员价；3->使用阶梯价格；4->使用满减价格；5->限时购
-  string brand_name = 41; //品牌名称
-  string product_category_name = 42; //商品分类名称
-  string product_category_id_array = 43; //商品分类id字符串
-  repeated MemberPriceList      MemberPriceList = 44;
-  repeated ProductAttributeValueList      ProductAttributeValueList = 45;
-  repeated ProductFullReductionList      ProductFullReductionList = 46;
-  repeated ProductLadderList      ProductLadderList = 47;
-  repeated SkuStockList      SkuStockList = 48;
-}
-
-message UpdateProductResp {
-  string pong = 1;
-}
-
-message DeleteProductReq {
-  repeated int64 ids = 1;
-}
-
-message DeleteProductResp {
-  string pong = 1;
-}
-
-message QueryProductDetailByIdReq {
-  int64 id = 1;
-}
-
-message BrandData {
-  int64 id = 1; //
-  string name = 2; //品牌名称
-  string logo = 3; //品牌logo
-  string big_pic = 4; //专区大图
-  string description = 5; //描述
-  string first_letter = 6; //首字母
-  int32 sort = 7; //排序
-  int32 recommend_status = 8; //推荐状态
-  int32 product_count = 9; //产品数量
-  int32 product_comment_count = 10; //产品评论数量
-  int32 is_enabled = 11; //是否启用
-  int64 create_by = 12; //创建人ID
-  string create_time = 13; //创建时间
-  int64 update_by = 14; //更新人ID
-  string update_time = 15; //更新时间
-
-}
-message ProductAttributeDataList {
-  int64 id = 1; //
-  int64 product_attribute_category_id = 2; //商品属性分类id
-  string name = 3; //商品属性分类id
-  int32 select_type = 4; //属性选择类型：0->唯一；1->单选；2->多选
-  int32 input_type = 5; //属性录入方式：0->手工录入；1->从列表中选取
-  string input_list = 6; //可选值列表，以逗号隔开
-  int32 sort = 7; //排序字段：最高的可以单独上传图片
-  int32 filter_type = 8; //分类筛选样式：1->普通；1->颜色
-  int32 search_type = 9; //检索类型；0->不需要进行检索；1->关键字检索；2->范围检索
-  int32 related_status = 10; //相同属性产品是否关联；0->不关联；1->关联
-  int32 hand_add_status = 11; //是否支持手动新增；0->不支持；1->支持
-  int32 type = 12; //属性的类型；0->规格；1->参数
-
-}
-message ProductAttributeValueData {
-  int64 id = 1; //
-  int64 product_attribute_id = 2; //
-  int64 product_id = 3; //
-  string value = 4; //手动添加规格或参数的值，参数单值，规格有多个时以逗号隔开
-
-}
-message SkuStockData {
-  int64 id = 1; //
-  int64 product_id = 2; //商品id
-  string sku_code = 3; //sku编码
-  int64 price = 4; //价格
-  int32 stock = 5; //库存
-  int32 low_stock = 6; //预警库存
-  string pic = 7; //展示图片
-  int32 sale = 8; //销量
-  int64 promotion_price = 9; //单品促销价格
-  int32 lock_stock = 10; //锁定库存
-  string sp_data = 11; //商品销售属性，json格式
-
-
-}
-message ProductLadderData {
-  int64 id = 1; //
-  int64 product_id = 2; //商品id
-  int32 count = 3; //满足的商品数量
-  int64 discount = 4; //折扣
-  int64 price = 5; //折后价格
-
-}
-message ProductFullReductionData {
-  int64 id = 1; //
-  int64 product_id = 2; //商品id
-  int64 full_price = 3; //商品满多少
-  int64 reduce_price = 4; //商品减多少
-
-}
-message MemberPriceListData {
-  int64 id = 1; //
-  int64 product_id = 2; //商品id
-  int64 member_level_id = 3; //会员等级id
-  int64 member_price = 4; //会员价格
-  string member_level_name = 5; //会员等级名称
-
-}
-
-message QueryProductDetailByIdResp{
-  ProductListData       Product = 1;
-  BrandData       Brand = 2;
-  repeated ProductAttributeDataList       ProductAttributeList = 3;
-  repeated ProductAttributeValueData       ProductAttributeValueList = 4;
-  repeated SkuStockData      SkuStockList = 5;
-  repeated ProductLadderData      ProductLadderList = 6;
-  repeated ProductFullReductionData      ProductFullReductionList = 7;
-  repeated MemberPriceListData      MemberPriceList = 8;
-}
-
-message UpdateProductStatusReq {
-  repeated int64 ids = 1;
-  int32 status = 2;
-  string detail = 3;
-  string vertifyMan = 4;
-}
-
-message UpdateProductStatusResp {
-  string pong = 1;
-}
-
-message UpdateProductSortReq {
-  int64 id = 1;
-  int32 sort = 2;
-}
-
-service ProductService {
-
-  rpc AddProduct(AddProductReq) returns(AddProductResp);
-  //查询商品列表
-  rpc QueryProductList(QueryProductListReq) returns(QueryProductListResp);
-  rpc QueryProductListByIds(QueryProductByIdsReq) returns(QueryProductListResp);
-  rpc UpdateProduct(UpdateProductReq) returns(UpdateProductResp);
-  rpc DeleteProduct(DeleteProductReq) returns(DeleteProductResp);
-
-  //查询商品详情
-  rpc QueryProductDetailById(QueryProductDetailByIdReq) returns(QueryProductDetailByIdResp);
-
-  //批量修改审核状态
-  rpc UpdateVerifyStatus(UpdateProductStatusReq) returns(UpdateProductStatusResp);
-  //批量上下架商品
-  rpc UpdatePublishStatus(UpdateProductStatusReq) returns(UpdateProductStatusResp);
-  //批量推荐商品
-  rpc UpdateRecommendStatus(UpdateProductStatusReq) returns(UpdateProductStatusResp);
-  //批量设为新品
-  rpc UpdateNewStatus(UpdateProductStatusReq) returns(UpdateProductStatusResp);
-  //批量修改删除状态
-  rpc UpdateDeleteStatus(UpdateProductStatusReq) returns(UpdateProductStatusResp);
-
-  //更新排序
-  rpc UpdateProductSort(UpdateProductSortReq) returns(UpdateProductResp);
-}
-
-
-
-// 添加商品属性参数表
+// 添加商品属性
 message AddProductAttributeReq {
-  int64 id = 1; //
-  int64 product_attribute_category_id = 2; //商品属性分类id
-  string name = 3; //商品属性分类id
-  int32 select_type = 4; //属性选择类型：0->唯一；1->单选；2->多选
-  int32 input_type = 5; //属性录入方式：0->手工录入；1->从列表中选取
-  string input_list = 6; //可选值列表，以逗号隔开
-  int32 sort = 7; //排序字段：最高的可以单独上传图片
-  int32 filter_type = 8; //分类筛选样式：1->普通；1->颜色
-  int32 search_type = 9; //检索类型；0->不需要进行检索；1->关键字检索；2->范围检索
-  int32 related_status = 10; //相同属性产品是否关联；0->不关联；1->关联
-  int32 hand_add_status = 11; //是否支持手动新增；0->不支持；1->支持
-  int32 type = 12; //属性的类型；0->规格；1->参数
-
+  int64 id = 1; //主键id
+  int64 group_id = 2; //属性分组ID
+  string name = 3; //属性名称
+  int32 input_type = 4; //输入类型：1-手动输入，2-单选，3-多选
+  int32 value_type = 5; //值类型：1-文本，2-数字，3-日期
+  string input_list = 6; //可选值列表，用逗号分隔
+  string unit = 7; //单位
+  int32 is_required = 8; //是否必填
+  int32 is_searchable = 9; //是否支持搜索
+  int32 is_show = 10; //是否显示
+  int32 sort = 11; //排序
+  int32 status = 12; //状态：0->禁用；1->启用
+  int64 create_by = 13; //创建人ID
 }
 
 message AddProductAttributeResp {
   string pong = 1;
 }
 
-// 删除商品属性参数表
+// 删除商品属性
 message DeleteProductAttributeReq {
   repeated int64 ids = 1;
 }
@@ -709,31 +34,93 @@ message DeleteProductAttributeResp {
   string pong = 1;
 }
 
+// 更新商品属性
+message UpdateProductAttributeReq {
+  int64 id = 1; //主键id
+  int64 group_id = 2; //属性分组ID
+  string name = 3; //属性名称
+  int32 input_type = 4; //输入类型：1-手动输入，2-单选，3-多选
+  int32 value_type = 5; //值类型：1-文本，2-数字，3-日期
+  string input_list = 6; //可选值列表，用逗号分隔
+  string unit = 7; //单位
+  int32 is_required = 8; //是否必填
+  int32 is_searchable = 9; //是否支持搜索
+  int32 is_show = 10; //是否显示
+  int32 sort = 11; //排序
+  int32 status = 12; //状态：0->禁用；1->启用
+  int64 update_by = 13; //更新人ID
+}
 
+message UpdateProductAttributeResp {
+  string pong = 1;
+}
 
-// 分页查询商品属性参数表列表
-message QueryProductAttributeListReq {
-  int64 page_num = 1; //第几页
-  int64 page_size = 2; //每页的数量
-  string name = 3; //
-  int64 product_attribute_category_id = 4; //
-  int32 type = 5; //属性的类型；0->规格；1->参数
+// 更新商品属性状态
+message UpdateProductAttributeStatusReq {
+  repeated int64 ids = 1; //主键id
+  int32 status = 12; //状态：0->禁用；1->启用
+  int64 update_by = 15; //更新人ID
+}
+
+message UpdateProductAttributeStatusResp {
+  string pong = 1;
+}
+
+// 查询商品属性详情
+message QueryProductAttributeDetailReq {
+    int64 id = 1;
+}
+
+message QueryProductAttributeDetailResp {
+  int64 id = 1; //主键id
+  int64 group_id = 2; //属性分组ID
+  string name = 3; //属性名称
+  int32 input_type = 4; //输入类型：1-手动输入，2-单选，3-多选
+  int32 value_type = 5; //值类型：1-文本，2-数字，3-日期
+  string input_list = 6; //可选值列表，用逗号分隔
+  string unit = 7; //单位
+  int32 is_required = 8; //是否必填
+  int32 is_searchable = 9; //是否支持搜索
+  int32 is_show = 10; //是否显示
+  int32 sort = 11; //排序
+  int32 status = 12; //状态：0->禁用；1->启用
+  int64 create_by = 13; //创建人ID
+  string create_time = 14; //创建时间
+  int64 update_by = 15; //更新人ID
+  string update_time = 16; //更新时间
 
 }
 
+// 分页查询商品属性列表
+message QueryProductAttributeListReq {
+  int64 group_id = 1; //属性分组ID
+  string name = 2; //属性名称
+  int32 input_type = 3; //输入类型：1-手动输入，2-单选，3-多选
+  int32 is_required = 4; //是否必填
+  int32 is_searchable = 5; //是否支持搜索
+  int32 is_show = 6; //是否显示
+  int32 page_num = 7; //第几页
+  int32 page_size = 8; //每页的数量
+  int32 status = 9; //状态：0->禁用；1->启用
+}
+
 message ProductAttributeListData {
-  int64 id = 1; //
-  int64 product_attribute_category_id = 2; //商品属性分类id
-  string name = 3; //商品属性分类id
-  int32 select_type = 4; //属性选择类型：0->唯一；1->单选；2->多选
-  int32 input_type = 5; //属性录入方式：0->手工录入；1->从列表中选取
-  string input_list = 6; //可选值列表，以逗号隔开
-  int32 sort = 7; //排序字段：最高的可以单独上传图片
-  int32 filter_type = 8; //分类筛选样式：1->普通；1->颜色
-  int32 search_type = 9; //检索类型；0->不需要进行检索；1->关键字检索；2->范围检索
-  int32 related_status = 10; //相同属性产品是否关联；0->不关联；1->关联
-  int32 hand_add_status = 11; //是否支持手动新增；0->不支持；1->支持
-  int32 type = 12; //属性的类型；0->规格；1->参数
+  int64 id = 1; //主键id
+  int64 group_id = 2; //属性分组ID
+  string name = 3; //属性名称
+  int32 input_type = 4; //输入类型：1-手动输入，2-单选，3-多选
+  int32 value_type = 5; //值类型：1-文本，2-数字，3-日期
+  string input_list = 6; //可选值列表，用逗号分隔
+  string unit = 7; //单位
+  int32 is_required = 8; //是否必填
+  int32 is_searchable = 9; //是否支持搜索
+  int32 is_show = 10; //是否显示
+  int32 sort = 11; //排序
+  int32 status = 12; //状态：0->禁用；1->启用
+  int64 create_by = 13; //创建人ID
+  string create_time = 14; //创建时间
+  int64 update_by = 15; //更新人ID
+  string update_time = 16; //更新时间
 
 }
 
@@ -742,132 +129,153 @@ message QueryProductAttributeListResp {
   repeated  ProductAttributeListData list = 2;
 }
 
-message QueryByproductCategoryIdReq {
-  int64 ProductCategoryId = 1;
-}
-message QueryByproductCategoryIdData{
-  int64    AttributeId = 1;
-  int64    AttributeCategoryId = 2;
-
-}
-message QueryByproductCategoryIdResp {
-  repeated  QueryByproductCategoryIdData list = 1;
-}
-
-// 商品属性参数表
+// 商品属性
 service ProductAttributeService {
-  // 添加商品属性参数表
+  // 添加商品属性
   rpc AddProductAttribute(AddProductAttributeReq) returns (AddProductAttributeResp){}
-  // 删除商品属性参数表
+  // 删除商品属性
   rpc DeleteProductAttribute(DeleteProductAttributeReq) returns (DeleteProductAttributeResp){}
-  // 查询商品属性参数表列表
+  // 更新商品属性
+  rpc UpdateProductAttribute(UpdateProductAttributeReq) returns (UpdateProductAttributeResp ){}
+  // 更新商品属性状态
+  rpc UpdateProductAttributeStatus(UpdateProductAttributeStatusReq) returns (UpdateProductAttributeStatusResp ){}
+  // 查询商品属性详情
+   rpc QueryProductAttributeDetail(QueryProductAttributeDetailReq) returns (QueryProductAttributeDetailResp){}
+  // 查询商品属性列表
   rpc QueryProductAttributeList(QueryProductAttributeListReq) returns (QueryProductAttributeListResp){}
 
-  //根据商品分类的id获取商品属性及属性分类
-  rpc QueryByproductCategoryId(QueryByproductCategoryIdReq) returns(QueryByproductCategoryIdResp);
 
 }
 
 
-// 添加产品属性分类表
-message AddProductAttributeCategoryReq {
-  string name = 1; //
-
+// 添加商品属性分组
+message AddProductAttributeGroupReq {
+  int64 category_id = 1; //分类ID
+  string name = 2; //分组名称
+  int32 sort = 3; //排序
+  int32 status = 4; //状态：0->禁用；1->启用
+  int64 create_by = 5; //创建人ID
 }
 
-message AddProductAttributeCategoryResp {
+message AddProductAttributeGroupResp {
   string pong = 1;
 }
 
-// 删除产品属性分类表
-message DeleteProductAttributeCategoryReq {
+// 删除商品属性分组
+message DeleteProductAttributeGroupReq {
   repeated int64 ids = 1;
 }
 
-message DeleteProductAttributeCategoryResp {
+message DeleteProductAttributeGroupResp {
   string pong = 1;
 }
 
-// 更新产品属性分类表
-message UpdateProductAttributeCategoryReq {
-  int64 id = 1; //
-  string name = 2; //商品属性分类名称
-  int32 attribute_count = 3; //属性数量
-  int32 param_count = 4; //参数数量
-
+// 更新商品属性分组
+message UpdateProductAttributeGroupReq {
+  int64 id = 1; //主键id
+  int64 category_id = 2; //分类ID
+  string name = 3; //分组名称
+  int32 sort = 4; //排序
+  int32 status = 5; //状态：0->禁用；1->启用
+  int64 update_by = 6; //更新人ID
 }
 
-message UpdateProductAttributeCategoryResp {
+message UpdateProductAttributeGroupResp {
   string pong = 1;
 }
 
+// 更新商品属性分组状态
+message UpdateProductAttributeGroupStatusReq {
+  repeated int64 ids = 1; //主键id
+  int32 status = 5; //状态：0->禁用；1->启用
+  int64 update_by = 8; //更新人ID
+}
 
-// 分页查询产品属性分类表列表
-message QueryProductAttributeCategoryListReq {
-  int64 page_num = 1; //第几页
-  int64 page_size = 2; //每页的数量
-  string name = 3; //
+message UpdateProductAttributeGroupStatusResp {
+  string pong = 1;
+}
+
+// 查询商品属性分组详情
+message QueryProductAttributeGroupDetailReq {
+    int64 id = 1;
+}
+
+message QueryProductAttributeGroupDetailResp {
+  int64 id = 1; //主键id
+  int64 category_id = 2; //分类ID
+  string name = 3; //分组名称
+  int32 sort = 4; //排序
+  int32 status = 5; //状态：0->禁用；1->启用
+  int64 create_by = 6; //创建人ID
+  string create_time = 7; //创建时间
+  int64 update_by = 8; //更新人ID
+  string update_time = 9; //更新时间
+  int32 is_deleted = 10; //是否删除
 
 }
 
-message ProductAttributeCategoryListData {
-  int32 attribute_count = 1; //属性数量
-  int64 id = 2; //
-  string name = 3; //
-  int32 param_count = 4; //参数数量
-  repeated ProductAttributeData ProductAttributeList=5;
+// 分页查询商品属性分组列表
+message QueryProductAttributeGroupListReq {
+  int64 category_id = 1; //分类ID
+  string name = 2; //分组名称
+  int32 status = 3; //状态：0->禁用；1->启用
+  int32 page_num = 4; //第几页
+  int32 page_size = 5; //每页的数量
 }
-message ProductAttributeData {
-  int64 id = 1; //
-  int64 product_attribute_category_id = 2; //商品属性分类id
-  string name = 3; //商品属性分类id
-  int32 select_type = 4; //属性选择类型：0->唯一；1->单选；2->多选
-  int32 input_type = 5; //属性录入方式：0->手工录入；1->从列表中选取
-  string input_list = 6; //可选值列表，以逗号隔开
-  int32 sort = 7; //排序字段：最高的可以单独上传图片
-  int32 filter_type = 8; //分类筛选样式：1->普通；1->颜色
-  int32 search_type = 9; //检索类型；0->不需要进行检索；1->关键字检索；2->范围检索
-  int32 related_status = 10; //相同属性产品是否关联；0->不关联；1->关联
-  int32 hand_add_status = 11; //是否支持手动新增；0->不支持；1->支持
-  int32 type = 12; //属性的类型；0->规格；1->参数
+
+message ProductAttributeGroupListData {
+  int64 id = 1; //主键id
+  int64 category_id = 2; //分类ID
+  string name = 3; //分组名称
+  int32 sort = 4; //排序
+  int32 status = 5; //状态：0->禁用；1->启用
+  int64 create_by = 6; //创建人ID
+  string create_time = 7; //创建时间
+  int64 update_by = 8; //更新人ID
+  string update_time = 9; //更新时间
+  int32 is_deleted = 10; //是否删除
 
 }
-message QueryProductAttributeCategoryListResp {
+
+message QueryProductAttributeGroupListResp {
   int64 total = 1;
-  repeated  ProductAttributeCategoryListData list = 2;
+  repeated  ProductAttributeGroupListData list = 2;
 }
 
-// 产品属性分类表
-service ProductAttributeCategoryService {
-  // 添加产品属性分类表
-  rpc AddProductAttributeCategory(AddProductAttributeCategoryReq) returns (AddProductAttributeCategoryResp){}
-  // 删除产品属性分类表
-  rpc DeleteProductAttributeCategory(DeleteProductAttributeCategoryReq) returns (DeleteProductAttributeCategoryResp){}
-  // 更新产品属性分类表
-  rpc UpdateProductAttributeCategory(UpdateProductAttributeCategoryReq) returns (UpdateProductAttributeCategoryResp ){}
-  // 查询产品属性分类表列表
-  rpc QueryProductAttributeCategoryList(QueryProductAttributeCategoryListReq) returns (QueryProductAttributeCategoryListResp){}
+// 商品属性分组
+service ProductAttributeGroupService {
+  // 添加商品属性分组
+  rpc AddProductAttributeGroup(AddProductAttributeGroupReq) returns (AddProductAttributeGroupResp){}
+  // 删除商品属性分组
+  rpc DeleteProductAttributeGroup(DeleteProductAttributeGroupReq) returns (DeleteProductAttributeGroupResp){}
+  // 更新商品属性分组
+  rpc UpdateProductAttributeGroup(UpdateProductAttributeGroupReq) returns (UpdateProductAttributeGroupResp ){}
+  // 更新商品属性分组状态
+  rpc UpdateProductAttributeGroupStatus(UpdateProductAttributeGroupStatusReq) returns (UpdateProductAttributeGroupStatusResp ){}
+  // 查询商品属性分组详情
+   rpc QueryProductAttributeGroupDetail(QueryProductAttributeGroupDetailReq) returns (QueryProductAttributeGroupDetailResp){}
+  // 查询商品属性分组列表
+  rpc QueryProductAttributeGroupList(QueryProductAttributeGroupListReq) returns (QueryProductAttributeGroupListResp){}
 
-  //获取所有商品属性分类及其下属性
-  rpc queryCategoryWithAttrList(QueryProductAttributeCategoryListReq) returns(QueryProductAttributeCategoryListResp);
 
 }
 
 
-// 添加存储产品参数信息的表
+// 添加商品属性值
 message AddProductAttributeValueReq {
-  int64 id = 1; //
-  int64 product_id = 2; //商品id
-  int64 product_attribute_id = 3; //商品属性id
-  string value = 4; //手动添加规格或参数的值，参数单值，规格有多个时以逗号隔开
-
+  int64 id = 1; //主键id
+  int64 spu_id = 2; //商品SPU ID
+  int64 attribute_id = 3; //属性ID
+  string value = 4; //属性值
+  int32 status = 5; //状态：0->禁用；1->启用
+  int64 create_by = 6; //创建人ID
 }
 
 message AddProductAttributeValueResp {
   string pong = 1;
 }
 
-// 删除存储产品参数信息的表
+// 删除商品属性值
 message DeleteProductAttributeValueReq {
   repeated int64 ids = 1;
 }
@@ -876,31 +284,69 @@ message DeleteProductAttributeValueResp {
   string pong = 1;
 }
 
-// 更新存储产品参数信息的表
+// 更新商品属性值
 message UpdateProductAttributeValueReq {
-  int64 id = 1; //
-  int64 product_id = 2; //商品id
-  int64 product_attribute_id = 3; //商品属性id
-  string value = 4; //手动添加规格或参数的值，参数单值，规格有多个时以逗号隔开
-
+  int64 id = 1; //主键id
+  int64 spu_id = 2; //商品SPU ID
+  int64 attribute_id = 3; //属性ID
+  string value = 4; //属性值
+  int32 status = 5; //状态：0->禁用；1->启用
+  int64 update_by = 8; //更新人ID
 }
 
 message UpdateProductAttributeValueResp {
   string pong = 1;
 }
 
+// 更新商品属性值状态
+message UpdateProductAttributeValueStatusReq {
+  repeated int64 ids = 1; //主键id
+  int32 status = 5; //状态：0->禁用；1->启用
+  int64 update_by = 8; //更新人ID
+}
 
-// 分页查询存储产品参数信息的表列表
-message QueryProductAttributeValueListReq {
-  int64 product_id = 1; //
+message UpdateProductAttributeValueStatusResp {
+  string pong = 1;
+}
+
+// 查询商品属性值详情
+message QueryProductAttributeValueDetailReq {
+    int64 id = 1;
+}
+
+message QueryProductAttributeValueDetailResp {
+  int64 id = 1; //主键id
+  int64 spu_id = 2; //商品SPU ID
+  int64 attribute_id = 3; //属性ID
+  string value = 4; //属性值
+  int32 status = 5; //状态：0->禁用；1->启用
+  int64 create_by = 6; //创建人ID
+  string create_time = 7; //创建时间
+  int64 update_by = 8; //更新人ID
+  string update_time = 9; //更新时间
 
 }
 
+// 分页查询商品属性值列表
+message QueryProductAttributeValueListReq {
+  int64 spu_id = 1; //商品SPU ID
+  int64 attribute_id = 2; //属性ID
+  int32 status = 3; //状态：0->禁用；1->启用
+  int32 page_num = 4; //第几页
+  int32 page_size = 5; //每页的数量
+}
+
 message ProductAttributeValueListData {
-  int64 id = 1; //
-  int64 product_id = 2; //商品id
-  int64 product_attribute_id = 3; //商品属性id
-  string value = 4; //手动添加规格或参数的值，参数单值，规格有多个时以逗号隔开
+  int64 id = 1; //主键id
+  int64 spu_id = 2; //商品SPU ID
+  int64 attribute_id = 3; //属性ID
+  string value = 4; //属性值
+  int32 status = 5; //状态：0->禁用；1->启用
+  int64 create_by = 6; //创建人ID
+  string create_time = 7; //创建时间
+  int64 update_by = 8; //更新人ID
+  string update_time = 9; //更新时间
+
 }
 
 message QueryProductAttributeValueListResp {
@@ -908,15 +354,19 @@ message QueryProductAttributeValueListResp {
   repeated  ProductAttributeValueListData list = 2;
 }
 
-// 存储产品参数信息的表
+// 商品属性值
 service ProductAttributeValueService {
-  // 添加存储产品参数信息的表
+  // 添加商品属性值
   rpc AddProductAttributeValue(AddProductAttributeValueReq) returns (AddProductAttributeValueResp){}
-  // 删除存储产品参数信息的表
+  // 删除商品属性值
   rpc DeleteProductAttributeValue(DeleteProductAttributeValueReq) returns (DeleteProductAttributeValueResp){}
-  // 更新存储产品参数信息的表
+  // 更新商品属性值
   rpc UpdateProductAttributeValue(UpdateProductAttributeValueReq) returns (UpdateProductAttributeValueResp ){}
-  // 查询存储产品参数信息的表列表
+  // 更新商品属性值状态
+  rpc UpdateProductAttributeValueStatus(UpdateProductAttributeValueStatusReq) returns (UpdateProductAttributeValueStatusResp ){}
+  // 查询商品属性值详情
+   rpc QueryProductAttributeValueDetail(QueryProductAttributeValueDetailReq) returns (QueryProductAttributeValueDetailResp){}
+  // 查询商品属性值列表
   rpc QueryProductAttributeValueList(QueryProductAttributeValueListReq) returns (QueryProductAttributeValueListResp){}
 
 
@@ -1352,6 +802,325 @@ service ProductCollectService {
 }
 
 
+// 添加商品评价
+message AddCommentReq {
+  int32 replay_count = 1; //回复数量
+  int64 product_id = 2; //商品id
+  string member_nick_name = 3; //评价者昵称
+  string product_name = 4; //商品名称
+  int32 star = 5; //评价星数：0->5
+  string member_ip = 6; //评价的ip
+  int32 show_status = 8; //是否显示，0-不显示，1-显示
+  string product_attribute = 9; //购买时的商品属性
+  int32 collect_count = 10; //点赞数
+  int32 read_count = 11; //阅读数
+  string content = 12; //内容
+  string pics = 13; //上传图片地址，以逗号隔开
+  string member_icon = 14; //评论用户头像
+
+}
+
+message AddCommentResp {
+  string pong = 1;
+}
+
+// 删除商品评价
+message DeleteCommentReq {
+  string id = 1;
+}
+
+message DeleteCommentResp {
+  string pong = 1;
+}
+
+// 更新商品评价
+message UpdateCommentReq {
+  string id = 1; //
+  int64 product_id = 2; //商品id
+  string member_nick_name = 3; //评价者昵称
+  string product_name = 4; //商品名称
+  int32 star = 5; //评价星数：0->5
+  string member_ip = 6; //评价的ip
+  int32 show_status = 8; //是否显示，0-不显示，1-显示
+  string product_attribute = 9; //购买时的商品属性
+  int32 collect_count = 10; //点赞数
+  int32 read_count = 11; //阅读数
+  string content = 12; //内容
+  string pics = 13; //上传图片地址，以逗号隔开
+  string member_icon = 14; //评论用户头像
+  int32 replay_count = 15; //回复数量
+}
+
+message UpdateCommentResp {
+  string pong = 1;
+}
+
+
+// 查询商品评价详情
+message QueryCommentDetailReq {
+  string id = 1;
+}
+
+message QueryCommentDetailResp {
+  string id = 1; //
+  int64 product_id = 2; //商品id
+  string member_nick_name = 3; //评价者昵称
+  string product_name = 4; //商品名称
+  int32 star = 5; //评价星数：0->5
+  string member_ip = 6; //评价的ip
+  string create_time = 7; //评价时间
+  int32 show_status = 8; //是否显示，0-不显示，1-显示
+  string product_attribute = 9; //购买时的商品属性
+  int32 collect_count = 10; //点赞数
+  int32 read_count = 11; //阅读数
+  string content = 12; //内容
+  string pics = 13; //上传图片地址，以逗号隔开
+  string member_icon = 14; //评论用户头像
+  int32 replay_count = 15; //回复数量
+
+}
+
+// 分页查询商品评价列表
+message QueryCommentListReq {
+  int64 page_num = 1; //第几页
+  int64 page_size = 2; //每页的数量
+  int64 product_id = 3;
+}
+
+message CommentListData {
+  string id = 1; //
+  int64 product_id = 2; //商品id
+  string member_nick_name = 3; //评价者昵称
+  string product_name = 4; //商品名称
+  int32 star = 5; //评价星数：0->5
+  string member_ip = 6; //评价的ip
+  string create_time = 7; //评价时间
+  int32 show_status = 8; //是否显示，0-不显示，1-显示
+  string product_attribute = 9; //购买时的商品属性
+  int32 collect_count = 10; //点赞数
+  int32 read_count = 11; //阅读数
+  string content = 12; //内容
+  string pics = 13; //上传图片地址，以逗号隔开
+  string member_icon = 14; //评论用户头像
+  int32 replay_count = 15; //回复数量
+
+}
+
+message QueryCommentListResp {
+  int64 total = 1;
+  repeated  CommentListData list = 2;
+}
+
+// 商品评价
+service CommentService {
+  // 添加商品评价
+  rpc AddComment(AddCommentReq) returns (AddCommentResp){}
+  // 删除商品评价
+  rpc DeleteComment(DeleteCommentReq) returns (DeleteCommentResp){}
+  // 更新商品评价
+  rpc UpdateComment(UpdateCommentReq) returns (UpdateCommentResp ){}
+  // 查询商品评价详情
+  rpc QueryCommentDetail(QueryCommentDetailReq) returns (QueryCommentDetailResp){}
+  // 查询商品评价列表
+  rpc QueryCommentList(QueryCommentListReq) returns (QueryCommentListResp){}
+
+
+}
+
+
+// 添加产品评价回复
+message AddCommentReplayReq {
+  int32 type = 1; //评论人员类型；0->会员；1->管理员
+  int64 comment_id = 2; //评论id
+  string member_nick_name = 3; //评论人员昵称
+  string member_icon = 4; //评论人员头像
+  string content = 5; //内容
+
+}
+
+message AddCommentReplayResp {
+  string pong = 1;
+}
+
+// 删除产品评价回复
+message DeleteCommentReplayReq {
+  string id = 1;
+}
+
+message DeleteCommentReplayResp {
+  string pong = 1;
+}
+
+// 更新产品评价回复
+message UpdateCommentReplayReq {
+  string id = 1; //
+  int64 comment_id = 2; //评论id
+  string member_nick_name = 3; //评论人员昵称
+  string member_icon = 4; //评论人员头像
+  string content = 5; //内容
+  int32 type = 7; //评论人员类型；0->会员；1->管理员
+}
+
+message UpdateCommentReplayResp {
+  string pong = 1;
+}
+
+// 查询产品评价回复详情
+message QueryCommentReplayDetailReq {
+  string id = 1;
+}
+
+message QueryCommentReplayDetailResp {
+  string id = 1; //
+  int64 comment_id = 2; //评论id
+  string member_nick_name = 3; //评论人员昵称
+  string member_icon = 4; //评论人员头像
+  string content = 5; //内容
+  string create_time = 6; //评论时间
+  int32 type = 7; //评论人员类型；0->会员；1->管理员
+
+}
+
+// 分页查询产品评价回复列表
+message QueryCommentReplayListReq {
+  int64 page_num = 1; //第几页
+  int64 page_size = 2; //每页的数量
+  int64 comment_id = 3; //
+}
+
+message CommentReplayListData {
+  string id = 1; //
+  int64 comment_id = 2; //评论id
+  string member_nick_name = 3; //评论人员昵称
+  string member_icon = 4; //评论人员头像
+  string content = 5; //内容
+  string create_time = 6; //评论时间
+  int32 type = 7; //评论人员类型；0->会员；1->管理员
+
+}
+
+message QueryCommentReplayListResp {
+  int64 total = 1;
+  repeated  CommentReplayListData list = 2;
+}
+
+// 产品评价回复
+service CommentReplayService {
+  // 添加产品评价回复
+  rpc AddCommentReplay(AddCommentReplayReq) returns (AddCommentReplayResp){}
+  // 删除产品评价回复
+  rpc DeleteCommentReplay(DeleteCommentReplayReq) returns (DeleteCommentReplayResp){}
+  // 更新产品评价回复
+  rpc UpdateCommentReplay(UpdateCommentReplayReq) returns (UpdateCommentReplayResp ){}
+  // 查询产品评价回复详情
+  rpc QueryCommentReplayDetail(QueryCommentReplayDetailReq) returns (QueryCommentReplayDetailResp){}
+  // 查询产品评价回复列表
+  rpc QueryCommentReplayList(QueryCommentReplayListReq) returns (QueryCommentReplayListResp){}
+
+
+}
+
+
+// 添加运费模版
+message AddFeightTemplateReq {
+  int64 id = 1; //
+  string name = 2; //运费模版名称
+  int32 charge_type = 3; //计费类型:0->按重量；1->按件数
+  int64 first_weight = 4; //首重kg
+  int64 first_fee = 5; //首费（元）
+  int64 continue_weight = 6; //续重kg
+  int64 continue_fee = 7; //续费（元）
+  string dest = 8; //目的地（省、市）
+
+}
+
+message AddFeightTemplateResp {
+  string pong = 1;
+}
+
+// 删除运费模版
+message DeleteFeightTemplateReq {
+  repeated int64 ids = 1;
+}
+
+message DeleteFeightTemplateResp {
+  string pong = 1;
+}
+
+// 更新运费模版
+message UpdateFeightTemplateReq {
+  int64 id = 1; //
+  string name = 2; //运费模版名称
+  int32 charge_type = 3; //计费类型:0->按重量；1->按件数
+  int64 first_weight = 4; //首重kg
+  int64 first_fee = 5; //首费（元）
+  int64 continue_weight = 6; //续重kg
+  int64 continue_fee = 7; //续费（元）
+  string dest = 8; //目的地（省、市）
+
+}
+
+message UpdateFeightTemplateResp {
+  string pong = 1;
+}
+
+
+// 查询运费模版详情
+message QueryFeightTemplateDetailReq {
+    int64 id = 1;
+}
+
+message QueryFeightTemplateDetailResp {
+  int64 id = 1; //
+  string name = 2; //运费模版名称
+  int32 charge_type = 3; //计费类型:0->按重量；1->按件数
+  int64 first_weight = 4; //首重kg
+  int64 first_fee = 5; //首费（元）
+  int64 continue_weight = 6; //续重kg
+  int64 continue_fee = 7; //续费（元）
+  string dest = 8; //目的地（省、市）
+}
+
+// 分页查询运费模版列表
+message QueryFeightTemplateListReq {
+ int64 page_num = 1; //第几页
+  int64 page_size = 2; //每页的数量
+}
+
+message FeightTemplateListData {
+  int64 id = 1; //
+  string name = 2; //运费模版名称
+  int32 charge_type = 3; //计费类型:0->按重量；1->按件数
+  int64 first_weight = 4; //首重kg
+  int64 first_fee = 5; //首费（元）
+  int64 continue_weight = 6; //续重kg
+  int64 continue_fee = 7; //续费（元）
+  string dest = 8; //目的地（省、市）
+
+}
+
+message QueryFeightTemplateListResp {
+  int64 total = 1;
+  repeated  FeightTemplateListData list = 2;
+}
+
+// 运费模版
+service FeightTemplateService {
+  // 添加运费模版
+  rpc AddFeightTemplate(AddFeightTemplateReq) returns (AddFeightTemplateResp){}
+  // 删除运费模版
+  rpc DeleteFeightTemplate(DeleteFeightTemplateReq) returns (DeleteFeightTemplateResp){}
+  // 更新运费模版
+  rpc UpdateFeightTemplate(UpdateFeightTemplateReq) returns (UpdateFeightTemplateResp ){}
+  // 查询运费模版详情
+   rpc QueryFeightTemplateDetail(QueryFeightTemplateDetailReq) returns (QueryFeightTemplateDetailResp){}
+  // 查询运费模版列表
+  rpc QueryFeightTemplateList(QueryFeightTemplateListReq) returns (QueryFeightTemplateListResp){}
+
+
+}
+
+
 // 添加产品满减表(只针对同商品)
 message AddProductFullReductionReq {
   int64 id = 1; //
@@ -1585,6 +1354,767 @@ service ProductOperateLogService {
 }
 
 
+// 添加商品SKU
+message AddProductSkuReq {
+  int64 spu_id = 1; //商品SpuId
+  string name = 2; //SKU名称
+  string sku_code = 3; //SKU编码
+  string main_pic = 4; //主图
+  string album_pics = 5; //图片集
+  float price = 6; //价格
+  float promotion_price = 7; //单品促销价格
+  string promotion_start_time = 8; //促销开始时间
+  string promotion_end_time = 9; //促销结束时间
+  int32 stock = 10; //库存
+  int32 low_stock = 11; //预警库存
+  string spec_data = 12; //规格数据
+  float weight = 13; //重量(kg)
+  int32 publish_status = 14; //上架状态：0-下架，1-上架
+  int32 verify_status = 15; //审核状态：0-未审核，1-审核通过，2-审核不通过
+  int32 sort = 16; //排序
+  int64 create_by = 17; //创建人ID
+}
+
+message AddProductSkuResp {
+  string pong = 1;
+}
+
+// 删除商品SKU
+message DeleteProductSkuReq {
+  repeated int64 ids = 1;
+}
+
+message DeleteProductSkuResp {
+  string pong = 1;
+}
+
+// 更新商品SKU
+message UpdateProductSkuReq {
+  repeated UpdateProductSkuData data = 1;
+}
+message UpdateProductSkuData {
+  int64 id = 1; //商品SpuId
+  int64 spu_id = 2; //商品SpuId
+  string name = 3; //SKU名称
+  string sku_code = 4; //SKU编码
+  string main_pic = 5; //主图
+  string album_pics = 6; //图片集
+  float price = 7; //价格
+  float promotion_price = 8; //单品促销价格
+  string promotion_start_time = 9; //促销开始时间
+  string promotion_end_time = 10; //促销结束时间
+  int32 stock = 11; //库存
+  int32 low_stock = 12; //预警库存
+  string spec_data = 13; //规格数据
+  float weight = 14; //重量(kg)
+  int32 publish_status = 15; //上架状态：0-下架，1-上架
+  int32 verify_status = 16; //审核状态：0-未审核，1-审核通过，2-审核不通过
+  int32 sort = 17; //排序
+  int64 update_by = 18; //更新人ID
+}
+
+message UpdateProductSkuResp {
+  string pong = 1;
+}
+
+// 查询商品SKU详情
+message QueryProductSkuDetailReq {
+  int64 id = 1;
+}
+
+message QueryProductSkuDetailResp {
+  int64 id = 1; //商品SpuId
+  int64 spu_id = 2; //商品SpuId
+  string name = 3; //SKU名称
+  string sku_code = 4; //SKU编码
+  string main_pic = 5; //主图
+  string album_pics = 6; //图片集
+  float price = 7; //价格
+  float promotion_price = 8; //单品促销价格
+  string promotion_start_time = 9; //促销开始时间
+  string promotion_end_time = 10; //促销结束时间
+  int32 stock = 11; //库存
+  int32 low_stock = 12; //预警库存
+  string spec_data = 13; //规格数据
+  float weight = 14; //重量(kg)
+  int32 publish_status = 15; //上架状态：0-下架，1-上架
+  int32 verify_status = 16; //审核状态：0-未审核，1-审核通过，2-审核不通过
+  int32 sort = 17; //排序
+  int32 sales = 18; //销量
+  int64 create_by = 19; //创建人ID
+  string create_time = 20; //创建时间
+  int64 update_by = 21; //更新人ID
+  string update_time = 22; //更新时间
+
+}
+
+// 分页查询商品SKU列表
+message QueryProductSkuListReq {
+  int64 spu_id = 1; //商品SpuId
+  string name = 2; //SKU名称
+  string sku_code = 3; //SKU编码
+  string promotion_start_time = 4; //促销开始时间
+  string promotion_end_time = 5; //促销结束时间
+  int32 publish_status = 6; //上架状态：0-下架，1-上架
+  int32 verify_status = 7; //审核状态：0-未审核，1-审核通过，2-审核不通过
+  int32 page_num = 8; //第几页
+  int32 page_size = 9; //每页的数量
+}
+
+message ProductSkuListData {
+  int64 id = 1; //商品SpuId
+  int64 spu_id = 2; //商品SpuId
+  string name = 3; //SKU名称
+  string sku_code = 4; //SKU编码
+  string main_pic = 5; //主图
+  string album_pics = 6; //图片集
+  float price = 7; //价格
+  float promotion_price = 8; //单品促销价格
+  string promotion_start_time = 9; //促销开始时间
+  string promotion_end_time = 10; //促销结束时间
+  int32 stock = 11; //库存
+  int32 low_stock = 12; //预警库存
+  string spec_data = 13; //规格数据
+  float weight = 14; //重量(kg)
+  int32 publish_status = 15; //上架状态：0-下架，1-上架
+  int32 verify_status = 16; //审核状态：0-未审核，1-审核通过，2-审核不通过
+  int32 sort = 17; //排序
+  int32 sales = 18; //销量
+  int64 create_by = 19; //创建人ID
+  string create_time = 20; //创建时间
+  int64 update_by = 21; //更新人ID
+  string update_time = 22; //更新时间
+
+}
+
+message QueryProductSkuListResp {
+  int64 total = 1;
+  repeated  ProductSkuListData list = 2;
+}
+
+message UpdateSkuStockReq {
+  repeated UpdateSkuStockData data = 1;
+}
+
+message UpdateSkuStockData {
+  int64    id = 1;
+  int32    product_quantity = 2;
+}
+message UpdateSkuStockLockResp {
+  string pong = 1;
+}
+
+// 商品SKU
+service ProductSkuService {
+  // 添加商品SKU
+  rpc AddProductSku(AddProductSkuReq) returns (AddProductSkuResp){}
+  // 删除商品SKU
+  rpc DeleteProductSku(DeleteProductSkuReq) returns (DeleteProductSkuResp){}
+  // 更新商品SKU
+  rpc UpdateProductSku(UpdateProductSkuReq) returns (UpdateProductSkuResp ){}
+  // 查询商品SKU详情
+  rpc QueryProductSkuDetail(QueryProductSkuDetailReq) returns (QueryProductSkuDetailResp){}
+  // 查询商品SKU列表
+  rpc QueryProductSkuList(QueryProductSkuListReq) returns (QueryProductSkuListResp){}
+
+  //取消订单的时候,释放库存
+  rpc ReleaseSkuStockLock(UpdateSkuStockReq) returns(UpdateSkuStockLockResp);
+  //下单的时候,锁定库存
+  rpc LockSkuStockLock(UpdateSkuStockReq) returns(UpdateSkuStockLockResp);
+
+}
+
+
+// 添加商品规格
+message AddProductSpecReq {
+  int64 category_id = 1; //分类ID
+  string name = 2; //规格名称
+  int32 sort = 3; //排序
+  int32 status = 4; //状态：0->禁用；1->启用
+  int64 create_by = 5; //创建人ID
+}
+
+message AddProductSpecResp {
+  string pong = 1;
+}
+
+// 删除商品规格
+message DeleteProductSpecReq {
+  repeated int64 ids = 1;
+}
+
+message DeleteProductSpecResp {
+  string pong = 1;
+}
+
+// 更新商品规格
+message UpdateProductSpecReq {
+  int64 id = 1; //
+  int64 category_id = 2; //分类ID
+  string name = 3; //规格名称
+  int32 sort = 4; //排序
+  int32 status = 5; //状态：0->禁用；1->启用
+  int64 update_by = 8; //更新人ID
+}
+
+message UpdateProductSpecResp {
+  string pong = 1;
+}
+
+// 更新商品规格状态
+message UpdateProductSpecStatusReq {
+  repeated int64 ids = 1; //
+  int32 status = 5; //状态：0->禁用；1->启用
+  int64 update_by = 8; //更新人ID
+}
+
+message UpdateProductSpecStatusResp {
+  string pong = 1;
+}
+
+// 查询商品规格详情
+message QueryProductSpecDetailReq {
+    int64 id = 1;
+}
+
+message QueryProductSpecDetailResp {
+  int64 id = 1; //
+  int64 category_id = 2; //分类ID
+  string name = 3; //规格名称
+  int32 sort = 4; //排序
+  int32 status = 5; //状态：0->禁用；1->启用
+  int64 create_by = 6; //创建人ID
+  string create_time = 7; //创建时间
+  int64 update_by = 8; //更新人ID
+  string update_time = 9; //更新时间
+
+}
+
+// 分页查询商品规格列表
+message QueryProductSpecListReq {
+  int64 category_id = 1; //分类ID
+  string name = 2; //规格名称
+  int32 status = 3; //状态：0->禁用；1->启用
+  int32 page_num = 4; //第几页
+  int32 page_size = 5; //每页的数量
+}
+
+message ProductSpecListData {
+  int64 id = 1; //
+  int64 category_id = 2; //分类ID
+  string name = 3; //规格名称
+  int32 sort = 4; //排序
+  int32 status = 5; //状态：0->禁用；1->启用
+  int64 create_by = 6; //创建人ID
+  string create_time = 7; //创建时间
+  int64 update_by = 8; //更新人ID
+  string update_time = 9; //更新时间
+  int32 is_deleted = 10; //是否删除
+
+}
+
+message QueryProductSpecListResp {
+  int64 total = 1;
+  repeated  ProductSpecListData list = 2;
+}
+
+// 商品规格
+service ProductSpecService {
+  // 添加商品规格
+  rpc AddProductSpec(AddProductSpecReq) returns (AddProductSpecResp){}
+  // 删除商品规格
+  rpc DeleteProductSpec(DeleteProductSpecReq) returns (DeleteProductSpecResp){}
+  // 更新商品规格
+  rpc UpdateProductSpec(UpdateProductSpecReq) returns (UpdateProductSpecResp ){}
+  // 更新商品规格状态
+  rpc UpdateProductSpecStatus(UpdateProductSpecStatusReq) returns (UpdateProductSpecStatusResp ){}
+  // 查询商品规格详情
+   rpc QueryProductSpecDetail(QueryProductSpecDetailReq) returns (QueryProductSpecDetailResp){}
+  // 查询商品规格列表
+  rpc QueryProductSpecList(QueryProductSpecListReq) returns (QueryProductSpecListResp){}
+
+
+}
+
+
+// 添加商品规格值
+message AddProductSpecValueReq {
+  int64 spec_id = 1; //规格ID
+  string value = 2; //规格值
+  int32 sort = 3; //排序
+  int32 status = 4; //状态：0->禁用；1->启用
+  int64 create_by = 5; //创建人ID
+}
+
+message AddProductSpecValueResp {
+  string pong = 1;
+}
+
+// 删除商品规格值
+message DeleteProductSpecValueReq {
+  repeated int64 ids = 1;
+}
+
+message DeleteProductSpecValueResp {
+  string pong = 1;
+}
+
+// 更新商品规格值
+message UpdateProductSpecValueReq {
+  int64 id = 1; //
+  int64 spec_id = 2; //规格ID
+  string value = 3; //规格值
+  int32 sort = 4; //排序
+  int32 status = 5; //状态：0->禁用；1->启用
+  int64 update_by = 8; //更新人ID
+}
+
+message UpdateProductSpecValueResp {
+  string pong = 1;
+}
+
+// 更新商品规格值状态
+message UpdateProductSpecValueStatusReq {
+  repeated int64 ids = 1; //
+  int32 status = 5; //状态：0->禁用；1->启用
+  int64 update_by = 8; //更新人ID
+}
+
+message UpdateProductSpecValueStatusResp {
+  string pong = 1;
+}
+
+// 查询商品规格值详情
+message QueryProductSpecValueDetailReq {
+    int64 id = 1;
+}
+
+message QueryProductSpecValueDetailResp {
+  int64 id = 1; //
+  int64 spec_id = 2; //规格ID
+  string value = 3; //规格值
+  int32 sort = 4; //排序
+  int32 status = 5; //状态：0->禁用；1->启用
+  int64 create_by = 6; //创建人ID
+  string create_time = 7; //创建时间
+  int64 update_by = 8; //更新人ID
+  string update_time = 9; //更新时间
+
+}
+
+// 分页查询商品规格值列表
+message QueryProductSpecValueListReq {
+  int64 spec_id = 1; //规格ID
+  int32 status = 2; //状态：0->禁用；1->启用
+  int32 page_num = 3; //第几页
+  int32 page_size = 4; //每页的数量
+}
+
+message ProductSpecValueListData {
+  int64 id = 1; //
+  int64 spec_id = 2; //规格ID
+  string value = 3; //规格值
+  int32 sort = 4; //排序
+  int32 status = 5; //状态：0->禁用；1->启用
+  int64 create_by = 6; //创建人ID
+  string create_time = 7; //创建时间
+  int64 update_by = 8; //更新人ID
+  string update_time = 9; //更新时间
+
+}
+
+message QueryProductSpecValueListResp {
+  int64 total = 1;
+  repeated  ProductSpecValueListData list = 2;
+}
+
+// 商品规格值
+service ProductSpecValueService {
+  // 添加商品规格值
+  rpc AddProductSpecValue(AddProductSpecValueReq) returns (AddProductSpecValueResp){}
+  // 删除商品规格值
+  rpc DeleteProductSpecValue(DeleteProductSpecValueReq) returns (DeleteProductSpecValueResp){}
+  // 更新商品规格值
+  rpc UpdateProductSpecValue(UpdateProductSpecValueReq) returns (UpdateProductSpecValueResp ){}
+  // 更新商品规格值状态
+  rpc UpdateProductSpecValueStatus(UpdateProductSpecValueStatusReq) returns (UpdateProductSpecValueStatusResp ){}
+  // 查询商品规格值详情
+   rpc QueryProductSpecValueDetail(QueryProductSpecValueDetailReq) returns (QueryProductSpecValueDetailResp){}
+  // 查询商品规格值列表
+  rpc QueryProductSpecValueList(QueryProductSpecValueListReq) returns (QueryProductSpecValueListResp){}
+
+
+}
+
+
+message MemberPriceList {
+  int64    level_id = 1;//会员id
+  int64  price = 2;//会员价格
+  string    level_name = 3;//会员名称
+}
+message ProductAttributeValueList {
+  int64    ProductAttributeId = 1;//商品满多少
+  string  AttributeValues = 2;//商品满多少
+}
+message ProductFullReductionList {
+  int64 full_price = 1; //商品满多少
+  int64 reduce_price = 2; //商品减多少
+}
+message ProductLadderList {
+  int32 count = 1; //满足的商品数量
+  int64 discount = 2; //折扣
+  int64 price = 3; //折后价格
+}
+message SkuStockList {
+  int64 spu_id = 1; //商品SpuId
+  string name = 2; //SKU名称
+  string sku_code = 3; //SKU编码
+  string main_pic = 4; //主图
+  string album_pics = 5; //图片集
+  float price = 6; //价格
+  float promotion_price = 7; //单品促销价格
+  string promotion_start_time = 8; //促销开始时间
+  string promotion_end_time = 9; //促销结束时间
+  int32 stock = 10; //库存
+  int32 low_stock = 11; //预警库存
+  string spec_data = 12; //规格数据
+  float weight = 13; //重量(kg)
+  int32 publish_status = 14; //上架状态：0-下架，1-上架
+  int32 verify_status = 15; //审核状态：0-未审核，1-审核通过，2-审核不通过
+  int32 sort = 16; //排序
+}
+
+// 添加商品SPU
+message AddProductSpuReq {
+  int64 id = 1; //商品SpuId
+  string name = 2; //商品名称
+  int64 category_id = 3; //商品分类ID
+  string category_ids = 4; //商品分类ID集合
+  string category_name = 5; //商品分类名称
+  int64 brand_id = 6; //品牌ID
+  string brand_name = 7; //品牌名称
+  string unit = 8; //单位
+  float weight = 9; //重量(kg)
+  string keywords = 10; //关键词
+  string brief = 11; //简介
+  string description = 12; //详细描述
+  string album_pics = 13; //画册图片，最多8张，以逗号分割
+  string main_pic = 14; //主图
+  string price_range = 15; //价格区间
+  int32 publish_status = 16; //上架状态：0-下架，1-上架
+  int32 new_status = 17; //新品状态:0->不是新品；1->新品
+  int32 recommend_status = 18; //推荐状态；0->不推荐；1->推荐
+  int32 verify_status = 19; //审核状态：0->未审核；1->审核通过
+  int32 preview_status = 20; //是否为预告商品：0->不是；1->是
+  int32 sort = 21; //排序
+  int32 new_status_sort = 22; //新品排序
+  int32 recommend_status_sort = 23; //推荐排序
+  int32 sales = 24; //销量
+  int32 stock = 25; //库存
+  int32 low_stock = 26; //预警库存
+  int32 promotion_type = 27; //促销类型：0->没有促销使用原价;1->使用促销价；2->使用会员价；3->使用阶梯价格；4->使用满减价格；5->秒杀
+  string detail_title = 28; //详情标题
+  string detail_desc = 29; //详情描述
+  string detail_html = 30; //产品详情网页内容
+  string detail_mobile_html = 31; //移动端网页详情
+  int64 create_by = 32; //创建人ID
+  repeated MemberPriceList      MemberPriceList = 33;
+  repeated ProductAttributeValueList      ProductAttributeValueList = 34;
+  repeated ProductFullReductionList      ProductFullReductionList = 35;
+  repeated ProductLadderList      ProductLadderList = 36;
+  repeated SkuStockList      SkuStockList = 37;
+}
+
+message AddProductSpuResp {
+  int64 spu_id = 1;
+}
+
+// 删除商品SPU
+message DeleteProductSpuReq {
+  repeated int64 ids = 1;
+}
+
+message DeleteProductSpuResp {
+  string pong = 1;
+}
+
+// 更新商品SPU
+message UpdateProductSpuReq {
+  int64 id = 1; //商品SpuId
+  string name = 2; //商品名称
+  int64 category_id = 3; //商品分类ID
+  string category_ids = 4; //商品分类ID集合
+  string category_name = 5; //商品分类名称
+  int64 brand_id = 6; //品牌ID
+  string brand_name = 7; //品牌名称
+  string unit = 8; //单位
+  float weight = 9; //重量(kg)
+  string keywords = 10; //关键词
+  string brief = 11; //简介
+  string description = 12; //详细描述
+  string album_pics = 13; //画册图片，最多8张，以逗号分割
+  string main_pic = 14; //主图
+  string price_range = 15; //价格区间
+  int32 publish_status = 16; //上架状态：0-下架，1-上架
+  int32 new_status = 17; //新品状态:0->不是新品；1->新品
+  int32 recommend_status = 18; //推荐状态；0->不推荐；1->推荐
+  int32 verify_status = 19; //审核状态：0->未审核；1->审核通过
+  int32 preview_status = 20; //是否为预告商品：0->不是；1->是
+  int32 sort = 21; //排序
+  int32 new_status_sort = 22; //新品排序
+  int32 recommend_status_sort = 23; //推荐排序
+  int32 sales = 24; //销量
+  int32 stock = 25; //库存
+  int32 low_stock = 26; //预警库存
+  int32 promotion_type = 27; //促销类型：0->没有促销使用原价;1->使用促销价；2->使用会员价；3->使用阶梯价格；4->使用满减价格；5->秒杀
+  string detail_title = 28; //详情标题
+  string detail_desc = 29; //详情描述
+  string detail_html = 30; //产品详情网页内容
+  string detail_mobile_html = 31; //移动端网页详情
+  int64 update_by = 32; //更新人ID
+  repeated MemberPriceList      MemberPriceList = 33;
+  repeated ProductAttributeValueList      ProductAttributeValueList = 34;
+  repeated ProductFullReductionList      ProductFullReductionList = 35;
+  repeated ProductLadderList      ProductLadderList = 36;
+  repeated SkuStockList      SkuStockList = 37;
+}
+
+message UpdateProductSpuResp {
+  string pong = 1;
+}
+
+// 更新商品SPU状态
+message UpdateProductSpuStatusReq {
+  repeated int64 ids = 1; //商品SpuId
+  int32 status = 16; //状态
+  string detail = 3;
+  int64 update_by = 4; //审核人
+  string review_man = 5; //更新人ID
+}
+
+message UpdateProductSpuStatusResp {
+  string pong = 1;
+}
+
+// 查询商品SPU详情
+message QueryProductSpuDetailReq {
+  int64 id = 1;
+}
+
+message BrandData {
+  int64 id = 1; //
+  string name = 2; //品牌名称
+  string logo = 3; //品牌logo
+  string big_pic = 4; //专区大图
+  string description = 5; //描述
+  string first_letter = 6; //首字母
+  int32 sort = 7; //排序
+  int32 recommend_status = 8; //推荐状态
+  int32 product_count = 9; //产品数量
+  int32 product_comment_count = 10; //产品评论数量
+  int32 is_enabled = 11; //是否启用
+  int64 create_by = 12; //创建人ID
+  string create_time = 13; //创建时间
+  int64 update_by = 14; //更新人ID
+  string update_time = 15; //更新时间
+
+}
+message ProductAttributeDataList {
+  int64 id = 1; //主键id
+  int64 group_id = 2; //属性分组ID
+  string name = 3; //属性名称
+  int32 input_type = 4; //输入类型：1-手动输入，2-单选，3-多选
+  int32 value_type = 5; //值类型：1-文本，2-数字，3-日期
+  string input_list = 6; //可选值列表，用逗号分隔
+  string unit = 7; //单位
+  int32 is_required = 8; //是否必填
+  int32 is_searchable = 9; //是否支持搜索
+  int32 is_show = 10; //是否显示
+  int32 sort = 11; //排序
+  int64 create_by = 12; //创建人ID
+  string create_time = 13; //创建时间
+  int64 update_by = 14; //更新人ID
+  string update_time = 15; //更新时间
+
+}
+message ProductAttributeValueData {
+  int64 id = 1; //主键id
+  int64 spu_id = 2; //商品SPU ID
+  int64 attribute_id = 3; //属性ID
+  string value = 4; //属性值
+  int64 create_by = 5; //创建人ID
+  string create_time = 6; //创建时间
+  int64 update_by = 7; //更新人ID
+  string update_time = 8; //更新时间
+}
+message SkuStockData {
+  int64 id = 1; //商品SpuId
+  int64 spu_id = 2; //商品SpuId
+  string name = 3; //SKU名称
+  string sku_code = 4; //SKU编码
+  string main_pic = 5; //主图
+  string album_pics = 6; //图片集
+  float price = 7; //价格
+  float promotion_price = 8; //单品促销价格
+  string promotion_start_time = 9; //促销开始时间
+  string promotion_end_time = 10; //促销结束时间
+  int32 stock = 11; //库存
+  int32 low_stock = 12; //预警库存
+  string spec_data = 13; //规格数据
+  float weight = 14; //重量(kg)
+  int32 publish_status = 15; //上架状态：0-下架，1-上架
+  int32 verify_status = 16; //审核状态：0-未审核，1-审核通过，2-审核不通过
+  int32 sort = 17; //排序
+  int32 sales = 18; //销量
+  int64 create_by = 19; //创建人ID
+  string create_time = 20; //创建时间
+  int64 update_by = 21; //更新人ID
+  string update_time = 22; //更新时间
+
+
+}
+message ProductLadderData {
+  int64 id = 1; //
+  int64 product_id = 2; //商品id
+  int32 count = 3; //满足的商品数量
+  int64 discount = 4; //折扣
+  int64 price = 5; //折后价格
+
+}
+message ProductFullReductionData {
+  int64 id = 1; //
+  int64 product_id = 2; //商品id
+  int64 full_price = 3; //商品满多少
+  int64 reduce_price = 4; //商品减多少
+
+}
+message MemberPriceListData {
+  int64 id = 1; //
+  int64 product_id = 2; //商品id
+  int64 member_level_id = 3; //会员等级id
+  int64 member_price = 4; //会员价格
+  string member_level_name = 5; //会员等级名称
+
+}
+
+message QueryProductSpuDetailResp {
+  ProductSpuListData data = 1; //商品
+  BrandData       Brand = 2;
+  repeated ProductAttributeDataList       ProductAttributeList = 3;
+  repeated ProductAttributeValueData       ProductAttributeValueList = 4;
+  repeated SkuStockData      SkuStockList = 5;
+  repeated ProductLadderData      ProductLadderList = 6;
+  repeated ProductFullReductionData      ProductFullReductionList = 7;
+  repeated MemberPriceListData      MemberPriceList = 8;
+
+}
+
+// 分页查询商品SPU列表
+message QueryProductSpuListReq {
+  string name = 1; //商品名称
+  int64 category_id = 2; //商品分类ID
+  string category_ids = 3; //商品分类ID集合
+  string category_name = 4; //商品分类名称
+  int64 brand_id = 5; //品牌ID
+  string brand_name = 6; //品牌名称
+  int32 publish_status = 7; //上架状态：0-下架，1-上架
+  int32 new_status = 8; //新品状态:0->不是新品；1->新品
+  int32 recommend_status = 9; //推荐状态；0->不推荐；1->推荐
+  int32 verify_status = 10; //审核状态：0->未审核；1->审核通过
+  int32 preview_status = 11; //是否为预告商品：0->不是；1->是
+  int32 promotion_type = 12; //促销类型：0->没有促销使用原价;1->使用促销价；2->使用会员价；3->使用阶梯价格；4->使用满减价格；5->秒杀
+  int32 page_num = 13; //第几页
+  int32 page_size = 14; //每页的数量
+  string keywords = 15; //关键词
+}
+
+message ProductSpuListData {
+  int64 id = 1; //商品SpuId
+  string name = 2; //商品名称
+  int64 category_id = 3; //商品分类ID
+  string category_ids = 4; //商品分类ID集合
+  string category_name = 5; //商品分类名称
+  int64 brand_id = 6; //品牌ID
+  string brand_name = 7; //品牌名称
+  string unit = 8; //单位
+  float weight = 9; //重量(kg)
+  string keywords = 10; //关键词
+  string brief = 11; //简介
+  string description = 12; //详细描述
+  string album_pics = 13; //画册图片，最多8张，以逗号分割
+  string main_pic = 14; //主图
+  string price_range = 15; //价格区间
+  int32 publish_status = 16; //上架状态：0-下架，1-上架
+  int32 new_status = 17; //新品状态:0->不是新品；1->新品
+  int32 recommend_status = 18; //推荐状态；0->不推荐；1->推荐
+  int32 verify_status = 19; //审核状态：0->未审核；1->审核通过
+  int32 preview_status = 20; //是否为预告商品：0->不是；1->是
+  int32 sort = 21; //排序
+  int32 new_status_sort = 22; //新品排序
+  int32 recommend_status_sort = 23; //推荐排序
+  int32 sales = 24; //销量
+  int32 stock = 25; //库存
+  int32 low_stock = 26; //预警库存
+  int32 promotion_type = 27; //促销类型：0->没有促销使用原价;1->使用促销价；2->使用会员价；3->使用阶梯价格；4->使用满减价格；5->秒杀
+  string detail_title = 28; //详情标题
+  string detail_desc = 29; //详情描述
+  string detail_html = 30; //产品详情网页内容
+  string detail_mobile_html = 31; //移动端网页详情
+  int64 create_by = 32; //创建人ID
+  string create_time = 33; //创建时间
+  int64 update_by = 34; //更新人ID
+  string update_time = 35; //更新时间
+
+}
+
+message QueryProductSpuListResp {
+  int64 total = 1;
+  repeated  ProductSpuListData list = 2;
+}
+
+message UpdateProductSortReq {
+  int64 id = 1;
+  int32 sort = 2;
+  int64 update_by = 3; //更新人ID
+}
+message QueryProductSpuByIdsReq {
+  repeated int64  Ids = 1;
+}
+// 商品SPU
+service ProductSpuService {
+  // 添加商品SPU
+  rpc AddProductSpu(AddProductSpuReq) returns (AddProductSpuResp){}
+  // 删除商品SPU
+  rpc DeleteProductSpu(DeleteProductSpuReq) returns (DeleteProductSpuResp){}
+  // 更新商品SPU
+  rpc UpdateProductSpu(UpdateProductSpuReq) returns (UpdateProductSpuResp){}
+  // 查询商品SPU详情
+  rpc QueryProductSpuDetail(QueryProductSpuDetailReq) returns (QueryProductSpuDetailResp){}
+  // 查询商品SPU列表
+  rpc QueryProductSpuList(QueryProductSpuListReq) returns (QueryProductSpuListResp){}
+
+
+  //修改审核状态
+  rpc UpdateVerifyStatus(UpdateProductSpuStatusReq) returns(UpdateProductSpuStatusResp);
+  //上下架商品
+  rpc UpdatePublishStatus(UpdateProductSpuStatusReq) returns(UpdateProductSpuStatusResp);
+  //推荐商品
+  rpc UpdateRecommendStatus(UpdateProductSpuStatusReq) returns(UpdateProductSpuStatusResp);
+  //设为新品
+  rpc UpdateNewStatus(UpdateProductSpuStatusReq) returns(UpdateProductSpuStatusResp);
+  //修改删除状态
+  rpc UpdateDeleteStatus(UpdateProductSpuStatusReq) returns(UpdateProductSpuStatusResp);
+
+  //更新新品排序
+  rpc UpdateNewStatusSort(UpdateProductSortReq) returns(UpdateProductSpuStatusResp);
+  //更新推荐排序
+  rpc UpdateRecommendStatusSort(UpdateProductSortReq) returns(UpdateProductSpuStatusResp);
+
+  //根据id集合查询商品信息
+  rpc QueryProductSpuListByIds(QueryProductSpuByIdsReq) returns(QueryProductSpuListResp);
+}
+
+
 // 添加商品审核记录
 message AddProductVertifyRecordReq {
   int64 product_id = 2; //商品id
@@ -1640,155 +2170,5 @@ service ProductVertifyRecordService {
   // 查询商品审核记录列表
   rpc QueryProductVertifyRecordList(QueryProductVertifyRecordListReq) returns (QueryProductVertifyRecordListResp){}
 
-
-}
-
-
-// 添加sku的库存
-message AddSkuStockReq {
-  int64 id = 1; //
-  int64 product_id = 2; //商品id
-  string sku_code = 3; //sku编码
-  int64 price = 4; //价格
-  int32 stock = 5; //库存
-  int32 low_stock = 6; //预警库存
-  string pic = 7; //展示图片
-  int32 sale = 8; //销量
-  int64 promotion_price = 9; //单品促销价格
-  int32 lock_stock = 10; //锁定库存
-  string sp_data = 11; //商品销售属性，json格式
-}
-
-message AddSkuStockResp {
-  string pong = 1;
-}
-
-// 删除sku的库存
-message DeleteSkuStockReq {
-  repeated int64 ids = 1;
-}
-
-message DeleteSkuStockResp {
-  string pong = 1;
-}
-
-// 更新sku的库存
-message UpdateSkuStockReq {
-  repeated UpdateSkuStockData    SkuStockList = 1;
-
-}
-message UpdateSkuStockData {
-  int64 id = 1; //
-  int64 product_id = 2; //商品id
-  string sku_code = 3; //sku编码
-  int64 price = 4; //价格
-  int32 stock = 5; //库存
-  int32 low_stock = 6; //预警库存
-  string pic = 7; //展示图片
-  int32 sale = 8; //销量
-  int64 promotion_price = 9; //单品促销价格
-  int32 lock_stock = 10; //锁定库存
-  string sp_data = 11; //商品销售属性，json格式
-}
-
-
-message UpdateSkuStockResp {
-  string pong = 1;
-}
-
-// 查询sku的库存详情
-message QuerySkuStockDetailReq {
-    int64 id = 1;
-}
-
-message QuerySkuStockDetailResp {
-  int64 id = 1; //
-  int64 product_id = 2; //商品id
-  string sku_code = 3; //sku编码
-  int64 price = 4; //价格
-  int32 stock = 5; //库存
-  int32 low_stock = 6; //预警库存
-  string pic = 7; //展示图片
-  int32 sale = 8; //销量
-  int64 promotion_price = 9; //单品促销价格
-  int32 lock_stock = 10; //锁定库存
-  string sp_data = 11; //商品销售属性，json格式
-}
-
-// 分页查询sku的库存列表
-message QuerySkuStockListReq {
-  int64 product_id = 1; //
-  string sku_code = 2; //sku编码
-
-}
-
-message SkuStockListData {
-  int64 id = 1; //
-  int32 lock_stock = 2; //锁定库存
-  int32 low_stock = 3; //预警库存
-  string pic = 4; //展示图片
-  int64 price = 5; //
-  int64 product_id = 6; //
-  int64 promotion_price = 7; //单品促销价格
-  int32 sale = 8; //销量
-  string sku_code = 9; //sku编码
-  string sp_data = 10; //商品销售属性，json格式
-  int32 stock = 11; //库存
-
-}
-
-message QuerySkuStockListResp {
-  int64 total = 1;
-  repeated  SkuStockListData list = 2;
-}
-
-message ReleaseSkuStockLockReq {
-  repeated ReleaseSkuStockLockData data = 1;
-}
-
-message ReleaseSkuStockLockData {
-  int64    ProductSkuId = 1;
-  int32    ProductQuantity = 2;
-}
-message ReleaseSkuStockLockResp {
-  string pong = 1;
-}
-
-message LockSkuStockLockReq {
-  repeated LockSkuStockLockData data = 1;
-}
-
-message LockSkuStockLockData {
-  int64    ProductSkuId = 1;
-  int32    ProductQuantity = 2;
-}
-message LockSkuStockLockResp {
-  string pong = 1;
-}
-
-message QuerySkuStockByProductSkuIdReq {
-  int64    ProductSkuId = 1;
-}
-
-// sku的库存
-service SkuStockService {
-  // 添加sku的库存
-  rpc AddSkuStock(AddSkuStockReq) returns (AddSkuStockResp){}
-  // 删除sku的库存
-  rpc DeleteSkuStock(DeleteSkuStockReq) returns (DeleteSkuStockResp){}
-  // 更新sku的库存
-  rpc UpdateSkuStock(UpdateSkuStockReq) returns (UpdateSkuStockResp ){}
-  // 查询sku的库存详情
-   rpc QuerySkuStockDetail(QuerySkuStockDetailReq) returns (QuerySkuStockDetailResp){}
-  // 查询sku的库存列表
-  rpc QuerySkuStockList(QuerySkuStockListReq) returns (QuerySkuStockListResp){}
-
-
-  //取消订单的时候,释放库存
-  rpc ReleaseSkuStockLock(ReleaseSkuStockLockReq) returns(ReleaseSkuStockLockResp);
-  //下单的时候,锁定库存
-  rpc LockSkuStockLock(LockSkuStockLockReq) returns(LockSkuStockLockResp);
-  //根据ProductSkuId查询sku
-  rpc QuerySkuStockByProductSkuId(QuerySkuStockByProductSkuIdReq) returns(SkuStockListData);
 
 }

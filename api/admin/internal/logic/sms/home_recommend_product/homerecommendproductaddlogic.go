@@ -36,7 +36,7 @@ func NewHomeRecommendProductAddLogic(ctx context.Context, svcCtx *svc.ServiceCon
 // HomeRecommendProductAdd 添加人气推荐商品
 func (l *HomeRecommendProductAddLogic) HomeRecommendProductAdd(req *types.AddHomeRecommendProductReq) (*types.BaseResp, error) {
 
-	_, err := l.svcCtx.ProductService.UpdateRecommendStatus(l.ctx, &pmsclient.UpdateProductStatusReq{
+	_, err := l.svcCtx.ProductSpuService.UpdateRecommendStatus(l.ctx, &pmsclient.UpdateProductSpuStatusReq{
 		Ids:    req.ProductIds,
 		Status: 1,
 	})

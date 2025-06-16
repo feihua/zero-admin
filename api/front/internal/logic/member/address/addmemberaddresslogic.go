@@ -33,7 +33,7 @@ func NewAddMemberAddressLogic(ctx context.Context, svcCtx *svc.ServiceContext) *
 }
 
 // AddMemberAddress 添加会员收货地址
-func (l *AddMemberAddressLogic) AddMemberAddress(req *types.AddMemberAddressReq) (resp *types.AddMemberAddressResp, err error) {
+func (l *AddMemberAddressLogic) AddMemberAddress(req *types.MemberAddressReq) (resp *types.MemberAddressResp, err error) {
 	memberId, err := common.GetMemberId(l.ctx)
 	if err != nil {
 		return nil, err
@@ -57,7 +57,7 @@ func (l *AddMemberAddressLogic) AddMemberAddress(req *types.AddMemberAddressReq)
 		return nil, errorx.NewDefaultError(s.Message())
 	}
 
-	return &types.AddMemberAddressResp{
+	return &types.MemberAddressResp{
 		Code:    0,
 		Message: "添加会员收货地址成功",
 	}, nil

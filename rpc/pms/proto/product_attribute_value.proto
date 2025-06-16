@@ -4,20 +4,21 @@ package main;
 
 option go_package = "./proto";
 
-// 添加存储产品参数信息的表
+// 添加商品属性值
 message AddProductAttributeValueReq {
-  int64 id = 1; //
-  int64 product_id = 2; //商品id
-  int64 product_attribute_id = 3; //商品属性id
-  string value = 4; //手动添加规格或参数的值，参数单值，规格有多个时以逗号隔开
-
+  int64 id = 1; //主键id
+  int64 spu_id = 2; //商品SPU ID
+  int64 attribute_id = 3; //属性ID
+  string value = 4; //属性值
+  int32 status = 5; //状态：0->禁用；1->启用
+  int64 create_by = 6; //创建人ID
 }
 
 message AddProductAttributeValueResp {
   string pong = 1;
 }
 
-// 删除存储产品参数信息的表
+// 删除商品属性值
 message DeleteProductAttributeValueReq {
   repeated int64 ids = 1;
 }
@@ -26,31 +27,69 @@ message DeleteProductAttributeValueResp {
   string pong = 1;
 }
 
-// 更新存储产品参数信息的表
+// 更新商品属性值
 message UpdateProductAttributeValueReq {
-  int64 id = 1; //
-  int64 product_id = 2; //商品id
-  int64 product_attribute_id = 3; //商品属性id
-  string value = 4; //手动添加规格或参数的值，参数单值，规格有多个时以逗号隔开
-
+  int64 id = 1; //主键id
+  int64 spu_id = 2; //商品SPU ID
+  int64 attribute_id = 3; //属性ID
+  string value = 4; //属性值
+  int32 status = 5; //状态：0->禁用；1->启用
+  int64 update_by = 8; //更新人ID
 }
 
 message UpdateProductAttributeValueResp {
   string pong = 1;
 }
 
+// 更新商品属性值状态
+message UpdateProductAttributeValueStatusReq {
+  repeated int64 ids = 1; //主键id
+  int32 status = 5; //状态：0->禁用；1->启用
+  int64 update_by = 8; //更新人ID
+}
 
-// 分页查询存储产品参数信息的表列表
-message QueryProductAttributeValueListReq {
-  int64 product_id = 1; //
+message UpdateProductAttributeValueStatusResp {
+  string pong = 1;
+}
+
+// 查询商品属性值详情
+message QueryProductAttributeValueDetailReq {
+    int64 id = 1;
+}
+
+message QueryProductAttributeValueDetailResp {
+  int64 id = 1; //主键id
+  int64 spu_id = 2; //商品SPU ID
+  int64 attribute_id = 3; //属性ID
+  string value = 4; //属性值
+  int32 status = 5; //状态：0->禁用；1->启用
+  int64 create_by = 6; //创建人ID
+  string create_time = 7; //创建时间
+  int64 update_by = 8; //更新人ID
+  string update_time = 9; //更新时间
 
 }
 
+// 分页查询商品属性值列表
+message QueryProductAttributeValueListReq {
+  int64 spu_id = 1; //商品SPU ID
+  int64 attribute_id = 2; //属性ID
+  int32 status = 3; //状态：0->禁用；1->启用
+  int32 page_num = 4; //第几页
+  int32 page_size = 5; //每页的数量
+}
+
 message ProductAttributeValueListData {
-  int64 id = 1; //
-  int64 product_id = 2; //商品id
-  int64 product_attribute_id = 3; //商品属性id
-  string value = 4; //手动添加规格或参数的值，参数单值，规格有多个时以逗号隔开
+  int64 id = 1; //主键id
+  int64 spu_id = 2; //商品SPU ID
+  int64 attribute_id = 3; //属性ID
+  string value = 4; //属性值
+  int32 status = 5; //状态：0->禁用；1->启用
+  int64 create_by = 6; //创建人ID
+  string create_time = 7; //创建时间
+  int64 update_by = 8; //更新人ID
+  string update_time = 9; //更新时间
+
 }
 
 message QueryProductAttributeValueListResp {
@@ -58,15 +97,19 @@ message QueryProductAttributeValueListResp {
   repeated  ProductAttributeValueListData list = 2;
 }
 
-// 存储产品参数信息的表
+// 商品属性值
 service ProductAttributeValueService {
-  // 添加存储产品参数信息的表
+  // 添加商品属性值
   rpc AddProductAttributeValue(AddProductAttributeValueReq) returns (AddProductAttributeValueResp){}
-  // 删除存储产品参数信息的表
+  // 删除商品属性值
   rpc DeleteProductAttributeValue(DeleteProductAttributeValueReq) returns (DeleteProductAttributeValueResp){}
-  // 更新存储产品参数信息的表
+  // 更新商品属性值
   rpc UpdateProductAttributeValue(UpdateProductAttributeValueReq) returns (UpdateProductAttributeValueResp ){}
-  // 查询存储产品参数信息的表列表
+  // 更新商品属性值状态
+  rpc UpdateProductAttributeValueStatus(UpdateProductAttributeValueStatusReq) returns (UpdateProductAttributeValueStatusResp ){}
+  // 查询商品属性值详情
+   rpc QueryProductAttributeValueDetail(QueryProductAttributeValueDetailReq) returns (QueryProductAttributeValueDetailResp){}
+  // 查询商品属性值列表
   rpc QueryProductAttributeValueList(QueryProductAttributeValueListReq) returns (QueryProductAttributeValueListResp){}
 
 

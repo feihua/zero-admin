@@ -57,8 +57,8 @@ type (
 	DeleteSeckillSessionReq            = smsclient.DeleteSeckillSessionReq
 	DeleteSeckillSessionResp           = smsclient.DeleteSeckillSessionResp
 	HomeAdvertiseListData              = smsclient.HomeAdvertiseListData
-	QueryCouponByIdReq                 = smsclient.QueryCouponByIdReq
-	QueryCouponByIdResp                = smsclient.QueryCouponByIdResp
+	QueryCouponByScopeIdReq            = smsclient.QueryCouponByScopeIdReq
+	QueryCouponByScopeIdResp           = smsclient.QueryCouponByScopeIdResp
 	QueryCouponData                    = smsclient.QueryCouponData
 	QueryCouponDetailReq               = smsclient.QueryCouponDetailReq
 	QueryCouponDetailResp              = smsclient.QueryCouponDetailResp

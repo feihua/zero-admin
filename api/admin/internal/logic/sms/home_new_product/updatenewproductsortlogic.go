@@ -35,7 +35,7 @@ func NewUpdateNewProductSortLogic(ctx context.Context, svcCtx *svc.ServiceContex
 
 // UpdateNewProductSort 修改推荐排序
 func (l *UpdateNewProductSortLogic) UpdateNewProductSort(req *types.UpdateNewProductSortReq) (resp *types.BaseResp, err error) {
-	_, err = l.svcCtx.ProductService.UpdateProductSort(l.ctx, &pmsclient.UpdateProductSortReq{
+	_, err = l.svcCtx.ProductSpuService.UpdateNewStatusSort(l.ctx, &pmsclient.UpdateProductSortReq{
 		Id:   req.ProductId,
 		Sort: req.Sort,
 	})

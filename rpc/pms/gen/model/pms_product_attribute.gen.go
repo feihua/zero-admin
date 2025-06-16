@@ -4,22 +4,31 @@
 
 package model
 
+import (
+	"time"
+)
+
 const TableNamePmsProductAttribute = "pms_product_attribute"
 
-// PmsProductAttribute 商品属性参数表
+// PmsProductAttribute 商品属性表
 type PmsProductAttribute struct {
-	ID                         int64  `gorm:"column:id;primaryKey;autoIncrement:true" json:"id"`
-	ProductAttributeCategoryID int64  `gorm:"column:product_attribute_category_id;not null;comment:商品属性分类id" json:"product_attribute_category_id"` // 商品属性分类id
-	Name                       string `gorm:"column:name;not null;comment:商品属性分类id" json:"name"`                                                   // 商品属性分类id
-	SelectType                 int32  `gorm:"column:select_type;not null;comment:属性选择类型：0->唯一；1->单选；2->多选" json:"select_type"`                     // 属性选择类型：0->唯一；1->单选；2->多选
-	InputType                  int32  `gorm:"column:input_type;not null;comment:属性录入方式：0->手工录入；1->从列表中选取" json:"input_type"`                       // 属性录入方式：0->手工录入；1->从列表中选取
-	InputList                  string `gorm:"column:input_list;not null;comment:可选值列表，以逗号隔开" json:"input_list"`                                    // 可选值列表，以逗号隔开
-	Sort                       int32  `gorm:"column:sort;not null;comment:排序字段：最高的可以单独上传图片" json:"sort"`                                           // 排序字段：最高的可以单独上传图片
-	FilterType                 int32  `gorm:"column:filter_type;not null;comment:分类筛选样式：1->普通；1->颜色" json:"filter_type"`                           // 分类筛选样式：1->普通；1->颜色
-	SearchType                 int32  `gorm:"column:search_type;not null;comment:检索类型；0->不需要进行检索；1->关键字检索；2->范围检索" json:"search_type"`             // 检索类型；0->不需要进行检索；1->关键字检索；2->范围检索
-	RelatedStatus              int32  `gorm:"column:related_status;not null;comment:相同属性产品是否关联；0->不关联；1->关联" json:"related_status"`                // 相同属性产品是否关联；0->不关联；1->关联
-	HandAddStatus              int32  `gorm:"column:hand_add_status;not null;comment:是否支持手动新增；0->不支持；1->支持" json:"hand_add_status"`                // 是否支持手动新增；0->不支持；1->支持
-	Type                       int32  `gorm:"column:type;not null;comment:属性的类型；0->规格；1->参数" json:"type"`                                          // 属性的类型；0->规格；1->参数
+	ID           int64      `gorm:"column:id;primaryKey;autoIncrement:true;comment:主键id" json:"id"`                        // 主键id
+	GroupID      int64      `gorm:"column:group_id;not null;comment:属性分组ID" json:"group_id"`                               // 属性分组ID
+	Name         string     `gorm:"column:name;not null;comment:属性名称" json:"name"`                                         // 属性名称
+	InputType    int32      `gorm:"column:input_type;not null;comment:输入类型：1-手动输入，2-单选，3-多选" json:"input_type"`            // 输入类型：1-手动输入，2-单选，3-多选
+	ValueType    int32      `gorm:"column:value_type;not null;comment:值类型：1-文本，2-数字，3-日期" json:"value_type"`               // 值类型：1-文本，2-数字，3-日期
+	InputList    string     `gorm:"column:input_list;not null;comment:可选值列表，用逗号分隔" json:"input_list"`                      // 可选值列表，用逗号分隔
+	Unit         string     `gorm:"column:unit;not null;comment:单位" json:"unit"`                                           // 单位
+	IsRequired   int32      `gorm:"column:is_required;not null;comment:是否必填" json:"is_required"`                           // 是否必填
+	IsSearchable int32      `gorm:"column:is_searchable;not null;comment:是否支持搜索" json:"is_searchable"`                     // 是否支持搜索
+	IsShow       int32      `gorm:"column:is_show;not null;default:1;comment:是否显示" json:"is_show"`                         // 是否显示
+	Sort         int32      `gorm:"column:sort;not null;comment:排序" json:"sort"`                                           // 排序
+	Status       int32      `gorm:"column:status;not null;comment:状态：0->禁用；1->启用" json:"status"`                           // 状态：0->禁用；1->启用
+	CreateBy     int64      `gorm:"column:create_by;not null;comment:创建人ID" json:"create_by"`                              // 创建人ID
+	CreateTime   time.Time  `gorm:"column:create_time;not null;default:CURRENT_TIMESTAMP;comment:创建时间" json:"create_time"` // 创建时间
+	UpdateBy     *int64     `gorm:"column:update_by;comment:更新人ID" json:"update_by"`                                       // 更新人ID
+	UpdateTime   *time.Time `gorm:"column:update_time;comment:更新时间" json:"update_time"`                                    // 更新时间
+	IsDeleted    int32      `gorm:"column:is_deleted;not null;comment:是否删除" json:"is_deleted"`                             // 是否删除
 }
 
 // TableName PmsProductAttribute's table name

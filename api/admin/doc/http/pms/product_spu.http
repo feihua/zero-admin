@@ -1,0 +1,259 @@
+###用户登录
+POST {{host}}/api/sys/user/login
+Content-Type: application/json
+
+{
+  "account": "admin",
+  "password": "123456"
+}
+> {%
+    client.global.set("token", response.body.data.token);
+%}
+
+### 添加商品spu
+POST {{host}}/api/pms/product/addProductSpu
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "productData": {
+    "name": "iPhone 15 Pro-test",
+    "categoryId": 4,
+    "categoryIds": "4,1",
+    "categoryName": "test",
+    "brandId": 1,
+    "brandName": "test",
+    "unit": "台",
+    "weight": 0.19,
+    "keywords": "iPhone,苹果,手机,A17",
+    "brief": "iPhone 15 Pro 支持USB-C快充，搭载A17 Pro芯片",
+    "description": "iPhone 15 Pro搭载创新的A17 Pro芯片，采用USB-C接口，支持快充。提供暗紫色、原色和银色三种颜色选择...",
+    "albumPics": "http://example.com/album/iphone15-1.jpg,http://example.com/album/iphone15-2.jpg,http://example.com/album/iphone15-3.jpg",
+    "mainPic": "http://example.com/main/iphone15.jpg",
+    "publishStatus": 1,
+    "newStatus": 1,
+    "recommendStatus": 1,
+    "verifyStatus": 1,
+    "previewStatus": 0,
+    "sort": 1,
+    "newStatusSort": 1,
+    "recommendStatusSort": 1,
+    "stock": 100,
+    "lowStock": 10,
+    "promotionType": 3,
+    "detailTitle": "test",
+    "detailDesc": "test",
+    "detailHtml": "test",
+    "detailMobileHtml": "test"
+  },
+  "skuList": [
+    {
+      "name": "iPhone 15 Pro 暗紫色 128GB 全网通版",
+      "skuCode": "IP15P-128-PURPLE",
+      "mainPic": "http://example.com/sku/iphone15-purple-128.jpg",
+      "albumPics": "http://example.com/sku/iphone15-p-1.jpg,http://example.com/sku/iphone15-p-2.jpg",
+      "price": 7999,
+      "promotionPrice": 7899,
+      "promotionStartTime": "",
+      "promotionEndTime": "",
+      "stock": 1000,
+      "lowStock": 100,
+      "specData": "{\"容量\": \"128GB\", \"颜色\": \"暗紫色\", \"网络版本\": \"全网通版\"}",
+      "weight": 0.19,
+      "publishStatus": 1,
+      "verifyStatus": 1,
+      "sort": 1
+    }
+  ],
+  "attributeValueList": [
+    {
+      "attributeId": 1,
+      "value": "Apple",
+      "status": 0
+    }
+  ],
+  "subjectIds": [
+    1,
+    2
+  ],
+  "prefrenceAreaIds": [
+    1,
+    3
+  ],
+  "ladderList": [
+    {
+      "count": 3,
+      "discount": 1,
+      "price": 0
+    }
+  ],
+  "fullList": [
+    {
+      "fullPrice": 0,
+      "reducePrice": 0
+    }
+  ],
+  "memberPriceList": [
+    {
+      "memberLevelId": 1,
+      "memberPrice": 66,
+      "memberLevelName": "黄金会员"
+    }
+  ]
+}
+
+### 删除商品spu
+GET {{host}}/api/pms/product/deleteProductSpu?ids=1
+Authorization: Bearer {{token}}
+
+
+### 修改商品spu
+POST {{host}}/api/pms/product/updateProductSpu
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "productData": {
+    "id": 12,
+    "name": "iPhone 15 Pro-test-update",
+    "categoryId": 4,
+    "categoryIds": "4,1",
+    "categoryName": "test",
+    "brandId": 1,
+    "brandName": "test",
+    "unit": "台",
+    "weight": 0.19,
+    "keywords": "iPhone,苹果,手机,A17",
+    "brief": "iPhone 15 Pro 支持USB-C快充，搭载A17 Pro芯片",
+    "description": "iPhone 15 Pro搭载创新的A17 Pro芯片，采用USB-C接口，支持快充。提供暗紫色、原色和银色三种颜色选择...",
+    "albumPics": "http://example.com/album/iphone15-1.jpg,http://example.com/album/iphone15-2.jpg,http://example.com/album/iphone15-3.jpg",
+    "mainPic": "http://example.com/main/iphone15.jpg",
+    "publishStatus": 1,
+    "newStatus": 1,
+    "recommendStatus": 1,
+    "verifyStatus": 1,
+    "previewStatus": 0,
+    "sort": 1,
+    "newStatusSort": 1,
+    "recommendStatusSort": 1,
+    "stock": 100,
+    "lowStock": 10,
+    "promotionType": 3,
+    "detailTitle": "test",
+    "detailDesc": "test",
+    "detailHtml": "test",
+    "detailMobileHtml": "test"
+  },
+  "skuList": [
+    {
+      "name": "iPhone 15 Pro 暗紫色 128GB 全网通版",
+      "skuCode": "IP15P-128-PURPLE",
+      "mainPic": "http://example.com/sku/iphone15-purple-128.jpg",
+      "albumPics": "http://example.com/sku/iphone15-p-1.jpg,http://example.com/sku/iphone15-p-2.jpg",
+      "price": 7999,
+      "promotionPrice": 7899,
+      "promotionStartTime": "",
+      "promotionEndTime": "",
+      "stock": 1000,
+      "lowStock": 100,
+      "specData": "{\"容量\": \"128GB\", \"颜色\": \"暗紫色\", \"网络版本\": \"全网通版\"}",
+      "weight": 0.19,
+      "publishStatus": 1,
+      "verifyStatus": 1,
+      "sort": 1
+    }
+  ],
+  "attributeValueList": [
+    {
+      "attributeId": 1,
+      "value": "Apple",
+      "status": 0
+    }
+  ],
+  "subjectIds": [
+    1,
+    2
+  ],
+  "prefrenceAreaIds": [
+    1,
+    3
+  ],
+  "ladderList": [
+    {
+      "count": 3,
+      "discount": 1,
+      "price": 0
+    }
+  ],
+  "fullList": [
+    {
+      "fullPrice": 0,
+      "reducePrice": 0
+    }
+  ],
+  "memberPriceList": [
+    {
+      "memberLevelId": 1,
+      "memberPrice": 66,
+      "memberLevelName": "黄金会员"
+    }
+  ]
+}
+
+### 修改审核状态
+POST {{host}}/api/pms/product/updateVerifyStatus
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "ids": [1],
+  "status": 1
+}
+
+### 更新商品spu上架/下架
+POST {{host}}/api/pms/product/updatePublishStatus
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "ids": [1],
+  "status": 1
+}
+
+### 更新推荐商品
+POST {{host}}/api/pms/product/updateRecommendStatus
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "ids": [1],
+  "status": 1
+}
+
+### 设为新品
+POST {{host}}/api/pms/product/updateNewStatus
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "ids": [1],
+  "status": 1
+}
+
+### 修改删除状态
+POST {{host}}/api/pms/product/updateDeleteStatus
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "ids": [1],
+  "status": 1
+}
+
+### 根据id查询商品spu详情
+GET {{host}}/api/pms/product/queryProductSpuDetail?id=12
+Authorization: Bearer {{token}}
+
+### 查询商品spu列表
+GET {{host}}/api/pms/product/queryProductSpuList
+Authorization: Bearer {{token}}

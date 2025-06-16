@@ -34,7 +34,7 @@ func NewCartItemDeleteLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Ca
 }
 
 // CartItemDelete 删除购物车中的某个商品
-func (l *CartItemDeleteLogic) CartItemDelete(req *types.CartItemDeleteReq) (resp *types.CartItemDeleteResp, err error) {
+func (l *CartItemDeleteLogic) CartItemDelete(req *types.CartItemDeleteReq) (resp *types.CartItemResp, err error) {
 	memberId, err := common.GetMemberId(l.ctx)
 	if err != nil {
 		return nil, err
@@ -46,7 +46,7 @@ func (l *CartItemDeleteLogic) CartItemDelete(req *types.CartItemDeleteReq) (resp
 		s, _ := status.FromError(err)
 		return nil, errorx.NewDefaultError(s.Message())
 	}
-	return &types.CartItemDeleteResp{
+	return &types.CartItemResp{
 		Code:    0,
 		Message: "操作成功",
 	}, nil

@@ -20,8 +20,8 @@ type (
 	AddCommentResp                                = pmsclient.AddCommentResp
 	AddFeightTemplateReq                          = pmsclient.AddFeightTemplateReq
 	AddFeightTemplateResp                         = pmsclient.AddFeightTemplateResp
-	AddProductAttributeCategoryReq                = pmsclient.AddProductAttributeCategoryReq
-	AddProductAttributeCategoryResp               = pmsclient.AddProductAttributeCategoryResp
+	AddProductAttributeGroupReq                   = pmsclient.AddProductAttributeGroupReq
+	AddProductAttributeGroupResp                  = pmsclient.AddProductAttributeGroupResp
 	AddProductAttributeReq                        = pmsclient.AddProductAttributeReq
 	AddProductAttributeResp                       = pmsclient.AddProductAttributeResp
 	AddProductAttributeValueReq                   = pmsclient.AddProductAttributeValueReq
@@ -40,12 +40,16 @@ type (
 	AddProductLadderResp                          = pmsclient.AddProductLadderResp
 	AddProductOperateLogReq                       = pmsclient.AddProductOperateLogReq
 	AddProductOperateLogResp                      = pmsclient.AddProductOperateLogResp
-	AddProductReq                                 = pmsclient.AddProductReq
-	AddProductResp                                = pmsclient.AddProductResp
+	AddProductSkuReq                              = pmsclient.AddProductSkuReq
+	AddProductSkuResp                             = pmsclient.AddProductSkuResp
+	AddProductSpecReq                             = pmsclient.AddProductSpecReq
+	AddProductSpecResp                            = pmsclient.AddProductSpecResp
+	AddProductSpecValueReq                        = pmsclient.AddProductSpecValueReq
+	AddProductSpecValueResp                       = pmsclient.AddProductSpecValueResp
+	AddProductSpuReq                              = pmsclient.AddProductSpuReq
+	AddProductSpuResp                             = pmsclient.AddProductSpuResp
 	AddProductVertifyRecordReq                    = pmsclient.AddProductVertifyRecordReq
 	AddProductVertifyRecordResp                   = pmsclient.AddProductVertifyRecordResp
-	AddSkuStockReq                                = pmsclient.AddSkuStockReq
-	AddSkuStockResp                               = pmsclient.AddSkuStockResp
 	BrandData                                     = pmsclient.BrandData
 	CommentListData                               = pmsclient.CommentListData
 	CommentReplayListData                         = pmsclient.CommentReplayListData
@@ -55,8 +59,8 @@ type (
 	DeleteCommentResp                             = pmsclient.DeleteCommentResp
 	DeleteFeightTemplateReq                       = pmsclient.DeleteFeightTemplateReq
 	DeleteFeightTemplateResp                      = pmsclient.DeleteFeightTemplateResp
-	DeleteProductAttributeCategoryReq             = pmsclient.DeleteProductAttributeCategoryReq
-	DeleteProductAttributeCategoryResp            = pmsclient.DeleteProductAttributeCategoryResp
+	DeleteProductAttributeGroupReq                = pmsclient.DeleteProductAttributeGroupReq
+	DeleteProductAttributeGroupResp               = pmsclient.DeleteProductAttributeGroupResp
 	DeleteProductAttributeReq                     = pmsclient.DeleteProductAttributeReq
 	DeleteProductAttributeResp                    = pmsclient.DeleteProductAttributeResp
 	DeleteProductAttributeValueReq                = pmsclient.DeleteProductAttributeValueReq
@@ -73,19 +77,19 @@ type (
 	DeleteProductLadderResp                       = pmsclient.DeleteProductLadderResp
 	DeleteProductOperateLogReq                    = pmsclient.DeleteProductOperateLogReq
 	DeleteProductOperateLogResp                   = pmsclient.DeleteProductOperateLogResp
-	DeleteProductReq                              = pmsclient.DeleteProductReq
-	DeleteProductResp                             = pmsclient.DeleteProductResp
-	DeleteSkuStockReq                             = pmsclient.DeleteSkuStockReq
-	DeleteSkuStockResp                            = pmsclient.DeleteSkuStockResp
+	DeleteProductSkuReq                           = pmsclient.DeleteProductSkuReq
+	DeleteProductSkuResp                          = pmsclient.DeleteProductSkuResp
+	DeleteProductSpecReq                          = pmsclient.DeleteProductSpecReq
+	DeleteProductSpecResp                         = pmsclient.DeleteProductSpecResp
+	DeleteProductSpecValueReq                     = pmsclient.DeleteProductSpecValueReq
+	DeleteProductSpecValueResp                    = pmsclient.DeleteProductSpecValueResp
+	DeleteProductSpuReq                           = pmsclient.DeleteProductSpuReq
+	DeleteProductSpuResp                          = pmsclient.DeleteProductSpuResp
 	FeightTemplateListData                        = pmsclient.FeightTemplateListData
-	LockSkuStockLockData                          = pmsclient.LockSkuStockLockData
-	LockSkuStockLockReq                           = pmsclient.LockSkuStockLockReq
-	LockSkuStockLockResp                          = pmsclient.LockSkuStockLockResp
 	MemberPriceList                               = pmsclient.MemberPriceList
 	MemberPriceListData                           = pmsclient.MemberPriceListData
-	ProductAttributeCategoryListData              = pmsclient.ProductAttributeCategoryListData
-	ProductAttributeData                          = pmsclient.ProductAttributeData
 	ProductAttributeDataList                      = pmsclient.ProductAttributeDataList
+	ProductAttributeGroupListData                 = pmsclient.ProductAttributeGroupListData
 	ProductAttributeListData                      = pmsclient.ProductAttributeListData
 	ProductAttributeValueData                     = pmsclient.ProductAttributeValueData
 	ProductAttributeValueList                     = pmsclient.ProductAttributeValueList
@@ -100,13 +104,13 @@ type (
 	ProductLadderData                             = pmsclient.ProductLadderData
 	ProductLadderList                             = pmsclient.ProductLadderList
 	ProductLadderListData                         = pmsclient.ProductLadderListData
-	ProductListData                               = pmsclient.ProductListData
 	ProductOperateLogListData                     = pmsclient.ProductOperateLogListData
+	ProductSkuListData                            = pmsclient.ProductSkuListData
+	ProductSpecListData                           = pmsclient.ProductSpecListData
+	ProductSpecValueListData                      = pmsclient.ProductSpecValueListData
+	ProductSpuListData                            = pmsclient.ProductSpuListData
 	ProductVertifyRecordListData                  = pmsclient.ProductVertifyRecordListData
 	QueryBrandListByIdsReq                        = pmsclient.QueryBrandListByIdsReq
-	QueryByproductCategoryIdData                  = pmsclient.QueryByproductCategoryIdData
-	QueryByproductCategoryIdReq                   = pmsclient.QueryByproductCategoryIdReq
-	QueryByproductCategoryIdResp                  = pmsclient.QueryByproductCategoryIdResp
 	QueryCommentDetailReq                         = pmsclient.QueryCommentDetailReq
 	QueryCommentDetailResp                        = pmsclient.QueryCommentDetailResp
 	QueryCommentListReq                           = pmsclient.QueryCommentListReq
@@ -119,17 +123,22 @@ type (
 	QueryFeightTemplateDetailResp                 = pmsclient.QueryFeightTemplateDetailResp
 	QueryFeightTemplateListReq                    = pmsclient.QueryFeightTemplateListReq
 	QueryFeightTemplateListResp                   = pmsclient.QueryFeightTemplateListResp
-	QueryProductAttributeCategoryListReq          = pmsclient.QueryProductAttributeCategoryListReq
-	QueryProductAttributeCategoryListResp         = pmsclient.QueryProductAttributeCategoryListResp
+	QueryProductAttributeDetailReq                = pmsclient.QueryProductAttributeDetailReq
+	QueryProductAttributeDetailResp               = pmsclient.QueryProductAttributeDetailResp
+	QueryProductAttributeGroupDetailReq           = pmsclient.QueryProductAttributeGroupDetailReq
+	QueryProductAttributeGroupDetailResp          = pmsclient.QueryProductAttributeGroupDetailResp
+	QueryProductAttributeGroupListReq             = pmsclient.QueryProductAttributeGroupListReq
+	QueryProductAttributeGroupListResp            = pmsclient.QueryProductAttributeGroupListResp
 	QueryProductAttributeListReq                  = pmsclient.QueryProductAttributeListReq
 	QueryProductAttributeListResp                 = pmsclient.QueryProductAttributeListResp
+	QueryProductAttributeValueDetailReq           = pmsclient.QueryProductAttributeValueDetailReq
+	QueryProductAttributeValueDetailResp          = pmsclient.QueryProductAttributeValueDetailResp
 	QueryProductAttributeValueListReq             = pmsclient.QueryProductAttributeValueListReq
 	QueryProductAttributeValueListResp            = pmsclient.QueryProductAttributeValueListResp
 	QueryProductBrandDetailReq                    = pmsclient.QueryProductBrandDetailReq
 	QueryProductBrandDetailResp                   = pmsclient.QueryProductBrandDetailResp
 	QueryProductBrandListReq                      = pmsclient.QueryProductBrandListReq
 	QueryProductBrandListResp                     = pmsclient.QueryProductBrandListResp
-	QueryProductByIdsReq                          = pmsclient.QueryProductByIdsReq
 	QueryProductCategoryAttributeRelationListReq  = pmsclient.QueryProductCategoryAttributeRelationListReq
 	QueryProductCategoryAttributeRelationListResp = pmsclient.QueryProductCategoryAttributeRelationListResp
 	QueryProductCategoryDetailReq                 = pmsclient.QueryProductCategoryDetailReq
@@ -143,45 +152,57 @@ type (
 	QueryProductCollectDetailResp                 = pmsclient.QueryProductCollectDetailResp
 	QueryProductCollectListReq                    = pmsclient.QueryProductCollectListReq
 	QueryProductCollectListResp                   = pmsclient.QueryProductCollectListResp
-	QueryProductDetailByIdReq                     = pmsclient.QueryProductDetailByIdReq
-	QueryProductDetailByIdResp                    = pmsclient.QueryProductDetailByIdResp
 	QueryProductFullReductionListReq              = pmsclient.QueryProductFullReductionListReq
 	QueryProductFullReductionListResp             = pmsclient.QueryProductFullReductionListResp
 	QueryProductLadderDetailReq                   = pmsclient.QueryProductLadderDetailReq
 	QueryProductLadderDetailResp                  = pmsclient.QueryProductLadderDetailResp
 	QueryProductLadderListReq                     = pmsclient.QueryProductLadderListReq
 	QueryProductLadderListResp                    = pmsclient.QueryProductLadderListResp
-	QueryProductListReq                           = pmsclient.QueryProductListReq
-	QueryProductListResp                          = pmsclient.QueryProductListResp
 	QueryProductOperateLogDetailReq               = pmsclient.QueryProductOperateLogDetailReq
 	QueryProductOperateLogDetailResp              = pmsclient.QueryProductOperateLogDetailResp
 	QueryProductOperateLogListReq                 = pmsclient.QueryProductOperateLogListReq
 	QueryProductOperateLogListResp                = pmsclient.QueryProductOperateLogListResp
+	QueryProductSkuDetailReq                      = pmsclient.QueryProductSkuDetailReq
+	QueryProductSkuDetailResp                     = pmsclient.QueryProductSkuDetailResp
+	QueryProductSkuListReq                        = pmsclient.QueryProductSkuListReq
+	QueryProductSkuListResp                       = pmsclient.QueryProductSkuListResp
+	QueryProductSpecDetailReq                     = pmsclient.QueryProductSpecDetailReq
+	QueryProductSpecDetailResp                    = pmsclient.QueryProductSpecDetailResp
+	QueryProductSpecListReq                       = pmsclient.QueryProductSpecListReq
+	QueryProductSpecListResp                      = pmsclient.QueryProductSpecListResp
+	QueryProductSpecValueDetailReq                = pmsclient.QueryProductSpecValueDetailReq
+	QueryProductSpecValueDetailResp               = pmsclient.QueryProductSpecValueDetailResp
+	QueryProductSpecValueListReq                  = pmsclient.QueryProductSpecValueListReq
+	QueryProductSpecValueListResp                 = pmsclient.QueryProductSpecValueListResp
+	QueryProductSpuByIdsReq                       = pmsclient.QueryProductSpuByIdsReq
+	QueryProductSpuDetailReq                      = pmsclient.QueryProductSpuDetailReq
+	QueryProductSpuDetailResp                     = pmsclient.QueryProductSpuDetailResp
+	QueryProductSpuListReq                        = pmsclient.QueryProductSpuListReq
+	QueryProductSpuListResp                       = pmsclient.QueryProductSpuListResp
 	QueryProductVertifyRecordDetailReq            = pmsclient.QueryProductVertifyRecordDetailReq
 	QueryProductVertifyRecordDetailResp           = pmsclient.QueryProductVertifyRecordDetailResp
 	QueryProductVertifyRecordListReq              = pmsclient.QueryProductVertifyRecordListReq
 	QueryProductVertifyRecordListResp             = pmsclient.QueryProductVertifyRecordListResp
-	QuerySkuStockByProductSkuIdReq                = pmsclient.QuerySkuStockByProductSkuIdReq
-	QuerySkuStockDetailReq                        = pmsclient.QuerySkuStockDetailReq
-	QuerySkuStockDetailResp                       = pmsclient.QuerySkuStockDetailResp
-	QuerySkuStockListReq                          = pmsclient.QuerySkuStockListReq
-	QuerySkuStockListResp                         = pmsclient.QuerySkuStockListResp
-	ReleaseSkuStockLockData                       = pmsclient.ReleaseSkuStockLockData
-	ReleaseSkuStockLockReq                        = pmsclient.ReleaseSkuStockLockReq
-	ReleaseSkuStockLockResp                       = pmsclient.ReleaseSkuStockLockResp
 	SkuStockData                                  = pmsclient.SkuStockData
 	SkuStockList                                  = pmsclient.SkuStockList
-	SkuStockListData                              = pmsclient.SkuStockListData
 	UpdateCommentReplayReq                        = pmsclient.UpdateCommentReplayReq
 	UpdateCommentReplayResp                       = pmsclient.UpdateCommentReplayResp
 	UpdateCommentReq                              = pmsclient.UpdateCommentReq
 	UpdateCommentResp                             = pmsclient.UpdateCommentResp
 	UpdateFeightTemplateReq                       = pmsclient.UpdateFeightTemplateReq
 	UpdateFeightTemplateResp                      = pmsclient.UpdateFeightTemplateResp
-	UpdateProductAttributeCategoryReq             = pmsclient.UpdateProductAttributeCategoryReq
-	UpdateProductAttributeCategoryResp            = pmsclient.UpdateProductAttributeCategoryResp
+	UpdateProductAttributeGroupReq                = pmsclient.UpdateProductAttributeGroupReq
+	UpdateProductAttributeGroupResp               = pmsclient.UpdateProductAttributeGroupResp
+	UpdateProductAttributeGroupStatusReq          = pmsclient.UpdateProductAttributeGroupStatusReq
+	UpdateProductAttributeGroupStatusResp         = pmsclient.UpdateProductAttributeGroupStatusResp
+	UpdateProductAttributeReq                     = pmsclient.UpdateProductAttributeReq
+	UpdateProductAttributeResp                    = pmsclient.UpdateProductAttributeResp
+	UpdateProductAttributeStatusReq               = pmsclient.UpdateProductAttributeStatusReq
+	UpdateProductAttributeStatusResp              = pmsclient.UpdateProductAttributeStatusResp
 	UpdateProductAttributeValueReq                = pmsclient.UpdateProductAttributeValueReq
 	UpdateProductAttributeValueResp               = pmsclient.UpdateProductAttributeValueResp
+	UpdateProductAttributeValueStatusReq          = pmsclient.UpdateProductAttributeValueStatusReq
+	UpdateProductAttributeValueStatusResp         = pmsclient.UpdateProductAttributeValueStatusResp
 	UpdateProductBrandReq                         = pmsclient.UpdateProductBrandReq
 	UpdateProductBrandResp                        = pmsclient.UpdateProductBrandResp
 	UpdateProductBrandSortReq                     = pmsclient.UpdateProductBrandSortReq
@@ -193,23 +214,38 @@ type (
 	UpdateProductCategoryStatusResp               = pmsclient.UpdateProductCategoryStatusResp
 	UpdateProductLadderReq                        = pmsclient.UpdateProductLadderReq
 	UpdateProductLadderResp                       = pmsclient.UpdateProductLadderResp
-	UpdateProductReq                              = pmsclient.UpdateProductReq
-	UpdateProductResp                             = pmsclient.UpdateProductResp
+	UpdateProductSkuData                          = pmsclient.UpdateProductSkuData
+	UpdateProductSkuReq                           = pmsclient.UpdateProductSkuReq
+	UpdateProductSkuResp                          = pmsclient.UpdateProductSkuResp
 	UpdateProductSortReq                          = pmsclient.UpdateProductSortReq
-	UpdateProductStatusReq                        = pmsclient.UpdateProductStatusReq
-	UpdateProductStatusResp                       = pmsclient.UpdateProductStatusResp
+	UpdateProductSpecReq                          = pmsclient.UpdateProductSpecReq
+	UpdateProductSpecResp                         = pmsclient.UpdateProductSpecResp
+	UpdateProductSpecStatusReq                    = pmsclient.UpdateProductSpecStatusReq
+	UpdateProductSpecStatusResp                   = pmsclient.UpdateProductSpecStatusResp
+	UpdateProductSpecValueReq                     = pmsclient.UpdateProductSpecValueReq
+	UpdateProductSpecValueResp                    = pmsclient.UpdateProductSpecValueResp
+	UpdateProductSpecValueStatusReq               = pmsclient.UpdateProductSpecValueStatusReq
+	UpdateProductSpecValueStatusResp              = pmsclient.UpdateProductSpecValueStatusResp
+	UpdateProductSpuReq                           = pmsclient.UpdateProductSpuReq
+	UpdateProductSpuResp                          = pmsclient.UpdateProductSpuResp
+	UpdateProductSpuStatusReq                     = pmsclient.UpdateProductSpuStatusReq
+	UpdateProductSpuStatusResp                    = pmsclient.UpdateProductSpuStatusResp
 	UpdateSkuStockData                            = pmsclient.UpdateSkuStockData
+	UpdateSkuStockLockResp                        = pmsclient.UpdateSkuStockLockResp
 	UpdateSkuStockReq                             = pmsclient.UpdateSkuStockReq
-	UpdateSkuStockResp                            = pmsclient.UpdateSkuStockResp
 
 	ProductAttributeValueService interface {
-		// 添加存储产品参数信息的表
+		// 添加商品属性值
 		AddProductAttributeValue(ctx context.Context, in *AddProductAttributeValueReq, opts ...grpc.CallOption) (*AddProductAttributeValueResp, error)
-		// 删除存储产品参数信息的表
+		// 删除商品属性值
 		DeleteProductAttributeValue(ctx context.Context, in *DeleteProductAttributeValueReq, opts ...grpc.CallOption) (*DeleteProductAttributeValueResp, error)
-		// 更新存储产品参数信息的表
+		// 更新商品属性值
 		UpdateProductAttributeValue(ctx context.Context, in *UpdateProductAttributeValueReq, opts ...grpc.CallOption) (*UpdateProductAttributeValueResp, error)
-		// 查询存储产品参数信息的表列表
+		// 更新商品属性值状态
+		UpdateProductAttributeValueStatus(ctx context.Context, in *UpdateProductAttributeValueStatusReq, opts ...grpc.CallOption) (*UpdateProductAttributeValueStatusResp, error)
+		// 查询商品属性值详情
+		QueryProductAttributeValueDetail(ctx context.Context, in *QueryProductAttributeValueDetailReq, opts ...grpc.CallOption) (*QueryProductAttributeValueDetailResp, error)
+		// 查询商品属性值列表
 		QueryProductAttributeValueList(ctx context.Context, in *QueryProductAttributeValueListReq, opts ...grpc.CallOption) (*QueryProductAttributeValueListResp, error)
 	}
 
@@ -224,25 +260,37 @@ func NewProductAttributeValueService(cli zrpc.Client) ProductAttributeValueServi
 	}
 }
 
-// 添加存储产品参数信息的表
+// 添加商品属性值
 func (m *defaultProductAttributeValueService) AddProductAttributeValue(ctx context.Context, in *AddProductAttributeValueReq, opts ...grpc.CallOption) (*AddProductAttributeValueResp, error) {
 	client := pmsclient.NewProductAttributeValueServiceClient(m.cli.Conn())
 	return client.AddProductAttributeValue(ctx, in, opts...)
 }
 
-// 删除存储产品参数信息的表
+// 删除商品属性值
 func (m *defaultProductAttributeValueService) DeleteProductAttributeValue(ctx context.Context, in *DeleteProductAttributeValueReq, opts ...grpc.CallOption) (*DeleteProductAttributeValueResp, error) {
 	client := pmsclient.NewProductAttributeValueServiceClient(m.cli.Conn())
 	return client.DeleteProductAttributeValue(ctx, in, opts...)
 }
 
-// 更新存储产品参数信息的表
+// 更新商品属性值
 func (m *defaultProductAttributeValueService) UpdateProductAttributeValue(ctx context.Context, in *UpdateProductAttributeValueReq, opts ...grpc.CallOption) (*UpdateProductAttributeValueResp, error) {
 	client := pmsclient.NewProductAttributeValueServiceClient(m.cli.Conn())
 	return client.UpdateProductAttributeValue(ctx, in, opts...)
 }
 
-// 查询存储产品参数信息的表列表
+// 更新商品属性值状态
+func (m *defaultProductAttributeValueService) UpdateProductAttributeValueStatus(ctx context.Context, in *UpdateProductAttributeValueStatusReq, opts ...grpc.CallOption) (*UpdateProductAttributeValueStatusResp, error) {
+	client := pmsclient.NewProductAttributeValueServiceClient(m.cli.Conn())
+	return client.UpdateProductAttributeValueStatus(ctx, in, opts...)
+}
+
+// 查询商品属性值详情
+func (m *defaultProductAttributeValueService) QueryProductAttributeValueDetail(ctx context.Context, in *QueryProductAttributeValueDetailReq, opts ...grpc.CallOption) (*QueryProductAttributeValueDetailResp, error) {
+	client := pmsclient.NewProductAttributeValueServiceClient(m.cli.Conn())
+	return client.QueryProductAttributeValueDetail(ctx, in, opts...)
+}
+
+// 查询商品属性值列表
 func (m *defaultProductAttributeValueService) QueryProductAttributeValueList(ctx context.Context, in *QueryProductAttributeValueListReq, opts ...grpc.CallOption) (*QueryProductAttributeValueListResp, error) {
 	client := pmsclient.NewProductAttributeValueServiceClient(m.cli.Conn())
 	return client.QueryProductAttributeValueList(ctx, in, opts...)

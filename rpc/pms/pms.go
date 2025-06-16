@@ -10,7 +10,7 @@ import (
 	commentreplayserviceServer "github.com/feihua/zero-admin/rpc/pms/internal/server/commentreplayservice"
 	commentserviceServer "github.com/feihua/zero-admin/rpc/pms/internal/server/commentservice"
 	feighttemplateserviceServer "github.com/feihua/zero-admin/rpc/pms/internal/server/feighttemplateservice"
-	productattributecategoryserviceServer "github.com/feihua/zero-admin/rpc/pms/internal/server/productattributecategoryservice"
+	productattributegroupserviceServer "github.com/feihua/zero-admin/rpc/pms/internal/server/productattributegroupservice"
 	productattributeserviceServer "github.com/feihua/zero-admin/rpc/pms/internal/server/productattributeservice"
 	productattributevalueserviceServer "github.com/feihua/zero-admin/rpc/pms/internal/server/productattributevalueservice"
 	productbrandserviceServer "github.com/feihua/zero-admin/rpc/pms/internal/server/productbrandservice"
@@ -19,9 +19,11 @@ import (
 	productfullreductionserviceServer "github.com/feihua/zero-admin/rpc/pms/internal/server/productfullreductionservice"
 	productladderserviceServer "github.com/feihua/zero-admin/rpc/pms/internal/server/productladderservice"
 	productoperatelogserviceServer "github.com/feihua/zero-admin/rpc/pms/internal/server/productoperatelogservice"
-	productserviceServer "github.com/feihua/zero-admin/rpc/pms/internal/server/productservice"
+	productskuserviceServer "github.com/feihua/zero-admin/rpc/pms/internal/server/productskuservice"
+	productspecserviceServer "github.com/feihua/zero-admin/rpc/pms/internal/server/productspecservice"
+	productspecvalueserviceServer "github.com/feihua/zero-admin/rpc/pms/internal/server/productspecvalueservice"
+	productspuserviceServer "github.com/feihua/zero-admin/rpc/pms/internal/server/productspuservice"
 	productvertifyrecordserviceServer "github.com/feihua/zero-admin/rpc/pms/internal/server/productvertifyrecordservice"
-	skustockserviceServer "github.com/feihua/zero-admin/rpc/pms/internal/server/skustockservice"
 	"github.com/feihua/zero-admin/rpc/pms/internal/svc"
 	"github.com/feihua/zero-admin/rpc/pms/pmsclient"
 
@@ -44,12 +46,12 @@ func main() {
 	ctx := svc.NewServiceContext(c)
 
 	s := zrpc.MustNewServer(c.RpcServerConf, func(grpcServer *grpc.Server) {
-		pmsclient.RegisterProductServiceServer(grpcServer, productserviceServer.NewProductServiceServer(ctx))
+		pmsclient.RegisterProductSpuServiceServer(grpcServer, productspuserviceServer.NewProductSpuServiceServer(ctx))
 		pmsclient.RegisterProductBrandServiceServer(grpcServer, productbrandserviceServer.NewProductBrandServiceServer(ctx))
 		pmsclient.RegisterCommentServiceServer(grpcServer, commentserviceServer.NewCommentServiceServer(ctx))
 		pmsclient.RegisterCommentReplayServiceServer(grpcServer, commentreplayserviceServer.NewCommentReplayServiceServer(ctx))
 		pmsclient.RegisterFeightTemplateServiceServer(grpcServer, feighttemplateserviceServer.NewFeightTemplateServiceServer(ctx))
-		pmsclient.RegisterProductAttributeCategoryServiceServer(grpcServer, productattributecategoryserviceServer.NewProductAttributeCategoryServiceServer(ctx))
+		pmsclient.RegisterProductAttributeGroupServiceServer(grpcServer, productattributegroupserviceServer.NewProductAttributeGroupServiceServer(ctx))
 		pmsclient.RegisterProductAttributeServiceServer(grpcServer, productattributeserviceServer.NewProductAttributeServiceServer(ctx))
 		pmsclient.RegisterProductAttributeValueServiceServer(grpcServer, productattributevalueserviceServer.NewProductAttributeValueServiceServer(ctx))
 		pmsclient.RegisterProductCategoryAttributeRelationServiceServer(grpcServer, productcategoryattributerelationserviceServer.NewProductCategoryAttributeRelationServiceServer(ctx))
@@ -58,7 +60,9 @@ func main() {
 		pmsclient.RegisterProductLadderServiceServer(grpcServer, productladderserviceServer.NewProductLadderServiceServer(ctx))
 		pmsclient.RegisterProductOperateLogServiceServer(grpcServer, productoperatelogserviceServer.NewProductOperateLogServiceServer(ctx))
 		pmsclient.RegisterProductVertifyRecordServiceServer(grpcServer, productvertifyrecordserviceServer.NewProductVertifyRecordServiceServer(ctx))
-		pmsclient.RegisterSkuStockServiceServer(grpcServer, skustockserviceServer.NewSkuStockServiceServer(ctx))
+		pmsclient.RegisterProductSkuServiceServer(grpcServer, productskuserviceServer.NewProductSkuServiceServer(ctx))
+		pmsclient.RegisterProductSpecServiceServer(grpcServer, productspecserviceServer.NewProductSpecServiceServer(ctx))
+		pmsclient.RegisterProductSpecValueServiceServer(grpcServer, productspecvalueserviceServer.NewProductSpecValueServiceServer(ctx))
 
 		if c.Mode == service.DevMode || c.Mode == service.TestMode {
 			reflection.Register(grpcServer)

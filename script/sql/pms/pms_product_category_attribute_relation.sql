@@ -1,3 +1,4 @@
+drop table if exists pms_product_category_attribute_relation;
 create table pms_product_category_attribute_relation
 (
     id                   bigint auto_increment

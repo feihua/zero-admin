@@ -11,7 +11,10 @@ type (
 		BrandLogo string `json:"brandLogo"` // 品牌Logo
 		BrandCity string `json:"brandCity"` // 品牌所在城市
 	}
-	AddAttentionResp {
+	DeleteAttentionReq {
+		BrandIds []int64 `form:"brandIds"`
+	}
+	AttentionResp {
 		Code    int64  `json:"code"`
 		Message string `json:"message"`
 	}
@@ -32,13 +35,6 @@ type (
 		Code    int64               `json:"code"`
 		Message string              `json:"message"`
 	}
-	DeleteAttentionReq {
-		BrandIds []int64 `form:"brandIds"`
-	}
-	DeleteAttentionResp {
-		Code    int64  `json:"code"`
-		Message string `json:"message"`
-	}
 )
 
 @server (
@@ -49,7 +45,7 @@ type (
 service front-api {
 	//添加品牌关注
 	@handler AddAttention
-	post /addAttention (AddAttentionReq) returns (AddAttentionResp)
+	post /addAttention (AddAttentionReq) returns (AttentionResp)
 
 	//分页查询当前用户品牌关注列表
 	@handler QueryAttentionList
@@ -57,10 +53,10 @@ service front-api {
 
 	//取消品牌关注
 	@handler DeleteAttention
-	get /deleteAttention (DeleteAttentionReq) returns (DeleteAttentionResp)
+	get /deleteAttention (DeleteAttentionReq) returns (AttentionResp)
 
 	//清空当前用户品牌关注列表
 	@handler ClearAttention
-	get /clearAttention returns (DeleteAttentionResp)
+	get /clearAttention returns (AttentionResp)
 }
 

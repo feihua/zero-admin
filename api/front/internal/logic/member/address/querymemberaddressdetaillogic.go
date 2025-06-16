@@ -63,7 +63,6 @@ func (l *QueryMemberAddressDetailLogic) QueryMemberAddressDetail(req *types.Quer
 		IsDefault:     detail.IsDefault,     // 是否默认地址
 		CreateTime:    detail.CreateTime,    // 创建时间
 		UpdateTime:    detail.UpdateTime,    // 更新时间
-		IsDeleted:     detail.IsDeleted,     // 是否删除
 
 	}
 	return &types.QueryMemberAddressDetailResp{

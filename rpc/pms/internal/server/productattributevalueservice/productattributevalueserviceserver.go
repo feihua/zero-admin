@@ -23,25 +23,37 @@ func NewProductAttributeValueServiceServer(svcCtx *svc.ServiceContext) *ProductA
 	}
 }
 
-// 添加存储产品参数信息的表
+// 添加商品属性值
 func (s *ProductAttributeValueServiceServer) AddProductAttributeValue(ctx context.Context, in *pmsclient.AddProductAttributeValueReq) (*pmsclient.AddProductAttributeValueResp, error) {
 	l := productattributevalueservicelogic.NewAddProductAttributeValueLogic(ctx, s.svcCtx)
 	return l.AddProductAttributeValue(in)
 }
 
-// 删除存储产品参数信息的表
+// 删除商品属性值
 func (s *ProductAttributeValueServiceServer) DeleteProductAttributeValue(ctx context.Context, in *pmsclient.DeleteProductAttributeValueReq) (*pmsclient.DeleteProductAttributeValueResp, error) {
 	l := productattributevalueservicelogic.NewDeleteProductAttributeValueLogic(ctx, s.svcCtx)
 	return l.DeleteProductAttributeValue(in)
 }
 
-// 更新存储产品参数信息的表
+// 更新商品属性值
 func (s *ProductAttributeValueServiceServer) UpdateProductAttributeValue(ctx context.Context, in *pmsclient.UpdateProductAttributeValueReq) (*pmsclient.UpdateProductAttributeValueResp, error) {
 	l := productattributevalueservicelogic.NewUpdateProductAttributeValueLogic(ctx, s.svcCtx)
 	return l.UpdateProductAttributeValue(in)
 }
 
-// 查询存储产品参数信息的表列表
+// 更新商品属性值状态
+func (s *ProductAttributeValueServiceServer) UpdateProductAttributeValueStatus(ctx context.Context, in *pmsclient.UpdateProductAttributeValueStatusReq) (*pmsclient.UpdateProductAttributeValueStatusResp, error) {
+	l := productattributevalueservicelogic.NewUpdateProductAttributeValueStatusLogic(ctx, s.svcCtx)
+	return l.UpdateProductAttributeValueStatus(in)
+}
+
+// 查询商品属性值详情
+func (s *ProductAttributeValueServiceServer) QueryProductAttributeValueDetail(ctx context.Context, in *pmsclient.QueryProductAttributeValueDetailReq) (*pmsclient.QueryProductAttributeValueDetailResp, error) {
+	l := productattributevalueservicelogic.NewQueryProductAttributeValueDetailLogic(ctx, s.svcCtx)
+	return l.QueryProductAttributeValueDetail(in)
+}
+
+// 查询商品属性值列表
 func (s *ProductAttributeValueServiceServer) QueryProductAttributeValueList(ctx context.Context, in *pmsclient.QueryProductAttributeValueListReq) (*pmsclient.QueryProductAttributeValueListResp, error) {
 	l := productattributevalueservicelogic.NewQueryProductAttributeValueListLogic(ctx, s.svcCtx)
 	return l.QueryProductAttributeValueList(in)

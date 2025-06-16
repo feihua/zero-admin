@@ -29,24 +29,36 @@ func newPmsProductAttributeValue(db *gorm.DB, opts ...gen.DOOption) pmsProductAt
 	tableName := _pmsProductAttributeValue.pmsProductAttributeValueDo.TableName()
 	_pmsProductAttributeValue.ALL = field.NewAsterisk(tableName)
 	_pmsProductAttributeValue.ID = field.NewInt64(tableName, "id")
-	_pmsProductAttributeValue.ProductID = field.NewInt64(tableName, "product_id")
-	_pmsProductAttributeValue.ProductAttributeID = field.NewInt64(tableName, "product_attribute_id")
+	_pmsProductAttributeValue.SpuID = field.NewInt64(tableName, "spu_id")
+	_pmsProductAttributeValue.AttributeID = field.NewInt64(tableName, "attribute_id")
 	_pmsProductAttributeValue.Value = field.NewString(tableName, "value")
+	_pmsProductAttributeValue.Status = field.NewInt32(tableName, "status")
+	_pmsProductAttributeValue.CreateBy = field.NewInt64(tableName, "create_by")
+	_pmsProductAttributeValue.CreateTime = field.NewTime(tableName, "create_time")
+	_pmsProductAttributeValue.UpdateBy = field.NewInt64(tableName, "update_by")
+	_pmsProductAttributeValue.UpdateTime = field.NewTime(tableName, "update_time")
+	_pmsProductAttributeValue.IsDeleted = field.NewInt32(tableName, "is_deleted")
 
 	_pmsProductAttributeValue.fillFieldMap()
 
 	return _pmsProductAttributeValue
 }
 
-// pmsProductAttributeValue 存储产品参数信息的表
+// pmsProductAttributeValue 商品属性值表
 type pmsProductAttributeValue struct {
 	pmsProductAttributeValueDo pmsProductAttributeValueDo
 
-	ALL                field.Asterisk
-	ID                 field.Int64
-	ProductID          field.Int64  // 商品id
-	ProductAttributeID field.Int64  // 商品属性id
-	Value              field.String // 手动添加规格或参数的值，参数单值，规格有多个时以逗号隔开
+	ALL         field.Asterisk
+	ID          field.Int64  // 主键id
+	SpuID       field.Int64  // 商品SPU ID
+	AttributeID field.Int64  // 属性ID
+	Value       field.String // 属性值
+	Status      field.Int32  // 状态：0->禁用；1->启用
+	CreateBy    field.Int64  // 创建人ID
+	CreateTime  field.Time   // 创建时间
+	UpdateBy    field.Int64  // 更新人ID
+	UpdateTime  field.Time   // 更新时间
+	IsDeleted   field.Int32  // 是否删除
 
 	fieldMap map[string]field.Expr
 }
@@ -64,9 +76,15 @@ func (p pmsProductAttributeValue) As(alias string) *pmsProductAttributeValue {
 func (p *pmsProductAttributeValue) updateTableName(table string) *pmsProductAttributeValue {
 	p.ALL = field.NewAsterisk(table)
 	p.ID = field.NewInt64(table, "id")
-	p.ProductID = field.NewInt64(table, "product_id")
-	p.ProductAttributeID = field.NewInt64(table, "product_attribute_id")
+	p.SpuID = field.NewInt64(table, "spu_id")
+	p.AttributeID = field.NewInt64(table, "attribute_id")
 	p.Value = field.NewString(table, "value")
+	p.Status = field.NewInt32(table, "status")
+	p.CreateBy = field.NewInt64(table, "create_by")
+	p.CreateTime = field.NewTime(table, "create_time")
+	p.UpdateBy = field.NewInt64(table, "update_by")
+	p.UpdateTime = field.NewTime(table, "update_time")
+	p.IsDeleted = field.NewInt32(table, "is_deleted")
 
 	p.fillFieldMap()
 
@@ -95,11 +113,17 @@ func (p *pmsProductAttributeValue) GetFieldByName(fieldName string) (field.Order
 }
 
 func (p *pmsProductAttributeValue) fillFieldMap() {
-	p.fieldMap = make(map[string]field.Expr, 4)
+	p.fieldMap = make(map[string]field.Expr, 10)
 	p.fieldMap["id"] = p.ID
-	p.fieldMap["product_id"] = p.ProductID
-	p.fieldMap["product_attribute_id"] = p.ProductAttributeID
+	p.fieldMap["spu_id"] = p.SpuID
+	p.fieldMap["attribute_id"] = p.AttributeID
 	p.fieldMap["value"] = p.Value
+	p.fieldMap["status"] = p.Status
+	p.fieldMap["create_by"] = p.CreateBy
+	p.fieldMap["create_time"] = p.CreateTime
+	p.fieldMap["update_by"] = p.UpdateBy
+	p.fieldMap["update_time"] = p.UpdateTime
+	p.fieldMap["is_deleted"] = p.IsDeleted
 }
 
 func (p pmsProductAttributeValue) clone(db *gorm.DB) pmsProductAttributeValue {

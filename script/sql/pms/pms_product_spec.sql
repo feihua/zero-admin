@@ -6,6 +6,7 @@ create table pms_product_spec
     category_id bigint                             not null comment '分类ID',
     name        varchar(50)                        not null comment '规格名称',
     sort        int      default 0                 not null comment '排序',
+    status      tinyint  default 0                 not null comment '状态：0->禁用；1->启用',
     create_by   bigint                             not null comment '创建人ID',
     create_time datetime default CURRENT_TIMESTAMP not null comment '创建时间',
     update_by   bigint                             null comment '更新人ID',

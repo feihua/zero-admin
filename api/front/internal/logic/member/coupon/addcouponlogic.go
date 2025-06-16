@@ -38,13 +38,10 @@ func (l *AddCouponLogic) AddCoupon(req *types.AddCouponReq) (resp *types.AddCoup
 	if err != nil {
 		return nil, err
 	}
-	_, err = l.svcCtx.CouponHistoryService.AddCouponHistory(l.ctx, &smsclient.AddCouponHistoryReq{
-		CouponId:       req.CouponId,
-		MemberId:       memberId,
-		CouponCode:     "哈哈还没有弄!",
-		MemberNickname: l.ctx.Value("memberName").(string),
-		GetType:        1, // 主动领取
-		UseStatus:      0, // 未使用
+	_, err = l.svcCtx.CouponRecordService.AddCouponRecord(l.ctx, &smsclient.AddCouponRecordReq{
+		CouponId: req.CouponId,
+		MemberId: memberId,
+		GetType:  1, // 主动领取
 	})
 
 	if err != nil {

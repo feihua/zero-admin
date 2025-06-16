@@ -17,7 +17,7 @@ import (
 	"github.com/feihua/zero-admin/rpc/pms/client/commentreplayservice"
 	"github.com/feihua/zero-admin/rpc/pms/client/commentservice"
 	"github.com/feihua/zero-admin/rpc/pms/client/feighttemplateservice"
-	"github.com/feihua/zero-admin/rpc/pms/client/productattributecategoryservice"
+	"github.com/feihua/zero-admin/rpc/pms/client/productattributegroupservice"
 	"github.com/feihua/zero-admin/rpc/pms/client/productattributeservice"
 	"github.com/feihua/zero-admin/rpc/pms/client/productattributevalueservice"
 	"github.com/feihua/zero-admin/rpc/pms/client/productbrandservice"
@@ -26,9 +26,11 @@ import (
 	"github.com/feihua/zero-admin/rpc/pms/client/productfullreductionservice"
 	"github.com/feihua/zero-admin/rpc/pms/client/productladderservice"
 	"github.com/feihua/zero-admin/rpc/pms/client/productoperatelogservice"
-	"github.com/feihua/zero-admin/rpc/pms/client/productservice"
+	"github.com/feihua/zero-admin/rpc/pms/client/productskuservice"
+	"github.com/feihua/zero-admin/rpc/pms/client/productspecservice"
+	"github.com/feihua/zero-admin/rpc/pms/client/productspecvalueservice"
+	"github.com/feihua/zero-admin/rpc/pms/client/productspuservice"
 	"github.com/feihua/zero-admin/rpc/pms/client/productvertifyrecordservice"
-	"github.com/feihua/zero-admin/rpc/pms/client/skustockservice"
 	"github.com/feihua/zero-admin/rpc/sms/client/couponrecordservice"
 	"github.com/feihua/zero-admin/rpc/sms/client/couponscopeservice"
 	"github.com/feihua/zero-admin/rpc/sms/client/couponservice"
@@ -86,7 +88,7 @@ type ServiceContext struct {
 	CommentReplayService                    commentreplayservice.CommentReplayService
 	CommentService                          commentservice.CommentService
 	FeightTemplateService                   feighttemplateservice.FeightTemplateService
-	ProductAttributeCategoryService         productattributecategoryservice.ProductAttributeCategoryService
+	ProductAttributeGroupService            productattributegroupservice.ProductAttributeGroupService
 	ProductAttributeService                 productattributeservice.ProductAttributeService
 	ProductAttributeValueService            productattributevalueservice.ProductAttributeValueService
 	ProductCategoryAttributeRelationService productcategoryattributerelationservice.ProductCategoryAttributeRelationService
@@ -94,9 +96,11 @@ type ServiceContext struct {
 	ProductFullReductionService             productfullreductionservice.ProductFullReductionService
 	ProductLadderService                    productladderservice.ProductLadderService
 	ProductOperateLogService                productoperatelogservice.ProductOperateLogService
-	ProductService                          productservice.ProductService
+	ProductSpuService                       productspuservice.ProductSpuService
 	ProductVertifyRecordService             productvertifyrecordservice.ProductVertifyRecordService
-	SkuStockService                         skustockservice.SkuStockService
+	ProductSkuService                       productskuservice.ProductSkuService
+	ProductSpecService                      productspecservice.ProductSpecService
+	ProductSpecValueService                 productspecvalueservice.ProductSpecValueService
 	// 订单相关
 	CartItemService            cartitemservice.CartItemService
 	CompanyAddressService      companyaddressservice.CompanyAddressService
@@ -160,7 +164,7 @@ func NewServiceContext(c config.Config) *ServiceContext {
 		CommentReplayService:                    commentreplayservice.NewCommentReplayService(pmsClient),
 		CommentService:                          commentservice.NewCommentService(pmsClient),
 		FeightTemplateService:                   feighttemplateservice.NewFeightTemplateService(pmsClient),
-		ProductAttributeCategoryService:         productattributecategoryservice.NewProductAttributeCategoryService(pmsClient),
+		ProductAttributeGroupService:            productattributegroupservice.NewProductAttributeGroupService(pmsClient),
 		ProductAttributeService:                 productattributeservice.NewProductAttributeService(pmsClient),
 		ProductAttributeValueService:            productattributevalueservice.NewProductAttributeValueService(pmsClient),
 		ProductCategoryAttributeRelationService: productcategoryattributerelationservice.NewProductCategoryAttributeRelationService(pmsClient),
@@ -168,9 +172,11 @@ func NewServiceContext(c config.Config) *ServiceContext {
 		ProductFullReductionService:             productfullreductionservice.NewProductFullReductionService(pmsClient),
 		ProductLadderService:                    productladderservice.NewProductLadderService(pmsClient),
 		ProductOperateLogService:                productoperatelogservice.NewProductOperateLogService(pmsClient),
-		ProductService:                          productservice.NewProductService(pmsClient),
+		ProductSpuService:                       productspuservice.NewProductSpuService(pmsClient),
 		ProductVertifyRecordService:             productvertifyrecordservice.NewProductVertifyRecordService(pmsClient),
-		SkuStockService:                         skustockservice.NewSkuStockService(pmsClient),
+		ProductSkuService:                       productskuservice.NewProductSkuService(pmsClient),
+		ProductSpecService:                      productspecservice.NewProductSpecService(pmsClient),
+		ProductSpecValueService:                 productspecvalueservice.NewProductSpecValueService(pmsClient),
 
 		CartItemService:            cartitemservice.NewCartItemService(omsClient),
 		CompanyAddressService:      companyaddressservice.NewCompanyAddressService(omsClient),

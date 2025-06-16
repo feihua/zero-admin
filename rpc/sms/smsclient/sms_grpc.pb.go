@@ -19,13 +19,13 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	CouponService_AddCoupon_FullMethodName          = "/smsclient.CouponService/AddCoupon"
-	CouponService_DeleteCoupon_FullMethodName       = "/smsclient.CouponService/DeleteCoupon"
-	CouponService_UpdateCoupon_FullMethodName       = "/smsclient.CouponService/UpdateCoupon"
-	CouponService_UpdateCouponStatus_FullMethodName = "/smsclient.CouponService/UpdateCouponStatus"
-	CouponService_QueryCouponDetail_FullMethodName  = "/smsclient.CouponService/QueryCouponDetail"
-	CouponService_QueryCouponList_FullMethodName    = "/smsclient.CouponService/QueryCouponList"
-	CouponService_QueryCouponById_FullMethodName    = "/smsclient.CouponService/QueryCouponById"
+	CouponService_AddCoupon_FullMethodName            = "/smsclient.CouponService/AddCoupon"
+	CouponService_DeleteCoupon_FullMethodName         = "/smsclient.CouponService/DeleteCoupon"
+	CouponService_UpdateCoupon_FullMethodName         = "/smsclient.CouponService/UpdateCoupon"
+	CouponService_UpdateCouponStatus_FullMethodName   = "/smsclient.CouponService/UpdateCouponStatus"
+	CouponService_QueryCouponDetail_FullMethodName    = "/smsclient.CouponService/QueryCouponDetail"
+	CouponService_QueryCouponList_FullMethodName      = "/smsclient.CouponService/QueryCouponList"
+	CouponService_QueryCouponByScopeId_FullMethodName = "/smsclient.CouponService/QueryCouponByScopeId"
 )
 
 // CouponServiceClient is the client API for CouponService service.
@@ -44,8 +44,8 @@ type CouponServiceClient interface {
 	QueryCouponDetail(ctx context.Context, in *QueryCouponDetailReq, opts ...grpc.CallOption) (*QueryCouponDetailResp, error)
 	// 查询优惠券列表
 	QueryCouponList(ctx context.Context, in *QueryCouponListReq, opts ...grpc.CallOption) (*QueryCouponListResp, error)
-	// 根据商品Id和分类id查询可用的优惠券(app)
-	QueryCouponById(ctx context.Context, in *QueryCouponByIdReq, opts ...grpc.CallOption) (*QueryCouponByIdResp, error)
+	// 根据商品Id和分类id查询可用的优惠券
+	QueryCouponByScopeId(ctx context.Context, in *QueryCouponByScopeIdReq, opts ...grpc.CallOption) (*QueryCouponByScopeIdResp, error)
 }
 
 type couponServiceClient struct {
@@ -110,9 +110,9 @@ func (c *couponServiceClient) QueryCouponList(ctx context.Context, in *QueryCoup
 	return out, nil
 }
 
-func (c *couponServiceClient) QueryCouponById(ctx context.Context, in *QueryCouponByIdReq, opts ...grpc.CallOption) (*QueryCouponByIdResp, error) {
-	out := new(QueryCouponByIdResp)
-	err := c.cc.Invoke(ctx, CouponService_QueryCouponById_FullMethodName, in, out, opts...)
+func (c *couponServiceClient) QueryCouponByScopeId(ctx context.Context, in *QueryCouponByScopeIdReq, opts ...grpc.CallOption) (*QueryCouponByScopeIdResp, error) {
+	out := new(QueryCouponByScopeIdResp)
+	err := c.cc.Invoke(ctx, CouponService_QueryCouponByScopeId_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -135,8 +135,8 @@ type CouponServiceServer interface {
 	QueryCouponDetail(context.Context, *QueryCouponDetailReq) (*QueryCouponDetailResp, error)
 	// 查询优惠券列表
 	QueryCouponList(context.Context, *QueryCouponListReq) (*QueryCouponListResp, error)
-	// 根据商品Id和分类id查询可用的优惠券(app)
-	QueryCouponById(context.Context, *QueryCouponByIdReq) (*QueryCouponByIdResp, error)
+	// 根据商品Id和分类id查询可用的优惠券
+	QueryCouponByScopeId(context.Context, *QueryCouponByScopeIdReq) (*QueryCouponByScopeIdResp, error)
 	mustEmbedUnimplementedCouponServiceServer()
 }
 
@@ -162,8 +162,8 @@ func (UnimplementedCouponServiceServer) QueryCouponDetail(context.Context, *Quer
 func (UnimplementedCouponServiceServer) QueryCouponList(context.Context, *QueryCouponListReq) (*QueryCouponListResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method QueryCouponList not implemented")
 }
-func (UnimplementedCouponServiceServer) QueryCouponById(context.Context, *QueryCouponByIdReq) (*QueryCouponByIdResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method QueryCouponById not implemented")
+func (UnimplementedCouponServiceServer) QueryCouponByScopeId(context.Context, *QueryCouponByScopeIdReq) (*QueryCouponByScopeIdResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method QueryCouponByScopeId not implemented")
 }
 func (UnimplementedCouponServiceServer) mustEmbedUnimplementedCouponServiceServer() {}
 
@@ -286,20 +286,20 @@ func _CouponService_QueryCouponList_Handler(srv interface{}, ctx context.Context
 	return interceptor(ctx, in, info, handler)
 }
 
-func _CouponService_QueryCouponById_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(QueryCouponByIdReq)
+func _CouponService_QueryCouponByScopeId_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryCouponByScopeIdReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(CouponServiceServer).QueryCouponById(ctx, in)
+		return srv.(CouponServiceServer).QueryCouponByScopeId(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: CouponService_QueryCouponById_FullMethodName,
+		FullMethod: CouponService_QueryCouponByScopeId_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CouponServiceServer).QueryCouponById(ctx, req.(*QueryCouponByIdReq))
+		return srv.(CouponServiceServer).QueryCouponByScopeId(ctx, req.(*QueryCouponByScopeIdReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -336,8 +336,8 @@ var CouponService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _CouponService_QueryCouponList_Handler,
 		},
 		{
-			MethodName: "QueryCouponById",
-			Handler:    _CouponService_QueryCouponById_Handler,
+			MethodName: "QueryCouponByScopeId",
+			Handler:    _CouponService_QueryCouponByScopeId_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

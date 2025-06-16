@@ -23,26 +23,38 @@ func NewProductAttributeServiceServer(svcCtx *svc.ServiceContext) *ProductAttrib
 	}
 }
 
-// 添加商品属性参数表
+// 添加商品属性
 func (s *ProductAttributeServiceServer) AddProductAttribute(ctx context.Context, in *pmsclient.AddProductAttributeReq) (*pmsclient.AddProductAttributeResp, error) {
 	l := productattributeservicelogic.NewAddProductAttributeLogic(ctx, s.svcCtx)
 	return l.AddProductAttribute(in)
 }
 
-// 删除商品属性参数表
+// 删除商品属性
 func (s *ProductAttributeServiceServer) DeleteProductAttribute(ctx context.Context, in *pmsclient.DeleteProductAttributeReq) (*pmsclient.DeleteProductAttributeResp, error) {
 	l := productattributeservicelogic.NewDeleteProductAttributeLogic(ctx, s.svcCtx)
 	return l.DeleteProductAttribute(in)
 }
 
-// 查询商品属性参数表列表
+// 更新商品属性
+func (s *ProductAttributeServiceServer) UpdateProductAttribute(ctx context.Context, in *pmsclient.UpdateProductAttributeReq) (*pmsclient.UpdateProductAttributeResp, error) {
+	l := productattributeservicelogic.NewUpdateProductAttributeLogic(ctx, s.svcCtx)
+	return l.UpdateProductAttribute(in)
+}
+
+// 更新商品属性状态
+func (s *ProductAttributeServiceServer) UpdateProductAttributeStatus(ctx context.Context, in *pmsclient.UpdateProductAttributeStatusReq) (*pmsclient.UpdateProductAttributeStatusResp, error) {
+	l := productattributeservicelogic.NewUpdateProductAttributeStatusLogic(ctx, s.svcCtx)
+	return l.UpdateProductAttributeStatus(in)
+}
+
+// 查询商品属性详情
+func (s *ProductAttributeServiceServer) QueryProductAttributeDetail(ctx context.Context, in *pmsclient.QueryProductAttributeDetailReq) (*pmsclient.QueryProductAttributeDetailResp, error) {
+	l := productattributeservicelogic.NewQueryProductAttributeDetailLogic(ctx, s.svcCtx)
+	return l.QueryProductAttributeDetail(in)
+}
+
+// 查询商品属性列表
 func (s *ProductAttributeServiceServer) QueryProductAttributeList(ctx context.Context, in *pmsclient.QueryProductAttributeListReq) (*pmsclient.QueryProductAttributeListResp, error) {
 	l := productattributeservicelogic.NewQueryProductAttributeListLogic(ctx, s.svcCtx)
 	return l.QueryProductAttributeList(in)
-}
-
-// 根据商品分类的id获取商品属性及属性分类
-func (s *ProductAttributeServiceServer) QueryByproductCategoryId(ctx context.Context, in *pmsclient.QueryByproductCategoryIdReq) (*pmsclient.QueryByproductCategoryIdResp, error) {
-	l := productattributeservicelogic.NewQueryByproductCategoryIdLogic(ctx, s.svcCtx)
-	return l.QueryByproductCategoryId(in)
 }

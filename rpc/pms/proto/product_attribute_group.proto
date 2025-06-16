@@ -1,0 +1,117 @@
+syntax = "proto3";
+
+package main;
+
+option go_package = "./proto";
+
+// 添加商品属性分组
+message AddProductAttributeGroupReq {
+  int64 category_id = 1; //分类ID
+  string name = 2; //分组名称
+  int32 sort = 3; //排序
+  int32 status = 4; //状态：0->禁用；1->启用
+  int64 create_by = 5; //创建人ID
+}
+
+message AddProductAttributeGroupResp {
+  string pong = 1;
+}
+
+// 删除商品属性分组
+message DeleteProductAttributeGroupReq {
+  repeated int64 ids = 1;
+}
+
+message DeleteProductAttributeGroupResp {
+  string pong = 1;
+}
+
+// 更新商品属性分组
+message UpdateProductAttributeGroupReq {
+  int64 id = 1; //主键id
+  int64 category_id = 2; //分类ID
+  string name = 3; //分组名称
+  int32 sort = 4; //排序
+  int32 status = 5; //状态：0->禁用；1->启用
+  int64 update_by = 6; //更新人ID
+}
+
+message UpdateProductAttributeGroupResp {
+  string pong = 1;
+}
+
+// 更新商品属性分组状态
+message UpdateProductAttributeGroupStatusReq {
+  repeated int64 ids = 1; //主键id
+  int32 status = 5; //状态：0->禁用；1->启用
+  int64 update_by = 8; //更新人ID
+}
+
+message UpdateProductAttributeGroupStatusResp {
+  string pong = 1;
+}
+
+// 查询商品属性分组详情
+message QueryProductAttributeGroupDetailReq {
+    int64 id = 1;
+}
+
+message QueryProductAttributeGroupDetailResp {
+  int64 id = 1; //主键id
+  int64 category_id = 2; //分类ID
+  string name = 3; //分组名称
+  int32 sort = 4; //排序
+  int32 status = 5; //状态：0->禁用；1->启用
+  int64 create_by = 6; //创建人ID
+  string create_time = 7; //创建时间
+  int64 update_by = 8; //更新人ID
+  string update_time = 9; //更新时间
+  int32 is_deleted = 10; //是否删除
+
+}
+
+// 分页查询商品属性分组列表
+message QueryProductAttributeGroupListReq {
+  int64 category_id = 1; //分类ID
+  string name = 2; //分组名称
+  int32 status = 3; //状态：0->禁用；1->启用
+  int32 page_num = 4; //第几页
+  int32 page_size = 5; //每页的数量
+}
+
+message ProductAttributeGroupListData {
+  int64 id = 1; //主键id
+  int64 category_id = 2; //分类ID
+  string name = 3; //分组名称
+  int32 sort = 4; //排序
+  int32 status = 5; //状态：0->禁用；1->启用
+  int64 create_by = 6; //创建人ID
+  string create_time = 7; //创建时间
+  int64 update_by = 8; //更新人ID
+  string update_time = 9; //更新时间
+  int32 is_deleted = 10; //是否删除
+
+}
+
+message QueryProductAttributeGroupListResp {
+  int64 total = 1;
+  repeated  ProductAttributeGroupListData list = 2;
+}
+
+// 商品属性分组
+service ProductAttributeGroupService {
+  // 添加商品属性分组
+  rpc AddProductAttributeGroup(AddProductAttributeGroupReq) returns (AddProductAttributeGroupResp){}
+  // 删除商品属性分组
+  rpc DeleteProductAttributeGroup(DeleteProductAttributeGroupReq) returns (DeleteProductAttributeGroupResp){}
+  // 更新商品属性分组
+  rpc UpdateProductAttributeGroup(UpdateProductAttributeGroupReq) returns (UpdateProductAttributeGroupResp ){}
+  // 更新商品属性分组状态
+  rpc UpdateProductAttributeGroupStatus(UpdateProductAttributeGroupStatusReq) returns (UpdateProductAttributeGroupStatusResp ){}
+  // 查询商品属性分组详情
+   rpc QueryProductAttributeGroupDetail(QueryProductAttributeGroupDetailReq) returns (QueryProductAttributeGroupDetailResp){}
+  // 查询商品属性分组列表
+  rpc QueryProductAttributeGroupList(QueryProductAttributeGroupListReq) returns (QueryProductAttributeGroupListResp){}
+
+
+}

@@ -57,8 +57,8 @@ type (
 	DeleteSeckillSessionReq            = smsclient.DeleteSeckillSessionReq
 	DeleteSeckillSessionResp           = smsclient.DeleteSeckillSessionResp
 	HomeAdvertiseListData              = smsclient.HomeAdvertiseListData
-	QueryCouponByIdReq                 = smsclient.QueryCouponByIdReq
-	QueryCouponByIdResp                = smsclient.QueryCouponByIdResp
+	QueryCouponByScopeIdReq            = smsclient.QueryCouponByScopeIdReq
+	QueryCouponByScopeIdResp           = smsclient.QueryCouponByScopeIdResp
 	QueryCouponData                    = smsclient.QueryCouponData
 	QueryCouponDetailReq               = smsclient.QueryCouponDetailReq
 	QueryCouponDetailResp              = smsclient.QueryCouponDetailResp
@@ -153,8 +153,8 @@ type (
 		QueryCouponDetail(ctx context.Context, in *QueryCouponDetailReq, opts ...grpc.CallOption) (*QueryCouponDetailResp, error)
 		// 查询优惠券列表
 		QueryCouponList(ctx context.Context, in *QueryCouponListReq, opts ...grpc.CallOption) (*QueryCouponListResp, error)
-		// 根据商品Id和分类id查询可用的优惠券(app)
-		QueryCouponById(ctx context.Context, in *QueryCouponByIdReq, opts ...grpc.CallOption) (*QueryCouponByIdResp, error)
+		// 根据商品Id和分类id查询可用的优惠券
+		QueryCouponByScopeId(ctx context.Context, in *QueryCouponByScopeIdReq, opts ...grpc.CallOption) (*QueryCouponByScopeIdResp, error)
 	}
 
 	defaultCouponService struct {
@@ -204,8 +204,8 @@ func (m *defaultCouponService) QueryCouponList(ctx context.Context, in *QueryCou
 	return client.QueryCouponList(ctx, in, opts...)
 }
 
-// 根据商品Id和分类id查询可用的优惠券(app)
-func (m *defaultCouponService) QueryCouponById(ctx context.Context, in *QueryCouponByIdReq, opts ...grpc.CallOption) (*QueryCouponByIdResp, error) {
+// 根据商品Id和分类id查询可用的优惠券
+func (m *defaultCouponService) QueryCouponByScopeId(ctx context.Context, in *QueryCouponByScopeIdReq, opts ...grpc.CallOption) (*QueryCouponByScopeIdResp, error) {
 	client := smsclient.NewCouponServiceClient(m.cli.Conn())
-	return client.QueryCouponById(ctx, in, opts...)
+	return client.QueryCouponByScopeId(ctx, in, opts...)
 }

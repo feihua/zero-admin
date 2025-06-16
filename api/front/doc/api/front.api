@@ -8,7 +8,7 @@ import "product.api"
 import "collection.api"
 import "read_history.api"
 import "coupon.api"
-import "brand.api"
+import "product_brand.api"
 import "attention.api"
 import "pay.api"
 

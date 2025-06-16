@@ -1,83 +1,116 @@
 import "../base/base.api"
 
 info (
-	desc:   "属性分类"
-	author: "koobe"
+	desc:   "商品属性"
+	author: "LiuFeiHua"
 	email:  "1002219331@qq.com"
 )
 
 type (
+	// 添加商品属性请求参数
 	AddProductAttributeReq {
-		ProductAttributeCategoryId int64  `json:"productAttributeCategoryId"` // 属性分类id
-		Name                       string `json:"name"`
-		SelectType                 int32  `json:"selectType"` // 属性选择类型：0->唯一；1->单选；2->多选
-		InputType                  int32  `json:"inputType"` // 属性录入方式：0->手工录入；1->从列表中选取
-		InputList                  string `json:"inputList,optional"` // 可选值列表，以逗号隔开
-		Sort                       int32  `json:"sort"` // 排序字段：最高的可以单独上传图片
-		FilterType                 int32  `json:"filterType"` // 分类筛选样式：1->普通；1->颜色
-		SearchType                 int32  `json:"searchType"` // 检索类型；0->不需要进行检索；1->关键字检索；2->范围检索
-		RelatedStatus              int32  `json:"relatedStatus"` // 相同属性产品是否关联；0->不关联；1->关联
-		HandAddStatus              int32  `json:"handAddStatus"` // 是否支持手动新增；0->不支持；1->支持
-		Type                       int32  `json:"type"` // 属性的类型；0->规格；1->参数
+		GroupId      int64  `json:"groupId"` //属性分组ID
+		Name         string `json:"name"` //属性名称
+		InputType    int32  `json:"inputType"` //输入类型：1-手动输入，2-单选，3-多选
+		ValueType    int32  `json:"valueType"` //值类型：1-文本，2-数字，3-日期
+		InputList    string `json:"inputList"` //可选值列表，用逗号分隔
+		Unit         string `json:"unit"` //单位
+		IsRequired   int32  `json:"isRequired"` //是否必填
+		IsSearchable int32  `json:"isSearchable"` //是否支持搜索
+		IsShow       int32  `json:"isShow"` //是否显示
+		Sort         int32  `json:"sort"` //排序
+		Status       int32  `json:"status"` //状态：0->禁用；1->启用
 	}
-	ListProductAttributeReq {
-		Current                    int64  `form:"current,default=1"`
-		PageSize                   int64  `form:"pageSize,default=20"`
-		Name                       string `form:"name,optional"`
-		Type                       int32  `form:"type,default=2"` // 属性的类型；0->规格；1->参数
-		ProductAttributeCategoryId int64  `form:"productAttributeCategoryId,default=0"`
-	}
-	ListProductAttributeData {
-		Id                         int64  `json:"id"`
-		ProductAttributeCategoryId int64  `json:"productAttributeCategoryId"`
-		Name                       string `json:"name"`
-		SelectType                 int32  `json:"selectType"` // 属性选择类型：0->唯一；1->单选；2->多选
-		InputType                  int32  `json:"inputType"` // 属性录入方式：0->手工录入；1->从列表中选取
-		InputList                  string `json:"inputList"` // 可选值列表，以逗号隔开
-		Sort                       int32  `json:"sort"` // 排序字段：最高的可以单独上传图片
-		FilterType                 int32  `json:"filterType"` // 分类筛选样式：1->普通；1->颜色
-		SearchType                 int32  `json:"searchType"` // 检索类型；0->不需要进行检索；1->关键字检索；2->范围检索
-		RelatedStatus              int32  `json:"relatedStatus"` // 相同属性产品是否关联；0->不关联；1->关联
-		HandAddStatus              int32  `json:"handAddStatus"` // 是否支持手动新增；0->不支持；1->支持
-		Type                       int32  `json:"type"` // 属性的类型；0->规格；1->参数
-	}
-	ListProductAttributeResp {
-		Code     string                      `json:"code"`
-		Message  string                      `json:"message"`
-		Current  int64                       `json:"current,default=1"`
-		Data     []*ListProductAttributeData `json:"data"`
-		PageSize int64                       `json:"pageSize,default=20"`
-		Success  bool                        `json:"success"`
-		Total    int64                       `json:"total"`
-	}
-	UpdateProductAttributeReq {
-		Id                         int64  `json:"id"`
-		ProductAttributeCategoryId int64  `json:"productAttributeCategoryId"`
-		Name                       string `json:"name"`
-		SelectType                 int32  `json:"selectType"` // 属性选择类型：0->唯一；1->单选；2->多选
-		InputType                  int32  `json:"inputType"` // 属性录入方式：0->手工录入；1->从列表中选取
-		InputList                  string `json:"inputList,optional"` // 可选值列表，以逗号隔开
-		Sort                       int32  `json:"sort"` // 排序字段：最高的可以单独上传图片
-		FilterType                 int32  `json:"filterType"` // 分类筛选样式：1->普通；1->颜色
-		SearchType                 int32  `json:"searchType"` // 检索类型；0->不需要进行检索；1->关键字检索；2->范围检索
-		RelatedStatus              int32  `json:"relatedStatus"` // 相同属性产品是否关联；0->不关联；1->关联
-		HandAddStatus              int32  `json:"handAddStatus"` // 是否支持手动新增；0->不支持；1->支持
-		Type                       int32  `json:"type"` // 属性的类型；0->规格；1->参数
-	}
-	QueryByproductCategoryIdReq {
-		ProductCategoryId int64 `json:"productCategoryId"`
-	}
-	QueryByproductCategoryIdData {
-		AttributeId                int64 `json:"attributeId"`
-		ProductAttributeCategoryId int64 `json:"productAttributeCategoryId"`
-	}
-	QueryByproductCategoryIdResp {
-		Code    string                          `json:"code"`
-		Message string                          `json:"message"`
-		Data    []*QueryByproductCategoryIdData `json:"data"`
-	}
+	// 删除商品属性请求参数
 	DeleteProductAttributeReq {
 		Ids []int64 `form:"ids"`
+	}
+	// 更新商品属性请求参数
+	UpdateProductAttributeReq {
+		Id           int64  `json:"id"` //主键id
+		GroupId      int64  `json:"groupId"` //属性分组ID
+		Name         string `json:"name"` //属性名称
+		InputType    int32  `json:"inputType"` //输入类型：1-手动输入，2-单选，3-多选
+		ValueType    int32  `json:"valueType"` //值类型：1-文本，2-数字，3-日期
+		InputList    string `json:"inputList"` //可选值列表，用逗号分隔
+		Unit         string `json:"unit"` //单位
+		IsRequired   int32  `json:"isRequired"` //是否必填
+		IsSearchable int32  `json:"isSearchable"` //是否支持搜索
+		IsShow       int32  `json:"isShow"` //是否显示
+		Sort         int32  `json:"sort"` //排序
+		Status       int32  `json:"status"` //状态：0->禁用；1->启用
+	}
+	// 更新商品属性状态请求参数
+	UpdateProductAttributeStatusReq {
+		Ids    []int64 `json:"ids"` //主键id
+		Status int32   `json:"status"` //状态：0->禁用；1->启用
+	}
+	// 查询商品属性详情请求参数
+	QueryProductAttributeDetailReq {
+		Id int64 `form:"id"`
+	}
+	QueryProductAttributeDetailData {
+		Id           int64  `json:"id"` //主键id
+		GroupId      int64  `json:"groupId"` //属性分组ID
+		Name         string `json:"name"` //属性名称
+		InputType    int32  `json:"inputType"` //输入类型：1-手动输入，2-单选，3-多选
+		ValueType    int32  `json:"valueType"` //值类型：1-文本，2-数字，3-日期
+		InputList    string `json:"inputList"` //可选值列表，用逗号分隔
+		Unit         string `json:"unit"` //单位
+		IsRequired   int32  `json:"isRequired"` //是否必填
+		IsSearchable int32  `json:"isSearchable"` //是否支持搜索
+		IsShow       int32  `json:"isShow"` //是否显示
+		Sort         int32  `json:"sort"` //排序
+		Status       int32  `json:"status"` //状态：0->禁用；1->启用
+		CreateBy     int64  `json:"createBy"` //创建人ID
+		CreateTime   string `json:"createTime"` //创建时间
+		UpdateBy     int64  `json:"updateBy"` //更新人ID
+		UpdateTime   string `json:"updateTime"` //更新时间
+	}
+	QueryProductAttributeDetailResp {
+		Code    string                          `json:"code"`
+		Message string                          `json:"message"`
+		Data    QueryProductAttributeDetailData `json:"data"`
+	}
+	// 分页查询商品属性列表请求参数
+	QueryProductAttributeListReq {
+		Current      int32  `form:"current,default=1"` //第几页
+		PageSize     int32  `form:"pageSize,default=20"` //每页的数量
+		GroupId      int64  `form:"groupId,optional"` //属性分组ID
+		Name         string `form:"name,optional"` //属性名称
+		InputType    int32  `form:"inputType,optional"` //输入类型：1-手动输入，2-单选，3-多选
+		ValueType    int32  `form:"valueType,optional"` //值类型：1-文本，2-数字，3-日期
+		IsRequired   int32  `form:"isRequired,optional"` //是否必填
+		IsSearchable int32  `form:"isSearchable,optional"` //是否支持搜索
+		IsShow       int32  `form:"isShow,default=2"` //是否显示
+		Status       int32  `form:"status,default=2"` //状态：0-禁用，1-启用
+	}
+	QueryProductAttributeListData {
+		Id           int64  `json:"id"` //主键id
+		GroupId      int64  `json:"groupId"` //属性分组ID
+		Name         string `json:"name"` //属性名称
+		InputType    int32  `json:"inputType"` //输入类型：1-手动输入，2-单选，3-多选
+		ValueType    int32  `json:"valueType"` //值类型：1-文本，2-数字，3-日期
+		InputList    string `json:"inputList"` //可选值列表，用逗号分隔
+		Unit         string `json:"unit"` //单位
+		IsRequired   int32  `json:"isRequired"` //是否必填
+		IsSearchable int32  `json:"isSearchable"` //是否支持搜索
+		IsShow       int32  `json:"isShow"` //是否显示
+		Sort         int32  `json:"sort"` //排序
+		Status       int32  `json:"status"` //状态：0->禁用；1->启用
+		CreateBy     int64  `json:"createBy"` //创建人ID
+		CreateTime   string `json:"createTime"` //创建时间
+		UpdateBy     int64  `json:"updateBy"` //更新人ID
+		UpdateTime   string `json:"updateTime"` //更新时间
+	}
+	QueryProductAttributeListResp {
+		Code     string                           `json:"code"`
+		Message  string                           `json:"message"`
+		Data     []*QueryProductAttributeListData `json:"data"`
+		Current  int32                            `json:"current,default=1"`
+		PageSize int32                            `json:"pageSize,default=20"`
+		Total    int64                            `json:"total"`
+		Success  bool                             `json:"success"`
 	}
 )
 
@@ -88,20 +121,28 @@ type (
 	prefix:     /api/pms/attribute
 )
 service admin-api {
-	//添加商品属性
-	@handler ProductAttributeAdd
+	// 添加商品属性
+	@handler AddProductAttribute
 	post /addAttribute (AddProductAttributeReq) returns (BaseResp)
 
-	//查询商品属性
-	@handler ProductAttributeList
-	get /queryAttributeList (ListProductAttributeReq) returns (ListProductAttributeResp)
-
-	//根据商品分类的id获取商品属性及属性分类
-	@handler QueryByproductCategoryId
-	get /queryByproductCategoryId (QueryByproductCategoryIdReq) returns (QueryByproductCategoryIdResp)
-
-	//删除商品属性
-	@handler ProductAttributeDelete
+	// 删除商品属性
+	@handler DeleteProductAttribute
 	get /deleteAttribute (DeleteProductAttributeReq) returns (BaseResp)
+
+	// 更新商品属性
+	@handler UpdateProductAttribute
+	post /updateAttribute (UpdateProductAttributeReq) returns (BaseResp)
+
+	// 更新商品属性状态
+	@handler UpdateProductAttributeStatus
+	post /updateAttributeStatus (UpdateProductAttributeStatusReq) returns (BaseResp)
+
+	// 查询商品属性详情
+	@handler QueryProductAttributeDetail
+	get /queryAttributeDetail (QueryProductAttributeDetailReq) returns (QueryProductAttributeDetailResp)
+
+	// 分页查询商品属性列表
+	@handler QueryProductAttributeList
+	get /queryAttributeList (QueryProductAttributeListReq) returns (QueryProductAttributeListResp)
 }
 
