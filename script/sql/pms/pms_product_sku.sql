@@ -34,7 +34,7 @@ create index idx_spu_id
     on pms_product_sku (spu_id, is_deleted);
 
 -- 插入商品SKU数据
-insert into gozero.pms_product_sku (id, spu_id, name, sku_code, main_pic, album_pics, price, promotion_price, stock, low_stock, spec_data, weight, publish_status, verify_status, sort, sales, create_by)
+insert into pms_product_sku (id, spu_id, name, sku_code, main_pic, album_pics, price, promotion_price, stock, low_stock, spec_data, weight, publish_status, verify_status, sort, sales, create_by)
 values  (1, 1, 'iPhone 15 Pro 暗紫色 128GB 全网通版', 'IP15P-128-PURPLE', 'http://example.com/sku/iphone15-purple-128.jpg', 'http://example.com/sku/iphone15-p-1.jpg,http://example.com/sku/iphone15-p-2.jpg', 7999.00, 7899.00, 1000, 100, '{"容量": "128GB", "颜色": "暗紫色", "网络版本": "全网通版"}', 0.19, 1, 1, 1, 300, 1),
         (2, 1, 'iPhone 15 Pro 暗紫色 256GB 全网通版', 'IP15P-256-PURPLE', 'http://example.com/sku/iphone15-purple-256.jpg', 'http://example.com/sku/iphone15-p-1.jpg,http://example.com/sku/iphone15-p-2.jpg', 8999.00, 8899.00, 800, 80, '{"容量": "256GB", "颜色": "暗紫色", "网络版本": "全网通版"}', 0.19, 1, 1, 2, 200, 1),
         (3, 1, 'iPhone 15 Pro 自然色 128GB 全网通版', 'IP15P-128-NATURAL', 'http://example.com/sku/iphone15-natural-128.jpg', 'http://example.com/sku/iphone15-n-1.jpg,http://example.com/sku/iphone15-n-2.jpg', 7999.00, 7899.00, 1200, 100, '{"容量": "128GB", "颜色": "自然色", "网络版本": "全网通版"}', 0.19, 1, 1, 3, 250, 1),
