@@ -1,0 +1,52 @@
+info (
+	desc:   "订单支付信息"
+	author: "koobe"
+	email:  "1002219331@qq.com"
+)
+
+type OrderPayReq {
+	OrderId int64  `json:"orderId"`
+	Remark  string `json:"remark,optional"`
+}
+
+type OrderPayResp {
+	Code    int64  `json:"code"`
+	Message string `json:"message"`
+	Data    string `json:"data"`
+}
+
+type OrderPayQueryReq {
+	OrderId int64 `json:"orderId"`
+}
+
+type OrderPayQueryResp {
+	Code    int64  `json:"code"`
+	Message string `json:"message"`
+	Data    string `json:"data"`
+}
+
+@server (
+	jwt:    Auth
+	group:  order/pay
+	prefix: /api/order
+)
+service front-api {
+	//对订单进行支付
+	@handler OrderPay
+	post /orderPay (OrderPayReq) returns (OrderPayResp)
+
+	//查询订单支付状态
+	@handler OrderPayQuery
+	get /orderPayQuery/:orderId (OrderPayQueryReq) returns (OrderPayQueryResp)
+}
+
+@server (
+	group:  order/pay
+	prefix: /api/pay
+)
+service front-api {
+	//支付回调用通知
+	@handler Notify
+	post /notify
+}
+

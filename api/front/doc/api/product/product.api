@@ -1,0 +1,158 @@
+import "./product_brand.api"
+import "../member/member_coupon.api"
+
+info (
+	desc:   "商品信息"
+	author: "koobe"
+	email:  "1002219331@qq.com"
+)
+
+type QueryProductDetailReq {
+	ProductId int64 `form:"productId"`
+}
+
+type QueryProductDetailResp {
+	Code    int64             `json:"code"`
+	Message string            `json:"message"`
+	Data    ProductDetailData `json:"data"`
+}
+
+type ProductDetailData {
+	ProductData        ProductData                 `json:"product"` //商品信息
+	BrandData          BrandData                   `json:"brand"` //商品品牌
+	AttributeList      []ProductAttributeList      `json:"productAttributeList"` //商品属性
+	AttributeValueList []ProductAttributeValueList `json:"productAttributeValueList"` //商品属性值
+	SkuList            []SkuStockList              `json:"skuStockList"` //商品SKU库存信息
+	LadderList         []ProductLadderList         `json:"productLadderList"` //商品阶梯价格
+	FullList           []ProductFullReductionList  `json:"productFullReductionList"` //商品满减信息
+	MemberPriceList    []MemberPriceList           `json:"memberPriceList"` //商品会员价格
+	CouponList         []CouponData                `json:"couponList"` //优惠券信息
+}
+
+type ProductData {
+	Id                  int64   `json:"id"` //商品SpuId
+	Name                string  `json:"name"` //商品名称
+	CategoryId          int64   `json:"categoryId"` //商品分类ID
+	CategoryIds         string  `json:"categoryIds"` //商品分类ID集合
+	CategoryName        string  `json:"categoryName"` //商品分类名称
+	BrandId             int64   `json:"brandId"` //品牌ID
+	BrandName           string  `json:"brandName"` //品牌名称
+	Unit                string  `json:"unit"` //单位
+	Weight              float32 `json:"weight"` //重量(kg)
+	Keywords            string  `json:"keywords"` //关键词
+	Brief               string  `json:"brief"` //简介
+	Description         string  `json:"description"` //详细描述
+	AlbumPics           string  `json:"albumPics"` //画册图片，最多8张，以逗号分割
+	MainPic             string  `json:"mainPic"` //主图
+	PriceRange          string  `json:"priceRange"` //价格区间
+	PublishStatus       int32   `json:"publishStatus"` //上架状态：0-下架，1-上架
+	NewStatus           int32   `json:"newStatus"` //新品状态:0->不是新品；1->新品
+	RecommendStatus     int32   `json:"recommendStatus"` //推荐状态；0->不推荐；1->推荐
+	VerifyStatus        int32   `json:"verifyStatus"` //审核状态：0->未审核；1->审核通过
+	PreviewStatus       int32   `json:"previewStatus"` //是否为预告商品：0->不是；1->是
+	Sort                int32   `json:"sort"` //排序
+	NewStatusSort       int32   `json:"newStatusSort"` //新品排序
+	RecommendStatusSort int32   `json:"recommendStatusSort"` //推荐排序
+	Sales               int32   `json:"sales"` //销量
+	Stock               int32   `json:"stock"` //库存
+	LowStock            int32   `json:"lowStock"` //预警库存
+	PromotionType       int32   `json:"promotionType"` //促销类型：0->没有促销使用原价;1->使用促销价；2->使用会员价；3->使用阶梯价格；4->使用满减价格；5->秒杀
+	DetailTitle         string  `json:"detailTitle"` //详情标题
+	DetailDesc          string  `json:"detailDesc"` //详情描述
+	DetailHtml          string  `json:"detailHtml"` //产品详情网页内容
+	DetailMobileHtml    string  `json:"detailMobileHtml"` //移动端网页详情
+}
+
+type ProductAttributeList {
+	Id           int64  `json:"id"` //主键id
+	GroupId      int64  `json:"groupId"` //属性分组ID
+	Name         string `json:"name"` //属性名称
+	InputType    int32  `json:"inputType"` //输入类型：1-手动输入，2-单选，3-多选
+	ValueType    int32  `json:"valueType"` //值类型：1-文本，2-数字，3-日期
+	InputList    string `json:"inputList"` //可选值列表，用逗号分隔
+	Unit         string `json:"unit"` //单位
+	IsRequired   int32  `json:"isRequired"` //是否必填
+	IsSearchable int32  `json:"isSearchable"` //是否支持搜索
+	IsShow       int32  `json:"isShow"` //是否显示
+	Sort         int32  `json:"sort"` //排序
+}
+
+type ProductAttributeValueList {
+	Id          int64  `json:"id"` //主键id
+	SpuId       int64  `json:"spuId"` //商品SPU ID
+	AttributeId int64  `json:"attributeId"` //属性ID
+	Value       string `json:"value"` //属性值
+}
+
+type ProductLadderList {
+	Id        int64 `json:"id"` //
+	ProductId int64 `json:"productId"` //商品id
+	Count     int32 `json:"count"` //满足的商品数量
+	Discount  int64 `json:"discount"` //折扣
+	Price     int64 `json:"price"` //折后价格
+}
+
+type SkuStockList {
+	Id                 int64   `json:"id"` //商品SpuId
+	SpuId              int64   `json:"spuId"` //商品SpuId
+	Name               string  `json:"name"` //SKU名称
+	SkuCode            string  `json:"skuCode"` //SKU编码
+	MainPic            string  `json:"mainPic"` //主图
+	AlbumPics          string  `json:"albumPics"` //图片集
+	Price              float32 `json:"price"` //价格
+	PromotionPrice     float32 `json:"promotionPrice"` //单品促销价格
+	PromotionStartTime string  `json:"promotionStartTime"` //促销开始时间
+	PromotionEndTime   string  `json:"promotionEndTime"` //促销结束时间
+	Stock              int32   `json:"stock"` //库存
+	LowStock           int32   `json:"lowStock"` //预警库存
+	SpecData           string  `json:"specData"` //规格数据
+	Weight             float32 `json:"weight"` //重量(kg)
+	PublishStatus      int32   `json:"publishStatus"` //上架状态：0-下架，1-上架
+	VerifyStatus       int32   `json:"verifyStatus"` //审核状态：0-未审核，1-审核通过，2-审核不通过
+	Sort               int32   `json:"sort"` //排序
+	Sales              int32   `json:"sales"` //销量
+}
+
+type ProductFullReductionList {
+	Id          int64 `json:"id"` //
+	ProductId   int64 `json:"productId"` //商品id
+	FullPrice   int64 `json:"fullPrice"` //商品满多少
+	ReducePrice int64 `json:"reducePrice"` //商品减多少
+}
+
+type MemberPriceList {
+	Id              int64  `json:"id"` //
+	ProductId       int64  `json:"productId"` //商品id
+	MemberLevelId   int64  `json:"memberLevelId"` //会员等级id
+	MemberPrice     int64  `json:"memberPrice"` //会员价格
+	MemberLevelName string `json:"memberLevelName"` //会员等级名称
+}
+
+type QueryProductListReq {
+	Current           int32  `form:"current,default=1"`
+	PageSize          int32  `form:"pageSize,default=10"`
+	BrandId           int64  `form:"brandId,default=0"`
+	ProductCategoryId int64  `form:"productCategoryId,default=0"`
+	Keyword           string `form:"keyword,optional"`
+}
+
+type QueryProductListResp {
+	Code    int64         `json:"code"`
+	Message string        `json:"message"`
+	Data    []ProductData `json:"data"`
+}
+
+@server (
+	group:  product/product
+	prefix: /api/product
+)
+service front-api {
+	// 查询商品详情
+	@handler QueryProductDetail
+	get /queryProductDetail (QueryProductDetailReq) returns (QueryProductDetailResp)
+
+	// 查询商品列表
+	@handler QueryProductList
+	get /queryProductList (QueryProductListReq) returns (QueryProductListResp)
+}
+

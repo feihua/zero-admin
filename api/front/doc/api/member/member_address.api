@@ -1,0 +1,103 @@
+info (
+	desc:   "会员收货地址"
+	author: "LiuFeiHua"
+	email:  "1002219331@qq.com"
+)
+
+type (
+	// 会员收货地址请求参数
+	AddressReq {
+		Id            int64  `json:"id,optional"` //主键ID
+		ReceiverName  string `json:"receiverName"` //收货人姓名
+		ReceiverPhone string `json:"receiverPhone"` //收货人电话
+		Province      string `json:"province"` //省份
+		City          string `json:"city"` //城市
+		District      string `json:"district"` //区县
+		DetailAddress string `json:"detailAddress"` //详细地址
+		PostalCode    string `json:"postalCode"` //邮政编码
+		Tag           string `json:"tag"` //地址标签：家、公司等
+		IsDefault     int32  `json:"isDefault"` //是否默认地址
+	}
+	DeleteAddressReq {
+		Ids []int64 `form:"ids"`
+	}
+	// 更新会员收货地址状态请求参数
+	UpdateAddressStatusReq {
+		Id        int64 `json:"id"` //主键ID
+		IsDefault int32 `json:"isDefault"` //是否默认地址
+	}
+	AddressResp {
+		Code    int64  `json:"code"`
+		Message string `json:"message"`
+	}
+	// 查询会员收货地址详情请求参数
+	QueryAddressDetailReq {
+		Id int64 `form:"id"`
+	}
+	QueryAddressDetailData {
+		Id            int64  `json:"id"` //主键ID
+		MemberId      int64  `json:"memberId"` //会员ID
+		ReceiverName  string `json:"receiverName"` //收货人姓名
+		ReceiverPhone string `json:"receiverPhone"` //收货人电话
+		Province      string `json:"province"` //省份
+		City          string `json:"city"` //城市
+		District      string `json:"district"` //区县
+		DetailAddress string `json:"detailAddress"` //详细地址
+		PostalCode    string `json:"postalCode"` //邮政编码
+		Tag           string `json:"tag"` //地址标签：家、公司等
+		IsDefault     int32  `json:"isDefault"` //是否默认地址
+		CreateTime    string `json:"createTime"` //创建时间
+		UpdateTime    string `json:"updateTime"` //更新时间
+	}
+	QueryAddressDetailResp {
+		Code    int64                  `json:"code"`
+		Message string                 `json:"message"`
+		Data    QueryAddressDetailData `json:"data"`
+	}
+	// 分页查询会员收货地址列表请求参数
+	QueryAddressListReq {
+		Current  int64 `form:"current,default=1"` //第几页
+		PageSize int64 `form:"pageSize,default=20"` //每页的数量
+	}
+	QueryAddressListResp {
+		Code     int64                     `json:"code"`
+		Message  string                    `json:"message"`
+		Current  int64                     `json:"current,default=1"`
+		Data     []*QueryAddressDetailData `json:"data"`
+		PageSize int64                     `json:"pageSize,default=20"`
+		Success  bool                      `json:"success"`
+		Total    int64                     `json:"total"`
+	}
+)
+
+@server (
+	jwt:    Auth
+	group:  member/address
+	prefix: /api/member
+)
+service front-api {
+	//添加会员收货地址
+	@handler AddAddress
+	post /addAddress (AddressReq) returns (AddressResp)
+
+	// 删除会员收货地址
+	@handler DeleteAddress
+	get /deleteAddress (DeleteAddressReq) returns (AddressResp)
+
+	// 更新会员收货地址
+	@handler UpdateAddress
+	post /updateAddress (AddressReq) returns (AddressResp)
+
+	// 更新会员收货地址状态
+	@handler UpdateAddressStatus
+	post /updateAddressStatus (UpdateAddressStatusReq) returns (AddressResp)
+
+	// 查询会员收货地址详情
+	@handler QueryAddressDetail
+	get /querAddressDetail (QueryAddressDetailReq) returns (QueryAddressDetailResp)
+
+	// 分页查询会员收货地址列表
+	@handler QueryAddressList
+	get /queryAddressList (QueryAddressListReq) returns (QueryAddressListResp)
+}
+

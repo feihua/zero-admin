@@ -1,0 +1,27 @@
+info (
+	desc:   "首页推荐主题"
+	author: "koobe"
+	email:  "1002219331@qq.com"
+)
+
+type (
+	SubjectList {
+		Id              int64  `json:"id"` //专题id
+		CategoryId      int64  `json:"categoryId"` //专题分类id
+		Title           string `json:"title"` //专题标题
+		Pic             string `json:"pic"` //专题主图
+		ProductCount    int32  `json:"productCount"` //关联产品数量
+		RecommendStatus int32  `json:"recommendStatus"` //推荐状态：0->不推荐；1->推荐
+		CollectCount    int32  `json:"collectCount"` //收藏数
+		ReadCount       int32  `json:"readCount"` //阅读数
+		CommentCount    int32  `json:"commentCount"` //评论数
+		AlbumPics       string `json:"albumPics"` //画册图片用逗号分割
+		Description     string `json:"description"` //专题内容
+		ShowStatus      int32  `json:"showStatus"` //显示状态：0->不显示；1->显示
+		Content         string `json:"content"` //专题内容
+		ForwardCount    int32  `json:"forwardCount"` //转发数
+		CategoryName    string `json:"categoryName"` //专题分类名称
+		Sort            int32  `json:"sort"` //排序
+	}
+)
+

@@ -1,0 +1,40 @@
+info (
+	desc:   "品牌相关"
+	author: "koobe"
+	email:  "1002219331@qq.com"
+)
+
+type BrandListReq {
+	Current  int32 `form:"current,default=1"`
+	PageSize int32 `form:"pageSize,default=6"`
+}
+
+type BrandListResp {
+	Code    int64       `json:"code"`
+	Message string      `json:"message"`
+	Data    []BrandData `json:"data"`
+}
+
+type BrandData {
+	Id                  int64  `json:"id"` //
+	Name                string `json:"name"` //品牌名称
+	Logo                string `json:"logo"` //品牌logo
+	BigPic              string `json:"bigPic"` //专区大图
+	Description         string `json:"description"` //描述
+	FirstLetter         string `json:"firstLetter"` //首字母
+	Sort                int32  `json:"sort"` //排序
+	RecommendStatus     int32  `json:"recommendStatus"` //推荐状态
+	ProductCount        int32  `json:"productCount"` //产品数量
+	ProductCommentCount int32  `json:"productCommentCount"` //产品评论数量
+}
+
+@server (
+	group:  product/brand
+	prefix: /api/product
+)
+service front-api {
+	//分页获取推荐品牌
+	@handler QueryBrandList
+	get /queryBrandList (BrandListReq) returns (BrandListResp)
+}
+

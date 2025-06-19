@@ -1,0 +1,68 @@
+info (
+	desc:   "优惠券"
+	author: "koobe"
+	email:  "1002219331@qq.com"
+)
+
+type (
+	AddCouponReq {
+		CouponId int64 `json:"couponId"`
+	}
+	AddCouponResp {
+		Code    int64  `json:"code"`
+		Message string `json:"message"`
+	}
+	ListCouponReq {
+		UseStatus int32 `form:"useStatus,default=3"` // 使用状态：0->未使用；1->已使用；2->已过期
+	}
+	CouponData {
+		Id          int64   `json:"id"` //优惠券ID
+		TypeId      int64   `json:"typeId"` //优惠券类型ID
+		Name        string  `json:"name"` //优惠券名称
+		Code        string  `json:"code"` //优惠券码
+		Amount      float32 `json:"amount"` //优惠金额/折扣率
+		MinAmount   float32 `json:"minAmount"` //最低使用金额
+		StartTime   string  `json:"startTime"` //生效时间
+		EndTime     string  `json:"endTime"` //失效时间
+		PerLimit    int32   `json:"perLimit"` //每人限领数量
+		Status      int32   `json:"status"` //状态：0-未开始，1-进行中，2-已结束，3-已取消
+		Description string  `json:"description"` //使用说明
+	}
+	ListCouponResp {
+		Code    int64         `json:"code"`
+		Message string        `json:"message"`
+		Data    []*CouponData `json:"data"`
+	}
+	CouponListByCartReq {
+		Type int32 `form:"type"` // 使用状态-使用可用:0->不可用；1->可用
+	}
+	CouponListByCartResp {
+		Code    int64                `json:"code"`
+		Message string               `json:"message"`
+		Data    CouponListByCartData `json:"data"`
+	}
+	CouponListByCartData {
+		EnableList  interface{} `json:"enableList"`
+		DisableList interface{} `json:"disableList"`
+	}
+)
+
+@server (
+	jwt:    Auth
+	group:  member/coupon
+	prefix: /api/member/coupon
+)
+service front-api {
+	//领取指定优惠券
+	@handler AddCoupon
+	post /addCoupon (AddCouponReq) returns (AddCouponResp)
+
+	//获取会员优惠券列表
+	@handler QueryCouponList
+	get /queryCouponList (ListCouponReq) returns (ListCouponResp)
+
+	//获取登录会员购物车的相关优惠券
+	@handler QueryCouponListByCart
+	get /queryCouponListByCart (CouponListByCartReq) returns (CouponListByCartResp)
+}
+

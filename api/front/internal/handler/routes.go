@@ -6,18 +6,19 @@ package handler
 import (
 	"net/http"
 
-	brand "github.com/feihua/zero-admin/api/front/internal/handler/brand"
-	cart "github.com/feihua/zero-admin/api/front/internal/handler/cart"
-	category "github.com/feihua/zero-admin/api/front/internal/handler/category"
-	collection "github.com/feihua/zero-admin/api/front/internal/handler/collection"
-	history "github.com/feihua/zero-admin/api/front/internal/handler/history"
 	home "github.com/feihua/zero-admin/api/front/internal/handler/home"
 	memberaddress "github.com/feihua/zero-admin/api/front/internal/handler/member/address"
 	memberattention "github.com/feihua/zero-admin/api/front/internal/handler/member/attention"
+	membercollection "github.com/feihua/zero-admin/api/front/internal/handler/member/collection"
 	membercoupon "github.com/feihua/zero-admin/api/front/internal/handler/member/coupon"
+	memberhistory "github.com/feihua/zero-admin/api/front/internal/handler/member/history"
 	membermember "github.com/feihua/zero-admin/api/front/internal/handler/member/member"
-	order "github.com/feihua/zero-admin/api/front/internal/handler/order"
-	product "github.com/feihua/zero-admin/api/front/internal/handler/product"
+	ordercart "github.com/feihua/zero-admin/api/front/internal/handler/order/cart"
+	orderorder "github.com/feihua/zero-admin/api/front/internal/handler/order/order"
+	orderpay "github.com/feihua/zero-admin/api/front/internal/handler/order/pay"
+	productbrand "github.com/feihua/zero-admin/api/front/internal/handler/product/brand"
+	productcategory "github.com/feihua/zero-admin/api/front/internal/handler/product/category"
+	productproduct "github.com/feihua/zero-admin/api/front/internal/handler/product/product"
 	"github.com/feihua/zero-admin/api/front/internal/svc"
 
 	"github.com/zeromicro/go-zero/rest"
@@ -28,166 +29,8 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 		[]rest.Route{
 			{
 				Method:  http.MethodGet,
-				Path:    "/queryBrandList",
-				Handler: brand.QueryBrandListHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodGet,
-				Path:    "/queryBrandProductList",
-				Handler: brand.QueryBrandProductListHandler(serverCtx),
-			},
-		},
-		rest.WithPrefix("/api/brand"),
-	)
-
-	server.AddRoutes(
-		[]rest.Route{
-			{
-				Method:  http.MethodPost,
-				Path:    "/addCart",
-				Handler: cart.CartItemAddHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodGet,
-				Path:    "/clear",
-				Handler: cart.CarItemClearHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodPost,
-				Path:    "/deleteCart",
-				Handler: cart.CartItemDeleteHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodGet,
-				Path:    "/product/:productId",
-				Handler: cart.CartProductHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodPost,
-				Path:    "/promotionList",
-				Handler: cart.CarItemtListPromotionHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodGet,
-				Path:    "/queryCartList",
-				Handler: cart.CarItemListHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodPost,
-				Path:    "/updateAttr",
-				Handler: cart.CartUpdateAttrHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodPost,
-				Path:    "/updateQuantity",
-				Handler: cart.CartUpdateQuantityHandler(serverCtx),
-			},
-		},
-		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
-		rest.WithPrefix("/api/cart"),
-	)
-
-	server.AddRoutes(
-		[]rest.Route{
-			{
-				Method:  http.MethodGet,
-				Path:    "/queryProductCateListById",
-				Handler: category.QueryProductCateListByIdHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodGet,
-				Path:    "/queryProductCateTreeList",
-				Handler: category.QueryProductCateTreeListHandler(serverCtx),
-			},
-		},
-		rest.WithPrefix("/api/category"),
-	)
-
-	server.AddRoutes(
-		[]rest.Route{
-			{
-				Method:  http.MethodPost,
-				Path:    "/addProductCollection",
-				Handler: collection.AddProductCollectionHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodGet,
-				Path:    "/clearProductCollection",
-				Handler: collection.ClearProductCollectionHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodGet,
-				Path:    "/deleteProductCollection",
-				Handler: collection.DeleteProductCollectionHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodGet,
-				Path:    "/queryProductCollectionList",
-				Handler: collection.QueryProductCollectionListHandler(serverCtx),
-			},
-		},
-		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
-		rest.WithPrefix("/api/collection"),
-	)
-
-	server.AddRoutes(
-		[]rest.Route{
-			{
-				Method:  http.MethodPost,
-				Path:    "/addReadHistory",
-				Handler: history.AddReadHistoryHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodGet,
-				Path:    "/clearReadHistory",
-				Handler: history.ClearReadHistoryHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodGet,
-				Path:    "/deleteReadHistory",
-				Handler: history.DeleteReadHistoryHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodGet,
-				Path:    "/queryReadHistoryList",
-				Handler: history.QueryReadHistoryListHandler(serverCtx),
-			},
-		},
-		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
-		rest.WithPrefix("/api/history"),
-	)
-
-	server.AddRoutes(
-		[]rest.Route{
-			{
-				Method:  http.MethodGet,
 				Path:    "/index",
 				Handler: home.IndexHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodPost,
-				Path:    "/querySubjectList",
-				Handler: home.QuerySubjectListHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodPost,
-				Path:    "/recommendBrandList",
-				Handler: home.RecommendBrandListHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodPost,
-				Path:    "/recommendHotProductList",
-				Handler: home.RecommendHotProductListHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodPost,
-				Path:    "/recommendNewProductList",
-				Handler: home.RecommendNewProductListHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodPost,
-				Path:    "/recommendProductList",
-				Handler: home.RecommendProductListHandler(serverCtx),
 			},
 		},
 		rest.WithPrefix("/api/home"),
@@ -197,37 +40,37 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 		[]rest.Route{
 			{
 				Method:  http.MethodPost,
-				Path:    "/addMemberAddress",
-				Handler: memberaddress.AddMemberAddressHandler(serverCtx),
+				Path:    "/addAddress",
+				Handler: memberaddress.AddAddressHandler(serverCtx),
 			},
 			{
 				Method:  http.MethodGet,
-				Path:    "/deleteMemberAddress",
-				Handler: memberaddress.DeleteMemberAddressHandler(serverCtx),
+				Path:    "/deleteAddress",
+				Handler: memberaddress.DeleteAddressHandler(serverCtx),
 			},
 			{
 				Method:  http.MethodGet,
-				Path:    "/queryMemberAddressDetail",
-				Handler: memberaddress.QueryMemberAddressDetailHandler(serverCtx),
+				Path:    "/querAddressDetail",
+				Handler: memberaddress.QueryAddressDetailHandler(serverCtx),
 			},
 			{
 				Method:  http.MethodGet,
-				Path:    "/queryMemberAddressList",
-				Handler: memberaddress.QueryMemberAddressListHandler(serverCtx),
+				Path:    "/queryAddressList",
+				Handler: memberaddress.QueryAddressListHandler(serverCtx),
 			},
 			{
 				Method:  http.MethodPost,
-				Path:    "/updateMemberAddress",
-				Handler: memberaddress.UpdateMemberAddressHandler(serverCtx),
+				Path:    "/updateAddress",
+				Handler: memberaddress.UpdateAddressHandler(serverCtx),
 			},
 			{
 				Method:  http.MethodPost,
-				Path:    "/updateMemberAddressStatus",
-				Handler: memberaddress.UpdateMemberAddressStatusHandler(serverCtx),
+				Path:    "/updateAddressStatus",
+				Handler: memberaddress.UpdateAddressStatusHandler(serverCtx),
 			},
 		},
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
-		rest.WithPrefix("/api/member/address"),
+		rest.WithPrefix("/api/member"),
 	)
 
 	server.AddRoutes(
@@ -254,7 +97,34 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			},
 		},
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
-		rest.WithPrefix("/api/member/attention"),
+		rest.WithPrefix("/api/member"),
+	)
+
+	server.AddRoutes(
+		[]rest.Route{
+			{
+				Method:  http.MethodPost,
+				Path:    "/addtCollection",
+				Handler: membercollection.AddCollectionHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodGet,
+				Path:    "/clearCollection",
+				Handler: membercollection.ClearCollectionHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodGet,
+				Path:    "/deleteCollection",
+				Handler: membercollection.DeleteCollectionHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodGet,
+				Path:    "/queryCollectionList",
+				Handler: membercollection.QueryCollectionListHandler(serverCtx),
+			},
+		},
+		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
+		rest.WithPrefix("/api/member"),
 	)
 
 	server.AddRoutes(
@@ -266,11 +136,6 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			},
 			{
 				Method:  http.MethodGet,
-				Path:    "/queryCouponHistoryList",
-				Handler: membercoupon.QueryCouponHistoryListHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodGet,
 				Path:    "/queryCouponList",
 				Handler: membercoupon.QueryCouponListHandler(serverCtx),
 			},
@@ -279,14 +144,36 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				Path:    "/queryCouponListByCart",
 				Handler: membercoupon.QueryCouponListByCartHandler(serverCtx),
 			},
-			{
-				Method:  http.MethodGet,
-				Path:    "/queryCouponListByProductId",
-				Handler: membercoupon.QueryCouponListByProductIdHandler(serverCtx),
-			},
 		},
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
 		rest.WithPrefix("/api/member/coupon"),
+	)
+
+	server.AddRoutes(
+		[]rest.Route{
+			{
+				Method:  http.MethodPost,
+				Path:    "/addReadHistory",
+				Handler: memberhistory.AddReadHistoryHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodGet,
+				Path:    "/clearReadHistory",
+				Handler: memberhistory.ClearReadHistoryHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodGet,
+				Path:    "/deleteReadHistory",
+				Handler: memberhistory.DeleteReadHistoryHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodGet,
+				Path:    "/queryReadHistoryList",
+				Handler: memberhistory.QueryReadHistoryListHandler(serverCtx),
+			},
+		},
+		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
+		rest.WithPrefix("/api/member"),
 	)
 
 	server.AddRoutes(
@@ -330,49 +217,91 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 	server.AddRoutes(
 		[]rest.Route{
 			{
+				Method:  http.MethodPost,
+				Path:    "/addCart",
+				Handler: ordercart.CartItemAddHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodGet,
+				Path:    "/clear",
+				Handler: ordercart.CarItemClearHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/deleteCart",
+				Handler: ordercart.CartItemDeleteHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodGet,
+				Path:    "/product/:productId",
+				Handler: ordercart.CartProductHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/promotionList",
+				Handler: ordercart.CarItemtListPromotionHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodGet,
+				Path:    "/queryCartList",
+				Handler: ordercart.CarItemListHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/updateAttr",
+				Handler: ordercart.CartUpdateAttrHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/updateQuantity",
+				Handler: ordercart.CartUpdateQuantityHandler(serverCtx),
+			},
+		},
+		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
+		rest.WithPrefix("/api/order"),
+	)
+
+	server.AddRoutes(
+		[]rest.Route{
+			{
 				Method:  http.MethodGet,
 				Path:    "/cancelUserOrder",
-				Handler: order.CancelUserOrderHandler(serverCtx),
+				Handler: orderorder.CancelUserOrderHandler(serverCtx),
 			},
 			{
 				Method:  http.MethodGet,
 				Path:    "/confirmReceiveOrder",
-				Handler: order.ConfirmReceiveOrderHandler(serverCtx),
+				Handler: orderorder.ConfirmReceiveOrderHandler(serverCtx),
 			},
 			{
 				Method:  http.MethodGet,
 				Path:    "/deleteOrder",
-				Handler: order.DeleteOrderHandler(serverCtx),
+				Handler: orderorder.DeleteOrderHandler(serverCtx),
 			},
 			{
 				Method:  http.MethodPost,
 				Path:    "/generateConfirmOrder",
-				Handler: order.GenerateConfirmOrderHandler(serverCtx),
+				Handler: orderorder.GenerateConfirmOrderHandler(serverCtx),
 			},
 			{
 				Method:  http.MethodPost,
 				Path:    "/generateOrder",
-				Handler: order.GenerateOrderHandler(serverCtx),
+				Handler: orderorder.GenerateOrderHandler(serverCtx),
 			},
 			{
 				Method:  http.MethodGet,
-				Path:    "/orderDetail",
-				Handler: order.OrderDetailHandler(serverCtx),
+				Path:    "/queryOrderDetail",
+				Handler: orderorder.QueryOrderDetailHandler(serverCtx),
 			},
 			{
 				Method:  http.MethodGet,
-				Path:    "/orderList",
-				Handler: order.OrderListHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodPost,
-				Path:    "/payCallback",
-				Handler: order.PayCallbackHandler(serverCtx),
+				Path:    "/queryOrderList",
+				Handler: orderorder.QueryOrderListHandler(serverCtx),
 			},
 			{
 				Method:  http.MethodPost,
 				Path:    "/returnApply",
-				Handler: order.ReturnApplyHandler(serverCtx),
+				Handler: orderorder.ReturnApplyHandler(serverCtx),
 			},
 		},
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
@@ -384,16 +313,16 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			{
 				Method:  http.MethodPost,
 				Path:    "/orderPay",
-				Handler: order.OrderPayHandler(serverCtx),
+				Handler: orderpay.OrderPayHandler(serverCtx),
 			},
 			{
 				Method:  http.MethodGet,
 				Path:    "/orderPayQuery/:orderId",
-				Handler: order.OrderPayQueryHandler(serverCtx),
+				Handler: orderpay.OrderPayQueryHandler(serverCtx),
 			},
 		},
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
-		rest.WithPrefix("/api/pay"),
+		rest.WithPrefix("/api/order"),
 	)
 
 	server.AddRoutes(
@@ -401,7 +330,7 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			{
 				Method:  http.MethodPost,
 				Path:    "/notify",
-				Handler: order.NotifyHandler(serverCtx),
+				Handler: orderpay.NotifyHandler(serverCtx),
 			},
 		},
 		rest.WithPrefix("/api/pay"),
@@ -411,13 +340,35 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 		[]rest.Route{
 			{
 				Method:  http.MethodGet,
-				Path:    "/queryProduct",
-				Handler: product.QueryProductHandler(serverCtx),
+				Path:    "/queryBrandList",
+				Handler: productbrand.QueryBrandListHandler(serverCtx),
+			},
+		},
+		rest.WithPrefix("/api/product"),
+	)
+
+	server.AddRoutes(
+		[]rest.Route{
+			{
+				Method:  http.MethodGet,
+				Path:    "/queryProductCateList",
+				Handler: productcategory.QueryProductCateListHandler(serverCtx),
+			},
+		},
+		rest.WithPrefix("/api/product"),
+	)
+
+	server.AddRoutes(
+		[]rest.Route{
+			{
+				Method:  http.MethodGet,
+				Path:    "/queryProductDetail",
+				Handler: productproduct.QueryProductDetailHandler(serverCtx),
 			},
 			{
 				Method:  http.MethodGet,
 				Path:    "/queryProductList",
-				Handler: product.QueryProductListHandler(serverCtx),
+				Handler: productproduct.QueryProductListHandler(serverCtx),
 			},
 		},
 		rest.WithPrefix("/api/product"),

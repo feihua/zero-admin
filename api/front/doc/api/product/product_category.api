@@ -1,0 +1,31 @@
+info (
+	desc:   "分类相关"
+	author: "koobe"
+	email:  "1002219331@qq.com"
+)
+
+type QueryProductCateListResp {
+	Code    int64             `json:"code"`
+	Message string            `json:"message"`
+	Data    []ProductCateData `json:"data"`
+}
+
+type ProductCateData {
+	Id       int64             `json:"id"`
+	Key      string            `json:"key"`
+	Name     string            `json:"name"`
+	Label    string            `json:"label"`
+	ImageUrl string            `json:"imageUrl"`
+	Children []ProductCateData `json:"children"`
+}
+
+@server (
+	group:  product/category
+	prefix: /api/product
+)
+service front-api {
+	//获取所有商品分类
+	@handler QueryProductCateList
+	get /queryProductCateList returns (QueryProductCateListResp)
+}
+

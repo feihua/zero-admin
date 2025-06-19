@@ -97,7 +97,7 @@ format: ## 格式化代码
 gen:	## 生成所有模块代码
 	$(GOCTL) api go -api ./api/admin/doc/api/admin.api -dir ./api/admin/
 	# 生成front-api代码
-	$(GOCTL) api go -api ./api/front/doc/api/front.api -dir ./api/front/
+	$(GOCTL) api go -api ./api/front/doc/api/front.api -dir ./api/front/ --style go_zero
 	# 生成web-api代码
 	$(GOCTL) api go -api ./api/web/doc/api/web.api -dir ./api/web/
 	# 生成sys-rpc代码

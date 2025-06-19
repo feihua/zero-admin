@@ -1,6 +1,6 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="gen-front" type="ShConfigurationType">
-    <option name="SCRIPT_TEXT" value="goctl api format --dir api/front/doc/api;goctl api go -api ./api/front/doc/api/front.api -dir ./api/front/" />
+    <option name="SCRIPT_TEXT" value="goctl api format --dir api/front/doc/api;goctl api go -api ./api/front/doc/api/front.api -dir ./api/front/ --style go_zero" />
     <option name="INDEPENDENT_SCRIPT_PATH" value="true" />
     <option name="SCRIPT_PATH" value="" />
     <option name="SCRIPT_OPTIONS" value="" />

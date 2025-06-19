@@ -1,0 +1,65 @@
+info (
+	desc:   "会员商品收藏管理"
+	author: "koobe"
+	email:  "1002219331@qq.com"
+)
+
+type CollectionReq {
+	ProductId       int64  `json:"productId"` // 商品id
+	ProductName     string `json:"productName"` // 商品名称
+	ProductPic      string `json:"productPic"` // 商品图片
+	ProductSubTitle string `json:"productSubTitle"` // 商品标题
+	ProductPrice    int64  `json:"productPrice"` // 商品价格
+}
+
+type CollectionResp {
+	Code    int64  `json:"code"`
+	Message string `json:"message"`
+}
+
+type CollectionDeleteReq {
+	Ids []string `form:"ids"`
+}
+
+type CollectionListResp {
+	Code    int64            `json:"code"`
+	Message string           `json:"message"`
+	Data    []CollectionList `json:"data"` //收藏列表
+}
+
+type CollectionList {
+	Id              string `json:"id"` // 编号
+	MemberId        int64  `json:"memberId"` // 会员id
+	MemberNickName  string `json:"memberNickName"` // 会员姓名
+	MemberIcon      string `json:"memberIcon"` // 会员头像
+	ProductId       int64  `json:"productId"` // 商品id
+	ProductName     string `json:"productName"` // 商品名称
+	ProductPic      string `json:"productPic"` // 商品图片
+	ProductSubTitle string `json:"productSubTitle"` // 商品标题
+	ProductPrice    int64  `json:"productPrice"` // 商品价格
+	CreateTime      string `json:"createTime"` // 浏览时间
+}
+
+@server (
+	jwt:    Auth
+	group:  member/collection
+	prefix: /api/member
+)
+service front-api {
+	//添加商品收藏
+	@handler AddCollection
+	post /addtCollection (CollectionReq) returns (CollectionResp)
+
+	//删除商品收藏
+	@handler DeleteCollection
+	get /deleteCollection (CollectionDeleteReq) returns (CollectionResp)
+
+	//清空当前用户商品收藏列表
+	@handler ClearCollection
+	get /clearCollection returns (CollectionResp)
+
+	//分页查询商品收藏列表
+	@handler QueryCollectionList
+	get /queryCollectionList returns (CollectionListResp)
+}
+

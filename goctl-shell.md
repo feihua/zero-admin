@@ -15,7 +15,7 @@ go get -u github.com/zeromicro/go-zero/tools/goctl
 goctl api go -api ./api/admin/doc/api/admin.api -dir ./api/admin/
 
 2.2移动端app代码
-goctl api go -api ./api/front/doc/api/front.api -dir ./api/front/
+goctl api go -api ./api/front/doc/api/front.api -dir ./api/front/ --style go_zero
 
 2.2网页端web代码
 goctl api go -api ./api/web/doc/api/web.api -dir ./api/web/
