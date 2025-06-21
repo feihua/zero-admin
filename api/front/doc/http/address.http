@@ -62,5 +62,5 @@ GET {{host}}/api/member/address/queryMemberAddressDetail?id=15
 Authorization: Bearer {{token}}
 
 ### 获取会员个人的收货地址
-GET {{host}}/api/member/address/queryMemberAddressList
+GET {{host}}/api/member/queryAddressList
 Authorization: Bearer {{token}}
