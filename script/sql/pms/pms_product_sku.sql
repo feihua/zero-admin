@@ -2,7 +2,7 @@ drop table if exists pms_product_sku;
 create table pms_product_sku
 (
     id                   bigint auto_increment
-        primary key comment '商品SpuId',
+        primary key comment '商品SkuId',
     spu_id               bigint                             not null comment '商品SpuId',
     name                 varchar(200)                       not null comment 'SKU名称',
     sku_code             varchar(50)                        not null comment 'SKU编码',
@@ -35,9 +35,9 @@ create index idx_spu_id
 
 -- 插入商品SKU数据
 insert into pms_product_sku (id, spu_id, name, sku_code, main_pic, album_pics, price, promotion_price, stock, low_stock, spec_data, weight, publish_status, verify_status, sort, sales, create_by)
-values  (1, 1, 'iPhone 15 Pro 暗紫色 128GB 全网通版', 'IP15P-128-PURPLE', 'http://example.com/sku/iphone15-purple-128.jpg', 'http://example.com/sku/iphone15-p-1.jpg,http://example.com/sku/iphone15-p-2.jpg', 7999.00, 7899.00, 1000, 100, '{"容量": "128GB", "颜色": "暗紫色", "网络版本": "全网通版"}', 0.19, 1, 1, 1, 300, 1),
-        (2, 1, 'iPhone 15 Pro 暗紫色 256GB 全网通版', 'IP15P-256-PURPLE', 'http://example.com/sku/iphone15-purple-256.jpg', 'http://example.com/sku/iphone15-p-1.jpg,http://example.com/sku/iphone15-p-2.jpg', 8999.00, 8899.00, 800, 80, '{"容量": "256GB", "颜色": "暗紫色", "网络版本": "全网通版"}', 0.19, 1, 1, 2, 200, 1),
-        (3, 1, 'iPhone 15 Pro 自然色 128GB 全网通版', 'IP15P-128-NATURAL', 'http://example.com/sku/iphone15-natural-128.jpg', 'http://example.com/sku/iphone15-n-1.jpg,http://example.com/sku/iphone15-n-2.jpg', 7999.00, 7899.00, 1200, 100, '{"容量": "128GB", "颜色": "自然色", "网络版本": "全网通版"}', 0.19, 1, 1, 3, 250, 1),
-        (4, 1, 'iPhone 15 Pro 自然色 256GB 全网通版', 'IP15P-256-NATURAL', 'http://example.com/sku/iphone15-natural-256.jpg', 'http://example.com/sku/iphone15-n-1.jpg,http://example.com/sku/iphone15-n-2.jpg', 8999.00, 8899.00, 900, 80, '{"容量": "256GB", "颜色": "自然色", "网络版本": "全网通版"}', 0.19, 1, 1, 4, 180, 1),
-        (5, 3, 'MacBook Pro 14 深空灰 16GB+512GB', 'MBP14-16-512-GRAY', 'http://example.com/sku/macbook-gray-512.jpg', 'http://example.com/sku/macbook-g-1.jpg,http://example.com/sku/macbook-g-2.jpg', 14999.00, 13999.00, 500, 50, '{"内存": "16GB", "硬盘": "512GB", "颜色": "深空灰"}', 1.60, 1, 1, 5, 100, 1),
-        (6, 3, 'MacBook Pro 14 深空灰 16GB+1TB', 'MBP14-16-1T-GRAY', 'http://example.com/sku/macbook-gray-1t.jpg', 'http://example.com/sku/macbook-g-1.jpg,http://example.com/sku/macbook-g-2.jpg', 16999.00, 15999.00, 300, 30, '{"内存": "16GB", "硬盘": "1TB", "颜色": "深空灰"}', 1.60, 1, 1, 6, 80, 1);
+values  (1, 1, 'iPhone 15 Pro 暗紫色 128GB 全网通版', 'IP15P-128-PURPLE', 'http://129.204.203.29/big.png', 'http://example.com/sku/iphone15-p-1.jpg,http://example.com/sku/iphone15-p-2.jpg', 7999.00, 7899.00, 1000, 100, '{"容量": "128GB", "颜色": "暗紫色", "网络版本": "全网通版"}', 0.19, 1, 1, 1, 300, 1),
+        (2, 1, 'iPhone 15 Pro 暗紫色 256GB 全网通版', 'IP15P-256-PURPLE', 'http://129.204.203.29/big.png', 'http://example.com/sku/iphone15-p-1.jpg,http://example.com/sku/iphone15-p-2.jpg', 8999.00, 8899.00, 800, 80, '{"容量": "256GB", "颜色": "暗紫色", "网络版本": "全网通版"}', 0.19, 1, 1, 2, 200, 1),
+        (3, 1, 'iPhone 15 Pro 自然色 128GB 全网通版', 'IP15P-128-NATURAL', 'http://129.204.203.29/big.png', 'http://example.com/sku/iphone15-n-1.jpg,http://example.com/sku/iphone15-n-2.jpg', 7999.00, 7899.00, 1200, 100, '{"容量": "128GB", "颜色": "自然色", "网络版本": "全网通版"}', 0.19, 1, 1, 3, 250, 1),
+        (4, 1, 'iPhone 15 Pro 自然色 256GB 全网通版', 'IP15P-256-NATURAL', 'http://129.204.203.29/big.png', 'http://example.com/sku/iphone15-n-1.jpg,http://example.com/sku/iphone15-n-2.jpg', 8999.00, 8899.00, 900, 80, '{"容量": "256GB", "颜色": "自然色", "网络版本": "全网通版"}', 0.19, 1, 1, 4, 180, 1),
+        (5, 3, 'MacBook Pro 14 深空灰 16GB+512GB', 'MBP14-16-512-GRAY', 'http://129.204.203.29/big.png', 'http://example.com/sku/macbook-g-1.jpg,http://example.com/sku/macbook-g-2.jpg', 14999.00, 13999.00, 500, 50, '{"内存": "16GB", "硬盘": "512GB", "颜色": "深空灰"}', 1.60, 1, 1, 5, 100, 1),
+        (6, 3, 'MacBook Pro 14 深空灰 16GB+1TB', 'MBP14-16-1T-GRAY', 'http://129.204.203.29/big.png', 'http://example.com/sku/macbook-g-1.jpg,http://example.com/sku/macbook-g-2.jpg', 16999.00, 15999.00, 300, 30, '{"内存": "16GB", "硬盘": "1TB", "颜色": "深空灰"}', 1.60, 1, 1, 6, 80, 1);
