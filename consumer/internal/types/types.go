@@ -3,6 +3,32 @@
 
 package types
 
+type MemberInfo struct {
+	Id           int64   `json:"id"`           //主键ID
+	MemberId     int64   `json:"memberId"`     //会员ID
+	LevelId      int64   `json:"levelId"`      //等级ID
+	Nickname     string  `json:"nickname"`     //昵称
+	Mobile       string  `json:"mobile"`       //手机号码
+	Source       int32   `json:"source"`       //注册来源：0-PC，1-APP，2-小程序
+	Avatar       string  `json:"avatar"`       //头像
+	Signature    string  `json:"signature"`    //个性签名
+	Gender       int32   `json:"gender"`       //性别：0-未知，1-男，2-女
+	Birthday     string  `json:"birthday"`     //生日
+	GrowthPoint  int32   `json:"growthPoint"`  //成长值
+	Points       int32   `json:"points"`       //积分
+	TotalPoints  int32   `json:"totalPoints"`  //累计获得积分
+	SpendAmount  float64 `json:"spendAmount"`  //累计消费金额
+	OrderCount   int32   `json:"orderCount"`   //订单数
+	CouponCount  int32   `json:"couponCount"`  //优惠券数量
+	CommentCount int32   `json:"commentCount"` //评价数
+	ReturnCount  int32   `json:"returnCount"`  //退货数
+	LotteryTimes int32   `json:"lotteryTimes"` //剩余抽奖次数
+	LastLogin    string  `json:"lastLogin"`    //最后登录
+	IsEnabled    int32   `json:"isEnabled"`    //是否启用：0-禁用，1-启用
+	CreateTime   string  `json:"createTime"`   //创建时间
+	UpdateTime   string  `json:"updateTime"`   //更新时间
+}
+
 type Request struct {
 	Name string `path:"name,options=you|me"`
 }

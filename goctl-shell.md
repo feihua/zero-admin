@@ -19,6 +19,9 @@ goctl api go -api ./api/front/doc/api/front.api -dir ./api/front/ --style go_zer
 
 2.2网页端web代码
 goctl api go -api ./api/web/doc/api/web.api -dir ./api/web/
+
+2.3mq consumer代码
+goctl api go -api ./consumer/consumer.api -dir ./consumer
 ```
 
 ## 3.生成rpc代码

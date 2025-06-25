@@ -81,12 +81,24 @@ func (l *LoginLogic) Login(in *umsclient.LoginReq) (*umsclient.LoginResp, error)
 		return nil, errors.New("生成token失败")
 	}
 
-	body, err := json.Marshal(member)
-	if err != nil {
-		logc.Errorf(l.ctx, "序列化 JSON 失败: %v", err)
-	}
-	l.svcCtx.RabbitMQ.PublishSimple("test", body)
+	sendCouponMsg(member, l)
+
 	return &umsclient.LoginResp{
 		Token: token,
 	}, nil
+}
+
+// 首次登录,发送优惠券消息
+func sendCouponMsg(member *model.UmsMemberInfo, l *LoginLogic) {
+	if member.FirstLoginStatus == 1 {
+		logc.Errorf(l.ctx, "用户：%s,首次登录，将发放新手优惠券", member.Nickname)
+		body, err := json.Marshal(member)
+		if err != nil {
+			logc.Errorf(l.ctx, "序列化 JSON 失败: %v", err)
+		}
+		err = l.svcCtx.RabbitMQ.PublishSimple("first_login_queue", body)
+		if err != nil {
+			logc.Errorf(l.ctx, "发送新手优惠券消息失败,参数：%+v,异常:%s", err.Error())
+		}
+	}
 }

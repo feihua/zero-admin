@@ -100,6 +100,8 @@ gen:	## 生成所有模块代码
 	$(GOCTL) api go -api ./api/front/doc/api/front.api -dir ./api/front/ --style go_zero
 	# 生成web-api代码
 	$(GOCTL) api go -api ./api/web/doc/api/web.api -dir ./api/web/
+	# 生成mq消费者代码
+	$(GOCTL) api go -api ./consumer/consumer.api -dir ./consumer
 	# 生成sys-rpc代码
 	$(GOCTL) rpc protoc rpc/sys/sys.proto --go_out=./rpc/sys/ --go-grpc_out=./rpc/sys/ --zrpc_out=./rpc/sys/ -m
 	# 生成ums-rpc代码
