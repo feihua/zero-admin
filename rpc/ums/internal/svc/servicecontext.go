@@ -1,6 +1,8 @@
 package svc
 
 import (
+	"fmt"
+	"github.com/feihua/zero-admin/pkg/mq"
 	"github.com/feihua/zero-admin/rpc/ums/gen/model"
 	"github.com/feihua/zero-admin/rpc/ums/gen/query"
 	"github.com/feihua/zero-admin/rpc/ums/internal/config"
@@ -14,6 +16,7 @@ import (
 type ServiceContext struct {
 	Config                             config.Config
 	DB                                 *gorm.DB
+	RabbitMQ                           *mq.RabbitMQ
 	MemberBrandAttentionModel          model.MemberBrandAttentionModel
 	MemberBrowseRecordModel            model.MemberBrowseRecordModel
 	MemberProductCategoryRelationModel model.MemberProductCategoryRelationModel
@@ -27,11 +30,15 @@ func NewServiceContext(c config.Config) *ServiceContext {
 		Logger:                 settingLogConfig(),
 	})
 	if err != nil {
+		logx.Infof("mysql连接失败：%+v", err)
 		panic(err)
 	}
 
-	logx.Debug("mysql已连接")
+	logx.Info("mysql连接成功")
 	query.SetDefault(db)
+
+	mqUrl := fmt.Sprintf("amqp://%s:%s@%s:%d/", c.Rabbitmq.UserName, c.Rabbitmq.Password, c.Rabbitmq.Host, c.Rabbitmq.Port)
+	rabbitmq := mq.NewRabbitMQSimple(mqUrl)
 
 	MemberBrandAttention := model.NewMemberBrandAttentionModel(c.Mongo.Datasource, c.Mongo.Db, "ums_member_brand_attention")
 	MemberBrowseRecordModel := model.NewMemberBrowseRecordModel(c.Mongo.Datasource, c.Mongo.Db, "ums_member_browse_record")
@@ -40,6 +47,7 @@ func NewServiceContext(c config.Config) *ServiceContext {
 	return &ServiceContext{
 		Config:                             c,
 		DB:                                 db,
+		RabbitMQ:                           rabbitmq,
 		MemberBrandAttentionModel:          MemberBrandAttention,
 		MemberBrowseRecordModel:            MemberBrowseRecordModel,
 		MemberProductCategoryRelationModel: MemberProductCategoryRelationModel,

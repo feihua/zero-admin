@@ -80,6 +80,7 @@ func (l *LoginLogic) Login(in *umsclient.LoginReq) (*umsclient.LoginResp, error)
 		return nil, errors.New("生成token失败")
 	}
 
+	l.svcCtx.RabbitMQ.PublishSimple("test", token)
 	return &umsclient.LoginResp{
 		Token: token,
 	}, nil

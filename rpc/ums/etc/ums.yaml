@@ -11,6 +11,11 @@ Mysql:
 Mongo:
   Datasource: mongodb://admin:123467@127.0.0.1:27017
   Db: ums
+Rabbitmq:
+  Host: 127.0.0.1
+  Port: 5672
+  UserName: test
+  Password: test
 JWT:
   AccessSecret: ad879037-c7a4-4063-9236-6bfc35d54b7d
   AccessExpire: 86400

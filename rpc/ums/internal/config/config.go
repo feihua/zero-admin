@@ -13,6 +13,12 @@ type Config struct {
 		Datasource string
 		Db         string
 	}
+	Rabbitmq struct {
+		Host     string
+		Port     int64
+		UserName string
+		Password string
+	}
 	JWT struct {
 		AccessSecret string
 		AccessExpire int64
