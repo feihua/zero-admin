@@ -83,6 +83,11 @@ func (l *LoginLogic) Login(in *umsclient.LoginReq) (*umsclient.LoginResp, error)
 
 	sendCouponMsg(member, l)
 
+	//todo test
+	err = l.svcCtx.RabbitMQ.SendDelayMessage("order.delay.exchange", "order.cancel.queue", "order.cancel", []byte("test"), 1)
+	if err != nil {
+		logc.Errorf(l.ctx, "发送新手优惠券消息失败,,异常:%s", err.Error())
+	}
 	return &umsclient.LoginResp{
 		Token: token,
 	}, nil

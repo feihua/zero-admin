@@ -1,6 +1,7 @@
 package mq
 
 import (
+	"fmt"
 	"github.com/feihua/zero-admin/pkg/errorx"
 	amqp "github.com/rabbitmq/amqp091-go"
 	"github.com/zeromicro/go-zero/core/logx"
@@ -58,7 +59,7 @@ func (r *RabbitMQ) PublishSimple(queueName string, message []byte) error {
 	_, err := r.channel.QueueDeclare(
 		queueName,
 		// 是否持久化
-		false,
+		true,
 		// 是否自动删除
 		false,
 		// 是否具有排他性
@@ -92,7 +93,7 @@ func (r *RabbitMQ) ConsumeSimple(queueName string, handler func([]byte)) {
 	q, err := r.channel.QueueDeclare(
 		queueName,
 		// 是否持久化
-		false,
+		true,
 		// 是否自动删除
 		false,
 		// 是否具有排他性
@@ -141,4 +142,75 @@ func (r *RabbitMQ) ConsumeSimple(queueName string, handler func([]byte)) {
 	logx.Info(" Waiting for messages ...")
 	<-forever
 
+}
+
+// SendDelayMessage 发送延时取消消息
+func (r *RabbitMQ) SendDelayMessage(exchange, queueName, key string, message []byte, delayMinutes int) error {
+	// 声明延时交换机
+	err := r.channel.ExchangeDeclare(
+		exchange,            // 交换机名称
+		"x-delayed-message", // 类型（需要延时插件）
+		true,                // 持久化
+		false,               // 自动删除
+		false,               // 内部
+		false,               // 不等待
+		amqp.Table{
+			"x-delayed-type": "direct",
+		},
+	)
+	if err != nil {
+		r.Destroy()
+		logx.Errorf("声明延时交换机失败：%+v", err)
+		return errorx.NewDefaultError("声明延时交换机失败")
+	}
+
+	// 声明订单取消队列
+	_, err = r.channel.QueueDeclare(
+		queueName, // 队列名称
+		true,      // 持久化
+		false,     // 自动删除
+		false,     // 排他性
+		false,     // 不等待
+		nil,
+	)
+	if err != nil {
+		r.Destroy()
+		logx.Errorf("声明队列失败：%+v", err)
+		return errorx.NewDefaultError("声明队列失败")
+	}
+
+	// 绑定队列到交换机
+	err = r.channel.QueueBind(
+		queueName, // 队列名
+		key,       // 路由键
+		exchange,  // 交换机
+		false,
+		nil,
+	)
+	if err != nil {
+		r.Destroy()
+		logx.Errorf("绑定队列失败：%+v", err)
+		return errorx.NewDefaultError("绑定队列失败")
+	}
+
+	err = r.channel.Publish(
+		exchange, // 交换机
+		key,      // 路由键
+		false,    // 强制
+		false,    // 立即
+		amqp.Publishing{
+			ContentType:  "application/json",
+			Body:         message,
+			DeliveryMode: amqp.Persistent,
+			Headers: amqp.Table{
+				"x-delay": int64(delayMinutes * 60 * 1000), // 延时时间（毫秒）
+			},
+		},
+	)
+	if err != nil {
+		return fmt.Errorf("发送延时消息失败: %v", err)
+	}
+
+	logx.Errorf("订单 %s 延时取消消息已发送，将在 %d 分钟后处理", "1", delayMinutes)
+	return nil
 }

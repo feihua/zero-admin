@@ -63,5 +63,11 @@ func NewServiceContext(c config.Config) *ServiceContext {
 			consumer.FirstLogin(context.Background(), body, memberInfoService, couponService, couponRecordService)
 		})
 	}()
+
+	go func() {
+		rabbitmq.ConsumeSimple("order.cancel.queue", func(body []byte) {
+			logc.Infof(context.Background(), "收到order.cancel.queue消息: %s", body)
+		})
+	}()
 	return s
 }
