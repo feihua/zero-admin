@@ -3,7 +3,7 @@ Host: 0.0.0.0
 Port: 8087
 
 Rabbitmq:
-  Host: 129.204.203.29
+  Host: 127.0.0.1
   Port: 5672
   UserName: guest
-  Password: 12341qweqfsd2356
+  Password: guest

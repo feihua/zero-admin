@@ -4,7 +4,6 @@ import (
 	"github.com/feihua/zero-admin/pkg/errorx"
 	amqp "github.com/rabbitmq/amqp091-go"
 	"github.com/zeromicro/go-zero/core/logx"
-	"log"
 )
 
 // RabbitMQ 配置
@@ -54,7 +53,7 @@ func NewRabbitMQSimple(MqUrl string) *RabbitMQ {
 }
 
 // PublishSimple 直接模式队列生产
-func (r *RabbitMQ) PublishSimple(queueName, message string) error {
+func (r *RabbitMQ) PublishSimple(queueName string, message []byte) error {
 	// 1.申请队列，如果队列不存在会自动创建，存在则跳过创建
 	_, err := r.channel.QueueDeclare(
 		queueName,
@@ -82,13 +81,13 @@ func (r *RabbitMQ) PublishSimple(queueName, message string) error {
 		// 如果为true，当exchange发送消息到队列后发现队列上没有消费者，则会把消息返还给发送者
 		false,
 		amqp.Publishing{
-			ContentType: "text/plain",
-			Body:        []byte(message),
+			ContentType: "application/json",
+			Body:        message,
 		})
 }
 
 // ConsumeSimple simple 模式下消费者
-func (r *RabbitMQ) ConsumeSimple(queueName string) {
+func (r *RabbitMQ) ConsumeSimple(queueName string, handler func([]byte)) {
 	// 1.申请队列，如果队列不存在会自动创建，存在则跳过创建
 	q, err := r.channel.QueueDeclare(
 		queueName,
@@ -132,8 +131,9 @@ func (r *RabbitMQ) ConsumeSimple(queueName string) {
 	// 启用协程处理消息
 	go func() {
 		for d := range msgs {
-			// 消息逻辑处理，可以自行设计逻辑
-			log.Printf("Received a message: %s", d.Body)
+			// 消息逻辑处理
+			// log.Printf("Received a message: %s", d.Body)
+			handler(d.Body)
 
 		}
 	}()

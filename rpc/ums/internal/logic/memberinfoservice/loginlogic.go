@@ -2,6 +2,7 @@ package memberinfoservicelogic
 
 import (
 	"context"
+	"encoding/json"
 	"github.com/feihua/zero-admin/rpc/ums/gen/model"
 	"github.com/feihua/zero-admin/rpc/ums/gen/query"
 	"github.com/pkg/errors"
@@ -80,7 +81,11 @@ func (l *LoginLogic) Login(in *umsclient.LoginReq) (*umsclient.LoginResp, error)
 		return nil, errors.New("生成token失败")
 	}
 
-	l.svcCtx.RabbitMQ.PublishSimple("test", token)
+	body, err := json.Marshal(member)
+	if err != nil {
+		logc.Errorf(l.ctx, "序列化 JSON 失败: %v", err)
+	}
+	l.svcCtx.RabbitMQ.PublishSimple("test", body)
 	return &umsclient.LoginResp{
 		Token: token,
 	}, nil
