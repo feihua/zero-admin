@@ -1,23 +1,23 @@
 #!/bin/bash
 
 #停止服务
-docker stop sys-rpc
-docker stop ums-rpc
-docker stop oms-rpc
-docker stop pms-rpc
-docker stop sms-rpc
-docker stop cms-rpc
+docker stop sys
+docker stop ums
+docker stop oms
+docker stop pms
+docker stop sms
+docker stop cms
 docker stop admin-api
 docker stop front-api
 docker stop web-api
 
 #删除容器
-docker rm sys-rpc
-docker rm ums-rpc
-docker rm oms-rpc
-docker rm pms-rpc
-docker rm sms-rpc
-docker rm cms-rpc
+docker rm sys
+docker rm ums
+docker rm oms
+docker rm pms
+docker rm sms
+docker rm cms
 docker rm admin-api
 docker rm front-api
 docker rm web-api
@@ -54,6 +54,6 @@ docker run -itd --net=host --name=oms oms-rpc:0.0.1
 docker run -itd --net=host --name=pms pms-rpc:0.0.1
 docker run -itd --net=host --name=sms sms-rpc:0.0.1
 docker run -itd --net=host --name=cms cms-rpc:0.0.1
-docker run -itd --net=host --name=admin-api admin-api:0.0.1
+docker run -itd --net=host --name=admin-api  -v /www/wwwroot/upload:/app/uploads admin-api:0.0.1
 docker run -itd --net=host --name=front-api front-api:0.0.1
 docker run -itd --net=host --name=web-api web-api:0.0.1
