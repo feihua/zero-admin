@@ -70,3 +70,9 @@ func (s *MemberInfoServiceServer) UpdateMemberPoints(ctx context.Context, in *um
 	l := memberinfoservicelogic.NewUpdateMemberPointsLogic(ctx, s.svcCtx)
 	return l.UpdateMemberPoints(in)
 }
+
+// 更新会员首次登录状态
+func (s *MemberInfoServiceServer) UpdateFirstLoginStatus(ctx context.Context, in *umsclient.UpdateFirstLoginStatusReq) (*umsclient.UpdateMemberInfoResp, error) {
+	l := memberinfoservicelogic.NewUpdateFirstLoginStatusLogic(ctx, s.svcCtx)
+	return l.UpdateFirstLoginStatus(in)
+}

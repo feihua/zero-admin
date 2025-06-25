@@ -159,6 +159,7 @@ type (
 	RegisterReq                                = umsclient.RegisterReq
 	RegisterResp                               = umsclient.RegisterResp
 	UpdateCouponStatusReq                      = umsclient.UpdateCouponStatusReq
+	UpdateFirstLoginStatusReq                  = umsclient.UpdateFirstLoginStatusReq
 	UpdateMemberAddressReq                     = umsclient.UpdateMemberAddressReq
 	UpdateMemberAddressResp                    = umsclient.UpdateMemberAddressResp
 	UpdateMemberAddressStatusReq               = umsclient.UpdateMemberAddressStatusReq

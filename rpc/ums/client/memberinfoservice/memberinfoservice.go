@@ -159,6 +159,7 @@ type (
 	RegisterReq                                = umsclient.RegisterReq
 	RegisterResp                               = umsclient.RegisterResp
 	UpdateCouponStatusReq                      = umsclient.UpdateCouponStatusReq
+	UpdateFirstLoginStatusReq                  = umsclient.UpdateFirstLoginStatusReq
 	UpdateMemberAddressReq                     = umsclient.UpdateMemberAddressReq
 	UpdateMemberAddressResp                    = umsclient.UpdateMemberAddressResp
 	UpdateMemberAddressStatusReq               = umsclient.UpdateMemberAddressStatusReq
@@ -208,6 +209,8 @@ type (
 		Login(ctx context.Context, in *LoginReq, opts ...grpc.CallOption) (*LoginResp, error)
 		// 更新会员积分
 		UpdateMemberPoints(ctx context.Context, in *UpdateMemberPointsReq, opts ...grpc.CallOption) (*UpdateMemberPointsResp, error)
+		// 更新会员首次登录状态
+		UpdateFirstLoginStatus(ctx context.Context, in *UpdateFirstLoginStatusReq, opts ...grpc.CallOption) (*UpdateMemberInfoResp, error)
 	}
 
 	defaultMemberInfoService struct {
@@ -267,4 +270,10 @@ func (m *defaultMemberInfoService) Login(ctx context.Context, in *LoginReq, opts
 func (m *defaultMemberInfoService) UpdateMemberPoints(ctx context.Context, in *UpdateMemberPointsReq, opts ...grpc.CallOption) (*UpdateMemberPointsResp, error) {
 	client := umsclient.NewMemberInfoServiceClient(m.cli.Conn())
 	return client.UpdateMemberPoints(ctx, in, opts...)
+}
+
+// 更新会员首次登录状态
+func (m *defaultMemberInfoService) UpdateFirstLoginStatus(ctx context.Context, in *UpdateFirstLoginStatusReq, opts ...grpc.CallOption) (*UpdateMemberInfoResp, error) {
+	client := umsclient.NewMemberInfoServiceClient(m.cli.Conn())
+	return client.UpdateFirstLoginStatus(ctx, in, opts...)
 }

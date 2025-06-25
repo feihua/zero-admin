@@ -7,3 +7,19 @@ Rabbitmq:
   Port: 5672
   UserName: guest
   Password: guest
+
+#会员
+UmsRpc:
+  Etcd:
+    Hosts:
+      - localhost:2379
+    Key: ums.rpc
+  NonBlock: true
+
+#营销
+SmsRpc:
+  Etcd:
+    Hosts:
+      - localhost:2379
+    Key: sms.rpc
+  NonBlock: true

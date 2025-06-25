@@ -470,27 +470,30 @@ message QueryMemberInfoDetailReq {
 message QueryMemberInfoDetailResp {
   int64 id = 1; //主键ID
   int64 member_id = 2; //会员ID
-  int64 level_id = 3; //等级ID
-  string nickname = 4; //昵称
-  string mobile = 5; //手机号码
-  int32 source = 6; //注册来源：0-PC，1-APP，2-小程序
-  string avatar = 8; //头像
-  string signature = 9; //个性签名
-  int32 gender = 10; //性别：0-未知，1-男，2-女
-  string birthday = 11; //生日
-  int32 growth_point = 12; //成长值
-  int32 points = 13; //积分
-  int32 total_points = 14; //累计获得积分
-  float spend_amount = 15; //累计消费金额
-  int32 order_count = 16; //订单数
-  int32 coupon_count = 17; //优惠券数量
-  int32 comment_count = 18; //评价数
-  int32 return_count = 19; //退货数
-  int32 lottery_times = 20; //剩余抽奖次数
-  string last_login = 21; //最后登录
-  int32 is_enabled = 22; //是否启用：0-禁用，1-启用
-  string create_time = 23; //创建时间
-  string update_time = 24; //更新时间
+  string wx_openid = 3; //微信openid
+  int64 level_id = 4; //等级ID
+  string nickname = 5; //昵称
+  string mobile = 6; //手机号码
+  int32 source = 7; //注册来源：0-PC，1-APP，2-小程序
+  string password = 8; //密码
+  string avatar = 9; //头像
+  string signature = 10; //个性签名
+  int32 gender = 11; //性别：0-未知，1-男，2-女
+  string birthday = 12; //生日
+  int32 growth_point = 13; //成长值
+  int32 points = 14; //积分
+  int32 total_points = 15; //累计获得积分
+  float spend_amount = 16; //累计消费金额
+  int32 order_count = 17; //订单数
+  int32 coupon_count = 18; //优惠券数量
+  int32 comment_count = 19; //评价数
+  int32 return_count = 20; //退货数
+  int32 lottery_times = 21; //剩余抽奖次数
+  int32 first_login_status = 22; //1:未登录过,2:已登录过
+  string last_login = 23; //最后登录
+  int32 is_enabled = 24; //是否启用：0-禁用，1-启用
+  string create_time = 25; //创建时间
+  string update_time = 26; //更新时间
 
 }
 
@@ -508,27 +511,30 @@ message QueryMemberInfoListReq {
 message MemberInfoListData {
   int64 id = 1; //主键ID
   int64 member_id = 2; //会员ID
-  int64 level_id = 3; //等级ID
-  string nickname = 4; //昵称
-  string mobile = 5; //手机号码
-  int32 source = 6; //注册来源：0-PC，1-APP，2-小程序
-  string avatar = 8; //头像
-  string signature = 9; //个性签名
-  int32 gender = 10; //性别：0-未知，1-男，2-女
-  string birthday = 11; //生日
-  int32 growth_point = 12; //成长值
-  int32 points = 13; //积分
-  int32 total_points = 14; //累计获得积分
-  float spend_amount = 15; //累计消费金额
-  int32 order_count = 16; //订单数
-  int32 coupon_count = 17; //优惠券数量
-  int32 comment_count = 18; //评价数
-  int32 return_count = 19; //退货数
-  int32 lottery_times = 20; //剩余抽奖次数
-  string last_login = 21; //最后登录
-  int32 is_enabled = 22; //是否启用：0-禁用，1-启用
-  string create_time = 23; //创建时间
-  string update_time = 24; //更新时间
+  string wx_openid = 3; //微信openid
+  int64 level_id = 4; //等级ID
+  string nickname = 5; //昵称
+  string mobile = 6; //手机号码
+  int32 source = 7; //注册来源：0-PC，1-APP，2-小程序
+  string password = 8; //密码
+  string avatar = 9; //头像
+  string signature = 10; //个性签名
+  int32 gender = 11; //性别：0-未知，1-男，2-女
+  string birthday = 12; //生日
+  int32 growth_point = 13; //成长值
+  int32 points = 14; //积分
+  int32 total_points = 15; //累计获得积分
+  float spend_amount = 16; //累计消费金额
+  int32 order_count = 17; //订单数
+  int32 coupon_count = 18; //优惠券数量
+  int32 comment_count = 19; //评价数
+  int32 return_count = 20; //退货数
+  int32 lottery_times = 21; //剩余抽奖次数
+  int32 first_login_status = 22; //1:未登录过,2:已登录过
+  string last_login = 23; //最后登录
+  int32 is_enabled = 24; //是否启用：0-禁用，1-启用
+  string create_time = 25; //创建时间
+  string update_time = 26; //更新时间
 
 }
 
@@ -557,6 +563,11 @@ message UpdateMemberPointsResp {
   string pong = 1;
 }
 
+message UpdateFirstLoginStatusReq {
+  int64 member_id = 1; //会员ID
+  int32 coupon_count = 18; //优惠券数量
+}
+
 // 会员信息
 service MemberInfoService {
   // 注册会员信息
@@ -576,6 +587,9 @@ service MemberInfoService {
   rpc Login(LoginReq) returns(LoginResp);
   //更新会员积分
   rpc UpdateMemberPoints(UpdateMemberPointsReq) returns(UpdateMemberPointsResp);
+
+  //更新会员首次登录状态
+  rpc UpdateFirstLoginStatus(UpdateFirstLoginStatusReq) returns(UpdateMemberInfoResp);
 
 }
 

@@ -1022,6 +1022,7 @@ const (
 	MemberInfoService_QueryMemberInfoList_FullMethodName    = "/umsclient.MemberInfoService/QueryMemberInfoList"
 	MemberInfoService_Login_FullMethodName                  = "/umsclient.MemberInfoService/Login"
 	MemberInfoService_UpdateMemberPoints_FullMethodName     = "/umsclient.MemberInfoService/UpdateMemberPoints"
+	MemberInfoService_UpdateFirstLoginStatus_FullMethodName = "/umsclient.MemberInfoService/UpdateFirstLoginStatus"
 )
 
 // MemberInfoServiceClient is the client API for MemberInfoService service.
@@ -1044,6 +1045,8 @@ type MemberInfoServiceClient interface {
 	Login(ctx context.Context, in *LoginReq, opts ...grpc.CallOption) (*LoginResp, error)
 	// 更新会员积分
 	UpdateMemberPoints(ctx context.Context, in *UpdateMemberPointsReq, opts ...grpc.CallOption) (*UpdateMemberPointsResp, error)
+	// 更新会员首次登录状态
+	UpdateFirstLoginStatus(ctx context.Context, in *UpdateFirstLoginStatusReq, opts ...grpc.CallOption) (*UpdateMemberInfoResp, error)
 }
 
 type memberInfoServiceClient struct {
@@ -1126,6 +1129,15 @@ func (c *memberInfoServiceClient) UpdateMemberPoints(ctx context.Context, in *Up
 	return out, nil
 }
 
+func (c *memberInfoServiceClient) UpdateFirstLoginStatus(ctx context.Context, in *UpdateFirstLoginStatusReq, opts ...grpc.CallOption) (*UpdateMemberInfoResp, error) {
+	out := new(UpdateMemberInfoResp)
+	err := c.cc.Invoke(ctx, MemberInfoService_UpdateFirstLoginStatus_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // MemberInfoServiceServer is the server API for MemberInfoService service.
 // All implementations must embed UnimplementedMemberInfoServiceServer
 // for forward compatibility
@@ -1146,6 +1158,8 @@ type MemberInfoServiceServer interface {
 	Login(context.Context, *LoginReq) (*LoginResp, error)
 	// 更新会员积分
 	UpdateMemberPoints(context.Context, *UpdateMemberPointsReq) (*UpdateMemberPointsResp, error)
+	// 更新会员首次登录状态
+	UpdateFirstLoginStatus(context.Context, *UpdateFirstLoginStatusReq) (*UpdateMemberInfoResp, error)
 	mustEmbedUnimplementedMemberInfoServiceServer()
 }
 
@@ -1176,6 +1190,9 @@ func (UnimplementedMemberInfoServiceServer) Login(context.Context, *LoginReq) (*
 }
 func (UnimplementedMemberInfoServiceServer) UpdateMemberPoints(context.Context, *UpdateMemberPointsReq) (*UpdateMemberPointsResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateMemberPoints not implemented")
+}
+func (UnimplementedMemberInfoServiceServer) UpdateFirstLoginStatus(context.Context, *UpdateFirstLoginStatusReq) (*UpdateMemberInfoResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateFirstLoginStatus not implemented")
 }
 func (UnimplementedMemberInfoServiceServer) mustEmbedUnimplementedMemberInfoServiceServer() {}
 
@@ -1334,6 +1351,24 @@ func _MemberInfoService_UpdateMemberPoints_Handler(srv interface{}, ctx context.
 	return interceptor(ctx, in, info, handler)
 }
 
+func _MemberInfoService_UpdateFirstLoginStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateFirstLoginStatusReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MemberInfoServiceServer).UpdateFirstLoginStatus(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: MemberInfoService_UpdateFirstLoginStatus_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MemberInfoServiceServer).UpdateFirstLoginStatus(ctx, req.(*UpdateFirstLoginStatusReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // MemberInfoService_ServiceDesc is the grpc.ServiceDesc for MemberInfoService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -1372,6 +1407,10 @@ var MemberInfoService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateMemberPoints",
 			Handler:    _MemberInfoService_UpdateMemberPoints_Handler,
+		},
+		{
+			MethodName: "UpdateFirstLoginStatus",
+			Handler:    _MemberInfoService_UpdateFirstLoginStatus_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

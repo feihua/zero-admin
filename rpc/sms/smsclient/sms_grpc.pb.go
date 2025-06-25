@@ -26,6 +26,7 @@ const (
 	CouponService_QueryCouponDetail_FullMethodName    = "/smsclient.CouponService/QueryCouponDetail"
 	CouponService_QueryCouponList_FullMethodName      = "/smsclient.CouponService/QueryCouponList"
 	CouponService_QueryCouponByScopeId_FullMethodName = "/smsclient.CouponService/QueryCouponByScopeId"
+	CouponService_QueryCouponByCode_FullMethodName    = "/smsclient.CouponService/QueryCouponByCode"
 )
 
 // CouponServiceClient is the client API for CouponService service.
@@ -46,6 +47,8 @@ type CouponServiceClient interface {
 	QueryCouponList(ctx context.Context, in *QueryCouponListReq, opts ...grpc.CallOption) (*QueryCouponListResp, error)
 	// 根据商品Id和分类id查询可用的优惠券
 	QueryCouponByScopeId(ctx context.Context, in *QueryCouponByScopeIdReq, opts ...grpc.CallOption) (*QueryCouponByScopeIdResp, error)
+	// 根据优惠券类型的code查询优惠券
+	QueryCouponByCode(ctx context.Context, in *QueryCouponByCodeReq, opts ...grpc.CallOption) (*QueryCouponByCodeResp, error)
 }
 
 type couponServiceClient struct {
@@ -119,6 +122,15 @@ func (c *couponServiceClient) QueryCouponByScopeId(ctx context.Context, in *Quer
 	return out, nil
 }
 
+func (c *couponServiceClient) QueryCouponByCode(ctx context.Context, in *QueryCouponByCodeReq, opts ...grpc.CallOption) (*QueryCouponByCodeResp, error) {
+	out := new(QueryCouponByCodeResp)
+	err := c.cc.Invoke(ctx, CouponService_QueryCouponByCode_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // CouponServiceServer is the server API for CouponService service.
 // All implementations must embed UnimplementedCouponServiceServer
 // for forward compatibility
@@ -137,6 +149,8 @@ type CouponServiceServer interface {
 	QueryCouponList(context.Context, *QueryCouponListReq) (*QueryCouponListResp, error)
 	// 根据商品Id和分类id查询可用的优惠券
 	QueryCouponByScopeId(context.Context, *QueryCouponByScopeIdReq) (*QueryCouponByScopeIdResp, error)
+	// 根据优惠券类型的code查询优惠券
+	QueryCouponByCode(context.Context, *QueryCouponByCodeReq) (*QueryCouponByCodeResp, error)
 	mustEmbedUnimplementedCouponServiceServer()
 }
 
@@ -164,6 +178,9 @@ func (UnimplementedCouponServiceServer) QueryCouponList(context.Context, *QueryC
 }
 func (UnimplementedCouponServiceServer) QueryCouponByScopeId(context.Context, *QueryCouponByScopeIdReq) (*QueryCouponByScopeIdResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method QueryCouponByScopeId not implemented")
+}
+func (UnimplementedCouponServiceServer) QueryCouponByCode(context.Context, *QueryCouponByCodeReq) (*QueryCouponByCodeResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method QueryCouponByCode not implemented")
 }
 func (UnimplementedCouponServiceServer) mustEmbedUnimplementedCouponServiceServer() {}
 
@@ -304,6 +321,24 @@ func _CouponService_QueryCouponByScopeId_Handler(srv interface{}, ctx context.Co
 	return interceptor(ctx, in, info, handler)
 }
 
+func _CouponService_QueryCouponByCode_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryCouponByCodeReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CouponServiceServer).QueryCouponByCode(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: CouponService_QueryCouponByCode_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CouponServiceServer).QueryCouponByCode(ctx, req.(*QueryCouponByCodeReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // CouponService_ServiceDesc is the grpc.ServiceDesc for CouponService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -338,6 +373,10 @@ var CouponService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "QueryCouponByScopeId",
 			Handler:    _CouponService_QueryCouponByScopeId_Handler,
+		},
+		{
+			MethodName: "QueryCouponByCode",
+			Handler:    _CouponService_QueryCouponByCode_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

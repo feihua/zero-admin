@@ -147,6 +147,13 @@ message QueryCouponByScopeIdReq {
 message QueryCouponByScopeIdResp {
   repeated  CouponListData list = 1;
 }
+
+message QueryCouponByCodeReq {
+  string code = 1; //优惠券类型编码
+}
+message QueryCouponByCodeResp {
+  repeated  CouponListData list = 1;
+}
 // 优惠券
 service CouponService {
   // 添加优惠券
@@ -164,5 +171,8 @@ service CouponService {
 
   //根据商品Id和分类id查询可用的优惠券
   rpc QueryCouponByScopeId(QueryCouponByScopeIdReq) returns(QueryCouponByScopeIdResp);
+
+  //根据优惠券类型的code查询优惠券
+  rpc QueryCouponByCode(QueryCouponByCodeReq) returns(QueryCouponByCodeResp);
 
 }

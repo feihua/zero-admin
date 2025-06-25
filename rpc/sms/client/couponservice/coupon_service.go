@@ -57,6 +57,8 @@ type (
 	DeleteSeckillSessionReq            = smsclient.DeleteSeckillSessionReq
 	DeleteSeckillSessionResp           = smsclient.DeleteSeckillSessionResp
 	HomeAdvertiseListData              = smsclient.HomeAdvertiseListData
+	QueryCouponByCodeReq               = smsclient.QueryCouponByCodeReq
+	QueryCouponByCodeResp              = smsclient.QueryCouponByCodeResp
 	QueryCouponByScopeIdReq            = smsclient.QueryCouponByScopeIdReq
 	QueryCouponByScopeIdResp           = smsclient.QueryCouponByScopeIdResp
 	QueryCouponData                    = smsclient.QueryCouponData
@@ -155,6 +157,8 @@ type (
 		QueryCouponList(ctx context.Context, in *QueryCouponListReq, opts ...grpc.CallOption) (*QueryCouponListResp, error)
 		// 根据商品Id和分类id查询可用的优惠券
 		QueryCouponByScopeId(ctx context.Context, in *QueryCouponByScopeIdReq, opts ...grpc.CallOption) (*QueryCouponByScopeIdResp, error)
+		// 根据优惠券类型的code查询优惠券
+		QueryCouponByCode(ctx context.Context, in *QueryCouponByCodeReq, opts ...grpc.CallOption) (*QueryCouponByCodeResp, error)
 	}
 
 	defaultCouponService struct {
@@ -208,4 +212,10 @@ func (m *defaultCouponService) QueryCouponList(ctx context.Context, in *QueryCou
 func (m *defaultCouponService) QueryCouponByScopeId(ctx context.Context, in *QueryCouponByScopeIdReq, opts ...grpc.CallOption) (*QueryCouponByScopeIdResp, error) {
 	client := smsclient.NewCouponServiceClient(m.cli.Conn())
 	return client.QueryCouponByScopeId(ctx, in, opts...)
+}
+
+// 根据优惠券类型的code查询优惠券
+func (m *defaultCouponService) QueryCouponByCode(ctx context.Context, in *QueryCouponByCodeReq, opts ...grpc.CallOption) (*QueryCouponByCodeResp, error) {
+	client := smsclient.NewCouponServiceClient(m.cli.Conn())
+	return client.QueryCouponByCode(ctx, in, opts...)
 }
