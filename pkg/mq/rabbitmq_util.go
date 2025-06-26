@@ -2,7 +2,6 @@ package mq
 
 import (
 	"fmt"
-	"github.com/feihua/zero-admin/pkg/errorx"
 	amqp "github.com/rabbitmq/amqp091-go"
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -39,13 +38,13 @@ func NewRabbitMQSimple(MqUrl string) *RabbitMQ {
 	// 获取connection
 	rabbitmq.conn, err = amqp.Dial(rabbitmq.MqUrl)
 	if err != nil {
-		logx.Errorf("rabbitmq连接失败：%s:%+v", "failed to connect rabbitmq!", err)
+		logx.Errorf("rabbitmq获取connection失败：%s:%+v", "failed to connect rabbitmq!", err)
 		panic(err)
 	}
 	// 获取channel
 	rabbitmq.channel, err = rabbitmq.conn.Channel()
 	if err != nil {
-		logx.Errorf("rabbitmq连接失败：%s:%+v", "failed to open a channel", err)
+		logx.Errorf("rabbitmq获取channel失败：%s:%+v", "failed to open a channel", err)
 		panic(err)
 	}
 
@@ -70,8 +69,9 @@ func (r *RabbitMQ) PublishSimple(queueName string, message []byte) error {
 		nil,
 	)
 	if err != nil {
+		r.Destroy()
 		logx.Errorf("rabbitmq申请队列：%s失败, 错误消息: %+v", queueName, err)
-		return errorx.NewDefaultError("rabbitmq申请队列失败")
+		return fmt.Errorf("rabbitmq申请队列失败: %v", err)
 	}
 	// 调用channel 发送消息到队列中
 	return r.channel.Publish(
@@ -104,6 +104,7 @@ func (r *RabbitMQ) ConsumeSimple(queueName string, handler func([]byte)) {
 		nil,
 	)
 	if err != nil {
+		r.Destroy()
 		logx.Errorf("rabbitmq申请队列：%s失败, 错误消息: %+v", queueName, err)
 		panic(err)
 	}
@@ -161,7 +162,7 @@ func (r *RabbitMQ) SendDelayMessage(exchange, queueName, key string, message []b
 	if err != nil {
 		r.Destroy()
 		logx.Errorf("声明延时交换机失败：%+v", err)
-		return errorx.NewDefaultError("声明延时交换机失败")
+		return fmt.Errorf("声明延时交换机失败: %v", err)
 	}
 
 	// 声明订单取消队列
@@ -176,7 +177,7 @@ func (r *RabbitMQ) SendDelayMessage(exchange, queueName, key string, message []b
 	if err != nil {
 		r.Destroy()
 		logx.Errorf("声明队列失败：%+v", err)
-		return errorx.NewDefaultError("声明队列失败")
+		return fmt.Errorf("声明队列失败: %v", err)
 	}
 
 	// 绑定队列到交换机
@@ -190,7 +191,7 @@ func (r *RabbitMQ) SendDelayMessage(exchange, queueName, key string, message []b
 	if err != nil {
 		r.Destroy()
 		logx.Errorf("绑定队列失败：%+v", err)
-		return errorx.NewDefaultError("绑定队列失败")
+		return fmt.Errorf("绑定队列失败: %v", err)
 	}
 
 	err = r.channel.Publish(
@@ -211,6 +212,5 @@ func (r *RabbitMQ) SendDelayMessage(exchange, queueName, key string, message []b
 		return fmt.Errorf("发送延时消息失败: %v", err)
 	}
 
-	logx.Errorf("订单 %s 延时取消消息已发送，将在 %d 分钟后处理", "1", delayMinutes)
 	return nil
 }

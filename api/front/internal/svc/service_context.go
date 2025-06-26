@@ -1,7 +1,9 @@
 package svc
 
 import (
+	"fmt"
 	"github.com/feihua/zero-admin/api/front/internal/config"
+	"github.com/feihua/zero-admin/pkg/mq"
 	"github.com/feihua/zero-admin/rpc/cms/client/preferredareaproductrelationservice"
 	"github.com/feihua/zero-admin/rpc/cms/client/preferredareaservice"
 	"github.com/feihua/zero-admin/rpc/cms/client/subjectproductrelationservice"
@@ -138,6 +140,8 @@ type ServiceContext struct {
 	PreferredAreaProductRelationService preferredareaproductrelationservice.PreferredAreaProductRelationService
 
 	AlipayClient *alipay.Client
+
+	RabbitMQ *mq.RabbitMQ
 }
 
 func NewServiceContext(c config.Config) *ServiceContext {
@@ -152,6 +156,9 @@ func NewServiceContext(c config.Config) *ServiceContext {
 	omsClient := zrpc.MustNewClient(c.OmsRpc)
 	smsClient := zrpc.MustNewClient(c.SmsRpc)
 	cmsClient := zrpc.MustNewClient(c.CmsRpc)
+
+	mqUrl := fmt.Sprintf("amqp://%s:%s@%s:%d/", c.Rabbitmq.UserName, c.Rabbitmq.Password, c.Rabbitmq.Host, c.Rabbitmq.Port)
+	rabbitmq := mq.NewRabbitMQSimple(mqUrl)
 	return &ServiceContext{
 		Config:                               c,
 		MemberGrowthLogService:               membergrowthlogservice.NewMemberGrowthLogService(umsClient),
@@ -221,5 +228,6 @@ func NewServiceContext(c config.Config) *ServiceContext {
 		PreferredAreaProductRelationService: preferredareaproductrelationservice.NewPreferredAreaProductRelationService(cmsClient),
 
 		AlipayClient: client,
+		RabbitMQ:     rabbitmq,
 	}
 }

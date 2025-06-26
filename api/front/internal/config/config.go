@@ -8,19 +8,19 @@ import (
 type Config struct {
 	rest.RestConf
 
-	//系统
+	// 系统
 	SysRpc zrpc.RpcClientConf
-	//会员
+	// 会员
 	UmsRpc zrpc.RpcClientConf
-	//商品
+	// 商品
 	PmsRpc zrpc.RpcClientConf
-	//订单
+	// 订单
 	OmsRpc zrpc.RpcClientConf
-	//营销
+	// 营销
 	SmsRpc zrpc.RpcClientConf
-	//支付
+	// 支付
 	PayRpc zrpc.RpcClientConf
-	//内容相关
+	// 内容相关
 	CmsRpc zrpc.RpcClientConf
 
 	Auth struct {
@@ -28,12 +28,19 @@ type Config struct {
 		AccessExpire int64
 	}
 
-	//支付宝支付配置
+	// 支付宝支付配置
 	Alipay struct {
 		AppId        string
 		PrivateKey   string
 		ServerDomain string
 		NotifyURL    string
 		IsProduction bool
+	}
+
+	Rabbitmq struct {
+		Host     string
+		Port     int64
+		UserName string
+		Password string
 	}
 }

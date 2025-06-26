@@ -2,6 +2,8 @@ package order
 
 import (
 	"context"
+	"encoding/json"
+	"fmt"
 	"github.com/feihua/zero-admin/api/front/internal/logic/common"
 	"github.com/feihua/zero-admin/api/front/internal/logic/order/cart"
 	"github.com/feihua/zero-admin/pkg/errorx"
@@ -319,13 +321,18 @@ func (l *GenerateOrderLogic) GenerateOrder(req *types.GenerateOrderReq) (*types.
 	if err != nil {
 		return result(1, "扣除积分异常"), nil
 	}
+
+	orderId := orderAddResp.Id
 	// 12.发送延迟消息取消订单
-	// todo 发送延迟消息取消订单
+	err = l.sendMsg(orderId)
+	if err != nil {
+		return nil, err
+	}
 	return &types.GenerateOrderResp{
 		Code:    0,
 		Message: "下单成功",
 		Data: types.GenerateOrderData{
-			Id:                orderAddResp.Id,
+			Id:                orderId,
 			MemberId:          memberId,
 			MemberUsername:    memberInfo.Nickname,
 			TotalAmount:       orderInfo.TotalAmount,
@@ -346,6 +353,26 @@ func (l *GenerateOrderLogic) GenerateOrder(req *types.GenerateOrderReq) (*types.
 			UseIntegration:    orderInfo.UseIntegration,
 		},
 	}, nil
+}
+
+// 发送延迟消息取消订单
+func (l *GenerateOrderLogic) sendMsg(orderId int64) error {
+	delayMinutes := 30 // 延迟时间(分钟)
+	message := map[string]any{"orderId": orderId}
+	body, err := json.Marshal(message)
+	if err != nil {
+		logc.Errorf(l.ctx, "序列化 JSON 失败: %v", err)
+		return errorx.NewDefaultError("序列化 JSON 错误")
+	}
+	err = l.svcCtx.RabbitMQ.SendDelayMessage("order.delay.exchange", "order.cancel.queue", "order.cancel", body, delayMinutes)
+
+	if err != nil {
+		logc.Errorf(l.ctx, "订单 %d 延时取消,消息发送失败,,异常:%s", orderId, err.Error())
+		return errorx.NewDefaultError(fmt.Sprintf("订单 %d 延时取消,消息发送失败,,异常:%s", orderId, err.Error()))
+	}
+
+	logx.Errorf("订单 %d 延时取消,消息已发送，将在 %d 分钟后处理", orderId, delayMinutes)
+	return nil
 }
 
 func result(code int64, message string) *types.GenerateOrderResp {
