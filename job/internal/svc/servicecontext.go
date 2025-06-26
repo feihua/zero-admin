@@ -2,8 +2,10 @@ package svc
 
 import (
 	"context"
+	"fmt"
 	"github.com/feihua/zero-admin/job/internal/config"
 	"github.com/feihua/zero-admin/job/internal/jobs"
+	"github.com/feihua/zero-admin/pkg/time_util"
 	"github.com/feihua/zero-admin/rpc/oms/client/orderservice"
 	"github.com/feihua/zero-admin/rpc/oms/client/ordersettingservice"
 	"github.com/feihua/zero-admin/rpc/pms/client/productskuservice"
@@ -65,9 +67,15 @@ func NewServiceContext(c config.Config) *ServiceContext {
 
 	s, _ := gocron.NewScheduler()
 
-	// 每隔3秒执行一次任务
+	// 每隔10秒执行一次任务
 	_, _ = s.NewJob(
-		gocron.DurationJob(time.Second*3),
+		gocron.DurationJob(time.Second*10),
+		gocron.NewTask(task, "test"),
+	)
+
+	// 每隔60秒执行一次任务
+	_, _ = s.NewJob(
+		gocron.DurationJob(time.Second*60),
 		gocron.NewTask(jobs.CancelTimeOutOrder, context.Background(), skuService, orderService, couponRecordService, memberInfoService, settingService),
 	)
 
@@ -75,7 +83,6 @@ func NewServiceContext(c config.Config) *ServiceContext {
 	return svc
 }
 
-// func task(a string) {
-// 	fmt.Println("执行任务:", time.Now())
-// 	jobs.CancelTimeOutOrder(context.Background(), skuService, orderService, couponRecordService, memberInfoService)
-// }
+func task(a string) {
+	fmt.Println("执行任务:", a, time_util.TimeToStr(time.Now()))
+}

@@ -2,6 +2,7 @@ package jobs
 
 import (
 	"context"
+	"github.com/feihua/zero-admin/pkg/time_util"
 	"github.com/feihua/zero-admin/rpc/oms/client/orderservice"
 	"github.com/feihua/zero-admin/rpc/oms/client/ordersettingservice"
 	"github.com/feihua/zero-admin/rpc/oms/omsclient"
@@ -34,7 +35,7 @@ func CancelTimeOutOrder(ctx context.Context, productSkuService productskuservice
 	}
 
 	if len(timeOutOrderList.List) == 0 {
-		logc.Infof(ctx, "暂无超时的订单,当前时间：%s", time.Now())
+		logc.Infof(ctx, "暂无超时的订单,当前时间：%s", time_util.TimeToStr(time.Now()))
 		return
 	}
 
