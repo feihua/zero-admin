@@ -590,7 +590,10 @@ message UpdateOrderStatusByOutTradeNoReq {
 message UpdateOrderStatusByOutTradeNoResp {
   string pong = 1;
 }
+message QueryTimeOutOrderListReq {
+  int32 minute = 1; //超时的时间
 
+}
 service OrderService {
   //pc
   //批量发货
@@ -622,6 +625,9 @@ service OrderService {
   rpc QueryOrderList(QueryOrderListReq) returns(OrderListResp);
   //更新订单状态
   rpc UpdateOrderStatusByOutTradeNo(UpdateOrderStatusByOutTradeNoReq) returns(UpdateOrderStatusByOutTradeNoResp);
+
+  //查询超时、未支付的订单及订单详情
+  rpc QueryTimeOutOrderList(QueryTimeOutOrderListReq) returns(OrderListResp);
 
 }
 
@@ -1249,7 +1255,7 @@ message UpdateOrderSettingStatusResp {
 
 // 查询订单设置详情
 message QueryOrderSettingDetailReq {
-    int64 id = 1;
+  int64 id = 1;
 }
 
 message QueryOrderSettingDetailResp {
@@ -1297,6 +1303,9 @@ message QueryOrderSettingListResp {
   repeated  OrderSettingListData list = 2;
 }
 
+message QueryDefaultSettingReq{
+
+}
 // 订单设置
 service OrderSettingService {
   // 添加订单设置
@@ -1304,14 +1313,17 @@ service OrderSettingService {
   // 删除订单设置
   rpc DeleteOrderSetting(DeleteOrderSettingReq) returns (DeleteOrderSettingResp){}
   // 更新订单设置
-  rpc UpdateOrderSetting(UpdateOrderSettingReq) returns (UpdateOrderSettingResp ){}
+  rpc UpdateOrderSetting(UpdateOrderSettingReq) returns (UpdateOrderSettingResp){}
   // 更新订单设置状态
-  rpc UpdateOrderSettingStatus(UpdateOrderSettingStatusReq) returns (UpdateOrderSettingStatusResp ){}
+  rpc UpdateOrderSettingStatus(UpdateOrderSettingStatusReq) returns (UpdateOrderSettingStatusResp){}
   // 查询订单设置详情
-   rpc QueryOrderSettingDetail(QueryOrderSettingDetailReq) returns (QueryOrderSettingDetailResp){}
+  rpc QueryOrderSettingDetail(QueryOrderSettingDetailReq) returns (QueryOrderSettingDetailResp){}
   // 查询订单设置列表
   rpc QueryOrderSettingList(QueryOrderSettingListReq) returns (QueryOrderSettingListResp){}
 
   // 更新订单设置默认状态
-  rpc UpdateOrderSettingDefaultStatus(UpdateOrderSettingStatusReq) returns (UpdateOrderSettingStatusResp ){}
+  rpc UpdateOrderSettingDefaultStatus(UpdateOrderSettingStatusReq) returns (UpdateOrderSettingStatusResp){}
+
+  // 查询默认的订单设置
+  rpc QueryDefaultSetting(QueryDefaultSettingReq) returns (QueryOrderSettingDetailResp){}
 }

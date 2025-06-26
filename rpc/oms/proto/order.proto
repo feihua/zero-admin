@@ -305,7 +305,10 @@ message UpdateOrderStatusByOutTradeNoReq {
 message UpdateOrderStatusByOutTradeNoResp {
   string pong = 1;
 }
+message QueryTimeOutOrderListReq {
+  int32 minute = 1; //超时的时间
 
+}
 service OrderService {
   //pc
   //批量发货
@@ -337,6 +340,9 @@ service OrderService {
   rpc QueryOrderList(QueryOrderListReq) returns(OrderListResp);
   //更新订单状态
   rpc UpdateOrderStatusByOutTradeNo(UpdateOrderStatusByOutTradeNoReq) returns(UpdateOrderStatusByOutTradeNoResp);
+
+  //查询超时、未支付的订单及订单详情
+  rpc QueryTimeOutOrderList(QueryTimeOutOrderListReq) returns(OrderListResp);
 
 }
 

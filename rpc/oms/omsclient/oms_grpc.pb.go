@@ -649,6 +649,7 @@ const (
 	OrderService_OrderDeleteById_FullMethodName               = "/omsclient.OrderService/OrderDeleteById"
 	OrderService_QueryOrderList_FullMethodName                = "/omsclient.OrderService/QueryOrderList"
 	OrderService_UpdateOrderStatusByOutTradeNo_FullMethodName = "/omsclient.OrderService/UpdateOrderStatusByOutTradeNo"
+	OrderService_QueryTimeOutOrderList_FullMethodName         = "/omsclient.OrderService/QueryTimeOutOrderList"
 )
 
 // OrderServiceClient is the client API for OrderService service.
@@ -684,6 +685,8 @@ type OrderServiceClient interface {
 	QueryOrderList(ctx context.Context, in *QueryOrderListReq, opts ...grpc.CallOption) (*OrderListResp, error)
 	// 更新订单状态
 	UpdateOrderStatusByOutTradeNo(ctx context.Context, in *UpdateOrderStatusByOutTradeNoReq, opts ...grpc.CallOption) (*UpdateOrderStatusByOutTradeNoResp, error)
+	// 查询超时、未支付的订单及订单详情
+	QueryTimeOutOrderList(ctx context.Context, in *QueryTimeOutOrderListReq, opts ...grpc.CallOption) (*OrderListResp, error)
 }
 
 type orderServiceClient struct {
@@ -847,6 +850,15 @@ func (c *orderServiceClient) UpdateOrderStatusByOutTradeNo(ctx context.Context, 
 	return out, nil
 }
 
+func (c *orderServiceClient) QueryTimeOutOrderList(ctx context.Context, in *QueryTimeOutOrderListReq, opts ...grpc.CallOption) (*OrderListResp, error) {
+	out := new(OrderListResp)
+	err := c.cc.Invoke(ctx, OrderService_QueryTimeOutOrderList_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // OrderServiceServer is the server API for OrderService service.
 // All implementations must embed UnimplementedOrderServiceServer
 // for forward compatibility
@@ -880,6 +892,8 @@ type OrderServiceServer interface {
 	QueryOrderList(context.Context, *QueryOrderListReq) (*OrderListResp, error)
 	// 更新订单状态
 	UpdateOrderStatusByOutTradeNo(context.Context, *UpdateOrderStatusByOutTradeNoReq) (*UpdateOrderStatusByOutTradeNoResp, error)
+	// 查询超时、未支付的订单及订单详情
+	QueryTimeOutOrderList(context.Context, *QueryTimeOutOrderListReq) (*OrderListResp, error)
 	mustEmbedUnimplementedOrderServiceServer()
 }
 
@@ -937,6 +951,9 @@ func (UnimplementedOrderServiceServer) QueryOrderList(context.Context, *QueryOrd
 }
 func (UnimplementedOrderServiceServer) UpdateOrderStatusByOutTradeNo(context.Context, *UpdateOrderStatusByOutTradeNoReq) (*UpdateOrderStatusByOutTradeNoResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateOrderStatusByOutTradeNo not implemented")
+}
+func (UnimplementedOrderServiceServer) QueryTimeOutOrderList(context.Context, *QueryTimeOutOrderListReq) (*OrderListResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method QueryTimeOutOrderList not implemented")
 }
 func (UnimplementedOrderServiceServer) mustEmbedUnimplementedOrderServiceServer() {}
 
@@ -1257,6 +1274,24 @@ func _OrderService_UpdateOrderStatusByOutTradeNo_Handler(srv interface{}, ctx co
 	return interceptor(ctx, in, info, handler)
 }
 
+func _OrderService_QueryTimeOutOrderList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryTimeOutOrderListReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(OrderServiceServer).QueryTimeOutOrderList(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: OrderService_QueryTimeOutOrderList_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(OrderServiceServer).QueryTimeOutOrderList(ctx, req.(*QueryTimeOutOrderListReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // OrderService_ServiceDesc is the grpc.ServiceDesc for OrderService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -1331,6 +1366,10 @@ var OrderService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateOrderStatusByOutTradeNo",
 			Handler:    _OrderService_UpdateOrderStatusByOutTradeNo_Handler,
+		},
+		{
+			MethodName: "QueryTimeOutOrderList",
+			Handler:    _OrderService_QueryTimeOutOrderList_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
@@ -2471,6 +2510,7 @@ const (
 	OrderSettingService_QueryOrderSettingDetail_FullMethodName         = "/omsclient.OrderSettingService/QueryOrderSettingDetail"
 	OrderSettingService_QueryOrderSettingList_FullMethodName           = "/omsclient.OrderSettingService/QueryOrderSettingList"
 	OrderSettingService_UpdateOrderSettingDefaultStatus_FullMethodName = "/omsclient.OrderSettingService/UpdateOrderSettingDefaultStatus"
+	OrderSettingService_QueryDefaultSetting_FullMethodName             = "/omsclient.OrderSettingService/QueryDefaultSetting"
 )
 
 // OrderSettingServiceClient is the client API for OrderSettingService service.
@@ -2491,6 +2531,8 @@ type OrderSettingServiceClient interface {
 	QueryOrderSettingList(ctx context.Context, in *QueryOrderSettingListReq, opts ...grpc.CallOption) (*QueryOrderSettingListResp, error)
 	// 更新订单设置默认状态
 	UpdateOrderSettingDefaultStatus(ctx context.Context, in *UpdateOrderSettingStatusReq, opts ...grpc.CallOption) (*UpdateOrderSettingStatusResp, error)
+	// 查询默认的订单设置
+	QueryDefaultSetting(ctx context.Context, in *QueryDefaultSettingReq, opts ...grpc.CallOption) (*QueryOrderSettingDetailResp, error)
 }
 
 type orderSettingServiceClient struct {
@@ -2564,6 +2606,15 @@ func (c *orderSettingServiceClient) UpdateOrderSettingDefaultStatus(ctx context.
 	return out, nil
 }
 
+func (c *orderSettingServiceClient) QueryDefaultSetting(ctx context.Context, in *QueryDefaultSettingReq, opts ...grpc.CallOption) (*QueryOrderSettingDetailResp, error) {
+	out := new(QueryOrderSettingDetailResp)
+	err := c.cc.Invoke(ctx, OrderSettingService_QueryDefaultSetting_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // OrderSettingServiceServer is the server API for OrderSettingService service.
 // All implementations must embed UnimplementedOrderSettingServiceServer
 // for forward compatibility
@@ -2582,6 +2633,8 @@ type OrderSettingServiceServer interface {
 	QueryOrderSettingList(context.Context, *QueryOrderSettingListReq) (*QueryOrderSettingListResp, error)
 	// 更新订单设置默认状态
 	UpdateOrderSettingDefaultStatus(context.Context, *UpdateOrderSettingStatusReq) (*UpdateOrderSettingStatusResp, error)
+	// 查询默认的订单设置
+	QueryDefaultSetting(context.Context, *QueryDefaultSettingReq) (*QueryOrderSettingDetailResp, error)
 	mustEmbedUnimplementedOrderSettingServiceServer()
 }
 
@@ -2609,6 +2662,9 @@ func (UnimplementedOrderSettingServiceServer) QueryOrderSettingList(context.Cont
 }
 func (UnimplementedOrderSettingServiceServer) UpdateOrderSettingDefaultStatus(context.Context, *UpdateOrderSettingStatusReq) (*UpdateOrderSettingStatusResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateOrderSettingDefaultStatus not implemented")
+}
+func (UnimplementedOrderSettingServiceServer) QueryDefaultSetting(context.Context, *QueryDefaultSettingReq) (*QueryOrderSettingDetailResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method QueryDefaultSetting not implemented")
 }
 func (UnimplementedOrderSettingServiceServer) mustEmbedUnimplementedOrderSettingServiceServer() {}
 
@@ -2749,6 +2805,24 @@ func _OrderSettingService_UpdateOrderSettingDefaultStatus_Handler(srv interface{
 	return interceptor(ctx, in, info, handler)
 }
 
+func _OrderSettingService_QueryDefaultSetting_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryDefaultSettingReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(OrderSettingServiceServer).QueryDefaultSetting(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: OrderSettingService_QueryDefaultSetting_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(OrderSettingServiceServer).QueryDefaultSetting(ctx, req.(*QueryDefaultSettingReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // OrderSettingService_ServiceDesc is the grpc.ServiceDesc for OrderSettingService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -2783,6 +2857,10 @@ var OrderSettingService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateOrderSettingDefaultStatus",
 			Handler:    _OrderSettingService_UpdateOrderSettingDefaultStatus_Handler,
+		},
+		{
+			MethodName: "QueryDefaultSetting",
+			Handler:    _OrderSettingService_QueryDefaultSetting_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

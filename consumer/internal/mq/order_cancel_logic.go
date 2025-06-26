@@ -83,6 +83,6 @@ func OrderCancel(ctx context.Context, body []byte, productSkuService productskus
 		return
 	}
 
-	logc.Errorf(ctx, "取消用户：%d 的订单：%d 成功", memberId, orderId)
+	logc.Errorf(ctx, "取消用户：%d 未支付的订单：%d 成功", memberId, orderId)
 
 }
