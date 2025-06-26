@@ -13,7 +13,7 @@ import (
 )
 
 // FirstLogin 处理会员第一次登录的时候,发放新手优惠券
-func FirstLogin(ctx context.Context, body []byte, MemberInfoService memberinfoservice.MemberInfoService, CouponService couponservice.CouponService, CouponRecordService couponrecordservice.CouponRecordService) {
+func FirstLogin(ctx context.Context, body []byte, memberInfoService memberinfoservice.MemberInfoService, CouponService couponservice.CouponService, CouponRecordService couponrecordservice.CouponRecordService) {
 	logc.Infof(ctx, "收到消息: %s", body)
 	var memberInfo types.MemberInfo
 	err := json.Unmarshal(body, &memberInfo)
@@ -55,7 +55,7 @@ func FirstLogin(ctx context.Context, body []byte, MemberInfoService memberinfose
 		logc.Infof(ctx, "给用户: %s,发放优惠券成功：%+v", memberInfo.Nickname, i)
 	}
 
-	_, err = MemberInfoService.UpdateFirstLoginStatus(ctx, &umsclient.UpdateFirstLoginStatusReq{
+	_, err = memberInfoService.UpdateFirstLoginStatus(ctx, &umsclient.UpdateFirstLoginStatusReq{
 		MemberId:    memberInfo.MemberId,
 		CouponCount: int32(len(resp.List)),
 	})
@@ -64,5 +64,5 @@ func FirstLogin(ctx context.Context, body []byte, MemberInfoService memberinfose
 		logc.Errorf(ctx, "更新用户: %s,首次登录状态失败：%+v", memberInfo.Nickname, err)
 		return
 	}
-	return
+
 }

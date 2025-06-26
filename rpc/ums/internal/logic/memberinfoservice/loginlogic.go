@@ -83,6 +83,14 @@ func (l *LoginLogic) Login(in *umsclient.LoginReq) (*umsclient.LoginResp, error)
 
 	sendCouponMsg(member, l)
 
+	delayMinutes := 2 // 延迟时间(分钟)
+	message := map[string]any{"orderId": 1, "memberId": 1}
+	body, err := json.Marshal(message)
+	if err != nil {
+		logc.Errorf(l.ctx, "序列化 JSON 失败: %v", err)
+	}
+	err = l.svcCtx.RabbitMQ.SendDelayMessage("order.delay.exchange", "order.cancel.queue", "order.cancel", body, delayMinutes)
+
 	return &umsclient.LoginResp{
 		Token: token,
 	}, nil
@@ -100,7 +108,7 @@ func sendCouponMsg(member *model.UmsMemberInfo, l *LoginLogic) {
 		if err != nil {
 			logc.Errorf(l.ctx, "序列化 JSON 失败: %v", err)
 		}
-		err = l.svcCtx.RabbitMQ.PublishSimple("first_login_queue", body)
+		err = l.svcCtx.RabbitMQ.PublishSimple("first.login.queue", body)
 		if err != nil {
 			logc.Errorf(l.ctx, "发送新手优惠券消息失败,参数：%+v,异常:%s", param, err.Error())
 		}

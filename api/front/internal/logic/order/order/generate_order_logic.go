@@ -324,7 +324,7 @@ func (l *GenerateOrderLogic) GenerateOrder(req *types.GenerateOrderReq) (*types.
 
 	orderId := orderAddResp.Id
 	// 12.发送延迟消息取消订单
-	err = l.sendMsg(orderId)
+	err = l.sendMsg(orderId, memberId)
 	if err != nil {
 		return nil, err
 	}
@@ -356,9 +356,9 @@ func (l *GenerateOrderLogic) GenerateOrder(req *types.GenerateOrderReq) (*types.
 }
 
 // 发送延迟消息取消订单
-func (l *GenerateOrderLogic) sendMsg(orderId int64) error {
+func (l *GenerateOrderLogic) sendMsg(orderId, memberId int64) error {
 	delayMinutes := 30 // 延迟时间(分钟)
-	message := map[string]any{"orderId": orderId}
+	message := map[string]any{"orderId": orderId, "memberId": memberId}
 	body, err := json.Marshal(message)
 	if err != nil {
 		logc.Errorf(l.ctx, "序列化 JSON 失败: %v", err)
