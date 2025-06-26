@@ -79,3 +79,9 @@ Alipay:
   ServerDomain: ""           #设置回调地址域名
   NotifyURL: ""              #异步回调
   IsProduction: true         #是否为生产环境，传 false 的时候为沙箱环境，用于开发测试，正式上线的时候需要改为 true
+
+Rabbitmq:
+  Host: 127.0.0.1
+  Port: 5672
+  UserName: guest
+  Password: guest
