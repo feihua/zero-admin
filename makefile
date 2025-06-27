@@ -116,6 +116,9 @@ gen:	## 生成所有模块代码
 	$(GOCTL) rpc protoc rpc/sms/sms.proto --go_out=./rpc/sms/ --go-grpc_out=./rpc/sms/ --zrpc_out=./rpc/sms/ -m --style go_zero
 	# 生成cmsrpc代码
 	$(GOCTL) rpc protoc rpc/cms/cms.proto --go_out=./rpc/cms/ --go-grpc_out=./rpc/cms/ --zrpc_out=./rpc/cms/ -m
+	# 生成search代码
+	$(GOCTL) rpc protoc rpc/search/search.proto --go_out=./rpc/search/ --go-grpc_out=./rpc/search/ --zrpc_out=./rpc/search/ --style go_zero
+
 
 model: ## 生成model代码
 	go run rpc/cms/gen/generator.go

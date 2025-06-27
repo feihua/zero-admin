@@ -36,4 +36,4 @@ Log:
   ServiceName: consumer
   Stat: false
   Mode: file
-  Path: logs/consumer
+  Path: logs/job

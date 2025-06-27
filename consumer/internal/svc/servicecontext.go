@@ -8,6 +8,8 @@ import (
 	"github.com/feihua/zero-admin/pkg/mq"
 	"github.com/feihua/zero-admin/rpc/oms/client/orderservice"
 	"github.com/feihua/zero-admin/rpc/pms/client/productskuservice"
+	"github.com/feihua/zero-admin/rpc/pms/client/productspuservice"
+	"github.com/feihua/zero-admin/rpc/search/search_client"
 	"github.com/feihua/zero-admin/rpc/sms/client/couponrecordservice"
 	"github.com/feihua/zero-admin/rpc/sms/client/couponservice"
 	"github.com/feihua/zero-admin/rpc/sms/client/coupontypeservice"
@@ -34,8 +36,12 @@ type ServiceContext struct {
 
 	// 商品相关
 	ProductSkuService productskuservice.ProductSkuService
+	ProductSpuService productspuservice.ProductSpuService
 	// 订单相关
 	OrderService orderservice.OrderService
+
+	// 搜索相关
+	Search search_client.Search
 }
 
 func NewServiceContext(c config.Config) *ServiceContext {
@@ -43,6 +49,7 @@ func NewServiceContext(c config.Config) *ServiceContext {
 	smsClient := zrpc.MustNewClient(c.SmsRpc)
 	omsClient := zrpc.MustNewClient(c.OmsRpc)
 	pmsClient := zrpc.MustNewClient(c.PmsRpc)
+	searchClient := zrpc.MustNewClient(c.SearchRpc)
 
 	mqUrl := fmt.Sprintf("amqp://%s:%s@%s:%d/", c.Rabbitmq.UserName, c.Rabbitmq.Password, c.Rabbitmq.Host, c.Rabbitmq.Port)
 	rabbitmq := mq.NewRabbitMQSimple(mqUrl)
@@ -51,7 +58,9 @@ func NewServiceContext(c config.Config) *ServiceContext {
 	couponService := couponservice.NewCouponService(smsClient)
 	couponRecordService := couponrecordservice.NewCouponRecordService(smsClient)
 	skuService := productskuservice.NewProductSkuService(pmsClient)
+	spuService := productspuservice.NewProductSpuService(pmsClient)
 	orderService := orderservice.NewOrderService(omsClient)
+	search := search_client.NewSearch(searchClient)
 	s := &ServiceContext{
 		Config:                 c,
 		RabbitMQ:               rabbitmq,
@@ -62,7 +71,9 @@ func NewServiceContext(c config.Config) *ServiceContext {
 		CouponService:          couponService,
 		CouponTypeService:      coupontypeservice.NewCouponTypeService(smsClient),
 		ProductSkuService:      skuService,
+		ProductSpuService:      spuService,
 		OrderService:           orderService,
+		Search:                 search,
 	}
 
 	go func() {
@@ -80,6 +91,12 @@ func NewServiceContext(c config.Config) *ServiceContext {
 	go func() {
 		rabbitmq.ConsumeSimple("order.cancel.queue", func(body []byte) {
 			consumer.OrderCancel(context.Background(), body, skuService, orderService, couponRecordService, memberInfoService)
+		})
+	}()
+
+	go func() {
+		rabbitmq.ConsumeSimple("syn.product.to.es.queue", func(body []byte) {
+			consumer.SynProductToEs(context.Background(), body, search, spuService)
 		})
 	}()
 	return s

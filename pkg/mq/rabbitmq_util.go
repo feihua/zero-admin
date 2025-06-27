@@ -214,3 +214,68 @@ func (r *RabbitMQ) SendDelayMessage(exchange, queueName, key string, message []b
 
 	return nil
 }
+
+// SendMessage 发送消息
+func (r *RabbitMQ) SendMessage(exchange, queueName, key string, message []byte) error {
+	// 声明交换机
+	err := r.channel.ExchangeDeclare(
+		exchange, // 交换机名称
+		"direct", // 类型
+		true,     // 持久化
+		false,    // 自动删除
+		false,    // 内部
+		false,    // 不等待
+		nil,      // 其他属性
+	)
+	if err != nil {
+		r.Destroy()
+		logx.Errorf("声明交换机失败：%+v", err)
+		return fmt.Errorf("声明交换机失败: %v", err)
+	}
+
+	// 声明队列
+	_, err = r.channel.QueueDeclare(
+		queueName, // 队列名称
+		true,      // 持久化
+		false,     // 自动删除
+		false,     // 排他性
+		false,     // 不等待
+		nil,
+	)
+	if err != nil {
+		r.Destroy()
+		logx.Errorf("声明队列失败：%+v", err)
+		return fmt.Errorf("声明队列失败: %v", err)
+	}
+
+	// 绑定队列到交换机
+	err = r.channel.QueueBind(
+		queueName, // 队列名
+		key,       // 路由键
+		exchange,  // 交换机
+		false,
+		nil,
+	)
+	if err != nil {
+		r.Destroy()
+		logx.Errorf("绑定队列失败：%+v", err)
+		return fmt.Errorf("绑定队列失败: %v", err)
+	}
+
+	err = r.channel.Publish(
+		exchange, // 交换机
+		key,      // 路由键
+		false,    // 强制
+		false,    // 立即
+		amqp.Publishing{
+			ContentType:  "application/json",
+			Body:         message,
+			DeliveryMode: amqp.Persistent,
+		},
+	)
+	if err != nil {
+		return fmt.Errorf("发送消息失败: %v", err)
+	}
+
+	return nil
+}

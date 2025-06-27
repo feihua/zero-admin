@@ -23,4 +23,7 @@ type Config struct {
 	OmsRpc zrpc.RpcClientConf
 	// 营销
 	SmsRpc zrpc.RpcClientConf
+
+	// 搜索
+	SearchRpc zrpc.RpcClientConf
 }

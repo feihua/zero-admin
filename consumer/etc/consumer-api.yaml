@@ -38,6 +38,12 @@ SmsRpc:
     Key: sms.rpc
   NonBlock: true
 
+SearchRpc:
+  Etcd:
+    Hosts:
+      - localhost:2379
+    Key: search.rpc
+  NonBlock: true
 
 Log:
   ServiceName: consumer
