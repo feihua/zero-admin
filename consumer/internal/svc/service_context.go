@@ -99,5 +99,10 @@ func NewServiceContext(c config.Config) *ServiceContext {
 			consumer.SynProductToEs(context.Background(), body, search, spuService)
 		})
 	}()
+	go func() {
+		rabbitmq.ConsumeSimple("delete.product.from.es.queue", func(body []byte) {
+			consumer.DeleteProductFromEs(context.Background(), body, search, spuService)
+		})
+	}()
 	return s
 }

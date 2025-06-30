@@ -52,7 +52,7 @@ message CreateResp {
 }
 
 message DeleteReq {
-  repeated string ids = 1;
+  repeated int64 ids = 1;
 }
 
 message DeleteResp {

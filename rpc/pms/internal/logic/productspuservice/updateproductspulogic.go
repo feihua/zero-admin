@@ -2,6 +2,7 @@ package productspuservicelogic
 
 import (
 	"context"
+	"encoding/json"
 	"errors"
 	"github.com/feihua/zero-admin/rpc/pms/gen/model"
 	"github.com/feihua/zero-admin/rpc/pms/gen/query"
@@ -175,5 +176,10 @@ func (l *UpdateProductSpuLogic) UpdateProductSpu(in *pmsclient.UpdateProductSpuR
 			CreateBy:    in.UpdateBy,             // 创建人ID
 		})
 	}
+
+	message := map[string]any{"id": spuId}
+	body, _ := json.Marshal(message)
+	err = l.svcCtx.RabbitMQ.SendMessage("syn.product.to.es.exchange", "syn.product.to.es.queue", "syn.product.to.es.queue", body)
+
 	return &pmsclient.UpdateProductSpuResp{}, nil
 }

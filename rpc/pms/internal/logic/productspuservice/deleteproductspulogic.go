@@ -2,6 +2,7 @@ package productspuservicelogic
 
 import (
 	"context"
+	"encoding/json"
 	"errors"
 	"github.com/feihua/zero-admin/rpc/pms/gen/query"
 	"github.com/feihua/zero-admin/rpc/pms/internal/svc"
@@ -39,6 +40,10 @@ func (l *DeleteProductSpuLogic) DeleteProductSpu(in *pmsclient.DeleteProductSpuR
 		logc.Errorf(l.ctx, "删除商品SPU失败,参数:%+v,异常:%s", in, err.Error())
 		return nil, errors.New("删除商品SPU失败")
 	}
+
+	message := map[string]any{"ids": in.Ids}
+	body, _ := json.Marshal(message)
+	err = l.svcCtx.RabbitMQ.SendMessage("syn.product.to.es.exchange", "delete.product.from.es.queue", "delete.product.from.es.queue", body)
 
 	return &pmsclient.DeleteProductSpuResp{}, nil
 }

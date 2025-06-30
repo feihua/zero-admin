@@ -1,6 +1,8 @@
 package svc
 
 import (
+	"fmt"
+	"github.com/feihua/zero-admin/pkg/mq"
 	"github.com/feihua/zero-admin/rpc/pms/gen/model"
 	"github.com/feihua/zero-admin/rpc/pms/gen/query"
 	"github.com/feihua/zero-admin/rpc/pms/internal/config"
@@ -13,8 +15,9 @@ import (
 )
 
 type ServiceContext struct {
-	c  config.Config
-	DB *gorm.DB
+	c        config.Config
+	DB       *gorm.DB
+	RabbitMQ *mq.RabbitMQ
 
 	ProductCommentModel       model.ProductCommentModel
 	ProductCommentReplayModel model.ProductCommentReplayModel
@@ -37,6 +40,9 @@ func NewServiceContext(c config.Config) *ServiceContext {
 	logx.Debug("mysql已连接")
 	query.SetDefault(DB)
 
+	mqUrl := fmt.Sprintf("amqp://%s:%s@%s:%d/", c.Rabbitmq.UserName, c.Rabbitmq.Password, c.Rabbitmq.Host, c.Rabbitmq.Port)
+	rabbitmq := mq.NewRabbitMQSimple(mqUrl)
+
 	_, err = mon.NewModel(c.Mongo.Datasource, c.Mongo.Db, "test")
 	if err != nil {
 		logx.Errorf("mongo连接失败：%+v", err)
@@ -49,9 +55,9 @@ func NewServiceContext(c config.Config) *ServiceContext {
 	ProductVertifyRecordModel := model.NewProductVertifyRecordModel(c.Mongo.Datasource, c.Mongo.Db, "product_vertify_record")
 	ProductCollectModel := model.NewProductCollectModel(c.Mongo.Datasource, c.Mongo.Db, "product_collect")
 	return &ServiceContext{
-		c:  c,
-		DB: DB,
-
+		c:                         c,
+		DB:                        DB,
+		RabbitMQ:                  rabbitmq,
 		ProductCommentModel:       ProductCommentModel,
 		ProductCommentReplayModel: ProductCommentReplayModel,
 		ProductOperateLogModel:    ProductOperateLogModel,

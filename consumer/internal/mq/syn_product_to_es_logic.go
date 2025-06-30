@@ -10,7 +10,7 @@ import (
 
 // SynProductToEs 同步商品到es
 func SynProductToEs(ctx context.Context, body []byte, Search search_client.Search, productSpuService productspuservice.ProductSpuService) {
-	logc.Infof(ctx, "需要同步的商品信息: %s", body)
+	logc.Infof(ctx, "需要同步商品的id: %s", body)
 	var orderInfo map[string]int64
 	err := json.Unmarshal(body, &orderInfo)
 	if err != nil {
@@ -19,11 +19,14 @@ func SynProductToEs(ctx context.Context, body []byte, Search search_client.Searc
 	}
 	id := orderInfo["id"]
 
-	res, _ := productSpuService.QueryProductSpuDetail(ctx, &productspuservice.QueryProductSpuDetailReq{
+	res, err := productSpuService.QueryProductSpuDetail(ctx, &productspuservice.QueryProductSpuDetailReq{
 		Id: id,
 	})
-
-	logc.Infof(ctx, "商品id: %v", res)
+	if err != nil {
+		logc.Errorf(ctx, "查询商品异常,请求参数: %s, 异常信息: %+v", body, err)
+		return
+	}
+	logc.Infof(ctx, "需要同步商品的信息: %v", res)
 
 	product := res.Data
 	product1 := &search_client.ProductData{

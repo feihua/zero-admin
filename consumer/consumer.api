@@ -33,8 +33,19 @@ type MemberInfo {
 	IsEnabled        int32   `json:"isEnabled"` //是否启用：0-禁用，1-启用
 }
 
+type ProductEsReq {
+	Ids []int64 `json:"ids"` //商品ID集合
+}
+
+@server (
+	group:  product
+	prefix: /api/consumer
+)
 service consumer-api {
-	@handler ConsumerHandler
-	get /from/:name (Request) returns (Response)
+	@handler AddProductToEs
+	post /addProductToEs (ProductEsReq) returns (Response)
+
+	@handler DeleteProductFromEs
+	post /deleteProductFromEs (ProductEsReq) returns (Response)
 }
 

@@ -28,6 +28,10 @@ type MemberInfo struct {
 	IsEnabled        int32   `json:"isEnabled"`          //是否启用：0-禁用，1-启用
 }
 
+type ProductEsReq struct {
+	Ids []int64 `json:"ids"` //商品ID集合
+}
+
 type Request struct {
 	Name string `path:"name,options=you|me"`
 }

@@ -52,13 +52,13 @@ func NewServiceContext(c config.Config) *ServiceContext {
 	MemberProductCategoryRelationModel := model.NewMemberProductCategoryRelationModel(c.Mongo.Datasource, c.Mongo.Db, "ums_member_product_category_relation")
 	MemberProductCollectionModel := model.NewMemberProductCollectionModel(c.Mongo.Datasource, c.Mongo.Db, "ums_member_product_collection")
 	return &ServiceContext{
-		Config:                             c,
-		DB:                                 db,
-		RabbitMQ:                           rabbitmq,
-		MemberBrandAttentionModel:          MemberBrandAttention,
-		MemberBrowseRecordModel:            MemberBrowseRecordModel,
-		MemberProductCategoryRelationModel: MemberProductCategoryRelationModel,
-		MemberProductCollectionModel:       MemberProductCollectionModel,
+		Config:   c,
+		DB:       db,
+		RabbitMQ: rabbitmq,
+		// MemberBrandAttentionModel:          MemberBrandAttention,
+		// MemberBrowseRecordModel:            MemberBrowseRecordModel,
+		// MemberProductCategoryRelationModel: MemberProductCategoryRelationModel,
+		// MemberProductCollectionModel:       MemberProductCollectionModel,
 	}
 }
 

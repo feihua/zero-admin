@@ -30,7 +30,17 @@ func NewCreateLogic(ctx context.Context, svcCtx *svc.ServiceContext) *CreateLogi
 // Create 创建商品
 func (l *CreateLogic) Create(in *search.CreateReq) (*search.CreateResp, error) {
 	var buf bytes.Buffer
+
+	var deleteBuf bytes.Buffer
 	for _, p := range in.Data {
+
+		deleteMeta := map[string]map[string]string{
+			"delete": {"_index": svc.IndexName, "_id": strconv.FormatInt(p.Id, 10)},
+		}
+		line, _ := json.Marshal(deleteMeta)
+		deleteBuf.Write(line)
+		deleteBuf.WriteByte('\n')
+
 		meta := map[string]map[string]string{
 			"index": {"_index": svc.IndexName, "_id": strconv.FormatInt(p.Id, 10)},
 		}
@@ -41,9 +51,19 @@ func (l *CreateLogic) Create(in *search.CreateReq) (*search.CreateResp, error) {
 		buf.Write(data)
 		buf.WriteByte('\n')
 	}
-	_, err := l.svcCtx.ESClient.Bulk(bytes.NewReader(buf.Bytes()), l.svcCtx.ESClient.Bulk.WithContext(l.ctx))
+
+	_, err := l.svcCtx.ESClient.Bulk(bytes.NewReader(deleteBuf.Bytes()), l.svcCtx.ESClient.Bulk.WithContext(l.ctx))
+	if err != nil {
+		logx.Infof("bulk delete error：%+v", err)
+	} else {
+		logx.Infof("删除商品es索引成功：%+v", deleteBuf.String())
+	}
+
+	_, err = l.svcCtx.ESClient.Bulk(bytes.NewReader(buf.Bytes()), l.svcCtx.ESClient.Bulk.WithContext(l.ctx))
 	if err != nil {
 		return nil, fmt.Errorf("bulk create error: %+v", err)
+	} else {
+		logx.Infof("添加商品es索引成功：%+v", buf.String())
 	}
 
 	return &search.CreateResp{}, nil
