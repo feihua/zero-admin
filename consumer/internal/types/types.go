@@ -29,7 +29,7 @@ type MemberInfo struct {
 }
 
 type ProductEsReq struct {
-	Ids []int64 `json:"ids"` //商品ID集合
+	Ids []int64 `json:"ids,optional"` //商品ID集合
 }
 
 type Request struct {

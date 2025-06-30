@@ -26,7 +26,8 @@ func NewDeleteProductFromEsLogic(ctx context.Context, svcCtx *svc.ServiceContext
 
 // DeleteProductFromEs 测试删除商品
 func (l *DeleteProductFromEsLogic) DeleteProductFromEs(req *types.ProductEsReq) (resp *types.Response, err error) {
-	message := map[string]any{"ids": req.Ids}
+	// message := map[string]any{"ids": nil}// 清空所有商品索引
+	message := map[string]any{"ids": req.Ids} // 根据id删除商品索引
 	body, _ := json.Marshal(message)
 	err = l.svcCtx.RabbitMQ.SendMessage("syn.product.to.es.exchange", "delete.product.from.es.queue", "delete.product.from.es.queue", body)
 
