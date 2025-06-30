@@ -50,3 +50,7 @@ Log:
   Stat: false
   Mode: file
   Path: logs/consumer
+
+Auth:
+  AccessSecret: ad879037-c7a4-4063-9236-6bfc35d54b7d
+  AccessExpire: 86400

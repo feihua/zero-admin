@@ -6,6 +6,7 @@ package handler
 import (
 	"net/http"
 
+	auth "github.com/feihua/zero-admin/consumer/internal/handler/auth"
 	product "github.com/feihua/zero-admin/consumer/internal/handler/product"
 	"github.com/feihua/zero-admin/consumer/internal/svc"
 
@@ -13,6 +14,16 @@ import (
 )
 
 func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
+	server.AddRoutes(
+		[]rest.Route{
+			{
+				Method:  http.MethodPost,
+				Path:    "/api/consumer/auth",
+				Handler: auth.ConsumerAuthHandler(serverCtx),
+			},
+		},
+	)
+
 	server.AddRoutes(
 		[]rest.Route{
 			{
@@ -26,6 +37,7 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				Handler: product.DeleteProductFromEsHandler(serverCtx),
 			},
 		},
+		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
 		rest.WithPrefix("/api/consumer"),
 	)
 }

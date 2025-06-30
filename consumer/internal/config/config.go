@@ -26,4 +26,9 @@ type Config struct {
 
 	// 搜索
 	SearchRpc zrpc.RpcClientConf
+
+	Auth struct {
+		AccessSecret string
+		AccessExpire int64
+	}
 }

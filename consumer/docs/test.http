@@ -1,5 +1,5 @@
 ###用户登录
-POST {{host}}/api/sys/user/login
+POST {{host}}/api/consumer/auth
 Content-Type: application/json
 
 {
@@ -12,6 +12,7 @@ Content-Type: application/json
 
 ### 添加商品索引
 POST {{host}}/api/consumer/addProductToEs
+Authorization: Bearer {{token}}
 Content-Type: application/json
 
 {
@@ -22,6 +23,7 @@ Content-Type: application/json
 
 ### 删除商品索引
 POST {{host}}/api/consumer/deleteProductFromEs
+Authorization: Bearer {{token}}
 Content-Type: application/json
 
 {

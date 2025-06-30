@@ -3,6 +3,21 @@
 
 package types
 
+type LoginData struct {
+	AccessToken string `json:"token"`
+}
+
+type LoginReq struct {
+	Account  string `json:"account"`  //手机号或者用户名
+	Password string `json:"password"` //密码
+}
+
+type LoginResp struct {
+	Code    string    `json:"code"`
+	Message string    `json:"message"`
+	Data    LoginData `json:"data"`
+}
+
 type MemberInfo struct {
 	MemberId         int64   `json:"memberId"`           //会员ID
 	WxOpenid         string  `json:"wxOpenid"`           //微信openid

@@ -1,5 +1,20 @@
 syntax = "v1"
 
+type LoginReq {
+	Account  string `json:"account"` //手机号或者用户名
+	Password string `json:"password"` //密码
+}
+
+type LoginData {
+	AccessToken string `json:"token"`
+}
+
+type LoginResp {
+	Code    string    `json:"code"`
+	Message string    `json:"message"`
+	Data    LoginData `json:"data"`
+}
+
 type Request {
 	Name string `path:"name,options=you|me"`
 }
@@ -38,6 +53,7 @@ type ProductEsReq {
 }
 
 @server (
+	jwt:    Auth
 	group:  product
 	prefix: /api/consumer
 )
@@ -47,5 +63,13 @@ service consumer-api {
 
 	@handler DeleteProductFromEs
 	post /deleteProductFromEs (ProductEsReq) returns (Response)
+}
+
+@server (
+	group: auth
+)
+service consumer-api {
+	@handler ConsumerAuth
+	post /api/consumer/auth (LoginReq) returns (LoginResp)
 }
 
