@@ -7,6 +7,7 @@ import (
 	"github.com/feihua/zero-admin/rpc/ums/gen/query"
 	"github.com/feihua/zero-admin/rpc/ums/internal/config"
 	"github.com/zeromicro/go-zero/core/logx"
+	"github.com/zeromicro/go-zero/core/stores/mon"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 	"gorm.io/gorm/logger"
@@ -30,7 +31,7 @@ func NewServiceContext(c config.Config) *ServiceContext {
 		Logger:                 settingLogConfig(),
 	})
 	if err != nil {
-		logx.Infof("mysql连接失败：%+v", err)
+		logx.Errorf("mysql连接失败：%+v", err)
 		panic(err)
 	}
 
@@ -40,6 +41,12 @@ func NewServiceContext(c config.Config) *ServiceContext {
 	mqUrl := fmt.Sprintf("amqp://%s:%s@%s:%d/", c.Rabbitmq.UserName, c.Rabbitmq.Password, c.Rabbitmq.Host, c.Rabbitmq.Port)
 	rabbitmq := mq.NewRabbitMQSimple(mqUrl)
 
+	_, err = mon.NewModel(c.Mongo.Datasource, c.Mongo.Db, "test")
+	if err != nil {
+		logx.Errorf("mongo连接失败：%+v", err)
+		panic(err)
+	}
+	logx.Info("mongo连接成功")
 	MemberBrandAttention := model.NewMemberBrandAttentionModel(c.Mongo.Datasource, c.Mongo.Db, "ums_member_brand_attention")
 	MemberBrowseRecordModel := model.NewMemberBrowseRecordModel(c.Mongo.Datasource, c.Mongo.Db, "ums_member_browse_record")
 	MemberProductCategoryRelationModel := model.NewMemberProductCategoryRelationModel(c.Mongo.Datasource, c.Mongo.Db, "ums_member_product_category_relation")

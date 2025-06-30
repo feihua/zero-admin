@@ -5,6 +5,7 @@ import (
 	"github.com/feihua/zero-admin/rpc/pms/gen/query"
 	"github.com/feihua/zero-admin/rpc/pms/internal/config"
 	"github.com/zeromicro/go-zero/core/logx"
+	"github.com/zeromicro/go-zero/core/stores/mon"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 	"gorm.io/gorm/logger"
@@ -29,12 +30,19 @@ func NewServiceContext(c config.Config) *ServiceContext {
 		Logger:                 settingLogConfig(),
 	})
 	if err != nil {
+		logx.Errorf("mysql连接失败：%+v", err)
 		panic(err)
 	}
 
 	logx.Debug("mysql已连接")
 	query.SetDefault(DB)
 
+	_, err = mon.NewModel(c.Mongo.Datasource, c.Mongo.Db, "test")
+	if err != nil {
+		logx.Errorf("mongo连接失败：%+v", err)
+		panic(err)
+	}
+	logx.Info("mongo连接成功")
 	ProductCommentModel := model.NewProductCommentModel(c.Mongo.Datasource, c.Mongo.Db, "product_comment")
 	ProductCommentReplayModel := model.NewProductCommentReplayModel(c.Mongo.Datasource, c.Mongo.Db, "product_comment_replay")
 	ProductOperateLogModel := model.NewProductOperateLogModel(c.Mongo.Datasource, c.Mongo.Db, "product_operate_log")
