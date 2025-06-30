@@ -5,7 +5,6 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"github.com/feihua/zero-admin/pkg/es"
 	"github.com/feihua/zero-admin/rpc/search/internal/svc"
 	"github.com/feihua/zero-admin/rpc/search/search"
 
@@ -38,7 +37,7 @@ func (l *DeleteLogic) Delete(in *search.DeleteReq) (*search.DeleteResp, error) {
 		buf.Write(line)
 		buf.WriteByte('\n')
 	}
-	_, err := es.GetESClient().Bulk(bytes.NewReader(buf.Bytes()), es.GetESClient().Bulk.WithContext(l.ctx))
+	_, err := l.svcCtx.ESClient.Bulk(bytes.NewReader(buf.Bytes()), l.svcCtx.ESClient.Bulk.WithContext(l.ctx))
 	if err != nil {
 		return nil, fmt.Errorf("bulk delete error: %+v", err)
 	}

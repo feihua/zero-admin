@@ -93,7 +93,7 @@ func (l *LoginLogic) Login(in *umsclient.LoginReq) (*umsclient.LoginResp, error)
 	err = l.svcCtx.RabbitMQ.SendDelayMessage("order.delay.exchange", "order.cancel.queue", "order.cancel", body, delayMinutes)
 
 	// todo 测试同步商品到es
-	message = map[string]any{"id": 2}
+	message = map[string]any{"id": 3}
 	body, err = json.Marshal(message)
 	if err != nil {
 		logc.Errorf(l.ctx, "序列化 JSON 失败: %v", err)

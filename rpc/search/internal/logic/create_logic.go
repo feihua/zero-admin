@@ -5,7 +5,6 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"github.com/feihua/zero-admin/pkg/es"
 	"strconv"
 
 	"github.com/feihua/zero-admin/rpc/search/internal/svc"
@@ -42,7 +41,7 @@ func (l *CreateLogic) Create(in *search.CreateReq) (*search.CreateResp, error) {
 		buf.Write(data)
 		buf.WriteByte('\n')
 	}
-	_, err := es.GetESClient().Bulk(bytes.NewReader(buf.Bytes()), es.GetESClient().Bulk.WithContext(l.ctx))
+	_, err := l.svcCtx.ESClient.Bulk(bytes.NewReader(buf.Bytes()), l.svcCtx.ESClient.Bulk.WithContext(l.ctx))
 	if err != nil {
 		return nil, fmt.Errorf("bulk create error: %+v", err)
 	}

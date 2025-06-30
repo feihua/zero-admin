@@ -10,10 +10,10 @@ var (
 	once     sync.Once
 )
 
-func GetESClient() *elasticsearch.Client {
+func GetESClient(url string) *elasticsearch.Client {
 	once.Do(func() {
 		cfg := elasticsearch.Config{
-			Addresses: []string{"http://localhost:9200"},
+			Addresses: []string{url},
 		}
 		client, err := elasticsearch.NewClient(cfg)
 		if err != nil {

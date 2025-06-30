@@ -10,3 +10,6 @@ Log:
   Stat: false
   Mode: file
   Path: logs/search
+
+Es:
+  Host: http://127.0.0.1:9200

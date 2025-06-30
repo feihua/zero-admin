@@ -4,8 +4,6 @@ import (
 	"bytes"
 	"context"
 	"encoding/json"
-	"github.com/feihua/zero-admin/pkg/es"
-
 	"github.com/feihua/zero-admin/rpc/search/internal/svc"
 	"github.com/feihua/zero-admin/rpc/search/search"
 
@@ -46,10 +44,10 @@ func (l *SearchSimpleLogic) SearchSimple(in *search.SearchSimpleReq) (*search.Se
 	}
 
 	data, _ := json.Marshal(query)
-	res, err := es.GetESClient().Search(
-		es.GetESClient().Search.WithContext(l.ctx),
-		es.GetESClient().Search.WithIndex(svc.IndexName),
-		es.GetESClient().Search.WithBody(bytes.NewReader(data)),
+	res, err := l.svcCtx.ESClient.Search(
+		l.svcCtx.ESClient.Search.WithContext(l.ctx),
+		l.svcCtx.ESClient.Search.WithIndex(svc.IndexName),
+		l.svcCtx.ESClient.Search.WithBody(bytes.NewReader(data)),
 	)
 	if err != nil {
 		return nil, err
