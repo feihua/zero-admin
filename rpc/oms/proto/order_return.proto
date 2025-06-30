@@ -1,0 +1,140 @@
+syntax = "proto3";
+
+package main;
+
+option go_package = "./proto";
+
+// 添加/更新-退货/售后
+message OrderReturnReq {
+  int64 id = 1; //主键ID
+  int64 order_id = 2; //关联订单ID
+  string return_no = 3; //退货单号
+  int64 member_id = 4; //会员ID
+  int32 status = 5; //退货状态（0待审核 1审核通过 2已收货 3已退款 4已拒绝 5已关闭）
+  int32 type = 6; //售后类型（0退货退款 1仅退款 2换货）
+  string reason = 7; //退货原因
+  string description = 8; //问题描述
+  string proof_pic = 9; //凭证图片，逗号分隔
+  float refund_amount = 10; //退款金额
+  string return_name = 11; //退货人姓名
+  string return_phone = 12; //退货人电话
+  string company_address = 13; //退货收货地址
+  string create_time = 14; //申请时间
+  string handle_time = 15; //处理时间
+  string handle_note = 16; //处理备注
+  string handle_man = 17; //处理人员
+  string receive_time = 18; //收货时间
+  string receive_note = 19; //收货备注
+  string receive_man = 20; //收货人
+  string refund_time = 21; //退款时间
+  string close_time = 22; //关闭时间
+  string remark = 23; //备注
+  repeated OrderReturnItemData order_return_item = 24; //退货/售后明细
+}
+
+message OrderReturnItemData {
+  int64 id = 1; //主键ID
+  int64 return_id = 2; //退货单ID（关联oms_order_return.id）
+  int64 order_id = 3; //订单ID
+  int64 order_item_id = 4; //订单明细ID
+  int64 sku_id = 5; //商品SKU ID
+  string sku_name = 6; //商品名称
+  string sku_pic = 7; //商品图片
+  string sku_attrs = 8; //商品销售属性
+  int32 quantity = 9; //退货数量
+  float product_price = 10; //商品单价
+  float real_amount = 11; //实际退款金额
+  string reason = 12; //退货原因
+  string remark = 13; //备注
+
+}
+
+message OrderReturnResp {
+  string pong = 1;
+}
+
+// 删除退货/售后
+message DeleteOrderReturnReq {
+  repeated int64 ids = 1;
+}
+
+// 更新退货/售后状态
+message UpdateOrderReturnStatusReq {
+  int64 id = 1; //键ID
+  float refund_amount = 2; //退款金额
+  string receive_man = 3; //收货人
+  string handle_man = 4; //处理人员
+  int32 status = 5; //退货状态（0待审核 1审核通过 2已收货 3已退款 4已拒绝 5已关闭）
+  string company_address = 6; //退货收货地址
+  string receive_note = 7; //收货备注
+  string handle_note = 8; //处理备注
+}
+
+// 查询退货/售后详情
+message QueryOrderReturnDetailReq {
+    int64 id = 1;
+}
+
+
+// 分页查询退货/售后列表
+message QueryOrderReturnListReq {
+  int64 order_id = 1; //关联订单ID
+  string return_no = 2; //退货单号
+  int64 member_id = 3; //会员ID
+  int32 status = 4; //退货状态（0待审核 1审核通过 2已收货 3已退款 4已拒绝 5已关闭）
+  int32 type = 5; //售后类型（0退货退款 1仅退款 2换货）
+  string return_name = 6; //退货人姓名
+  string return_phone = 7; //退货人电话
+  int32 page_num = 8; //第几页
+  int32 page_size = 9; //每页的数量
+}
+
+message OrderReturnData {
+  int64 id = 1; //主键ID
+  int64 order_id = 2; //关联订单ID
+  string return_no = 3; //退货单号
+  int64 member_id = 4; //会员ID
+  int32 status = 5; //退货状态（0待审核 1审核通过 2已收货 3已退款 4已拒绝 5已关闭）
+  int32 type = 6; //售后类型（0退货退款 1仅退款 2换货）
+  string reason = 7; //退货原因
+  string description = 8; //问题描述
+  string proof_pic = 9; //凭证图片，逗号分隔
+  float refund_amount = 10; //退款金额
+  string return_name = 11; //退货人姓名
+  string return_phone = 12; //退货人电话
+  string company_address = 13; //退货收货地址
+  string create_time = 14; //申请时间
+  string handle_time = 15; //处理时间
+  string handle_note = 16; //处理备注
+  string handle_man = 17; //处理人员
+  string receive_time = 18; //收货时间
+  string receive_note = 19; //收货备注
+  string receive_man = 20; //收货人
+  string refund_time = 21; //退款时间
+  string close_time = 22; //关闭时间
+  string remark = 23; //备注
+  repeated OrderReturnItemData order_return_item = 24; //退货/售后明细
+}
+
+message QueryOrderReturnListResp {
+  int64 total = 1;
+  repeated  OrderReturnData list = 2;
+}
+
+// 退货/售后
+service OrderReturnService {
+  // 添加退货/售后
+  rpc AddOrderReturn(OrderReturnReq) returns (OrderReturnResp){}
+  // 删除退货/售后
+  rpc DeleteOrderReturn(DeleteOrderReturnReq) returns (OrderReturnResp){}
+  // 更新退货/售后
+  rpc UpdateOrderReturn(OrderReturnReq) returns (OrderReturnResp ){}
+  // 更新退货/售后状态
+  rpc UpdateOrderReturnStatus(UpdateOrderReturnStatusReq) returns (OrderReturnResp ){}
+  // 查询退货/售后详情
+   rpc QueryOrderReturnDetail(QueryOrderReturnDetailReq) returns (OrderReturnData){}
+  // 查询退货/售后列表
+  rpc QueryOrderReturnList(QueryOrderReturnListReq) returns (QueryOrderReturnListResp){}
+
+
+}

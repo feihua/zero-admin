@@ -10,10 +10,9 @@ import (
 	"github.com/feihua/zero-admin/rpc/cms/client/subjectservice"
 	"github.com/feihua/zero-admin/rpc/oms/client/cartitemservice"
 	"github.com/feihua/zero-admin/rpc/oms/client/companyaddressservice"
-	"github.com/feihua/zero-admin/rpc/oms/client/orderitemservice"
-	"github.com/feihua/zero-admin/rpc/oms/client/orderoperatehistoryservice"
-	"github.com/feihua/zero-admin/rpc/oms/client/orderreturnapplyservice"
+	"github.com/feihua/zero-admin/rpc/oms/client/orderoperationlogservice"
 	"github.com/feihua/zero-admin/rpc/oms/client/orderreturnreasonservice"
+	"github.com/feihua/zero-admin/rpc/oms/client/orderreturnservice"
 	"github.com/feihua/zero-admin/rpc/oms/client/orderservice"
 	"github.com/feihua/zero-admin/rpc/oms/client/ordersettingservice"
 	"github.com/feihua/zero-admin/rpc/pms/client/commentreplayservice"
@@ -115,14 +114,13 @@ type ServiceContext struct {
 	ProductSpecService                      productspecservice.ProductSpecService
 	ProductSpecValueService                 productspecvalueservice.ProductSpecValueService
 	// 订单相关
-	CartItemService            cartitemservice.CartItemService
-	CompanyAddressService      companyaddressservice.CompanyAddressService
-	OrderItemService           orderitemservice.OrderItemService
-	OrderOperateHistoryService orderoperatehistoryservice.OrderOperateHistoryService
-	OrderReturnApplyService    orderreturnapplyservice.OrderReturnApplyService
-	OrderReturnReasonService   orderreturnreasonservice.OrderReturnReasonService
-	OrderService               orderservice.OrderService
-	OrderSettingService        ordersettingservice.OrderSettingService
+	CartItemService          cartitemservice.CartItemService
+	CompanyAddressService    companyaddressservice.CompanyAddressService
+	OrderOperationLogService orderoperationlogservice.OrderOperationLogService
+	OrderReturnService       orderreturnservice.OrderReturnService
+	OrderReturnReasonService orderreturnreasonservice.OrderReturnReasonService
+	OrderService             orderservice.OrderService
+	OrderSettingService      ordersettingservice.OrderSettingService
 	// 营销相关
 	CouponRecordService       couponrecordservice.CouponRecordService
 	CouponScopeService        couponscopeservice.CouponScopeService
@@ -203,14 +201,13 @@ func NewServiceContext(c config.Config) *ServiceContext {
 		ProductSpecService:                      productspecservice.NewProductSpecService(pmsClient),
 		ProductSpecValueService:                 productspecvalueservice.NewProductSpecValueService(pmsClient),
 
-		CartItemService:            cartitemservice.NewCartItemService(omsClient),
-		CompanyAddressService:      companyaddressservice.NewCompanyAddressService(omsClient),
-		OrderItemService:           orderitemservice.NewOrderItemService(omsClient),
-		OrderOperateHistoryService: orderoperatehistoryservice.NewOrderOperateHistoryService(omsClient),
-		OrderReturnApplyService:    orderreturnapplyservice.NewOrderReturnApplyService(omsClient),
-		OrderReturnReasonService:   orderreturnreasonservice.NewOrderReturnReasonService(omsClient),
-		OrderService:               orderservice.NewOrderService(omsClient),
-		OrderSettingService:        ordersettingservice.NewOrderSettingService(omsClient),
+		CartItemService:          cartitemservice.NewCartItemService(omsClient),
+		CompanyAddressService:    companyaddressservice.NewCompanyAddressService(omsClient),
+		OrderOperationLogService: orderoperationlogservice.NewOrderOperationLogService(omsClient),
+		OrderReturnService:       orderreturnservice.NewOrderReturnService(omsClient),
+		OrderReturnReasonService: orderreturnreasonservice.NewOrderReturnReasonService(omsClient),
+		OrderService:             orderservice.NewOrderService(omsClient),
+		OrderSettingService:      ordersettingservice.NewOrderSettingService(omsClient),
 
 		CouponRecordService:       couponrecordservice.NewCouponRecordService(smsClient),
 		CouponScopeService:        couponscopeservice.NewCouponScopeService(smsClient),

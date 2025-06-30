@@ -1,0 +1,82 @@
+syntax = "proto3";
+
+package main;
+
+option go_package = "./proto";
+
+// 添加订单支付
+message OrderPaymentReq {
+  int64 id = 1; //主键ID
+  int64 order_id = 2; //订单ID
+  string order_no = 3; //订单编号
+  int32 pay_type = 4; //支付方式：1-支付宝，2-微信，3-银联
+  string transaction_id = 5; //支付流水号
+  float total_amount = 6; //订单金额
+  float pay_amount = 7; //支付金额
+  int32 pay_status = 8; //支付状态：0-待支付，1-支付成功，2-支付失败
+  string pay_time = 9; //支付时间
+  int32 is_deleted = 12; //是否删除
+}
+
+message OrderPaymentResp {
+  string pong = 1;
+}
+
+
+// 更新订单支付状态
+message UpdateOrderPaymentStatusReq {
+  repeated int64 ids = 1; //主键ID
+  int32 pay_status = 8; //支付状态：0-待支付，1-支付成功，2-支付失败
+}
+
+// 查询订单支付详情
+message QueryOrderPaymentDetailReq {
+    int64 id = 1;
+}
+
+
+// 分页查询订单支付列表
+message QueryOrderPaymentListReq {
+  int64 order_id = 1; //订单ID
+  string order_no = 2; //订单编号
+  int32 pay_type = 3; //支付方式：1-支付宝，2-微信，3-银联
+  string transaction_id = 4; //支付流水号
+  int32 pay_status = 5; //支付状态：0-待支付，1-支付成功，2-支付失败
+  int32 page_num = 6; //第几页
+  int32 page_size = 7; //每页的数量
+}
+
+message OrderPaymentData {
+  int64 id = 1; //主键ID
+  int64 order_id = 2; //订单ID
+  string order_no = 3; //订单编号
+  int32 pay_type = 4; //支付方式：1-支付宝，2-微信，3-银联
+  string transaction_id = 5; //支付流水号
+  float total_amount = 6; //订单金额
+  float pay_amount = 7; //支付金额
+  int32 pay_status = 8; //支付状态：0-待支付，1-支付成功，2-支付失败
+  string pay_time = 9; //支付时间
+  string create_time = 10; //创建时间
+  string update_time = 11; //
+  int32 is_deleted = 12; //是否删除
+
+}
+
+message QueryOrderPaymentListResp {
+  int64 total = 1;
+  repeated  OrderPaymentData list = 2;
+}
+
+// 订单支付
+service OrderPaymentService {
+  // 添加订单支付
+  rpc AddOrderPayment(OrderPaymentReq) returns (OrderPaymentResp){}
+  // 更新订单支付状态
+  rpc UpdateOrderPaymentStatus(UpdateOrderPaymentStatusReq) returns (OrderPaymentResp ){}
+  // 查询订单支付详情
+   rpc QueryOrderPaymentDetail(QueryOrderPaymentDetailReq) returns (OrderPaymentData){}
+  // 查询订单支付列表
+  rpc QueryOrderPaymentList(QueryOrderPaymentListReq) returns (QueryOrderPaymentListResp){}
+
+
+}

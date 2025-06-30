@@ -9,7 +9,6 @@ import (
 	"github.com/feihua/zero-admin/pkg/errorx"
 	"github.com/feihua/zero-admin/rpc/oms/omsclient"
 	"github.com/feihua/zero-admin/rpc/pms/pmsclient"
-	"github.com/feihua/zero-admin/rpc/sms/smsclient"
 	"github.com/feihua/zero-admin/rpc/ums/umsclient"
 	"github.com/zeromicro/go-zero/core/logc"
 	"google.golang.org/grpc/status"
@@ -68,34 +67,26 @@ func (l *GenerateOrderLogic) GenerateOrder(req *types.GenerateOrderReq) (*types.
 	}
 	// 2.生成下单商品信息
 	var flag = false // 用于判断库存
-	var totalAmount int64 = 0
+	// var totalAmount float32 = 0
 	orderItemList := make([]*omsclient.OrderItemData, 0)
 	cartItemIds := make([]int64, 0) // 方便提交订单成功,后删除购物车中的商品
 	for _, item := range cartPromotionItemList {
 		orderItemList = append(orderItemList, &omsclient.OrderItemData{
-			OrderId:           0,
-			OrderSn:           "",
-			ProductId:         item.ProductId,
-			ProductPic:        item.ProductPic,
-			ProductName:       item.ProductPic,
-			ProductBrand:      item.ProductBrand,
-			ProductSn:         item.ProductSn,
-			ProductPrice:      item.Price,
-			ProductQuantity:   item.Quantity,
-			ProductSkuId:      item.ProductSkuId,
-			ProductSkuCode:    item.ProductSkuCode,
-			ProductCategoryId: item.ProductCategoryId,
-			PromotionName:     item.PromotionMessage,
-			PromotionAmount:   item.ReduceAmount,
-			CouponAmount:      0, // 设置为0是表示默认不使用优惠券,后面会判断如果使用了优惠券,则会重新设置该值
-			IntegrationAmount: 0, // 设置为0是表示默认不使用积分,后面会判断如果使用了积分,则会重新设置该值
-			RealAmount:        0,
-			GiftIntegration:   item.Integration,
-			GiftGrowth:        item.Growth,
-			ProductAttr:       item.ProductAttr,
+			// OrderItemStatus: 1, //订单商品状态：1-正常,2-退货申请中,3-已退货,4-已拒绝
+			// SkuId: item.ProductSkuId, //商品SKU ID
+			// SkuName: item.ProductName, //商品名称
+			// SkuPic: item.ProductPic, //商品图片
+			// SkuPrice: item.Price, //商品单价
+			// SkuQuantity: item.Quantity, //商品数量
+			// SkuTotalAmount: item.ReduceAmount, //商品总金额
+			// PromotionAmount: item.PromotionAmount, //促销分摊金额
+			// CouponAmount: item.CouponAmount, //优惠券分摊金额
+			// PointsAmount: item.PointsAmount, //积分分摊金额
+			// DiscountAmount: item.DiscountAmount, //优惠分摊金额
+			// RealAmount: item.RealAmount, //实付金额
 		})
 
-		totalAmount = totalAmount + item.Price
+		// totalAmount = totalAmount + item.Price
 		if item.RealStock <= 0 || item.RealStock < item.Quantity {
 			flag = true
 		}
@@ -185,28 +176,28 @@ func (l *GenerateOrderLogic) GenerateOrder(req *types.GenerateOrderReq) (*types.
 			return result(1, "未达到最低使用积分门槛"), nil
 		}
 		// 1.4是否超过订单抵用最高百分比
-		integrationAmount := int64(req.UseIntegration / consumeSetting.UseUnit)
-		var maxPercent = int64(consumeSetting.MaxPercentPerOrder / 100)
-		if integrationAmount > maxPercent*totalAmount {
-			return result(1, "超过订单抵用最高百分比"), nil
-		}
+		// integrationAmount := int64(req.UseIntegration / consumeSetting.UseUnit)
+		// var maxPercent = int64(consumeSetting.MaxPercentPerOrder / 100)
+		// if integrationAmount > maxPercent*totalAmount {
+		// 	return result(1, "超过订单抵用最高百分比"), nil
+		// }
 
 		// 2.可用情况下分摊到可用商品中
-		for _, item := range orderItemList {
-			item.IntegrationAmount = (item.ProductPrice / totalAmount) * integrationAmount
-		}
+		// for _, item := range orderItemList {
+		// 	item.PointsAmount = (item.SkuPrice / totalAmount) * integrationAmount
+		// }
 	}
 	// 6.计算order_item的实付金额
 	// 原价-促销优惠-优惠券抵扣-积分抵扣
 	for _, item := range orderItemList {
-		item.RealAmount = item.ProductPrice - item.PromotionAmount - item.CouponAmount - item.IntegrationAmount
+		item.RealAmount = item.SkuPrice - item.PromotionAmount - item.CouponAmount - item.PointsAmount
 	}
 	// 7.进行库存锁定
 	var data []*pmsclient.UpdateSkuStockData
 	for _, item := range orderItemList {
 		data = append(data, &pmsclient.UpdateSkuStockData{
-			Id:              item.ProductSkuId,
-			ProductQuantity: item.ProductQuantity,
+			Id:              item.SkuId,
+			ProductQuantity: item.SkuQuantity,
 		})
 	}
 	_, err = l.svcCtx.ProductSkuService.LockSkuStockLock(l.ctx, &pmsclient.UpdateSkuStockReq{
@@ -220,101 +211,82 @@ func (l *GenerateOrderLogic) GenerateOrder(req *types.GenerateOrderReq) (*types.
 	}
 	// 8.根据商品合计、运费、活动优惠、优惠券、积分计算应付金额
 	// 计算订单优惠(促销价、满减、阶梯价)
-	var promotionAmount int64
-	// 获取订单促销信息
-	var promotionInfo string
-	// 计算订单优惠券抵扣金额
-	var couponAmount int64
-	// 计算积分抵扣金额
-	var integrationAmount int64
-	// 计算该订单赠送的积分
-	var giftIntegration int32
-	// 计算赠送成长值
-	var giftGrowth int32
-	for _, item := range orderItemList {
-		promotionAmount = promotionAmount + item.PromotionAmount*int64(item.ProductQuantity)
-		promotionInfo = promotionInfo + item.PromotionName
-		couponAmount = couponAmount + item.CouponAmount*int64(item.ProductQuantity)
-		integrationAmount = integrationAmount + item.IntegrationAmount*int64(item.ProductQuantity)
-		giftIntegration = giftIntegration + item.GiftIntegration*item.ProductQuantity
-		giftGrowth = giftGrowth + item.GiftGrowth*item.ProductQuantity
-	}
+	// var promotionAmount int64
+	// // 获取订单促销信息
+	// var promotionInfo string
+	// // 计算订单优惠券抵扣金额
+	// var couponAmount int64
+	// // 计算积分抵扣金额
+	// var integrationAmount int64
+	// // 计算该订单赠送的积分
+	// var giftIntegration int32
+	// // 计算赠送成长值
+	// var giftGrowth int32
+	// for _, item := range orderItemList {
+	// promotionAmount = promotionAmount + item.PromotionAmount*int64(item.SkuQuantity)
+	// promotionInfo = promotionInfo
+	// couponAmount = couponAmount + item.CouponAmount*int64(item.SkuQuantity)
+	// integrationAmount = integrationAmount + item.IntegrationAmount*int64(item.SkuQuantity)
+	// giftIntegration = giftIntegration + item.GiftIntegration*item.SkuQuantity
+	// giftGrowth = giftGrowth + item.GiftGrowth*item.SkuQuantity
+	// }
 	// 计算订单应付金额
-	payAmount := totalAmount - promotionAmount - couponAmount - integrationAmount
-	address, err := l.svcCtx.MemberAddressService.QueryMemberAddressDetail(l.ctx, &umsclient.QueryMemberAddressDetailReq{
-		MemberId: memberId,
-		Id:       req.MemberReceiveAddressId,
-	})
-	if err != nil {
-		return result(1, "查询会员地址异常"), nil
-	}
+	// payAmount := totalAmount - promotionAmount - couponAmount - integrationAmount
+	// address, err := l.svcCtx.MemberAddressService.QueryMemberAddressDetail(l.ctx, &umsclient.QueryMemberAddressDetailReq{
+	// 	MemberId: memberId,
+	// 	Id:       req.MemberReceiveAddressId,
+	// })
+	// if err != nil {
+	// 	return result(1, "查询会员地址异常"), nil
+	// }
 	// 设置自动收货天数
-	orderSettingList, err := l.svcCtx.OrderSettingService.QueryOrderSettingList(l.ctx, &omsclient.QueryOrderSettingListReq{
-		PageNum:  1,
-		PageSize: 10,
-	})
-	if err != nil {
-		return result(1, "查询订单设置异常"), nil
-	}
-	orderInfo := &omsclient.OrderAddReq{
-		CartItemIds:           cartItemIds,                              // 购物车ids(创建订单成功后删除购物车中的商品)
-		MemberId:              memberId,                                 // 会员id
-		CouponId:              req.CouponId,                             // 优惠券id
-		OrderSn:               "",                                       // 生成订单号
-		MemberUsername:        memberInfo.Nickname,                      // 会员名称
-		TotalAmount:           totalAmount,                              // 订单总金额
-		PayAmount:             payAmount,                                // 订单应付金额
-		FreightAmount:         0,                                        // 运费金额
-		PromotionAmount:       promotionAmount,                          // 订单优惠
-		IntegrationAmount:     integrationAmount,                        // 积分抵扣金额
-		CouponAmount:          couponAmount,                             // 计算订单优惠券金额
-		DiscountAmount:        0,                                        // 管理员后台调整订单使用的折扣金额
-		PayType:               0,                                        // 支付方式：0->未支付；1->支付宝；2->微信
-		SourceType:            1,                                        // 订单来源：0->PC订单；1->app订单
-		Status:                0,                                        // 订单状态：0->待付款；1->待发货；2->已发货；3->已完成；4->已关闭；5->无效订单
-		OrderType:             0,                                        // 订单类型：0->正常订单；1->秒杀订单
-		DeliveryCompany:       "",                                       //
-		DeliverySn:            "",                                       //
-		AutoConfirmDay:        orderSettingList.List[0].ConfirmOvertime, // 自动收货天数
-		Integration:           giftIntegration,                          // 赠送积分
-		Growth:                giftGrowth,                               // 赠送成长值
-		PromotionInfo:         promotionInfo,                            // 获取订单促销信息
-		BillType:              0,                                        //
-		BillHeader:            "",                                       //
-		BillContent:           "",                                       //
-		BillReceiverPhone:     "",                                       //
-		BillReceiverEmail:     "",                                       //
-		ReceiverName:          address.ReceiverName,                     // 收货人名称
-		ReceiverPhone:         address.ReceiverPhone,                    // 收货人电话
-		ReceiverPostCode:      address.PostalCode,                       // 邮政编码
-		ReceiverProvince:      address.Province,                         // 省份/直辖市
-		ReceiverCity:          address.City,                             // 城市
-		ReceiverRegion:        address.District,                         // 区
-		ReceiverDetailAddress: address.DetailAddress,                    // 详细地址(街道)
-		Note:                  "",                                       //
-		ConfirmStatus:         0,                                        // 确认收货状态：0->未确认；1->已确认
-		DeleteStatus:          0,                                        // 删除状态：0->未删除；1->已删除
-		UseIntegration:        req.UseIntegration,                       // 下单时使用的积分
-		OrderItemList:         orderItemList,                            //
+	// orderSettingList, err := l.svcCtx.OrderSettingService.QueryOrderSettingList(l.ctx, &omsclient.QueryOrderSettingListReq{
+	// 	PageNum:  1,
+	// 	PageSize: 10,
+	// })
+	// if err != nil {
+	// 	return result(1, "查询订单设置异常"), nil
+	// }
+	orderInfo := &omsclient.AddOrderReq{
+		// UserId: req.UserId, //用户ID
+		// OrderStatus: req.OrderStatus, //订单状态：1-待支付,2-已支付,3-已发货,4-已完成,5-已取消,6-已退款,7-售后中
+		// TotalAmount: req.TotalAmount, //订单总金额
+		// PromotionAmount: req.PromotionAmount, //促销金额
+		// CouponAmount: req.CouponAmount, //优惠券金额
+		// PointsAmount: req.PointsAmount, //积分金额
+		// DiscountAmount: req.DiscountAmount, //优惠金额
+		// FreightAmount: req.FreightAmount, //运费金额
+		// PayAmount: req.PayAmount, //实付金额
+		// PayType: req.PayType, //支付方式：1-支付宝,2-微信,3-银联
+		// PayTime: req.PayTime, //支付时间
+		// DeliveryTime: req.DeliveryTime, //发货时间
+		// ReceiveTime: req.ReceiveTime, //收货时间
+		// CommentTime: req.CommentTime, //评价时间
+		// SourceType: req.SourceType, //订单来源：1-APP,2-PC,3-小程序
+		// ExpressOrderNumber: req.ExpressOrderNumber, //快递单号
+		// UsePoints: req.UsePoints, //下单时使用的积分
+		// ReceiveStatus: req.ReceiveStatus, //是否确认收货：0->否,1->是
+		// Remark: req.Remark, //订单备注
+		// OrderItemList:         orderItemList,                            //
 	}
 	// 9.转化为订单信息并插入数据库(插入order表和order_item表)
-	orderAddResp, err := l.svcCtx.OrderService.OrderAdd(l.ctx, orderInfo)
+	orderAddResp, err := l.svcCtx.OrderService.AddOrder(l.ctx, orderInfo)
 	if err != nil {
 		return result(1, "提交订单异常"), nil
 	}
 	// 10.如果使用优惠券,更新优惠券使用状态
 	// 10.1修改sms_coupon_history表的use_status字段
 	// 10.2记得修改sms_coupon的use_count字段,下单的时候要加1,取消订单的时候,要减1
-	if couponAmount > 0 {
-		_, err = l.svcCtx.CouponRecordService.UpdateCouponRecord(l.ctx, &smsclient.UpdateCouponRecordReq{
-			MemberId: memberId,
-			Status:   1,
-			CouponId: req.CouponId,
-		})
-		if err != nil {
-			return result(1, "更新优惠券使用状态异常"), nil
-		}
-	}
+	// if couponAmount > 0 {
+	// 	_, err = l.svcCtx.CouponRecordService.UpdateCouponRecord(l.ctx, &smsclient.UpdateCouponRecordReq{
+	// 		MemberId: memberId,
+	// 		Status:   1,
+	// 		// CouponIds: req.CouponId,
+	// 	})
+	// 	if err != nil {
+	// 		return result(1, "更新优惠券使用状态异常"), nil
+	// 	}
+	// }
 	// 11.如果使用积分,需要扣除积分
 	i := memberInfo.Points - req.UseIntegration
 	_, err = l.svcCtx.MemberService.UpdateMemberPoints(l.ctx, &umsclient.UpdateMemberPointsReq{MemberId: memberId, Points: i})
@@ -332,25 +304,25 @@ func (l *GenerateOrderLogic) GenerateOrder(req *types.GenerateOrderReq) (*types.
 		Code:    0,
 		Message: "下单成功",
 		Data: types.GenerateOrderData{
-			Id:                orderId,
-			MemberId:          memberId,
-			MemberUsername:    memberInfo.Nickname,
-			TotalAmount:       orderInfo.TotalAmount,
-			PayAmount:         orderInfo.PayAmount,
-			FreightAmount:     orderInfo.FreightAmount,
-			PromotionAmount:   orderInfo.PromotionAmount,
-			IntegrationAmount: orderInfo.IntegrationAmount,
-			CouponAmount:      orderInfo.CouponAmount,
-			DiscountAmount:    orderInfo.DiscountAmount,
-			PayType:           orderInfo.PayType,
-			SourceType:        orderInfo.SourceType,
-			Status:            orderInfo.Status,
-			OrderType:         orderInfo.OrderType,
-			Integration:       orderInfo.Integration,
-			Growth:            orderInfo.Growth,
-			PromotionInfo:     orderInfo.PromotionInfo,
-			Note:              orderInfo.Note,
-			UseIntegration:    orderInfo.UseIntegration,
+			Id:       orderId,
+			MemberId: memberId,
+			// MemberUsername:    memberInfo.Nickname,
+			// TotalAmount:       orderInfo.TotalAmount,
+			// PayAmount:         orderInfo.PayAmount,
+			// FreightAmount:     orderInfo.FreightAmount,
+			// PromotionAmount:   orderInfo.PromotionAmount,
+			// IntegrationAmount: orderInfo.IntegrationAmount,
+			// CouponAmount:      orderInfo.CouponAmount,
+			// DiscountAmount:    orderInfo.DiscountAmount,
+			// PayType:           orderInfo.PayType,
+			// SourceType:        orderInfo.SourceType,
+			// Status:            orderInfo.Status,
+			// OrderType:         orderInfo.OrderType,
+			// Integration:       orderInfo.Integration,
+			// Growth:            orderInfo.Growth,
+			// PromotionInfo:     orderInfo.PromotionInfo,
+			// Note:              orderInfo.Note,
+			// UseIntegration:    orderInfo.UseIntegration,
 		},
 	}, nil
 }

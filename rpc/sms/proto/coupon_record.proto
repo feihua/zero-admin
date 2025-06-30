@@ -28,7 +28,7 @@ message DeleteCouponRecordResp {
 
 // 更新优惠券领取记录
 message UpdateCouponRecordReq {
-  int64 coupon_id = 1; //优惠券ID
+  repeated int64 coupon_ids = 1; //优惠券ID
   int64 member_id = 2; //用户ID
   int64 order_id = 3; //使用订单ID
   float order_amount = 4; //订单金额

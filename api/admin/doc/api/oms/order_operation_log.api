@@ -1,0 +1,19 @@
+info (
+	desc:   "订单操作记录"
+	author: "LiuFeiHua"
+	email:  "1002219331@qq.com"
+)
+
+type (
+	OrderOperationLogData {
+		Id            int64  `json:"id"` //主键ID
+		OrderId       int64  `json:"orderId"` //订单ID
+		OrderNo       string `json:"orderNo"` //订单编号
+		OperationType int32  `json:"operationType"` //操作类型：1-创建订单，2-支付订单，3-发货，4-确认收货，5-取消订单，6-退款
+		OperatorId    int64  `json:"operatorId"` //操作人ID
+		OperatorType  int32  `json:"operatorType"` //操作人类型：1-用户，2-系统，3-管理员
+		OperatorNote  string `json:"operatorNote"` //操作备注
+		CreateTime    string `json:"createTime"` //操作时间
+	}
+)
+

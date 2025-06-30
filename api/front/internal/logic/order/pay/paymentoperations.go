@@ -58,8 +58,8 @@ func (l *PaymentOperationsUtils) AliPayNotify(writer http.ResponseWriter, reques
 	// 2.发送到mq,后再处理
 	// 目前实现的是第一种,直接更新订单状态
 	if alipay.TradeStatusSuccess == tradeStatus {
-		_, err = l.svcCtx.OrderService.UpdateOrderStatusByOutTradeNo(l.ctx, &omsclient.UpdateOrderStatusByOutTradeNoReq{
-			OutTradeNo:  outTradeNo,
+		_, err = l.svcCtx.OrderService.UpdateOrder(l.ctx, &omsclient.UpdateOrderReq{
+			OrderNo:     outTradeNo,
 			OrderStatus: 1, // 支付成功后,订单状态修改为待发货
 		})
 

@@ -1,0 +1,11 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="search" type="GoApplicationRunConfiguration" factoryName="Go Application">
+    <module name="zero-admin" />
+    <working_directory value="$PROJECT_DIR$" />
+    <kind value="PACKAGE" />
+    <package value="github.com/feihua/zero-admin/rpc/search" />
+    <directory value="$PROJECT_DIR$" />
+    <filePath value="$PROJECT_DIR$/rpc/search/search.go" />
+    <method v="2" />
+  </configuration>
+</component>

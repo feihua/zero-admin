@@ -7,7 +7,11 @@ Etcd:
 
 Mysql:
   Datasource: root:12341qweqfsd2356@tcp(127.0.0.1:3306)/gozero?charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai
-
+Rabbitmq:
+  Host: 127.0.0.1
+  Port: 5672
+  UserName: guest
+  Password: guest
 Log:
   ServiceName: oms-service
   Stat: false # go-zero 版本 >= 1.5.0 才支持

@@ -30,57 +30,51 @@ func newOmsOrderItem(db *gorm.DB, opts ...gen.DOOption) omsOrderItem {
 	_omsOrderItem.ALL = field.NewAsterisk(tableName)
 	_omsOrderItem.ID = field.NewInt64(tableName, "id")
 	_omsOrderItem.OrderID = field.NewInt64(tableName, "order_id")
-	_omsOrderItem.OrderSn = field.NewString(tableName, "order_sn")
-	_omsOrderItem.ProductID = field.NewInt64(tableName, "product_id")
-	_omsOrderItem.ProductPic = field.NewString(tableName, "product_pic")
-	_omsOrderItem.ProductName = field.NewString(tableName, "product_name")
-	_omsOrderItem.ProductBrand = field.NewString(tableName, "product_brand")
-	_omsOrderItem.ProductSn = field.NewString(tableName, "product_sn")
-	_omsOrderItem.ProductPrice = field.NewInt64(tableName, "product_price")
-	_omsOrderItem.ProductQuantity = field.NewInt32(tableName, "product_quantity")
-	_omsOrderItem.ProductSkuID = field.NewInt64(tableName, "product_sku_id")
-	_omsOrderItem.ProductSkuCode = field.NewString(tableName, "product_sku_code")
-	_omsOrderItem.ProductCategoryID = field.NewInt64(tableName, "product_category_id")
-	_omsOrderItem.PromotionName = field.NewString(tableName, "promotion_name")
-	_omsOrderItem.PromotionAmount = field.NewInt64(tableName, "promotion_amount")
-	_omsOrderItem.CouponAmount = field.NewInt64(tableName, "coupon_amount")
-	_omsOrderItem.IntegrationAmount = field.NewInt64(tableName, "integration_amount")
-	_omsOrderItem.RealAmount = field.NewInt64(tableName, "real_amount")
-	_omsOrderItem.GiftIntegration = field.NewInt32(tableName, "gift_integration")
-	_omsOrderItem.GiftGrowth = field.NewInt32(tableName, "gift_growth")
-	_omsOrderItem.ProductAttr = field.NewString(tableName, "product_attr")
+	_omsOrderItem.OrderNo = field.NewString(tableName, "order_no")
+	_omsOrderItem.OrderItemStatus = field.NewInt32(tableName, "order_item_status")
+	_omsOrderItem.SkuID = field.NewInt64(tableName, "sku_id")
+	_omsOrderItem.SkuName = field.NewString(tableName, "sku_name")
+	_omsOrderItem.SkuPic = field.NewString(tableName, "sku_pic")
+	_omsOrderItem.SkuPrice = field.NewFloat64(tableName, "sku_price")
+	_omsOrderItem.SkuQuantity = field.NewInt32(tableName, "sku_quantity")
+	_omsOrderItem.SpecData = field.NewString(tableName, "spec_data")
+	_omsOrderItem.SkuTotalAmount = field.NewFloat64(tableName, "sku_total_amount")
+	_omsOrderItem.PromotionAmount = field.NewFloat64(tableName, "promotion_amount")
+	_omsOrderItem.CouponAmount = field.NewFloat64(tableName, "coupon_amount")
+	_omsOrderItem.PointsAmount = field.NewFloat64(tableName, "points_amount")
+	_omsOrderItem.DiscountAmount = field.NewFloat64(tableName, "discount_amount")
+	_omsOrderItem.RealAmount = field.NewFloat64(tableName, "real_amount")
+	_omsOrderItem.CreateTime = field.NewTime(tableName, "create_time")
+	_omsOrderItem.IsDeleted = field.NewBool(tableName, "is_deleted")
 
 	_omsOrderItem.fillFieldMap()
 
 	return _omsOrderItem
 }
 
-// omsOrderItem 订单中所包含的商品
+// omsOrderItem 订单商品表
 type omsOrderItem struct {
 	omsOrderItemDo omsOrderItemDo
 
-	ALL               field.Asterisk
-	ID                field.Int64
-	OrderID           field.Int64  // 订单id
-	OrderSn           field.String // 订单编号
-	ProductID         field.Int64  // 商品id
-	ProductPic        field.String // 商品图片
-	ProductName       field.String // 商品名称
-	ProductBrand      field.String // 商品品牌
-	ProductSn         field.String // 货号
-	ProductPrice      field.Int64  // 销售价格
-	ProductQuantity   field.Int32  // 购买数量
-	ProductSkuID      field.Int64  // 商品sku编号
-	ProductSkuCode    field.String // 商品sku条码
-	ProductCategoryID field.Int64  // 商品分类id
-	PromotionName     field.String // 商品促销名称
-	PromotionAmount   field.Int64  // 商品促销分解金额
-	CouponAmount      field.Int64  // 优惠券优惠分解金额
-	IntegrationAmount field.Int64  // 积分优惠分解金额
-	RealAmount        field.Int64  // 该商品经过优惠后的分解金额
-	GiftIntegration   field.Int32  // 赠送的积分
-	GiftGrowth        field.Int32  // 赠送的成长值
-	ProductAttr       field.String // 商品销售属性:[{"key":"颜色","value":"颜色"},{"key":"容量","value":"4G"}]
+	ALL             field.Asterisk
+	ID              field.Int64
+	OrderID         field.Int64   // 订单ID
+	OrderNo         field.String  // 订单编号
+	OrderItemStatus field.Int32   // 订单商品状态：1-正常,2-退货申请中,3-已退货,4-已拒绝
+	SkuID           field.Int64   // 商品SKU ID
+	SkuName         field.String  // 商品名称
+	SkuPic          field.String  // 商品图片
+	SkuPrice        field.Float64 // 商品单价
+	SkuQuantity     field.Int32   // 商品数量
+	SpecData        field.String  // 规格数据
+	SkuTotalAmount  field.Float64 // 商品总金额
+	PromotionAmount field.Float64 // 促销分摊金额
+	CouponAmount    field.Float64 // 优惠券分摊金额
+	PointsAmount    field.Float64 // 积分分摊金额
+	DiscountAmount  field.Float64 // 优惠分摊金额
+	RealAmount      field.Float64 // 实付金额
+	CreateTime      field.Time    // 创建时间
+	IsDeleted       field.Bool    // 是否删除
 
 	fieldMap map[string]field.Expr
 }
@@ -99,25 +93,22 @@ func (o *omsOrderItem) updateTableName(table string) *omsOrderItem {
 	o.ALL = field.NewAsterisk(table)
 	o.ID = field.NewInt64(table, "id")
 	o.OrderID = field.NewInt64(table, "order_id")
-	o.OrderSn = field.NewString(table, "order_sn")
-	o.ProductID = field.NewInt64(table, "product_id")
-	o.ProductPic = field.NewString(table, "product_pic")
-	o.ProductName = field.NewString(table, "product_name")
-	o.ProductBrand = field.NewString(table, "product_brand")
-	o.ProductSn = field.NewString(table, "product_sn")
-	o.ProductPrice = field.NewInt64(table, "product_price")
-	o.ProductQuantity = field.NewInt32(table, "product_quantity")
-	o.ProductSkuID = field.NewInt64(table, "product_sku_id")
-	o.ProductSkuCode = field.NewString(table, "product_sku_code")
-	o.ProductCategoryID = field.NewInt64(table, "product_category_id")
-	o.PromotionName = field.NewString(table, "promotion_name")
-	o.PromotionAmount = field.NewInt64(table, "promotion_amount")
-	o.CouponAmount = field.NewInt64(table, "coupon_amount")
-	o.IntegrationAmount = field.NewInt64(table, "integration_amount")
-	o.RealAmount = field.NewInt64(table, "real_amount")
-	o.GiftIntegration = field.NewInt32(table, "gift_integration")
-	o.GiftGrowth = field.NewInt32(table, "gift_growth")
-	o.ProductAttr = field.NewString(table, "product_attr")
+	o.OrderNo = field.NewString(table, "order_no")
+	o.OrderItemStatus = field.NewInt32(table, "order_item_status")
+	o.SkuID = field.NewInt64(table, "sku_id")
+	o.SkuName = field.NewString(table, "sku_name")
+	o.SkuPic = field.NewString(table, "sku_pic")
+	o.SkuPrice = field.NewFloat64(table, "sku_price")
+	o.SkuQuantity = field.NewInt32(table, "sku_quantity")
+	o.SpecData = field.NewString(table, "spec_data")
+	o.SkuTotalAmount = field.NewFloat64(table, "sku_total_amount")
+	o.PromotionAmount = field.NewFloat64(table, "promotion_amount")
+	o.CouponAmount = field.NewFloat64(table, "coupon_amount")
+	o.PointsAmount = field.NewFloat64(table, "points_amount")
+	o.DiscountAmount = field.NewFloat64(table, "discount_amount")
+	o.RealAmount = field.NewFloat64(table, "real_amount")
+	o.CreateTime = field.NewTime(table, "create_time")
+	o.IsDeleted = field.NewBool(table, "is_deleted")
 
 	o.fillFieldMap()
 
@@ -146,28 +137,25 @@ func (o *omsOrderItem) GetFieldByName(fieldName string) (field.OrderExpr, bool) 
 }
 
 func (o *omsOrderItem) fillFieldMap() {
-	o.fieldMap = make(map[string]field.Expr, 21)
+	o.fieldMap = make(map[string]field.Expr, 18)
 	o.fieldMap["id"] = o.ID
 	o.fieldMap["order_id"] = o.OrderID
-	o.fieldMap["order_sn"] = o.OrderSn
-	o.fieldMap["product_id"] = o.ProductID
-	o.fieldMap["product_pic"] = o.ProductPic
-	o.fieldMap["product_name"] = o.ProductName
-	o.fieldMap["product_brand"] = o.ProductBrand
-	o.fieldMap["product_sn"] = o.ProductSn
-	o.fieldMap["product_price"] = o.ProductPrice
-	o.fieldMap["product_quantity"] = o.ProductQuantity
-	o.fieldMap["product_sku_id"] = o.ProductSkuID
-	o.fieldMap["product_sku_code"] = o.ProductSkuCode
-	o.fieldMap["product_category_id"] = o.ProductCategoryID
-	o.fieldMap["promotion_name"] = o.PromotionName
+	o.fieldMap["order_no"] = o.OrderNo
+	o.fieldMap["order_item_status"] = o.OrderItemStatus
+	o.fieldMap["sku_id"] = o.SkuID
+	o.fieldMap["sku_name"] = o.SkuName
+	o.fieldMap["sku_pic"] = o.SkuPic
+	o.fieldMap["sku_price"] = o.SkuPrice
+	o.fieldMap["sku_quantity"] = o.SkuQuantity
+	o.fieldMap["spec_data"] = o.SpecData
+	o.fieldMap["sku_total_amount"] = o.SkuTotalAmount
 	o.fieldMap["promotion_amount"] = o.PromotionAmount
 	o.fieldMap["coupon_amount"] = o.CouponAmount
-	o.fieldMap["integration_amount"] = o.IntegrationAmount
+	o.fieldMap["points_amount"] = o.PointsAmount
+	o.fieldMap["discount_amount"] = o.DiscountAmount
 	o.fieldMap["real_amount"] = o.RealAmount
-	o.fieldMap["gift_integration"] = o.GiftIntegration
-	o.fieldMap["gift_growth"] = o.GiftGrowth
-	o.fieldMap["product_attr"] = o.ProductAttr
+	o.fieldMap["create_time"] = o.CreateTime
+	o.fieldMap["is_deleted"] = o.IsDeleted
 }
 
 func (o omsOrderItem) clone(db *gorm.DB) omsOrderItem {

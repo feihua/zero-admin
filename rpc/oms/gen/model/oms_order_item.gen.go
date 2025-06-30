@@ -4,31 +4,32 @@
 
 package model
 
+import (
+	"time"
+)
+
 const TableNameOmsOrderItem = "oms_order_item"
 
-// OmsOrderItem 订单中所包含的商品
+// OmsOrderItem 订单商品表
 type OmsOrderItem struct {
-	ID                int64  `gorm:"column:id;primaryKey;autoIncrement:true" json:"id"`
-	OrderID           int64  `gorm:"column:order_id;not null;comment:订单id" json:"order_id"`                                                                 // 订单id
-	OrderSn           string `gorm:"column:order_sn;not null;comment:订单编号" json:"order_sn"`                                                                 // 订单编号
-	ProductID         int64  `gorm:"column:product_id;not null;comment:商品id" json:"product_id"`                                                             // 商品id
-	ProductPic        string `gorm:"column:product_pic;not null;comment:商品图片" json:"product_pic"`                                                           // 商品图片
-	ProductName       string `gorm:"column:product_name;not null;comment:商品名称" json:"product_name"`                                                         // 商品名称
-	ProductBrand      string `gorm:"column:product_brand;not null;comment:商品品牌" json:"product_brand"`                                                       // 商品品牌
-	ProductSn         string `gorm:"column:product_sn;not null;comment:货号" json:"product_sn"`                                                               // 货号
-	ProductPrice      int64  `gorm:"column:product_price;not null;comment:销售价格" json:"product_price"`                                                       // 销售价格
-	ProductQuantity   int32  `gorm:"column:product_quantity;not null;comment:购买数量" json:"product_quantity"`                                                 // 购买数量
-	ProductSkuID      int64  `gorm:"column:product_sku_id;not null;comment:商品sku编号" json:"product_sku_id"`                                                  // 商品sku编号
-	ProductSkuCode    string `gorm:"column:product_sku_code;not null;comment:商品sku条码" json:"product_sku_code"`                                              // 商品sku条码
-	ProductCategoryID int64  `gorm:"column:product_category_id;not null;comment:商品分类id" json:"product_category_id"`                                         // 商品分类id
-	PromotionName     string `gorm:"column:promotion_name;not null;comment:商品促销名称" json:"promotion_name"`                                                   // 商品促销名称
-	PromotionAmount   int64  `gorm:"column:promotion_amount;not null;comment:商品促销分解金额" json:"promotion_amount"`                                             // 商品促销分解金额
-	CouponAmount      int64  `gorm:"column:coupon_amount;not null;comment:优惠券优惠分解金额" json:"coupon_amount"`                                                  // 优惠券优惠分解金额
-	IntegrationAmount int64  `gorm:"column:integration_amount;not null;comment:积分优惠分解金额" json:"integration_amount"`                                         // 积分优惠分解金额
-	RealAmount        int64  `gorm:"column:real_amount;not null;comment:该商品经过优惠后的分解金额" json:"real_amount"`                                                  // 该商品经过优惠后的分解金额
-	GiftIntegration   int32  `gorm:"column:gift_integration;not null;comment:赠送的积分" json:"gift_integration"`                                                // 赠送的积分
-	GiftGrowth        int32  `gorm:"column:gift_growth;not null;comment:赠送的成长值" json:"gift_growth"`                                                         // 赠送的成长值
-	ProductAttr       string `gorm:"column:product_attr;not null;comment:商品销售属性:[{"key":"颜色","value":"颜色"},{"key":"容量","value":"4G"}]" json:"product_attr"` // 商品销售属性:[{"key":"颜色","value":"颜色"},{"key":"容量","value":"4G"}]
+	ID              int64     `gorm:"column:id;primaryKey;autoIncrement:true" json:"id"`
+	OrderID         int64     `gorm:"column:order_id;not null;comment:订单ID" json:"order_id"`                                                        // 订单ID
+	OrderNo         string    `gorm:"column:order_no;not null;comment:订单编号" json:"order_no"`                                                        // 订单编号
+	OrderItemStatus int32     `gorm:"column:order_item_status;not null;default:1;comment:订单商品状态：1-正常,2-退货申请中,3-已退货,4-已拒绝" json:"order_item_status"` // 订单商品状态：1-正常,2-退货申请中,3-已退货,4-已拒绝
+	SkuID           int64     `gorm:"column:sku_id;not null;comment:商品SKU ID" json:"sku_id"`                                                        // 商品SKU ID
+	SkuName         string    `gorm:"column:sku_name;not null;comment:商品名称" json:"sku_name"`                                                        // 商品名称
+	SkuPic          string    `gorm:"column:sku_pic;not null;comment:商品图片" json:"sku_pic"`                                                          // 商品图片
+	SkuPrice        float64   `gorm:"column:sku_price;not null;comment:商品单价" json:"sku_price"`                                                      // 商品单价
+	SkuQuantity     int32     `gorm:"column:sku_quantity;not null;comment:商品数量" json:"sku_quantity"`                                                // 商品数量
+	SpecData        string    `gorm:"column:spec_data;not null;comment:规格数据" json:"spec_data"`                                                      // 规格数据
+	SkuTotalAmount  float64   `gorm:"column:sku_total_amount;not null;comment:商品总金额" json:"sku_total_amount"`                                       // 商品总金额
+	PromotionAmount float64   `gorm:"column:promotion_amount;not null;default:0.00;comment:促销分摊金额" json:"promotion_amount"`                         // 促销分摊金额
+	CouponAmount    float64   `gorm:"column:coupon_amount;not null;default:0.00;comment:优惠券分摊金额" json:"coupon_amount"`                              // 优惠券分摊金额
+	PointsAmount    float64   `gorm:"column:points_amount;not null;default:0.00;comment:积分分摊金额" json:"points_amount"`                               // 积分分摊金额
+	DiscountAmount  float64   `gorm:"column:discount_amount;not null;default:0.00;comment:优惠分摊金额" json:"discount_amount"`                           // 优惠分摊金额
+	RealAmount      float64   `gorm:"column:real_amount;not null;comment:实付金额" json:"real_amount"`                                                  // 实付金额
+	CreateTime      time.Time `gorm:"column:create_time;not null;default:CURRENT_TIMESTAMP(3);comment:创建时间" json:"create_time"`                     // 创建时间
+	IsDeleted       bool      `gorm:"column:is_deleted;not null;comment:是否删除" json:"is_deleted"`                                                    // 是否删除
 }
 
 // TableName OmsOrderItem's table name

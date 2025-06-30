@@ -9,10 +9,11 @@ import (
 	"github.com/feihua/zero-admin/rpc/oms/internal/config"
 	cartitemserviceServer "github.com/feihua/zero-admin/rpc/oms/internal/server/cartitemservice"
 	companyaddressserviceServer "github.com/feihua/zero-admin/rpc/oms/internal/server/companyaddressservice"
-	orderitemserviceServer "github.com/feihua/zero-admin/rpc/oms/internal/server/orderitemservice"
-	orderoperatehistoryserviceServer "github.com/feihua/zero-admin/rpc/oms/internal/server/orderoperatehistoryservice"
-	orderreturnapplyserviceServer "github.com/feihua/zero-admin/rpc/oms/internal/server/orderreturnapplyservice"
+	orderdeliveryserviceServer "github.com/feihua/zero-admin/rpc/oms/internal/server/orderdeliveryservice"
+	orderoperationlogserviceServer "github.com/feihua/zero-admin/rpc/oms/internal/server/orderoperationlogservice"
+	orderpaymentserviceServer "github.com/feihua/zero-admin/rpc/oms/internal/server/orderpaymentservice"
 	orderreturnreasonserviceServer "github.com/feihua/zero-admin/rpc/oms/internal/server/orderreturnreasonservice"
+	orderreturnserviceServer "github.com/feihua/zero-admin/rpc/oms/internal/server/orderreturnservice"
 	orderserviceServer "github.com/feihua/zero-admin/rpc/oms/internal/server/orderservice"
 	ordersettingserviceServer "github.com/feihua/zero-admin/rpc/oms/internal/server/ordersettingservice"
 	"github.com/feihua/zero-admin/rpc/oms/internal/svc"
@@ -37,13 +38,14 @@ func main() {
 	ctx := svc.NewServiceContext(c)
 
 	s := zrpc.MustNewServer(c.RpcServerConf, func(grpcServer *grpc.Server) {
-		omsclient.RegisterOrderServiceServer(grpcServer, orderserviceServer.NewOrderServiceServer(ctx))
 		omsclient.RegisterCartItemServiceServer(grpcServer, cartitemserviceServer.NewCartItemServiceServer(ctx))
 		omsclient.RegisterCompanyAddressServiceServer(grpcServer, companyaddressserviceServer.NewCompanyAddressServiceServer(ctx))
-		omsclient.RegisterOrderItemServiceServer(grpcServer, orderitemserviceServer.NewOrderItemServiceServer(ctx))
-		omsclient.RegisterOrderOperateHistoryServiceServer(grpcServer, orderoperatehistoryserviceServer.NewOrderOperateHistoryServiceServer(ctx))
-		omsclient.RegisterOrderReturnApplyServiceServer(grpcServer, orderreturnapplyserviceServer.NewOrderReturnApplyServiceServer(ctx))
+		omsclient.RegisterOrderDeliveryServiceServer(grpcServer, orderdeliveryserviceServer.NewOrderDeliveryServiceServer(ctx))
+		omsclient.RegisterOrderOperationLogServiceServer(grpcServer, orderoperationlogserviceServer.NewOrderOperationLogServiceServer(ctx))
+		omsclient.RegisterOrderPaymentServiceServer(grpcServer, orderpaymentserviceServer.NewOrderPaymentServiceServer(ctx))
 		omsclient.RegisterOrderReturnReasonServiceServer(grpcServer, orderreturnreasonserviceServer.NewOrderReturnReasonServiceServer(ctx))
+		omsclient.RegisterOrderReturnServiceServer(grpcServer, orderreturnserviceServer.NewOrderReturnServiceServer(ctx))
+		omsclient.RegisterOrderServiceServer(grpcServer, orderserviceServer.NewOrderServiceServer(ctx))
 		omsclient.RegisterOrderSettingServiceServer(grpcServer, ordersettingserviceServer.NewOrderSettingServiceServer(ctx))
 
 		if c.Mode == service.DevMode || c.Mode == service.TestMode {

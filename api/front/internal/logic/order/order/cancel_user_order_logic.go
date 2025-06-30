@@ -43,7 +43,7 @@ func (l *CancelUserOrderLogic) CancelUserOrder(req *types.CancelUserOrderReq) (r
 	// todo 暂时没有分布式事务
 	// 1.查询订单是否存在
 	// 2.修改订单状态
-	resp, err := l.svcCtx.OrderService.OrderCancel(l.ctx, &omsclient.OrderCancelReq{
+	resp, err := l.svcCtx.OrderService.CancelOrder(l.ctx, &omsclient.CancelOrderReq{
 		MemberId: memberId,
 		OrderId:  req.OrderId,
 	})
@@ -51,7 +51,7 @@ func (l *CancelUserOrderLogic) CancelUserOrder(req *types.CancelUserOrderReq) (r
 		return nil, err
 	}
 
-	couponId := resp.CouponId
+	couponIds := resp.CouponIds
 	integration := resp.Integration
 	stockLockData := resp.Data
 
@@ -73,11 +73,11 @@ func (l *CancelUserOrderLogic) CancelUserOrder(req *types.CancelUserOrderReq) (r
 	// 4.如果使用优惠券,更新优惠券使用状态
 	// 4.1修改sms_coupon_history表的use_status字段
 	// 4.2记得修改sms_coupon的use_count字段,下单的时候要加1,取消订单的时候,要减1
-	if couponId > 0 {
+	if len(couponIds) > 0 {
 		_, err = l.svcCtx.CouponRecordService.UpdateCouponRecord(l.ctx, &smsclient.UpdateCouponRecordReq{
-			MemberId: memberId,
-			Status:   0,
-			CouponId: couponId,
+			MemberId:  memberId,
+			Status:    0,
+			CouponIds: couponIds,
 		})
 		if err != nil {
 			return nil, err

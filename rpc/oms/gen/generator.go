@@ -27,13 +27,21 @@ func main() {
 		g.GenerateModel("oms_company_address"),
 		g.GenerateModel("oms_order_return_reason"),
 		g.GenerateModel("oms_order_setting"),
+
 		g.GenerateModel("oms_order_delivery"),
+		g.GenerateModel("oms_order_return"),
+		g.GenerateModel("oms_order_return_item"),
+		g.GenerateModel("oms_order_main"),
+		g.GenerateModel("oms_order_item"),
+		g.GenerateModel("oms_order_operation_log"),
+		g.GenerateModel("oms_order_payment"),
+		g.GenerateModel("oms_order_promotion"),
 
 		g.GenerateModel("oms_cart_item"),
-		g.GenerateModel("oms_order"),
-		g.GenerateModel("oms_order_item"),
-		g.GenerateModel("oms_order_operate_history"),
-		g.GenerateModel("oms_order_return_apply"),
+		// g.GenerateModel("oms_order"),
+		// g.GenerateModel("oms_order_item"),
+		// g.GenerateModel("oms_order_operate_history"),
+		// g.GenerateModel("oms_order_return_apply"),
 	)
 
 	// Execute the generator

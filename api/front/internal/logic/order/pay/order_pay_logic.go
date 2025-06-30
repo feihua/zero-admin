@@ -34,9 +34,9 @@ func (l *OrderPayLogic) OrderPay(req *types.OrderPayReq) (resp *types.OrderPayRe
 	}
 
 	// 1.判断订单是否存在
-	orderInfo, err := l.svcCtx.OrderService.OrderListByMemberId(l.ctx, &omsclient.OrderListByMemberIdReq{
-		Id:       req.OrderId,
-		MemberId: memberId,
+	orderInfo, err := l.svcCtx.OrderService.QueryOrderDetail(l.ctx, &omsclient.QueryOrderDetailReq{
+		Id:     req.OrderId,
+		UserId: memberId,
 	})
 	if err != nil {
 		return orderPayResp(1, "查询订单异常", "")
@@ -44,7 +44,7 @@ func (l *OrderPayLogic) OrderPay(req *types.OrderPayReq) (resp *types.OrderPayRe
 
 	// 2.调用支付rpc进行预下单
 	operationsUtils := NewPaymentOperationsUtils(l.ctx, l.svcCtx)
-	outTradeNo := orderInfo.Data.OrderSn
+	outTradeNo := orderInfo.Data.OrderNo
 	message, err := operationsUtils.TradeAppPay(outTradeNo, "0.01", "支付测试")
 	if err != nil {
 		return orderPayResp(1, message, "")

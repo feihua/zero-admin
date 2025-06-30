@@ -10,9 +10,9 @@ import (
 	cmssubject "github.com/feihua/zero-admin/api/admin/internal/handler/cms/subject"
 	cmssubject_category "github.com/feihua/zero-admin/api/admin/internal/handler/cms/subject_category"
 	omscompany_address "github.com/feihua/zero-admin/api/admin/internal/handler/oms/company_address"
-	omsorder "github.com/feihua/zero-admin/api/admin/internal/handler/oms/order"
+	omsorder_main "github.com/feihua/zero-admin/api/admin/internal/handler/oms/order_main"
+	omsorder_return "github.com/feihua/zero-admin/api/admin/internal/handler/oms/order_return"
 	omsorder_setting "github.com/feihua/zero-admin/api/admin/internal/handler/oms/order_setting"
-	omsreturn_apply "github.com/feihua/zero-admin/api/admin/internal/handler/oms/return_apply"
 	omsreturn_reason "github.com/feihua/zero-admin/api/admin/internal/handler/oms/return_reason"
 	pmsproduct_attribute "github.com/feihua/zero-admin/api/admin/internal/handler/pms/product_attribute"
 	pmsproduct_attribute_group "github.com/feihua/zero-admin/api/admin/internal/handler/pms/product_attribute_group"
@@ -233,47 +233,72 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				{
 					Method:  http.MethodPost,
 					Path:    "/closeOrder",
-					Handler: omsorder.CloseOrderHandler(serverCtx),
+					Handler: omsorder_main.CloseOrderHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodGet,
-					Path:    "/deleteOrder",
-					Handler: omsorder.OrderDeleteHandler(serverCtx),
+					Path:    "/deleteOrderMain",
+					Handler: omsorder_main.DeleteOrderMainHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
 					Path:    "/delivery",
-					Handler: omsorder.DeliveryHandler(serverCtx),
+					Handler: omsorder_main.DeliveryHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodGet,
-					Path:    "/orderDetail",
-					Handler: omsorder.OrderDetailHandler(serverCtx),
+					Path:    "/queryOrderMainDetail",
+					Handler: omsorder_main.QueryOrderMainDetailHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodGet,
-					Path:    "/queryOrderList",
-					Handler: omsorder.OrderListHandler(serverCtx),
+					Path:    "/queryOrderMainList",
+					Handler: omsorder_main.QueryOrderMainListHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
 					Path:    "/updateMoneyInfo",
-					Handler: omsorder.UpdateMoneyInfoHandler(serverCtx),
+					Handler: omsorder_main.UpdateMoneyInfoHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
 					Path:    "/updateNote",
-					Handler: omsorder.UpdateNoteHandler(serverCtx),
+					Handler: omsorder_main.UpdateNoteHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodPost,
-					Path:    "/updateReceiverInfo",
-					Handler: omsorder.UpdateReceiverInfoHandler(serverCtx),
+					Path:    "/updateOrderMain",
+					Handler: omsorder_main.UpdateOrderMainHandler(serverCtx),
 				},
 			}...,
 		),
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
 		rest.WithPrefix("/api/oms/order"),
+	)
+
+	server.AddRoutes(
+		rest.WithMiddlewares(
+			[]rest.Middleware{serverCtx.CheckUrl},
+			[]rest.Route{
+				{
+					Method:  http.MethodGet,
+					Path:    "/queryOrderReturnDetail",
+					Handler: omsorder_return.QueryOrderReturnDetailHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodGet,
+					Path:    "/queryOrderReturnList",
+					Handler: omsorder_return.QueryOrderReturnListHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodPost,
+					Path:    "/updateOrderReturn",
+					Handler: omsorder_return.UpdateOrderReturnHandler(serverCtx),
+				},
+			}...,
+		),
+		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
+		rest.WithPrefix("/api/oms/orderReturn"),
 	)
 
 	server.AddRoutes(
@@ -319,36 +344,6 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 		),
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
 		rest.WithPrefix("/api/oms/setting"),
-	)
-
-	server.AddRoutes(
-		rest.WithMiddlewares(
-			[]rest.Middleware{serverCtx.CheckUrl},
-			[]rest.Route{
-				{
-					Method:  http.MethodGet,
-					Path:    "/deleteOrderReturnApply",
-					Handler: omsreturn_apply.DeleteOrderReturnApplyHandler(serverCtx),
-				},
-				{
-					Method:  http.MethodGet,
-					Path:    "/queryOrderReturnApplyDetail",
-					Handler: omsreturn_apply.QueryOrderReturnApplyDetailHandler(serverCtx),
-				},
-				{
-					Method:  http.MethodGet,
-					Path:    "/queryOrderReturnApplyList",
-					Handler: omsreturn_apply.QueryOrderReturnApplyListHandler(serverCtx),
-				},
-				{
-					Method:  http.MethodPost,
-					Path:    "/updateOrderReturnApplyStatus",
-					Handler: omsreturn_apply.UpdateOrderReturnApplyStatusHandler(serverCtx),
-				},
-			}...,
-		),
-		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
-		rest.WithPrefix("/api/oms/returnApply"),
 	)
 
 	server.AddRoutes(

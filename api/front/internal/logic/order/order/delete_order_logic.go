@@ -39,9 +39,9 @@ func (l *DeleteOrderLogic) DeleteOrder(req *types.DeleteOrderReq) (resp *types.D
 	if err != nil {
 		return nil, err
 	}
-	_, err = l.svcCtx.OrderService.OrderDelete(l.ctx, &omsclient.OrderDeleteReq{
+	_, err = l.svcCtx.OrderService.DeleteOrder(l.ctx, &omsclient.DeleteOrderReq{
 		MemberId: memberId,
-		OrderId:  req.OrderId,
+		Ids:      req.OrderIds,
 	})
 
 	if err != nil {

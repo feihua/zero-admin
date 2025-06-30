@@ -372,7 +372,7 @@ type DeleteAttentionReq struct {
 }
 
 type DeleteOrderReq struct {
-	OrderId int64 `form:"orderId"`
+	OrderIds []int64 `form:"orderIds"`
 }
 
 type DeleteOrderResp struct {
@@ -483,78 +483,6 @@ type ListCouponResp struct {
 	Data    []*CouponData `json:"data"`
 }
 
-type ListOrderData struct {
-	Id                    int64               `json:"id"` // 订单id
-	MemberId              int64               `json:"memberId"`
-	CouponId              int64               `json:"couponId"`
-	OrderSn               string              `json:"orderSn"`               // 订单编号
-	CreateTime            string              `json:"createTime"`            // 提交时间
-	MemberUsername        string              `json:"memberUserName"`        // 用户帐号
-	TotalAmount           int64               `json:"totalAmount"`           // 订单总金额
-	PayAmount             int64               `json:"payAmount"`             // 应付金额（实际支付金额）
-	FreightAmount         int64               `json:"freightAmount"`         // 运费金额
-	PromotionAmount       int64               `json:"promotionAmount"`       // 促销优化金额（促销价、满减、阶梯价）
-	IntegrationAmount     int64               `json:"integrationAmount"`     // 积分抵扣金额
-	CouponAmount          int64               `json:"couponAmount"`          // 优惠券抵扣金额
-	DiscountAmount        int64               `json:"discountAmount"`        // 管理员后台调整订单使用的折扣金额
-	PayType               int32               `json:"payType"`               // 支付方式：0->未支付；1->支付宝；2->微信
-	SourceType            int32               `json:"sourceType"`            // 订单来源：0->PC订单；1->app订单
-	Status                int32               `json:"status"`                // 订单状态：0->待付款；1->待发货；2->已发货；3->已完成；4->已关闭；5->无效订单
-	OrderType             int32               `json:"orderType"`             // 订单类型：0->正常订单；1->秒杀订单
-	DeliveryCompany       string              `json:"deliveryCompany"`       // 物流公司(配送方式)
-	DeliverySn            string              `json:"deliverySn"`            // 物流单号
-	AutoConfirmDay        int32               `json:"autoConfirmDay"`        // 自动确认时间（天）
-	Integration           int32               `json:"integration"`           // 可以获得的积分
-	Growth                int32               `json:"growth"`                // 可以活动的成长值
-	PromotionInfo         string              `json:"promotionInfo"`         // 活动信息
-	BillType              int32               `json:"billType"`              // 发票类型：0->不开发票；1->电子发票；2->纸质发票
-	BillHeader            string              `json:"billHeader"`            // 发票抬头
-	BillContent           string              `json:"billContent"`           // 发票内容
-	BillReceiverPhone     string              `json:"billReceiverPhone"`     // 收票人电话
-	BillReceiverEmail     string              `json:"billReceiverEmail"`     // 收票人邮箱
-	ReceiverName          string              `json:"receiverName"`          // 收货人姓名
-	ReceiverPhone         string              `json:"receiverPhone"`         // 收货人电话
-	ReceiverPostCode      string              `json:"receiverPostCode"`      // 收货人邮编
-	ReceiverProvince      string              `json:"receiverProvince"`      // 省份/直辖市
-	ReceiverCity          string              `json:"receiverCity"`          // 城市
-	ReceiverRegion        string              `json:"receiverRegion"`        // 区
-	ReceiverDetailAddress string              `json:"receiverDetailAddress"` // 详细地址
-	Note                  string              `json:"note"`                  // 订单备注
-	ConfirmStatus         int32               `json:"confirmStatus"`         // 确认收货状态：0->未确认；1->已确认
-	DeleteStatus          int32               `json:"deleteStatus"`          // 删除状态：0->未删除；1->已删除
-	UseIntegration        int32               `json:"useIntegration"`        // 下单时使用的积分
-	PaymentTime           string              `json:"paymentTime"`           // 支付时间
-	DeliveryTime          string              `json:"deliveryTime"`          // 发货时间
-	ReceiveTime           string              `json:"receiveTime"`           // 确认收货时间
-	CommentTime           string              `json:"commentTime"`           // 评价时间
-	ModifyTime            string              `json:"modifyTime"`            // 修改时间
-	ListOrderItem         []ListOrderItemData `json:"orderItemList"`         // 商品数据
-}
-
-type ListOrderItemData struct {
-	Id                int64  `json:"id"`
-	OrderId           int64  `json:"orderId"` // 订单id
-	OrderSn           string `json:"orderSn"` // 订单编号
-	ProductId         int64  `json:"productId"`
-	ProductPic        string `json:"productPic"`
-	ProductName       string `json:"productName"`
-	ProductBrand      string `json:"productBrand"`
-	ProductSn         string `json:"productSn"`
-	ProductPrice      int64  `json:"productPrice"`      // 销售价格
-	ProductQuantity   int32  `json:"productQuantity"`   // 购买数量
-	ProductSkuId      int64  `json:"productSkuId"`      // 商品sku编号
-	ProductSkuCode    string `json:"productSkuCode"`    // 商品sku条码
-	ProductCategoryId int64  `json:"productCategoryId"` // 商品分类id
-	PromotionName     string `json:"promotionName"`     // 商品促销名称
-	PromotionAmount   int64  `json:"promotionAmount"`   // 商品促销分解金额
-	CouponAmount      int64  `json:"couponAmount"`      // 优惠券优惠分解金额
-	IntegrationAmount int64  `json:"integrationAmount"` // 积分优惠分解金额
-	RealAmount        int64  `json:"realAmount"`        // 该商品经过优惠后的分解金额
-	GiftIntegration   int32  `json:"giftIntegration"`
-	GiftGrowth        int32  `json:"giftGrowth"`
-	ProductAttr       string `json:"productAttr"` // 商品销售属性:[{"key":"颜色","value":"颜色"},{"key":"容量","value":"4G"}]
-}
-
 type LoginData struct {
 	Token     string `json:"token"`
 	TokenHead string `json:"tokenHead"`
@@ -636,21 +564,42 @@ type OrderDetailReq struct {
 }
 
 type OrderDetailResp struct {
-	Code    int64         `json:"code"`
-	Message string        `json:"message"`
-	Data    ListOrderData `json:"data"`
+	Code    int64          `json:"code"`
+	Message string         `json:"message"`
+	Data    QueryOrderData `json:"data"`
+}
+
+type OrderItemData struct {
+	Id              int64   `json:"id"`              //
+	OrderId         int64   `json:"orderId"`         //订单ID
+	OrderNo         string  `json:"orderNo"`         //订单编号
+	OrderItemStatus int32   `json:"orderItemStatus"` //订单商品状态：1-正常,2-退货申请中,3-已退货,4-已拒绝
+	SkuId           int64   `json:"skuId"`           //商品SKU ID
+	SkuName         string  `json:"skuName"`         //商品名称
+	SkuPic          string  `json:"skuPic"`          //商品图片
+	SkuPrice        float32 `json:"skuPrice"`        //商品单价
+	SkuQuantity     int32   `json:"skuQuantity"`     //商品数量
+	SpecData        string  `json:"specData"`        //规格数据
+	SkuTotalAmount  float32 `json:"skuTotalAmount"`  //商品总金额
+	PromotionAmount float32 `json:"promotionAmount"` //促销分摊金额
+	CouponAmount    float32 `json:"couponAmount"`    //优惠券分摊金额
+	PointsAmount    float32 `json:"pointsAmount"`    //积分分摊金额
+	DiscountAmount  float32 `json:"discountAmount"`  //优惠分摊金额
+	RealAmount      float32 `json:"realAmount"`      //实付金额
+	CreateTime      string  `json:"createTime"`      //创建时间
+	IsDeleted       int32   `json:"isDeleted"`       //是否删除
 }
 
 type OrderListReq struct {
-	Current  int64 `form:"current,default=1"`
-	PageSize int64 `form:"pageSize,default=5"`
+	Current  int32 `form:"current,default=1"`
+	PageSize int32 `form:"pageSize,default=5"`
 	Status   int32 `form:"status,default=6"` // 订单状态：0->待付款；1->待发货；2->已发货；3->已完成；4->已关闭；5->无效订单
 }
 
 type OrderListResp struct {
-	Code    int64            `json:"code"`
-	Message string           `json:"message"`
-	Data    []*ListOrderData `json:"data"`
+	Code    int64             `json:"code"`
+	Message string            `json:"message"`
+	Data    []*QueryOrderData `json:"data"`
 }
 
 type OrderPayQueryReq struct {
@@ -806,6 +755,33 @@ type QueryAddressListResp struct {
 	Total    int64                     `json:"total"`
 }
 
+type QueryOrderData struct {
+	Id                 int64            `json:"id"`                 //
+	OrderNo            string           `json:"orderNo"`            //订单编号
+	UserId             int64            `json:"userId"`             //用户ID
+	OrderStatus        int32            `json:"orderStatus"`        //订单状态：1-待支付,2-已支付,3-已发货,4-已完成,5-已取消,6-已退款,7-售后中
+	TotalAmount        float32          `json:"totalAmount"`        //订单总金额
+	PromotionAmount    float32          `json:"promotionAmount"`    //促销金额
+	CouponAmount       float32          `json:"couponAmount"`       //优惠券金额
+	PointsAmount       float32          `json:"pointsAmount"`       //积分金额
+	DiscountAmount     float32          `json:"discountAmount"`     //优惠金额
+	FreightAmount      float32          `json:"freightAmount"`      //运费金额
+	PayAmount          float32          `json:"payAmount"`          //实付金额
+	PayType            int32            `json:"payType"`            //支付方式：1-支付宝,2-微信,3-银联
+	PayTime            string           `json:"payTime"`            //支付时间
+	DeliveryTime       string           `json:"deliveryTime"`       //发货时间
+	ReceiveTime        string           `json:"receiveTime"`        //收货时间
+	CommentTime        string           `json:"commentTime"`        //评价时间
+	SourceType         int32            `json:"sourceType"`         //订单来源：1-APP,2-PC,3-小程序
+	ExpressOrderNumber string           `json:"expressOrderNumber"` //快递单号
+	UsePoints          int32            `json:"usePoints"`          //下单时使用的积分
+	ReceiveStatus      int32            `json:"receiveStatus"`      //是否确认收货：0->否,1->是
+	Remark             string           `json:"remark"`             //订单备注
+	CreateTime         string           `json:"createTime"`         //提交时间
+	UpdateTime         string           `json:"updateTime"`         //
+	OrderItemData      []*OrderItemData `json:"orderItemData"`      // 商品数据
+}
+
 type QueryProductCateListResp struct {
 	Code    int64             `json:"code"`
 	Message string            `json:"message"`
@@ -887,27 +863,38 @@ type RegisterResp struct {
 }
 
 type ReturnApplyReq struct {
-	OrderId          int64  `json:"orderId"`
-	ProductId        int64  `json:"productId"`
-	OrderSn          string `json:"orderSn"`
-	MemberUsername   string `json:"memberUsername"`
-	ReturnName       string `json:"returnName"`
-	ReturnPhone      string `json:"returnPhone"`
-	ProductPic       string `json:"productPic"`
-	ProductName      string `json:"productName"`
-	ProductBrand     string `json:"productBrand"`
-	ProductAttr      string `json:"productAttr"`
-	ProductCount     int32  `json:"productCount"`
-	ProductPrice     int64  `json:"productPrice"`
-	ProductRealPrice int64  `json:"productRealPrice"`
-	Reason           string `json:"reason"`
-	Description      string `json:"description"`
-	ProofPics        string `json:"proofPics"`
+	OrderId        int64            `json:"orderId"`         //关联订单ID
+	Status         int32            `json:"status"`          //退货状态（0待审核 1审核通过 2已收货 3已退款 4已拒绝 5已关闭）
+	Type           int32            `json:"type"`            //售后类型（0退货退款 1仅退款 2换货）
+	Reason         string           `json:"reason"`          //退货原因
+	Description    string           `json:"description"`     //问题描述
+	ProofPic       string           `json:"proofPic"`        //凭证图片，逗号分隔
+	RefundAmount   float32          `json:"refundAmount"`    //退款金额
+	ReturnName     string           `json:"returnName"`      //退货人姓名
+	ReturnPhone    string           `json:"returnPhone"`     //退货人电话
+	CompanyAddress string           `json:"companyAddress"`  //退货收货地址
+	Remark         string           `json:"remark,optional"` //备注
+	ReturnItemData []ReturnItemData `json:"returnItemData"`  //备注
 }
 
 type ReturnApplyResp struct {
 	Code    int64  `json:"code"`
 	Message string `json:"message"`
+}
+
+type ReturnItemData struct {
+	ReturnId     int64   `json:"returnId"`        //退货单ID（关联oms_order_return.id）
+	OrderId      int64   `json:"orderId"`         //订单ID
+	OrderItemId  int64   `json:"orderItemId"`     //订单明细ID
+	SkuId        int64   `json:"skuId"`           //商品SKU ID
+	SkuName      string  `json:"skuName"`         //商品名称
+	SkuPic       string  `json:"skuPic"`          //商品图片
+	SkuAttrs     string  `json:"skuAttrs"`        //商品销售属性
+	Quantity     int32   `json:"quantity"`        //退货数量
+	ProductPrice float32 `json:"productPrice"`    //商品单价
+	RealAmount   float32 `json:"realAmount"`      //实际退款金额
+	Reason       string  `json:"reason"`          //退货原因
+	Remark       string  `json:"remark,optional"` //备注
 }
 
 type SkuStockList struct {

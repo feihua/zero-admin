@@ -39,7 +39,7 @@ func (l *ConfirmReceiveOrderLogic) ConfirmReceiveOrder(req *types.ConfirmReceive
 	if err != nil {
 		return nil, err
 	}
-	_, err = l.svcCtx.OrderService.OrderConfirm(l.ctx, &omsclient.OrderConfirmReq{
+	_, err = l.svcCtx.OrderService.ConfirmOrder(l.ctx, &omsclient.ConfirmOrderReq{
 		MemberId: memberId,
 		OrderId:  req.OrderId,
 	})

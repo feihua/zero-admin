@@ -16,74 +16,89 @@ import (
 )
 
 var (
-	Q                      = new(Query)
-	OmsCartItem            *omsCartItem
-	OmsCompanyAddress      *omsCompanyAddress
-	OmsOrder               *omsOrder
-	OmsOrderDelivery       *omsOrderDelivery
-	OmsOrderItem           *omsOrderItem
-	OmsOrderOperateHistory *omsOrderOperateHistory
-	OmsOrderReturnApply    *omsOrderReturnApply
-	OmsOrderReturnReason   *omsOrderReturnReason
-	OmsOrderSetting        *omsOrderSetting
+	Q                    = new(Query)
+	OmsCartItem          *omsCartItem
+	OmsCompanyAddress    *omsCompanyAddress
+	OmsOrderDelivery     *omsOrderDelivery
+	OmsOrderItem         *omsOrderItem
+	OmsOrderMain         *omsOrderMain
+	OmsOrderOperationLog *omsOrderOperationLog
+	OmsOrderPayment      *omsOrderPayment
+	OmsOrderPromotion    *omsOrderPromotion
+	OmsOrderReturn       *omsOrderReturn
+	OmsOrderReturnItem   *omsOrderReturnItem
+	OmsOrderReturnReason *omsOrderReturnReason
+	OmsOrderSetting      *omsOrderSetting
 )
 
 func SetDefault(db *gorm.DB, opts ...gen.DOOption) {
 	*Q = *Use(db, opts...)
 	OmsCartItem = &Q.OmsCartItem
 	OmsCompanyAddress = &Q.OmsCompanyAddress
-	OmsOrder = &Q.OmsOrder
 	OmsOrderDelivery = &Q.OmsOrderDelivery
 	OmsOrderItem = &Q.OmsOrderItem
-	OmsOrderOperateHistory = &Q.OmsOrderOperateHistory
-	OmsOrderReturnApply = &Q.OmsOrderReturnApply
+	OmsOrderMain = &Q.OmsOrderMain
+	OmsOrderOperationLog = &Q.OmsOrderOperationLog
+	OmsOrderPayment = &Q.OmsOrderPayment
+	OmsOrderPromotion = &Q.OmsOrderPromotion
+	OmsOrderReturn = &Q.OmsOrderReturn
+	OmsOrderReturnItem = &Q.OmsOrderReturnItem
 	OmsOrderReturnReason = &Q.OmsOrderReturnReason
 	OmsOrderSetting = &Q.OmsOrderSetting
 }
 
 func Use(db *gorm.DB, opts ...gen.DOOption) *Query {
 	return &Query{
-		db:                     db,
-		OmsCartItem:            newOmsCartItem(db, opts...),
-		OmsCompanyAddress:      newOmsCompanyAddress(db, opts...),
-		OmsOrder:               newOmsOrder(db, opts...),
-		OmsOrderDelivery:       newOmsOrderDelivery(db, opts...),
-		OmsOrderItem:           newOmsOrderItem(db, opts...),
-		OmsOrderOperateHistory: newOmsOrderOperateHistory(db, opts...),
-		OmsOrderReturnApply:    newOmsOrderReturnApply(db, opts...),
-		OmsOrderReturnReason:   newOmsOrderReturnReason(db, opts...),
-		OmsOrderSetting:        newOmsOrderSetting(db, opts...),
+		db:                   db,
+		OmsCartItem:          newOmsCartItem(db, opts...),
+		OmsCompanyAddress:    newOmsCompanyAddress(db, opts...),
+		OmsOrderDelivery:     newOmsOrderDelivery(db, opts...),
+		OmsOrderItem:         newOmsOrderItem(db, opts...),
+		OmsOrderMain:         newOmsOrderMain(db, opts...),
+		OmsOrderOperationLog: newOmsOrderOperationLog(db, opts...),
+		OmsOrderPayment:      newOmsOrderPayment(db, opts...),
+		OmsOrderPromotion:    newOmsOrderPromotion(db, opts...),
+		OmsOrderReturn:       newOmsOrderReturn(db, opts...),
+		OmsOrderReturnItem:   newOmsOrderReturnItem(db, opts...),
+		OmsOrderReturnReason: newOmsOrderReturnReason(db, opts...),
+		OmsOrderSetting:      newOmsOrderSetting(db, opts...),
 	}
 }
 
 type Query struct {
 	db *gorm.DB
 
-	OmsCartItem            omsCartItem
-	OmsCompanyAddress      omsCompanyAddress
-	OmsOrder               omsOrder
-	OmsOrderDelivery       omsOrderDelivery
-	OmsOrderItem           omsOrderItem
-	OmsOrderOperateHistory omsOrderOperateHistory
-	OmsOrderReturnApply    omsOrderReturnApply
-	OmsOrderReturnReason   omsOrderReturnReason
-	OmsOrderSetting        omsOrderSetting
+	OmsCartItem          omsCartItem
+	OmsCompanyAddress    omsCompanyAddress
+	OmsOrderDelivery     omsOrderDelivery
+	OmsOrderItem         omsOrderItem
+	OmsOrderMain         omsOrderMain
+	OmsOrderOperationLog omsOrderOperationLog
+	OmsOrderPayment      omsOrderPayment
+	OmsOrderPromotion    omsOrderPromotion
+	OmsOrderReturn       omsOrderReturn
+	OmsOrderReturnItem   omsOrderReturnItem
+	OmsOrderReturnReason omsOrderReturnReason
+	OmsOrderSetting      omsOrderSetting
 }
 
 func (q *Query) Available() bool { return q.db != nil }
 
 func (q *Query) clone(db *gorm.DB) *Query {
 	return &Query{
-		db:                     db,
-		OmsCartItem:            q.OmsCartItem.clone(db),
-		OmsCompanyAddress:      q.OmsCompanyAddress.clone(db),
-		OmsOrder:               q.OmsOrder.clone(db),
-		OmsOrderDelivery:       q.OmsOrderDelivery.clone(db),
-		OmsOrderItem:           q.OmsOrderItem.clone(db),
-		OmsOrderOperateHistory: q.OmsOrderOperateHistory.clone(db),
-		OmsOrderReturnApply:    q.OmsOrderReturnApply.clone(db),
-		OmsOrderReturnReason:   q.OmsOrderReturnReason.clone(db),
-		OmsOrderSetting:        q.OmsOrderSetting.clone(db),
+		db:                   db,
+		OmsCartItem:          q.OmsCartItem.clone(db),
+		OmsCompanyAddress:    q.OmsCompanyAddress.clone(db),
+		OmsOrderDelivery:     q.OmsOrderDelivery.clone(db),
+		OmsOrderItem:         q.OmsOrderItem.clone(db),
+		OmsOrderMain:         q.OmsOrderMain.clone(db),
+		OmsOrderOperationLog: q.OmsOrderOperationLog.clone(db),
+		OmsOrderPayment:      q.OmsOrderPayment.clone(db),
+		OmsOrderPromotion:    q.OmsOrderPromotion.clone(db),
+		OmsOrderReturn:       q.OmsOrderReturn.clone(db),
+		OmsOrderReturnItem:   q.OmsOrderReturnItem.clone(db),
+		OmsOrderReturnReason: q.OmsOrderReturnReason.clone(db),
+		OmsOrderSetting:      q.OmsOrderSetting.clone(db),
 	}
 }
 
@@ -97,42 +112,51 @@ func (q *Query) WriteDB() *Query {
 
 func (q *Query) ReplaceDB(db *gorm.DB) *Query {
 	return &Query{
-		db:                     db,
-		OmsCartItem:            q.OmsCartItem.replaceDB(db),
-		OmsCompanyAddress:      q.OmsCompanyAddress.replaceDB(db),
-		OmsOrder:               q.OmsOrder.replaceDB(db),
-		OmsOrderDelivery:       q.OmsOrderDelivery.replaceDB(db),
-		OmsOrderItem:           q.OmsOrderItem.replaceDB(db),
-		OmsOrderOperateHistory: q.OmsOrderOperateHistory.replaceDB(db),
-		OmsOrderReturnApply:    q.OmsOrderReturnApply.replaceDB(db),
-		OmsOrderReturnReason:   q.OmsOrderReturnReason.replaceDB(db),
-		OmsOrderSetting:        q.OmsOrderSetting.replaceDB(db),
+		db:                   db,
+		OmsCartItem:          q.OmsCartItem.replaceDB(db),
+		OmsCompanyAddress:    q.OmsCompanyAddress.replaceDB(db),
+		OmsOrderDelivery:     q.OmsOrderDelivery.replaceDB(db),
+		OmsOrderItem:         q.OmsOrderItem.replaceDB(db),
+		OmsOrderMain:         q.OmsOrderMain.replaceDB(db),
+		OmsOrderOperationLog: q.OmsOrderOperationLog.replaceDB(db),
+		OmsOrderPayment:      q.OmsOrderPayment.replaceDB(db),
+		OmsOrderPromotion:    q.OmsOrderPromotion.replaceDB(db),
+		OmsOrderReturn:       q.OmsOrderReturn.replaceDB(db),
+		OmsOrderReturnItem:   q.OmsOrderReturnItem.replaceDB(db),
+		OmsOrderReturnReason: q.OmsOrderReturnReason.replaceDB(db),
+		OmsOrderSetting:      q.OmsOrderSetting.replaceDB(db),
 	}
 }
 
 type queryCtx struct {
-	OmsCartItem            IOmsCartItemDo
-	OmsCompanyAddress      IOmsCompanyAddressDo
-	OmsOrder               IOmsOrderDo
-	OmsOrderDelivery       IOmsOrderDeliveryDo
-	OmsOrderItem           IOmsOrderItemDo
-	OmsOrderOperateHistory IOmsOrderOperateHistoryDo
-	OmsOrderReturnApply    IOmsOrderReturnApplyDo
-	OmsOrderReturnReason   IOmsOrderReturnReasonDo
-	OmsOrderSetting        IOmsOrderSettingDo
+	OmsCartItem          IOmsCartItemDo
+	OmsCompanyAddress    IOmsCompanyAddressDo
+	OmsOrderDelivery     IOmsOrderDeliveryDo
+	OmsOrderItem         IOmsOrderItemDo
+	OmsOrderMain         IOmsOrderMainDo
+	OmsOrderOperationLog IOmsOrderOperationLogDo
+	OmsOrderPayment      IOmsOrderPaymentDo
+	OmsOrderPromotion    IOmsOrderPromotionDo
+	OmsOrderReturn       IOmsOrderReturnDo
+	OmsOrderReturnItem   IOmsOrderReturnItemDo
+	OmsOrderReturnReason IOmsOrderReturnReasonDo
+	OmsOrderSetting      IOmsOrderSettingDo
 }
 
 func (q *Query) WithContext(ctx context.Context) *queryCtx {
 	return &queryCtx{
-		OmsCartItem:            q.OmsCartItem.WithContext(ctx),
-		OmsCompanyAddress:      q.OmsCompanyAddress.WithContext(ctx),
-		OmsOrder:               q.OmsOrder.WithContext(ctx),
-		OmsOrderDelivery:       q.OmsOrderDelivery.WithContext(ctx),
-		OmsOrderItem:           q.OmsOrderItem.WithContext(ctx),
-		OmsOrderOperateHistory: q.OmsOrderOperateHistory.WithContext(ctx),
-		OmsOrderReturnApply:    q.OmsOrderReturnApply.WithContext(ctx),
-		OmsOrderReturnReason:   q.OmsOrderReturnReason.WithContext(ctx),
-		OmsOrderSetting:        q.OmsOrderSetting.WithContext(ctx),
+		OmsCartItem:          q.OmsCartItem.WithContext(ctx),
+		OmsCompanyAddress:    q.OmsCompanyAddress.WithContext(ctx),
+		OmsOrderDelivery:     q.OmsOrderDelivery.WithContext(ctx),
+		OmsOrderItem:         q.OmsOrderItem.WithContext(ctx),
+		OmsOrderMain:         q.OmsOrderMain.WithContext(ctx),
+		OmsOrderOperationLog: q.OmsOrderOperationLog.WithContext(ctx),
+		OmsOrderPayment:      q.OmsOrderPayment.WithContext(ctx),
+		OmsOrderPromotion:    q.OmsOrderPromotion.WithContext(ctx),
+		OmsOrderReturn:       q.OmsOrderReturn.WithContext(ctx),
+		OmsOrderReturnItem:   q.OmsOrderReturnItem.WithContext(ctx),
+		OmsOrderReturnReason: q.OmsOrderReturnReason.WithContext(ctx),
+		OmsOrderSetting:      q.OmsOrderSetting.WithContext(ctx),
 	}
 }
 

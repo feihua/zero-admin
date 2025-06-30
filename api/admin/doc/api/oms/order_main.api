@@ -1,0 +1,163 @@
+import "./order_operation_log.api"
+import "./order_item.api"
+
+info (
+	desc:   "订单"
+	author: "LiuFeiHua"
+	email:  "1002219331@qq.com"
+)
+
+type (
+	DeliveryReq {
+		OrderId         int64  `json:"orderId"` //订单id
+		DeliveryCompany string `json:"deliveryCompany"` // 物流公司
+		DeliverySn      string `json:"deliverySn"` // 物流单号
+	}
+	CloseOrderReq {
+		Ids  []int64 `json:"ids"` //订单id
+		Note string  `json:"note"`
+	}
+	// 删除订单请求参数
+	DeleteOrderMainReq {
+		Ids []int64 `form:"ids"`
+	}
+	DeleteOrderMainResp {
+		Code    string `json:"code"`
+		Message string `json:"message"`
+	}
+	// 更新订单请求参数
+	UpdateOrderMainReq {
+		Id                 int64   `json:"id"` //
+		OrderStatus        int32   `json:"orderStatus"` //订单状态：1-待支付,2-已支付,3-已发货,4-已完成,5-已取消,6-已退款,7-售后中
+		TotalAmount        float32 `json:"totalAmount"` //订单总金额
+		PromotionAmount    float32 `json:"promotionAmount"` //促销金额
+		CouponAmount       float32 `json:"couponAmount"` //优惠券金额
+		PointsAmount       float32 `json:"pointsAmount"` //积分金额
+		DiscountAmount     float32 `json:"discountAmount"` //优惠金额
+		FreightAmount      float32 `json:"freightAmount"` //运费金额
+		PayAmount          float32 `json:"payAmount"` //实付金额
+		PayType            int32   `json:"payType,optional"` //支付方式：1-支付宝,2-微信,3-银联
+		PayTime            string  `json:"payTime,optional"` //支付时间
+		DeliveryTime       string  `json:"deliveryTime,optional"` //发货时间
+		ReceiveTime        string  `json:"receiveTime,optional"` //收货时间
+		CommentTime        string  `json:"commentTime,optional"` //评价时间
+		SourceType         int32   `json:"sourceType"` //订单来源：1-APP,2-PC,3-小程序
+		ExpressOrderNumber string  `json:"expressOrderNumber"` //快递单号
+		UsePoints          int32   `json:"usePoints"` //下单时使用的积分
+		ReceiveStatus      int32   `json:"receiveStatus"` //是否确认收货：0->否,1->是
+		Remark             string  `json:"remark,optional"` //订单备注
+	}
+	UpdateOrderMainResp {
+		Code    string `json:"code"`
+		Message string `json:"message"`
+	}
+	// 查询订单详情请求参数
+	QueryOrderMainDetailReq {
+		Id int64 `form:"id"`
+	}
+	QueryOrderData {
+		Id                    int64                    `json:"id"` //
+		OrderNo               string                   `json:"orderNo"` //订单编号
+		UserId                int64                    `json:"userId"` //用户ID
+		OrderStatus           int32                    `json:"orderStatus"` //订单状态：1-待支付,2-已支付,3-已发货,4-已完成,5-已取消,6-已退款,7-售后中
+		TotalAmount           float32                  `json:"totalAmount"` //订单总金额
+		PromotionAmount       float32                  `json:"promotionAmount"` //促销金额
+		CouponAmount          float32                  `json:"couponAmount"` //优惠券金额
+		PointsAmount          float32                  `json:"pointsAmount"` //积分金额
+		DiscountAmount        float32                  `json:"discountAmount"` //优惠金额
+		FreightAmount         float32                  `json:"freightAmount"` //运费金额
+		PayAmount             float32                  `json:"payAmount"` //实付金额
+		PayType               int32                    `json:"payType"` //支付方式：1-支付宝,2-微信,3-银联
+		PayTime               string                   `json:"payTime"` //支付时间
+		DeliveryTime          string                   `json:"deliveryTime"` //发货时间
+		ReceiveTime           string                   `json:"receiveTime"` //收货时间
+		CommentTime           string                   `json:"commentTime"` //评价时间
+		SourceType            int32                    `json:"sourceType"` //订单来源：1-APP,2-PC,3-小程序
+		ExpressOrderNumber    string                   `json:"expressOrderNumber"` //快递单号
+		UsePoints             int32                    `json:"usePoints"` //下单时使用的积分
+		ReceiveStatus         int32                    `json:"receiveStatus"` //是否确认收货：0->否,1->是
+		Remark                string                   `json:"remark"` //订单备注
+		CreateTime            string                   `json:"createTime"` //提交时间
+		UpdateTime            string                   `json:"updateTime"` //
+		OrderOperationLogData []*OrderOperationLogData `json:"orderOperationLogData"` // 操作历史数据
+		OrderItemData         []*OrderItemData         `json:"orderItemData"` // 商品数据
+	}
+	QueryOrderMainDetailResp {
+		Code    string         `json:"code"`
+		Message string         `json:"message"`
+		Data    QueryOrderData `json:"data"`
+	}
+	// 分页查询订单列表请求参数
+	QueryOrderMainListReq {
+		Current            int32  `form:"current,default=1"` //第几页
+		PageSize           int32  `form:"pageSize,default=20"` //每页的数量
+		OrderNo            string `form:"orderNo,optional"` //订单编号
+		UserId             int64  `form:"userId,optional"` //用户ID
+		OrderStatus        int32  `form:"orderStatus,default=2"` //订单状态：1-待支付,2-已支付,3-已发货,4-已完成,5-已取消,6-已退款,7-售后中
+		PayType            int32  `form:"payType,optional"` //支付方式：1-支付宝,2-微信,3-银联
+		SourceType         int32  `form:"sourceType,optional"` //订单来源：1-APP,2-PC,3-小程序
+		ExpressOrderNumber string `form:"expressOrderNumber,optional"` //快递单号
+		ReceiveStatus      int32  `form:"receiveStatus,default=2"` //是否确认收货：0->否,1->是
+	}
+	QueryOrderMainListResp {
+		Code     string            `json:"code"`
+		Message  string            `json:"message"`
+		Data     []*QueryOrderData `json:"data"`
+		Current  int32             `json:"current,default=1"`
+		PageSize int32             `json:"pageSize,default=20"`
+		Total    int64             `json:"total"`
+		Success  bool              `json:"success"`
+	}
+	UpdateMoneyInfoReq {
+		Id             int64 `json:"id"` // 订单id
+		Status         int32 `json:"status,optional"` // 订单状态：1-待支付,2-已支付,3-已发货,4-已完成,5-已取消,6-已退款,7-售后中
+		FreightAmount  int64 `json:"freightAmount"` // 运费金额
+		DiscountAmount int64 `json:"discountAmount"` // 管理员后台调整订单所使用的折扣金额
+	}
+	UpdateNoteReq {
+		Id     int64  `json:"id"` // 订单id
+		Status int32  `json:"status,optional"` // 订单状态：1-待支付,2-已支付,3-已发货,4-已完成,5-已取消,6-已退款,7-售后中
+		Note   string `json:"note,optional"` // 订单备注
+	}
+)
+
+@server (
+	jwt:        Auth
+	middleware: CheckUrl
+	group:      oms/order_main
+	prefix:     /api/oms/order
+)
+service admin-api {
+	//订单发货
+	@handler Delivery
+	post /delivery (DeliveryReq) returns (BaseResp)
+
+	//批量关闭订单
+	@handler CloseOrder
+	post /closeOrder (CloseOrderReq) returns (BaseResp)
+
+	// 删除订单
+	@handler DeleteOrderMain
+	get /deleteOrderMain (DeleteOrderMainReq) returns (DeleteOrderMainResp)
+
+	// 更新订单
+	@handler UpdateOrderMain
+	post /updateOrderMain (UpdateOrderMainReq) returns (UpdateOrderMainResp)
+
+	// 查询订单详情
+	@handler QueryOrderMainDetail
+	get /queryOrderMainDetail (QueryOrderMainDetailReq) returns (QueryOrderMainDetailResp)
+
+	// 分页查询订单列表
+	@handler QueryOrderMainList
+	get /queryOrderMainList (QueryOrderMainListReq) returns (QueryOrderMainListResp)
+
+	//修改订单费用信息
+	@handler UpdateMoneyInfo
+	post /updateMoneyInfo (UpdateMoneyInfoReq) returns (BaseResp)
+
+	//备注订单
+	@handler UpdateNote
+	post /updateNote (UpdateNoteReq) returns (BaseResp)
+}
+

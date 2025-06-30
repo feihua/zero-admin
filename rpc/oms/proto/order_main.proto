@@ -1,0 +1,231 @@
+syntax = "proto3";
+
+package main;
+
+option go_package = "./proto";
+
+message OrderItemData {
+  int64 id = 1; //
+  int64 order_id = 2; //订单ID
+  string order_no = 3; //订单编号
+  int32 order_item_status = 4; //订单商品状态：1-正常,2-退货申请中,3-已退货,4-已拒绝
+  int64 sku_id = 5; //商品SKU ID
+  string sku_name = 6; //商品名称
+  string sku_pic = 7; //商品图片
+  float sku_price = 8; //商品单价
+  int32 sku_quantity = 9; //商品数量
+  string spec_data = 10; //规格数据
+  float sku_total_amount = 11; //商品总金额
+  float promotion_amount = 12; //促销分摊金额
+  float coupon_amount = 13; //优惠券分摊金额
+  float points_amount = 14; //积分分摊金额
+  float discount_amount = 15; //优惠分摊金额
+  float real_amount = 16; //实付金额
+
+}
+
+// 添加订单
+message AddOrderReq {
+  int64 id = 1; //
+  string order_no = 2; //订单编号
+  int64 user_id = 3; //用户ID
+  int32 order_status = 4; //订单状态：1-待支付,2-已支付,3-已发货,4-已完成,5-已取消,6-已退款,7-售后中
+  float total_amount = 5; //订单总金额
+  float promotion_amount = 6; //促销金额
+  float coupon_amount = 7; //优惠券金额
+  float points_amount = 8; //积分金额
+  float discount_amount = 9; //优惠金额
+  float freight_amount = 10; //运费金额
+  float pay_amount = 11; //实付金额
+  int32 source_type = 12; //订单来源：1-APP,2-PC,3-小程序
+  int32 use_points = 13; //下单时使用的积分
+  string remark = 14; //订单备注
+  repeated OrderItemData order_item_data = 15; //订单商品
+}
+
+message AddOrderResp {
+  int64 Id = 1;//订单创建成功后,返回订单id
+}
+
+// 删除订单
+message DeleteOrderReq {
+  repeated int64 ids = 1;
+  int64 MemberId = 2;
+}
+
+message DeleteOrderResp {
+  string pong = 1;
+}
+
+// 更新订单
+message UpdateOrderReq {
+  int64 id = 1; //
+  int32 order_status = 2; //订单状态：1-待支付,2-已支付,3-已发货,4-已完成,5-已取消,6-已退款,7-售后中
+  string express_order_number = 3; //快递单号
+  string remark = 4; //订单备注
+  float freight_amount = 5; //运费金额
+  string order_no = 6; //订单编号
+}
+
+message UpdateOrderResp {
+  string pong = 1;
+}
+
+// 更新订单状态
+message UpdateOrderStatusReq {
+  repeated int64 ids = 1; //
+  int32 order_status = 4; //订单状态：1-待支付,2-已支付,3-已发货,4-已完成,5-已取消,6-已退款,7-售后中
+  int32 receive_status = 20; //是否确认收货：0->否,1->是
+}
+
+message UpdateOrderStatusResp {
+  string pong = 1;
+}
+
+// 查询订单详情
+message QueryOrderDetailReq {
+  int64 id = 1;
+  int64 user_id = 2; //用户ID
+}
+
+message QueryOrderDetailResp {
+  OrderListData data = 1; //订单详情
+
+
+}
+
+// 分页查询订单列表
+message QueryOrderListReq {
+  string order_no = 1; //订单编号
+  int64 user_id = 2; //用户ID
+  int32 order_status = 3; //订单状态：1-待支付,2-已支付,3-已发货,4-已完成,5-已取消,6-已退款,7-售后中
+  int32 pay_type = 4; //支付方式：1-支付宝,2-微信,3-银联
+  int32 source_type = 5; //订单来源：1-APP,2-PC,3-小程序
+  string express_order_number = 6; //快递单号
+  int32 page_num = 7; //第几页
+  int32 page_size = 8; //每页的数量
+}
+
+message OrderOptLogData {
+  int64 id = 1; //主键ID
+  int64 order_id = 2; //订单ID
+  string order_no = 3; //订单编号
+  int32 operation_type = 4; //操作类型：1-创建订单，2-支付订单，3-发货，4-确认收货，5-取消订单，6-退款
+  int64 operator_id = 5; //操作人ID
+  int32 operator_type = 6; //操作人类型：1-用户，2-系统，3-管理员
+  string operator_note = 7; //操作备注
+  string create_time = 8; //操作时间
+
+}
+message OrderListData {
+  int64 id = 1; //
+  string order_no = 2; //订单编号
+  int64 user_id = 3; //用户ID
+  int32 order_status = 4; //订单状态：1-待支付,2-已支付,3-已发货,4-已完成,5-已取消,6-已退款,7-售后中
+  float total_amount = 5; //订单总金额
+  float promotion_amount = 6; //促销金额
+  float coupon_amount = 7; //优惠券金额
+  float points_amount = 8; //积分金额
+  float discount_amount = 9; //优惠金额
+  float freight_amount = 10; //运费金额
+  float pay_amount = 11; //实付金额
+  int32 pay_type = 12; //支付方式：1-支付宝,2-微信,3-银联
+  string pay_time = 13; //支付时间
+  string delivery_time = 14; //发货时间
+  string receive_time = 15; //收货时间
+  string comment_time = 16; //评价时间
+  int32 source_type = 17; //订单来源：1-APP,2-PC,3-小程序
+  string express_order_number = 18; //快递单号
+  int32 use_points = 19; //下单时使用的积分
+  int32 receive_status = 20; //是否确认收货：0->否,1->是
+  string remark = 21; //订单备注
+  string create_time = 22; //提交时间
+  string update_time = 23; //
+  repeated OrderItemData order_item_data = 24; //订单商品
+  repeated OrderOptLogData opt_log_data = 25; //订单操作记录
+}
+
+message QueryOrderListResp {
+  int64 total = 1;
+  repeated  OrderListData list = 2;
+}
+
+message DeliveryReq {
+  int64 order_id = 1;//订单id
+  string delivery_sn = 2;//物流单号
+  int64 OperatorId = 3;
+  string OrderNo = 4;
+}
+
+message DeliveryResp {
+  string pong = 1;
+}
+message CloseOrderReq {
+  repeated int64 Ids = 1;
+  string Note = 2;
+  int64 OperatorId = 3;
+  string OrderNo = 4;
+}
+
+message CloseOrderResp {
+  string pong = 1;
+}
+
+message UpdateReceiverInfoResp {
+  string pong = 1;
+}
+message CancelOrderReq {
+  int64 MemberId = 1;
+  int64 OrderId = 2;
+}
+
+message ReleaseSkuStockLockData {
+  int64    ProductSkuId = 1;
+  int32    ProductQuantity = 2;
+}
+
+message CancelOrderResp {
+  repeated int64 CouponIds = 1;//优惠券id集合
+  int32 Integration = 2;//积分
+  repeated ReleaseSkuStockLockData data = 3;//释放库存
+}
+message ConfirmOrderReq {
+  int64 MemberId = 1;
+  int64 OrderId = 2;
+}
+
+message ConfirmOrderResp {
+  string pong = 1;
+}
+message QueryTimeOutOrderListReq {
+  int32 minute = 1; //超时的时间
+
+}
+// 订单
+service OrderService {
+  // 添加订单(app)
+  rpc AddOrder(AddOrderReq) returns (AddOrderResp){}
+  // 删除订单
+  rpc DeleteOrder(DeleteOrderReq) returns (DeleteOrderResp){}
+  // 更新订单
+  rpc UpdateOrder(UpdateOrderReq) returns (UpdateOrderResp){}
+  // 更新订单状态
+  rpc UpdateOrderStatus(UpdateOrderStatusReq) returns (UpdateOrderStatusResp){}
+  // 查询订单详情:订单信息、商品信息、操作记录
+  rpc QueryOrderDetail(QueryOrderDetailReq) returns (QueryOrderDetailResp){}
+  // 查询订单列表
+  rpc QueryOrderList(QueryOrderListReq) returns (QueryOrderListResp){}
+
+  //订单发货
+  rpc Delivery(DeliveryReq) returns(DeliveryResp);
+  //关闭订单
+  rpc CloseOrder(CloseOrderReq) returns(CloseOrderResp);
+
+  //取消订单(app)
+  rpc CancelOrder(CancelOrderReq) returns(CancelOrderResp);
+  //确认收货(app)
+  rpc ConfirmOrder(ConfirmOrderReq) returns(ConfirmOrderResp);
+
+  //查询超时、未支付的订单及订单详情
+  rpc QueryTimeOutOrderList(QueryTimeOutOrderListReq) returns(QueryOrderListResp);
+}

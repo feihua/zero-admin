@@ -30,7 +30,7 @@ func OrderCancel(ctx context.Context, body []byte, productSkuService productskus
 	// todo 暂时没有分布式事务
 	// 1.查询订单是否存在
 	// 2.修改订单状态
-	resp, err := orderService.OrderCancel(ctx, &omsclient.OrderCancelReq{
+	resp, err := orderService.CancelOrder(ctx, &omsclient.CancelOrderReq{
 		MemberId: memberId,
 		OrderId:  orderId,
 	})
@@ -39,7 +39,7 @@ func OrderCancel(ctx context.Context, body []byte, productSkuService productskus
 		return
 	}
 
-	couponId := resp.CouponId
+	couponIds := resp.CouponIds
 	integration := resp.Integration
 	stockLockData := resp.Data
 
@@ -62,11 +62,11 @@ func OrderCancel(ctx context.Context, body []byte, productSkuService productskus
 	// 4.如果使用优惠券,更新优惠券使用状态
 	// 4.1修改sms_coupon_history表的use_status字段
 	// 4.2记得修改sms_coupon的use_count字段,下单的时候要加1,取消订单的时候,要减1
-	if couponId > 0 {
+	if len(couponIds) > 0 {
 		_, err = couponRecordService.UpdateCouponRecord(ctx, &smsclient.UpdateCouponRecordReq{
-			MemberId: memberId,
-			Status:   0,
-			CouponId: couponId,
+			MemberId:  memberId,
+			Status:    0,
+			CouponIds: couponIds,
 		})
 		if err != nil {
 			logc.Errorf(ctx, "更新优惠券使用状态失败,请求参数：%+v,错误信息：%+v", orderInfo, err)

@@ -104,5 +104,29 @@ func NewServiceContext(c config.Config) *ServiceContext {
 			consumer.DeleteProductFromEs(context.Background(), body, search, spuService)
 		})
 	}()
+
+	go func() {
+		rabbitmq.ConsumeSimple("order.return.queue", func(body []byte) {
+			consumer.OrderReturn(context.Background(), body)
+		})
+	}()
+
+	go func() {
+		rabbitmq.ConsumeSimple("order.cancel.by.user.queue", func(body []byte) {
+			consumer.OrderCancelByUser(context.Background(), body)
+		})
+	}()
+
+	go func() {
+		rabbitmq.ConsumeSimple("order.close.queue", func(body []byte) {
+			consumer.OrderClose(context.Background(), body)
+		})
+	}()
+
+	go func() {
+		rabbitmq.ConsumeSimple("order.delivery.queue", func(body []byte) {
+			consumer.OrderDelivery(context.Background(), body)
+		})
+	}()
 	return s
 }

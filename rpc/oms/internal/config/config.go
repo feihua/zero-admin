@@ -8,4 +8,10 @@ type Config struct {
 	Mysql struct {
 		Datasource string
 	}
+	Rabbitmq struct {
+		Host     string
+		Port     int64
+		UserName string
+		Password string
+	}
 }

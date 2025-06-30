@@ -1,0 +1,29 @@
+info (
+	desc:   "订单商品"
+	author: "LiuFeiHua"
+	email:  "1002219331@qq.com"
+)
+
+type (
+	OrderItemData {
+		Id              int64   `json:"id"` //
+		OrderId         int64   `json:"orderId"` //订单ID
+		OrderNo         string  `json:"orderNo"` //订单编号
+		OrderItemStatus int32   `json:"orderItemStatus"` //订单商品状态：1-正常,2-退货申请中,3-已退货,4-已拒绝
+		SkuId           int64   `json:"skuId"` //商品SKU ID
+		SkuName         string  `json:"skuName"` //商品名称
+		SkuPic          string  `json:"skuPic"` //商品图片
+		SkuPrice        float32 `json:"skuPrice"` //商品单价
+		SkuQuantity     int32   `json:"skuQuantity"` //商品数量
+		SpecData        string  `json:"specData"` //规格数据
+		SkuTotalAmount  float32 `json:"skuTotalAmount"` //商品总金额
+		PromotionAmount float32 `json:"promotionAmount"` //促销分摊金额
+		CouponAmount    float32 `json:"couponAmount"` //优惠券分摊金额
+		PointsAmount    float32 `json:"pointsAmount"` //积分分摊金额
+		DiscountAmount  float32 `json:"discountAmount"` //优惠分摊金额
+		RealAmount      float32 `json:"realAmount"` //实付金额
+		CreateTime      string  `json:"createTime"` //创建时间
+		IsDeleted       int32   `json:"isDeleted"` //是否删除
+	}
+)
+

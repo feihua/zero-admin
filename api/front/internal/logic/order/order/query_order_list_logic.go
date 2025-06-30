@@ -39,107 +39,81 @@ func (l *QueryOrderListLogic) QueryOrderList(req *types.OrderListReq) (resp1 *ty
 	if err != nil {
 		return nil, err
 	}
-	resp, err := l.svcCtx.OrderService.QueryOrderList(l.ctx, &omsclient.QueryOrderListReq{
-		Current:  req.Current,
-		PageSize: req.PageSize,
-		Status:   req.Status,
-		MemberId: memberId,
+	res, err := l.svcCtx.OrderService.QueryOrderList(l.ctx, &omsclient.QueryOrderListReq{
+		PageNum:     req.Current,  // 当前页
+		PageSize:    req.PageSize, // 每页条数
+		UserId:      memberId,     // 用户ID
+		OrderStatus: req.Status,   // 订单状态：1-待支付,2-已支付,3-已发货,4-已完成,5-已取消,6-已退款,7-售后中
 	})
 
 	if err != nil {
-		logc.Errorf(l.ctx, "获取订单列表失败,参数: %+v,异常：%s", req, err.Error())
+		logc.Errorf(l.ctx, "查询字订单列表失败,参数：%+v,响应：%s", req, err.Error())
 		s, _ := status.FromError(err)
 		return nil, errorx.NewDefaultError(s.Message())
 	}
 
-	list := make([]*types.ListOrderData, 0)
+	var orderData []*types.QueryOrderData
 
-	for _, item := range resp.List {
+	for _, detail := range res.List {
+		elems := &types.QueryOrderData{
+			Id:                 detail.Id,                 //
+			OrderNo:            detail.OrderNo,            // 订单编号
+			UserId:             detail.UserId,             // 用户ID
+			OrderStatus:        detail.OrderStatus,        // 订单状态：1-待支付,2-已支付,3-已发货,4-已完成,5-已取消,6-已退款,7-售后中
+			TotalAmount:        detail.TotalAmount,        // 订单总金额
+			PromotionAmount:    detail.PromotionAmount,    // 促销金额
+			CouponAmount:       detail.CouponAmount,       // 优惠券金额
+			PointsAmount:       detail.PointsAmount,       // 积分金额
+			DiscountAmount:     detail.DiscountAmount,     // 优惠金额
+			FreightAmount:      detail.FreightAmount,      // 运费金额
+			PayAmount:          detail.PayAmount,          // 实付金额
+			PayType:            detail.PayType,            // 支付方式：1-支付宝,2-微信,3-银联
+			PayTime:            detail.PayTime,            // 支付时间
+			DeliveryTime:       detail.DeliveryTime,       // 发货时间
+			ReceiveTime:        detail.ReceiveTime,        // 收货时间
+			CommentTime:        detail.CommentTime,        // 评价时间
+			SourceType:         detail.SourceType,         // 订单来源：1-APP,2-PC,3-小程序
+			ExpressOrderNumber: detail.ExpressOrderNumber, // 快递单号
+			UsePoints:          detail.UsePoints,          // 下单时使用的积分
+			ReceiveStatus:      detail.ReceiveStatus,      // 是否确认收货：0->否,1->是
+			Remark:             detail.Remark,             // 订单备注
+			CreateTime:         detail.CreateTime,         // 提交时间
+			UpdateTime:         detail.UpdateTime,         //
 
-		list = append(list, &types.ListOrderData{
-			Id:                    item.Id,
-			MemberId:              item.MemberId,
-			CouponId:              item.CouponId,
-			OrderSn:               item.OrderSn,
-			CreateTime:            item.CreateTime,
-			MemberUsername:        item.MemberUsername,
-			TotalAmount:           item.TotalAmount,
-			PayAmount:             item.PayAmount,
-			FreightAmount:         item.FreightAmount,
-			PromotionAmount:       item.PromotionAmount,
-			IntegrationAmount:     item.IntegrationAmount,
-			CouponAmount:          item.CouponAmount,
-			DiscountAmount:        item.DiscountAmount,
-			PayType:               item.PayType,
-			SourceType:            item.SourceType,
-			Status:                item.Status,
-			OrderType:             item.OrderType,
-			DeliveryCompany:       item.DeliveryCompany,
-			DeliverySn:            item.DeliverySn,
-			AutoConfirmDay:        item.AutoConfirmDay,
-			Integration:           item.Integration,
-			Growth:                item.Growth,
-			PromotionInfo:         item.PromotionInfo,
-			BillType:              item.BillType,
-			BillHeader:            item.BillHeader,
-			BillContent:           item.BillContent,
-			BillReceiverPhone:     item.BillReceiverPhone,
-			BillReceiverEmail:     item.BillReceiverEmail,
-			ReceiverName:          item.ReceiverName,
-			ReceiverPhone:         item.ReceiverPhone,
-			ReceiverPostCode:      item.ReceiverPostCode,
-			ReceiverProvince:      item.ReceiverProvince,
-			ReceiverCity:          item.ReceiverCity,
-			ReceiverRegion:        item.ReceiverRegion,
-			ReceiverDetailAddress: item.ReceiverDetailAddress,
-			Note:                  item.Note,
-			ConfirmStatus:         item.ConfirmStatus,
-			DeleteStatus:          item.DeleteStatus,
-			UseIntegration:        item.UseIntegration,
-			PaymentTime:           item.PaymentTime,
-			DeliveryTime:          item.DeliveryTime,
-			ReceiveTime:           item.ReceiveTime,
-			CommentTime:           item.CommentTime,
-			ModifyTime:            item.ModifyTime,
-			ListOrderItem:         queryOrderItems(item),
-		})
+		}
+
+		itemData := detail.OrderItemData
+
+		var orderItemData []*types.OrderItemData
+
+		for _, d := range itemData {
+			orderItemData = append(orderItemData, &types.OrderItemData{
+				Id:              d.Id,              //
+				OrderId:         d.OrderId,         // 订单ID
+				OrderNo:         d.OrderNo,         // 订单编号
+				OrderItemStatus: d.OrderItemStatus, // 订单商品状态：1-正常,2-退货申请中,3-已退货,4-已拒绝
+				SkuId:           d.SkuId,           // 商品SKU ID
+				SkuName:         d.SkuName,         // 商品名称
+				SkuPic:          d.SkuPic,          // 商品图片
+				SkuPrice:        d.SkuPrice,        // 商品单价
+				SkuQuantity:     d.SkuQuantity,     // 商品数量
+				SpecData:        d.SpecData,        // 规格数据
+				SkuTotalAmount:  d.SkuTotalAmount,  // 商品总金额
+				PromotionAmount: d.PromotionAmount, // 促销分摊金额
+				CouponAmount:    d.CouponAmount,    // 优惠券分摊金额
+				PointsAmount:    d.PointsAmount,    // 积分分摊金额
+				DiscountAmount:  d.DiscountAmount,  // 优惠分摊金额
+				RealAmount:      d.RealAmount,      // 实付金额
+
+			})
+		}
+		elems.OrderItemData = orderItemData
+
+		orderData = append(orderData, elems)
 	}
-
 	return &types.OrderListResp{
 		Code:    0,
 		Message: "操作成功",
-		Data:    list,
+		Data:    orderData,
 	}, nil
-}
-
-// 获取订单商品
-func queryOrderItems(item1 *omsclient.OrderListData) []types.ListOrderItemData {
-	itemListData := make([]types.ListOrderItemData, 0)
-	for _, item := range item1.ItemListData {
-		itemListData = append(itemListData, types.ListOrderItemData{
-			Id:                item.Id,
-			OrderId:           item.OrderId,
-			OrderSn:           item.OrderSn,
-			ProductId:         item.ProductId,
-			ProductPic:        item.ProductPic,
-			ProductName:       item.ProductName,
-			ProductBrand:      item.ProductBrand,
-			ProductSn:         item.ProductSn,
-			ProductPrice:      item.ProductPrice,
-			ProductQuantity:   item.ProductQuantity,
-			ProductSkuId:      item.ProductSkuId,
-			ProductSkuCode:    item.ProductSkuCode,
-			ProductCategoryId: item.ProductCategoryId,
-			PromotionName:     item.PromotionName,
-			PromotionAmount:   item.PromotionAmount,
-			CouponAmount:      item.CouponAmount,
-			IntegrationAmount: item.IntegrationAmount,
-			RealAmount:        item.RealAmount,
-			GiftIntegration:   item.GiftIntegration,
-			GiftGrowth:        item.GiftGrowth,
-			ProductAttr:       item.ProductAttr,
-		})
-	}
-
-	return itemListData
 }

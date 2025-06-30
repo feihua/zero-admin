@@ -1,0 +1,66 @@
+syntax = "proto3";
+
+package main;
+
+option go_package = "./proto";
+
+// 添加订单操作记录
+message AddOrderOperationLogReq {
+  int64 id = 1; //主键ID
+  int64 order_id = 2; //订单ID
+  string order_no = 3; //订单编号
+  int32 operation_type = 4; //操作类型：1-创建订单，2-支付订单，3-发货，4-确认收货，5-取消订单，6-退款
+  int64 operator_id = 5; //操作人ID
+  int32 operator_type = 6; //操作人类型：1-用户，2-系统，3-管理员
+  string operator_note = 7; //操作备注
+}
+
+message AddOrderOperationLogResp {
+  string pong = 1;
+}
+
+// 查询订单操作记录详情
+message QueryOrderOperationLogDetailReq {
+  int64 id = 1;
+}
+
+
+// 分页查询订单操作记录列表
+message QueryOrderOperationLogListReq {
+  int64 order_id = 1; //订单ID
+  string order_no = 2; //订单编号
+  int32 operation_type = 3; //操作类型：1-创建订单，2-支付订单，3-发货，4-确认收货，5-取消订单，6-退款
+  int64 operator_id = 4; //操作人ID
+  int32 operator_type = 5; //操作人类型：1-用户，2-系统，3-管理员
+  int32 page_num = 7; //第几页
+  int32 page_size = 8; //每页的数量
+}
+
+message OrderOperationLogData {
+  int64 id = 1; //主键ID
+  int64 order_id = 2; //订单ID
+  string order_no = 3; //订单编号
+  int32 operation_type = 4; //操作类型：1-创建订单，2-支付订单，3-发货，4-确认收货，5-取消订单，6-退款
+  int64 operator_id = 5; //操作人ID
+  int32 operator_type = 6; //操作人类型：1-用户，2-系统，3-管理员
+  string operator_note = 7; //操作备注
+  string create_time = 8; //操作时间
+
+}
+
+message QueryOrderOperationLogListResp {
+  int64 total = 1;
+  repeated  OrderOperationLogData list = 2;
+}
+
+// 订单操作记录
+service OrderOperationLogService {
+  // 添加订单操作记录
+  rpc AddOrderOperationLog(AddOrderOperationLogReq) returns (AddOrderOperationLogResp){}
+  // 查询订单操作记录详情
+  rpc QueryOrderOperationLogDetail(QueryOrderOperationLogDetailReq) returns (OrderOperationLogData){}
+  // 查询订单操作记录列表
+  rpc QueryOrderOperationLogList(QueryOrderOperationLogListReq) returns (QueryOrderOperationLogListResp){}
+
+
+}

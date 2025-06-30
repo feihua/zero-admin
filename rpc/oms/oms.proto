@@ -289,352 +289,6 @@ service CompanyAddressService {
 }
 
 
-message DeliveryReq {
-  int64 order_id = 1;//订单id
-  string delivery_company = 2;//物流公司(配送方式)
-  string delivery_sn = 3;//物流单号
-  string operate_man = 4;
-}
-
-message DeliveryResp {
-  string pong = 1;
-}
-message CloseOrderReq {
-  repeated int64 Ids = 1;
-  string Note = 2;
-  string operate_man = 3;
-}
-
-message CloseOrderResp {
-  string pong = 1;
-}
-message OrderDetailReq {
-  int64 order_id = 1;
-}
-
-message OrderDetailResp {
-  OrderListData data = 1;
-}
-message UpdateReceiverInfoReq {
-  int64 order_id = 1;//订单id
-  int32 status = 2; //订单状态：0->待付款；1->待发货；2->已发货；3->已完成；4->已关闭；5->无效订单
-  string receiver_city = 34; //城市
-  string receiver_detail_address = 35; //详细地址
-  string receiver_name = 36; //收货人姓名
-  string receiver_phone = 37; //收货人电话
-  string receiver_post_code = 38; //收货人邮编
-  string receiver_province = 39; //省份/直辖市
-  string receiver_region = 40; //区
-  string operate_man = 10;
-}
-
-message UpdateReceiverInfoResp {
-  string pong = 1;
-}
-message UpdateMoneyInfoReq {
-  int32 status = 1; //订单状态：0->待付款；1->待发货；2->已发货；3->已完成；4->已关闭；5->无效订单
-  int64 order_id = 2;//订单id
-  int64 freight_amount = 3; //运费金额
-  int64 discount_amount = 4; //管理员后台调整订单使用的折扣金额
-  string operate_man = 5;
-}
-
-message UpdateMoneyInfoResp {
-  string pong = 1;
-}
-message UpdateNoteReq {
-  int32 status = 1; //订单状态：0->待付款；1->待发货；2->已发货；3->已完成；4->已关闭；5->无效订单
-  int64 order_id = 2;//订单id
-  string note = 3;
-  string operate_man = 4;
-}
-
-message UpdateNoteResp {
-  string pong = 1;
-}
-message OrderAddReq {
-  int64 id = 1; //订单id
-  int64 member_id = 2; //会员id
-  int64 coupon_id = 3; //优惠券id
-  string order_sn = 4; //订单编号
-  string member_username = 6; //用户帐号
-  int64 total_amount = 7; //订单总金额
-  int64 pay_amount = 8; //应付金额（实际支付金额）
-  int64 freight_amount = 9; //运费金额
-  int64 promotion_amount = 10; //促销优化金额（促销价、满减、阶梯价）
-  int64 integration_amount = 11; //积分抵扣金额
-  int64 coupon_amount = 12; //优惠券抵扣金额
-  int64 discount_amount = 13; //管理员后台调整订单使用的折扣金额
-  int32 pay_type = 14; //支付方式：0->未支付；1->支付宝；2->微信
-  int32 source_type = 15; //订单来源：0->PC订单；1->app订单
-  int32 status = 16; //订单状态：0->待付款；1->待发货；2->已发货；3->已完成；4->已关闭；5->无效订单
-  int32 order_type = 17; //订单类型：0->正常订单；1->秒杀订单
-  string delivery_company = 18; //物流公司(配送方式)
-  string delivery_sn = 19; //物流单号
-  int32 auto_confirm_day = 20; //自动确认时间（天）
-  int32 integration = 21; //可以获得的积分
-  int32 growth = 22; //可以活动的成长值
-  string promotion_info = 23; //活动信息
-  int32 bill_type = 24; //发票类型：0->不开发票；1->电子发票；2->纸质发票
-  string bill_header = 25; //发票抬头
-  string bill_content = 26; //发票内容
-  string bill_receiver_phone = 27; //收票人电话
-  string bill_receiver_email = 28; //收票人邮箱
-  string receiver_name = 29; //收货人姓名
-  string receiver_phone = 30; //收货人电话
-  string receiver_post_code = 31; //收货人邮编
-  string receiver_province = 32; //省份/直辖市
-  string receiver_city = 33; //城市
-  string receiver_region = 34; //区
-  string receiver_detail_address = 35; //详细地址
-  string note = 36; //订单备注
-  int32 confirm_status = 37; //确认收货状态：0->未确认；1->已确认
-  int32 delete_status = 38; //删除状态：0->未删除；1->已删除
-  int32 use_integration = 39; //下单时使用的积分
-  string payment_time = 40; //支付时间
-  string delivery_time = 41; //发货时间
-  string receive_time = 42; //确认收货时间
-  string comment_time = 43; //评价时间
-  string modify_time = 44; //修改时间
-  repeated OrderItemData orderItemList = 45;
-  int64       OrderId = 46;//订单创建后,返回
-  repeated int64       CartItemIds = 47;
-}
-
-message OrderItemData {
-  int64 id = 1; //
-  int64 order_id = 2; //订单id
-  string order_sn = 3; //订单编号
-  int64 product_id = 4; //商品id
-  string product_pic = 5; //商品图片
-  string product_name = 6; //商品名称
-  string product_brand = 7; //商品品牌
-  string product_sn = 8; //货号
-  int64 product_price = 9; //销售价格
-  int32 product_quantity = 10; //购买数量
-  int64 product_sku_id = 11; //商品sku编号
-  string product_sku_code = 12; //商品sku条码
-  int64 product_category_id = 13; //商品分类id
-  string promotion_name = 14; //商品促销名称
-  int64 promotion_amount = 15; //商品促销分解金额
-  int64 coupon_amount = 16; //优惠券优惠分解金额
-  int64 integration_amount = 17; //积分优惠分解金额
-  int64 real_amount = 18; //该商品经过优惠后的分解金额
-  int32 gift_integration = 19; //
-  int32 gift_growth = 20; //
-  string product_attr = 21; //商品销售属性:[{"key":"颜色","value":"颜色"},{"key":"容量","value":"4G"}]
-
-}
-
-message OrderAddResp {
-  int64 Id = 1;//订单创建成功后,返回订单id
-}
-
-message OrderListReq {
-  int64 current = 1;
-  int64 page_size = 2;
-  string order_sn = 3; //订单编号
-  string member_username = 4; //用户帐号
-  int32 pay_type = 5; //支付方式：0->未支付；1->支付宝；2->微信
-  int32 source_type = 6; //订单来源：0->PC订单；1->app订单
-  int32       status = 7;
-  int32 order_type = 8; //订单类型：0->正常订单；1->秒杀订单
-  int64 member_id = 9; //会员id
-  string receiver_keyword = 10;
-}
-
-message OrderListData{
-  int64 id = 1; //订单id
-  int64 member_id = 2; //会员id
-  int64 coupon_id = 3; //优惠券id
-  string order_sn = 4; //订单编号
-  string create_time = 5; //提交时间
-  string member_username = 6; //用户帐号
-  int64 total_amount = 7; //订单总金额
-  int64 pay_amount = 8; //应付金额（实际支付金额）
-  int64 freight_amount = 9; //运费金额
-  int64 promotion_amount = 10; //促销优化金额（促销价、满减、阶梯价）
-  int64 integration_amount = 11; //积分抵扣金额
-  int64 coupon_amount = 12; //优惠券抵扣金额
-  int64 discount_amount = 13; //管理员后台调整订单使用的折扣金额
-  int32 pay_type = 14; //支付方式：0->未支付；1->支付宝；2->微信
-  int32 source_type = 15; //订单来源：0->PC订单；1->app订单
-  int32 status = 16; //订单状态：0->待付款；1->待发货；2->已发货；3->已完成；4->已关闭；5->无效订单
-  int32 order_type = 17; //订单类型：0->正常订单；1->秒杀订单
-  string delivery_company = 18; //物流公司(配送方式)
-  string delivery_sn = 19; //物流单号
-  int32 auto_confirm_day = 20; //自动确认时间（天）
-  int32 integration = 21; //可以获得的积分
-  int32 growth = 22; //可以活动的成长值
-  string promotion_info = 23; //活动信息
-  int32 bill_type = 24; //发票类型：0->不开发票；1->电子发票；2->纸质发票
-  string bill_header = 25; //发票抬头
-  string bill_content = 26; //发票内容
-  string bill_receiver_phone = 27; //收票人电话
-  string bill_receiver_email = 28; //收票人邮箱
-  string receiver_name = 29; //收货人姓名
-  string receiver_phone = 30; //收货人电话
-  string receiver_post_code = 31; //收货人邮编
-  string receiver_province = 32; //省份/直辖市
-  string receiver_city = 33; //城市
-  string receiver_region = 34; //区
-  string receiver_detail_address = 35; //详细地址
-  string note = 36; //订单备注
-  int32 confirm_status = 37; //确认收货状态：0->未确认；1->已确认
-  int32 delete_status = 38; //删除状态：0->未删除；1->已删除
-  int32 use_integration = 39; //下单时使用的积分
-  string payment_time = 40; //支付时间
-  string delivery_time = 41; //发货时间
-  string receive_time = 42; //确认收货时间
-  string comment_time = 43; //评价时间
-  string modify_time = 44; //修改时间
-  repeated  OrderItemData itemListData = 45;
-  repeated  OrderOperateHistoryData historyListData = 46;
-}
-
-message OrderOperateHistoryData {
-  int64 id = 1; //
-  int64 order_id = 2; //订单id
-  string operate_man = 3; //操作人：用户；系统；后台管理员
-  string create_time = 4; //创建时间
-  int32 order_status = 5; //订单状态：0->待付款；1->待发货；2->已发货；3->已完成；4->已关闭；5->无效订单
-  string note = 6; //备注
-
-}
-message OrderListResp {
-  int64 total = 1;
-  repeated  OrderListData list = 2;
-}
-
-message OrderUpdateReq {
-  int64       id = 1;
-  int32 status = 2; //订单状态：0->待付款；1->待发货；2->已发货；3->已完成；4->已关闭；5->无效订单
-  string delivery_company = 3;//物流公司(配送方式)
-  string delivery_sn = 43;//物流单号
-  string      note = 5;
-}
-
-message OrderUpdateResp {
-  string pong = 1;
-}
-
-message OrderDeleteByIdReq {
-  repeated int64 Ids = 1;
-}
-
-message OrderDeleteReq {
-  int64 MemberId = 1;
-  int64 OrderId = 2;
-}
-
-message OrderDeleteResp {
-  string pong = 1;
-}
-
-message OrderListByMemberIdReq {
-  int64       Id = 1;
-  int64 MemberId = 2;
-}
-
-
-message OrderListByMemberIdResp {
-  int64 total = 1;
-  OrderListData data = 2;
-}
-
-message OrderCancelReq {
-  int64 MemberId = 1;
-  int64 OrderId = 2;
-}
-
-message ReleaseSkuStockLockData {
-  int64    ProductSkuId = 1;
-  int32    ProductQuantity = 2;
-}
-
-message OrderCancelResp {
-  int64 CouponId = 1;//优惠券id
-  int32 Integration = 2;//积分
-  repeated ReleaseSkuStockLockData data = 3;//释放库存
-}
-
-message OrderConfirmReq {
-  int64 MemberId = 1;
-  int64 OrderId = 2;
-}
-
-message OrderConfirmResp {
-  string pong = 1;
-}
-
-message OrderRefundReq {
-  int64 UserId = 1;
-  int64 OrderId = 2;
-}
-
-message OrderRefundResp {
-  string pong = 1;
-}
-
-message QueryOrderListReq {
-  int64 MemberId = 1;
-  int32 Status = 2;
-  int64 current = 3;
-  int64 pageSize = 4;
-}
-message UpdateOrderStatusByOutTradeNoReq {
-  string OutTradeNo = 1;
-  int64 OrderStatus = 2;
-}
-
-message UpdateOrderStatusByOutTradeNoResp {
-  string pong = 1;
-}
-message QueryTimeOutOrderListReq {
-  int32 minute = 1; //超时的时间
-
-}
-service OrderService {
-  //pc
-  //批量发货
-  rpc Delivery(DeliveryReq) returns(DeliveryResp);
-  //批量关闭订单
-  rpc CloseOrder(CloseOrderReq) returns(CloseOrderResp);
-  //获取订单详情：订单信息、商品信息、操作记录
-  rpc OrderDetail(OrderDetailReq) returns(OrderDetailResp);
-  //修改收货人信息
-  rpc UpdateReceiverInfo(UpdateReceiverInfoReq) returns(UpdateReceiverInfoResp);
-  //修改订单费用信息
-  rpc UpdateMoneyInfo(UpdateMoneyInfoReq) returns(UpdateMoneyInfoResp);
-  //备注订单
-  rpc UpdateNote(UpdateNoteReq) returns(UpdateNoteResp);
-  //查询订单
-  rpc OrderList(OrderListReq) returns(OrderListResp);
-  //批量删除订单
-  rpc OrderDelete(OrderDeleteReq) returns(OrderDeleteResp);
-
-  //app
-  rpc OrderAdd(OrderAddReq) returns(OrderAddResp);
-  rpc OrderUpdate(OrderUpdateReq) returns(OrderUpdateResp);
-  rpc OrderListByMemberId(OrderListByMemberIdReq) returns(OrderListByMemberIdResp);
-  rpc OrderCancel(OrderCancelReq) returns(OrderCancelResp);
-  rpc OrderConfirm(OrderConfirmReq) returns(OrderConfirmResp);
-  rpc OrderRefund(OrderRefundReq) returns(OrderRefundResp);
-  rpc OrderDeleteById(OrderDeleteByIdReq) returns(OrderDeleteResp);
-  //app端查询会员的订单列表信息
-  rpc QueryOrderList(QueryOrderListReq) returns(OrderListResp);
-  //更新订单状态
-  rpc UpdateOrderStatusByOutTradeNo(UpdateOrderStatusByOutTradeNoReq) returns(UpdateOrderStatusByOutTradeNoResp);
-
-  //查询超时、未支付的订单及订单详情
-  rpc QueryTimeOutOrderList(QueryTimeOutOrderListReq) returns(OrderListResp);
-
-}
-
-
-
-
-
 // 添加订单收货地址
 message AddOrderDeliveryReq {
   int64 id = 1; //
@@ -759,334 +413,504 @@ service OrderDeliveryService {
 }
 
 
-// 添加订单中所包含的商品
-message AddOrderItemReq {
+message OrderItemData {
   int64 id = 1; //
-  int64 order_id = 2; //订单id
-  string order_sn = 3; //订单编号
-  int64 product_id = 4; //商品id
-  string product_pic = 5; //商品图片
-  string product_name = 6; //商品名称
-  string product_brand = 7; //商品品牌
-  string product_sn = 8; //货号
-  int64 product_price = 9; //销售价格
-  int32 product_quantity = 10; //购买数量
-  int64 product_sku_id = 11; //商品sku编号
-  string product_sku_code = 12; //商品sku条码
-  int64 product_category_id = 13; //商品分类id
-  string promotion_name = 14; //商品促销名称
-  int64 promotion_amount = 15; //商品促销分解金额
-  int64 coupon_amount = 16; //优惠券优惠分解金额
-  int64 integration_amount = 17; //积分优惠分解金额
-  int64 real_amount = 18; //该商品经过优惠后的分解金额
-  int32 gift_integration = 19; //
-  int32 gift_growth = 20; //
-  string product_attr = 21; //商品销售属性:[{"key":"颜色","value":"颜色"},{"key":"容量","value":"4G"}]
+  int64 order_id = 2; //订单ID
+  string order_no = 3; //订单编号
+  int32 order_item_status = 4; //订单商品状态：1-正常,2-退货申请中,3-已退货,4-已拒绝
+  int64 sku_id = 5; //商品SKU ID
+  string sku_name = 6; //商品名称
+  string sku_pic = 7; //商品图片
+  float sku_price = 8; //商品单价
+  int32 sku_quantity = 9; //商品数量
+  string spec_data = 10; //规格数据
+  float sku_total_amount = 11; //商品总金额
+  float promotion_amount = 12; //促销分摊金额
+  float coupon_amount = 13; //优惠券分摊金额
+  float points_amount = 14; //积分分摊金额
+  float discount_amount = 15; //优惠分摊金额
+  float real_amount = 16; //实付金额
 
 }
 
-message AddOrderItemResp {
+// 添加订单
+message AddOrderReq {
+  int64 id = 1; //
+  string order_no = 2; //订单编号
+  int64 user_id = 3; //用户ID
+  int32 order_status = 4; //订单状态：1-待支付,2-已支付,3-已发货,4-已完成,5-已取消,6-已退款,7-售后中
+  float total_amount = 5; //订单总金额
+  float promotion_amount = 6; //促销金额
+  float coupon_amount = 7; //优惠券金额
+  float points_amount = 8; //积分金额
+  float discount_amount = 9; //优惠金额
+  float freight_amount = 10; //运费金额
+  float pay_amount = 11; //实付金额
+  int32 source_type = 12; //订单来源：1-APP,2-PC,3-小程序
+  int32 use_points = 13; //下单时使用的积分
+  string remark = 14; //订单备注
+  repeated OrderItemData order_item_data = 15; //订单商品
+}
+
+message AddOrderResp {
+  int64 Id = 1;//订单创建成功后,返回订单id
+}
+
+// 删除订单
+message DeleteOrderReq {
+  repeated int64 ids = 1;
+  int64 MemberId = 2;
+}
+
+message DeleteOrderResp {
   string pong = 1;
 }
 
-// 查询订单中所包含的商品详情
-message QueryOrderItemDetailReq {
+// 更新订单
+message UpdateOrderReq {
+  int64 id = 1; //
+  int32 order_status = 2; //订单状态：1-待支付,2-已支付,3-已发货,4-已完成,5-已取消,6-已退款,7-售后中
+  string express_order_number = 3; //快递单号
+  string remark = 4; //订单备注
+  float freight_amount = 5; //运费金额
+  string order_no = 6; //订单编号
+}
+
+message UpdateOrderResp {
+  string pong = 1;
+}
+
+// 更新订单状态
+message UpdateOrderStatusReq {
+  repeated int64 ids = 1; //
+  int32 order_status = 4; //订单状态：1-待支付,2-已支付,3-已发货,4-已完成,5-已取消,6-已退款,7-售后中
+  int32 receive_status = 20; //是否确认收货：0->否,1->是
+}
+
+message UpdateOrderStatusResp {
+  string pong = 1;
+}
+
+// 查询订单详情
+message QueryOrderDetailReq {
+  int64 id = 1;
+  int64 user_id = 2; //用户ID
+}
+
+message QueryOrderDetailResp {
+  OrderListData data = 1; //订单详情
+
+
+}
+
+// 分页查询订单列表
+message QueryOrderListReq {
+  string order_no = 1; //订单编号
+  int64 user_id = 2; //用户ID
+  int32 order_status = 3; //订单状态：1-待支付,2-已支付,3-已发货,4-已完成,5-已取消,6-已退款,7-售后中
+  int32 pay_type = 4; //支付方式：1-支付宝,2-微信,3-银联
+  int32 source_type = 5; //订单来源：1-APP,2-PC,3-小程序
+  string express_order_number = 6; //快递单号
+  int32 page_num = 7; //第几页
+  int32 page_size = 8; //每页的数量
+}
+
+message OrderOptLogData {
+  int64 id = 1; //主键ID
+  int64 order_id = 2; //订单ID
+  string order_no = 3; //订单编号
+  int32 operation_type = 4; //操作类型：1-创建订单，2-支付订单，3-发货，4-确认收货，5-取消订单，6-退款
+  int64 operator_id = 5; //操作人ID
+  int32 operator_type = 6; //操作人类型：1-用户，2-系统，3-管理员
+  string operator_note = 7; //操作备注
+  string create_time = 8; //操作时间
+
+}
+message OrderListData {
+  int64 id = 1; //
+  string order_no = 2; //订单编号
+  int64 user_id = 3; //用户ID
+  int32 order_status = 4; //订单状态：1-待支付,2-已支付,3-已发货,4-已完成,5-已取消,6-已退款,7-售后中
+  float total_amount = 5; //订单总金额
+  float promotion_amount = 6; //促销金额
+  float coupon_amount = 7; //优惠券金额
+  float points_amount = 8; //积分金额
+  float discount_amount = 9; //优惠金额
+  float freight_amount = 10; //运费金额
+  float pay_amount = 11; //实付金额
+  int32 pay_type = 12; //支付方式：1-支付宝,2-微信,3-银联
+  string pay_time = 13; //支付时间
+  string delivery_time = 14; //发货时间
+  string receive_time = 15; //收货时间
+  string comment_time = 16; //评价时间
+  int32 source_type = 17; //订单来源：1-APP,2-PC,3-小程序
+  string express_order_number = 18; //快递单号
+  int32 use_points = 19; //下单时使用的积分
+  int32 receive_status = 20; //是否确认收货：0->否,1->是
+  string remark = 21; //订单备注
+  string create_time = 22; //提交时间
+  string update_time = 23; //
+  repeated OrderItemData order_item_data = 24; //订单商品
+  repeated OrderOptLogData opt_log_data = 25; //订单操作记录
+}
+
+message QueryOrderListResp {
+  int64 total = 1;
+  repeated  OrderListData list = 2;
+}
+
+message DeliveryReq {
+  int64 order_id = 1;//订单id
+  string delivery_sn = 2;//物流单号
+  int64 OperatorId = 3;
+  string OrderNo = 4;
+}
+
+message DeliveryResp {
+  string pong = 1;
+}
+message CloseOrderReq {
+  repeated int64 Ids = 1;
+  string Note = 2;
+  int64 OperatorId = 3;
+  string OrderNo = 4;
+}
+
+message CloseOrderResp {
+  string pong = 1;
+}
+
+message UpdateReceiverInfoResp {
+  string pong = 1;
+}
+message CancelOrderReq {
+  int64 MemberId = 1;
+  int64 OrderId = 2;
+}
+
+message ReleaseSkuStockLockData {
+  int64    ProductSkuId = 1;
+  int32    ProductQuantity = 2;
+}
+
+message CancelOrderResp {
+  repeated int64 CouponIds = 1;//优惠券id集合
+  int32 Integration = 2;//积分
+  repeated ReleaseSkuStockLockData data = 3;//释放库存
+}
+message ConfirmOrderReq {
+  int64 MemberId = 1;
+  int64 OrderId = 2;
+}
+
+message ConfirmOrderResp {
+  string pong = 1;
+}
+message QueryTimeOutOrderListReq {
+  int32 minute = 1; //超时的时间
+
+}
+// 订单
+service OrderService {
+  // 添加订单(app)
+  rpc AddOrder(AddOrderReq) returns (AddOrderResp){}
+  // 删除订单
+  rpc DeleteOrder(DeleteOrderReq) returns (DeleteOrderResp){}
+  // 更新订单
+  rpc UpdateOrder(UpdateOrderReq) returns (UpdateOrderResp){}
+  // 更新订单状态
+  rpc UpdateOrderStatus(UpdateOrderStatusReq) returns (UpdateOrderStatusResp){}
+  // 查询订单详情:订单信息、商品信息、操作记录
+  rpc QueryOrderDetail(QueryOrderDetailReq) returns (QueryOrderDetailResp){}
+  // 查询订单列表
+  rpc QueryOrderList(QueryOrderListReq) returns (QueryOrderListResp){}
+
+  //订单发货
+  rpc Delivery(DeliveryReq) returns(DeliveryResp);
+  //关闭订单
+  rpc CloseOrder(CloseOrderReq) returns(CloseOrderResp);
+
+  //取消订单(app)
+  rpc CancelOrder(CancelOrderReq) returns(CancelOrderResp);
+  //确认收货(app)
+  rpc ConfirmOrder(ConfirmOrderReq) returns(ConfirmOrderResp);
+
+  //查询超时、未支付的订单及订单详情
+  rpc QueryTimeOutOrderList(QueryTimeOutOrderListReq) returns(QueryOrderListResp);
+}
+
+
+// 添加订单操作记录
+message AddOrderOperationLogReq {
+  int64 id = 1; //主键ID
+  int64 order_id = 2; //订单ID
+  string order_no = 3; //订单编号
+  int32 operation_type = 4; //操作类型：1-创建订单，2-支付订单，3-发货，4-确认收货，5-取消订单，6-退款
+  int64 operator_id = 5; //操作人ID
+  int32 operator_type = 6; //操作人类型：1-用户，2-系统，3-管理员
+  string operator_note = 7; //操作备注
+}
+
+message AddOrderOperationLogResp {
+  string pong = 1;
+}
+
+// 查询订单操作记录详情
+message QueryOrderOperationLogDetailReq {
+  int64 id = 1;
+}
+
+
+// 分页查询订单操作记录列表
+message QueryOrderOperationLogListReq {
+  int64 order_id = 1; //订单ID
+  string order_no = 2; //订单编号
+  int32 operation_type = 3; //操作类型：1-创建订单，2-支付订单，3-发货，4-确认收货，5-取消订单，6-退款
+  int64 operator_id = 4; //操作人ID
+  int32 operator_type = 5; //操作人类型：1-用户，2-系统，3-管理员
+  int32 page_num = 7; //第几页
+  int32 page_size = 8; //每页的数量
+}
+
+message OrderOperationLogData {
+  int64 id = 1; //主键ID
+  int64 order_id = 2; //订单ID
+  string order_no = 3; //订单编号
+  int32 operation_type = 4; //操作类型：1-创建订单，2-支付订单，3-发货，4-确认收货，5-取消订单，6-退款
+  int64 operator_id = 5; //操作人ID
+  int32 operator_type = 6; //操作人类型：1-用户，2-系统，3-管理员
+  string operator_note = 7; //操作备注
+  string create_time = 8; //操作时间
+
+}
+
+message QueryOrderOperationLogListResp {
+  int64 total = 1;
+  repeated  OrderOperationLogData list = 2;
+}
+
+// 订单操作记录
+service OrderOperationLogService {
+  // 添加订单操作记录
+  rpc AddOrderOperationLog(AddOrderOperationLogReq) returns (AddOrderOperationLogResp){}
+  // 查询订单操作记录详情
+  rpc QueryOrderOperationLogDetail(QueryOrderOperationLogDetailReq) returns (OrderOperationLogData){}
+  // 查询订单操作记录列表
+  rpc QueryOrderOperationLogList(QueryOrderOperationLogListReq) returns (QueryOrderOperationLogListResp){}
+
+
+}
+
+
+// 添加订单支付
+message OrderPaymentReq {
+  int64 id = 1; //主键ID
+  int64 order_id = 2; //订单ID
+  string order_no = 3; //订单编号
+  int32 pay_type = 4; //支付方式：1-支付宝，2-微信，3-银联
+  string transaction_id = 5; //支付流水号
+  float total_amount = 6; //订单金额
+  float pay_amount = 7; //支付金额
+  int32 pay_status = 8; //支付状态：0-待支付，1-支付成功，2-支付失败
+  string pay_time = 9; //支付时间
+  int32 is_deleted = 12; //是否删除
+}
+
+message OrderPaymentResp {
+  string pong = 1;
+}
+
+
+// 更新订单支付状态
+message UpdateOrderPaymentStatusReq {
+  repeated int64 ids = 1; //主键ID
+  int32 pay_status = 8; //支付状态：0-待支付，1-支付成功，2-支付失败
+}
+
+// 查询订单支付详情
+message QueryOrderPaymentDetailReq {
     int64 id = 1;
 }
 
-message QueryOrderItemDetailResp {
-  int64 id = 1; //
-  int64 order_id = 2; //订单id
-  string order_sn = 3; //订单编号
-  int64 product_id = 4; //商品id
-  string product_pic = 5; //商品图片
-  string product_name = 6; //商品名称
-  string product_brand = 7; //商品品牌
-  string product_sn = 8; //货号
-  int64 product_price = 9; //销售价格
-  int32 product_quantity = 10; //购买数量
-  int64 product_sku_id = 11; //商品sku编号
-  string product_sku_code = 12; //商品sku条码
-  int64 product_category_id = 13; //商品分类id
-  string promotion_name = 14; //商品促销名称
-  int64 promotion_amount = 15; //商品促销分解金额
-  int64 coupon_amount = 16; //优惠券优惠分解金额
-  int64 integration_amount = 17; //积分优惠分解金额
-  int64 real_amount = 18; //该商品经过优惠后的分解金额
-  int32 gift_integration = 19; //
-  int32 gift_growth = 20; //
-  string product_attr = 21; //商品销售属性:[{"key":"颜色","value":"颜色"},{"key":"容量","value":"4G"}]
+
+// 分页查询订单支付列表
+message QueryOrderPaymentListReq {
+  int64 order_id = 1; //订单ID
+  string order_no = 2; //订单编号
+  int32 pay_type = 3; //支付方式：1-支付宝，2-微信，3-银联
+  string transaction_id = 4; //支付流水号
+  int32 pay_status = 5; //支付状态：0-待支付，1-支付成功，2-支付失败
+  int32 page_num = 6; //第几页
+  int32 page_size = 7; //每页的数量
+}
+
+message OrderPaymentData {
+  int64 id = 1; //主键ID
+  int64 order_id = 2; //订单ID
+  string order_no = 3; //订单编号
+  int32 pay_type = 4; //支付方式：1-支付宝，2-微信，3-银联
+  string transaction_id = 5; //支付流水号
+  float total_amount = 6; //订单金额
+  float pay_amount = 7; //支付金额
+  int32 pay_status = 8; //支付状态：0-待支付，1-支付成功，2-支付失败
+  string pay_time = 9; //支付时间
+  string create_time = 10; //创建时间
+  string update_time = 11; //
+  int32 is_deleted = 12; //是否删除
 
 }
 
-// 分页查询订单中所包含的商品列表
-message QueryOrderItemListReq {
- int64 page_num = 1; //第几页
-  int64 page_size = 2; //每页的数量
-}
-
-message OrderItemListData {
-  int64 id = 1; //
-  int64 order_id = 2; //订单id
-  string order_sn = 3; //订单编号
-  int64 product_id = 4; //商品id
-  string product_pic = 5; //商品图片
-  string product_name = 6; //商品名称
-  string product_brand = 7; //商品品牌
-  string product_sn = 8; //货号
-  int64 product_price = 9; //销售价格
-  int32 product_quantity = 10; //购买数量
-  int64 product_sku_id = 11; //商品sku编号
-  string product_sku_code = 12; //商品sku条码
-  int64 product_category_id = 13; //商品分类id
-  string promotion_name = 14; //商品促销名称
-  int64 promotion_amount = 15; //商品促销分解金额
-  int64 coupon_amount = 16; //优惠券优惠分解金额
-  int64 integration_amount = 17; //积分优惠分解金额
-  int64 real_amount = 18; //该商品经过优惠后的分解金额
-  int32 gift_integration = 19; //
-  int32 gift_growth = 20; //
-  string product_attr = 21; //商品销售属性:[{"key":"颜色","value":"颜色"},{"key":"容量","value":"4G"}]
-
-}
-
-message QueryOrderItemListResp {
+message QueryOrderPaymentListResp {
   int64 total = 1;
-  repeated  OrderItemListData list = 2;
+  repeated  OrderPaymentData list = 2;
 }
 
-// 订单中所包含的商品
-service OrderItemService {
-  // 添加订单中所包含的商品
-  rpc AddOrderItem(AddOrderItemReq) returns (AddOrderItemResp){}
-  // 查询订单中所包含的商品详情
-   rpc QueryOrderItemDetail(QueryOrderItemDetailReq) returns (QueryOrderItemDetailResp){}
-  // 查询订单中所包含的商品列表
-  rpc QueryOrderItemList(QueryOrderItemListReq) returns (QueryOrderItemListResp){}
+// 订单支付
+service OrderPaymentService {
+  // 添加订单支付
+  rpc AddOrderPayment(OrderPaymentReq) returns (OrderPaymentResp){}
+  // 更新订单支付状态
+  rpc UpdateOrderPaymentStatus(UpdateOrderPaymentStatusReq) returns (OrderPaymentResp ){}
+  // 查询订单支付详情
+   rpc QueryOrderPaymentDetail(QueryOrderPaymentDetailReq) returns (OrderPaymentData){}
+  // 查询订单支付列表
+  rpc QueryOrderPaymentList(QueryOrderPaymentListReq) returns (QueryOrderPaymentListResp){}
 
-
-}
-
-
-// 添加订单操作历史记录
-message AddOrderOperateHistoryReq {
-  int64 id = 1; //
-  int64 order_id = 2; //订单id
-  string operate_man = 3; //操作人：用户；系统；后台管理员
-  int32 order_status = 5; //订单状态：0->待付款；1->待发货；2->已发货；3->已完成；4->已关闭；5->无效订单
-  string note = 6; //备注
 
 }
 
-message AddOrderOperateHistoryResp {
+
+// 添加/更新-退货/售后
+message OrderReturnReq {
+  int64 id = 1; //主键ID
+  int64 order_id = 2; //关联订单ID
+  string return_no = 3; //退货单号
+  int64 member_id = 4; //会员ID
+  int32 status = 5; //退货状态（0待审核 1审核通过 2已收货 3已退款 4已拒绝 5已关闭）
+  int32 type = 6; //售后类型（0退货退款 1仅退款 2换货）
+  string reason = 7; //退货原因
+  string description = 8; //问题描述
+  string proof_pic = 9; //凭证图片，逗号分隔
+  float refund_amount = 10; //退款金额
+  string return_name = 11; //退货人姓名
+  string return_phone = 12; //退货人电话
+  string company_address = 13; //退货收货地址
+  string create_time = 14; //申请时间
+  string handle_time = 15; //处理时间
+  string handle_note = 16; //处理备注
+  string handle_man = 17; //处理人员
+  string receive_time = 18; //收货时间
+  string receive_note = 19; //收货备注
+  string receive_man = 20; //收货人
+  string refund_time = 21; //退款时间
+  string close_time = 22; //关闭时间
+  string remark = 23; //备注
+  repeated OrderReturnItemData order_return_item = 24; //退货/售后明细
+}
+
+message OrderReturnItemData {
+  int64 id = 1; //主键ID
+  int64 return_id = 2; //退货单ID（关联oms_order_return.id）
+  int64 order_id = 3; //订单ID
+  int64 order_item_id = 4; //订单明细ID
+  int64 sku_id = 5; //商品SKU ID
+  string sku_name = 6; //商品名称
+  string sku_pic = 7; //商品图片
+  string sku_attrs = 8; //商品销售属性
+  int32 quantity = 9; //退货数量
+  float product_price = 10; //商品单价
+  float real_amount = 11; //实际退款金额
+  string reason = 12; //退货原因
+  string remark = 13; //备注
+
+}
+
+message OrderReturnResp {
   string pong = 1;
 }
 
-// 删除订单操作历史记录
-message DeleteOrderOperateHistoryReq {
+// 删除退货/售后
+message DeleteOrderReturnReq {
   repeated int64 ids = 1;
 }
 
-message DeleteOrderOperateHistoryResp {
-  string pong = 1;
+// 更新退货/售后状态
+message UpdateOrderReturnStatusReq {
+  int64 id = 1; //键ID
+  float refund_amount = 2; //退款金额
+  string receive_man = 3; //收货人
+  string handle_man = 4; //处理人员
+  int32 status = 5; //退货状态（0待审核 1审核通过 2已收货 3已退款 4已拒绝 5已关闭）
+  string company_address = 6; //退货收货地址
+  string receive_note = 7; //收货备注
+  string handle_note = 8; //处理备注
 }
 
-
-// 分页查询订单操作历史记录列表
-message QueryOrderOperateHistoryListReq {
-  int64 page_num = 1; //第几页
-  int64 page_size = 2; //每页的数量
-  int32 order_status = 3; //订单状态：0->待付款；1->待发货；2->已发货；3->已完成；4->已关闭；5->无效订单
-
-}
-
-message OrderOperateHistoryListData {
-  int64 id = 1; //
-  int64 order_id = 2; //订单id
-  string operate_man = 3; //操作人：用户；系统；后台管理员
-  string create_time = 4; //创建时间
-  int32 order_status = 5; //订单状态：0->待付款；1->待发货；2->已发货；3->已完成；4->已关闭；5->无效订单
-  string note = 6; //备注
-
-}
-
-message QueryOrderOperateHistoryListResp {
-  int64 total = 1;
-  repeated  OrderOperateHistoryListData list = 2;
-}
-
-// 订单操作历史记录
-service OrderOperateHistoryService {
-  // 添加订单操作历史记录
-  rpc AddOrderOperateHistory(AddOrderOperateHistoryReq) returns (AddOrderOperateHistoryResp){}
-  // 删除订单操作历史记录
-  rpc DeleteOrderOperateHistory(DeleteOrderOperateHistoryReq) returns (DeleteOrderOperateHistoryResp){}
-  // 查询订单操作历史记录列表
-  rpc QueryOrderOperateHistoryList(QueryOrderOperateHistoryListReq) returns (QueryOrderOperateHistoryListResp){}
-
-
-}
-
-
-// 添加订单退货申请
-message AddOrderReturnApplyReq {
-  int64 id = 1; //
-  int64 order_id = 2; //订单id
-  int64 company_address_id = 3; //收货地址表id
-  int64 product_id = 4; //退货商品id
-  string order_sn = 5; //订单编号
-  string member_username = 7; //会员用户名
-  int64 return_amount = 8; //退款金额
-  string return_name = 9; //退货人姓名
-  string return_phone = 10; //退货人电话
-  int32 status = 11; //申请状态：0->待处理；1->退货中；2->已完成；3->已拒绝
-  string handle_time = 12; //处理时间
-  string product_pic = 13; //商品图片
-  string product_name = 14; //商品名称
-  string product_brand = 15; //商品品牌
-  string product_attr = 16; //商品销售属性：颜色：红色；尺码：xl;
-  int32 product_count = 17; //退货数量
-  int64 product_price = 18; //商品单价
-  int64 product_real_price = 19; //商品实际支付单价
-  string reason = 20; //原因
-  string description = 21; //描述
-  string proof_pics = 22; //凭证图片，以逗号隔开
-  string handle_note = 23; //处理备注
-  string handle_man = 24; //处理人员
-  string receive_man = 25; //收货人
-  string receive_time = 26; //收货时间
-  string receive_note = 27; //收货备注
-
-}
-
-message AddOrderReturnApplyResp {
-  string pong = 1;
-}
-
-// 删除订单退货申请
-message DeleteOrderReturnApplyReq {
-  repeated int64 ids = 1;
-}
-
-message DeleteOrderReturnApplyResp {
-  string pong = 1;
-}
-
-// 更新订单退货申请
-message UpdateOrderReturnApplyReq {
-  int64 company_address_id = 1; //收货地址表id
-  string handle_man =2; //处理人员
-  string handle_note = 3; //处理备注
-  int64 id = 4; //
-  string receive_man = 5; //收货人
-  string receive_note = 6; //收货备注
-  int64 return_amount = 7; //退款金额
-  int32 status = 8; //申请状态：0->待处理；1->退货中；2->已完成；3->已拒绝
-
-}
-
-message UpdateOrderReturnApplyResp {
-  string pong = 1;
-}
-
-// 查询订单退货申请详情
-message QueryOrderReturnApplyDetailReq {
+// 查询退货/售后详情
+message QueryOrderReturnDetailReq {
     int64 id = 1;
 }
 
-message QueryOrderReturnApplyDetailResp {
-  int64 id = 1; //
-  int64 order_id = 2; //订单id
-  int64 company_address_id = 3; //收货地址表id
-  int64 product_id = 4; //退货商品id
-  string order_sn = 5; //订单编号
-  string create_time = 6; //申请时间
-  string member_username = 7; //会员用户名
-  int64 return_amount = 8; //退款金额
-  string return_name = 9; //退货人姓名
-  string return_phone = 10; //退货人电话
-  int32 status = 11; //申请状态：0->待处理；1->退货中；2->已完成；3->已拒绝
-  string handle_time = 12; //处理时间
-  string product_pic = 13; //商品图片
-  string product_name = 14; //商品名称
-  string product_brand = 15; //商品品牌
-  string product_attr = 16; //商品销售属性：颜色：红色；尺码：xl;
-  int32 product_count = 17; //退货数量
-  int64 product_price = 18; //商品单价
-  int64 product_real_price = 19; //商品实际支付单价
-  string reason = 20; //原因
-  string description = 21; //描述
-  string proof_pics = 22; //凭证图片，以逗号隔开
-  string handle_note = 23; //处理备注
-  string handle_man = 24; //处理人员
-  string receive_man = 25; //收货人
-  string receive_time = 26; //收货时间
-  string receive_note = 27; //收货备注
 
+// 分页查询退货/售后列表
+message QueryOrderReturnListReq {
+  int64 order_id = 1; //关联订单ID
+  string return_no = 2; //退货单号
+  int64 member_id = 3; //会员ID
+  int32 status = 4; //退货状态（0待审核 1审核通过 2已收货 3已退款 4已拒绝 5已关闭）
+  int32 type = 5; //售后类型（0退货退款 1仅退款 2换货）
+  string return_name = 6; //退货人姓名
+  string return_phone = 7; //退货人电话
+  int32 page_num = 8; //第几页
+  int32 page_size = 9; //每页的数量
 }
 
-// 分页查询订单退货申请列表
-message QueryOrderReturnApplyListReq {
-  int64 page_num = 1; //第几页
-  int64 page_size = 2; //每页的数量
-  string handle_man = 3; //处理人员
-  string member_username = 4; //会员用户名
-  string order_sn = 5; //订单编号
-  string handle_time = 6; //处理时间
-  int32 status = 7; //申请状态：0->待处理；1->退货中；2->已完成；3->已拒绝
-  string create_time = 8; //申请时间
-  string return_name = 9; //退货人姓名
-  string return_phone = 10; //退货人电话
+message OrderReturnData {
+  int64 id = 1; //主键ID
+  int64 order_id = 2; //关联订单ID
+  string return_no = 3; //退货单号
+  int64 member_id = 4; //会员ID
+  int32 status = 5; //退货状态（0待审核 1审核通过 2已收货 3已退款 4已拒绝 5已关闭）
+  int32 type = 6; //售后类型（0退货退款 1仅退款 2换货）
+  string reason = 7; //退货原因
+  string description = 8; //问题描述
+  string proof_pic = 9; //凭证图片，逗号分隔
+  float refund_amount = 10; //退款金额
+  string return_name = 11; //退货人姓名
+  string return_phone = 12; //退货人电话
+  string company_address = 13; //退货收货地址
+  string create_time = 14; //申请时间
+  string handle_time = 15; //处理时间
+  string handle_note = 16; //处理备注
+  string handle_man = 17; //处理人员
+  string receive_time = 18; //收货时间
+  string receive_note = 19; //收货备注
+  string receive_man = 20; //收货人
+  string refund_time = 21; //退款时间
+  string close_time = 22; //关闭时间
+  string remark = 23; //备注
+  repeated OrderReturnItemData order_return_item = 24; //退货/售后明细
 }
 
-message OrderReturnApplyListData {
-  int64 id = 1; //
-  int64 order_id = 2; //订单id
-  int64 company_address_id = 3; //收货地址表id
-  int64 product_id = 4; //退货商品id
-  string order_sn = 5; //订单编号
-  string create_time = 6; //申请时间
-  string member_username = 7; //会员用户名
-  int64 return_amount = 8; //退款金额
-  string return_name = 9; //退货人姓名
-  string return_phone = 10; //退货人电话
-  int32 status = 11; //申请状态：0->待处理；1->退货中；2->已完成；3->已拒绝
-  string handle_time = 12; //处理时间
-  string product_pic = 13; //商品图片
-  string product_name = 14; //商品名称
-  string product_brand = 15; //商品品牌
-  string product_attr = 16; //商品销售属性：颜色：红色；尺码：xl;
-  int32 product_count = 17; //退货数量
-  int64 product_price = 18; //商品单价
-  int64 product_real_price = 19; //商品实际支付单价
-  string reason = 20; //原因
-  string description = 21; //描述
-  string proof_pics = 22; //凭证图片，以逗号隔开
-  string handle_note = 23; //处理备注
-  string handle_man = 24; //处理人员
-  string receive_man = 25; //收货人
-  string receive_time = 26; //收货时间
-  string receive_note = 27; //收货备注
-
-}
-
-message QueryOrderReturnApplyListResp {
+message QueryOrderReturnListResp {
   int64 total = 1;
-  repeated  OrderReturnApplyListData list = 2;
+  repeated  OrderReturnData list = 2;
 }
 
-// 订单退货申请
-service OrderReturnApplyService {
-  // 添加订单退货申请
-  rpc AddOrderReturnApply(AddOrderReturnApplyReq) returns (AddOrderReturnApplyResp){}
-  // 删除订单退货申请
-  rpc DeleteOrderReturnApply(DeleteOrderReturnApplyReq) returns (DeleteOrderReturnApplyResp){}
-  // 更新订单退货申请
-  rpc UpdateOrderReturnApply(UpdateOrderReturnApplyReq) returns (UpdateOrderReturnApplyResp ){}
-  // 查询订单退货申请详情
-   rpc QueryOrderReturnApplyDetail(QueryOrderReturnApplyDetailReq) returns (QueryOrderReturnApplyDetailResp){}
-  // 查询订单退货申请列表
-  rpc QueryOrderReturnApplyList(QueryOrderReturnApplyListReq) returns (QueryOrderReturnApplyListResp){}
+// 退货/售后
+service OrderReturnService {
+  // 添加退货/售后
+  rpc AddOrderReturn(OrderReturnReq) returns (OrderReturnResp){}
+  // 删除退货/售后
+  rpc DeleteOrderReturn(DeleteOrderReturnReq) returns (OrderReturnResp){}
+  // 更新退货/售后
+  rpc UpdateOrderReturn(OrderReturnReq) returns (OrderReturnResp ){}
+  // 更新退货/售后状态
+  rpc UpdateOrderReturnStatus(UpdateOrderReturnStatusReq) returns (OrderReturnResp ){}
+  // 查询退货/售后详情
+   rpc QueryOrderReturnDetail(QueryOrderReturnDetailReq) returns (OrderReturnData){}
+  // 查询退货/售后列表
+  rpc QueryOrderReturnList(QueryOrderReturnListReq) returns (QueryOrderReturnListResp){}
 
 
 }
