@@ -5,13 +5,20 @@ import (
 
 	"github.com/feihua/zero-admin/api/front/internal/logic/order/cart"
 	"github.com/feihua/zero-admin/api/front/internal/svc"
+	"github.com/feihua/zero-admin/api/front/internal/types"
 	"github.com/zeromicro/go-zero/rest/httpx"
 )
 
-func CarItemListHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
+func AddCartItemHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		l := cart.NewCarItemListLogic(r.Context(), svcCtx)
-		resp, err := l.CarItemList()
+		var req types.CartItemReq
+		if err := httpx.Parse(r, &req); err != nil {
+			httpx.ErrorCtx(r.Context(), w, err)
+			return
+		}
+
+		l := cart.NewAddCartItemLogic(r.Context(), svcCtx)
+		resp, err := l.AddCartItem(&req)
 		if err != nil {
 			httpx.ErrorCtx(r.Context(), w, err)
 		} else {

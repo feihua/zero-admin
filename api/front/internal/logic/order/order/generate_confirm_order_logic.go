@@ -113,13 +113,13 @@ func (l *GenerateConfirmOrderLogic) GenerateConfirmOrder(req *types.GenerateConf
 		Id: 1,
 	})
 	// 6.计算总金额、活动优惠、应付金额
-	var totalAmount int64 = 0
-	var freightAmount int64 = 0
-	var promotionAmount int64 = 0
-	var payAmount int64 = 0
+	var totalAmount float32 = 0
+	var freightAmount float32 = 0
+	var promotionAmount float32 = 0
+	var payAmount float32 = 0
 	for _, item := range cartPromotionItemList {
-		totalAmount = totalAmount + item.Price*int64(item.Quantity)
-		promotionAmount = promotionAmount + item.ReduceAmount*int64(item.Quantity)
+		totalAmount = totalAmount + item.Price*float32(item.Quantity)
+		promotionAmount = promotionAmount + float32(item.ReduceAmount)*float32(item.Quantity)
 	}
 	payAmount = totalAmount - promotionAmount
 	return &types.GenerateConfirmOrderResp{

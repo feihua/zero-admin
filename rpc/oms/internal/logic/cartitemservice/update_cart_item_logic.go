@@ -8,6 +8,7 @@ import (
 	"github.com/feihua/zero-admin/rpc/oms/internal/svc"
 	"github.com/feihua/zero-admin/rpc/oms/omsclient"
 	"github.com/zeromicro/go-zero/core/logc"
+	"time"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -32,33 +33,38 @@ func NewUpdateCartItemLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Up
 }
 
 // UpdateCartItem 更新购物车
-// 1.先更加id删除原来的
+// 1.先删除原来的
 // 2.添加新的
-func (l *UpdateCartItemLogic) UpdateCartItem(in *omsclient.UpdateCartItemReq) (*omsclient.UpdateCartItemResp, error) {
+func (l *UpdateCartItemLogic) UpdateCartItem(in *omsclient.UpdateCartItemReq) (*omsclient.CartItemResp, error) {
 	q := query.OmsCartItem
-	// 1.先更加id删除原来的
+	// 1.先删除原来的
 	_, err := q.WithContext(l.ctx).Where(q.ID.Eq(in.Id)).Delete()
 	if err != nil {
 		return nil, err
 	}
 
+	now := time.Now()
+	expireTime := now.AddDate(0, 0, l.svcCtx.C.Cart.Timeout)
 	// 2.添加新的
 	err = q.WithContext(l.ctx).Create(&model.OmsCartItem{
-		ProductID:         in.ProductId,         // 商品id
-		ProductSkuID:      in.ProductSkuId,      // 商品库存id
-		MemberID:          in.MemberId,          // 会员id
+		ID:                in.Id,                // 主键ID
+		MemberID:          in.MemberId,          // 会员ID
+		ProductID:         in.ProductId,         // 商品ID
+		ProductSkuID:      in.ProductSkuId,      // 商品SKU ID
 		Quantity:          in.Quantity,          // 购买数量
-		Price:             in.Price,             // 添加到购物车的价格
-		ProductPic:        in.ProductPic,        // 商品主图
+		Price:             float64(in.Price),    // 添加到购物车时的价格
+		Selected:          in.Selected,          // 是否选中 0-未选中 1-选中
 		ProductName:       in.ProductName,       // 商品名称
-		ProductSubTitle:   in.ProductSubTitle,   // 商品副标题（卖点）
-		ProductSkuCode:    in.ProductSkuCode,    // 商品sku条码
-		MemberNickname:    in.MemberNickname,    // 会员昵称
-		DeleteStatus:      in.DeleteStatus,      // 是否删除
-		ProductCategoryID: in.ProductCategoryId, // 商品分类
+		ProductSubTitle:   in.ProductSubTitle,   // 商品副标题
+		ProductPic:        in.ProductPic,        // 商品主图URL
+		ProductSkuCode:    in.ProductSkuCode,    // 商品SKU编码
+		ProductSn:         in.ProductSn,         // 商品货号
 		ProductBrand:      in.ProductBrand,      // 商品品牌
-		ProductSn:         in.ProductSn,         // 货号
-		ProductAttr:       in.ProductAttr,       // 商品销售属性:[{"key":"颜色","value":"颜色"},{"key":"容量","value":"4G"}]
+		ProductCategoryID: in.ProductCategoryId, // 商品分类ID
+		ProductAttr:       in.ProductAttr,       // 商品销售属性JSON
+		MemberNickname:    in.MemberNickname,    // 会员昵称
+		Source:            in.Source,            // 来源 1-PC 2-H5 3-小程序 4-APP
+		ExpireTime:        expireTime,           // 过期时间
 	})
 
 	if err != nil {
@@ -66,5 +72,5 @@ func (l *UpdateCartItemLogic) UpdateCartItem(in *omsclient.UpdateCartItemReq) (*
 		return nil, errors.New("更新购物车失败")
 	}
 
-	return &omsclient.UpdateCartItemResp{}, nil
+	return &omsclient.CartItemResp{}, nil
 }

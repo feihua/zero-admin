@@ -23,37 +23,37 @@ func NewCartItemServiceServer(svcCtx *svc.ServiceContext) *CartItemServiceServer
 	}
 }
 
-// 添加购物车表
-func (s *CartItemServiceServer) AddCartItem(ctx context.Context, in *omsclient.AddCartItemReq) (*omsclient.AddCartItemResp, error) {
+// 添加购物车
+func (s *CartItemServiceServer) AddCartItem(ctx context.Context, in *omsclient.AddCartItemReq) (*omsclient.CartItemResp, error) {
 	l := cartitemservicelogic.NewAddCartItemLogic(ctx, s.svcCtx)
 	return l.AddCartItem(in)
 }
 
-// 删除购物车表
-func (s *CartItemServiceServer) DeleteCartItem(ctx context.Context, in *omsclient.DeleteCartItemReq) (*omsclient.DeleteCartItemResp, error) {
+// 删除购物车
+func (s *CartItemServiceServer) DeleteCartItem(ctx context.Context, in *omsclient.DeleteCartItemReq) (*omsclient.CartItemResp, error) {
 	l := cartitemservicelogic.NewDeleteCartItemLogic(ctx, s.svcCtx)
 	return l.DeleteCartItem(in)
 }
 
-// 更新购物车表
-func (s *CartItemServiceServer) UpdateCartItem(ctx context.Context, in *omsclient.UpdateCartItemReq) (*omsclient.UpdateCartItemResp, error) {
+// 更新购物车
+func (s *CartItemServiceServer) UpdateCartItem(ctx context.Context, in *omsclient.UpdateCartItemReq) (*omsclient.CartItemResp, error) {
 	l := cartitemservicelogic.NewUpdateCartItemLogic(ctx, s.svcCtx)
 	return l.UpdateCartItem(in)
 }
 
 // 修改购物车中某个商品的数量
-func (s *CartItemServiceServer) UpdateCartItemQuantity(ctx context.Context, in *omsclient.UpdateCartItemQuantityReq) (*omsclient.UpdateCartItemQuantityResp, error) {
+func (s *CartItemServiceServer) UpdateCartItemQuantity(ctx context.Context, in *omsclient.UpdateCartItemQuantityReq) (*omsclient.CartItemResp, error) {
 	l := cartitemservicelogic.NewUpdateCartItemQuantityLogic(ctx, s.svcCtx)
 	return l.UpdateCartItemQuantity(in)
 }
 
-// 查询购物车表详情
-func (s *CartItemServiceServer) QueryCartItemDetail(ctx context.Context, in *omsclient.QueryCartItemDetailReq) (*omsclient.QueryCartItemDetailResp, error) {
+// 查询购物车详情
+func (s *CartItemServiceServer) QueryCartItemDetail(ctx context.Context, in *omsclient.QueryCartItemDetailReq) (*omsclient.CartItemData, error) {
 	l := cartitemservicelogic.NewQueryCartItemDetailLogic(ctx, s.svcCtx)
 	return l.QueryCartItemDetail(in)
 }
 
-// 查询购物车表列表
+// 查询购物车列
 func (s *CartItemServiceServer) QueryCartItemList(ctx context.Context, in *omsclient.QueryCartItemListReq) (*omsclient.QueryCartItemListResp, error) {
 	l := cartitemservicelogic.NewQueryCartItemListLogic(ctx, s.svcCtx)
 	return l.QueryCartItemList(in)

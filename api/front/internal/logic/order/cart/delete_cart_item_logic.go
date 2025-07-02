@@ -14,42 +14,35 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// CarItemClearLogic 清空购物车
-/*
-Author: LiuFeiHua
-Date: 2025/6/20 10:21
-*/
-type CarItemClearLogic struct {
+type DeleteCartItemLogic struct {
 	logx.Logger
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
 }
 
-func NewCarItemClearLogic(ctx context.Context, svcCtx *svc.ServiceContext) *CarItemClearLogic {
-	return &CarItemClearLogic{
+func NewDeleteCartItemLogic(ctx context.Context, svcCtx *svc.ServiceContext) *DeleteCartItemLogic {
+	return &DeleteCartItemLogic{
 		Logger: logx.WithContext(ctx),
 		ctx:    ctx,
 		svcCtx: svcCtx,
 	}
 }
 
-// CarItemClear 清空购物车
-func (l *CarItemClearLogic) CarItemClear() (resp *types.CartItemClearResp, err error) {
+// DeleteCartItem 删除购物车中的某个商品
+func (l *DeleteCartItemLogic) DeleteCartItem(req *types.CartItemDeleteReq) (resp *types.CartItemResp, err error) {
 	memberId, err := common.GetMemberId(l.ctx)
 	if err != nil {
 		return nil, err
 	}
-
-	_, err = l.svcCtx.CartItemService.DeleteCartItem(l.ctx, &omsclient.DeleteCartItemReq{MemberId: memberId})
+	_, err = l.svcCtx.CartItemService.DeleteCartItem(l.ctx, &omsclient.DeleteCartItemReq{MemberId: memberId, Ids: req.Ids})
 
 	if err != nil {
-		logc.Errorf(l.ctx, "清空购物车失败,参数memberId: %+v,异常：%s", memberId, err.Error())
+		logc.Errorf(l.ctx, "删除购物车中的某个商品失败,参数: %+v,异常：%s", req, err.Error())
 		s, _ := status.FromError(err)
 		return nil, errorx.NewDefaultError(s.Message())
 	}
-
-	return &types.CartItemClearResp{
+	return &types.CartItemResp{
 		Code:    0,
-		Message: "清空购物车成功",
+		Message: "操作成功",
 	}, nil
 }

@@ -10,26 +10,29 @@ import (
 
 const TableNameOmsCartItem = "oms_cart_item"
 
-// OmsCartItem 购物车
+// OmsCartItem 购物车表
 type OmsCartItem struct {
-	ID                int64      `gorm:"column:id;primaryKey;autoIncrement:true" json:"id"`
-	ProductID         int64      `gorm:"column:product_id;not null;comment:商品id" json:"product_id"`                                                             // 商品id
-	ProductSkuID      int64      `gorm:"column:product_sku_id;not null;comment:商品库存id" json:"product_sku_id"`                                                   // 商品库存id
-	MemberID          int64      `gorm:"column:member_id;not null;comment:会员id" json:"member_id"`                                                               // 会员id
-	Quantity          int32      `gorm:"column:quantity;not null;comment:购买数量" json:"quantity"`                                                                 // 购买数量
-	Price             int64      `gorm:"column:price;not null;comment:添加到购物车的价格" json:"price"`                                                                  // 添加到购物车的价格
-	ProductPic        string     `gorm:"column:product_pic;not null;comment:商品主图" json:"product_pic"`                                                           // 商品主图
-	ProductName       string     `gorm:"column:product_name;not null;comment:商品名称" json:"product_name"`                                                         // 商品名称
-	ProductSubTitle   string     `gorm:"column:product_sub_title;not null;comment:商品副标题（卖点）" json:"product_sub_title"`                                          // 商品副标题（卖点）
-	ProductSkuCode    string     `gorm:"column:product_sku_code;not null;comment:商品sku条码" json:"product_sku_code"`                                              // 商品sku条码
-	MemberNickname    string     `gorm:"column:member_nickname;not null;comment:会员昵称" json:"member_nickname"`                                                   // 会员昵称
-	DeleteStatus      int32      `gorm:"column:delete_status;not null;comment:是否删除" json:"delete_status"`                                                       // 是否删除
-	ProductCategoryID int64      `gorm:"column:product_category_id;not null;comment:商品分类" json:"product_category_id"`                                           // 商品分类
-	ProductBrand      string     `gorm:"column:product_brand;not null;comment:商品品牌" json:"product_brand"`                                                       // 商品品牌
-	ProductSn         string     `gorm:"column:product_sn;not null;comment:货号" json:"product_sn"`                                                               // 货号
-	ProductAttr       string     `gorm:"column:product_attr;not null;comment:商品销售属性:[{"key":"颜色","value":"颜色"},{"key":"容量","value":"4G"}]" json:"product_attr"` // 商品销售属性:[{"key":"颜色","value":"颜色"},{"key":"容量","value":"4G"}]
-	CreateTime        time.Time  `gorm:"column:create_time;not null;default:CURRENT_TIMESTAMP;comment:创建时间" json:"create_time"`                                 // 创建时间
-	UpdateTime        *time.Time `gorm:"column:update_time;comment:更新时间" json:"update_time"`                                                                    // 更新时间
+	ID                int64      `gorm:"column:id;primaryKey;autoIncrement:true;comment:主键ID" json:"id"`                        // 主键ID
+	MemberID          int64      `gorm:"column:member_id;not null;comment:会员ID" json:"member_id"`                               // 会员ID
+	ProductID         int64      `gorm:"column:product_id;not null;comment:商品ID" json:"product_id"`                             // 商品ID
+	ProductSkuID      int64      `gorm:"column:product_sku_id;not null;comment:商品SKU ID" json:"product_sku_id"`                 // 商品SKU ID
+	Quantity          int32      `gorm:"column:quantity;not null;default:1;comment:购买数量" json:"quantity"`                       // 购买数量
+	Price             float64    `gorm:"column:price;not null;comment:添加到购物车时的价格" json:"price"`                                 // 添加到购物车时的价格
+	Selected          int32      `gorm:"column:selected;not null;default:1;comment:是否选中 0-未选中 1-选中" json:"selected"`            // 是否选中 0-未选中 1-选中
+	ProductName       string     `gorm:"column:product_name;not null;comment:商品名称" json:"product_name"`                         // 商品名称
+	ProductSubTitle   string     `gorm:"column:product_sub_title;not null;comment:商品副标题" json:"product_sub_title"`              // 商品副标题
+	ProductPic        string     `gorm:"column:product_pic;not null;comment:商品主图URL" json:"product_pic"`                        // 商品主图URL
+	ProductSkuCode    string     `gorm:"column:product_sku_code;not null;comment:商品SKU编码" json:"product_sku_code"`              // 商品SKU编码
+	ProductSn         string     `gorm:"column:product_sn;not null;comment:商品货号" json:"product_sn"`                             // 商品货号
+	ProductBrand      string     `gorm:"column:product_brand;not null;comment:商品品牌" json:"product_brand"`                       // 商品品牌
+	ProductCategoryID int64      `gorm:"column:product_category_id;not null;comment:商品分类ID" json:"product_category_id"`         // 商品分类ID
+	ProductAttr       string     `gorm:"column:product_attr;not null;comment:商品销售属性JSON" json:"product_attr"`                   // 商品销售属性JSON
+	MemberNickname    string     `gorm:"column:member_nickname;not null;comment:会员昵称" json:"member_nickname"`                   // 会员昵称
+	Source            int32      `gorm:"column:source;not null;default:1;comment:来源 1-PC 2-H5 3-小程序 4-APP" json:"source"`       // 来源 1-PC 2-H5 3-小程序 4-APP
+	DeleteStatus      int32      `gorm:"column:delete_status;not null;comment:删除状态 0-正常 1-删除" json:"delete_status"`             // 删除状态 0-正常 1-删除
+	ExpireTime        time.Time  `gorm:"column:expire_time;not null;comment:过期时间" json:"expire_time"`                           // 过期时间
+	CreateTime        time.Time  `gorm:"column:create_time;not null;default:CURRENT_TIMESTAMP;comment:创建时间" json:"create_time"` // 创建时间
+	UpdateTime        *time.Time `gorm:"column:update_time;comment:更新时间" json:"update_time"`                                    // 更新时间
 }
 
 // TableName OmsCartItem's table name

@@ -5,6 +5,7 @@ import (
 	"errors"
 	"github.com/feihua/zero-admin/rpc/oms/gen/query"
 	"github.com/zeromicro/go-zero/core/logc"
+	"time"
 
 	"github.com/feihua/zero-admin/rpc/oms/internal/svc"
 	"github.com/feihua/zero-admin/rpc/oms/omsclient"
@@ -31,18 +32,19 @@ func NewDeleteCartItemLogic(ctx context.Context, svcCtx *svc.ServiceContext) *De
 	}
 }
 
-// DeleteCartItem 删除购物车
-func (l *DeleteCartItemLogic) DeleteCartItem(in *omsclient.DeleteCartItemReq) (*omsclient.DeleteCartItemResp, error) {
-	q := query.OmsCartItem.WithContext(l.ctx).Where(query.OmsCartItem.MemberID.Eq(in.MemberId))
+// DeleteCartItem 删除/清空购物车
+func (l *DeleteCartItemLogic) DeleteCartItem(in *omsclient.DeleteCartItemReq) (*omsclient.CartItemResp, error) {
+	item := query.OmsCartItem
+	q := item.WithContext(l.ctx).Where(item.MemberID.Eq(in.MemberId))
 	if len(in.Ids) > 0 {
-		q = q.Where(query.OmsCartItem.ID.In(in.Ids...))
+		q = q.Where(item.ID.In(in.Ids...))
 	}
-	_, err := q.Delete()
+	_, err := q.UpdateSimple(item.DeleteStatus.Value(1), item.UpdateTime.Value(time.Now()))
 
 	if err != nil {
 		logc.Errorf(l.ctx, "删除购物车失败,参数:%+v,异常:%s", in, err.Error())
 		return nil, errors.New("删除购物车失败")
 	}
 
-	return &omsclient.DeleteCartItemResp{}, nil
+	return &omsclient.CartItemResp{}, nil
 }

@@ -8,10 +8,10 @@ import (
 	"github.com/zeromicro/go-zero/rest/httpx"
 )
 
-func CarItemClearHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
+func QueryCarItemListHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		l := cart.NewCarItemClearLogic(r.Context(), svcCtx)
-		resp, err := l.CarItemClear()
+		l := cart.NewQueryCarItemListLogic(r.Context(), svcCtx)
+		resp, err := l.QueryCarItemList()
 		if err != nil {
 			httpx.ErrorCtx(r.Context(), w, err)
 		} else {

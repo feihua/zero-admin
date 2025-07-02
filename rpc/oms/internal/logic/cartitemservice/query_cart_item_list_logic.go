@@ -41,33 +41,36 @@ func (l *QueryCartItemListLogic) QueryCartItemList(in *omsclient.QueryCartItemLi
 		logc.Errorf(l.ctx, "查询购物车列表失败,参数:%+v,异常:%s", in, err.Error())
 		return nil, errors.New("查询购物车列表失败")
 	}
-	var list []*omsclient.CartItemListData
+	var list []*omsclient.CartItemData
 	for _, item := range result {
-		list = append(list, &omsclient.CartItemListData{
-			Id:                item.ID,                                 //
-			ProductId:         item.ProductID,                          // 商品id
-			ProductSkuId:      item.ProductSkuID,                       // 商品库存id
-			MemberId:          item.MemberID,                           // 会员id
+		data := &omsclient.CartItemData{
+			Id:                item.ID,                                 // 主键ID
+			MemberId:          item.MemberID,                           // 会员ID
+			ProductId:         item.ProductID,                          // 商品ID
+			ProductSkuId:      item.ProductSkuID,                       // 商品SKU ID
 			Quantity:          item.Quantity,                           // 购买数量
-			Price:             item.Price,                              // 添加到购物车的价格
-			ProductPic:        item.ProductPic,                         // 商品主图
+			Price:             float32(item.Price),                     // 添加到购物车时的价格
+			Selected:          item.Selected,                           // 是否选中 0-未选中 1-选中
 			ProductName:       item.ProductName,                        // 商品名称
-			ProductSubTitle:   item.ProductSubTitle,                    // 商品副标题（卖点）
-			ProductSkuCode:    item.ProductSkuCode,                     // 商品sku条码
+			ProductSubTitle:   item.ProductSubTitle,                    // 商品副标题
+			ProductPic:        item.ProductPic,                         // 商品主图URL
+			ProductSkuCode:    item.ProductSkuCode,                     // 商品SKU编码
+			ProductSn:         item.ProductSn,                          // 商品货号
+			ProductBrand:      item.ProductBrand,                       // 商品品牌
+			ProductCategoryId: item.ProductCategoryID,                  // 商品分类ID
+			ProductAttr:       item.ProductAttr,                        // 商品销售属性JSON
 			MemberNickname:    item.MemberNickname,                     // 会员昵称
+			Source:            item.Source,                             // 来源 1-PC 2-H5 3-小程序 4-APP
+			DeleteStatus:      item.DeleteStatus,                       // 删除状态 0-正常 1-删除
+			ExpireTime:        time_util.TimeToStr(item.ExpireTime),    // 过期时间
 			CreateTime:        time_util.TimeToStr(item.CreateTime),    // 创建时间
 			UpdateTime:        time_util.TimeToString(item.UpdateTime), // 更新时间
-			DeleteStatus:      item.DeleteStatus,                       // 是否删除
-			ProductCategoryId: item.ProductCategoryID,                  // 商品分类
-			ProductBrand:      item.ProductBrand,                       // 商品品牌
-			ProductSn:         item.ProductSn,                          // 货号
-			ProductAttr:       item.ProductAttr,                        // 商品销售属性:[{"key":"颜色","value":"颜色"},{"key":"容量","value":"4G"}]
-		})
+		}
+		list = append(list, data)
 	}
 
 	return &omsclient.QueryCartItemListResp{
-		Total: 0,
-		List:  list,
+		List: list,
 	}, nil
 
 }

@@ -92,7 +92,7 @@ func NewServiceContext(c config.Config) *ServiceContext {
 
 	go func() {
 		rabbitmq.ConsumeSimple("order.delay.cancel.queue", func(body []byte) {
-			order.OrderCancel(context.Background(), body, skuService, orderService, couponRecordService, memberInfoService)
+			order.OrderDelayCancel(context.Background(), body, skuService, orderService, couponRecordService, memberInfoService)
 		})
 	}()
 
@@ -115,7 +115,7 @@ func NewServiceContext(c config.Config) *ServiceContext {
 
 	go func() {
 		rabbitmq.ConsumeSimple("order.cancel.queue", func(body []byte) {
-			order.OrderCancelByUser(context.Background(), body)
+			order.OrderCancel(context.Background(), body)
 		})
 	}()
 

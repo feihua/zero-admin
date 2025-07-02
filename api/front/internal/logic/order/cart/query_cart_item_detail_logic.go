@@ -13,27 +13,22 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-// CartProductLogic 获取购物车中某个商品的规格,用于重选规格
-/*
-Author: LiuFeiHua
-Date: 2025/6/20 10:28
-*/
-type CartProductLogic struct {
+type QueryCartItemDetailLogic struct {
 	logx.Logger
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
 }
 
-func NewCartProductLogic(ctx context.Context, svcCtx *svc.ServiceContext) *CartProductLogic {
-	return &CartProductLogic{
+func NewQueryCartItemDetailLogic(ctx context.Context, svcCtx *svc.ServiceContext) *QueryCartItemDetailLogic {
+	return &QueryCartItemDetailLogic{
 		Logger: logx.WithContext(ctx),
 		ctx:    ctx,
 		svcCtx: svcCtx,
 	}
 }
 
-// CartProduct 获取购物车中某个商品的规格,用于重选规格
-func (l *CartProductLogic) CartProduct(req *types.CartProductReq) (resp *types.CartProductResp, err error) {
+// QueryCartItemDetail 获取购物车中某个商品的规格,用于重选规格
+func (l *QueryCartItemDetailLogic) QueryCartItemDetail(req *types.CartProductReq) (resp *types.CartProductResp, err error) {
 	productResp, err := l.svcCtx.ProductSpuService.QueryProductSpuDetail(l.ctx, &pmsclient.QueryProductSpuDetailReq{
 		Id: req.ProductId,
 	})
@@ -86,28 +81,28 @@ func buildSkuStockListData(resp *pmsclient.QueryProductSpuDetailResp) []types.Ca
 	for _, detail := range resp.SkuStockList {
 
 		list = append(list, types.CartItemSkuStockList{
-			Id:                 detail.Id,                      // 商品SpuId
-			SpuId:              detail.SpuId,                   // 商品SpuId
-			Name:               detail.Name,                    // SKU名称
-			SkuCode:            detail.SkuCode,                 // SKU编码
-			MainPic:            detail.MainPic,                 // 主图
-			AlbumPics:          detail.AlbumPics,               // 图片集
-			Price:              float64(detail.Price),          // 价格
-			PromotionPrice:     float64(detail.PromotionPrice), // 单品促销价格
-			PromotionStartTime: detail.PromotionStartTime,      // 促销开始时间
-			PromotionEndTime:   detail.PromotionEndTime,        // 促销结束时间
-			Stock:              detail.Stock,                   // 库存
-			LowStock:           detail.LowStock,                // 预警库存
-			SpecData:           detail.SpecData,                // 规格数据
-			Weight:             float64(detail.Weight),         // 重量(kg)
-			PublishStatus:      detail.PublishStatus,           // 上架状态：0-下架，1-上架
-			VerifyStatus:       detail.VerifyStatus,            // 审核状态：0-未审核，1-审核通过，2-审核不通过
-			Sort:               detail.Sort,                    // 排序
-			Sales:              detail.Sales,                   // 销量
-			CreateBy:           detail.CreateBy,                // 创建人ID
-			CreateTime:         detail.CreateTime,              // 创建时间
-			UpdateBy:           detail.UpdateBy,                // 更新人ID
-			UpdateTime:         detail.UpdateTime,              // 更新时间
+			Id:                 detail.Id,                 // 商品SpuId
+			SpuId:              detail.SpuId,              // 商品SpuId
+			Name:               detail.Name,               // SKU名称
+			SkuCode:            detail.SkuCode,            // SKU编码
+			MainPic:            detail.MainPic,            // 主图
+			AlbumPics:          detail.AlbumPics,          // 图片集
+			Price:              detail.Price,              // 价格
+			PromotionPrice:     detail.PromotionPrice,     // 单品促销价格
+			PromotionStartTime: detail.PromotionStartTime, // 促销开始时间
+			PromotionEndTime:   detail.PromotionEndTime,   // 促销结束时间
+			Stock:              detail.Stock,              // 库存
+			LowStock:           detail.LowStock,           // 预警库存
+			SpecData:           detail.SpecData,           // 规格数据
+			Weight:             detail.Weight,             // 重量(kg)
+			PublishStatus:      detail.PublishStatus,      // 上架状态：0-下架，1-上架
+			VerifyStatus:       detail.VerifyStatus,       // 审核状态：0-未审核，1-审核通过，2-审核不通过
+			Sort:               detail.Sort,               // 排序
+			Sales:              detail.Sales,              // 销量
+			CreateBy:           detail.CreateBy,           // 创建人ID
+			CreateTime:         detail.CreateTime,         // 创建时间
+			UpdateBy:           detail.UpdateBy,           // 更新人ID
+			UpdateTime:         detail.UpdateTime,         // 更新时间
 		})
 	}
 

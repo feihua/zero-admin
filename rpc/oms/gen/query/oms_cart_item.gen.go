@@ -29,21 +29,24 @@ func newOmsCartItem(db *gorm.DB, opts ...gen.DOOption) omsCartItem {
 	tableName := _omsCartItem.omsCartItemDo.TableName()
 	_omsCartItem.ALL = field.NewAsterisk(tableName)
 	_omsCartItem.ID = field.NewInt64(tableName, "id")
+	_omsCartItem.MemberID = field.NewInt64(tableName, "member_id")
 	_omsCartItem.ProductID = field.NewInt64(tableName, "product_id")
 	_omsCartItem.ProductSkuID = field.NewInt64(tableName, "product_sku_id")
-	_omsCartItem.MemberID = field.NewInt64(tableName, "member_id")
 	_omsCartItem.Quantity = field.NewInt32(tableName, "quantity")
-	_omsCartItem.Price = field.NewInt64(tableName, "price")
-	_omsCartItem.ProductPic = field.NewString(tableName, "product_pic")
+	_omsCartItem.Price = field.NewFloat64(tableName, "price")
+	_omsCartItem.Selected = field.NewInt32(tableName, "selected")
 	_omsCartItem.ProductName = field.NewString(tableName, "product_name")
 	_omsCartItem.ProductSubTitle = field.NewString(tableName, "product_sub_title")
+	_omsCartItem.ProductPic = field.NewString(tableName, "product_pic")
 	_omsCartItem.ProductSkuCode = field.NewString(tableName, "product_sku_code")
-	_omsCartItem.MemberNickname = field.NewString(tableName, "member_nickname")
-	_omsCartItem.DeleteStatus = field.NewInt32(tableName, "delete_status")
-	_omsCartItem.ProductCategoryID = field.NewInt64(tableName, "product_category_id")
-	_omsCartItem.ProductBrand = field.NewString(tableName, "product_brand")
 	_omsCartItem.ProductSn = field.NewString(tableName, "product_sn")
+	_omsCartItem.ProductBrand = field.NewString(tableName, "product_brand")
+	_omsCartItem.ProductCategoryID = field.NewInt64(tableName, "product_category_id")
 	_omsCartItem.ProductAttr = field.NewString(tableName, "product_attr")
+	_omsCartItem.MemberNickname = field.NewString(tableName, "member_nickname")
+	_omsCartItem.Source = field.NewInt32(tableName, "source")
+	_omsCartItem.DeleteStatus = field.NewInt32(tableName, "delete_status")
+	_omsCartItem.ExpireTime = field.NewTime(tableName, "expire_time")
 	_omsCartItem.CreateTime = field.NewTime(tableName, "create_time")
 	_omsCartItem.UpdateTime = field.NewTime(tableName, "update_time")
 
@@ -52,29 +55,32 @@ func newOmsCartItem(db *gorm.DB, opts ...gen.DOOption) omsCartItem {
 	return _omsCartItem
 }
 
-// omsCartItem 购物车
+// omsCartItem 购物车表
 type omsCartItem struct {
 	omsCartItemDo omsCartItemDo
 
 	ALL               field.Asterisk
-	ID                field.Int64
-	ProductID         field.Int64  // 商品id
-	ProductSkuID      field.Int64  // 商品库存id
-	MemberID          field.Int64  // 会员id
-	Quantity          field.Int32  // 购买数量
-	Price             field.Int64  // 添加到购物车的价格
-	ProductPic        field.String // 商品主图
-	ProductName       field.String // 商品名称
-	ProductSubTitle   field.String // 商品副标题（卖点）
-	ProductSkuCode    field.String // 商品sku条码
-	MemberNickname    field.String // 会员昵称
-	DeleteStatus      field.Int32  // 是否删除
-	ProductCategoryID field.Int64  // 商品分类
-	ProductBrand      field.String // 商品品牌
-	ProductSn         field.String // 货号
-	ProductAttr       field.String // 商品销售属性:[{"key":"颜色","value":"颜色"},{"key":"容量","value":"4G"}]
-	CreateTime        field.Time   // 创建时间
-	UpdateTime        field.Time   // 更新时间
+	ID                field.Int64   // 主键ID
+	MemberID          field.Int64   // 会员ID
+	ProductID         field.Int64   // 商品ID
+	ProductSkuID      field.Int64   // 商品SKU ID
+	Quantity          field.Int32   // 购买数量
+	Price             field.Float64 // 添加到购物车时的价格
+	Selected          field.Int32   // 是否选中 0-未选中 1-选中
+	ProductName       field.String  // 商品名称
+	ProductSubTitle   field.String  // 商品副标题
+	ProductPic        field.String  // 商品主图URL
+	ProductSkuCode    field.String  // 商品SKU编码
+	ProductSn         field.String  // 商品货号
+	ProductBrand      field.String  // 商品品牌
+	ProductCategoryID field.Int64   // 商品分类ID
+	ProductAttr       field.String  // 商品销售属性JSON
+	MemberNickname    field.String  // 会员昵称
+	Source            field.Int32   // 来源 1-PC 2-H5 3-小程序 4-APP
+	DeleteStatus      field.Int32   // 删除状态 0-正常 1-删除
+	ExpireTime        field.Time    // 过期时间
+	CreateTime        field.Time    // 创建时间
+	UpdateTime        field.Time    // 更新时间
 
 	fieldMap map[string]field.Expr
 }
@@ -92,21 +98,24 @@ func (o omsCartItem) As(alias string) *omsCartItem {
 func (o *omsCartItem) updateTableName(table string) *omsCartItem {
 	o.ALL = field.NewAsterisk(table)
 	o.ID = field.NewInt64(table, "id")
+	o.MemberID = field.NewInt64(table, "member_id")
 	o.ProductID = field.NewInt64(table, "product_id")
 	o.ProductSkuID = field.NewInt64(table, "product_sku_id")
-	o.MemberID = field.NewInt64(table, "member_id")
 	o.Quantity = field.NewInt32(table, "quantity")
-	o.Price = field.NewInt64(table, "price")
-	o.ProductPic = field.NewString(table, "product_pic")
+	o.Price = field.NewFloat64(table, "price")
+	o.Selected = field.NewInt32(table, "selected")
 	o.ProductName = field.NewString(table, "product_name")
 	o.ProductSubTitle = field.NewString(table, "product_sub_title")
+	o.ProductPic = field.NewString(table, "product_pic")
 	o.ProductSkuCode = field.NewString(table, "product_sku_code")
-	o.MemberNickname = field.NewString(table, "member_nickname")
-	o.DeleteStatus = field.NewInt32(table, "delete_status")
-	o.ProductCategoryID = field.NewInt64(table, "product_category_id")
-	o.ProductBrand = field.NewString(table, "product_brand")
 	o.ProductSn = field.NewString(table, "product_sn")
+	o.ProductBrand = field.NewString(table, "product_brand")
+	o.ProductCategoryID = field.NewInt64(table, "product_category_id")
 	o.ProductAttr = field.NewString(table, "product_attr")
+	o.MemberNickname = field.NewString(table, "member_nickname")
+	o.Source = field.NewInt32(table, "source")
+	o.DeleteStatus = field.NewInt32(table, "delete_status")
+	o.ExpireTime = field.NewTime(table, "expire_time")
 	o.CreateTime = field.NewTime(table, "create_time")
 	o.UpdateTime = field.NewTime(table, "update_time")
 
@@ -135,23 +144,26 @@ func (o *omsCartItem) GetFieldByName(fieldName string) (field.OrderExpr, bool) {
 }
 
 func (o *omsCartItem) fillFieldMap() {
-	o.fieldMap = make(map[string]field.Expr, 18)
+	o.fieldMap = make(map[string]field.Expr, 21)
 	o.fieldMap["id"] = o.ID
+	o.fieldMap["member_id"] = o.MemberID
 	o.fieldMap["product_id"] = o.ProductID
 	o.fieldMap["product_sku_id"] = o.ProductSkuID
-	o.fieldMap["member_id"] = o.MemberID
 	o.fieldMap["quantity"] = o.Quantity
 	o.fieldMap["price"] = o.Price
-	o.fieldMap["product_pic"] = o.ProductPic
+	o.fieldMap["selected"] = o.Selected
 	o.fieldMap["product_name"] = o.ProductName
 	o.fieldMap["product_sub_title"] = o.ProductSubTitle
+	o.fieldMap["product_pic"] = o.ProductPic
 	o.fieldMap["product_sku_code"] = o.ProductSkuCode
-	o.fieldMap["member_nickname"] = o.MemberNickname
-	o.fieldMap["delete_status"] = o.DeleteStatus
-	o.fieldMap["product_category_id"] = o.ProductCategoryID
-	o.fieldMap["product_brand"] = o.ProductBrand
 	o.fieldMap["product_sn"] = o.ProductSn
+	o.fieldMap["product_brand"] = o.ProductBrand
+	o.fieldMap["product_category_id"] = o.ProductCategoryID
 	o.fieldMap["product_attr"] = o.ProductAttr
+	o.fieldMap["member_nickname"] = o.MemberNickname
+	o.fieldMap["source"] = o.Source
+	o.fieldMap["delete_status"] = o.DeleteStatus
+	o.fieldMap["expire_time"] = o.ExpireTime
 	o.fieldMap["create_time"] = o.CreateTime
 	o.fieldMap["update_time"] = o.UpdateTime
 }

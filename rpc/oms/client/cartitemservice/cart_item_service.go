@@ -15,7 +15,6 @@ import (
 
 type (
 	AddCartItemReq                    = omsclient.AddCartItemReq
-	AddCartItemResp                   = omsclient.AddCartItemResp
 	AddCompanyAddressReq              = omsclient.AddCompanyAddressReq
 	AddCompanyAddressResp             = omsclient.AddCompanyAddressResp
 	AddOrderDeliveryReq               = omsclient.AddOrderDeliveryReq
@@ -30,14 +29,14 @@ type (
 	AddOrderSettingResp               = omsclient.AddOrderSettingResp
 	CancelOrderReq                    = omsclient.CancelOrderReq
 	CancelOrderResp                   = omsclient.CancelOrderResp
-	CartItemListData                  = omsclient.CartItemListData
+	CartItemData                      = omsclient.CartItemData
+	CartItemResp                      = omsclient.CartItemResp
 	CloseOrderReq                     = omsclient.CloseOrderReq
 	CloseOrderResp                    = omsclient.CloseOrderResp
 	CompanyAddressListData            = omsclient.CompanyAddressListData
 	ConfirmOrderReq                   = omsclient.ConfirmOrderReq
 	ConfirmOrderResp                  = omsclient.ConfirmOrderResp
 	DeleteCartItemReq                 = omsclient.DeleteCartItemReq
-	DeleteCartItemResp                = omsclient.DeleteCartItemResp
 	DeleteCompanyAddressReq           = omsclient.DeleteCompanyAddressReq
 	DeleteCompanyAddressResp          = omsclient.DeleteCompanyAddressResp
 	DeleteOrderDeliveryReq            = omsclient.DeleteOrderDeliveryReq
@@ -66,7 +65,6 @@ type (
 	OrderReturnResp                   = omsclient.OrderReturnResp
 	OrderSettingListData              = omsclient.OrderSettingListData
 	QueryCartItemDetailReq            = omsclient.QueryCartItemDetailReq
-	QueryCartItemDetailResp           = omsclient.QueryCartItemDetailResp
 	QueryCartItemListReq              = omsclient.QueryCartItemListReq
 	QueryCartItemListResp             = omsclient.QueryCartItemListResp
 	QueryCompanyAddressDetailReq      = omsclient.QueryCompanyAddressDetailReq
@@ -102,9 +100,7 @@ type (
 	QueryTimeOutOrderListReq          = omsclient.QueryTimeOutOrderListReq
 	ReleaseSkuStockLockData           = omsclient.ReleaseSkuStockLockData
 	UpdateCartItemQuantityReq         = omsclient.UpdateCartItemQuantityReq
-	UpdateCartItemQuantityResp        = omsclient.UpdateCartItemQuantityResp
 	UpdateCartItemReq                 = omsclient.UpdateCartItemReq
-	UpdateCartItemResp                = omsclient.UpdateCartItemResp
 	UpdateCompanyAddressReq           = omsclient.UpdateCompanyAddressReq
 	UpdateCompanyAddressResp          = omsclient.UpdateCompanyAddressResp
 	UpdateCompanyAddressStatusReq     = omsclient.UpdateCompanyAddressStatusReq
@@ -128,17 +124,17 @@ type (
 	UpdateReceiverInfoResp            = omsclient.UpdateReceiverInfoResp
 
 	CartItemService interface {
-		// 添加购物车表
-		AddCartItem(ctx context.Context, in *AddCartItemReq, opts ...grpc.CallOption) (*AddCartItemResp, error)
-		// 删除购物车表
-		DeleteCartItem(ctx context.Context, in *DeleteCartItemReq, opts ...grpc.CallOption) (*DeleteCartItemResp, error)
-		// 更新购物车表
-		UpdateCartItem(ctx context.Context, in *UpdateCartItemReq, opts ...grpc.CallOption) (*UpdateCartItemResp, error)
+		// 添加购物车
+		AddCartItem(ctx context.Context, in *AddCartItemReq, opts ...grpc.CallOption) (*CartItemResp, error)
+		// 删除购物车
+		DeleteCartItem(ctx context.Context, in *DeleteCartItemReq, opts ...grpc.CallOption) (*CartItemResp, error)
+		// 更新购物车
+		UpdateCartItem(ctx context.Context, in *UpdateCartItemReq, opts ...grpc.CallOption) (*CartItemResp, error)
 		// 修改购物车中某个商品的数量
-		UpdateCartItemQuantity(ctx context.Context, in *UpdateCartItemQuantityReq, opts ...grpc.CallOption) (*UpdateCartItemQuantityResp, error)
-		// 查询购物车表详情
-		QueryCartItemDetail(ctx context.Context, in *QueryCartItemDetailReq, opts ...grpc.CallOption) (*QueryCartItemDetailResp, error)
-		// 查询购物车表列表
+		UpdateCartItemQuantity(ctx context.Context, in *UpdateCartItemQuantityReq, opts ...grpc.CallOption) (*CartItemResp, error)
+		// 查询购物车详情
+		QueryCartItemDetail(ctx context.Context, in *QueryCartItemDetailReq, opts ...grpc.CallOption) (*CartItemData, error)
+		// 查询购物车列
 		QueryCartItemList(ctx context.Context, in *QueryCartItemListReq, opts ...grpc.CallOption) (*QueryCartItemListResp, error)
 	}
 
@@ -153,37 +149,37 @@ func NewCartItemService(cli zrpc.Client) CartItemService {
 	}
 }
 
-// 添加购物车表
-func (m *defaultCartItemService) AddCartItem(ctx context.Context, in *AddCartItemReq, opts ...grpc.CallOption) (*AddCartItemResp, error) {
+// 添加购物车
+func (m *defaultCartItemService) AddCartItem(ctx context.Context, in *AddCartItemReq, opts ...grpc.CallOption) (*CartItemResp, error) {
 	client := omsclient.NewCartItemServiceClient(m.cli.Conn())
 	return client.AddCartItem(ctx, in, opts...)
 }
 
-// 删除购物车表
-func (m *defaultCartItemService) DeleteCartItem(ctx context.Context, in *DeleteCartItemReq, opts ...grpc.CallOption) (*DeleteCartItemResp, error) {
+// 删除购物车
+func (m *defaultCartItemService) DeleteCartItem(ctx context.Context, in *DeleteCartItemReq, opts ...grpc.CallOption) (*CartItemResp, error) {
 	client := omsclient.NewCartItemServiceClient(m.cli.Conn())
 	return client.DeleteCartItem(ctx, in, opts...)
 }
 
-// 更新购物车表
-func (m *defaultCartItemService) UpdateCartItem(ctx context.Context, in *UpdateCartItemReq, opts ...grpc.CallOption) (*UpdateCartItemResp, error) {
+// 更新购物车
+func (m *defaultCartItemService) UpdateCartItem(ctx context.Context, in *UpdateCartItemReq, opts ...grpc.CallOption) (*CartItemResp, error) {
 	client := omsclient.NewCartItemServiceClient(m.cli.Conn())
 	return client.UpdateCartItem(ctx, in, opts...)
 }
 
 // 修改购物车中某个商品的数量
-func (m *defaultCartItemService) UpdateCartItemQuantity(ctx context.Context, in *UpdateCartItemQuantityReq, opts ...grpc.CallOption) (*UpdateCartItemQuantityResp, error) {
+func (m *defaultCartItemService) UpdateCartItemQuantity(ctx context.Context, in *UpdateCartItemQuantityReq, opts ...grpc.CallOption) (*CartItemResp, error) {
 	client := omsclient.NewCartItemServiceClient(m.cli.Conn())
 	return client.UpdateCartItemQuantity(ctx, in, opts...)
 }
 
-// 查询购物车表详情
-func (m *defaultCartItemService) QueryCartItemDetail(ctx context.Context, in *QueryCartItemDetailReq, opts ...grpc.CallOption) (*QueryCartItemDetailResp, error) {
+// 查询购物车详情
+func (m *defaultCartItemService) QueryCartItemDetail(ctx context.Context, in *QueryCartItemDetailReq, opts ...grpc.CallOption) (*CartItemData, error) {
 	client := omsclient.NewCartItemServiceClient(m.cli.Conn())
 	return client.QueryCartItemDetail(ctx, in, opts...)
 }
 
-// 查询购物车表列表
+// 查询购物车列
 func (m *defaultCartItemService) QueryCartItemList(ctx context.Context, in *QueryCartItemListReq, opts ...grpc.CallOption) (*QueryCartItemListResp, error) {
 	client := omsclient.NewCartItemServiceClient(m.cli.Conn())
 	return client.QueryCartItemList(ctx, in, opts...)

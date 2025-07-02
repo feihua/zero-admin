@@ -15,7 +15,6 @@ import (
 
 type (
 	AddCartItemReq                    = omsclient.AddCartItemReq
-	AddCartItemResp                   = omsclient.AddCartItemResp
 	AddCompanyAddressReq              = omsclient.AddCompanyAddressReq
 	AddCompanyAddressResp             = omsclient.AddCompanyAddressResp
 	AddOrderDeliveryReq               = omsclient.AddOrderDeliveryReq
@@ -30,14 +29,14 @@ type (
 	AddOrderSettingResp               = omsclient.AddOrderSettingResp
 	CancelOrderReq                    = omsclient.CancelOrderReq
 	CancelOrderResp                   = omsclient.CancelOrderResp
-	CartItemListData                  = omsclient.CartItemListData
+	CartItemData                      = omsclient.CartItemData
+	CartItemResp                      = omsclient.CartItemResp
 	CloseOrderReq                     = omsclient.CloseOrderReq
 	CloseOrderResp                    = omsclient.CloseOrderResp
 	CompanyAddressListData            = omsclient.CompanyAddressListData
 	ConfirmOrderReq                   = omsclient.ConfirmOrderReq
 	ConfirmOrderResp                  = omsclient.ConfirmOrderResp
 	DeleteCartItemReq                 = omsclient.DeleteCartItemReq
-	DeleteCartItemResp                = omsclient.DeleteCartItemResp
 	DeleteCompanyAddressReq           = omsclient.DeleteCompanyAddressReq
 	DeleteCompanyAddressResp          = omsclient.DeleteCompanyAddressResp
 	DeleteOrderDeliveryReq            = omsclient.DeleteOrderDeliveryReq
@@ -66,7 +65,6 @@ type (
 	OrderReturnResp                   = omsclient.OrderReturnResp
 	OrderSettingListData              = omsclient.OrderSettingListData
 	QueryCartItemDetailReq            = omsclient.QueryCartItemDetailReq
-	QueryCartItemDetailResp           = omsclient.QueryCartItemDetailResp
 	QueryCartItemListReq              = omsclient.QueryCartItemListReq
 	QueryCartItemListResp             = omsclient.QueryCartItemListResp
 	QueryCompanyAddressDetailReq      = omsclient.QueryCompanyAddressDetailReq
@@ -102,9 +100,7 @@ type (
 	QueryTimeOutOrderListReq          = omsclient.QueryTimeOutOrderListReq
 	ReleaseSkuStockLockData           = omsclient.ReleaseSkuStockLockData
 	UpdateCartItemQuantityReq         = omsclient.UpdateCartItemQuantityReq
-	UpdateCartItemQuantityResp        = omsclient.UpdateCartItemQuantityResp
 	UpdateCartItemReq                 = omsclient.UpdateCartItemReq
-	UpdateCartItemResp                = omsclient.UpdateCartItemResp
 	UpdateCompanyAddressReq           = omsclient.UpdateCompanyAddressReq
 	UpdateCompanyAddressResp          = omsclient.UpdateCompanyAddressResp
 	UpdateCompanyAddressStatusReq     = omsclient.UpdateCompanyAddressStatusReq

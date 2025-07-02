@@ -13,7 +13,7 @@ import (
 )
 
 type ServiceContext struct {
-	c        config.Config
+	C        config.Config
 	DB       *gorm.DB
 	RabbitMQ *mq.RabbitMQ
 	// OmsCartItemModel            omsmodel.OmsCartItemModel
@@ -44,7 +44,7 @@ func NewServiceContext(c config.Config) *ServiceContext {
 	rabbitmq := mq.NewRabbitMQSimple(mqUrl)
 	// sqlConn := sqlx.NewMysql(c.Mysql.Datasource)
 	return &ServiceContext{
-		c:        c,
+		C:        c,
 		DB:       DB,
 		RabbitMQ: rabbitmq,
 		// OmsCartItemModel:            omsmodel.NewOmsCartItemModel(sqlConn),

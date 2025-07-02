@@ -38,10 +38,6 @@ func main() {
 		g.GenerateModel("oms_order_promotion"),
 
 		g.GenerateModel("oms_cart_item"),
-		// g.GenerateModel("oms_order"),
-		// g.GenerateModel("oms_order_item"),
-		// g.GenerateModel("oms_order_operate_history"),
-		// g.GenerateModel("oms_order_return_apply"),
 	)
 
 	// Execute the generator

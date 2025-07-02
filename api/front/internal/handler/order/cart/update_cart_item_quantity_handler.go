@@ -9,16 +9,16 @@ import (
 	"github.com/zeromicro/go-zero/rest/httpx"
 )
 
-func CartProductHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
+func UpdateCartItemQuantityHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		var req types.CartProductReq
+		var req types.UpdateCartItemQuantityReq
 		if err := httpx.Parse(r, &req); err != nil {
 			httpx.ErrorCtx(r.Context(), w, err)
 			return
 		}
 
-		l := cart.NewCartProductLogic(r.Context(), svcCtx)
-		resp, err := l.CartProduct(&req)
+		l := cart.NewUpdateCartItemQuantityLogic(r.Context(), svcCtx)
+		resp, err := l.UpdateCartItemQuantity(&req)
 		if err != nil {
 			httpx.ErrorCtx(r.Context(), w, err)
 		} else {

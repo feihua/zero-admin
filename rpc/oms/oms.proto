@@ -4,64 +4,57 @@ package omsclient;
 
 option go_package = "./omsclient";
 
-// 添加购物车表
+// 添加购物车
 message AddCartItemReq {
-  int64 id = 1; //
-  int64 product_id = 2; //商品id
-  int64 product_sku_id = 3; //商品库存id
-  int64 member_id = 4; //会员id
+  int32 source = 1; //来源 1-PC 2-H5 3-小程序 4-APP
+  int64 member_id = 2; //会员ID
+  int64 product_id = 3; //商品ID
+  int64 product_sku_id = 4; //商品SKU ID
   int32 quantity = 5; //购买数量
-  int64 price = 6; //添加到购物车的价格
-  string product_pic = 7; //商品主图
+  float price = 6; //添加到购物车时的价格
+  int32 selected = 7; //是否选中 0-未选中 1-选中
   string product_name = 8; //商品名称
-  string product_sub_title = 9; //商品副标题（卖点）
-  string product_sku_code = 10; //商品sku条码
-  string member_nickname = 11; //会员昵称
-  int32 delete_status = 14; //是否删除
-  int64 product_category_id = 15; //商品分类
-  string product_brand = 16; //商品品牌
-  string product_sn = 17; //货号
-  string product_attr = 18; //商品销售属性:[{"key":"颜色","value":"颜色"},{"key":"容量","value":"4G"}]
+  string product_sub_title = 9; //商品副标题
+  string product_pic = 10; //商品主图URL
+  string product_sku_code = 11; //商品SKU编码
+  string product_sn = 12; //商品货号
+  string product_brand = 13; //商品品牌
+  int64 product_category_id = 14; //商品分类ID
+  string product_attr = 15; //商品销售属性JSON
+  string member_nickname = 16; //会员昵称
+
 }
 
-message AddCartItemResp {
+message CartItemResp {
   string pong = 1;
 }
 
-// 删除购物车表
+// 删除购物车
 message DeleteCartItemReq {
   repeated int64 ids = 1;
   int64      member_id = 2;
 }
 
-message DeleteCartItemResp {
-  string pong = 1;
-}
-
-// 更新购物车表
+// 更新购物车
 message UpdateCartItemReq {
-  int64 id = 1; //
-  int64 product_id = 2; //商品id
-  int64 product_sku_id = 3; //商品库存id
-  int64 member_id = 4; //会员id
+  int64 id = 1; //主键ID
+  int64 member_id = 2; //会员ID
+  int64 product_id = 3; //商品ID
+  int64 product_sku_id = 4; //商品SKU ID
   int32 quantity = 5; //购买数量
-  int64 price = 6; //添加到购物车的价格
-  string product_pic = 7; //商品主图
+  float price = 6; //添加到购物车时的价格
+  int32 selected = 7; //是否选中 0-未选中 1-选中
   string product_name = 8; //商品名称
-  string product_sub_title = 9; //商品副标题（卖点）
-  string product_sku_code = 10; //商品sku条码
-  string member_nickname = 11; //会员昵称
-  int32 delete_status = 14; //是否删除
-  int64 product_category_id = 15; //商品分类
-  string product_brand = 16; //商品品牌
-  string product_sn = 17; //货号
-  string product_attr = 18; //商品销售属性:[{"key":"颜色","value":"颜色"},{"key":"容量","value":"4G"}]
+  string product_sub_title = 9; //商品副标题
+  string product_pic = 10; //商品主图URL
+  string product_sku_code = 11; //商品SKU编码
+  string product_sn = 12; //商品货号
+  string product_brand = 13; //商品品牌
+  int64 product_category_id = 14; //商品分类ID
+  string product_attr = 15; //商品销售属性JSON
+  string member_nickname = 16; //会员昵称
+  int32 source = 17; //来源 1-PC 2-H5 3-小程序 4-APP
 
-
-}
-
-message UpdateCartItemResp {
-  string pong = 1;
 }
 
 // 修改购物车中某个商品的数量
@@ -72,81 +65,58 @@ message UpdateCartItemQuantityReq {
 
 }
 
-message UpdateCartItemQuantityResp {
-  string pong = 1;
-}
-// 查询购物车表详情
+// 查询购物车详情
 message QueryCartItemDetailReq {
   int64 id = 1;
 }
 
-message QueryCartItemDetailResp {
-  int64 id = 1; //
-  int64 product_id = 2; //商品id
-  int64 product_sku_id = 3; //商品库存id
-  int64 member_id = 4; //会员id
+message CartItemData {
+  int64 id = 1; //主键ID
+  int64 member_id = 2; //会员ID
+  int64 product_id = 3; //商品ID
+  int64 product_sku_id = 4; //商品SKU ID
   int32 quantity = 5; //购买数量
-  int64 price = 6; //添加到购物车的价格
-  string product_pic = 7; //商品主图
+  float price = 6; //添加到购物车时的价格
+  int32 selected = 7; //是否选中 0-未选中 1-选中
   string product_name = 8; //商品名称
-  string product_sub_title = 9; //商品副标题（卖点）
-  string product_sku_code = 10; //商品sku条码
-  string member_nickname = 11; //会员昵称
-  string create_time = 12; //创建时间
-  string update_time = 13; //更新时间
-  int32 delete_status = 14; //是否删除
-  int64 product_category_id = 15; //商品分类
-  string product_brand = 16; //商品品牌
-  string product_sn = 17; //货号
-  string product_attr = 18; //商品销售属性:[{"key":"颜色","value":"颜色"},{"key":"容量","value":"4G"}]
+  string product_sub_title = 9; //商品副标题
+  string product_pic = 10; //商品主图URL
+  string product_sku_code = 11; //商品SKU编码
+  string product_sn = 12; //商品货号
+  string product_brand = 13; //商品品牌
+  int64 product_category_id = 14; //商品分类ID
+  string product_attr = 15; //商品销售属性JSON
+  string member_nickname = 16; //会员昵称
+  int32 source = 17; //来源 1-PC 2-H5 3-小程序 4-APP
+  int32 delete_status = 18; //删除状态 0-正常 1-删除
+  string expire_time = 19; //过期时间
+  string create_time = 20; //创建时间
+  string update_time = 21; //更新时间
 
 }
 
-// 分页查询购物车表列表
+// 分页查询购物车列
 message QueryCartItemListReq {
   int64 member_id = 1; //会员id
 }
 
-message CartItemListData {
-  int64 id = 1; //
-  int64 product_id = 2; //商品id
-  int64 product_sku_id = 3; //商品库存id
-  int64 member_id = 4; //会员id
-  int32 quantity = 5; //购买数量
-  int64 price = 6; //添加到购物车的价格
-  string product_pic = 7; //商品主图
-  string product_name = 8; //商品名称
-  string product_sub_title = 9; //商品副标题（卖点）
-  string product_sku_code = 10; //商品sku条码
-  string member_nickname = 11; //会员昵称
-  string create_time = 12; //创建时间
-  string update_time = 13; //更新时间
-  int32 delete_status = 14; //是否删除
-  int64 product_category_id = 15; //商品分类
-  string product_brand = 16; //商品品牌
-  string product_sn = 17; //货号
-  string product_attr = 18; //商品销售属性:[{"key":"颜色","value":"颜色"},{"key":"容量","value":"4G"}]
-
-}
-
 message QueryCartItemListResp {
-  int64 total = 1;
-  repeated  CartItemListData list = 2;
+  repeated  CartItemData list = 1;
 }
 
-// 购物车表
+// 购物车
 service CartItemService {
-  // 添加购物车表
-  rpc AddCartItem(AddCartItemReq) returns (AddCartItemResp){}
-  // 删除购物车表
-  rpc DeleteCartItem(DeleteCartItemReq) returns (DeleteCartItemResp){}
-  // 更新购物车表
-  rpc UpdateCartItem(UpdateCartItemReq) returns (UpdateCartItemResp){}
+  // 添加购物车
+  rpc AddCartItem(AddCartItemReq) returns (CartItemResp){}
+  // 删除购物车
+  rpc DeleteCartItem(DeleteCartItemReq) returns (CartItemResp){}
+  // 更新购物车
+  rpc UpdateCartItem(UpdateCartItemReq) returns (CartItemResp){}
   //修改购物车中某个商品的数量
-  rpc UpdateCartItemQuantity(UpdateCartItemQuantityReq) returns (UpdateCartItemQuantityResp){}
-  // 查询购物车表详情
-  rpc QueryCartItemDetail(QueryCartItemDetailReq) returns (QueryCartItemDetailResp){}
-  // 查询购物车表列表
+  rpc UpdateCartItemQuantity(UpdateCartItemQuantityReq) returns (CartItemResp){}
+  // 查询购物车详情
+  rpc QueryCartItemDetail(QueryCartItemDetailReq) returns (CartItemData){}
+  // 查询购物车列
   rpc QueryCartItemList(QueryCartItemListReq) returns (QueryCartItemListResp){}
 
 

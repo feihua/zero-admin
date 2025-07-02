@@ -31,17 +31,17 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type CartItemServiceClient interface {
-	// 添加购物车表
-	AddCartItem(ctx context.Context, in *AddCartItemReq, opts ...grpc.CallOption) (*AddCartItemResp, error)
-	// 删除购物车表
-	DeleteCartItem(ctx context.Context, in *DeleteCartItemReq, opts ...grpc.CallOption) (*DeleteCartItemResp, error)
-	// 更新购物车表
-	UpdateCartItem(ctx context.Context, in *UpdateCartItemReq, opts ...grpc.CallOption) (*UpdateCartItemResp, error)
+	// 添加购物车
+	AddCartItem(ctx context.Context, in *AddCartItemReq, opts ...grpc.CallOption) (*CartItemResp, error)
+	// 删除购物车
+	DeleteCartItem(ctx context.Context, in *DeleteCartItemReq, opts ...grpc.CallOption) (*CartItemResp, error)
+	// 更新购物车
+	UpdateCartItem(ctx context.Context, in *UpdateCartItemReq, opts ...grpc.CallOption) (*CartItemResp, error)
 	// 修改购物车中某个商品的数量
-	UpdateCartItemQuantity(ctx context.Context, in *UpdateCartItemQuantityReq, opts ...grpc.CallOption) (*UpdateCartItemQuantityResp, error)
-	// 查询购物车表详情
-	QueryCartItemDetail(ctx context.Context, in *QueryCartItemDetailReq, opts ...grpc.CallOption) (*QueryCartItemDetailResp, error)
-	// 查询购物车表列表
+	UpdateCartItemQuantity(ctx context.Context, in *UpdateCartItemQuantityReq, opts ...grpc.CallOption) (*CartItemResp, error)
+	// 查询购物车详情
+	QueryCartItemDetail(ctx context.Context, in *QueryCartItemDetailReq, opts ...grpc.CallOption) (*CartItemData, error)
+	// 查询购物车列
 	QueryCartItemList(ctx context.Context, in *QueryCartItemListReq, opts ...grpc.CallOption) (*QueryCartItemListResp, error)
 }
 
@@ -53,8 +53,8 @@ func NewCartItemServiceClient(cc grpc.ClientConnInterface) CartItemServiceClient
 	return &cartItemServiceClient{cc}
 }
 
-func (c *cartItemServiceClient) AddCartItem(ctx context.Context, in *AddCartItemReq, opts ...grpc.CallOption) (*AddCartItemResp, error) {
-	out := new(AddCartItemResp)
+func (c *cartItemServiceClient) AddCartItem(ctx context.Context, in *AddCartItemReq, opts ...grpc.CallOption) (*CartItemResp, error) {
+	out := new(CartItemResp)
 	err := c.cc.Invoke(ctx, CartItemService_AddCartItem_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -62,8 +62,8 @@ func (c *cartItemServiceClient) AddCartItem(ctx context.Context, in *AddCartItem
 	return out, nil
 }
 
-func (c *cartItemServiceClient) DeleteCartItem(ctx context.Context, in *DeleteCartItemReq, opts ...grpc.CallOption) (*DeleteCartItemResp, error) {
-	out := new(DeleteCartItemResp)
+func (c *cartItemServiceClient) DeleteCartItem(ctx context.Context, in *DeleteCartItemReq, opts ...grpc.CallOption) (*CartItemResp, error) {
+	out := new(CartItemResp)
 	err := c.cc.Invoke(ctx, CartItemService_DeleteCartItem_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -71,8 +71,8 @@ func (c *cartItemServiceClient) DeleteCartItem(ctx context.Context, in *DeleteCa
 	return out, nil
 }
 
-func (c *cartItemServiceClient) UpdateCartItem(ctx context.Context, in *UpdateCartItemReq, opts ...grpc.CallOption) (*UpdateCartItemResp, error) {
-	out := new(UpdateCartItemResp)
+func (c *cartItemServiceClient) UpdateCartItem(ctx context.Context, in *UpdateCartItemReq, opts ...grpc.CallOption) (*CartItemResp, error) {
+	out := new(CartItemResp)
 	err := c.cc.Invoke(ctx, CartItemService_UpdateCartItem_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -80,8 +80,8 @@ func (c *cartItemServiceClient) UpdateCartItem(ctx context.Context, in *UpdateCa
 	return out, nil
 }
 
-func (c *cartItemServiceClient) UpdateCartItemQuantity(ctx context.Context, in *UpdateCartItemQuantityReq, opts ...grpc.CallOption) (*UpdateCartItemQuantityResp, error) {
-	out := new(UpdateCartItemQuantityResp)
+func (c *cartItemServiceClient) UpdateCartItemQuantity(ctx context.Context, in *UpdateCartItemQuantityReq, opts ...grpc.CallOption) (*CartItemResp, error) {
+	out := new(CartItemResp)
 	err := c.cc.Invoke(ctx, CartItemService_UpdateCartItemQuantity_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -89,8 +89,8 @@ func (c *cartItemServiceClient) UpdateCartItemQuantity(ctx context.Context, in *
 	return out, nil
 }
 
-func (c *cartItemServiceClient) QueryCartItemDetail(ctx context.Context, in *QueryCartItemDetailReq, opts ...grpc.CallOption) (*QueryCartItemDetailResp, error) {
-	out := new(QueryCartItemDetailResp)
+func (c *cartItemServiceClient) QueryCartItemDetail(ctx context.Context, in *QueryCartItemDetailReq, opts ...grpc.CallOption) (*CartItemData, error) {
+	out := new(CartItemData)
 	err := c.cc.Invoke(ctx, CartItemService_QueryCartItemDetail_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -111,17 +111,17 @@ func (c *cartItemServiceClient) QueryCartItemList(ctx context.Context, in *Query
 // All implementations must embed UnimplementedCartItemServiceServer
 // for forward compatibility
 type CartItemServiceServer interface {
-	// 添加购物车表
-	AddCartItem(context.Context, *AddCartItemReq) (*AddCartItemResp, error)
-	// 删除购物车表
-	DeleteCartItem(context.Context, *DeleteCartItemReq) (*DeleteCartItemResp, error)
-	// 更新购物车表
-	UpdateCartItem(context.Context, *UpdateCartItemReq) (*UpdateCartItemResp, error)
+	// 添加购物车
+	AddCartItem(context.Context, *AddCartItemReq) (*CartItemResp, error)
+	// 删除购物车
+	DeleteCartItem(context.Context, *DeleteCartItemReq) (*CartItemResp, error)
+	// 更新购物车
+	UpdateCartItem(context.Context, *UpdateCartItemReq) (*CartItemResp, error)
 	// 修改购物车中某个商品的数量
-	UpdateCartItemQuantity(context.Context, *UpdateCartItemQuantityReq) (*UpdateCartItemQuantityResp, error)
-	// 查询购物车表详情
-	QueryCartItemDetail(context.Context, *QueryCartItemDetailReq) (*QueryCartItemDetailResp, error)
-	// 查询购物车表列表
+	UpdateCartItemQuantity(context.Context, *UpdateCartItemQuantityReq) (*CartItemResp, error)
+	// 查询购物车详情
+	QueryCartItemDetail(context.Context, *QueryCartItemDetailReq) (*CartItemData, error)
+	// 查询购物车列
 	QueryCartItemList(context.Context, *QueryCartItemListReq) (*QueryCartItemListResp, error)
 	mustEmbedUnimplementedCartItemServiceServer()
 }
@@ -130,19 +130,19 @@ type CartItemServiceServer interface {
 type UnimplementedCartItemServiceServer struct {
 }
 
-func (UnimplementedCartItemServiceServer) AddCartItem(context.Context, *AddCartItemReq) (*AddCartItemResp, error) {
+func (UnimplementedCartItemServiceServer) AddCartItem(context.Context, *AddCartItemReq) (*CartItemResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AddCartItem not implemented")
 }
-func (UnimplementedCartItemServiceServer) DeleteCartItem(context.Context, *DeleteCartItemReq) (*DeleteCartItemResp, error) {
+func (UnimplementedCartItemServiceServer) DeleteCartItem(context.Context, *DeleteCartItemReq) (*CartItemResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteCartItem not implemented")
 }
-func (UnimplementedCartItemServiceServer) UpdateCartItem(context.Context, *UpdateCartItemReq) (*UpdateCartItemResp, error) {
+func (UnimplementedCartItemServiceServer) UpdateCartItem(context.Context, *UpdateCartItemReq) (*CartItemResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateCartItem not implemented")
 }
-func (UnimplementedCartItemServiceServer) UpdateCartItemQuantity(context.Context, *UpdateCartItemQuantityReq) (*UpdateCartItemQuantityResp, error) {
+func (UnimplementedCartItemServiceServer) UpdateCartItemQuantity(context.Context, *UpdateCartItemQuantityReq) (*CartItemResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateCartItemQuantity not implemented")
 }
-func (UnimplementedCartItemServiceServer) QueryCartItemDetail(context.Context, *QueryCartItemDetailReq) (*QueryCartItemDetailResp, error) {
+func (UnimplementedCartItemServiceServer) QueryCartItemDetail(context.Context, *QueryCartItemDetailReq) (*CartItemData, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method QueryCartItemDetail not implemented")
 }
 func (UnimplementedCartItemServiceServer) QueryCartItemList(context.Context, *QueryCartItemListReq) (*QueryCartItemListResp, error) {

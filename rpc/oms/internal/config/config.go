@@ -14,4 +14,7 @@ type Config struct {
 		UserName string
 		Password string
 	}
+	Cart struct {
+		Timeout int
+	}
 }
