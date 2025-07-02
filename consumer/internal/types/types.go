@@ -54,3 +54,8 @@ type Request struct {
 type Response struct {
 	Message string `json:"message"`
 }
+
+type TestOrderReq struct {
+	Id       int64 `json:"id"`                //商品ID
+	TestType int64 `json:"testType,optional"` //测试类型
+}

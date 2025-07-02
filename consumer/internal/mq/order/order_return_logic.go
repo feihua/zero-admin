@@ -1,4 +1,4 @@
-package consumer
+package order
 
 import (
 	"context"
@@ -6,9 +6,9 @@ import (
 	"github.com/zeromicro/go-zero/core/logc"
 )
 
-// OrderDelivery 订单发货通知
-func OrderDelivery(ctx context.Context, body []byte) {
-	logc.Infof(ctx, "订单发货通知mq消息: %s", body)
+// OrderReturn 申请退款通知
+func OrderReturn(ctx context.Context, body []byte) {
+	logc.Infof(ctx, "申请退款通知mq消息: %s", body)
 	var orderInfo map[string]int64
 	err := json.Unmarshal(body, &orderInfo)
 	if err != nil {

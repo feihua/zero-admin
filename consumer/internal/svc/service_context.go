@@ -4,7 +4,9 @@ import (
 	"context"
 	"fmt"
 	"github.com/feihua/zero-admin/consumer/internal/config"
-	consumer "github.com/feihua/zero-admin/consumer/internal/mq"
+	"github.com/feihua/zero-admin/consumer/internal/mq/coupon"
+	"github.com/feihua/zero-admin/consumer/internal/mq/order"
+	"github.com/feihua/zero-admin/consumer/internal/mq/product"
 	"github.com/feihua/zero-admin/pkg/mq"
 	"github.com/feihua/zero-admin/rpc/oms/client/orderservice"
 	"github.com/feihua/zero-admin/rpc/pms/client/productskuservice"
@@ -84,48 +86,54 @@ func NewServiceContext(c config.Config) *ServiceContext {
 
 	go func() {
 		rabbitmq.ConsumeSimple("first.login.queue", func(body []byte) {
-			consumer.FirstLogin(context.Background(), body, memberInfoService, couponService, couponRecordService)
+			coupon.FirstLogin(context.Background(), body, memberInfoService, couponService, couponRecordService)
 		})
 	}()
 
 	go func() {
 		rabbitmq.ConsumeSimple("order.cancel.queue", func(body []byte) {
-			consumer.OrderCancel(context.Background(), body, skuService, orderService, couponRecordService, memberInfoService)
+			order.OrderCancel(context.Background(), body, skuService, orderService, couponRecordService, memberInfoService)
 		})
 	}()
 
 	go func() {
 		rabbitmq.ConsumeSimple("syn.product.to.es.queue", func(body []byte) {
-			consumer.SynProductToEs(context.Background(), body, search, spuService)
+			product.SynProductToEs(context.Background(), body, search, spuService)
 		})
 	}()
 	go func() {
 		rabbitmq.ConsumeSimple("delete.product.from.es.queue", func(body []byte) {
-			consumer.DeleteProductFromEs(context.Background(), body, search, spuService)
+			product.DeleteProductFromEs(context.Background(), body, search, spuService)
 		})
 	}()
 
 	go func() {
 		rabbitmq.ConsumeSimple("order.return.queue", func(body []byte) {
-			consumer.OrderReturn(context.Background(), body)
+			order.OrderReturn(context.Background(), body)
 		})
 	}()
 
 	go func() {
 		rabbitmq.ConsumeSimple("order.cancel.by.user.queue", func(body []byte) {
-			consumer.OrderCancelByUser(context.Background(), body)
+			order.OrderCancelByUser(context.Background(), body)
 		})
 	}()
 
 	go func() {
 		rabbitmq.ConsumeSimple("order.close.queue", func(body []byte) {
-			consumer.OrderClose(context.Background(), body)
+			order.OrderClose(context.Background(), body)
 		})
 	}()
 
 	go func() {
 		rabbitmq.ConsumeSimple("order.delivery.queue", func(body []byte) {
-			consumer.OrderDelivery(context.Background(), body)
+			order.OrderDelivery(context.Background(), body)
+		})
+	}()
+
+	go func() {
+		rabbitmq.ConsumeSimple("order.confirm.queue", func(body []byte) {
+			order.OrderConfirm(context.Background(), body)
 		})
 	}()
 	return s

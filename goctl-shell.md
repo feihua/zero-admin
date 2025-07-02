@@ -21,7 +21,7 @@ goctl api go -api ./api/front/doc/api/front.api -dir ./api/front/ --style go_zer
 goctl api go -api ./api/web/doc/api/web.api -dir ./api/web/
 
 2.3mq consumer代码
-goctl api go -api ./consumer/consumer.api -dir ./consumer
+goctl api go -api ./consumer/consumer.api -dir ./consumer --style go_zero
 
 2.4定时任务job代码
 goctl api go -api ./job/job.api -dir ./job --style go_zero

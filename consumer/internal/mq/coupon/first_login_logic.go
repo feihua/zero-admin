@@ -1,4 +1,4 @@
-package consumer
+package coupon
 
 import (
 	"context"

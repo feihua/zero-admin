@@ -57,9 +57,12 @@ func (l *CloseOrderLogic) CloseOrder(in *omsclient.CloseOrderReq) (*omsclient.Cl
 		return nil, errors.New("添加订单操作记录失败")
 	}
 
-	message := map[string]any{"ids": in.Ids}
-	body, _ := json.Marshal(message)
-	err = l.svcCtx.RabbitMQ.SendMessage("order.close.exchange", "order.close.queue", "order.close.key", body)
+	for id := range in.Ids {
+		message := map[string]any{"id": id}
+		body, _ := json.Marshal(message)
+		err = l.svcCtx.RabbitMQ.SendMessage("order.close.exchange", "order.close.queue", "order.close.key", body)
+
+	}
 
 	return &omsclient.CloseOrderResp{}, nil
 }

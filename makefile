@@ -101,7 +101,7 @@ gen:	## 生成所有模块代码
 	# 生成web-api代码
 	$(GOCTL) api go -api ./api/web/doc/api/web.api -dir ./api/web/
 	# 生成mq消费者代码
-	$(GOCTL) api go -api ./consumer/consumer.api -dir ./consumer
+	$(GOCTL) api go -api ./consumer/consumer.api -dir ./consumer --style go_zero
 	# 生成定时任务代码
 	$(GOCTL) api go -api ./job/job.api -dir ./job --style go_zero
 	# 生成sys-rpc代码

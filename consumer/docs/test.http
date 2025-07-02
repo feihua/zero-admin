@@ -32,3 +32,12 @@ Content-Type: application/json
   ]
 }
 
+### 测试订单相关操作
+POST {{host}}/api/consumer/testOrder
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "id": 1
+}
+

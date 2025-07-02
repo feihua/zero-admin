@@ -7,6 +7,7 @@ import (
 	"net/http"
 
 	auth "github.com/feihua/zero-admin/consumer/internal/handler/auth"
+	order "github.com/feihua/zero-admin/consumer/internal/handler/order"
 	product "github.com/feihua/zero-admin/consumer/internal/handler/product"
 	"github.com/feihua/zero-admin/consumer/internal/svc"
 
@@ -22,6 +23,18 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				Handler: auth.ConsumerAuthHandler(serverCtx),
 			},
 		},
+	)
+
+	server.AddRoutes(
+		[]rest.Route{
+			{
+				Method:  http.MethodPost,
+				Path:    "/testOrder",
+				Handler: order.TestOrderHandler(serverCtx),
+			},
+		},
+		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
+		rest.WithPrefix("/api/consumer"),
 	)
 
 	server.AddRoutes(

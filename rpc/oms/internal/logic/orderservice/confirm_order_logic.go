@@ -2,6 +2,7 @@ package orderservicelogic
 
 import (
 	"context"
+	"encoding/json"
 	"errors"
 	"github.com/feihua/zero-admin/rpc/oms/gen/query"
 	"github.com/zeromicro/go-zero/core/logc"
@@ -50,5 +51,10 @@ func (l *ConfirmOrderLogic) ConfirmOrder(in *omsclient.ConfirmOrderReq) (*omscli
 		logc.Errorf(l.ctx, "更新订单失败,参数:%+v,异常:%s", item, err.Error())
 		return nil, errors.New("更新订单失败")
 	}
+
+	message := map[string]any{"id": in.OrderId}
+	body, _ := json.Marshal(message)
+	err = l.svcCtx.RabbitMQ.SendMessage("order.confirm.exchange", "order.confirm.queue", "order.confirm.key", body)
+
 	return &omsclient.ConfirmOrderResp{}, nil
 }

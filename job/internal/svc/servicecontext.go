@@ -67,15 +67,15 @@ func NewServiceContext(c config.Config) *ServiceContext {
 
 	s, _ := gocron.NewScheduler()
 
-	// 每隔10秒执行一次任务
+	// 每隔10分钟执行一次任务
 	_, _ = s.NewJob(
-		gocron.DurationJob(time.Second*10),
+		gocron.DurationJob(time.Second*60*10),
 		gocron.NewTask(task, "test"),
 	)
 
-	// 每隔60秒执行一次任务
+	// 每隔30分钟执行一次任务
 	_, _ = s.NewJob(
-		gocron.DurationJob(time.Second*60),
+		gocron.DurationJob(time.Second*60*30),
 		gocron.NewTask(jobs.CancelTimeOutOrder, context.Background(), skuService, orderService, couponRecordService, memberInfoService, settingService),
 	)
 
