@@ -102,7 +102,7 @@ func (l *AddOrderReturnLogic) AddOrderReturn(in *omsclient.OrderReturnReq) (*oms
 
 	message := map[string]any{"id": in.OrderId}
 	body, _ := json.Marshal(message)
-	err = l.svcCtx.RabbitMQ.SendMessage("order.return.exchange", "order.return.queue", "order.return.key", body)
+	err = l.svcCtx.RabbitMQ.SendMessage("order.event.exchange", "order.return.queue", "order.return.key", body)
 
 	return &omsclient.OrderReturnResp{}, nil
 }

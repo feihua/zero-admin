@@ -140,7 +140,7 @@ func (r *RabbitMQ) ConsumeSimple(queueName string, handler func([]byte)) {
 		}
 	}()
 
-	logx.Info(" Waiting for messages ...")
+	logx.Infof("queue: %s, consumers %d Waiting for messages ...", queueName, q.Consumers)
 	<-forever
 
 }

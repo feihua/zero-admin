@@ -336,7 +336,7 @@ func (l *GenerateOrderLogic) sendMsg(orderId, memberId int64) error {
 		logc.Errorf(l.ctx, "序列化 JSON 失败: %v", err)
 		return errorx.NewDefaultError("序列化 JSON 错误")
 	}
-	err = l.svcCtx.RabbitMQ.SendDelayMessage("order.delay.exchange", "order.cancel.queue", "order.cancel", body, delayMinutes)
+	err = l.svcCtx.RabbitMQ.SendDelayMessage("order.delay.exchange", "order.delay.cancel.queue", "order.delay.cancel", body, delayMinutes)
 
 	if err != nil {
 		logc.Errorf(l.ctx, "订单 %d 延时取消,消息发送失败,,异常:%s", orderId, err.Error())

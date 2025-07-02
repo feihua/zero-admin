@@ -29,7 +29,7 @@ func (l *DeleteProductFromEsLogic) DeleteProductFromEs(req *types.ProductEsReq) 
 	// message := map[string]any{"ids": nil}// 清空所有商品索引
 	message := map[string]any{"ids": req.Ids} // 根据id删除商品索引
 	body, _ := json.Marshal(message)
-	err = l.svcCtx.RabbitMQ.SendMessage("syn.product.to.es.exchange", "delete.product.from.es.queue", "delete.product.from.es.queue", body)
+	err = l.svcCtx.RabbitMQ.SendMessage("product.event.exchange", "delete.product.from.es.queue", "delete.product.key", body)
 
 	return &types.Response{
 		Message: "从es删除商品索引成功",

@@ -29,7 +29,7 @@ func (l *AddProductToEsLogic) AddProductToEs(req *types.ProductEsReq) (resp *typ
 	for _, id := range req.Ids {
 		message := map[string]any{"id": id}
 		body, _ := json.Marshal(message)
-		err = l.svcCtx.RabbitMQ.SendMessage("syn.product.to.es.exchange", "syn.product.to.es.queue", "syn.product.to.es.queue", body)
+		err = l.svcCtx.RabbitMQ.SendMessage("product.event.exchange", "syn.product.to.es.queue", "syn.product.key", body)
 
 	}
 

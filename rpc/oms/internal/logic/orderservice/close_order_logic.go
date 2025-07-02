@@ -60,7 +60,7 @@ func (l *CloseOrderLogic) CloseOrder(in *omsclient.CloseOrderReq) (*omsclient.Cl
 	for id := range in.Ids {
 		message := map[string]any{"id": id}
 		body, _ := json.Marshal(message)
-		err = l.svcCtx.RabbitMQ.SendMessage("order.close.exchange", "order.close.queue", "order.close.key", body)
+		err = l.svcCtx.RabbitMQ.SendMessage("order.event.exchange", "order.close.queue", "order.close.key", body)
 
 	}
 

@@ -2,6 +2,7 @@ package orderservicelogic
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 	"github.com/feihua/zero-admin/rpc/oms/gen/model"
 	"github.com/feihua/zero-admin/rpc/oms/gen/query"
@@ -90,6 +91,10 @@ func (l *AddOrderLogic) AddOrder(in *omsclient.AddOrderReq) (*omsclient.AddOrder
 		logc.Errorf(l.ctx, "删除购物车失败,参数:%+v,异常:%s", in, err.Error())
 		return nil, fmt.Errorf("删除购物车失败")
 	}
+
+	message := map[string]any{"id": item.ID}
+	body, _ := json.Marshal(message)
+	err = l.svcCtx.RabbitMQ.SendMessage("order.event.exchange", "order.create.queue", "order.create.key", body)
 
 	return &omsclient.AddOrderResp{}, nil
 }
