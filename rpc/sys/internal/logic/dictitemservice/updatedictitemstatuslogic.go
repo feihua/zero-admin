@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"github.com/feihua/zero-admin/rpc/sys/gen/query"
 	"github.com/zeromicro/go-zero/core/logc"
+	"strconv"
 
 	"github.com/feihua/zero-admin/rpc/sys/internal/svc"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
@@ -43,5 +44,11 @@ func (l *UpdateDictItemStatusLogic) UpdateDictItemStatus(in *sysclient.UpdateDic
 		return nil, errors.New(fmt.Sprintf("更新字典数据状态失败"))
 	}
 
+	ids := make([]string, 0, len(in.Ids))
+	for _, id := range in.Ids {
+		ids = append(ids, strconv.FormatInt(id, 10))
+	}
+	key := l.svcCtx.RedisKey + "dict:item"
+	_, _ = l.svcCtx.Redis.HdelCtx(l.ctx, key, ids...)
 	return &sysclient.UpdateDictItemStatusResp{}, nil
 }

@@ -17,9 +17,9 @@ Authorization: Bearer {{token}}
 
 {
   "dictSort": 2,
-  "dictLabel": "公告1",
+  "dictLabel": "公告111",
   "dictValue": "21",
-  "dictType": "sys_notice_type",
+  "dictType": "sys_notice_type11",
   "cssClass": "1",
   "listClass": "1",
   "isDefault": "N",
@@ -64,7 +64,7 @@ Authorization: Bearer {{token}}
 }
 
 ### 查询字典数据详情
-GET {{host}}/api/sys/dictItem/queryDictItemDetail?id=6
+GET {{host}}/api/sys/dictItem/queryDictItemDetail?id=3
 Authorization: Bearer {{token}}
 
 

@@ -11,6 +11,7 @@ import (
 	"github.com/zeromicro/go-zero/core/logc"
 	"github.com/zeromicro/go-zero/core/logx"
 	"gorm.io/gorm"
+	"strconv"
 	"time"
 )
 
@@ -164,5 +165,8 @@ func (l *UpdateUserLogic) UpdateUser(in *sysclient.UpdateUserReq) (*sysclient.Up
 		return nil, errors.New("更新用户异常")
 	}
 
+	key := l.svcCtx.RedisKey + "user"
+	filed := strconv.FormatInt(in.Id, 10)
+	_, _ = l.svcCtx.Redis.HdelCtx(l.ctx, key, filed)
 	return &sysclient.UpdateUserResp{}, nil
 }

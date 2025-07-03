@@ -161,6 +161,10 @@ func (l *UpdateDeptLogic) UpdateDept(in *sysclient.UpdateDeptReq) (*sysclient.Up
 		}
 
 	}
+
+	key := l.svcCtx.RedisKey + "dept"
+	filed := strconv.FormatInt(in.Id, 10)
+	_, _ = l.svcCtx.Redis.HdelCtx(l.ctx, key, filed)
 	return &sysclient.UpdateDeptResp{}, nil
 }
 

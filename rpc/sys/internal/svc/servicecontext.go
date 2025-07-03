@@ -4,6 +4,7 @@ import (
 	"github.com/feihua/zero-admin/rpc/sys/gen/query"
 	"github.com/feihua/zero-admin/rpc/sys/internal/config"
 	"github.com/zeromicro/go-zero/core/logx"
+	"github.com/zeromicro/go-zero/core/stores/redis"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 	"gorm.io/gorm/logger"
@@ -11,11 +12,16 @@ import (
 )
 
 type ServiceContext struct {
-	Config config.Config
-	DB     *gorm.DB
+	Config   config.Config
+	DB       *gorm.DB
+	Redis    *redis.Redis
+	RedisKey string // redis的模块统一前缀
 }
 
 func NewServiceContext(c config.Config) *ServiceContext {
+	redisKey := c.RpcServerConf.Redis.Key
+	rds := redis.MustNewRedis(c.RpcServerConf.Redis.RedisConf)
+
 	db, err := gorm.Open(mysql.Open(c.Mysql.Datasource), &gorm.Config{
 		SkipDefaultTransaction: true,
 		PrepareStmt:            true,
@@ -30,8 +36,10 @@ func NewServiceContext(c config.Config) *ServiceContext {
 	query.SetDefault(db)
 
 	return &ServiceContext{
-		Config: c,
-		DB:     db,
+		Config:   c,
+		DB:       db,
+		Redis:    rds,
+		RedisKey: redisKey,
 	}
 }
 

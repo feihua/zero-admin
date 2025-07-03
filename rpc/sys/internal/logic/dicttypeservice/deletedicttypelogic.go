@@ -5,6 +5,7 @@ import (
 	"errors"
 	"github.com/feihua/zero-admin/rpc/sys/gen/query"
 	"github.com/zeromicro/go-zero/core/logc"
+	"strconv"
 
 	"github.com/feihua/zero-admin/rpc/sys/internal/svc"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
@@ -70,5 +71,11 @@ func (l *DeleteDictTypeLogic) DeleteDictType(in *sysclient.DeleteDictTypeReq) (*
 		return nil, errors.New("删除字典类型失败")
 	}
 
+	ids := make([]string, 0, len(in.Ids))
+	for _, id := range in.Ids {
+		ids = append(ids, strconv.FormatInt(id, 10))
+	}
+	key := l.svcCtx.RedisKey + "dict:type"
+	_, _ = l.svcCtx.Redis.HdelCtx(l.ctx, key, ids...)
 	return &sysclient.DeleteDictTypeResp{}, nil
 }

@@ -8,6 +8,7 @@ import (
 	"github.com/feihua/zero-admin/rpc/ums/internal/config"
 	"github.com/zeromicro/go-zero/core/logx"
 	"github.com/zeromicro/go-zero/core/stores/mon"
+	"github.com/zeromicro/go-zero/core/stores/redis"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 	"gorm.io/gorm/logger"
@@ -22,9 +23,13 @@ type ServiceContext struct {
 	MemberBrowseRecordModel            model.MemberBrowseRecordModel
 	MemberProductCategoryRelationModel model.MemberProductCategoryRelationModel
 	MemberProductCollectionModel       model.MemberProductCollectionModel
+	Redis                              *redis.Redis
+	RedisKey                           string // redis的模块统一前缀
 }
 
 func NewServiceContext(c config.Config) *ServiceContext {
+	redisKey := c.RpcServerConf.Redis.Key
+	rds := redis.MustNewRedis(c.RpcServerConf.Redis.RedisConf)
 	db, err := gorm.Open(mysql.Open(c.Mysql.Datasource), &gorm.Config{
 		SkipDefaultTransaction: true,
 		PrepareStmt:            true,
@@ -52,13 +57,15 @@ func NewServiceContext(c config.Config) *ServiceContext {
 	MemberProductCategoryRelationModel := model.NewMemberProductCategoryRelationModel(c.Mongo.Datasource, c.Mongo.Db, "ums_member_product_category_relation")
 	MemberProductCollectionModel := model.NewMemberProductCollectionModel(c.Mongo.Datasource, c.Mongo.Db, "ums_member_product_collection")
 	return &ServiceContext{
-		Config:   c,
-		DB:       db,
-		RabbitMQ: rabbitmq,
-		// MemberBrandAttentionModel:          MemberBrandAttention,
-		// MemberBrowseRecordModel:            MemberBrowseRecordModel,
-		// MemberProductCategoryRelationModel: MemberProductCategoryRelationModel,
-		// MemberProductCollectionModel:       MemberProductCollectionModel,
+		Config:                             c,
+		DB:                                 db,
+		RabbitMQ:                           rabbitmq,
+		MemberBrandAttentionModel:          MemberBrandAttention,
+		MemberBrowseRecordModel:            MemberBrowseRecordModel,
+		MemberProductCategoryRelationModel: MemberProductCategoryRelationModel,
+		MemberProductCollectionModel:       MemberProductCollectionModel,
+		Redis:                              rds,
+		RedisKey:                           redisKey,
 	}
 }
 

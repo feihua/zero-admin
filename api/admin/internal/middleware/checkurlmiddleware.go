@@ -34,7 +34,8 @@ func (m *CheckUrlMiddleware) Handle(next http.HandlerFunc) http.HandlerFunc {
 		}
 
 		// 获取用户能访问的url
-		urls, err := m.Redis.Get("zero:mall:token1:" + userId)
+		key := "zero:mall:token"
+		urls, err := m.Redis.HgetCtx(r.Context(), key, userId)
 		if err != nil {
 			logc.Errorf(r.Context(), "用户：%s,获取redis连接异常", userName)
 			httpx.Error(w, errorx.NewDefaultError(fmt.Sprintf("用户：%s,获取redis连接异常", userName)))

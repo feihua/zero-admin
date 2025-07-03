@@ -53,7 +53,7 @@ Authorization: Bearer {{token}}
 }
 
 ### 查询角色详情
-GET {{host}}/api/sys/role/queryRoleDetail?id=4
+GET {{host}}/api/sys/role/queryRoleDetail?id=1
 Authorization: Bearer {{token}}
 
 ### 查询角色列表

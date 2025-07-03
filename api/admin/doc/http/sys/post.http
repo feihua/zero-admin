@@ -54,7 +54,7 @@ Authorization: Bearer {{token}}
 }
 
 ### 查询岗位详情
-GET {{host}}/api/sys/post/queryPostDetail?id=5
+GET {{host}}/api/sys/post/queryPostDetail?id=1
 Authorization: Bearer {{token}}
 
 ### 查询岗位信息列表

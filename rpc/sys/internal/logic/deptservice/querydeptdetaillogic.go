@@ -2,6 +2,7 @@ package deptservicelogic
 
 import (
 	"context"
+	"encoding/json"
 	"errors"
 	"github.com/feihua/zero-admin/pkg/time_util"
 	"github.com/feihua/zero-admin/rpc/sys/gen/query"
@@ -9,6 +10,7 @@ import (
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
 	"github.com/zeromicro/go-zero/core/logc"
 	"gorm.io/gorm"
+	"strconv"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -34,6 +36,14 @@ func NewQueryDeptDetailLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Q
 
 // QueryDeptDetail 查询部门信息详情
 func (l *QueryDeptDetailLogic) QueryDeptDetail(in *sysclient.QueryDeptDetailReq) (*sysclient.QueryDeptDetailResp, error) {
+	idStr := strconv.FormatInt(in.Id, 10)
+	key := l.svcCtx.RedisKey + "dept"
+	cachedData, _ := l.svcCtx.Redis.HgetCtx(l.ctx, key, idStr)
+
+	var cached sysclient.QueryDeptDetailResp
+	if json.Unmarshal([]byte(cachedData), &cached) == nil {
+		return &cached, nil
+	}
 	dept, err := query.SysDept.WithContext(l.ctx).Where(query.SysDept.ID.Eq(in.Id)).First()
 
 	switch {
@@ -63,6 +73,9 @@ func (l *QueryDeptDetailLogic) QueryDeptDetail(in *sysclient.QueryDeptDetailReq)
 		UpdateTime: time_util.TimeToString(dept.UpdateTime), // 更新时间
 	}
 
+	value, _ := json.Marshal(data)
+	filed := strconv.FormatInt(dept.ID, 10)
+	_ = l.svcCtx.Redis.HsetCtx(l.ctx, key, filed, string(value))
 	return data, nil
 
 }

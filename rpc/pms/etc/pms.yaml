@@ -26,3 +26,10 @@ Prometheus:
   Host: 127.0.0.1
   Port: 8182
   Path: /metrics
+
+Redis:
+  Host: 127.0.0.1:6379
+  Type: "node"
+  Pass: "123456"
+  Tls: false
+  Key: "pms:"

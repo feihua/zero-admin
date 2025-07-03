@@ -2,11 +2,13 @@ package userservicelogic
 
 import (
 	"context"
+	"encoding/json"
 	"errors"
 	"github.com/feihua/zero-admin/pkg/time_util"
 	"github.com/feihua/zero-admin/rpc/sys/gen/query"
 	"github.com/zeromicro/go-zero/core/logc"
 	"gorm.io/gorm"
+	"strconv"
 
 	"github.com/feihua/zero-admin/rpc/sys/internal/svc"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
@@ -35,6 +37,15 @@ func NewQueryUserDetailLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Q
 
 // QueryUserDetail 查询用户详情
 func (l *QueryUserDetailLogic) QueryUserDetail(in *sysclient.QueryUserDetailReq) (*sysclient.QueryUserDetailResp, error) {
+	idStr := strconv.FormatInt(in.Id, 10)
+	key := l.svcCtx.RedisKey + "user"
+	cachedData, _ := l.svcCtx.Redis.HgetCtx(l.ctx, key, idStr)
+
+	var cached sysclient.QueryUserDetailResp
+	if json.Unmarshal([]byte(cachedData), &cached) == nil {
+		return &cached, nil
+	}
+
 	item, err := query.SysUser.WithContext(l.ctx).Where(query.SysUser.ID.Eq(in.Id)).First()
 
 	// 1.判断用户是否存在
@@ -81,5 +92,8 @@ func (l *QueryUserDetailLogic) QueryUserDetail(in *sysclient.QueryUserDetailReq)
 		PostIds:       postIds,                                    // 岗位id
 	}
 
+	value, _ := json.Marshal(data)
+	filed := strconv.FormatInt(item.ID, 10)
+	_ = l.svcCtx.Redis.HsetCtx(l.ctx, key, filed, string(value))
 	return data, nil
 }

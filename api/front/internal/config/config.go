@@ -43,4 +43,8 @@ type Config struct {
 		UserName string
 		Password string
 	}
+	Redis struct {
+		Address string
+		Pass    string
+	}
 }

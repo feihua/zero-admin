@@ -85,3 +85,7 @@ Rabbitmq:
   Port: 5672
   UserName: guest
   Password: guest
+
+Redis:
+  Address: 127.0.0.1:6379
+  Pass: "123456"

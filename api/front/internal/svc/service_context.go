@@ -64,6 +64,7 @@ import (
 	"github.com/feihua/zero-admin/rpc/ums/client/membertaskrelationservice"
 	"github.com/feihua/zero-admin/rpc/ums/client/membertaskservice"
 	"github.com/smartwalle/alipay/v3"
+	"github.com/zeromicro/go-zero/core/stores/redis"
 	"github.com/zeromicro/go-zero/zrpc"
 )
 
@@ -140,9 +141,20 @@ type ServiceContext struct {
 	AlipayClient *alipay.Client
 
 	RabbitMQ *mq.RabbitMQ
+
+	Redis *redis.Redis
 }
 
 func NewServiceContext(c config.Config) *ServiceContext {
+	conf := redis.RedisConf{
+		Host: c.Redis.Address,
+		Type: "node",
+		Pass: c.Redis.Pass,
+		Tls:  false,
+	}
+
+	rds := redis.MustNewRedis(conf)
+
 	// 初始化支付宝客户端
 	client, err := alipay.New(c.Alipay.AppId, c.Alipay.PrivateKey, c.Alipay.IsProduction)
 	if err != nil {
@@ -226,5 +238,6 @@ func NewServiceContext(c config.Config) *ServiceContext {
 
 		AlipayClient: client,
 		RabbitMQ:     rabbitmq,
+		Redis:        rds,
 	}
 }

@@ -79,6 +79,17 @@ func NewServiceContext(c config.Config) *ServiceContext {
 		gocron.NewTask(jobs.CancelTimeOutOrder, context.Background(), skuService, orderService, couponRecordService, memberInfoService, settingService),
 	)
 
+	// 10秒后执行执行任务
+	_, _ = s.NewJob(
+		gocron.OneTimeJob(
+			gocron.OneTimeJobStartDateTime(time.Now().Add(10*time.Second)),
+		),
+		gocron.NewTask(
+			func() {
+				fmt.Println("10秒后执行执行任务:")
+			},
+		),
+	)
 	s.Start()
 	return svc
 }

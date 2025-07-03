@@ -7,6 +7,7 @@ import (
 	"github.com/feihua/zero-admin/rpc/sys/internal/svc"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
 	"github.com/zeromicro/go-zero/core/logc"
+	"strconv"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -62,5 +63,11 @@ func (l *UpdateUserStatusLogic) UpdateUserStatus(in *sysclient.UpdateUserStatusR
 		return nil, errors.New("更新用户状态异常")
 	}
 
+	idsStr := make([]string, 0, len(in.Ids))
+	for _, id := range in.Ids {
+		idsStr = append(idsStr, strconv.FormatInt(id, 10))
+	}
+	key := l.svcCtx.RedisKey + "user"
+	_, _ = l.svcCtx.Redis.HdelCtx(l.ctx, key, idsStr...)
 	return &sysclient.UpdateUserStatusResp{}, nil
 }

@@ -7,6 +7,8 @@ import (
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
 	"github.com/zeromicro/go-zero/core/logc"
 	"google.golang.org/grpc/status"
+	"strconv"
+	"strings"
 
 	"github.com/feihua/zero-admin/api/admin/internal/svc"
 	"github.com/feihua/zero-admin/api/admin/internal/types"
@@ -60,5 +62,22 @@ func (l *AddMenuLogic) AddMenu(req *types.AddMenuReq) (*types.BaseResp, error) {
 		return nil, errorx.NewDefaultError(s.Message())
 	}
 
+	// 以下操作是确保权限变更了,超级管理员不用重新登录
+	// 添加权限的时候, 需要将权限的接口地址保存到redis中,这样超级管理员不用重新登录,即刻拥有权限
+	key := "zero:mall:token"
+	urls, err := l.svcCtx.Redis.HgetCtx(l.ctx, key, strconv.FormatInt(1, 10))
+	if err != nil {
+		logc.Error(l.ctx, "获取redis连接异常")
+		return nil, errorx.NewDefaultError("获取redis连接异常")
+	}
+
+	backUrls := strings.Split(urls, ",")
+	backUrls = append(backUrls, req.BackgroundUrl)
+
+	err = l.svcCtx.Redis.HsetCtx(l.ctx, key, strconv.FormatInt(1, 10), strings.Join(backUrls, ","))
+	if err != nil {
+		logc.Error(l.ctx, "获取redis连接异常")
+		return nil, errorx.NewDefaultError("获取redis连接异常")
+	}
 	return res.Success()
 }

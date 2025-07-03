@@ -10,6 +10,7 @@ import (
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
 	"github.com/zeromicro/go-zero/core/logc"
 	"gorm.io/gorm"
+	"strconv"
 	"time"
 
 	"github.com/feihua/zero-admin/rpc/sys/internal/svc"
@@ -119,5 +120,9 @@ func (l *UpdateMenuLogic) UpdateMenu(in *sysclient.UpdateMenuReq) (*sysclient.Up
 		return nil, errors.New("更新菜单信息失败")
 	}
 
+	key := l.svcCtx.RedisKey + "menu"
+	filed := strconv.FormatInt(in.Id, 10)
+	_, _ = l.svcCtx.Redis.HdelCtx(l.ctx, key, filed)
+	_, _ = l.svcCtx.Redis.HdelCtx(l.ctx, l.svcCtx.RedisKey+"background_url", in.BackgroundUrl)
 	return &sysclient.UpdateMenuResp{}, nil
 }

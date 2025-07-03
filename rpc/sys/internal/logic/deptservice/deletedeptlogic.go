@@ -7,6 +7,7 @@ import (
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
 	"github.com/zeromicro/go-zero/core/logc"
 	"gorm.io/gorm"
+	"strconv"
 
 	"github.com/feihua/zero-admin/rpc/sys/internal/svc"
 
@@ -90,6 +91,8 @@ func (l *DeleteDeptLogic) DeleteDept(in *sysclient.DeleteDeptReq) (*sysclient.De
 		logc.Errorf(l.ctx, "删除部门信息失败,参数:%+v,异常:%s", in, err.Error())
 		return nil, errors.New("删除部门信息失败")
 	}
-
+	key := l.svcCtx.RedisKey + "dept"
+	filed := strconv.FormatInt(in.Id, 10)
+	_, _ = l.svcCtx.Redis.HdelCtx(l.ctx, key, filed)
 	return &sysclient.DeleteDeptResp{}, nil
 }

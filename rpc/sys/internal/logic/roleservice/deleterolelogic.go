@@ -7,6 +7,7 @@ import (
 	"github.com/feihua/zero-admin/rpc/sys/internal/svc"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
 	"github.com/zeromicro/go-zero/core/logx"
+	"strconv"
 )
 
 // DeleteRoleLogic 删除角色
@@ -87,5 +88,11 @@ func (l *DeleteRoleLogic) DeleteRole(in *sysclient.DeleteRoleReq) (*sysclient.De
 		return nil, errors.New("删除角色失败")
 	}
 
+	idsStr := make([]string, 0, len(in.Ids))
+	for _, id := range in.Ids {
+		idsStr = append(idsStr, strconv.FormatInt(id, 10))
+	}
+	key := l.svcCtx.RedisKey + "role"
+	_, _ = l.svcCtx.Redis.HdelCtx(l.ctx, key, idsStr...)
 	return &sysclient.DeleteRoleResp{}, nil
 }

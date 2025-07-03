@@ -10,6 +10,7 @@ import (
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
 	"github.com/zeromicro/go-zero/core/logc"
 	"gorm.io/gorm"
+	"strconv"
 	"time"
 
 	"github.com/zeromicro/go-zero/core/logx"
@@ -107,5 +108,9 @@ func (l *UpdateRoleLogic) UpdateRole(in *sysclient.UpdateRoleReq) (*sysclient.Up
 		logc.Errorf(l.ctx, "更新角色失败,参数:%+v,异常:%s", role, err.Error())
 		return nil, errors.New("更新角色失败")
 	}
+
+	key := l.svcCtx.RedisKey + "role"
+	filed := strconv.FormatInt(in.Id, 10)
+	_, _ = l.svcCtx.Redis.HdelCtx(l.ctx, key, filed)
 	return &sysclient.UpdateRoleResp{}, nil
 }

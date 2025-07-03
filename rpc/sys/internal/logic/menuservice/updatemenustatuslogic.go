@@ -5,6 +5,7 @@ import (
 	"errors"
 	"github.com/feihua/zero-admin/rpc/sys/gen/query"
 	"github.com/zeromicro/go-zero/core/logc"
+	"strconv"
 
 	"github.com/feihua/zero-admin/rpc/sys/internal/svc"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
@@ -56,6 +57,8 @@ func (l *UpdateMenuStatusLogic) UpdateMenuStatus(in *sysclient.UpdateMenuStatusR
 		logc.Errorf(l.ctx, "更新菜单状态失败,参数:%+v,异常:%s", in, err.Error())
 		return nil, errors.New("更新菜单状态失败")
 	}
-
+	key := l.svcCtx.RedisKey + "menu"
+	filed := strconv.FormatInt(in.Id, 10)
+	_, _ = l.svcCtx.Redis.HdelCtx(l.ctx, key, filed)
 	return &sysclient.UpdateMenuStatusResp{}, nil
 }

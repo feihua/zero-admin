@@ -32,7 +32,7 @@ Authorization: Bearer {{token}}
   "backgroundUrl": "/api/member/queryIntegrationChangeHistoryList"
 }
 ### 删除菜单信息
-GET {{host}}/api/sys/menu/deleteMenu?ids=[162]
+GET {{host}}/api/sys/menu/deleteMenu?id=180
 Authorization: Bearer {{token}}
 
 
@@ -58,6 +58,11 @@ Authorization: Bearer {{token}}
   "vueRedirect": "",
   "backgroundUrl": "/api/member/queryIntegrationChangeHistoryList"
 }
+
+
+### 查询菜单详情
+GET {{host}}/api/sys/menu/queryMenuDetail?id=3
+Authorization: Bearer {{token}}
 
 ### 查询菜单信息列表
 GET {{host}}/api/sys/menu/queryMenuList

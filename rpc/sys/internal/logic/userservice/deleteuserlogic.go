@@ -8,6 +8,7 @@ import (
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
 	"github.com/zeromicro/go-zero/core/logc"
 	"github.com/zeromicro/go-zero/core/logx"
+	"strconv"
 )
 
 // DeleteUserLogic 删除用户
@@ -71,6 +72,11 @@ func (l *DeleteUserLogic) DeleteUser(in *sysclient.DeleteUserReq) (*sysclient.De
 		logc.Errorf(l.ctx, "删除用户异常,参数:%+v,异常:%s", in, err.Error())
 		return nil, errors.New("删除用户异常")
 	}
-
+	idsStr := make([]string, 0, len(in.Ids))
+	for _, id := range in.Ids {
+		idsStr = append(idsStr, strconv.FormatInt(id, 10))
+	}
+	key := l.svcCtx.RedisKey + "user"
+	_, _ = l.svcCtx.Redis.HdelCtx(l.ctx, key, idsStr...)
 	return &sysclient.DeleteUserResp{}, nil
 }

@@ -37,12 +37,23 @@ func NewAddOperateLogLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Add
 func (l *AddOperateLogLogic) AddOperateLog(in *sysclient.AddOperateLogReq) (*sysclient.AddOperateLogResp, error) {
 
 	uri := strings.Split(in.OperateUrl, "?")[0]
-	// todo 待优化 量大的时候 ，把它们的关联缓存起来(redis)
-	q := query.SysMenu
-	menu, _ := q.WithContext(l.ctx).Select(q.MenuName).Where(q.BackgroundURL.Like("%" + uri + "%")).First()
+
+	key := l.svcCtx.RedisKey + "background_url"
+	name, _ := l.svcCtx.Redis.HgetCtx(l.ctx, key, uri)
+
+	if name == "" {
+		q := query.SysMenu
+		_ = q.WithContext(l.ctx).Select(q.MenuName).Where(q.BackgroundURL.Eq(uri)).Scan(&name)
+		if name == "" {
+			_, _ = l.svcCtx.Redis.HdelCtx(l.ctx, l.svcCtx.RedisKey+"background_url", uri)
+			logc.Errorf(l.ctx, "添加操作日志失败,参数uri:%+v,异常:%s", uri, "菜单不存在,可能被删除了")
+			return &sysclient.AddOperateLogResp{}, nil
+		}
+		_ = l.svcCtx.Redis.HsetCtx(l.ctx, key, uri, name)
+	}
 
 	sysLog := &model.SysOperateLog{
-		Title:           menu.MenuName,      // 模块标题
+		Title:           name,               // 模块标题
 		BusinessType:    in.BusinessType,    // 业务类型（0其它 1新增 2修改 3删除）
 		Method:          in.Method,          // 方法名称
 		RequestMethod:   in.RequestMethod,   // 请求方式

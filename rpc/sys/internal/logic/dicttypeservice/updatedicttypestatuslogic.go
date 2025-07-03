@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"github.com/feihua/zero-admin/rpc/sys/gen/query"
 	"github.com/zeromicro/go-zero/core/logc"
+	"strconv"
 
 	"github.com/feihua/zero-admin/rpc/sys/internal/svc"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
@@ -42,6 +43,11 @@ func (l *UpdateDictTypeStatusLogic) UpdateDictTypeStatus(in *sysclient.UpdateDic
 		logc.Errorf(l.ctx, "根据字典类型ids：%+v,更新字典类型状态失败,异常:%s", in, err.Error())
 		return nil, errors.New(fmt.Sprintf("更新字典类型状态失败"))
 	}
-
+	ids := make([]string, 0, len(in.Ids))
+	for _, id := range in.Ids {
+		ids = append(ids, strconv.FormatInt(id, 10))
+	}
+	key := l.svcCtx.RedisKey + "dict:type"
+	_, _ = l.svcCtx.Redis.HdelCtx(l.ctx, key, ids...)
 	return &sysclient.UpdateDictTypeStatusResp{}, nil
 }

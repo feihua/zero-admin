@@ -9,6 +9,7 @@ import (
 	"github.com/feihua/zero-admin/rpc/sys/internal/svc"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
 	"github.com/zeromicro/go-zero/core/logc"
+	"strconv"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -52,5 +53,8 @@ func (l *ReSetPasswordLogic) ReSetPassword(in *sysclient.ReSetPasswordReq) (*sys
 		return nil, errors.New("重置用户密码失败")
 	}
 
+	key := l.svcCtx.RedisKey + "user"
+	filed := strconv.FormatInt(in.Id, 10)
+	_, _ = l.svcCtx.Redis.HdelCtx(l.ctx, key, filed)
 	return &sysclient.ReSetPasswordResp{}, nil
 }

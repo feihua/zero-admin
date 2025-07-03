@@ -5,6 +5,7 @@ import (
 	"errors"
 	"github.com/feihua/zero-admin/rpc/sys/gen/query"
 	"github.com/zeromicro/go-zero/core/logc"
+	"strconv"
 
 	"github.com/feihua/zero-admin/rpc/sys/internal/svc"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
@@ -58,5 +59,11 @@ func (l *UpdateRoleStatusLogic) UpdateRoleStatus(in *sysclient.UpdateRoleStatusR
 		return nil, errors.New("更新角色信息状态失败")
 	}
 
+	ids := make([]string, 0, len(in.Ids))
+	for _, id := range in.Ids {
+		ids = append(ids, strconv.FormatInt(id, 10))
+	}
+	key := l.svcCtx.RedisKey + "role"
+	_, _ = l.svcCtx.Redis.HdelCtx(l.ctx, key, ids...)
 	return &sysclient.UpdateRoleStatusResp{}, nil
 }

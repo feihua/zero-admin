@@ -11,6 +11,7 @@ import (
 	"github.com/zeromicro/go-zero/core/logc"
 	"github.com/zeromicro/go-zero/core/logx"
 	"gorm.io/gorm"
+	"strconv"
 	"time"
 )
 
@@ -99,5 +100,7 @@ func (l *UpdateDictTypeLogic) UpdateDictType(in *sysclient.UpdateDictTypeReq) (*
 		return nil, errors.New("更新字典信息失败")
 	}
 
+	key := l.svcCtx.RedisKey + "dict:type"
+	_, _ = l.svcCtx.Redis.HdelCtx(l.ctx, key, strconv.FormatInt(in.Id, 10))
 	return &sysclient.UpdateDictTypeResp{}, nil
 }

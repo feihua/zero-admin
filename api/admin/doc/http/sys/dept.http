@@ -60,7 +60,7 @@ Authorization: Bearer {{token}}
 }
 
 ### 查询部门详情
-GET {{host}}/api/sys/dept/queryDeptDetail?id=11
+GET {{host}}/api/sys/dept/queryDeptDetail?id=1
 Authorization: Bearer {{token}}
 
 ### 查询部门列表

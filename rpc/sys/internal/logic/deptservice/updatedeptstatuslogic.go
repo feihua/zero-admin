@@ -9,6 +9,7 @@ import (
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
 	"github.com/zeromicro/go-zero/core/logc"
 	"gorm.io/gorm"
+	"strconv"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -84,5 +85,8 @@ func (l *UpdateDeptStatusLogic) UpdateDeptStatus(in *sysclient.UpdateDeptStatusR
 		return nil, errors.New(fmt.Sprintf("更新部门信息表状态失败"))
 	}
 
+	key := l.svcCtx.RedisKey + "dept"
+	filed := strconv.FormatInt(in.Id, 10)
+	_, _ = l.svcCtx.Redis.HdelCtx(l.ctx, key, filed)
 	return &sysclient.UpdateDeptStatusResp{}, nil
 }

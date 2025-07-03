@@ -2,11 +2,13 @@ package roleservicelogic
 
 import (
 	"context"
+	"encoding/json"
 	"errors"
 	"github.com/feihua/zero-admin/pkg/time_util"
 	"github.com/feihua/zero-admin/rpc/sys/gen/query"
 	"github.com/zeromicro/go-zero/core/logc"
 	"gorm.io/gorm"
+	"strconv"
 
 	"github.com/feihua/zero-admin/rpc/sys/internal/svc"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
@@ -36,6 +38,14 @@ func NewQueryRoleDetailLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Q
 // QueryRoleDetail 查询角色详情
 // 1.判断角色是否存在
 func (l *QueryRoleDetailLogic) QueryRoleDetail(in *sysclient.QueryRoleDetailReq) (*sysclient.QueryRoleDetailResp, error) {
+	idStr := strconv.FormatInt(in.Id, 10)
+	key := l.svcCtx.RedisKey + "role"
+	cachedData, _ := l.svcCtx.Redis.HgetCtx(l.ctx, key, idStr)
+
+	var cached sysclient.QueryRoleDetailResp
+	if json.Unmarshal([]byte(cachedData), &cached) == nil {
+		return &cached, nil
+	}
 	item, err := query.SysRole.WithContext(l.ctx).Where(query.SysRole.ID.Eq(in.Id)).First()
 
 	// 1.判断角色是否存在
@@ -61,5 +71,8 @@ func (l *QueryRoleDetailLogic) QueryRoleDetail(in *sysclient.QueryRoleDetailReq)
 		UpdateTime: time_util.TimeToString(item.UpdateTime), // 更新时间
 	}
 
+	value, _ := json.Marshal(data)
+	filed := strconv.FormatInt(item.ID, 10)
+	_ = l.svcCtx.Redis.HsetCtx(l.ctx, key, filed, string(value))
 	return data, nil
 }
