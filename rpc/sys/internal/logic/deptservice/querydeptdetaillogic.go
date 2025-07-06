@@ -2,8 +2,8 @@ package deptservicelogic
 
 import (
 	"context"
-	"encoding/json"
 	"errors"
+	"github.com/bytedance/sonic"
 	"github.com/feihua/zero-admin/pkg/time_util"
 	"github.com/feihua/zero-admin/rpc/sys/gen/query"
 	"github.com/feihua/zero-admin/rpc/sys/internal/svc"
@@ -41,7 +41,7 @@ func (l *QueryDeptDetailLogic) QueryDeptDetail(in *sysclient.QueryDeptDetailReq)
 	cachedData, _ := l.svcCtx.Redis.HgetCtx(l.ctx, key, idStr)
 
 	var cached sysclient.QueryDeptDetailResp
-	if json.Unmarshal([]byte(cachedData), &cached) == nil {
+	if sonic.Unmarshal([]byte(cachedData), &cached) == nil {
 		return &cached, nil
 	}
 	dept, err := query.SysDept.WithContext(l.ctx).Where(query.SysDept.ID.Eq(in.Id)).First()
@@ -73,7 +73,7 @@ func (l *QueryDeptDetailLogic) QueryDeptDetail(in *sysclient.QueryDeptDetailReq)
 		UpdateTime: time_util.TimeToString(dept.UpdateTime), // 更新时间
 	}
 
-	value, _ := json.Marshal(data)
+	value, _ := sonic.Marshal(data)
 	filed := strconv.FormatInt(dept.ID, 10)
 	_ = l.svcCtx.Redis.HsetCtx(l.ctx, key, filed, string(value))
 	return data, nil

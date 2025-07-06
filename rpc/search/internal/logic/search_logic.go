@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"context"
 	"encoding/json"
+	"github.com/bytedance/sonic"
 	"github.com/feihua/zero-admin/rpc/search/internal/svc"
 	"github.com/feihua/zero-admin/rpc/search/search"
 
@@ -74,7 +75,7 @@ func (l *SearchLogic) Search(in *search.SearchReq) (*search.SearchResp, error) {
 		query["sort"] = sortField
 	}
 
-	data, _ := json.Marshal(query)
+	data, _ := sonic.Marshal(query)
 	res, err := l.svcCtx.ESClient.Search(
 		l.svcCtx.ESClient.Search.WithContext(l.ctx),
 		l.svcCtx.ESClient.Search.WithIndex(svc.IndexName),

@@ -2,7 +2,7 @@ package coupon
 
 import (
 	"context"
-	"encoding/json"
+	"github.com/bytedance/sonic"
 	"github.com/feihua/zero-admin/consumer/internal/types"
 	"github.com/feihua/zero-admin/rpc/sms/client/couponrecordservice"
 	"github.com/feihua/zero-admin/rpc/sms/client/couponservice"
@@ -16,7 +16,7 @@ import (
 func FirstLogin(ctx context.Context, body []byte, memberInfoService memberinfoservice.MemberInfoService, CouponService couponservice.CouponService, CouponRecordService couponrecordservice.CouponRecordService) {
 	logc.Infof(ctx, "收到消息: %s", body)
 	var memberInfo types.MemberInfo
-	err := json.Unmarshal(body, &memberInfo)
+	err := sonic.Unmarshal(body, &memberInfo)
 	if err != nil {
 		logc.Errorf(context.Background(), "序列化 JSON 失败: %v", err)
 	}

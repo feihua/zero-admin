@@ -3,8 +3,8 @@ package logic
 import (
 	"bytes"
 	"context"
-	"encoding/json"
 	"fmt"
+	"github.com/bytedance/sonic"
 	"github.com/feihua/zero-admin/rpc/search/internal/svc"
 	"github.com/feihua/zero-admin/rpc/search/search"
 	"strconv"
@@ -44,7 +44,7 @@ func (l *DeleteLogic) Delete(in *search.DeleteReq) (*search.DeleteResp, error) {
 		meta := map[string]map[string]string{
 			"delete": {"_index": svc.IndexName, "_id": strconv.FormatInt(id, 10)},
 		}
-		line, _ := json.Marshal(meta)
+		line, _ := sonic.Marshal(meta)
 		buf.Write(line)
 		buf.WriteByte('\n')
 	}

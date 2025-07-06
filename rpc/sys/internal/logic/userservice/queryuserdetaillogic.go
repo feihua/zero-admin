@@ -2,8 +2,8 @@ package userservicelogic
 
 import (
 	"context"
-	"encoding/json"
 	"errors"
+	"github.com/bytedance/sonic"
 	"github.com/feihua/zero-admin/pkg/time_util"
 	"github.com/feihua/zero-admin/rpc/sys/gen/query"
 	"github.com/zeromicro/go-zero/core/logc"
@@ -42,7 +42,7 @@ func (l *QueryUserDetailLogic) QueryUserDetail(in *sysclient.QueryUserDetailReq)
 	cachedData, _ := l.svcCtx.Redis.HgetCtx(l.ctx, key, idStr)
 
 	var cached sysclient.QueryUserDetailResp
-	if json.Unmarshal([]byte(cachedData), &cached) == nil {
+	if sonic.Unmarshal([]byte(cachedData), &cached) == nil {
 		return &cached, nil
 	}
 
@@ -92,7 +92,7 @@ func (l *QueryUserDetailLogic) QueryUserDetail(in *sysclient.QueryUserDetailReq)
 		PostIds:       postIds,                                    // 岗位id
 	}
 
-	value, _ := json.Marshal(data)
+	value, _ := sonic.Marshal(data)
 	filed := strconv.FormatInt(item.ID, 10)
 	_ = l.svcCtx.Redis.HsetCtx(l.ctx, key, filed, string(value))
 	return data, nil

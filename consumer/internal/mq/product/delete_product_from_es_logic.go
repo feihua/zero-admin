@@ -2,7 +2,7 @@ package product
 
 import (
 	"context"
-	"encoding/json"
+	"github.com/bytedance/sonic"
 	"github.com/feihua/zero-admin/rpc/pms/client/productspuservice"
 	"github.com/feihua/zero-admin/rpc/search/search_client"
 	"github.com/zeromicro/go-zero/core/logc"
@@ -12,7 +12,7 @@ import (
 func DeleteProductFromEs(ctx context.Context, body []byte, Search search_client.Search, productSpuService productspuservice.ProductSpuService) {
 	logc.Infof(ctx, "需要删除es中商品的索引信息: %s", body)
 	var orderInfo map[string][]int64
-	err := json.Unmarshal(body, &orderInfo)
+	err := sonic.Unmarshal(body, &orderInfo)
 	if err != nil {
 		logc.Errorf(ctx, "序列化 JSON 失败: %v", err)
 		return

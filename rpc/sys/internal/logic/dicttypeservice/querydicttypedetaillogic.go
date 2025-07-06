@@ -2,8 +2,8 @@ package dicttypeservicelogic
 
 import (
 	"context"
-	"encoding/json"
 	"errors"
+	"github.com/bytedance/sonic"
 	"github.com/feihua/zero-admin/pkg/time_util"
 	"github.com/feihua/zero-admin/rpc/sys/gen/query"
 	"github.com/zeromicro/go-zero/core/logc"
@@ -43,7 +43,7 @@ func (l *QueryDictTypeDetailLogic) QueryDictTypeDetail(in *sysclient.QueryDictTy
 	cachedData, _ := l.svcCtx.Redis.HgetCtx(l.ctx, key, idStr)
 
 	var cached sysclient.QueryDictTypeDetailResp
-	if json.Unmarshal([]byte(cachedData), &cached) == nil {
+	if sonic.Unmarshal([]byte(cachedData), &cached) == nil {
 		return &cached, nil
 	}
 	dict, err := query.SysDictType.WithContext(l.ctx).Where(query.SysDictType.ID.Eq(in.Id)).First()
@@ -70,7 +70,7 @@ func (l *QueryDictTypeDetailLogic) QueryDictTypeDetail(in *sysclient.QueryDictTy
 		UpdateTime: time_util.TimeToString(dict.UpdateTime), // 更新时间
 	}
 
-	value, _ := json.Marshal(data)
+	value, _ := sonic.Marshal(data)
 	filed := strconv.FormatInt(dict.ID, 10)
 	_ = l.svcCtx.Redis.HsetCtx(l.ctx, key, filed, string(value))
 	return data, nil

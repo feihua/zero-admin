@@ -2,8 +2,8 @@ package orderreturnservicelogic
 
 import (
 	"context"
-	"encoding/json"
 	"errors"
+	"github.com/bytedance/sonic"
 	"github.com/feihua/zero-admin/rpc/oms/gen/model"
 	"github.com/feihua/zero-admin/rpc/oms/gen/query"
 	"github.com/feihua/zero-admin/rpc/oms/internal/svc"
@@ -101,7 +101,7 @@ func (l *AddOrderReturnLogic) AddOrderReturn(in *omsclient.OrderReturnReq) (*oms
 	}
 
 	message := map[string]any{"id": in.OrderId}
-	body, _ := json.Marshal(message)
+	body, _ := sonic.Marshal(message)
 	err = l.svcCtx.RabbitMQ.SendMessage("order.event.exchange", "order.return.queue", "order.return.key", body)
 
 	return &omsclient.OrderReturnResp{}, nil

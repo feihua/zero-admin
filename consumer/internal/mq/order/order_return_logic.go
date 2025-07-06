@@ -2,7 +2,7 @@ package order
 
 import (
 	"context"
-	"encoding/json"
+	"github.com/bytedance/sonic"
 	"github.com/zeromicro/go-zero/core/logc"
 )
 
@@ -10,7 +10,7 @@ import (
 func OrderReturn(ctx context.Context, body []byte) {
 	logc.Infof(ctx, "申请退款通知mq消息: %s", body)
 	var orderInfo map[string]int64
-	err := json.Unmarshal(body, &orderInfo)
+	err := sonic.Unmarshal(body, &orderInfo)
 	if err != nil {
 		logc.Errorf(ctx, "序列化 JSON 失败: %v", err)
 		return

@@ -2,7 +2,6 @@ package subjectservicelogic
 
 import (
 	"context"
-	"encoding/json"
 	"github.com/feihua/zero-admin/pkg/time_util"
 	"github.com/feihua/zero-admin/rpc/cms/gen/query"
 	"github.com/zeromicro/go-zero/core/logc"
@@ -32,7 +31,6 @@ func (l *SubjectListByIdsLogic) SubjectListByIds(in *cmsclient.SubjectListByIdsR
 	subjects, err := q.WithContext(l.ctx).Where(q.ID.In(in.Ids...)).Find()
 
 	if err != nil {
-		in, _ := json.Marshal(in)
 		logc.Errorf(l.ctx, "查询商品品牌列表信息失败,参数：%+v,异常:%s", in, err.Error())
 		return nil, err
 	}

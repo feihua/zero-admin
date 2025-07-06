@@ -2,8 +2,8 @@ package orderservicelogic
 
 import (
 	"context"
-	"encoding/json"
 	"errors"
+	"github.com/bytedance/sonic"
 	"github.com/feihua/zero-admin/rpc/oms/gen/model"
 	"github.com/feihua/zero-admin/rpc/oms/gen/query"
 	"github.com/zeromicro/go-zero/core/logc"
@@ -69,7 +69,7 @@ func (l *DeliveryLogic) Delivery(in *omsclient.DeliveryReq) (*omsclient.Delivery
 	}
 
 	message := map[string]any{"ids": in.OrderId}
-	body, _ := json.Marshal(message)
+	body, _ := sonic.Marshal(message)
 	err = l.svcCtx.RabbitMQ.SendMessage("order.event.exchange", "order.delivery.queue", "order.delivery.key", body)
 
 	return &omsclient.DeliveryResp{}, nil

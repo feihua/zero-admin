@@ -2,8 +2,8 @@ package productspuservicelogic
 
 import (
 	"context"
-	"encoding/json"
 	"errors"
+	"github.com/bytedance/sonic"
 	"github.com/feihua/zero-admin/rpc/pms/gen/model"
 	"github.com/feihua/zero-admin/rpc/pms/gen/query"
 	"github.com/feihua/zero-admin/rpc/pms/internal/svc"
@@ -155,7 +155,7 @@ func (l *AddProductSpuLogic) AddProductSpu(in *pmsclient.ProductSpuReq) (*pmscli
 	}
 
 	message := map[string]any{"id": spuId}
-	body, _ := json.Marshal(message)
+	body, _ := sonic.Marshal(message)
 	err = l.svcCtx.RabbitMQ.SendMessage("product.event.exchange", "syn.product.to.es.queue", "syn.product.key", body)
 
 	return &pmsclient.ProductSpuResp{

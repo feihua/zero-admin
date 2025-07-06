@@ -1,3 +1,0 @@
-### 获取商品分类
-GET {{host}}/api/category/queryProductCateList
-

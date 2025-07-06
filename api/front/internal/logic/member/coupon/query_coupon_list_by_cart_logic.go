@@ -2,7 +2,7 @@ package coupon
 
 import (
 	"context"
-	"encoding/json"
+	"github.com/bytedance/sonic"
 	"github.com/feihua/zero-admin/api/front/internal/logic/order/cart"
 	"github.com/feihua/zero-admin/rpc/sms/smsclient"
 	"github.com/zeromicro/go-zero/core/logc"
@@ -127,8 +127,8 @@ func QueryCouponList(svcCtx *svc.ServiceContext, ctx context.Context, cartPromot
 	// 		}
 	// 	}
 	// }
-	enableListStr, _ := json.Marshal(enableList)
-	disableListStr, _ := json.Marshal(disableList)
+	enableListStr, _ := sonic.Marshal(enableList)
+	disableListStr, _ := sonic.Marshal(disableList)
 	logc.Errorf(ctx, "可用的优惠券,参数:%s", enableListStr)
 	logc.Errorf(ctx, "不可用的优惠券,参数:%s", disableListStr)
 	return enableList, disableList

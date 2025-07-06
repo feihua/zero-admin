@@ -2,8 +2,8 @@ package orderservicelogic
 
 import (
 	"context"
-	"encoding/json"
 	"errors"
+	"github.com/bytedance/sonic"
 	"github.com/feihua/zero-admin/rpc/oms/gen/query"
 	"github.com/feihua/zero-admin/rpc/oms/internal/svc"
 	"github.com/feihua/zero-admin/rpc/oms/omsclient"
@@ -68,7 +68,7 @@ func (l *CancelOrderLogic) CancelOrder(in *omsclient.CancelOrderReq) (*omsclient
 	_ = p.WithContext(l.ctx).Select(p.PromotionID).Where(p.OrderID.Eq(item.ID), p.IsDeleted.Eq(0), p.PromotionType.Eq(1)).Scan(&couponIds)
 
 	message := map[string]any{"id": in.OrderId}
-	body, _ := json.Marshal(message)
+	body, _ := sonic.Marshal(message)
 	err = l.svcCtx.RabbitMQ.SendMessage("order.event.exchange", "order.cancel.queue", "order.cancel.key", body)
 
 	return &omsclient.CancelOrderResp{

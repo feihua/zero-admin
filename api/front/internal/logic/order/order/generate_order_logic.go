@@ -2,8 +2,8 @@ package order
 
 import (
 	"context"
-	"encoding/json"
 	"fmt"
+	"github.com/bytedance/sonic"
 	"github.com/feihua/zero-admin/api/front/internal/logic/common"
 	"github.com/feihua/zero-admin/api/front/internal/logic/order/cart"
 	"github.com/feihua/zero-admin/pkg/errorx"
@@ -331,7 +331,7 @@ func (l *GenerateOrderLogic) GenerateOrder(req *types.GenerateOrderReq) (*types.
 func (l *GenerateOrderLogic) sendMsg(orderId, memberId int64) error {
 	delayMinutes := 30 // 延迟时间(分钟)
 	message := map[string]any{"orderId": orderId, "memberId": memberId}
-	body, err := json.Marshal(message)
+	body, err := sonic.Marshal(message)
 	if err != nil {
 		logc.Errorf(l.ctx, "序列化 JSON 失败: %v", err)
 		return errorx.NewDefaultError("序列化 JSON 错误")

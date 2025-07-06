@@ -2,8 +2,8 @@ package orderservicelogic
 
 import (
 	"context"
-	"encoding/json"
 	"errors"
+	"github.com/bytedance/sonic"
 	"github.com/feihua/zero-admin/rpc/oms/gen/model"
 	"github.com/feihua/zero-admin/rpc/oms/gen/query"
 	"github.com/zeromicro/go-zero/core/logc"
@@ -59,7 +59,7 @@ func (l *CloseOrderLogic) CloseOrder(in *omsclient.CloseOrderReq) (*omsclient.Cl
 
 	for id := range in.Ids {
 		message := map[string]any{"id": id}
-		body, _ := json.Marshal(message)
+		body, _ := sonic.Marshal(message)
 		err = l.svcCtx.RabbitMQ.SendMessage("order.event.exchange", "order.close.queue", "order.close.key", body)
 
 	}

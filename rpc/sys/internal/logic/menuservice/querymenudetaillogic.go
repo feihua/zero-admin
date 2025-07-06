@@ -2,8 +2,8 @@ package menuservicelogic
 
 import (
 	"context"
-	"encoding/json"
 	"errors"
+	"github.com/bytedance/sonic"
 	"github.com/feihua/zero-admin/pkg/time_util"
 	"github.com/feihua/zero-admin/rpc/sys/gen/query"
 	"github.com/zeromicro/go-zero/core/logc"
@@ -42,7 +42,7 @@ func (l *QueryMenuDetailLogic) QueryMenuDetail(in *sysclient.QueryMenuDetailReq)
 	cachedData, _ := l.svcCtx.Redis.HgetCtx(l.ctx, key, idStr)
 
 	var cached sysclient.QueryMenuDetailResp
-	if json.Unmarshal([]byte(cachedData), &cached) == nil {
+	if sonic.Unmarshal([]byte(cachedData), &cached) == nil {
 		return &cached, nil
 	}
 	menu, err := query.SysMenu.WithContext(l.ctx).Where(query.SysMenu.ID.Eq(in.Id)).First()
@@ -80,7 +80,7 @@ func (l *QueryMenuDetailLogic) QueryMenuDetail(in *sysclient.QueryMenuDetailReq)
 		BackgroundUrl: menu.BackgroundURL,                      // 接口地址
 	}
 
-	value, _ := json.Marshal(data)
+	value, _ := sonic.Marshal(data)
 	filed := strconv.FormatInt(menu.ID, 10)
 	_ = l.svcCtx.Redis.HsetCtx(l.ctx, key, filed, string(value))
 	return data, nil

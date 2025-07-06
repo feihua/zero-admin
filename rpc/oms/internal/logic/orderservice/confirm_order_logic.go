@@ -2,8 +2,8 @@ package orderservicelogic
 
 import (
 	"context"
-	"encoding/json"
 	"errors"
+	"github.com/bytedance/sonic"
 	"github.com/feihua/zero-admin/rpc/oms/gen/query"
 	"github.com/zeromicro/go-zero/core/logc"
 	"gorm.io/gorm"
@@ -53,7 +53,7 @@ func (l *ConfirmOrderLogic) ConfirmOrder(in *omsclient.ConfirmOrderReq) (*omscli
 	}
 
 	message := map[string]any{"id": in.OrderId}
-	body, _ := json.Marshal(message)
+	body, _ := sonic.Marshal(message)
 	err = l.svcCtx.RabbitMQ.SendMessage("order.confirm.exchange", "order.confirm.queue", "order.confirm.key", body)
 
 	return &omsclient.ConfirmOrderResp{}, nil

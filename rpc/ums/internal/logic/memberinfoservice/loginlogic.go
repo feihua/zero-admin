@@ -2,7 +2,7 @@ package memberinfoservicelogic
 
 import (
 	"context"
-	"encoding/json"
+	"github.com/bytedance/sonic"
 	"github.com/feihua/zero-admin/rpc/ums/gen/model"
 	"github.com/feihua/zero-admin/rpc/ums/gen/query"
 	"github.com/pkg/errors"
@@ -96,7 +96,7 @@ func sendCouponMsg(member *model.UmsMemberInfo, l *LoginLogic) {
 		param["memberId"] = member.MemberID
 		param["nickname"] = member.Nickname
 		param["firstLoginStatus"] = member.FirstLoginStatus
-		body, err := json.Marshal(param)
+		body, err := sonic.Marshal(param)
 		if err != nil {
 			logc.Errorf(l.ctx, "序列化 JSON 失败: %v", err)
 		}

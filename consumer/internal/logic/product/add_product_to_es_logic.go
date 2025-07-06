@@ -2,7 +2,7 @@ package product
 
 import (
 	"context"
-	"encoding/json"
+	"github.com/bytedance/sonic"
 
 	"github.com/feihua/zero-admin/consumer/internal/svc"
 	"github.com/feihua/zero-admin/consumer/internal/types"
@@ -28,7 +28,7 @@ func NewAddProductToEsLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Ad
 func (l *AddProductToEsLogic) AddProductToEs(req *types.ProductEsReq) (resp *types.Response, err error) {
 	for _, id := range req.Ids {
 		message := map[string]any{"id": id}
-		body, _ := json.Marshal(message)
+		body, _ := sonic.Marshal(message)
 		err = l.svcCtx.RabbitMQ.SendMessage("product.event.exchange", "syn.product.to.es.queue", "syn.product.key", body)
 
 	}

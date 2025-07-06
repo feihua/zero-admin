@@ -2,7 +2,7 @@ package order
 
 import (
 	"context"
-	"encoding/json"
+	"github.com/bytedance/sonic"
 	"github.com/feihua/zero-admin/rpc/oms/client/orderservice"
 	"github.com/feihua/zero-admin/rpc/oms/omsclient"
 	"github.com/feihua/zero-admin/rpc/pms/client/productskuservice"
@@ -18,7 +18,7 @@ import (
 func OrderDelayCancel(ctx context.Context, body []byte, productSkuService productskuservice.ProductSkuService, orderService orderservice.OrderService, couponRecordService couponrecordservice.CouponRecordService, memberService memberinfoservice.MemberInfoService) {
 	logc.Infof(ctx, "收到超过30分钟未付款的订单mq消息: %s", body)
 	var orderInfo map[string]int64
-	err := json.Unmarshal(body, &orderInfo)
+	err := sonic.Unmarshal(body, &orderInfo)
 	if err != nil {
 		logc.Errorf(ctx, "序列化 JSON 失败: %v", err)
 		return
