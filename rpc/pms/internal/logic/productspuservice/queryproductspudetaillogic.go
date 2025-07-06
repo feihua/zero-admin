@@ -57,6 +57,7 @@ func (l *QueryProductSpuDetailLogic) QueryProductSpuDetail(in *pmsclient.QueryPr
 	product := &pmsclient.ProductSpuListData{
 		Id:                  item.ID,                                          // 商品SpuId
 		Name:                item.Name,                                        // 商品名称
+		ProductSn:           item.ProductSn,                                   // 商品货号
 		CategoryId:          item.CategoryID,                                  // 商品分类ID
 		CategoryIds:         item.CategoryIds,                                 // 商品分类ID集合
 		CategoryName:        item.CategoryName,                                // 商品分类名称

@@ -90,6 +90,7 @@ func (l *QueryProductSpuListLogic) QueryProductSpuList(in *pmsclient.QueryProduc
 	for _, item := range result {
 		list = append(list, &pmsclient.ProductSpuListData{
 			Id:                  item.ID,                                          // 商品SpuId
+			ProductSn:           item.ProductSn,                                   // 商品货号
 			Name:                item.Name,                                        // 商品名称
 			CategoryId:          item.CategoryID,                                  // 商品分类ID
 			CategoryIds:         item.CategoryIds,                                 // 商品分类ID集合

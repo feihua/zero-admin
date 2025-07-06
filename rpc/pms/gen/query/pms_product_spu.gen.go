@@ -30,6 +30,7 @@ func newPmsProductSpu(db *gorm.DB, opts ...gen.DOOption) pmsProductSpu {
 	_pmsProductSpu.ALL = field.NewAsterisk(tableName)
 	_pmsProductSpu.ID = field.NewInt64(tableName, "id")
 	_pmsProductSpu.Name = field.NewString(tableName, "name")
+	_pmsProductSpu.ProductSn = field.NewString(tableName, "product_sn")
 	_pmsProductSpu.CategoryID = field.NewInt64(tableName, "category_id")
 	_pmsProductSpu.CategoryIds = field.NewString(tableName, "category_ids")
 	_pmsProductSpu.CategoryName = field.NewString(tableName, "category_name")
@@ -77,6 +78,7 @@ type pmsProductSpu struct {
 	ALL                 field.Asterisk
 	ID                  field.Int64   // 商品SpuId
 	Name                field.String  // 商品名称
+	ProductSn           field.String  // 商品货号
 	CategoryID          field.Int64   // 商品分类ID
 	CategoryIds         field.String  // 商品分类ID集合
 	CategoryName        field.String  // 商品分类名称
@@ -129,6 +131,7 @@ func (p *pmsProductSpu) updateTableName(table string) *pmsProductSpu {
 	p.ALL = field.NewAsterisk(table)
 	p.ID = field.NewInt64(table, "id")
 	p.Name = field.NewString(table, "name")
+	p.ProductSn = field.NewString(table, "product_sn")
 	p.CategoryID = field.NewInt64(table, "category_id")
 	p.CategoryIds = field.NewString(table, "category_ids")
 	p.CategoryName = field.NewString(table, "category_name")
@@ -191,9 +194,10 @@ func (p *pmsProductSpu) GetFieldByName(fieldName string) (field.OrderExpr, bool)
 }
 
 func (p *pmsProductSpu) fillFieldMap() {
-	p.fieldMap = make(map[string]field.Expr, 36)
+	p.fieldMap = make(map[string]field.Expr, 37)
 	p.fieldMap["id"] = p.ID
 	p.fieldMap["name"] = p.Name
+	p.fieldMap["product_sn"] = p.ProductSn
 	p.fieldMap["category_id"] = p.CategoryID
 	p.fieldMap["category_ids"] = p.CategoryIds
 	p.fieldMap["category_name"] = p.CategoryName

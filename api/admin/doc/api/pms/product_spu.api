@@ -28,6 +28,7 @@ type (
 	ProductSpuData {
 		Id                  int64   `json:"id,optional"` //商品SpuId
 		Name                string  `json:"name"` //商品名称
+		ProductSn           string  `json:"productSn"` //商品货号
 		CategoryId          int64   `json:"categoryId"` //商品分类ID
 		CategoryIds         string  `json:"categoryIds"` //商品分类ID集合
 		CategoryName        string  `json:"categoryName"` //商品分类名称
@@ -103,6 +104,7 @@ type (
 		Current         int32  `form:"current,default=1"` //第几页
 		PageSize        int32  `form:"pageSize,default=20"` //每页的数量
 		Name            string `form:"name,optional"` //商品名称
+		ProductSn       string `form:"productSn,optional"` //商品货号
 		CategoryId      int64  `form:"categoryId,optional"` //商品分类ID
 		BrandId         int64  `form:"brandId,optional"` //品牌ID
 		Keywords        string `form:"keywords,optional"` //关键词
@@ -116,6 +118,7 @@ type (
 	QueryProductSpuListData {
 		Id                  int64   `json:"id"` //商品SpuId
 		Name                string  `json:"name"` //商品名称
+		ProductSn           string  `json:"productSn"` //商品货号
 		CategoryId          int64   `json:"categoryId"` //商品分类ID
 		CategoryIds         string  `json:"categoryIds"` //商品分类ID集合
 		CategoryName        string  `json:"categoryName"` //商品分类名称

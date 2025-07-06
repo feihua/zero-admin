@@ -62,7 +62,7 @@ type pmsProductSku struct {
 	pmsProductSkuDo pmsProductSkuDo
 
 	ALL                field.Asterisk
-	ID                 field.Int64   // 商品SpuId
+	ID                 field.Int64   // 商品SkuId
 	SpuID              field.Int64   // 商品SpuId
 	Name               field.String  // SKU名称
 	SkuCode            field.String  // SKU编码

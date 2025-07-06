@@ -60,6 +60,7 @@ func (l *QueryProductSpuListLogic) QueryProductSpuList(req *types.QueryProductSp
 		list = append(list, &types.QueryProductSpuListData{
 			Id:                  detail.Id,                  // 商品SpuId
 			Name:                detail.Name,                // 商品名称
+			ProductSn:           detail.ProductSn,           //商品货号
 			CategoryId:          detail.CategoryId,          // 商品分类ID
 			CategoryIds:         detail.CategoryIds,         // 商品分类ID集合
 			CategoryName:        detail.CategoryName,        // 商品分类名称

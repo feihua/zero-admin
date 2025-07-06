@@ -12,7 +12,7 @@ const TableNamePmsProductSku = "pms_product_sku"
 
 // PmsProductSku 商品SKU表
 type PmsProductSku struct {
-	ID                 int64      `gorm:"column:id;primaryKey;autoIncrement:true;comment:商品SpuId" json:"id"`                     // 商品SpuId
+	ID                 int64      `gorm:"column:id;primaryKey;autoIncrement:true;comment:商品SkuId" json:"id"`                     // 商品SkuId
 	SpuID              int64      `gorm:"column:spu_id;not null;comment:商品SpuId" json:"spu_id"`                                  // 商品SpuId
 	Name               string     `gorm:"column:name;not null;comment:SKU名称" json:"name"`                                        // SKU名称
 	SkuCode            string     `gorm:"column:sku_code;not null;comment:SKU编码" json:"sku_code"`                                // SKU编码

@@ -42,11 +42,12 @@ func NewAddProductSpuLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Add
 // 4.满减价格
 // 5.添加sku库存信息
 // 6.添加商品参数,添加自定义商品规格
-func (l *AddProductSpuLogic) AddProductSpu(in *pmsclient.AddProductSpuReq) (*pmsclient.AddProductSpuResp, error) {
+func (l *AddProductSpuLogic) AddProductSpu(in *pmsclient.ProductSpuReq) (*pmsclient.ProductSpuResp, error) {
 	q := query.PmsProductSpu
 
 	item := &model.PmsProductSpu{
 		Name:                in.Name,                // 商品名称
+		ProductSn:           in.ProductSn,           // 商品货号
 		CategoryID:          in.CategoryId,          // 商品分类ID
 		CategoryIds:         in.CategoryIds,         // 商品分类ID集合
 		CategoryName:        in.CategoryName,        // 商品分类名称
@@ -157,7 +158,7 @@ func (l *AddProductSpuLogic) AddProductSpu(in *pmsclient.AddProductSpuReq) (*pms
 	body, _ := json.Marshal(message)
 	err = l.svcCtx.RabbitMQ.SendMessage("product.event.exchange", "syn.product.to.es.queue", "syn.product.key", body)
 
-	return &pmsclient.AddProductSpuResp{
+	return &pmsclient.ProductSpuResp{
 		SpuId: spuId,
 	}, nil
 

@@ -43,7 +43,7 @@ func NewUpdateProductSpuLogic(ctx context.Context, svcCtx *svc.ServiceContext) *
 // 4.满减价格
 // 5.更新sku库存信息
 // 6.更新商品参数,添加自定义商品规格
-func (l *UpdateProductSpuLogic) UpdateProductSpu(in *pmsclient.UpdateProductSpuReq) (*pmsclient.UpdateProductSpuResp, error) {
+func (l *UpdateProductSpuLogic) UpdateProductSpu(in *pmsclient.ProductSpuReq) (*pmsclient.ProductSpuResp, error) {
 	spu := query.PmsProductSpu
 	q := spu.WithContext(l.ctx)
 
@@ -62,6 +62,7 @@ func (l *UpdateProductSpuLogic) UpdateProductSpu(in *pmsclient.UpdateProductSpuR
 	now := time.Now()
 	item := &model.PmsProductSpu{
 		ID:                  in.Id,                  // 商品SpuId
+		ProductSn:           in.ProductSn,           // 商品货号
 		Name:                in.Name,                // 商品名称
 		CategoryID:          in.CategoryId,          // 商品分类ID
 		CategoryIds:         in.CategoryIds,         // 商品分类ID集合
@@ -94,7 +95,7 @@ func (l *UpdateProductSpuLogic) UpdateProductSpu(in *pmsclient.UpdateProductSpuR
 		DetailMobileHTML:    in.DetailMobileHtml,    // 移动端网页详情
 		CreateBy:            detail.CreateBy,        // 创建人ID
 		CreateTime:          detail.CreateTime,      // 创建时间
-		UpdateBy:            &in.UpdateBy,           // 更新人ID
+		UpdateBy:            &in.CreateBy,           // 更新人ID
 		UpdateTime:          &now,                   // 更新时间
 	}
 
@@ -162,7 +163,7 @@ func (l *UpdateProductSpuLogic) UpdateProductSpu(in *pmsclient.UpdateProductSpuR
 			PublishStatus:  list.PublishStatus,           // 上架状态：0-下架，1-上架
 			VerifyStatus:   list.VerifyStatus,            // 审核状态：0-未审核，1-审核通过，2-审核不通过
 			Sort:           list.Sort,                    // 排序
-			CreateBy:       in.UpdateBy,                  // 创建人ID
+			CreateBy:       in.CreateBy,                  // 创建人ID
 		})
 	}
 	// 6.更新商品参数,添加自定义商品规格
@@ -173,7 +174,7 @@ func (l *UpdateProductSpuLogic) UpdateProductSpu(in *pmsclient.UpdateProductSpuR
 			SpuID:       spuId,                   // 商品SPU ID
 			AttributeID: list.ProductAttributeId, // 属性ID
 			Value:       list.AttributeValues,    // 属性值
-			CreateBy:    in.UpdateBy,             // 创建人ID
+			CreateBy:    in.CreateBy,             // 创建人ID
 		})
 	}
 
@@ -181,5 +182,5 @@ func (l *UpdateProductSpuLogic) UpdateProductSpu(in *pmsclient.UpdateProductSpuR
 	body, _ := json.Marshal(message)
 	err = l.svcCtx.RabbitMQ.SendMessage("product.event.exchange", "syn.product.to.es.queue", "syn.product.key", body)
 
-	return &pmsclient.UpdateProductSpuResp{}, nil
+	return &pmsclient.ProductSpuResp{}, nil
 }

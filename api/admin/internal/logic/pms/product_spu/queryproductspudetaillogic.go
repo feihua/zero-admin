@@ -98,6 +98,7 @@ func buildProductData(resp *pmsclient.QueryProductSpuDetailResp) types.QueryProd
 	return types.QueryProductSpuListData{
 		Id:                  product.Id,                  // 商品SpuId
 		Name:                product.Name,                // 商品名称
+		ProductSn:           product.ProductSn,           //商品货号
 		CategoryId:          product.CategoryId,          // 商品分类ID
 		CategoryIds:         product.CategoryIds,         // 商品分类ID集合
 		CategoryName:        product.CategoryName,        // 商品分类名称

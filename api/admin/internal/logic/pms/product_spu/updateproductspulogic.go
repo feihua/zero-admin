@@ -70,9 +70,10 @@ func (l *UpdateProductSpuLogic) updateProductSpuInfo(req *types.UpdateProductSpu
 		return err
 	}
 	product := req.ProductData
-	_, err = l.svcCtx.ProductSpuService.UpdateProductSpu(l.ctx, &pmsclient.UpdateProductSpuReq{
+	_, err = l.svcCtx.ProductSpuService.UpdateProductSpu(l.ctx, &pmsclient.ProductSpuReq{
 		Id:                        product.Id,                                // 商品SpuId
 		Name:                      product.Name,                              // 商品名称
+		ProductSn:                 product.ProductSn,                         // 商品货号
 		CategoryId:                product.CategoryId,                        // 商品分类ID
 		CategoryIds:               product.CategoryIds,                       // 商品分类ID集合
 		CategoryName:              product.CategoryName,                      // 商品分类名称
@@ -100,7 +101,7 @@ func (l *UpdateProductSpuLogic) updateProductSpuInfo(req *types.UpdateProductSpu
 		DetailDesc:                product.DetailDesc,                        // 详情描述
 		DetailHtml:                product.DetailHtml,                        // 产品详情网页内容
 		DetailMobileHtml:          product.DetailMobileHtml,                  // 移动端网页详情
-		UpdateBy:                  userId,                                    // 更新人ID
+		CreateBy:                  userId,                                    // 更新人ID
 		MemberPriceList:           buildUpdateMemberPriceList(req),           // 会员价格
 		ProductAttributeValueList: buildUpdateProductAttributeValueList(req), // 商品参数及自定义规格属性
 		ProductFullReductionList:  buildUpdateProductFullReductionList(req),  // 满减价格

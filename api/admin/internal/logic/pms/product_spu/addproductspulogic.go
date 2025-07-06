@@ -66,14 +66,15 @@ func (l *AddProductSpuLogic) AddProductSpu(req *types.AddProductSpuReq) (resp *t
 	return res.Success()
 }
 
-func (l *AddProductSpuLogic) addProductSpuInfo(req *types.AddProductSpuReq) (*productspuservice.AddProductSpuResp, error) {
+func (l *AddProductSpuLogic) addProductSpuInfo(req *types.AddProductSpuReq) (*productspuservice.ProductSpuResp, error) {
 	userId, err := common.GetUserId(l.ctx)
 	if err != nil {
 		return nil, err
 	}
 	product := req.ProductData
-	return l.svcCtx.ProductSpuService.AddProductSpu(l.ctx, &pmsclient.AddProductSpuReq{
+	return l.svcCtx.ProductSpuService.AddProductSpu(l.ctx, &pmsclient.ProductSpuReq{
 		Name:                      product.Name,                        // 商品名称
+		ProductSn:                 product.ProductSn,                   // 商品货号
 		CategoryId:                product.CategoryId,                  // 商品分类ID
 		CategoryIds:               product.CategoryIds,                 // 商品分类ID集合
 		CategoryName:              product.CategoryName,                // 商品分类名称

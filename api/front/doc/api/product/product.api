@@ -32,6 +32,7 @@ type ProductDetailData {
 type ProductData {
 	Id                  int64   `json:"id"` //商品SpuId
 	Name                string  `json:"name"` //商品名称
+	ProductSn           string  `json:"productSn"` //商品货号
 	CategoryId          int64   `json:"categoryId"` //商品分类ID
 	CategoryIds         string  `json:"categoryIds"` //商品分类ID集合
 	CategoryName        string  `json:"categoryName"` //商品分类名称

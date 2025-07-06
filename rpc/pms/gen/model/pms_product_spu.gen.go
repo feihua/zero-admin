@@ -14,6 +14,7 @@ const TableNamePmsProductSpu = "pms_product_spu"
 type PmsProductSpu struct {
 	ID                  int64      `gorm:"column:id;primaryKey;autoIncrement:true;comment:商品SpuId" json:"id"`                                                         // 商品SpuId
 	Name                string     `gorm:"column:name;not null;comment:商品名称" json:"name"`                                                                             // 商品名称
+	ProductSn           string     `gorm:"column:product_sn;not null;comment:商品货号" json:"product_sn"`                                                                 // 商品货号
 	CategoryID          int64      `gorm:"column:category_id;not null;comment:商品分类ID" json:"category_id"`                                                             // 商品分类ID
 	CategoryIds         string     `gorm:"column:category_ids;not null;comment:商品分类ID集合" json:"category_ids"`                                                         // 商品分类ID集合
 	CategoryName        string     `gorm:"column:category_name;not null;comment:商品分类名称" json:"category_name"`                                                         // 商品分类名称
