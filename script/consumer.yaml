@@ -1,27 +1,27 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: web-api
+  name: consumer-api
   namespace: zero-admin
   labels:
-    app: web-api
+    app: consumer-api
 spec:
   replicas: 1
   revisionHistoryLimit: 2
   selector:
     matchLabels:
-      app: web-api
+      app: consumer-api
   template:
     metadata:
       labels:
-        app: web-api
+        app: consumer-api
     spec:
       serviceAccountName: koobe
       containers:
-        - name: web-api
-          image: web-api:0.0.1
+        - name: consumer-api
+          image: consumer-api:0.0.1
           ports:
-            - containerPort: 7777
+            - containerPort: 8087
           envFrom:
             - configMapRef:
                 name: zero-admin-config
@@ -30,15 +30,15 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: web-api-svc
+  name: consumer-api-svc
   namespace: zero-admin
   labels:
-    app: web-api-svc
+    app: consumer-api-svc
 spec:
   ports:
-    - port: 7777
-      name: web-api
-      targetPort: 7777
+    - port: 8087
+      name: consumer-api
+      targetPort: 8087
   selector:
-    app: web-api
+    app: consumer-api
   type: NodePort

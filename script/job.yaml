@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: job-api
+  namespace: zero-admin
+  labels:
+    app: job-api
+spec:
+  replicas: 1
+  revisionHistoryLimit: 2
+  selector:
+    matchLabels:
+      app: job-api
+  template:
+    metadata:
+      labels:
+        app: job-api
+    spec:
+      serviceAccountName: koobe
+      containers:
+        - name: job-api
+          image: job-api:0.0.1
+          ports:
+            - containerPort: 8089
+          envFrom:
+            - configMapRef:
+                name: zero-admin-config
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: job-api-svc
+  namespace: zero-admin
+  labels:
+    app: job-api-svc
+spec:
+  ports:
+    - port: 8089
+      name: job-api
+      targetPort: 8089
+  selector:
+    app: job-api
+  type: NodePort

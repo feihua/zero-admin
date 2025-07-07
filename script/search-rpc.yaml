@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: search-rpc
+  namespace: zero-admin
+  labels:
+    app: search-rpc
+spec:
+  replicas: 1
+  revisionHistoryLimit: 2
+  selector:
+    matchLabels:
+      app: search-rpc
+  template:
+    metadata:
+      labels:
+        app: search-rpc
+    spec:
+      containers:
+        - name: search-rpc
+          image: search-rpc:0.0.1
+          ports:
+            - containerPort: 8088
+          envFrom:
+            - configMapRef:
+                name: zero-admin-config
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: search-rpc-svc
+  namespace: zero-admin
+  labels:
+    app: search-rpc-svc
+spec:
+  ports:
+    - port: 8088
+      name: search-rpc
+      targetPort: 8088
+  selector:
+    app: search-rpc
