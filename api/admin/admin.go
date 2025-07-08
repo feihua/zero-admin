@@ -26,8 +26,14 @@ func main() {
 	logx.AddWriter(logx.NewWriter(os.Stdout)) // 添加控制台输出
 
 	ctx := svc.NewServiceContext(c)
-	server := rest.MustNewServer(c.RestConf,
-		rest.WithFileServer("/swagger", http.Dir("api/admin/static")))
+	var server *rest.Server
+	if c.Swagger.IsTest {
+		fs := rest.WithFileServer("/swagger", http.Dir(c.Swagger.Path))
+		server = rest.MustNewServer(c.RestConf, fs)
+	} else {
+		server = rest.MustNewServer(c.RestConf)
+	}
+
 	defer server.Stop()
 
 	server.Use(ctx.AddLog)

@@ -32,4 +32,8 @@ type Config struct {
 		Address string
 		Pass    string
 	}
+	Swagger struct {
+		IsTest bool
+		Path   string
+	}
 }

@@ -64,6 +64,11 @@ Prometheus:
 Redis:
   Address: 127.0.0.1:6379
   Pass: "12341qweqfsd2356"
+
+Swagger:
+  IsTest: true  #是否打开swagger，true为打开，false为关闭（生产环境需要关闭）
+  Path: "api/admin/static"
+
 Log:
   ServiceName: admin-api
   Stat: false # go-zero 版本 >= 1.5.0 才支持

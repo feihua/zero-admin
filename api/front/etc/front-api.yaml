@@ -80,6 +80,11 @@ Alipay:
   NotifyURL: ""              #异步回调
   IsProduction: true         #是否为生产环境，传 false 的时候为沙箱环境，用于开发测试，正式上线的时候需要改为 true
 
+# swagger
+Swagger:
+  IsTest: true #是否打开swagger，true为打开，false为关闭（生产环境需要关闭）
+  Path: "api/front/static"
+
 Rabbitmq:
   Host: 127.0.0.1
   Port: 5672
