@@ -1,0 +1,17 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="gen-swagger" type="ShConfigurationType">
+    <option name="SCRIPT_TEXT" value="goctl api swagger --api api/admin/doc/api/cms/cms.api --dir api/admin/static; goctl api swagger --api api/admin/doc/api/oms/oms.api --dir api/admin/static; goctl api swagger --api api/admin/doc/api/pms/pms.api --dir api/admin/static; goctl api swagger --api api/admin/doc/api/sms/sms.api --dir api/admin/static; goctl api swagger --api api/admin/doc/api/sys/sys.api --dir api/admin/static; goctl api swagger --api api/admin/doc/api/ums/ums.api --dir api/admin/static; goctl api swagger --api api/front/doc/api/home/index.api --dir api/front/static; goctl api swagger --api api/front/doc/api/order/oms.api --dir api/front/static; goctl api swagger --api api/front/doc/api/product/pms.api --dir api/front/static; goctl api swagger --api api/front/doc/api/member/ums.api --dir api/front/static;" />
+    <option name="INDEPENDENT_SCRIPT_PATH" value="true" />
+    <option name="SCRIPT_PATH" value="" />
+    <option name="SCRIPT_OPTIONS" value="" />
+    <option name="INDEPENDENT_SCRIPT_WORKING_DIRECTORY" value="true" />
+    <option name="SCRIPT_WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+    <option name="INDEPENDENT_INTERPRETER_PATH" value="true" />
+    <option name="INTERPRETER_PATH" value="powershell.exe" />
+    <option name="INTERPRETER_OPTIONS" value="" />
+    <option name="EXECUTE_IN_TERMINAL" value="true" />
+    <option name="EXECUTE_SCRIPT_FILE" value="false" />
+    <envs />
+    <method v="2" />
+  </configuration>
+</component>
