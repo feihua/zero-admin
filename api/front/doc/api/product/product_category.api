@@ -22,6 +22,7 @@ type ProductCateData {
 @server (
 	group:  product/category
 	prefix: /api/product
+	tags:   "商品分类管理"
 )
 service front-api {
 	//获取所有商品分类

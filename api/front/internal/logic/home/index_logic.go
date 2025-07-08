@@ -85,7 +85,7 @@ func querySubjectList(l *IndexLogic) []types.SubjectList {
 }
 
 // 人气推荐
-func queryHotProductList(l *IndexLogic) []types.ProductData {
+func queryHotProductList(l *IndexLogic) []types.IndexProductData {
 	var resp, _ = l.svcCtx.ProductSpuService.QueryProductSpuList(l.ctx, &pmsclient.QueryProductSpuListReq{
 		PageNum:         1,
 		PageSize:        4,
@@ -98,11 +98,11 @@ func queryHotProductList(l *IndexLogic) []types.ProductData {
 		RecommendStatus: 1,
 	})
 
-	var list []types.ProductData
+	var list []types.IndexProductData
 
 	for _, detail := range resp.List {
 
-		list = append(list, types.ProductData{
+		list = append(list, types.IndexProductData{
 			Id:                  detail.Id,                  // 商品SpuId
 			Name:                detail.Name,                // 商品名称
 			ProductSn:           detail.ProductSn,           // 商品货号
@@ -141,7 +141,7 @@ func queryHotProductList(l *IndexLogic) []types.ProductData {
 }
 
 // 新品推荐
-func queryNewProductList(l *IndexLogic) []types.ProductData {
+func queryNewProductList(l *IndexLogic) []types.IndexProductData {
 	var resp, _ = l.svcCtx.ProductSpuService.QueryProductSpuList(l.ctx, &pmsclient.QueryProductSpuListReq{
 		PageNum:         1,
 		PageSize:        4,
@@ -154,11 +154,11 @@ func queryNewProductList(l *IndexLogic) []types.ProductData {
 		RecommendStatus: 2,
 	})
 
-	var list []types.ProductData
+	var list []types.IndexProductData
 
 	for _, detail := range resp.List {
 
-		list = append(list, types.ProductData{
+		list = append(list, types.IndexProductData{
 			Id:                  detail.Id,                  // 商品SpuId
 			Name:                detail.Name,                // 商品名称
 			ProductSn:           detail.ProductSn,           // 商品货号
@@ -261,7 +261,7 @@ func queryHomeFlashPromotion(l *IndexLogic) types.HomeFlashPromotion {
 }
 
 // 推荐品牌
-func queryBrandList(l *IndexLogic) []types.BrandData {
+func queryBrandList(l *IndexLogic) []types.IndexBrandData {
 	result, _ := l.svcCtx.ProductBrandService.QueryProductBrandList(l.ctx, &pmsclient.QueryProductBrandListReq{
 		PageNum:         1,
 		PageSize:        6,
@@ -270,10 +270,10 @@ func queryBrandList(l *IndexLogic) []types.BrandData {
 		IsEnabled:       1,  // 是否启用
 	})
 
-	var list []types.BrandData
+	var list []types.IndexBrandData
 
 	for _, detail := range result.List {
-		list = append(list, types.BrandData{
+		list = append(list, types.IndexBrandData{
 			Id:                  detail.Id,                  //
 			Name:                detail.Name,                // 品牌名称
 			Logo:                detail.Logo,                // 品牌logo

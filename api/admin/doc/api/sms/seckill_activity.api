@@ -95,6 +95,8 @@ type (
 	middleware: CheckUrl
 	group:      sms/seckill_activity
 	prefix:     /api/sms/seckillActivity
+	tags: "秒杀活动管理"
+	authType: apiKey
 )
 service admin-api {
 	// 添加秒杀活动

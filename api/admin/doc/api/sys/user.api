@@ -3,7 +3,9 @@ import "../base/base.api"
 info (
 	desc:   "用户信息"
 	author: "liufeihua"
+	schemes: "http"
 	email:  "1002219331@qq.com"
+
 )
 
 type (
@@ -235,6 +237,8 @@ type (
 	middleware: CheckUrl
 	group:      sys/user
 	prefix:     /api/sys/user
+	tags: "用户管理"
+	authType: apiKey
 )
 service admin-api {
 	//获取用户信息
@@ -284,8 +288,12 @@ service admin-api {
 
 @server (
 	group: sys/user
+	tags: "用户管理"
 )
 service admin-api {
+	@doc(
+		summary: "注册"
+	)
 	@handler UserLogin
 	post /api/sys/user/login (LoginReq) returns (LoginResp)
 }

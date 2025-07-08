@@ -1,0 +1,11 @@
+import "./product.api"
+import "./product_brand.api"
+import "./product_category.api"
+
+info (
+	title:       "商品管理 API"
+	description: "商品管理相关接口"
+	schemes:     "http"
+	version:     "v1"
+)
+

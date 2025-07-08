@@ -49,6 +49,8 @@ type (
 	middleware: CheckUrl
 	group:      sms/coupon_record
 	prefix:     /api/sms/couponRecord
+	tags: "优惠券领取记录管理"
+	authType: apiKey
 )
 service admin-api {
 	// 分页查询优惠券领取记录列表

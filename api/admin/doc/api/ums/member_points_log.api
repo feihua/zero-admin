@@ -60,6 +60,8 @@ type (
 	middleware: CheckUrl
 	group:      ums/member_points
 	prefix:     /api/ums/pointsLog
+	tags: "会员积分管理"
+	authType: apiKey
 )
 service admin-api {
 	// 查询会员积分记录详情

@@ -1,0 +1,2071 @@
+{
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "schemes": [
+    "http"
+  ],
+  "swagger": "2.0",
+  "info": {
+    "description": "会员管理相关接口",
+    "title": "会员管理 API",
+    "version": "v1"
+  },
+  "basePath": "/",
+  "paths": {
+    "/api/member/addAddress": {
+      "post": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "会员收货地址管理"
+        ],
+        "summary": "AddAddress",
+        "operationId": "member/AddressAddAddress",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": [
+                "receiverName",
+                "receiverPhone",
+                "province",
+                "city",
+                "district",
+                "detailAddress",
+                "postalCode",
+                "tag",
+                "isDefault"
+              ],
+              "properties": {
+                "city": {
+                  "description": "城市",
+                  "type": "string"
+                },
+                "detailAddress": {
+                  "description": "详细地址",
+                  "type": "string"
+                },
+                "district": {
+                  "description": "区县",
+                  "type": "string"
+                },
+                "id": {
+                  "description": "主键ID",
+                  "type": "integer"
+                },
+                "isDefault": {
+                  "description": "是否默认地址",
+                  "type": "integer"
+                },
+                "postalCode": {
+                  "description": "邮政编码",
+                  "type": "string"
+                },
+                "province": {
+                  "description": "省份",
+                  "type": "string"
+                },
+                "receiverName": {
+                  "description": "收货人姓名",
+                  "type": "string"
+                },
+                "receiverPhone": {
+                  "description": "收货人电话",
+                  "type": "string"
+                },
+                "tag": {
+                  "description": "地址标签：家、公司等",
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "integer"
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/member/addAttention": {
+      "post": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "品牌关注管理"
+        ],
+        "summary": "AddAttention",
+        "operationId": "member/AttentionAddAttention",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": [
+                "brandId",
+                "brandName",
+                "brandLogo",
+                "brandCity"
+              ],
+              "properties": {
+                "brandCity": {
+                  "description": "品牌所在城市",
+                  "type": "string"
+                },
+                "brandId": {
+                  "description": "品牌id",
+                  "type": "integer"
+                },
+                "brandLogo": {
+                  "description": "品牌Logo",
+                  "type": "string"
+                },
+                "brandName": {
+                  "description": "品牌名称",
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "integer"
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/member/addReadHistory": {
+      "post": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "浏览记录管理"
+        ],
+        "summary": "AddReadHistory",
+        "operationId": "member/HistoryAddReadHistory",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": [
+                "productId",
+                "productName",
+                "productPic",
+                "productSubTitle",
+                "productPrice"
+              ],
+              "properties": {
+                "productId": {
+                  "description": "商品id",
+                  "type": "integer"
+                },
+                "productName": {
+                  "description": "商品名称",
+                  "type": "string"
+                },
+                "productPic": {
+                  "description": "商品图片",
+                  "type": "string"
+                },
+                "productPrice": {
+                  "description": "商品价格",
+                  "type": "integer"
+                },
+                "productSubTitle": {
+                  "description": "商品标题",
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "integer"
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/member/addtCollection": {
+      "post": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "商品收藏管理"
+        ],
+        "summary": "AddCollection",
+        "operationId": "member/CollectionAddCollection",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": [
+                "productId",
+                "productName",
+                "productPic",
+                "productSubTitle",
+                "productPrice"
+              ],
+              "properties": {
+                "productId": {
+                  "description": "商品id",
+                  "type": "integer"
+                },
+                "productName": {
+                  "description": "商品名称",
+                  "type": "string"
+                },
+                "productPic": {
+                  "description": "商品图片",
+                  "type": "string"
+                },
+                "productPrice": {
+                  "description": "商品价格",
+                  "type": "integer"
+                },
+                "productSubTitle": {
+                  "description": "商品标题",
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "integer"
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/member/clearAttention": {
+      "get": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "品牌关注管理"
+        ],
+        "summary": "ClearAttention",
+        "operationId": "member/AttentionClearAttention",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "integer"
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/member/clearCollection": {
+      "get": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "商品收藏管理"
+        ],
+        "summary": "ClearCollection",
+        "operationId": "member/CollectionClearCollection",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "integer"
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/member/clearReadHistory": {
+      "get": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "浏览记录管理"
+        ],
+        "summary": "ClearReadHistory",
+        "operationId": "member/HistoryClearReadHistory",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "integer"
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/member/coupon/addCoupon": {
+      "post": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "优惠券管理"
+        ],
+        "summary": "AddCoupon",
+        "operationId": "member/CouponAddCoupon",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": [
+                "couponId"
+              ],
+              "properties": {
+                "couponId": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "integer"
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/member/coupon/queryCouponList": {
+      "get": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "优惠券管理"
+        ],
+        "summary": "QueryCouponList",
+        "operationId": "member/CouponQueryCouponList",
+        "parameters": [
+          {
+            "type": "integer",
+            "default": 3,
+            "description": "使用状态：0-\u003e未使用；1-\u003e已使用；2-\u003e已过期",
+            "name": "useStatus",
+            "in": "query",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "integer"
+                },
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "required": [
+                      "id",
+                      "typeId",
+                      "name",
+                      "code",
+                      "amount",
+                      "minAmount",
+                      "startTime",
+                      "endTime",
+                      "perLimit",
+                      "status",
+                      "description"
+                    ],
+                    "properties": {
+                      "amount": {
+                        "description": "优惠金额/折扣率",
+                        "type": "number"
+                      },
+                      "code": {
+                        "description": "优惠券码",
+                        "type": "string"
+                      },
+                      "description": {
+                        "description": "使用说明",
+                        "type": "string"
+                      },
+                      "endTime": {
+                        "description": "失效时间",
+                        "type": "string"
+                      },
+                      "id": {
+                        "description": "优惠券ID",
+                        "type": "integer"
+                      },
+                      "minAmount": {
+                        "description": "最低使用金额",
+                        "type": "number"
+                      },
+                      "name": {
+                        "description": "优惠券名称",
+                        "type": "string"
+                      },
+                      "perLimit": {
+                        "description": "每人限领数量",
+                        "type": "integer"
+                      },
+                      "startTime": {
+                        "description": "生效时间",
+                        "type": "string"
+                      },
+                      "status": {
+                        "description": "状态：0-未开始，1-进行中，2-已结束，3-已取消",
+                        "type": "integer"
+                      },
+                      "typeId": {
+                        "description": "优惠券类型ID",
+                        "type": "integer"
+                      }
+                    }
+                  }
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/member/coupon/queryCouponListByCart": {
+      "get": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "优惠券管理"
+        ],
+        "summary": "QueryCouponListByCart",
+        "operationId": "member/CouponQueryCouponListByCart",
+        "parameters": [
+          {
+            "type": "integer",
+            "description": "使用状态-使用可用:0-\u003e不可用；1-\u003e可用",
+            "name": "type",
+            "in": "query",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "integer"
+                },
+                "data": {
+                  "type": "object",
+                  "required": [
+                    "enableList",
+                    "disableList"
+                  ],
+                  "properties": {
+                    "disableList": {},
+                    "enableList": {}
+                  }
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/member/deleteAddress": {
+      "get": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "会员收货地址管理"
+        ],
+        "summary": "DeleteAddress",
+        "operationId": "member/AddressDeleteAddress",
+        "parameters": [
+          {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            },
+            "name": "ids",
+            "in": "query",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "integer"
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/member/deleteAttention": {
+      "get": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "品牌关注管理"
+        ],
+        "summary": "DeleteAttention",
+        "operationId": "member/AttentionDeleteAttention",
+        "parameters": [
+          {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            },
+            "name": "brandIds",
+            "in": "query",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "integer"
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/member/deleteCollection": {
+      "get": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "商品收藏管理"
+        ],
+        "summary": "DeleteCollection",
+        "operationId": "member/CollectionDeleteCollection",
+        "parameters": [
+          {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "name": "ids",
+            "in": "query",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "integer"
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/member/deleteReadHistory": {
+      "get": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "浏览记录管理"
+        ],
+        "summary": "DeleteReadHistory",
+        "operationId": "member/HistoryDeleteReadHistory",
+        "parameters": [
+          {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "name": "ids",
+            "in": "query",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "integer"
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/member/info": {
+      "get": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "会员管理"
+        ],
+        "summary": "Info",
+        "operationId": "member/MemberInfo",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "integer"
+                },
+                "data": {
+                  "type": "object",
+                  "required": [
+                    "id",
+                    "memberId",
+                    "levelId",
+                    "nickname",
+                    "mobile",
+                    "source",
+                    "avatar",
+                    "signature",
+                    "gender",
+                    "birthday",
+                    "growthPoint",
+                    "points",
+                    "totalPoints",
+                    "spendAmount",
+                    "orderCount",
+                    "couponCount",
+                    "commentCount",
+                    "returnCount",
+                    "lotteryTimes",
+                    "lastLogin"
+                  ],
+                  "properties": {
+                    "avatar": {
+                      "description": "头像",
+                      "type": "string"
+                    },
+                    "birthday": {
+                      "description": "生日",
+                      "type": "string"
+                    },
+                    "commentCount": {
+                      "description": "评价数",
+                      "type": "integer"
+                    },
+                    "couponCount": {
+                      "description": "优惠券数量",
+                      "type": "integer"
+                    },
+                    "gender": {
+                      "description": "性别：0-未知，1-男，2-女",
+                      "type": "integer"
+                    },
+                    "growthPoint": {
+                      "description": "成长值",
+                      "type": "integer"
+                    },
+                    "id": {
+                      "description": "主键ID",
+                      "type": "integer"
+                    },
+                    "lastLogin": {
+                      "description": "最后登录",
+                      "type": "string"
+                    },
+                    "levelId": {
+                      "description": "等级ID",
+                      "type": "integer"
+                    },
+                    "lotteryTimes": {
+                      "description": "剩余抽奖次数",
+                      "type": "integer"
+                    },
+                    "memberId": {
+                      "description": "会员ID",
+                      "type": "integer"
+                    },
+                    "mobile": {
+                      "description": "手机号码",
+                      "type": "string"
+                    },
+                    "nickname": {
+                      "description": "昵称",
+                      "type": "string"
+                    },
+                    "orderCount": {
+                      "description": "订单数",
+                      "type": "integer"
+                    },
+                    "points": {
+                      "description": "积分",
+                      "type": "integer"
+                    },
+                    "returnCount": {
+                      "description": "退货数",
+                      "type": "integer"
+                    },
+                    "signature": {
+                      "description": "个性签名",
+                      "type": "string"
+                    },
+                    "source": {
+                      "description": "注册来源：0-PC，1-APP，2-小程序",
+                      "type": "integer"
+                    },
+                    "spendAmount": {
+                      "description": "累计消费金额",
+                      "type": "number"
+                    },
+                    "totalPoints": {
+                      "description": "累计获得积分",
+                      "type": "integer"
+                    }
+                  }
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/member/login": {
+      "post": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "用户管理"
+        ],
+        "summary": "Login",
+        "operationId": "member/MemberLogin",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": [
+                "mobile",
+                "password",
+                "source"
+              ],
+              "properties": {
+                "mobile": {
+                  "description": "会员名称或者手机号码",
+                  "type": "string"
+                },
+                "password": {
+                  "description": "密码",
+                  "type": "string"
+                },
+                "source": {
+                  "description": "登录类型：0-\u003ePC；1-\u003eandroid;2-\u003eios;3-\u003e小程序",
+                  "type": "integer",
+                  "default": 1,
+                  "example": 1
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "integer"
+                },
+                "data": {
+                  "type": "object",
+                  "required": [
+                    "token",
+                    "tokenHead"
+                  ],
+                  "properties": {
+                    "token": {
+                      "type": "string"
+                    },
+                    "tokenHead": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/member/querAddressDetail": {
+      "get": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "会员收货地址管理"
+        ],
+        "summary": "QueryAddressDetail",
+        "operationId": "member/AddressQueryAddressDetail",
+        "parameters": [
+          {
+            "type": "integer",
+            "name": "id",
+            "in": "query",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "integer"
+                },
+                "data": {
+                  "type": "object",
+                  "required": [
+                    "id",
+                    "memberId",
+                    "receiverName",
+                    "receiverPhone",
+                    "province",
+                    "city",
+                    "district",
+                    "detailAddress",
+                    "postalCode",
+                    "tag",
+                    "isDefault",
+                    "createTime",
+                    "updateTime"
+                  ],
+                  "properties": {
+                    "city": {
+                      "description": "城市",
+                      "type": "string"
+                    },
+                    "createTime": {
+                      "description": "创建时间",
+                      "type": "string"
+                    },
+                    "detailAddress": {
+                      "description": "详细地址",
+                      "type": "string"
+                    },
+                    "district": {
+                      "description": "区县",
+                      "type": "string"
+                    },
+                    "id": {
+                      "description": "主键ID",
+                      "type": "integer"
+                    },
+                    "isDefault": {
+                      "description": "是否默认地址",
+                      "type": "integer"
+                    },
+                    "memberId": {
+                      "description": "会员ID",
+                      "type": "integer"
+                    },
+                    "postalCode": {
+                      "description": "邮政编码",
+                      "type": "string"
+                    },
+                    "province": {
+                      "description": "省份",
+                      "type": "string"
+                    },
+                    "receiverName": {
+                      "description": "收货人姓名",
+                      "type": "string"
+                    },
+                    "receiverPhone": {
+                      "description": "收货人电话",
+                      "type": "string"
+                    },
+                    "tag": {
+                      "description": "地址标签：家、公司等",
+                      "type": "string"
+                    },
+                    "updateTime": {
+                      "description": "更新时间",
+                      "type": "string"
+                    }
+                  }
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/member/queryAddressList": {
+      "get": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "会员收货地址管理"
+        ],
+        "summary": "QueryAddressList",
+        "operationId": "member/AddressQueryAddressList",
+        "parameters": [
+          {
+            "type": "integer",
+            "default": 1,
+            "description": "第几页",
+            "name": "current",
+            "in": "query",
+            "required": true
+          },
+          {
+            "type": "integer",
+            "default": 20,
+            "description": "每页的数量",
+            "name": "pageSize",
+            "in": "query",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "integer"
+                },
+                "current": {
+                  "type": "integer",
+                  "default": 1,
+                  "example": 1
+                },
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "required": [
+                      "id",
+                      "memberId",
+                      "receiverName",
+                      "receiverPhone",
+                      "province",
+                      "city",
+                      "district",
+                      "detailAddress",
+                      "postalCode",
+                      "tag",
+                      "isDefault",
+                      "createTime",
+                      "updateTime"
+                    ],
+                    "properties": {
+                      "city": {
+                        "description": "城市",
+                        "type": "string"
+                      },
+                      "createTime": {
+                        "description": "创建时间",
+                        "type": "string"
+                      },
+                      "detailAddress": {
+                        "description": "详细地址",
+                        "type": "string"
+                      },
+                      "district": {
+                        "description": "区县",
+                        "type": "string"
+                      },
+                      "id": {
+                        "description": "主键ID",
+                        "type": "integer"
+                      },
+                      "isDefault": {
+                        "description": "是否默认地址",
+                        "type": "integer"
+                      },
+                      "memberId": {
+                        "description": "会员ID",
+                        "type": "integer"
+                      },
+                      "postalCode": {
+                        "description": "邮政编码",
+                        "type": "string"
+                      },
+                      "province": {
+                        "description": "省份",
+                        "type": "string"
+                      },
+                      "receiverName": {
+                        "description": "收货人姓名",
+                        "type": "string"
+                      },
+                      "receiverPhone": {
+                        "description": "收货人电话",
+                        "type": "string"
+                      },
+                      "tag": {
+                        "description": "地址标签：家、公司等",
+                        "type": "string"
+                      },
+                      "updateTime": {
+                        "description": "更新时间",
+                        "type": "string"
+                      }
+                    }
+                  }
+                },
+                "message": {
+                  "type": "string"
+                },
+                "pageSize": {
+                  "type": "integer",
+                  "default": 20,
+                  "example": 20
+                },
+                "success": {
+                  "type": "boolean"
+                },
+                "total": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/member/queryAttentionList": {
+      "get": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "品牌关注管理"
+        ],
+        "summary": "QueryAttentionList",
+        "operationId": "member/AttentionQueryAttentionList",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "integer"
+                },
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "required": [
+                      "id",
+                      "memberId",
+                      "memberNickName",
+                      "memberIcon",
+                      "brandId",
+                      "brandName",
+                      "brandLogo",
+                      "brandCity",
+                      "createTime"
+                    ],
+                    "properties": {
+                      "brandCity": {
+                        "description": "品牌所在城市",
+                        "type": "string"
+                      },
+                      "brandId": {
+                        "description": "品牌id",
+                        "type": "integer"
+                      },
+                      "brandLogo": {
+                        "description": "品牌Logo",
+                        "type": "string"
+                      },
+                      "brandName": {
+                        "description": "品牌名称",
+                        "type": "string"
+                      },
+                      "createTime": {
+                        "description": "关注时间",
+                        "type": "string"
+                      },
+                      "id": {
+                        "type": "string"
+                      },
+                      "memberIcon": {
+                        "description": "会员头像",
+                        "type": "string"
+                      },
+                      "memberId": {
+                        "description": "会员id",
+                        "type": "integer"
+                      },
+                      "memberNickName": {
+                        "description": "会员姓名",
+                        "type": "string"
+                      }
+                    }
+                  }
+                },
+                "message": {
+                  "type": "string"
+                },
+                "success": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/member/queryCollectionList": {
+      "get": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "商品收藏管理"
+        ],
+        "summary": "QueryCollectionList",
+        "operationId": "member/CollectionQueryCollectionList",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "integer"
+                },
+                "data": {
+                  "description": "收藏列表",
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "required": [
+                      "id",
+                      "memberId",
+                      "memberNickName",
+                      "memberIcon",
+                      "productId",
+                      "productName",
+                      "productPic",
+                      "productSubTitle",
+                      "productPrice",
+                      "createTime"
+                    ],
+                    "properties": {
+                      "createTime": {
+                        "description": "浏览时间",
+                        "type": "string"
+                      },
+                      "id": {
+                        "description": "编号",
+                        "type": "string"
+                      },
+                      "memberIcon": {
+                        "description": "会员头像",
+                        "type": "string"
+                      },
+                      "memberId": {
+                        "description": "会员id",
+                        "type": "integer"
+                      },
+                      "memberNickName": {
+                        "description": "会员姓名",
+                        "type": "string"
+                      },
+                      "productId": {
+                        "description": "商品id",
+                        "type": "integer"
+                      },
+                      "productName": {
+                        "description": "商品名称",
+                        "type": "string"
+                      },
+                      "productPic": {
+                        "description": "商品图片",
+                        "type": "string"
+                      },
+                      "productPrice": {
+                        "description": "商品价格",
+                        "type": "integer"
+                      },
+                      "productSubTitle": {
+                        "description": "商品标题",
+                        "type": "string"
+                      }
+                    }
+                  }
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/member/queryReadHistoryList": {
+      "get": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "浏览记录管理"
+        ],
+        "summary": "QueryReadHistoryList",
+        "operationId": "member/HistoryQueryReadHistoryList",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "integer"
+                },
+                "data": {
+                  "description": "浏览列表",
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "required": [
+                      "id",
+                      "memberId",
+                      "memberNickName",
+                      "memberIcon",
+                      "productId",
+                      "productName",
+                      "productPic",
+                      "productSubTitle",
+                      "productPrice",
+                      "createTime"
+                    ],
+                    "properties": {
+                      "createTime": {
+                        "description": "浏览时间",
+                        "type": "string"
+                      },
+                      "id": {
+                        "description": "编号",
+                        "type": "string"
+                      },
+                      "memberIcon": {
+                        "description": "会员头像",
+                        "type": "string"
+                      },
+                      "memberId": {
+                        "description": "会员id",
+                        "type": "integer"
+                      },
+                      "memberNickName": {
+                        "description": "会员姓名",
+                        "type": "string"
+                      },
+                      "productId": {
+                        "description": "商品id",
+                        "type": "integer"
+                      },
+                      "productName": {
+                        "description": "商品名称",
+                        "type": "string"
+                      },
+                      "productPic": {
+                        "description": "商品图片",
+                        "type": "string"
+                      },
+                      "productPrice": {
+                        "description": "商品价格",
+                        "type": "integer"
+                      },
+                      "productSubTitle": {
+                        "description": "商品标题",
+                        "type": "string"
+                      }
+                    }
+                  }
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/member/register": {
+      "post": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "用户管理"
+        ],
+        "summary": "Register",
+        "operationId": "member/MemberRegister",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": [
+                "nickname",
+                "password",
+                "confirmPassword",
+                "mobile",
+                "source"
+              ],
+              "properties": {
+                "confirmPassword": {
+                  "description": "确认密码",
+                  "type": "string"
+                },
+                "mobile": {
+                  "description": "手机号码",
+                  "type": "string"
+                },
+                "nickname": {
+                  "description": "昵称",
+                  "type": "string"
+                },
+                "password": {
+                  "description": "密码",
+                  "type": "string"
+                },
+                "source": {
+                  "description": "注册来源：0-PC，1-APP，2-小程序",
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "integer"
+                },
+                "data": {
+                  "type": "object",
+                  "required": [
+                    "token",
+                    "tokenHead"
+                  ],
+                  "properties": {
+                    "token": {
+                      "type": "string"
+                    },
+                    "tokenHead": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/member/updateAddress": {
+      "post": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "会员收货地址管理"
+        ],
+        "summary": "UpdateAddress",
+        "operationId": "member/AddressUpdateAddress",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": [
+                "receiverName",
+                "receiverPhone",
+                "province",
+                "city",
+                "district",
+                "detailAddress",
+                "postalCode",
+                "tag",
+                "isDefault"
+              ],
+              "properties": {
+                "city": {
+                  "description": "城市",
+                  "type": "string"
+                },
+                "detailAddress": {
+                  "description": "详细地址",
+                  "type": "string"
+                },
+                "district": {
+                  "description": "区县",
+                  "type": "string"
+                },
+                "id": {
+                  "description": "主键ID",
+                  "type": "integer"
+                },
+                "isDefault": {
+                  "description": "是否默认地址",
+                  "type": "integer"
+                },
+                "postalCode": {
+                  "description": "邮政编码",
+                  "type": "string"
+                },
+                "province": {
+                  "description": "省份",
+                  "type": "string"
+                },
+                "receiverName": {
+                  "description": "收货人姓名",
+                  "type": "string"
+                },
+                "receiverPhone": {
+                  "description": "收货人电话",
+                  "type": "string"
+                },
+                "tag": {
+                  "description": "地址标签：家、公司等",
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "integer"
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/member/updateAddressStatus": {
+      "post": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "会员收货地址管理"
+        ],
+        "summary": "UpdateAddressStatus",
+        "operationId": "member/AddressUpdateAddressStatus",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": [
+                "id",
+                "isDefault"
+              ],
+              "properties": {
+                "id": {
+                  "description": "主键ID",
+                  "type": "integer"
+                },
+                "isDefault": {
+                  "description": "是否默认地址",
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "integer"
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/member/updateMember": {
+      "post": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "会员管理"
+        ],
+        "summary": "UpdateMember",
+        "operationId": "member/MemberUpdateMember",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": [
+                "id",
+                "nickname",
+                "mobile",
+                "avatar",
+                "signature",
+                "gender"
+              ],
+              "properties": {
+                "avatar": {
+                  "description": "头像",
+                  "type": "string"
+                },
+                "birthday": {
+                  "description": "生日",
+                  "type": "string"
+                },
+                "gender": {
+                  "description": "性别：1-男，2-女",
+                  "type": "integer"
+                },
+                "id": {
+                  "description": "主键ID",
+                  "type": "integer"
+                },
+                "mobile": {
+                  "description": "手机号码",
+                  "type": "string"
+                },
+                "nickname": {
+                  "description": "昵称",
+                  "type": "string"
+                },
+                "signature": {
+                  "description": "个性签名",
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/member/updatePassword": {
+      "post": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "会员管理"
+        ],
+        "summary": "UpdatePassword",
+        "operationId": "member/MemberUpdatePassword",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": [
+                "password"
+              ],
+              "properties": {
+                "password": {
+                  "description": "密码",
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "apiKey": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
+    },
+    "petstore_auth": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "http://swagger.io/api/oauth/dialog",
+      "scopes": {
+        "read:pets": "read your pets",
+        "write:pets": "modify pets in your account"
+      }
+    }
+  },
+  "x-date": "2025-07-08 11:20:00",
+  "x-description": "This is a goctl generated swagger file.",
+  "x-github": "https://github.com/zeromicro/go-zero",
+  "x-go-zero-doc": "https://go-zero.dev/",
+  "x-goctl-version": "1.8.4"
+}

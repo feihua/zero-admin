@@ -41,9 +41,11 @@ type CollectionList {
 }
 
 @server (
-	jwt:    Auth
-	group:  member/collection
-	prefix: /api/member
+	jwt:      Auth
+	group:    member/collection
+	prefix:   /api/member
+	tags:     "商品收藏管理"
+	authType: apiKey
 )
 service front-api {
 	//添加商品收藏

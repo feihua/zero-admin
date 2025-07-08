@@ -71,9 +71,11 @@ type (
 )
 
 @server (
-	jwt:    Auth
-	group:  member/address
-	prefix: /api/member
+	jwt:      Auth
+	group:    member/address
+	prefix:   /api/member
+	tags:     "会员收货地址管理"
+	authType: apiKey
 )
 service front-api {
 	//添加会员收货地址

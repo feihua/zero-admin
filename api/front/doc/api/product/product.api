@@ -146,6 +146,7 @@ type QueryProductListResp {
 @server (
 	group:  product/product
 	prefix: /api/product
+	tags:   "商品管理"
 )
 service front-api {
 	// 查询商品详情

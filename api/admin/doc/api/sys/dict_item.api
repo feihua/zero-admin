@@ -106,6 +106,8 @@ type (
 	middleware: CheckUrl
 	group:      sys/dict_item
 	prefix:     /api/sys/dictItem
+	tags: "字典数据管理"
+	authType: apiKey
 )
 service admin-api {
 	// 添加字典数据

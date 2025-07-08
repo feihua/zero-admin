@@ -86,6 +86,8 @@ type (
 	middleware: CheckUrl
 	group:      pms/product_spec
 	prefix:     /api/pms/productSpec
+	tags: "商品规格管理"
+	authType: apiKey
 )
 service admin-api {
 	// 添加商品规格

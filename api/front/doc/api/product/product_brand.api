@@ -31,6 +31,7 @@ type BrandData {
 @server (
 	group:  product/brand
 	prefix: /api/product
+	tags:   "商品品牌管理"
 )
 service front-api {
 	//分页获取推荐品牌

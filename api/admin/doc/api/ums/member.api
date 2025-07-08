@@ -134,6 +134,8 @@ type (
 	middleware: CheckUrl
 	group:      ums/member
 	prefix:     /api/ums/member
+	tags: "会员管理"
+	authType: apiKey
 )
 service admin-api {
 	// 删除会员信息

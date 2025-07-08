@@ -48,9 +48,11 @@ type (
 )
 
 @server (
-	jwt:    Auth
-	group:  member/coupon
-	prefix: /api/member/coupon
+	jwt:      Auth
+	group:    member/coupon
+	prefix:   /api/member/coupon
+	tags:     "优惠券管理"
+	authType: apiKey
 )
 service front-api {
 	//领取指定优惠券

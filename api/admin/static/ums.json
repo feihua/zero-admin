@@ -1,0 +1,4786 @@
+{
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "schemes": [
+    "http"
+  ],
+  "swagger": "2.0",
+  "info": {
+    "description": "会员管理相关接口",
+    "title": "会员管理 API",
+    "version": "v1"
+  },
+  "basePath": "/",
+  "paths": {
+    "/api/ums/address/queryMemberAddressList": {
+      "get": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "会员地址管理"
+        ],
+        "summary": "QueryMemberAddressList",
+        "operationId": "ums/MemberAddressQueryMemberAddressList",
+        "parameters": [
+          {
+            "type": "integer",
+            "default": 1,
+            "name": "current",
+            "in": "query",
+            "required": true
+          },
+          {
+            "type": "integer",
+            "default": 20,
+            "name": "pageSize",
+            "in": "query",
+            "required": true
+          },
+          {
+            "type": "integer",
+            "default": 0,
+            "name": "memberId",
+            "in": "query",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "current": {
+                  "type": "integer",
+                  "default": 1,
+                  "example": 1
+                },
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "required": [
+                      "id",
+                      "memberId",
+                      "receiverName",
+                      "receiverPhone",
+                      "province",
+                      "city",
+                      "district",
+                      "detailAddress",
+                      "postalCode",
+                      "tag",
+                      "isDefault",
+                      "createTime",
+                      "updateTime",
+                      "isDeleted"
+                    ],
+                    "properties": {
+                      "city": {
+                        "description": "城市",
+                        "type": "string"
+                      },
+                      "createTime": {
+                        "description": "创建时间",
+                        "type": "string"
+                      },
+                      "detailAddress": {
+                        "description": "详细地址",
+                        "type": "string"
+                      },
+                      "district": {
+                        "description": "区县",
+                        "type": "string"
+                      },
+                      "id": {
+                        "description": "主键ID",
+                        "type": "integer"
+                      },
+                      "isDefault": {
+                        "description": "是否默认地址",
+                        "type": "integer"
+                      },
+                      "isDeleted": {
+                        "description": "是否删除",
+                        "type": "integer"
+                      },
+                      "memberId": {
+                        "description": "会员ID",
+                        "type": "integer"
+                      },
+                      "postalCode": {
+                        "description": "邮政编码",
+                        "type": "string"
+                      },
+                      "province": {
+                        "description": "省份",
+                        "type": "string"
+                      },
+                      "receiverName": {
+                        "description": "收货人姓名",
+                        "type": "string"
+                      },
+                      "receiverPhone": {
+                        "description": "收货人电话",
+                        "type": "string"
+                      },
+                      "tag": {
+                        "description": "地址标签：家、公司等",
+                        "type": "string"
+                      },
+                      "updateTime": {
+                        "description": "更新时间",
+                        "type": "string"
+                      }
+                    }
+                  }
+                },
+                "message": {
+                  "type": "string"
+                },
+                "pageSize": {
+                  "type": "integer",
+                  "default": 20,
+                  "example": 20
+                },
+                "success": {
+                  "type": "boolean"
+                },
+                "total": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/ums/consumeSetting/addMemberConsumeSetting": {
+      "post": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "积分消费设置管理"
+        ],
+        "summary": "AddMemberConsumeSetting",
+        "operationId": "ums/MemberConsumeSettingAddMemberConsumeSetting",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": [
+                "deductionPerAmount",
+                "maxPercentPerOrder",
+                "useUnit",
+                "couponStatus",
+                "status"
+              ],
+              "properties": {
+                "couponStatus": {
+                  "description": "是否可以和优惠券同用；0-\u003e不可以；1-\u003e可以",
+                  "type": "integer"
+                },
+                "deductionPerAmount": {
+                  "description": "每一元需要抵扣的积分数量",
+                  "type": "integer"
+                },
+                "maxPercentPerOrder": {
+                  "description": "每笔订单最高抵用百分比",
+                  "type": "integer"
+                },
+                "status": {
+                  "description": "状态：0-\u003e禁用；1-\u003e启用",
+                  "type": "integer"
+                },
+                "useUnit": {
+                  "description": "每次使用积分最小单位100",
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/ums/consumeSetting/deleteMemberConsumeSetting": {
+      "get": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "积分消费设置管理"
+        ],
+        "summary": "DeleteMemberConsumeSetting",
+        "operationId": "ums/MemberConsumeSettingDeleteMemberConsumeSetting",
+        "parameters": [
+          {
+            "type": "integer",
+            "name": "id",
+            "in": "query",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/ums/consumeSetting/queryMemberConsumeSettingDetail": {
+      "get": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "积分消费设置管理"
+        ],
+        "summary": "QueryMemberConsumeSettingDetail",
+        "operationId": "ums/MemberConsumeSettingQueryMemberConsumeSettingDetail",
+        "parameters": [
+          {
+            "type": "integer",
+            "name": "id",
+            "in": "query",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "data": {
+                  "type": "object",
+                  "required": [
+                    "id",
+                    "deductionPerAmount",
+                    "maxPercentPerOrder",
+                    "useUnit",
+                    "couponStatus",
+                    "status",
+                    "createBy",
+                    "createTime",
+                    "updateBy",
+                    "updateTime"
+                  ],
+                  "properties": {
+                    "couponStatus": {
+                      "description": "是否可以和优惠券同用；0-\u003e不可以；1-\u003e可以",
+                      "type": "integer"
+                    },
+                    "createBy": {
+                      "description": "创建人ID",
+                      "type": "integer"
+                    },
+                    "createTime": {
+                      "description": "创建时间",
+                      "type": "string"
+                    },
+                    "deductionPerAmount": {
+                      "description": "每一元需要抵扣的积分数量",
+                      "type": "integer"
+                    },
+                    "id": {
+                      "type": "integer"
+                    },
+                    "maxPercentPerOrder": {
+                      "description": "每笔订单最高抵用百分比",
+                      "type": "integer"
+                    },
+                    "status": {
+                      "description": "状态：0-\u003e禁用；1-\u003e启用",
+                      "type": "integer"
+                    },
+                    "updateBy": {
+                      "description": "更新人ID",
+                      "type": "integer"
+                    },
+                    "updateTime": {
+                      "description": "更新时间",
+                      "type": "string"
+                    },
+                    "useUnit": {
+                      "description": "每次使用积分最小单位100",
+                      "type": "integer"
+                    }
+                  }
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/ums/consumeSetting/queryMemberConsumeSettingList": {
+      "get": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "积分消费设置管理"
+        ],
+        "summary": "QueryMemberConsumeSettingList",
+        "operationId": "ums/MemberConsumeSettingQueryMemberConsumeSettingList",
+        "parameters": [
+          {
+            "type": "integer",
+            "default": 1,
+            "description": "第几页",
+            "name": "current",
+            "in": "query",
+            "required": true
+          },
+          {
+            "type": "integer",
+            "default": 20,
+            "description": "每页的数量",
+            "name": "pageSize",
+            "in": "query",
+            "required": true
+          },
+          {
+            "type": "integer",
+            "default": 2,
+            "description": "是否可以和优惠券同用；0-\u003e不可以；1-\u003e可以",
+            "name": "couponStatus",
+            "in": "query",
+            "required": true
+          },
+          {
+            "type": "integer",
+            "default": 2,
+            "description": "状态：0-\u003e禁用；1-\u003e启用",
+            "name": "status",
+            "in": "query",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "current": {
+                  "type": "integer",
+                  "default": 1,
+                  "example": 1
+                },
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "required": [
+                      "id",
+                      "deductionPerAmount",
+                      "maxPercentPerOrder",
+                      "useUnit",
+                      "couponStatus",
+                      "status",
+                      "createBy",
+                      "createTime",
+                      "updateBy",
+                      "updateTime"
+                    ],
+                    "properties": {
+                      "couponStatus": {
+                        "description": "是否可以和优惠券同用；0-\u003e不可以；1-\u003e可以",
+                        "type": "integer"
+                      },
+                      "createBy": {
+                        "description": "创建人ID",
+                        "type": "integer"
+                      },
+                      "createTime": {
+                        "description": "创建时间",
+                        "type": "string"
+                      },
+                      "deductionPerAmount": {
+                        "description": "每一元需要抵扣的积分数量",
+                        "type": "integer"
+                      },
+                      "id": {
+                        "type": "integer"
+                      },
+                      "maxPercentPerOrder": {
+                        "description": "每笔订单最高抵用百分比",
+                        "type": "integer"
+                      },
+                      "status": {
+                        "description": "状态：0-\u003e禁用；1-\u003e启用",
+                        "type": "integer"
+                      },
+                      "updateBy": {
+                        "description": "更新人ID",
+                        "type": "integer"
+                      },
+                      "updateTime": {
+                        "description": "更新时间",
+                        "type": "string"
+                      },
+                      "useUnit": {
+                        "description": "每次使用积分最小单位100",
+                        "type": "integer"
+                      }
+                    }
+                  }
+                },
+                "message": {
+                  "type": "string"
+                },
+                "pageSize": {
+                  "type": "integer",
+                  "default": 20,
+                  "example": 20
+                },
+                "success": {
+                  "type": "boolean"
+                },
+                "total": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/ums/consumeSetting/updateCouponStatus": {
+      "post": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "积分消费设置管理"
+        ],
+        "summary": "updateCouponStatus",
+        "operationId": "ums/MemberConsumeSettingUpdateCouponStatus",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": [
+                "id",
+                "couponStatus"
+              ],
+              "properties": {
+                "couponStatus": {
+                  "description": "是否可以和优惠券同用；0-\u003e不可以；1-\u003e可以",
+                  "type": "integer"
+                },
+                "id": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/ums/consumeSetting/updateMemberConsumeSetting": {
+      "post": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "积分消费设置管理"
+        ],
+        "summary": "UpdateMemberConsumeSetting",
+        "operationId": "ums/MemberConsumeSettingUpdateMemberConsumeSetting",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": [
+                "id",
+                "deductionPerAmount",
+                "maxPercentPerOrder",
+                "useUnit",
+                "couponStatus",
+                "status"
+              ],
+              "properties": {
+                "couponStatus": {
+                  "description": "是否可以和优惠券同用；0-\u003e不可以；1-\u003e可以",
+                  "type": "integer"
+                },
+                "deductionPerAmount": {
+                  "description": "每一元需要抵扣的积分数量",
+                  "type": "integer"
+                },
+                "id": {
+                  "type": "integer"
+                },
+                "maxPercentPerOrder": {
+                  "description": "每笔订单最高抵用百分比",
+                  "type": "integer"
+                },
+                "status": {
+                  "description": "状态：0-\u003e禁用；1-\u003e启用",
+                  "type": "integer"
+                },
+                "useUnit": {
+                  "description": "每次使用积分最小单位100",
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/ums/consumeSetting/updateStatus": {
+      "post": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "积分消费设置管理"
+        ],
+        "summary": "updateStatus",
+        "operationId": "ums/MemberConsumeSettingUpdateStatus",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": [
+                "id",
+                "status"
+              ],
+              "properties": {
+                "id": {
+                  "type": "integer"
+                },
+                "status": {
+                  "description": "状态：0-\u003e禁用；1-\u003e启用",
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/ums/growthLog/queryMemberGrowthLogDetail": {
+      "get": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "会员成长值管理"
+        ],
+        "summary": "QueryMemberGrowthLogDetail",
+        "operationId": "ums/MemberGrowthQueryMemberGrowthLogDetail",
+        "parameters": [
+          {
+            "type": "integer",
+            "name": "id",
+            "in": "query",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "data": {
+                  "type": "object",
+                  "required": [
+                    "id",
+                    "memberId",
+                    "changeType",
+                    "changeGrowth",
+                    "sourceType",
+                    "description",
+                    "operateMan",
+                    "operateNote",
+                    "createTime"
+                  ],
+                  "properties": {
+                    "changeGrowth": {
+                      "description": "变更成长值",
+                      "type": "integer"
+                    },
+                    "changeType": {
+                      "description": "变更类型：1-添加成长值，2-减少成长值",
+                      "type": "integer"
+                    },
+                    "createTime": {
+                      "description": "创建时间",
+                      "type": "string"
+                    },
+                    "description": {
+                      "description": "描述",
+                      "type": "string"
+                    },
+                    "id": {
+                      "type": "integer"
+                    },
+                    "memberId": {
+                      "description": "会员ID",
+                      "type": "integer"
+                    },
+                    "operateMan": {
+                      "description": "操作人员",
+                      "type": "string"
+                    },
+                    "operateNote": {
+                      "description": "操作备注",
+                      "type": "string"
+                    },
+                    "sourceType": {
+                      "description": "来源类型：0-其他，1-订单，2-活动，3-签到，4-管理员修改",
+                      "type": "integer"
+                    }
+                  }
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/ums/growthLog/queryMemberGrowthLogList": {
+      "get": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "会员成长值管理"
+        ],
+        "summary": "QueryMemberGrowthLogList",
+        "operationId": "ums/MemberGrowthQueryMemberGrowthLogList",
+        "parameters": [
+          {
+            "type": "integer",
+            "default": 1,
+            "description": "第几页",
+            "name": "current",
+            "in": "query",
+            "required": true
+          },
+          {
+            "type": "integer",
+            "default": 20,
+            "description": "每页的数量",
+            "name": "pageSize",
+            "in": "query",
+            "required": true
+          },
+          {
+            "type": "integer",
+            "default": 0,
+            "description": "会员ID",
+            "name": "memberId",
+            "in": "query",
+            "required": true
+          },
+          {
+            "type": "integer",
+            "default": 0,
+            "description": "变更类型：1-添加成长值，2-减少成长值",
+            "name": "changeType",
+            "in": "query",
+            "required": true
+          },
+          {
+            "type": "integer",
+            "default": 5,
+            "description": "来源类型：0-其他，1-订单，2-活动，3-签到，4-管理员修改",
+            "name": "sourceType",
+            "in": "query",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "current": {
+                  "type": "integer",
+                  "default": 1,
+                  "example": 1
+                },
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "required": [
+                      "id",
+                      "memberId",
+                      "changeType",
+                      "changeGrowth",
+                      "sourceType",
+                      "description",
+                      "operateMan",
+                      "operateNote",
+                      "createTime"
+                    ],
+                    "properties": {
+                      "changeGrowth": {
+                        "description": "变更成长值",
+                        "type": "integer"
+                      },
+                      "changeType": {
+                        "description": "变更类型：1-添加成长值，2-减少成长值",
+                        "type": "integer"
+                      },
+                      "createTime": {
+                        "description": "创建时间",
+                        "type": "string"
+                      },
+                      "description": {
+                        "description": "描述",
+                        "type": "string"
+                      },
+                      "id": {
+                        "type": "integer"
+                      },
+                      "memberId": {
+                        "description": "会员ID",
+                        "type": "integer"
+                      },
+                      "operateMan": {
+                        "description": "操作人员",
+                        "type": "string"
+                      },
+                      "operateNote": {
+                        "description": "操作备注",
+                        "type": "string"
+                      },
+                      "sourceType": {
+                        "description": "来源类型：0-其他，1-订单，2-活动，3-签到，4-管理员修改",
+                        "type": "integer"
+                      }
+                    }
+                  }
+                },
+                "message": {
+                  "type": "string"
+                },
+                "pageSize": {
+                  "type": "integer",
+                  "default": 20,
+                  "example": 20
+                },
+                "success": {
+                  "type": "boolean"
+                },
+                "total": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/ums/level/addMemberLevel": {
+      "post": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "会员等级管理"
+        ],
+        "summary": "AddMemberLevel",
+        "operationId": "ums/MemberLevelAddMemberLevel",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": [
+                "name",
+                "level",
+                "growthPoint",
+                "discountRate",
+                "freeFreight",
+                "commentExtra",
+                "privileges",
+                "isEnabled"
+              ],
+              "properties": {
+                "commentExtra": {
+                  "description": "是否可评论获取奖励",
+                  "type": "integer"
+                },
+                "discountRate": {
+                  "description": "折扣率(0-100)",
+                  "type": "number"
+                },
+                "freeFreight": {
+                  "description": "是否免运费",
+                  "type": "integer"
+                },
+                "growthPoint": {
+                  "description": "升级所需成长值",
+                  "type": "integer"
+                },
+                "isEnabled": {
+                  "description": "是否启用",
+                  "type": "integer"
+                },
+                "level": {
+                  "description": "等级",
+                  "type": "integer"
+                },
+                "name": {
+                  "description": "等级名称",
+                  "type": "string"
+                },
+                "privileges": {
+                  "description": "会员特权JSON",
+                  "type": "string"
+                },
+                "remark": {
+                  "description": "备注",
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/ums/level/deleteMemberLevel": {
+      "get": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "会员等级管理"
+        ],
+        "summary": "DeleteMemberLevel",
+        "operationId": "ums/MemberLevelDeleteMemberLevel",
+        "parameters": [
+          {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            },
+            "name": "ids",
+            "in": "query",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/ums/level/queryMemberLevelDetail": {
+      "get": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "会员等级管理"
+        ],
+        "summary": "QueryMemberLevelDetail",
+        "operationId": "ums/MemberLevelQueryMemberLevelDetail",
+        "parameters": [
+          {
+            "type": "integer",
+            "name": "id",
+            "in": "query",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "data": {
+                  "type": "object",
+                  "required": [
+                    "id",
+                    "name",
+                    "level",
+                    "growthPoint",
+                    "discountRate",
+                    "freeFreight",
+                    "commentExtra",
+                    "privileges",
+                    "remark",
+                    "isEnabled",
+                    "createBy",
+                    "createTime",
+                    "updateBy",
+                    "updateTime",
+                    "isDeleted"
+                  ],
+                  "properties": {
+                    "commentExtra": {
+                      "description": "是否可评论获取奖励",
+                      "type": "integer"
+                    },
+                    "createBy": {
+                      "description": "创建人ID",
+                      "type": "integer"
+                    },
+                    "createTime": {
+                      "description": "创建时间",
+                      "type": "string"
+                    },
+                    "discountRate": {
+                      "description": "折扣率(0-100)",
+                      "type": "number"
+                    },
+                    "freeFreight": {
+                      "description": "是否免运费",
+                      "type": "integer"
+                    },
+                    "growthPoint": {
+                      "description": "升级所需成长值",
+                      "type": "integer"
+                    },
+                    "id": {
+                      "description": "主键ID",
+                      "type": "integer"
+                    },
+                    "isDeleted": {
+                      "description": "是否删除",
+                      "type": "integer"
+                    },
+                    "isEnabled": {
+                      "description": "是否启用",
+                      "type": "integer"
+                    },
+                    "level": {
+                      "description": "等级",
+                      "type": "integer"
+                    },
+                    "name": {
+                      "description": "等级名称",
+                      "type": "string"
+                    },
+                    "privileges": {
+                      "description": "会员特权JSON",
+                      "type": "string"
+                    },
+                    "remark": {
+                      "description": "备注",
+                      "type": "string"
+                    },
+                    "updateBy": {
+                      "description": "更新人ID",
+                      "type": "integer"
+                    },
+                    "updateTime": {
+                      "description": "更新时间",
+                      "type": "string"
+                    }
+                  }
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/ums/level/queryMemberLevelList": {
+      "get": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "会员等级管理"
+        ],
+        "summary": "QueryMemberLevelList",
+        "operationId": "ums/MemberLevelQueryMemberLevelList",
+        "parameters": [
+          {
+            "type": "integer",
+            "default": 1,
+            "description": "第几页",
+            "name": "current",
+            "in": "query",
+            "required": true
+          },
+          {
+            "type": "integer",
+            "default": 20,
+            "description": "每页的数量",
+            "name": "pageSize",
+            "in": "query",
+            "required": true
+          },
+          {
+            "type": "string",
+            "description": "等级名称",
+            "name": "name",
+            "in": "query",
+            "allowEmptyValue": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "current": {
+                  "type": "integer",
+                  "default": 1,
+                  "example": 1
+                },
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "required": [
+                      "id",
+                      "name",
+                      "level",
+                      "growthPoint",
+                      "discountRate",
+                      "freeFreight",
+                      "commentExtra",
+                      "privileges",
+                      "remark",
+                      "isEnabled",
+                      "createBy",
+                      "createTime",
+                      "updateBy",
+                      "updateTime",
+                      "isDeleted"
+                    ],
+                    "properties": {
+                      "commentExtra": {
+                        "description": "是否可评论获取奖励",
+                        "type": "integer"
+                      },
+                      "createBy": {
+                        "description": "创建人ID",
+                        "type": "integer"
+                      },
+                      "createTime": {
+                        "description": "创建时间",
+                        "type": "string"
+                      },
+                      "discountRate": {
+                        "description": "折扣率(0-100)",
+                        "type": "number"
+                      },
+                      "freeFreight": {
+                        "description": "是否免运费",
+                        "type": "integer"
+                      },
+                      "growthPoint": {
+                        "description": "升级所需成长值",
+                        "type": "integer"
+                      },
+                      "id": {
+                        "description": "主键ID",
+                        "type": "integer"
+                      },
+                      "isDeleted": {
+                        "description": "是否删除",
+                        "type": "integer"
+                      },
+                      "isEnabled": {
+                        "description": "是否启用",
+                        "type": "integer"
+                      },
+                      "level": {
+                        "description": "等级",
+                        "type": "integer"
+                      },
+                      "name": {
+                        "description": "等级名称",
+                        "type": "string"
+                      },
+                      "privileges": {
+                        "description": "会员特权JSON",
+                        "type": "string"
+                      },
+                      "remark": {
+                        "description": "备注",
+                        "type": "string"
+                      },
+                      "updateBy": {
+                        "description": "更新人ID",
+                        "type": "integer"
+                      },
+                      "updateTime": {
+                        "description": "更新时间",
+                        "type": "string"
+                      }
+                    }
+                  }
+                },
+                "message": {
+                  "type": "string"
+                },
+                "pageSize": {
+                  "type": "integer",
+                  "default": 20,
+                  "example": 20
+                },
+                "success": {
+                  "type": "boolean"
+                },
+                "total": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/ums/level/updateMemberLevel": {
+      "post": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "会员等级管理"
+        ],
+        "summary": "UpdateMemberLevel",
+        "operationId": "ums/MemberLevelUpdateMemberLevel",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": [
+                "id",
+                "name",
+                "level",
+                "growthPoint",
+                "discountRate",
+                "freeFreight",
+                "commentExtra",
+                "privileges",
+                "isEnabled"
+              ],
+              "properties": {
+                "commentExtra": {
+                  "description": "是否可评论获取奖励",
+                  "type": "integer"
+                },
+                "discountRate": {
+                  "description": "折扣率(0-100)",
+                  "type": "number"
+                },
+                "freeFreight": {
+                  "description": "是否免运费",
+                  "type": "integer"
+                },
+                "growthPoint": {
+                  "description": "升级所需成长值",
+                  "type": "integer"
+                },
+                "id": {
+                  "description": "主键ID",
+                  "type": "integer"
+                },
+                "isEnabled": {
+                  "description": "是否启用",
+                  "type": "integer"
+                },
+                "level": {
+                  "description": "等级",
+                  "type": "integer"
+                },
+                "name": {
+                  "description": "等级名称",
+                  "type": "string"
+                },
+                "privileges": {
+                  "description": "会员特权JSON",
+                  "type": "string"
+                },
+                "remark": {
+                  "description": "备注",
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/ums/level/updateMemberLevelStatus": {
+      "post": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "会员等级管理"
+        ],
+        "summary": "UpdateMemberLevelStatus",
+        "operationId": "ums/MemberLevelUpdateMemberLevelStatus",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": [
+                "id",
+                "isEnabled"
+              ],
+              "properties": {
+                "id": {
+                  "description": "主键ID",
+                  "type": "integer"
+                },
+                "isEnabled": {
+                  "description": "是否启用",
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/ums/member/deleteMember": {
+      "get": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "会员管理"
+        ],
+        "summary": "DeleteMemberInfo",
+        "operationId": "ums/MemberDeleteMemberInfo",
+        "parameters": [
+          {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            },
+            "name": "ids",
+            "in": "query",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/ums/member/queryMemberDetail": {
+      "get": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "会员管理"
+        ],
+        "summary": "QueryMemberInfoDetail",
+        "operationId": "ums/MemberQueryMemberInfoDetail",
+        "parameters": [
+          {
+            "type": "integer",
+            "name": "memberId",
+            "in": "query",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "data": {
+                  "type": "object",
+                  "required": [
+                    "id",
+                    "memberId",
+                    "levelId",
+                    "nickname",
+                    "mobile",
+                    "source",
+                    "avatar",
+                    "signature",
+                    "gender",
+                    "birthday",
+                    "growthPoint",
+                    "points",
+                    "totalPoints",
+                    "spendAmount",
+                    "orderCount",
+                    "couponCount",
+                    "commentCount",
+                    "returnCount",
+                    "lotteryTimes",
+                    "lastLogin",
+                    "isEnabled",
+                    "createTime",
+                    "updateTime"
+                  ],
+                  "properties": {
+                    "avatar": {
+                      "description": "头像",
+                      "type": "string"
+                    },
+                    "birthday": {
+                      "description": "生日",
+                      "type": "string"
+                    },
+                    "commentCount": {
+                      "description": "评价数",
+                      "type": "integer"
+                    },
+                    "couponCount": {
+                      "description": "优惠券数量",
+                      "type": "integer"
+                    },
+                    "createTime": {
+                      "description": "创建时间",
+                      "type": "string"
+                    },
+                    "gender": {
+                      "description": "性别：0-未知，1-男，2-女",
+                      "type": "integer"
+                    },
+                    "growthPoint": {
+                      "description": "成长值",
+                      "type": "integer"
+                    },
+                    "id": {
+                      "description": "主键ID",
+                      "type": "integer"
+                    },
+                    "isEnabled": {
+                      "description": "是否启用：0-禁用，1-启用",
+                      "type": "integer"
+                    },
+                    "lastLogin": {
+                      "description": "最后登录",
+                      "type": "string"
+                    },
+                    "levelId": {
+                      "description": "等级ID",
+                      "type": "integer"
+                    },
+                    "lotteryTimes": {
+                      "description": "剩余抽奖次数",
+                      "type": "integer"
+                    },
+                    "memberId": {
+                      "description": "会员ID",
+                      "type": "integer"
+                    },
+                    "mobile": {
+                      "description": "手机号码",
+                      "type": "string"
+                    },
+                    "nickname": {
+                      "description": "昵称",
+                      "type": "string"
+                    },
+                    "orderCount": {
+                      "description": "订单数",
+                      "type": "integer"
+                    },
+                    "points": {
+                      "description": "积分",
+                      "type": "integer"
+                    },
+                    "returnCount": {
+                      "description": "退货数",
+                      "type": "integer"
+                    },
+                    "signature": {
+                      "description": "个性签名",
+                      "type": "string"
+                    },
+                    "source": {
+                      "description": "注册来源：0-PC，1-APP，2-小程序",
+                      "type": "integer"
+                    },
+                    "spendAmount": {
+                      "description": "累计消费金额",
+                      "type": "number"
+                    },
+                    "totalPoints": {
+                      "description": "累计获得积分",
+                      "type": "integer"
+                    },
+                    "updateTime": {
+                      "description": "更新时间",
+                      "type": "string"
+                    }
+                  }
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/ums/member/queryMemberList": {
+      "get": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "会员管理"
+        ],
+        "summary": "QueryMemberInfoList",
+        "operationId": "ums/MemberQueryMemberInfoList",
+        "parameters": [
+          {
+            "type": "integer",
+            "default": 1,
+            "description": "第几页",
+            "name": "current",
+            "in": "query",
+            "required": true
+          },
+          {
+            "type": "integer",
+            "default": 20,
+            "description": "每页的数量",
+            "name": "pageSize",
+            "in": "query",
+            "required": true
+          },
+          {
+            "type": "integer",
+            "default": 0,
+            "description": "会员ID",
+            "name": "memberId",
+            "in": "query",
+            "required": true
+          },
+          {
+            "type": "string",
+            "description": "昵称",
+            "name": "nickname",
+            "in": "query",
+            "allowEmptyValue": true
+          },
+          {
+            "type": "string",
+            "description": "手机号码",
+            "name": "mobile",
+            "in": "query",
+            "allowEmptyValue": true
+          },
+          {
+            "type": "integer",
+            "default": 3,
+            "description": "注册来源：0-PC，1-APP，2-小程序",
+            "name": "source",
+            "in": "query",
+            "required": true
+          },
+          {
+            "type": "integer",
+            "default": 2,
+            "description": "是否启用：0-禁用，1-启用",
+            "name": "isEnabled",
+            "in": "query",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "current": {
+                  "type": "integer",
+                  "default": 1,
+                  "example": 1
+                },
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "required": [
+                      "id",
+                      "memberId",
+                      "levelId",
+                      "nickname",
+                      "mobile",
+                      "source",
+                      "avatar",
+                      "signature",
+                      "gender",
+                      "birthday",
+                      "growthPoint",
+                      "points",
+                      "totalPoints",
+                      "spendAmount",
+                      "orderCount",
+                      "couponCount",
+                      "commentCount",
+                      "returnCount",
+                      "lotteryTimes",
+                      "lastLogin",
+                      "isEnabled",
+                      "createTime",
+                      "updateTime"
+                    ],
+                    "properties": {
+                      "avatar": {
+                        "description": "头像",
+                        "type": "string"
+                      },
+                      "birthday": {
+                        "description": "生日",
+                        "type": "string"
+                      },
+                      "commentCount": {
+                        "description": "评价数",
+                        "type": "integer"
+                      },
+                      "couponCount": {
+                        "description": "优惠券数量",
+                        "type": "integer"
+                      },
+                      "createTime": {
+                        "description": "创建时间",
+                        "type": "string"
+                      },
+                      "gender": {
+                        "description": "性别：0-未知，1-男，2-女",
+                        "type": "integer"
+                      },
+                      "growthPoint": {
+                        "description": "成长值",
+                        "type": "integer"
+                      },
+                      "id": {
+                        "description": "主键ID",
+                        "type": "integer"
+                      },
+                      "isEnabled": {
+                        "description": "是否启用：0-禁用，1-启用",
+                        "type": "integer"
+                      },
+                      "lastLogin": {
+                        "description": "最后登录",
+                        "type": "string"
+                      },
+                      "levelId": {
+                        "description": "等级ID",
+                        "type": "integer"
+                      },
+                      "lotteryTimes": {
+                        "description": "剩余抽奖次数",
+                        "type": "integer"
+                      },
+                      "memberId": {
+                        "description": "会员ID",
+                        "type": "integer"
+                      },
+                      "mobile": {
+                        "description": "手机号码",
+                        "type": "string"
+                      },
+                      "nickname": {
+                        "description": "昵称",
+                        "type": "string"
+                      },
+                      "orderCount": {
+                        "description": "订单数",
+                        "type": "integer"
+                      },
+                      "points": {
+                        "description": "积分",
+                        "type": "integer"
+                      },
+                      "returnCount": {
+                        "description": "退货数",
+                        "type": "integer"
+                      },
+                      "signature": {
+                        "description": "个性签名",
+                        "type": "string"
+                      },
+                      "source": {
+                        "description": "注册来源：0-PC，1-APP，2-小程序",
+                        "type": "integer"
+                      },
+                      "spendAmount": {
+                        "description": "累计消费金额",
+                        "type": "number"
+                      },
+                      "totalPoints": {
+                        "description": "累计获得积分",
+                        "type": "integer"
+                      },
+                      "updateTime": {
+                        "description": "更新时间",
+                        "type": "string"
+                      }
+                    }
+                  }
+                },
+                "message": {
+                  "type": "string"
+                },
+                "pageSize": {
+                  "type": "integer",
+                  "default": 20,
+                  "example": 20
+                },
+                "success": {
+                  "type": "boolean"
+                },
+                "total": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/ums/member/queryMemberLoginLogList": {
+      "get": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "会员管理"
+        ],
+        "summary": "QueryMemberLoginLogList",
+        "operationId": "ums/MemberQueryMemberLoginLogList",
+        "parameters": [
+          {
+            "type": "integer",
+            "default": 1,
+            "name": "current",
+            "in": "query",
+            "required": true
+          },
+          {
+            "type": "integer",
+            "default": 20,
+            "name": "pageSize",
+            "in": "query",
+            "required": true
+          },
+          {
+            "type": "integer",
+            "name": "memberId",
+            "in": "query",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "current": {
+                  "type": "integer",
+                  "default": 1,
+                  "example": 1
+                },
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "required": [
+                      "id",
+                      "memberId",
+                      "memberIp",
+                      "city",
+                      "loginType",
+                      "province",
+                      "createTime"
+                    ],
+                    "properties": {
+                      "city": {
+                        "description": "登录城市",
+                        "type": "string"
+                      },
+                      "createTime": {
+                        "description": "登录时间",
+                        "type": "string"
+                      },
+                      "id": {
+                        "type": "integer"
+                      },
+                      "loginType": {
+                        "description": "登录类型：0-\u003ePC；1-\u003eandroid;2-\u003eios;3-\u003e小程序",
+                        "type": "integer"
+                      },
+                      "memberId": {
+                        "description": "会员id",
+                        "type": "integer"
+                      },
+                      "memberIp": {
+                        "description": "登录ip",
+                        "type": "string"
+                      },
+                      "province": {
+                        "description": "登录省份",
+                        "type": "string"
+                      }
+                    }
+                  }
+                },
+                "message": {
+                  "type": "string"
+                },
+                "pageSize": {
+                  "type": "integer",
+                  "default": 20,
+                  "example": 20
+                },
+                "success": {
+                  "type": "boolean"
+                },
+                "total": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/ums/member/updateMember": {
+      "post": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "会员管理"
+        ],
+        "summary": "UpdateMemberInfo",
+        "operationId": "ums/MemberUpdateMemberInfo",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": [
+                "id",
+                "nickname",
+                "mobile",
+                "avatar",
+                "signature",
+                "gender"
+              ],
+              "properties": {
+                "avatar": {
+                  "description": "头像",
+                  "type": "string"
+                },
+                "birthday": {
+                  "description": "生日",
+                  "type": "string"
+                },
+                "gender": {
+                  "description": "性别：1-男，2-女",
+                  "type": "integer"
+                },
+                "id": {
+                  "description": "主键ID",
+                  "type": "integer"
+                },
+                "mobile": {
+                  "description": "手机号码",
+                  "type": "string"
+                },
+                "nickname": {
+                  "description": "昵称",
+                  "type": "string"
+                },
+                "signature": {
+                  "description": "个性签名",
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/ums/member/updateMemberStatus": {
+      "post": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "会员管理"
+        ],
+        "summary": "UpdateMemberInfoStatus",
+        "operationId": "ums/MemberUpdateMemberInfoStatus",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": [
+                "ids",
+                "isEnabled"
+              ],
+              "properties": {
+                "ids": {
+                  "description": "主键ID",
+                  "type": "array",
+                  "items": {
+                    "type": "integer"
+                  }
+                },
+                "isEnabled": {
+                  "description": "是否启用：0-禁用，1-启用",
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/ums/pointsLog/queryMemberPointsLogDetail": {
+      "get": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "会员积分管理"
+        ],
+        "summary": "QueryMemberPointsLogDetail",
+        "operationId": "ums/MemberPointsQueryMemberPointsLogDetail",
+        "parameters": [
+          {
+            "type": "integer",
+            "name": "id",
+            "in": "query",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "data": {
+                  "type": "object",
+                  "required": [
+                    "id",
+                    "memberId",
+                    "changeType",
+                    "changePoints",
+                    "sourceType",
+                    "description",
+                    "operateMan",
+                    "operateNote",
+                    "createTime"
+                  ],
+                  "properties": {
+                    "changePoints": {
+                      "description": "变更积分",
+                      "type": "integer"
+                    },
+                    "changeType": {
+                      "description": "变更类型：1-添加积分，2-减少积分",
+                      "type": "integer"
+                    },
+                    "createTime": {
+                      "description": "创建时间",
+                      "type": "string"
+                    },
+                    "description": {
+                      "description": "描述",
+                      "type": "string"
+                    },
+                    "id": {
+                      "type": "integer"
+                    },
+                    "memberId": {
+                      "description": "会员ID",
+                      "type": "integer"
+                    },
+                    "operateMan": {
+                      "description": "操作人员",
+                      "type": "string"
+                    },
+                    "operateNote": {
+                      "description": "操作备注",
+                      "type": "string"
+                    },
+                    "sourceType": {
+                      "description": "来源类型：0-其他，1-订单，2-活动，3-签到，4-管理员修改",
+                      "type": "integer"
+                    }
+                  }
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/ums/pointsLog/queryMemberPointsLogList": {
+      "get": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "会员积分管理"
+        ],
+        "summary": "QueryMemberPointsLogList",
+        "operationId": "ums/MemberPointsQueryMemberPointsLogList",
+        "parameters": [
+          {
+            "type": "integer",
+            "default": 1,
+            "description": "第几页",
+            "name": "current",
+            "in": "query",
+            "required": true
+          },
+          {
+            "type": "integer",
+            "default": 20,
+            "description": "每页的数量",
+            "name": "pageSize",
+            "in": "query",
+            "required": true
+          },
+          {
+            "type": "integer",
+            "default": 0,
+            "description": "会员ID",
+            "name": "memberId",
+            "in": "query",
+            "required": true
+          },
+          {
+            "type": "integer",
+            "default": 0,
+            "description": "变更类型：1-添加积分，2-减少积分",
+            "name": "changeType",
+            "in": "query",
+            "required": true
+          },
+          {
+            "type": "integer",
+            "default": 5,
+            "description": "来源类型：0-其他，1-订单，2-活动，3-签到，4-管理员修改",
+            "name": "sourceType",
+            "in": "query",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "current": {
+                  "type": "integer",
+                  "default": 1,
+                  "example": 1
+                },
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "required": [
+                      "id",
+                      "memberId",
+                      "changeType",
+                      "changePoints",
+                      "sourceType",
+                      "description",
+                      "operateMan",
+                      "operateNote",
+                      "createTime"
+                    ],
+                    "properties": {
+                      "changePoints": {
+                        "description": "变更积分",
+                        "type": "integer"
+                      },
+                      "changeType": {
+                        "description": "变更类型：1-添加积分，2-减少积分",
+                        "type": "integer"
+                      },
+                      "createTime": {
+                        "description": "创建时间",
+                        "type": "string"
+                      },
+                      "description": {
+                        "description": "描述",
+                        "type": "string"
+                      },
+                      "id": {
+                        "type": "integer"
+                      },
+                      "memberId": {
+                        "description": "会员ID",
+                        "type": "integer"
+                      },
+                      "operateMan": {
+                        "description": "操作人员",
+                        "type": "string"
+                      },
+                      "operateNote": {
+                        "description": "操作备注",
+                        "type": "string"
+                      },
+                      "sourceType": {
+                        "description": "来源类型：0-其他，1-订单，2-活动，3-签到，4-管理员修改",
+                        "type": "integer"
+                      }
+                    }
+                  }
+                },
+                "message": {
+                  "type": "string"
+                },
+                "pageSize": {
+                  "type": "integer",
+                  "default": 20,
+                  "example": 20
+                },
+                "success": {
+                  "type": "boolean"
+                },
+                "total": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/ums/ruleSetting/addMemberRuleSetting": {
+      "post": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "会员积分成长规则管理"
+        ],
+        "summary": "AddMemberRuleSetting",
+        "operationId": "ums/MemberRuleSettingAddMemberRuleSetting",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": [
+                "consumePerPoint",
+                "lowOrderAmount",
+                "maxPointPerOrder",
+                "ruleType",
+                "status"
+              ],
+              "properties": {
+                "consumePerPoint": {
+                  "description": "每消费多少元获取1个点",
+                  "type": "integer"
+                },
+                "lowOrderAmount": {
+                  "description": "最低获取点数的订单金额",
+                  "type": "integer"
+                },
+                "maxPointPerOrder": {
+                  "description": "每笔订单最高获取点数",
+                  "type": "integer"
+                },
+                "ruleType": {
+                  "description": "类型：0-\u003e积分规则；1-\u003e成长值规则",
+                  "type": "integer"
+                },
+                "status": {
+                  "description": "状态：0-\u003e禁用；1-\u003e启用",
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/ums/ruleSetting/deleteMemberRuleSetting": {
+      "get": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "会员积分成长规则管理"
+        ],
+        "summary": "DeleteMemberRuleSetting",
+        "operationId": "ums/MemberRuleSettingDeleteMemberRuleSetting",
+        "parameters": [
+          {
+            "type": "integer",
+            "name": "id",
+            "in": "query",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/ums/ruleSetting/queryMemberRuleSettingDetail": {
+      "get": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "会员积分成长规则管理"
+        ],
+        "summary": "QueryMemberRuleSettingDetail",
+        "operationId": "ums/MemberRuleSettingQueryMemberRuleSettingDetail",
+        "parameters": [
+          {
+            "type": "integer",
+            "name": "id",
+            "in": "query",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "data": {
+                  "type": "object",
+                  "required": [
+                    "id",
+                    "consumePerPoint",
+                    "lowOrderAmount",
+                    "maxPointPerOrder",
+                    "ruleType",
+                    "status",
+                    "createBy",
+                    "createTime",
+                    "updateBy",
+                    "updateTime"
+                  ],
+                  "properties": {
+                    "consumePerPoint": {
+                      "description": "每消费多少元获取1个点",
+                      "type": "integer"
+                    },
+                    "createBy": {
+                      "description": "创建者",
+                      "type": "integer"
+                    },
+                    "createTime": {
+                      "description": "创建时间",
+                      "type": "string"
+                    },
+                    "id": {
+                      "type": "integer"
+                    },
+                    "lowOrderAmount": {
+                      "description": "最低获取点数的订单金额",
+                      "type": "integer"
+                    },
+                    "maxPointPerOrder": {
+                      "description": "每笔订单最高获取点数",
+                      "type": "integer"
+                    },
+                    "ruleType": {
+                      "description": "类型：0-\u003e积分规则；1-\u003e成长值规则",
+                      "type": "integer"
+                    },
+                    "status": {
+                      "description": "状态：0-\u003e禁用；1-\u003e启用",
+                      "type": "integer"
+                    },
+                    "updateBy": {
+                      "description": "更新者",
+                      "type": "integer"
+                    },
+                    "updateTime": {
+                      "description": "更新时间",
+                      "type": "string"
+                    }
+                  }
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/ums/ruleSetting/queryMemberRuleSettingList": {
+      "get": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "会员积分成长规则管理"
+        ],
+        "summary": "QueryMemberRuleSettingList",
+        "operationId": "ums/MemberRuleSettingQueryMemberRuleSettingList",
+        "parameters": [
+          {
+            "type": "integer",
+            "default": 1,
+            "description": "第几页",
+            "name": "current",
+            "in": "query",
+            "required": true
+          },
+          {
+            "type": "integer",
+            "default": 20,
+            "description": "每页的数量",
+            "name": "pageSize",
+            "in": "query",
+            "required": true
+          },
+          {
+            "type": "integer",
+            "default": 2,
+            "description": "类型：0-\u003e积分规则；1-\u003e成长值规则",
+            "name": "ruleType",
+            "in": "query",
+            "required": true
+          },
+          {
+            "type": "integer",
+            "default": 2,
+            "description": "状态：0-\u003e禁用；1-\u003e启用",
+            "name": "status",
+            "in": "query",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "current": {
+                  "type": "integer",
+                  "default": 1,
+                  "example": 1
+                },
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "required": [
+                      "id",
+                      "consumePerPoint",
+                      "lowOrderAmount",
+                      "maxPointPerOrder",
+                      "ruleType",
+                      "status",
+                      "createBy",
+                      "createTime",
+                      "updateBy",
+                      "updateTime"
+                    ],
+                    "properties": {
+                      "consumePerPoint": {
+                        "description": "每消费多少元获取1个点",
+                        "type": "integer"
+                      },
+                      "createBy": {
+                        "description": "创建者",
+                        "type": "integer"
+                      },
+                      "createTime": {
+                        "description": "创建时间",
+                        "type": "string"
+                      },
+                      "id": {
+                        "type": "integer"
+                      },
+                      "lowOrderAmount": {
+                        "description": "最低获取点数的订单金额",
+                        "type": "integer"
+                      },
+                      "maxPointPerOrder": {
+                        "description": "每笔订单最高获取点数",
+                        "type": "integer"
+                      },
+                      "ruleType": {
+                        "description": "类型：0-\u003e积分规则；1-\u003e成长值规则",
+                        "type": "integer"
+                      },
+                      "status": {
+                        "description": "状态：0-\u003e禁用；1-\u003e启用",
+                        "type": "integer"
+                      },
+                      "updateBy": {
+                        "description": "更新者",
+                        "type": "integer"
+                      },
+                      "updateTime": {
+                        "description": "更新时间",
+                        "type": "string"
+                      }
+                    }
+                  }
+                },
+                "message": {
+                  "type": "string"
+                },
+                "pageSize": {
+                  "type": "integer",
+                  "default": 20,
+                  "example": 20
+                },
+                "success": {
+                  "type": "boolean"
+                },
+                "total": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/ums/ruleSetting/updateMemberRuleSetting": {
+      "post": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "会员积分成长规则管理"
+        ],
+        "summary": "UpdateMemberRuleSetting",
+        "operationId": "ums/MemberRuleSettingUpdateMemberRuleSetting",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": [
+                "id",
+                "consumePerPoint",
+                "lowOrderAmount",
+                "maxPointPerOrder",
+                "ruleType",
+                "status"
+              ],
+              "properties": {
+                "consumePerPoint": {
+                  "description": "每消费多少元获取1个点",
+                  "type": "integer"
+                },
+                "id": {
+                  "type": "integer"
+                },
+                "lowOrderAmount": {
+                  "description": "最低获取点数的订单金额",
+                  "type": "integer"
+                },
+                "maxPointPerOrder": {
+                  "description": "每笔订单最高获取点数",
+                  "type": "integer"
+                },
+                "ruleType": {
+                  "description": "类型：0-\u003e积分规则；1-\u003e成长值规则",
+                  "type": "integer"
+                },
+                "status": {
+                  "description": "状态：0-\u003e禁用；1-\u003e启用",
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/ums/ruleSetting/updateMemberRuleSettingStatus": {
+      "post": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "会员积分成长规则管理"
+        ],
+        "summary": "UpdateMemberRuleSettingStatus",
+        "operationId": "ums/MemberRuleSettingUpdateMemberRuleSettingStatus",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": [
+                "id",
+                "status"
+              ],
+              "properties": {
+                "id": {
+                  "type": "integer"
+                },
+                "status": {
+                  "description": "状态：0-\u003e禁用；1-\u003e启用",
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/ums/sign/queryMemberSignLogDetail": {
+      "get": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "会员签到记录管理"
+        ],
+        "summary": "QueryMemberSignLogDetail",
+        "operationId": "ums/MemberSignQueryMemberSignLogDetail",
+        "parameters": [
+          {
+            "type": "integer",
+            "name": "id",
+            "in": "query",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "data": {
+                  "type": "object",
+                  "required": [
+                    "id",
+                    "memberId",
+                    "signDate",
+                    "continueDays",
+                    "points",
+                    "createTime"
+                  ],
+                  "properties": {
+                    "continueDays": {
+                      "description": "连续签到天数",
+                      "type": "integer"
+                    },
+                    "createTime": {
+                      "type": "string"
+                    },
+                    "id": {
+                      "type": "integer"
+                    },
+                    "memberId": {
+                      "description": "会员ID",
+                      "type": "integer"
+                    },
+                    "points": {
+                      "description": "获得积分",
+                      "type": "integer"
+                    },
+                    "signDate": {
+                      "description": "签到日期",
+                      "type": "string"
+                    }
+                  }
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/ums/sign/queryMemberSignLogList": {
+      "get": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "会员签到记录管理"
+        ],
+        "summary": "QueryMemberSignLogList",
+        "operationId": "ums/MemberSignQueryMemberSignLogList",
+        "parameters": [
+          {
+            "type": "integer",
+            "default": 1,
+            "description": "第几页",
+            "name": "current",
+            "in": "query",
+            "required": true
+          },
+          {
+            "type": "integer",
+            "default": 20,
+            "description": "每页的数量",
+            "name": "pageSize",
+            "in": "query",
+            "required": true
+          },
+          {
+            "type": "integer",
+            "description": "会员ID",
+            "name": "memberId",
+            "in": "query",
+            "allowEmptyValue": true
+          },
+          {
+            "type": "string",
+            "description": "签到日期",
+            "name": "signDate",
+            "in": "query",
+            "allowEmptyValue": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "current": {
+                  "type": "integer",
+                  "default": 1,
+                  "example": 1
+                },
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "required": [
+                      "id",
+                      "memberId",
+                      "signDate",
+                      "continueDays",
+                      "points",
+                      "createTime"
+                    ],
+                    "properties": {
+                      "continueDays": {
+                        "description": "连续签到天数",
+                        "type": "integer"
+                      },
+                      "createTime": {
+                        "type": "string"
+                      },
+                      "id": {
+                        "type": "integer"
+                      },
+                      "memberId": {
+                        "description": "会员ID",
+                        "type": "integer"
+                      },
+                      "points": {
+                        "description": "获得积分",
+                        "type": "integer"
+                      },
+                      "signDate": {
+                        "description": "签到日期",
+                        "type": "string"
+                      }
+                    }
+                  }
+                },
+                "message": {
+                  "type": "string"
+                },
+                "pageSize": {
+                  "type": "integer",
+                  "default": 20,
+                  "example": 20
+                },
+                "success": {
+                  "type": "boolean"
+                },
+                "total": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/ums/statistics/queryMemberStatisticsInfoDetail": {
+      "get": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "会员统计信息管理"
+        ],
+        "summary": "QueryMemberStatisticsInfoDetail",
+        "operationId": "ums/MemberStatisticsQueryMemberStatisticsInfoDetail",
+        "parameters": [
+          {
+            "type": "integer",
+            "name": "id",
+            "in": "query",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "data": {
+                  "type": "object",
+                  "required": [
+                    "id",
+                    "memberId",
+                    "consumeAmount",
+                    "orderCount",
+                    "couponCount",
+                    "commentCount",
+                    "returnOrderCount",
+                    "loginCount",
+                    "attendCount",
+                    "fansCount",
+                    "collectProductCount",
+                    "collectSubjectCount",
+                    "collectTopicCount",
+                    "collectCommentCount",
+                    "inviteFriendCount",
+                    "recentOrderTime"
+                  ],
+                  "properties": {
+                    "attendCount": {
+                      "description": "关注数量",
+                      "type": "integer"
+                    },
+                    "collectCommentCount": {
+                      "description": "收藏的专题活动数量",
+                      "type": "integer"
+                    },
+                    "collectProductCount": {
+                      "description": "收藏的商品数量",
+                      "type": "integer"
+                    },
+                    "collectSubjectCount": {
+                      "description": "收藏的专题活动数量",
+                      "type": "integer"
+                    },
+                    "collectTopicCount": {
+                      "description": "收藏的评论数量",
+                      "type": "integer"
+                    },
+                    "commentCount": {
+                      "description": "评价数",
+                      "type": "integer"
+                    },
+                    "consumeAmount": {
+                      "description": "累计消费金额",
+                      "type": "integer"
+                    },
+                    "couponCount": {
+                      "description": "优惠券数量",
+                      "type": "integer"
+                    },
+                    "fansCount": {
+                      "description": "粉丝数量",
+                      "type": "integer"
+                    },
+                    "id": {
+                      "type": "integer"
+                    },
+                    "inviteFriendCount": {
+                      "description": "邀请好友数",
+                      "type": "integer"
+                    },
+                    "loginCount": {
+                      "description": "登录次数",
+                      "type": "integer"
+                    },
+                    "memberId": {
+                      "description": "会员id",
+                      "type": "integer"
+                    },
+                    "orderCount": {
+                      "description": "订单数量",
+                      "type": "integer"
+                    },
+                    "recentOrderTime": {
+                      "description": "最后一次下订单时间",
+                      "type": "string"
+                    },
+                    "returnOrderCount": {
+                      "description": "退货数量",
+                      "type": "integer"
+                    }
+                  }
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/ums/statistics/queryMemberStatisticsInfoList": {
+      "get": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "会员统计信息管理"
+        ],
+        "summary": "QueryMemberStatisticsInfoList",
+        "operationId": "ums/MemberStatisticsQueryMemberStatisticsInfoList",
+        "parameters": [
+          {
+            "type": "integer",
+            "default": 1,
+            "name": "current",
+            "in": "query",
+            "required": true
+          },
+          {
+            "type": "integer",
+            "default": 20,
+            "name": "pageSize",
+            "in": "query",
+            "required": true
+          },
+          {
+            "type": "integer",
+            "default": 0,
+            "description": "会员id",
+            "name": "memberId",
+            "in": "query",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "current": {
+                  "type": "integer",
+                  "default": 1,
+                  "example": 1
+                },
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "required": [
+                      "id",
+                      "memberId",
+                      "consumeAmount",
+                      "orderCount",
+                      "couponCount",
+                      "commentCount",
+                      "returnOrderCount",
+                      "loginCount",
+                      "attendCount",
+                      "fansCount",
+                      "collectProductCount",
+                      "collectSubjectCount",
+                      "collectTopicCount",
+                      "collectCommentCount",
+                      "inviteFriendCount",
+                      "recentOrderTime"
+                    ],
+                    "properties": {
+                      "attendCount": {
+                        "description": "关注数量",
+                        "type": "integer"
+                      },
+                      "collectCommentCount": {
+                        "description": "收藏的专题活动数量",
+                        "type": "integer"
+                      },
+                      "collectProductCount": {
+                        "description": "收藏的商品数量",
+                        "type": "integer"
+                      },
+                      "collectSubjectCount": {
+                        "description": "收藏的专题活动数量",
+                        "type": "integer"
+                      },
+                      "collectTopicCount": {
+                        "description": "收藏的评论数量",
+                        "type": "integer"
+                      },
+                      "commentCount": {
+                        "description": "评价数",
+                        "type": "integer"
+                      },
+                      "consumeAmount": {
+                        "description": "累计消费金额",
+                        "type": "integer"
+                      },
+                      "couponCount": {
+                        "description": "优惠券数量",
+                        "type": "integer"
+                      },
+                      "fansCount": {
+                        "description": "粉丝数量",
+                        "type": "integer"
+                      },
+                      "id": {
+                        "type": "integer"
+                      },
+                      "inviteFriendCount": {
+                        "description": "邀请好友数",
+                        "type": "integer"
+                      },
+                      "loginCount": {
+                        "description": "登录次数",
+                        "type": "integer"
+                      },
+                      "memberId": {
+                        "description": "会员id",
+                        "type": "integer"
+                      },
+                      "orderCount": {
+                        "description": "订单数量",
+                        "type": "integer"
+                      },
+                      "recentOrderTime": {
+                        "description": "最后一次下订单时间",
+                        "type": "string"
+                      },
+                      "returnOrderCount": {
+                        "description": "退货数量",
+                        "type": "integer"
+                      }
+                    }
+                  }
+                },
+                "message": {
+                  "type": "string"
+                },
+                "pageSize": {
+                  "type": "integer",
+                  "default": 20,
+                  "example": 20
+                },
+                "success": {
+                  "type": "boolean"
+                },
+                "total": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/ums/tag/addMemberTag": {
+      "post": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "用户标签管理"
+        ],
+        "summary": "AddMemberTag",
+        "operationId": "ums/MemberTagAddMemberTag",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": [
+                "tagName",
+                "description",
+                "finishOrderCount",
+                "finishOrderAmount",
+                "status"
+              ],
+              "properties": {
+                "description": {
+                  "description": "标签描述",
+                  "type": "string"
+                },
+                "finishOrderAmount": {
+                  "description": "自动打标签完成订单金额",
+                  "type": "number"
+                },
+                "finishOrderCount": {
+                  "description": "自动打标签完成订单数量",
+                  "type": "integer"
+                },
+                "status": {
+                  "description": "状态：0-禁用，1-启用",
+                  "type": "integer"
+                },
+                "tagName": {
+                  "description": "标签名称",
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/ums/tag/deleteMemberTag": {
+      "get": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "用户标签管理"
+        ],
+        "summary": "DeleteMemberTag",
+        "operationId": "ums/MemberTagDeleteMemberTag",
+        "parameters": [
+          {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            },
+            "name": "ids",
+            "in": "query",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/ums/tag/queryMemberTagDetail": {
+      "get": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "用户标签管理"
+        ],
+        "summary": "QueryMemberTagDetail",
+        "operationId": "ums/MemberTagQueryMemberTagDetail",
+        "parameters": [
+          {
+            "type": "integer",
+            "name": "id",
+            "in": "query",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "data": {
+                  "type": "object",
+                  "required": [
+                    "id",
+                    "tagName",
+                    "description",
+                    "finishOrderCount",
+                    "finishOrderAmount",
+                    "status",
+                    "createBy",
+                    "createTime",
+                    "updateBy",
+                    "updateTime"
+                  ],
+                  "properties": {
+                    "createBy": {
+                      "description": "创建人ID",
+                      "type": "integer"
+                    },
+                    "createTime": {
+                      "description": "创建时间",
+                      "type": "string"
+                    },
+                    "description": {
+                      "description": "标签描述",
+                      "type": "string"
+                    },
+                    "finishOrderAmount": {
+                      "description": "自动打标签完成订单金额",
+                      "type": "number"
+                    },
+                    "finishOrderCount": {
+                      "description": "自动打标签完成订单数量",
+                      "type": "integer"
+                    },
+                    "id": {
+                      "description": "主键ID",
+                      "type": "integer"
+                    },
+                    "status": {
+                      "description": "状态：0-禁用，1-启用",
+                      "type": "integer"
+                    },
+                    "tagName": {
+                      "description": "标签名称",
+                      "type": "string"
+                    },
+                    "updateBy": {
+                      "description": "更新人ID",
+                      "type": "integer"
+                    },
+                    "updateTime": {
+                      "description": "更新时间",
+                      "type": "string"
+                    }
+                  }
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/ums/tag/queryMemberTagList": {
+      "get": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "用户标签管理"
+        ],
+        "summary": "QueryMemberTagList",
+        "operationId": "ums/MemberTagQueryMemberTagList",
+        "parameters": [
+          {
+            "type": "integer",
+            "default": 1,
+            "description": "第几页",
+            "name": "current",
+            "in": "query",
+            "required": true
+          },
+          {
+            "type": "integer",
+            "default": 20,
+            "description": "每页的数量",
+            "name": "pageSize",
+            "in": "query",
+            "required": true
+          },
+          {
+            "type": "string",
+            "description": "标签名称",
+            "name": "tagName",
+            "in": "query",
+            "allowEmptyValue": true
+          },
+          {
+            "type": "integer",
+            "default": 2,
+            "description": "状态：0-禁用，1-启用",
+            "name": "status",
+            "in": "query",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "current": {
+                  "type": "integer",
+                  "default": 1,
+                  "example": 1
+                },
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "required": [
+                      "id",
+                      "tagName",
+                      "description",
+                      "finishOrderCount",
+                      "finishOrderAmount",
+                      "status",
+                      "createBy",
+                      "createTime",
+                      "updateBy",
+                      "updateTime"
+                    ],
+                    "properties": {
+                      "createBy": {
+                        "description": "创建人ID",
+                        "type": "integer"
+                      },
+                      "createTime": {
+                        "description": "创建时间",
+                        "type": "string"
+                      },
+                      "description": {
+                        "description": "标签描述",
+                        "type": "string"
+                      },
+                      "finishOrderAmount": {
+                        "description": "自动打标签完成订单金额",
+                        "type": "number"
+                      },
+                      "finishOrderCount": {
+                        "description": "自动打标签完成订单数量",
+                        "type": "integer"
+                      },
+                      "id": {
+                        "description": "主键ID",
+                        "type": "integer"
+                      },
+                      "status": {
+                        "description": "状态：0-禁用，1-启用",
+                        "type": "integer"
+                      },
+                      "tagName": {
+                        "description": "标签名称",
+                        "type": "string"
+                      },
+                      "updateBy": {
+                        "description": "更新人ID",
+                        "type": "integer"
+                      },
+                      "updateTime": {
+                        "description": "更新时间",
+                        "type": "string"
+                      }
+                    }
+                  }
+                },
+                "message": {
+                  "type": "string"
+                },
+                "pageSize": {
+                  "type": "integer",
+                  "default": 20,
+                  "example": 20
+                },
+                "success": {
+                  "type": "boolean"
+                },
+                "total": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/ums/tag/updateMemberTag": {
+      "post": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "用户标签管理"
+        ],
+        "summary": "UpdateMemberTag",
+        "operationId": "ums/MemberTagUpdateMemberTag",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": [
+                "id",
+                "tagName",
+                "description",
+                "finishOrderCount",
+                "finishOrderAmount",
+                "status"
+              ],
+              "properties": {
+                "description": {
+                  "description": "标签描述",
+                  "type": "string"
+                },
+                "finishOrderAmount": {
+                  "description": "自动打标签完成订单金额",
+                  "type": "number"
+                },
+                "finishOrderCount": {
+                  "description": "自动打标签完成订单数量",
+                  "type": "integer"
+                },
+                "id": {
+                  "description": "主键ID",
+                  "type": "integer"
+                },
+                "status": {
+                  "description": "状态：0-禁用，1-启用",
+                  "type": "integer"
+                },
+                "tagName": {
+                  "description": "标签名称",
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/ums/tag/updateMemberTagStatus": {
+      "post": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "用户标签管理"
+        ],
+        "summary": "UpdateMemberTagStatus",
+        "operationId": "ums/MemberTagUpdateMemberTagStatus",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": [
+                "ids",
+                "status"
+              ],
+              "properties": {
+                "ids": {
+                  "description": "主键ID",
+                  "type": "array",
+                  "items": {
+                    "type": "integer"
+                  }
+                },
+                "status": {
+                  "description": "状态：0-禁用，1-启用",
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/ums/task/addMemberTask": {
+      "post": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "会员任务管理"
+        ],
+        "summary": "AddMemberTask",
+        "operationId": "ums/MemberTaskAddMemberTask",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": [
+                "taskName",
+                "taskDesc",
+                "taskGrowth",
+                "taskIntegral",
+                "taskType",
+                "completeCount",
+                "rewardType",
+                "rewardParams",
+                "startTime",
+                "endTime",
+                "status",
+                "sort"
+              ],
+              "properties": {
+                "completeCount": {
+                  "description": "需要完成次数",
+                  "type": "integer"
+                },
+                "endTime": {
+                  "description": "任务结束时间",
+                  "type": "string"
+                },
+                "rewardParams": {
+                  "description": "奖励参数JSON",
+                  "type": "string"
+                },
+                "rewardType": {
+                  "description": "奖励类型：0-积分成长值，1-优惠券，2-抽奖次数",
+                  "type": "integer"
+                },
+                "sort": {
+                  "description": "排序",
+                  "type": "integer"
+                },
+                "startTime": {
+                  "description": "任务开始时间",
+                  "type": "string"
+                },
+                "status": {
+                  "description": "状态：0-禁用，1-启用",
+                  "type": "integer"
+                },
+                "taskDesc": {
+                  "description": "任务描述",
+                  "type": "string"
+                },
+                "taskGrowth": {
+                  "description": "赠送成长值",
+                  "type": "integer"
+                },
+                "taskIntegral": {
+                  "description": "赠送积分",
+                  "type": "integer"
+                },
+                "taskName": {
+                  "description": "任务名称",
+                  "type": "string"
+                },
+                "taskType": {
+                  "description": "任务类型：0-新手任务，1-日常任务，2-周常任务，3-月常任务",
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/ums/task/deleteMemberTask": {
+      "get": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "会员任务管理"
+        ],
+        "summary": "DeleteMemberTask",
+        "operationId": "ums/MemberTaskDeleteMemberTask",
+        "parameters": [
+          {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            },
+            "name": "ids",
+            "in": "query",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/ums/task/queryMemberTaskDetail": {
+      "get": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "会员任务管理"
+        ],
+        "summary": "QueryMemberTaskDetail",
+        "operationId": "ums/MemberTaskQueryMemberTaskDetail",
+        "parameters": [
+          {
+            "type": "integer",
+            "name": "id",
+            "in": "query",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "data": {
+                  "type": "object",
+                  "required": [
+                    "id",
+                    "taskName",
+                    "taskDesc",
+                    "taskGrowth",
+                    "taskIntegral",
+                    "taskType",
+                    "completeCount",
+                    "rewardType",
+                    "rewardParams",
+                    "startTime",
+                    "endTime",
+                    "status",
+                    "sort",
+                    "createBy",
+                    "createTime",
+                    "updateBy",
+                    "updateTime"
+                  ],
+                  "properties": {
+                    "completeCount": {
+                      "description": "需要完成次数",
+                      "type": "integer"
+                    },
+                    "createBy": {
+                      "description": "创建人ID",
+                      "type": "integer"
+                    },
+                    "createTime": {
+                      "description": "创建时间",
+                      "type": "string"
+                    },
+                    "endTime": {
+                      "description": "任务结束时间",
+                      "type": "string"
+                    },
+                    "id": {
+                      "description": "主键ID",
+                      "type": "integer"
+                    },
+                    "rewardParams": {
+                      "description": "奖励参数JSON",
+                      "type": "string"
+                    },
+                    "rewardType": {
+                      "description": "奖励类型：0-积分成长值，1-优惠券，2-抽奖次数",
+                      "type": "integer"
+                    },
+                    "sort": {
+                      "description": "排序",
+                      "type": "integer"
+                    },
+                    "startTime": {
+                      "description": "任务开始时间",
+                      "type": "string"
+                    },
+                    "status": {
+                      "description": "状态：0-禁用，1-启用",
+                      "type": "integer"
+                    },
+                    "taskDesc": {
+                      "description": "任务描述",
+                      "type": "string"
+                    },
+                    "taskGrowth": {
+                      "description": "赠送成长值",
+                      "type": "integer"
+                    },
+                    "taskIntegral": {
+                      "description": "赠送积分",
+                      "type": "integer"
+                    },
+                    "taskName": {
+                      "description": "任务名称",
+                      "type": "string"
+                    },
+                    "taskType": {
+                      "description": "任务类型：0-新手任务，1-日常任务，2-周常任务，3-月常任务",
+                      "type": "integer"
+                    },
+                    "updateBy": {
+                      "description": "更新人ID",
+                      "type": "integer"
+                    },
+                    "updateTime": {
+                      "description": "更新时间",
+                      "type": "string"
+                    }
+                  }
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/ums/task/queryMemberTaskList": {
+      "get": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "会员任务管理"
+        ],
+        "summary": "QueryMemberTaskList",
+        "operationId": "ums/MemberTaskQueryMemberTaskList",
+        "parameters": [
+          {
+            "type": "integer",
+            "default": 1,
+            "description": "第几页",
+            "name": "current",
+            "in": "query",
+            "required": true
+          },
+          {
+            "type": "integer",
+            "default": 20,
+            "description": "每页的数量",
+            "name": "pageSize",
+            "in": "query",
+            "required": true
+          },
+          {
+            "type": "string",
+            "description": "任务名称",
+            "name": "taskName",
+            "in": "query",
+            "allowEmptyValue": true
+          },
+          {
+            "type": "integer",
+            "default": 4,
+            "description": "任务类型：0-新手任务，1-日常任务，2-周常任务，3-月常任务",
+            "name": "taskType",
+            "in": "query",
+            "required": true
+          },
+          {
+            "type": "integer",
+            "default": 3,
+            "description": "奖励类型：0-积分成长值，1-优惠券，2-抽奖次数",
+            "name": "rewardType",
+            "in": "query",
+            "required": true
+          },
+          {
+            "type": "string",
+            "description": "任务开始时间",
+            "name": "startTime",
+            "in": "query",
+            "allowEmptyValue": true
+          },
+          {
+            "type": "string",
+            "description": "任务结束时间",
+            "name": "endTime",
+            "in": "query",
+            "allowEmptyValue": true
+          },
+          {
+            "type": "integer",
+            "default": 2,
+            "description": "状态：0-禁用，1-启用",
+            "name": "status",
+            "in": "query",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "current": {
+                  "type": "integer",
+                  "default": 1,
+                  "example": 1
+                },
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "required": [
+                      "id",
+                      "taskName",
+                      "taskDesc",
+                      "taskGrowth",
+                      "taskIntegral",
+                      "taskType",
+                      "completeCount",
+                      "rewardType",
+                      "rewardParams",
+                      "startTime",
+                      "endTime",
+                      "status",
+                      "sort",
+                      "createBy",
+                      "createTime",
+                      "updateBy",
+                      "updateTime"
+                    ],
+                    "properties": {
+                      "completeCount": {
+                        "description": "需要完成次数",
+                        "type": "integer"
+                      },
+                      "createBy": {
+                        "description": "创建人ID",
+                        "type": "integer"
+                      },
+                      "createTime": {
+                        "description": "创建时间",
+                        "type": "string"
+                      },
+                      "endTime": {
+                        "description": "任务结束时间",
+                        "type": "string"
+                      },
+                      "id": {
+                        "description": "主键ID",
+                        "type": "integer"
+                      },
+                      "rewardParams": {
+                        "description": "奖励参数JSON",
+                        "type": "string"
+                      },
+                      "rewardType": {
+                        "description": "奖励类型：0-积分成长值，1-优惠券，2-抽奖次数",
+                        "type": "integer"
+                      },
+                      "sort": {
+                        "description": "排序",
+                        "type": "integer"
+                      },
+                      "startTime": {
+                        "description": "任务开始时间",
+                        "type": "string"
+                      },
+                      "status": {
+                        "description": "状态：0-禁用，1-启用",
+                        "type": "integer"
+                      },
+                      "taskDesc": {
+                        "description": "任务描述",
+                        "type": "string"
+                      },
+                      "taskGrowth": {
+                        "description": "赠送成长值",
+                        "type": "integer"
+                      },
+                      "taskIntegral": {
+                        "description": "赠送积分",
+                        "type": "integer"
+                      },
+                      "taskName": {
+                        "description": "任务名称",
+                        "type": "string"
+                      },
+                      "taskType": {
+                        "description": "任务类型：0-新手任务，1-日常任务，2-周常任务，3-月常任务",
+                        "type": "integer"
+                      },
+                      "updateBy": {
+                        "description": "更新人ID",
+                        "type": "integer"
+                      },
+                      "updateTime": {
+                        "description": "更新时间",
+                        "type": "string"
+                      }
+                    }
+                  }
+                },
+                "message": {
+                  "type": "string"
+                },
+                "pageSize": {
+                  "type": "integer",
+                  "default": 20,
+                  "example": 20
+                },
+                "success": {
+                  "type": "boolean"
+                },
+                "total": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/ums/task/updateMemberTask": {
+      "post": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "会员任务管理"
+        ],
+        "summary": "UpdateMemberTask",
+        "operationId": "ums/MemberTaskUpdateMemberTask",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": [
+                "id",
+                "taskName",
+                "taskDesc",
+                "taskGrowth",
+                "taskIntegral",
+                "taskType",
+                "completeCount",
+                "rewardType",
+                "rewardParams",
+                "startTime",
+                "endTime",
+                "status",
+                "sort"
+              ],
+              "properties": {
+                "completeCount": {
+                  "description": "需要完成次数",
+                  "type": "integer"
+                },
+                "endTime": {
+                  "description": "任务结束时间",
+                  "type": "string"
+                },
+                "id": {
+                  "description": "主键ID",
+                  "type": "integer"
+                },
+                "rewardParams": {
+                  "description": "奖励参数JSON",
+                  "type": "string"
+                },
+                "rewardType": {
+                  "description": "奖励类型：0-积分成长值，1-优惠券，2-抽奖次数",
+                  "type": "integer"
+                },
+                "sort": {
+                  "description": "排序",
+                  "type": "integer"
+                },
+                "startTime": {
+                  "description": "任务开始时间",
+                  "type": "string"
+                },
+                "status": {
+                  "description": "状态：0-禁用，1-启用",
+                  "type": "integer"
+                },
+                "taskDesc": {
+                  "description": "任务描述",
+                  "type": "string"
+                },
+                "taskGrowth": {
+                  "description": "赠送成长值",
+                  "type": "integer"
+                },
+                "taskIntegral": {
+                  "description": "赠送积分",
+                  "type": "integer"
+                },
+                "taskName": {
+                  "description": "任务名称",
+                  "type": "string"
+                },
+                "taskType": {
+                  "description": "任务类型：0-新手任务，1-日常任务，2-周常任务，3-月常任务",
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/ums/task/updateMemberTaskStatus": {
+      "post": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "会员任务管理"
+        ],
+        "summary": "UpdateMemberTaskStatus",
+        "operationId": "ums/MemberTaskUpdateMemberTaskStatus",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": [
+                "ids",
+                "status"
+              ],
+              "properties": {
+                "ids": {
+                  "description": "主键ID",
+                  "type": "array",
+                  "items": {
+                    "type": "integer"
+                  }
+                },
+                "status": {
+                  "description": "状态：0-禁用，1-启用",
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "apiKey": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
+    },
+    "petstore_auth": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "http://swagger.io/api/oauth/dialog",
+      "scopes": {
+        "read:pets": "read your pets",
+        "write:pets": "modify pets in your account"
+      }
+    }
+  },
+  "x-date": "2025-07-08 11:19:59",
+  "x-description": "This is a goctl generated swagger file.",
+  "x-github": "https://github.com/zeromicro/go-zero",
+  "x-go-zero-doc": "https://go-zero.dev/",
+  "x-goctl-version": "1.8.4"
+}

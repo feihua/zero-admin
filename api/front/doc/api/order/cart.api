@@ -165,9 +165,11 @@ type CartItemSkuStockList {
 }
 
 @server (
-	jwt:    Auth
-	group:  order/cart
-	prefix: /api/order
+	jwt:      Auth
+	group:    order/cart
+	prefix:   /api/order
+	tags:     "购物车管理"
+	authType: apiKey
 )
 service front-api {
 	//添加商品进购物车

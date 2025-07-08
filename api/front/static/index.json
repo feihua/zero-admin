@@ -1,0 +1,844 @@
+{
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "schemes": [
+    "http"
+  ],
+  "swagger": "2.0",
+  "info": {
+    "description": "首页数据相关接口",
+    "title": "首页数据 API",
+    "version": "v1"
+  },
+  "basePath": "/",
+  "paths": {
+    "/api/home/index": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "获取首页数据"
+        ],
+        "summary": "Index",
+        "operationId": "homeIndex",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "integer"
+                },
+                "data": {
+                  "type": "object",
+                  "required": [
+                    "advertiseList",
+                    "brandList",
+                    "homeFlashPromotion",
+                    "newProductList",
+                    "hotProductList",
+                    "subjectList"
+                  ],
+                  "properties": {
+                    "advertiseList": {
+                      "description": "获取首页广告",
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "required": [
+                          "id",
+                          "name",
+                          "type",
+                          "pic",
+                          "startTime",
+                          "endTime",
+                          "status",
+                          "clickCount",
+                          "orderCount",
+                          "url",
+                          "remark",
+                          "sort"
+                        ],
+                        "properties": {
+                          "clickCount": {
+                            "description": "点击数",
+                            "type": "integer"
+                          },
+                          "endTime": {
+                            "description": "结束时间",
+                            "type": "string"
+                          },
+                          "id": {
+                            "description": "编号",
+                            "type": "integer"
+                          },
+                          "name": {
+                            "description": "名称",
+                            "type": "string"
+                          },
+                          "orderCount": {
+                            "description": "下单数",
+                            "type": "integer"
+                          },
+                          "pic": {
+                            "description": "图片地址",
+                            "type": "string"
+                          },
+                          "remark": {
+                            "description": "备注",
+                            "type": "string"
+                          },
+                          "sort": {
+                            "description": "排序",
+                            "type": "integer"
+                          },
+                          "startTime": {
+                            "description": "开始时间",
+                            "type": "string"
+                          },
+                          "status": {
+                            "description": "上下线状态：0-\u003e下线；1-\u003e上线",
+                            "type": "integer"
+                          },
+                          "type": {
+                            "description": "轮播位置：0-\u003ePC首页轮播；1-\u003eapp首页轮播",
+                            "type": "integer"
+                          },
+                          "url": {
+                            "description": "链接地址",
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    "brandList": {
+                      "description": "获取推荐品牌",
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "required": [
+                          "id",
+                          "name",
+                          "logo",
+                          "bigPic",
+                          "description",
+                          "firstLetter",
+                          "sort",
+                          "recommendStatus",
+                          "productCount",
+                          "productCommentCount"
+                        ],
+                        "properties": {
+                          "bigPic": {
+                            "description": "专区大图",
+                            "type": "string"
+                          },
+                          "description": {
+                            "description": "描述",
+                            "type": "string"
+                          },
+                          "firstLetter": {
+                            "description": "首字母",
+                            "type": "string"
+                          },
+                          "id": {
+                            "type": "integer"
+                          },
+                          "logo": {
+                            "description": "品牌logo",
+                            "type": "string"
+                          },
+                          "name": {
+                            "description": "品牌名称",
+                            "type": "string"
+                          },
+                          "productCommentCount": {
+                            "description": "产品评论数量",
+                            "type": "integer"
+                          },
+                          "productCount": {
+                            "description": "产品数量",
+                            "type": "integer"
+                          },
+                          "recommendStatus": {
+                            "description": "推荐状态",
+                            "type": "integer"
+                          },
+                          "sort": {
+                            "description": "排序",
+                            "type": "integer"
+                          }
+                        }
+                      }
+                    },
+                    "homeFlashPromotion": {
+                      "description": "获取秒杀信息",
+                      "type": "object",
+                      "required": [
+                        "startTime",
+                        "endTime",
+                        "nextStartTime",
+                        "nextEndTime",
+                        "productList"
+                      ],
+                      "properties": {
+                        "endTime": {
+                          "type": "string"
+                        },
+                        "nextEndTime": {
+                          "type": "string"
+                        },
+                        "nextStartTime": {
+                          "type": "string"
+                        },
+                        "productList": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "required": [
+                              "id",
+                              "name",
+                              "productSn",
+                              "categoryId",
+                              "categoryIds",
+                              "categoryName",
+                              "brandId",
+                              "brandName",
+                              "unit",
+                              "weight",
+                              "keywords",
+                              "brief",
+                              "description",
+                              "albumPics",
+                              "mainPic",
+                              "priceRange",
+                              "publishStatus",
+                              "newStatus",
+                              "recommendStatus",
+                              "verifyStatus",
+                              "previewStatus",
+                              "sort",
+                              "newStatusSort",
+                              "recommendStatusSort",
+                              "sales",
+                              "stock",
+                              "lowStock",
+                              "promotionType",
+                              "detailTitle",
+                              "detailDesc",
+                              "detailHtml",
+                              "detailMobileHtml"
+                            ],
+                            "properties": {
+                              "albumPics": {
+                                "description": "画册图片，最多8张，以逗号分割",
+                                "type": "string"
+                              },
+                              "brandId": {
+                                "description": "品牌ID",
+                                "type": "integer"
+                              },
+                              "brandName": {
+                                "description": "品牌名称",
+                                "type": "string"
+                              },
+                              "brief": {
+                                "description": "简介",
+                                "type": "string"
+                              },
+                              "categoryId": {
+                                "description": "商品分类ID",
+                                "type": "integer"
+                              },
+                              "categoryIds": {
+                                "description": "商品分类ID集合",
+                                "type": "string"
+                              },
+                              "categoryName": {
+                                "description": "商品分类名称",
+                                "type": "string"
+                              },
+                              "description": {
+                                "description": "详细描述",
+                                "type": "string"
+                              },
+                              "detailDesc": {
+                                "description": "详情描述",
+                                "type": "string"
+                              },
+                              "detailHtml": {
+                                "description": "产品详情网页内容",
+                                "type": "string"
+                              },
+                              "detailMobileHtml": {
+                                "description": "移动端网页详情",
+                                "type": "string"
+                              },
+                              "detailTitle": {
+                                "description": "详情标题",
+                                "type": "string"
+                              },
+                              "id": {
+                                "description": "商品SpuId",
+                                "type": "integer"
+                              },
+                              "keywords": {
+                                "description": "关键词",
+                                "type": "string"
+                              },
+                              "lowStock": {
+                                "description": "预警库存",
+                                "type": "integer"
+                              },
+                              "mainPic": {
+                                "description": "主图",
+                                "type": "string"
+                              },
+                              "name": {
+                                "description": "商品名称",
+                                "type": "string"
+                              },
+                              "newStatus": {
+                                "description": "新品状态:0-\u003e不是新品；1-\u003e新品",
+                                "type": "integer"
+                              },
+                              "newStatusSort": {
+                                "description": "新品排序",
+                                "type": "integer"
+                              },
+                              "previewStatus": {
+                                "description": "是否为预告商品：0-\u003e不是；1-\u003e是",
+                                "type": "integer"
+                              },
+                              "priceRange": {
+                                "description": "价格区间",
+                                "type": "string"
+                              },
+                              "productSn": {
+                                "description": "商品货号",
+                                "type": "string"
+                              },
+                              "promotionType": {
+                                "description": "促销类型：0-\u003e没有促销使用原价;1-\u003e使用促销价；2-\u003e使用会员价；3-\u003e使用阶梯价格；4-\u003e使用满减价格；5-\u003e秒杀",
+                                "type": "integer"
+                              },
+                              "publishStatus": {
+                                "description": "上架状态：0-下架，1-上架",
+                                "type": "integer"
+                              },
+                              "recommendStatus": {
+                                "description": "推荐状态；0-\u003e不推荐；1-\u003e推荐",
+                                "type": "integer"
+                              },
+                              "recommendStatusSort": {
+                                "description": "推荐排序",
+                                "type": "integer"
+                              },
+                              "sales": {
+                                "description": "销量",
+                                "type": "integer"
+                              },
+                              "sort": {
+                                "description": "排序",
+                                "type": "integer"
+                              },
+                              "stock": {
+                                "description": "库存",
+                                "type": "integer"
+                              },
+                              "unit": {
+                                "description": "单位",
+                                "type": "string"
+                              },
+                              "verifyStatus": {
+                                "description": "审核状态：0-\u003e未审核；1-\u003e审核通过",
+                                "type": "integer"
+                              },
+                              "weight": {
+                                "description": "重量(kg)",
+                                "type": "number"
+                              }
+                            }
+                          }
+                        },
+                        "startTime": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "hotProductList": {
+                      "description": "获取人气推荐",
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "required": [
+                          "id",
+                          "name",
+                          "productSn",
+                          "categoryId",
+                          "categoryIds",
+                          "categoryName",
+                          "brandId",
+                          "brandName",
+                          "unit",
+                          "weight",
+                          "keywords",
+                          "brief",
+                          "description",
+                          "albumPics",
+                          "mainPic",
+                          "priceRange",
+                          "publishStatus",
+                          "newStatus",
+                          "recommendStatus",
+                          "verifyStatus",
+                          "previewStatus",
+                          "sort",
+                          "newStatusSort",
+                          "recommendStatusSort",
+                          "sales",
+                          "stock",
+                          "lowStock",
+                          "promotionType",
+                          "detailTitle",
+                          "detailDesc",
+                          "detailHtml",
+                          "detailMobileHtml"
+                        ],
+                        "properties": {
+                          "albumPics": {
+                            "description": "画册图片，最多8张，以逗号分割",
+                            "type": "string"
+                          },
+                          "brandId": {
+                            "description": "品牌ID",
+                            "type": "integer"
+                          },
+                          "brandName": {
+                            "description": "品牌名称",
+                            "type": "string"
+                          },
+                          "brief": {
+                            "description": "简介",
+                            "type": "string"
+                          },
+                          "categoryId": {
+                            "description": "商品分类ID",
+                            "type": "integer"
+                          },
+                          "categoryIds": {
+                            "description": "商品分类ID集合",
+                            "type": "string"
+                          },
+                          "categoryName": {
+                            "description": "商品分类名称",
+                            "type": "string"
+                          },
+                          "description": {
+                            "description": "详细描述",
+                            "type": "string"
+                          },
+                          "detailDesc": {
+                            "description": "详情描述",
+                            "type": "string"
+                          },
+                          "detailHtml": {
+                            "description": "产品详情网页内容",
+                            "type": "string"
+                          },
+                          "detailMobileHtml": {
+                            "description": "移动端网页详情",
+                            "type": "string"
+                          },
+                          "detailTitle": {
+                            "description": "详情标题",
+                            "type": "string"
+                          },
+                          "id": {
+                            "description": "商品SpuId",
+                            "type": "integer"
+                          },
+                          "keywords": {
+                            "description": "关键词",
+                            "type": "string"
+                          },
+                          "lowStock": {
+                            "description": "预警库存",
+                            "type": "integer"
+                          },
+                          "mainPic": {
+                            "description": "主图",
+                            "type": "string"
+                          },
+                          "name": {
+                            "description": "商品名称",
+                            "type": "string"
+                          },
+                          "newStatus": {
+                            "description": "新品状态:0-\u003e不是新品；1-\u003e新品",
+                            "type": "integer"
+                          },
+                          "newStatusSort": {
+                            "description": "新品排序",
+                            "type": "integer"
+                          },
+                          "previewStatus": {
+                            "description": "是否为预告商品：0-\u003e不是；1-\u003e是",
+                            "type": "integer"
+                          },
+                          "priceRange": {
+                            "description": "价格区间",
+                            "type": "string"
+                          },
+                          "productSn": {
+                            "description": "商品货号",
+                            "type": "string"
+                          },
+                          "promotionType": {
+                            "description": "促销类型：0-\u003e没有促销使用原价;1-\u003e使用促销价；2-\u003e使用会员价；3-\u003e使用阶梯价格；4-\u003e使用满减价格；5-\u003e秒杀",
+                            "type": "integer"
+                          },
+                          "publishStatus": {
+                            "description": "上架状态：0-下架，1-上架",
+                            "type": "integer"
+                          },
+                          "recommendStatus": {
+                            "description": "推荐状态；0-\u003e不推荐；1-\u003e推荐",
+                            "type": "integer"
+                          },
+                          "recommendStatusSort": {
+                            "description": "推荐排序",
+                            "type": "integer"
+                          },
+                          "sales": {
+                            "description": "销量",
+                            "type": "integer"
+                          },
+                          "sort": {
+                            "description": "排序",
+                            "type": "integer"
+                          },
+                          "stock": {
+                            "description": "库存",
+                            "type": "integer"
+                          },
+                          "unit": {
+                            "description": "单位",
+                            "type": "string"
+                          },
+                          "verifyStatus": {
+                            "description": "审核状态：0-\u003e未审核；1-\u003e审核通过",
+                            "type": "integer"
+                          },
+                          "weight": {
+                            "description": "重量(kg)",
+                            "type": "number"
+                          }
+                        }
+                      }
+                    },
+                    "newProductList": {
+                      "description": "获取新品推荐",
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "required": [
+                          "id",
+                          "name",
+                          "productSn",
+                          "categoryId",
+                          "categoryIds",
+                          "categoryName",
+                          "brandId",
+                          "brandName",
+                          "unit",
+                          "weight",
+                          "keywords",
+                          "brief",
+                          "description",
+                          "albumPics",
+                          "mainPic",
+                          "priceRange",
+                          "publishStatus",
+                          "newStatus",
+                          "recommendStatus",
+                          "verifyStatus",
+                          "previewStatus",
+                          "sort",
+                          "newStatusSort",
+                          "recommendStatusSort",
+                          "sales",
+                          "stock",
+                          "lowStock",
+                          "promotionType",
+                          "detailTitle",
+                          "detailDesc",
+                          "detailHtml",
+                          "detailMobileHtml"
+                        ],
+                        "properties": {
+                          "albumPics": {
+                            "description": "画册图片，最多8张，以逗号分割",
+                            "type": "string"
+                          },
+                          "brandId": {
+                            "description": "品牌ID",
+                            "type": "integer"
+                          },
+                          "brandName": {
+                            "description": "品牌名称",
+                            "type": "string"
+                          },
+                          "brief": {
+                            "description": "简介",
+                            "type": "string"
+                          },
+                          "categoryId": {
+                            "description": "商品分类ID",
+                            "type": "integer"
+                          },
+                          "categoryIds": {
+                            "description": "商品分类ID集合",
+                            "type": "string"
+                          },
+                          "categoryName": {
+                            "description": "商品分类名称",
+                            "type": "string"
+                          },
+                          "description": {
+                            "description": "详细描述",
+                            "type": "string"
+                          },
+                          "detailDesc": {
+                            "description": "详情描述",
+                            "type": "string"
+                          },
+                          "detailHtml": {
+                            "description": "产品详情网页内容",
+                            "type": "string"
+                          },
+                          "detailMobileHtml": {
+                            "description": "移动端网页详情",
+                            "type": "string"
+                          },
+                          "detailTitle": {
+                            "description": "详情标题",
+                            "type": "string"
+                          },
+                          "id": {
+                            "description": "商品SpuId",
+                            "type": "integer"
+                          },
+                          "keywords": {
+                            "description": "关键词",
+                            "type": "string"
+                          },
+                          "lowStock": {
+                            "description": "预警库存",
+                            "type": "integer"
+                          },
+                          "mainPic": {
+                            "description": "主图",
+                            "type": "string"
+                          },
+                          "name": {
+                            "description": "商品名称",
+                            "type": "string"
+                          },
+                          "newStatus": {
+                            "description": "新品状态:0-\u003e不是新品；1-\u003e新品",
+                            "type": "integer"
+                          },
+                          "newStatusSort": {
+                            "description": "新品排序",
+                            "type": "integer"
+                          },
+                          "previewStatus": {
+                            "description": "是否为预告商品：0-\u003e不是；1-\u003e是",
+                            "type": "integer"
+                          },
+                          "priceRange": {
+                            "description": "价格区间",
+                            "type": "string"
+                          },
+                          "productSn": {
+                            "description": "商品货号",
+                            "type": "string"
+                          },
+                          "promotionType": {
+                            "description": "促销类型：0-\u003e没有促销使用原价;1-\u003e使用促销价；2-\u003e使用会员价；3-\u003e使用阶梯价格；4-\u003e使用满减价格；5-\u003e秒杀",
+                            "type": "integer"
+                          },
+                          "publishStatus": {
+                            "description": "上架状态：0-下架，1-上架",
+                            "type": "integer"
+                          },
+                          "recommendStatus": {
+                            "description": "推荐状态；0-\u003e不推荐；1-\u003e推荐",
+                            "type": "integer"
+                          },
+                          "recommendStatusSort": {
+                            "description": "推荐排序",
+                            "type": "integer"
+                          },
+                          "sales": {
+                            "description": "销量",
+                            "type": "integer"
+                          },
+                          "sort": {
+                            "description": "排序",
+                            "type": "integer"
+                          },
+                          "stock": {
+                            "description": "库存",
+                            "type": "integer"
+                          },
+                          "unit": {
+                            "description": "单位",
+                            "type": "string"
+                          },
+                          "verifyStatus": {
+                            "description": "审核状态：0-\u003e未审核；1-\u003e审核通过",
+                            "type": "integer"
+                          },
+                          "weight": {
+                            "description": "重量(kg)",
+                            "type": "number"
+                          }
+                        }
+                      }
+                    },
+                    "subjectList": {
+                      "description": "获取推荐专题",
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "required": [
+                          "id",
+                          "categoryId",
+                          "title",
+                          "pic",
+                          "productCount",
+                          "recommendStatus",
+                          "collectCount",
+                          "readCount",
+                          "commentCount",
+                          "albumPics",
+                          "description",
+                          "showStatus",
+                          "content",
+                          "forwardCount",
+                          "categoryName",
+                          "sort"
+                        ],
+                        "properties": {
+                          "albumPics": {
+                            "description": "画册图片用逗号分割",
+                            "type": "string"
+                          },
+                          "categoryId": {
+                            "description": "专题分类id",
+                            "type": "integer"
+                          },
+                          "categoryName": {
+                            "description": "专题分类名称",
+                            "type": "string"
+                          },
+                          "collectCount": {
+                            "description": "收藏数",
+                            "type": "integer"
+                          },
+                          "commentCount": {
+                            "description": "评论数",
+                            "type": "integer"
+                          },
+                          "content": {
+                            "description": "专题内容",
+                            "type": "string"
+                          },
+                          "description": {
+                            "description": "专题内容",
+                            "type": "string"
+                          },
+                          "forwardCount": {
+                            "description": "转发数",
+                            "type": "integer"
+                          },
+                          "id": {
+                            "description": "专题id",
+                            "type": "integer"
+                          },
+                          "pic": {
+                            "description": "专题主图",
+                            "type": "string"
+                          },
+                          "productCount": {
+                            "description": "关联产品数量",
+                            "type": "integer"
+                          },
+                          "readCount": {
+                            "description": "阅读数",
+                            "type": "integer"
+                          },
+                          "recommendStatus": {
+                            "description": "推荐状态：0-\u003e不推荐；1-\u003e推荐",
+                            "type": "integer"
+                          },
+                          "showStatus": {
+                            "description": "显示状态：0-\u003e不显示；1-\u003e显示",
+                            "type": "integer"
+                          },
+                          "sort": {
+                            "description": "排序",
+                            "type": "integer"
+                          },
+                          "title": {
+                            "description": "专题标题",
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "apiKey": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
+    },
+    "petstore_auth": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "http://swagger.io/api/oauth/dialog",
+      "scopes": {
+        "read:pets": "read your pets",
+        "write:pets": "modify pets in your account"
+      }
+    }
+  },
+  "x-date": "2025-07-08 11:19:59",
+  "x-description": "This is a goctl generated swagger file.",
+  "x-github": "https://github.com/zeromicro/go-zero",
+  "x-go-zero-doc": "https://go-zero.dev/",
+  "x-goctl-version": "1.8.4"
+}

@@ -89,6 +89,8 @@ type (
 	middleware: CheckUrl
 	group:      ums/member_tag
 	prefix:     /api/ums/tag
+	tags: "用户标签管理"
+	authType: apiKey
 )
 service admin-api {
 	// 添加用户标签

@@ -87,6 +87,8 @@ type (
 	middleware: CheckUrl
 	group:      cms/subject_category
 	prefix:     /api/cms/subjectCategory
+	tags: "专题分类管理"
+	authType: apiKey
 )
 service admin-api {
 	// 添加专题分类表

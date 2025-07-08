@@ -41,9 +41,11 @@ type ReadHistoryList {
 }
 
 @server (
-	jwt:    Auth
-	group:  member/history
-	prefix: /api/member
+	jwt:      Auth
+	group:    member/history
+	prefix:   /api/member
+	tags:     "浏览记录管理"
+	authType: apiKey
 )
 service front-api {
 	//创建浏览记录

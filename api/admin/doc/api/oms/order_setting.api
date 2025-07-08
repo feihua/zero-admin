@@ -97,6 +97,8 @@ type (
 	middleware: CheckUrl
 	group:      oms/order_setting
 	prefix:     /api/oms/setting
+	tags: "订单设置管理"
+	authType: apiKey
 )
 service admin-api {
 	// 添加订单设置

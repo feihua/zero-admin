@@ -1,0 +1,1826 @@
+{
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "schemes": [
+    "http"
+  ],
+  "swagger": "2.0",
+  "info": {
+    "description": "内容管理相关接口",
+    "title": "内容管理 API",
+    "version": "v1"
+  },
+  "basePath": "/",
+  "paths": {
+    "/api/cms/prefrenceArea/addPreferredArea": {
+      "post": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "优选专区管理"
+        ],
+        "summary": "AddPreferredArea",
+        "operationId": "cms/PrefrenceAreaAddPreferredArea",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": [
+                "name",
+                "subTitle",
+                "pic",
+                "sort",
+                "showStatus"
+              ],
+              "properties": {
+                "name": {
+                  "description": "专区名称",
+                  "type": "string"
+                },
+                "pic": {
+                  "description": "展示图片",
+                  "type": "string"
+                },
+                "showStatus": {
+                  "description": "显示状态：0-\u003e不显示；1-\u003e显示",
+                  "type": "integer",
+                  "default": 2,
+                  "example": 2
+                },
+                "sort": {
+                  "description": "排序",
+                  "type": "integer"
+                },
+                "subTitle": {
+                  "description": "子标题",
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/cms/prefrenceArea/deletePreferredArea": {
+      "get": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "优选专区管理"
+        ],
+        "summary": "DeletePreferredArea",
+        "operationId": "cms/PrefrenceAreaDeletePreferredArea",
+        "parameters": [
+          {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            },
+            "name": "ids",
+            "in": "query",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/cms/prefrenceArea/queryPreferredAreaDetail": {
+      "get": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "优选专区管理"
+        ],
+        "summary": "QueryPreferredAreaDetail",
+        "operationId": "cms/PrefrenceAreaQueryPreferredAreaDetail",
+        "parameters": [
+          {
+            "type": "integer",
+            "name": "id",
+            "in": "query",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "data": {
+                  "type": "object",
+                  "required": [
+                    "id",
+                    "name",
+                    "subTitle",
+                    "pic",
+                    "sort",
+                    "showStatus",
+                    "createBy",
+                    "createTime",
+                    "updateBy",
+                    "updateTime"
+                  ],
+                  "properties": {
+                    "createBy": {
+                      "description": "创建者",
+                      "type": "string"
+                    },
+                    "createTime": {
+                      "description": "创建时间",
+                      "type": "string"
+                    },
+                    "id": {
+                      "description": "主键ID",
+                      "type": "integer"
+                    },
+                    "name": {
+                      "description": "专区名称",
+                      "type": "string"
+                    },
+                    "pic": {
+                      "description": "展示图片",
+                      "type": "string"
+                    },
+                    "showStatus": {
+                      "description": "显示状态：0-\u003e不显示；1-\u003e显示",
+                      "type": "integer"
+                    },
+                    "sort": {
+                      "description": "排序",
+                      "type": "integer"
+                    },
+                    "subTitle": {
+                      "description": "子标题",
+                      "type": "string"
+                    },
+                    "updateBy": {
+                      "description": "更新者",
+                      "type": "string"
+                    },
+                    "updateTime": {
+                      "description": "更新时间",
+                      "type": "string"
+                    }
+                  }
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/cms/prefrenceArea/queryPreferredAreaList": {
+      "get": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "优选专区管理"
+        ],
+        "summary": "QueryPreferredAreaList",
+        "operationId": "cms/PrefrenceAreaQueryPreferredAreaList",
+        "parameters": [
+          {
+            "type": "integer",
+            "default": 1,
+            "description": "第几页",
+            "name": "current",
+            "in": "query",
+            "required": true
+          },
+          {
+            "type": "integer",
+            "default": 20,
+            "description": "每页的数量",
+            "name": "pageSize",
+            "in": "query",
+            "required": true
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": [
+                "showStatus"
+              ],
+              "properties": {
+                "name": {
+                  "description": "专区名称",
+                  "type": "string"
+                },
+                "pic": {
+                  "description": "展示图片",
+                  "type": "string"
+                },
+                "showStatus": {
+                  "description": "显示状态：0-\u003e不显示；1-\u003e显示",
+                  "type": "integer",
+                  "default": 2,
+                  "example": 2
+                },
+                "subTitle": {
+                  "description": "子标题",
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "current": {
+                  "type": "integer",
+                  "default": 1,
+                  "example": 1
+                },
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "required": [
+                      "id",
+                      "name",
+                      "subTitle",
+                      "pic",
+                      "sort",
+                      "showStatus",
+                      "createBy",
+                      "createTime",
+                      "updateBy",
+                      "updateTime"
+                    ],
+                    "properties": {
+                      "createBy": {
+                        "description": "创建者",
+                        "type": "string"
+                      },
+                      "createTime": {
+                        "description": "创建时间",
+                        "type": "string"
+                      },
+                      "id": {
+                        "description": "主键ID",
+                        "type": "integer"
+                      },
+                      "name": {
+                        "description": "专区名称",
+                        "type": "string"
+                      },
+                      "pic": {
+                        "description": "展示图片",
+                        "type": "string"
+                      },
+                      "showStatus": {
+                        "description": "显示状态：0-\u003e不显示；1-\u003e显示",
+                        "type": "integer"
+                      },
+                      "sort": {
+                        "description": "排序",
+                        "type": "integer"
+                      },
+                      "subTitle": {
+                        "description": "子标题",
+                        "type": "string"
+                      },
+                      "updateBy": {
+                        "description": "更新者",
+                        "type": "string"
+                      },
+                      "updateTime": {
+                        "description": "更新时间",
+                        "type": "string"
+                      }
+                    }
+                  }
+                },
+                "message": {
+                  "type": "string"
+                },
+                "pageSize": {
+                  "type": "integer",
+                  "default": 20,
+                  "example": 20
+                },
+                "success": {
+                  "type": "boolean"
+                },
+                "total": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/cms/prefrenceArea/updatePreferredArea": {
+      "post": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "优选专区管理"
+        ],
+        "summary": "UpdatePreferredArea",
+        "operationId": "cms/PrefrenceAreaUpdatePreferredArea",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": [
+                "id",
+                "name",
+                "subTitle",
+                "pic",
+                "sort",
+                "showStatus"
+              ],
+              "properties": {
+                "id": {
+                  "description": "主键ID",
+                  "type": "integer"
+                },
+                "name": {
+                  "description": "专区名称",
+                  "type": "string"
+                },
+                "pic": {
+                  "description": "展示图片",
+                  "type": "string"
+                },
+                "showStatus": {
+                  "description": "显示状态：0-\u003e不显示；1-\u003e显示",
+                  "type": "integer",
+                  "default": 2,
+                  "example": 2
+                },
+                "sort": {
+                  "description": "排序",
+                  "type": "integer"
+                },
+                "subTitle": {
+                  "description": "子标题",
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/cms/prefrenceArea/updatePreferredAreaStatus": {
+      "post": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "优选专区管理"
+        ],
+        "summary": "UpdatePreferredAreaStatus",
+        "operationId": "cms/PrefrenceAreaUpdatePreferredAreaStatus",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": [
+                "ids",
+                "showStatus"
+              ],
+              "properties": {
+                "ids": {
+                  "description": "主键ID",
+                  "type": "array",
+                  "items": {
+                    "type": "integer"
+                  }
+                },
+                "showStatus": {
+                  "description": "显示状态：0-\u003e不显示；1-\u003e显示",
+                  "type": "integer",
+                  "default": 2,
+                  "example": 2
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/cms/subject/addSubject": {
+      "post": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "专题管理"
+        ],
+        "summary": "AddSubject",
+        "operationId": "cms/SubjectAddSubject",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": [
+                "categoryId",
+                "title",
+                "pic",
+                "productCount",
+                "recommendStatus",
+                "collectCount",
+                "readCount",
+                "commentCount",
+                "albumPics",
+                "description",
+                "showStatus",
+                "content",
+                "forwardCount",
+                "categoryName"
+              ],
+              "properties": {
+                "albumPics": {
+                  "description": "画册图片用逗号分割",
+                  "type": "string"
+                },
+                "categoryId": {
+                  "description": "专题分类id",
+                  "type": "integer"
+                },
+                "categoryName": {
+                  "description": "专题分类名称",
+                  "type": "string"
+                },
+                "collectCount": {
+                  "description": "收藏数",
+                  "type": "integer"
+                },
+                "commentCount": {
+                  "description": "评论数",
+                  "type": "integer"
+                },
+                "content": {
+                  "description": "专题内容",
+                  "type": "string"
+                },
+                "description": {
+                  "description": "专题内容",
+                  "type": "string"
+                },
+                "forwardCount": {
+                  "description": "转发数",
+                  "type": "integer"
+                },
+                "pic": {
+                  "description": "专题主图",
+                  "type": "string"
+                },
+                "productCount": {
+                  "description": "关联产品数量",
+                  "type": "integer"
+                },
+                "readCount": {
+                  "description": "阅读数",
+                  "type": "integer"
+                },
+                "recommendStatus": {
+                  "description": "推荐状态：0-\u003e不推荐；1-\u003e推荐",
+                  "type": "integer",
+                  "default": 2,
+                  "example": 2
+                },
+                "showStatus": {
+                  "description": "显示状态：0-\u003e不显示；1-\u003e显示",
+                  "type": "integer",
+                  "default": 2,
+                  "example": 2
+                },
+                "title": {
+                  "description": "专题标题",
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/cms/subject/deleteSubject": {
+      "get": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "专题管理"
+        ],
+        "summary": "DeleteSubject",
+        "operationId": "cms/SubjectDeleteSubject",
+        "parameters": [
+          {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            },
+            "name": "ids",
+            "in": "query",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/cms/subject/querySubjectDetail": {
+      "get": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "专题管理"
+        ],
+        "summary": "QuerySubjectDetail",
+        "operationId": "cms/SubjectQuerySubjectDetail",
+        "parameters": [
+          {
+            "type": "integer",
+            "name": "id",
+            "in": "query",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "data": {
+                  "type": "object",
+                  "required": [
+                    "id",
+                    "categoryId",
+                    "title",
+                    "pic",
+                    "productCount",
+                    "recommendStatus",
+                    "collectCount",
+                    "readCount",
+                    "commentCount",
+                    "albumPics",
+                    "description",
+                    "showStatus",
+                    "content",
+                    "forwardCount",
+                    "categoryName",
+                    "createBy",
+                    "createTime",
+                    "updateBy",
+                    "updateTime"
+                  ],
+                  "properties": {
+                    "albumPics": {
+                      "description": "画册图片用逗号分割",
+                      "type": "string"
+                    },
+                    "categoryId": {
+                      "description": "专题分类id",
+                      "type": "integer"
+                    },
+                    "categoryName": {
+                      "description": "专题分类名称",
+                      "type": "string"
+                    },
+                    "collectCount": {
+                      "description": "收藏数",
+                      "type": "integer"
+                    },
+                    "commentCount": {
+                      "description": "评论数",
+                      "type": "integer"
+                    },
+                    "content": {
+                      "description": "专题内容",
+                      "type": "string"
+                    },
+                    "createBy": {
+                      "description": "创建者",
+                      "type": "string"
+                    },
+                    "createTime": {
+                      "description": "创建时间",
+                      "type": "string"
+                    },
+                    "description": {
+                      "description": "专题内容",
+                      "type": "string"
+                    },
+                    "forwardCount": {
+                      "description": "转发数",
+                      "type": "integer"
+                    },
+                    "id": {
+                      "description": "专题id",
+                      "type": "integer"
+                    },
+                    "pic": {
+                      "description": "专题主图",
+                      "type": "string"
+                    },
+                    "productCount": {
+                      "description": "关联产品数量",
+                      "type": "integer"
+                    },
+                    "readCount": {
+                      "description": "阅读数",
+                      "type": "integer"
+                    },
+                    "recommendStatus": {
+                      "description": "推荐状态：0-\u003e不推荐；1-\u003e推荐",
+                      "type": "integer"
+                    },
+                    "showStatus": {
+                      "description": "显示状态：0-\u003e不显示；1-\u003e显示",
+                      "type": "integer"
+                    },
+                    "title": {
+                      "description": "专题标题",
+                      "type": "string"
+                    },
+                    "updateBy": {
+                      "description": "更新者",
+                      "type": "string"
+                    },
+                    "updateTime": {
+                      "description": "更新时间",
+                      "type": "string"
+                    }
+                  }
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/cms/subject/querySubjectList": {
+      "get": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "专题管理"
+        ],
+        "summary": "QuerySubjectList",
+        "operationId": "cms/SubjectQuerySubjectList",
+        "parameters": [
+          {
+            "type": "integer",
+            "default": 1,
+            "description": "第几页",
+            "name": "current",
+            "in": "query",
+            "required": true
+          },
+          {
+            "type": "integer",
+            "default": 20,
+            "description": "每页的数量",
+            "name": "pageSize",
+            "in": "query",
+            "required": true
+          },
+          {
+            "type": "integer",
+            "default": 2,
+            "description": "显示状态：0-\u003e不显示；1-\u003e显示",
+            "name": "showStatus",
+            "in": "query",
+            "required": true
+          },
+          {
+            "type": "string",
+            "description": "专题标题",
+            "name": "title",
+            "in": "query",
+            "allowEmptyValue": true
+          },
+          {
+            "type": "integer",
+            "default": 2,
+            "description": "//推荐状态：0-\u003e不推荐；1-\u003e推荐",
+            "name": "recommendStatus",
+            "in": "query",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "current": {
+                  "type": "integer",
+                  "default": 1,
+                  "example": 1
+                },
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "required": [
+                      "id",
+                      "categoryId",
+                      "title",
+                      "pic",
+                      "productCount",
+                      "recommendStatus",
+                      "collectCount",
+                      "readCount",
+                      "commentCount",
+                      "albumPics",
+                      "description",
+                      "showStatus",
+                      "content",
+                      "forwardCount",
+                      "categoryName",
+                      "createBy",
+                      "createTime",
+                      "updateBy",
+                      "updateTime"
+                    ],
+                    "properties": {
+                      "albumPics": {
+                        "description": "画册图片用逗号分割",
+                        "type": "string"
+                      },
+                      "categoryId": {
+                        "description": "专题分类id",
+                        "type": "integer"
+                      },
+                      "categoryName": {
+                        "description": "专题分类名称",
+                        "type": "string"
+                      },
+                      "collectCount": {
+                        "description": "收藏数",
+                        "type": "integer"
+                      },
+                      "commentCount": {
+                        "description": "评论数",
+                        "type": "integer"
+                      },
+                      "content": {
+                        "description": "专题内容",
+                        "type": "string"
+                      },
+                      "createBy": {
+                        "description": "创建者",
+                        "type": "string"
+                      },
+                      "createTime": {
+                        "description": "创建时间",
+                        "type": "string"
+                      },
+                      "description": {
+                        "description": "专题内容",
+                        "type": "string"
+                      },
+                      "forwardCount": {
+                        "description": "转发数",
+                        "type": "integer"
+                      },
+                      "id": {
+                        "description": "专题id",
+                        "type": "integer"
+                      },
+                      "pic": {
+                        "description": "专题主图",
+                        "type": "string"
+                      },
+                      "productCount": {
+                        "description": "关联产品数量",
+                        "type": "integer"
+                      },
+                      "readCount": {
+                        "description": "阅读数",
+                        "type": "integer"
+                      },
+                      "recommendStatus": {
+                        "description": "推荐状态：0-\u003e不推荐；1-\u003e推荐",
+                        "type": "integer"
+                      },
+                      "showStatus": {
+                        "description": "显示状态：0-\u003e不显示；1-\u003e显示",
+                        "type": "integer"
+                      },
+                      "title": {
+                        "description": "专题标题",
+                        "type": "string"
+                      },
+                      "updateBy": {
+                        "description": "更新者",
+                        "type": "string"
+                      },
+                      "updateTime": {
+                        "description": "更新时间",
+                        "type": "string"
+                      }
+                    }
+                  }
+                },
+                "message": {
+                  "type": "string"
+                },
+                "pageSize": {
+                  "type": "integer",
+                  "default": 20,
+                  "example": 20
+                },
+                "success": {
+                  "type": "boolean"
+                },
+                "total": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/cms/subject/updateSubject": {
+      "post": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "专题管理"
+        ],
+        "summary": "UpdateSubject",
+        "operationId": "cms/SubjectUpdateSubject",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": [
+                "id",
+                "categoryId",
+                "title",
+                "pic",
+                "productCount",
+                "recommendStatus",
+                "collectCount",
+                "readCount",
+                "commentCount",
+                "albumPics",
+                "description",
+                "showStatus",
+                "content",
+                "forwardCount",
+                "categoryName"
+              ],
+              "properties": {
+                "albumPics": {
+                  "description": "画册图片用逗号分割",
+                  "type": "string"
+                },
+                "categoryId": {
+                  "description": "专题分类id",
+                  "type": "integer"
+                },
+                "categoryName": {
+                  "description": "专题分类名称",
+                  "type": "string"
+                },
+                "collectCount": {
+                  "description": "收藏数",
+                  "type": "integer"
+                },
+                "commentCount": {
+                  "description": "评论数",
+                  "type": "integer"
+                },
+                "content": {
+                  "description": "专题内容",
+                  "type": "string"
+                },
+                "description": {
+                  "description": "专题内容",
+                  "type": "string"
+                },
+                "forwardCount": {
+                  "description": "转发数",
+                  "type": "integer"
+                },
+                "id": {
+                  "description": "专题id",
+                  "type": "integer"
+                },
+                "pic": {
+                  "description": "专题主图",
+                  "type": "string"
+                },
+                "productCount": {
+                  "description": "关联产品数量",
+                  "type": "integer"
+                },
+                "readCount": {
+                  "description": "阅读数",
+                  "type": "integer"
+                },
+                "recommendStatus": {
+                  "description": "推荐状态：0-\u003e不推荐；1-\u003e推荐",
+                  "type": "integer",
+                  "default": 2,
+                  "example": 2
+                },
+                "showStatus": {
+                  "description": "显示状态：0-\u003e不显示；1-\u003e显示",
+                  "type": "integer",
+                  "default": 2,
+                  "example": 2
+                },
+                "title": {
+                  "description": "专题标题",
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/cms/subject/updateSubjectStatus": {
+      "post": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "专题管理"
+        ],
+        "summary": "UpdateSubjectStatus",
+        "operationId": "cms/SubjectUpdateSubjectStatus",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": [
+                "ids",
+                "recommendStatus",
+                "showStatus"
+              ],
+              "properties": {
+                "ids": {
+                  "type": "array",
+                  "items": {
+                    "type": "integer"
+                  }
+                },
+                "recommendStatus": {
+                  "description": "推荐状态：0-\u003e不推荐；1-\u003e推荐",
+                  "type": "integer"
+                },
+                "showStatus": {
+                  "description": "显示状态：0-\u003e不显示；1-\u003e显示",
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/cms/subjectCategory/addSubjectCategory": {
+      "post": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "专题分类管理"
+        ],
+        "summary": "AddSubjectCategory",
+        "operationId": "cms/SubjectCategoryAddSubjectCategory",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": [
+                "name",
+                "icon",
+                "showStatus",
+                "sort"
+              ],
+              "properties": {
+                "icon": {
+                  "description": "分类图标",
+                  "type": "string"
+                },
+                "name": {
+                  "description": "专题分类名称",
+                  "type": "string"
+                },
+                "showStatus": {
+                  "description": "显示状态：0-\u003e不显示；1-\u003e显示",
+                  "type": "integer",
+                  "default": 2,
+                  "example": 2
+                },
+                "sort": {
+                  "description": "排序",
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/cms/subjectCategory/deleteSubjectCategory": {
+      "get": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "专题分类管理"
+        ],
+        "summary": "DeleteSubjectCategory",
+        "operationId": "cms/SubjectCategoryDeleteSubjectCategory",
+        "parameters": [
+          {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            },
+            "name": "ids",
+            "in": "query",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/cms/subjectCategory/querySubjectCategoryDetail": {
+      "get": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "专题分类管理"
+        ],
+        "summary": "QuerySubjectCategoryDetail",
+        "operationId": "cms/SubjectCategoryQuerySubjectCategoryDetail",
+        "parameters": [
+          {
+            "type": "integer",
+            "name": "id",
+            "in": "query",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "data": {
+                  "type": "object",
+                  "required": [
+                    "id",
+                    "name",
+                    "icon",
+                    "subjectCount",
+                    "showStatus",
+                    "sort",
+                    "createBy",
+                    "createTime",
+                    "updateBy",
+                    "updateTime"
+                  ],
+                  "properties": {
+                    "createBy": {
+                      "description": "创建者",
+                      "type": "string"
+                    },
+                    "createTime": {
+                      "description": "创建时间",
+                      "type": "string"
+                    },
+                    "icon": {
+                      "description": "分类图标",
+                      "type": "string"
+                    },
+                    "id": {
+                      "description": "主键ID",
+                      "type": "integer"
+                    },
+                    "name": {
+                      "description": "专题分类名称",
+                      "type": "string"
+                    },
+                    "showStatus": {
+                      "description": "显示状态：0-\u003e不显示；1-\u003e显示",
+                      "type": "integer"
+                    },
+                    "sort": {
+                      "description": "排序",
+                      "type": "integer"
+                    },
+                    "subjectCount": {
+                      "description": "专题数量",
+                      "type": "integer"
+                    },
+                    "updateBy": {
+                      "description": "更新者",
+                      "type": "string"
+                    },
+                    "updateTime": {
+                      "description": "更新时间",
+                      "type": "string"
+                    }
+                  }
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/cms/subjectCategory/querySubjectCategoryList": {
+      "get": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "专题分类管理"
+        ],
+        "summary": "QuerySubjectCategoryList",
+        "operationId": "cms/SubjectCategoryQuerySubjectCategoryList",
+        "parameters": [
+          {
+            "type": "integer",
+            "default": 1,
+            "description": "第几页",
+            "name": "current",
+            "in": "query",
+            "required": true
+          },
+          {
+            "type": "integer",
+            "default": 20,
+            "description": "每页的数量",
+            "name": "pageSize",
+            "in": "query",
+            "required": true
+          },
+          {
+            "type": "integer",
+            "default": 2,
+            "description": "显示状态：0-\u003e不显示；1-\u003e显示",
+            "name": "showStatus",
+            "in": "query",
+            "required": true
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "form": {
+                  "description": "专题分类名称",
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "current": {
+                  "type": "integer",
+                  "default": 1,
+                  "example": 1
+                },
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "required": [
+                      "id",
+                      "name",
+                      "icon",
+                      "subjectCount",
+                      "showStatus",
+                      "sort",
+                      "createBy",
+                      "createTime",
+                      "updateBy",
+                      "updateTime"
+                    ],
+                    "properties": {
+                      "createBy": {
+                        "description": "创建者",
+                        "type": "string"
+                      },
+                      "createTime": {
+                        "description": "创建时间",
+                        "type": "string"
+                      },
+                      "icon": {
+                        "description": "分类图标",
+                        "type": "string"
+                      },
+                      "id": {
+                        "description": "主键ID",
+                        "type": "integer"
+                      },
+                      "name": {
+                        "description": "专题分类名称",
+                        "type": "string"
+                      },
+                      "showStatus": {
+                        "description": "显示状态：0-\u003e不显示；1-\u003e显示",
+                        "type": "integer"
+                      },
+                      "sort": {
+                        "description": "排序",
+                        "type": "integer"
+                      },
+                      "subjectCount": {
+                        "description": "专题数量",
+                        "type": "integer"
+                      },
+                      "updateBy": {
+                        "description": "更新者",
+                        "type": "string"
+                      },
+                      "updateTime": {
+                        "description": "更新时间",
+                        "type": "string"
+                      }
+                    }
+                  }
+                },
+                "message": {
+                  "type": "string"
+                },
+                "pageSize": {
+                  "type": "integer",
+                  "default": 20,
+                  "example": 20
+                },
+                "success": {
+                  "type": "boolean"
+                },
+                "total": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/cms/subjectCategory/updateSubjectCategory": {
+      "post": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "专题分类管理"
+        ],
+        "summary": "UpdateSubjectCategory",
+        "operationId": "cms/SubjectCategoryUpdateSubjectCategory",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": [
+                "id",
+                "name",
+                "icon",
+                "showStatus",
+                "sort"
+              ],
+              "properties": {
+                "icon": {
+                  "description": "分类图标",
+                  "type": "string"
+                },
+                "id": {
+                  "description": "主键ID",
+                  "type": "integer"
+                },
+                "name": {
+                  "description": "专题分类名称",
+                  "type": "string"
+                },
+                "showStatus": {
+                  "description": "显示状态：0-\u003e不显示；1-\u003e显示",
+                  "type": "integer",
+                  "default": 2,
+                  "example": 2
+                },
+                "sort": {
+                  "description": "排序",
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/cms/subjectCategory/updateSubjectCategoryStatus": {
+      "post": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "专题分类管理"
+        ],
+        "summary": "UpdateSubjectCategoryStatus",
+        "operationId": "cms/SubjectCategoryUpdateSubjectCategoryStatus",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": [
+                "ids",
+                "showStatus"
+              ],
+              "properties": {
+                "ids": {
+                  "description": "主键ID",
+                  "type": "array",
+                  "items": {
+                    "type": "integer"
+                  }
+                },
+                "showStatus": {
+                  "description": "显示状态：0-\u003e不显示；1-\u003e显示",
+                  "type": "integer",
+                  "default": 2,
+                  "example": 2
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "apiKey": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
+    },
+    "petstore_auth": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "http://swagger.io/api/oauth/dialog",
+      "scopes": {
+        "read:pets": "read your pets",
+        "write:pets": "modify pets in your account"
+      }
+    }
+  },
+  "x-date": "2025-07-08 11:19:58",
+  "x-description": "This is a goctl generated swagger file.",
+  "x-github": "https://github.com/zeromicro/go-zero",
+  "x-go-zero-doc": "https://go-zero.dev/",
+  "x-goctl-version": "1.8.4"
+}

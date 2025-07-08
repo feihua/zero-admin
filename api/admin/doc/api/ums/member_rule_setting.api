@@ -89,6 +89,8 @@ type (
 	middleware: CheckUrl
 	group:      ums/member_rule_setting
 	prefix:     /api/ums/ruleSetting
+	tags: "会员积分成长规则管理"
+	authType: apiKey
 )
 service admin-api {
 	// 添加会员积分成长规则

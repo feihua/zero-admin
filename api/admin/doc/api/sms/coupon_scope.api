@@ -74,6 +74,8 @@ type (
 	middleware: CheckUrl
 	group:      sms/coupon_scope
 	prefix:     /api/sms/couponScope
+	tags: "优惠券使用范围管理"
+	authType: apiKey
 )
 service admin-api {
 	// 添加优惠券使用范围

@@ -121,6 +121,8 @@ type (
 	middleware: CheckUrl
 	group:      ums/member_task
 	prefix:     /api/ums/task
+	tags: "会员任务管理"
+	authType: apiKey
 )
 service admin-api {
 	// 添加会员任务

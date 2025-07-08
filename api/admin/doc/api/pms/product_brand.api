@@ -106,6 +106,8 @@ type (
 	middleware: CheckUrl
 	group:      pms/product_brand
 	prefix:     /api/pms/brand
+	tags: "商品品牌管理"
+	authType: apiKey
 )
 service admin-api {
 	// 添加商品品牌

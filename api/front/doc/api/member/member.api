@@ -84,8 +84,10 @@ type MemberResp {
 }
 
 @server (
-	group:  member/member
-	prefix: /api/member
+	group:    member/member
+	prefix:   /api/member
+	tags:     "用户管理"
+	authType: apiKey
 )
 service front-api {
 	// 会员注册
@@ -98,9 +100,11 @@ service front-api {
 }
 
 @server (
-	jwt:    Auth
-	group:  member/member
-	prefix: /api/member
+	jwt:      Auth
+	group:    member/member
+	prefix:   /api/member
+	tags:     "会员管理"
+	authType: apiKey
 )
 service front-api {
 	// 获取会员个人信息

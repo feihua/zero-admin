@@ -126,6 +126,8 @@ type (
 	middleware: CheckUrl
 	group:      oms/order_main
 	prefix:     /api/oms/order
+	tags: "订单管理"
+	authType: apiKey
 )
 service admin-api {
 	//订单发货

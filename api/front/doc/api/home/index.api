@@ -1,0 +1,10 @@
+import "./home.api"
+
+info (
+	title:                       "首页数据 API"
+	description:                 "首页数据相关接口"
+	schemes:                     "http"
+	version:                     "v1"
+	securityDefinitionsFromJson: `{"apiKey":{"type":"apiKey","name":"Authorization","in":"header"},"petstore_auth":{"type":"oauth2","authorizationUrl":"http://swagger.io/api/oauth/dialog","flow":"implicit","scopes":{"write:pets":"modify pets in your account","read:pets":"read your pets"}}}`
+)
+

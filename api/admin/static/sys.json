@@ -1,0 +1,6085 @@
+{
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "schemes": [
+    "http"
+  ],
+  "swagger": "2.0",
+  "info": {
+    "description": "系统管理相关接口",
+    "title": "系统管理 API",
+    "version": "v1"
+  },
+  "basePath": "/",
+  "paths": {
+    "/api/sys/dept/addDept": {
+      "post": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "部门管理"
+        ],
+        "summary": "AddDept",
+        "operationId": "sys/DeptAddDept",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": [
+                "parentId",
+                "deptName",
+                "sort",
+                "leader",
+                "phone",
+                "email",
+                "status"
+              ],
+              "properties": {
+                "deptName": {
+                  "description": "部门名称",
+                  "type": "string"
+                },
+                "email": {
+                  "description": "邮箱",
+                  "type": "string"
+                },
+                "leader": {
+                  "description": "负责人",
+                  "type": "string"
+                },
+                "parentId": {
+                  "description": "上级部门id",
+                  "type": "integer"
+                },
+                "phone": {
+                  "description": "联系电话",
+                  "type": "string"
+                },
+                "remark": {
+                  "description": "备注信息",
+                  "type": "string"
+                },
+                "sort": {
+                  "description": "显示顺序",
+                  "type": "integer"
+                },
+                "status": {
+                  "description": "部门状态（0：停用，1:正常）",
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/sys/dept/deleteDept": {
+      "get": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "部门管理"
+        ],
+        "summary": "DeleteDept",
+        "operationId": "sys/DeptDeleteDept",
+        "parameters": [
+          {
+            "type": "integer",
+            "name": "id",
+            "in": "query",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/sys/dept/queryDeptDetail": {
+      "get": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "部门管理"
+        ],
+        "summary": "QueryDeptDetail",
+        "operationId": "sys/DeptQueryDeptDetail",
+        "parameters": [
+          {
+            "type": "integer",
+            "name": "id",
+            "in": "query",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "data": {
+                  "type": "object",
+                  "required": [
+                    "id",
+                    "parentId",
+                    "ancestors",
+                    "deptName",
+                    "sort",
+                    "leader",
+                    "phone",
+                    "email",
+                    "status",
+                    "delFlag",
+                    "remark",
+                    "createBy",
+                    "createTime",
+                    "updateBy",
+                    "updateTime"
+                  ],
+                  "properties": {
+                    "ancestors": {
+                      "description": "祖级列表",
+                      "type": "string"
+                    },
+                    "createBy": {
+                      "description": "创建者",
+                      "type": "string"
+                    },
+                    "createTime": {
+                      "description": "创建时间",
+                      "type": "string"
+                    },
+                    "delFlag": {
+                      "description": "删除标志（0代表删除 1代表存在）",
+                      "type": "integer"
+                    },
+                    "deptName": {
+                      "description": "部门名称",
+                      "type": "string"
+                    },
+                    "email": {
+                      "description": "邮箱",
+                      "type": "string"
+                    },
+                    "id": {
+                      "description": "部门id",
+                      "type": "integer"
+                    },
+                    "leader": {
+                      "description": "负责人",
+                      "type": "string"
+                    },
+                    "parentId": {
+                      "description": "上级部门id",
+                      "type": "integer"
+                    },
+                    "phone": {
+                      "description": "联系电话",
+                      "type": "string"
+                    },
+                    "remark": {
+                      "description": "备注信息",
+                      "type": "string"
+                    },
+                    "sort": {
+                      "description": "显示顺序",
+                      "type": "integer"
+                    },
+                    "status": {
+                      "description": "部门状态（0：停用，1:正常）",
+                      "type": "integer"
+                    },
+                    "updateBy": {
+                      "description": "更新者",
+                      "type": "string"
+                    },
+                    "updateTime": {
+                      "description": "更新时间",
+                      "type": "string"
+                    }
+                  }
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/sys/dept/queryDeptList": {
+      "get": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "部门管理"
+        ],
+        "summary": "QueryDeptList",
+        "operationId": "sys/DeptQueryDeptList",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "required": [
+                      "id",
+                      "parentId",
+                      "ancestors",
+                      "deptName",
+                      "sort",
+                      "leader",
+                      "phone",
+                      "email",
+                      "status",
+                      "delFlag",
+                      "remark",
+                      "createBy",
+                      "createTime",
+                      "updateBy",
+                      "updateTime"
+                    ],
+                    "properties": {
+                      "ancestors": {
+                        "description": "祖级列表",
+                        "type": "string"
+                      },
+                      "createBy": {
+                        "description": "创建者",
+                        "type": "string"
+                      },
+                      "createTime": {
+                        "description": "创建时间",
+                        "type": "string"
+                      },
+                      "delFlag": {
+                        "description": "删除标志（0代表删除 1代表存在）",
+                        "type": "integer"
+                      },
+                      "deptName": {
+                        "description": "部门名称",
+                        "type": "string"
+                      },
+                      "email": {
+                        "description": "邮箱",
+                        "type": "string"
+                      },
+                      "id": {
+                        "description": "部门id",
+                        "type": "integer"
+                      },
+                      "leader": {
+                        "description": "负责人",
+                        "type": "string"
+                      },
+                      "parentId": {
+                        "description": "上级部门id",
+                        "type": "integer"
+                      },
+                      "phone": {
+                        "description": "联系电话",
+                        "type": "string"
+                      },
+                      "remark": {
+                        "description": "备注信息",
+                        "type": "string"
+                      },
+                      "sort": {
+                        "description": "显示顺序",
+                        "type": "integer"
+                      },
+                      "status": {
+                        "description": "部门状态（0：停用，1:正常）",
+                        "type": "integer"
+                      },
+                      "updateBy": {
+                        "description": "更新者",
+                        "type": "string"
+                      },
+                      "updateTime": {
+                        "description": "更新时间",
+                        "type": "string"
+                      }
+                    }
+                  }
+                },
+                "message": {
+                  "type": "string"
+                },
+                "success": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/sys/dept/updateDept": {
+      "post": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "部门管理"
+        ],
+        "summary": "UpdateDept",
+        "operationId": "sys/DeptUpdateDept",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": [
+                "id",
+                "parentId",
+                "deptName",
+                "sort",
+                "leader",
+                "phone",
+                "email",
+                "status"
+              ],
+              "properties": {
+                "deptName": {
+                  "description": "部门名称",
+                  "type": "string"
+                },
+                "email": {
+                  "description": "邮箱",
+                  "type": "string"
+                },
+                "id": {
+                  "description": "部门id",
+                  "type": "integer"
+                },
+                "leader": {
+                  "description": "负责人",
+                  "type": "string"
+                },
+                "parentId": {
+                  "description": "上级部门id",
+                  "type": "integer"
+                },
+                "phone": {
+                  "description": "联系电话",
+                  "type": "string"
+                },
+                "remark": {
+                  "description": "备注信息",
+                  "type": "string"
+                },
+                "sort": {
+                  "description": "显示顺序",
+                  "type": "integer"
+                },
+                "status": {
+                  "description": "部门状态（0：停用，1:正常）",
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/sys/dept/updateDeptStatus": {
+      "post": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "部门管理"
+        ],
+        "summary": "UpdateDeptStatus",
+        "operationId": "sys/DeptUpdateDeptStatus",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": [
+                "id",
+                "status"
+              ],
+              "properties": {
+                "id": {
+                  "description": "部门id",
+                  "type": "integer"
+                },
+                "status": {
+                  "description": "部门状态（0：停用，1:正常）",
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/sys/dictItem/addDictItem": {
+      "post": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "字典数据管理"
+        ],
+        "summary": "AddDictItem",
+        "operationId": "sys/DictItemAddDictItem",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": [
+                "dictSort",
+                "dictLabel",
+                "dictValue",
+                "dictType",
+                "isDefault",
+                "status"
+              ],
+              "properties": {
+                "cssClass": {
+                  "description": "样式属性（其他样式扩展）",
+                  "type": "string"
+                },
+                "dictLabel": {
+                  "description": "字典标签",
+                  "type": "string"
+                },
+                "dictSort": {
+                  "description": "字典排序",
+                  "type": "integer"
+                },
+                "dictType": {
+                  "description": "字典类型",
+                  "type": "string"
+                },
+                "dictValue": {
+                  "description": "字典键值",
+                  "type": "string"
+                },
+                "isDefault": {
+                  "description": "是否默认（Y是 N否）",
+                  "type": "string"
+                },
+                "listClass": {
+                  "description": "表格回显样式",
+                  "type": "string"
+                },
+                "remark": {
+                  "description": "备注",
+                  "type": "string"
+                },
+                "status": {
+                  "description": "状态（0：停用，1:正常）",
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/sys/dictItem/deleteDictItem": {
+      "get": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "字典数据管理"
+        ],
+        "summary": "DeleteDictItem",
+        "operationId": "sys/DictItemDeleteDictItem",
+        "parameters": [
+          {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            },
+            "name": "ids",
+            "in": "query",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/sys/dictItem/queryDictItemDetail": {
+      "get": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "字典数据管理"
+        ],
+        "summary": "QueryDictItemDetail",
+        "operationId": "sys/DictItemQueryDictItemDetail",
+        "parameters": [
+          {
+            "type": "integer",
+            "name": "id",
+            "in": "query",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "data": {
+                  "type": "object",
+                  "required": [
+                    "id",
+                    "dictSort",
+                    "dictLabel",
+                    "dictValue",
+                    "dictType",
+                    "cssClass",
+                    "listClass",
+                    "isDefault",
+                    "status",
+                    "remark",
+                    "createBy",
+                    "createTime",
+                    "updateBy",
+                    "updateTime"
+                  ],
+                  "properties": {
+                    "createBy": {
+                      "description": "创建者",
+                      "type": "string"
+                    },
+                    "createTime": {
+                      "description": "创建时间",
+                      "type": "string"
+                    },
+                    "cssClass": {
+                      "description": "样式属性（其他样式扩展）",
+                      "type": "string"
+                    },
+                    "dictLabel": {
+                      "description": "字典标签",
+                      "type": "string"
+                    },
+                    "dictSort": {
+                      "description": "字典排序",
+                      "type": "integer"
+                    },
+                    "dictType": {
+                      "description": "字典类型",
+                      "type": "string"
+                    },
+                    "dictValue": {
+                      "description": "字典键值",
+                      "type": "string"
+                    },
+                    "id": {
+                      "description": "字典数据id",
+                      "type": "integer"
+                    },
+                    "isDefault": {
+                      "description": "是否默认（Y是 N否）",
+                      "type": "string"
+                    },
+                    "listClass": {
+                      "description": "表格回显样式",
+                      "type": "string"
+                    },
+                    "remark": {
+                      "description": "备注",
+                      "type": "string"
+                    },
+                    "status": {
+                      "description": "状态（0：停用，1:正常）",
+                      "type": "integer"
+                    },
+                    "updateBy": {
+                      "description": "更新者",
+                      "type": "string"
+                    },
+                    "updateTime": {
+                      "description": "更新时间",
+                      "type": "string"
+                    }
+                  }
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/sys/dictItem/queryDictItemList": {
+      "get": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "字典数据管理"
+        ],
+        "summary": "QueryDictItemList",
+        "operationId": "sys/DictItemQueryDictItemList",
+        "parameters": [
+          {
+            "type": "integer",
+            "default": 1,
+            "description": "第几页",
+            "name": "current",
+            "in": "query",
+            "required": true
+          },
+          {
+            "type": "integer",
+            "default": 20,
+            "description": "每页的数量",
+            "name": "pageSize",
+            "in": "query",
+            "required": true
+          },
+          {
+            "type": "string",
+            "description": "字典标签",
+            "name": "dictLabel",
+            "in": "query",
+            "allowEmptyValue": true
+          },
+          {
+            "type": "string",
+            "description": "字典类型",
+            "name": "dictType",
+            "in": "query",
+            "allowEmptyValue": true
+          },
+          {
+            "type": "integer",
+            "default": 2,
+            "description": "状态（0：停用，1:正常）",
+            "name": "status",
+            "in": "query",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "current": {
+                  "type": "integer",
+                  "default": 1,
+                  "example": 1
+                },
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "required": [
+                      "id",
+                      "dictSort",
+                      "dictLabel",
+                      "dictValue",
+                      "dictType",
+                      "cssClass",
+                      "listClass",
+                      "isDefault",
+                      "status",
+                      "remark",
+                      "createBy",
+                      "createTime",
+                      "updateBy",
+                      "updateTime"
+                    ],
+                    "properties": {
+                      "createBy": {
+                        "description": "创建者",
+                        "type": "string"
+                      },
+                      "createTime": {
+                        "description": "创建时间",
+                        "type": "string"
+                      },
+                      "cssClass": {
+                        "description": "样式属性（其他样式扩展）",
+                        "type": "string"
+                      },
+                      "dictLabel": {
+                        "description": "字典标签",
+                        "type": "string"
+                      },
+                      "dictSort": {
+                        "description": "字典排序",
+                        "type": "integer"
+                      },
+                      "dictType": {
+                        "description": "字典类型",
+                        "type": "string"
+                      },
+                      "dictValue": {
+                        "description": "字典键值",
+                        "type": "string"
+                      },
+                      "id": {
+                        "description": "字典数据id",
+                        "type": "integer"
+                      },
+                      "isDefault": {
+                        "description": "是否默认（Y是 N否）",
+                        "type": "string"
+                      },
+                      "listClass": {
+                        "description": "表格回显样式",
+                        "type": "string"
+                      },
+                      "remark": {
+                        "description": "备注",
+                        "type": "string"
+                      },
+                      "status": {
+                        "description": "状态（0：停用，1:正常）",
+                        "type": "integer"
+                      },
+                      "updateBy": {
+                        "description": "更新者",
+                        "type": "string"
+                      },
+                      "updateTime": {
+                        "description": "更新时间",
+                        "type": "string"
+                      }
+                    }
+                  }
+                },
+                "message": {
+                  "type": "string"
+                },
+                "pageSize": {
+                  "type": "integer",
+                  "default": 20,
+                  "example": 20
+                },
+                "success": {
+                  "type": "boolean"
+                },
+                "total": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/sys/dictItem/updateDictItem": {
+      "post": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "字典数据管理"
+        ],
+        "summary": "UpdateDictItem",
+        "operationId": "sys/DictItemUpdateDictItem",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": [
+                "id",
+                "dictSort",
+                "dictLabel",
+                "dictValue",
+                "dictType",
+                "isDefault",
+                "status"
+              ],
+              "properties": {
+                "cssClass": {
+                  "description": "样式属性（其他样式扩展）",
+                  "type": "string"
+                },
+                "dictLabel": {
+                  "description": "字典标签",
+                  "type": "string"
+                },
+                "dictSort": {
+                  "description": "字典排序",
+                  "type": "integer"
+                },
+                "dictType": {
+                  "description": "字典类型",
+                  "type": "string"
+                },
+                "dictValue": {
+                  "description": "字典键值",
+                  "type": "string"
+                },
+                "id": {
+                  "description": "字典数据id",
+                  "type": "integer"
+                },
+                "isDefault": {
+                  "description": "是否默认（Y是 N否）",
+                  "type": "string"
+                },
+                "listClass": {
+                  "description": "表格回显样式",
+                  "type": "string"
+                },
+                "remark": {
+                  "description": "备注",
+                  "type": "string"
+                },
+                "status": {
+                  "description": "状态（0：停用，1:正常）",
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/sys/dictItem/updateDictItemStatus": {
+      "post": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "字典数据管理"
+        ],
+        "summary": "UpdateDictItemStatus",
+        "operationId": "sys/DictItemUpdateDictItemStatus",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": [
+                "ids",
+                "status"
+              ],
+              "properties": {
+                "ids": {
+                  "description": "字典数据id",
+                  "type": "array",
+                  "items": {
+                    "type": "integer"
+                  }
+                },
+                "status": {
+                  "description": "状态（0：停用，1:正常）",
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/sys/dictType/addDictType": {
+      "post": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "字典类型管理"
+        ],
+        "summary": "AddDictType",
+        "operationId": "sys/DictTypeAddDictType",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": [
+                "dictName",
+                "dictType",
+                "status"
+              ],
+              "properties": {
+                "dictName": {
+                  "description": "字典名称",
+                  "type": "string"
+                },
+                "dictType": {
+                  "description": "字典类型",
+                  "type": "string"
+                },
+                "remark": {
+                  "description": "备注",
+                  "type": "string"
+                },
+                "status": {
+                  "description": "状态（0：停用，1:正常）",
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/sys/dictType/deleteDictType": {
+      "get": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "字典类型管理"
+        ],
+        "summary": "DeleteDictType",
+        "operationId": "sys/DictTypeDeleteDictType",
+        "parameters": [
+          {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            },
+            "name": "ids",
+            "in": "query",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/sys/dictType/queryDictTypeDetail": {
+      "get": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "字典类型管理"
+        ],
+        "summary": "QueryDictTypeDetail",
+        "operationId": "sys/DictTypeQueryDictTypeDetail",
+        "parameters": [
+          {
+            "type": "integer",
+            "name": "id",
+            "in": "query",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "data": {
+                  "type": "object",
+                  "required": [
+                    "id",
+                    "dictName",
+                    "dictType",
+                    "status",
+                    "remark",
+                    "createBy",
+                    "createTime",
+                    "updateBy",
+                    "updateTime"
+                  ],
+                  "properties": {
+                    "createBy": {
+                      "description": "创建者",
+                      "type": "string"
+                    },
+                    "createTime": {
+                      "description": "创建时间",
+                      "type": "string"
+                    },
+                    "dictName": {
+                      "description": "字典名称",
+                      "type": "string"
+                    },
+                    "dictType": {
+                      "description": "字典类型",
+                      "type": "string"
+                    },
+                    "id": {
+                      "description": "字典id",
+                      "type": "integer"
+                    },
+                    "remark": {
+                      "description": "备注",
+                      "type": "string"
+                    },
+                    "status": {
+                      "description": "状态（0：停用，1:正常）",
+                      "type": "integer"
+                    },
+                    "updateBy": {
+                      "description": "更新者",
+                      "type": "string"
+                    },
+                    "updateTime": {
+                      "description": "更新时间",
+                      "type": "string"
+                    }
+                  }
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/sys/dictType/queryDictTypeList": {
+      "get": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "字典类型管理"
+        ],
+        "summary": "QueryDictTypeList",
+        "operationId": "sys/DictTypeQueryDictTypeList",
+        "parameters": [
+          {
+            "type": "integer",
+            "default": 1,
+            "description": "第几页",
+            "name": "current",
+            "in": "query",
+            "required": true
+          },
+          {
+            "type": "integer",
+            "default": 20,
+            "description": "每页的数量",
+            "name": "pageSize",
+            "in": "query",
+            "required": true
+          },
+          {
+            "type": "string",
+            "description": "字典名称",
+            "name": "dictName",
+            "in": "query",
+            "allowEmptyValue": true
+          },
+          {
+            "type": "string",
+            "description": "字典类型",
+            "name": "dictType",
+            "in": "query",
+            "allowEmptyValue": true
+          },
+          {
+            "type": "integer",
+            "default": 2,
+            "description": "状态（0：停用，1:正常）",
+            "name": "status",
+            "in": "query",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "current": {
+                  "type": "integer",
+                  "default": 1,
+                  "example": 1
+                },
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "required": [
+                      "id",
+                      "dictName",
+                      "dictType",
+                      "status",
+                      "remark",
+                      "createBy",
+                      "createTime",
+                      "updateBy",
+                      "updateTime"
+                    ],
+                    "properties": {
+                      "createBy": {
+                        "description": "创建者",
+                        "type": "string"
+                      },
+                      "createTime": {
+                        "description": "创建时间",
+                        "type": "string"
+                      },
+                      "dictName": {
+                        "description": "字典名称",
+                        "type": "string"
+                      },
+                      "dictType": {
+                        "description": "字典类型",
+                        "type": "string"
+                      },
+                      "id": {
+                        "description": "字典id",
+                        "type": "integer"
+                      },
+                      "remark": {
+                        "description": "备注",
+                        "type": "string"
+                      },
+                      "status": {
+                        "description": "状态（0：停用，1:正常）",
+                        "type": "integer"
+                      },
+                      "updateBy": {
+                        "description": "更新者",
+                        "type": "string"
+                      },
+                      "updateTime": {
+                        "description": "更新时间",
+                        "type": "string"
+                      }
+                    }
+                  }
+                },
+                "message": {
+                  "type": "string"
+                },
+                "pageSize": {
+                  "type": "integer",
+                  "default": 20,
+                  "example": 20
+                },
+                "success": {
+                  "type": "boolean"
+                },
+                "total": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/sys/dictType/updateDictType": {
+      "post": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "字典类型管理"
+        ],
+        "summary": "UpdateDictType",
+        "operationId": "sys/DictTypeUpdateDictType",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": [
+                "id",
+                "dictName",
+                "dictType",
+                "status"
+              ],
+              "properties": {
+                "dictName": {
+                  "description": "字典名称",
+                  "type": "string"
+                },
+                "dictType": {
+                  "description": "字典类型",
+                  "type": "string"
+                },
+                "id": {
+                  "description": "字典id",
+                  "type": "integer"
+                },
+                "remark": {
+                  "description": "备注",
+                  "type": "string"
+                },
+                "status": {
+                  "description": "状态（0：停用，1:正常）",
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/sys/dictType/updateDictTypeStatus": {
+      "post": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "字典类型管理"
+        ],
+        "summary": "UpdateDictTypeStatus",
+        "operationId": "sys/DictTypeUpdateDictTypeStatus",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": [
+                "ids",
+                "status"
+              ],
+              "properties": {
+                "ids": {
+                  "description": "字典id",
+                  "type": "array",
+                  "items": {
+                    "type": "integer"
+                  }
+                },
+                "status": {
+                  "description": "状态",
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/sys/log/deleteLoginLog": {
+      "get": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "系统登录日志管理"
+        ],
+        "summary": "DeleteLoginLog",
+        "operationId": "sys/LogDeleteLoginLog",
+        "parameters": [
+          {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            },
+            "name": "ids",
+            "in": "query",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/sys/log/deleteOperateLog": {
+      "get": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "系统操作日志管理"
+        ],
+        "summary": "DeleteOperateLog",
+        "operationId": "sys/LogDeleteOperateLog",
+        "parameters": [
+          {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            },
+            "name": "ids",
+            "in": "query",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/sys/log/queryLoginLogDetail": {
+      "get": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "系统登录日志管理"
+        ],
+        "summary": "QueryLoginLogDetail",
+        "operationId": "sys/LogQueryLoginLogDetail",
+        "parameters": [
+          {
+            "type": "integer",
+            "name": "id",
+            "in": "query",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "data": {
+                  "type": "object",
+                  "required": [
+                    "id",
+                    "loginName",
+                    "ipaddr",
+                    "loginLocation",
+                    "platform",
+                    "browser",
+                    "version",
+                    "os",
+                    "arch",
+                    "engine",
+                    "engineDetails",
+                    "extra",
+                    "status",
+                    "msg",
+                    "loginTime"
+                  ],
+                  "properties": {
+                    "arch": {
+                      "description": "体系结构信息",
+                      "type": "string"
+                    },
+                    "browser": {
+                      "description": "浏览器类型",
+                      "type": "string"
+                    },
+                    "engine": {
+                      "description": "渲染引擎信息",
+                      "type": "string"
+                    },
+                    "engineDetails": {
+                      "description": "渲染引擎详细信息",
+                      "type": "string"
+                    },
+                    "extra": {
+                      "description": "其他信息（可选）",
+                      "type": "string"
+                    },
+                    "id": {
+                      "description": "登录日志id",
+                      "type": "integer"
+                    },
+                    "ipaddr": {
+                      "description": "登录IP地址",
+                      "type": "string"
+                    },
+                    "loginLocation": {
+                      "description": "登录地点",
+                      "type": "string"
+                    },
+                    "loginName": {
+                      "description": "登录账号",
+                      "type": "string"
+                    },
+                    "loginTime": {
+                      "description": "访问时间",
+                      "type": "string"
+                    },
+                    "msg": {
+                      "description": "提示消息",
+                      "type": "string"
+                    },
+                    "os": {
+                      "description": "操作系统",
+                      "type": "string"
+                    },
+                    "platform": {
+                      "description": "平台信息",
+                      "type": "string"
+                    },
+                    "status": {
+                      "description": "登录状态(0:失败,1:成功)",
+                      "type": "integer"
+                    },
+                    "version": {
+                      "description": "浏览器版本",
+                      "type": "string"
+                    }
+                  }
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/sys/log/queryLoginLogList": {
+      "get": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "系统登录日志管理"
+        ],
+        "summary": "QueryLoginLogList",
+        "operationId": "sys/LogQueryLoginLogList",
+        "parameters": [
+          {
+            "type": "integer",
+            "default": 1,
+            "description": "第几页",
+            "name": "current",
+            "in": "query",
+            "required": true
+          },
+          {
+            "type": "integer",
+            "default": 20,
+            "description": "每页的数量",
+            "name": "pageSize",
+            "in": "query",
+            "required": true
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": [
+                "status"
+              ],
+              "properties": {
+                "browser": {
+                  "description": "浏览器类型",
+                  "type": "string"
+                },
+                "ipaddr": {
+                  "description": "登录IP地址",
+                  "type": "string"
+                },
+                "loginLocation": {
+                  "description": "登录地点",
+                  "type": "string"
+                },
+                "loginName": {
+                  "description": "登录账号",
+                  "type": "string"
+                },
+                "os": {
+                  "description": "操作系统",
+                  "type": "string"
+                },
+                "platform": {
+                  "description": "平台信息",
+                  "type": "string"
+                },
+                "status": {
+                  "description": "登录状态(0:失败,1:成功)",
+                  "type": "integer",
+                  "default": 2,
+                  "example": 2
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "current": {
+                  "type": "integer",
+                  "default": 1,
+                  "example": 1
+                },
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "required": [
+                      "id",
+                      "loginName",
+                      "ipaddr",
+                      "loginLocation",
+                      "platform",
+                      "browser",
+                      "version",
+                      "os",
+                      "arch",
+                      "engine",
+                      "engineDetails",
+                      "extra",
+                      "status",
+                      "msg",
+                      "loginTime"
+                    ],
+                    "properties": {
+                      "arch": {
+                        "description": "体系结构信息",
+                        "type": "string"
+                      },
+                      "browser": {
+                        "description": "浏览器类型",
+                        "type": "string"
+                      },
+                      "engine": {
+                        "description": "渲染引擎信息",
+                        "type": "string"
+                      },
+                      "engineDetails": {
+                        "description": "渲染引擎详细信息",
+                        "type": "string"
+                      },
+                      "extra": {
+                        "description": "其他信息（可选）",
+                        "type": "string"
+                      },
+                      "id": {
+                        "description": "登录日志id",
+                        "type": "integer"
+                      },
+                      "ipaddr": {
+                        "description": "登录IP地址",
+                        "type": "string"
+                      },
+                      "loginLocation": {
+                        "description": "登录地点",
+                        "type": "string"
+                      },
+                      "loginName": {
+                        "description": "登录账号",
+                        "type": "string"
+                      },
+                      "loginTime": {
+                        "description": "访问时间",
+                        "type": "string"
+                      },
+                      "msg": {
+                        "description": "提示消息",
+                        "type": "string"
+                      },
+                      "os": {
+                        "description": "操作系统",
+                        "type": "string"
+                      },
+                      "platform": {
+                        "description": "平台信息",
+                        "type": "string"
+                      },
+                      "status": {
+                        "description": "登录状态(0:失败,1:成功)",
+                        "type": "integer"
+                      },
+                      "version": {
+                        "description": "浏览器版本",
+                        "type": "string"
+                      }
+                    }
+                  }
+                },
+                "message": {
+                  "type": "string"
+                },
+                "pageSize": {
+                  "type": "integer",
+                  "default": 20,
+                  "example": 20
+                },
+                "success": {
+                  "type": "boolean"
+                },
+                "total": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/sys/log/queryOperateLogDetail": {
+      "get": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "系统操作日志管理"
+        ],
+        "summary": "QueryOperateLogDetail",
+        "operationId": "sys/LogQueryOperateLogDetail",
+        "parameters": [
+          {
+            "type": "integer",
+            "name": "id",
+            "in": "query",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "data": {
+                  "type": "object",
+                  "required": [
+                    "id",
+                    "title",
+                    "businessType",
+                    "method",
+                    "requestMethod",
+                    "operatorType",
+                    "operateName",
+                    "deptName",
+                    "operateUrl",
+                    "operateIp",
+                    "operateLocation",
+                    "operateParam",
+                    "jsonResult",
+                    "platform",
+                    "browser",
+                    "version",
+                    "os",
+                    "arch",
+                    "engine",
+                    "engineDetails",
+                    "extra",
+                    "status",
+                    "errorMsg",
+                    "operateTime",
+                    "costTime"
+                  ],
+                  "properties": {
+                    "arch": {
+                      "description": "体系结构信息",
+                      "type": "string"
+                    },
+                    "browser": {
+                      "description": "浏览器类型",
+                      "type": "string"
+                    },
+                    "businessType": {
+                      "description": "业务类型（0其它 1新增 2修改 3删除）",
+                      "type": "integer"
+                    },
+                    "costTime": {
+                      "description": "消耗时间",
+                      "type": "integer"
+                    },
+                    "deptName": {
+                      "description": "部门名称",
+                      "type": "string"
+                    },
+                    "engine": {
+                      "description": "渲染引擎信息",
+                      "type": "string"
+                    },
+                    "engineDetails": {
+                      "description": "渲染引擎详细信息",
+                      "type": "string"
+                    },
+                    "errorMsg": {
+                      "description": "错误消息",
+                      "type": "string"
+                    },
+                    "extra": {
+                      "description": "其他信息（可选）",
+                      "type": "string"
+                    },
+                    "id": {
+                      "description": "操作日志id",
+                      "type": "integer"
+                    },
+                    "jsonResult": {
+                      "description": "返回参数",
+                      "type": "string"
+                    },
+                    "method": {
+                      "description": "方法名称",
+                      "type": "string"
+                    },
+                    "operateIp": {
+                      "description": "主机地址",
+                      "type": "string"
+                    },
+                    "operateLocation": {
+                      "description": "操作地点",
+                      "type": "string"
+                    },
+                    "operateName": {
+                      "description": "操作人员",
+                      "type": "string"
+                    },
+                    "operateParam": {
+                      "description": "请求参数",
+                      "type": "string"
+                    },
+                    "operateTime": {
+                      "description": "操作时间",
+                      "type": "string"
+                    },
+                    "operateUrl": {
+                      "description": "请求URL",
+                      "type": "string"
+                    },
+                    "operatorType": {
+                      "description": "操作类别（0其它 1后台用户 2手机端用户）",
+                      "type": "integer"
+                    },
+                    "os": {
+                      "description": "操作系统",
+                      "type": "string"
+                    },
+                    "platform": {
+                      "description": "平台信息",
+                      "type": "string"
+                    },
+                    "requestMethod": {
+                      "description": "请求方式",
+                      "type": "string"
+                    },
+                    "status": {
+                      "description": "操作状态(0:异常,正常)",
+                      "type": "integer"
+                    },
+                    "title": {
+                      "description": "模块标题",
+                      "type": "string"
+                    },
+                    "version": {
+                      "description": "浏览器版本",
+                      "type": "string"
+                    }
+                  }
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/sys/log/queryOperateLogList": {
+      "get": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "系统操作日志管理"
+        ],
+        "summary": "QueryOperateLogList",
+        "operationId": "sys/LogQueryOperateLogList",
+        "parameters": [
+          {
+            "type": "integer",
+            "default": 1,
+            "description": "第几页",
+            "name": "current",
+            "in": "query",
+            "required": true
+          },
+          {
+            "type": "integer",
+            "default": 20,
+            "description": "每页的数量",
+            "name": "pageSize",
+            "in": "query",
+            "required": true
+          },
+          {
+            "type": "string",
+            "description": "模块标题",
+            "name": "title",
+            "in": "query",
+            "allowEmptyValue": true
+          },
+          {
+            "type": "integer",
+            "description": "业务类型（0其它 1新增 2修改 3删除）",
+            "name": "businessType",
+            "in": "query",
+            "allowEmptyValue": true
+          },
+          {
+            "type": "string",
+            "description": "方法名称",
+            "name": "method",
+            "in": "query",
+            "allowEmptyValue": true
+          },
+          {
+            "type": "string",
+            "description": "请求方式",
+            "name": "requestMethod",
+            "in": "query",
+            "allowEmptyValue": true
+          },
+          {
+            "type": "integer",
+            "description": "操作类别（0其它 1后台用户 2手机端用户）",
+            "name": "operatorType",
+            "in": "query",
+            "allowEmptyValue": true
+          },
+          {
+            "type": "string",
+            "description": "操作人员",
+            "name": "operateName",
+            "in": "query",
+            "allowEmptyValue": true
+          },
+          {
+            "type": "string",
+            "description": "部门名称",
+            "name": "deptName",
+            "in": "query",
+            "allowEmptyValue": true
+          },
+          {
+            "type": "string",
+            "description": "请求URL",
+            "name": "operateUrl",
+            "in": "query",
+            "allowEmptyValue": true
+          },
+          {
+            "type": "string",
+            "description": "主机地址",
+            "name": "operateIp",
+            "in": "query",
+            "allowEmptyValue": true
+          },
+          {
+            "type": "string",
+            "description": "操作地点",
+            "name": "operateLocation",
+            "in": "query",
+            "allowEmptyValue": true
+          },
+          {
+            "type": "string",
+            "description": "平台信息",
+            "name": "platform",
+            "in": "query",
+            "allowEmptyValue": true
+          },
+          {
+            "type": "string",
+            "description": "浏览器类型",
+            "name": "browser",
+            "in": "query",
+            "allowEmptyValue": true
+          },
+          {
+            "type": "string",
+            "description": "操作系统",
+            "name": "os",
+            "in": "query",
+            "allowEmptyValue": true
+          },
+          {
+            "type": "integer",
+            "default": 2,
+            "description": "操作状态(0:异常,正常)",
+            "name": "status",
+            "in": "query",
+            "required": true
+          },
+          {
+            "type": "string",
+            "description": "错误消息",
+            "name": "errorMsg",
+            "in": "query",
+            "allowEmptyValue": true
+          },
+          {
+            "type": "string",
+            "description": "操作时间",
+            "name": "operateTime",
+            "in": "query",
+            "allowEmptyValue": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "current": {
+                  "type": "integer",
+                  "default": 1,
+                  "example": 1
+                },
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "required": [
+                      "id",
+                      "title",
+                      "businessType",
+                      "method",
+                      "requestMethod",
+                      "operatorType",
+                      "operateName",
+                      "deptName",
+                      "operateUrl",
+                      "operateIp",
+                      "operateLocation",
+                      "operateParam",
+                      "jsonResult",
+                      "platform",
+                      "browser",
+                      "version",
+                      "os",
+                      "arch",
+                      "engine",
+                      "engineDetails",
+                      "extra",
+                      "status",
+                      "errorMsg",
+                      "operateTime",
+                      "costTime"
+                    ],
+                    "properties": {
+                      "arch": {
+                        "description": "体系结构信息",
+                        "type": "string"
+                      },
+                      "browser": {
+                        "description": "浏览器类型",
+                        "type": "string"
+                      },
+                      "businessType": {
+                        "description": "业务类型（0其它 1新增 2修改 3删除）",
+                        "type": "integer"
+                      },
+                      "costTime": {
+                        "description": "消耗时间",
+                        "type": "integer"
+                      },
+                      "deptName": {
+                        "description": "部门名称",
+                        "type": "string"
+                      },
+                      "engine": {
+                        "description": "渲染引擎信息",
+                        "type": "string"
+                      },
+                      "engineDetails": {
+                        "description": "渲染引擎详细信息",
+                        "type": "string"
+                      },
+                      "errorMsg": {
+                        "description": "错误消息",
+                        "type": "string"
+                      },
+                      "extra": {
+                        "description": "其他信息（可选）",
+                        "type": "string"
+                      },
+                      "id": {
+                        "description": "操作日志id",
+                        "type": "integer"
+                      },
+                      "jsonResult": {
+                        "description": "返回参数",
+                        "type": "string"
+                      },
+                      "method": {
+                        "description": "方法名称",
+                        "type": "string"
+                      },
+                      "operateIp": {
+                        "description": "主机地址",
+                        "type": "string"
+                      },
+                      "operateLocation": {
+                        "description": "操作地点",
+                        "type": "string"
+                      },
+                      "operateName": {
+                        "description": "操作人员",
+                        "type": "string"
+                      },
+                      "operateParam": {
+                        "description": "请求参数",
+                        "type": "string"
+                      },
+                      "operateTime": {
+                        "description": "操作时间",
+                        "type": "string"
+                      },
+                      "operateUrl": {
+                        "description": "请求URL",
+                        "type": "string"
+                      },
+                      "operatorType": {
+                        "description": "操作类别（0其它 1后台用户 2手机端用户）",
+                        "type": "integer"
+                      },
+                      "os": {
+                        "description": "操作系统",
+                        "type": "string"
+                      },
+                      "platform": {
+                        "description": "平台信息",
+                        "type": "string"
+                      },
+                      "requestMethod": {
+                        "description": "请求方式",
+                        "type": "string"
+                      },
+                      "status": {
+                        "description": "操作状态(0:异常,正常)",
+                        "type": "integer"
+                      },
+                      "title": {
+                        "description": "模块标题",
+                        "type": "string"
+                      },
+                      "version": {
+                        "description": "浏览器版本",
+                        "type": "string"
+                      }
+                    }
+                  }
+                },
+                "message": {
+                  "type": "string"
+                },
+                "pageSize": {
+                  "type": "integer",
+                  "default": 20,
+                  "example": 20
+                },
+                "success": {
+                  "type": "boolean"
+                },
+                "total": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/sys/menu/addMenu": {
+      "post": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "菜单管理"
+        ],
+        "summary": "AddMenu",
+        "operationId": "sys/MenuAddMenu",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": [
+                "menuName",
+                "parentId",
+                "menuType",
+                "menuSort",
+                "isVisible"
+              ],
+              "properties": {
+                "backgroundUrl": {
+                  "description": "接口地址",
+                  "type": "string"
+                },
+                "isVisible": {
+                  "description": "是否可见  0：否  1：是",
+                  "type": "integer"
+                },
+                "menuIcon": {
+                  "description": "菜单图标",
+                  "type": "string"
+                },
+                "menuName": {
+                  "description": "菜单名称",
+                  "type": "string"
+                },
+                "menuPath": {
+                  "description": "前端路由",
+                  "type": "string"
+                },
+                "menuPerms": {
+                  "description": "权限标识",
+                  "type": "string"
+                },
+                "menuSort": {
+                  "description": "菜单排序",
+                  "type": "integer"
+                },
+                "menuStatus": {
+                  "description": "菜单状态",
+                  "type": "integer"
+                },
+                "menuType": {
+                  "description": "类型 0：目录,1：菜单,2：按钮,3：外链",
+                  "type": "integer"
+                },
+                "parentId": {
+                  "description": "父菜单ID，一级菜单为0",
+                  "type": "integer",
+                  "default": 0,
+                  "example": 0
+                },
+                "remark": {
+                  "description": "备注信息",
+                  "type": "string"
+                },
+                "vueComponent": {
+                  "description": "vue的页面",
+                  "type": "string"
+                },
+                "vueIcon": {
+                  "description": "vue的图标",
+                  "type": "string"
+                },
+                "vuePath": {
+                  "description": "vue系统的path",
+                  "type": "string"
+                },
+                "vueRedirect": {
+                  "description": "vue的路由重定向",
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/sys/menu/deleteMenu": {
+      "get": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "菜单管理"
+        ],
+        "summary": "DeleteMenu",
+        "operationId": "sys/MenuDeleteMenu",
+        "parameters": [
+          {
+            "type": "integer",
+            "name": "id",
+            "in": "query",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/sys/menu/queryMenuDetail": {
+      "get": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "菜单管理"
+        ],
+        "summary": "QueryMenuDetail",
+        "operationId": "sys/MenuQueryMenuDetail",
+        "parameters": [
+          {
+            "type": "integer",
+            "name": "id",
+            "in": "query",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "data": {
+                  "type": "object",
+                  "required": [
+                    "id",
+                    "menuName",
+                    "parentId",
+                    "menuPath",
+                    "menuPerms",
+                    "menuType",
+                    "menuIcon",
+                    "menuSort",
+                    "createBy",
+                    "createTime",
+                    "updateBy",
+                    "updateTime",
+                    "menuStatus",
+                    "isDeleted",
+                    "isVisible",
+                    "remark",
+                    "vuePath",
+                    "vueComponent",
+                    "vueIcon",
+                    "vueRedirect",
+                    "backgroundUrl"
+                  ],
+                  "properties": {
+                    "backgroundUrl": {
+                      "description": "接口地址",
+                      "type": "string"
+                    },
+                    "createBy": {
+                      "description": "创建者",
+                      "type": "string"
+                    },
+                    "createTime": {
+                      "description": "创建时间",
+                      "type": "string"
+                    },
+                    "id": {
+                      "description": "编号",
+                      "type": "integer"
+                    },
+                    "isDeleted": {
+                      "description": "是否删除  0：否  1：是",
+                      "type": "integer"
+                    },
+                    "isVisible": {
+                      "description": "是否可见  0：否  1：是",
+                      "type": "integer"
+                    },
+                    "menuIcon": {
+                      "description": "菜单图标",
+                      "type": "string"
+                    },
+                    "menuName": {
+                      "description": "菜单名称",
+                      "type": "string"
+                    },
+                    "menuPath": {
+                      "description": "前端路由",
+                      "type": "string"
+                    },
+                    "menuPerms": {
+                      "description": "权限标识",
+                      "type": "string"
+                    },
+                    "menuSort": {
+                      "description": "菜单排序",
+                      "type": "integer"
+                    },
+                    "menuStatus": {
+                      "description": "菜单状态",
+                      "type": "integer"
+                    },
+                    "menuType": {
+                      "description": "类型 0：目录,1：菜单,2：按钮,3：外链",
+                      "type": "integer"
+                    },
+                    "parentId": {
+                      "description": "父菜单ID，一级菜单为0",
+                      "type": "integer"
+                    },
+                    "remark": {
+                      "description": "备注信息",
+                      "type": "string"
+                    },
+                    "updateBy": {
+                      "description": "更新者",
+                      "type": "string"
+                    },
+                    "updateTime": {
+                      "description": "更新时间",
+                      "type": "string"
+                    },
+                    "vueComponent": {
+                      "description": "vue的页面",
+                      "type": "string"
+                    },
+                    "vueIcon": {
+                      "description": "vue的图标",
+                      "type": "string"
+                    },
+                    "vuePath": {
+                      "description": "vue系统的path",
+                      "type": "string"
+                    },
+                    "vueRedirect": {
+                      "description": "vue的路由重定向",
+                      "type": "string"
+                    }
+                  }
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/sys/menu/queryMenuList": {
+      "get": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "菜单管理"
+        ],
+        "summary": "QueryMenuList",
+        "operationId": "sys/MenuQueryMenuList",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "current": {
+                  "type": "integer",
+                  "default": 1,
+                  "example": 1
+                },
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "required": [
+                      "id",
+                      "menuName",
+                      "parentId",
+                      "menuPath",
+                      "menuPerms",
+                      "menuType",
+                      "menuIcon",
+                      "menuSort",
+                      "createBy",
+                      "createTime",
+                      "updateBy",
+                      "updateTime",
+                      "menuStatus",
+                      "isDeleted",
+                      "isVisible",
+                      "remark",
+                      "vuePath",
+                      "vueComponent",
+                      "vueIcon",
+                      "vueRedirect",
+                      "backgroundUrl"
+                    ],
+                    "properties": {
+                      "backgroundUrl": {
+                        "description": "接口地址",
+                        "type": "string"
+                      },
+                      "createBy": {
+                        "description": "创建者",
+                        "type": "string"
+                      },
+                      "createTime": {
+                        "description": "创建时间",
+                        "type": "string"
+                      },
+                      "id": {
+                        "description": "编号",
+                        "type": "integer"
+                      },
+                      "isDeleted": {
+                        "description": "是否删除  0：否  1：是",
+                        "type": "integer"
+                      },
+                      "isVisible": {
+                        "description": "是否可见  0：否  1：是",
+                        "type": "integer"
+                      },
+                      "menuIcon": {
+                        "description": "菜单图标",
+                        "type": "string"
+                      },
+                      "menuName": {
+                        "description": "菜单名称",
+                        "type": "string"
+                      },
+                      "menuPath": {
+                        "description": "前端路由",
+                        "type": "string"
+                      },
+                      "menuPerms": {
+                        "description": "权限标识",
+                        "type": "string"
+                      },
+                      "menuSort": {
+                        "description": "菜单排序",
+                        "type": "integer"
+                      },
+                      "menuStatus": {
+                        "description": "菜单状态",
+                        "type": "integer"
+                      },
+                      "menuType": {
+                        "description": "类型 0：目录,1：菜单,2：按钮,3：外链",
+                        "type": "integer"
+                      },
+                      "parentId": {
+                        "description": "父菜单ID，一级菜单为0",
+                        "type": "integer"
+                      },
+                      "remark": {
+                        "description": "备注信息",
+                        "type": "string"
+                      },
+                      "updateBy": {
+                        "description": "更新者",
+                        "type": "string"
+                      },
+                      "updateTime": {
+                        "description": "更新时间",
+                        "type": "string"
+                      },
+                      "vueComponent": {
+                        "description": "vue的页面",
+                        "type": "string"
+                      },
+                      "vueIcon": {
+                        "description": "vue的图标",
+                        "type": "string"
+                      },
+                      "vuePath": {
+                        "description": "vue系统的path",
+                        "type": "string"
+                      },
+                      "vueRedirect": {
+                        "description": "vue的路由重定向",
+                        "type": "string"
+                      }
+                    }
+                  }
+                },
+                "message": {
+                  "type": "string"
+                },
+                "pageSize": {
+                  "type": "integer",
+                  "default": 20,
+                  "example": 20
+                },
+                "success": {
+                  "type": "boolean"
+                },
+                "total": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/sys/menu/updateMenu": {
+      "post": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "菜单管理"
+        ],
+        "summary": "UpdateMenu",
+        "operationId": "sys/MenuUpdateMenu",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": [
+                "id",
+                "menuName",
+                "parentId",
+                "menuType",
+                "menuSort",
+                "isVisible"
+              ],
+              "properties": {
+                "backgroundUrl": {
+                  "description": "接口地址",
+                  "type": "string"
+                },
+                "id": {
+                  "description": "编号",
+                  "type": "integer"
+                },
+                "isVisible": {
+                  "description": "是否可见  0：否  1：是",
+                  "type": "integer"
+                },
+                "menuIcon": {
+                  "description": "菜单图标",
+                  "type": "string"
+                },
+                "menuName": {
+                  "description": "菜单名称",
+                  "type": "string"
+                },
+                "menuPath": {
+                  "description": "前端路由",
+                  "type": "string"
+                },
+                "menuPerms": {
+                  "description": "权限标识",
+                  "type": "string"
+                },
+                "menuSort": {
+                  "description": "菜单排序",
+                  "type": "integer"
+                },
+                "menuStatus": {
+                  "description": "菜单状态",
+                  "type": "integer"
+                },
+                "menuType": {
+                  "description": "类型 0：目录,1：菜单,2：按钮,3：外链",
+                  "type": "integer"
+                },
+                "parentId": {
+                  "description": "父菜单ID，一级菜单为0",
+                  "type": "integer"
+                },
+                "remark": {
+                  "description": "备注信息",
+                  "type": "string"
+                },
+                "vueComponent": {
+                  "description": "vue的页面",
+                  "type": "string"
+                },
+                "vueIcon": {
+                  "description": "vue的图标",
+                  "type": "string"
+                },
+                "vuePath": {
+                  "description": "vue系统的path",
+                  "type": "string"
+                },
+                "vueRedirect": {
+                  "description": "vue的路由重定向",
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/sys/menu/updateMenuStatus": {
+      "post": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "菜单管理"
+        ],
+        "summary": "UpdateMenuStatus",
+        "operationId": "sys/MenuUpdateMenuStatus",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": [
+                "menuId",
+                "menuStatus"
+              ],
+              "properties": {
+                "menuId": {
+                  "description": "编号",
+                  "type": "integer"
+                },
+                "menuStatus": {
+                  "description": "菜单状态",
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/sys/post/addPost": {
+      "post": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "岗位管理"
+        ],
+        "summary": "AddPost",
+        "operationId": "sys/PostAddPost",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": [
+                "postCode",
+                "postName",
+                "sort",
+                "status"
+              ],
+              "properties": {
+                "postCode": {
+                  "description": "岗位编码",
+                  "type": "string"
+                },
+                "postName": {
+                  "description": "岗位名称",
+                  "type": "string"
+                },
+                "remark": {
+                  "description": "备注",
+                  "type": "string"
+                },
+                "sort": {
+                  "description": "显示顺序",
+                  "type": "integer"
+                },
+                "status": {
+                  "description": "岗位状态（0：停用，1:正常）",
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/sys/post/deletePost": {
+      "get": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "岗位管理"
+        ],
+        "summary": "DeletePost",
+        "operationId": "sys/PostDeletePost",
+        "parameters": [
+          {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            },
+            "name": "ids",
+            "in": "query",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/sys/post/queryPostDetail": {
+      "get": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "岗位管理"
+        ],
+        "summary": "QueryPostDetail",
+        "operationId": "sys/PostQueryPostDetail",
+        "parameters": [
+          {
+            "type": "integer",
+            "name": "id",
+            "in": "query",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/sys/post/queryPostList": {
+      "get": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "岗位管理"
+        ],
+        "summary": "QueryPostList",
+        "operationId": "sys/PostQueryPostList",
+        "parameters": [
+          {
+            "type": "integer",
+            "default": 1,
+            "description": "第几页",
+            "name": "current",
+            "in": "query",
+            "required": true
+          },
+          {
+            "type": "integer",
+            "default": 20,
+            "description": "每页的数量",
+            "name": "pageSize",
+            "in": "query",
+            "required": true
+          },
+          {
+            "type": "string",
+            "description": "岗位编码",
+            "name": "postCode",
+            "in": "query",
+            "allowEmptyValue": true
+          },
+          {
+            "type": "string",
+            "description": "岗位名称",
+            "name": "postName",
+            "in": "query",
+            "allowEmptyValue": true
+          },
+          {
+            "type": "integer",
+            "default": 2,
+            "description": "岗位状态（0：停用，1:正常）",
+            "name": "status",
+            "in": "query",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "current": {
+                  "type": "integer",
+                  "default": 1,
+                  "example": 1
+                },
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "required": [
+                      "id",
+                      "postCode",
+                      "postName",
+                      "sort",
+                      "status",
+                      "remark",
+                      "createBy",
+                      "createTime",
+                      "updateBy",
+                      "updateTime"
+                    ],
+                    "properties": {
+                      "createBy": {
+                        "description": "创建者",
+                        "type": "string"
+                      },
+                      "createTime": {
+                        "description": "创建时间",
+                        "type": "string"
+                      },
+                      "id": {
+                        "description": "岗位id",
+                        "type": "integer"
+                      },
+                      "postCode": {
+                        "description": "岗位编码",
+                        "type": "string"
+                      },
+                      "postName": {
+                        "description": "岗位名称",
+                        "type": "string"
+                      },
+                      "remark": {
+                        "description": "备注",
+                        "type": "string"
+                      },
+                      "sort": {
+                        "description": "显示顺序",
+                        "type": "integer"
+                      },
+                      "status": {
+                        "description": "岗位状态（0：停用，1:正常）",
+                        "type": "integer"
+                      },
+                      "updateBy": {
+                        "description": "更新者",
+                        "type": "string"
+                      },
+                      "updateTime": {
+                        "description": "更新时间",
+                        "type": "string"
+                      }
+                    }
+                  }
+                },
+                "message": {
+                  "type": "string"
+                },
+                "pageSize": {
+                  "type": "integer",
+                  "default": 20,
+                  "example": 20
+                },
+                "success": {
+                  "type": "boolean"
+                },
+                "total": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/sys/post/updatePost": {
+      "post": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "岗位管理"
+        ],
+        "summary": "UpdatePost",
+        "operationId": "sys/PostUpdatePost",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": [
+                "id",
+                "postCode",
+                "postName",
+                "sort",
+                "status"
+              ],
+              "properties": {
+                "id": {
+                  "description": "岗位id",
+                  "type": "integer"
+                },
+                "postCode": {
+                  "description": "岗位编码",
+                  "type": "string"
+                },
+                "postName": {
+                  "description": "岗位名称",
+                  "type": "string"
+                },
+                "remark": {
+                  "description": "备注",
+                  "type": "string"
+                },
+                "sort": {
+                  "description": "显示顺序",
+                  "type": "integer"
+                },
+                "status": {
+                  "description": "岗位状态（0：停用，1:正常）",
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/sys/post/updatePostStatus": {
+      "post": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "岗位管理"
+        ],
+        "summary": "UpdatePostStatus",
+        "operationId": "sys/PostUpdatePostStatus",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": [
+                "ids",
+                "status"
+              ],
+              "properties": {
+                "ids": {
+                  "description": "岗位id",
+                  "type": "array",
+                  "items": {
+                    "type": "integer"
+                  }
+                },
+                "status": {
+                  "description": "状态",
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/sys/role/addRole": {
+      "post": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "角色管理"
+        ],
+        "summary": "AddRole",
+        "operationId": "sys/RoleAddRole",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": [
+                "roleName",
+                "roleKey",
+                "dataScope",
+                "status"
+              ],
+              "properties": {
+                "dataScope": {
+                  "description": "数据范围（1：全部数据权限 2：自定数据权限 3：本部门数据权限 4：本部门及以下数据权限）",
+                  "type": "integer"
+                },
+                "remark": {
+                  "description": "备注",
+                  "type": "string"
+                },
+                "roleKey": {
+                  "description": "角色权限字符串",
+                  "type": "string"
+                },
+                "roleName": {
+                  "description": "名称",
+                  "type": "string"
+                },
+                "status": {
+                  "description": "状态(1:正常，0:禁用)",
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/sys/role/cancelAuthorization": {
+      "post": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "角色管理"
+        ],
+        "summary": "CancelAuthorization",
+        "operationId": "sys/RoleCancelAuthorization",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": [
+                "roleId",
+                "userIds",
+                "isExist"
+              ],
+              "properties": {
+                "isExist": {
+                  "description": "0：取消授权，1：确认授权",
+                  "type": "integer"
+                },
+                "roleId": {
+                  "type": "integer"
+                },
+                "userIds": {
+                  "type": "array",
+                  "items": {
+                    "type": "integer"
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/sys/role/deleteRole": {
+      "get": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "角色管理"
+        ],
+        "summary": "DeleteRole",
+        "operationId": "sys/RoleDeleteRole",
+        "parameters": [
+          {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            },
+            "name": "ids",
+            "in": "query",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/sys/role/queryRoleDetail": {
+      "get": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "角色管理"
+        ],
+        "summary": "QueryRoleDetail",
+        "operationId": "sys/RoleQueryRoleDetail",
+        "parameters": [
+          {
+            "type": "integer",
+            "name": "id",
+            "in": "query",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "data": {
+                  "type": "object",
+                  "required": [
+                    "id",
+                    "roleName",
+                    "roleKey",
+                    "dataScope",
+                    "status",
+                    "remark",
+                    "delFlag",
+                    "createBy",
+                    "createTime",
+                    "updateBy",
+                    "updateTime"
+                  ],
+                  "properties": {
+                    "createBy": {
+                      "description": "创建者",
+                      "type": "string"
+                    },
+                    "createTime": {
+                      "description": "创建时间",
+                      "type": "string"
+                    },
+                    "dataScope": {
+                      "description": "数据范围（1：全部数据权限 2：自定数据权限 3：本部门数据权限 4：本部门及以下数据权限）",
+                      "type": "integer"
+                    },
+                    "delFlag": {
+                      "description": "删除标志（0代表删除 1代表存在）",
+                      "type": "integer"
+                    },
+                    "id": {
+                      "description": "角色id",
+                      "type": "integer"
+                    },
+                    "remark": {
+                      "description": "备注",
+                      "type": "string"
+                    },
+                    "roleKey": {
+                      "description": "角色权限字符串",
+                      "type": "string"
+                    },
+                    "roleName": {
+                      "description": "名称",
+                      "type": "string"
+                    },
+                    "status": {
+                      "description": "状态(1:正常，0:禁用)",
+                      "type": "integer"
+                    },
+                    "updateBy": {
+                      "description": "更新者",
+                      "type": "string"
+                    },
+                    "updateTime": {
+                      "description": "更新时间",
+                      "type": "string"
+                    }
+                  }
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/sys/role/queryRoleList": {
+      "get": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "角色管理"
+        ],
+        "summary": "QueryRoleList",
+        "operationId": "sys/RoleQueryRoleList",
+        "parameters": [
+          {
+            "type": "integer",
+            "default": 1,
+            "description": "第几页",
+            "name": "current",
+            "in": "query",
+            "required": true
+          },
+          {
+            "type": "integer",
+            "default": 20,
+            "description": "每页的数量",
+            "name": "pageSize",
+            "in": "query",
+            "required": true
+          },
+          {
+            "type": "string",
+            "description": "名称",
+            "name": "roleName",
+            "in": "query",
+            "allowEmptyValue": true
+          },
+          {
+            "type": "string",
+            "description": "角色权限字符串",
+            "name": "roleKey",
+            "in": "query",
+            "allowEmptyValue": true
+          },
+          {
+            "type": "integer",
+            "description": "数据范围（1：全部数据权限 2：自定数据权限 3：本部门数据权限 4：本部门及以下数据权限）",
+            "name": "dataScope",
+            "in": "query",
+            "allowEmptyValue": true
+          },
+          {
+            "type": "integer",
+            "default": 2,
+            "description": "状态(1:正常，0:禁用)",
+            "name": "status",
+            "in": "query",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "current": {
+                  "type": "integer",
+                  "default": 1,
+                  "example": 1
+                },
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "required": [
+                      "id",
+                      "roleName",
+                      "roleKey",
+                      "dataScope",
+                      "status",
+                      "remark",
+                      "delFlag",
+                      "createBy",
+                      "createTime",
+                      "updateBy",
+                      "updateTime"
+                    ],
+                    "properties": {
+                      "createBy": {
+                        "description": "创建者",
+                        "type": "string"
+                      },
+                      "createTime": {
+                        "description": "创建时间",
+                        "type": "string"
+                      },
+                      "dataScope": {
+                        "description": "数据范围（1：全部数据权限 2：自定数据权限 3：本部门数据权限 4：本部门及以下数据权限）",
+                        "type": "integer"
+                      },
+                      "delFlag": {
+                        "description": "删除标志（0代表删除 1代表存在）",
+                        "type": "integer"
+                      },
+                      "id": {
+                        "description": "角色id",
+                        "type": "integer"
+                      },
+                      "remark": {
+                        "description": "备注",
+                        "type": "string"
+                      },
+                      "roleKey": {
+                        "description": "角色权限字符串",
+                        "type": "string"
+                      },
+                      "roleName": {
+                        "description": "名称",
+                        "type": "string"
+                      },
+                      "status": {
+                        "description": "状态(1:正常，0:禁用)",
+                        "type": "integer"
+                      },
+                      "updateBy": {
+                        "description": "更新者",
+                        "type": "string"
+                      },
+                      "updateTime": {
+                        "description": "更新时间",
+                        "type": "string"
+                      }
+                    }
+                  }
+                },
+                "message": {
+                  "type": "string"
+                },
+                "pageSize": {
+                  "type": "integer",
+                  "default": 20,
+                  "example": 20
+                },
+                "success": {
+                  "type": "boolean"
+                },
+                "total": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/sys/role/queryRoleMenuList": {
+      "get": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "角色管理"
+        ],
+        "summary": "QueryRoleMenuList",
+        "operationId": "sys/RoleQueryRoleMenuList",
+        "parameters": [
+          {
+            "type": "integer",
+            "name": "roleId",
+            "in": "query",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "data": {
+                  "type": "object",
+                  "required": [
+                    "menuList",
+                    "menuIds"
+                  ],
+                  "properties": {
+                    "menuIds": {
+                      "type": "array",
+                      "items": {
+                        "type": "integer"
+                      }
+                    },
+                    "menuList": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "required": [
+                          "key",
+                          "title",
+                          "parentId",
+                          "id",
+                          "label",
+                          "isPenultimate"
+                        ],
+                        "properties": {
+                          "id": {
+                            "description": "编号",
+                            "type": "integer"
+                          },
+                          "isPenultimate": {
+                            "description": "菜单名称",
+                            "type": "boolean"
+                          },
+                          "key": {
+                            "description": "编号",
+                            "type": "string"
+                          },
+                          "label": {
+                            "description": "菜单名称",
+                            "type": "string"
+                          },
+                          "parentId": {
+                            "description": "父菜单ID，一级菜单为0",
+                            "type": "integer"
+                          },
+                          "title": {
+                            "description": "菜单名称",
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/sys/role/queryRoleUserList": {
+      "get": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "角色管理"
+        ],
+        "summary": "QueryRoleUserList",
+        "operationId": "sys/RoleQueryRoleUserList",
+        "parameters": [
+          {
+            "type": "integer",
+            "default": 1,
+            "description": "第几页",
+            "name": "current",
+            "in": "query",
+            "required": true
+          },
+          {
+            "type": "integer",
+            "default": 20,
+            "description": "每页的数量",
+            "name": "pageSize",
+            "in": "query",
+            "required": true
+          },
+          {
+            "type": "integer",
+            "description": "角色id",
+            "name": "roleId",
+            "in": "query",
+            "required": true
+          },
+          {
+            "type": "integer",
+            "description": "角色是否已经拥有用户， 1:表示拥有的用户，0:表示没拥有的用户",
+            "name": "isExist",
+            "in": "query",
+            "required": true
+          },
+          {
+            "type": "string",
+            "description": "手机号",
+            "name": "mobile",
+            "in": "query",
+            "allowEmptyValue": true
+          },
+          {
+            "type": "string",
+            "description": "昵称",
+            "name": "userName",
+            "in": "query",
+            "allowEmptyValue": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "current": {
+                  "type": "integer",
+                  "default": 1,
+                  "example": 1
+                },
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "required": [
+                      "id",
+                      "mobile",
+                      "userName",
+                      "nickName",
+                      "userType",
+                      "avatar",
+                      "email",
+                      "status",
+                      "deptId",
+                      "loginIp",
+                      "loginDate",
+                      "loginBrowser",
+                      "loginOs",
+                      "pwdUpdateDate",
+                      "remark",
+                      "delFlag",
+                      "createBy",
+                      "createTime",
+                      "updateBy",
+                      "updateTime"
+                    ],
+                    "properties": {
+                      "avatar": {
+                        "description": "头像路径",
+                        "type": "string"
+                      },
+                      "createBy": {
+                        "description": "创建者",
+                        "type": "string"
+                      },
+                      "createTime": {
+                        "description": "创建时间",
+                        "type": "string"
+                      },
+                      "delFlag": {
+                        "description": "删除标志（0代表删除 1代表存在）",
+                        "type": "integer"
+                      },
+                      "deptId": {
+                        "description": "部门ID",
+                        "type": "integer"
+                      },
+                      "email": {
+                        "description": "用户邮箱",
+                        "type": "string"
+                      },
+                      "id": {
+                        "description": "用户id",
+                        "type": "integer"
+                      },
+                      "loginBrowser": {
+                        "description": "浏览器类型",
+                        "type": "string"
+                      },
+                      "loginDate": {
+                        "description": "最后登录时间",
+                        "type": "string"
+                      },
+                      "loginIp": {
+                        "description": "最后登录IP",
+                        "type": "string"
+                      },
+                      "loginOs": {
+                        "description": "操作系统",
+                        "type": "string"
+                      },
+                      "mobile": {
+                        "description": "手机号码",
+                        "type": "string"
+                      },
+                      "nickName": {
+                        "description": "用户昵称",
+                        "type": "string"
+                      },
+                      "pwdUpdateDate": {
+                        "description": "密码最后更新时间",
+                        "type": "string"
+                      },
+                      "remark": {
+                        "description": "备注",
+                        "type": "string"
+                      },
+                      "status": {
+                        "description": "状态(1:正常，0:禁用)",
+                        "type": "integer"
+                      },
+                      "updateBy": {
+                        "description": "更新者",
+                        "type": "string"
+                      },
+                      "updateTime": {
+                        "description": "更新时间",
+                        "type": "string"
+                      },
+                      "userName": {
+                        "description": "用户账号",
+                        "type": "string"
+                      },
+                      "userType": {
+                        "description": "用户类型（00系统用户）",
+                        "type": "string"
+                      }
+                    }
+                  }
+                },
+                "message": {
+                  "type": "string"
+                },
+                "pageSize": {
+                  "type": "integer",
+                  "default": 20,
+                  "example": 20
+                },
+                "success": {
+                  "type": "boolean"
+                },
+                "total": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/sys/role/updateRole": {
+      "post": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "角色管理"
+        ],
+        "summary": "UpdateRole",
+        "operationId": "sys/RoleUpdateRole",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": [
+                "id",
+                "roleName",
+                "roleKey",
+                "dataScope",
+                "status"
+              ],
+              "properties": {
+                "dataScope": {
+                  "description": "数据范围（1：全部数据权限 2：自定数据权限 3：本部门数据权限 4：本部门及以下数据权限）",
+                  "type": "integer"
+                },
+                "id": {
+                  "description": "角色id",
+                  "type": "integer"
+                },
+                "remark": {
+                  "description": "备注",
+                  "type": "string"
+                },
+                "roleKey": {
+                  "description": "角色权限字符串",
+                  "type": "string"
+                },
+                "roleName": {
+                  "description": "名称",
+                  "type": "string"
+                },
+                "status": {
+                  "description": "状态(1:正常，0:禁用)",
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/sys/role/updateRoleMenuList": {
+      "post": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "角色管理"
+        ],
+        "summary": "UpdateRoleMenuList",
+        "operationId": "sys/RoleUpdateRoleMenuList",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": [
+                "roleId",
+                "menuIds"
+              ],
+              "properties": {
+                "menuIds": {
+                  "type": "array",
+                  "items": {
+                    "type": "integer"
+                  }
+                },
+                "roleId": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/sys/role/updateRoleStatus": {
+      "post": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "角色管理"
+        ],
+        "summary": "UpdateRoleStatus",
+        "operationId": "sys/RoleUpdateRoleStatus",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": [
+                "ids",
+                "status"
+              ],
+              "properties": {
+                "ids": {
+                  "description": "角色id",
+                  "type": "array",
+                  "items": {
+                    "type": "integer"
+                  }
+                },
+                "status": {
+                  "description": "状态",
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/sys/upload": {
+      "post": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "文件上传"
+        ],
+        "summary": "Upload",
+        "operationId": "sys/UploadUpload",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "data": {
+                  "type": "string"
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/sys/user/addUser": {
+      "post": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "用户管理"
+        ],
+        "summary": "AddUser",
+        "operationId": "sys/UserAddUser",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": [
+                "mobile",
+                "userName",
+                "nickName",
+                "email",
+                "password",
+                "status",
+                "deptId",
+                "postIds"
+              ],
+              "properties": {
+                "avatar": {
+                  "description": "头像路径",
+                  "type": "string"
+                },
+                "deptId": {
+                  "description": "部门ID",
+                  "type": "integer"
+                },
+                "email": {
+                  "description": "用户邮箱",
+                  "type": "string"
+                },
+                "mobile": {
+                  "description": "手机号码",
+                  "type": "string"
+                },
+                "nickName": {
+                  "description": "用户昵称",
+                  "type": "string"
+                },
+                "password": {
+                  "description": "密码",
+                  "type": "string"
+                },
+                "postIds": {
+                  "description": "部门id",
+                  "type": "array",
+                  "items": {
+                    "type": "integer"
+                  }
+                },
+                "remark": {
+                  "description": "备注",
+                  "type": "string"
+                },
+                "status": {
+                  "description": "状态(1:正常，0:禁用)",
+                  "type": "integer"
+                },
+                "userName": {
+                  "description": "用户账号",
+                  "type": "string"
+                },
+                "userType": {
+                  "description": "用户类型（00系统用户）",
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/sys/user/deleteUser": {
+      "get": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "用户管理"
+        ],
+        "summary": "DeleteUser",
+        "operationId": "sys/UserDeleteUser",
+        "parameters": [
+          {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            },
+            "name": "ids",
+            "in": "query",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/sys/user/info": {
+      "get": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "用户管理"
+        ],
+        "summary": "UserInfo",
+        "operationId": "sys/UserUserInfo",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "data": {
+                  "type": "object",
+                  "required": [
+                    "avatar",
+                    "name",
+                    "menuTree",
+                    "menuTreeVue"
+                  ],
+                  "properties": {
+                    "avatar": {
+                      "description": "用户头像",
+                      "type": "string"
+                    },
+                    "menuTree": {
+                      "description": "菜单",
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "required": [
+                          "id",
+                          "path",
+                          "name",
+                          "parentId",
+                          "icon",
+                          "vueIcon"
+                        ],
+                        "properties": {
+                          "icon": {
+                            "description": "菜单图标",
+                            "type": "string"
+                          },
+                          "id": {
+                            "description": "编号",
+                            "type": "integer"
+                          },
+                          "name": {
+                            "description": "菜单名称",
+                            "type": "string"
+                          },
+                          "parentId": {
+                            "description": "父菜单ID，一级菜单为0",
+                            "type": "integer"
+                          },
+                          "path": {
+                            "description": "菜单路径",
+                            "type": "string"
+                          },
+                          "vueIcon": {
+                            "description": "菜单图标",
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    "menuTreeVue": {
+                      "description": "菜单",
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "required": [
+                          "id",
+                          "parentId",
+                          "title",
+                          "path",
+                          "name",
+                          "icon",
+                          "redirect",
+                          "component",
+                          "meta"
+                        ],
+                        "properties": {
+                          "component": {
+                            "type": "string"
+                          },
+                          "icon": {
+                            "type": "string"
+                          },
+                          "id": {
+                            "type": "integer"
+                          },
+                          "meta": {
+                            "type": "object",
+                            "required": [
+                              "title",
+                              "icon"
+                            ],
+                            "properties": {
+                              "icon": {
+                                "type": "string"
+                              },
+                              "title": {
+                                "type": "string"
+                              }
+                            }
+                          },
+                          "name": {
+                            "type": "string"
+                          },
+                          "parentId": {
+                            "type": "integer"
+                          },
+                          "path": {
+                            "type": "string"
+                          },
+                          "redirect": {
+                            "type": "string"
+                          },
+                          "title": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    "name": {
+                      "description": "名称",
+                      "type": "string"
+                    }
+                  }
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/sys/user/login": {
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "用户管理"
+        ],
+        "summary": "注册",
+        "operationId": "sys/UserUserLogin",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": [
+                "account",
+                "password"
+              ],
+              "properties": {
+                "account": {
+                  "description": "手机号或者用户名",
+                  "type": "string"
+                },
+                "password": {
+                  "description": "密码",
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "data": {
+                  "type": "object",
+                  "required": [
+                    "token"
+                  ],
+                  "properties": {
+                    "token": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/sys/user/queryDeptAndPostList": {
+      "get": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "用户管理"
+        ],
+        "summary": "QueryDeptAndPostList",
+        "operationId": "sys/UserQueryDeptAndPostList",
+        "parameters": [
+          {
+            "type": "integer",
+            "default": 1,
+            "name": "current",
+            "in": "query",
+            "required": true
+          },
+          {
+            "type": "integer",
+            "default": 20,
+            "name": "pageSize",
+            "in": "query",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "data": {
+                  "type": "object",
+                  "required": [
+                    "deptList",
+                    "postList"
+                  ],
+                  "properties": {
+                    "deptList": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "required": [
+                          "id",
+                          "key",
+                          "value",
+                          "title",
+                          "parentId"
+                        ],
+                        "properties": {
+                          "id": {
+                            "type": "integer"
+                          },
+                          "key": {
+                            "type": "string"
+                          },
+                          "parentId": {
+                            "type": "integer"
+                          },
+                          "title": {
+                            "type": "string"
+                          },
+                          "value": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    "postList": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "required": [
+                          "id",
+                          "postName"
+                        ],
+                        "properties": {
+                          "id": {
+                            "type": "integer"
+                          },
+                          "postName": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/sys/user/queryUserDetail": {
+      "get": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "用户管理"
+        ],
+        "summary": "QueryUserDetail",
+        "operationId": "sys/UserQueryUserDetail",
+        "parameters": [
+          {
+            "type": "integer",
+            "name": "id",
+            "in": "query",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "data": {
+                  "type": "object",
+                  "required": [
+                    "id",
+                    "mobile",
+                    "userName",
+                    "nickName",
+                    "userType",
+                    "avatar",
+                    "email",
+                    "status",
+                    "deptId",
+                    "loginIp",
+                    "loginDate",
+                    "loginBrowser",
+                    "loginOs",
+                    "pwdUpdateDate",
+                    "remark",
+                    "delFlag",
+                    "createBy",
+                    "createTime",
+                    "updateBy",
+                    "updateTime",
+                    "postIds"
+                  ],
+                  "properties": {
+                    "avatar": {
+                      "description": "头像路径",
+                      "type": "string"
+                    },
+                    "createBy": {
+                      "description": "创建者",
+                      "type": "string"
+                    },
+                    "createTime": {
+                      "description": "创建时间",
+                      "type": "string"
+                    },
+                    "delFlag": {
+                      "description": "删除标志（0代表删除 1代表存在）",
+                      "type": "integer"
+                    },
+                    "deptId": {
+                      "description": "部门ID",
+                      "type": "integer"
+                    },
+                    "email": {
+                      "description": "用户邮箱",
+                      "type": "string"
+                    },
+                    "id": {
+                      "description": "用户id",
+                      "type": "integer"
+                    },
+                    "loginBrowser": {
+                      "description": "浏览器类型",
+                      "type": "string"
+                    },
+                    "loginDate": {
+                      "description": "最后登录时间",
+                      "type": "string"
+                    },
+                    "loginIp": {
+                      "description": "最后登录IP",
+                      "type": "string"
+                    },
+                    "loginOs": {
+                      "description": "操作系统",
+                      "type": "string"
+                    },
+                    "mobile": {
+                      "description": "手机号码",
+                      "type": "string"
+                    },
+                    "nickName": {
+                      "description": "用户昵称",
+                      "type": "string"
+                    },
+                    "postIds": {
+                      "description": "部门ids",
+                      "type": "array",
+                      "items": {
+                        "type": "integer"
+                      }
+                    },
+                    "pwdUpdateDate": {
+                      "description": "密码最后更新时间",
+                      "type": "string"
+                    },
+                    "remark": {
+                      "description": "备注",
+                      "type": "string"
+                    },
+                    "status": {
+                      "description": "状态(1:正常，0:禁用)",
+                      "type": "integer"
+                    },
+                    "updateBy": {
+                      "description": "更新者",
+                      "type": "string"
+                    },
+                    "updateTime": {
+                      "description": "更新时间",
+                      "type": "string"
+                    },
+                    "userName": {
+                      "description": "用户账号",
+                      "type": "string"
+                    },
+                    "userType": {
+                      "description": "用户类型（00系统用户）",
+                      "type": "string"
+                    }
+                  }
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/sys/user/queryUserList": {
+      "get": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "用户管理"
+        ],
+        "summary": "QueryUserList",
+        "operationId": "sys/UserQueryUserList",
+        "parameters": [
+          {
+            "type": "integer",
+            "default": 1,
+            "description": "第几页",
+            "name": "current",
+            "in": "query",
+            "required": true
+          },
+          {
+            "type": "integer",
+            "default": 20,
+            "description": "每页的数量",
+            "name": "pageSize",
+            "in": "query",
+            "required": true
+          },
+          {
+            "type": "string",
+            "description": "手机号码",
+            "name": "mobile",
+            "in": "query",
+            "allowEmptyValue": true
+          },
+          {
+            "type": "string",
+            "description": "用户账号",
+            "name": "userName",
+            "in": "query",
+            "allowEmptyValue": true
+          },
+          {
+            "type": "string",
+            "description": "用户昵称",
+            "name": "nickName",
+            "in": "query",
+            "allowEmptyValue": true
+          },
+          {
+            "type": "string",
+            "description": "用户邮箱",
+            "name": "email",
+            "in": "query",
+            "allowEmptyValue": true
+          },
+          {
+            "type": "integer",
+            "default": 2,
+            "description": "状态(1:正常，0:禁用)",
+            "name": "status",
+            "in": "query",
+            "required": true
+          },
+          {
+            "type": "integer",
+            "description": "部门ID",
+            "name": "deptId",
+            "in": "query",
+            "allowEmptyValue": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "current": {
+                  "type": "integer",
+                  "default": 1,
+                  "example": 1
+                },
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "required": [
+                      "id",
+                      "mobile",
+                      "userName",
+                      "nickName",
+                      "userType",
+                      "avatar",
+                      "email",
+                      "status",
+                      "deptId",
+                      "loginIp",
+                      "loginDate",
+                      "loginBrowser",
+                      "loginOs",
+                      "pwdUpdateDate",
+                      "remark",
+                      "delFlag",
+                      "createBy",
+                      "createTime",
+                      "updateBy",
+                      "updateTime"
+                    ],
+                    "properties": {
+                      "avatar": {
+                        "description": "头像路径",
+                        "type": "string"
+                      },
+                      "createBy": {
+                        "description": "创建者",
+                        "type": "string"
+                      },
+                      "createTime": {
+                        "description": "创建时间",
+                        "type": "string"
+                      },
+                      "delFlag": {
+                        "description": "删除标志（0代表删除 1代表存在）",
+                        "type": "integer"
+                      },
+                      "deptId": {
+                        "description": "部门ID",
+                        "type": "integer"
+                      },
+                      "email": {
+                        "description": "用户邮箱",
+                        "type": "string"
+                      },
+                      "id": {
+                        "description": "用户id",
+                        "type": "integer"
+                      },
+                      "loginBrowser": {
+                        "description": "浏览器类型",
+                        "type": "string"
+                      },
+                      "loginDate": {
+                        "description": "最后登录时间",
+                        "type": "string"
+                      },
+                      "loginIp": {
+                        "description": "最后登录IP",
+                        "type": "string"
+                      },
+                      "loginOs": {
+                        "description": "操作系统",
+                        "type": "string"
+                      },
+                      "mobile": {
+                        "description": "手机号码",
+                        "type": "string"
+                      },
+                      "nickName": {
+                        "description": "用户昵称",
+                        "type": "string"
+                      },
+                      "pwdUpdateDate": {
+                        "description": "密码最后更新时间",
+                        "type": "string"
+                      },
+                      "remark": {
+                        "description": "备注",
+                        "type": "string"
+                      },
+                      "status": {
+                        "description": "状态(1:正常，0:禁用)",
+                        "type": "integer"
+                      },
+                      "updateBy": {
+                        "description": "更新者",
+                        "type": "string"
+                      },
+                      "updateTime": {
+                        "description": "更新时间",
+                        "type": "string"
+                      },
+                      "userName": {
+                        "description": "用户账号",
+                        "type": "string"
+                      },
+                      "userType": {
+                        "description": "用户类型（00系统用户）",
+                        "type": "string"
+                      }
+                    }
+                  }
+                },
+                "message": {
+                  "type": "string"
+                },
+                "pageSize": {
+                  "type": "integer",
+                  "default": 20,
+                  "example": 20
+                },
+                "success": {
+                  "type": "boolean"
+                },
+                "total": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/sys/user/queryUserRoleList": {
+      "get": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "用户管理"
+        ],
+        "summary": "QueryUserRoleList",
+        "operationId": "sys/UserQueryUserRoleList",
+        "parameters": [
+          {
+            "type": "integer",
+            "name": "userId",
+            "in": "query",
+            "required": true
+          },
+          {
+            "type": "integer",
+            "default": 1,
+            "name": "current",
+            "in": "query",
+            "required": true
+          },
+          {
+            "type": "integer",
+            "default": 20,
+            "name": "pageSize",
+            "in": "query",
+            "required": true
+          },
+          {
+            "type": "string",
+            "description": "角色名称",
+            "name": "roleName",
+            "in": "query",
+            "allowEmptyValue": true
+          },
+          {
+            "type": "string",
+            "description": "权限字符",
+            "name": "roleKey",
+            "in": "query",
+            "allowEmptyValue": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "data": {
+                  "type": "object",
+                  "required": [
+                    "roleList",
+                    "roleIds"
+                  ],
+                  "properties": {
+                    "roleIds": {
+                      "type": "array",
+                      "items": {
+                        "type": "integer"
+                      }
+                    },
+                    "roleList": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "required": [
+                          "id",
+                          "roleName",
+                          "roleKey",
+                          "dataScope",
+                          "status",
+                          "remark",
+                          "delFlag",
+                          "createBy",
+                          "createTime",
+                          "updateBy",
+                          "updateTime"
+                        ],
+                        "properties": {
+                          "createBy": {
+                            "description": "创建者",
+                            "type": "string"
+                          },
+                          "createTime": {
+                            "description": "创建时间",
+                            "type": "string"
+                          },
+                          "dataScope": {
+                            "description": "数据范围（1：全部数据权限 2：自定数据权限 3：本部门数据权限 4：本部门及以下数据权限）",
+                            "type": "integer"
+                          },
+                          "delFlag": {
+                            "description": "删除标志（0代表删除 1代表存在）",
+                            "type": "integer"
+                          },
+                          "id": {
+                            "description": "角色id",
+                            "type": "integer"
+                          },
+                          "remark": {
+                            "description": "备注",
+                            "type": "string"
+                          },
+                          "roleKey": {
+                            "description": "角色权限字符串",
+                            "type": "string"
+                          },
+                          "roleName": {
+                            "description": "名称",
+                            "type": "string"
+                          },
+                          "status": {
+                            "description": "状态(1:正常，0:禁用)",
+                            "type": "integer"
+                          },
+                          "updateBy": {
+                            "description": "更新者",
+                            "type": "string"
+                          },
+                          "updateTime": {
+                            "description": "更新时间",
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/sys/user/reSetPassword": {
+      "post": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "用户管理"
+        ],
+        "summary": "ReSetPassword",
+        "operationId": "sys/UserReSetPassword",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": [
+                "userId"
+              ],
+              "properties": {
+                "userId": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/sys/user/updateUser": {
+      "post": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "用户管理"
+        ],
+        "summary": "UpdateUser",
+        "operationId": "sys/UserUpdateUser",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": [
+                "id",
+                "mobile",
+                "userName",
+                "nickName",
+                "userType",
+                "email",
+                "status",
+                "deptId",
+                "postIds"
+              ],
+              "properties": {
+                "avatar": {
+                  "description": "头像路径",
+                  "type": "string"
+                },
+                "deptId": {
+                  "description": "部门ID",
+                  "type": "integer"
+                },
+                "email": {
+                  "description": "用户邮箱",
+                  "type": "string"
+                },
+                "id": {
+                  "description": "用户id",
+                  "type": "integer"
+                },
+                "mobile": {
+                  "description": "手机号码",
+                  "type": "string"
+                },
+                "nickName": {
+                  "description": "用户昵称",
+                  "type": "string"
+                },
+                "postIds": {
+                  "description": "部门id",
+                  "type": "array",
+                  "items": {
+                    "type": "integer"
+                  }
+                },
+                "remark": {
+                  "description": "备注",
+                  "type": "string"
+                },
+                "status": {
+                  "description": "状态(1:正常，0:禁用)",
+                  "type": "integer"
+                },
+                "userName": {
+                  "description": "用户账号",
+                  "type": "string"
+                },
+                "userType": {
+                  "description": "用户类型（00系统用户）",
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/sys/user/updateUserRoleList": {
+      "post": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "用户管理"
+        ],
+        "summary": "UpdateUserRoleList",
+        "operationId": "sys/UserUpdateUserRoleList",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": [
+                "userId",
+                "roleIds"
+              ],
+              "properties": {
+                "roleIds": {
+                  "type": "array",
+                  "items": {
+                    "type": "integer"
+                  }
+                },
+                "userId": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/sys/user/updateUserStatus": {
+      "post": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "用户管理"
+        ],
+        "summary": "UpdateUserStatus",
+        "operationId": "sys/UserUpdateUserStatus",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": [
+                "ids",
+                "status"
+              ],
+              "properties": {
+                "ids": {
+                  "description": "用户id",
+                  "type": "array",
+                  "items": {
+                    "type": "integer"
+                  }
+                },
+                "status": {
+                  "description": "状态",
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "apiKey": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
+    },
+    "petstore_auth": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "http://swagger.io/api/oauth/dialog",
+      "scopes": {
+        "read:pets": "read your pets",
+        "write:pets": "modify pets in your account"
+      }
+    }
+  },
+  "x-date": "2025-07-08 11:19:59",
+  "x-description": "This is a goctl generated swagger file.",
+  "x-github": "https://github.com/zeromicro/go-zero",
+  "x-go-zero-doc": "https://go-zero.dev/",
+  "x-goctl-version": "1.8.4"
+}

@@ -126,6 +126,8 @@ type (
 	middleware: CheckUrl
 	group:      sys/menu
 	prefix:     /api/sys/menu
+	tags: "菜单管理"
+	authType: apiKey
 )
 service admin-api {
 	// 添加菜单信息

@@ -29,7 +29,8 @@ func main() {
 	logx.AddWriter(logx.NewWriter(os.Stdout)) // 添加控制台输出
 
 	ctx := svc.NewServiceContext(c)
-	server := rest.MustNewServer(c.RestConf)
+	server := rest.MustNewServer(c.RestConf,
+		rest.WithFileServer("/swagger", http.Dir("api/front/static")))
 	defer server.Stop()
 
 	handler.RegisterHandlers(server, ctx)
@@ -48,5 +49,6 @@ func main() {
 	})
 
 	fmt.Printf("Starting server at %s:%d...\n", c.Host, c.Port)
+	fmt.Printf("swagger ui at %s\n", "http://localhost:9999/swagger/index.html")
 	server.Start()
 }

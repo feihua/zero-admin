@@ -108,6 +108,8 @@ type (
 	middleware: CheckUrl
 	group:      sms/home_advertise
 	prefix:     /api/sms/homeAdvertise
+	tags: "首页轮播广告管理"
+	authType: apiKey
 )
 service admin-api {
 	// 添加首页轮播广告

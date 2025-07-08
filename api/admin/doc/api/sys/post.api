@@ -90,6 +90,8 @@ type (
 	middleware: CheckUrl
 	group:      sys/post
 	prefix:     /api/sys/post
+	tags: "岗位管理"
+	authType: apiKey
 )
 service admin-api {
 	// 添加岗位信息

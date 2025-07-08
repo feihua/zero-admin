@@ -26,9 +26,11 @@ type OrderPayQueryResp {
 }
 
 @server (
-	jwt:    Auth
-	group:  order/pay
-	prefix: /api/order
+	jwt:      Auth
+	group:    order/pay
+	prefix:   /api/order
+	tags:     "支付管理"
+	authType: apiKey
 )
 service front-api {
 	//对订单进行支付
@@ -41,8 +43,10 @@ service front-api {
 }
 
 @server (
-	group:  order/pay
-	prefix: /api/pay
+	group:    order/pay
+	prefix:   /api/pay
+	tags:     "支付回调用通知"
+	authType: apiKey
 )
 service front-api {
 	//支付回调用通知

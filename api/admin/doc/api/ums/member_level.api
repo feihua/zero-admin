@@ -106,6 +106,8 @@ type (
 	middleware: CheckUrl
 	group:      ums/member_level
 	prefix:     /api/ums/level
+	tags: "会员等级管理"
+	authType: apiKey
 )
 service admin-api {
 	// 添加会员等级

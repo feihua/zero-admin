@@ -1,0 +1,1357 @@
+{
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "schemes": [
+    "http"
+  ],
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0"
+  },
+  "basePath": "/",
+  "paths": {
+    "/api/sys/user/addUser": {
+      "post": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "用户操作"
+        ],
+        "summary": "AddUser",
+        "operationId": "sys/UserAddUser",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": [
+                "mobile",
+                "userName",
+                "nickName",
+                "email",
+                "password",
+                "status",
+                "deptId",
+                "postIds"
+              ],
+              "properties": {
+                "avatar": {
+                  "description": "头像路径",
+                  "type": "string"
+                },
+                "deptId": {
+                  "description": "部门ID",
+                  "type": "integer"
+                },
+                "email": {
+                  "description": "用户邮箱",
+                  "type": "string"
+                },
+                "mobile": {
+                  "description": "手机号码",
+                  "type": "string"
+                },
+                "nickName": {
+                  "description": "用户昵称",
+                  "type": "string"
+                },
+                "password": {
+                  "description": "密码",
+                  "type": "string"
+                },
+                "postIds": {
+                  "description": "部门id",
+                  "type": "array",
+                  "items": {
+                    "type": "integer"
+                  }
+                },
+                "remark": {
+                  "description": "备注",
+                  "type": "string"
+                },
+                "status": {
+                  "description": "状态(1:正常，0:禁用)",
+                  "type": "integer"
+                },
+                "userName": {
+                  "description": "用户账号",
+                  "type": "string"
+                },
+                "userType": {
+                  "description": "用户类型（00系统用户）",
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/sys/user/deleteUser": {
+      "get": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "用户操作"
+        ],
+        "summary": "DeleteUser",
+        "operationId": "sys/UserDeleteUser",
+        "parameters": [
+          {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            },
+            "name": "ids",
+            "in": "query",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/sys/user/info": {
+      "get": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "用户操作"
+        ],
+        "summary": "UserInfo",
+        "operationId": "sys/UserUserInfo",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "data": {
+                  "type": "object",
+                  "required": [
+                    "avatar",
+                    "name",
+                    "menuTree",
+                    "menuTreeVue"
+                  ],
+                  "properties": {
+                    "avatar": {
+                      "description": "用户头像",
+                      "type": "string"
+                    },
+                    "menuTree": {
+                      "description": "菜单",
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "required": [
+                          "id",
+                          "path",
+                          "name",
+                          "parentId",
+                          "icon",
+                          "vueIcon"
+                        ],
+                        "properties": {
+                          "icon": {
+                            "description": "菜单图标",
+                            "type": "string"
+                          },
+                          "id": {
+                            "description": "编号",
+                            "type": "integer"
+                          },
+                          "name": {
+                            "description": "菜单名称",
+                            "type": "string"
+                          },
+                          "parentId": {
+                            "description": "父菜单ID，一级菜单为0",
+                            "type": "integer"
+                          },
+                          "path": {
+                            "description": "菜单路径",
+                            "type": "string"
+                          },
+                          "vueIcon": {
+                            "description": "菜单图标",
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    "menuTreeVue": {
+                      "description": "菜单",
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "required": [
+                          "id",
+                          "parentId",
+                          "title",
+                          "path",
+                          "name",
+                          "icon",
+                          "redirect",
+                          "component",
+                          "meta"
+                        ],
+                        "properties": {
+                          "component": {
+                            "type": "string"
+                          },
+                          "icon": {
+                            "type": "string"
+                          },
+                          "id": {
+                            "type": "integer"
+                          },
+                          "meta": {
+                            "type": "object",
+                            "required": [
+                              "title",
+                              "icon"
+                            ],
+                            "properties": {
+                              "icon": {
+                                "type": "string"
+                              },
+                              "title": {
+                                "type": "string"
+                              }
+                            }
+                          },
+                          "name": {
+                            "type": "string"
+                          },
+                          "parentId": {
+                            "type": "integer"
+                          },
+                          "path": {
+                            "type": "string"
+                          },
+                          "redirect": {
+                            "type": "string"
+                          },
+                          "title": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    "name": {
+                      "description": "名称",
+                      "type": "string"
+                    }
+                  }
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/sys/user/login": {
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "用户操作"
+        ],
+        "summary": "注册",
+        "operationId": "sys/UserUserLogin",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": [
+                "account",
+                "password"
+              ],
+              "properties": {
+                "account": {
+                  "description": "手机号或者用户名",
+                  "type": "string"
+                },
+                "password": {
+                  "description": "密码",
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "data": {
+                  "type": "object",
+                  "required": [
+                    "token"
+                  ],
+                  "properties": {
+                    "token": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/sys/user/queryDeptAndPostList": {
+      "get": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "用户操作"
+        ],
+        "summary": "QueryDeptAndPostList",
+        "operationId": "sys/UserQueryDeptAndPostList",
+        "parameters": [
+          {
+            "type": "integer",
+            "default": 1,
+            "name": "current",
+            "in": "query",
+            "required": true
+          },
+          {
+            "type": "integer",
+            "default": 20,
+            "name": "pageSize",
+            "in": "query",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "data": {
+                  "type": "object",
+                  "required": [
+                    "deptList",
+                    "postList"
+                  ],
+                  "properties": {
+                    "deptList": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "required": [
+                          "id",
+                          "key",
+                          "value",
+                          "title",
+                          "parentId"
+                        ],
+                        "properties": {
+                          "id": {
+                            "type": "integer"
+                          },
+                          "key": {
+                            "type": "string"
+                          },
+                          "parentId": {
+                            "type": "integer"
+                          },
+                          "title": {
+                            "type": "string"
+                          },
+                          "value": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    "postList": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "required": [
+                          "id",
+                          "postName"
+                        ],
+                        "properties": {
+                          "id": {
+                            "type": "integer"
+                          },
+                          "postName": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/sys/user/queryUserDetail": {
+      "get": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "用户操作"
+        ],
+        "summary": "QueryUserDetail",
+        "operationId": "sys/UserQueryUserDetail",
+        "parameters": [
+          {
+            "type": "integer",
+            "name": "id",
+            "in": "query",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "data": {
+                  "type": "object",
+                  "required": [
+                    "id",
+                    "mobile",
+                    "userName",
+                    "nickName",
+                    "userType",
+                    "avatar",
+                    "email",
+                    "status",
+                    "deptId",
+                    "loginIp",
+                    "loginDate",
+                    "loginBrowser",
+                    "loginOs",
+                    "pwdUpdateDate",
+                    "remark",
+                    "delFlag",
+                    "createBy",
+                    "createTime",
+                    "updateBy",
+                    "updateTime",
+                    "postIds"
+                  ],
+                  "properties": {
+                    "avatar": {
+                      "description": "头像路径",
+                      "type": "string"
+                    },
+                    "createBy": {
+                      "description": "创建者",
+                      "type": "string"
+                    },
+                    "createTime": {
+                      "description": "创建时间",
+                      "type": "string"
+                    },
+                    "delFlag": {
+                      "description": "删除标志（0代表删除 1代表存在）",
+                      "type": "integer"
+                    },
+                    "deptId": {
+                      "description": "部门ID",
+                      "type": "integer"
+                    },
+                    "email": {
+                      "description": "用户邮箱",
+                      "type": "string"
+                    },
+                    "id": {
+                      "description": "用户id",
+                      "type": "integer"
+                    },
+                    "loginBrowser": {
+                      "description": "浏览器类型",
+                      "type": "string"
+                    },
+                    "loginDate": {
+                      "description": "最后登录时间",
+                      "type": "string"
+                    },
+                    "loginIp": {
+                      "description": "最后登录IP",
+                      "type": "string"
+                    },
+                    "loginOs": {
+                      "description": "操作系统",
+                      "type": "string"
+                    },
+                    "mobile": {
+                      "description": "手机号码",
+                      "type": "string"
+                    },
+                    "nickName": {
+                      "description": "用户昵称",
+                      "type": "string"
+                    },
+                    "postIds": {
+                      "description": "部门ids",
+                      "type": "array",
+                      "items": {
+                        "type": "integer"
+                      }
+                    },
+                    "pwdUpdateDate": {
+                      "description": "密码最后更新时间",
+                      "type": "string"
+                    },
+                    "remark": {
+                      "description": "备注",
+                      "type": "string"
+                    },
+                    "status": {
+                      "description": "状态(1:正常，0:禁用)",
+                      "type": "integer"
+                    },
+                    "updateBy": {
+                      "description": "更新者",
+                      "type": "string"
+                    },
+                    "updateTime": {
+                      "description": "更新时间",
+                      "type": "string"
+                    },
+                    "userName": {
+                      "description": "用户账号",
+                      "type": "string"
+                    },
+                    "userType": {
+                      "description": "用户类型（00系统用户）",
+                      "type": "string"
+                    }
+                  }
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/sys/user/queryUserList": {
+      "get": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "用户操作"
+        ],
+        "summary": "QueryUserList",
+        "operationId": "sys/UserQueryUserList",
+        "parameters": [
+          {
+            "type": "integer",
+            "default": 1,
+            "description": "第几页",
+            "name": "current",
+            "in": "query",
+            "required": true
+          },
+          {
+            "type": "integer",
+            "default": 20,
+            "description": "每页的数量",
+            "name": "pageSize",
+            "in": "query",
+            "required": true
+          },
+          {
+            "type": "string",
+            "description": "手机号码",
+            "name": "mobile",
+            "in": "query",
+            "allowEmptyValue": true
+          },
+          {
+            "type": "string",
+            "description": "用户账号",
+            "name": "userName",
+            "in": "query",
+            "allowEmptyValue": true
+          },
+          {
+            "type": "string",
+            "description": "用户昵称",
+            "name": "nickName",
+            "in": "query",
+            "allowEmptyValue": true
+          },
+          {
+            "type": "string",
+            "description": "用户邮箱",
+            "name": "email",
+            "in": "query",
+            "allowEmptyValue": true
+          },
+          {
+            "type": "integer",
+            "default": 2,
+            "description": "状态(1:正常，0:禁用)",
+            "name": "status",
+            "in": "query",
+            "required": true
+          },
+          {
+            "type": "integer",
+            "description": "部门ID",
+            "name": "deptId",
+            "in": "query",
+            "allowEmptyValue": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "current": {
+                  "type": "integer",
+                  "default": 1,
+                  "example": 1
+                },
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "required": [
+                      "id",
+                      "mobile",
+                      "userName",
+                      "nickName",
+                      "userType",
+                      "avatar",
+                      "email",
+                      "status",
+                      "deptId",
+                      "loginIp",
+                      "loginDate",
+                      "loginBrowser",
+                      "loginOs",
+                      "pwdUpdateDate",
+                      "remark",
+                      "delFlag",
+                      "createBy",
+                      "createTime",
+                      "updateBy",
+                      "updateTime"
+                    ],
+                    "properties": {
+                      "avatar": {
+                        "description": "头像路径",
+                        "type": "string"
+                      },
+                      "createBy": {
+                        "description": "创建者",
+                        "type": "string"
+                      },
+                      "createTime": {
+                        "description": "创建时间",
+                        "type": "string"
+                      },
+                      "delFlag": {
+                        "description": "删除标志（0代表删除 1代表存在）",
+                        "type": "integer"
+                      },
+                      "deptId": {
+                        "description": "部门ID",
+                        "type": "integer"
+                      },
+                      "email": {
+                        "description": "用户邮箱",
+                        "type": "string"
+                      },
+                      "id": {
+                        "description": "用户id",
+                        "type": "integer"
+                      },
+                      "loginBrowser": {
+                        "description": "浏览器类型",
+                        "type": "string"
+                      },
+                      "loginDate": {
+                        "description": "最后登录时间",
+                        "type": "string"
+                      },
+                      "loginIp": {
+                        "description": "最后登录IP",
+                        "type": "string"
+                      },
+                      "loginOs": {
+                        "description": "操作系统",
+                        "type": "string"
+                      },
+                      "mobile": {
+                        "description": "手机号码",
+                        "type": "string"
+                      },
+                      "nickName": {
+                        "description": "用户昵称",
+                        "type": "string"
+                      },
+                      "pwdUpdateDate": {
+                        "description": "密码最后更新时间",
+                        "type": "string"
+                      },
+                      "remark": {
+                        "description": "备注",
+                        "type": "string"
+                      },
+                      "status": {
+                        "description": "状态(1:正常，0:禁用)",
+                        "type": "integer"
+                      },
+                      "updateBy": {
+                        "description": "更新者",
+                        "type": "string"
+                      },
+                      "updateTime": {
+                        "description": "更新时间",
+                        "type": "string"
+                      },
+                      "userName": {
+                        "description": "用户账号",
+                        "type": "string"
+                      },
+                      "userType": {
+                        "description": "用户类型（00系统用户）",
+                        "type": "string"
+                      }
+                    }
+                  }
+                },
+                "message": {
+                  "type": "string"
+                },
+                "pageSize": {
+                  "type": "integer",
+                  "default": 20,
+                  "example": 20
+                },
+                "success": {
+                  "type": "boolean"
+                },
+                "total": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/sys/user/queryUserRoleList": {
+      "get": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "用户操作"
+        ],
+        "summary": "QueryUserRoleList",
+        "operationId": "sys/UserQueryUserRoleList",
+        "parameters": [
+          {
+            "type": "integer",
+            "name": "userId",
+            "in": "query",
+            "required": true
+          },
+          {
+            "type": "integer",
+            "default": 1,
+            "name": "current",
+            "in": "query",
+            "required": true
+          },
+          {
+            "type": "integer",
+            "default": 20,
+            "name": "pageSize",
+            "in": "query",
+            "required": true
+          },
+          {
+            "type": "string",
+            "description": "角色名称",
+            "name": "roleName",
+            "in": "query",
+            "allowEmptyValue": true
+          },
+          {
+            "type": "string",
+            "description": "权限字符",
+            "name": "roleKey",
+            "in": "query",
+            "allowEmptyValue": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "data": {
+                  "type": "object",
+                  "required": [
+                    "roleList",
+                    "roleIds"
+                  ],
+                  "properties": {
+                    "roleIds": {
+                      "type": "array",
+                      "items": {
+                        "type": "integer"
+                      }
+                    },
+                    "roleList": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "required": [
+                          "id",
+                          "roleName",
+                          "roleKey",
+                          "dataScope",
+                          "status",
+                          "remark",
+                          "delFlag",
+                          "createBy",
+                          "createTime",
+                          "updateBy",
+                          "updateTime"
+                        ],
+                        "properties": {
+                          "createBy": {
+                            "description": "创建者",
+                            "type": "string"
+                          },
+                          "createTime": {
+                            "description": "创建时间",
+                            "type": "string"
+                          },
+                          "dataScope": {
+                            "description": "数据范围（1：全部数据权限 2：自定数据权限 3：本部门数据权限 4：本部门及以下数据权限）",
+                            "type": "integer"
+                          },
+                          "delFlag": {
+                            "description": "删除标志（0代表删除 1代表存在）",
+                            "type": "integer"
+                          },
+                          "id": {
+                            "description": "角色id",
+                            "type": "integer"
+                          },
+                          "remark": {
+                            "description": "备注",
+                            "type": "string"
+                          },
+                          "roleKey": {
+                            "description": "角色权限字符串",
+                            "type": "string"
+                          },
+                          "roleName": {
+                            "description": "名称",
+                            "type": "string"
+                          },
+                          "status": {
+                            "description": "状态(1:正常，0:禁用)",
+                            "type": "integer"
+                          },
+                          "updateBy": {
+                            "description": "更新者",
+                            "type": "string"
+                          },
+                          "updateTime": {
+                            "description": "更新时间",
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/sys/user/reSetPassword": {
+      "post": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "用户操作"
+        ],
+        "summary": "ReSetPassword",
+        "operationId": "sys/UserReSetPassword",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": [
+                "userId"
+              ],
+              "properties": {
+                "userId": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/sys/user/updateUser": {
+      "post": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "用户操作"
+        ],
+        "summary": "UpdateUser",
+        "operationId": "sys/UserUpdateUser",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": [
+                "id",
+                "mobile",
+                "userName",
+                "nickName",
+                "userType",
+                "email",
+                "status",
+                "deptId",
+                "postIds"
+              ],
+              "properties": {
+                "avatar": {
+                  "description": "头像路径",
+                  "type": "string"
+                },
+                "deptId": {
+                  "description": "部门ID",
+                  "type": "integer"
+                },
+                "email": {
+                  "description": "用户邮箱",
+                  "type": "string"
+                },
+                "id": {
+                  "description": "用户id",
+                  "type": "integer"
+                },
+                "mobile": {
+                  "description": "手机号码",
+                  "type": "string"
+                },
+                "nickName": {
+                  "description": "用户昵称",
+                  "type": "string"
+                },
+                "postIds": {
+                  "description": "部门id",
+                  "type": "array",
+                  "items": {
+                    "type": "integer"
+                  }
+                },
+                "remark": {
+                  "description": "备注",
+                  "type": "string"
+                },
+                "status": {
+                  "description": "状态(1:正常，0:禁用)",
+                  "type": "integer"
+                },
+                "userName": {
+                  "description": "用户账号",
+                  "type": "string"
+                },
+                "userType": {
+                  "description": "用户类型（00系统用户）",
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/sys/user/updateUserRoleList": {
+      "post": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "用户操作"
+        ],
+        "summary": "UpdateUserRoleList",
+        "operationId": "sys/UserUpdateUserRoleList",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": [
+                "userId",
+                "roleIds"
+              ],
+              "properties": {
+                "roleIds": {
+                  "type": "array",
+                  "items": {
+                    "type": "integer"
+                  }
+                },
+                "userId": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/sys/user/updateUserStatus": {
+      "post": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "用户操作"
+        ],
+        "summary": "UpdateUserStatus",
+        "operationId": "sys/UserUpdateUserStatus",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": [
+                "ids",
+                "status"
+              ],
+              "properties": {
+                "ids": {
+                  "description": "用户id",
+                  "type": "array",
+                  "items": {
+                    "type": "integer"
+                  }
+                },
+                "status": {
+                  "description": "状态",
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "apiKey": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
+    },
+    "petstore_auth": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "http://swagger.io/api/oauth/dialog",
+      "scopes": {
+        "read:pets": "read your pets",
+        "write:pets": "modify pets in your account"
+      }
+    }
+  },
+  "x-date": "2025-07-07 18:01:25",
+  "x-description": "This is a goctl generated swagger file.",
+  "x-github": "https://github.com/zeromicro/go-zero",
+  "x-go-zero-doc": "https://go-zero.dev/",
+  "x-goctl-version": "1.8.4"
+}

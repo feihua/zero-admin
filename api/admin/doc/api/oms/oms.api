@@ -1,0 +1,16 @@
+import "./order_main.api"
+import "./order_company_address.api"
+import "./order_return.api"
+import "./order_return_reason.api"
+import "./order_setting.api"
+
+
+info (
+	title: "订单管理 API"
+	description:   "订单管理相关接口"
+	schemes: "http"
+	version: "v1"
+	securityDefinitionsFromJson: `{"apiKey":{"type":"apiKey","name":"Authorization","in":"header"},"petstore_auth":{"type":"oauth2","authorizationUrl":"http://swagger.io/api/oauth/dialog","flow":"implicit","scopes":{"write:pets":"modify pets in your account","read:pets":"read your pets"}}}`
+
+)
+

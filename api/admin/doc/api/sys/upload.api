@@ -17,6 +17,8 @@ type (
 	middleware: CheckUrl
 	group:      sys/upload
 	prefix:     /api/sys
+	tags: "文件上传"
+	authType: apiKey
 )
 service admin-api {
 	//上传文件

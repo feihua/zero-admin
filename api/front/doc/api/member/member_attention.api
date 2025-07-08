@@ -38,9 +38,11 @@ type (
 )
 
 @server (
-	jwt:    Auth
-	group:  member/attention
-	prefix: /api/member
+	jwt:      Auth
+	group:    member/attention
+	prefix:   /api/member
+	tags:     "品牌关注管理"
+	authType: apiKey
 )
 service front-api {
 	//添加品牌关注

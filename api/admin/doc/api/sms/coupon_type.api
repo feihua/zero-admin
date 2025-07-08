@@ -95,6 +95,8 @@ type (
 	middleware: CheckUrl
 	group:      sms/coupon_type
 	prefix:     /api/sms/couponType
+	tags: "优惠券类型管理"
+	authType: apiKey
 )
 service admin-api {
 	// 添加优惠券类型

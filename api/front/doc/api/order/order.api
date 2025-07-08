@@ -228,9 +228,11 @@ type ReturnApplyResp {
 }
 
 @server (
-	jwt:    Auth
-	group:  order/order
-	prefix: /api/order
+	jwt:      Auth
+	group:    order/order
+	prefix:   /api/order
+	tags:     "订单管理"
+	authType: apiKey
 )
 service front-api {
 	//根据购物车信息生成确认单信息

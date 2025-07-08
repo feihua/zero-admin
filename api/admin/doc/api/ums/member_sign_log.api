@@ -53,6 +53,8 @@ type (
 	middleware: CheckUrl
 	group:      ums/member_sign
 	prefix:     /api/ums/sign
+	tags: "会员签到记录管理"
+	authType: apiKey
 )
 service admin-api {
 	// 查询会员签到记录详情

@@ -86,6 +86,8 @@ type (
 	middleware: CheckUrl
 	group:      sys/dict_type
 	prefix:     /api/sys/dictType
+	tags: "字典类型管理"
+	authType: apiKey
 )
 service admin-api {
 	// 添加字典类型

@@ -91,6 +91,8 @@ type (
 	middleware: CheckUrl
 	group:      ums/member_consume_setting
 	prefix:     /api/ums/consumeSetting
+	tags: "积分消费设置管理"
+	authType: apiKey
 )
 service admin-api {
 	// 添加积分消费设置

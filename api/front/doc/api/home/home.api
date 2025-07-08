@@ -1,12 +1,11 @@
 import "./home_advertise.api"
 import "./home_recommend_subject.api"
-import "../product/product_brand.api"
-import "../product/product.api"
 
 info (
-	desc:   "首页数据"
-	author: "koobe"
-	email:  "1002219331@qq.com"
+	desc:        "首页数据"
+	description: "首页数据相关接口"
+	schemes:     "http"
+	version:     "v1"
 )
 
 type HomeResp {
@@ -17,24 +16,73 @@ type HomeResp {
 
 type Data {
 	AdvertiseList      []AdvertiseList    `json:"advertiseList"` //获取首页广告
-	BrandList          []BrandData        `json:"brandList"` //获取推荐品牌
+	BrandList          []IndexBrandData   `json:"brandList"` //获取推荐品牌
 	HomeFlashPromotion HomeFlashPromotion `json:"homeFlashPromotion"` //获取秒杀信息
-	NewProductList     []ProductData      `json:"newProductList"` //获取新品推荐
-	HotProductList     []ProductData      `json:"hotProductList"` //获取人气推荐
+	NewProductList     []IndexProductData `json:"newProductList"` //获取新品推荐
+	HotProductList     []IndexProductData `json:"hotProductList"` //获取人气推荐
 	SubjectList        []SubjectList      `json:"subjectList"` //获取推荐专题
 }
 
 type HomeFlashPromotion {
-	StartTime     string        `json:"startTime"`
-	EndTime       string        `json:"endTime"`
-	NextStartTime string        `json:"nextStartTime"`
-	NextEndTime   string        `json:"nextEndTime"`
-	ProductList   []ProductData `json:"productList"`
+	StartTime     string             `json:"startTime"`
+	EndTime       string             `json:"endTime"`
+	NextStartTime string             `json:"nextStartTime"`
+	NextEndTime   string             `json:"nextEndTime"`
+	ProductList   []IndexProductData `json:"productList"`
+}
+
+type IndexBrandData {
+	Id                  int64  `json:"id"` //
+	Name                string `json:"name"` //品牌名称
+	Logo                string `json:"logo"` //品牌logo
+	BigPic              string `json:"bigPic"` //专区大图
+	Description         string `json:"description"` //描述
+	FirstLetter         string `json:"firstLetter"` //首字母
+	Sort                int32  `json:"sort"` //排序
+	RecommendStatus     int32  `json:"recommendStatus"` //推荐状态
+	ProductCount        int32  `json:"productCount"` //产品数量
+	ProductCommentCount int32  `json:"productCommentCount"` //产品评论数量
+}
+
+type IndexProductData {
+	Id                  int64   `json:"id"` //商品SpuId
+	Name                string  `json:"name"` //商品名称
+	ProductSn           string  `json:"productSn"` //商品货号
+	CategoryId          int64   `json:"categoryId"` //商品分类ID
+	CategoryIds         string  `json:"categoryIds"` //商品分类ID集合
+	CategoryName        string  `json:"categoryName"` //商品分类名称
+	BrandId             int64   `json:"brandId"` //品牌ID
+	BrandName           string  `json:"brandName"` //品牌名称
+	Unit                string  `json:"unit"` //单位
+	Weight              float32 `json:"weight"` //重量(kg)
+	Keywords            string  `json:"keywords"` //关键词
+	Brief               string  `json:"brief"` //简介
+	Description         string  `json:"description"` //详细描述
+	AlbumPics           string  `json:"albumPics"` //画册图片，最多8张，以逗号分割
+	MainPic             string  `json:"mainPic"` //主图
+	PriceRange          string  `json:"priceRange"` //价格区间
+	PublishStatus       int32   `json:"publishStatus"` //上架状态：0-下架，1-上架
+	NewStatus           int32   `json:"newStatus"` //新品状态:0->不是新品；1->新品
+	RecommendStatus     int32   `json:"recommendStatus"` //推荐状态；0->不推荐；1->推荐
+	VerifyStatus        int32   `json:"verifyStatus"` //审核状态：0->未审核；1->审核通过
+	PreviewStatus       int32   `json:"previewStatus"` //是否为预告商品：0->不是；1->是
+	Sort                int32   `json:"sort"` //排序
+	NewStatusSort       int32   `json:"newStatusSort"` //新品排序
+	RecommendStatusSort int32   `json:"recommendStatusSort"` //推荐排序
+	Sales               int32   `json:"sales"` //销量
+	Stock               int32   `json:"stock"` //库存
+	LowStock            int32   `json:"lowStock"` //预警库存
+	PromotionType       int32   `json:"promotionType"` //促销类型：0->没有促销使用原价;1->使用促销价；2->使用会员价；3->使用阶梯价格；4->使用满减价格；5->秒杀
+	DetailTitle         string  `json:"detailTitle"` //详情标题
+	DetailDesc          string  `json:"detailDesc"` //详情描述
+	DetailHtml          string  `json:"detailHtml"` //产品详情网页内容
+	DetailMobileHtml    string  `json:"detailMobileHtml"` //移动端网页详情
 }
 
 @server (
 	group:  home
 	prefix: /api/home
+	tags:   "获取首页数据"
 )
 service front-api {
 	//首页内容信息展示

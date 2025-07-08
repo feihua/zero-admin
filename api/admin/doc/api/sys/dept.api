@@ -97,6 +97,8 @@ type (
 	middleware: CheckUrl
 	group:      sys/dept
 	prefix:     /api/sys/dept
+	tags: "部门管理"
+	authType: apiKey
 )
 service admin-api {
 	// 添加部门

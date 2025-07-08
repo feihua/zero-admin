@@ -1,0 +1,3486 @@
+{
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "schemes": [
+    "http"
+  ],
+  "swagger": "2.0",
+  "info": {
+    "description": "订单管理相关接口",
+    "title": "订单管理 API",
+    "version": "v1"
+  },
+  "basePath": "/",
+  "paths": {
+    "/api/oms/companyAddress/addCompanyAddress": {
+      "post": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "公司收发货地址管理"
+        ],
+        "summary": "AddCompanyAddress",
+        "operationId": "oms/CompanyAddressAddCompanyAddress",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": [
+                "addressName",
+                "name",
+                "phone",
+                "province",
+                "city",
+                "region",
+                "detailAddress",
+                "sendStatus",
+                "receiveStatus"
+              ],
+              "properties": {
+                "addressName": {
+                  "description": "地址名称",
+                  "type": "string"
+                },
+                "city": {
+                  "description": "市",
+                  "type": "string"
+                },
+                "detailAddress": {
+                  "description": "详细地址",
+                  "type": "string"
+                },
+                "name": {
+                  "description": "收发货人姓名",
+                  "type": "string"
+                },
+                "phone": {
+                  "description": "收货人电话",
+                  "type": "string"
+                },
+                "province": {
+                  "description": "省/直辖市",
+                  "type": "string"
+                },
+                "receiveStatus": {
+                  "description": "默认收货地址：0-\u003e否；1-\u003e是",
+                  "type": "integer"
+                },
+                "region": {
+                  "description": "区",
+                  "type": "string"
+                },
+                "sendStatus": {
+                  "description": "默认发货地址：0-\u003e否；1-\u003e是",
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/oms/companyAddress/deleteCompanyAddress": {
+      "get": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "公司收发货地址管理"
+        ],
+        "summary": "DeleteCompanyAddress",
+        "operationId": "oms/CompanyAddressDeleteCompanyAddress",
+        "parameters": [
+          {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            },
+            "name": "ids",
+            "in": "query",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/oms/companyAddress/queryCompanyAddressDetail": {
+      "get": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "公司收发货地址管理"
+        ],
+        "summary": "QueryCompanyAddressDetail",
+        "operationId": "oms/CompanyAddressQueryCompanyAddressDetail",
+        "parameters": [
+          {
+            "type": "integer",
+            "name": "id",
+            "in": "query",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "data": {
+                  "type": "object",
+                  "required": [
+                    "id",
+                    "addressName",
+                    "name",
+                    "phone",
+                    "province",
+                    "city",
+                    "region",
+                    "detailAddress",
+                    "sendStatus",
+                    "receiveStatus",
+                    "createBy",
+                    "createTime",
+                    "updateBy",
+                    "updateTime"
+                  ],
+                  "properties": {
+                    "addressName": {
+                      "description": "地址名称",
+                      "type": "string"
+                    },
+                    "city": {
+                      "description": "市",
+                      "type": "string"
+                    },
+                    "createBy": {
+                      "description": "创建人ID",
+                      "type": "integer"
+                    },
+                    "createTime": {
+                      "description": "创建时间",
+                      "type": "string"
+                    },
+                    "detailAddress": {
+                      "description": "详细地址",
+                      "type": "string"
+                    },
+                    "id": {
+                      "description": "主键ID",
+                      "type": "integer"
+                    },
+                    "name": {
+                      "description": "收发货人姓名",
+                      "type": "string"
+                    },
+                    "phone": {
+                      "description": "收货人电话",
+                      "type": "string"
+                    },
+                    "province": {
+                      "description": "省/直辖市",
+                      "type": "string"
+                    },
+                    "receiveStatus": {
+                      "description": "默认收货地址：0-\u003e否；1-\u003e是",
+                      "type": "integer"
+                    },
+                    "region": {
+                      "description": "区",
+                      "type": "string"
+                    },
+                    "sendStatus": {
+                      "description": "默认发货地址：0-\u003e否；1-\u003e是",
+                      "type": "integer"
+                    },
+                    "updateBy": {
+                      "description": "更新人ID",
+                      "type": "integer"
+                    },
+                    "updateTime": {
+                      "description": "更新时间",
+                      "type": "string"
+                    }
+                  }
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/oms/companyAddress/queryCompanyAddressList": {
+      "get": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "公司收发货地址管理"
+        ],
+        "summary": "QueryCompanyAddressList",
+        "operationId": "oms/CompanyAddressQueryCompanyAddressList",
+        "parameters": [
+          {
+            "type": "integer",
+            "default": 1,
+            "description": "第几页",
+            "name": "current",
+            "in": "query",
+            "required": true
+          },
+          {
+            "type": "integer",
+            "default": 20,
+            "description": "每页的数量",
+            "name": "pageSize",
+            "in": "query",
+            "required": true
+          },
+          {
+            "type": "string",
+            "description": "地址名称",
+            "name": "addressName",
+            "in": "query",
+            "allowEmptyValue": true
+          },
+          {
+            "type": "string",
+            "description": "收发货人姓名",
+            "name": "name",
+            "in": "query",
+            "allowEmptyValue": true
+          },
+          {
+            "type": "string",
+            "description": "收货人电话",
+            "name": "phone",
+            "in": "query",
+            "allowEmptyValue": true
+          },
+          {
+            "type": "integer",
+            "default": 2,
+            "description": "默认发货地址：0-\u003e否；1-\u003e是",
+            "name": "sendStatus",
+            "in": "query",
+            "required": true
+          },
+          {
+            "type": "integer",
+            "default": 2,
+            "description": "默认收货地址：0-\u003e否；1-\u003e是",
+            "name": "receiveStatus",
+            "in": "query",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "current": {
+                  "type": "integer",
+                  "default": 1,
+                  "example": 1
+                },
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "required": [
+                      "id",
+                      "addressName",
+                      "name",
+                      "phone",
+                      "province",
+                      "city",
+                      "region",
+                      "detailAddress",
+                      "sendStatus",
+                      "receiveStatus",
+                      "createBy",
+                      "createTime",
+                      "updateBy",
+                      "updateTime"
+                    ],
+                    "properties": {
+                      "addressName": {
+                        "description": "地址名称",
+                        "type": "string"
+                      },
+                      "city": {
+                        "description": "市",
+                        "type": "string"
+                      },
+                      "createBy": {
+                        "description": "创建人ID",
+                        "type": "integer"
+                      },
+                      "createTime": {
+                        "description": "创建时间",
+                        "type": "string"
+                      },
+                      "detailAddress": {
+                        "description": "详细地址",
+                        "type": "string"
+                      },
+                      "id": {
+                        "description": "主键ID",
+                        "type": "integer"
+                      },
+                      "name": {
+                        "description": "收发货人姓名",
+                        "type": "string"
+                      },
+                      "phone": {
+                        "description": "收货人电话",
+                        "type": "string"
+                      },
+                      "province": {
+                        "description": "省/直辖市",
+                        "type": "string"
+                      },
+                      "receiveStatus": {
+                        "description": "默认收货地址：0-\u003e否；1-\u003e是",
+                        "type": "integer"
+                      },
+                      "region": {
+                        "description": "区",
+                        "type": "string"
+                      },
+                      "sendStatus": {
+                        "description": "默认发货地址：0-\u003e否；1-\u003e是",
+                        "type": "integer"
+                      },
+                      "updateBy": {
+                        "description": "更新人ID",
+                        "type": "integer"
+                      },
+                      "updateTime": {
+                        "description": "更新时间",
+                        "type": "string"
+                      }
+                    }
+                  }
+                },
+                "message": {
+                  "type": "string"
+                },
+                "pageSize": {
+                  "type": "integer",
+                  "default": 20,
+                  "example": 20
+                },
+                "success": {
+                  "type": "boolean"
+                },
+                "total": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/oms/companyAddress/updateCompanyAddress": {
+      "post": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "公司收发货地址管理"
+        ],
+        "summary": "UpdateCompanyAddress",
+        "operationId": "oms/CompanyAddressUpdateCompanyAddress",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": [
+                "id",
+                "addressName",
+                "name",
+                "phone",
+                "province",
+                "city",
+                "region",
+                "detailAddress",
+                "sendStatus",
+                "receiveStatus"
+              ],
+              "properties": {
+                "addressName": {
+                  "description": "地址名称",
+                  "type": "string"
+                },
+                "city": {
+                  "description": "市",
+                  "type": "string"
+                },
+                "detailAddress": {
+                  "description": "详细地址",
+                  "type": "string"
+                },
+                "id": {
+                  "description": "主键ID",
+                  "type": "integer"
+                },
+                "name": {
+                  "description": "收发货人姓名",
+                  "type": "string"
+                },
+                "phone": {
+                  "description": "收货人电话",
+                  "type": "string"
+                },
+                "province": {
+                  "description": "省/直辖市",
+                  "type": "string"
+                },
+                "receiveStatus": {
+                  "description": "默认收货地址：0-\u003e否；1-\u003e是",
+                  "type": "integer"
+                },
+                "region": {
+                  "description": "区",
+                  "type": "string"
+                },
+                "sendStatus": {
+                  "description": "默认发货地址：0-\u003e否；1-\u003e是",
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/oms/companyAddress/updateCompanyAddressReceiveStatus": {
+      "post": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "公司收发货地址管理"
+        ],
+        "summary": "UpdateCompanyAddressReceiveStatus",
+        "operationId": "oms/CompanyAddressUpdateCompanyAddressReceiveStatus",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": [
+                "id",
+                "status"
+              ],
+              "properties": {
+                "id": {
+                  "description": "主键ID",
+                  "type": "integer"
+                },
+                "status": {
+                  "description": "默认发货地址：0-\u003e否；1-\u003e是",
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/oms/companyAddress/updateCompanyAddressSendStatus": {
+      "post": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "公司收发货地址管理"
+        ],
+        "summary": "UpdateCompanyAddressSendStatus",
+        "operationId": "oms/CompanyAddressUpdateCompanyAddressSendStatus",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": [
+                "id",
+                "status"
+              ],
+              "properties": {
+                "id": {
+                  "description": "主键ID",
+                  "type": "integer"
+                },
+                "status": {
+                  "description": "默认发货地址：0-\u003e否；1-\u003e是",
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/oms/order/closeOrder": {
+      "post": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "订单管理"
+        ],
+        "summary": "CloseOrder",
+        "operationId": "oms/OrderMainCloseOrder",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": [
+                "ids",
+                "note"
+              ],
+              "properties": {
+                "ids": {
+                  "description": "订单id",
+                  "type": "array",
+                  "items": {
+                    "type": "integer"
+                  }
+                },
+                "note": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/oms/order/deleteOrderMain": {
+      "get": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "订单管理"
+        ],
+        "summary": "DeleteOrderMain",
+        "operationId": "oms/OrderMainDeleteOrderMain",
+        "parameters": [
+          {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            },
+            "name": "ids",
+            "in": "query",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/oms/order/delivery": {
+      "post": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "订单管理"
+        ],
+        "summary": "Delivery",
+        "operationId": "oms/OrderMainDelivery",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": [
+                "orderId",
+                "deliveryCompany",
+                "deliverySn"
+              ],
+              "properties": {
+                "deliveryCompany": {
+                  "description": "物流公司",
+                  "type": "string"
+                },
+                "deliverySn": {
+                  "description": "物流单号",
+                  "type": "string"
+                },
+                "orderId": {
+                  "description": "订单id",
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/oms/order/queryOrderMainDetail": {
+      "get": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "订单管理"
+        ],
+        "summary": "QueryOrderMainDetail",
+        "operationId": "oms/OrderMainQueryOrderMainDetail",
+        "parameters": [
+          {
+            "type": "integer",
+            "name": "id",
+            "in": "query",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "data": {
+                  "type": "object",
+                  "required": [
+                    "id",
+                    "orderNo",
+                    "userId",
+                    "orderStatus",
+                    "totalAmount",
+                    "promotionAmount",
+                    "couponAmount",
+                    "pointsAmount",
+                    "discountAmount",
+                    "freightAmount",
+                    "payAmount",
+                    "payType",
+                    "payTime",
+                    "deliveryTime",
+                    "receiveTime",
+                    "commentTime",
+                    "sourceType",
+                    "expressOrderNumber",
+                    "usePoints",
+                    "receiveStatus",
+                    "remark",
+                    "createTime",
+                    "updateTime",
+                    "orderOperationLogData",
+                    "orderItemData"
+                  ],
+                  "properties": {
+                    "commentTime": {
+                      "description": "评价时间",
+                      "type": "string"
+                    },
+                    "couponAmount": {
+                      "description": "优惠券金额",
+                      "type": "number"
+                    },
+                    "createTime": {
+                      "description": "提交时间",
+                      "type": "string"
+                    },
+                    "deliveryTime": {
+                      "description": "发货时间",
+                      "type": "string"
+                    },
+                    "discountAmount": {
+                      "description": "优惠金额",
+                      "type": "number"
+                    },
+                    "expressOrderNumber": {
+                      "description": "快递单号",
+                      "type": "string"
+                    },
+                    "freightAmount": {
+                      "description": "运费金额",
+                      "type": "number"
+                    },
+                    "id": {
+                      "type": "integer"
+                    },
+                    "orderItemData": {
+                      "description": "商品数据",
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "required": [
+                          "id",
+                          "orderId",
+                          "orderNo",
+                          "orderItemStatus",
+                          "skuId",
+                          "skuName",
+                          "skuPic",
+                          "skuPrice",
+                          "skuQuantity",
+                          "specData",
+                          "skuTotalAmount",
+                          "promotionAmount",
+                          "couponAmount",
+                          "pointsAmount",
+                          "discountAmount",
+                          "realAmount",
+                          "createTime",
+                          "isDeleted"
+                        ],
+                        "properties": {
+                          "couponAmount": {
+                            "description": "优惠券分摊金额",
+                            "type": "number"
+                          },
+                          "createTime": {
+                            "description": "创建时间",
+                            "type": "string"
+                          },
+                          "discountAmount": {
+                            "description": "优惠分摊金额",
+                            "type": "number"
+                          },
+                          "id": {
+                            "type": "integer"
+                          },
+                          "isDeleted": {
+                            "description": "是否删除",
+                            "type": "integer"
+                          },
+                          "orderId": {
+                            "description": "订单ID",
+                            "type": "integer"
+                          },
+                          "orderItemStatus": {
+                            "description": "订单商品状态：1-正常,2-退货申请中,3-已退货,4-已拒绝",
+                            "type": "integer"
+                          },
+                          "orderNo": {
+                            "description": "订单编号",
+                            "type": "string"
+                          },
+                          "pointsAmount": {
+                            "description": "积分分摊金额",
+                            "type": "number"
+                          },
+                          "promotionAmount": {
+                            "description": "促销分摊金额",
+                            "type": "number"
+                          },
+                          "realAmount": {
+                            "description": "实付金额",
+                            "type": "number"
+                          },
+                          "skuId": {
+                            "description": "商品SKU ID",
+                            "type": "integer"
+                          },
+                          "skuName": {
+                            "description": "商品名称",
+                            "type": "string"
+                          },
+                          "skuPic": {
+                            "description": "商品图片",
+                            "type": "string"
+                          },
+                          "skuPrice": {
+                            "description": "商品单价",
+                            "type": "number"
+                          },
+                          "skuQuantity": {
+                            "description": "商品数量",
+                            "type": "integer"
+                          },
+                          "skuTotalAmount": {
+                            "description": "商品总金额",
+                            "type": "number"
+                          },
+                          "specData": {
+                            "description": "规格数据",
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    "orderNo": {
+                      "description": "订单编号",
+                      "type": "string"
+                    },
+                    "orderOperationLogData": {
+                      "description": "操作历史数据",
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "required": [
+                          "id",
+                          "orderId",
+                          "orderNo",
+                          "operationType",
+                          "operatorId",
+                          "operatorType",
+                          "operatorNote",
+                          "createTime"
+                        ],
+                        "properties": {
+                          "createTime": {
+                            "description": "操作时间",
+                            "type": "string"
+                          },
+                          "id": {
+                            "description": "主键ID",
+                            "type": "integer"
+                          },
+                          "operationType": {
+                            "description": "操作类型：1-创建订单，2-支付订单，3-发货，4-确认收货，5-取消订单，6-退款",
+                            "type": "integer"
+                          },
+                          "operatorId": {
+                            "description": "操作人ID",
+                            "type": "integer"
+                          },
+                          "operatorNote": {
+                            "description": "操作备注",
+                            "type": "string"
+                          },
+                          "operatorType": {
+                            "description": "操作人类型：1-用户，2-系统，3-管理员",
+                            "type": "integer"
+                          },
+                          "orderId": {
+                            "description": "订单ID",
+                            "type": "integer"
+                          },
+                          "orderNo": {
+                            "description": "订单编号",
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    "orderStatus": {
+                      "description": "订单状态：1-待支付,2-已支付,3-已发货,4-已完成,5-已取消,6-已退款,7-售后中",
+                      "type": "integer"
+                    },
+                    "payAmount": {
+                      "description": "实付金额",
+                      "type": "number"
+                    },
+                    "payTime": {
+                      "description": "支付时间",
+                      "type": "string"
+                    },
+                    "payType": {
+                      "description": "支付方式：1-支付宝,2-微信,3-银联",
+                      "type": "integer"
+                    },
+                    "pointsAmount": {
+                      "description": "积分金额",
+                      "type": "number"
+                    },
+                    "promotionAmount": {
+                      "description": "促销金额",
+                      "type": "number"
+                    },
+                    "receiveStatus": {
+                      "description": "是否确认收货：0-\u003e否,1-\u003e是",
+                      "type": "integer"
+                    },
+                    "receiveTime": {
+                      "description": "收货时间",
+                      "type": "string"
+                    },
+                    "remark": {
+                      "description": "订单备注",
+                      "type": "string"
+                    },
+                    "sourceType": {
+                      "description": "订单来源：1-APP,2-PC,3-小程序",
+                      "type": "integer"
+                    },
+                    "totalAmount": {
+                      "description": "订单总金额",
+                      "type": "number"
+                    },
+                    "updateTime": {
+                      "type": "string"
+                    },
+                    "usePoints": {
+                      "description": "下单时使用的积分",
+                      "type": "integer"
+                    },
+                    "userId": {
+                      "description": "用户ID",
+                      "type": "integer"
+                    }
+                  }
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/oms/order/queryOrderMainList": {
+      "get": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "订单管理"
+        ],
+        "summary": "QueryOrderMainList",
+        "operationId": "oms/OrderMainQueryOrderMainList",
+        "parameters": [
+          {
+            "type": "integer",
+            "default": 1,
+            "description": "第几页",
+            "name": "current",
+            "in": "query",
+            "required": true
+          },
+          {
+            "type": "integer",
+            "default": 20,
+            "description": "每页的数量",
+            "name": "pageSize",
+            "in": "query",
+            "required": true
+          },
+          {
+            "type": "string",
+            "description": "订单编号",
+            "name": "orderNo",
+            "in": "query",
+            "allowEmptyValue": true
+          },
+          {
+            "type": "integer",
+            "description": "用户ID",
+            "name": "userId",
+            "in": "query",
+            "allowEmptyValue": true
+          },
+          {
+            "type": "integer",
+            "default": 2,
+            "description": "订单状态：1-待支付,2-已支付,3-已发货,4-已完成,5-已取消,6-已退款,7-售后中",
+            "name": "orderStatus",
+            "in": "query",
+            "required": true
+          },
+          {
+            "type": "integer",
+            "description": "支付方式：1-支付宝,2-微信,3-银联",
+            "name": "payType",
+            "in": "query",
+            "allowEmptyValue": true
+          },
+          {
+            "type": "integer",
+            "description": "订单来源：1-APP,2-PC,3-小程序",
+            "name": "sourceType",
+            "in": "query",
+            "allowEmptyValue": true
+          },
+          {
+            "type": "string",
+            "description": "快递单号",
+            "name": "expressOrderNumber",
+            "in": "query",
+            "allowEmptyValue": true
+          },
+          {
+            "type": "integer",
+            "default": 2,
+            "description": "是否确认收货：0-\u003e否,1-\u003e是",
+            "name": "receiveStatus",
+            "in": "query",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "current": {
+                  "type": "integer",
+                  "default": 1,
+                  "example": 1
+                },
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "required": [
+                      "id",
+                      "orderNo",
+                      "userId",
+                      "orderStatus",
+                      "totalAmount",
+                      "promotionAmount",
+                      "couponAmount",
+                      "pointsAmount",
+                      "discountAmount",
+                      "freightAmount",
+                      "payAmount",
+                      "payType",
+                      "payTime",
+                      "deliveryTime",
+                      "receiveTime",
+                      "commentTime",
+                      "sourceType",
+                      "expressOrderNumber",
+                      "usePoints",
+                      "receiveStatus",
+                      "remark",
+                      "createTime",
+                      "updateTime",
+                      "orderOperationLogData",
+                      "orderItemData"
+                    ],
+                    "properties": {
+                      "commentTime": {
+                        "description": "评价时间",
+                        "type": "string"
+                      },
+                      "couponAmount": {
+                        "description": "优惠券金额",
+                        "type": "number"
+                      },
+                      "createTime": {
+                        "description": "提交时间",
+                        "type": "string"
+                      },
+                      "deliveryTime": {
+                        "description": "发货时间",
+                        "type": "string"
+                      },
+                      "discountAmount": {
+                        "description": "优惠金额",
+                        "type": "number"
+                      },
+                      "expressOrderNumber": {
+                        "description": "快递单号",
+                        "type": "string"
+                      },
+                      "freightAmount": {
+                        "description": "运费金额",
+                        "type": "number"
+                      },
+                      "id": {
+                        "type": "integer"
+                      },
+                      "orderItemData": {
+                        "description": "商品数据",
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "required": [
+                            "id",
+                            "orderId",
+                            "orderNo",
+                            "orderItemStatus",
+                            "skuId",
+                            "skuName",
+                            "skuPic",
+                            "skuPrice",
+                            "skuQuantity",
+                            "specData",
+                            "skuTotalAmount",
+                            "promotionAmount",
+                            "couponAmount",
+                            "pointsAmount",
+                            "discountAmount",
+                            "realAmount",
+                            "createTime",
+                            "isDeleted"
+                          ],
+                          "properties": {
+                            "couponAmount": {
+                              "description": "优惠券分摊金额",
+                              "type": "number"
+                            },
+                            "createTime": {
+                              "description": "创建时间",
+                              "type": "string"
+                            },
+                            "discountAmount": {
+                              "description": "优惠分摊金额",
+                              "type": "number"
+                            },
+                            "id": {
+                              "type": "integer"
+                            },
+                            "isDeleted": {
+                              "description": "是否删除",
+                              "type": "integer"
+                            },
+                            "orderId": {
+                              "description": "订单ID",
+                              "type": "integer"
+                            },
+                            "orderItemStatus": {
+                              "description": "订单商品状态：1-正常,2-退货申请中,3-已退货,4-已拒绝",
+                              "type": "integer"
+                            },
+                            "orderNo": {
+                              "description": "订单编号",
+                              "type": "string"
+                            },
+                            "pointsAmount": {
+                              "description": "积分分摊金额",
+                              "type": "number"
+                            },
+                            "promotionAmount": {
+                              "description": "促销分摊金额",
+                              "type": "number"
+                            },
+                            "realAmount": {
+                              "description": "实付金额",
+                              "type": "number"
+                            },
+                            "skuId": {
+                              "description": "商品SKU ID",
+                              "type": "integer"
+                            },
+                            "skuName": {
+                              "description": "商品名称",
+                              "type": "string"
+                            },
+                            "skuPic": {
+                              "description": "商品图片",
+                              "type": "string"
+                            },
+                            "skuPrice": {
+                              "description": "商品单价",
+                              "type": "number"
+                            },
+                            "skuQuantity": {
+                              "description": "商品数量",
+                              "type": "integer"
+                            },
+                            "skuTotalAmount": {
+                              "description": "商品总金额",
+                              "type": "number"
+                            },
+                            "specData": {
+                              "description": "规格数据",
+                              "type": "string"
+                            }
+                          }
+                        }
+                      },
+                      "orderNo": {
+                        "description": "订单编号",
+                        "type": "string"
+                      },
+                      "orderOperationLogData": {
+                        "description": "操作历史数据",
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "required": [
+                            "id",
+                            "orderId",
+                            "orderNo",
+                            "operationType",
+                            "operatorId",
+                            "operatorType",
+                            "operatorNote",
+                            "createTime"
+                          ],
+                          "properties": {
+                            "createTime": {
+                              "description": "操作时间",
+                              "type": "string"
+                            },
+                            "id": {
+                              "description": "主键ID",
+                              "type": "integer"
+                            },
+                            "operationType": {
+                              "description": "操作类型：1-创建订单，2-支付订单，3-发货，4-确认收货，5-取消订单，6-退款",
+                              "type": "integer"
+                            },
+                            "operatorId": {
+                              "description": "操作人ID",
+                              "type": "integer"
+                            },
+                            "operatorNote": {
+                              "description": "操作备注",
+                              "type": "string"
+                            },
+                            "operatorType": {
+                              "description": "操作人类型：1-用户，2-系统，3-管理员",
+                              "type": "integer"
+                            },
+                            "orderId": {
+                              "description": "订单ID",
+                              "type": "integer"
+                            },
+                            "orderNo": {
+                              "description": "订单编号",
+                              "type": "string"
+                            }
+                          }
+                        }
+                      },
+                      "orderStatus": {
+                        "description": "订单状态：1-待支付,2-已支付,3-已发货,4-已完成,5-已取消,6-已退款,7-售后中",
+                        "type": "integer"
+                      },
+                      "payAmount": {
+                        "description": "实付金额",
+                        "type": "number"
+                      },
+                      "payTime": {
+                        "description": "支付时间",
+                        "type": "string"
+                      },
+                      "payType": {
+                        "description": "支付方式：1-支付宝,2-微信,3-银联",
+                        "type": "integer"
+                      },
+                      "pointsAmount": {
+                        "description": "积分金额",
+                        "type": "number"
+                      },
+                      "promotionAmount": {
+                        "description": "促销金额",
+                        "type": "number"
+                      },
+                      "receiveStatus": {
+                        "description": "是否确认收货：0-\u003e否,1-\u003e是",
+                        "type": "integer"
+                      },
+                      "receiveTime": {
+                        "description": "收货时间",
+                        "type": "string"
+                      },
+                      "remark": {
+                        "description": "订单备注",
+                        "type": "string"
+                      },
+                      "sourceType": {
+                        "description": "订单来源：1-APP,2-PC,3-小程序",
+                        "type": "integer"
+                      },
+                      "totalAmount": {
+                        "description": "订单总金额",
+                        "type": "number"
+                      },
+                      "updateTime": {
+                        "type": "string"
+                      },
+                      "usePoints": {
+                        "description": "下单时使用的积分",
+                        "type": "integer"
+                      },
+                      "userId": {
+                        "description": "用户ID",
+                        "type": "integer"
+                      }
+                    }
+                  }
+                },
+                "message": {
+                  "type": "string"
+                },
+                "pageSize": {
+                  "type": "integer",
+                  "default": 20,
+                  "example": 20
+                },
+                "success": {
+                  "type": "boolean"
+                },
+                "total": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/oms/order/updateMoneyInfo": {
+      "post": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "订单管理"
+        ],
+        "summary": "UpdateMoneyInfo",
+        "operationId": "oms/OrderMainUpdateMoneyInfo",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": [
+                "id",
+                "freightAmount",
+                "discountAmount"
+              ],
+              "properties": {
+                "discountAmount": {
+                  "description": "管理员后台调整订单所使用的折扣金额",
+                  "type": "integer"
+                },
+                "freightAmount": {
+                  "description": "运费金额",
+                  "type": "integer"
+                },
+                "id": {
+                  "description": "订单id",
+                  "type": "integer"
+                },
+                "status": {
+                  "description": "订单状态：1-待支付,2-已支付,3-已发货,4-已完成,5-已取消,6-已退款,7-售后中",
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/oms/order/updateNote": {
+      "post": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "订单管理"
+        ],
+        "summary": "UpdateNote",
+        "operationId": "oms/OrderMainUpdateNote",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": [
+                "id"
+              ],
+              "properties": {
+                "id": {
+                  "description": "订单id",
+                  "type": "integer"
+                },
+                "note": {
+                  "description": "订单备注",
+                  "type": "string"
+                },
+                "status": {
+                  "description": "订单状态：1-待支付,2-已支付,3-已发货,4-已完成,5-已取消,6-已退款,7-售后中",
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/oms/order/updateOrderMain": {
+      "post": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "订单管理"
+        ],
+        "summary": "UpdateOrderMain",
+        "operationId": "oms/OrderMainUpdateOrderMain",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": [
+                "id",
+                "orderStatus",
+                "totalAmount",
+                "promotionAmount",
+                "couponAmount",
+                "pointsAmount",
+                "discountAmount",
+                "freightAmount",
+                "payAmount",
+                "sourceType",
+                "expressOrderNumber",
+                "usePoints",
+                "receiveStatus"
+              ],
+              "properties": {
+                "commentTime": {
+                  "description": "评价时间",
+                  "type": "string"
+                },
+                "couponAmount": {
+                  "description": "优惠券金额",
+                  "type": "number"
+                },
+                "deliveryTime": {
+                  "description": "发货时间",
+                  "type": "string"
+                },
+                "discountAmount": {
+                  "description": "优惠金额",
+                  "type": "number"
+                },
+                "expressOrderNumber": {
+                  "description": "快递单号",
+                  "type": "string"
+                },
+                "freightAmount": {
+                  "description": "运费金额",
+                  "type": "number"
+                },
+                "id": {
+                  "type": "integer"
+                },
+                "orderStatus": {
+                  "description": "订单状态：1-待支付,2-已支付,3-已发货,4-已完成,5-已取消,6-已退款,7-售后中",
+                  "type": "integer"
+                },
+                "payAmount": {
+                  "description": "实付金额",
+                  "type": "number"
+                },
+                "payTime": {
+                  "description": "支付时间",
+                  "type": "string"
+                },
+                "payType": {
+                  "description": "支付方式：1-支付宝,2-微信,3-银联",
+                  "type": "integer"
+                },
+                "pointsAmount": {
+                  "description": "积分金额",
+                  "type": "number"
+                },
+                "promotionAmount": {
+                  "description": "促销金额",
+                  "type": "number"
+                },
+                "receiveStatus": {
+                  "description": "是否确认收货：0-\u003e否,1-\u003e是",
+                  "type": "integer"
+                },
+                "receiveTime": {
+                  "description": "收货时间",
+                  "type": "string"
+                },
+                "remark": {
+                  "description": "订单备注",
+                  "type": "string"
+                },
+                "sourceType": {
+                  "description": "订单来源：1-APP,2-PC,3-小程序",
+                  "type": "integer"
+                },
+                "totalAmount": {
+                  "description": "订单总金额",
+                  "type": "number"
+                },
+                "usePoints": {
+                  "description": "下单时使用的积分",
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/oms/orderReturn/queryOrderReturnDetail": {
+      "get": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "退货订单管理"
+        ],
+        "summary": "QueryOrderReturnDetail",
+        "operationId": "oms/OrderReturnQueryOrderReturnDetail",
+        "parameters": [
+          {
+            "type": "integer",
+            "name": "id",
+            "in": "query",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "data": {
+                  "type": "object",
+                  "required": [
+                    "id",
+                    "orderId",
+                    "returnNo",
+                    "memberId",
+                    "status",
+                    "type",
+                    "reason",
+                    "description",
+                    "proofPic",
+                    "refundAmount",
+                    "returnName",
+                    "returnPhone",
+                    "companyAddress",
+                    "createTime",
+                    "handleTime",
+                    "handleNote",
+                    "handleMan",
+                    "receiveTime",
+                    "receiveNote",
+                    "receiveMan",
+                    "refundTime",
+                    "closeTime",
+                    "remark"
+                  ],
+                  "properties": {
+                    "closeTime": {
+                      "description": "关闭时间",
+                      "type": "string"
+                    },
+                    "companyAddress": {
+                      "description": "退货收货地址",
+                      "type": "string"
+                    },
+                    "createTime": {
+                      "description": "申请时间",
+                      "type": "string"
+                    },
+                    "description": {
+                      "description": "问题描述",
+                      "type": "string"
+                    },
+                    "handleMan": {
+                      "description": "处理人员",
+                      "type": "string"
+                    },
+                    "handleNote": {
+                      "description": "处理备注",
+                      "type": "string"
+                    },
+                    "handleTime": {
+                      "description": "处理时间",
+                      "type": "string"
+                    },
+                    "id": {
+                      "description": "主键ID",
+                      "type": "integer"
+                    },
+                    "memberId": {
+                      "description": "会员ID",
+                      "type": "integer"
+                    },
+                    "orderId": {
+                      "description": "关联订单ID",
+                      "type": "integer"
+                    },
+                    "proofPic": {
+                      "description": "凭证图片，逗号分隔",
+                      "type": "string"
+                    },
+                    "reason": {
+                      "description": "退货原因",
+                      "type": "string"
+                    },
+                    "receiveMan": {
+                      "description": "收货人",
+                      "type": "string"
+                    },
+                    "receiveNote": {
+                      "description": "收货备注",
+                      "type": "string"
+                    },
+                    "receiveTime": {
+                      "description": "收货时间",
+                      "type": "string"
+                    },
+                    "refundAmount": {
+                      "description": "退款金额",
+                      "type": "number"
+                    },
+                    "refundTime": {
+                      "description": "退款时间",
+                      "type": "string"
+                    },
+                    "remark": {
+                      "description": "备注",
+                      "type": "string"
+                    },
+                    "returnName": {
+                      "description": "退货人姓名",
+                      "type": "string"
+                    },
+                    "returnNo": {
+                      "description": "退货单号",
+                      "type": "string"
+                    },
+                    "returnPhone": {
+                      "description": "退货人电话",
+                      "type": "string"
+                    },
+                    "status": {
+                      "description": "退货状态（0待审核 1审核通过 2已收货 3已退款 4已拒绝 5已关闭）",
+                      "type": "integer"
+                    },
+                    "type": {
+                      "description": "售后类型（0退货退款 1仅退款 2换货）",
+                      "type": "integer"
+                    }
+                  }
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/oms/orderReturn/queryOrderReturnList": {
+      "get": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "退货订单管理"
+        ],
+        "summary": "QueryOrderReturnList",
+        "operationId": "oms/OrderReturnQueryOrderReturnList",
+        "parameters": [
+          {
+            "type": "integer",
+            "default": 1,
+            "description": "第几页",
+            "name": "current",
+            "in": "query",
+            "required": true
+          },
+          {
+            "type": "integer",
+            "default": 20,
+            "description": "每页的数量",
+            "name": "pageSize",
+            "in": "query",
+            "required": true
+          },
+          {
+            "type": "integer",
+            "description": "关联订单ID",
+            "name": "orderId",
+            "in": "query",
+            "allowEmptyValue": true
+          },
+          {
+            "type": "string",
+            "description": "退货单号",
+            "name": "returnNo",
+            "in": "query",
+            "allowEmptyValue": true
+          },
+          {
+            "type": "integer",
+            "description": "会员ID",
+            "name": "memberId",
+            "in": "query",
+            "allowEmptyValue": true
+          },
+          {
+            "type": "integer",
+            "default": 2,
+            "description": "退货状态（0待审核 1审核通过 2已收货 3已退款 4已拒绝 5已关闭）",
+            "name": "status",
+            "in": "query",
+            "required": true
+          },
+          {
+            "type": "integer",
+            "description": "售后类型（0退货退款 1仅退款 2换货）",
+            "name": "type",
+            "in": "query",
+            "allowEmptyValue": true
+          },
+          {
+            "type": "string",
+            "description": "退货人姓名",
+            "name": "returnName",
+            "in": "query",
+            "allowEmptyValue": true
+          },
+          {
+            "type": "string",
+            "description": "退货人电话",
+            "name": "returnPhone",
+            "in": "query",
+            "allowEmptyValue": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "current": {
+                  "type": "integer",
+                  "default": 1,
+                  "example": 1
+                },
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "required": [
+                      "id",
+                      "orderId",
+                      "returnNo",
+                      "memberId",
+                      "status",
+                      "type",
+                      "reason",
+                      "description",
+                      "proofPic",
+                      "refundAmount",
+                      "returnName",
+                      "returnPhone",
+                      "companyAddress",
+                      "createTime",
+                      "handleTime",
+                      "handleNote",
+                      "handleMan",
+                      "receiveTime",
+                      "receiveNote",
+                      "receiveMan",
+                      "refundTime",
+                      "closeTime",
+                      "remark"
+                    ],
+                    "properties": {
+                      "closeTime": {
+                        "description": "关闭时间",
+                        "type": "string"
+                      },
+                      "companyAddress": {
+                        "description": "退货收货地址",
+                        "type": "string"
+                      },
+                      "createTime": {
+                        "description": "申请时间",
+                        "type": "string"
+                      },
+                      "description": {
+                        "description": "问题描述",
+                        "type": "string"
+                      },
+                      "handleMan": {
+                        "description": "处理人员",
+                        "type": "string"
+                      },
+                      "handleNote": {
+                        "description": "处理备注",
+                        "type": "string"
+                      },
+                      "handleTime": {
+                        "description": "处理时间",
+                        "type": "string"
+                      },
+                      "id": {
+                        "description": "主键ID",
+                        "type": "integer"
+                      },
+                      "memberId": {
+                        "description": "会员ID",
+                        "type": "integer"
+                      },
+                      "orderId": {
+                        "description": "关联订单ID",
+                        "type": "integer"
+                      },
+                      "proofPic": {
+                        "description": "凭证图片，逗号分隔",
+                        "type": "string"
+                      },
+                      "reason": {
+                        "description": "退货原因",
+                        "type": "string"
+                      },
+                      "receiveMan": {
+                        "description": "收货人",
+                        "type": "string"
+                      },
+                      "receiveNote": {
+                        "description": "收货备注",
+                        "type": "string"
+                      },
+                      "receiveTime": {
+                        "description": "收货时间",
+                        "type": "string"
+                      },
+                      "refundAmount": {
+                        "description": "退款金额",
+                        "type": "number"
+                      },
+                      "refundTime": {
+                        "description": "退款时间",
+                        "type": "string"
+                      },
+                      "remark": {
+                        "description": "备注",
+                        "type": "string"
+                      },
+                      "returnName": {
+                        "description": "退货人姓名",
+                        "type": "string"
+                      },
+                      "returnNo": {
+                        "description": "退货单号",
+                        "type": "string"
+                      },
+                      "returnPhone": {
+                        "description": "退货人电话",
+                        "type": "string"
+                      },
+                      "status": {
+                        "description": "退货状态（0待审核 1审核通过 2已收货 3已退款 4已拒绝 5已关闭）",
+                        "type": "integer"
+                      },
+                      "type": {
+                        "description": "售后类型（0退货退款 1仅退款 2换货）",
+                        "type": "integer"
+                      }
+                    }
+                  }
+                },
+                "message": {
+                  "type": "string"
+                },
+                "pageSize": {
+                  "type": "integer",
+                  "default": 20,
+                  "example": 20
+                },
+                "success": {
+                  "type": "boolean"
+                },
+                "total": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/oms/orderReturn/updateOrderReturn": {
+      "post": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "退货订单管理"
+        ],
+        "summary": "UpdateOrderReturn",
+        "operationId": "oms/OrderReturnUpdateOrderReturn",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": [
+                "id",
+                "status",
+                "handleNote",
+                "receiveNote",
+                "refundAmount"
+              ],
+              "properties": {
+                "handleNote": {
+                  "description": "处理备注",
+                  "type": "string"
+                },
+                "id": {
+                  "description": "主键ID",
+                  "type": "integer"
+                },
+                "receiveNote": {
+                  "description": "收货备注",
+                  "type": "string"
+                },
+                "refundAmount": {
+                  "description": "退款金额",
+                  "type": "number"
+                },
+                "status": {
+                  "description": "退货状态（0待审核 1审核通过 2已收货 3已退款 4已拒绝 5已关闭）",
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/oms/returnReason/addReturnReason": {
+      "post": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "退货原因管理"
+        ],
+        "summary": "AddOrderReturnReason",
+        "operationId": "oms/ReturnReasonAddOrderReturnReason",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": [
+                "name",
+                "sort",
+                "status"
+              ],
+              "properties": {
+                "name": {
+                  "description": "退货类型",
+                  "type": "string"
+                },
+                "sort": {
+                  "description": "排序",
+                  "type": "integer"
+                },
+                "status": {
+                  "description": "状态：0-\u003e不启用；1-\u003e启用",
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/oms/returnReason/deleteReturnReason": {
+      "get": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "退货原因管理"
+        ],
+        "summary": "DeleteOrderReturnReason",
+        "operationId": "oms/ReturnReasonDeleteOrderReturnReason",
+        "parameters": [
+          {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            },
+            "name": "ids",
+            "in": "query",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/oms/returnReason/queryReturnReasonDetail": {
+      "get": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "退货原因管理"
+        ],
+        "summary": "QueryOrderReturnReasonDetail",
+        "operationId": "oms/ReturnReasonQueryOrderReturnReasonDetail",
+        "parameters": [
+          {
+            "type": "integer",
+            "name": "id",
+            "in": "query",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "data": {
+                  "type": "object",
+                  "required": [
+                    "id",
+                    "name",
+                    "sort",
+                    "status",
+                    "createBy",
+                    "createTime",
+                    "updateBy",
+                    "updateTime"
+                  ],
+                  "properties": {
+                    "createBy": {
+                      "description": "创建人ID",
+                      "type": "integer"
+                    },
+                    "createTime": {
+                      "description": "创建时间",
+                      "type": "string"
+                    },
+                    "id": {
+                      "description": "主键ID",
+                      "type": "integer"
+                    },
+                    "name": {
+                      "description": "退货类型",
+                      "type": "string"
+                    },
+                    "sort": {
+                      "description": "排序",
+                      "type": "integer"
+                    },
+                    "status": {
+                      "description": "状态：0-\u003e不启用；1-\u003e启用",
+                      "type": "integer"
+                    },
+                    "updateBy": {
+                      "description": "更新人ID",
+                      "type": "integer"
+                    },
+                    "updateTime": {
+                      "description": "更新时间",
+                      "type": "string"
+                    }
+                  }
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/oms/returnReason/queryReturnReasonList": {
+      "get": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "退货原因管理"
+        ],
+        "summary": "QueryOrderReturnReasonList",
+        "operationId": "oms/ReturnReasonQueryOrderReturnReasonList",
+        "parameters": [
+          {
+            "type": "integer",
+            "default": 1,
+            "description": "第几页",
+            "name": "current",
+            "in": "query",
+            "required": true
+          },
+          {
+            "type": "integer",
+            "default": 20,
+            "description": "每页的数量",
+            "name": "pageSize",
+            "in": "query",
+            "required": true
+          },
+          {
+            "type": "string",
+            "description": "退货类型",
+            "name": "name",
+            "in": "query",
+            "allowEmptyValue": true
+          },
+          {
+            "type": "integer",
+            "default": 2,
+            "description": "状态：0-\u003e不启用；1-\u003e启用",
+            "name": "status",
+            "in": "query",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "current": {
+                  "type": "integer",
+                  "default": 1,
+                  "example": 1
+                },
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "required": [
+                      "id",
+                      "name",
+                      "sort",
+                      "status",
+                      "createBy",
+                      "createTime",
+                      "updateBy",
+                      "updateTime"
+                    ],
+                    "properties": {
+                      "createBy": {
+                        "description": "创建人ID",
+                        "type": "integer"
+                      },
+                      "createTime": {
+                        "description": "创建时间",
+                        "type": "string"
+                      },
+                      "id": {
+                        "description": "主键ID",
+                        "type": "integer"
+                      },
+                      "name": {
+                        "description": "退货类型",
+                        "type": "string"
+                      },
+                      "sort": {
+                        "description": "排序",
+                        "type": "integer"
+                      },
+                      "status": {
+                        "description": "状态：0-\u003e不启用；1-\u003e启用",
+                        "type": "integer"
+                      },
+                      "updateBy": {
+                        "description": "更新人ID",
+                        "type": "integer"
+                      },
+                      "updateTime": {
+                        "description": "更新时间",
+                        "type": "string"
+                      }
+                    }
+                  }
+                },
+                "message": {
+                  "type": "string"
+                },
+                "pageSize": {
+                  "type": "integer",
+                  "default": 20,
+                  "example": 20
+                },
+                "success": {
+                  "type": "boolean"
+                },
+                "total": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/oms/returnReason/updateReturnReason": {
+      "post": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "退货原因管理"
+        ],
+        "summary": "UpdateOrderReturnReason",
+        "operationId": "oms/ReturnReasonUpdateOrderReturnReason",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": [
+                "id",
+                "name",
+                "sort",
+                "status"
+              ],
+              "properties": {
+                "id": {
+                  "description": "主键ID",
+                  "type": "integer"
+                },
+                "name": {
+                  "description": "退货类型",
+                  "type": "string"
+                },
+                "sort": {
+                  "description": "排序",
+                  "type": "integer"
+                },
+                "status": {
+                  "description": "状态：0-\u003e不启用；1-\u003e启用",
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/oms/returnReason/updateReturnReasonStatus": {
+      "post": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "退货原因管理"
+        ],
+        "summary": "UpdateOrderReturnReasonStatus",
+        "operationId": "oms/ReturnReasonUpdateOrderReturnReasonStatus",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": [
+                "ids",
+                "status"
+              ],
+              "properties": {
+                "ids": {
+                  "description": "主键ID",
+                  "type": "array",
+                  "items": {
+                    "type": "integer"
+                  }
+                },
+                "status": {
+                  "description": "状态：0-\u003e不启用；1-\u003e启用",
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/oms/setting/addOrderSetting": {
+      "post": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "订单设置管理"
+        ],
+        "summary": "AddOrderSetting",
+        "operationId": "oms/OrderSettingAddOrderSetting",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": [
+                "flashOrderOvertime",
+                "normalOrderOvertime",
+                "confirmOvertime",
+                "finishOvertime",
+                "status",
+                "isDefault",
+                "commentOvertime"
+              ],
+              "properties": {
+                "commentOvertime": {
+                  "description": "订单完成后自动好评时间（天）",
+                  "type": "integer"
+                },
+                "confirmOvertime": {
+                  "description": "发货后自动确认收货时间（天）",
+                  "type": "integer"
+                },
+                "finishOvertime": {
+                  "description": "自动完成交易时间，不能申请售后（天）",
+                  "type": "integer"
+                },
+                "flashOrderOvertime": {
+                  "description": "秒杀订单超时关闭时间(分)",
+                  "type": "integer"
+                },
+                "isDefault": {
+                  "description": "是否默认：0-\u003e否；1-\u003e是",
+                  "type": "integer"
+                },
+                "normalOrderOvertime": {
+                  "description": "正常订单超时时间(分)",
+                  "type": "integer"
+                },
+                "status": {
+                  "description": "状态：0-\u003e禁用；1-\u003e启用",
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/oms/setting/deleteOrderSetting": {
+      "get": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "订单设置管理"
+        ],
+        "summary": "DeleteOrderSetting",
+        "operationId": "oms/OrderSettingDeleteOrderSetting",
+        "parameters": [
+          {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            },
+            "name": "ids",
+            "in": "query",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/oms/setting/queryOrderSettingDetail": {
+      "get": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "订单设置管理"
+        ],
+        "summary": "QueryOrderSettingDetail",
+        "operationId": "oms/OrderSettingQueryOrderSettingDetail",
+        "parameters": [
+          {
+            "type": "integer",
+            "name": "id",
+            "in": "query",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "data": {
+                  "type": "object",
+                  "required": [
+                    "id",
+                    "flashOrderOvertime",
+                    "normalOrderOvertime",
+                    "confirmOvertime",
+                    "finishOvertime",
+                    "status",
+                    "isDefault",
+                    "commentOvertime",
+                    "createBy",
+                    "createTime",
+                    "updateBy",
+                    "updateTime"
+                  ],
+                  "properties": {
+                    "commentOvertime": {
+                      "description": "订单完成后自动好评时间（天）",
+                      "type": "integer"
+                    },
+                    "confirmOvertime": {
+                      "description": "发货后自动确认收货时间（天）",
+                      "type": "integer"
+                    },
+                    "createBy": {
+                      "description": "创建人ID",
+                      "type": "integer"
+                    },
+                    "createTime": {
+                      "description": "创建时间",
+                      "type": "string"
+                    },
+                    "finishOvertime": {
+                      "description": "自动完成交易时间，不能申请售后（天）",
+                      "type": "integer"
+                    },
+                    "flashOrderOvertime": {
+                      "description": "秒杀订单超时关闭时间(分)",
+                      "type": "integer"
+                    },
+                    "id": {
+                      "description": "主键ID",
+                      "type": "integer"
+                    },
+                    "isDefault": {
+                      "description": "是否默认：0-\u003e否；1-\u003e是",
+                      "type": "integer"
+                    },
+                    "normalOrderOvertime": {
+                      "description": "正常订单超时时间(分)",
+                      "type": "integer"
+                    },
+                    "status": {
+                      "description": "状态：0-\u003e禁用；1-\u003e启用",
+                      "type": "integer"
+                    },
+                    "updateBy": {
+                      "description": "更新人ID",
+                      "type": "integer"
+                    },
+                    "updateTime": {
+                      "description": "更新时间",
+                      "type": "string"
+                    }
+                  }
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/oms/setting/queryOrderSettingList": {
+      "get": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "订单设置管理"
+        ],
+        "summary": "QueryOrderSettingList",
+        "operationId": "oms/OrderSettingQueryOrderSettingList",
+        "parameters": [
+          {
+            "type": "integer",
+            "default": 1,
+            "description": "第几页",
+            "name": "current",
+            "in": "query",
+            "required": true
+          },
+          {
+            "type": "integer",
+            "default": 20,
+            "description": "每页的数量",
+            "name": "pageSize",
+            "in": "query",
+            "required": true
+          },
+          {
+            "type": "integer",
+            "default": 2,
+            "description": "状态：0-\u003e禁用；1-\u003e启用",
+            "name": "status",
+            "in": "query",
+            "required": true
+          },
+          {
+            "type": "integer",
+            "default": 2,
+            "description": "是否默认：0-\u003e否；1-\u003e是",
+            "name": "isDefault",
+            "in": "query",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "current": {
+                  "type": "integer",
+                  "default": 1,
+                  "example": 1
+                },
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "required": [
+                      "id",
+                      "flashOrderOvertime",
+                      "normalOrderOvertime",
+                      "confirmOvertime",
+                      "finishOvertime",
+                      "status",
+                      "isDefault",
+                      "commentOvertime",
+                      "createBy",
+                      "createTime",
+                      "updateBy",
+                      "updateTime"
+                    ],
+                    "properties": {
+                      "commentOvertime": {
+                        "description": "订单完成后自动好评时间（天）",
+                        "type": "integer"
+                      },
+                      "confirmOvertime": {
+                        "description": "发货后自动确认收货时间（天）",
+                        "type": "integer"
+                      },
+                      "createBy": {
+                        "description": "创建人ID",
+                        "type": "integer"
+                      },
+                      "createTime": {
+                        "description": "创建时间",
+                        "type": "string"
+                      },
+                      "finishOvertime": {
+                        "description": "自动完成交易时间，不能申请售后（天）",
+                        "type": "integer"
+                      },
+                      "flashOrderOvertime": {
+                        "description": "秒杀订单超时关闭时间(分)",
+                        "type": "integer"
+                      },
+                      "id": {
+                        "description": "主键ID",
+                        "type": "integer"
+                      },
+                      "isDefault": {
+                        "description": "是否默认：0-\u003e否；1-\u003e是",
+                        "type": "integer"
+                      },
+                      "normalOrderOvertime": {
+                        "description": "正常订单超时时间(分)",
+                        "type": "integer"
+                      },
+                      "status": {
+                        "description": "状态：0-\u003e禁用；1-\u003e启用",
+                        "type": "integer"
+                      },
+                      "updateBy": {
+                        "description": "更新人ID",
+                        "type": "integer"
+                      },
+                      "updateTime": {
+                        "description": "更新时间",
+                        "type": "string"
+                      }
+                    }
+                  }
+                },
+                "message": {
+                  "type": "string"
+                },
+                "pageSize": {
+                  "type": "integer",
+                  "default": 20,
+                  "example": 20
+                },
+                "success": {
+                  "type": "boolean"
+                },
+                "total": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/oms/setting/updateOrderSetting": {
+      "post": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "订单设置管理"
+        ],
+        "summary": "UpdateOrderSetting",
+        "operationId": "oms/OrderSettingUpdateOrderSetting",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": [
+                "id",
+                "flashOrderOvertime",
+                "normalOrderOvertime",
+                "confirmOvertime",
+                "finishOvertime",
+                "status",
+                "isDefault",
+                "commentOvertime"
+              ],
+              "properties": {
+                "commentOvertime": {
+                  "description": "订单完成后自动好评时间（天）",
+                  "type": "integer"
+                },
+                "confirmOvertime": {
+                  "description": "发货后自动确认收货时间（天）",
+                  "type": "integer"
+                },
+                "finishOvertime": {
+                  "description": "自动完成交易时间，不能申请售后（天）",
+                  "type": "integer"
+                },
+                "flashOrderOvertime": {
+                  "description": "秒杀订单超时关闭时间(分)",
+                  "type": "integer"
+                },
+                "id": {
+                  "description": "主键ID",
+                  "type": "integer"
+                },
+                "isDefault": {
+                  "description": "是否默认：0-\u003e否；1-\u003e是",
+                  "type": "integer"
+                },
+                "normalOrderOvertime": {
+                  "description": "正常订单超时时间(分)",
+                  "type": "integer"
+                },
+                "status": {
+                  "description": "状态：0-\u003e禁用；1-\u003e启用",
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/oms/setting/updateOrderSettingIsDefault": {
+      "post": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "订单设置管理"
+        ],
+        "summary": "UpdateOrderSettingIsDefault",
+        "operationId": "oms/OrderSettingUpdateOrderSettingIsDefault",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": [
+                "id",
+                "status"
+              ],
+              "properties": {
+                "id": {
+                  "description": "主键ID",
+                  "type": "integer"
+                },
+                "status": {
+                  "description": "状态：0-\u003e禁用；1-\u003e启用",
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/oms/setting/updateOrderSettingStatus": {
+      "post": {
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "订单设置管理"
+        ],
+        "summary": "UpdateOrderSettingStatus",
+        "operationId": "oms/OrderSettingUpdateOrderSettingStatus",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": [
+                "id",
+                "status"
+              ],
+              "properties": {
+                "id": {
+                  "description": "主键ID",
+                  "type": "integer"
+                },
+                "status": {
+                  "description": "状态：0-\u003e禁用；1-\u003e启用",
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "apiKey": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
+    },
+    "petstore_auth": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "http://swagger.io/api/oauth/dialog",
+      "scopes": {
+        "read:pets": "read your pets",
+        "write:pets": "modify pets in your account"
+      }
+    }
+  },
+  "x-date": "2025-07-08 11:19:58",
+  "x-description": "This is a goctl generated swagger file.",
+  "x-github": "https://github.com/zeromicro/go-zero",
+  "x-go-zero-doc": "https://go-zero.dev/",
+  "x-goctl-version": "1.8.4"
+}
