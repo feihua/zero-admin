@@ -102,8 +102,8 @@ type (
 	middleware: CheckUrl
 	group:      oms/order_return
 	prefix:     /api/oms/orderReturn
-	tags: "退货订单管理"
-	authType: apiKey
+	tags:       "退货订单管理"
+	authType:   apiKey
 )
 service admin-api {
 	// 更新退货/售后主

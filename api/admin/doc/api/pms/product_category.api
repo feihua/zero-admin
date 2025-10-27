@@ -116,8 +116,8 @@ type (
 	middleware: CheckUrl
 	group:      pms/product_category
 	prefix:     /api/pms/category
-	tags: "产品分类管理"
-	authType: apiKey
+	tags:       "产品分类管理"
+	authType:   apiKey
 )
 service admin-api {
 	// 添加产品分类

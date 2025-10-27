@@ -43,8 +43,8 @@ type (
 	middleware: CheckUrl
 	group:      sms/home_new_product
 	prefix:     /api/sms/homeNewProduct
-	tags: "新鲜好物管理"
-	authType: apiKey
+	tags:       "新鲜好物管理"
+	authType:   apiKey
 )
 service admin-api {
 	// 添加新鲜好物表

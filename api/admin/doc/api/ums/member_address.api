@@ -42,8 +42,8 @@ type (
 	middleware: CheckUrl
 	group:      ums/member_address
 	prefix:     /api/ums/address
-	tags: "会员地址管理"
-	authType: apiKey
+	tags:       "会员地址管理"
+	authType:   apiKey
 )
 service admin-api {
 	//分页查询会员地址

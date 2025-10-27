@@ -61,8 +61,8 @@ type (
 	middleware: CheckUrl
 	group:      sms/home_recommend_subject
 	prefix:     /api/sms/homeRecommendSubject
-	tags: "首页专题推荐管理"
-	authType: apiKey
+	tags:       "首页专题推荐管理"
+	authType:   apiKey
 )
 service admin-api {
 	//添加首页专题推荐

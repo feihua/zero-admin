@@ -108,8 +108,8 @@ type (
 	middleware: CheckUrl
 	group:      oms/company_address
 	prefix:     /api/oms/companyAddress
-	tags: "公司收发货地址管理"
-	authType: apiKey
+	tags:       "公司收发货地址管理"
+	authType:   apiKey
 )
 service admin-api {
 	// 添加公司收发货地址

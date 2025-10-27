@@ -36,6 +36,7 @@ func main() {
 		g.GenerateModel("sys_role_menu"),
 		g.GenerateModel("sys_user"),
 		g.GenerateModel("sys_post"),
+		g.GenerateModel("sys_notice"),
 		g.GenerateModel("sys_user_role"),
 	)
 

@@ -130,8 +130,8 @@ type (
 	middleware: CheckUrl
 	group:      sms/coupon
 	prefix:     /api/sms/coupon
-	tags: "优惠券管理"
-	authType: apiKey
+	tags:       "优惠券管理"
+	authType:   apiKey
 )
 service admin-api {
 	// 添加优惠券

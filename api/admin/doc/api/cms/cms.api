@@ -2,13 +2,11 @@ import "./subject.api"
 import "./prefrence_area.api"
 import "./subject_category.api"
 
-
 info (
-	title: "内容管理 API"
-	description:   "内容管理相关接口"
-	schemes: "http"
-	version: "v1"
+	title:                       "内容管理 API"
+	description:                 "内容管理相关接口"
+	schemes:                     "http"
+	version:                     "v1"
 	securityDefinitionsFromJson: `{"apiKey":{"type":"apiKey","name":"Authorization","in":"header"},"petstore_auth":{"type":"oauth2","authorizationUrl":"http://swagger.io/api/oauth/dialog","flow":"implicit","scopes":{"write:pets":"modify pets in your account","read:pets":"read your pets"}}}`
-
 )
 

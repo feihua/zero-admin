@@ -115,8 +115,8 @@ type (
 	middleware: CheckUrl
 	group:      sms/seckill_product
 	prefix:     /api/sms/seckillProduct
-	tags: "秒杀商品管理"
-	authType: apiKey
+	tags:       "秒杀商品管理"
+	authType:   apiKey
 )
 service admin-api {
 	// 添加秒杀商品

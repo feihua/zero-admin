@@ -134,8 +134,8 @@ type (
 	middleware: CheckUrl
 	group:      pms/product_sku
 	prefix:     /api/pms/product
-	tags: "商品SKU管理"
-	authType: apiKey
+	tags:       "商品SKU管理"
+	authType:   apiKey
 )
 service admin-api {
 	// 添加商品SKU

@@ -11,11 +11,10 @@ import "./member_points_log.api"
 import "./member_growth_log.api"
 
 info (
-	title: "会员管理 API"
-	description:   "会员管理相关接口"
-	schemes: "http"
-	version: "v1"
+	title:                       "会员管理 API"
+	description:                 "会员管理相关接口"
+	schemes:                     "http"
+	version:                     "v1"
 	securityDefinitionsFromJson: `{"apiKey":{"type":"apiKey","name":"Authorization","in":"header"},"petstore_auth":{"type":"oauth2","authorizationUrl":"http://swagger.io/api/oauth/dialog","flow":"implicit","scopes":{"write:pets":"modify pets in your account","read:pets":"read your pets"}}}`
-
 )
 

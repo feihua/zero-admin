@@ -3,8 +3,9 @@ package main
 import (
 	"flag"
 	"fmt"
-	"github.com/zeromicro/go-zero/core/logx"
 	"os"
+
+	"github.com/zeromicro/go-zero/core/logx"
 
 	"github.com/feihua/zero-admin/rpc/sys/internal/config"
 	deptserviceServer "github.com/feihua/zero-admin/rpc/sys/internal/server/deptservice"
@@ -12,6 +13,7 @@ import (
 	dicttypeserviceServer "github.com/feihua/zero-admin/rpc/sys/internal/server/dicttypeservice"
 	loginlogserviceServer "github.com/feihua/zero-admin/rpc/sys/internal/server/loginlogservice"
 	menuserviceServer "github.com/feihua/zero-admin/rpc/sys/internal/server/menuservice"
+	noticeserviceServer "github.com/feihua/zero-admin/rpc/sys/internal/server/noticeservice"
 	operatelogServer "github.com/feihua/zero-admin/rpc/sys/internal/server/operatelogservice"
 	postserviceServer "github.com/feihua/zero-admin/rpc/sys/internal/server/postservice"
 	roleserviceServer "github.com/feihua/zero-admin/rpc/sys/internal/server/roleservice"
@@ -41,6 +43,7 @@ func main() {
 		sysclient.RegisterUserServiceServer(grpcServer, userserviceServer.NewUserServiceServer(ctx))
 		sysclient.RegisterRoleServiceServer(grpcServer, roleserviceServer.NewRoleServiceServer(ctx))
 		sysclient.RegisterPostServiceServer(grpcServer, postserviceServer.NewPostServiceServer(ctx))
+		sysclient.RegisterNoticeServiceServer(grpcServer, noticeserviceServer.NewNoticeServiceServer(ctx))
 		sysclient.RegisterMenuServiceServer(grpcServer, menuserviceServer.NewMenuServiceServer(ctx))
 		sysclient.RegisterDictTypeServiceServer(grpcServer, dicttypeserviceServer.NewDictTypeServiceServer(ctx))
 		sysclient.RegisterDictItemServiceServer(grpcServer, dictitemserviceServer.NewDictItemServiceServer(ctx))

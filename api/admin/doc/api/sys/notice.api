@@ -1,0 +1,119 @@
+info (
+	desc:   "通知公告表"
+	author: "刘飞华"
+	email:  "1002219331@qq.com"
+)
+
+type (
+	// 添加通知公告表请求参数
+	AddNoticeReq {
+		NoticeTitle   string `json:"noticeTitle"` //公告标题
+		NoticeType    int32  `json:"noticeType"` //公告类型（1:通知,2:公告）
+		NoticeContent string `json:"noticeContent"` //公告内容
+		Status        int32  `json:"status,default=2"` //公告状态（0:关闭,1:正常 ）
+		Remark        string `json:"remark"` //备注
+	}
+	NoticeResp {
+		Code    string `json:"code"`
+		Message string `json:"message"`
+	}
+	// 删除通知公告表请求参数
+	DeleteNoticeReq {
+		Ids []int64 `form:"ids"`
+	}
+	// 更新通知公告表请求参数
+	UpdateNoticeReq {
+		Id            int64  `json:"id"` //公告ID
+		NoticeTitle   string `json:"noticeTitle"` //公告标题
+		NoticeType    int32  `json:"noticeType"` //公告类型（1:通知,2:公告）
+		NoticeContent string `json:"noticeContent"` //公告内容
+		Status        int32  `json:"status,default=2"` //公告状态（0:关闭,1:正常 ）
+		Remark        string `json:"remark"` //备注
+	}
+	// 更新通知公告表状态请求参数
+	UpdateNoticeStatusReq {
+		Ids    []int64 `json:"ids"` //公告ID
+		Status int32   `json:"status,default=2"` //公告状态（0:关闭,1:正常 ）
+	}
+	// 查询通知公告表详情请求参数
+	QueryNoticeDetailReq {
+		Id int64 `form:"id"`
+	}
+	QueryNoticeDetailData {
+		Id            int64  `json:"id"` //公告ID
+		NoticeTitle   string `json:"noticeTitle"` //公告标题
+		NoticeType    int32  `json:"noticeType"` //公告类型（1:通知,2:公告）
+		NoticeContent string `json:"noticeContent"` //公告内容
+		Status        int32  `json:"status"` //公告状态（0:关闭,1:正常 ）
+		Remark        string `json:"remark"` //备注
+		CreateBy      string `json:"createBy"` //创建者
+		CreateTime    string `json:"createTime"` //创建时间
+		UpdateBy      string `json:"updateBy"` //更新者
+		UpdateTime    string `json:"updateTime"` //更新时间
+	}
+	QueryNoticeDetailResp {
+		Code    string                `json:"code"`
+		Message string                `json:"message"`
+		Data    QueryNoticeDetailData `json:"data"`
+	}
+	// 分页查询通知公告表列表请求参数
+	QueryNoticeListReq {
+		Current     int64  `form:"current,default=1"` //第几页
+		PageSize    int64  `form:"pageSize,default=20"` //每页的数量
+		NoticeTitle string `form:"noticeTitle,optional"` //公告标题
+		NoticeType  int32  `form:"noticeType,optional"` //公告类型（1:通知,2:公告）
+		Status      int32  `form:"status,default=2"` //公告状态（0:关闭,1:正常 ）
+	}
+	QueryNoticeListData {
+		Id            int64  `json:"id"` //公告ID
+		NoticeTitle   string `json:"noticeTitle"` //公告标题
+		NoticeType    int32  `json:"noticeType"` //公告类型（1:通知,2:公告）
+		NoticeContent string `json:"noticeContent"` //公告内容
+		Status        int32  `json:"status"` //公告状态（0:关闭,1:正常 ）
+		Remark        string `json:"remark"` //备注
+		CreateBy      string `json:"createBy"` //创建者
+		CreateTime    string `json:"createTime"` //创建时间
+		UpdateBy      string `json:"updateBy"` //更新者
+		UpdateTime    string `json:"updateTime"` //更新时间
+	}
+	QueryNoticeListResp {
+		Code     string                 `json:"code"`
+		Message  string                 `json:"message"`
+		Current  int64                  `json:"current,default=1"`
+		Data     []*QueryNoticeListData `json:"data"`
+		PageSize int64                  `json:"pageSize,default=20"`
+		Success  bool                   `json:"success"`
+		Total    int64                  `json:"total"`
+	}
+)
+
+@server (
+	group:  sys/sys_notice
+	prefix: /api/sys/notice
+)
+service admin-api {
+	// 添加通知公告表
+	@handler AddNotice
+	post /addNotice (AddNoticeReq) returns (NoticeResp)
+
+	// 删除通知公告表
+	@handler DeleteNotice
+	get /deleteNotice (DeleteNoticeReq) returns (NoticeResp)
+
+	// 更新通知公告表
+	@handler UpdateNotice
+	post /updateNotice (UpdateNoticeReq) returns (NoticeResp)
+
+	// 更新通知公告表状态
+	@handler UpdateNoticeStatus
+	post /updateNoticeStatus (UpdateNoticeStatusReq) returns (NoticeResp)
+
+	// 查询通知公告表详情
+	@handler QueryNoticeDetail
+	get /queryNoticeDetail (QueryNoticeDetailReq) returns (QueryNoticeDetailResp)
+
+	// 分页查询通知公告表列表
+	@handler QueryNoticeList
+	get /queryNoticeList (QueryNoticeListReq) returns (QueryNoticeListResp)
+}
+

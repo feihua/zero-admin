@@ -81,8 +81,8 @@ type (
 	middleware: CheckUrl
 	group:      oms/return_reason
 	prefix:     /api/oms/returnReason
-	tags: "退货原因管理"
-	authType: apiKey
+	tags:       "退货原因管理"
+	authType:   apiKey
 )
 service admin-api {
 	// 添加退货原因

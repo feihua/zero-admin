@@ -86,8 +86,8 @@ type (
 	middleware: CheckUrl
 	group:      sms/home_brand
 	prefix:     /api/sms/homeBrand
-	tags: "首页推荐品牌管理"
-	authType: apiKey
+	tags:       "首页推荐品牌管理"
+	authType:   apiKey
 )
 service admin-api {
 	// 添加首页推荐品牌表

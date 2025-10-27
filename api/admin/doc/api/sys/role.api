@@ -162,8 +162,8 @@ type (
 	middleware: CheckUrl
 	group:      sys/role
 	prefix:     /api/sys/role
-	tags: "角色管理"
-	authType: apiKey
+	tags:       "角色管理"
+	authType:   apiKey
 )
 service admin-api {
 	// 添加角色信息

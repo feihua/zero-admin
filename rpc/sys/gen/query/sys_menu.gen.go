@@ -6,6 +6,7 @@ package query
 
 import (
 	"context"
+	"database/sql"
 
 	"gorm.io/gorm"
 	"gorm.io/gorm/clause"
@@ -232,6 +233,8 @@ type ISysMenuDo interface {
 	FirstOrCreate() (*model.SysMenu, error)
 	FindByPage(offset int, limit int) (result []*model.SysMenu, count int64, err error)
 	ScanByPage(result interface{}, offset int, limit int) (count int64, err error)
+	Rows() (*sql.Rows, error)
+	Row() *sql.Row
 	Scan(result interface{}) (err error)
 	Returning(value interface{}, columns ...string) ISysMenuDo
 	UnderlyingDB() *gorm.DB

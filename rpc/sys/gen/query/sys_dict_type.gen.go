@@ -6,6 +6,7 @@ package query
 
 import (
 	"context"
+	"database/sql"
 
 	"gorm.io/gorm"
 	"gorm.io/gorm/clause"
@@ -186,6 +187,8 @@ type ISysDictTypeDo interface {
 	FirstOrCreate() (*model.SysDictType, error)
 	FindByPage(offset int, limit int) (result []*model.SysDictType, count int64, err error)
 	ScanByPage(result interface{}, offset int, limit int) (count int64, err error)
+	Rows() (*sql.Rows, error)
+	Row() *sql.Row
 	Scan(result interface{}) (err error)
 	Returning(value interface{}, columns ...string) ISysDictTypeDo
 	UnderlyingDB() *gorm.DB

@@ -60,8 +60,8 @@ type (
 	middleware: CheckUrl
 	group:      sms/seckill_reservation
 	prefix:     /api/sms/seckillReservation
-	tags: "秒杀预约管理"
-	authType: apiKey
+	tags:       "秒杀预约管理"
+	authType:   apiKey
 )
 service admin-api {
 	// 查询秒杀预约详情

@@ -22,6 +22,7 @@ var (
 	SysDictType   *sysDictType
 	SysLoginLog   *sysLoginLog
 	SysMenu       *sysMenu
+	SysNotice     *sysNotice
 	SysOperateLog *sysOperateLog
 	SysPost       *sysPost
 	SysRole       *sysRole
@@ -38,6 +39,7 @@ func SetDefault(db *gorm.DB, opts ...gen.DOOption) {
 	SysDictType = &Q.SysDictType
 	SysLoginLog = &Q.SysLoginLog
 	SysMenu = &Q.SysMenu
+	SysNotice = &Q.SysNotice
 	SysOperateLog = &Q.SysOperateLog
 	SysPost = &Q.SysPost
 	SysRole = &Q.SysRole
@@ -55,6 +57,7 @@ func Use(db *gorm.DB, opts ...gen.DOOption) *Query {
 		SysDictType:   newSysDictType(db, opts...),
 		SysLoginLog:   newSysLoginLog(db, opts...),
 		SysMenu:       newSysMenu(db, opts...),
+		SysNotice:     newSysNotice(db, opts...),
 		SysOperateLog: newSysOperateLog(db, opts...),
 		SysPost:       newSysPost(db, opts...),
 		SysRole:       newSysRole(db, opts...),
@@ -73,6 +76,7 @@ type Query struct {
 	SysDictType   sysDictType
 	SysLoginLog   sysLoginLog
 	SysMenu       sysMenu
+	SysNotice     sysNotice
 	SysOperateLog sysOperateLog
 	SysPost       sysPost
 	SysRole       sysRole
@@ -92,6 +96,7 @@ func (q *Query) clone(db *gorm.DB) *Query {
 		SysDictType:   q.SysDictType.clone(db),
 		SysLoginLog:   q.SysLoginLog.clone(db),
 		SysMenu:       q.SysMenu.clone(db),
+		SysNotice:     q.SysNotice.clone(db),
 		SysOperateLog: q.SysOperateLog.clone(db),
 		SysPost:       q.SysPost.clone(db),
 		SysRole:       q.SysRole.clone(db),
@@ -118,6 +123,7 @@ func (q *Query) ReplaceDB(db *gorm.DB) *Query {
 		SysDictType:   q.SysDictType.replaceDB(db),
 		SysLoginLog:   q.SysLoginLog.replaceDB(db),
 		SysMenu:       q.SysMenu.replaceDB(db),
+		SysNotice:     q.SysNotice.replaceDB(db),
 		SysOperateLog: q.SysOperateLog.replaceDB(db),
 		SysPost:       q.SysPost.replaceDB(db),
 		SysRole:       q.SysRole.replaceDB(db),
@@ -134,6 +140,7 @@ type queryCtx struct {
 	SysDictType   ISysDictTypeDo
 	SysLoginLog   ISysLoginLogDo
 	SysMenu       ISysMenuDo
+	SysNotice     ISysNoticeDo
 	SysOperateLog ISysOperateLogDo
 	SysPost       ISysPostDo
 	SysRole       ISysRoleDo
@@ -150,6 +157,7 @@ func (q *Query) WithContext(ctx context.Context) *queryCtx {
 		SysDictType:   q.SysDictType.WithContext(ctx),
 		SysLoginLog:   q.SysLoginLog.WithContext(ctx),
 		SysMenu:       q.SysMenu.WithContext(ctx),
+		SysNotice:     q.SysNotice.WithContext(ctx),
 		SysOperateLog: q.SysOperateLog.WithContext(ctx),
 		SysPost:       q.SysPost.WithContext(ctx),
 		SysRole:       q.SysRole.WithContext(ctx),

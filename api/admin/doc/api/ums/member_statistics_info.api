@@ -73,8 +73,8 @@ type (
 	middleware: CheckUrl
 	group:      ums/member_statistics
 	prefix:     /api/ums/statistics
-	tags: "会员统计信息管理"
-	authType: apiKey
+	tags:       "会员统计信息管理"
+	authType:   apiKey
 )
 service admin-api {
 	// 查询会员统计信息详情

@@ -169,8 +169,8 @@ type (
 	middleware: CheckUrl
 	group:      pms/product_spu
 	prefix:     /api/pms/product
-	tags: "商品SPU管理"
-	authType: apiKey
+	tags:       "商品SPU管理"
+	authType:   apiKey
 )
 service admin-api {
 	// 添加商品SPU

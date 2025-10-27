@@ -82,8 +82,8 @@ type (
 	middleware: CheckUrl
 	group:      sys/log
 	prefix:     /api/sys/log
-	tags: "系统登录日志管理"
-	authType: apiKey
+	tags:       "系统登录日志管理"
+	authType:   apiKey
 )
 service admin-api {
 	// 删除系统登录日志

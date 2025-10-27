@@ -624,6 +624,124 @@ service MenuService {
 }
 
 
+
+// 添加通知公告表请求参数
+message AddNoticeReq {
+  string notice_title = 2; //公告标题
+  int32 notice_type = 3; //公告类型（1:通知,2:公告）
+  string notice_content = 4; //公告内容
+  int32 status = 5; //公告状态（0:关闭,1:正常 ）
+  string remark = 6; //备注
+  string create_by = 7; //创建者
+
+}
+message AddNoticeResp {
+  string pong = 1;
+}
+
+// 删除通知公告表请求参数
+message DeleteNoticeReq {
+  repeated int64 ids = 1;
+}
+
+message DeleteNoticeResp {
+  string pong = 1;
+}
+
+// 更新通知公告表请求参数
+message UpdateNoticeReq {
+  int64 id = 1; //公告ID
+  string notice_title = 2; //公告标题
+  int32 notice_type = 3; //公告类型（1:通知,2:公告）
+  string notice_content = 4; //公告内容
+  int32 status = 5; //公告状态（0:关闭,1:正常 ）
+  string remark = 6; //备注
+  string update_by = 7; //更新者
+}
+
+message UpdateNoticeResp {
+  string pong = 1;
+}
+
+// 更新通知公告表状态请求参数
+message UpdateNoticeStatusReq {
+  repeated int64 ids = 1; //公告ID
+  int32 status = 2; //公告状态（0:关闭,1:正常 ）
+  string update_by = 3; //更新者
+
+}
+
+message UpdateNoticeStatusResp {
+  string msg = 1;
+}
+
+// 查询通知公告表详情请求参数
+message QueryNoticeDetailReq {
+  int64 id = 1; //公告ID
+
+}
+
+message QueryNoticeDetailResp {
+  int64 id = 1; //公告ID
+  string notice_title = 2; //公告标题
+  int32 notice_type = 3; //公告类型（1:通知,2:公告）
+  string notice_content = 4; //公告内容
+  int32 status = 5; //公告状态（0:关闭,1:正常 ）
+  string remark = 6; //备注
+  string create_by = 7; //创建者
+  string create_time = 8; //创建时间
+  string update_by = 9; //更新者
+  string update_time = 10; //更新时间
+}
+
+// 分页查询通知公告表列表请求参数
+message QueryNoticeListReq {
+  int64 page_num = 1; //第几页
+  int64 page_size = 2; //每页的数量
+  string notice_title = 3; //公告标题
+  int32 notice_type = 4; //公告类型（1:通知,2:公告）
+  int32 status = 5; //公告状态（0:关闭,1:正常 ）
+
+}
+
+
+message QueryNoticeListResp {
+  int64 Total = 1;
+  repeated QueryNoticeListData list = 2;
+}
+
+message QueryNoticeListData {
+  int64 id = 1; //公告ID
+  string notice_title = 2; //公告标题
+  int32 notice_type = 3; //公告类型（1:通知,2:公告）
+  string notice_content = 4; //公告内容
+  int32 status = 5; //公告状态（0:关闭,1:正常 ）
+  string remark = 6; //备注
+  string create_by = 7; //创建者
+  string create_time = 8; //创建时间
+  string update_by = 9; //更新者
+  string update_time = 10; //更新时间
+}
+
+// 通知公告表服务
+service NoticeService {
+
+  // 添加通知公告表
+  rpc AddNotice(AddNoticeReq) returns(AddNoticeResp) {}
+  // 删除通知公告表
+  rpc DeleteNotice(DeleteNoticeReq) returns(DeleteNoticeResp) {}
+  // 更新通知公告表
+  rpc UpdateNotice(UpdateNoticeReq) returns(UpdateNoticeResp) {}
+  // 更新通知公告表状态
+  rpc UpdateNoticeStatus(UpdateNoticeStatusReq) returns(UpdateNoticeStatusResp) {}
+  // 查询通知公告表详情
+  rpc QueryNoticeDetail(QueryNoticeDetailReq) returns(QueryNoticeDetailResp) {}
+  // 分页查询通知公告表列表
+  rpc QueryNoticeList(QueryNoticeListReq) returns(QueryNoticeListResp) {}
+
+}
+
+
 // 添加系统操作日志
 message AddOperateLogReq {
   int64 id = 1; //操作日志id

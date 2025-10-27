@@ -1337,6 +1337,293 @@ var MenuService_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
+	NoticeService_AddNotice_FullMethodName          = "/sysclient.NoticeService/AddNotice"
+	NoticeService_DeleteNotice_FullMethodName       = "/sysclient.NoticeService/DeleteNotice"
+	NoticeService_UpdateNotice_FullMethodName       = "/sysclient.NoticeService/UpdateNotice"
+	NoticeService_UpdateNoticeStatus_FullMethodName = "/sysclient.NoticeService/UpdateNoticeStatus"
+	NoticeService_QueryNoticeDetail_FullMethodName  = "/sysclient.NoticeService/QueryNoticeDetail"
+	NoticeService_QueryNoticeList_FullMethodName    = "/sysclient.NoticeService/QueryNoticeList"
+)
+
+// NoticeServiceClient is the client API for NoticeService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type NoticeServiceClient interface {
+	// 添加通知公告表
+	AddNotice(ctx context.Context, in *AddNoticeReq, opts ...grpc.CallOption) (*AddNoticeResp, error)
+	// 删除通知公告表
+	DeleteNotice(ctx context.Context, in *DeleteNoticeReq, opts ...grpc.CallOption) (*DeleteNoticeResp, error)
+	// 更新通知公告表
+	UpdateNotice(ctx context.Context, in *UpdateNoticeReq, opts ...grpc.CallOption) (*UpdateNoticeResp, error)
+	// 更新通知公告表状态
+	UpdateNoticeStatus(ctx context.Context, in *UpdateNoticeStatusReq, opts ...grpc.CallOption) (*UpdateNoticeStatusResp, error)
+	// 查询通知公告表详情
+	QueryNoticeDetail(ctx context.Context, in *QueryNoticeDetailReq, opts ...grpc.CallOption) (*QueryNoticeDetailResp, error)
+	// 分页查询通知公告表列表
+	QueryNoticeList(ctx context.Context, in *QueryNoticeListReq, opts ...grpc.CallOption) (*QueryNoticeListResp, error)
+}
+
+type noticeServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewNoticeServiceClient(cc grpc.ClientConnInterface) NoticeServiceClient {
+	return &noticeServiceClient{cc}
+}
+
+func (c *noticeServiceClient) AddNotice(ctx context.Context, in *AddNoticeReq, opts ...grpc.CallOption) (*AddNoticeResp, error) {
+	out := new(AddNoticeResp)
+	err := c.cc.Invoke(ctx, NoticeService_AddNotice_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *noticeServiceClient) DeleteNotice(ctx context.Context, in *DeleteNoticeReq, opts ...grpc.CallOption) (*DeleteNoticeResp, error) {
+	out := new(DeleteNoticeResp)
+	err := c.cc.Invoke(ctx, NoticeService_DeleteNotice_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *noticeServiceClient) UpdateNotice(ctx context.Context, in *UpdateNoticeReq, opts ...grpc.CallOption) (*UpdateNoticeResp, error) {
+	out := new(UpdateNoticeResp)
+	err := c.cc.Invoke(ctx, NoticeService_UpdateNotice_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *noticeServiceClient) UpdateNoticeStatus(ctx context.Context, in *UpdateNoticeStatusReq, opts ...grpc.CallOption) (*UpdateNoticeStatusResp, error) {
+	out := new(UpdateNoticeStatusResp)
+	err := c.cc.Invoke(ctx, NoticeService_UpdateNoticeStatus_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *noticeServiceClient) QueryNoticeDetail(ctx context.Context, in *QueryNoticeDetailReq, opts ...grpc.CallOption) (*QueryNoticeDetailResp, error) {
+	out := new(QueryNoticeDetailResp)
+	err := c.cc.Invoke(ctx, NoticeService_QueryNoticeDetail_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *noticeServiceClient) QueryNoticeList(ctx context.Context, in *QueryNoticeListReq, opts ...grpc.CallOption) (*QueryNoticeListResp, error) {
+	out := new(QueryNoticeListResp)
+	err := c.cc.Invoke(ctx, NoticeService_QueryNoticeList_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// NoticeServiceServer is the server API for NoticeService service.
+// All implementations must embed UnimplementedNoticeServiceServer
+// for forward compatibility
+type NoticeServiceServer interface {
+	// 添加通知公告表
+	AddNotice(context.Context, *AddNoticeReq) (*AddNoticeResp, error)
+	// 删除通知公告表
+	DeleteNotice(context.Context, *DeleteNoticeReq) (*DeleteNoticeResp, error)
+	// 更新通知公告表
+	UpdateNotice(context.Context, *UpdateNoticeReq) (*UpdateNoticeResp, error)
+	// 更新通知公告表状态
+	UpdateNoticeStatus(context.Context, *UpdateNoticeStatusReq) (*UpdateNoticeStatusResp, error)
+	// 查询通知公告表详情
+	QueryNoticeDetail(context.Context, *QueryNoticeDetailReq) (*QueryNoticeDetailResp, error)
+	// 分页查询通知公告表列表
+	QueryNoticeList(context.Context, *QueryNoticeListReq) (*QueryNoticeListResp, error)
+	mustEmbedUnimplementedNoticeServiceServer()
+}
+
+// UnimplementedNoticeServiceServer must be embedded to have forward compatible implementations.
+type UnimplementedNoticeServiceServer struct {
+}
+
+func (UnimplementedNoticeServiceServer) AddNotice(context.Context, *AddNoticeReq) (*AddNoticeResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AddNotice not implemented")
+}
+func (UnimplementedNoticeServiceServer) DeleteNotice(context.Context, *DeleteNoticeReq) (*DeleteNoticeResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteNotice not implemented")
+}
+func (UnimplementedNoticeServiceServer) UpdateNotice(context.Context, *UpdateNoticeReq) (*UpdateNoticeResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateNotice not implemented")
+}
+func (UnimplementedNoticeServiceServer) UpdateNoticeStatus(context.Context, *UpdateNoticeStatusReq) (*UpdateNoticeStatusResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateNoticeStatus not implemented")
+}
+func (UnimplementedNoticeServiceServer) QueryNoticeDetail(context.Context, *QueryNoticeDetailReq) (*QueryNoticeDetailResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method QueryNoticeDetail not implemented")
+}
+func (UnimplementedNoticeServiceServer) QueryNoticeList(context.Context, *QueryNoticeListReq) (*QueryNoticeListResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method QueryNoticeList not implemented")
+}
+func (UnimplementedNoticeServiceServer) mustEmbedUnimplementedNoticeServiceServer() {}
+
+// UnsafeNoticeServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to NoticeServiceServer will
+// result in compilation errors.
+type UnsafeNoticeServiceServer interface {
+	mustEmbedUnimplementedNoticeServiceServer()
+}
+
+func RegisterNoticeServiceServer(s grpc.ServiceRegistrar, srv NoticeServiceServer) {
+	s.RegisterService(&NoticeService_ServiceDesc, srv)
+}
+
+func _NoticeService_AddNotice_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddNoticeReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NoticeServiceServer).AddNotice(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: NoticeService_AddNotice_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NoticeServiceServer).AddNotice(ctx, req.(*AddNoticeReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NoticeService_DeleteNotice_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteNoticeReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NoticeServiceServer).DeleteNotice(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: NoticeService_DeleteNotice_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NoticeServiceServer).DeleteNotice(ctx, req.(*DeleteNoticeReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NoticeService_UpdateNotice_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateNoticeReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NoticeServiceServer).UpdateNotice(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: NoticeService_UpdateNotice_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NoticeServiceServer).UpdateNotice(ctx, req.(*UpdateNoticeReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NoticeService_UpdateNoticeStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateNoticeStatusReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NoticeServiceServer).UpdateNoticeStatus(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: NoticeService_UpdateNoticeStatus_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NoticeServiceServer).UpdateNoticeStatus(ctx, req.(*UpdateNoticeStatusReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NoticeService_QueryNoticeDetail_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryNoticeDetailReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NoticeServiceServer).QueryNoticeDetail(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: NoticeService_QueryNoticeDetail_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NoticeServiceServer).QueryNoticeDetail(ctx, req.(*QueryNoticeDetailReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NoticeService_QueryNoticeList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryNoticeListReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NoticeServiceServer).QueryNoticeList(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: NoticeService_QueryNoticeList_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NoticeServiceServer).QueryNoticeList(ctx, req.(*QueryNoticeListReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// NoticeService_ServiceDesc is the grpc.ServiceDesc for NoticeService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var NoticeService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "sysclient.NoticeService",
+	HandlerType: (*NoticeServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "AddNotice",
+			Handler:    _NoticeService_AddNotice_Handler,
+		},
+		{
+			MethodName: "DeleteNotice",
+			Handler:    _NoticeService_DeleteNotice_Handler,
+		},
+		{
+			MethodName: "UpdateNotice",
+			Handler:    _NoticeService_UpdateNotice_Handler,
+		},
+		{
+			MethodName: "UpdateNoticeStatus",
+			Handler:    _NoticeService_UpdateNoticeStatus_Handler,
+		},
+		{
+			MethodName: "QueryNoticeDetail",
+			Handler:    _NoticeService_QueryNoticeDetail_Handler,
+		},
+		{
+			MethodName: "QueryNoticeList",
+			Handler:    _NoticeService_QueryNoticeList_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "rpc/sys/sys.proto",
+}
+
+const (
 	OperateLogService_AddOperateLog_FullMethodName         = "/sysclient.OperateLogService/AddOperateLog"
 	OperateLogService_DeleteOperateLog_FullMethodName      = "/sysclient.OperateLogService/DeleteOperateLog"
 	OperateLogService_QueryOperateLogDetail_FullMethodName = "/sysclient.OperateLogService/QueryOperateLogDetail"

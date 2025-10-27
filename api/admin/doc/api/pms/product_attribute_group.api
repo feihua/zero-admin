@@ -86,8 +86,8 @@ type (
 	middleware: CheckUrl
 	group:      pms/product_attribute_group
 	prefix:     /api/pms/attributeGroup
-	tags: "商品属性分组管理"
-	authType: apiKey
+	tags:       "商品属性分组管理"
+	authType:   apiKey
 )
 service admin-api {
 	// 添加商品属性分组
