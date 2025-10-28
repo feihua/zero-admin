@@ -1,4 +1,4 @@
-package sys_notice_service
+package noticeservicelogic
 
 import (
 	"context"
