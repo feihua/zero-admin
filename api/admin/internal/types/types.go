@@ -485,7 +485,7 @@ type DeleteMemberTaskReq struct {
 }
 
 type DeleteMenuReq struct {
-	Id int64 `form:"id"`
+	Ids []int64 `form:"ids"`
 }
 
 type DeleteNoticeReq struct {
@@ -2215,6 +2215,11 @@ type QueryMenuListData struct {
 }
 
 type QueryMenuListReq struct {
+	Current    int64  `form:"current,default=1"`    //第几页
+	PageSize   int64  `form:"pageSize,default=20"`  //每页的数量
+	MenuName   string `form:"menuName,optional"`    //菜单名称
+	ParentId   int64  `form:"parentId,optional"`    //父菜单ID
+	MenuStatus int32  `form:"menuStatus,default=2"` //状态（0:关闭,1:正常 ）
 }
 
 type QueryMenuListResp struct {

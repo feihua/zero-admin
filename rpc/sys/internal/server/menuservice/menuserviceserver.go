@@ -58,3 +58,8 @@ func (s *MenuServiceServer) QueryMenuList(ctx context.Context, in *sysclient.Que
 	l := menuservicelogic.NewQueryMenuListLogic(ctx, s.svcCtx)
 	return l.QueryMenuList(in)
 }
+
+func (s *MenuServiceServer) QueryMenuResourceList(ctx context.Context, in *sysclient.QueryMenuListReq) (*sysclient.QueryMenuListResp, error) {
+	l := menuservicelogic.NewQueryMenuResourceListLogic(ctx, s.svcCtx)
+	return l.QueryMenuResourceList(in)
+}

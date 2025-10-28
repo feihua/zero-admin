@@ -1050,12 +1050,13 @@ var LoginLogService_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	MenuService_AddMenu_FullMethodName          = "/sysclient.MenuService/AddMenu"
-	MenuService_DeleteMenu_FullMethodName       = "/sysclient.MenuService/DeleteMenu"
-	MenuService_UpdateMenu_FullMethodName       = "/sysclient.MenuService/UpdateMenu"
-	MenuService_UpdateMenuStatus_FullMethodName = "/sysclient.MenuService/UpdateMenuStatus"
-	MenuService_QueryMenuDetail_FullMethodName  = "/sysclient.MenuService/QueryMenuDetail"
-	MenuService_QueryMenuList_FullMethodName    = "/sysclient.MenuService/QueryMenuList"
+	MenuService_AddMenu_FullMethodName               = "/sysclient.MenuService/AddMenu"
+	MenuService_DeleteMenu_FullMethodName            = "/sysclient.MenuService/DeleteMenu"
+	MenuService_UpdateMenu_FullMethodName            = "/sysclient.MenuService/UpdateMenu"
+	MenuService_UpdateMenuStatus_FullMethodName      = "/sysclient.MenuService/UpdateMenuStatus"
+	MenuService_QueryMenuDetail_FullMethodName       = "/sysclient.MenuService/QueryMenuDetail"
+	MenuService_QueryMenuList_FullMethodName         = "/sysclient.MenuService/QueryMenuList"
+	MenuService_QueryMenuResourceList_FullMethodName = "/sysclient.MenuService/QueryMenuResourceList"
 )
 
 // MenuServiceClient is the client API for MenuService service.
@@ -1074,6 +1075,7 @@ type MenuServiceClient interface {
 	QueryMenuDetail(ctx context.Context, in *QueryMenuDetailReq, opts ...grpc.CallOption) (*QueryMenuDetailResp, error)
 	// 查询菜单信息表列表
 	QueryMenuList(ctx context.Context, in *QueryMenuListReq, opts ...grpc.CallOption) (*QueryMenuListResp, error)
+	QueryMenuResourceList(ctx context.Context, in *QueryMenuListReq, opts ...grpc.CallOption) (*QueryMenuListResp, error)
 }
 
 type menuServiceClient struct {
@@ -1138,6 +1140,15 @@ func (c *menuServiceClient) QueryMenuList(ctx context.Context, in *QueryMenuList
 	return out, nil
 }
 
+func (c *menuServiceClient) QueryMenuResourceList(ctx context.Context, in *QueryMenuListReq, opts ...grpc.CallOption) (*QueryMenuListResp, error) {
+	out := new(QueryMenuListResp)
+	err := c.cc.Invoke(ctx, MenuService_QueryMenuResourceList_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // MenuServiceServer is the server API for MenuService service.
 // All implementations must embed UnimplementedMenuServiceServer
 // for forward compatibility
@@ -1154,6 +1165,7 @@ type MenuServiceServer interface {
 	QueryMenuDetail(context.Context, *QueryMenuDetailReq) (*QueryMenuDetailResp, error)
 	// 查询菜单信息表列表
 	QueryMenuList(context.Context, *QueryMenuListReq) (*QueryMenuListResp, error)
+	QueryMenuResourceList(context.Context, *QueryMenuListReq) (*QueryMenuListResp, error)
 	mustEmbedUnimplementedMenuServiceServer()
 }
 
@@ -1178,6 +1190,9 @@ func (UnimplementedMenuServiceServer) QueryMenuDetail(context.Context, *QueryMen
 }
 func (UnimplementedMenuServiceServer) QueryMenuList(context.Context, *QueryMenuListReq) (*QueryMenuListResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method QueryMenuList not implemented")
+}
+func (UnimplementedMenuServiceServer) QueryMenuResourceList(context.Context, *QueryMenuListReq) (*QueryMenuListResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method QueryMenuResourceList not implemented")
 }
 func (UnimplementedMenuServiceServer) mustEmbedUnimplementedMenuServiceServer() {}
 
@@ -1300,6 +1315,24 @@ func _MenuService_QueryMenuList_Handler(srv interface{}, ctx context.Context, de
 	return interceptor(ctx, in, info, handler)
 }
 
+func _MenuService_QueryMenuResourceList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryMenuListReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MenuServiceServer).QueryMenuResourceList(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: MenuService_QueryMenuResourceList_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MenuServiceServer).QueryMenuResourceList(ctx, req.(*QueryMenuListReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // MenuService_ServiceDesc is the grpc.ServiceDesc for MenuService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -1330,6 +1363,10 @@ var MenuService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "QueryMenuList",
 			Handler:    _MenuService_QueryMenuList_Handler,
+		},
+		{
+			MethodName: "QueryMenuResourceList",
+			Handler:    _MenuService_QueryMenuResourceList_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

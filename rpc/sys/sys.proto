@@ -493,7 +493,7 @@ message AddMenuResp {
 
 // 删除菜单信息表
 message DeleteMenuReq {
-  int64 id = 1;
+  repeated int64 ids = 1;
 }
 
 message DeleteMenuResp {
@@ -572,7 +572,11 @@ message QueryMenuDetailResp {
 
 // 分页查询菜单信息表列表
 message QueryMenuListReq {
-
+  int64 page_num = 1; //第几页
+  int64 page_size = 2; //每页的数量
+  string menu_name = 3; //菜单名称
+  int64 parent_id = 4; //父菜单ID，一级菜单为0
+  int32 menu_status = 5; //菜单状态
 }
 
 message MenuListData {
@@ -619,6 +623,7 @@ service MenuService {
   rpc QueryMenuDetail(QueryMenuDetailReq) returns (QueryMenuDetailResp){}
   // 查询菜单信息表列表
   rpc QueryMenuList(QueryMenuListReq) returns (QueryMenuListResp){}
+  rpc QueryMenuResourceList(QueryMenuListReq) returns (QueryMenuListResp){}
 
 
 }

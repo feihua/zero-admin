@@ -27,7 +27,7 @@ type (
 	}
 	// 删除菜单信息
 	DeleteMenuReq {
-		Id int64 `form:"id"`
+		Ids []int64 `form:"ids"`
 	}
 	// 更新菜单信息
 	UpdateMenuReq {
@@ -86,7 +86,13 @@ type (
 		Data    QueryMenuDetailData `json:"data"`
 	}
 	// 分页查询菜单信息列
-	QueryMenuListReq  {}
+	QueryMenuListReq {
+		Current    int64  `form:"current,default=1"` //第几页
+		PageSize   int64  `form:"pageSize,default=20"` //每页的数量
+		MenuName   string `form:"menuName,optional"` //菜单名称
+		ParentId   int64  `form:"parentId,optional"` //父菜单ID
+		MenuStatus int32  `form:"menuStatus,default=2"` //状态（0:关闭,1:正常 ）
+	}
 	QueryMenuListData {
 		Id            int64  `json:"id"` //编号
 		MenuName      string `json:"menuName"` //菜单名称
@@ -153,5 +159,9 @@ service admin-api {
 	// 分页查询菜单信息列表
 	@handler QueryMenuList
 	get /queryMenuList (QueryMenuListReq) returns (QueryMenuListResp)
+
+	// 分页查询菜单信息列表
+	@handler QueryMenuResourceList
+	get /queryMenuResourceList (QueryMenuListReq) returns (QueryMenuListResp)
 }
 

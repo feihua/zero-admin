@@ -2,6 +2,8 @@ package menu
 
 import (
 	"context"
+	"strconv"
+
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
 	"github.com/feihua/zero-admin/api/admin/internal/common/res"
 	"github.com/feihua/zero-admin/api/admin/internal/svc"
@@ -9,7 +11,6 @@ import (
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
 	"github.com/zeromicro/go-zero/core/logc"
 	"google.golang.org/grpc/status"
-	"strconv"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -36,7 +37,7 @@ func NewDeleteMenuLogic(ctx context.Context, svcCtx *svc.ServiceContext) DeleteM
 // DeleteMenu 删除菜单
 func (l *DeleteMenuLogic) DeleteMenu(req *types.DeleteMenuReq) (*types.BaseResp, error) {
 	if _, err := l.svcCtx.MenuService.DeleteMenu(l.ctx, &sysclient.DeleteMenuReq{
-		Id: req.Id, // 编号
+		Ids: req.Ids, // 编号
 	}); err != nil {
 		logc.Errorf(l.ctx, "根据menuId: %+v,删除菜单异常:%s", req, err.Error())
 		s, _ := status.FromError(err)
@@ -51,8 +52,13 @@ func (l *DeleteMenuLogic) DeleteMenu(req *types.DeleteMenuReq) (*types.BaseResp,
 		return nil, errorx.NewDefaultError("获取redis连接异常")
 	}
 
+	fields, err := l.svcCtx.Redis.HkeysCtx(l.ctx, key)
+	if err != nil {
+		logc.Error(l.ctx, "获取redis连接异常")
+		return nil, errorx.NewDefaultError("获取redis连接异常")
+	}
 	// 删除的时候 ,有可能修改了权限,所以需要清空除了管理员外,其它人权限
-	_, err = l.svcCtx.Redis.HdelCtx(l.ctx, key)
+	_, err = l.svcCtx.Redis.HdelCtx(l.ctx, key, fields...)
 	if err != nil {
 		logc.Error(l.ctx, "获取redis连接异常")
 		return nil, errorx.NewDefaultError("获取redis连接异常")

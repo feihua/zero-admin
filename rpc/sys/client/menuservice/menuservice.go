@@ -174,6 +174,7 @@ type (
 		QueryMenuDetail(ctx context.Context, in *QueryMenuDetailReq, opts ...grpc.CallOption) (*QueryMenuDetailResp, error)
 		// 查询菜单信息表列表
 		QueryMenuList(ctx context.Context, in *QueryMenuListReq, opts ...grpc.CallOption) (*QueryMenuListResp, error)
+		QueryMenuResourceList(ctx context.Context, in *QueryMenuListReq, opts ...grpc.CallOption) (*QueryMenuListResp, error)
 	}
 
 	defaultMenuService struct {
@@ -221,4 +222,9 @@ func (m *defaultMenuService) QueryMenuDetail(ctx context.Context, in *QueryMenuD
 func (m *defaultMenuService) QueryMenuList(ctx context.Context, in *QueryMenuListReq, opts ...grpc.CallOption) (*QueryMenuListResp, error) {
 	client := sysclient.NewMenuServiceClient(m.cli.Conn())
 	return client.QueryMenuList(ctx, in, opts...)
+}
+
+func (m *defaultMenuService) QueryMenuResourceList(ctx context.Context, in *QueryMenuListReq, opts ...grpc.CallOption) (*QueryMenuListResp, error) {
+	client := sysclient.NewMenuServiceClient(m.cli.Conn())
+	return client.QueryMenuResourceList(ctx, in, opts...)
 }

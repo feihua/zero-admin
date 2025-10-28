@@ -2,6 +2,9 @@ package menu
 
 import (
 	"context"
+	"strconv"
+	"strings"
+
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
 	"github.com/feihua/zero-admin/api/admin/internal/common/res"
 	"github.com/feihua/zero-admin/api/admin/internal/svc"
@@ -9,8 +12,6 @@ import (
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
 	"github.com/zeromicro/go-zero/core/logc"
 	"google.golang.org/grpc/status"
-	"strconv"
-	"strings"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -71,7 +72,12 @@ func (l *UpdateMenuLogic) UpdateMenu(req *types.UpdateMenuReq) (*types.BaseResp,
 		return nil, errorx.NewDefaultError("获取redis连接异常")
 	}
 
-	_, err = l.svcCtx.Redis.HdelCtx(l.ctx, key)
+	fields, err := l.svcCtx.Redis.HkeysCtx(l.ctx, key)
+	if err != nil {
+		logc.Error(l.ctx, "获取redis连接异常")
+		return nil, errorx.NewDefaultError("获取redis连接异常")
+	}
+	_, err = l.svcCtx.Redis.HdelCtx(l.ctx, key, fields...)
 	if err != nil {
 		logc.Error(l.ctx, "获取redis连接异常")
 		return nil, errorx.NewDefaultError("获取redis连接异常")
