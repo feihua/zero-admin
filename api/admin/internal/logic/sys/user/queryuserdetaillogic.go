@@ -2,6 +2,7 @@ package user
 
 import (
 	"context"
+
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
 	"github.com/zeromicro/go-zero/core/logc"
@@ -66,6 +67,7 @@ func (l *QueryUserDetailLogic) QueryUserDetail(req *types.QueryUserDetailReq) (r
 		UpdateBy:      detail.UpdateBy,      // 更新者
 		UpdateTime:    detail.UpdateTime,    // 更新时间
 		PostIds:       detail.PostIds,       // 岗位id
+		RoleIds:       detail.RoleIds,       // 角色id
 	}
 
 	return &types.QueryUserDetailResp{

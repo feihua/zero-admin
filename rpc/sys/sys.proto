@@ -1247,6 +1247,7 @@ message AddUserReq {
   string remark = 11; //备注
   string create_by = 12; //创建者
   repeated int64 PostIds = 13; //岗位ids
+  repeated int64 RoleIds = 14; //角色ids
 }
 
 message AddUserResp {
@@ -1276,6 +1277,7 @@ message UpdateUserReq {
   string remark = 11; //备注
   string update_by = 12; //更新者
   repeated int64 PostIds = 13; //岗位ids
+  repeated int64 RoleIds = 14; //角色ids
 }
 
 message UpdateUserResp {
@@ -1320,6 +1322,7 @@ message QueryUserDetailResp {
   string update_by = 20; //更新者
   string update_time = 21; //更新时间
   repeated int64 PostIds = 22; //岗位ids
+  repeated int64 RoleIds = 23; //角色ids
 }
 
 // 分页查询用户信息列表

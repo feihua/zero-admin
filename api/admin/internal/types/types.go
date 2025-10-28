@@ -388,7 +388,8 @@ type AddUserReq struct {
 	Status   int32   `json:"status"`            //状态(1:正常，0:禁用)
 	DeptId   int64   `json:"deptId"`            //部门ID
 	Remark   string  `json:"remark,optional"`   //备注
-	PostIds  []int64 `json:"postIds"`           //部门id
+	PostIds  []int64 `json:"postIds"`           //岗位id
+	RoleIds  []int64 `json:"roleIds"`           //角色id
 }
 
 type BaseResp struct {
@@ -3787,7 +3788,8 @@ type QueryUserDetailData struct {
 	CreateTime    string  `json:"createTime"`    //创建时间
 	UpdateBy      string  `json:"updateBy"`      //更新者
 	UpdateTime    string  `json:"updateTime"`    //更新时间
-	PostIds       []int64 `json:"postIds"`       //部门ids
+	PostIds       []int64 `json:"postIds"`       //岗位id
+	RoleIds       []int64 `json:"roleIds"`       //角色id
 }
 
 type QueryUserDetailReq struct {
@@ -4542,7 +4544,8 @@ type UpdateUserReq struct {
 	Status   int32   `json:"status"`          //状态(1:正常，0:禁用)
 	DeptId   int64   `json:"deptId"`          //部门ID
 	Remark   string  `json:"remark,optional"` //备注
-	PostIds  []int64 `json:"postIds"`         //部门id
+	PostIds  []int64 `json:"postIds"`         //岗位id
+	RoleIds  []int64 `json:"roleIds"`         //角色id
 }
 
 type UpdateUserRoleReq struct {

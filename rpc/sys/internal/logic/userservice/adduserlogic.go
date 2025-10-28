@@ -4,6 +4,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
+
 	"github.com/feihua/zero-admin/rpc/sys/gen/model"
 	"github.com/feihua/zero-admin/rpc/sys/gen/query"
 	"github.com/feihua/zero-admin/rpc/sys/internal/svc"
@@ -139,6 +140,23 @@ func (l *AddUserLogic) AddUser(in *sysclient.AddUserReq) (*sysclient.AddUserResp
 			logc.Errorf(l.ctx, "删除用户与角色关联异常,参数:%+v,异常:%s", user, err.Error())
 			return err
 		}
+
+		if len(in.RoleIds) > 0 {
+			var userRoles []*model.SysUserRole
+			for _, roleId := range in.RoleIds {
+				userRoles = append(userRoles, &model.SysUserRole{
+					UserID: user.ID,
+					RoleID: roleId,
+				})
+			}
+			// 8.添加用户与角色关联
+			err = roleDo.CreateInBatches(userRoles, len(userRoles))
+			if err != nil {
+				logc.Errorf(l.ctx, "清空用户与角色关联异常,参数:%+v,异常:%s", user, err.Error())
+				return err
+			}
+		}
+
 		return nil
 	})
 

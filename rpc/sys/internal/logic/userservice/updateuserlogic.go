@@ -4,6 +4,9 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"strconv"
+	"time"
+
 	"github.com/feihua/zero-admin/rpc/sys/gen/model"
 	"github.com/feihua/zero-admin/rpc/sys/gen/query"
 	"github.com/feihua/zero-admin/rpc/sys/internal/svc"
@@ -11,8 +14,6 @@ import (
 	"github.com/zeromicro/go-zero/core/logc"
 	"github.com/zeromicro/go-zero/core/logx"
 	"gorm.io/gorm"
-	"strconv"
-	"time"
 )
 
 // UpdateUserLogic 更新用户
@@ -155,6 +156,30 @@ func (l *UpdateUserLogic) UpdateUser(in *sysclient.UpdateUserReq) (*sysclient.Up
 		if err != nil {
 			logc.Errorf(l.ctx, "更新用户与岗位关联异常,参数:%+v,异常:%s", user, err.Error())
 			return err
+		}
+
+		roleDo := tx.SysUserRole.WithContext(l.ctx)
+		// 8.清空用户与角色关联(防止脏数据)
+		_, err = roleDo.Where(tx.SysUserRole.UserID.Eq(sysUser.ID)).Delete()
+		if err != nil {
+			logc.Errorf(l.ctx, "删除用户与角色关联异常,参数:%+v,异常:%s", user, err.Error())
+			return err
+		}
+
+		if len(in.RoleIds) > 0 {
+			var userRoles []*model.SysUserRole
+			for _, roleId := range in.RoleIds {
+				userRoles = append(userRoles, &model.SysUserRole{
+					UserID: sysUser.ID,
+					RoleID: roleId,
+				})
+			}
+			// 9.添加用户与角色关联
+			err = roleDo.CreateInBatches(userRoles, len(userRoles))
+			if err != nil {
+				logc.Errorf(l.ctx, "清空用户与角色关联异常,参数:%+v,异常:%s", user, err.Error())
+				return err
+			}
 		}
 
 		return nil

@@ -2,6 +2,7 @@ package user
 
 import (
 	"context"
+
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
 	"github.com/feihua/zero-admin/api/admin/internal/common/res"
 	"github.com/feihua/zero-admin/api/admin/internal/svc"
@@ -46,7 +47,8 @@ func (l *UpdateUserLogic) UpdateUser(req *types.UpdateUserReq) (*types.BaseResp,
 		DeptId:   req.DeptId,   // 部门ID
 		Remark:   req.Remark,   // 备注
 		UpdateBy: l.ctx.Value("userName").(string),
-		PostIds:  req.PostIds, // 部门id
+		PostIds:  req.PostIds, // 岗位id
+		RoleIds:  req.RoleIds, // 角色id
 	}
 
 	if _, err := l.svcCtx.UserService.UpdateUser(l.ctx, &userUpdateReq); err != nil {

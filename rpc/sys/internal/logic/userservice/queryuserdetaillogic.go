@@ -3,12 +3,13 @@ package userservicelogic
 import (
 	"context"
 	"errors"
+	"strconv"
+
 	"github.com/bytedance/sonic"
 	"github.com/feihua/zero-admin/pkg/time_util"
 	"github.com/feihua/zero-admin/rpc/sys/gen/query"
 	"github.com/zeromicro/go-zero/core/logc"
 	"gorm.io/gorm"
-	"strconv"
 
 	"github.com/feihua/zero-admin/rpc/sys/internal/svc"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
@@ -57,15 +58,20 @@ func (l *QueryUserDetailLogic) QueryUserDetail(in *sysclient.QueryUserDetailReq)
 		return nil, errors.New("查询用户异常")
 	}
 
-	list, err := query.SysUserPost.WithContext(l.ctx).Where(query.SysUserPost.UserID.Eq(in.Id)).Find()
+	var postIds = make([]int64, 0)
+	post := query.SysUserPost
+	err = post.WithContext(l.ctx).Select(post.PostID).Where(post.UserID.Eq(in.Id)).Scan(&postIds)
 	if err != nil {
 		logc.Errorf(l.ctx, "查询用户岗位失败,参数：%+v,异常:%s", in, err.Error())
 		return nil, errors.New("查询用户详情失败")
 	}
 
-	var postIds = make([]int64, 0, len(list))
-	for _, post := range list {
-		postIds = append(postIds, post.PostID)
+	var roleIds []int64
+	role := query.SysUserRole
+	err = role.WithContext(l.ctx).Select(role.RoleID).Where(role.UserID.Eq(in.Id)).Scan(&roleIds)
+	if err != nil {
+		logc.Errorf(l.ctx, "查询用户角色失败,参数：%+v,异常:%s", in, err.Error())
+		return nil, errors.New("查询用户详情失败")
 	}
 
 	data := &sysclient.QueryUserDetailResp{
@@ -90,6 +96,7 @@ func (l *QueryUserDetailLogic) QueryUserDetail(in *sysclient.QueryUserDetailReq)
 		UpdateBy:      item.UpdateBy,                              // 更新者
 		UpdateTime:    time_util.TimeToString(item.UpdateTime),    // 更新时间
 		PostIds:       postIds,                                    // 岗位id
+		RoleIds:       roleIds,                                    // 角色id
 	}
 
 	value, _ := sonic.Marshal(data)
