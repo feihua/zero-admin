@@ -2,6 +2,8 @@ package role
 
 import (
 	"context"
+	"strconv"
+
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
 	"github.com/feihua/zero-admin/api/admin/internal/common/res"
 	"github.com/feihua/zero-admin/api/admin/internal/svc"
@@ -9,7 +11,6 @@ import (
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
 	"github.com/zeromicro/go-zero/core/logc"
 	"google.golang.org/grpc/status"
-	"strconv"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -53,9 +54,13 @@ func (l *UpdateRoleMenuListLogic) UpdateRoleMenuList(req *types.UpdateRoleMenuLi
 		logc.Error(l.ctx, "获取redis连接异常")
 		return nil, errorx.NewDefaultError("获取redis连接异常")
 	}
-
+	fields, err := l.svcCtx.Redis.HkeysCtx(l.ctx, key)
+	if err != nil {
+		logc.Error(l.ctx, "获取redis连接异常")
+		return nil, errorx.NewDefaultError("获取redis连接异常")
+	}
 	// 删除的时候 ,有可能修改了权限,所以需要清空除了管理员外,其它人权限
-	_, err = l.svcCtx.Redis.HdelCtx(l.ctx, key)
+	_, err = l.svcCtx.Redis.HdelCtx(l.ctx, key, fields...)
 	if err != nil {
 		logc.Error(l.ctx, "获取redis连接异常")
 		return nil, errorx.NewDefaultError("获取redis连接异常")
