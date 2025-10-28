@@ -88,8 +88,12 @@ type (
 )
 
 @server (
-	group:  sys/sys_notice
-	prefix: /api/sys/notice
+	jwt:        Auth
+	middleware: CheckUrl
+	group:      sys/sys_notice
+	prefix:     /api/sys/notice
+	tags:       "通知管理"
+	authType:   apiKey
 )
 service admin-api {
 	// 添加通知公告表

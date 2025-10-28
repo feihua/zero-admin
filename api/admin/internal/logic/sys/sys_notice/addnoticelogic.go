@@ -3,6 +3,7 @@ package sys_notice
 import (
 	"context"
 
+	"github.com/feihua/zero-admin/api/admin/internal/common"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
 	"github.com/feihua/zero-admin/api/admin/internal/svc"
 	"github.com/feihua/zero-admin/api/admin/internal/types"
@@ -34,7 +35,10 @@ func NewAddNoticeLogic(ctx context.Context, svcCtx *svc.ServiceContext) *AddNoti
 
 // AddNotice 添加通知公告表
 func (l *AddNoticeLogic) AddNotice(req *types.AddNoticeReq) (resp *types.NoticeResp, err error) {
-	createBy := l.ctx.Value("userName").(string)
+	userName, err := common.GetUserName(l.ctx)
+	if err != nil {
+		return nil, err
+	}
 
 	_, err = l.svcCtx.NoticeService.AddNotice(l.ctx, &sysclient.AddNoticeReq{
 		NoticeTitle:   req.NoticeTitle,   // 公告标题
@@ -42,7 +46,7 @@ func (l *AddNoticeLogic) AddNotice(req *types.AddNoticeReq) (resp *types.NoticeR
 		NoticeContent: req.NoticeContent, // 公告内容
 		Status:        req.Status,        // 公告状态（0:关闭,1:正常 ）
 		Remark:        req.Remark,        // 备注
-		CreateBy:      createBy,          // 创建者
+		CreateBy:      userName,          // 创建者
 
 	})
 

@@ -1478,38 +1478,42 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 	)
 
 	server.AddRoutes(
-		[]rest.Route{
-			{
-				Method:  http.MethodPost,
-				Path:    "/addNotice",
-				Handler: syssys_notice.AddNoticeHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodGet,
-				Path:    "/deleteNotice",
-				Handler: syssys_notice.DeleteNoticeHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodGet,
-				Path:    "/queryNoticeDetail",
-				Handler: syssys_notice.QueryNoticeDetailHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodGet,
-				Path:    "/queryNoticeList",
-				Handler: syssys_notice.QueryNoticeListHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodPost,
-				Path:    "/updateNotice",
-				Handler: syssys_notice.UpdateNoticeHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodPost,
-				Path:    "/updateNoticeStatus",
-				Handler: syssys_notice.UpdateNoticeStatusHandler(serverCtx),
-			},
-		},
+		rest.WithMiddlewares(
+			[]rest.Middleware{serverCtx.CheckUrl},
+			[]rest.Route{
+				{
+					Method:  http.MethodPost,
+					Path:    "/addNotice",
+					Handler: syssys_notice.AddNoticeHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodGet,
+					Path:    "/deleteNotice",
+					Handler: syssys_notice.DeleteNoticeHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodGet,
+					Path:    "/queryNoticeDetail",
+					Handler: syssys_notice.QueryNoticeDetailHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodGet,
+					Path:    "/queryNoticeList",
+					Handler: syssys_notice.QueryNoticeListHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodPost,
+					Path:    "/updateNotice",
+					Handler: syssys_notice.UpdateNoticeHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodPost,
+					Path:    "/updateNoticeStatus",
+					Handler: syssys_notice.UpdateNoticeStatusHandler(serverCtx),
+				},
+			}...,
+		),
+		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
 		rest.WithPrefix("/api/sys/notice"),
 	)
 

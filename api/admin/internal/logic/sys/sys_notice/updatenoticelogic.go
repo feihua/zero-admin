@@ -3,6 +3,7 @@ package sys_notice
 import (
 	"context"
 
+	"github.com/feihua/zero-admin/api/admin/internal/common"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
 	"github.com/feihua/zero-admin/api/admin/internal/svc"
 	"github.com/feihua/zero-admin/api/admin/internal/types"
@@ -35,7 +36,10 @@ func NewUpdateNoticeLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Upda
 // UpdateNotice 更新通知公告表
 func (l *UpdateNoticeLogic) UpdateNotice(req *types.UpdateNoticeReq) (resp *types.NoticeResp, err error) {
 
-	updateBy := l.ctx.Value("userName").(string)
+	userName, err := common.GetUserName(l.ctx)
+	if err != nil {
+		return nil, err
+	}
 	_, err = l.svcCtx.NoticeService.UpdateNotice(l.ctx, &sysclient.UpdateNoticeReq{
 		Id:            req.Id,            // 公告ID
 		NoticeTitle:   req.NoticeTitle,   // 公告标题
@@ -43,7 +47,7 @@ func (l *UpdateNoticeLogic) UpdateNotice(req *types.UpdateNoticeReq) (resp *type
 		NoticeContent: req.NoticeContent, // 公告内容
 		Status:        req.Status,        // 公告状态（0:关闭,1:正常 ）
 		Remark:        req.Remark,        // 备注
-		UpdateBy:      updateBy,          // 更新者
+		UpdateBy:      userName,          // 更新者
 
 	})
 
