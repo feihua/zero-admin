@@ -3,6 +3,8 @@ package membersignlogservicelogic
 import (
 	"context"
 	"errors"
+	"time"
+
 	"github.com/feihua/zero-admin/pkg/time_util"
 	"github.com/feihua/zero-admin/rpc/ums/gen/query"
 	"github.com/feihua/zero-admin/rpc/ums/internal/svc"
@@ -37,9 +39,14 @@ func (l *QueryMemberSignLogListLogic) QueryMemberSignLogList(in *umsclient.Query
 	if in.MemberId != 0 {
 		q = q.Where(memberSignLog.MemberID.Eq(in.MemberId))
 	}
-	// if in.SignDate != 2 {
-	// 	q = q.Where(memberSignLog.SignDate.Eq(in.SignDate))
-	// }
+	if len(in.SignDate) > 0 {
+		signDate, err := time.Parse("2006-01-02", in.SignDate)
+		if err != nil {
+			return nil, errors.New("日期格式错误")
+		}
+
+		q = q.Where(memberSignLog.SignDate.Eq(signDate))
+	}
 
 	result, count, err := q.FindByPage(int((in.PageNum-1)*in.PageSize), int(in.PageSize))
 

@@ -234,7 +234,7 @@ message AddMemberConsumeSettingResp {
 
 // 删除积分消费设置
 message DeleteMemberConsumeSettingReq {
-  int64 id = 1;
+  repeated int64 ids = 1;
 }
 
 message DeleteMemberConsumeSettingResp {
@@ -1082,7 +1082,7 @@ message AddMemberRuleSettingResp {
 
 // 删除会员积分成长规则
 message DeleteMemberRuleSettingReq {
-  int64 id = 1;
+  repeated int64 ids = 1;
 }
 
 message DeleteMemberRuleSettingResp {

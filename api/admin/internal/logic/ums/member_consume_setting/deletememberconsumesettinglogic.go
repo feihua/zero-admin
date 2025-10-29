@@ -34,7 +34,7 @@ func NewDeleteMemberConsumeSettingLogic(ctx context.Context, svcCtx *svc.Service
 // DeleteMemberConsumeSetting 删除积分消费设置
 func (l *DeleteMemberConsumeSettingLogic) DeleteMemberConsumeSetting(req *types.DeleteMemberConsumeSettingReq) (resp *types.BaseResp, err error) {
 	_, err = l.svcCtx.MemberConsumeSettingService.DeleteMemberConsumeSetting(l.ctx, &umsclient.DeleteMemberConsumeSettingReq{
-		Id: req.Id,
+		Ids: req.Ids,
 	})
 
 	if err != nil {

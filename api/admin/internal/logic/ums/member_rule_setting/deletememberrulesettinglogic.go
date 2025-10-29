@@ -2,6 +2,7 @@ package member_rule_setting
 
 import (
 	"context"
+
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
 	"github.com/feihua/zero-admin/api/admin/internal/common/res"
 	"github.com/feihua/zero-admin/rpc/ums/umsclient"
@@ -35,7 +36,7 @@ func NewDeleteMemberRuleSettingLogic(ctx context.Context, svcCtx *svc.ServiceCon
 // DeleteMemberRuleSetting 删除积分规则
 func (l *DeleteMemberRuleSettingLogic) DeleteMemberRuleSetting(req *types.DeleteMemberRuleSettingReq) (resp *types.BaseResp, err error) {
 	_, err = l.svcCtx.MemberRuleSettingService.DeleteMemberRuleSetting(l.ctx, &umsclient.DeleteMemberRuleSettingReq{
-		Id: req.Id,
+		Ids: req.Ids,
 	})
 
 	if err != nil {

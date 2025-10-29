@@ -3,6 +3,7 @@ package memberrulesettingservicelogic
 import (
 	"context"
 	"errors"
+
 	"github.com/feihua/zero-admin/rpc/ums/gen/query"
 	"github.com/feihua/zero-admin/rpc/ums/internal/svc"
 	"github.com/feihua/zero-admin/rpc/ums/umsclient"
@@ -33,7 +34,7 @@ func NewDeleteMemberRuleSettingLogic(ctx context.Context, svcCtx *svc.ServiceCon
 func (l *DeleteMemberRuleSettingLogic) DeleteMemberRuleSetting(in *umsclient.DeleteMemberRuleSettingReq) (*umsclient.DeleteMemberRuleSettingResp, error) {
 	q := query.UmsMemberRuleSetting
 
-	_, err := q.WithContext(l.ctx).Where(q.ID.Eq(in.Id)).Delete()
+	_, err := q.WithContext(l.ctx).Where(q.ID.In(in.Ids...)).Delete()
 
 	if err != nil {
 		logc.Errorf(l.ctx, "删除会员积分成长规则失败,参数:%+v,异常:%s", in, err.Error())

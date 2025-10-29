@@ -461,7 +461,7 @@ type DeleteLoginLogReq struct {
 }
 
 type DeleteMemberConsumeSettingReq struct {
-	Id int64 `form:"id"`
+	Ids []int64 `form:"ids"`
 }
 
 type DeleteMemberInfoReq struct {
@@ -473,7 +473,7 @@ type DeleteMemberLevelReq struct {
 }
 
 type DeleteMemberRuleSettingReq struct {
-	Id int64 `form:"id"`
+	Ids []int64 `form:"ids"`
 }
 
 type DeleteMemberTagReq struct {

@@ -21,7 +21,7 @@ message AddMemberRuleSettingResp {
 
 // 删除会员积分成长规则
 message DeleteMemberRuleSettingReq {
-  int64 id = 1;
+  repeated int64 ids = 1;
 }
 
 message DeleteMemberRuleSettingResp {

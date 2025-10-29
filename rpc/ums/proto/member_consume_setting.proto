@@ -21,7 +21,7 @@ message AddMemberConsumeSettingResp {
 
 // 删除积分消费设置
 message DeleteMemberConsumeSettingReq {
-  int64 id = 1;
+  repeated int64 ids = 1;
 }
 
 message DeleteMemberConsumeSettingResp {

@@ -15,7 +15,7 @@ type (
 	}
 	// 删除积分消费设置请求参数
 	DeleteMemberConsumeSettingReq {
-		Id int64 `form:"id"`
+		Ids []int64 `form:"ids"`
 	}
 	// 更新积分消费设置请求参数
 	UpdateMemberConsumeSettingReq {

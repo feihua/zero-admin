@@ -17,7 +17,7 @@ type (
 	}
 	// 删除会员积分成长规则请求参数
 	DeleteMemberRuleSettingReq {
-		Id int64 `form:"id"`
+		Ids []int64 `form:"ids"`
 	}
 	// 更新会员积分成长规则请求参数
 	UpdateMemberRuleSettingReq {
