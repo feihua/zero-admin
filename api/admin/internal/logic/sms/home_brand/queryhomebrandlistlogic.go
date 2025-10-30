@@ -2,6 +2,7 @@ package home_brand
 
 import (
 	"context"
+
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
 	"github.com/feihua/zero-admin/api/admin/internal/svc"
 	"github.com/feihua/zero-admin/api/admin/internal/types"
@@ -36,9 +37,9 @@ func (l *QueryHomeBrandListLogic) QueryHomeBrandList(req *types.QueryHomeBrandLi
 	result, err := l.svcCtx.ProductBrandService.QueryProductBrandList(l.ctx, &pmsclient.QueryProductBrandListReq{
 		PageNum:         int32(req.Current),
 		PageSize:        int32(req.PageSize),
-		Name:            req.BrandName, // 品牌名称
-		RecommendStatus: 1,             // 推荐状态
-		IsEnabled:       1,             // 是否启用
+		Name:            req.BrandName,       // 品牌名称
+		RecommendStatus: req.RecommendStatus, // 推荐状态
+		IsEnabled:       1,                   // 是否启用
 	})
 
 	if err != nil {

@@ -2,10 +2,11 @@ package home_recommend_subject
 
 import (
 	"context"
+	"strings"
+
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
 	"github.com/feihua/zero-admin/rpc/cms/cmsclient"
 	"github.com/zeromicro/go-zero/core/logc"
-	"strings"
 
 	"github.com/feihua/zero-admin/api/admin/internal/svc"
 	"github.com/feihua/zero-admin/api/admin/internal/types"
@@ -38,7 +39,7 @@ func (l *HomeRecommendSubjectListLogic) HomeRecommendSubjectList(req *types.List
 		PageNum:         req.Current,
 		PageSize:        req.PageSize,
 		Title:           strings.TrimSpace(req.SubjectName), // 专题标题
-		RecommendStatus: 1,                                  // 推荐状态：0->不推荐；1->推荐
+		RecommendStatus: req.RecommendStatus,                // 推荐状态：0->不推荐；1->推荐
 		ShowStatus:      1,                                  // 显示状态：0->不显示；1->显示
 	})
 

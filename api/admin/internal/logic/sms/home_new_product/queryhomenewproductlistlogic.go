@@ -2,10 +2,11 @@ package home_new_product
 
 import (
 	"context"
+	"strings"
+
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
 	"github.com/feihua/zero-admin/rpc/pms/pmsclient"
 	"github.com/zeromicro/go-zero/core/logc"
-	"strings"
 
 	"github.com/feihua/zero-admin/api/admin/internal/svc"
 	"github.com/feihua/zero-admin/api/admin/internal/types"
@@ -42,7 +43,7 @@ func (l *HomeNewProductListLogic) QueryHomeNewProductList(req *types.QueryHomeNe
 		PublishStatus:   2,
 		BrandId:         0,
 		RecommendStatus: 2,
-		NewStatus:       1,
+		NewStatus:       req.RecommendStatus,
 	})
 
 	if err != nil {
