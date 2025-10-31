@@ -45,6 +45,8 @@ func (l *HomeRecommendProductListLogic) HomeRecommendProductList(req *types.List
 		BrandId:         0,
 		NewStatus:       2,
 		RecommendStatus: req.RecommendStatus,
+		PromotionType:   6,
+		PreviewStatus:   2,
 	})
 
 	if err != nil {

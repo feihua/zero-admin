@@ -3,6 +3,7 @@ package subjectservicelogic
 import (
 	"context"
 	"errors"
+
 	"github.com/feihua/zero-admin/pkg/time_util"
 	"github.com/feihua/zero-admin/rpc/cms/cmsclient"
 	"github.com/feihua/zero-admin/rpc/cms/gen/query"
@@ -63,6 +64,7 @@ func (l *QuerySubjectDetailLogic) QuerySubjectDetail(in *cmsclient.QuerySubjectD
 		CreateTime:      time_util.TimeToStr(item.CreateTime),    // 创建时间
 		UpdateBy:        item.UpdateBy,                           // 更新者
 		UpdateTime:      time_util.TimeToString(item.UpdateTime), // 更新时间
+		Sort:            item.Sort,                               // 排序
 	}
 
 	return data, nil

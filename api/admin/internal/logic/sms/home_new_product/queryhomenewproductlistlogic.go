@@ -44,6 +44,8 @@ func (l *HomeNewProductListLogic) QueryHomeNewProductList(req *types.QueryHomeNe
 		BrandId:         0,
 		RecommendStatus: 2,
 		NewStatus:       req.RecommendStatus,
+		PromotionType:   6,
+		PreviewStatus:   2,
 	})
 
 	if err != nil {

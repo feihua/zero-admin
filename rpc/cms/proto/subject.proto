@@ -22,6 +22,7 @@ message AddSubjectReq {
   int32 forward_count = 14; //转发数
   string category_name = 15; //专题分类名称
   string create_by = 16; //创建者
+  int32 sort = 17; //排序
 }
 
 message AddSubjectResp {
@@ -55,6 +56,7 @@ message UpdateSubjectReq {
   int32 forward_count = 14; //转发数
   string category_name = 15; //专题分类名称
   string update_by = 18; //更新者
+  int32 sort = 19; //排序
 }
 
 message UpdateSubjectResp {
@@ -98,27 +100,18 @@ message QuerySubjectDetailResp {
   string create_time = 17; //创建时间
   string update_by = 18; //更新者
   string update_time = 19; //更新时间
-
+  int32 sort = 20; //排序
 }
 
 // 分页查询专题列表
 message QuerySubjectListReq {
   int64 category_id = 1; //专题分类id
   string title = 2; //专题标题
-  string pic = 3; //专题主图
-  int32 product_count = 4; //关联产品数量
-  int32 recommend_status = 5; //推荐状态：0->不推荐；1->推荐
-  int32 collect_count = 6; //收藏数
-  int32 read_count = 7; //阅读数
-  int32 comment_count = 8; //评论数
-  string album_pics = 9; //画册图片用逗号分割
-  string description = 10; //专题内容
-  int32 show_status = 11; //显示状态：0->不显示；1->显示
-  string content = 12; //专题内容
-  int32 forward_count = 13; //转发数
-  string category_name = 14; //专题分类名称
-  int64 page_num = 15; //第几页
-  int64 page_size = 16; //每页的数量
+  int32 recommend_status = 3; //推荐状态：0->不推荐；1->推荐
+  int32 show_status = 4; //显示状态：0->不显示；1->显示
+  string category_name = 5; //专题分类名称
+  int64 page_num = 6; //第几页
+  int64 page_size = 7; //每页的数量
 }
 
 message SubjectListData {
@@ -141,7 +134,7 @@ message SubjectListData {
   string create_time = 17; //创建时间
   string update_by = 18; //更新者
   string update_time = 19; //更新时间
-
+  int32 sort = 20; //排序
 }
 
 message QuerySubjectListResp {

@@ -71,7 +71,7 @@ func (l *HomeRecommendSubjectListLogic) HomeRecommendSubjectList(req *types.List
 			CreateTime:      item.CreateTime,      // 创建时间
 			UpdateBy:        item.UpdateBy,        // 更新者
 			UpdateTime:      item.UpdateTime,      // 更新时间
-			Sort:            1,
+			Sort:            item.Sort,            // 排序
 		})
 	}
 

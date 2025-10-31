@@ -375,6 +375,7 @@ type AddSubjectReq struct {
 	Content         string `json:"content"`                   //专题内容
 	ForwardCount    int32  `json:"forwardCount"`              //转发数
 	CategoryName    string `json:"categoryName"`              //专题分类名称
+	Sort            int32  `json:"sort"`                      // 排序
 }
 
 type AddUserReq struct {
@@ -3720,6 +3721,7 @@ type QuerySubjectDetailData struct {
 	CreateTime      string `json:"createTime"`      //创建时间
 	UpdateBy        string `json:"updateBy"`        //更新者
 	UpdateTime      string `json:"updateTime"`      //更新时间
+	Sort            int32  `json:"sort"`            // 排序
 }
 
 type QuerySubjectDetailReq struct {
@@ -3752,6 +3754,7 @@ type QuerySubjectListData struct {
 	CreateTime      string `json:"createTime"`      //创建时间
 	UpdateBy        string `json:"updateBy"`        //更新者
 	UpdateTime      string `json:"updateTime"`      //更新时间
+	Sort            int32  `json:"sort"`            // 排序
 }
 
 type QuerySubjectListReq struct {
@@ -4530,6 +4533,7 @@ type UpdateSubjectReq struct {
 	Content         string `json:"content"`                   //专题内容
 	ForwardCount    int32  `json:"forwardCount"`              //转发数
 	CategoryName    string `json:"categoryName"`              //专题分类名称
+	Sort            int32  `json:"sort"`                      // 排序
 }
 
 type UpdateSubjectStatusReq struct {

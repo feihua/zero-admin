@@ -3,6 +3,8 @@ package subjectservicelogic
 import (
 	"context"
 	"errors"
+	"time"
+
 	"github.com/feihua/zero-admin/rpc/cms/cmsclient"
 	"github.com/feihua/zero-admin/rpc/cms/gen/model"
 	"github.com/feihua/zero-admin/rpc/cms/gen/query"
@@ -10,7 +12,6 @@ import (
 	"github.com/zeromicro/go-zero/core/logc"
 	"github.com/zeromicro/go-zero/core/logx"
 	"gorm.io/gorm"
-	"time"
 )
 
 // UpdateSubjectLogic 更新专题
@@ -68,6 +69,7 @@ func (l *UpdateSubjectLogic) UpdateSubject(in *cmsclient.UpdateSubjectReq) (*cms
 		CreateTime:      s.CreateTime,       // 创建时间
 		UpdateBy:        in.UpdateBy,        // 更新者
 		UpdateTime:      &now,               // 更新时间
+		Sort:            in.Sort,            // 排序
 	}
 
 	// 2.专题存在时,则直接更新专题

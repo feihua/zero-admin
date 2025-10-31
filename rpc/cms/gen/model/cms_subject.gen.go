@@ -27,6 +27,7 @@ type CmsSubject struct {
 	Content         string     `gorm:"column:content;not null;comment:专题内容" json:"content"`                                   // 专题内容
 	ForwardCount    int32      `gorm:"column:forward_count;not null;comment:转发数" json:"forward_count"`                        // 转发数
 	CategoryName    string     `gorm:"column:category_name;not null;comment:专题分类名称" json:"category_name"`                     // 专题分类名称
+	Sort            int32      `gorm:"column:sort;not null;default:1;comment:排序" json:"sort"`                                 // 排序
 	CreateBy        string     `gorm:"column:create_by;not null;comment:创建者" json:"create_by"`                                // 创建者
 	CreateTime      time.Time  `gorm:"column:create_time;not null;default:CURRENT_TIMESTAMP;comment:创建时间" json:"create_time"` // 创建时间
 	UpdateBy        string     `gorm:"column:update_by;not null;comment:更新者" json:"update_by"`                                // 更新者

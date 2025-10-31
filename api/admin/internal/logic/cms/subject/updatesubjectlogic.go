@@ -2,6 +2,7 @@ package subject
 
 import (
 	"context"
+
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
 	"github.com/feihua/zero-admin/api/admin/internal/common/res"
 	"github.com/feihua/zero-admin/api/admin/internal/svc"
@@ -53,6 +54,7 @@ func (l *UpdateSubjectLogic) UpdateSubject(req *types.UpdateSubjectReq) (resp *t
 		ForwardCount:    req.ForwardCount,    // 转发数
 		CategoryName:    req.CategoryName,    // 专题分类名称
 		UpdateBy:        updateBy,            // 更新者
+		Sort:            req.Sort,            // 排序
 	})
 
 	if err != nil {

@@ -4,6 +4,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
+
 	"github.com/feihua/zero-admin/rpc/cms/cmsclient"
 	"github.com/feihua/zero-admin/rpc/cms/gen/model"
 	"github.com/feihua/zero-admin/rpc/cms/gen/query"
@@ -59,6 +60,7 @@ func (l *AddSubjectLogic) AddSubject(in *cmsclient.AddSubjectReq) (*cmsclient.Ad
 		ForwardCount:    in.ForwardCount,    // 转发数
 		CategoryName:    in.CategoryName,    // 专题分类名称
 		CreateBy:        in.CreateBy,        // 创建者
+		Sort:            in.Sort,            // 排序
 	}
 
 	err = q.WithContext(l.ctx).Create(item)

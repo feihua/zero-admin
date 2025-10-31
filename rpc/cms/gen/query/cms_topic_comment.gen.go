@@ -6,6 +6,7 @@ package query
 
 import (
 	"context"
+	"database/sql"
 
 	"gorm.io/gorm"
 	"gorm.io/gorm/clause"
@@ -180,6 +181,8 @@ type ICmsTopicCommentDo interface {
 	FirstOrCreate() (*model.CmsTopicComment, error)
 	FindByPage(offset int, limit int) (result []*model.CmsTopicComment, count int64, err error)
 	ScanByPage(result interface{}, offset int, limit int) (count int64, err error)
+	Rows() (*sql.Rows, error)
+	Row() *sql.Row
 	Scan(result interface{}) (err error)
 	Returning(value interface{}, columns ...string) ICmsTopicCommentDo
 	UnderlyingDB() *gorm.DB

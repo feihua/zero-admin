@@ -6,6 +6,7 @@ package query
 
 import (
 	"context"
+	"database/sql"
 
 	"gorm.io/gorm"
 	"gorm.io/gorm/clause"
@@ -42,6 +43,7 @@ func newCmsSubject(db *gorm.DB, opts ...gen.DOOption) cmsSubject {
 	_cmsSubject.Content = field.NewString(tableName, "content")
 	_cmsSubject.ForwardCount = field.NewInt32(tableName, "forward_count")
 	_cmsSubject.CategoryName = field.NewString(tableName, "category_name")
+	_cmsSubject.Sort = field.NewInt32(tableName, "sort")
 	_cmsSubject.CreateBy = field.NewString(tableName, "create_by")
 	_cmsSubject.CreateTime = field.NewTime(tableName, "create_time")
 	_cmsSubject.UpdateBy = field.NewString(tableName, "update_by")
@@ -72,6 +74,7 @@ type cmsSubject struct {
 	Content         field.String // 专题内容
 	ForwardCount    field.Int32  // 转发数
 	CategoryName    field.String // 专题分类名称
+	Sort            field.Int32  // 排序
 	CreateBy        field.String // 创建者
 	CreateTime      field.Time   // 创建时间
 	UpdateBy        field.String // 更新者
@@ -107,6 +110,7 @@ func (c *cmsSubject) updateTableName(table string) *cmsSubject {
 	c.Content = field.NewString(table, "content")
 	c.ForwardCount = field.NewInt32(table, "forward_count")
 	c.CategoryName = field.NewString(table, "category_name")
+	c.Sort = field.NewInt32(table, "sort")
 	c.CreateBy = field.NewString(table, "create_by")
 	c.CreateTime = field.NewTime(table, "create_time")
 	c.UpdateBy = field.NewString(table, "update_by")
@@ -137,7 +141,7 @@ func (c *cmsSubject) GetFieldByName(fieldName string) (field.OrderExpr, bool) {
 }
 
 func (c *cmsSubject) fillFieldMap() {
-	c.fieldMap = make(map[string]field.Expr, 19)
+	c.fieldMap = make(map[string]field.Expr, 20)
 	c.fieldMap["id"] = c.ID
 	c.fieldMap["category_id"] = c.CategoryID
 	c.fieldMap["title"] = c.Title
@@ -153,6 +157,7 @@ func (c *cmsSubject) fillFieldMap() {
 	c.fieldMap["content"] = c.Content
 	c.fieldMap["forward_count"] = c.ForwardCount
 	c.fieldMap["category_name"] = c.CategoryName
+	c.fieldMap["sort"] = c.Sort
 	c.fieldMap["create_by"] = c.CreateBy
 	c.fieldMap["create_time"] = c.CreateTime
 	c.fieldMap["update_by"] = c.UpdateBy
@@ -226,6 +231,8 @@ type ICmsSubjectDo interface {
 	FirstOrCreate() (*model.CmsSubject, error)
 	FindByPage(offset int, limit int) (result []*model.CmsSubject, count int64, err error)
 	ScanByPage(result interface{}, offset int, limit int) (count int64, err error)
+	Rows() (*sql.Rows, error)
+	Row() *sql.Row
 	Scan(result interface{}) (err error)
 	Returning(value interface{}, columns ...string) ICmsSubjectDo
 	UnderlyingDB() *gorm.DB

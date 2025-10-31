@@ -2,6 +2,7 @@ package subjectservicelogic
 
 import (
 	"context"
+
 	"github.com/feihua/zero-admin/pkg/time_util"
 	"github.com/feihua/zero-admin/rpc/cms/gen/query"
 	"github.com/zeromicro/go-zero/core/logc"
@@ -73,7 +74,7 @@ func (l *QuerySubjectListLogic) QuerySubjectList(in *cmsclient.QuerySubjectListR
 			CreateTime:      time_util.TimeToStr(item.CreateTime),    // 创建时间
 			UpdateBy:        item.UpdateBy,                           // 更新者
 			UpdateTime:      time_util.TimeToString(item.UpdateTime), // 更新时间
-
+			Sort:            item.Sort,                               // 排序
 		})
 	}
 

@@ -2,6 +2,7 @@ package subject
 
 import (
 	"context"
+
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
 	"github.com/feihua/zero-admin/api/admin/internal/svc"
 	"github.com/feihua/zero-admin/api/admin/internal/types"
@@ -64,6 +65,7 @@ func (l *QuerySubjectDetailLogic) QuerySubjectDetail(req *types.QuerySubjectDeta
 		CreateTime:      detail.CreateTime,      // 创建时间
 		UpdateBy:        detail.UpdateBy,        // 更新者
 		UpdateTime:      detail.UpdateTime,      // 更新时间
+		Sort:            detail.Sort,            // 排序
 	}
 	return &types.QuerySubjectDetailResp{
 		Code:    "000000",

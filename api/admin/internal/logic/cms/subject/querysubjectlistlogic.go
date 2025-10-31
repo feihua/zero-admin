@@ -2,10 +2,11 @@ package subject
 
 import (
 	"context"
+	"strings"
+
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
 	"github.com/feihua/zero-admin/rpc/cms/cmsclient"
 	"github.com/zeromicro/go-zero/core/logc"
-	"strings"
 
 	"github.com/feihua/zero-admin/api/admin/internal/svc"
 	"github.com/feihua/zero-admin/api/admin/internal/types"
@@ -70,6 +71,7 @@ func (l *QuerySubjectListLogic) QuerySubjectList(req *types.QuerySubjectListReq)
 			CreateTime:      item.CreateTime,      // 创建时间
 			UpdateBy:        item.UpdateBy,        // 更新者
 			UpdateTime:      item.UpdateTime,      // 更新时间
+			Sort:            item.Sort,            // 排序
 		})
 	}
 
