@@ -86,7 +86,7 @@ type (
 	QueryProductSkuListReq {
 		Current            int32  `form:"current,default=1"` //第几页
 		PageSize           int32  `form:"pageSize,default=20"` //每页的数量
-		SpuId              int64  `form:"spuId"` //商品SpuId
+		SpuId              int64  `form:"spuId,default=0 "` //商品SpuId
 		Name               string `form:"name,optional"` //SKU名称
 		SkuCode            string `form:"skuCode,optional"` //SKU编码
 		PromotionStartTime string `form:"promotionStartTime,optional"` //促销开始时间

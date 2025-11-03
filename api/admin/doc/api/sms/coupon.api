@@ -7,22 +7,27 @@ info (
 )
 
 type (
+	ScopeData {
+		ScopeType int32 `json:"scopeType"` //范围类型：0-全场，1-分类，2-商品
+		ScopeId   int64 `json:"scopeId,optional"` //范围ID（分类ID或商品ID）
+	}
 	// 添加优惠券请求参数
 	AddCouponReq {
-		TypeId        int64   `json:"typeId"` //优惠券类型ID
-		Name          string  `json:"name"` //优惠券名称
-		Code          string  `json:"code"` //优惠券码
-		Amount        float32 `json:"amount"` //优惠金额/折扣率
-		MinAmount     float32 `json:"minAmount"` //最低使用金额
-		StartTime     string  `json:"startTime"` //生效时间
-		EndTime       string  `json:"endTime"` //失效时间
-		TotalCount    int32   `json:"totalCount"` //发放总量
-		ReceivedCount int32   `json:"receivedCount"` //已领取数量
-		UsedCount     int32   `json:"usedCount"` //已使用数量
-		PerLimit      int32   `json:"perLimit"` //每人限领数量
-		Status        int32   `json:"status"` //状态：0-未开始，1-进行中，2-已结束，3-已取消
-		IsEnabled     int32   `json:"isEnabled"` //是否启用
-		Description   string  `json:"description,optional"` //使用说明
+		TypeId        int64       `json:"typeId"` //优惠券类型ID
+		Name          string      `json:"name"` //优惠券名称
+		Code          string      `json:"code"` //优惠券码
+		Amount        float32     `json:"amount"` //优惠金额/折扣率
+		MinAmount     float32     `json:"minAmount"` //最低使用金额
+		StartTime     string      `json:"startTime"` //生效时间
+		EndTime       string      `json:"endTime"` //失效时间
+		TotalCount    int32       `json:"totalCount"` //发放总量
+		ReceivedCount int32       `json:"receivedCount"` //已领取数量
+		UsedCount     int32       `json:"usedCount"` //已使用数量
+		PerLimit      int32       `json:"perLimit"` //每人限领数量
+		Status        int32       `json:"status"` //状态：0-未开始，1-进行中，2-已结束，3-已取消
+		IsEnabled     int32       `json:"isEnabled"` //是否启用
+		Description   string      `json:"description,optional"` //使用说明
+		ScopeData     []ScopeData `json:"couponScopeData,optional"` //使用说明
 	}
 	// 删除优惠券请求参数
 	DeleteCouponReq {
@@ -30,21 +35,22 @@ type (
 	}
 	// 更新优惠券请求参数
 	UpdateCouponReq {
-		Id            int64   `json:"id"` //优惠券ID
-		TypeId        int64   `json:"typeId"` //优惠券类型ID
-		Name          string  `json:"name"` //优惠券名称
-		Code          string  `json:"code"` //优惠券码
-		Amount        float32 `json:"amount"` //优惠金额/折扣率
-		MinAmount     float32 `json:"minAmount"` //最低使用金额
-		StartTime     string  `json:"startTime"` //生效时间
-		EndTime       string  `json:"endTime"` //失效时间
-		TotalCount    int32   `json:"totalCount"` //发放总量
-		ReceivedCount int32   `json:"receivedCount"` //已领取数量
-		UsedCount     int32   `json:"usedCount"` //已使用数量
-		PerLimit      int32   `json:"perLimit"` //每人限领数量
-		Status        int32   `json:"status"` //状态：0-未开始，1-进行中，2-已结束，3-已取消
-		IsEnabled     int32   `json:"isEnabled"` //是否启用
-		Description   string  `json:"description,optional"` //使用说明
+		Id            int64       `json:"id"` //优惠券ID
+		TypeId        int64       `json:"typeId"` //优惠券类型ID
+		Name          string      `json:"name"` //优惠券名称
+		Code          string      `json:"code"` //优惠券码
+		Amount        float32     `json:"amount"` //优惠金额/折扣率
+		MinAmount     float32     `json:"minAmount"` //最低使用金额
+		StartTime     string      `json:"startTime"` //生效时间
+		EndTime       string      `json:"endTime"` //失效时间
+		TotalCount    int32       `json:"totalCount"` //发放总量
+		ReceivedCount int32       `json:"receivedCount"` //已领取数量
+		UsedCount     int32       `json:"usedCount"` //已使用数量
+		PerLimit      int32       `json:"perLimit"` //每人限领数量
+		Status        int32       `json:"status"` //状态：0-未开始，1-进行中，2-已结束，3-已取消
+		IsEnabled     int32       `json:"isEnabled"` //是否启用
+		Description   string      `json:"description,optional"` //使用说明
+		ScopeData     []ScopeData `json:"couponScopeData,optional"` //使用说明
 	}
 	// 更新优惠券状态请求参数
 	UpdateSmsCouponStatusReq {
@@ -55,26 +61,33 @@ type (
 	QueryCouponDetailReq {
 		Id int64 `form:"id"`
 	}
+	CouponScopeData {
+		Id        int64  `json:"id"` //商品id/分类id
+		Name      string `json:"name"` //商品名称/分类名称
+		ProductSn string `json:"productSn"` //商品货号
+	}
 	QueryCouponDetailData {
-		Id            int64   `json:"id"` //优惠券ID
-		TypeId        int64   `json:"typeId"` //优惠券类型ID
-		Name          string  `json:"name"` //优惠券名称
-		Code          string  `json:"code"` //优惠券码
-		Amount        float32 `json:"amount"` //优惠金额/折扣率
-		MinAmount     float32 `json:"minAmount"` //最低使用金额
-		StartTime     string  `json:"startTime"` //生效时间
-		EndTime       string  `json:"endTime"` //失效时间
-		TotalCount    int32   `json:"totalCount"` //发放总量
-		ReceivedCount int32   `json:"receivedCount"` //已领取数量
-		UsedCount     int32   `json:"usedCount"` //已使用数量
-		PerLimit      int32   `json:"perLimit"` //每人限领数量
-		Status        int32   `json:"status"` //状态：0-未开始，1-进行中，2-已结束，3-已取消
-		IsEnabled     int32   `json:"isEnabled"` //是否启用
-		Description   string  `json:"description"` //使用说明
-		CreateBy      int64   `json:"createBy"` //创建人ID
-		CreateTime    string  `json:"createTime"` //创建时间
-		UpdateBy      int64   `json:"updateBy"` //更新人ID
-		UpdateTime    string  `json:"updateTime"` //更新时间
+		Id              int64              `json:"id"` //优惠券ID
+		TypeId          int64              `json:"typeId"` //优惠券类型ID
+		Name            string             `json:"name"` //优惠券名称
+		Code            string             `json:"code"` //优惠券码
+		Amount          float32            `json:"amount"` //优惠金额/折扣率
+		MinAmount       float32            `json:"minAmount"` //最低使用金额
+		StartTime       string             `json:"startTime"` //生效时间
+		EndTime         string             `json:"endTime"` //失效时间
+		TotalCount      int32              `json:"totalCount"` //发放总量
+		ReceivedCount   int32              `json:"receivedCount"` //已领取数量
+		UsedCount       int32              `json:"usedCount"` //已使用数量
+		PerLimit        int32              `json:"perLimit"` //每人限领数量
+		Status          int32              `json:"status"` //状态：0-未开始，1-进行中，2-已结束，3-已取消
+		IsEnabled       int32              `json:"isEnabled"` //是否启用
+		Description     string             `json:"description"` //使用说明
+		CreateBy        int64              `json:"createBy"` //创建人ID
+		CreateTime      string             `json:"createTime"` //创建时间
+		UpdateBy        int64              `json:"updateBy"` //更新人ID
+		UpdateTime      string             `json:"updateTime"` //更新时间
+		ScopeType       int32              `json:"scopeType"` //范围类型：0-全场，1-分类，2-商品
+		CouponScopeData []*CouponScopeData `json:"couponScopeData"` //使用范围
 	}
 	QueryCouponDetailResp {
 		Code    string                `json:"code"`

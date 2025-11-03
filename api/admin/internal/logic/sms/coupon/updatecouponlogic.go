@@ -2,6 +2,7 @@ package coupon
 
 import (
 	"context"
+
 	"github.com/feihua/zero-admin/api/admin/internal/common"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
 	"github.com/feihua/zero-admin/api/admin/internal/svc"
@@ -38,7 +39,8 @@ func (l *UpdateCouponLogic) UpdateCoupon(req *types.UpdateCouponReq) (resp *type
 	if err != nil {
 		return nil, err
 	}
-	_, err = l.svcCtx.CouponService.UpdateCoupon(l.ctx, &smsclient.UpdateCouponReq{
+
+	couponReq := &smsclient.UpdateCouponReq{
 		Id:            req.Id,            // 优惠券ID
 		TypeId:        req.TypeId,        // 优惠券类型ID
 		Name:          req.Name,          // 优惠券名称
@@ -55,7 +57,21 @@ func (l *UpdateCouponLogic) UpdateCoupon(req *types.UpdateCouponReq) (resp *type
 		IsEnabled:     req.IsEnabled,     // 是否启用
 		Description:   req.Description,   // 使用说明
 		UpdateBy:      userId,            // 更新人ID
-	})
+	}
+
+	if len(req.ScopeData) > 0 {
+		var list []*smsclient.CouponScopeData
+
+		for _, detail := range req.ScopeData {
+			list = append(list, &smsclient.CouponScopeData{
+				ScopeType: detail.ScopeType,
+				ScopeId:   detail.ScopeId,
+			})
+		}
+		couponReq.Scopes = list
+	}
+
+	_, err = l.svcCtx.CouponService.UpdateCoupon(l.ctx, couponReq)
 
 	if err != nil {
 		logc.Errorf(l.ctx, "更新优惠券失败,参数：%+v,响应：%s", req, err.Error())

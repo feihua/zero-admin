@@ -4,6 +4,8 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"time"
+
 	"github.com/feihua/zero-admin/rpc/sms/gen/model"
 	"github.com/feihua/zero-admin/rpc/sms/gen/query"
 	"github.com/feihua/zero-admin/rpc/sms/internal/svc"
@@ -11,7 +13,6 @@ import (
 	"github.com/zeromicro/go-zero/core/logc"
 	"github.com/zeromicro/go-zero/core/logx"
 	"gorm.io/gorm"
-	"time"
 )
 
 // UpdateCouponLogic 更新优惠券
@@ -94,5 +95,29 @@ func (l *UpdateCouponLogic) UpdateCoupon(in *smsclient.UpdateCouponReq) (*smscli
 		return nil, errors.New("更新优惠券失败")
 	}
 
+	var data []*model.SmsCouponScope
+	if len(in.Scopes) == 0 {
+		data = append(data, &model.SmsCouponScope{
+			CouponID:  item.ID, // 优惠券ID
+			ScopeType: 0,       // 范围类型：0-全场，1-分类，2-商品
+			ScopeID:   0,       // 范围ID（分类ID或商品ID）
+		})
+	} else {
+		for _, x := range in.Scopes {
+			data = append(data, &model.SmsCouponScope{
+				CouponID:  item.ID,     // 优惠券ID
+				ScopeType: x.ScopeType, // 范围类型：0-全场，1-分类，2-商品
+				ScopeID:   x.ScopeId,   // 范围ID（分类ID或商品ID）
+			})
+		}
+	}
+	_, _ = query.SmsCouponScope.WithContext(l.ctx).Where(query.SmsCouponScope.CouponID.Eq(in.Id)).Delete()
+
+	err = query.SmsCouponScope.WithContext(l.ctx).CreateInBatches(data, len(data))
+
+	if err != nil {
+		logc.Errorf(l.ctx, "添加优惠券使用范围失败,参数:%+v,异常:%s", data, err.Error())
+		return nil, errors.New("添加优惠券使用范围失败")
+	}
 	return &smsclient.UpdateCouponResp{}, nil
 }

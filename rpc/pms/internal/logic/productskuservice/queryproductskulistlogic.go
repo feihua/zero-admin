@@ -3,6 +3,8 @@ package productskuservicelogic
 import (
 	"context"
 	"errors"
+	"time"
+
 	"github.com/feihua/zero-admin/pkg/pointerprocess"
 	"github.com/feihua/zero-admin/pkg/time_util"
 	"github.com/feihua/zero-admin/rpc/pms/gen/query"
@@ -10,7 +12,6 @@ import (
 	"github.com/feihua/zero-admin/rpc/pms/pmsclient"
 	"github.com/zeromicro/go-zero/core/logc"
 	"github.com/zeromicro/go-zero/core/logx"
-	"time"
 )
 
 // QueryProductSkuListLogic 查询商品SKU列表
@@ -36,7 +37,7 @@ func NewQueryProductSkuListLogic(ctx context.Context, svcCtx *svc.ServiceContext
 func (l *QueryProductSkuListLogic) QueryProductSkuList(in *pmsclient.QueryProductSkuListReq) (*pmsclient.QueryProductSkuListResp, error) {
 	productSku := query.PmsProductSku
 	q := productSku.WithContext(l.ctx)
-	if in.SpuId != 2 {
+	if in.SpuId != 0 {
 		q = q.Where(productSku.SpuID.Eq(in.SpuId))
 	}
 	if len(in.Name) > 0 {

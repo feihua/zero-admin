@@ -2,9 +2,11 @@ package coupon
 
 import (
 	"context"
+
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
 	"github.com/feihua/zero-admin/api/admin/internal/svc"
 	"github.com/feihua/zero-admin/api/admin/internal/types"
+	"github.com/feihua/zero-admin/rpc/pms/pmsclient"
 	"github.com/feihua/zero-admin/rpc/sms/smsclient"
 	"github.com/zeromicro/go-zero/core/logc"
 	"google.golang.org/grpc/status"
@@ -66,6 +68,46 @@ func (l *QueryCouponDetailLogic) QueryCouponDetail(req *types.QueryCouponDetailR
 		UpdateTime:    detail.UpdateTime,    // 更新时间
 
 	}
+
+	scopeRes, _ := l.svcCtx.CouponScopeService.QueryCouponScopeList(l.ctx, &smsclient.QueryCouponScopeListReq{
+		PageNum:   1,
+		PageSize:  100,
+		CouponId:  detail.Id, // 优惠券ID
+		ScopeType: 3,
+	})
+
+	if len(scopeRes.List) > 0 {
+		var one = scopeRes.List[0]
+		data.ScopeType = one.ScopeType
+
+		if one.ScopeType != 0 {
+			var couponScopeDataList []*types.CouponScopeData
+			for _, scopeDetail := range scopeRes.List {
+				scopeData := types.CouponScopeData{
+					Id: scopeDetail.Id,
+				}
+
+				if scopeDetail.ScopeType == 1 {
+					item, _ := l.svcCtx.ProductCategoryService.QueryProductCategoryDetail(l.ctx, &pmsclient.QueryProductCategoryDetailReq{
+						Id: scopeDetail.ScopeId,
+					})
+					scopeData.Name = item.Name
+				}
+
+				if scopeDetail.ScopeType == 2 {
+					item, _ := l.svcCtx.ProductSpuService.QueryProductSpuDetail(l.ctx, &pmsclient.QueryProductSpuDetailReq{
+						Id: scopeDetail.ScopeId,
+					})
+					scopeData.Name = item.Data.Name
+					scopeData.ProductSn = item.Data.ProductSn
+				}
+				couponScopeDataList = append(couponScopeDataList, &scopeData)
+			}
+
+			data.CouponScopeData = couponScopeDataList
+		}
+	}
+
 	return &types.QueryCouponDetailResp{
 		Code:    "000000",
 		Message: "查询优惠券成功",

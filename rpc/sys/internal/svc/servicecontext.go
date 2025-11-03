@@ -1,6 +1,8 @@
 package svc
 
 import (
+	"time"
+
 	"github.com/feihua/zero-admin/rpc/sys/gen/query"
 	"github.com/feihua/zero-admin/rpc/sys/internal/config"
 	"github.com/zeromicro/go-zero/core/logx"
@@ -8,7 +10,6 @@ import (
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 	"gorm.io/gorm/logger"
-	"time"
 )
 
 type ServiceContext struct {
