@@ -808,6 +808,22 @@ type NoticeResp struct {
 	Message string `json:"message"`
 }
 
+type OrderDeliveryData struct {
+	Id               int64  `json:"id"`               //
+	OrderId          int64  `json:"orderId"`          //订单ID
+	OrderNo          string `json:"orderNo"`          //订单编号
+	ReceiverName     string `json:"receiverName"`     //收货人姓名
+	ReceiverPhone    string `json:"receiverPhone"`    //收货人电话
+	ReceiverProvince string `json:"receiverProvince"` //省份
+	ReceiverCity     string `json:"receiverCity"`     //城市
+	ReceiverDistrict string `json:"receiverDistrict"` //区县
+	ReceiverAddress  string `json:"receiverAddress"`  //详细地址
+	DeliveryCompany  string `json:"deliveryCompany"`  //物流公司
+	DeliveryNo       string `json:"deliveryNo"`       //物流单号
+	CreateTime       string `json:"createTime"`       //创建时间
+	UpdateTime       string `json:"updateTime"`       //更新时间
+}
+
 type OrderItemData struct {
 	Id              int64   `json:"id"`              //
 	OrderId         int64   `json:"orderId"`         //订单ID
@@ -838,6 +854,31 @@ type OrderOperationLogData struct {
 	OperatorType  int32  `json:"operatorType"`  //操作人类型：1-用户，2-系统，3-管理员
 	OperatorNote  string `json:"operatorNote"`  //操作备注
 	CreateTime    string `json:"createTime"`    //操作时间
+}
+
+type OrderPaymentData struct {
+	Id            int64   `json:"id"`            //主键ID
+	OrderId       int64   `json:"orderId"`       //订单ID
+	OrderNo       string  `json:"orderNo"`       //订单编号
+	PayType       int32   `json:"payType"`       //支付方式：1-支付宝，2-微信，3-银联
+	TransactionId string  `json:"transactionId"` //支付流水号
+	TotalAmount   float32 `json:"totalAmount"`   //订单金额
+	PayAmount     float32 `json:"payAmount"`     //支付金额
+	PayStatus     int32   `json:"payStatus"`     //支付状态：0-待支付，1-支付成功，2-支付失败
+	PayTime       string  `json:"payTime"`       //支付时间
+	CreateTime    string  `json:"createTime"`    //创建时间
+	UpdateTime    string  `json:"updateTime"`    //
+}
+
+type OrderPromotionData struct {
+	Id             int64   `json:"id"`             //主键ID
+	OrderId        int64   `json:"orderId"`        //订单ID
+	OrderNo        string  `json:"orderNo"`        //订单编号
+	PromotionType  int32   `json:"promotionType"`  //优惠类型：1-优惠券，2-积分抵扣，3-会员折扣，4-促销活动
+	PromotionId    int64   `json:"promotionId"`    //优惠ID
+	PromotionName  string  `json:"promotionName"`  //优惠名称
+	DiscountAmount float32 `json:"discountAmount"` //优惠金额
+	CreateTime     string  `json:"createTime"`     //
 }
 
 type PostList struct {
@@ -2419,6 +2460,9 @@ type QueryOrderData struct {
 	UpdateTime            string                   `json:"updateTime"`            //
 	OrderOperationLogData []*OrderOperationLogData `json:"orderOperationLogData"` // 操作历史数据
 	OrderItemData         []*OrderItemData         `json:"orderItemData"`         // 商品数据
+	OrderPromotionData    []*OrderPromotionData    `json:"orderPromotionData"`    // 订单优惠信息
+	OrderPaymentData      []*OrderPaymentData      `json:"orderPaymentData"`      // 订单优惠信息
+	OrderDeliveryData     OrderDeliveryData        `json:"orderDeliveryData"`     // 订单收货地址
 }
 
 type QueryOrderMainDetailReq struct {
@@ -2436,7 +2480,7 @@ type QueryOrderMainListReq struct {
 	PageSize           int32  `form:"pageSize,default=20"`         //每页的数量
 	OrderNo            string `form:"orderNo,optional"`            //订单编号
 	UserId             int64  `form:"userId,optional"`             //用户ID
-	OrderStatus        int32  `form:"orderStatus,default=2"`       //订单状态：1-待支付,2-已支付,3-已发货,4-已完成,5-已取消,6-已退款,7-售后中
+	OrderStatus        int32  `form:"orderStatus,optional"`        //订单状态：1-待支付,2-已支付,3-已发货,4-已完成,5-已取消,6-已退款,7-售后中
 	PayType            int32  `form:"payType,optional"`            //支付方式：1-支付宝,2-微信,3-银联
 	SourceType         int32  `form:"sourceType,optional"`         //订单来源：1-APP,2-PC,3-小程序
 	ExpressOrderNumber string `form:"expressOrderNumber,optional"` //快递单号

@@ -117,6 +117,48 @@ message OrderOptLogData {
   string create_time = 8; //操作时间
 
 }
+message PromotionListData {
+  int64 id = 1; //主键ID
+  int64 order_id = 2; //订单ID
+  string order_no = 3; //订单编号
+  int32 promotion_type = 4; //优惠类型：1-优惠券，2-积分抵扣，3-会员折扣，4-促销活动
+  int64 promotion_id = 5; //优惠ID
+  string promotion_name = 6; //优惠名称
+  float discount_amount = 7; //优惠金额
+  string create_time = 8; //
+
+}
+message DeliveryData {
+  int64 id = 1; //
+  int64 order_id = 2; //订单ID
+  string order_no = 3; //订单编号
+  string receiver_name = 4; //收货人姓名
+  string receiver_phone = 5; //收货人电话
+  string receiver_province = 6; //省份
+  string receiver_city = 7; //城市
+  string receiver_district = 8; //区县
+  string receiver_address = 9; //详细地址
+  string delivery_company = 10; //物流公司
+  string delivery_no = 11; //物流单号
+  string create_time = 12; //创建时间
+  string update_time = 13; //更新时间
+  int32 is_deleted = 14; //是否删除
+
+}
+message PaymentData {
+  int64 id = 1; //主键ID
+  int64 order_id = 2; //订单ID
+  string order_no = 3; //订单编号
+  int32 pay_type = 4; //支付方式：1-支付宝，2-微信，3-银联
+  string transaction_id = 5; //支付流水号
+  float total_amount = 6; //订单金额
+  float pay_amount = 7; //支付金额
+  int32 pay_status = 8; //支付状态：0-待支付，1-支付成功，2-支付失败
+  string pay_time = 9; //支付时间
+  string create_time = 10; //创建时间
+  string update_time = 11; //
+
+}
 message OrderListData {
   int64 id = 1; //
   string order_no = 2; //订单编号
@@ -143,6 +185,9 @@ message OrderListData {
   string update_time = 23; //
   repeated OrderItemData order_item_data = 24; //订单商品
   repeated OrderOptLogData opt_log_data = 25; //订单操作记录
+  repeated PromotionListData promotion_data = 26; //订单优惠信息
+  repeated PaymentData payment_data = 27; //订单支付信息
+  DeliveryData delivery_data = 28; //订单收货地址
 }
 
 message QueryOrderListResp {

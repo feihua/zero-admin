@@ -2,6 +2,7 @@ package order_main
 
 import (
 	"context"
+
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
 	"github.com/feihua/zero-admin/api/admin/internal/svc"
 	"github.com/feihua/zero-admin/api/admin/internal/types"
@@ -117,6 +118,64 @@ func (l *QueryOrderMainDetailLogic) QueryOrderMainDetail(req *types.QueryOrderMa
 	}
 
 	data.OrderOperationLogData = operationLogData
+
+	var list []*types.OrderPromotionData
+
+	for _, x := range detail.PromotionData {
+		list = append(list, &types.OrderPromotionData{
+			Id:             x.Id,             // 主键ID
+			OrderId:        x.OrderId,        // 订单ID
+			OrderNo:        x.OrderNo,        // 订单编号
+			PromotionType:  x.PromotionType,  // 优惠类型：1-优惠券，2-积分抵扣，3-会员折扣，4-促销活动
+			PromotionId:    x.PromotionId,    // 优惠ID
+			PromotionName:  x.PromotionName,  // 优惠名称
+			DiscountAmount: x.DiscountAmount, // 优惠金额
+			CreateTime:     x.CreateTime,     //
+		})
+	}
+
+	data.OrderPromotionData = list
+
+	deliveryData := detail.DeliveryData
+	x := types.OrderDeliveryData{
+		Id:               deliveryData.Id,               //
+		OrderId:          deliveryData.OrderId,          // 订单ID
+		OrderNo:          deliveryData.OrderNo,          // 订单编号
+		ReceiverName:     deliveryData.ReceiverName,     // 收货人姓名
+		ReceiverPhone:    deliveryData.ReceiverPhone,    // 收货人电话
+		ReceiverProvince: deliveryData.ReceiverProvince, // 省份
+		ReceiverCity:     deliveryData.ReceiverCity,     // 城市
+		ReceiverDistrict: deliveryData.ReceiverDistrict, // 区县
+		ReceiverAddress:  deliveryData.ReceiverAddress,  // 详细地址
+		DeliveryCompany:  deliveryData.DeliveryCompany,  // 物流公司
+		DeliveryNo:       deliveryData.DeliveryNo,       // 物流单号
+		CreateTime:       deliveryData.CreateTime,       // 创建时间
+		UpdateTime:       deliveryData.UpdateTime,       // 更新时间
+
+	}
+
+	data.OrderDeliveryData = x
+
+	var paymentData []*types.OrderPaymentData
+
+	for _, s := range detail.PaymentData {
+		paymentData = append(paymentData, &types.OrderPaymentData{
+			Id:            s.Id,            // 主键ID
+			OrderId:       s.OrderId,       // 订单ID
+			OrderNo:       s.OrderNo,       // 订单编号
+			PayType:       s.PayType,       // 支付方式：1-支付宝，2-微信，3-银联
+			TransactionId: s.TransactionId, // 支付流水号
+			TotalAmount:   s.TotalAmount,   // 订单金额
+			PayAmount:     s.PayAmount,     // 支付金额
+			PayStatus:     s.PayStatus,     // 支付状态：0-待支付，1-支付成功，2-支付失败
+			PayTime:       s.PayTime,       // 支付时间
+			CreateTime:    s.CreateTime,    // 创建时间
+			UpdateTime:    s.UpdateTime,    //
+
+		})
+	}
+
+	data.OrderPaymentData = paymentData
 	return &types.QueryOrderMainDetailResp{
 		Code:    "000000",
 		Message: "查询订单成功",

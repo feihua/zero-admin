@@ -1,0 +1,22 @@
+info (
+	desc:   "订单支付"
+	author: "LiuFeiHua"
+	email:  "1002219331@qq.com"
+)
+
+type (
+	OrderPaymentData {
+		Id            int64   `json:"id"` //主键ID
+		OrderId       int64   `json:"orderId"` //订单ID
+		OrderNo       string  `json:"orderNo"` //订单编号
+		PayType       int32   `json:"payType"` //支付方式：1-支付宝，2-微信，3-银联
+		TransactionId string  `json:"transactionId"` //支付流水号
+		TotalAmount   float32 `json:"totalAmount"` //订单金额
+		PayAmount     float32 `json:"payAmount"` //支付金额
+		PayStatus     int32   `json:"payStatus"` //支付状态：0-待支付，1-支付成功，2-支付失败
+		PayTime       string  `json:"payTime"` //支付时间
+		CreateTime    string  `json:"createTime"` //创建时间
+		UpdateTime    string  `json:"updateTime"` //
+	}
+)
+

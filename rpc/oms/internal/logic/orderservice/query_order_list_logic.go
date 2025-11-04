@@ -3,6 +3,7 @@ package orderservicelogic
 import (
 	"context"
 	"errors"
+
 	"github.com/feihua/zero-admin/pkg/time_util"
 	"github.com/feihua/zero-admin/rpc/oms/gen/query"
 	"github.com/zeromicro/go-zero/core/logc"
@@ -34,18 +35,18 @@ func (l *QueryOrderListLogic) QueryOrderList(in *omsclient.QueryOrderListReq) (*
 	if len(in.OrderNo) > 0 {
 		q = q.Where(orderMain.OrderNo.Like("%" + in.OrderNo + "%"))
 	}
-	if in.UserId != 2 {
+	if in.UserId != 0 {
 		q = q.Where(orderMain.UserID.Eq(in.UserId))
 	}
-	if in.OrderStatus != 2 {
+	if in.OrderStatus != 0 {
 		q = q.Where(orderMain.OrderStatus.Eq(in.OrderStatus))
 	}
 
-	if in.PayType != 2 {
+	if in.PayType != 0 {
 		q = q.Where(orderMain.PayType.Eq(in.PayType))
 	}
 
-	if in.SourceType != 2 {
+	if in.SourceType != 0 {
 		q = q.Where(orderMain.SourceType.Eq(in.SourceType))
 	}
 	if len(in.ExpressOrderNumber) > 0 {
@@ -75,7 +76,6 @@ func (l *QueryOrderListLogic) QueryOrderList(in *omsclient.QueryOrderListReq) (*
 			DiscountAmount:     float32(item.DiscountAmount),              // 优惠金额
 			FreightAmount:      float32(item.FreightAmount),               // 运费金额
 			PayAmount:          float32(item.PayAmount),                   // 实付金额
-			PayType:            *item.PayType,                             // 支付方式：1-支付宝,2-微信,3-银联
 			PayTime:            time_util.TimeToString(item.PayTime),      // 支付时间
 			DeliveryTime:       time_util.TimeToString(item.DeliveryTime), // 发货时间
 			ReceiveTime:        time_util.TimeToString(item.ReceiveTime),  // 收货时间
@@ -87,9 +87,11 @@ func (l *QueryOrderListLogic) QueryOrderList(in *omsclient.QueryOrderListReq) (*
 			Remark:             item.Remark,                               // 订单备注
 			CreateTime:         time_util.TimeToStr(item.CreateTime),      // 提交时间
 			UpdateTime:         time_util.TimeToString(item.UpdateTime),   //
-
 		}
 
+		if item.PayType != nil {
+			elems.PayType = *item.PayType
+		}
 		orderItem := query.OmsOrderItem
 		result1, err1 := orderItem.WithContext(l.ctx).Where(orderItem.OrderID.Eq(item.ID)).Find()
 

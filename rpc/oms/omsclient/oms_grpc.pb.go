@@ -1742,6 +1742,215 @@ var OrderPaymentService_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
+	OrderPromotionService_AddOrderPromotion_FullMethodName         = "/omsclient.OrderPromotionService/AddOrderPromotion"
+	OrderPromotionService_DeleteOrderPromotion_FullMethodName      = "/omsclient.OrderPromotionService/DeleteOrderPromotion"
+	OrderPromotionService_QueryOrderPromotionDetail_FullMethodName = "/omsclient.OrderPromotionService/QueryOrderPromotionDetail"
+	OrderPromotionService_QueryOrderPromotionList_FullMethodName   = "/omsclient.OrderPromotionService/QueryOrderPromotionList"
+)
+
+// OrderPromotionServiceClient is the client API for OrderPromotionService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type OrderPromotionServiceClient interface {
+	// 添加订单优惠信息
+	AddOrderPromotion(ctx context.Context, in *AddOrderPromotionReq, opts ...grpc.CallOption) (*AddOrderPromotionResp, error)
+	// 删除订单优惠信息
+	DeleteOrderPromotion(ctx context.Context, in *DeleteOrderPromotionReq, opts ...grpc.CallOption) (*DeleteOrderPromotionResp, error)
+	// 查询订单优惠信息详情
+	QueryOrderPromotionDetail(ctx context.Context, in *QueryOrderPromotionDetailReq, opts ...grpc.CallOption) (*QueryOrderPromotionDetailResp, error)
+	// 查询订单优惠信息列表
+	QueryOrderPromotionList(ctx context.Context, in *QueryOrderPromotionListReq, opts ...grpc.CallOption) (*QueryOrderPromotionListResp, error)
+}
+
+type orderPromotionServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewOrderPromotionServiceClient(cc grpc.ClientConnInterface) OrderPromotionServiceClient {
+	return &orderPromotionServiceClient{cc}
+}
+
+func (c *orderPromotionServiceClient) AddOrderPromotion(ctx context.Context, in *AddOrderPromotionReq, opts ...grpc.CallOption) (*AddOrderPromotionResp, error) {
+	out := new(AddOrderPromotionResp)
+	err := c.cc.Invoke(ctx, OrderPromotionService_AddOrderPromotion_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *orderPromotionServiceClient) DeleteOrderPromotion(ctx context.Context, in *DeleteOrderPromotionReq, opts ...grpc.CallOption) (*DeleteOrderPromotionResp, error) {
+	out := new(DeleteOrderPromotionResp)
+	err := c.cc.Invoke(ctx, OrderPromotionService_DeleteOrderPromotion_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *orderPromotionServiceClient) QueryOrderPromotionDetail(ctx context.Context, in *QueryOrderPromotionDetailReq, opts ...grpc.CallOption) (*QueryOrderPromotionDetailResp, error) {
+	out := new(QueryOrderPromotionDetailResp)
+	err := c.cc.Invoke(ctx, OrderPromotionService_QueryOrderPromotionDetail_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *orderPromotionServiceClient) QueryOrderPromotionList(ctx context.Context, in *QueryOrderPromotionListReq, opts ...grpc.CallOption) (*QueryOrderPromotionListResp, error) {
+	out := new(QueryOrderPromotionListResp)
+	err := c.cc.Invoke(ctx, OrderPromotionService_QueryOrderPromotionList_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// OrderPromotionServiceServer is the server API for OrderPromotionService service.
+// All implementations must embed UnimplementedOrderPromotionServiceServer
+// for forward compatibility
+type OrderPromotionServiceServer interface {
+	// 添加订单优惠信息
+	AddOrderPromotion(context.Context, *AddOrderPromotionReq) (*AddOrderPromotionResp, error)
+	// 删除订单优惠信息
+	DeleteOrderPromotion(context.Context, *DeleteOrderPromotionReq) (*DeleteOrderPromotionResp, error)
+	// 查询订单优惠信息详情
+	QueryOrderPromotionDetail(context.Context, *QueryOrderPromotionDetailReq) (*QueryOrderPromotionDetailResp, error)
+	// 查询订单优惠信息列表
+	QueryOrderPromotionList(context.Context, *QueryOrderPromotionListReq) (*QueryOrderPromotionListResp, error)
+	mustEmbedUnimplementedOrderPromotionServiceServer()
+}
+
+// UnimplementedOrderPromotionServiceServer must be embedded to have forward compatible implementations.
+type UnimplementedOrderPromotionServiceServer struct {
+}
+
+func (UnimplementedOrderPromotionServiceServer) AddOrderPromotion(context.Context, *AddOrderPromotionReq) (*AddOrderPromotionResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AddOrderPromotion not implemented")
+}
+func (UnimplementedOrderPromotionServiceServer) DeleteOrderPromotion(context.Context, *DeleteOrderPromotionReq) (*DeleteOrderPromotionResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteOrderPromotion not implemented")
+}
+func (UnimplementedOrderPromotionServiceServer) QueryOrderPromotionDetail(context.Context, *QueryOrderPromotionDetailReq) (*QueryOrderPromotionDetailResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method QueryOrderPromotionDetail not implemented")
+}
+func (UnimplementedOrderPromotionServiceServer) QueryOrderPromotionList(context.Context, *QueryOrderPromotionListReq) (*QueryOrderPromotionListResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method QueryOrderPromotionList not implemented")
+}
+func (UnimplementedOrderPromotionServiceServer) mustEmbedUnimplementedOrderPromotionServiceServer() {}
+
+// UnsafeOrderPromotionServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to OrderPromotionServiceServer will
+// result in compilation errors.
+type UnsafeOrderPromotionServiceServer interface {
+	mustEmbedUnimplementedOrderPromotionServiceServer()
+}
+
+func RegisterOrderPromotionServiceServer(s grpc.ServiceRegistrar, srv OrderPromotionServiceServer) {
+	s.RegisterService(&OrderPromotionService_ServiceDesc, srv)
+}
+
+func _OrderPromotionService_AddOrderPromotion_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddOrderPromotionReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(OrderPromotionServiceServer).AddOrderPromotion(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: OrderPromotionService_AddOrderPromotion_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(OrderPromotionServiceServer).AddOrderPromotion(ctx, req.(*AddOrderPromotionReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _OrderPromotionService_DeleteOrderPromotion_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteOrderPromotionReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(OrderPromotionServiceServer).DeleteOrderPromotion(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: OrderPromotionService_DeleteOrderPromotion_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(OrderPromotionServiceServer).DeleteOrderPromotion(ctx, req.(*DeleteOrderPromotionReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _OrderPromotionService_QueryOrderPromotionDetail_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryOrderPromotionDetailReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(OrderPromotionServiceServer).QueryOrderPromotionDetail(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: OrderPromotionService_QueryOrderPromotionDetail_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(OrderPromotionServiceServer).QueryOrderPromotionDetail(ctx, req.(*QueryOrderPromotionDetailReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _OrderPromotionService_QueryOrderPromotionList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryOrderPromotionListReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(OrderPromotionServiceServer).QueryOrderPromotionList(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: OrderPromotionService_QueryOrderPromotionList_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(OrderPromotionServiceServer).QueryOrderPromotionList(ctx, req.(*QueryOrderPromotionListReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// OrderPromotionService_ServiceDesc is the grpc.ServiceDesc for OrderPromotionService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var OrderPromotionService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "omsclient.OrderPromotionService",
+	HandlerType: (*OrderPromotionServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "AddOrderPromotion",
+			Handler:    _OrderPromotionService_AddOrderPromotion_Handler,
+		},
+		{
+			MethodName: "DeleteOrderPromotion",
+			Handler:    _OrderPromotionService_DeleteOrderPromotion_Handler,
+		},
+		{
+			MethodName: "QueryOrderPromotionDetail",
+			Handler:    _OrderPromotionService_QueryOrderPromotionDetail_Handler,
+		},
+		{
+			MethodName: "QueryOrderPromotionList",
+			Handler:    _OrderPromotionService_QueryOrderPromotionList_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "rpc/oms/oms.proto",
+}
+
+const (
 	OrderReturnService_AddOrderReturn_FullMethodName          = "/omsclient.OrderReturnService/AddOrderReturn"
 	OrderReturnService_DeleteOrderReturn_FullMethodName       = "/omsclient.OrderReturnService/DeleteOrderReturn"
 	OrderReturnService_UpdateOrderReturn_FullMethodName       = "/omsclient.OrderReturnService/UpdateOrderReturn"

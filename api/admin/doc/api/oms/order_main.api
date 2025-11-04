@@ -1,5 +1,8 @@
 import "./order_operation_log.api"
 import "./order_item.api"
+import "./order_promotion.api"
+import "./order_delivery.api"
+import "./order_payment.api"
 
 info (
 	desc:   "订单"
@@ -81,6 +84,9 @@ type (
 		UpdateTime            string                   `json:"updateTime"` //
 		OrderOperationLogData []*OrderOperationLogData `json:"orderOperationLogData"` // 操作历史数据
 		OrderItemData         []*OrderItemData         `json:"orderItemData"` // 商品数据
+		OrderPromotionData    []*OrderPromotionData    `json:"orderPromotionData"` // 订单优惠信息
+		OrderPaymentData      []*OrderPaymentData      `json:"orderPaymentData"` // 订单优惠信息
+		OrderDeliveryData     OrderDeliveryData        `json:"orderDeliveryData"` // 订单收货地址
 	}
 	QueryOrderMainDetailResp {
 		Code    string         `json:"code"`
@@ -93,7 +99,7 @@ type (
 		PageSize           int32  `form:"pageSize,default=20"` //每页的数量
 		OrderNo            string `form:"orderNo,optional"` //订单编号
 		UserId             int64  `form:"userId,optional"` //用户ID
-		OrderStatus        int32  `form:"orderStatus,default=2"` //订单状态：1-待支付,2-已支付,3-已发货,4-已完成,5-已取消,6-已退款,7-售后中
+		OrderStatus        int32  `form:"orderStatus,optional"` //订单状态：1-待支付,2-已支付,3-已发货,4-已完成,5-已取消,6-已退款,7-售后中
 		PayType            int32  `form:"payType,optional"` //支付方式：1-支付宝,2-微信,3-银联
 		SourceType         int32  `form:"sourceType,optional"` //订单来源：1-APP,2-PC,3-小程序
 		ExpressOrderNumber string `form:"expressOrderNumber,optional"` //快递单号

@@ -2,7 +2,7 @@
 // goctl 1.9.2
 // Source: oms.proto
 
-package cartitemservice
+package orderpromotionservice
 
 import (
 	"context"
@@ -135,64 +135,48 @@ type (
 	UpdateOrderStatusResp             = omsclient.UpdateOrderStatusResp
 	UpdateReceiverInfoResp            = omsclient.UpdateReceiverInfoResp
 
-	CartItemService interface {
-		// 添加购物车
-		AddCartItem(ctx context.Context, in *AddCartItemReq, opts ...grpc.CallOption) (*CartItemResp, error)
-		// 删除购物车
-		DeleteCartItem(ctx context.Context, in *DeleteCartItemReq, opts ...grpc.CallOption) (*CartItemResp, error)
-		// 更新购物车
-		UpdateCartItem(ctx context.Context, in *UpdateCartItemReq, opts ...grpc.CallOption) (*CartItemResp, error)
-		// 修改购物车中某个商品的数量
-		UpdateCartItemQuantity(ctx context.Context, in *UpdateCartItemQuantityReq, opts ...grpc.CallOption) (*CartItemResp, error)
-		// 查询购物车详情
-		QueryCartItemDetail(ctx context.Context, in *QueryCartItemDetailReq, opts ...grpc.CallOption) (*CartItemData, error)
-		// 查询购物车列
-		QueryCartItemList(ctx context.Context, in *QueryCartItemListReq, opts ...grpc.CallOption) (*QueryCartItemListResp, error)
+	OrderPromotionService interface {
+		// 添加订单优惠信息
+		AddOrderPromotion(ctx context.Context, in *AddOrderPromotionReq, opts ...grpc.CallOption) (*AddOrderPromotionResp, error)
+		// 删除订单优惠信息
+		DeleteOrderPromotion(ctx context.Context, in *DeleteOrderPromotionReq, opts ...grpc.CallOption) (*DeleteOrderPromotionResp, error)
+		// 查询订单优惠信息详情
+		QueryOrderPromotionDetail(ctx context.Context, in *QueryOrderPromotionDetailReq, opts ...grpc.CallOption) (*QueryOrderPromotionDetailResp, error)
+		// 查询订单优惠信息列表
+		QueryOrderPromotionList(ctx context.Context, in *QueryOrderPromotionListReq, opts ...grpc.CallOption) (*QueryOrderPromotionListResp, error)
 	}
 
-	defaultCartItemService struct {
+	defaultOrderPromotionService struct {
 		cli zrpc.Client
 	}
 )
 
-func NewCartItemService(cli zrpc.Client) CartItemService {
-	return &defaultCartItemService{
+func NewOrderPromotionService(cli zrpc.Client) OrderPromotionService {
+	return &defaultOrderPromotionService{
 		cli: cli,
 	}
 }
 
-// 添加购物车
-func (m *defaultCartItemService) AddCartItem(ctx context.Context, in *AddCartItemReq, opts ...grpc.CallOption) (*CartItemResp, error) {
-	client := omsclient.NewCartItemServiceClient(m.cli.Conn())
-	return client.AddCartItem(ctx, in, opts...)
+// 添加订单优惠信息
+func (m *defaultOrderPromotionService) AddOrderPromotion(ctx context.Context, in *AddOrderPromotionReq, opts ...grpc.CallOption) (*AddOrderPromotionResp, error) {
+	client := omsclient.NewOrderPromotionServiceClient(m.cli.Conn())
+	return client.AddOrderPromotion(ctx, in, opts...)
 }
 
-// 删除购物车
-func (m *defaultCartItemService) DeleteCartItem(ctx context.Context, in *DeleteCartItemReq, opts ...grpc.CallOption) (*CartItemResp, error) {
-	client := omsclient.NewCartItemServiceClient(m.cli.Conn())
-	return client.DeleteCartItem(ctx, in, opts...)
+// 删除订单优惠信息
+func (m *defaultOrderPromotionService) DeleteOrderPromotion(ctx context.Context, in *DeleteOrderPromotionReq, opts ...grpc.CallOption) (*DeleteOrderPromotionResp, error) {
+	client := omsclient.NewOrderPromotionServiceClient(m.cli.Conn())
+	return client.DeleteOrderPromotion(ctx, in, opts...)
 }
 
-// 更新购物车
-func (m *defaultCartItemService) UpdateCartItem(ctx context.Context, in *UpdateCartItemReq, opts ...grpc.CallOption) (*CartItemResp, error) {
-	client := omsclient.NewCartItemServiceClient(m.cli.Conn())
-	return client.UpdateCartItem(ctx, in, opts...)
+// 查询订单优惠信息详情
+func (m *defaultOrderPromotionService) QueryOrderPromotionDetail(ctx context.Context, in *QueryOrderPromotionDetailReq, opts ...grpc.CallOption) (*QueryOrderPromotionDetailResp, error) {
+	client := omsclient.NewOrderPromotionServiceClient(m.cli.Conn())
+	return client.QueryOrderPromotionDetail(ctx, in, opts...)
 }
 
-// 修改购物车中某个商品的数量
-func (m *defaultCartItemService) UpdateCartItemQuantity(ctx context.Context, in *UpdateCartItemQuantityReq, opts ...grpc.CallOption) (*CartItemResp, error) {
-	client := omsclient.NewCartItemServiceClient(m.cli.Conn())
-	return client.UpdateCartItemQuantity(ctx, in, opts...)
-}
-
-// 查询购物车详情
-func (m *defaultCartItemService) QueryCartItemDetail(ctx context.Context, in *QueryCartItemDetailReq, opts ...grpc.CallOption) (*CartItemData, error) {
-	client := omsclient.NewCartItemServiceClient(m.cli.Conn())
-	return client.QueryCartItemDetail(ctx, in, opts...)
-}
-
-// 查询购物车列
-func (m *defaultCartItemService) QueryCartItemList(ctx context.Context, in *QueryCartItemListReq, opts ...grpc.CallOption) (*QueryCartItemListResp, error) {
-	client := omsclient.NewCartItemServiceClient(m.cli.Conn())
-	return client.QueryCartItemList(ctx, in, opts...)
+// 查询订单优惠信息列表
+func (m *defaultOrderPromotionService) QueryOrderPromotionList(ctx context.Context, in *QueryOrderPromotionListReq, opts ...grpc.CallOption) (*QueryOrderPromotionListResp, error) {
+	client := omsclient.NewOrderPromotionServiceClient(m.cli.Conn())
+	return client.QueryOrderPromotionList(ctx, in, opts...)
 }

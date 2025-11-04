@@ -21,6 +21,8 @@ type (
 	AddOrderDeliveryResp              = omsclient.AddOrderDeliveryResp
 	AddOrderOperationLogReq           = omsclient.AddOrderOperationLogReq
 	AddOrderOperationLogResp          = omsclient.AddOrderOperationLogResp
+	AddOrderPromotionReq              = omsclient.AddOrderPromotionReq
+	AddOrderPromotionResp             = omsclient.AddOrderPromotionResp
 	AddOrderReq                       = omsclient.AddOrderReq
 	AddOrderResp                      = omsclient.AddOrderResp
 	AddOrderReturnReasonReq           = omsclient.AddOrderReturnReasonReq
@@ -41,6 +43,8 @@ type (
 	DeleteCompanyAddressResp          = omsclient.DeleteCompanyAddressResp
 	DeleteOrderDeliveryReq            = omsclient.DeleteOrderDeliveryReq
 	DeleteOrderDeliveryResp           = omsclient.DeleteOrderDeliveryResp
+	DeleteOrderPromotionReq           = omsclient.DeleteOrderPromotionReq
+	DeleteOrderPromotionResp          = omsclient.DeleteOrderPromotionResp
 	DeleteOrderReq                    = omsclient.DeleteOrderReq
 	DeleteOrderResp                   = omsclient.DeleteOrderResp
 	DeleteOrderReturnReasonReq        = omsclient.DeleteOrderReturnReasonReq
@@ -48,6 +52,7 @@ type (
 	DeleteOrderReturnReq              = omsclient.DeleteOrderReturnReq
 	DeleteOrderSettingReq             = omsclient.DeleteOrderSettingReq
 	DeleteOrderSettingResp            = omsclient.DeleteOrderSettingResp
+	DeliveryData                      = omsclient.DeliveryData
 	DeliveryReq                       = omsclient.DeliveryReq
 	DeliveryResp                      = omsclient.DeliveryResp
 	OrderDeliveryListData             = omsclient.OrderDeliveryListData
@@ -58,12 +63,15 @@ type (
 	OrderPaymentData                  = omsclient.OrderPaymentData
 	OrderPaymentReq                   = omsclient.OrderPaymentReq
 	OrderPaymentResp                  = omsclient.OrderPaymentResp
+	OrderPromotionListData            = omsclient.OrderPromotionListData
 	OrderReturnData                   = omsclient.OrderReturnData
 	OrderReturnItemData               = omsclient.OrderReturnItemData
 	OrderReturnReasonListData         = omsclient.OrderReturnReasonListData
 	OrderReturnReq                    = omsclient.OrderReturnReq
 	OrderReturnResp                   = omsclient.OrderReturnResp
 	OrderSettingListData              = omsclient.OrderSettingListData
+	PaymentData                       = omsclient.PaymentData
+	PromotionListData                 = omsclient.PromotionListData
 	QueryCartItemDetailReq            = omsclient.QueryCartItemDetailReq
 	QueryCartItemListReq              = omsclient.QueryCartItemListReq
 	QueryCartItemListResp             = omsclient.QueryCartItemListResp
@@ -86,6 +94,10 @@ type (
 	QueryOrderPaymentDetailReq        = omsclient.QueryOrderPaymentDetailReq
 	QueryOrderPaymentListReq          = omsclient.QueryOrderPaymentListReq
 	QueryOrderPaymentListResp         = omsclient.QueryOrderPaymentListResp
+	QueryOrderPromotionDetailReq      = omsclient.QueryOrderPromotionDetailReq
+	QueryOrderPromotionDetailResp     = omsclient.QueryOrderPromotionDetailResp
+	QueryOrderPromotionListReq        = omsclient.QueryOrderPromotionListReq
+	QueryOrderPromotionListResp       = omsclient.QueryOrderPromotionListResp
 	QueryOrderReturnDetailReq         = omsclient.QueryOrderReturnDetailReq
 	QueryOrderReturnListReq           = omsclient.QueryOrderReturnListReq
 	QueryOrderReturnListResp          = omsclient.QueryOrderReturnListResp

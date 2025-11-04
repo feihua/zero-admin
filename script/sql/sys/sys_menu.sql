@@ -373,4 +373,6 @@ INSERT INTO sys_menu (menu_name, parent_id, menu_path, menu_perms, menu_type, me
 
 INSERT INTO sys_menu (menu_name, parent_id, menu_path, menu_perms, menu_type, menu_icon, menu_sort, create_by, create_time, update_by, update_time, is_deleted, vue_path, vue_component, vue_icon, vue_redirect, background_url) VALUES ('查询退货详情', 22, '', '', 2, '', 3, 'liufeihua', current_time, 'liufeihua', current_time, 1, '', '', '', '', '/api/oms/orderReturn/queryOrderReturnDetail');
 
+INSERT INTO sys_menu (menu_name, parent_id, menu_path, menu_perms, menu_type, menu_icon, menu_sort, create_by, create_time, update_by, update_time, is_deleted, vue_path, vue_component, vue_icon, vue_redirect, background_url) VALUES ( '查询订单详情', 24, '', '', 2, '', 3, 'liufeihua', current_time, 'liufeihua', current_time, 1, '', '', '', '', '/api/oms/order/queryOrderMainDetail');
+
 

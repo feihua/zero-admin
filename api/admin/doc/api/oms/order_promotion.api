@@ -1,0 +1,19 @@
+info (
+	desc:   "订单优惠信息"
+	author: "LiuFeiHua"
+	email:  "1002219331@qq.com"
+)
+
+type (
+	OrderPromotionData {
+		Id             int64   `json:"id"` //主键ID
+		OrderId        int64   `json:"orderId"` //订单ID
+		OrderNo        string  `json:"orderNo"` //订单编号
+		PromotionType  int32   `json:"promotionType"` //优惠类型：1-优惠券，2-积分抵扣，3-会员折扣，4-促销活动
+		PromotionId    int64   `json:"promotionId"` //优惠ID
+		PromotionName  string  `json:"promotionName"` //优惠名称
+		DiscountAmount float32 `json:"discountAmount"` //优惠金额
+		CreateTime     string  `json:"createTime"` //
+	}
+)
+

@@ -1,0 +1,88 @@
+syntax = "proto3";
+
+package main;
+
+option go_package = "./proto";
+
+// 添加订单优惠信息
+message AddOrderPromotionReq {
+  int64 order_id = 1; //订单ID
+  string order_no = 2; //订单编号
+  int32 promotion_type = 3; //优惠类型：1-优惠券，2-积分抵扣，3-会员折扣，4-促销活动
+  int64 promotion_id = 4; //优惠ID
+  string promotion_name = 5; //优惠名称
+  float discount_amount = 6; //优惠金额
+}
+
+message AddOrderPromotionResp {
+  string pong = 1;
+}
+
+// 删除订单优惠信息
+message DeleteOrderPromotionReq {
+  repeated int64 ids = 1;
+}
+
+message DeleteOrderPromotionResp {
+  string pong = 1;
+}
+
+
+// 查询订单优惠信息详情
+message QueryOrderPromotionDetailReq {
+    int64 id = 1;
+}
+
+message QueryOrderPromotionDetailResp {
+  int64 id = 1; //主键ID
+  int64 order_id = 2; //订单ID
+  string order_no = 3; //订单编号
+  int32 promotion_type = 4; //优惠类型：1-优惠券，2-积分抵扣，3-会员折扣，4-促销活动
+  int64 promotion_id = 5; //优惠ID
+  string promotion_name = 6; //优惠名称
+  float discount_amount = 7; //优惠金额
+  string create_time = 8; //
+  int32 is_deleted = 9; //是否删除
+
+}
+
+// 分页查询订单优惠信息列表
+message QueryOrderPromotionListReq {
+  int64 order_id = 1; //订单ID
+  string order_no = 2; //订单编号
+  int32 promotion_type = 3; //优惠类型：1-优惠券，2-积分抵扣，3-会员折扣，4-促销活动
+  int64 promotion_id = 4; //优惠ID
+  int32 page_num = 5; //第几页
+  int32 page_size = 6; //每页的数量
+}
+
+message OrderPromotionListData {
+  int64 id = 1; //主键ID
+  int64 order_id = 2; //订单ID
+  string order_no = 3; //订单编号
+  int32 promotion_type = 4; //优惠类型：1-优惠券，2-积分抵扣，3-会员折扣，4-促销活动
+  int64 promotion_id = 5; //优惠ID
+  string promotion_name = 6; //优惠名称
+  float discount_amount = 7; //优惠金额
+  string create_time = 8; //
+
+}
+
+message QueryOrderPromotionListResp {
+  int64 total = 1;
+  repeated  OrderPromotionListData list = 2;
+}
+
+// 订单优惠信息
+service OrderPromotionService {
+  // 添加订单优惠信息
+  rpc AddOrderPromotion(AddOrderPromotionReq) returns (AddOrderPromotionResp){}
+  // 删除订单优惠信息
+  rpc DeleteOrderPromotion(DeleteOrderPromotionReq) returns (DeleteOrderPromotionResp){}
+  // 查询订单优惠信息详情
+   rpc QueryOrderPromotionDetail(QueryOrderPromotionDetailReq) returns (QueryOrderPromotionDetailResp){}
+  // 查询订单优惠信息列表
+  rpc QueryOrderPromotionList(QueryOrderPromotionListReq) returns (QueryOrderPromotionListResp){}
+
+
+}

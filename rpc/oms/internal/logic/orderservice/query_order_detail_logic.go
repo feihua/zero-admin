@@ -3,6 +3,7 @@ package orderservicelogic
 import (
 	"context"
 	"errors"
+
 	"github.com/feihua/zero-admin/pkg/time_util"
 	"github.com/feihua/zero-admin/rpc/oms/gen/query"
 	"github.com/zeromicro/go-zero/core/logc"
@@ -30,7 +31,15 @@ func NewQueryOrderDetailLogic(ctx context.Context, svcCtx *svc.ServiceContext) *
 
 // QueryOrderDetail 查询订单详情:订单信息、商品信息、操作记录
 func (l *QueryOrderDetailLogic) QueryOrderDetail(in *omsclient.QueryOrderDetailReq) (*omsclient.QueryOrderDetailResp, error) {
-	item, err := query.OmsOrderMain.WithContext(l.ctx).Where(query.OmsOrderMain.ID.Eq(in.Id), query.OmsOrderMain.UserID.Eq(in.UserId), query.OmsOrderMain.IsDeleted.Eq(0)).First()
+	orderMain := query.OmsOrderMain
+	q := orderMain.WithContext(l.ctx)
+	q = q.Where(orderMain.ID.Eq(in.Id), orderMain.IsDeleted.Eq(0))
+
+	if in.UserId != 0 {
+		q = q.Where(orderMain.UserID.Eq(in.UserId))
+	}
+
+	item, err := q.First()
 
 	switch {
 	case errors.Is(err, gorm.ErrRecordNotFound):
@@ -53,7 +62,6 @@ func (l *QueryOrderDetailLogic) QueryOrderDetail(in *omsclient.QueryOrderDetailR
 		DiscountAmount:     float32(item.DiscountAmount),              // 优惠金额
 		FreightAmount:      float32(item.FreightAmount),               // 运费金额
 		PayAmount:          float32(item.PayAmount),                   // 实付金额
-		PayType:            *item.PayType,                             // 支付方式：1-支付宝,2-微信,3-银联
 		PayTime:            time_util.TimeToString(item.PayTime),      // 支付时间
 		DeliveryTime:       time_util.TimeToString(item.DeliveryTime), // 发货时间
 		ReceiveTime:        time_util.TimeToString(item.ReceiveTime),  // 收货时间
@@ -67,10 +75,12 @@ func (l *QueryOrderDetailLogic) QueryOrderDetail(in *omsclient.QueryOrderDetailR
 		UpdateTime:         time_util.TimeToString(item.UpdateTime),   //
 	}
 
-	orderItem := query.OmsOrderItem
-	q := orderItem.WithContext(l.ctx).Where(orderItem.OrderID.Eq(in.Id))
+	if item.PayType != nil {
+		data.PayType = *item.PayType // 支付方式：1-支付宝,2-微信,3-银联
+	}
 
-	result, err := q.Find()
+	orderItem := query.OmsOrderItem
+	result, err := orderItem.WithContext(l.ctx).Where(orderItem.OrderID.Eq(in.Id)).Find()
 
 	if err != nil {
 		logc.Errorf(l.ctx, "查询订单商品列表失败,参数:%+v,异常:%s", in, err.Error())
@@ -128,6 +138,93 @@ func (l *QueryOrderDetailLogic) QueryOrderDetail(in *omsclient.QueryOrderDetailR
 	}
 
 	data.OptLogData = list1
+
+	orderPromotion := query.OmsOrderPromotion
+	result2, err := orderPromotion.WithContext(l.ctx).Where(orderPromotion.OrderID.Eq(in.Id)).Find()
+
+	if err != nil {
+		logc.Errorf(l.ctx, "查询订单优惠信息列表失败,参数:%+v,异常:%s", in, err.Error())
+		return nil, errors.New("查询订单优惠信息列表失败")
+	}
+
+	var list2 []*omsclient.PromotionListData
+
+	for _, x := range result2 {
+		y := omsclient.PromotionListData{
+			Id:             x.ID,                              // 主键ID
+			OrderId:        x.OrderID,                         // 订单ID
+			OrderNo:        x.OrderNo,                         // 订单编号
+			PromotionType:  x.PromotionType,                   // 优惠类型：1-优惠券，2-积分抵扣，3-会员折扣，4-促销活动
+			PromotionName:  x.PromotionName,                   // 优惠名称
+			DiscountAmount: float32(x.DiscountAmount),         // 优惠金额
+			CreateTime:     time_util.TimeToStr(x.CreateTime), //
+
+		}
+		if x.PromotionID != nil {
+			y.PromotionId = *x.PromotionID
+		}
+		list2 = append(list2, &y)
+	}
+
+	data.PromotionData = list2
+
+	delivery, err := query.OmsOrderDelivery.WithContext(l.ctx).Where(query.OmsOrderDelivery.OrderID.Eq(item.ID)).First()
+
+	switch {
+	case errors.Is(err, gorm.ErrRecordNotFound):
+		logc.Errorf(l.ctx, "订单收货地址不存在, 请求参数：%+v, 异常信息: %s", in, err.Error())
+		return nil, errors.New("订单收货地址不存在")
+	case err != nil:
+		logc.Errorf(l.ctx, "查询订单收货地址异常, 请求参数：%+v, 异常信息: %s", in, err.Error())
+		return nil, errors.New("查询订单收货地址异常")
+	}
+
+	x := &omsclient.DeliveryData{
+		Id:               delivery.ID,                                 //
+		OrderId:          delivery.OrderID,                            // 订单ID
+		OrderNo:          delivery.OrderNo,                            // 订单编号
+		ReceiverName:     delivery.ReceiverName,                       // 收货人姓名
+		ReceiverPhone:    delivery.ReceiverPhone,                      // 收货人电话
+		ReceiverProvince: delivery.ReceiverProvince,                   // 省份
+		ReceiverCity:     delivery.ReceiverCity,                       // 城市
+		ReceiverDistrict: delivery.ReceiverDistrict,                   // 区县
+		ReceiverAddress:  delivery.ReceiverAddress,                    // 详细地址
+		DeliveryCompany:  delivery.DeliveryCompany,                    // 物流公司
+		DeliveryNo:       delivery.DeliveryNo,                         // 物流单号
+		CreateTime:       time_util.TimeToStr(delivery.CreateTime),    // 创建时间
+		UpdateTime:       time_util.TimeToString(delivery.UpdateTime), // 更新时间
+	}
+
+	data.DeliveryData = x
+
+	orderPayment := query.OmsOrderPayment
+	payment, err := orderPayment.WithContext(l.ctx).Where(orderPayment.OrderID.Eq(in.Id)).Find()
+
+	if err != nil {
+		logc.Errorf(l.ctx, "查询订单支付列表失败,参数:%+v,异常:%s", in, err.Error())
+		return nil, errors.New("查询订单支付列表失败")
+	}
+
+	var list3 []*omsclient.PaymentData
+
+	for _, s := range payment {
+		list3 = append(list3, &omsclient.PaymentData{
+			Id:            s.ID,                                 // 主键ID
+			OrderId:       s.OrderID,                            // 订单ID
+			OrderNo:       s.OrderNo,                            // 订单编号
+			PayType:       s.PayType,                            // 支付方式：1-支付宝，2-微信，3-银联
+			TransactionId: s.TransactionID,                      // 支付流水号
+			TotalAmount:   float32(s.TotalAmount),               // 订单金额
+			PayAmount:     float32(s.PayAmount),                 // 支付金额
+			PayStatus:     s.PayStatus,                          // 支付状态：0-待支付，1-支付成功，2-支付失败
+			PayTime:       time_util.TimeToString(s.PayTime),    // 支付时间
+			CreateTime:    time_util.TimeToStr(s.CreateTime),    // 创建时间
+			UpdateTime:    time_util.TimeToString(s.UpdateTime), // 更新时间
+
+		})
+	}
+
+	data.PaymentData = list3
 	return &omsclient.QueryOrderDetailResp{
 		Data: data,
 	}, nil

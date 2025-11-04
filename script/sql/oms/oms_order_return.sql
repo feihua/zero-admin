@@ -37,3 +37,44 @@ create index idx_order_id
 create index idx_return_no
     on oms_order_return (return_no);
 
+INSERT INTO oms_order_return (
+    order_id, return_no, member_id, status, type, reason, description,
+    proof_pic, refund_amount, return_name, return_phone, company_address,
+    create_time, handle_time, handle_note, handle_man, receive_time,
+    receive_note, receive_man, refund_time, close_time, remark
+) VALUES
+-- Pending review return request
+(1001, 'RTN20231201001', 10001, 0, 0, '商品质量问题', '收到的商品有明显划痕和损坏',
+ 'pic1.jpg,pic2.jpg', 299.00, '张三', '13800138001', '北京市朝阳区某某街道101号',
+ '2023-12-01 10:30:00', NULL, '', '', NULL,
+ '', '', NULL, NULL, '客户 urgent'),
+
+-- Approved return
+(1002, 'RTN20231201002', 10002, 1, 0, '尺寸不合适', '买大了，需要换小一号',
+ 'pic3.jpg', 159.90, '李四', '13800138002', '上海市浦东新区某某路202号',
+ '2023-12-01 14:20:00', '2023-12-01 15:00:00', '已审核通过', '客服小王', NULL,
+ '', '', NULL, NULL, '普通客户'),
+
+-- Received return
+(1003, 'RTN20231202001', 10003, 2, 1, '发错商品', '收到的不是订购的商品',
+ '', 89.50, '王五', '13800138003', '广州市天河区某某大道303号',
+ '2023-12-02 09:15:00', '2023-12-02 10:00:00', '审核通过', '客服小李', '2023-12-03 14:30:00',
+ '已收到退货商品', '仓库小赵', NULL, NULL, 'VIP客户'),
+
+-- Refunded return
+(1004, 'RTN20231203001', 10004, 3, 0, '商品不喜欢', '颜色与描述不符',
+ 'pic4.jpg,pic5.jpg', 199.99, '赵六', '13800138004', '深圳市南山区某某科技园404号',
+ '2023-12-03 16:45:00', '2023-12-03 17:00:00', '同意退款', '客服小陈', '2023-12-04 09:00:00',
+ '商品已验收', '仓库小孙', '2023-12-04 10:30:00', NULL, '需加快处理'),
+
+-- Rejected return
+(1005, 'RTN20231204001', 10005, 4, 2, '人为损坏', '商品有明显人为使用痕迹',
+ 'pic6.jpg', 0.00, '钱七', '13800138005', '杭州市西湖区某某广场505号',
+ '2023-12-04 11:20:00', '2023-12-04 13:00:00', '不符合退货条件，已拒绝', '客服小周', NULL,
+ '', '', NULL, NULL, '注意客户态度'),
+
+-- Closed return
+(1006, 'RTN20231205001', 10006, 5, 1, '其他原因', '客户主动取消退货申请',
+ '', 0.00, '孙八', '13800138006', '南京市鼓楼区某某大厦606号',
+ '2023-12-05 15:30:00', NULL, '', '', NULL,
+ '', '', NULL, '2023-12-05 16:00:00', '客户自行解决');
