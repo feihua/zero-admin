@@ -2,6 +2,7 @@ package order_return
 
 import (
 	"context"
+
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
 	"github.com/feihua/zero-admin/api/admin/internal/svc"
 	"github.com/feihua/zero-admin/api/admin/internal/types"
@@ -70,6 +71,28 @@ func (l *QueryOrderReturnDetailLogic) QueryOrderReturnDetail(req *types.QueryOrd
 		Remark:         detail.Remark,                // 备注
 
 	}
+	var list []*types.ReturnItemListData
+
+	for _, item := range detail.OrderReturnItem {
+		list = append(list, &types.ReturnItemListData{
+			Id:           item.Id,           // 主键ID
+			ReturnId:     item.ReturnId,     // 退货单ID（关联oms_order_return.id）
+			OrderId:      item.OrderId,      // 订单ID
+			OrderItemId:  item.OrderItemId,  // 订单明细ID
+			SkuId:        item.SkuId,        // 商品SKU ID
+			SkuName:      item.SkuName,      // 商品名称
+			SkuPic:       item.SkuPic,       // 商品图片
+			SkuAttrs:     item.SkuAttrs,     // 商品销售属性
+			Quantity:     item.Quantity,     // 退货数量
+			ProductPrice: item.ProductPrice, // 商品单价
+			RealAmount:   item.RealAmount,   // 实际退款金额
+			Reason:       item.Reason,       // 退货原因
+			Remark:       item.Remark,       // 备注
+
+		})
+	}
+
+	data.ReturnItemListData = list
 	return &types.QueryOrderReturnDetailResp{
 		Code:    "000000",
 		Message: "查询退货/售后主成功",

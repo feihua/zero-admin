@@ -3,14 +3,14 @@ package orderreturnservicelogic
 import (
 	"context"
 	"errors"
-	"github.com/feihua/zero-admin/rpc/oms/gen/model"
+	"time"
+
 	"github.com/feihua/zero-admin/rpc/oms/gen/query"
 	"github.com/feihua/zero-admin/rpc/oms/internal/svc"
 	"github.com/feihua/zero-admin/rpc/oms/omsclient"
 	"github.com/zeromicro/go-zero/core/logc"
 	"github.com/zeromicro/go-zero/core/logx"
 	"gorm.io/gorm"
-	"time"
 )
 
 // UpdateOrderReturnLogic 更新退货/售后
@@ -37,7 +37,7 @@ func (l *UpdateOrderReturnLogic) UpdateOrderReturn(in *omsclient.OrderReturnReq)
 	q := query.OmsOrderReturn.WithContext(l.ctx)
 
 	// 1.根据退货/售后id查询退货/售后是否已存在
-	_, err := q.Where(query.OmsOrderReturn.ID.Eq(in.Id)).First()
+	returnApply, err := q.Where(query.OmsOrderReturn.ID.Eq(in.Id)).First()
 
 	switch {
 	case errors.Is(err, gorm.ErrRecordNotFound):
@@ -48,71 +48,37 @@ func (l *UpdateOrderReturnLogic) UpdateOrderReturn(in *omsclient.OrderReturnReq)
 		return nil, errors.New("查询退货/售后异常")
 	}
 
-	item := &model.OmsOrderReturn{
-		ID:             in.Id,                    // 主键ID
-		OrderID:        in.OrderId,               // 关联订单ID
-		ReturnNo:       in.ReturnNo,              // 退货单号
-		MemberID:       in.MemberId,              // 会员ID
-		Status:         in.Status,                // 退货状态（0待审核 1审核通过 2已收货 3已退款 4已拒绝 5已关闭）
-		Type:           in.Type,                  // 售后类型（0退货退款 1仅退款 2换货）
-		Reason:         in.Reason,                // 退货原因
-		Description:    in.Description,           // 问题描述
-		ProofPic:       in.ProofPic,              // 凭证图片，逗号分隔
-		RefundAmount:   float64(in.RefundAmount), // 退款金额
-		ReturnName:     in.ReturnName,            // 退货人姓名
-		ReturnPhone:    in.ReturnPhone,           // 退货人电话
-		CompanyAddress: in.CompanyAddress,        // 退货收货地址
-		Remark:         in.Remark,                // 备注
+	returnApply.Status = in.Status
+	operTime := time.Now()
+	// 确认退货
+	if in.Status == 1 {
+		// returnApply.CompanyAddressID = in.CompanyAddressID
+		returnApply.HandleTime = &operTime
+		returnApply.HandleNote = in.HandleNote
+		returnApply.HandleMan = in.HandleMan
+		returnApply.RefundAmount = float64(in.RefundAmount)
+	}
+	// 完成退货
+	if in.Status == 2 {
+		// returnApply.CompanyAddressID = in.CompanyAddressId
+		returnApply.ReceiveMan = in.ReceiveMan
+		returnApply.ReceiveTime = &operTime
+		returnApply.ReceiveNote = in.ReceiveNote
+	}
+	// 拒绝退货
+	if in.Status == 3 {
+		returnApply.HandleTime = &operTime
+		returnApply.HandleNote = in.HandleNote
+		returnApply.HandleMan = in.HandleMan
 	}
 
-	if len(in.HandleTime) > 0 {
-		t, _ := time.Parse("2006-01-02 15:04:05", in.HandleTime)
-		item.HandleTime = &t
-	}
-	if len(in.ReceiveTime) > 0 {
-		t, _ := time.Parse("2006-01-02 15:04:05", in.ReceiveTime)
-		item.ReceiveTime = &t
-	}
-	if len(in.RefundTime) > 0 {
-		t, _ := time.Parse("2006-01-02 15:04:05", in.RefundTime)
-		item.RefundTime = &t
-	}
-	if len(in.CloseTime) > 0 {
-		t, _ := time.Parse("2006-01-02 15:04:05", in.CloseTime)
-		item.CloseTime = &t
-	}
 	// 2.退货/售后存在时,则直接更新退货/售后
-	_, err = q.Updates(item)
+	_, err = q.Where(query.OmsOrderReturn.ID.Eq(in.Id)).Updates(returnApply)
 
 	if err != nil {
-		logc.Errorf(l.ctx, "更新退货/售后失败,参数:%+v,异常:%s", item, err.Error())
+		logc.Errorf(l.ctx, "更新退货/售后失败,参数:%+v,异常:%s", returnApply, err.Error())
 		return nil, errors.New("更新退货/售后失败")
 	}
 
-	orderReturnItem := query.OmsOrderReturnItem
-	_, _ = orderReturnItem.WithContext(l.ctx).Where(orderReturnItem.ReturnID.Eq(in.Id)).Delete()
-	for _, data := range in.OrderReturnItem {
-
-		returnItem := &model.OmsOrderReturnItem{
-			ReturnID:     item.ID,                    // 退货单ID（关联oms_order_return.id）
-			OrderID:      data.OrderId,               // 订单ID
-			OrderItemID:  data.OrderItemId,           // 订单明细ID
-			SkuID:        data.SkuId,                 // 商品SKU ID
-			SkuName:      data.SkuName,               // 商品名称
-			SkuPic:       data.SkuPic,                // 商品图片
-			SkuAttrs:     data.SkuAttrs,              // 商品销售属性
-			Quantity:     data.Quantity,              // 退货数量
-			ProductPrice: float64(data.ProductPrice), // 商品单价
-			RealAmount:   float64(data.RealAmount),   // 实际退款金额
-			Reason:       data.Reason,                // 退货原因
-			Remark:       data.Remark,                // 备注
-		}
-
-		err = orderReturnItem.WithContext(l.ctx).Create(returnItem)
-		if err != nil {
-			logc.Errorf(l.ctx, "添加退货/售后明细失败,参数:%+v,异常:%s", item, err.Error())
-			return nil, errors.New("添加退货/售后明细失败")
-		}
-	}
 	return &omsclient.OrderReturnResp{}, nil
 }

@@ -3,6 +3,7 @@ package orderreturnservicelogic
 import (
 	"context"
 	"errors"
+
 	"github.com/feihua/zero-admin/pkg/time_util"
 	"github.com/feihua/zero-admin/rpc/oms/gen/query"
 	"github.com/feihua/zero-admin/rpc/oms/internal/svc"
@@ -34,19 +35,19 @@ func NewQueryOrderReturnListLogic(ctx context.Context, svcCtx *svc.ServiceContex
 func (l *QueryOrderReturnListLogic) QueryOrderReturnList(in *omsclient.QueryOrderReturnListReq) (*omsclient.QueryOrderReturnListResp, error) {
 	orderReturn := query.OmsOrderReturn
 	q := orderReturn.WithContext(l.ctx)
-	if in.OrderId != 2 {
+	if in.OrderId != 0 {
 		q = q.Where(orderReturn.OrderID.Eq(in.OrderId))
 	}
 	if len(in.ReturnNo) > 0 {
 		q = q.Where(orderReturn.ReturnNo.Like("%" + in.ReturnNo + "%"))
 	}
-	if in.MemberId != 2 {
+	if in.MemberId != 0 {
 		q = q.Where(orderReturn.MemberID.Eq(in.MemberId))
 	}
 	if in.Status != 2 {
 		q = q.Where(orderReturn.Status.Eq(in.Status))
 	}
-	if in.Type != 2 {
+	if in.Type != 0 {
 		q = q.Where(orderReturn.Type.Eq(in.Type))
 	}
 

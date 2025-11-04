@@ -3,6 +3,7 @@ package orderreturnservicelogic
 import (
 	"context"
 	"errors"
+
 	"github.com/feihua/zero-admin/pkg/time_util"
 	"github.com/feihua/zero-admin/rpc/oms/gen/query"
 	"github.com/feihua/zero-admin/rpc/oms/internal/svc"
@@ -66,5 +67,37 @@ func (l *QueryOrderReturnDetailLogic) QueryOrderReturnDetail(in *omsclient.Query
 		Remark:         item.Remark,                              // 备注
 	}
 
+	orderReturnItem := query.OmsOrderReturnItem
+	q := orderReturnItem.WithContext(l.ctx).Where(orderReturnItem.ReturnID.Eq(item.ID))
+
+	result, _, err := q.FindByPage(0, 10)
+
+	if err != nil {
+		logc.Errorf(l.ctx, "查询退货/售后明细列表失败,参数:%+v,异常:%s", in, err.Error())
+		return nil, errors.New("查询退货/售后明细列表失败")
+	}
+
+	var list []*omsclient.OrderReturnItemData
+
+	for _, returnItem := range result {
+		list = append(list, &omsclient.OrderReturnItemData{
+			Id:           returnItem.ID,                    // 主键ID
+			ReturnId:     returnItem.ReturnID,              // 退货单ID（关联oms_order_return.id）
+			OrderId:      returnItem.OrderID,               // 订单ID
+			OrderItemId:  returnItem.OrderItemID,           // 订单明细ID
+			SkuId:        returnItem.SkuID,                 // 商品SKU ID
+			SkuName:      returnItem.SkuName,               // 商品名称
+			SkuPic:       returnItem.SkuPic,                // 商品图片
+			SkuAttrs:     returnItem.SkuAttrs,              // 商品销售属性
+			Quantity:     returnItem.Quantity,              // 退货数量
+			ProductPrice: float32(returnItem.ProductPrice), // 商品单价
+			RealAmount:   float32(returnItem.RealAmount),   // 实际退款金额
+			Reason:       returnItem.Reason,                // 退货原因
+			Remark:       returnItem.Remark,                // 备注
+
+		})
+	}
+
+	data.OrderReturnItem = list
 	return data, nil
 }

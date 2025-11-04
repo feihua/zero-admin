@@ -30,6 +30,7 @@ message OrderReturnReq {
   string close_time = 22; //关闭时间
   string remark = 23; //备注
   repeated OrderReturnItemData order_return_item = 24; //退货/售后明细
+  int64 companyAddressID = 25; //公司id
 }
 
 message OrderReturnItemData {

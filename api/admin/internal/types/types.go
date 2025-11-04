@@ -2454,29 +2454,30 @@ type QueryOrderMainListResp struct {
 }
 
 type QueryOrderReturnDetailData struct {
-	Id             int64   `json:"id"`             //主键ID
-	OrderId        int64   `json:"orderId"`        //关联订单ID
-	ReturnNo       string  `json:"returnNo"`       //退货单号
-	MemberId       int64   `json:"memberId"`       //会员ID
-	Status         int32   `json:"status"`         //退货状态（0待审核 1审核通过 2已收货 3已退款 4已拒绝 5已关闭）
-	Type           int32   `json:"type"`           //售后类型（0退货退款 1仅退款 2换货）
-	Reason         string  `json:"reason"`         //退货原因
-	Description    string  `json:"description"`    //问题描述
-	ProofPic       string  `json:"proofPic"`       //凭证图片，逗号分隔
-	RefundAmount   float64 `json:"refundAmount"`   //退款金额
-	ReturnName     string  `json:"returnName"`     //退货人姓名
-	ReturnPhone    string  `json:"returnPhone"`    //退货人电话
-	CompanyAddress string  `json:"companyAddress"` //退货收货地址
-	CreateTime     string  `json:"createTime"`     //申请时间
-	HandleTime     string  `json:"handleTime"`     //处理时间
-	HandleNote     string  `json:"handleNote"`     //处理备注
-	HandleMan      string  `json:"handleMan"`      //处理人员
-	ReceiveTime    string  `json:"receiveTime"`    //收货时间
-	ReceiveNote    string  `json:"receiveNote"`    //收货备注
-	ReceiveMan     string  `json:"receiveMan"`     //收货人
-	RefundTime     string  `json:"refundTime"`     //退款时间
-	CloseTime      string  `json:"closeTime"`      //关闭时间
-	Remark         string  `json:"remark"`         //备注
+	Id                 int64                 `json:"id"`             //主键ID
+	OrderId            int64                 `json:"orderId"`        //关联订单ID
+	ReturnNo           string                `json:"returnNo"`       //退货单号
+	MemberId           int64                 `json:"memberId"`       //会员ID
+	Status             int32                 `json:"status"`         //退货状态（0待审核 1审核通过 2已收货 3已退款 4已拒绝 5已关闭）
+	Type               int32                 `json:"type"`           //售后类型（0退货退款 1仅退款 2换货）
+	Reason             string                `json:"reason"`         //退货原因
+	Description        string                `json:"description"`    //问题描述
+	ProofPic           string                `json:"proofPic"`       //凭证图片，逗号分隔
+	RefundAmount       float64               `json:"refundAmount"`   //退款金额
+	ReturnName         string                `json:"returnName"`     //退货人姓名
+	ReturnPhone        string                `json:"returnPhone"`    //退货人电话
+	CompanyAddress     string                `json:"companyAddress"` //退货收货地址
+	CreateTime         string                `json:"createTime"`     //申请时间
+	HandleTime         string                `json:"handleTime"`     //处理时间
+	HandleNote         string                `json:"handleNote"`     //处理备注
+	HandleMan          string                `json:"handleMan"`      //处理人员
+	ReceiveTime        string                `json:"receiveTime"`    //收货时间
+	ReceiveNote        string                `json:"receiveNote"`    //收货备注
+	ReceiveMan         string                `json:"receiveMan"`     //收货人
+	RefundTime         string                `json:"refundTime"`     //退款时间
+	CloseTime          string                `json:"closeTime"`      //关闭时间
+	Remark             string                `json:"remark"`         //备注
+	ReturnItemListData []*ReturnItemListData `json:"returnItemList"`
 }
 
 type QueryOrderReturnDetailReq struct {
@@ -3881,6 +3882,22 @@ type ReSetPasswordReq struct {
 	UserId int64 `json:"userId"`
 }
 
+type ReturnItemListData struct {
+	Id           int64   `json:"id"`           //主键ID
+	ReturnId     int64   `json:"returnId"`     //退货单ID（关联oms_order_return.id）
+	OrderId      int64   `json:"orderId"`      //订单ID
+	OrderItemId  int64   `json:"orderItemId"`  //订单明细ID
+	SkuId        int64   `json:"skuId"`        //商品SKU ID
+	SkuName      string  `json:"skuName"`      //商品名称
+	SkuPic       string  `json:"skuPic"`       //商品图片
+	SkuAttrs     string  `json:"skuAttrs"`     //商品销售属性
+	Quantity     int32   `json:"quantity"`     //退货数量
+	ProductPrice float32 `json:"productPrice"` //商品单价
+	RealAmount   float32 `json:"realAmount"`   //实际退款金额
+	Reason       string  `json:"reason"`       //退货原因
+	Remark       string  `json:"remark"`       //备注
+}
+
 type RoleListData struct {
 	Id         int64  `json:"id"`         //角色id
 	RoleName   string `json:"roleName"`   //名称
@@ -4227,11 +4244,12 @@ type UpdateOrderReturnReasonStatusReq struct {
 }
 
 type UpdateOrderReturnReq struct {
-	Id           int64   `json:"id"`           //主键ID
-	Status       int32   `json:"status"`       //退货状态（0待审核 1审核通过 2已收货 3已退款 4已拒绝 5已关闭）
-	HandleNote   string  `json:"handleNote"`   //处理备注
-	ReceiveNote  string  `json:"receiveNote"`  //收货备注
-	RefundAmount float64 `json:"refundAmount"` //退款金额
+	Id               int64   `json:"id"`                        //主键ID
+	CompanyAddressId int64   `json:"companyAddressId,optional"` //主键ID
+	Status           int32   `json:"status"`                    //退货状态（0待审核 1审核通过 2已收货 3已退款 4已拒绝 5已关闭）
+	HandleNote       string  `json:"handleNote,optional"`       //处理备注
+	ReceiveNote      string  `json:"receiveNote,optional"`      //收货备注
+	RefundAmount     float64 `json:"refundAmount,optional"`     //退款金额
 }
 
 type UpdateOrderSettingReq struct {
