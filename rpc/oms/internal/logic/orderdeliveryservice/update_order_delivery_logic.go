@@ -3,6 +3,7 @@ package orderdeliveryservicelogic
 import (
 	"context"
 	"errors"
+
 	"github.com/feihua/zero-admin/rpc/oms/gen/model"
 	"github.com/feihua/zero-admin/rpc/oms/gen/query"
 	"github.com/feihua/zero-admin/rpc/oms/internal/svc"
@@ -62,7 +63,7 @@ func (l *UpdateOrderDeliveryLogic) UpdateOrderDelivery(in *omsclient.UpdateOrder
 	}
 
 	// 2.订单收货地址存在时,则直接更新订单收货地址
-	_, err = q.Updates(item)
+	_, err = q.Where(query.OmsOrderDelivery.ID.Eq(in.Id)).Updates(item)
 
 	if err != nil {
 		logc.Errorf(l.ctx, "更新订单收货地址失败,参数:%+v,异常:%s", item, err.Error())

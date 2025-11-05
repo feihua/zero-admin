@@ -10,6 +10,7 @@ import (
 	"github.com/feihua/zero-admin/rpc/cms/client/subjectservice"
 	"github.com/feihua/zero-admin/rpc/oms/client/cartitemservice"
 	"github.com/feihua/zero-admin/rpc/oms/client/companyaddressservice"
+	"github.com/feihua/zero-admin/rpc/oms/client/orderdeliveryservice"
 	"github.com/feihua/zero-admin/rpc/oms/client/orderoperationlogservice"
 	"github.com/feihua/zero-admin/rpc/oms/client/orderreturnreasonservice"
 	"github.com/feihua/zero-admin/rpc/oms/client/orderreturnservice"
@@ -135,6 +136,7 @@ type ServiceContext struct {
 	OrderReturnReasonService orderreturnreasonservice.OrderReturnReasonService
 	OrderService             orderservice.OrderService
 	OrderSettingService      ordersettingservice.OrderSettingService
+	OrderDeliveryService     orderdeliveryservice.OrderDeliveryService
 	// 营销相关
 	CouponRecordService       couponrecordservice.CouponRecordService
 	CouponScopeService        couponscopeservice.CouponScopeService
@@ -221,6 +223,7 @@ func NewServiceContext(c config.Config) *ServiceContext {
 		OrderReturnReasonService: orderreturnreasonservice.NewOrderReturnReasonService(omsClient),
 		OrderService:             orderservice.NewOrderService(omsClient),
 		OrderSettingService:      ordersettingservice.NewOrderSettingService(omsClient),
+		OrderDeliveryService:     orderdeliveryservice.NewOrderDeliveryService(omsClient),
 
 		CouponRecordService:       couponrecordservice.NewCouponRecordService(smsClient),
 		CouponScopeService:        couponscopeservice.NewCouponScopeService(smsClient),

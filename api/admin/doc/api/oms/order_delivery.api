@@ -20,5 +20,65 @@ type (
 		CreateTime       string `json:"createTime"` //创建时间
 		UpdateTime       string `json:"updateTime"` //更新时间
 	}
+	// 更新订单收货地址请求参数
+	UpdateOrderDeliveryReq {
+		Id               int64  `json:"id"` //
+		OrderId          int64  `json:"orderId"` //订单ID
+		OrderNo          string `json:"orderNo"` //订单编号
+		ReceiverName     string `json:"receiverName"` //收货人姓名
+		ReceiverPhone    string `json:"receiverPhone"` //收货人电话
+		ReceiverProvince string `json:"receiverProvince"` //省份
+		ReceiverCity     string `json:"receiverCity"` //城市
+		ReceiverDistrict string `json:"receiverDistrict"` //区县
+		ReceiverAddress  string `json:"receiverAddress"` //详细地址
+		DeliveryCompany  string `json:"deliveryCompany"` //物流公司
+		DeliveryNo       string `json:"deliveryNo"` //物流单号
+	}
+	UpdateOrderDeliveryResp {
+		Code    string `json:"code"`
+		Message string `json:"message"`
+	}
+	// 查询订单收货地址详情请求参数
+	QueryOrderDeliveryDetailReq {
+		Id int64 `form:"id"`
+	}
+	QueryOrderDeliveryDetailData {
+		Id               int64  `json:"id"` //
+		OrderId          int64  `json:"orderId"` //订单ID
+		OrderNo          string `json:"orderNo"` //订单编号
+		ReceiverName     string `json:"receiverName"` //收货人姓名
+		ReceiverPhone    string `json:"receiverPhone"` //收货人电话
+		ReceiverProvince string `json:"receiverProvince"` //省份
+		ReceiverCity     string `json:"receiverCity"` //城市
+		ReceiverDistrict string `json:"receiverDistrict"` //区县
+		ReceiverAddress  string `json:"receiverAddress"` //详细地址
+		DeliveryCompany  string `json:"deliveryCompany"` //物流公司
+		DeliveryNo       string `json:"deliveryNo"` //物流单号
+		CreateTime       string `json:"createTime"` //创建时间
+		UpdateTime       string `json:"updateTime"` //更新时间
+	}
+	QueryOrderDeliveryDetailResp {
+		Code    string                       `json:"code"`
+		Message string                       `json:"message"`
+		Data    QueryOrderDeliveryDetailData `json:"data"`
+	}
 )
+
+@server (
+	group:      oms/order_delivery
+	prefix:     /api/oms/orderDelivery
+	jwt:        Auth
+	middleware: CheckUrl
+	tags:       "订单收货地址管理"
+	authType:   apiKey
+)
+service admin-api {
+	// 更新订单收货地址
+	@handler UpdateOrderDelivery
+	post /updateOrderDelivery (UpdateOrderDeliveryReq) returns (UpdateOrderDeliveryResp)
+
+	// 查询订单收货地址详情
+	@handler QueryOrderDeliveryDetail
+	get /queryOrderDeliveryDetail (QueryOrderDeliveryDetailReq) returns (QueryOrderDeliveryDetailResp)
+}
 

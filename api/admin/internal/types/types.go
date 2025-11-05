@@ -2465,6 +2465,32 @@ type QueryOrderData struct {
 	OrderDeliveryData     OrderDeliveryData        `json:"orderDeliveryData"`     // 订单收货地址
 }
 
+type QueryOrderDeliveryDetailData struct {
+	Id               int64  `json:"id"`               //
+	OrderId          int64  `json:"orderId"`          //订单ID
+	OrderNo          string `json:"orderNo"`          //订单编号
+	ReceiverName     string `json:"receiverName"`     //收货人姓名
+	ReceiverPhone    string `json:"receiverPhone"`    //收货人电话
+	ReceiverProvince string `json:"receiverProvince"` //省份
+	ReceiverCity     string `json:"receiverCity"`     //城市
+	ReceiverDistrict string `json:"receiverDistrict"` //区县
+	ReceiverAddress  string `json:"receiverAddress"`  //详细地址
+	DeliveryCompany  string `json:"deliveryCompany"`  //物流公司
+	DeliveryNo       string `json:"deliveryNo"`       //物流单号
+	CreateTime       string `json:"createTime"`       //创建时间
+	UpdateTime       string `json:"updateTime"`       //更新时间
+}
+
+type QueryOrderDeliveryDetailReq struct {
+	Id int64 `form:"id"`
+}
+
+type QueryOrderDeliveryDetailResp struct {
+	Code    string                       `json:"code"`
+	Message string                       `json:"message"`
+	Data    QueryOrderDeliveryDetailData `json:"data"`
+}
+
 type QueryOrderMainDetailReq struct {
 	Id int64 `form:"id"`
 }
@@ -4246,6 +4272,25 @@ type UpdateNoticeReq struct {
 type UpdateNoticeStatusReq struct {
 	Ids    []int64 `json:"ids"`              //公告ID
 	Status int32   `json:"status,default=2"` //公告状态（0:关闭,1:正常 ）
+}
+
+type UpdateOrderDeliveryReq struct {
+	Id               int64  `json:"id"`               //
+	OrderId          int64  `json:"orderId"`          //订单ID
+	OrderNo          string `json:"orderNo"`          //订单编号
+	ReceiverName     string `json:"receiverName"`     //收货人姓名
+	ReceiverPhone    string `json:"receiverPhone"`    //收货人电话
+	ReceiverProvince string `json:"receiverProvince"` //省份
+	ReceiverCity     string `json:"receiverCity"`     //城市
+	ReceiverDistrict string `json:"receiverDistrict"` //区县
+	ReceiverAddress  string `json:"receiverAddress"`  //详细地址
+	DeliveryCompany  string `json:"deliveryCompany"`  //物流公司
+	DeliveryNo       string `json:"deliveryNo"`       //物流单号
+}
+
+type UpdateOrderDeliveryResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
 }
 
 type UpdateOrderMainReq struct {

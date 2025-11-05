@@ -3,6 +3,8 @@ package orderdeliveryservicelogic
 import (
 	"context"
 	"errors"
+
+	"github.com/feihua/zero-admin/pkg/time_util"
 	"github.com/feihua/zero-admin/rpc/oms/gen/query"
 	"github.com/feihua/zero-admin/rpc/oms/internal/svc"
 	"github.com/feihua/zero-admin/rpc/oms/omsclient"
@@ -44,19 +46,19 @@ func (l *QueryOrderDeliveryDetailLogic) QueryOrderDeliveryDetail(in *omsclient.Q
 	}
 
 	data := &omsclient.QueryOrderDeliveryDetailResp{
-		Id:               item.ID,                                       //
-		OrderId:          item.OrderID,                                  // 订单ID
-		OrderNo:          item.OrderNo,                                  // 订单编号
-		ReceiverName:     item.ReceiverName,                             // 收货人姓名
-		ReceiverPhone:    item.ReceiverPhone,                            // 收货人电话
-		ReceiverProvince: item.ReceiverProvince,                         // 省份
-		ReceiverCity:     item.ReceiverCity,                             // 城市
-		ReceiverDistrict: item.ReceiverDistrict,                         // 区县
-		ReceiverAddress:  item.ReceiverAddress,                          // 详细地址
-		DeliveryCompany:  item.DeliveryCompany,                          // 物流公司
-		DeliveryNo:       item.DeliveryNo,                               // 物流单号
-		CreateTime:       item.CreateTime.Format("2006-01-02 15:04:05"), // 创建时间
-		UpdateTime:       item.UpdateTime.Format("2006-01-02 15:04:05"), // 更新时间
+		Id:               item.ID,                                 //
+		OrderId:          item.OrderID,                            // 订单ID
+		OrderNo:          item.OrderNo,                            // 订单编号
+		ReceiverName:     item.ReceiverName,                       // 收货人姓名
+		ReceiverPhone:    item.ReceiverPhone,                      // 收货人电话
+		ReceiverProvince: item.ReceiverProvince,                   // 省份
+		ReceiverCity:     item.ReceiverCity,                       // 城市
+		ReceiverDistrict: item.ReceiverDistrict,                   // 区县
+		ReceiverAddress:  item.ReceiverAddress,                    // 详细地址
+		DeliveryCompany:  item.DeliveryCompany,                    // 物流公司
+		DeliveryNo:       item.DeliveryNo,                         // 物流单号
+		CreateTime:       time_util.TimeToStr(item.CreateTime),    // 创建时间
+		UpdateTime:       time_util.TimeToString(item.UpdateTime), // 更新时间
 	}
 
 	return data, nil

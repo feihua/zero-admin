@@ -10,6 +10,7 @@ import (
 	cmssubject "github.com/feihua/zero-admin/api/admin/internal/handler/cms/subject"
 	cmssubject_category "github.com/feihua/zero-admin/api/admin/internal/handler/cms/subject_category"
 	omscompany_address "github.com/feihua/zero-admin/api/admin/internal/handler/oms/company_address"
+	omsorder_delivery "github.com/feihua/zero-admin/api/admin/internal/handler/oms/order_delivery"
 	omsorder_main "github.com/feihua/zero-admin/api/admin/internal/handler/oms/order_main"
 	omsorder_return "github.com/feihua/zero-admin/api/admin/internal/handler/oms/order_return"
 	omsorder_setting "github.com/feihua/zero-admin/api/admin/internal/handler/oms/order_setting"
@@ -225,6 +226,26 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 		),
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
 		rest.WithPrefix("/api/oms/companyAddress"),
+	)
+
+	server.AddRoutes(
+		rest.WithMiddlewares(
+			[]rest.Middleware{serverCtx.CheckUrl},
+			[]rest.Route{
+				{
+					Method:  http.MethodGet,
+					Path:    "/queryOrderDeliveryDetail",
+					Handler: omsorder_delivery.QueryOrderDeliveryDetailHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodPost,
+					Path:    "/updateOrderDelivery",
+					Handler: omsorder_delivery.UpdateOrderDeliveryHandler(serverCtx),
+				},
+			}...,
+		),
+		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
+		rest.WithPrefix("/api/oms/orderDelivery"),
 	)
 
 	server.AddRoutes(
@@ -1293,18 +1314,18 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			[]rest.Route{
 				{
 					Method:  http.MethodGet,
-					Path:    "/deleteLoginLog",
-					Handler: syslog.DeleteLoginLogHandler(serverCtx),
+					Path:    "/deleteOperateLog",
+					Handler: syslog.DeleteOperateLogHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodGet,
-					Path:    "/queryLoginLogDetail",
-					Handler: syslog.QueryLoginLogDetailHandler(serverCtx),
+					Path:    "/queryOperateLogDetail",
+					Handler: syslog.QueryOperateLogDetailHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodGet,
-					Path:    "/queryLoginLogList",
-					Handler: syslog.QueryLoginLogListHandler(serverCtx),
+					Path:    "/queryOperateLogList",
+					Handler: syslog.QueryOperateLogListHandler(serverCtx),
 				},
 			}...,
 		),
@@ -1318,18 +1339,18 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			[]rest.Route{
 				{
 					Method:  http.MethodGet,
-					Path:    "/deleteOperateLog",
-					Handler: syslog.DeleteOperateLogHandler(serverCtx),
+					Path:    "/deleteLoginLog",
+					Handler: syslog.DeleteLoginLogHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodGet,
-					Path:    "/queryOperateLogDetail",
-					Handler: syslog.QueryOperateLogDetailHandler(serverCtx),
+					Path:    "/queryLoginLogDetail",
+					Handler: syslog.QueryLoginLogDetailHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodGet,
-					Path:    "/queryOperateLogList",
-					Handler: syslog.QueryOperateLogListHandler(serverCtx),
+					Path:    "/queryLoginLogList",
+					Handler: syslog.QueryLoginLogListHandler(serverCtx),
 				},
 			}...,
 		),
