@@ -34,7 +34,7 @@ func NewQueryOrderDeliveryDetailLogic(ctx context.Context, svcCtx *svc.ServiceCo
 
 // QueryOrderDeliveryDetail 查询订单收货地址详情
 func (l *QueryOrderDeliveryDetailLogic) QueryOrderDeliveryDetail(in *omsclient.QueryOrderDeliveryDetailReq) (*omsclient.QueryOrderDeliveryDetailResp, error) {
-	item, err := query.OmsOrderDelivery.WithContext(l.ctx).Where(query.OmsOrderDelivery.ID.Eq(in.Id)).First()
+	item, err := query.OmsOrderDelivery.WithContext(l.ctx).Where(query.OmsOrderDelivery.OrderID.Eq(in.Id)).First()
 
 	switch {
 	case errors.Is(err, gorm.ErrRecordNotFound):

@@ -913,36 +913,36 @@ type ProductLadderResp struct {
 }
 
 type ProductSpuData struct {
-	Id                  int64   `json:"id,optional"`         //商品SpuId
-	Name                string  `json:"name"`                //商品名称
-	ProductSn           string  `json:"productSn"`           //商品货号
-	CategoryId          int64   `json:"categoryId"`          //商品分类ID
-	CategoryIds         string  `json:"categoryIds"`         //商品分类ID集合
-	CategoryName        string  `json:"categoryName"`        //商品分类名称
-	BrandId             int64   `json:"brandId"`             //品牌ID
-	BrandName           string  `json:"brandName"`           //品牌名称
-	Unit                string  `json:"unit"`                //单位
-	Weight              float32 `json:"weight"`              //重量(kg)
-	Keywords            string  `json:"keywords"`            //关键词
-	Brief               string  `json:"brief"`               //简介
-	Description         string  `json:"description"`         //详细描述
-	AlbumPics           string  `json:"albumPics"`           //画册图片，最多8张，以逗号分割
-	MainPic             string  `json:"mainPic"`             //主图
-	PublishStatus       int32   `json:"publishStatus"`       //上架状态：0-下架，1-上架
-	NewStatus           int32   `json:"newStatus"`           //新品状态:0->不是新品；1->新品
-	RecommendStatus     int32   `json:"recommendStatus"`     //推荐状态；0->不推荐；1->推荐
-	VerifyStatus        int32   `json:"verifyStatus"`        //审核状态：0->未审核；1->审核通过
-	PreviewStatus       int32   `json:"previewStatus"`       //是否为预告商品：0->不是；1->是
-	Sort                int32   `json:"sort"`                //排序
-	NewStatusSort       int32   `json:"newStatusSort"`       //新品排序
-	RecommendStatusSort int32   `json:"recommendStatusSort"` //推荐排序
-	Stock               int32   `json:"stock"`               //库存
-	LowStock            int32   `json:"lowStock"`            //预警库存
-	PromotionType       int32   `json:"promotionType"`       //促销类型：0->没有促销使用原价;1->使用促销价；2->使用会员价；3->使用阶梯价格；4->使用满减价格；5->秒杀
-	DetailTitle         string  `json:"detailTitle"`         //详情标题
-	DetailDesc          string  `json:"detailDesc"`          //详情描述
-	DetailHtml          string  `json:"detailHtml"`          //产品详情网页内容
-	DetailMobileHtml    string  `json:"detailMobileHtml"`    //移动端网页详情
+	Id                  int64   `json:"id,optional"`          //商品SpuId
+	Name                string  `json:"name"`                 //商品名称
+	ProductSn           string  `json:"productSn"`            //商品货号
+	CategoryId          int64   `json:"categoryId"`           //商品分类ID
+	CategoryIds         string  `json:"categoryIds,optional"` //商品分类ID集合
+	CategoryName        string  `json:"categoryName"`         //商品分类名称
+	BrandId             int64   `json:"brandId"`              //品牌ID
+	BrandName           string  `json:"brandName"`            //品牌名称
+	Unit                string  `json:"unit"`                 //单位
+	Weight              float32 `json:"weight"`               //重量(kg)
+	Keywords            string  `json:"keywords"`             //关键词
+	Brief               string  `json:"brief"`                //简介
+	Description         string  `json:"description"`          //详细描述
+	AlbumPics           string  `json:"albumPics"`            //画册图片，最多8张，以逗号分割
+	MainPic             string  `json:"mainPic"`              //主图
+	PublishStatus       int32   `json:"publishStatus"`        //上架状态：0-下架，1-上架
+	NewStatus           int32   `json:"newStatus"`            //新品状态:0->不是新品；1->新品
+	RecommendStatus     int32   `json:"recommendStatus"`      //推荐状态；0->不推荐；1->推荐
+	VerifyStatus        int32   `json:"verifyStatus"`         //审核状态：0->未审核；1->审核通过
+	PreviewStatus       int32   `json:"previewStatus"`        //是否为预告商品：0->不是；1->是
+	Sort                int32   `json:"sort"`                 //排序
+	NewStatusSort       int32   `json:"newStatusSort"`        //新品排序
+	RecommendStatusSort int32   `json:"recommendStatusSort"`  //推荐排序
+	Stock               int32   `json:"stock"`                //库存
+	LowStock            int32   `json:"lowStock"`             //预警库存
+	PromotionType       int32   `json:"promotionType"`        //促销类型：0->没有促销使用原价;1->使用促销价；2->使用会员价；3->使用阶梯价格；4->使用满减价格；5->秒杀
+	DetailTitle         string  `json:"detailTitle"`          //详情标题
+	DetailDesc          string  `json:"detailDesc"`           //详情描述
+	DetailHtml          string  `json:"detailHtml"`           //产品详情网页内容
+	DetailMobileHtml    string  `json:"detailMobileHtml"`     //移动端网页详情
 }
 
 type ProductSpuDetailData struct {

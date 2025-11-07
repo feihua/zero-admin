@@ -30,7 +30,7 @@ type (
 		Name                string  `json:"name"` //商品名称
 		ProductSn           string  `json:"productSn"` //商品货号
 		CategoryId          int64   `json:"categoryId"` //商品分类ID
-		CategoryIds         string  `json:"categoryIds"` //商品分类ID集合
+		CategoryIds         string  `json:"categoryIds,optional"` //商品分类ID集合
 		CategoryName        string  `json:"categoryName"` //商品分类名称
 		BrandId             int64   `json:"brandId"` //品牌ID
 		BrandName           string  `json:"brandName"` //品牌名称
