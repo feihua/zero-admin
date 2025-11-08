@@ -39,8 +39,8 @@ copy_config:
 	mkdir -p target/search-rpc && cp rpc/search/etc/search.yaml target/search-rpc/search-rpc.yaml
 	mkdir -p target/admin-api && cp api/admin/etc/admin-api.yaml target/admin-api/admin-api.yaml
 	mkdir -p target/front-api && cp api/front/etc/front-api.yaml target/front-api/front-api.yaml
-	mkdir -p target/job && cp job/etc/job.yaml target/job/job.yaml
-	mkdir -p target/consumer && cp consumer/etc/consumer.yaml target/consumer/consumer.yaml
+	mkdir -p target/job && cp job/etc/job-api.yaml target/job/job-api.yaml
+	mkdir -p target/consumer && cp consumer/etc/consumer-api.yaml target/consumer/consumer-api.yaml
 
 build: copy_config ## 构建目标
 	$(GOBUILD) -o target/sys-rpc/sys-rpc -v ./rpc/sys/sys.go
@@ -67,8 +67,8 @@ start: ## 运行目标
 	nohup ./target/admin-api/admin-api -f ./target/admin-api/admin-api.yaml > /dev/null 2>&1 &
 	nohup ./target/front-api/front-api -f ./target/front-api/front-api.yaml  > /dev/null 2>&1 &
 	nohup ./target/web-api/web-api -f ./target/web-api/web-api.yaml  > /dev/null 2>&1 &
-	nohup ./target/job/job -f ./target/job/job.yaml  > /dev/null 2>&1 &
-	nohup ./target/consumer/consumer -f ./target/consumer/consumer.yaml  > /dev/null 2>&1 &
+	nohup ./target/job/job -f ./target/job/job-api.yaml  > /dev/null 2>&1 &
+	nohup ./target/consumer/consumer -f ./target/consumer/consumer-api.yaml  > /dev/null 2>&1 &
 
 
 stop: ## 停止目标
