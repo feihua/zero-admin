@@ -97,7 +97,8 @@ android版本体验地址 [flutter-mall-app](https://www.pgyer.com/OoW2Zy)
 # 1.项目预览
 
 **预览地址**http://129.204.203.29/mall <span  style="color: red;"> 账号：admin 密码: 123456</span>
-**预览地址（vue）**http://129.204.203.29/vue/login <span  style="color: red;"> 账号：admin 密码: 123456</span>
+
+**vue版本预览地址**http://129.204.203.29/vue/login <span  style="color: red;"> 账号：admin 密码: 123456</span>
 > 注：演示账号部分功能修改删除权限未开放。
 
 
