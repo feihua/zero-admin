@@ -2,9 +2,10 @@ package model
 
 import (
 	"context"
+
 	"github.com/zeromicro/go-zero/core/stores/mon"
-	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
+	"go.mongodb.org/mongo-driver/v2/bson"
 )
 
 var _ MemberProductCategoryRelationModel = (*customMemberProductCategoryRelationModel)(nil)

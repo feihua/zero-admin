@@ -3,14 +3,15 @@ package memberbrandattentionservicelogic
 import (
 	"context"
 	"errors"
+
+	"time"
+
 	"github.com/feihua/zero-admin/rpc/ums/gen/model"
 	"github.com/feihua/zero-admin/rpc/ums/gen/query"
 	"github.com/feihua/zero-admin/rpc/ums/internal/svc"
 	"github.com/feihua/zero-admin/rpc/ums/umsclient"
 	"github.com/zeromicro/go-zero/core/logc"
 	"github.com/zeromicro/go-zero/core/logx"
-	"go.mongodb.org/mongo-driver/bson/primitive"
-	"time"
 )
 
 // AddMemberBrandAttentionLogic 添加会员关注品牌
@@ -39,7 +40,6 @@ func (l *AddMemberBrandAttentionLogic) AddMemberBrandAttention(in *umsclient.Add
 
 	// 2.添加品牌关注
 	err := l.svcCtx.MemberBrandAttentionModel.Insert(l.ctx, &model.MemberBrandAttention{
-		ID:             primitive.ObjectID{},
 		MemberId:       in.MemberId,     // 会员id
 		MemberNickName: member.Nickname, // 会员姓名
 		MemberIcon:     member.Avatar,   // 会员头像
