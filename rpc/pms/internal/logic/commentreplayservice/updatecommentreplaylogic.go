@@ -3,11 +3,12 @@ package commentreplayservicelogic
 import (
 	"context"
 	"errors"
+
 	"github.com/feihua/zero-admin/rpc/pms/gen/model"
 	"github.com/feihua/zero-admin/rpc/pms/internal/svc"
 	"github.com/feihua/zero-admin/rpc/pms/pmsclient"
 	"github.com/zeromicro/go-zero/core/logc"
-	"go.mongodb.org/mongo-driver/bson/primitive"
+	"go.mongodb.org/mongo-driver/v2/bson"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -33,7 +34,7 @@ func NewUpdateCommentReplayLogic(ctx context.Context, svcCtx *svc.ServiceContext
 
 // UpdateCommentReplay 更新产品评价回复
 func (l *UpdateCommentReplayLogic) UpdateCommentReplay(in *pmsclient.UpdateCommentReplayReq) (*pmsclient.UpdateCommentReplayResp, error) {
-	objectID, _ := primitive.ObjectIDFromHex(in.Id)
+	objectID, _ := bson.ObjectIDFromHex(in.Id)
 	_, err := l.svcCtx.ProductCommentReplayModel.Update(l.ctx, &model.ProductCommentReplay{
 		ID:             objectID,          //
 		CommentId:      in.CommentId,      // 评论id

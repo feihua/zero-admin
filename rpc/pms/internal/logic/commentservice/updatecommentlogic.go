@@ -3,11 +3,12 @@ package commentservicelogic
 import (
 	"context"
 	"errors"
+
 	"github.com/feihua/zero-admin/rpc/pms/gen/model"
 	"github.com/feihua/zero-admin/rpc/pms/internal/svc"
 	"github.com/feihua/zero-admin/rpc/pms/pmsclient"
 	"github.com/zeromicro/go-zero/core/logc"
-	"go.mongodb.org/mongo-driver/bson/primitive"
+	"go.mongodb.org/mongo-driver/v2/bson"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -33,7 +34,7 @@ func NewUpdateCommentLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Upd
 
 // UpdateComment 更新商品评价
 func (l *UpdateCommentLogic) UpdateComment(in *pmsclient.UpdateCommentReq) (*pmsclient.UpdateCommentResp, error) {
-	objectID, _ := primitive.ObjectIDFromHex(in.Id)
+	objectID, _ := bson.ObjectIDFromHex(in.Id)
 	_, err := l.svcCtx.ProductCommentModel.Update(l.ctx, &model.ProductComment{
 		ID:               objectID,            //
 		ProductId:        in.ProductId,        // 商品id
