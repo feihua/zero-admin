@@ -1,5 +1,3 @@
 ### 获取商品分类
-GET {{host}}/api/category/queryProductCateListById?parentId=1
+GET {{host}}/api/product/queryProductCateList
 
-### 获取商品分类(嵌套children)(app端)
-GET {{host}}/api/category/queryProductCateTreeList

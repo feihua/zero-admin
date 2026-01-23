@@ -15,7 +15,7 @@ func main() {
 		FieldNullable: true,
 	})
 
-	var dsn = "root:12341qweqfsd2356@tcp(129.204.203.29:3306)/gozerotest?charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai"
+	var dsn = "root:123456@tcp(127.0.0.1:3306)/gozero?charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai"
 	// Initialize a *gorm.DB instance
 	db, _ := gorm.Open(mysql.Open(dsn))
 
