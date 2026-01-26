@@ -1,5 +1,5 @@
 ### 获取商品列表
-GET {{host}}/api/product/queryProductList?productCategoryId=7
+GET {{host}}/api/product/queryProductList?productCategoryId=8
 
 ### 获取商品详情
-GET {{host}}/api/product/queryProduct?productId=1
+GET {{host}}/api/product/queryProductDetail?productId=1

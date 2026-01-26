@@ -2,6 +2,7 @@ package order
 
 import (
 	"context"
+
 	"github.com/feihua/zero-admin/api/front/internal/logic/common"
 	"github.com/feihua/zero-admin/pkg/errorx"
 	"github.com/feihua/zero-admin/rpc/oms/omsclient"
@@ -101,6 +102,22 @@ func (l *QueryOrderDetailLogic) QueryOrderDetail(req *types.OrderDetailReq) (res
 		})
 	}
 	data.OrderItemData = orderItemData
+
+	deliveryData := detail.DeliveryData
+
+	data.MemberReceiveAddressList = types.MemberReceiveAddressList{
+		Id:            deliveryData.Id,
+		MemberId:      memberId,
+		ReceiverName:  deliveryData.ReceiverName,
+		ReceiverPhone: deliveryData.ReceiverPhone,
+		Province:      deliveryData.ReceiverProvince,
+		City:          deliveryData.ReceiverCity,
+		District:      deliveryData.ReceiverDistrict,
+		DetailAddress: deliveryData.ReceiverAddress,
+		PostalCode:    "todo",
+		Tag:           "todo",
+		IsDefault:     1,
+	}
 
 	return &types.OrderDetailResp{
 		Code:    0,

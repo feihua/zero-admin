@@ -203,22 +203,22 @@ type CartItemProductAttributeList struct {
 }
 
 type CartItemReq struct {
-	Id                int64   `json:"id"`                //主键ID
-	ProductId         int64   `json:"productId"`         //商品ID
-	ProductSkuId      int64   `json:"productSkuId"`      //商品SKU ID
-	Quantity          int32   `json:"quantity"`          //购买数量
-	Price             float32 `json:"price"`             //添加到购物车时的价格
-	Selected          int32   `json:"selected"`          //是否选中 0-未选中 1-选中
-	ProductName       string  `json:"productName"`       //商品名称
-	ProductSubTitle   string  `json:"productSubTitle"`   //商品副标题
-	ProductPic        string  `json:"productPic"`        //商品主图URL
-	ProductSkuCode    string  `json:"productSkuCode"`    //商品SKU编码
-	ProductSn         string  `json:"productSn"`         //商品货号
-	ProductBrand      string  `json:"productBrand"`      //商品品牌
-	ProductCategoryId int64   `json:"productCategoryId"` //商品分类ID
-	ProductAttr       string  `json:"productAttr"`       //商品销售属性JSON
-	MemberNickname    string  `json:"memberNickname"`    //会员昵称
-	Source            int32   `json:"source"`            //来源 1-PC 2-H5 3-小程序 4-APP
+	Id                int64   `json:"id,optional"`        //主键ID
+	ProductId         int64   `json:"productId"`          //商品ID
+	ProductSkuId      int64   `json:"productSkuId"`       //商品SKU ID
+	Quantity          int32   `json:"quantity"`           //购买数量
+	Price             float32 `json:"price"`              //添加到购物车时的价格
+	Selected          int32   `json:"selected,default=1"` //是否选中 0-未选中 1-选中
+	ProductName       string  `json:"productName"`        //商品名称
+	ProductSubTitle   string  `json:"productSubTitle"`    //商品副标题
+	ProductPic        string  `json:"productPic"`         //商品主图URL
+	ProductSkuCode    string  `json:"productSkuCode"`     //商品SKU编码
+	ProductSn         string  `json:"productSn"`          //商品货号
+	ProductBrand      string  `json:"productBrand"`       //商品品牌
+	ProductCategoryId int64   `json:"productCategoryId"`  //商品分类ID
+	ProductAttr       string  `json:"productAttr"`        //商品销售属性JSON
+	MemberNickname    string  `json:"memberNickname"`     //会员昵称
+	Source            int32   `json:"source,default=4"`   //来源 1-PC 2-H5 3-小程序 4-APP
 }
 
 type CartItemResp struct {
@@ -269,7 +269,6 @@ type CartListData struct {
 	ProductAttr       string  `json:"productAttr"`       //商品销售属性JSON
 	MemberNickname    string  `json:"memberNickname"`    //会员昵称
 	Source            int32   `json:"source"`            //来源 1-PC 2-H5 3-小程序 4-APP
-	DeleteStatus      int32   `json:"deleteStatus"`      //删除状态 0-正常 1-删除
 	ExpireTime        string  `json:"expireTime"`        //过期时间
 	CreateTime        string  `json:"createTime"`        //创建时间
 	UpdateTime        string  `json:"updateTime"`        //更新时间
@@ -849,30 +848,31 @@ type QueryBrandDetailResp struct {
 }
 
 type QueryOrderData struct {
-	Id                 int64            `json:"id"`                 //
-	OrderNo            string           `json:"orderNo"`            //订单编号
-	UserId             int64            `json:"userId"`             //用户ID
-	OrderStatus        int32            `json:"orderStatus"`        //订单状态：1-待支付,2-已支付,3-已发货,4-已完成,5-已取消,6-已退款,7-售后中
-	TotalAmount        float32          `json:"totalAmount"`        //订单总金额
-	PromotionAmount    float32          `json:"promotionAmount"`    //促销金额
-	CouponAmount       float32          `json:"couponAmount"`       //优惠券金额
-	PointsAmount       float32          `json:"pointsAmount"`       //积分金额
-	DiscountAmount     float32          `json:"discountAmount"`     //优惠金额
-	FreightAmount      float32          `json:"freightAmount"`      //运费金额
-	PayAmount          float32          `json:"payAmount"`          //实付金额
-	PayType            int32            `json:"payType"`            //支付方式：1-支付宝,2-微信,3-银联
-	PayTime            string           `json:"payTime"`            //支付时间
-	DeliveryTime       string           `json:"deliveryTime"`       //发货时间
-	ReceiveTime        string           `json:"receiveTime"`        //收货时间
-	CommentTime        string           `json:"commentTime"`        //评价时间
-	SourceType         int32            `json:"sourceType"`         //订单来源：1-APP,2-PC,3-小程序
-	ExpressOrderNumber string           `json:"expressOrderNumber"` //快递单号
-	UsePoints          int32            `json:"usePoints"`          //下单时使用的积分
-	ReceiveStatus      int32            `json:"receiveStatus"`      //是否确认收货：0->否,1->是
-	Remark             string           `json:"remark"`             //订单备注
-	CreateTime         string           `json:"createTime"`         //提交时间
-	UpdateTime         string           `json:"updateTime"`         //
-	OrderItemData      []*OrderItemData `json:"orderItemData"`      // 商品数据
+	Id                       int64                    `json:"id"`                 //
+	OrderNo                  string                   `json:"orderNo"`            //订单编号
+	UserId                   int64                    `json:"userId"`             //用户ID
+	OrderStatus              int32                    `json:"orderStatus"`        //订单状态：1-待支付,2-已支付,3-已发货,4-已完成,5-已取消,6-已退款,7-售后中
+	TotalAmount              float32                  `json:"totalAmount"`        //订单总金额
+	PromotionAmount          float32                  `json:"promotionAmount"`    //促销金额
+	CouponAmount             float32                  `json:"couponAmount"`       //优惠券金额
+	PointsAmount             float32                  `json:"pointsAmount"`       //积分金额
+	DiscountAmount           float32                  `json:"discountAmount"`     //优惠金额
+	FreightAmount            float32                  `json:"freightAmount"`      //运费金额
+	PayAmount                float32                  `json:"payAmount"`          //实付金额
+	PayType                  int32                    `json:"payType"`            //支付方式：1-支付宝,2-微信,3-银联
+	PayTime                  string                   `json:"payTime"`            //支付时间
+	DeliveryTime             string                   `json:"deliveryTime"`       //发货时间
+	ReceiveTime              string                   `json:"receiveTime"`        //收货时间
+	CommentTime              string                   `json:"commentTime"`        //评价时间
+	SourceType               int32                    `json:"sourceType"`         //订单来源：1-APP,2-PC,3-小程序
+	ExpressOrderNumber       string                   `json:"expressOrderNumber"` //快递单号
+	UsePoints                int32                    `json:"usePoints"`          //下单时使用的积分
+	ReceiveStatus            int32                    `json:"receiveStatus"`      //是否确认收货：0->否,1->是
+	Remark                   string                   `json:"remark"`             //订单备注
+	CreateTime               string                   `json:"createTime"`         //提交时间
+	UpdateTime               string                   `json:"updateTime"`         //
+	OrderItemData            []*OrderItemData         `json:"orderItemData"`      // 商品数据
+	MemberReceiveAddressList MemberReceiveAddressList `json:"memberReceiveAddress"`
 }
 
 type QueryProductCateListResp struct {

@@ -2,6 +2,7 @@ package cart
 
 import (
 	"context"
+
 	"github.com/feihua/zero-admin/api/front/internal/logic/common"
 	"github.com/feihua/zero-admin/pkg/errorx"
 	"github.com/feihua/zero-admin/rpc/oms/omsclient"
@@ -62,7 +63,6 @@ func (l *QueryCarItemListLogic) QueryCarItemList() (resp *types.CartItemListResp
 			ProductAttr:       detail.ProductAttr,       // 商品销售属性JSON
 			MemberNickname:    detail.MemberNickname,    // 会员昵称
 			Source:            detail.Source,            // 来源 1-PC 2-H5 3-小程序 4-APP
-			DeleteStatus:      detail.DeleteStatus,      // 删除状态 0-正常 1-删除
 			ExpireTime:        detail.ExpireTime,        // 过期时间
 			CreateTime:        detail.CreateTime,        // 创建时间
 			UpdateTime:        detail.UpdateTime,        // 更新时间
