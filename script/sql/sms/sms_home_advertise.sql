@@ -22,6 +22,6 @@ create table sms_home_advertise
 
 -- 插入首页轮播广告数据
 insert into sms_home_advertise (id, name, type, pic, start_time, end_time, status, click_count, order_count, url, remark, sort)
-values (1, '双十一大促', 0, 'http://129.204.203.29/big.png', '2023-11-01 00:00:00', '2029-11-11 23:59:59', 1, 0, 0, 'http://example.com/promo1', '双十一活动', 100),
-       (2, '圣诞节特惠', 1, 'http://129.204.203.29/big.png', '2023-12-01 00:00:00', '2029-12-25 23:59:59', 1, 0, 0, 'http://example.com/promo2', '圣诞节活动', 90),
-       (3, '新年狂欢', 0, 'http://129.204.203.29/big.png', '2023-12-26 00:00:00', '2029-01-01 23:59:59', 1, 0, 0, 'http://example.com/promo3', '新年活动', 80);
+values (1, '美食5折限时购', 1, 'http://129.204.203.29/banner01.png', '2023-11-01 00:00:00', '2029-11-11 23:59:59', 1, 0, 0, 'http://example.com/promo1', '双十一活动', 100),
+       (2, '特惠全场享8折', 1, 'http://129.204.203.29/banner02.png', '2023-12-01 00:00:00', '2029-12-25 23:59:59', 1, 0, 0, 'http://example.com/promo2', '圣诞节活动', 90),
+       (3, '邀请好友送优惠券', 1, 'http://129.204.203.29/banner03.png', '2023-12-26 00:00:00', '2029-01-01 23:59:59', 1, 0, 0, 'http://example.com/promo3', '新年活动', 80);

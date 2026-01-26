@@ -9,7 +9,7 @@ Content-Type: application/json
 > {% client.global.set("token", response.body.data.token); %}
 
 ### 添加会员品牌关注
-POST {{host}}/api/member/attention/addAttention
+POST {{host}}/api/member/addAttention
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
@@ -29,5 +29,5 @@ GET {{host}}/api/member/attention/clearAttention
 Authorization: Bearer {{token}}
 
 ### 获取会员品牌关注
-GET {{host}}/api/member/attention/queryAttentionList
+GET {{host}}/api/member/queryAttentionList
 Authorization: Bearer {{token}}

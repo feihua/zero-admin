@@ -23,14 +23,12 @@ create table pms_product_brand
 
 -- 插入商品品牌数据
 insert into pms_product_brand (id, name, logo, big_pic, description, first_letter, sort, recommend_status, product_count, product_comment_count, is_enabled, create_by)
-values (1, '华为', 'http://129.204.203.29/big.png', 'http://129.204.203.29/big.png', '华为的描述', 'H', 1, 1, 100, 50, 1, 1),
-       (2, '苹果', 'http://129.204.203.29/big.png', 'http://129.204.203.29/big.png', '苹果的描述', 'A', 2, 0, 200, 80, 1, 2),
-       (3, '耐克', 'http://129.204.203.29/big.png', 'http://129.204.203.29/big.png', '耐克的描述', 'N', 3, 1, 150, 60, 1, 3),
-       (4, '阿迪达斯', 'http://129.204.203.29/big.png', 'http://129.204.203.29/big.png', '阿迪达斯的描述', 'A', 4, 0, 120, 40, 1, 4),
-       (5, '雀巢', 'http://129.204.203.29/big.png', 'http://129.204.203.29/big.png', '雀巢的描述', 'Q', 5, 1, 180, 70, 1, 5),
-       (6, '可口可乐', 'http://129.204.203.29/big.png', 'http://129.204.203.29/big.png', '可口可乐的描述', 'K', 6, 0, 90, 30, 1, 6),
-       (7, '索尼', 'http://129.204.203.29/big.png', 'http://129.204.203.29/big.png', '索尼的描述', 'S', 7, 1, 110, 50, 1, 7),
-       (8, '海尔', 'http://129.204.203.29/big.png', 'http://129.204.203.29/big.png', '海尔的描述', 'H', 8, 0, 130, 60, 1, 8),
-       (9, '欧莱雅', 'http://129.204.203.29/big.png', 'http://129.204.203.29/big.png', '欧莱雅的描述', 'O', 9, 1, 140, 55, 1, 9),
-       (10, '雅诗兰黛', 'http://129.204.203.29/big.png', 'http://129.204.203.29/big.png', '雅诗兰黛的描述', 'Y', 10, 0, 160, 65, 1, 10),
-       (11, '特斯拉', 'http://129.204.203.29/big.png', 'http://129.204.203.29/big.png', '特斯拉的描述', 'T', 11, 1, 170, 75, 1, 11);
+values (1, '苹果', 'http://129.204.203.29/brand_apple.png', 'http://129.204.203.29/brand_apple.png', '苹果的描述', 'A', 1, 1, 100, 50, 1, 1),
+       (2, '方太', 'http://129.204.203.29/brand_fotile.png', 'http://129.204.203.29/brand_fotile.png', '方太的描述', 'F', 2, 0, 200, 80, 1, 2),
+       (3, '格力', 'http://129.204.203.29/brand_geli.png', 'http://129.204.203.29/brand_geli.png', '格力的描述', 'G', 3, 1, 150, 60, 1, 3),
+       (4, '海澜之家', 'http://129.204.203.29/brand_hailan.png', 'http://129.204.203.29/brand_hailan.png', '海澜之家的描述', 'H', 4, 0, 120, 40, 1, 4),
+       (5, '华为', 'http://129.204.203.29/brand_huawei.png', 'http://129.204.203.29/brand_huawei.png', '华为的描述', 'H', 5, 1, 180, 70, 1, 5),
+       (6, 'oppo', 'http://129.204.203.29/brand_oppo.png', 'http://129.204.203.29/brand_oppo.png', 'oppo的描述', 'O', 6, 0, 90, 30, 1, 6),
+       (7, '三星', 'http://129.204.203.29/brand_sumsung.png', 'http://129.204.203.29/brand_sumsung.png', '三星的描述', 'S', 7, 1, 110, 50, 1, 7),
+       (8, '万和', 'http://129.204.203.29/brand_wanhe.png', 'http://129.204.203.29/brand_wanhe.png', '万和的描述', 'W', 8, 0, 130, 60, 1, 8),
+       (9, '小米', 'http://129.204.203.29/brand_xiaomi.png', 'http://129.204.203.29/brand_xiaomi.png', '小米的描述', 'X', 9, 1, 140, 55, 1, 9);
