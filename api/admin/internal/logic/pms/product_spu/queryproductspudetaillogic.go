@@ -2,6 +2,7 @@ package product_spu
 
 import (
 	"context"
+
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
 	"github.com/feihua/zero-admin/api/admin/internal/svc"
 	"github.com/feihua/zero-admin/api/admin/internal/types"
@@ -98,7 +99,7 @@ func buildProductData(resp *pmsclient.QueryProductSpuDetailResp) types.QueryProd
 	return types.QueryProductSpuListData{
 		Id:                  product.Id,                  // 商品SpuId
 		Name:                product.Name,                // 商品名称
-		ProductSn:           product.ProductSn,           //商品货号
+		ProductSn:           product.ProductSn,           // 商品货号
 		CategoryId:          product.CategoryId,          // 商品分类ID
 		CategoryIds:         product.CategoryIds,         // 商品分类ID集合
 		CategoryName:        product.CategoryName,        // 商品分类名称
@@ -107,8 +108,6 @@ func buildProductData(resp *pmsclient.QueryProductSpuDetailResp) types.QueryProd
 		Unit:                product.Unit,                // 单位
 		Weight:              product.Weight,              // 重量(kg)
 		Keywords:            product.Keywords,            // 关键词
-		Brief:               product.Brief,               // 简介
-		Description:         product.Description,         // 详细描述
 		AlbumPics:           product.AlbumPics,           // 画册图片，最多8张，以逗号分割
 		MainPic:             product.MainPic,             // 主图
 		PriceRange:          product.PriceRange,          // 价格区间
@@ -124,8 +123,7 @@ func buildProductData(resp *pmsclient.QueryProductSpuDetailResp) types.QueryProd
 		Stock:               product.Stock,               // 库存
 		LowStock:            product.LowStock,            // 预警库存
 		PromotionType:       product.PromotionType,       // 促销类型：0->没有促销使用原价;1->使用促销价；2->使用会员价；3->使用阶梯价格；4->使用满减价格；5->秒杀
-		DetailTitle:         product.DetailTitle,         // 详情标题
-		DetailDesc:          product.DetailDesc,          // 详情描述
+		SubTitle:            product.SubTitle,            // 详情标题
 		DetailHtml:          product.DetailHtml,          // 产品详情网页内容
 		DetailMobileHtml:    product.DetailMobileHtml,    // 移动端网页详情
 		CreateBy:            product.CreateBy,            // 创建人ID

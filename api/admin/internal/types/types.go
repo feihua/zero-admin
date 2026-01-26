@@ -924,8 +924,6 @@ type ProductSpuData struct {
 	Unit                string  `json:"unit"`                 //单位
 	Weight              float32 `json:"weight"`               //重量(kg)
 	Keywords            string  `json:"keywords"`             //关键词
-	Brief               string  `json:"brief"`                //简介
-	Description         string  `json:"description"`          //详细描述
 	AlbumPics           string  `json:"albumPics"`            //画册图片，最多8张，以逗号分割
 	MainPic             string  `json:"mainPic"`              //主图
 	PublishStatus       int32   `json:"publishStatus"`        //上架状态：0-下架，1-上架
@@ -939,8 +937,7 @@ type ProductSpuData struct {
 	Stock               int32   `json:"stock"`                //库存
 	LowStock            int32   `json:"lowStock"`             //预警库存
 	PromotionType       int32   `json:"promotionType"`        //促销类型：0->没有促销使用原价;1->使用促销价；2->使用会员价；3->使用阶梯价格；4->使用满减价格；5->秒杀
-	DetailTitle         string  `json:"detailTitle"`          //详情标题
-	DetailDesc          string  `json:"detailDesc"`           //详情描述
+	SubTitle            string  `json:"subTitle"`             //副标题
 	DetailHtml          string  `json:"detailHtml"`           //产品详情网页内容
 	DetailMobileHtml    string  `json:"detailMobileHtml"`     //移动端网页详情
 }
@@ -3337,8 +3334,6 @@ type QueryProductSpuListData struct {
 	Unit                string  `json:"unit"`                //单位
 	Weight              float32 `json:"weight"`              //重量(kg)
 	Keywords            string  `json:"keywords"`            //关键词
-	Brief               string  `json:"brief"`               //简介
-	Description         string  `json:"description"`         //详细描述
 	AlbumPics           string  `json:"albumPics"`           //画册图片，最多8张，以逗号分割
 	MainPic             string  `json:"mainPic"`             //主图
 	PriceRange          string  `json:"priceRange"`          //价格区间
@@ -3354,8 +3349,7 @@ type QueryProductSpuListData struct {
 	Stock               int32   `json:"stock"`               //库存
 	LowStock            int32   `json:"lowStock"`            //预警库存
 	PromotionType       int32   `json:"promotionType"`       //促销类型：0->没有促销使用原价;1->使用促销价；2->使用会员价；3->使用阶梯价格；4->使用满减价格；5->秒杀
-	DetailTitle         string  `json:"detailTitle"`         //详情标题
-	DetailDesc          string  `json:"detailDesc"`          //详情描述
+	SubTitle            string  `json:"subTitle"`            //副标题
 	DetailHtml          string  `json:"detailHtml"`          //产品详情网页内容
 	DetailMobileHtml    string  `json:"detailMobileHtml"`    //移动端网页详情
 	CreateBy            int64   `json:"createBy"`            //创建人ID

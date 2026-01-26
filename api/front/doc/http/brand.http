@@ -2,6 +2,6 @@
 GET {{host}}/api/product/queryBrandList
 
 ### 品牌详情
-GET {{host}}/api/brand/queryBrandProductList?brandId=1
+GET {{host}}/api/product/queryBrandDetail?brandId=1
 
 

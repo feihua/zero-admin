@@ -69,8 +69,6 @@ func (l *HomeRecommendProductListLogic) HomeRecommendProductList(req *types.List
 			Unit:                detail.Unit,                // 单位
 			Weight:              detail.Weight,              // 重量(kg)
 			Keywords:            detail.Keywords,            // 关键词
-			Brief:               detail.Brief,               // 简介
-			Description:         detail.Description,         // 详细描述
 			AlbumPics:           detail.AlbumPics,           // 画册图片，最多8张，以逗号分割
 			MainPic:             detail.MainPic,             // 主图
 			PriceRange:          detail.PriceRange,          // 价格区间
@@ -86,8 +84,7 @@ func (l *HomeRecommendProductListLogic) HomeRecommendProductList(req *types.List
 			Stock:               detail.Stock,               // 库存
 			LowStock:            detail.LowStock,            // 预警库存
 			PromotionType:       detail.PromotionType,       // 促销类型：0->没有促销使用原价;1->使用促销价；2->使用会员价；3->使用阶梯价格；4->使用满减价格；5->秒杀
-			DetailTitle:         detail.DetailTitle,         // 详情标题
-			DetailDesc:          detail.DetailDesc,          // 详情描述
+			SubTitle:            detail.SubTitle,            // 详情标题
 			DetailHtml:          detail.DetailHtml,          // 产品详情网页内容
 			DetailMobileHtml:    detail.DetailMobileHtml,    // 移动端网页详情
 			CreateBy:            detail.CreateBy,            // 创建人ID

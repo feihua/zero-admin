@@ -2,6 +2,7 @@ package product_spu
 
 import (
 	"context"
+
 	"github.com/feihua/zero-admin/api/admin/internal/common"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
 	"github.com/feihua/zero-admin/api/admin/internal/common/res"
@@ -83,8 +84,6 @@ func (l *AddProductSpuLogic) addProductSpuInfo(req *types.AddProductSpuReq) (*pr
 		Unit:                      product.Unit,                        // 单位
 		Weight:                    product.Weight,                      // 重量(kg)
 		Keywords:                  product.Keywords,                    // 关键词
-		Brief:                     product.Brief,                       // 简介
-		Description:               product.Description,                 // 详细描述
 		AlbumPics:                 product.AlbumPics,                   // 画册图片，最多8张，以逗号分割
 		MainPic:                   product.MainPic,                     // 主图
 		PublishStatus:             product.PublishStatus,               // 上架状态：0-下架，1-上架
@@ -98,8 +97,7 @@ func (l *AddProductSpuLogic) addProductSpuInfo(req *types.AddProductSpuReq) (*pr
 		Stock:                     product.Stock,                       // 库存
 		LowStock:                  product.LowStock,                    // 预警库存
 		PromotionType:             product.PromotionType,               // 促销类型：0->没有促销使用原价;1->使用促销价；2->使用会员价；3->使用阶梯价格；4->使用满减价格；5->秒杀
-		DetailTitle:               product.DetailTitle,                 // 详情标题
-		DetailDesc:                product.DetailDesc,                  // 详情描述
+		SubTitle:                  product.SubTitle,                    // 详情标题
 		DetailHtml:                product.DetailHtml,                  // 产品详情网页内容
 		DetailMobileHtml:          product.DetailMobileHtml,            // 移动端网页详情
 		CreateBy:                  userId,                              // 创建人ID
