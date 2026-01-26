@@ -3,6 +3,7 @@ package productspuservicelogic
 import (
 	"context"
 	"errors"
+
 	"github.com/feihua/zero-admin/pkg/pointerprocess"
 	"github.com/feihua/zero-admin/pkg/time_util"
 	"github.com/feihua/zero-admin/rpc/pms/gen/model"
@@ -66,8 +67,6 @@ func (l *QueryProductSpuDetailLogic) QueryProductSpuDetail(in *pmsclient.QueryPr
 		Unit:                item.Unit,                                        // 单位
 		Weight:              float32(item.Weight),                             // 重量(kg)
 		Keywords:            item.Keywords,                                    // 关键词
-		Brief:               item.Brief,                                       // 简介
-		Description:         item.Description,                                 // 详细描述
 		AlbumPics:           item.AlbumPics,                                   // 画册图片，最多8张，以逗号分割
 		MainPic:             item.MainPic,                                     // 主图
 		PriceRange:          item.PriceRange,                                  // 价格区间
@@ -83,8 +82,7 @@ func (l *QueryProductSpuDetailLogic) QueryProductSpuDetail(in *pmsclient.QueryPr
 		Stock:               item.Stock,                                       // 库存
 		LowStock:            item.LowStock,                                    // 预警库存
 		PromotionType:       item.PromotionType,                               // 促销类型：0->没有促销使用原价;1->使用促销价；2->使用会员价；3->使用阶梯价格；4->使用满减价格；5->秒杀
-		DetailTitle:         item.DetailTitle,                                 // 详情标题
-		DetailDesc:          item.DetailDesc,                                  // 详情描述
+		SubTitle:            item.SubTitle,                                    // 副标题
 		DetailHtml:          item.DetailHTML,                                  // 产品详情网页内容
 		DetailMobileHtml:    item.DetailMobileHTML,                            // 移动端网页详情
 		CreateBy:            item.CreateBy,                                    // 创建人ID

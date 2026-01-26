@@ -30,6 +30,7 @@ func newPmsProductSpu(db *gorm.DB, opts ...gen.DOOption) pmsProductSpu {
 	_pmsProductSpu.ALL = field.NewAsterisk(tableName)
 	_pmsProductSpu.ID = field.NewInt64(tableName, "id")
 	_pmsProductSpu.Name = field.NewString(tableName, "name")
+	_pmsProductSpu.SubTitle = field.NewString(tableName, "subTitle")
 	_pmsProductSpu.ProductSn = field.NewString(tableName, "product_sn")
 	_pmsProductSpu.CategoryID = field.NewInt64(tableName, "category_id")
 	_pmsProductSpu.CategoryIds = field.NewString(tableName, "category_ids")
@@ -39,8 +40,6 @@ func newPmsProductSpu(db *gorm.DB, opts ...gen.DOOption) pmsProductSpu {
 	_pmsProductSpu.Unit = field.NewString(tableName, "unit")
 	_pmsProductSpu.Weight = field.NewFloat64(tableName, "weight")
 	_pmsProductSpu.Keywords = field.NewString(tableName, "keywords")
-	_pmsProductSpu.Brief = field.NewString(tableName, "brief")
-	_pmsProductSpu.Description = field.NewString(tableName, "description")
 	_pmsProductSpu.AlbumPics = field.NewString(tableName, "album_pics")
 	_pmsProductSpu.MainPic = field.NewString(tableName, "main_pic")
 	_pmsProductSpu.PriceRange = field.NewString(tableName, "price_range")
@@ -56,8 +55,6 @@ func newPmsProductSpu(db *gorm.DB, opts ...gen.DOOption) pmsProductSpu {
 	_pmsProductSpu.Stock = field.NewInt32(tableName, "stock")
 	_pmsProductSpu.LowStock = field.NewInt32(tableName, "low_stock")
 	_pmsProductSpu.PromotionType = field.NewInt32(tableName, "promotion_type")
-	_pmsProductSpu.DetailTitle = field.NewString(tableName, "detail_title")
-	_pmsProductSpu.DetailDesc = field.NewString(tableName, "detail_desc")
 	_pmsProductSpu.DetailHTML = field.NewString(tableName, "detail_html")
 	_pmsProductSpu.DetailMobileHTML = field.NewString(tableName, "detail_mobile_html")
 	_pmsProductSpu.CreateBy = field.NewInt64(tableName, "create_by")
@@ -78,6 +75,7 @@ type pmsProductSpu struct {
 	ALL                 field.Asterisk
 	ID                  field.Int64   // 商品SpuId
 	Name                field.String  // 商品名称
+	SubTitle            field.String  // 副标题
 	ProductSn           field.String  // 商品货号
 	CategoryID          field.Int64   // 商品分类ID
 	CategoryIds         field.String  // 商品分类ID集合
@@ -87,8 +85,6 @@ type pmsProductSpu struct {
 	Unit                field.String  // 单位
 	Weight              field.Float64 // 重量(kg)
 	Keywords            field.String  // 关键词
-	Brief               field.String  // 简介
-	Description         field.String  // 详细描述
 	AlbumPics           field.String  // 画册图片，最多8张，以逗号分割
 	MainPic             field.String  // 主图
 	PriceRange          field.String  // 价格区间
@@ -104,10 +100,8 @@ type pmsProductSpu struct {
 	Stock               field.Int32   // 库存
 	LowStock            field.Int32   // 预警库存
 	PromotionType       field.Int32   // 促销类型：0->没有促销使用原价;1->使用促销价；2->使用会员价；3->使用阶梯价格；4->使用满减价格；5->秒杀
-	DetailTitle         field.String  // 详情标题
-	DetailDesc          field.String  // 详情描述
-	DetailHTML          field.String  // 产品详情网页内容
-	DetailMobileHTML    field.String  // 移动端网页详情
+	DetailHTML          field.String  // 网页详情
+	DetailMobileHTML    field.String  // 移动端详情
 	CreateBy            field.Int64   // 创建人ID
 	CreateTime          field.Time    // 创建时间
 	UpdateBy            field.Int64   // 更新人ID
@@ -131,6 +125,7 @@ func (p *pmsProductSpu) updateTableName(table string) *pmsProductSpu {
 	p.ALL = field.NewAsterisk(table)
 	p.ID = field.NewInt64(table, "id")
 	p.Name = field.NewString(table, "name")
+	p.SubTitle = field.NewString(table, "subTitle")
 	p.ProductSn = field.NewString(table, "product_sn")
 	p.CategoryID = field.NewInt64(table, "category_id")
 	p.CategoryIds = field.NewString(table, "category_ids")
@@ -140,8 +135,6 @@ func (p *pmsProductSpu) updateTableName(table string) *pmsProductSpu {
 	p.Unit = field.NewString(table, "unit")
 	p.Weight = field.NewFloat64(table, "weight")
 	p.Keywords = field.NewString(table, "keywords")
-	p.Brief = field.NewString(table, "brief")
-	p.Description = field.NewString(table, "description")
 	p.AlbumPics = field.NewString(table, "album_pics")
 	p.MainPic = field.NewString(table, "main_pic")
 	p.PriceRange = field.NewString(table, "price_range")
@@ -157,8 +150,6 @@ func (p *pmsProductSpu) updateTableName(table string) *pmsProductSpu {
 	p.Stock = field.NewInt32(table, "stock")
 	p.LowStock = field.NewInt32(table, "low_stock")
 	p.PromotionType = field.NewInt32(table, "promotion_type")
-	p.DetailTitle = field.NewString(table, "detail_title")
-	p.DetailDesc = field.NewString(table, "detail_desc")
 	p.DetailHTML = field.NewString(table, "detail_html")
 	p.DetailMobileHTML = field.NewString(table, "detail_mobile_html")
 	p.CreateBy = field.NewInt64(table, "create_by")
@@ -194,9 +185,10 @@ func (p *pmsProductSpu) GetFieldByName(fieldName string) (field.OrderExpr, bool)
 }
 
 func (p *pmsProductSpu) fillFieldMap() {
-	p.fieldMap = make(map[string]field.Expr, 37)
+	p.fieldMap = make(map[string]field.Expr, 34)
 	p.fieldMap["id"] = p.ID
 	p.fieldMap["name"] = p.Name
+	p.fieldMap["subTitle"] = p.SubTitle
 	p.fieldMap["product_sn"] = p.ProductSn
 	p.fieldMap["category_id"] = p.CategoryID
 	p.fieldMap["category_ids"] = p.CategoryIds
@@ -206,8 +198,6 @@ func (p *pmsProductSpu) fillFieldMap() {
 	p.fieldMap["unit"] = p.Unit
 	p.fieldMap["weight"] = p.Weight
 	p.fieldMap["keywords"] = p.Keywords
-	p.fieldMap["brief"] = p.Brief
-	p.fieldMap["description"] = p.Description
 	p.fieldMap["album_pics"] = p.AlbumPics
 	p.fieldMap["main_pic"] = p.MainPic
 	p.fieldMap["price_range"] = p.PriceRange
@@ -223,8 +213,6 @@ func (p *pmsProductSpu) fillFieldMap() {
 	p.fieldMap["stock"] = p.Stock
 	p.fieldMap["low_stock"] = p.LowStock
 	p.fieldMap["promotion_type"] = p.PromotionType
-	p.fieldMap["detail_title"] = p.DetailTitle
-	p.fieldMap["detail_desc"] = p.DetailDesc
 	p.fieldMap["detail_html"] = p.DetailHTML
 	p.fieldMap["detail_mobile_html"] = p.DetailMobileHTML
 	p.fieldMap["create_by"] = p.CreateBy

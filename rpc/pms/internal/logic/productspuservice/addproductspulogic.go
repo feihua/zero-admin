@@ -3,6 +3,10 @@ package productspuservicelogic
 import (
 	"context"
 	"errors"
+	"math/rand"
+	"strconv"
+	"time"
+
 	"github.com/bytedance/sonic"
 	"github.com/feihua/zero-admin/rpc/pms/gen/model"
 	"github.com/feihua/zero-admin/rpc/pms/gen/query"
@@ -10,9 +14,6 @@ import (
 	"github.com/feihua/zero-admin/rpc/pms/pmsclient"
 	"github.com/zeromicro/go-zero/core/logc"
 	"github.com/zeromicro/go-zero/core/logx"
-	"math/rand"
-	"strconv"
-	"time"
 )
 
 // AddProductSpuLogic 添加商品SPU
@@ -56,8 +57,6 @@ func (l *AddProductSpuLogic) AddProductSpu(in *pmsclient.ProductSpuReq) (*pmscli
 		Unit:                in.Unit,                // 单位
 		Weight:              float64(in.Weight),     // 重量(kg)
 		Keywords:            in.Keywords,            // 关键词
-		Brief:               in.Brief,               // 简介
-		Description:         in.Description,         // 详细描述
 		AlbumPics:           in.AlbumPics,           // 画册图片，最多8张，以逗号分割
 		MainPic:             in.MainPic,             // 主图
 		PriceRange:          in.PriceRange,          // 价格区间
@@ -73,8 +72,7 @@ func (l *AddProductSpuLogic) AddProductSpu(in *pmsclient.ProductSpuReq) (*pmscli
 		Stock:               in.Stock,               // 库存
 		LowStock:            in.LowStock,            // 预警库存
 		PromotionType:       in.PromotionType,       // 促销类型：0->没有促销使用原价;1->使用促销价；2->使用会员价；3->使用阶梯价格；4->使用满减价格；5->秒杀
-		DetailTitle:         in.DetailTitle,         // 详情标题
-		DetailDesc:          in.DetailDesc,          // 详情描述
+		SubTitle:            in.SubTitle,            // 副标题
 		DetailHTML:          in.DetailHtml,          // 产品详情网页内容
 		DetailMobileHTML:    in.DetailMobileHtml,    // 移动端网页详情
 		CreateBy:            in.CreateBy,            // 创建人ID

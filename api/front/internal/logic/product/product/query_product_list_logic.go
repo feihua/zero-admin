@@ -2,6 +2,8 @@ package product
 
 import (
 	"context"
+	"strings"
+
 	"github.com/feihua/zero-admin/pkg/errorx"
 	"github.com/feihua/zero-admin/rpc/pms/pmsclient"
 	"github.com/zeromicro/go-zero/core/logc"
@@ -46,6 +48,7 @@ func (l *QueryProductListLogic) QueryProductList(req *types.QueryProductListReq)
 
 	var productLists []types.ProductData
 	for _, product := range productListResp.List {
+		price := strings.Split(product.PriceRange, "-")[0]
 		productLists = append(productLists, types.ProductData{
 			Id:                  product.Id,                  // 商品SpuId
 			Name:                product.Name,                // 商品名称
@@ -58,10 +61,9 @@ func (l *QueryProductListLogic) QueryProductList(req *types.QueryProductListReq)
 			Unit:                product.Unit,                // 单位
 			Weight:              product.Weight,              // 重量(kg)
 			Keywords:            product.Keywords,            // 关键词
-			Brief:               product.Brief,               // 简介
-			Description:         product.Description,         // 详细描述
 			AlbumPics:           product.AlbumPics,           // 画册图片，最多8张，以逗号分割
 			MainPic:             product.MainPic,             // 主图
+			Price:               price,                       // 价格
 			PriceRange:          product.PriceRange,          // 价格区间
 			PublishStatus:       product.PublishStatus,       // 上架状态：0-下架，1-上架
 			NewStatus:           product.NewStatus,           // 新品状态:0->不是新品；1->新品
@@ -75,8 +77,7 @@ func (l *QueryProductListLogic) QueryProductList(req *types.QueryProductListReq)
 			Stock:               product.Stock,               // 库存
 			LowStock:            product.LowStock,            // 预警库存
 			PromotionType:       product.PromotionType,       // 促销类型：0->没有促销使用原价;1->使用促销价；2->使用会员价；3->使用阶梯价格；4->使用满减价格；5->秒杀
-			DetailTitle:         product.DetailTitle,         // 详情标题
-			DetailDesc:          product.DetailDesc,          // 详情描述
+			SubTitle:            product.SubTitle,            // 详情标题
 			DetailHtml:          product.DetailHtml,          // 产品详情网页内容
 			DetailMobileHtml:    product.DetailMobileHtml,    // 移动端网页详情
 		})

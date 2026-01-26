@@ -2,6 +2,8 @@ package home
 
 import (
 	"context"
+	"strings"
+
 	"github.com/feihua/zero-admin/api/front/internal/svc"
 	"github.com/feihua/zero-admin/api/front/internal/types"
 	"github.com/feihua/zero-admin/rpc/cms/cmsclient"
@@ -101,7 +103,7 @@ func queryHotProductList(l *IndexLogic) []types.IndexProductData {
 	var list []types.IndexProductData
 
 	for _, detail := range resp.List {
-
+		price := strings.Split(detail.PriceRange, "-")[0]
 		list = append(list, types.IndexProductData{
 			Id:                  detail.Id,                  // 商品SpuId
 			Name:                detail.Name,                // 商品名称
@@ -114,10 +116,9 @@ func queryHotProductList(l *IndexLogic) []types.IndexProductData {
 			Unit:                detail.Unit,                // 单位
 			Weight:              detail.Weight,              // 重量(kg)
 			Keywords:            detail.Keywords,            // 关键词
-			Brief:               detail.Brief,               // 简介
-			Description:         detail.Description,         // 详细描述
 			AlbumPics:           detail.AlbumPics,           // 画册图片，最多8张，以逗号分割
 			MainPic:             detail.MainPic,             // 主图
+			Price:               price,                      // 价格
 			PriceRange:          detail.PriceRange,          // 价格区间
 			PublishStatus:       detail.PublishStatus,       // 上架状态：0-下架，1-上架
 			NewStatus:           detail.NewStatus,           // 新品状态:0->不是新品；1->新品
@@ -131,8 +132,7 @@ func queryHotProductList(l *IndexLogic) []types.IndexProductData {
 			Stock:               detail.Stock,               // 库存
 			LowStock:            detail.LowStock,            // 预警库存
 			PromotionType:       detail.PromotionType,       // 促销类型：0->没有促销使用原价;1->使用促销价；2->使用会员价；3->使用阶梯价格；4->使用满减价格；5->秒杀
-			DetailTitle:         detail.DetailTitle,         // 详情标题
-			DetailDesc:          detail.DetailDesc,          // 详情描述
+			SubTitle:            detail.SubTitle,            // 详情标题
 			DetailHtml:          detail.DetailHtml,          // 产品详情网页内容
 			DetailMobileHtml:    detail.DetailMobileHtml,    // 移动端网页详情
 		})
@@ -157,7 +157,7 @@ func queryNewProductList(l *IndexLogic) []types.IndexProductData {
 	var list []types.IndexProductData
 
 	for _, detail := range resp.List {
-
+		price := strings.Split(detail.PriceRange, "-")[0]
 		list = append(list, types.IndexProductData{
 			Id:                  detail.Id,                  // 商品SpuId
 			Name:                detail.Name,                // 商品名称
@@ -170,10 +170,9 @@ func queryNewProductList(l *IndexLogic) []types.IndexProductData {
 			Unit:                detail.Unit,                // 单位
 			Weight:              detail.Weight,              // 重量(kg)
 			Keywords:            detail.Keywords,            // 关键词
-			Brief:               detail.Brief,               // 简介
-			Description:         detail.Description,         // 详细描述
 			AlbumPics:           detail.AlbumPics,           // 画册图片，最多8张，以逗号分割
 			MainPic:             detail.MainPic,             // 主图
+			Price:               price,                      // 价格
 			PriceRange:          detail.PriceRange,          // 价格区间
 			PublishStatus:       detail.PublishStatus,       // 上架状态：0-下架，1-上架
 			NewStatus:           detail.NewStatus,           // 新品状态:0->不是新品；1->新品
@@ -187,8 +186,7 @@ func queryNewProductList(l *IndexLogic) []types.IndexProductData {
 			Stock:               detail.Stock,               // 库存
 			LowStock:            detail.LowStock,            // 预警库存
 			PromotionType:       detail.PromotionType,       // 促销类型：0->没有促销使用原价;1->使用促销价；2->使用会员价；3->使用阶梯价格；4->使用满减价格；5->秒杀
-			DetailTitle:         detail.DetailTitle,         // 详情标题
-			DetailDesc:          detail.DetailDesc,          // 详情描述
+			SubTitle:            detail.SubTitle,            // 详情标题
 			DetailHtml:          detail.DetailHtml,          // 产品详情网页内容
 			DetailMobileHtml:    detail.DetailMobileHtml,    // 移动端网页详情
 		})
@@ -256,7 +254,7 @@ func queryHomeFlashPromotion(l *IndexLogic) types.HomeFlashPromotion {
 	// productIdLists = append(productIdLists, 32)
 	//
 	// // 设置商品
-	// resp.ProductList = queryProductList(l.svcCtx.ProductService, productIdLists, l.ctx)
+	resp.ProductList = queryNewProductList(l)
 	return resp
 }
 

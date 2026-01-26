@@ -54,8 +54,6 @@ message ProductSpuReq {
   string unit = 9; //单位
   float weight = 10; //重量(kg)
   string keywords = 11; //关键词
-  string brief = 12; //简介
-  string description = 13; //详细描述
   string album_pics = 14; //画册图片，最多8张，以逗号分割
   string main_pic = 15; //主图
   string price_range = 16; //价格区间
@@ -71,8 +69,7 @@ message ProductSpuReq {
   int32 stock = 26; //库存
   int32 low_stock = 27; //预警库存
   int32 promotion_type = 28; //促销类型：0->没有促销使用原价;1->使用促销价；2->使用会员价；3->使用阶梯价格；4->使用满减价格；5->秒杀
-  string detail_title = 29; //详情标题
-  string detail_desc = 30; //详情描述
+  string sub_title = 29; //副标题
   string detail_html = 31; //产品详情网页内容
   string detail_mobile_html = 32; //移动端网页详情
   int64 create_by = 33; //创建人ID
@@ -254,8 +251,6 @@ message ProductSpuListData {
   string unit = 9; //单位
   float weight = 10; //重量(kg)
   string keywords = 11; //关键词
-  string brief = 12; //简介
-  string description = 13; //详细描述
   string album_pics = 14; //画册图片，最多8张，以逗号分割
   string main_pic = 15; //主图
   string price_range = 16; //价格区间
@@ -271,8 +266,7 @@ message ProductSpuListData {
   int32 stock = 26; //库存
   int32 low_stock = 27; //预警库存
   int32 promotion_type = 28; //促销类型：0->没有促销使用原价;1->使用促销价；2->使用会员价；3->使用阶梯价格；4->使用满减价格；5->秒杀
-  string detail_title = 29; //详情标题
-  string detail_desc = 30; //详情描述
+  string sub_title = 29; //副标题
   string detail_html = 31; //产品详情网页内容
   string detail_mobile_html = 32; //移动端网页详情
   int64 create_by = 33; //创建人ID

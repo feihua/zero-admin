@@ -14,6 +14,7 @@ const TableNamePmsProductSpu = "pms_product_spu"
 type PmsProductSpu struct {
 	ID                  int64      `gorm:"column:id;primaryKey;autoIncrement:true;comment:商品SpuId" json:"id"`                                                         // 商品SpuId
 	Name                string     `gorm:"column:name;not null;comment:商品名称" json:"name"`                                                                             // 商品名称
+	SubTitle            string     `gorm:"column:subTitle;not null;comment:副标题" json:"subTitle"`                                                                      // 副标题
 	ProductSn           string     `gorm:"column:product_sn;not null;comment:商品货号" json:"product_sn"`                                                                 // 商品货号
 	CategoryID          int64      `gorm:"column:category_id;not null;comment:商品分类ID" json:"category_id"`                                                             // 商品分类ID
 	CategoryIds         string     `gorm:"column:category_ids;not null;comment:商品分类ID集合" json:"category_ids"`                                                         // 商品分类ID集合
@@ -23,8 +24,6 @@ type PmsProductSpu struct {
 	Unit                string     `gorm:"column:unit;not null;comment:单位" json:"unit"`                                                                               // 单位
 	Weight              float64    `gorm:"column:weight;not null;comment:重量(kg)" json:"weight"`                                                                       // 重量(kg)
 	Keywords            string     `gorm:"column:keywords;not null;comment:关键词" json:"keywords"`                                                                      // 关键词
-	Brief               string     `gorm:"column:brief;not null;comment:简介" json:"brief"`                                                                             // 简介
-	Description         string     `gorm:"column:description;not null;comment:详细描述" json:"description"`                                                               // 详细描述
 	AlbumPics           string     `gorm:"column:album_pics;not null;comment:画册图片，最多8张，以逗号分割" json:"album_pics"`                                                      // 画册图片，最多8张，以逗号分割
 	MainPic             string     `gorm:"column:main_pic;not null;comment:主图" json:"main_pic"`                                                                       // 主图
 	PriceRange          string     `gorm:"column:price_range;not null;comment:价格区间" json:"price_range"`                                                               // 价格区间
@@ -40,10 +39,8 @@ type PmsProductSpu struct {
 	Stock               int32      `gorm:"column:stock;not null;comment:库存" json:"stock"`                                                                             // 库存
 	LowStock            int32      `gorm:"column:low_stock;not null;comment:预警库存" json:"low_stock"`                                                                   // 预警库存
 	PromotionType       int32      `gorm:"column:promotion_type;not null;comment:促销类型：0->没有促销使用原价;1->使用促销价；2->使用会员价；3->使用阶梯价格；4->使用满减价格；5->秒杀" json:"promotion_type"` // 促销类型：0->没有促销使用原价;1->使用促销价；2->使用会员价；3->使用阶梯价格；4->使用满减价格；5->秒杀
-	DetailTitle         string     `gorm:"column:detail_title;not null;comment:详情标题" json:"detail_title"`                                                             // 详情标题
-	DetailDesc          string     `gorm:"column:detail_desc;not null;comment:详情描述" json:"detail_desc"`                                                               // 详情描述
-	DetailHTML          string     `gorm:"column:detail_html;not null;comment:产品详情网页内容" json:"detail_html"`                                                           // 产品详情网页内容
-	DetailMobileHTML    string     `gorm:"column:detail_mobile_html;not null;comment:移动端网页详情" json:"detail_mobile_html"`                                              // 移动端网页详情
+	DetailHTML          string     `gorm:"column:detail_html;not null;comment:网页详情" json:"detail_html"`                                                               // 网页详情
+	DetailMobileHTML    string     `gorm:"column:detail_mobile_html;not null;comment:移动端详情" json:"detail_mobile_html"`                                                // 移动端详情
 	CreateBy            int64      `gorm:"column:create_by;not null;comment:创建人ID" json:"create_by"`                                                                  // 创建人ID
 	CreateTime          time.Time  `gorm:"column:create_time;not null;default:CURRENT_TIMESTAMP;comment:创建时间" json:"create_time"`                                     // 创建时间
 	UpdateBy            *int64     `gorm:"column:update_by;comment:更新人ID" json:"update_by"`                                                                           // 更新人ID

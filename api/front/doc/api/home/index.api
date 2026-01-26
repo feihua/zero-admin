@@ -1,9 +1,9 @@
 import "./home.api"
 
 info (
-	title:                       "首页数据 API"
-	description:                 "首页数据相关接口"
-	schemes:                     "http"
-	version:                     "v1"
+	title:       "首页数据 API"
+	description: "首页数据相关接口"
+	schemes:     "http"
+	version:     "v1"
 )
 
