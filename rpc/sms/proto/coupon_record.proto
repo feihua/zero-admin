@@ -113,7 +113,8 @@ message QueryCouponData {
   string end_time = 8; //失效时间
   int32 per_limit = 12; //每人限领数量
   int32 status = 13; //状态：0-未开始，1-进行中，2-已结束，3-已取消
-  string description = 15; //使用说明
+  string description = 14; //使用说明
+  int32 scope_type = 15; //范围类型：0-全场，1-分类，2-商品
 
 }
 message QueryMemberCouponListResp {

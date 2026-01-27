@@ -11,3 +11,7 @@ create table sms_coupon_scope
 )
     comment '优惠券使用范围表';
 
+insert into sms_coupon_scope (coupon_id, scope_type, scope_id)
+values (1, 0, 0),
+       (2, 0, 0),
+       (3, 0, 0);

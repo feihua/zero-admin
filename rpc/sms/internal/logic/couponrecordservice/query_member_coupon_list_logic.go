@@ -2,13 +2,15 @@ package couponrecordservicelogic
 
 import (
 	"context"
+	"time"
+
 	"github.com/feihua/zero-admin/pkg/time_util"
 	"github.com/feihua/zero-admin/rpc/sms/gen/model"
-	"github.com/pkg/errors"
-	"github.com/zeromicro/go-zero/core/logc"
-
+	"github.com/feihua/zero-admin/rpc/sms/gen/query"
 	"github.com/feihua/zero-admin/rpc/sms/internal/svc"
 	"github.com/feihua/zero-admin/rpc/sms/smsclient"
+	"github.com/pkg/errors"
+	"github.com/zeromicro/go-zero/core/logc"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -35,13 +37,13 @@ func NewQueryMemberCouponListLogic(ctx context.Context, svcCtx *svc.ServiceConte
 // QueryMemberCouponList 获取会员优惠券
 func (l *QueryMemberCouponListLogic) QueryMemberCouponList(in *smsclient.QueryMemberCouponListReq) (*smsclient.QueryMemberCouponListResp, error) {
 	var result []model.SmsCoupon
-	query := `select t2.*
-			from sms_coupon_record t1
-					 left join sms_coupon t2 on t1.coupon_id = t2.id
-			where t1.member_id = ?
-			  and t1.status = ?`
+	sql := `select t2.*
+				from sms_coupon_record t1
+						 left join sms_coupon t2 on t1.coupon_id = t2.id
+				where t1.member_id = ?
+				  and t1.status = ?;`
 	db := l.svcCtx.DB
-	err := db.Where(l.ctx).Raw(query, in.MemberId, in.Status).Find(&result).Error
+	err := db.Where(l.ctx).Raw(sql, in.MemberId, in.Status).Find(&result).Error
 
 	if err != nil {
 		logc.Errorf(l.ctx, "查询优惠券领取记录列表失败,参数:%+v,异常:%s", in, err.Error())
@@ -51,7 +53,7 @@ func (l *QueryMemberCouponListLogic) QueryMemberCouponList(in *smsclient.QueryMe
 	var list []*smsclient.QueryCouponData
 
 	for _, item := range result {
-		list = append(list, &smsclient.QueryCouponData{
+		x := &smsclient.QueryCouponData{
 			Id:          item.ID,                             // 优惠券ID
 			TypeId:      item.TypeID,                         // 优惠券类型ID
 			Name:        item.Name,                           // 优惠券名称
@@ -63,11 +65,20 @@ func (l *QueryMemberCouponListLogic) QueryMemberCouponList(in *smsclient.QueryMe
 			PerLimit:    item.PerLimit,                       // 每人限领数量
 			Status:      item.Status,                         // 状态：0-未开始，1-进行中，2-已结束，3-已取消
 			Description: item.Description,                    // 使用说明
+		}
 
-		})
+		isExpired := item.EndTime.Before(time.Now())
+		if in.Status == 0 && isExpired {
+			_, _ = query.SmsCouponRecord.WithContext(l.ctx).Where(query.SmsCouponRecord.CouponID.Eq(item.ID)).Update(query.SmsCouponRecord.Status, 2)
+			continue
+		}
+
+		scope, _ := query.SmsCouponScope.WithContext(l.ctx).Where(query.SmsCouponScope.CouponID.Eq(item.ID)).First()
+		x.ScopeType = scope.ScopeType
+		list = append(list, x)
+
 	}
-
 	return &smsclient.QueryMemberCouponListResp{
-		List: nil,
+		List: list,
 	}, nil
 }

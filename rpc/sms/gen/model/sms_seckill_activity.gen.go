@@ -17,7 +17,7 @@ type SmsSeckillActivity struct {
 	Description string     `gorm:"column:description;not null;comment:活动描述" json:"description"`                           // 活动描述
 	StartTime   time.Time  `gorm:"column:start_time;not null;comment:开始时间" json:"start_time"`                             // 开始时间
 	EndTime     time.Time  `gorm:"column:end_time;not null;comment:结束时间" json:"end_time"`                                 // 结束时间
-	Status      int32      `gorm:"column:status;not null;comment:活动状态：0-未开始，1-进行中，2-已结束，3-已取消" json:"status"`             // 活动状态：0-未开始，1-进行中，2-已结束，3-已取消
+	Status      int32      `gorm:"column:status;not null;comment:状态:0-上线,1-下线" json:"status"`                             // 状态:0-上线,1-下线
 	IsEnabled   int32      `gorm:"column:is_enabled;not null;default:1;comment:是否启用" json:"is_enabled"`                   // 是否启用
 	CreateBy    int64      `gorm:"column:create_by;not null;comment:创建人ID" json:"create_by"`                              // 创建人ID
 	CreateTime  time.Time  `gorm:"column:create_time;not null;default:CURRENT_TIMESTAMP;comment:创建时间" json:"create_time"` // 创建时间

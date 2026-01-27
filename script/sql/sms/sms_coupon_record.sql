@@ -19,3 +19,7 @@ create table sms_coupon_record
 )
     comment '优惠券领取记录表';
 
+insert into sms_coupon_record (coupon_id, member_id, get_time, get_type, use_time, invalid_time)
+values (1, 1001, current_timestamp, 0, null, null),
+       (2, 1001, current_timestamp, 1, null, null),
+       (3, 1001, current_timestamp, 1, null, null);

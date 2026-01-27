@@ -56,7 +56,7 @@ type smsSeckillActivity struct {
 	Description field.String // 活动描述
 	StartTime   field.Time   // 开始时间
 	EndTime     field.Time   // 结束时间
-	Status      field.Int32  // 活动状态：0-未开始，1-进行中，2-已结束，3-已取消
+	Status      field.Int32  // 状态:0-上线,1-下线
 	IsEnabled   field.Int32  // 是否启用
 	CreateBy    field.Int64  // 创建人ID
 	CreateTime  field.Time   // 创建时间

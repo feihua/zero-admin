@@ -2,6 +2,7 @@ package product
 
 import (
 	"context"
+
 	"github.com/bytedance/sonic"
 	"github.com/feihua/zero-admin/rpc/pms/client/productspuservice"
 	"github.com/feihua/zero-admin/rpc/search/search_client"
@@ -30,18 +31,18 @@ func SynProductToEs(ctx context.Context, body []byte, Search search_client.Searc
 
 	product := res.Data
 	product1 := &search_client.ProductData{
-		Id:                  product.Id,                  // 商品SpuId
-		Name:                product.Name,                // 商品名称
-		CategoryId:          product.CategoryId,          // 商品分类ID
-		CategoryIds:         product.CategoryIds,         // 商品分类ID集合
-		CategoryName:        product.CategoryName,        // 商品分类名称
-		BrandId:             product.BrandId,             // 品牌ID
-		BrandName:           product.BrandName,           // 品牌名称
-		Unit:                product.Unit,                // 单位
-		Weight:              product.Weight,              // 重量(kg)
-		Keywords:            product.Keywords,            // 关键词
-		Brief:               product.Brief,               // 简介
-		Description:         product.Description,         // 详细描述
+		Id:           product.Id,           // 商品SpuId
+		Name:         product.Name,         // 商品名称
+		CategoryId:   product.CategoryId,   // 商品分类ID
+		CategoryIds:  product.CategoryIds,  // 商品分类ID集合
+		CategoryName: product.CategoryName, // 商品分类名称
+		BrandId:      product.BrandId,      // 品牌ID
+		BrandName:    product.BrandName,    // 品牌名称
+		Unit:         product.Unit,         // 单位
+		Weight:       product.Weight,       // 重量(kg)
+		Keywords:     product.Keywords,     // 关键词
+		// Brief:               product.Brief,               // 简介
+		// Description:         product.Description,         // 详细描述
 		AlbumPics:           product.AlbumPics,           // 画册图片，最多8张，以逗号分割
 		MainPic:             product.MainPic,             // 主图
 		PriceRange:          product.PriceRange,          // 价格区间
@@ -57,14 +58,14 @@ func SynProductToEs(ctx context.Context, body []byte, Search search_client.Searc
 		Stock:               product.Stock,               // 库存
 		LowStock:            product.LowStock,            // 预警库存
 		PromotionType:       product.PromotionType,       // 促销类型：0->没有促销使用原价;1->使用促销价；2->使用会员价；3->使用阶梯价格；4->使用满减价格；5->秒杀
-		DetailTitle:         product.DetailTitle,         // 详情标题
-		DetailDesc:          product.DetailDesc,          // 详情描述
-		DetailHtml:          product.DetailHtml,          // 产品详情网页内容
-		DetailMobileHtml:    product.DetailMobileHtml,    // 移动端网页详情
-		CreateBy:            product.CreateBy,            // 创建人ID
-		CreateTime:          product.CreateTime,          // 创建时间
-		UpdateBy:            product.UpdateBy,            // 更新人ID
-		UpdateTime:          product.UpdateTime,          // 更新时间
+		// DetailTitle:         product.DetailTitle,         // 详情标题
+		// DetailDesc:          product.DetailDesc,          // 详情描述
+		DetailHtml:       product.DetailHtml,       // 产品详情网页内容
+		DetailMobileHtml: product.DetailMobileHtml, // 移动端网页详情
+		CreateBy:         product.CreateBy,         // 创建人ID
+		CreateTime:       product.CreateTime,       // 创建时间
+		UpdateBy:         product.UpdateBy,         // 更新人ID
+		UpdateTime:       product.UpdateTime,       // 更新时间
 	}
 
 	var list []*search_client.ProductData

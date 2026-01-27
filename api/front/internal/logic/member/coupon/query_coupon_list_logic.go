@@ -2,6 +2,7 @@ package coupon
 
 import (
 	"context"
+
 	"github.com/feihua/zero-admin/api/front/internal/logic/common"
 	"github.com/feihua/zero-admin/pkg/errorx"
 	"github.com/feihua/zero-admin/rpc/sms/smsclient"
@@ -64,6 +65,7 @@ func (l *QueryCouponListLogic) QueryCouponList(req *types.ListCouponReq) (resp *
 			PerLimit:    detail.PerLimit,    // 每人限领数量
 			Status:      detail.Status,      // 状态：0-未开始，1-进行中，2-已结束，3-已取消
 			Description: detail.Description, // 使用说明
+			ScopeType:   detail.ScopeType,   // 范围类型：0-全场通用，1-指定分类，2-指定商品
 		})
 	}
 

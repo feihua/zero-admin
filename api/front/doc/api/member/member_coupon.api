@@ -27,6 +27,7 @@ type (
 		PerLimit    int32   `json:"perLimit"` //每人限领数量
 		Status      int32   `json:"status"` //状态：0-未开始，1-进行中，2-已结束，3-已取消
 		Description string  `json:"description"` //使用说明
+		ScopeType   int32   `json:"scopeType"` //范围类型：0-全场，1-分类，2-商品
 	}
 	ListCouponResp {
 		Code    int64         `json:"code"`

@@ -48,7 +48,7 @@ create index idx_status
 
 -- 插入会员数据
 insert into ums_member_info (id, member_id, level_id, nickname, mobile, source, password, avatar, signature, gender, birthday, growth_point, points, total_points, spend_amount, order_count, coupon_count, comment_count, return_count, lottery_times, last_login, is_enabled)
-values (1, 1001, 1, '张三', '13800138001', 0, '123456', 'https://example.com/avatar/001.jpg', '生活就是购物~', 1, '1990-01-15', 100, 500, 1000, 999.99, 10, 5, 8, 1, 2, '2024-01-15 08:30:00', 1),
+values (1, 1001, 1, '张三', '13800138001', 0, '123456', 'https://example.com/avatar/001.jpg', '生活就是购物~', 1, '1990-01-15', 100, 500, 1000, 999.99, 10, 3, 8, 1, 2, '2024-01-15 08:30:00', 1),
        (2, 1002, 2, '李四', '13800138002', 1, '123456', 'https://example.com/avatar/002.jpg', '潮流时尚，品质生活', 2, '1995-03-20', 500, 1200, 2000, 2999.99, 25, 8, 20, 0, 5, '2024-01-15 12:45:00', 1),
        (3, 1003, 3, '王五', '13800138003', 2, '123456', 'https://example.com/avatar/003.jpg', 'VIP专享生活', 1, '1988-07-08', 1000, 3000, 5000, 8999.99, 50, 15, 45, 2, 10, '2024-01-15 15:20:00', 1),
        (4, 1004, 4, '赵六', '13800138004', 1, '123456', 'https://example.com/avatar/004.jpg', '享受生活每一天', 2, '1992-12-25', 2000, 5000, 8000, 15999.99, 80, 20, 75, 3, 15, '2024-01-15 18:10:00', 1),
