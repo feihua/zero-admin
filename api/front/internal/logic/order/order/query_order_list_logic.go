@@ -2,6 +2,7 @@ package order
 
 import (
 	"context"
+
 	"github.com/feihua/zero-admin/api/front/internal/logic/common"
 	"github.com/feihua/zero-admin/pkg/errorx"
 	"github.com/feihua/zero-admin/rpc/oms/omsclient"
@@ -52,8 +53,7 @@ func (l *QueryOrderListLogic) QueryOrderList(req *types.OrderListReq) (resp1 *ty
 		return nil, errorx.NewDefaultError(s.Message())
 	}
 
-	var orderData []*types.QueryOrderData
-
+	orderData := make([]*types.QueryOrderData, 0)
 	for _, detail := range res.List {
 		elems := &types.QueryOrderData{
 			Id:                 detail.Id,                 //
@@ -84,8 +84,7 @@ func (l *QueryOrderListLogic) QueryOrderList(req *types.OrderListReq) (resp1 *ty
 
 		itemData := detail.OrderItemData
 
-		var orderItemData []*types.OrderItemData
-
+		orderItemData := make([]*types.OrderItemData, 0)
 		for _, d := range itemData {
 			orderItemData = append(orderItemData, &types.OrderItemData{
 				Id:              d.Id,              //

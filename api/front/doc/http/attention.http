@@ -14,10 +14,10 @@ Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {
-  "brandId": 3,
-  "brandName": "华为",
+  "brandId": 2,
+  "brandName": "方太",
   "brandCity": "广东省",
-  "brandLogo": "http://macro-oss.oss-cn-shenzhen.aliyuncs.com/mall/images/20200607/5abf6f26N31658aa2.jpg"
+  "brandLogo": "http://129.204.203.29/brand_fotile.png"
 }
 
 ### 删除会员品牌关注

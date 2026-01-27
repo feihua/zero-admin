@@ -43,7 +43,7 @@ func (l *QueryMemberCouponListLogic) QueryMemberCouponList(in *smsclient.QueryMe
 				where t1.member_id = ?
 				  and t1.status = ?;`
 	db := l.svcCtx.DB
-	err := db.Where(l.ctx).Raw(sql, in.MemberId, in.Status).Find(&result).Error
+	err := db.Raw(sql, in.MemberId, in.Status).Find(&result).Error
 
 	if err != nil {
 		logc.Errorf(l.ctx, "查询优惠券领取记录列表失败,参数:%+v,异常:%s", in, err.Error())
@@ -69,7 +69,8 @@ func (l *QueryMemberCouponListLogic) QueryMemberCouponList(in *smsclient.QueryMe
 
 		isExpired := item.EndTime.Before(time.Now())
 		if in.Status == 0 && isExpired {
-			_, _ = query.SmsCouponRecord.WithContext(l.ctx).Where(query.SmsCouponRecord.CouponID.Eq(item.ID)).Update(query.SmsCouponRecord.Status, 2)
+			record := query.SmsCouponRecord
+			_, _ = record.WithContext(l.ctx).Where(record.CouponID.Eq(item.ID), record.Status.Eq(0)).Update(record.Status, 2)
 			continue
 		}
 

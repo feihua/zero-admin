@@ -3,9 +3,12 @@ package couponservicelogic
 import (
 	"context"
 	"errors"
+	"time"
+
 	"github.com/feihua/zero-admin/pkg/pointerprocess"
 	"github.com/feihua/zero-admin/pkg/time_util"
 	"github.com/feihua/zero-admin/rpc/sms/gen/model"
+	"github.com/feihua/zero-admin/rpc/sms/gen/query"
 	"github.com/zeromicro/go-zero/core/logc"
 
 	"github.com/feihua/zero-admin/rpc/sms/internal/svc"
@@ -75,6 +78,12 @@ func (l *QueryCouponByScopeIdLogic) QueryCouponByScopeId(in *smsclient.QueryCoup
 			UpdateTime:    time_util.TimeToString(item.UpdateTime),          // 更新时间
 
 		})
+
+		isExpired := item.EndTime.Before(time.Now())
+		if isExpired {
+			record := query.SmsCouponRecord
+			_, _ = record.WithContext(l.ctx).Where(record.CouponID.Eq(item.ID), record.Status.Eq(0)).Update(record.Status, 2)
+		}
 	}
 
 	return &smsclient.QueryCouponByScopeIdResp{

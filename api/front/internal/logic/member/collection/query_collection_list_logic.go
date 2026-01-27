@@ -2,6 +2,7 @@ package collection
 
 import (
 	"context"
+
 	"github.com/feihua/zero-admin/api/front/internal/logic/common"
 	"github.com/feihua/zero-admin/pkg/errorx"
 	"github.com/feihua/zero-admin/rpc/ums/umsclient"
@@ -52,8 +53,7 @@ func (l *QueryCollectionListLogic) QueryCollectionList() (resp *types.Collection
 		return nil, errorx.NewDefaultError(s.Message())
 	}
 
-	var list []types.CollectionList
-
+	list := make([]types.CollectionList, 0)
 	for _, detail := range collectionList.List {
 		list = append(list, types.CollectionList{
 			Id:              detail.Id,              //

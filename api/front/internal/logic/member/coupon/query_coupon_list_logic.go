@@ -50,8 +50,7 @@ func (l *QueryCouponListLogic) QueryCouponList(req *types.ListCouponReq) (resp *
 		return nil, errorx.NewDefaultError(s.Message())
 	}
 
-	var list []*types.CouponData
-
+	list := make([]*types.CouponData, 0)
 	for _, detail := range couponList.List {
 		list = append(list, &types.CouponData{
 			Id:          detail.Id,          // 优惠券ID

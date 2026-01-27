@@ -10,27 +10,27 @@ Content-Type: application/json
 
 
 ### 添加会员个人的浏览记录
-POST {{host}}/api/history/addReadHistory
+POST {{host}}/api/member/addReadHistory
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {
-  "memberIcon": "https://macro-oss.oss-cn-shenzhen.aliyuncs.com/mall/icon/github_icon_02.png",
-  "productId": 13,
-  "productName": "华为 HUAWEI P20",
-  "productPic": "https://macro-oss.oss-cn-shenzhen.aliyuncs.com/mall/images/20221028/iphone14_001.jpg",
-  "productSubTitle": "AI智慧全面屏 6GB +64GB 亮黑色 全网通版 移动联通电信4G手机 双卡双待手机 双卡双待",
-  "productPrice": 3788
+  "memberIcon": "http://129.204.203.29/xiaomi_s.jpg",
+  "productId": 2,
+  "productName": "小米（MI）REDMI Note15 Pro 天玑7400-Ultra 7000mAh 龙晶玻璃十倍抗摔 IP68 8+256 子夜黑 红米 5G手机",
+  "productPic": "http://129.204.203.29/xiaomi_s.jpg",
+  "productSubTitle": "新年狂欢购，限时特惠价，品质好物带回家",
+  "productPrice": 5999
 }
 
 ### 删除会员个人的浏览记录
-GET {{host}}/api/history/deleteReadHistory?ids=13
+GET {{host}}/api/member/deleteReadHistory?ids=13
 Authorization: Bearer {{token}}
 
 ### 获取会员个人的浏览记录
-GET {{host}}/api/history/queryReadHistoryList
+GET {{host}}/api/member/queryReadHistoryList
 Authorization: Bearer {{token}}
 
 ### 清空会员个人的浏览记录
-GET {{host}}/api/history/clearReadHistory
+GET {{host}}/api/member/clearReadHistory
 Authorization: Bearer {{token}}

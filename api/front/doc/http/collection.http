@@ -11,28 +11,28 @@ Content-Type: application/json
 
 
 ### 添加会员个人的收藏
-POST {{host}}/api/collection/addProductCollection
+POST {{host}}/api/member/addtCollection
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {
-  "memberIcon": "https://macro-oss.oss-cn-shenzhen.aliyuncs.com/mall/icon/github_icon_02.png",
-  "productId": 13,
-  "productName": "华为 HUAWEI P20",
-  "productPic": "https://macro-oss.oss-cn-shenzhen.aliyuncs.com/mall/images/20221028/iphone14_001.jpg",
-  "productSubTitle": "AI智慧全面屏 6GB +64GB 亮黑色 全网通版 移动联通电信4G手机 双卡双待手机 双卡双待",
-  "productPrice": 3788
+  "memberIcon": "http://129.204.203.29/apple_c.jpg",
+  "productId": 6,
+  "productName": "苹果（Apple）MacBook Pro Air 超薄商务办公 剪辑设计学生游戏99新13寸Pro丨i5+8G+512G固态丨",
+  "productPic": "http://129.204.203.29/apple_c.jpg",
+  "productSubTitle": "春节特卖会，精选好物五折起，不容错过",
+  "productPrice": 12999
 }
 
 ### 删除会员个人的收藏
-GET {{host}}/api/collection/deleteProductCollection?ids=13
+GET {{host}}/api/member/deleteCollection?ids=13
 Authorization: Bearer {{token}}
 
 ### 获取会员个人的收藏
-GET {{host}}/api/collection/queryProductCollectionList
+GET {{host}}/api/member/queryCollectionList
 Authorization: Bearer {{token}}
 
 ### 清空会员个人的收藏
-GET {{host}}/api/collection/clearProductCollection
+GET {{host}}/api/member/clearCollection
 Authorization: Bearer {{token}}
 

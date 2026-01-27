@@ -2,6 +2,7 @@ package attention
 
 import (
 	"context"
+
 	"github.com/feihua/zero-admin/api/front/internal/logic/common"
 	"github.com/feihua/zero-admin/pkg/errorx"
 	"github.com/feihua/zero-admin/rpc/ums/umsclient"
@@ -49,8 +50,7 @@ func (l *QueryAttentionListLogic) QueryAttentionList() (resp *types.ListAttentio
 		return nil, errorx.NewDefaultError(s.Message())
 	}
 
-	var list []types.ListAttentionData
-
+	list := make([]types.ListAttentionData, 0)
 	for _, detail := range attentionList.List {
 		list = append(list, types.ListAttentionData{
 			Id:             detail.Id,             //
