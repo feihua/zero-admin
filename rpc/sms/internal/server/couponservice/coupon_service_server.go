@@ -70,3 +70,9 @@ func (s *CouponServiceServer) QueryCouponByCode(ctx context.Context, in *smsclie
 	l := couponservicelogic.NewQueryCouponByCodeLogic(ctx, s.svcCtx)
 	return l.QueryCouponByCode(in)
 }
+
+// 处理过期的优惠券
+func (s *CouponServiceServer) HandleExpirationCoupon(ctx context.Context, in *smsclient.HandleExpirationCouponReq) (*smsclient.HandleExpirationCouponResp, error) {
+	l := couponservicelogic.NewHandleExpirationCouponLogic(ctx, s.svcCtx)
+	return l.HandleExpirationCoupon(in)
+}

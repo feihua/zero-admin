@@ -19,14 +19,15 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	CouponService_AddCoupon_FullMethodName            = "/smsclient.CouponService/AddCoupon"
-	CouponService_DeleteCoupon_FullMethodName         = "/smsclient.CouponService/DeleteCoupon"
-	CouponService_UpdateCoupon_FullMethodName         = "/smsclient.CouponService/UpdateCoupon"
-	CouponService_UpdateCouponStatus_FullMethodName   = "/smsclient.CouponService/UpdateCouponStatus"
-	CouponService_QueryCouponDetail_FullMethodName    = "/smsclient.CouponService/QueryCouponDetail"
-	CouponService_QueryCouponList_FullMethodName      = "/smsclient.CouponService/QueryCouponList"
-	CouponService_QueryCouponByScopeId_FullMethodName = "/smsclient.CouponService/QueryCouponByScopeId"
-	CouponService_QueryCouponByCode_FullMethodName    = "/smsclient.CouponService/QueryCouponByCode"
+	CouponService_AddCoupon_FullMethodName              = "/smsclient.CouponService/AddCoupon"
+	CouponService_DeleteCoupon_FullMethodName           = "/smsclient.CouponService/DeleteCoupon"
+	CouponService_UpdateCoupon_FullMethodName           = "/smsclient.CouponService/UpdateCoupon"
+	CouponService_UpdateCouponStatus_FullMethodName     = "/smsclient.CouponService/UpdateCouponStatus"
+	CouponService_QueryCouponDetail_FullMethodName      = "/smsclient.CouponService/QueryCouponDetail"
+	CouponService_QueryCouponList_FullMethodName        = "/smsclient.CouponService/QueryCouponList"
+	CouponService_QueryCouponByScopeId_FullMethodName   = "/smsclient.CouponService/QueryCouponByScopeId"
+	CouponService_QueryCouponByCode_FullMethodName      = "/smsclient.CouponService/QueryCouponByCode"
+	CouponService_HandleExpirationCoupon_FullMethodName = "/smsclient.CouponService/HandleExpirationCoupon"
 )
 
 // CouponServiceClient is the client API for CouponService service.
@@ -49,6 +50,8 @@ type CouponServiceClient interface {
 	QueryCouponByScopeId(ctx context.Context, in *QueryCouponByScopeIdReq, opts ...grpc.CallOption) (*QueryCouponByScopeIdResp, error)
 	// 根据优惠券类型的code查询优惠券
 	QueryCouponByCode(ctx context.Context, in *QueryCouponByCodeReq, opts ...grpc.CallOption) (*QueryCouponByCodeResp, error)
+	// 处理过期的优惠券
+	HandleExpirationCoupon(ctx context.Context, in *HandleExpirationCouponReq, opts ...grpc.CallOption) (*HandleExpirationCouponResp, error)
 }
 
 type couponServiceClient struct {
@@ -131,6 +134,15 @@ func (c *couponServiceClient) QueryCouponByCode(ctx context.Context, in *QueryCo
 	return out, nil
 }
 
+func (c *couponServiceClient) HandleExpirationCoupon(ctx context.Context, in *HandleExpirationCouponReq, opts ...grpc.CallOption) (*HandleExpirationCouponResp, error) {
+	out := new(HandleExpirationCouponResp)
+	err := c.cc.Invoke(ctx, CouponService_HandleExpirationCoupon_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // CouponServiceServer is the server API for CouponService service.
 // All implementations must embed UnimplementedCouponServiceServer
 // for forward compatibility
@@ -151,6 +163,8 @@ type CouponServiceServer interface {
 	QueryCouponByScopeId(context.Context, *QueryCouponByScopeIdReq) (*QueryCouponByScopeIdResp, error)
 	// 根据优惠券类型的code查询优惠券
 	QueryCouponByCode(context.Context, *QueryCouponByCodeReq) (*QueryCouponByCodeResp, error)
+	// 处理过期的优惠券
+	HandleExpirationCoupon(context.Context, *HandleExpirationCouponReq) (*HandleExpirationCouponResp, error)
 	mustEmbedUnimplementedCouponServiceServer()
 }
 
@@ -181,6 +195,9 @@ func (UnimplementedCouponServiceServer) QueryCouponByScopeId(context.Context, *Q
 }
 func (UnimplementedCouponServiceServer) QueryCouponByCode(context.Context, *QueryCouponByCodeReq) (*QueryCouponByCodeResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method QueryCouponByCode not implemented")
+}
+func (UnimplementedCouponServiceServer) HandleExpirationCoupon(context.Context, *HandleExpirationCouponReq) (*HandleExpirationCouponResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method HandleExpirationCoupon not implemented")
 }
 func (UnimplementedCouponServiceServer) mustEmbedUnimplementedCouponServiceServer() {}
 
@@ -339,6 +356,24 @@ func _CouponService_QueryCouponByCode_Handler(srv interface{}, ctx context.Conte
 	return interceptor(ctx, in, info, handler)
 }
 
+func _CouponService_HandleExpirationCoupon_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(HandleExpirationCouponReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CouponServiceServer).HandleExpirationCoupon(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: CouponService_HandleExpirationCoupon_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CouponServiceServer).HandleExpirationCoupon(ctx, req.(*HandleExpirationCouponReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // CouponService_ServiceDesc is the grpc.ServiceDesc for CouponService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -377,6 +412,10 @@ var CouponService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "QueryCouponByCode",
 			Handler:    _CouponService_QueryCouponByCode_Handler,
+		},
+		{
+			MethodName: "HandleExpirationCoupon",
+			Handler:    _CouponService_HandleExpirationCoupon_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

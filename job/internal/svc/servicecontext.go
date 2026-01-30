@@ -3,6 +3,8 @@ package svc
 import (
 	"context"
 	"fmt"
+	"time"
+
 	"github.com/feihua/zero-admin/job/internal/config"
 	"github.com/feihua/zero-admin/job/internal/jobs"
 	"github.com/feihua/zero-admin/pkg/time_util"
@@ -17,7 +19,6 @@ import (
 	"github.com/feihua/zero-admin/rpc/ums/client/memberpointslogservice"
 	"github.com/go-co-op/gocron/v2"
 	"github.com/zeromicro/go-zero/zrpc"
-	"time"
 )
 
 type ServiceContext struct {
@@ -77,6 +78,14 @@ func NewServiceContext(c config.Config) *ServiceContext {
 	_, _ = s.NewJob(
 		gocron.DurationJob(time.Second*60*30),
 		gocron.NewTask(jobs.CancelTimeOutOrder, context.Background(), skuService, orderService, couponRecordService, memberInfoService, settingService),
+	)
+
+	// // 每天00:00:00执行
+	_, _ = s.NewJob(
+		gocron.DailyJob(1, gocron.NewAtTimes(
+			gocron.NewAtTime(0, 0, 0),
+		)),
+		gocron.NewTask(jobs.HandleExpiredCouponLogic, context.Background(), couponService),
 	)
 
 	// 10秒后执行执行任务
