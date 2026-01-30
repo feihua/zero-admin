@@ -2,6 +2,7 @@ package brand
 
 import (
 	"context"
+
 	"github.com/feihua/zero-admin/pkg/errorx"
 	"github.com/feihua/zero-admin/rpc/pms/pmsclient"
 	"github.com/zeromicro/go-zero/core/logc"
@@ -37,7 +38,7 @@ func (l *QueryBrandListLogic) QueryBrandList(req *types.BrandListReq) (resp *typ
 	brandListResp, err := l.svcCtx.ProductBrandService.QueryProductBrandList(l.ctx, &pmsclient.QueryProductBrandListReq{
 		PageNum:         req.Current,
 		PageSize:        req.PageSize,
-		RecommendStatus: 1, // 推荐状态
+		RecommendStatus: 2, // 推荐状态
 		IsEnabled:       1, // 是否启用
 	})
 

@@ -26,7 +26,7 @@ insert into pms_product_brand (id, name, logo, big_pic, description, first_lette
 values (1, '苹果', 'http://129.204.203.29/brand_apple.png', 'http://129.204.203.29/brand_apple.png', '苹果的描述', 'A', 1, 1, 100, 50, 1, 1),
        (2, '方太', 'http://129.204.203.29/brand_fotile.png', 'http://129.204.203.29/brand_fotile.png', '方太的描述', 'F', 2, 0, 200, 80, 1, 2),
        (3, '格力', 'http://129.204.203.29/brand_geli.png', 'http://129.204.203.29/brand_geli.png', '格力的描述', 'G', 3, 1, 150, 60, 1, 3),
-       (4, '海澜之家', 'http://129.204.203.29/brand_hailan.png', 'http://129.204.203.29/brand_hailan.png', '海澜之家的描述', 'H', 4, 0, 120, 40, 1, 4),
+       (4, '海澜之家', 'http://129.204.203.29/brand_hailan.png', 'http://129.204.203.29/brand_hailan.png', '海澜之家的描述', 'H', 4, 1, 120, 40, 1, 4),
        (5, '华为', 'http://129.204.203.29/brand_huawei.png', 'http://129.204.203.29/brand_huawei.png', '华为的描述', 'H', 5, 1, 180, 70, 1, 5),
        (6, 'oppo', 'http://129.204.203.29/brand_oppo.png', 'http://129.204.203.29/brand_oppo.png', 'oppo的描述', 'O', 6, 0, 90, 30, 1, 6),
        (7, '三星', 'http://129.204.203.29/brand_sumsung.png', 'http://129.204.203.29/brand_sumsung.png', '三星的描述', 'S', 7, 1, 110, 50, 1, 7),
