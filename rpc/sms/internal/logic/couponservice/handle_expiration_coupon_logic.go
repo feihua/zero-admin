@@ -39,7 +39,7 @@ func (l *HandleExpirationCouponLogic) HandleExpirationCoupon(in *smsclient.Handl
     WHERE status = 0 
     AND coupon_id IN (
         SELECT id FROM sms_coupon WHERE end_time <= ?
-    )`, time.Now()).Error
+    )`, time.Now().Truncate(time.Second)).Error
 
 	if err != nil {
 		logc.Errorf(l.ctx, "处理过期的优惠券,异常:%s", err.Error())
