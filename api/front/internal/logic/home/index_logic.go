@@ -32,27 +32,27 @@ func NewIndexLogic(ctx context.Context, svcCtx *svc.ServiceContext) *IndexLogic 
 	}
 }
 
-func (l *IndexLogic) Index() (resp *types.HomeResp, err error) {
+func (l *IndexLogic) Index(req *types.HomeReq) (resp *types.HomeResp, err error) {
 	return &types.HomeResp{
 		Code:    0,
 		Message: "操作成功",
 		Data: types.Data{
 			AdvertiseList:      queryAdvertiseList(l),
-			BrandList:          queryBrandList(l),
-			HomeFlashPromotion: queryHomeFlashPromotion(l),
-			NewProductList:     queryNewProductList(l),
-			HotProductList:     queryHotProductList(l),
-			SubjectList:        querySubjectList(l), // 推荐专题
+			BrandList:          queryBrandList(l, req),
+			HomeFlashPromotion: queryHomeFlashPromotion(l, req),
+			NewProductList:     queryNewProductList(l, req),
+			HotProductList:     queryHotProductList(l, req),
+			SubjectList:        querySubjectList(l, req), // 推荐专题
 		},
 	}, nil
 }
 
 // 推荐专题
-func querySubjectList(l *IndexLogic) []types.SubjectList {
+func querySubjectList(l *IndexLogic, req *types.HomeReq) []types.SubjectList {
 	var list []types.SubjectList
 	res, err := l.svcCtx.SubjectService.QuerySubjectList(l.ctx, &cmsclient.QuerySubjectListReq{
 		PageNum:         1,
-		PageSize:        4,
+		PageSize:        int64(req.SubjectNumber),
 		Title:           "", // 专题标题
 		RecommendStatus: 1,  // 推荐状态：0->不推荐；1->推荐
 		ShowStatus:      1,  // 显示状态：0->不显示；1->显示
@@ -87,10 +87,10 @@ func querySubjectList(l *IndexLogic) []types.SubjectList {
 }
 
 // 人气推荐
-func queryHotProductList(l *IndexLogic) []types.IndexProductData {
+func queryHotProductList(l *IndexLogic, req *types.HomeReq) []types.IndexProductData {
 	var resp, _ = l.svcCtx.ProductSpuService.QueryProductSpuList(l.ctx, &pmsclient.QueryProductSpuListReq{
 		PageNum:         1,
-		PageSize:        4,
+		PageSize:        req.HotProductNumber,
 		Name:            "",
 		CategoryId:      0, // 商品分类ID
 		BrandId:         0, // 品牌ID
@@ -143,10 +143,10 @@ func queryHotProductList(l *IndexLogic) []types.IndexProductData {
 }
 
 // 新品推荐
-func queryNewProductList(l *IndexLogic) []types.IndexProductData {
+func queryNewProductList(l *IndexLogic, req *types.HomeReq) []types.IndexProductData {
 	var resp, _ = l.svcCtx.ProductSpuService.QueryProductSpuList(l.ctx, &pmsclient.QueryProductSpuListReq{
 		PageNum:         1,
-		PageSize:        4,
+		PageSize:        req.NewProductNumber,
 		CategoryId:      0, // 商品分类ID
 		BrandId:         0, // 品牌ID
 		PublishStatus:   1, // 上架状态：0-下架，1-上架
@@ -198,7 +198,7 @@ func queryNewProductList(l *IndexLogic) []types.IndexProductData {
 }
 
 // 当前秒杀场次
-func queryHomeFlashPromotion(l *IndexLogic) types.HomeFlashPromotion {
+func queryHomeFlashPromotion(l *IndexLogic, req *types.HomeReq) types.HomeFlashPromotion {
 	var resp types.HomeFlashPromotion
 	// currentDate := time.Now().Format("2006-01-02")
 	// flashPromotionList, _ := l.svcCtx.FlashPromotionService.QueryFlashPromotionListByDate(l.ctx, &smsclient.QueryFlashPromotionListByDateReq{
@@ -257,15 +257,15 @@ func queryHomeFlashPromotion(l *IndexLogic) types.HomeFlashPromotion {
 	// productIdLists = append(productIdLists, 32)
 	//
 	// // 设置商品
-	resp.ProductList = queryNewProductList(l)
+	resp.ProductList = queryNewProductList(l, req)
 	return resp
 }
 
 // 推荐品牌
-func queryBrandList(l *IndexLogic) []types.IndexBrandData {
+func queryBrandList(l *IndexLogic, req *types.HomeReq) []types.IndexBrandData {
 	result, _ := l.svcCtx.ProductBrandService.QueryProductBrandList(l.ctx, &pmsclient.QueryProductBrandListReq{
 		PageNum:         1,
-		PageSize:        6,
+		PageSize:        req.BrandNumber,
 		Name:            "", // 品牌名称
 		RecommendStatus: 1,  // 推荐状态
 		IsEnabled:       1,  // 是否启用

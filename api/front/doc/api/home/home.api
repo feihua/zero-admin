@@ -8,6 +8,15 @@ info (
 	version:     "v1"
 )
 
+type HomeReq {
+	AdvertiseType    string `form:"advertiseType,default=app"` // app或者pc
+	BrandNumber      int32  `form:"brandNumber,default=6"` //
+	HomeFlashNumber  int32  `form:"homeFlashNumber,default=4"` //
+	NewProductNumber int32  `form:"newProductNumber,default=4"` //
+	HotProductNumber int32  `form:"hotProductNumber,default=4"` //
+	SubjectNumber    int32  `form:"subjectNumber,default=4"` //
+}
+
 type HomeResp {
 	Code    int64  `json:"code"`
 	Message string `json:"message"`
@@ -85,6 +94,6 @@ type IndexProductData {
 service front-api {
 	//首页内容信息展示
 	@handler Index
-	get /index returns (HomeResp)
+	get /index (HomeReq) returns (HomeResp)
 }
 

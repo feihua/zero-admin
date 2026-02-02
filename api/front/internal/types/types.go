@@ -470,6 +470,15 @@ type HomeFlashPromotion struct {
 	ProductList   []IndexProductData `json:"productList"`
 }
 
+type HomeReq struct {
+	AdvertiseType    string `form:"advertiseType,default=app"`  // app或者pc
+	BrandNumber      int32  `form:"brandNumber,default=6"`      //
+	HomeFlashNumber  int32  `form:"homeFlashNumber,default=4"`  //
+	NewProductNumber int32  `form:"newProductNumber,default=4"` //
+	HotProductNumber int32  `form:"hotProductNumber,default=4"` //
+	SubjectNumber    int32  `form:"subjectNumber,default=4"`    //
+}
+
 type HomeResp struct {
 	Code    int64  `json:"code"`
 	Message string `json:"message"`
