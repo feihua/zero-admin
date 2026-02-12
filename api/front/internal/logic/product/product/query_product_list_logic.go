@@ -36,12 +36,12 @@ func (l *QueryProductListLogic) QueryProductList(req *types.QueryProductListReq)
 		CategoryId:      req.ProductCategoryId,
 		BrandId:         req.BrandId,
 		Name:            req.Keyword,
-		PublishStatus:   1, // 上架状态：0-下架，1-上架
-		NewStatus:       2, // 新品状态:0->不是新品；1->新品
-		RecommendStatus: 2, // 推荐状态；0->不推荐；1->推荐
-		VerifyStatus:    1, // 审核状态：0->未审核；1->审核通过
-		PreviewStatus:   0, // 是否为预告商品：0->不是；1->是
-		PromotionType:   6, // 促销类型：0->没有促销使用原价;1->使用促销价；2->使用会员价；3->使用阶梯价格；4->使用满减价格；5->秒杀
+		PublishStatus:   1,                   // 上架状态：0-下架，1-上架
+		NewStatus:       req.NewStatus,       // 新品状态:0->不是新品；1->新品
+		RecommendStatus: req.RecommendStatus, // 推荐状态；0->不推荐；1->推荐
+		VerifyStatus:    1,                   // 审核状态：0->未审核；1->审核通过
+		PreviewStatus:   0,                   // 是否为预告商品：0->不是；1->是
+		PromotionType:   6,                   // 促销类型：0->没有促销使用原价;1->使用促销价；2->使用会员价；3->使用阶梯价格；4->使用满减价格；5->秒杀
 	})
 
 	if err != nil {
