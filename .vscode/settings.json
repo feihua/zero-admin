@@ -1,7 +1,21 @@
 {
-//  "go.goroot": "/root/go",
-//  "go.toolsGopath": "/root/go/pkg/tool/linux_amd64/",
+  //  "go.goroot": "/root/go",
+  //  "go.toolsGopath": "/root/go/pkg/tool/linux_amd64/",
   "go.toolsEnvVars": {
     "GOPROXY": "https://goproxy.cn,direct"
-  }
+  },
+  "rest-client.environmentVariables": {
+    "$shared": {
+      "token":""
+    },
+    "local": {
+      "version": "v2",
+      "host": "http://127.0.0.1:9999",
+      "secretKey": "DEVSECRET"
+    },
+    "production": {
+      "host": "http://129.204.203.29/app",
+      "secretKey": "PRODSECRET"
+    }
+  },
 }
