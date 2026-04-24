@@ -18,7 +18,7 @@ create index idx_order
     on oms_order_promotion (order_id, is_deleted);
 
 -- 模拟数据
-insert into gozero.oms_order_promotion (id, order_id, order_no, promotion_type, promotion_id, promotion_name, discount_amount, is_deleted)
+insert into oms_order_promotion (id, order_id, order_no, promotion_type, promotion_id, promotion_name, discount_amount, is_deleted)
 values (1, 1, 'ORD20240001', 1, 2001, '新人优惠券', 20.00, 0),
        (2, 1, 'ORD20240002', 2, null, '积分抵扣', 15.50, 0),
        (3, 2, 'ORD20240003', 3, null, '会员折扣', 10.00, 0),
