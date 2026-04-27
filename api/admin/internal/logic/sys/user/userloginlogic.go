@@ -2,14 +2,16 @@ package user
 
 import (
 	"context"
+	"strconv"
+	"strings"
+	"time"
+
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
 	"github.com/feihua/zero-admin/api/admin/internal/svc"
 	"github.com/feihua/zero-admin/api/admin/internal/types"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
 	"github.com/zeromicro/go-zero/core/logc"
 	"google.golang.org/grpc/status"
-	"strconv"
-	"strings"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -52,8 +54,12 @@ func (l *UserLoginLogic) UserLogin(req *types.LoginReq, ip, browser, os string) 
 
 	// 把能访问的url存在在redis，在middleware中校验
 	filed := strconv.FormatInt(resp.Id, 10)
-	key := "zero:mall:token"
-	err = l.svcCtx.Redis.HsetCtx(l.ctx, key, filed, strings.Join(resp.ApiUrls, ","))
+	key := "zero:user:" + filed
+	err = l.svcCtx.Redis.HsetCtx(l.ctx, key, "isAdmin", resp.IsAdmin)
+	err = l.svcCtx.Redis.HsetCtx(l.ctx, key, "token", resp.AccessToken)
+	err = l.svcCtx.Redis.HsetCtx(l.ctx, key, "loginTime", time.Now().Format("2006-01-02 15:04:05"))
+	err = l.svcCtx.Redis.HsetCtx(l.ctx, key, "userName", resp.UserName)
+	err = l.svcCtx.Redis.HsetCtx(l.ctx, key, "permissions", strings.Join(resp.ApiUrls, ","))
 
 	if err != nil {
 		logc.Errorf(l.ctx, "设置用户：%s,权限到redis异常: %+v", resp.UserName, err)

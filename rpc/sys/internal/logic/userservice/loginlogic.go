@@ -65,7 +65,7 @@ func (l *LoginLogic) Login(in *sysclient.LoginReq) (*sysclient.LoginResp, error)
 	}
 
 	// 3.查询用户权限
-	apiUrls := l.queryApiUrls(user.ID)
+	apiUrls, isAdmin := l.queryApiUrls(user.ID)
 
 	if len(apiUrls) == 0 {
 		l.savaLoginLog(in, 0, fmt.Sprintf("用户还没有分配角色或者还没有分配角色权限: %+v", in))
@@ -108,11 +108,12 @@ func (l *LoginLogic) Login(in *sysclient.LoginReq) (*sysclient.LoginResp, error)
 		UserName:    user.UserName, // 用户名
 		AccessToken: jwtToken,      // token
 		ApiUrls:     apiUrls,       // 权限
+		IsAdmin:     isAdmin,       // 是否是超级管理员
 	}, nil
 }
 
 // 3.查询权限(判断是不是超级管理员：角色is_admin:1是超级管理员的角色)
-func (l *LoginLogic) queryApiUrls(userId int64) []string {
+func (l *LoginLogic) queryApiUrls(userId int64) ([]string, string) {
 	db := l.svcCtx.DB
 
 	var apiUrls []string
@@ -120,7 +121,7 @@ func (l *LoginLogic) queryApiUrls(userId int64) []string {
 	if common.IsAdmin(l.ctx, userId, l.svcCtx.DB) {
 		sql := `select background_url from sys_menu where background_url != ''`
 		db.WithContext(l.ctx).Raw(sql).Select("background_url").Scan(&apiUrls)
-		return apiUrls
+		return apiUrls, "1"
 	}
 
 	sql := `select sm.background_url
@@ -131,7 +132,7 @@ func (l *LoginLogic) queryApiUrls(userId int64) []string {
 			where sur.user_id = ?`
 	db.WithContext(l.ctx).Raw(sql, userId).Select("background_url").Scan(&apiUrls)
 
-	return apiUrls
+	return apiUrls, "0"
 }
 
 // 保存登录日志

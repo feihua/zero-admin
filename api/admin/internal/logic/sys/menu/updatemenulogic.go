@@ -2,8 +2,6 @@ package menu
 
 import (
 	"context"
-	"strconv"
-	"strings"
 
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
 	"github.com/feihua/zero-admin/api/admin/internal/common/res"
@@ -61,35 +59,6 @@ func (l *UpdateMenuLogic) UpdateMenu(req *types.UpdateMenuReq) (*types.BaseResp,
 		logc.Errorf(l.ctx, "更新菜单信息失败,参数:%+v,异常:%s", req, err.Error())
 		s, _ := status.FromError(err)
 		return nil, errorx.NewDefaultError(s.Message())
-	}
-
-	// 以下操作是确保权限变更了,超级管理员不用重新登录
-	// 更新的时候 ,有可能修改了权限,所以需要清空除了管理员外,其它人权限
-	key := "zero:mall:token"
-	urls, err := l.svcCtx.Redis.HgetCtx(l.ctx, key, strconv.FormatInt(1, 10))
-	if err != nil {
-		logc.Error(l.ctx, "获取redis连接异常")
-		return nil, errorx.NewDefaultError("获取redis连接异常")
-	}
-
-	fields, err := l.svcCtx.Redis.HkeysCtx(l.ctx, key)
-	if err != nil {
-		logc.Error(l.ctx, "获取redis连接异常")
-		return nil, errorx.NewDefaultError("获取redis连接异常")
-	}
-	_, err = l.svcCtx.Redis.HdelCtx(l.ctx, key, fields...)
-	if err != nil {
-		logc.Error(l.ctx, "获取redis连接异常")
-		return nil, errorx.NewDefaultError("获取redis连接异常")
-	}
-
-	backUrls := strings.Split(urls, ",")
-	backUrls = append(backUrls, req.BackgroundUrl)
-
-	err = l.svcCtx.Redis.HsetCtx(l.ctx, key, strconv.FormatInt(1, 10), strings.Join(backUrls, ","))
-	if err != nil {
-		logc.Error(l.ctx, "获取redis连接异常")
-		return nil, errorx.NewDefaultError("获取redis连接异常")
 	}
 
 	return res.Success()

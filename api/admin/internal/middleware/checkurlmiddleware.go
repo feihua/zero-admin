@@ -1,6 +1,7 @@
 package middleware
 
 import (
+	"context"
 	"encoding/json"
 	"fmt"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
@@ -24,55 +25,111 @@ func (m *CheckUrlMiddleware) Handle(next http.HandlerFunc) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 
 		uri := strings.Split(r.RequestURI, "?")[0]
-		// 判断请求header中是否携带了x-user-id
-		userId := r.Context().Value("userId").(json.Number).String()
-		userName := r.Context().Value("userName").(string)
-		if userId == "" || userName == "" {
-			logc.Errorf(r.Context(), "缺少必要参数x-user-id")
-			httpx.Error(w, errorx.NewDefaultError("缺少必要参数x-user-id"))
+		userIdValue := r.Context().Value("userId")
+		userNameValue := r.Context().Value("userName")
+
+		userId, ok := userIdValue.(json.Number)
+		if !ok || userId == "" {
+			logc.Errorf(r.Context(), "缺少必要参数userId")
+			httpx.Error(w, errorx.NewDefaultError("缺少必要参数userId"))
 			return
 		}
 
-		// 获取用户能访问的url
-		key := "zero:mall:token"
-		urls, err := m.Redis.HgetCtx(r.Context(), key, userId)
+		userName, ok := userNameValue.(string)
+		if !ok || userName == "" {
+			logc.Errorf(r.Context(), "缺少必要参数userName")
+			httpx.Error(w, errorx.NewDefaultError("缺少必要参数userName"))
+			return
+		}
+
+		key := fmt.Sprintf("zero:user:%s", userId)
+		
+		//// 检查用户登录状态
+		loginStatus, err := m.checkLoginStatus(r.Context(), key, userName, uri)
 		if err != nil {
-			logc.Errorf(r.Context(), "用户：%s,获取redis连接异常", userName)
-			httpx.Error(w, errorx.NewDefaultError(fmt.Sprintf("用户：%s,获取redis连接异常", userName)))
+			httpx.Error(w, err)
 			return
 		}
 
-		if len(strings.TrimSpace(urls)) == 0 {
-			logc.Errorf(r.Context(), "用户: %s,还没有登录", userName)
-			httpx.Error(w, errorx.NewDefaultError(fmt.Sprintf("用户: %s,还没有登录,请先登录", userName)))
+		// 如果是管理员，直接放行
+		if loginStatus.isAdmin {
+			next(w, r)
 			return
 		}
 
-		backUrls := strings.Split(fmt.Sprintf("%s,%s", urls, m.ExcludeUrls), ",")
-
-		if !isValueExist(backUrls, uri) {
-			logc.Errorf(r.Context(), "用户: %s,没有访问: %s路径的权限", userName, uri)
-			httpx.Error(w, errorx.NewDefaultError(fmt.Sprintf("用户: %s,没有访问: %s,路径的的权限,请联系管理员", userName, uri)))
+		// 验证用户权限
+		if !loginStatus.hasPermission {
+			logc.Errorf(r.Context(), "用户: %s,没有访问: %s 路径的权限", userName, uri)
+			httpx.Error(w, errorx.NewDefaultError(
+				fmt.Sprintf("用户: %s,没有访问: %s 路径的权限,请联系管理员", userName, uri),
+			))
 			return
 		}
 
+		// 权限验证通过，继续执行下一个处理器
 		next(w, r)
 	}
 }
 
-// isValueExist 检查一个字符串切片中是否存在指定的字符串值。
-// 这个函数通过遍历切片中的每个元素来搜索匹配的字符串。
-// 如果找到匹配项，它会立即返回true，表示值存在。
-// 如果遍历完所有元素都没有找到匹配项，则返回false，表示值不存在。
-//
-// 参数:
-//
-//	arr []string: 要搜索的字符串切片。
-//	value string: 要查找的字符串值。
-//
-// 返回值:
-//
-//	bool: 如果切片中存在指定的值，则返回true，否则返回false。
+type LoginStatus struct {
+	isAdmin       bool
+	hasPermission bool
+}
+
+// checkLoginStatus 检查用户登录状态
+func (m *CheckUrlMiddleware) checkLoginStatus(ctx context.Context, key, userName, uri string) (*LoginStatus, error) {
+	// 检查 token 是否存在
+	exists, err := m.Redis.HexistsCtx(ctx, key, "token")
+	if err != nil {
+		logc.Errorf(ctx, "用户：%s,获取redis连接异常", userName)
+		return nil, errorx.NewDefaultError(fmt.Sprintf("用户：%s,获取redis连接异常", userName))
+	}
+
+	if !exists {
+		logc.Errorf(ctx, "用户：%s,登录已超时", userName)
+		return nil, errorx.NewDefaultError(fmt.Sprintf("用户：%s,登录已超时，请求重新登录", userName))
+	}
+
+	// 获取 token
+	token, err := m.Redis.HgetCtx(ctx, key, "token")
+	if err != nil {
+		logc.Errorf(ctx, "用户：%s,获取redis连接异常", userName)
+		return nil, errorx.NewDefaultError(fmt.Sprintf("用户：%s,获取redis连接异常", userName))
+	}
+
+	if len(strings.TrimSpace(token)) == 0 {
+		logc.Errorf(ctx, "用户: %s,还没有登录", userName)
+		return nil, errorx.NewDefaultError(fmt.Sprintf("用户: %s,还没有登录,请先登录", userName))
+	}
+
+	// 检查是否为管理员
+	isAdmin, err := m.Redis.HgetCtx(ctx, key, "isAdmin")
+	if err != nil {
+		logc.Errorf(ctx, "用户：%s,获取redis连接异常", userName)
+		return nil, errorx.NewDefaultError(fmt.Sprintf("用户：%s,获取redis连接异常", userName))
+	}
+
+	if isAdmin == "1" {
+		return &LoginStatus{isAdmin: true}, nil
+	}
+
+	// 获取用户权限
+	permissions, err := m.Redis.HgetCtx(ctx, key, "permissions")
+	if err != nil {
+		logc.Errorf(ctx, "用户：%s,获取redis连接异常", userName)
+		return nil, errorx.NewDefaultError(fmt.Sprintf("用户：%s,获取redis连接异常", userName))
+	}
+
+	if len(strings.TrimSpace(permissions)) == 0 {
+		logc.Errorf(ctx, "用户: %s,还没有登录", userName)
+		return nil, errorx.NewDefaultError(fmt.Sprintf("用户: %s,还没有登录,请先登录", userName))
+	}
+
+	allUrls := strings.Split(fmt.Sprintf("%s,%s", permissions, m.ExcludeUrls), ",")
+	return &LoginStatus{isAdmin: false, hasPermission: isValueExist(allUrls, uri)}, nil
+}
+
+// bool: 如果切片中存在指定的值，则返回true，否则返回false。
 func isValueExist(arr []string, value string) bool {
 	for _, v := range arr {
 		if v == value {

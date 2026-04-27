@@ -156,11 +156,11 @@ message LoginReq {
 }
 
 message loginResp {
-  int64 id = 1;
-  string userName = 2;
-  string AccessToken = 3;
-  repeated string ApiUrls = 4;
-
+  int64 id = 1; //用户id
+  string userName = 2; //用户名称
+  string AccessToken = 3; //token
+  repeated string ApiUrls = 4;  //接口地址
+  string is_admin = 5;  //是否是超级管理员
 }
 
 message InfoReq {
