@@ -1,6 +1,6 @@
 module github.com/feihua/zero-admin
 
-go 1.25
+go 1.25.4
 
 require (
 	github.com/bytedance/sonic v1.14.2
@@ -14,6 +14,7 @@ require (
 	github.com/ua-parser/uap-go v0.0.0-20250917011043-9c86a9b0f8f0
 	github.com/zeromicro/go-zero v1.9.3
 	go.mongodb.org/mongo-driver v1.17.6
+	go.mongodb.org/mongo-driver/v2 v2.4.0
 	google.golang.org/grpc v1.77.0
 	google.golang.org/protobuf v1.36.10
 	gorm.io/driver/mysql v1.6.0
@@ -67,7 +68,6 @@ require (
 	github.com/mattn/go-isatty v0.0.20 // indirect
 	github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd // indirect
 	github.com/modern-go/reflect2 v1.0.2 // indirect
-	github.com/montanaflynn/stats v0.7.1 // indirect
 	github.com/munnerz/goautoneg v0.0.0-20191010083416-a7dc8b61c822 // indirect
 	github.com/openzipkin/zipkin-go v0.4.3 // indirect
 	github.com/pelletier/go-toml/v2 v2.2.2 // indirect
@@ -89,7 +89,6 @@ require (
 	go.etcd.io/etcd/api/v3 v3.5.15 // indirect
 	go.etcd.io/etcd/client/pkg/v3 v3.5.15 // indirect
 	go.etcd.io/etcd/client/v3 v3.5.15 // indirect
-	go.mongodb.org/mongo-driver/v2 v2.4.0 // indirect
 	go.opentelemetry.io/auto/sdk v1.2.1 // indirect
 	go.opentelemetry.io/otel v1.38.0 // indirect
 	go.opentelemetry.io/otel/exporters/jaeger v1.17.0 // indirect
