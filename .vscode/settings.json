@@ -6,7 +6,12 @@
   },
   "rest-client.environmentVariables": {
     "$shared": {
-      "token":""
+      "token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkZXB0SUQiOjEsImRlcHROYW1lIjoi5rWL6K-V56eR5oqAIiwiZXhwIjoxNzc3MzU0NTY2LCJpYXQiOjE3NzcyNjgxNjYsInVzZXJJZCI6MSwidXNlck5hbWUiOiJhZG1pbiJ9.Vq02a9T08JK9JOumbwsmpoPo2tDCwJe5lQ3leAZhxoM"
+    },
+    "local-admin": {
+      "version": "v2",
+      "host": "http://127.0.0.1:8888",
+      "secretKey": "DEVSECRET"
     },
     "local": {
       "version": "v2",
