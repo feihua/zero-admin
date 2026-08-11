@@ -38,7 +38,6 @@ func newUmsMemberTagRelation(db *gorm.DB, opts ...gen.DOOption) umsMemberTagRela
 	return _umsMemberTagRelation
 }
 
-// umsMemberTagRelation 会员标签关联表
 type umsMemberTagRelation struct {
 	umsMemberTagRelationDo umsMemberTagRelationDo
 

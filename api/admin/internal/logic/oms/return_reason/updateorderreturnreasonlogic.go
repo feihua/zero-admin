@@ -2,6 +2,7 @@ package return_reason
 
 import (
 	"context"
+
 	"github.com/feihua/zero-admin/api/admin/internal/common"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
 	"github.com/feihua/zero-admin/api/admin/internal/svc"
@@ -34,7 +35,7 @@ func NewUpdateOrderReturnReasonLogic(ctx context.Context, svcCtx *svc.ServiceCon
 
 // UpdateOrderReturnReason 更新退货原因
 func (l *UpdateOrderReturnReasonLogic) UpdateOrderReturnReason(req *types.UpdateOrderReturnReasonReq) (resp *types.BaseResp, err error) {
-	userId, err := common.GetUserId(l.ctx)
+	name, err := common.GetUserName(l.ctx)
 	if err != nil {
 		return nil, err
 	}
@@ -43,7 +44,7 @@ func (l *UpdateOrderReturnReasonLogic) UpdateOrderReturnReason(req *types.Update
 		Name:     req.Name,   // 退货类型
 		Sort:     req.Sort,   // 排序
 		Status:   req.Status, // 状态：0->不启用；1->启用
-		UpdateBy: userId,     // 更新人ID
+		UpdateBy: name,       // 更新人ID
 	})
 
 	if err != nil {

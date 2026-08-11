@@ -10,7 +10,7 @@ import (
 
 const TableNameOmsOrderSetting = "oms_order_setting"
 
-// OmsOrderSetting 订单设置表
+// OmsOrderSetting mapped from table <oms_order_setting>
 type OmsOrderSetting struct {
 	ID                  int64      `gorm:"column:id;primaryKey;autoIncrement:true;comment:主键ID" json:"id"`                         // 主键ID
 	FlashOrderOvertime  int32      `gorm:"column:flash_order_overtime;not null;comment:秒杀订单超时关闭时间(分)" json:"flash_order_overtime"` // 秒杀订单超时关闭时间(分)
@@ -18,13 +18,13 @@ type OmsOrderSetting struct {
 	ConfirmOvertime     int32      `gorm:"column:confirm_overtime;not null;comment:发货后自动确认收货时间（天）" json:"confirm_overtime"`        // 发货后自动确认收货时间（天）
 	FinishOvertime      int32      `gorm:"column:finish_overtime;not null;comment:自动完成交易时间，不能申请售后（天）" json:"finish_overtime"`      // 自动完成交易时间，不能申请售后（天）
 	Status              int32      `gorm:"column:status;not null;default:1;comment:状态：0->禁用；1->启用" json:"status"`                  // 状态：0->禁用；1->启用
-	IsDefault           int32      `gorm:"column:is_default;not null;comment:是否默认：0->否；1->是" json:"is_default"`                    // 是否默认：0->否；1->是
+	IsDefault           int32      `gorm:"column:is_default;not null;default:1;comment:是否默认：0->否；1->是" json:"is_default"`          // 是否默认：0->否；1->是
 	CommentOvertime     int32      `gorm:"column:comment_overtime;not null;comment:订单完成后自动好评时间（天）" json:"comment_overtime"`        // 订单完成后自动好评时间（天）
-	CreateBy            int64      `gorm:"column:create_by;not null;comment:创建人ID" json:"create_by"`                               // 创建人ID
+	CreateBy            string     `gorm:"column:create_by;not null;default:''::character varying;comment:创建人ID" json:"create_by"` // 创建人ID
 	CreateTime          time.Time  `gorm:"column:create_time;not null;default:CURRENT_TIMESTAMP;comment:创建时间" json:"create_time"`  // 创建时间
-	UpdateBy            *int64     `gorm:"column:update_by;comment:更新人ID" json:"update_by"`                                        // 更新人ID
+	UpdateBy            string     `gorm:"column:update_by;not null;default:''::character varying;comment:更新人ID" json:"update_by"` // 更新人ID
 	UpdateTime          *time.Time `gorm:"column:update_time;comment:更新时间" json:"update_time"`                                     // 更新时间
-	IsDeleted           int32      `gorm:"column:is_deleted;not null;comment:是否删除" json:"is_deleted"`                              // 是否删除
+	IsDeleted           int32      `gorm:"column:is_deleted;not null;default:1;comment:是否删除(0:否,1:是)" json:"is_deleted"`           // 是否删除(0:否,1:是)
 }
 
 // TableName OmsOrderSetting's table name

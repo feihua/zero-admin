@@ -49,22 +49,21 @@ func newSysDept(db *gorm.DB, opts ...gen.DOOption) sysDept {
 	return _sysDept
 }
 
-// sysDept 部门表
 type sysDept struct {
 	sysDeptDo sysDeptDo
 
 	ALL        field.Asterisk
 	ID         field.Int64  // 部门id
-	ParentID   field.Int64  // 上级部门id
+	ParentID   field.Int64  // 父部门id
 	Ancestors  field.String // 祖级列表
 	DeptName   field.String // 部门名称
 	Sort       field.Int32  // 显示顺序
 	Leader     field.String // 负责人
 	Phone      field.String // 联系电话
 	Email      field.String // 邮箱
-	Status     field.Int32  // 部门状态（0：停用，1:正常）
-	DelFlag    field.Int32  // 删除标志（0代表删除 1代表存在）
-	Remark     field.String // 备注信息
+	Status     field.Int32  // 状态0:停用,1:正常
+	DelFlag    field.Int32  // 删除标志（0:删除,1:存在）
+	Remark     field.String // 备注
 	CreateBy   field.String // 创建者
 	CreateTime field.Time   // 创建时间
 	UpdateBy   field.String // 更新者

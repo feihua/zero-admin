@@ -38,22 +38,23 @@ func NewAddMenuLogic(ctx context.Context, svcCtx *svc.ServiceContext) AddMenuLog
 func (l *AddMenuLogic) AddMenu(req *types.AddMenuReq) (*types.BaseResp, error) {
 	createBy := l.ctx.Value("userName").(string)
 	menuAddReq := sysclient.AddMenuReq{
-		MenuName:      req.MenuName,      // 菜单名称
-		ParentId:      req.ParentId,      // 父菜单ID，一级菜单为0
-		MenuPath:      req.MenuPath,      // 前端路由
-		MenuPerms:     req.MenuPerms,     // 权限标识
-		MenuType:      req.MenuType,      // 类型 0：目录,1：菜单,2：按钮,3：外链
-		MenuIcon:      req.MenuIcon,      // 菜单图标
-		MenuSort:      req.MenuSort,      // 菜单排序
-		CreateBy:      createBy,          // 创建者
-		MenuStatus:    req.MenuStatus,    // 菜单状态
-		IsVisible:     req.IsVisible,     // 是否可见  0：否  1：是
-		Remark:        req.Remark,        // 备注信息
-		VuePath:       req.VuePath,       // vue系统的path
-		VueComponent:  req.VueComponent,  // vue的页面
-		VueIcon:       req.VueIcon,       // vue的图标
-		VueRedirect:   req.VueRedirect,   // vue的路由重定向
-		BackgroundUrl: req.BackgroundUrl, // 接口地址
+		MenuName:     req.MenuName,     // 菜单名称
+		MenuType:     req.MenuType,     // 菜单类型(1:目录,2:菜单,3:按钮)
+		MenuUrl:      req.MenuUrl,      // 路由路径
+		MenuIcon:     req.MenuIcon,     // 菜单图标
+		MenuSort:     req.MenuSort,     // 排序
+		ParentId:     req.ParentId,     // 父id
+		ApiUrl:       req.ApiUrl,       // 接口url
+		Visible:      req.Visible,      // 显示状态（0:隐藏,显示:1）
+		Status:       req.Status,       // 菜单状态(1:正常，0:禁用)
+		Remark:       req.Remark,       // 备注
+		VuePath:      req.VuePath,      // vue的path
+		VueComponent: req.VueComponent, // vue的页面
+		VueIcon:      req.VueIcon,      // vue的图标
+		VueRedirect:  req.VueRedirect,  // vue的路由重定向
+		AngularIcon:  req.AngularIcon,  // angular的图标
+		ReactIcon:    req.ReactIcon,    // antd react的图标
+		CreateBy:     createBy,         // 创建者
 	}
 	if _, err := l.svcCtx.MenuService.AddMenu(l.ctx, &menuAddReq); err != nil {
 		logc.Errorf(l.ctx, "添加菜单信息失败,参数:%+v,异常:%s", req, err.Error())

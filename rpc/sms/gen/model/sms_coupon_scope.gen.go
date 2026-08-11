@@ -10,11 +10,11 @@ import (
 
 const TableNameSmsCouponScope = "sms_coupon_scope"
 
-// SmsCouponScope 优惠券使用范围表
+// SmsCouponScope mapped from table <sms_coupon_scope>
 type SmsCouponScope struct {
 	ID         int64     `gorm:"column:id;primaryKey;autoIncrement:true;comment:主键ID" json:"id"`                        // 主键ID
 	CouponID   int64     `gorm:"column:coupon_id;not null;comment:优惠券ID" json:"coupon_id"`                              // 优惠券ID
-	ScopeType  int32     `gorm:"column:scope_type;not null;comment:范围类型：0-全场，1-分类，2-商品" json:"scope_type"`              // 范围类型：0-全场，1-分类，2-商品
+	ScopeType  int32     `gorm:"column:scope_type;not null;default:1;comment:范围类型：0-全场，1-分类，2-商品" json:"scope_type"`    // 范围类型：0-全场，1-分类，2-商品
 	ScopeID    int64     `gorm:"column:scope_id;not null;comment:范围ID（分类ID或商品ID）" json:"scope_id"`                      // 范围ID（分类ID或商品ID）
 	CreateTime time.Time `gorm:"column:create_time;not null;default:CURRENT_TIMESTAMP;comment:创建时间" json:"create_time"` // 创建时间
 }

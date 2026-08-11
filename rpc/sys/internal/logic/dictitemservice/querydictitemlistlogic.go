@@ -3,6 +3,7 @@ package dictitemservicelogic
 import (
 	"context"
 	"errors"
+
 	"github.com/feihua/zero-admin/pkg/time_util"
 	"github.com/feihua/zero-admin/rpc/sys/gen/query"
 	"github.com/zeromicro/go-zero/core/logc"
@@ -34,17 +35,17 @@ func NewQueryDictItemListLogic(ctx context.Context, svcCtx *svc.ServiceContext) 
 
 // QueryDictItemList 查询字典数据列表
 func (l *QueryDictItemListLogic) QueryDictItemList(in *sysclient.QueryDictItemListReq) (*sysclient.QueryDictItemListResp, error) {
-	q := query.SysDictItem.WithContext(l.ctx)
+	q := query.SysDictData.WithContext(l.ctx)
 
 	if len(in.DictType) > 0 {
-		q = q.Where(query.SysDictItem.DictType.Eq(in.DictType))
+		q = q.Where(query.SysDictData.DictType.Eq(in.DictType))
 	}
 	if len(in.DictLabel) > 0 {
-		q = q.Where(query.SysDictItem.DictLabel.Like("%" + in.DictLabel + "%"))
+		q = q.Where(query.SysDictData.DictLabel.Like("%" + in.DictLabel + "%"))
 	}
 
 	if in.Status != 2 {
-		q = q.Where(query.SysDictItem.Status.Eq(in.Status))
+		q = q.Where(query.SysDictData.Status.Eq(in.Status))
 	}
 
 	result, count, err := q.FindByPage(int((in.PageNum-1)*in.PageSize), int(in.PageSize))
@@ -59,7 +60,7 @@ func (l *QueryDictItemListLogic) QueryDictItemList(in *sysclient.QueryDictItemLi
 	for _, item := range result {
 		list = append(list, &sysclient.DictItemListData{
 			Id:         item.ID,                                 // 字典数据id
-			DictSort:   item.DictSort,                           // 字典排序
+			DictSort:   item.Sort,                               // 字典排序
 			DictLabel:  item.DictLabel,                          // 字典标签
 			DictValue:  item.DictValue,                          // 字典键值
 			DictType:   item.DictType,                           // 字典类型

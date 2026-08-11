@@ -5,8 +5,8 @@ Etcd:
     - 127.0.0.1:2379
   Key: sys.rpc
 
-Mysql:
-  Datasource: root:12341qweqfsd2356@tcp(127.0.0.1:3306)/gozero?charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai
+postgresql:
+  Datasource: host=127.0.0.1 user=root password=123456 dbname=gozero port=5432 sslmode=disable TimeZone=Asia/Shanghai
 
 JWT:
   AccessSecret: ad879037-c7a4-4063-9236-6bfc35d54b7d
@@ -25,6 +25,6 @@ Prometheus:
 Redis:
   Host: 127.0.0.1:6379
   Type: "node"
-  Pass: "123456"
+  Pass: "1234567"
   Tls: false
   Key: "sys:"

@@ -2,6 +2,7 @@ package product_attribute
 
 import (
 	"context"
+
 	"github.com/feihua/zero-admin/api/admin/internal/common"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
 	"github.com/feihua/zero-admin/api/admin/internal/svc"
@@ -34,7 +35,7 @@ func NewUpdateProductAttributeLogic(ctx context.Context, svcCtx *svc.ServiceCont
 
 // UpdateProductAttribute 更新商品属性
 func (l *UpdateProductAttributeLogic) UpdateProductAttribute(req *types.UpdateProductAttributeReq) (resp *types.BaseResp, err error) {
-	userId, err := common.GetUserId(l.ctx)
+	name, err := common.GetUserName(l.ctx)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +52,7 @@ func (l *UpdateProductAttributeLogic) UpdateProductAttribute(req *types.UpdatePr
 		IsShow:       req.IsShow,       // 是否显示
 		Sort:         req.Sort,         // 排序
 		Status:       req.Status,       // 状态：0->禁用；1->启用
-		UpdateBy:     userId,           // 更新人ID
+		UpdateBy:     name,             // 更新人ID
 	})
 
 	if err != nil {

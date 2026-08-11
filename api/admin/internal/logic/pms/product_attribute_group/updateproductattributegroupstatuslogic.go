@@ -2,6 +2,7 @@ package product_attribute_group
 
 import (
 	"context"
+
 	"github.com/feihua/zero-admin/api/admin/internal/common"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
 	"github.com/feihua/zero-admin/api/admin/internal/svc"
@@ -34,14 +35,14 @@ func NewUpdateProductAttributeGroupStatusLogic(ctx context.Context, svcCtx *svc.
 
 // UpdateProductAttributeGroupStatus 更新商品属性分组状态
 func (l *UpdateProductAttributeGroupStatusLogic) UpdateProductAttributeGroupStatus(req *types.UpdateProductAttributeGroupStatusReq) (resp *types.BaseResp, err error) {
-	userId, err := common.GetUserId(l.ctx)
+	name, err := common.GetUserName(l.ctx)
 	if err != nil {
 		return nil, err
 	}
 	_, err = l.svcCtx.ProductAttributeGroupService.UpdateProductAttributeGroupStatus(l.ctx, &pmsclient.UpdateProductAttributeGroupStatusReq{
 		Ids:      req.Ids,    // 主键id
 		Status:   req.Status, // 状态：0->禁用；1->启用
-		UpdateBy: userId,     // 更新人ID
+		UpdateBy: name,       // 更新人ID
 
 	})
 

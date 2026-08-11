@@ -2,7 +2,10 @@
 package main
 
 import (
-	"gorm.io/driver/mysql"
+	"fmt"
+
+	"github.com/zeromicro/go-zero/core/logx"
+	"gorm.io/driver/postgres"
 	"gorm.io/gen"
 	"gorm.io/gorm"
 )
@@ -15,9 +18,20 @@ func main() {
 		FieldNullable: true,
 	})
 
-	var dsn = "root:123456@tcp(127.0.0.1:3306)/gozero?charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai"
+	dsn := "host=129.204.203.29 user=root password=1a2341q!weqfsd2356T dbname=gozero port=5432 sslmode=disable TimeZone=Asia/Shanghai"
 	// Initialize a *gorm.DB instance
-	db, _ := gorm.Open(mysql.Open(dsn))
+	db, _ := gorm.Open(postgres.Open(dsn), &gorm.Config{
+		SkipDefaultTransaction: true,
+		PrepareStmt:            true,
+	})
+
+	var curDB, curSchema string
+	if err := db.Raw("SELECT current_database()").Scan(&curDB).Error; err != nil {
+		fmt.Printf("current_database() query failed: %v", err)
+	}
+	if err := db.Raw("SELECT current_schema()").Scan(&curSchema).Error; err != nil {
+		fmt.Printf("current_schema() query failed: %v", err)
+	}
 
 	// Use the above `*gorm.DB` instance to initialize the generator,
 	// which is required to generate structs from db when using `GenerateModel/GenerateModelAs`
@@ -40,4 +54,11 @@ func main() {
 
 	// Execute the generator
 	g.Execute()
+}
+
+type Writer struct {
+}
+
+func (w Writer) Printf(format string, args ...interface{}) {
+	logx.Infof(format, args...)
 }

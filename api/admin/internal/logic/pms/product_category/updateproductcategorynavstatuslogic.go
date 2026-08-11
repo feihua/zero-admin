@@ -2,6 +2,7 @@ package product_category
 
 import (
 	"context"
+
 	"github.com/feihua/zero-admin/api/admin/internal/common"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
 	"github.com/feihua/zero-admin/rpc/pms/pmsclient"
@@ -29,14 +30,14 @@ func NewUpdateProductCategoryNavStatusLogic(ctx context.Context, svcCtx *svc.Ser
 }
 
 func (l *UpdateProductCategoryNavStatusLogic) UpdateProductCategoryNavStatus(req *types.UpdateProductCategoryStatusReq) (resp *types.BaseResp, err error) {
-	userId, err := common.GetUserId(l.ctx)
+	name, err := common.GetUserName(l.ctx)
 	if err != nil {
 		return nil, err
 	}
 	_, err = l.svcCtx.ProductCategoryService.UpdateCategoryNavStatus(l.ctx, &pmsclient.UpdateProductCategoryStatusReq{
 		Ids:      req.Ids,    //
 		Status:   req.Status, //
-		UpdateBy: userId,
+		UpdateBy: name,
 	})
 
 	if err != nil {

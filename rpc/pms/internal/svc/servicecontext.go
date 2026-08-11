@@ -11,7 +11,7 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 	"github.com/zeromicro/go-zero/core/stores/mon"
 	"github.com/zeromicro/go-zero/core/stores/redis"
-	"gorm.io/driver/mysql"
+	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 	"gorm.io/gorm/logger"
 )
@@ -34,7 +34,7 @@ type ServiceContext struct {
 func NewServiceContext(c config.Config) *ServiceContext {
 	redisKey := c.RpcServerConf.Redis.Key
 	rds := redis.MustNewRedis(c.RpcServerConf.Redis.RedisConf)
-	DB, err := gorm.Open(mysql.Open(c.Mysql.Datasource), &gorm.Config{
+	DB, err := gorm.Open(postgres.Open(c.Postgresql.Datasource), &gorm.Config{
 		SkipDefaultTransaction: true,
 		PrepareStmt:            true,
 		Logger:                 settingLogConfig(),

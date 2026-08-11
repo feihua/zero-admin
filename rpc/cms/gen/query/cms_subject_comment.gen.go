@@ -41,7 +41,6 @@ func newCmsSubjectComment(db *gorm.DB, opts ...gen.DOOption) cmsSubjectComment {
 	return _cmsSubjectComment
 }
 
-// cmsSubjectComment 专题评论表
 type cmsSubjectComment struct {
 	cmsSubjectCommentDo cmsSubjectCommentDo
 

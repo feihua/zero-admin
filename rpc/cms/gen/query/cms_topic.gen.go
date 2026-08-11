@@ -49,7 +49,6 @@ func newCmsTopic(db *gorm.DB, opts ...gen.DOOption) cmsTopic {
 	return _cmsTopic
 }
 
-// cmsTopic 话题表
 type cmsTopic struct {
 	cmsTopicDo cmsTopicDo
 

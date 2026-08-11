@@ -112,10 +112,7 @@ type (
 		Email         string  `json:"email"` //用户邮箱
 		Status        int32   `json:"status"` //状态(1:正常，0:禁用)
 		DeptId        int64   `json:"deptId"` //部门ID
-		LoginIp       string  `json:"loginIp"` //最后登录IP
-		LoginDate     string  `json:"loginDate"` //最后登录时间
-		LoginBrowser  string  `json:"loginBrowser"` //浏览器类型
-		LoginOs       string  `json:"loginOs"` //操作系统
+		LastLoginInfo string  `json:"lastLoginInfo"` //最后登录信息
 		PwdUpdateDate string  `json:"pwdUpdateDate"` //密码最后更新时间
 		Remark        string  `json:"remark"` //备注
 		DelFlag       int32   `json:"delFlag"` //删除标志（0代表删除 1代表存在）
@@ -152,10 +149,7 @@ type (
 		Email         string `json:"email"` //用户邮箱
 		Status        int32  `json:"status"` //状态(1:正常，0:禁用)
 		DeptId        int64  `json:"deptId"` //部门ID
-		LoginIp       string `json:"loginIp"` //最后登录IP
-		LoginDate     string `json:"loginDate"` //最后登录时间
-		LoginBrowser  string `json:"loginBrowser"` //浏览器类型
-		LoginOs       string `json:"loginOs"` //操作系统
+		LastLoginInfo string `json:"lastLoginInfo"` //最后登录信息
 		PwdUpdateDate string `json:"pwdUpdateDate"` //密码最后更新时间
 		Remark        string `json:"remark"` //备注
 		DelFlag       int32  `json:"delFlag"` //删除标志（0代表删除 1代表存在）

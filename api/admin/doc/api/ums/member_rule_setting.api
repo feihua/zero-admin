@@ -44,9 +44,9 @@ type (
 		MaxPointPerOrder int32  `json:"maxPointPerOrder"` //每笔订单最高获取点数
 		RuleType         int32  `json:"ruleType"` //类型：0->积分规则；1->成长值规则
 		Status           int32  `json:"status"` //状态：0->禁用；1->启用
-		CreateBy         int64  `json:"createBy"` //创建者
+		CreateBy         string `json:"createBy"` //创建者
 		CreateTime       string `json:"createTime"` //创建时间
-		UpdateBy         int64  `json:"updateBy"` //更新者
+		UpdateBy         string `json:"updateBy"` //更新者
 		UpdateTime       string `json:"updateTime"` //更新时间
 	}
 	QueryMemberRuleSettingDetailResp {
@@ -68,9 +68,9 @@ type (
 		MaxPointPerOrder int32  `json:"maxPointPerOrder"` //每笔订单最高获取点数
 		RuleType         int32  `json:"ruleType"` //类型：0->积分规则；1->成长值规则
 		Status           int32  `json:"status"` //状态：0->禁用；1->启用
-		CreateBy         int64  `json:"createBy"` //创建者
+		CreateBy         string `json:"createBy"` //创建者
 		CreateTime       string `json:"createTime"` //创建时间
-		UpdateBy         int64  `json:"updateBy"` //更新者
+		UpdateBy         string `json:"updateBy"` //更新者
 		UpdateTime       string `json:"updateTime"` //更新时间
 	}
 	QueryMemberRuleSettingListResp {

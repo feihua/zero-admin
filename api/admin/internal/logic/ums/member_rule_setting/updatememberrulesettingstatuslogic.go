@@ -2,6 +2,7 @@ package member_rule_setting
 
 import (
 	"context"
+
 	"github.com/feihua/zero-admin/api/admin/internal/common"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
 	"github.com/feihua/zero-admin/api/admin/internal/common/res"
@@ -31,14 +32,14 @@ func NewUpdateMemberRuleSettingStatusLogic(ctx context.Context, svcCtx *svc.Serv
 
 // UpdateMemberRuleSettingStatus 更新会员积分规则状态
 func (l *UpdateMemberRuleSettingStatusLogic) UpdateMemberRuleSettingStatus(req *types.UpdateMemberRuleSettingStatusReq) (resp *types.BaseResp, err error) {
-	userId, err := common.GetUserId(l.ctx)
+	name, err := common.GetUserName(l.ctx)
 	if err != nil {
 		return nil, err
 	}
 	_, err = l.svcCtx.MemberRuleSettingService.UpdateMemberRuleSettingStatus(l.ctx, &umsclient.UpdateMemberRuleSettingStatusReq{
 		Id:       req.Id,
 		Status:   req.Status,
-		UpdateBy: userId,
+		UpdateBy: name,
 	})
 
 	if err != nil {

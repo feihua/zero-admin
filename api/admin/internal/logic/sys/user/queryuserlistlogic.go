@@ -2,6 +2,7 @@ package user
 
 import (
 	"context"
+
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
 	"github.com/feihua/zero-admin/api/admin/internal/svc"
 	"github.com/feihua/zero-admin/api/admin/internal/types"
@@ -62,10 +63,7 @@ func (l *QueryUserListLogic) QueryUserList(req *types.QueryUserListReq) (*types.
 			Email:         detail.Email,         // 用户邮箱
 			Status:        detail.Status,        // 状态(1:正常，0:禁用)
 			DeptId:        detail.DeptId,        // 部门ID
-			LoginIp:       detail.LoginIp,       // 最后登录IP
-			LoginDate:     detail.LoginDate,     // 最后登录时间
-			LoginBrowser:  detail.LoginBrowser,  // 浏览器类型
-			LoginOs:       detail.LoginOs,       // 操作系统
+			LastLoginInfo: detail.LastLoginInfo, // 最后登录信息
 			PwdUpdateDate: detail.PwdUpdateDate, // 密码最后更新时间
 			Remark:        detail.Remark,        // 备注
 			DelFlag:       detail.DelFlag,       // 删除标志（0代表删除 1代表存在）

@@ -35,7 +35,7 @@ func NewUpdateCouponLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Upda
 
 // UpdateCoupon 更新优惠券
 func (l *UpdateCouponLogic) UpdateCoupon(req *types.UpdateCouponReq) (resp *types.BaseResp, err error) {
-	userId, err := common.GetUserId(l.ctx)
+	name, err := common.GetUserName(l.ctx)
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ func (l *UpdateCouponLogic) UpdateCoupon(req *types.UpdateCouponReq) (resp *type
 		Status:        req.Status,        // 状态：0-未开始，1-进行中，2-已结束，3-已取消
 		IsEnabled:     req.IsEnabled,     // 是否启用
 		Description:   req.Description,   // 使用说明
-		UpdateBy:      userId,            // 更新人ID
+		UpdateBy:      name,              // 更新人ID
 	}
 
 	if len(req.ScopeData) > 0 {

@@ -33,6 +33,7 @@ func newSysPost(db *gorm.DB, opts ...gen.DOOption) sysPost {
 	_sysPost.PostName = field.NewString(tableName, "post_name")
 	_sysPost.Sort = field.NewInt32(tableName, "sort")
 	_sysPost.Status = field.NewInt32(tableName, "status")
+	_sysPost.DelFlag = field.NewInt32(tableName, "del_flag")
 	_sysPost.Remark = field.NewString(tableName, "remark")
 	_sysPost.CreateBy = field.NewString(tableName, "create_by")
 	_sysPost.CreateTime = field.NewTime(tableName, "create_time")
@@ -44,7 +45,6 @@ func newSysPost(db *gorm.DB, opts ...gen.DOOption) sysPost {
 	return _sysPost
 }
 
-// sysPost 岗位信息表
 type sysPost struct {
 	sysPostDo sysPostDo
 
@@ -54,6 +54,7 @@ type sysPost struct {
 	PostName   field.String // 岗位名称
 	Sort       field.Int32  // 显示顺序
 	Status     field.Int32  // 岗位状态（0：停用，1:正常）
+	DelFlag    field.Int32  // 删除标志（0:删除,1:存在）
 	Remark     field.String // 备注
 	CreateBy   field.String // 创建者
 	CreateTime field.Time   // 创建时间
@@ -80,6 +81,7 @@ func (s *sysPost) updateTableName(table string) *sysPost {
 	s.PostName = field.NewString(table, "post_name")
 	s.Sort = field.NewInt32(table, "sort")
 	s.Status = field.NewInt32(table, "status")
+	s.DelFlag = field.NewInt32(table, "del_flag")
 	s.Remark = field.NewString(table, "remark")
 	s.CreateBy = field.NewString(table, "create_by")
 	s.CreateTime = field.NewTime(table, "create_time")
@@ -109,12 +111,13 @@ func (s *sysPost) GetFieldByName(fieldName string) (field.OrderExpr, bool) {
 }
 
 func (s *sysPost) fillFieldMap() {
-	s.fieldMap = make(map[string]field.Expr, 10)
+	s.fieldMap = make(map[string]field.Expr, 11)
 	s.fieldMap["id"] = s.ID
 	s.fieldMap["post_code"] = s.PostCode
 	s.fieldMap["post_name"] = s.PostName
 	s.fieldMap["sort"] = s.Sort
 	s.fieldMap["status"] = s.Status
+	s.fieldMap["del_flag"] = s.DelFlag
 	s.fieldMap["remark"] = s.Remark
 	s.fieldMap["create_by"] = s.CreateBy
 	s.fieldMap["create_time"] = s.CreateTime

@@ -115,10 +115,6 @@ func (l *UpdateUserLogic) UpdateUser(in *sysclient.UpdateUserReq) (*sysclient.Up
 		Email:         in.Email,           // 用户邮箱
 		Status:        in.Status,          // 状态(1:正常，0:禁用)
 		DeptID:        in.DeptId,          // 部门ID
-		LoginIP:       item.LoginIP,       // 最后登录IP
-		LoginDate:     item.LoginDate,     // 最后登录时间
-		LoginBrowser:  item.LoginBrowser,  // 浏览器类型
-		LoginOs:       item.LoginOs,       // 操作系统
 		PwdUpdateDate: item.PwdUpdateDate, // 密码最后更新时间
 		Remark:        in.Remark,          // 备注
 		DelFlag:       item.DelFlag,       // 删除标志（0代表删除 1代表存在）

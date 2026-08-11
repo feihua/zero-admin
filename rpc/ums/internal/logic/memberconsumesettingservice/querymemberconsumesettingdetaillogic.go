@@ -3,7 +3,7 @@ package memberconsumesettingservicelogic
 import (
 	"context"
 	"errors"
-	"github.com/feihua/zero-admin/pkg/pointerprocess"
+
 	"github.com/feihua/zero-admin/pkg/time_util"
 	"github.com/feihua/zero-admin/rpc/ums/gen/query"
 	"github.com/feihua/zero-admin/rpc/ums/internal/svc"
@@ -46,16 +46,16 @@ func (l *QueryMemberConsumeSettingDetailLogic) QueryMemberConsumeSettingDetail(i
 	}
 
 	data := &umsclient.QueryMemberConsumeSettingDetailResp{
-		Id:                 item.ID,                                          //
-		DeductionPerAmount: item.DeductionPerAmount,                          // 每一元需要抵扣的积分数量
-		MaxPercentPerOrder: item.MaxPercentPerOrder,                          // 每笔订单最高抵用百分比
-		UseUnit:            item.UseUnit,                                     // 每次使用积分最小单位100
-		CouponStatus:       item.CouponStatus,                                // 是否可以和优惠券同用；0->不可以；1->可以
-		Status:             item.Status,                                      // 状态：0->禁用；1->启用
-		CreateBy:           item.CreateBy,                                    // 创建人ID
-		CreateTime:         time_util.TimeToStr(item.CreateTime),             // 创建时间
-		UpdateBy:           pointerprocess.DefaltData(item.UpdateBy).(int64), // 更新人ID
-		UpdateTime:         time_util.TimeToString(item.UpdateTime),          // 更新时间
+		Id:                 item.ID,                                 //
+		DeductionPerAmount: item.DeductionPerAmount,                 // 每一元需要抵扣的积分数量
+		MaxPercentPerOrder: item.MaxPercentPerOrder,                 // 每笔订单最高抵用百分比
+		UseUnit:            item.UseUnit,                            // 每次使用积分最小单位100
+		CouponStatus:       item.CouponStatus,                       // 是否可以和优惠券同用；0->不可以；1->可以
+		Status:             item.Status,                             // 状态：0->禁用；1->启用
+		CreateBy:           item.CreateBy,                           // 创建人ID
+		CreateTime:         time_util.TimeToStr(item.CreateTime),    // 创建时间
+		UpdateBy:           item.UpdateBy,                           // 更新人ID
+		UpdateTime:         time_util.TimeToString(item.UpdateTime), // 更新时间
 	}
 
 	return data, nil

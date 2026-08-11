@@ -84,10 +84,6 @@ func (l *QueryUserDetailLogic) QueryUserDetail(in *sysclient.QueryUserDetailReq)
 		Email:         item.Email,                                 // 用户邮箱
 		Status:        item.Status,                                // 状态(1:正常，0:禁用)
 		DeptId:        item.DeptID,                                // 部门ID
-		LoginIp:       item.LoginIP,                               // 最后登录IP
-		LoginDate:     time_util.TimeToString(item.LoginDate),     // 最后登录时间
-		LoginBrowser:  item.LoginBrowser,                          // 浏览器类型
-		LoginOs:       item.LoginOs,                               // 操作系统
 		PwdUpdateDate: time_util.TimeToString(item.PwdUpdateDate), // 密码最后更新时间
 		Remark:        item.Remark,                                // 备注
 		DelFlag:       item.DelFlag,                               // 删除标志（0代表删除 1代表存在）
@@ -98,7 +94,7 @@ func (l *QueryUserDetailLogic) QueryUserDetail(in *sysclient.QueryUserDetailReq)
 		PostIds:       postIds,                                    // 岗位id
 		RoleIds:       roleIds,                                    // 角色id
 	}
-
+	_ = sonic.Unmarshal(item.LastLoginInfo, data.LastLoginInfo)
 	value, _ := sonic.Marshal(data)
 	filed := strconv.FormatInt(item.ID, 10)
 	_ = l.svcCtx.Redis.HsetCtx(l.ctx, key, filed, string(value))

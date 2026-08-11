@@ -19,7 +19,7 @@ message AddMemberTaskReq {
   string end_time = 11; //任务结束时间
   int32 status = 12; //状态：0-禁用，1-启用
   int32 sort = 13; //排序
-  int64 create_by = 14; //创建人ID
+  string create_by = 14; //创建人ID
 }
 
 message AddMemberTaskResp {
@@ -50,7 +50,7 @@ message UpdateMemberTaskReq {
   string end_time = 11; //任务结束时间
   int32 status = 12; //状态：0-禁用，1-启用
   int32 sort = 13; //排序
-  int64 update_by = 16; //更新人ID
+  string update_by = 16; //更新人ID
 }
 
 message UpdateMemberTaskResp {
@@ -61,7 +61,7 @@ message UpdateMemberTaskResp {
 message UpdateMemberTaskStatusReq {
   repeated int64 ids = 1; //主键ID
   int32 status = 12; //状态：0-禁用，1-启用
-  int64 update_by = 16; //更新人ID
+  string update_by = 16; //更新人ID
 }
 
 message UpdateMemberTaskStatusResp {
@@ -87,9 +87,9 @@ message QueryMemberTaskDetailResp {
   string end_time = 11; //任务结束时间
   int32 status = 12; //状态：0-禁用，1-启用
   int32 sort = 13; //排序
-  int64 create_by = 14; //创建人ID
+  string create_by = 14; //创建人ID
   string create_time = 15; //创建时间
-  int64 update_by = 16; //更新人ID
+  string update_by = 16; //更新人ID
   string update_time = 17; //更新时间
 
 }
@@ -120,9 +120,9 @@ message MemberTaskListData {
   string end_time = 11; //任务结束时间
   int32 status = 12; //状态：0-禁用，1-启用
   int32 sort = 13; //排序
-  int64 create_by = 14; //创建人ID
+  string create_by = 14; //创建人ID
   string create_time = 15; //创建时间
-  int64 update_by = 16; //更新人ID
+  string update_by = 16; //更新人ID
   string update_time = 17; //更新时间
 
 }

@@ -3,12 +3,13 @@ package dictitemservicelogic
 import (
 	"context"
 	"errors"
+	"strconv"
+
 	"github.com/bytedance/sonic"
 	"github.com/feihua/zero-admin/pkg/time_util"
 	"github.com/feihua/zero-admin/rpc/sys/gen/query"
 	"github.com/zeromicro/go-zero/core/logc"
 	"gorm.io/gorm"
-	"strconv"
 
 	"github.com/feihua/zero-admin/rpc/sys/internal/svc"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
@@ -46,7 +47,7 @@ func (l *QueryDictItemDetailLogic) QueryDictItemDetail(in *sysclient.QueryDictIt
 	if sonic.Unmarshal([]byte(cachedData), &cached) == nil {
 		return &cached, nil
 	}
-	item, err := query.SysDictItem.WithContext(l.ctx).Where(query.SysDictItem.ID.Eq(in.Id)).First()
+	item, err := query.SysDictData.WithContext(l.ctx).Where(query.SysDictData.ID.Eq(in.Id)).First()
 
 	// 1.判断字典数据是否存在
 	switch {
@@ -60,7 +61,7 @@ func (l *QueryDictItemDetailLogic) QueryDictItemDetail(in *sysclient.QueryDictIt
 
 	data := &sysclient.QueryDictItemDetailResp{
 		Id:         item.ID,                                 // 字典数据id
-		DictSort:   item.DictSort,                           // 字典排序
+		DictSort:   item.Sort,                               // 字典排序
 		DictLabel:  item.DictLabel,                          // 字典标签
 		DictValue:  item.DictValue,                          // 字典键值
 		DictType:   item.DictType,                           // 字典类型

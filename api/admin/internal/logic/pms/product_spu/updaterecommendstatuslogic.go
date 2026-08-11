@@ -2,6 +2,7 @@ package product_spu
 
 import (
 	"context"
+
 	"github.com/feihua/zero-admin/api/admin/internal/common"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
 	"github.com/feihua/zero-admin/api/admin/internal/common/res"
@@ -36,14 +37,14 @@ func NewUpdateRecommendStatusLogic(ctx context.Context, svcCtx *svc.ServiceConte
 
 // UpdateRecommendStatus 推荐商品
 func (l *UpdateRecommendStatusLogic) UpdateRecommendStatus(req *types.UpdateProductSpuStatusReq) (resp *types.BaseResp, err error) {
-	userId, err := common.GetUserId(l.ctx)
+	name, err := common.GetUserName(l.ctx)
 	if err != nil {
 		return nil, err
 	}
 	_, err = l.svcCtx.ProductSpuService.UpdateRecommendStatus(l.ctx, &pmsclient.UpdateProductSpuStatusReq{
 		Ids:      req.Ids,
 		Status:   req.Status,
-		UpdateBy: userId,
+		UpdateBy: name,
 	})
 
 	if err != nil {

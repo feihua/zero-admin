@@ -2,6 +2,7 @@ package seckill_product
 
 import (
 	"context"
+
 	"github.com/feihua/zero-admin/api/admin/internal/common"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
 	"github.com/feihua/zero-admin/api/admin/internal/svc"
@@ -34,7 +35,7 @@ func NewUpdateSeckillProductLogic(ctx context.Context, svcCtx *svc.ServiceContex
 
 // UpdateSeckillProduct 更新秒杀商品
 func (l *UpdateSeckillProductLogic) UpdateSeckillProduct(req *types.UpdateSeckillProductReq) (resp *types.BaseResp, err error) {
-	userId, err := common.GetUserId(l.ctx)
+	name, err := common.GetUserName(l.ctx)
 	if err != nil {
 		return nil, err
 	}
@@ -50,7 +51,7 @@ func (l *UpdateSeckillProductLogic) UpdateSeckillProduct(req *types.UpdateSeckil
 		PerLimit:     req.PerLimit,     // 每人限购数量
 		Sort:         req.Sort,         // 排序
 		Status:       req.Status,       // 状态：0-未上架，1-已上架
-		UpdateBy:     userId,           // 更新人ID
+		UpdateBy:     name,             // 更新人ID
 	})
 
 	if err != nil {

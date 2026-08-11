@@ -38,7 +38,6 @@ func newUmsMemberTaskRelation(db *gorm.DB, opts ...gen.DOOption) umsMemberTaskRe
 	return _umsMemberTaskRelation
 }
 
-// umsMemberTaskRelation 会员任务关联表
 type umsMemberTaskRelation struct {
 	umsMemberTaskRelationDo umsMemberTaskRelationDo
 

@@ -44,7 +44,6 @@ func newCmsPreferredArea(db *gorm.DB, opts ...gen.DOOption) cmsPreferredArea {
 	return _cmsPreferredArea
 }
 
-// cmsPreferredArea 优选专区
 type cmsPreferredArea struct {
 	cmsPreferredAreaDo cmsPreferredAreaDo
 

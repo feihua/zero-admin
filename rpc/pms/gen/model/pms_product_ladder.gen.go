@@ -6,7 +6,7 @@ package model
 
 const TableNamePmsProductLadder = "pms_product_ladder"
 
-// PmsProductLadder 产品阶梯价格表(只针对同商品)
+// PmsProductLadder mapped from table <pms_product_ladder>
 type PmsProductLadder struct {
 	ID        int64 `gorm:"column:id;primaryKey;autoIncrement:true" json:"id"`
 	ProductID int64 `gorm:"column:product_id;not null;comment:商品id" json:"product_id"` // 商品id

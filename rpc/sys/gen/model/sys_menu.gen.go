@@ -10,29 +10,31 @@ import (
 
 const TableNameSysMenu = "sys_menu"
 
-// SysMenu 菜单信息表
+// SysMenu mapped from table <sys_menu>
 type SysMenu struct {
-	ID            int64      `gorm:"column:id;primaryKey;autoIncrement:true;comment:菜单id" json:"id"`                        // 菜单id
-	MenuName      string     `gorm:"column:menu_name;not null;comment:菜单名称" json:"menu_name"`                               // 菜单名称
-	ParentID      int64      `gorm:"column:parent_id;not null;comment:父菜单ID，一级菜单为0" json:"parent_id"`                       // 父菜单ID，一级菜单为0
-	MenuPath      string     `gorm:"column:menu_path;not null;comment:前端路由" json:"menu_path"`                               // 前端路由
-	MenuPerms     string     `gorm:"column:menu_perms;not null;comment:权限标识" json:"menu_perms"`                             // 权限标识
-	MenuType      int32      `gorm:"column:menu_type;not null;comment:类型 0：目录,1：菜单,2：按钮,3：外链" json:"menu_type"`             // 类型 0：目录,1：菜单,2：按钮,3：外链
-	MenuIcon      string     `gorm:"column:menu_icon;not null;comment:菜单图标" json:"menu_icon"`                               // 菜单图标
-	MenuSort      int32      `gorm:"column:menu_sort;not null;comment:菜单排序" json:"menu_sort"`                               // 菜单排序
-	CreateBy      string     `gorm:"column:create_by;not null;comment:创建者" json:"create_by"`                                // 创建者
-	CreateTime    time.Time  `gorm:"column:create_time;not null;default:CURRENT_TIMESTAMP;comment:创建时间" json:"create_time"` // 创建时间
-	UpdateBy      string     `gorm:"column:update_by;not null;comment:更新者" json:"update_by"`                                // 更新者
-	UpdateTime    *time.Time `gorm:"column:update_time;comment:更新时间" json:"update_time"`                                    // 更新时间
-	MenuStatus    int32      `gorm:"column:menu_status;not null;default:1;comment:菜单状态" json:"menu_status"`                 // 菜单状态
-	IsDeleted     int32      `gorm:"column:is_deleted;not null;default:1;comment:是否删除  0：否  1：是" json:"is_deleted"`         // 是否删除  0：否  1：是
-	IsVisible     int32      `gorm:"column:is_visible;not null;default:1;comment:是否可见  0：否  1：是" json:"is_visible"`         // 是否可见  0：否  1：是
-	Remark        string     `gorm:"column:remark;not null;comment:备注信息" json:"remark"`                                     // 备注信息
-	VuePath       string     `gorm:"column:vue_path;not null;comment:vue系统的path" json:"vue_path"`                           // vue系统的path
-	VueComponent  string     `gorm:"column:vue_component;not null;comment:vue的页面" json:"vue_component"`                     // vue的页面
-	VueIcon       string     `gorm:"column:vue_icon;not null;comment:vue的图标" json:"vue_icon"`                               // vue的图标
-	VueRedirect   string     `gorm:"column:vue_redirect;not null;comment:vue的路由重定向" json:"vue_redirect"`                    // vue的路由重定向
-	BackgroundURL string     `gorm:"column:background_url;not null;comment:接口地址" json:"background_url"`                     // 接口地址
+	ID           int64      `gorm:"column:id;primaryKey;autoIncrement:true;comment:主键" json:"id"`                                      // 主键
+	MenuName     string     `gorm:"column:menu_name;not null;comment:菜单名称" json:"menu_name"`                                           // 菜单名称
+	Ancestors    string     `gorm:"column:ancestors;not null;default:''::character varying;comment:祖级列表" json:"ancestors"`             // 祖级列表
+	MenuType     int32      `gorm:"column:menu_type;not null;default:1;comment:菜单类型(1:目录,2:菜单,3:按钮)" json:"menu_type"`                 // 菜单类型(1:目录,2:菜单,3:按钮)
+	MenuURL      string     `gorm:"column:menu_url;not null;default:''::character varying;comment:路由路径" json:"menu_url"`               // 路由路径
+	MenuIcon     string     `gorm:"column:menu_icon;not null;default:''::character varying;comment:菜单图标" json:"menu_icon"`             // 菜单图标
+	MenuSort     int32      `gorm:"column:menu_sort;not null;default:1;comment:排序" json:"menu_sort"`                                   // 排序
+	ParentID     int64      `gorm:"column:parent_id;not null;comment:父id" json:"parent_id"`                                            // 父id
+	APIURL       string     `gorm:"column:api_url;not null;default:''::character varying;comment:接口url" json:"api_url"`                // 接口url
+	Visible      int32      `gorm:"column:visible;not null;default:1;comment:显示状态（0:隐藏,显示:1）" json:"visible"`                          // 显示状态（0:隐藏,显示:1）
+	Status       int32      `gorm:"column:status;not null;default:1;comment:菜单状态(1:正常，0:禁用)" json:"status"`                            // 菜单状态(1:正常，0:禁用)
+	DelFlag      int32      `gorm:"column:del_flag;not null;default:1;comment:删除标志（0:删除,1:存在）" json:"del_flag"`                        // 删除标志（0:删除,1:存在）
+	Remark       string     `gorm:"column:remark;not null;default:''::character varying;comment:备注" json:"remark"`                     // 备注
+	VuePath      string     `gorm:"column:vue_path;not null;default:''::character varying;comment:vue的path" json:"vue_path"`           // vue的path
+	VueComponent string     `gorm:"column:vue_component;not null;default:''::character varying;comment:vue的页面" json:"vue_component"`   // vue的页面
+	VueIcon      string     `gorm:"column:vue_icon;not null;default:''::character varying;comment:vue的图标" json:"vue_icon"`             // vue的图标
+	VueRedirect  string     `gorm:"column:vue_redirect;not null;default:''::character varying;comment:vue的路由重定向" json:"vue_redirect"`  // vue的路由重定向
+	AngularIcon  string     `gorm:"column:angular_icon;not null;default:''::character varying;comment:angular的图标" json:"angular_icon"` // angular的图标
+	ReactIcon    string     `gorm:"column:react_icon;not null;default:''::character varying;comment:antd react的图标" json:"react_icon"`  // antd react的图标
+	CreateBy     string     `gorm:"column:create_by;not null;default:''::character varying;comment:创建者" json:"create_by"`              // 创建者
+	CreateTime   time.Time  `gorm:"column:create_time;not null;default:CURRENT_TIMESTAMP;comment:创建时间" json:"create_time"`             // 创建时间
+	UpdateBy     string     `gorm:"column:update_by;not null;default:''::character varying;comment:更新者" json:"update_by"`              // 更新者
+	UpdateTime   *time.Time `gorm:"column:update_time;comment:更新时间" json:"update_time"`                                                // 更新时间
 }
 
 // TableName SysMenu's table name

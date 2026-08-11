@@ -30,57 +30,60 @@ func newSysMenu(db *gorm.DB, opts ...gen.DOOption) sysMenu {
 	_sysMenu.ALL = field.NewAsterisk(tableName)
 	_sysMenu.ID = field.NewInt64(tableName, "id")
 	_sysMenu.MenuName = field.NewString(tableName, "menu_name")
-	_sysMenu.ParentID = field.NewInt64(tableName, "parent_id")
-	_sysMenu.MenuPath = field.NewString(tableName, "menu_path")
-	_sysMenu.MenuPerms = field.NewString(tableName, "menu_perms")
+	_sysMenu.Ancestors = field.NewString(tableName, "ancestors")
 	_sysMenu.MenuType = field.NewInt32(tableName, "menu_type")
+	_sysMenu.MenuURL = field.NewString(tableName, "menu_url")
 	_sysMenu.MenuIcon = field.NewString(tableName, "menu_icon")
 	_sysMenu.MenuSort = field.NewInt32(tableName, "menu_sort")
-	_sysMenu.CreateBy = field.NewString(tableName, "create_by")
-	_sysMenu.CreateTime = field.NewTime(tableName, "create_time")
-	_sysMenu.UpdateBy = field.NewString(tableName, "update_by")
-	_sysMenu.UpdateTime = field.NewTime(tableName, "update_time")
-	_sysMenu.MenuStatus = field.NewInt32(tableName, "menu_status")
-	_sysMenu.IsDeleted = field.NewInt32(tableName, "is_deleted")
-	_sysMenu.IsVisible = field.NewInt32(tableName, "is_visible")
+	_sysMenu.ParentID = field.NewInt64(tableName, "parent_id")
+	_sysMenu.APIURL = field.NewString(tableName, "api_url")
+	_sysMenu.Visible = field.NewInt32(tableName, "visible")
+	_sysMenu.Status = field.NewInt32(tableName, "status")
+	_sysMenu.DelFlag = field.NewInt32(tableName, "del_flag")
 	_sysMenu.Remark = field.NewString(tableName, "remark")
 	_sysMenu.VuePath = field.NewString(tableName, "vue_path")
 	_sysMenu.VueComponent = field.NewString(tableName, "vue_component")
 	_sysMenu.VueIcon = field.NewString(tableName, "vue_icon")
 	_sysMenu.VueRedirect = field.NewString(tableName, "vue_redirect")
-	_sysMenu.BackgroundURL = field.NewString(tableName, "background_url")
+	_sysMenu.AngularIcon = field.NewString(tableName, "angular_icon")
+	_sysMenu.ReactIcon = field.NewString(tableName, "react_icon")
+	_sysMenu.CreateBy = field.NewString(tableName, "create_by")
+	_sysMenu.CreateTime = field.NewTime(tableName, "create_time")
+	_sysMenu.UpdateBy = field.NewString(tableName, "update_by")
+	_sysMenu.UpdateTime = field.NewTime(tableName, "update_time")
 
 	_sysMenu.fillFieldMap()
 
 	return _sysMenu
 }
 
-// sysMenu 菜单信息表
 type sysMenu struct {
 	sysMenuDo sysMenuDo
 
-	ALL           field.Asterisk
-	ID            field.Int64  // 菜单id
-	MenuName      field.String // 菜单名称
-	ParentID      field.Int64  // 父菜单ID，一级菜单为0
-	MenuPath      field.String // 前端路由
-	MenuPerms     field.String // 权限标识
-	MenuType      field.Int32  // 类型 0：目录,1：菜单,2：按钮,3：外链
-	MenuIcon      field.String // 菜单图标
-	MenuSort      field.Int32  // 菜单排序
-	CreateBy      field.String // 创建者
-	CreateTime    field.Time   // 创建时间
-	UpdateBy      field.String // 更新者
-	UpdateTime    field.Time   // 更新时间
-	MenuStatus    field.Int32  // 菜单状态
-	IsDeleted     field.Int32  // 是否删除  0：否  1：是
-	IsVisible     field.Int32  // 是否可见  0：否  1：是
-	Remark        field.String // 备注信息
-	VuePath       field.String // vue系统的path
-	VueComponent  field.String // vue的页面
-	VueIcon       field.String // vue的图标
-	VueRedirect   field.String // vue的路由重定向
-	BackgroundURL field.String // 接口地址
+	ALL          field.Asterisk
+	ID           field.Int64  // 主键
+	MenuName     field.String // 菜单名称
+	Ancestors    field.String // 祖级列表
+	MenuType     field.Int32  // 菜单类型(1:目录,2:菜单,3:按钮)
+	MenuURL      field.String // 路由路径
+	MenuIcon     field.String // 菜单图标
+	MenuSort     field.Int32  // 排序
+	ParentID     field.Int64  // 父id
+	APIURL       field.String // 接口url
+	Visible      field.Int32  // 显示状态（0:隐藏,显示:1）
+	Status       field.Int32  // 菜单状态(1:正常，0:禁用)
+	DelFlag      field.Int32  // 删除标志（0:删除,1:存在）
+	Remark       field.String // 备注
+	VuePath      field.String // vue的path
+	VueComponent field.String // vue的页面
+	VueIcon      field.String // vue的图标
+	VueRedirect  field.String // vue的路由重定向
+	AngularIcon  field.String // angular的图标
+	ReactIcon    field.String // antd react的图标
+	CreateBy     field.String // 创建者
+	CreateTime   field.Time   // 创建时间
+	UpdateBy     field.String // 更新者
+	UpdateTime   field.Time   // 更新时间
 
 	fieldMap map[string]field.Expr
 }
@@ -99,25 +102,27 @@ func (s *sysMenu) updateTableName(table string) *sysMenu {
 	s.ALL = field.NewAsterisk(table)
 	s.ID = field.NewInt64(table, "id")
 	s.MenuName = field.NewString(table, "menu_name")
-	s.ParentID = field.NewInt64(table, "parent_id")
-	s.MenuPath = field.NewString(table, "menu_path")
-	s.MenuPerms = field.NewString(table, "menu_perms")
+	s.Ancestors = field.NewString(table, "ancestors")
 	s.MenuType = field.NewInt32(table, "menu_type")
+	s.MenuURL = field.NewString(table, "menu_url")
 	s.MenuIcon = field.NewString(table, "menu_icon")
 	s.MenuSort = field.NewInt32(table, "menu_sort")
-	s.CreateBy = field.NewString(table, "create_by")
-	s.CreateTime = field.NewTime(table, "create_time")
-	s.UpdateBy = field.NewString(table, "update_by")
-	s.UpdateTime = field.NewTime(table, "update_time")
-	s.MenuStatus = field.NewInt32(table, "menu_status")
-	s.IsDeleted = field.NewInt32(table, "is_deleted")
-	s.IsVisible = field.NewInt32(table, "is_visible")
+	s.ParentID = field.NewInt64(table, "parent_id")
+	s.APIURL = field.NewString(table, "api_url")
+	s.Visible = field.NewInt32(table, "visible")
+	s.Status = field.NewInt32(table, "status")
+	s.DelFlag = field.NewInt32(table, "del_flag")
 	s.Remark = field.NewString(table, "remark")
 	s.VuePath = field.NewString(table, "vue_path")
 	s.VueComponent = field.NewString(table, "vue_component")
 	s.VueIcon = field.NewString(table, "vue_icon")
 	s.VueRedirect = field.NewString(table, "vue_redirect")
-	s.BackgroundURL = field.NewString(table, "background_url")
+	s.AngularIcon = field.NewString(table, "angular_icon")
+	s.ReactIcon = field.NewString(table, "react_icon")
+	s.CreateBy = field.NewString(table, "create_by")
+	s.CreateTime = field.NewTime(table, "create_time")
+	s.UpdateBy = field.NewString(table, "update_by")
+	s.UpdateTime = field.NewTime(table, "update_time")
 
 	s.fillFieldMap()
 
@@ -142,28 +147,30 @@ func (s *sysMenu) GetFieldByName(fieldName string) (field.OrderExpr, bool) {
 }
 
 func (s *sysMenu) fillFieldMap() {
-	s.fieldMap = make(map[string]field.Expr, 21)
+	s.fieldMap = make(map[string]field.Expr, 23)
 	s.fieldMap["id"] = s.ID
 	s.fieldMap["menu_name"] = s.MenuName
-	s.fieldMap["parent_id"] = s.ParentID
-	s.fieldMap["menu_path"] = s.MenuPath
-	s.fieldMap["menu_perms"] = s.MenuPerms
+	s.fieldMap["ancestors"] = s.Ancestors
 	s.fieldMap["menu_type"] = s.MenuType
+	s.fieldMap["menu_url"] = s.MenuURL
 	s.fieldMap["menu_icon"] = s.MenuIcon
 	s.fieldMap["menu_sort"] = s.MenuSort
-	s.fieldMap["create_by"] = s.CreateBy
-	s.fieldMap["create_time"] = s.CreateTime
-	s.fieldMap["update_by"] = s.UpdateBy
-	s.fieldMap["update_time"] = s.UpdateTime
-	s.fieldMap["menu_status"] = s.MenuStatus
-	s.fieldMap["is_deleted"] = s.IsDeleted
-	s.fieldMap["is_visible"] = s.IsVisible
+	s.fieldMap["parent_id"] = s.ParentID
+	s.fieldMap["api_url"] = s.APIURL
+	s.fieldMap["visible"] = s.Visible
+	s.fieldMap["status"] = s.Status
+	s.fieldMap["del_flag"] = s.DelFlag
 	s.fieldMap["remark"] = s.Remark
 	s.fieldMap["vue_path"] = s.VuePath
 	s.fieldMap["vue_component"] = s.VueComponent
 	s.fieldMap["vue_icon"] = s.VueIcon
 	s.fieldMap["vue_redirect"] = s.VueRedirect
-	s.fieldMap["background_url"] = s.BackgroundURL
+	s.fieldMap["angular_icon"] = s.AngularIcon
+	s.fieldMap["react_icon"] = s.ReactIcon
+	s.fieldMap["create_by"] = s.CreateBy
+	s.fieldMap["create_time"] = s.CreateTime
+	s.fieldMap["update_by"] = s.UpdateBy
+	s.fieldMap["update_time"] = s.UpdateTime
 }
 
 func (s sysMenu) clone(db *gorm.DB) sysMenu {

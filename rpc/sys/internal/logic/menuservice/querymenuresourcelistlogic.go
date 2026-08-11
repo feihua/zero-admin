@@ -36,7 +36,7 @@ func (l *QueryMenuResourceListLogic) QueryMenuResourceList(in *sysclient.QueryMe
 	}
 
 	if in.MenuStatus != 2 {
-		q = q.Where(menu.MenuStatus.Eq(in.MenuStatus))
+		q = q.Where(menu.Status.Eq(in.MenuStatus))
 	}
 
 	if in.ParentId != 0 {
@@ -52,29 +52,31 @@ func (l *QueryMenuResourceListLogic) QueryMenuResourceList(in *sysclient.QueryMe
 
 	var list = make([]*sysclient.MenuListData, 0, len(result))
 
-	for _, detail := range result {
+	for _, item := range result {
 		list = append(list, &sysclient.MenuListData{
-			Id:            detail.ID,                                 // 编号
-			MenuName:      detail.MenuName,                           // 菜单名称
-			ParentId:      detail.ParentID,                           // 父菜单ID，一级菜单为0
-			MenuPath:      detail.MenuPath,                           // 前端路由
-			MenuPerms:     detail.MenuPerms,                          // 权限标识
-			MenuType:      detail.MenuType,                           // 类型 0：目录,1：菜单,2：按钮,3：外链
-			MenuIcon:      detail.MenuIcon,                           // 菜单图标
-			MenuSort:      detail.MenuSort,                           // 菜单排序
-			CreateBy:      detail.CreateBy,                           // 创建者
-			CreateTime:    time_util.TimeToStr(detail.CreateTime),    // 创建时间
-			UpdateBy:      detail.UpdateBy,                           // 更新者
-			UpdateTime:    time_util.TimeToString(detail.UpdateTime), // 更新时间
-			MenuStatus:    detail.MenuStatus,                         // 菜单状态
-			IsDeleted:     detail.IsDeleted,                          // 是否删除  0：否  1：是
-			IsVisible:     detail.IsVisible,                          // 是否可见  0：否  1：是
-			Remark:        detail.Remark,                             // 备注信息
-			VuePath:       detail.VuePath,                            // vue系统的path
-			VueComponent:  detail.VueComponent,                       // vue的页面
-			VueIcon:       detail.VueIcon,                            // vue的图标
-			VueRedirect:   detail.VueRedirect,                        // vue的路由重定向
-			BackgroundUrl: detail.BackgroundURL,                      // 接口地址
+			Id:           item.ID,                                 // 主键
+			MenuName:     item.MenuName,                           // 菜单名称
+			Ancestors:    item.Ancestors,                          // 祖级列表
+			MenuType:     item.MenuType,                           // 菜单类型(1:目录,2:菜单,3:按钮)
+			MenuUrl:      item.MenuURL,                            // 路由路径
+			MenuIcon:     item.MenuIcon,                           // 菜单图标
+			MenuSort:     item.MenuSort,                           // 排序
+			ParentId:     item.ParentID,                           // 父id
+			ApiUrl:       item.APIURL,                             // 接口url
+			Visible:      item.Visible,                            // 显示状态（0:隐藏,显示:1）
+			Status:       item.Status,                             // 菜单状态(1:正常，0:禁用)
+			DelFlag:      item.DelFlag,                            // 删除标志（0:删除,1:存在）
+			Remark:       item.Remark,                             // 备注
+			VuePath:      item.VuePath,                            // vue的path
+			VueComponent: item.VueComponent,                       // vue的页面
+			VueIcon:      item.VueIcon,                            // vue的图标
+			VueRedirect:  item.VueRedirect,                        // vue的路由重定向
+			AngularIcon:  item.AngularIcon,                        // angular的图标
+			ReactIcon:    item.ReactIcon,                          // antd react的图标
+			CreateBy:     item.CreateBy,                           // 创建者
+			CreateTime:   time_util.TimeToStr(item.CreateTime),    // 创建时间
+			UpdateBy:     item.UpdateBy,                           // 更新者
+			UpdateTime:   time_util.TimeToString(item.UpdateTime), // 更新时间
 		})
 	}
 

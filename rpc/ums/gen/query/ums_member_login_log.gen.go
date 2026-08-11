@@ -41,7 +41,6 @@ func newUmsMemberLoginLog(db *gorm.DB, opts ...gen.DOOption) umsMemberLoginLog {
 	return _umsMemberLoginLog
 }
 
-// umsMemberLoginLog 会员登录记录
 type umsMemberLoginLog struct {
 	umsMemberLoginLogDo umsMemberLoginLogDo
 

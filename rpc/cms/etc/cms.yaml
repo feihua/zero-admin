@@ -4,8 +4,9 @@ Etcd:
   Hosts:
     - 127.0.0.1:2379
   Key: cms.rpc
-Mysql:
-  Datasource: root:12341qweqfsd2356@tcp(127.0.0.1:3306)/gozero?charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai
+
+postgresql:
+  Datasource: host=127.0.0.1 user=root password=123456 dbname=gozero port=5432 sslmode=disable TimeZone=Asia/Shanghai
 
 Log:
   ServiceName: cms-service

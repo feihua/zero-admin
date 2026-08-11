@@ -4,14 +4,15 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"strconv"
+	"time"
+
 	"github.com/feihua/zero-admin/rpc/sys/gen/model"
 	"github.com/feihua/zero-admin/rpc/sys/gen/query"
 	"github.com/feihua/zero-admin/rpc/sys/internal/svc"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
 	"github.com/zeromicro/go-zero/core/logc"
 	"gorm.io/gorm"
-	"strconv"
-	"time"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -43,12 +44,12 @@ func NewUpdateDictItemLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Up
 // 5.如果更新字典数据是默认,则修改其他选项为非默认状态
 // 6.字典数据存在时,则直接更新字典数据
 func (l *UpdateDictItemLogic) UpdateDictItem(in *sysclient.UpdateDictItemReq) (*sysclient.UpdateDictItemResp, error) {
-	q := query.SysDictItem
+	q := query.SysDictData
 
 	dictType := in.DictType
 
 	// 1.判断字典数据是否存在
-	dictItem, err := q.WithContext(l.ctx).Where(query.SysDictItem.ID.Eq(in.Id)).First()
+	dictItem, err := q.WithContext(l.ctx).Where(query.SysDictData.ID.Eq(in.Id)).First()
 
 	// 1.判断字典数据是否存在
 	switch {
@@ -107,9 +108,9 @@ func (l *UpdateDictItemLogic) UpdateDictItem(in *sysclient.UpdateDictItemReq) (*
 	}
 
 	now := time.Now()
-	data := &model.SysDictItem{
+	data := &model.SysDictData{
 		ID:         in.Id,               // 字典数据id
-		DictSort:   in.DictSort,         // 字典排序
+		Sort:       in.DictSort,         // 字典排序
 		DictLabel:  in.DictLabel,        // 字典标签
 		DictValue:  in.DictValue,        // 字典键值
 		DictType:   in.DictType,         // 字典类型
@@ -125,7 +126,7 @@ func (l *UpdateDictItemLogic) UpdateDictItem(in *sysclient.UpdateDictItemReq) (*
 	}
 
 	// 6.字典数据存在时,则直接更新字典数据
-	err = l.svcCtx.DB.Model(&model.SysDictItem{}).WithContext(l.ctx).Where(query.SysDictItem.ID.Eq(in.Id)).Save(data).Error
+	err = l.svcCtx.DB.Model(&model.SysDictData{}).WithContext(l.ctx).Where(query.SysDictData.ID.Eq(in.Id)).Save(data).Error
 
 	if err != nil {
 		logc.Errorf(l.ctx, "更新字典数据失败,参数:%+v,异常:%s", dictItem, err.Error())

@@ -2,6 +2,7 @@ package member_consume_setting
 
 import (
 	"context"
+
 	"github.com/feihua/zero-admin/api/admin/internal/common"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
 	"github.com/feihua/zero-admin/rpc/ums/umsclient"
@@ -35,14 +36,14 @@ func NewUpdateStatusLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Upda
 
 // UpdateStatus 更新状态
 func (l *UpdateStatusLogic) UpdateStatus(req *types.UpdateStatusReq) (resp *types.BaseResp, err error) {
-	userId, err := common.GetUserId(l.ctx)
+	name, err := common.GetUserName(l.ctx)
 	if err != nil {
 		return nil, err
 	}
 	_, err = l.svcCtx.MemberConsumeSettingService.UpdateStatus(l.ctx, &umsclient.UpdateStatusReq{
 		Id:       req.Id,     //
 		Status:   req.Status, // 状态：0->禁用；1->启用
-		UpdateBy: userId,
+		UpdateBy: name,
 	})
 
 	if err != nil {

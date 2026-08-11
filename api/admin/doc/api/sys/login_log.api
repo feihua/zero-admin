@@ -16,21 +16,13 @@ type (
 		Id int64 `form:"id"`
 	}
 	QueryLoginLogDetailData {
-		Id            int64  `json:"id"` //登录日志id
-		LoginName     string `json:"loginName"` //登录账号
-		Ipaddr        string `json:"ipaddr"` //登录IP地址
-		LoginLocation string `json:"loginLocation"` //登录地点
-		Platform      string `json:"platform"` //平台信息
-		Browser       string `json:"browser"` //浏览器类型
-		Version       string `json:"version"` //浏览器版本
-		Os            string `json:"os"` //操作系统
-		Arch          string `json:"arch"` //体系结构信息
-		Engine        string `json:"engine"` //渲染引擎信息
-		EngineDetails string `json:"engineDetails"` //渲染引擎详细信息
-		Extra         string `json:"extra"` //其他信息（可选）
-		Status        int32  `json:"status"` //登录状态(0:失败,1:成功)
-		Msg           string `json:"msg"` //提示消息
-		LoginTime     string `json:"loginTime"` //访问时间
+		Id        int64  `json:"id"` //访问id
+		LoginName string `json:"loginName"` //登录账号
+		IpAddr    string `json:"ipAddr"` //登录ip地址
+		Extra     string `json:"extra"` //其他信息（可选）
+		Status    int32  `json:"status"` //登录状态(0:失败,1:成功)
+		Msg       string `json:"msg"` //提示消息
+		LoginTime string `json:"loginTime"` //访问时间
 	}
 	QueryLoginLogDetailResp {
 		Code    string                  `json:"code"`
@@ -39,32 +31,20 @@ type (
 	}
 	// 分页查询系统登录日志列表请求参数
 	QueryLoginLogListReq {
-		Current       int64  `form:"current,default=1"` //第几页
-		PageSize      int64  `form:"pageSize,default=20"` //每页的数量
-		LoginName     string `json:"loginName,optional"` //登录账号
-		Ipaddr        string `json:"ipaddr,optional"` //登录IP地址
-		LoginLocation string `json:"loginLocation,optional"` //登录地点
-		Platform      string `json:"platform,optional"` //平台信息
-		Browser       string `json:"browser,optional"` //浏览器类型
-		Os            string `json:"os,optional"` //操作系统
-		Status        int32  `json:"status,default=2"` //登录状态(0:失败,1:成功)
+		Current   int64  `form:"current,default=1"` //第几页
+		PageSize  int64  `form:"pageSize,default=20"` //每页的数量
+		LoginName string `json:"loginName,optional"` //登录账号
+		Ipaddr    string `json:"ipaddr,optional"` //登录IP地址
+		Status    int32  `json:"status,default=2"` //登录状态(0:失败,1:成功)
 	}
 	QueryLoginLogListData {
-		Id            int64  `json:"id"` //登录日志id
-		LoginName     string `json:"loginName"` //登录账号
-		Ipaddr        string `json:"ipaddr"` //登录IP地址
-		LoginLocation string `json:"loginLocation"` //登录地点
-		Platform      string `json:"platform"` //平台信息
-		Browser       string `json:"browser"` //浏览器类型
-		Version       string `json:"version"` //浏览器版本
-		Os            string `json:"os"` //操作系统
-		Arch          string `json:"arch"` //体系结构信息
-		Engine        string `json:"engine"` //渲染引擎信息
-		EngineDetails string `json:"engineDetails"` //渲染引擎详细信息
-		Extra         string `json:"extra"` //其他信息（可选）
-		Status        int32  `json:"status"` //登录状态(0:失败,1:成功)
-		Msg           string `json:"msg"` //提示消息
-		LoginTime     string `json:"loginTime"` //访问时间
+		Id        int64  `json:"id"` //访问id
+		LoginName string `json:"loginName"` //登录账号
+		IpAddr    string `json:"ipAddr"` //登录ip地址
+		Extra     string `json:"extra"` //其他信息（可选）
+		Status    int32  `json:"status"` //登录状态(0:失败,1:成功)
+		Msg       string `json:"msg"` //提示消息
+		LoginTime string `json:"loginTime"` //访问时间
 	}
 	QueryLoginLogListResp {
 		Code     string                   `json:"code"`

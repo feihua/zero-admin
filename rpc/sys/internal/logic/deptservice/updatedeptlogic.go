@@ -4,15 +4,16 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"strconv"
+	"strings"
+	"time"
+
 	"github.com/feihua/zero-admin/rpc/sys/gen/model"
 	"github.com/feihua/zero-admin/rpc/sys/gen/query"
 	"github.com/feihua/zero-admin/rpc/sys/internal/svc"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
 	"github.com/zeromicro/go-zero/core/logc"
 	"gorm.io/gorm"
-	"strconv"
-	"strings"
-	"time"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -95,7 +96,7 @@ func (l *UpdateDeptLogic) UpdateDept(in *sysclient.UpdateDeptReq) (*sysclient.Up
 	}
 
 	// 4.查询是否有下级部门
-	sql := "select count(*) from sys_dept where status = 1 and del_flag = 1 and find_in_set(?, 'ancestors')"
+	sql := "select count(*) from sys_dept where status = 1 and del_flag = 1 and ? = ANY(string_to_array(ancestors, ','))"
 	err = l.svcCtx.DB.Raw(sql, in.Id).Count(&count).Error
 	if err != nil {
 		logc.Errorf(l.ctx, "根据部门id查询是否有下级部门失败,异常:%s", err.Error())
@@ -106,7 +107,7 @@ func (l *UpdateDeptLogic) UpdateDept(in *sysclient.UpdateDeptReq) (*sysclient.Up
 		return nil, errors.New(fmt.Sprintf("该部门包含未停用的子部门"))
 	}
 
-	sql = "select * from sys_dept where find_in_set(?, 'ancestors')"
+	sql = "SELECT * FROM sys_dept WHERE ? = ANY(string_to_array(ancestors, ','))"
 	list := make([]model.SysDept, 10)
 	err = l.svcCtx.DB.Model(&model.SysDept{}).Raw(sql, in.Id).Scan(list).Error
 	if err != nil {

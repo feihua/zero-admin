@@ -5,7 +5,6 @@ import (
 	"errors"
 	"time"
 
-	"github.com/feihua/zero-admin/pkg/pointerprocess"
 	"github.com/feihua/zero-admin/pkg/time_util"
 	"github.com/feihua/zero-admin/rpc/pms/gen/query"
 	"github.com/feihua/zero-admin/rpc/pms/internal/svc"
@@ -74,28 +73,28 @@ func (l *QueryProductSkuListLogic) QueryProductSkuList(in *pmsclient.QueryProduc
 
 	for _, item := range result {
 		list = append(list, &pmsclient.ProductSkuListData{
-			Id:                 item.ID,                                          // 商品SpuId
-			SpuId:              item.SpuID,                                       // 商品SpuId
-			Name:               item.Name,                                        // SKU名称
-			SkuCode:            item.SkuCode,                                     // SKU编码
-			MainPic:            item.MainPic,                                     // 主图
-			AlbumPics:          item.AlbumPics,                                   // 图片集
-			Price:              float32(item.Price),                              // 价格
-			PromotionPrice:     float32(item.PromotionPrice),                     // 单品促销价格
-			PromotionStartTime: time_util.TimeToString(item.PromotionStartTime),  // 促销开始时间
-			PromotionEndTime:   time_util.TimeToString(item.PromotionEndTime),    // 促销结束时间
-			Stock:              item.Stock,                                       // 库存
-			LowStock:           item.LowStock,                                    // 预警库存
-			SpecData:           item.SpecData,                                    // 规格数据
-			Weight:             float32(item.Weight),                             // 重量(kg)
-			PublishStatus:      item.PublishStatus,                               // 上架状态：0-下架，1-上架
-			VerifyStatus:       item.VerifyStatus,                                // 审核状态：0-未审核，1-审核通过，2-审核不通过
-			Sort:               item.Sort,                                        // 排序
-			Sales:              item.Sales,                                       // 销量
-			CreateBy:           item.CreateBy,                                    // 创建人ID
-			CreateTime:         time_util.TimeToStr(item.CreateTime),             // 创建时间
-			UpdateBy:           pointerprocess.DefaltData(item.UpdateBy).(int64), // 更新人ID
-			UpdateTime:         time_util.TimeToString(item.UpdateTime),          // 更新时间
+			Id:                 item.ID,                                         // 商品SpuId
+			SpuId:              item.SpuID,                                      // 商品SpuId
+			Name:               item.Name,                                       // SKU名称
+			SkuCode:            item.SkuCode,                                    // SKU编码
+			MainPic:            item.MainPic,                                    // 主图
+			AlbumPics:          item.AlbumPics,                                  // 图片集
+			Price:              float32(item.Price),                             // 价格
+			PromotionPrice:     float32(item.PromotionPrice),                    // 单品促销价格
+			PromotionStartTime: time_util.TimeToString(item.PromotionStartTime), // 促销开始时间
+			PromotionEndTime:   time_util.TimeToString(item.PromotionEndTime),   // 促销结束时间
+			Stock:              item.Stock,                                      // 库存
+			LowStock:           item.LowStock,                                   // 预警库存
+			SpecData:           item.SpecData,                                   // 规格数据
+			Weight:             float32(item.Weight),                            // 重量(kg)
+			PublishStatus:      item.PublishStatus,                              // 上架状态：0-下架，1-上架
+			VerifyStatus:       item.VerifyStatus,                               // 审核状态：0-未审核，1-审核通过，2-审核不通过
+			Sort:               item.Sort,                                       // 排序
+			Sales:              item.Sales,                                      // 销量
+			CreateBy:           item.CreateBy,                                   // 创建人ID
+			CreateTime:         time_util.TimeToStr(item.CreateTime),            // 创建时间
+			UpdateBy:           item.UpdateBy,                                   // 更新人ID
+			UpdateTime:         time_util.TimeToString(item.UpdateTime),         // 更新时间
 
 		})
 	}

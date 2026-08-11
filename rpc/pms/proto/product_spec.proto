@@ -10,7 +10,7 @@ message AddProductSpecReq {
   string name = 2; //规格名称
   int32 sort = 3; //排序
   int32 status = 4; //状态：0->禁用；1->启用
-  int64 create_by = 5; //创建人ID
+  string create_by = 5; //创建人ID
 }
 
 message AddProductSpecResp {
@@ -33,7 +33,7 @@ message UpdateProductSpecReq {
   string name = 3; //规格名称
   int32 sort = 4; //排序
   int32 status = 5; //状态：0->禁用；1->启用
-  int64 update_by = 8; //更新人ID
+  string update_by = 8; //更新人ID
 }
 
 message UpdateProductSpecResp {
@@ -44,7 +44,7 @@ message UpdateProductSpecResp {
 message UpdateProductSpecStatusReq {
   repeated int64 ids = 1; //
   int32 status = 5; //状态：0->禁用；1->启用
-  int64 update_by = 8; //更新人ID
+  string update_by = 8; //更新人ID
 }
 
 message UpdateProductSpecStatusResp {
@@ -62,9 +62,9 @@ message QueryProductSpecDetailResp {
   string name = 3; //规格名称
   int32 sort = 4; //排序
   int32 status = 5; //状态：0->禁用；1->启用
-  int64 create_by = 6; //创建人ID
+  string create_by = 6; //创建人ID
   string create_time = 7; //创建时间
-  int64 update_by = 8; //更新人ID
+  string update_by = 8; //更新人ID
   string update_time = 9; //更新时间
 
 }
@@ -84,9 +84,9 @@ message ProductSpecListData {
   string name = 3; //规格名称
   int32 sort = 4; //排序
   int32 status = 5; //状态：0->禁用；1->启用
-  int64 create_by = 6; //创建人ID
+  string create_by = 6; //创建人ID
   string create_time = 7; //创建时间
-  int64 update_by = 8; //更新人ID
+  string update_by = 8; //更新人ID
   string update_time = 9; //更新时间
   int32 is_deleted = 10; //是否删除
 

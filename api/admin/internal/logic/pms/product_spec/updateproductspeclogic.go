@@ -34,7 +34,7 @@ func NewUpdateProductSpecLogic(ctx context.Context, svcCtx *svc.ServiceContext) 
 
 // UpdateProductSpec 更新商品规格
 func (l *UpdateProductSpecLogic) UpdateProductSpec(req *types.UpdateProductSpecReq) (resp *types.BaseResp, err error) {
-	userId, err := common.GetUserId(l.ctx)
+	name, err := common.GetUserName(l.ctx)
 	if err != nil {
 		return nil, err
 	}
@@ -44,7 +44,7 @@ func (l *UpdateProductSpecLogic) UpdateProductSpec(req *types.UpdateProductSpecR
 		Name:       req.Name,       // 规格名称
 		Sort:       req.Sort,       // 排序
 		Status:     req.Status,     // 状态：0->禁用；1->启用
-		UpdateBy:   userId,         // 更新人ID
+		UpdateBy:   name,           // 更新人ID
 	})
 
 	if err != nil {

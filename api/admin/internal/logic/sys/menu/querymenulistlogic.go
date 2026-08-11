@@ -2,6 +2,7 @@ package menu
 
 import (
 	"context"
+
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
 	"github.com/feihua/zero-admin/api/admin/internal/svc"
 	"github.com/feihua/zero-admin/api/admin/internal/types"
@@ -42,29 +43,30 @@ func (l *QueryMenuListLogic) QueryMenuList(req *types.QueryMenuListReq) (*types.
 
 	var list []*types.QueryMenuListData
 
-	for _, menu := range result.List {
+	for _, item := range result.List {
 		menuItem := &types.QueryMenuListData{
-			Id:            menu.Id,            // 编号
-			MenuName:      menu.MenuName,      // 菜单名称
-			ParentId:      menu.ParentId,      // 父菜单ID，一级菜单为0
-			MenuPath:      menu.MenuPath,      // 前端路由
-			MenuPerms:     menu.MenuPerms,     // 权限标识
-			MenuType:      menu.MenuType,      // 类型 0：目录,1：菜单,2：按钮,3：外链
-			MenuIcon:      menu.MenuIcon,      // 菜单图标
-			MenuSort:      menu.MenuSort,      // 菜单排序
-			CreateBy:      menu.CreateBy,      // 创建者
-			CreateTime:    menu.CreateTime,    // 创建时间
-			UpdateBy:      menu.UpdateBy,      // 更新者
-			UpdateTime:    menu.UpdateTime,    // 更新时间
-			MenuStatus:    menu.MenuStatus,    // 菜单状态
-			IsDeleted:     menu.IsDeleted,     // 是否删除  0：否  1：是
-			IsVisible:     menu.IsVisible,     // 是否可见  0：否  1：是
-			Remark:        menu.Remark,        // 备注信息
-			VuePath:       menu.VuePath,       // vue系统的path
-			VueComponent:  menu.VueComponent,  // vue的页面
-			VueIcon:       menu.VueIcon,       // vue的图标
-			VueRedirect:   menu.VueRedirect,   // vue的路由重定向
-			BackgroundUrl: menu.BackgroundUrl, // 接口地址
+			Id:           item.Id,           // 主键
+			MenuName:     item.MenuName,     // 菜单名称
+			Ancestors:    item.Ancestors,    // 祖级列表
+			MenuType:     item.MenuType,     // 菜单类型(1:目录,2:菜单,3:按钮)
+			MenuUrl:      item.MenuUrl,      // 路由路径
+			MenuIcon:     item.MenuIcon,     // 菜单图标
+			MenuSort:     item.MenuSort,     // 排序
+			ParentId:     item.ParentId,     // 父id
+			ApiUrl:       item.ApiUrl,       // 接口url
+			Visible:      item.Visible,      // 显示状态（0:隐藏,显示:1）
+			Status:       item.Status,       // 菜单状态(1:正常，0:禁用)
+			Remark:       item.Remark,       // 备注
+			VuePath:      item.VuePath,      // vue的path
+			VueComponent: item.VueComponent, // vue的页面
+			VueIcon:      item.VueIcon,      // vue的图标
+			VueRedirect:  item.VueRedirect,  // vue的路由重定向
+			AngularIcon:  item.AngularIcon,  // angular的图标
+			ReactIcon:    item.ReactIcon,    // antd react的图标
+			CreateBy:     item.CreateBy,     // 创建者
+			CreateTime:   item.CreateTime,   // 创建时间
+			UpdateBy:     item.UpdateBy,     // 更新者
+			UpdateTime:   item.UpdateTime,   // 更新时间
 		}
 
 		list = append(list, menuItem)

@@ -2,6 +2,7 @@ package product_brand
 
 import (
 	"context"
+
 	"github.com/feihua/zero-admin/api/admin/internal/common"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
 	"github.com/feihua/zero-admin/rpc/pms/pmsclient"
@@ -29,14 +30,14 @@ func NewUpdateProductBrandRecommendStatusLogic(ctx context.Context, svcCtx *svc.
 }
 
 func (l *UpdateProductBrandRecommendStatusLogic) UpdateProductBrandRecommendStatus(req *types.UpdateProductBrandStatusReq) (resp *types.BaseResp, err error) {
-	userId, err := common.GetUserId(l.ctx)
+	name, err := common.GetUserName(l.ctx)
 	if err != nil {
 		return nil, err
 	}
 	_, err = l.svcCtx.ProductBrandService.UpdateBrandRecommendStatus(l.ctx, &pmsclient.UpdateProductBrandStatusReq{
 		Ids:      req.Ids,    //
 		Status:   req.Status, // 状态
-		UpdateBy: userId,
+		UpdateBy: name,
 	})
 
 	if err != nil {

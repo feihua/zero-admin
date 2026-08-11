@@ -4,6 +4,8 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"time"
+
 	"github.com/feihua/zero-admin/rpc/pms/gen/model"
 	"github.com/feihua/zero-admin/rpc/pms/gen/query"
 	"github.com/feihua/zero-admin/rpc/pms/internal/svc"
@@ -11,7 +13,6 @@ import (
 	"github.com/zeromicro/go-zero/core/logc"
 	"github.com/zeromicro/go-zero/core/logx"
 	"gorm.io/gorm"
-	"time"
 )
 
 // UpdateProductCategoryLogic 更新产品分类
@@ -71,7 +72,7 @@ func (l *UpdateProductCategoryLogic) UpdateProductCategory(in *pmsclient.UpdateP
 		IsEnabled:   in.IsEnabled,      // 是否启用
 		CreateBy:    detail.CreateBy,   // 创建者
 		CreateTime:  detail.CreateTime, // 创建时间
-		UpdateBy:    &in.UpdateBy,      // 更新者
+		UpdateBy:    in.UpdateBy,       // 更新者
 		UpdateTime:  &now,              // 更新时间
 	}
 

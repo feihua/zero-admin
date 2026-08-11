@@ -37,7 +37,6 @@ func newCmsPreferredAreaProductRelation(db *gorm.DB, opts ...gen.DOOption) cmsPr
 	return _cmsPreferredAreaProductRelation
 }
 
-// cmsPreferredAreaProductRelation 优选专区和产品关系表
 type cmsPreferredAreaProductRelation struct {
 	cmsPreferredAreaProductRelationDo cmsPreferredAreaProductRelationDo
 

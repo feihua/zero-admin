@@ -68,7 +68,7 @@ func (l *AddProductSpuLogic) AddProductSpu(req *types.AddProductSpuReq) (resp *t
 }
 
 func (l *AddProductSpuLogic) addProductSpuInfo(req *types.AddProductSpuReq) (*productspuservice.ProductSpuResp, error) {
-	userId, err := common.GetUserId(l.ctx)
+	name, err := common.GetUserName(l.ctx)
 	if err != nil {
 		return nil, err
 	}
@@ -100,7 +100,7 @@ func (l *AddProductSpuLogic) addProductSpuInfo(req *types.AddProductSpuReq) (*pr
 		SubTitle:                  product.SubTitle,                    // 详情标题
 		DetailHtml:                product.DetailHtml,                  // 产品详情网页内容
 		DetailMobileHtml:          product.DetailMobileHtml,            // 移动端网页详情
-		CreateBy:                  userId,                              // 创建人ID
+		CreateBy:                  name,                                // 创建人ID
 		MemberPriceList:           buildMemberPriceList(req),           // 会员价格
 		ProductAttributeValueList: buildProductAttributeValueList(req), // 商品参数及自定义规格属性
 		ProductFullReductionList:  buildProductFullReductionList(req),  // 满减价格

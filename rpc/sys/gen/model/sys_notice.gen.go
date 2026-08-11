@@ -10,18 +10,19 @@ import (
 
 const TableNameSysNotice = "sys_notice"
 
-// SysNotice 通知公告表
+// SysNotice mapped from table <sys_notice>
 type SysNotice struct {
-	ID            int64      `gorm:"column:id;primaryKey;autoIncrement:true;comment:公告ID" json:"id"`                        // 公告ID
-	NoticeTitle   string     `gorm:"column:notice_title;not null;comment:公告标题" json:"notice_title"`                         // 公告标题
-	NoticeType    int32      `gorm:"column:notice_type;not null;default:1;comment:公告类型（1:通知,2:公告）" json:"notice_type"`      // 公告类型（1:通知,2:公告）
-	NoticeContent string     `gorm:"column:notice_content;not null;comment:公告内容" json:"notice_content"`                     // 公告内容
-	Status        int32      `gorm:"column:status;not null;comment:公告状态（0:关闭,1:正常 ）" json:"status"`                         // 公告状态（0:关闭,1:正常 ）
-	Remark        string     `gorm:"column:remark;not null;comment:备注" json:"remark"`                                       // 备注
-	CreateBy      string     `gorm:"column:create_by;not null;comment:创建者" json:"create_by"`                                // 创建者
-	CreateTime    time.Time  `gorm:"column:create_time;not null;default:CURRENT_TIMESTAMP;comment:创建时间" json:"create_time"` // 创建时间
-	UpdateBy      string     `gorm:"column:update_by;not null;comment:更新者" json:"update_by"`                                // 更新者
-	UpdateTime    *time.Time `gorm:"column:update_time;comment:更新时间" json:"update_time"`                                    // 更新时间
+	ID            int64      `gorm:"column:id;primaryKey;autoIncrement:true;comment:公告id" json:"id"`                                  // 公告id
+	NoticeTitle   string     `gorm:"column:notice_title;not null;comment:公告标题" json:"notice_title"`                                   // 公告标题
+	NoticeType    int32      `gorm:"column:notice_type;not null;default:1;comment:公告类型（1:通知,2:公告）" json:"notice_type"`                // 公告类型（1:通知,2:公告）
+	NoticeContent string     `gorm:"column:notice_content;not null;default:''::character varying;comment:公告内容" json:"notice_content"` // 公告内容
+	Status        int32      `gorm:"column:status;not null;default:1;comment:公告状态（0:关闭,1:正常 ）" json:"status"`                         // 公告状态（0:关闭,1:正常 ）
+	Remark        string     `gorm:"column:remark;not null;default:''::character varying;comment:备注" json:"remark"`                   // 备注
+	DelFlag       int32      `gorm:"column:del_flag;not null;default:1;comment:删除标志（0:删除,1:存在）" json:"del_flag"`                      // 删除标志（0:删除,1:存在）
+	CreateBy      string     `gorm:"column:create_by;not null;default:''::character varying;comment:创建者" json:"create_by"`            // 创建者
+	CreateTime    time.Time  `gorm:"column:create_time;not null;default:CURRENT_TIMESTAMP;comment:创建时间" json:"create_time"`           // 创建时间
+	UpdateBy      string     `gorm:"column:update_by;not null;default:''::character varying;comment:更新者" json:"update_by"`            // 更新者
+	UpdateTime    *time.Time `gorm:"column:update_time;comment:更新时间" json:"update_time"`                                              // 更新时间
 }
 
 // TableName SysNotice's table name

@@ -88,9 +88,10 @@ Swagger:
 Rabbitmq:
   Host: 127.0.0.1
   Port: 5672
-  UserName: guest
-  Password: guest
+  UserName: root
+  Password: 123456
 
 Redis:
   Address: 127.0.0.1:6379
-  Pass: "123456"
+  Pass: "1234567"
+

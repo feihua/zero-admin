@@ -2,6 +2,7 @@ package product_category
 
 import (
 	"context"
+
 	"github.com/feihua/zero-admin/api/admin/internal/common"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
 	"github.com/feihua/zero-admin/api/admin/internal/svc"
@@ -34,7 +35,7 @@ func NewUpdateProductCategoryLogic(ctx context.Context, svcCtx *svc.ServiceConte
 
 // UpdateProductCategory 更新产品分类
 func (l *UpdateProductCategoryLogic) UpdateProductCategory(req *types.UpdateProductCategoryReq) (resp *types.BaseResp, err error) {
-	userId, err := common.GetUserId(l.ctx)
+	name, err := common.GetUserName(l.ctx)
 	if err != nil {
 		return nil, err
 	}
@@ -50,7 +51,7 @@ func (l *UpdateProductCategoryLogic) UpdateProductCategory(req *types.UpdateProd
 		Keywords:    req.Keywords,    // 关键字
 		Description: req.Description, // 描述
 		IsEnabled:   req.IsEnabled,   // 是否启用
-		UpdateBy:    userId,          // 更新人ID
+		UpdateBy:    name,            // 更新人ID
 	})
 
 	if err != nil {

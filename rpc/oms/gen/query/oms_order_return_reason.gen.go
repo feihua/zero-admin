@@ -32,9 +32,9 @@ func newOmsOrderReturnReason(db *gorm.DB, opts ...gen.DOOption) omsOrderReturnRe
 	_omsOrderReturnReason.Name = field.NewString(tableName, "name")
 	_omsOrderReturnReason.Sort = field.NewInt32(tableName, "sort")
 	_omsOrderReturnReason.Status = field.NewInt32(tableName, "status")
-	_omsOrderReturnReason.CreateBy = field.NewInt64(tableName, "create_by")
+	_omsOrderReturnReason.CreateBy = field.NewString(tableName, "create_by")
 	_omsOrderReturnReason.CreateTime = field.NewTime(tableName, "create_time")
-	_omsOrderReturnReason.UpdateBy = field.NewInt64(tableName, "update_by")
+	_omsOrderReturnReason.UpdateBy = field.NewString(tableName, "update_by")
 	_omsOrderReturnReason.UpdateTime = field.NewTime(tableName, "update_time")
 	_omsOrderReturnReason.IsDeleted = field.NewInt32(tableName, "is_deleted")
 
@@ -43,7 +43,6 @@ func newOmsOrderReturnReason(db *gorm.DB, opts ...gen.DOOption) omsOrderReturnRe
 	return _omsOrderReturnReason
 }
 
-// omsOrderReturnReason 退货原因表
 type omsOrderReturnReason struct {
 	omsOrderReturnReasonDo omsOrderReturnReasonDo
 
@@ -52,11 +51,11 @@ type omsOrderReturnReason struct {
 	Name       field.String // 退货类型
 	Sort       field.Int32  // 排序
 	Status     field.Int32  // 状态：0->不启用；1->启用
-	CreateBy   field.Int64  // 创建人ID
+	CreateBy   field.String // 创建人ID
 	CreateTime field.Time   // 创建时间
-	UpdateBy   field.Int64  // 更新人ID
+	UpdateBy   field.String // 更新人ID
 	UpdateTime field.Time   // 更新时间
-	IsDeleted  field.Int32  // 是否删除
+	IsDeleted  field.Int32  // 是否删除(0:否,1:是)
 
 	fieldMap map[string]field.Expr
 }
@@ -77,9 +76,9 @@ func (o *omsOrderReturnReason) updateTableName(table string) *omsOrderReturnReas
 	o.Name = field.NewString(table, "name")
 	o.Sort = field.NewInt32(table, "sort")
 	o.Status = field.NewInt32(table, "status")
-	o.CreateBy = field.NewInt64(table, "create_by")
+	o.CreateBy = field.NewString(table, "create_by")
 	o.CreateTime = field.NewTime(table, "create_time")
-	o.UpdateBy = field.NewInt64(table, "update_by")
+	o.UpdateBy = field.NewString(table, "update_by")
 	o.UpdateTime = field.NewTime(table, "update_time")
 	o.IsDeleted = field.NewInt32(table, "is_deleted")
 

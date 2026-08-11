@@ -4,6 +4,8 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"time"
+
 	"github.com/feihua/zero-admin/rpc/oms/gen/model"
 	"github.com/feihua/zero-admin/rpc/oms/gen/query"
 	"github.com/feihua/zero-admin/rpc/oms/internal/svc"
@@ -11,7 +13,6 @@ import (
 	"github.com/zeromicro/go-zero/core/logc"
 	"github.com/zeromicro/go-zero/core/logx"
 	"gorm.io/gorm"
-	"time"
 )
 
 // UpdateOrderReturnReasonLogic 更新退货原因
@@ -64,7 +65,7 @@ func (l *UpdateOrderReturnReasonLogic) UpdateOrderReturnReason(in *omsclient.Upd
 		Status:     in.Status,         // 状态：0->不启用；1->启用
 		CreateBy:   detail.CreateBy,   // 创建者
 		CreateTime: detail.CreateTime, // 创建时间
-		UpdateBy:   &in.UpdateBy,      // 更新者
+		UpdateBy:   in.UpdateBy,       // 更新者
 		UpdateTime: &now,              // 更新时间
 	}
 

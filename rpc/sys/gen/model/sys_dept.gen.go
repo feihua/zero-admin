@@ -10,22 +10,22 @@ import (
 
 const TableNameSysDept = "sys_dept"
 
-// SysDept 部门表
+// SysDept mapped from table <sys_dept>
 type SysDept struct {
 	ID         int64      `gorm:"column:id;primaryKey;autoIncrement:true;comment:部门id" json:"id"`                        // 部门id
-	ParentID   int64      `gorm:"column:parent_id;not null;comment:上级部门id" json:"parent_id"`                             // 上级部门id
-	Ancestors  string     `gorm:"column:ancestors;not null;comment:祖级列表" json:"ancestors"`                               // 祖级列表
-	DeptName   string     `gorm:"column:dept_name;not null;comment:部门名称" json:"dept_name"`                               // 部门名称
+	ParentID   int64      `gorm:"column:parent_id;not null;comment:父部门id" json:"parent_id"`                              // 父部门id
+	Ancestors  string     `gorm:"column:ancestors;not null;default:''::character varying;comment:祖级列表" json:"ancestors"` // 祖级列表
+	DeptName   string     `gorm:"column:dept_name;not null;default:''::character varying;comment:部门名称" json:"dept_name"` // 部门名称
 	Sort       int32      `gorm:"column:sort;not null;comment:显示顺序" json:"sort"`                                         // 显示顺序
-	Leader     string     `gorm:"column:leader;not null;comment:负责人" json:"leader"`                                      // 负责人
-	Phone      string     `gorm:"column:phone;not null;comment:联系电话" json:"phone"`                                       // 联系电话
-	Email      string     `gorm:"column:email;not null;comment:邮箱" json:"email"`                                         // 邮箱
-	Status     int32      `gorm:"column:status;not null;comment:部门状态（0：停用，1:正常）" json:"status"`                          // 部门状态（0：停用，1:正常）
-	DelFlag    int32      `gorm:"column:del_flag;not null;default:1;comment:删除标志（0代表删除 1代表存在）" json:"del_flag"`          // 删除标志（0代表删除 1代表存在）
-	Remark     string     `gorm:"column:remark;not null;comment:备注信息" json:"remark"`                                     // 备注信息
-	CreateBy   string     `gorm:"column:create_by;not null;default:admin;comment:创建者" json:"create_by"`                  // 创建者
+	Leader     string     `gorm:"column:leader;not null;default:''::character varying;comment:负责人" json:"leader"`        // 负责人
+	Phone      string     `gorm:"column:phone;not null;default:''::character varying;comment:联系电话" json:"phone"`         // 联系电话
+	Email      string     `gorm:"column:email;not null;default:''::character varying;comment:邮箱" json:"email"`           // 邮箱
+	Status     int32      `gorm:"column:status;not null;default:1;comment:状态0:停用,1:正常" json:"status"`                    // 状态0:停用,1:正常
+	DelFlag    int32      `gorm:"column:del_flag;not null;default:1;comment:删除标志（0:删除,1:存在）" json:"del_flag"`            // 删除标志（0:删除,1:存在）
+	Remark     string     `gorm:"column:remark;not null;default:''::character varying;comment:备注" json:"remark"`         // 备注
+	CreateBy   string     `gorm:"column:create_by;not null;default:''::character varying;comment:创建者" json:"create_by"`  // 创建者
 	CreateTime time.Time  `gorm:"column:create_time;not null;default:CURRENT_TIMESTAMP;comment:创建时间" json:"create_time"` // 创建时间
-	UpdateBy   string     `gorm:"column:update_by;not null;comment:更新者" json:"update_by"`                                // 更新者
+	UpdateBy   string     `gorm:"column:update_by;not null;default:''::character varying;comment:更新者" json:"update_by"`  // 更新者
 	UpdateTime *time.Time `gorm:"column:update_time;comment:更新时间" json:"update_time"`                                    // 更新时间
 }
 

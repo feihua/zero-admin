@@ -2,6 +2,7 @@ package member_task
 
 import (
 	"context"
+
 	"github.com/feihua/zero-admin/api/admin/internal/common"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
 	"github.com/feihua/zero-admin/api/admin/internal/svc"
@@ -34,7 +35,7 @@ func NewAddMemberTaskLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Add
 
 // AddMemberTask 添加会员任务
 func (l *AddMemberTaskLogic) AddMemberTask(req *types.AddMemberTaskReq) (resp *types.BaseResp, err error) {
-	userId, err := common.GetUserId(l.ctx)
+	name, err := common.GetUserName(l.ctx)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +52,7 @@ func (l *AddMemberTaskLogic) AddMemberTask(req *types.AddMemberTaskReq) (resp *t
 		EndTime:       req.EndTime,       // 任务结束时间
 		Status:        req.Status,        // 状态：0-禁用，1-启用
 		Sort:          req.Sort,          // 排序
-		CreateBy:      userId,            // 创建人ID
+		CreateBy:      name,              // 创建人ID
 	})
 
 	if err != nil {

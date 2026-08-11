@@ -1,14 +1,33 @@
 Name: ums.rpc
 ListenOn: 0.0.0.0:8081
 
-Mysql:
-  Datasource: root:r-wz9wop62956dh5k9ed@tcp(110.41.179.89:30395)/gozero?charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai
+Postgresql:
+  Datasource: host=127.0.0.1 user=root password=123456 dbname=gozero port=5432 sslmode=disable TimeZone=Asia/Shanghai
 
+Mongo:
+  Datasource: mongodb://admin:123456@127.0.0.1:27017
+  Db: ums
+Rabbitmq:
+  Host: 127.0.0.1
+  Port: 5672
+  UserName: root
+  Password: 123456
 JWT:
   AccessSecret: ad879037-c7a4-4063-9236-6bfc35d54b7d
   AccessExpire: 86400
 Log:
   ServiceName: ums-service
   Stat: false # go-zero 版本 >= 1.5.0 才支持
-#  Mode: file
-#  Path: logs/ums
+  Mode: file
+  Path: logs/ums
+Prometheus:
+  Host: 127.0.0.1
+  Port: 8181
+  Path: /metrics
+
+Redis:
+  Host: 127.0.0.1:6379
+  Type: "node"
+  Pass: "123456"
+  Tls: false
+  Key: "ums:"

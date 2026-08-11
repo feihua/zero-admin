@@ -135,7 +135,7 @@ message AddCompanyAddressReq {
   string detail_address = 8; //详细地址
   int32 send_status = 9; //默认发货地址：0->否；1->是
   int32 receive_status = 10; //默认收货地址：0->否；1->是
-  int64 create_by = 11; //创建人ID
+  string create_by = 11; //创建人ID
 }
 
 message AddCompanyAddressResp {
@@ -163,7 +163,7 @@ message UpdateCompanyAddressReq {
   string detail_address = 8; //详细地址
   int32 send_status = 9; //默认发货地址：0->否；1->是
   int32 receive_status = 10; //默认收货地址：0->否；1->是
-  int64 update_by = 13; //更新人ID
+  string update_by = 13; //更新人ID
 }
 
 message UpdateCompanyAddressResp {
@@ -174,7 +174,7 @@ message UpdateCompanyAddressResp {
 message UpdateCompanyAddressStatusReq {
   int64 id = 1; //主键ID
   int32 status = 2; //默认发货地址：0->否；1->是
-  int64 update_by = 4; //更新人ID
+  string update_by = 4; //更新人ID
 }
 
 message UpdateCompanyAddressStatusResp {
@@ -197,9 +197,9 @@ message QueryCompanyAddressDetailResp {
   string detail_address = 8; //详细地址
   int32 send_status = 9; //默认发货地址：0->否；1->是
   int32 receive_status = 10; //默认收货地址：0->否；1->是
-  int64 create_by = 11; //创建人ID
+  string create_by = 11; //创建人ID
   string create_time = 12; //创建时间
-  int64 update_by = 13; //更新人ID
+  string update_by = 13; //更新人ID
   string update_time = 14; //更新时间
 
 }
@@ -226,9 +226,9 @@ message CompanyAddressListData {
   string detail_address = 8; //详细地址
   int32 send_status = 9; //默认发货地址：0->否；1->是
   int32 receive_status = 10; //默认收货地址：0->否；1->是
-  int64 create_by = 11; //创建人ID
+  string create_by = 11; //创建人ID
   string create_time = 12; //创建时间
-  int64 update_by = 13; //更新人ID
+  string update_by = 13; //更新人ID
   string update_time = 14; //更新时间
 
 }
@@ -1022,7 +1022,7 @@ message AddOrderReturnReasonReq {
   string name = 2; //退货类型
   int32 sort = 3; //排序
   int32 status = 4; //状态：0->不启用；1->启用
-  int64 create_by = 5; //创建人ID
+  string create_by = 5; //创建人ID
 }
 
 message AddOrderReturnReasonResp {
@@ -1044,7 +1044,7 @@ message UpdateOrderReturnReasonReq {
   string name = 2; //退货类型
   int32 sort = 3; //排序
   int32 status = 4; //状态：0->不启用；1->启用
-  int64 update_by = 7; //更新人ID
+  string update_by = 7; //更新人ID
 }
 
 message UpdateOrderReturnReasonResp {
@@ -1055,7 +1055,7 @@ message UpdateOrderReturnReasonResp {
 message UpdateOrderReturnReasonStatusReq {
   repeated int64 ids = 1; //主键ID
   int32 status = 2; //状态：0->不启用；1->启用
-  int64 update_by = 3; //更新人ID
+  string update_by = 3; //更新人ID
 }
 
 message UpdateOrderReturnReasonStatusResp {
@@ -1072,9 +1072,9 @@ message QueryOrderReturnReasonDetailResp {
   string name = 2; //退货类型
   int32 sort = 3; //排序
   int32 status = 4; //状态：0->不启用；1->启用
-  int64 create_by = 5; //创建人ID
+  string create_by = 5; //创建人ID
   string create_time = 6; //创建时间
-  int64 update_by = 7; //更新人ID
+  string update_by = 7; //更新人ID
   string update_time = 8; //更新时间
 
 }
@@ -1092,9 +1092,9 @@ message OrderReturnReasonListData {
   string name = 2; //退货类型
   int32 sort = 3; //排序
   int32 status = 4; //状态：0->不启用；1->启用
-  int64 create_by = 5; //创建人ID
+  string create_by = 5; //创建人ID
   string create_time = 6; //创建时间
-  int64 update_by = 7; //更新人ID
+  string update_by = 7; //更新人ID
   string update_time = 8; //更新时间
 
 }
@@ -1133,7 +1133,7 @@ message AddOrderSettingReq {
   int32 status = 6; //状态：0->禁用；1->启用
   int32 is_default = 7; //是否默认：0->否；1->是
   int32 comment_overtime = 8; //订单完成后自动好评时间（天）
-  int64 create_by = 9; //创建人ID
+  string create_by = 9; //创建人ID
 }
 
 message AddOrderSettingResp {
@@ -1159,7 +1159,7 @@ message UpdateOrderSettingReq {
   int32 status = 6; //状态：0->禁用；1->启用
   int32 is_default = 7; //是否默认：0->否；1->是
   int32 comment_overtime = 8; //订单完成后自动好评时间（天）
-  int64 update_by = 11; //更新人ID
+  string update_by = 11; //更新人ID
 }
 
 message UpdateOrderSettingResp {
@@ -1170,7 +1170,7 @@ message UpdateOrderSettingResp {
 message UpdateOrderSettingStatusReq {
   int64 id = 1; //主键ID
   int32 status = 2; //状态
-  int64 update_by = 3; //更新人ID
+  string update_by = 3; //更新人ID
 }
 
 message UpdateOrderSettingStatusResp {
@@ -1191,9 +1191,9 @@ message QueryOrderSettingDetailResp {
   int32 status = 6; //状态：0->禁用；1->启用
   int32 is_default = 7; //是否默认：0->否；1->是
   int32 comment_overtime = 8; //订单完成后自动好评时间（天）
-  int64 create_by = 9; //创建人ID
+  string create_by = 9; //创建人ID
   string create_time = 10; //创建时间
-  int64 update_by = 11; //更新人ID
+  string update_by = 11; //更新人ID
   string update_time = 12; //更新时间
 
 }
@@ -1215,9 +1215,9 @@ message OrderSettingListData {
   int32 status = 6; //状态：0->禁用；1->启用
   int32 is_default = 7; //是否默认：0->否；1->是
   int32 comment_overtime = 8; //订单完成后自动好评时间（天）
-  int64 create_by = 9; //创建人ID
+  string create_by = 9; //创建人ID
   string create_time = 10; //创建时间
-  int64 update_by = 11; //更新人ID
+  string update_by = 11; //更新人ID
   string update_time = 12; //更新时间
 
 }

@@ -2,6 +2,7 @@ package seckill_session
 
 import (
 	"context"
+
 	"github.com/feihua/zero-admin/api/admin/internal/common"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
 	"github.com/feihua/zero-admin/api/admin/internal/svc"
@@ -34,14 +35,14 @@ func NewUpdateSeckillSessionStatusLogic(ctx context.Context, svcCtx *svc.Service
 
 // UpdateSeckillSessionStatus 更新秒杀场次状态
 func (l *UpdateSeckillSessionStatusLogic) UpdateSeckillSessionStatus(req *types.UpdateSeckillSessionStatusReq) (resp *types.BaseResp, err error) {
-	userId, err := common.GetUserId(l.ctx)
+	name, err := common.GetUserName(l.ctx)
 	if err != nil {
 		return nil, err
 	}
 	_, err = l.svcCtx.SeckillSessionService.UpdateSeckillSessionStatus(l.ctx, &smsclient.UpdateSeckillSessionStatusReq{
 		Ids:      req.Ids,    // 秒杀场次ID
 		Status:   req.Status, // 状态：0-禁用，1-启用
-		UpdateBy: userId,     // 更新人ID
+		UpdateBy: name,       // 更新人ID
 
 	})
 

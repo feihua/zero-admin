@@ -1,5 +1,11 @@
 Name: cms.rpc
 ListenOn: 0.0.0.0:8086
 
-Mysql:
-  Datasource: root:r-wz9wop62956dh5k9ed@tcp(110.41.179.89:30395)/gozero?charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai
+postgresql:
+  Datasource: host=127.0.0.1 user=root password=123456 dbname=gozero port=5432 sslmode=disable TimeZone=Asia/Shanghai
+
+Log:
+  ServiceName: cms-service
+  Stat: false
+  Mode: file
+  Path: logs/cms

@@ -6,7 +6,7 @@ package model
 
 const TableNamePmsProductFullReduction = "pms_product_full_reduction"
 
-// PmsProductFullReduction 产品满减表(只针对同商品)
+// PmsProductFullReduction mapped from table <pms_product_full_reduction>
 type PmsProductFullReduction struct {
 	ID          int64 `gorm:"column:id;primaryKey;autoIncrement:true" json:"id"`
 	ProductID   int64 `gorm:"column:product_id;not null;comment:商品id" json:"product_id"`      // 商品id

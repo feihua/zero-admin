@@ -6,7 +6,7 @@ package model
 
 const TableNameCmsPreferredAreaProductRelation = "cms_preferred_area_product_relation"
 
-// CmsPreferredAreaProductRelation 优选专区和产品关系表
+// CmsPreferredAreaProductRelation mapped from table <cms_preferred_area_product_relation>
 type CmsPreferredAreaProductRelation struct {
 	ID              int64 `gorm:"column:id;primaryKey;autoIncrement:true;comment:主键ID" json:"id"`            // 主键ID
 	PreferredAreaID int64 `gorm:"column:preferred_area_id;not null;comment:优选专区ID" json:"preferred_area_id"` // 优选专区ID

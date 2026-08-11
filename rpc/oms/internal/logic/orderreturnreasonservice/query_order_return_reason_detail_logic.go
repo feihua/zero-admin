@@ -3,7 +3,7 @@ package orderreturnreasonservicelogic
 import (
 	"context"
 	"errors"
-	"github.com/feihua/zero-admin/pkg/pointerprocess"
+
 	"github.com/feihua/zero-admin/pkg/time_util"
 	"github.com/feihua/zero-admin/rpc/oms/gen/query"
 	"github.com/feihua/zero-admin/rpc/oms/internal/svc"
@@ -46,14 +46,14 @@ func (l *QueryOrderReturnReasonDetailLogic) QueryOrderReturnReasonDetail(in *oms
 	}
 
 	data := &omsclient.QueryOrderReturnReasonDetailResp{
-		Id:         item.ID,                                          // 主键ID
-		Name:       item.Name,                                        // 退货类型
-		Sort:       item.Sort,                                        // 排序
-		Status:     item.Status,                                      // 状态：0->不启用；1->启用
-		CreateBy:   item.CreateBy,                                    // 创建者
-		CreateTime: time_util.TimeToStr(item.CreateTime),             // 创建时间
-		UpdateBy:   pointerprocess.DefaltData(item.UpdateBy).(int64), // 更新人ID
-		UpdateTime: time_util.TimeToString(item.UpdateTime),          // 更新时间
+		Id:         item.ID,                                 // 主键ID
+		Name:       item.Name,                               // 退货类型
+		Sort:       item.Sort,                               // 排序
+		Status:     item.Status,                             // 状态：0->不启用；1->启用
+		CreateBy:   item.CreateBy,                           // 创建者
+		CreateTime: time_util.TimeToStr(item.CreateTime),    // 创建时间
+		UpdateBy:   item.UpdateBy,                           // 更新人ID
+		UpdateTime: time_util.TimeToString(item.UpdateTime), // 更新时间
 	}
 
 	return data, nil

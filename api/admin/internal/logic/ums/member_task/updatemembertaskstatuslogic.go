@@ -2,6 +2,7 @@ package member_task
 
 import (
 	"context"
+
 	"github.com/feihua/zero-admin/api/admin/internal/common"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
 	"github.com/feihua/zero-admin/api/admin/internal/svc"
@@ -34,14 +35,14 @@ func NewUpdateMemberTaskStatusLogic(ctx context.Context, svcCtx *svc.ServiceCont
 
 // UpdateMemberTaskStatus 更新会员任务状态
 func (l *UpdateMemberTaskStatusLogic) UpdateMemberTaskStatus(req *types.UpdateMemberTaskStatusReq) (resp *types.BaseResp, err error) {
-	userId, err := common.GetUserId(l.ctx)
+	name, err := common.GetUserName(l.ctx)
 	if err != nil {
 		return nil, err
 	}
 	_, err = l.svcCtx.MemberTaskService.UpdateMemberTaskStatus(l.ctx, &umsclient.UpdateMemberTaskStatusReq{
 		Ids:      req.Ids,    // 主键ID
 		Status:   req.Status, // 状态：0-禁用，1-启用
-		UpdateBy: userId,
+		UpdateBy: name,
 	})
 
 	if err != nil {

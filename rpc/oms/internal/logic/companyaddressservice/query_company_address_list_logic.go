@@ -3,7 +3,7 @@ package companyaddressservicelogic
 import (
 	"context"
 	"errors"
-	"github.com/feihua/zero-admin/pkg/pointerprocess"
+
 	"github.com/feihua/zero-admin/pkg/time_util"
 	"github.com/feihua/zero-admin/rpc/oms/gen/query"
 	"github.com/feihua/zero-admin/rpc/oms/internal/svc"
@@ -63,20 +63,20 @@ func (l *QueryCompanyAddressListLogic) QueryCompanyAddressList(in *omsclient.Que
 
 	for _, item := range result {
 		list = append(list, &omsclient.CompanyAddressListData{
-			Id:            item.ID,                                          // 主键ID
-			AddressName:   item.AddressName,                                 // 地址名称
-			Name:          item.Name,                                        // 收发货人姓名
-			Phone:         item.Phone,                                       // 收货人电话
-			Province:      item.Province,                                    // 省/直辖市
-			City:          item.City,                                        // 市
-			Region:        item.Region,                                      // 区
-			DetailAddress: item.DetailAddress,                               // 详细地址
-			SendStatus:    item.SendStatus,                                  // 默认发货地址：0->否；1->是
-			ReceiveStatus: item.ReceiveStatus,                               // 默认收货地址：0->否；1->是
-			CreateBy:      item.CreateBy,                                    // 创建者
-			CreateTime:    time_util.TimeToStr(item.CreateTime),             // 创建时间
-			UpdateBy:      pointerprocess.DefaltData(item.UpdateBy).(int64), // 更新人ID
-			UpdateTime:    time_util.TimeToString(item.UpdateTime),          // 更新时间
+			Id:            item.ID,                                 // 主键ID
+			AddressName:   item.AddressName,                        // 地址名称
+			Name:          item.Name,                               // 收发货人姓名
+			Phone:         item.Phone,                              // 收货人电话
+			Province:      item.Province,                           // 省/直辖市
+			City:          item.City,                               // 市
+			Region:        item.Region,                             // 区
+			DetailAddress: item.DetailAddress,                      // 详细地址
+			SendStatus:    item.SendStatus,                         // 默认发货地址：0->否；1->是
+			ReceiveStatus: item.ReceiveStatus,                      // 默认收货地址：0->否；1->是
+			CreateBy:      item.CreateBy,                           // 创建者
+			CreateTime:    time_util.TimeToStr(item.CreateTime),    // 创建时间
+			UpdateBy:      item.UpdateBy,                           // 更新人ID
+			UpdateTime:    time_util.TimeToString(item.UpdateTime), // 更新时间
 
 		})
 	}

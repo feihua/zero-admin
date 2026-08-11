@@ -6,7 +6,7 @@ package model
 
 const TableNameOmsOrderReturnItem = "oms_order_return_item"
 
-// OmsOrderReturnItem 退货/售后明细表
+// OmsOrderReturnItem mapped from table <oms_order_return_item>
 type OmsOrderReturnItem struct {
 	ID           int64   `gorm:"column:id;primaryKey;autoIncrement:true;comment:主键ID" json:"id"`                  // 主键ID
 	ReturnID     int64   `gorm:"column:return_id;not null;comment:退货单ID（关联oms_order_return.id）" json:"return_id"` // 退货单ID（关联oms_order_return.id）
@@ -16,9 +16,9 @@ type OmsOrderReturnItem struct {
 	SkuName      string  `gorm:"column:sku_name;not null;comment:商品名称" json:"sku_name"`                           // 商品名称
 	SkuPic       string  `gorm:"column:sku_pic;not null;comment:商品图片" json:"sku_pic"`                             // 商品图片
 	SkuAttrs     string  `gorm:"column:sku_attrs;not null;comment:商品销售属性" json:"sku_attrs"`                       // 商品销售属性
-	Quantity     int32   `gorm:"column:quantity;not null;default:1;comment:退货数量" json:"quantity"`                 // 退货数量
-	ProductPrice float64 `gorm:"column:product_price;not null;default:0.00;comment:商品单价" json:"product_price"`    // 商品单价
-	RealAmount   float64 `gorm:"column:real_amount;not null;default:0.00;comment:实际退款金额" json:"real_amount"`      // 实际退款金额
+	Quantity     int32   `gorm:"column:quantity;not null;comment:退货数量" json:"quantity"`                           // 退货数量
+	ProductPrice float64 `gorm:"column:product_price;not null;comment:商品单价" json:"product_price"`                 // 商品单价
+	RealAmount   float64 `gorm:"column:real_amount;not null;comment:实际退款金额" json:"real_amount"`                   // 实际退款金额
 	Reason       string  `gorm:"column:reason;not null;comment:退货原因" json:"reason"`                               // 退货原因
 	Remark       string  `gorm:"column:remark;not null;comment:备注" json:"remark"`                                 // 备注
 }

@@ -3,7 +3,7 @@ package memberrulesettingservicelogic
 import (
 	"context"
 	"errors"
-	"github.com/feihua/zero-admin/pkg/pointerprocess"
+
 	"github.com/feihua/zero-admin/pkg/time_util"
 	"github.com/feihua/zero-admin/rpc/ums/gen/query"
 	"github.com/feihua/zero-admin/rpc/ums/internal/svc"
@@ -46,16 +46,16 @@ func (l *QueryMemberRuleSettingDetailLogic) QueryMemberRuleSettingDetail(in *ums
 	}
 
 	data := &umsclient.QueryMemberRuleSettingDetailResp{
-		Id:               item.ID,                                          //
-		ConsumePerPoint:  item.ConsumePerPoint,                             // 每消费多少元获取1个点
-		LowOrderAmount:   item.LowOrderAmount,                              // 最低获取点数的订单金额
-		MaxPointPerOrder: item.MaxPointPerOrder,                            // 每笔订单最高获取点数
-		RuleType:         item.RuleType,                                    // 类型：0->积分规则；1->成长值规则
-		Status:           item.Status,                                      // 状态：0->禁用；1->启用
-		CreateBy:         item.CreateBy,                                    // 创建人ID
-		CreateTime:       time_util.TimeToStr(item.CreateTime),             // 创建时间
-		UpdateBy:         pointerprocess.DefaltData(item.UpdateBy).(int64), // 更新人ID
-		UpdateTime:       time_util.TimeToString(item.UpdateTime),          // 更新时间
+		Id:               item.ID,                                 //
+		ConsumePerPoint:  item.ConsumePerPoint,                    // 每消费多少元获取1个点
+		LowOrderAmount:   item.LowOrderAmount,                     // 最低获取点数的订单金额
+		MaxPointPerOrder: item.MaxPointPerOrder,                   // 每笔订单最高获取点数
+		RuleType:         item.RuleType,                           // 类型：0->积分规则；1->成长值规则
+		Status:           item.Status,                             // 状态：0->禁用；1->启用
+		CreateBy:         item.CreateBy,                           // 创建人ID
+		CreateTime:       time_util.TimeToStr(item.CreateTime),    // 创建时间
+		UpdateBy:         item.UpdateBy,                           // 更新人ID
+		UpdateTime:       time_util.TimeToString(item.UpdateTime), // 更新时间
 	}
 
 	return data, nil

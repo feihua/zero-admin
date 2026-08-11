@@ -43,7 +43,6 @@ func newUmsMemberPointsLog(db *gorm.DB, opts ...gen.DOOption) umsMemberPointsLog
 	return _umsMemberPointsLog
 }
 
-// umsMemberPointsLog 会员积分记录表
 type umsMemberPointsLog struct {
 	umsMemberPointsLogDo umsMemberPointsLogDo
 

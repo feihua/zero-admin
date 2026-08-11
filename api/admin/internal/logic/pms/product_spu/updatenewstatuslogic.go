@@ -2,6 +2,7 @@ package product_spu
 
 import (
 	"context"
+
 	"github.com/feihua/zero-admin/api/admin/internal/common"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
 	"github.com/feihua/zero-admin/api/admin/internal/common/res"
@@ -36,14 +37,14 @@ func NewUpdateNewStatusLogic(ctx context.Context, svcCtx *svc.ServiceContext) *U
 
 // UpdateNewStatus 设为新品
 func (l *UpdateNewStatusLogic) UpdateNewStatus(req *types.UpdateProductSpuStatusReq) (resp *types.BaseResp, err error) {
-	userId, err := common.GetUserId(l.ctx)
+	name, err := common.GetUserName(l.ctx)
 	if err != nil {
 		return nil, err
 	}
 	_, err = l.svcCtx.ProductSpuService.UpdateNewStatus(l.ctx, &pmsclient.UpdateProductSpuStatusReq{
 		Ids:      req.Ids,
 		Status:   req.Status,
-		UpdateBy: userId,
+		UpdateBy: name,
 	})
 
 	if err != nil {

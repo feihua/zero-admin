@@ -2,6 +2,7 @@ package member_rule_setting
 
 import (
 	"context"
+
 	"github.com/feihua/zero-admin/api/admin/internal/common"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
 	"github.com/feihua/zero-admin/api/admin/internal/common/res"
@@ -35,7 +36,7 @@ func NewUpdateMemberRuleSettingLogic(ctx context.Context, svcCtx *svc.ServiceCon
 
 // UpdateMemberRuleSetting 更新会员积分规则
 func (l *UpdateMemberRuleSettingLogic) UpdateMemberRuleSetting(req *types.UpdateMemberRuleSettingReq) (resp *types.BaseResp, err error) {
-	userId, err := common.GetUserId(l.ctx)
+	name, err := common.GetUserName(l.ctx)
 	if err != nil {
 		return nil, err
 	}
@@ -46,7 +47,7 @@ func (l *UpdateMemberRuleSettingLogic) UpdateMemberRuleSetting(req *types.Update
 		MaxPointPerOrder: req.MaxPointPerOrder, // 每笔订单最高获取点数
 		RuleType:         req.RuleType,         // 类型：0->积分规则；1->成长值规则
 		Status:           req.Status,           // 状态：0->禁用；1->启用
-		UpdateBy:         userId,
+		UpdateBy:         name,
 	})
 
 	if err != nil {

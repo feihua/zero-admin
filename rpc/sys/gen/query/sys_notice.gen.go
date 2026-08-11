@@ -34,6 +34,7 @@ func newSysNotice(db *gorm.DB, opts ...gen.DOOption) sysNotice {
 	_sysNotice.NoticeContent = field.NewString(tableName, "notice_content")
 	_sysNotice.Status = field.NewInt32(tableName, "status")
 	_sysNotice.Remark = field.NewString(tableName, "remark")
+	_sysNotice.DelFlag = field.NewInt32(tableName, "del_flag")
 	_sysNotice.CreateBy = field.NewString(tableName, "create_by")
 	_sysNotice.CreateTime = field.NewTime(tableName, "create_time")
 	_sysNotice.UpdateBy = field.NewString(tableName, "update_by")
@@ -44,17 +45,17 @@ func newSysNotice(db *gorm.DB, opts ...gen.DOOption) sysNotice {
 	return _sysNotice
 }
 
-// sysNotice 通知公告表
 type sysNotice struct {
 	sysNoticeDo sysNoticeDo
 
 	ALL           field.Asterisk
-	ID            field.Int64  // 公告ID
+	ID            field.Int64  // 公告id
 	NoticeTitle   field.String // 公告标题
 	NoticeType    field.Int32  // 公告类型（1:通知,2:公告）
 	NoticeContent field.String // 公告内容
 	Status        field.Int32  // 公告状态（0:关闭,1:正常 ）
 	Remark        field.String // 备注
+	DelFlag       field.Int32  // 删除标志（0:删除,1:存在）
 	CreateBy      field.String // 创建者
 	CreateTime    field.Time   // 创建时间
 	UpdateBy      field.String // 更新者
@@ -81,6 +82,7 @@ func (s *sysNotice) updateTableName(table string) *sysNotice {
 	s.NoticeContent = field.NewString(table, "notice_content")
 	s.Status = field.NewInt32(table, "status")
 	s.Remark = field.NewString(table, "remark")
+	s.DelFlag = field.NewInt32(table, "del_flag")
 	s.CreateBy = field.NewString(table, "create_by")
 	s.CreateTime = field.NewTime(table, "create_time")
 	s.UpdateBy = field.NewString(table, "update_by")
@@ -111,13 +113,14 @@ func (s *sysNotice) GetFieldByName(fieldName string) (field.OrderExpr, bool) {
 }
 
 func (s *sysNotice) fillFieldMap() {
-	s.fieldMap = make(map[string]field.Expr, 10)
+	s.fieldMap = make(map[string]field.Expr, 11)
 	s.fieldMap["id"] = s.ID
 	s.fieldMap["notice_title"] = s.NoticeTitle
 	s.fieldMap["notice_type"] = s.NoticeType
 	s.fieldMap["notice_content"] = s.NoticeContent
 	s.fieldMap["status"] = s.Status
 	s.fieldMap["remark"] = s.Remark
+	s.fieldMap["del_flag"] = s.DelFlag
 	s.fieldMap["create_by"] = s.CreateBy
 	s.fieldMap["create_time"] = s.CreateTime
 	s.fieldMap["update_by"] = s.UpdateBy

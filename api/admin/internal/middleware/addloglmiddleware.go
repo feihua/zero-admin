@@ -2,14 +2,14 @@ package middleware
 
 import (
 	"bytes"
-	"github.com/feihua/zero-admin/rpc/sys/client/operatelogservice"
-	"github.com/feihua/zero-admin/rpc/sys/sysclient"
-	"github.com/ua-parser/uap-go/uaparser"
-	"github.com/zeromicro/go-zero/core/logx"
-	"github.com/zeromicro/go-zero/rest/httpx"
 	"io/ioutil"
 	"net/http"
 	"time"
+
+	"github.com/feihua/zero-admin/rpc/sys/client/operatelogservice"
+	"github.com/feihua/zero-admin/rpc/sys/sysclient"
+	"github.com/zeromicro/go-zero/core/logx"
+	"github.com/zeromicro/go-zero/rest/httpx"
 )
 
 type AddLogMiddleware struct {
@@ -42,6 +42,7 @@ func (m *AddLogMiddleware) Handle(next http.HandlerFunc) http.HandlerFunc {
 		} else {
 			deptName = deptNameRaw
 		}
+		logx.WithContext(r.Context()).Infof("Request deptName: %s", deptName)
 
 		startTime := time.Now()
 
@@ -73,38 +74,19 @@ func (m *AddLogMiddleware) Handle(next http.HandlerFunc) http.HandlerFunc {
 		// logx.WithContext(r.Context()).Infof("Response: %s %s %s", r.Method, r.RequestURI, responseBoy)
 
 		userAgent := r.Header.Get("User-Agent")
-		parser := uaparser.NewFromSaved()
-		ua := parser.Parse(userAgent)
 
-		browser := ua.UserAgent.Family + " " + ua.UserAgent.Major
-		os := ua.Os.Family + " " + ua.Os.Major
 		// 打印请求和响应耗时
 		duration := time.Since(startTime)
 		opLog := &sysclient.AddOperateLogReq{
-			Title:           "",
-			BusinessType:    0,
-			Method:          r.Method,
-			RequestMethod:   r.Method,
-			OperatorType:    0,
-			OperateName:     userName,
-			DeptName:        deptName,
-			OperateUrl:      uri,
-			OperateIp:       httpx.GetRemoteAddr(r),
-			OperateLocation: "",
-			OperateParam:    string(body),
-			JsonResult:      responseBoy,
-			Platform:        "",
-			Browser:         browser,
-			Version:         "",
-			Os:              os,
-			Arch:            "",
-			Engine:          "",
-			EngineDetails:   "",
-			Extra:           "",
-			Status:          0,
-			ErrorMsg:        "",
-			OperateTime:     "",
-			CostTime:        duration.Milliseconds(),
+			OperateName:  userName,
+			OperateUrl:   uri,
+			OperateIp:    httpx.GetRemoteAddr(r),
+			OperateParam: string(body),
+			JsonResult:   responseBoy,
+			Extra:        userAgent,
+			Status:       0,
+			OperateTime:  "",
+			CostTime:     duration.Milliseconds(),
 		}
 		_, _ = m.Sys.AddOperateLog(r.Context(), opLog)
 	}

@@ -58,7 +58,6 @@ func newOmsOrderMain(db *gorm.DB, opts ...gen.DOOption) omsOrderMain {
 	return _omsOrderMain
 }
 
-// omsOrderMain 订单主表
 type omsOrderMain struct {
 	omsOrderMainDo omsOrderMainDo
 
@@ -86,7 +85,7 @@ type omsOrderMain struct {
 	Remark             field.String  // 订单备注
 	CreateTime         field.Time    // 提交时间
 	UpdateTime         field.Time
-	IsDeleted          field.Int32 // 是否删除
+	IsDeleted          field.Int32 // 是否删除(0:否,1:是)
 
 	fieldMap map[string]field.Expr
 }

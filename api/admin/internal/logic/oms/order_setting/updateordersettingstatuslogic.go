@@ -2,6 +2,7 @@ package order_setting
 
 import (
 	"context"
+
 	"github.com/feihua/zero-admin/api/admin/internal/common"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
 	"github.com/feihua/zero-admin/api/admin/internal/svc"
@@ -34,14 +35,14 @@ func NewUpdateOrderSettingStatusLogic(ctx context.Context, svcCtx *svc.ServiceCo
 
 // UpdateOrderSettingStatus 更新订单设置状态
 func (l *UpdateOrderSettingStatusLogic) UpdateOrderSettingStatus(req *types.UpdateOrderSettingStatusReq) (resp *types.BaseResp, err error) {
-	userId, err := common.GetUserId(l.ctx)
+	name, err := common.GetUserName(l.ctx)
 	if err != nil {
 		return nil, err
 	}
 	_, err = l.svcCtx.OrderSettingService.UpdateOrderSettingStatus(l.ctx, &omsclient.UpdateOrderSettingStatusReq{
 		Id:       req.Id,     // 主键ID
 		Status:   req.Status, // 状态：0->禁用；1->启用
-		UpdateBy: userId,
+		UpdateBy: name,
 	})
 
 	if err != nil {

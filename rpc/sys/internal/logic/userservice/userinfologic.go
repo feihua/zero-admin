@@ -3,6 +3,8 @@ package userservicelogic
 import (
 	"context"
 	"errors"
+	"strings"
+
 	"github.com/feihua/zero-admin/rpc/sys/gen/model"
 	"github.com/feihua/zero-admin/rpc/sys/gen/query"
 	"github.com/feihua/zero-admin/rpc/sys/internal/logic/common"
@@ -11,7 +13,6 @@ import (
 	"github.com/zeromicro/go-zero/core/logc"
 	"github.com/zeromicro/go-zero/core/logx"
 	"gorm.io/gorm"
-	"strings"
 )
 
 // UserInfoLogic 获取用户信息
@@ -65,7 +66,7 @@ func (l *UserInfoLogic) UserInfo(in *sysclient.InfoReq) (*sysclient.InfoResp, er
 func (l *UserInfoLogic) queryApis(userId int64) ([]*sysclient.MenuListTree, []string) {
 	var result []*model.SysMenu
 	if common.IsAdmin(l.ctx, userId, l.svcCtx.DB) {
-		result, _ = query.SysMenu.WithContext(l.ctx).Where(query.SysMenu.IsVisible.Eq(1)).Find()
+		result, _ = query.SysMenu.WithContext(l.ctx).Where(query.SysMenu.Visible.Eq(1)).Find()
 	} else {
 		sql := `
 				select sm.*
@@ -73,7 +74,7 @@ func (l *UserInfoLogic) queryApis(userId int64) ([]*sysclient.MenuListTree, []st
 						 left join sys_role sr on sur.role_id = sr.id
 						 left join sys_role_menu srm on sr.id = srm.role_id
 						 left join sys_menu sm on srm.menu_id = sm.id
-				where sur.user_id = ? and sm.is_visible=1
+				where sur.user_id = ? and sm.visible=1
 				order by sm.id
 				`
 		db := l.svcCtx.DB
@@ -94,7 +95,7 @@ func buildMenuTree(menus []*model.SysMenu) ([]*sysclient.MenuListTree, []string)
 				Name:         menu.MenuName,     // 菜单名称
 				Icon:         menu.MenuIcon,     // 图标
 				ParentId:     menu.ParentID,     // 父级id
-				Path:         menu.MenuPath,     // 路径
+				Path:         menu.MenuURL,      // 路径
 				VuePath:      menu.VuePath,      // vue路径
 				VueComponent: menu.VueComponent, // vue组件
 				VueIcon:      menu.VueIcon,      // vue图标
@@ -102,8 +103,8 @@ func buildMenuTree(menus []*model.SysMenu) ([]*sysclient.MenuListTree, []string)
 			})
 		}
 
-		if len(strings.TrimSpace(menu.BackgroundURL)) != 0 {
-			urls = append(urls, menu.BackgroundURL) // 接口地址
+		if len(strings.TrimSpace(menu.APIURL)) != 0 {
+			urls = append(urls, menu.APIURL) // 接口地址
 		}
 
 	}

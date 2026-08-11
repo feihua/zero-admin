@@ -4,12 +4,13 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"strconv"
+
 	"github.com/feihua/zero-admin/rpc/sys/gen/query"
 	"github.com/feihua/zero-admin/rpc/sys/internal/svc"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
 	"github.com/zeromicro/go-zero/core/logc"
 	"gorm.io/gorm"
-	"strconv"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -57,7 +58,7 @@ func (l *UpdateDeptStatusLogic) UpdateDeptStatus(in *sysclient.UpdateDeptStatusR
 
 	// 2.查询是否有下级部门
 	var count int64
-	sql := "select count(*) from sys_dept where status = 1 and del_flag = 1 and find_in_set(?, 'ancestors')"
+	sql := "select count(*) from sys_dept where status = 1 and del_flag = 1 and ? = ANY(string_to_array(ancestors, ','))"
 	err = l.svcCtx.DB.Raw(sql, id).Count(&count).Error
 	if err != nil {
 		logc.Errorf(l.ctx, "根据部门id查询是否有下级部门失败,异常:%s", err.Error())

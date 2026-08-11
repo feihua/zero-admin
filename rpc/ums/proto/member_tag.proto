@@ -12,7 +12,7 @@ message AddMemberTagReq {
   int32 finish_order_count = 4; //自动打标签完成订单数量
   float finish_order_amount = 5; //自动打标签完成订单金额
   int32 status = 6; //状态：0-禁用，1-启用
-  int64 create_by = 7; //创建人ID
+  string create_by = 7; //创建人ID
 }
 
 message AddMemberTagResp {
@@ -36,7 +36,7 @@ message UpdateMemberTagReq {
   int32 finish_order_count = 4; //自动打标签完成订单数量
   float finish_order_amount = 5; //自动打标签完成订单金额
   int32 status = 6; //状态：0-禁用，1-启用
-  int64 update_by = 9; //更新人ID
+  string update_by = 9; //更新人ID
 }
 
 message UpdateMemberTagResp {
@@ -47,7 +47,7 @@ message UpdateMemberTagResp {
 message UpdateMemberTagStatusReq {
   repeated int64 ids = 1; //主键ID
   int32 status = 6; //状态：0-禁用，1-启用
-  int64 update_by = 9; //更新人ID
+  string update_by = 9; //更新人ID
 }
 
 message UpdateMemberTagStatusResp {
@@ -66,9 +66,9 @@ message QueryMemberTagDetailResp {
   int32 finish_order_count = 4; //自动打标签完成订单数量
   float finish_order_amount = 5; //自动打标签完成订单金额
   int32 status = 6; //状态：0-禁用，1-启用
-  int64 create_by = 7; //创建人ID
+  string create_by = 7; //创建人ID
   string create_time = 8; //创建时间
-  int64 update_by = 9; //更新人ID
+  string update_by = 9; //更新人ID
   string update_time = 10; //更新时间
 
 }
@@ -88,9 +88,9 @@ message MemberTagListData {
   int32 finish_order_count = 4; //自动打标签完成订单数量
   float finish_order_amount = 5; //自动打标签完成订单金额
   int32 status = 6; //状态：0-禁用，1-启用
-  int64 create_by = 7; //创建人ID
+  string create_by = 7; //创建人ID
   string create_time = 8; //创建时间
-  int64 update_by = 9; //更新人ID
+  string update_by = 9; //更新人ID
   string update_time = 10; //更新时间
 
 }

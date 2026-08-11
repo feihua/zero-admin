@@ -3,7 +3,7 @@ package seckillsessionservicelogic
 import (
 	"context"
 	"errors"
-	"github.com/feihua/zero-admin/pkg/pointerprocess"
+
 	"github.com/feihua/zero-admin/pkg/time_util"
 	"github.com/feihua/zero-admin/rpc/sms/gen/query"
 	"github.com/feihua/zero-admin/rpc/sms/internal/svc"
@@ -54,16 +54,16 @@ func (l *QuerySeckillSessionListLogic) QuerySeckillSessionList(in *smsclient.Que
 
 	for _, item := range result {
 		list = append(list, &smsclient.SeckillSessionListData{
-			Id:         item.ID,                                          // 秒杀场次ID
-			Name:       item.Name,                                        // 场次名称
-			StartTime:  item.StartTime,                                   // 开始时间
-			EndTime:    item.EndTime,                                     // 结束时间
-			Status:     item.Status,                                      // 状态：0-禁用，1-启用
-			Sort:       item.Sort,                                        // 排序
-			CreateBy:   item.CreateBy,                                    // 创建人ID
-			CreateTime: time_util.TimeToStr(item.CreateTime),             // 创建时间
-			UpdateBy:   pointerprocess.DefaltData(item.UpdateBy).(int64), // 更新人ID
-			UpdateTime: time_util.TimeToString(item.UpdateTime),          // 更新时间
+			Id:         item.ID,                                 // 秒杀场次ID
+			Name:       item.Name,                               // 场次名称
+			StartTime:  item.StartTime,                          // 开始时间
+			EndTime:    item.EndTime,                            // 结束时间
+			Status:     item.Status,                             // 状态：0-禁用，1-启用
+			Sort:       item.Sort,                               // 排序
+			CreateBy:   item.CreateBy,                           // 创建人ID
+			CreateTime: time_util.TimeToStr(item.CreateTime),    // 创建时间
+			UpdateBy:   item.UpdateBy,                           // 更新人ID
+			UpdateTime: time_util.TimeToString(item.UpdateTime), // 更新时间
 
 		})
 	}

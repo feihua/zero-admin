@@ -2,6 +2,7 @@ package product_spec_value
 
 import (
 	"context"
+
 	"github.com/feihua/zero-admin/api/admin/internal/common"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
 	"github.com/feihua/zero-admin/api/admin/internal/svc"
@@ -34,7 +35,7 @@ func NewUpdateProductSpecValueLogic(ctx context.Context, svcCtx *svc.ServiceCont
 
 // UpdateProductSpecValue 更新商品规格值
 func (l *UpdateProductSpecValueLogic) UpdateProductSpecValue(req *types.UpdateProductSpecValueReq) (resp *types.BaseResp, err error) {
-	userId, err := common.GetUserId(l.ctx)
+	name, err := common.GetUserName(l.ctx)
 	if err != nil {
 		return nil, err
 	}
@@ -44,7 +45,7 @@ func (l *UpdateProductSpecValueLogic) UpdateProductSpecValue(req *types.UpdatePr
 		Value:    req.Value,  // 规格值
 		Sort:     req.Sort,   // 排序
 		Status:   req.Status, // 状态：0->禁用；1->启用
-		UpdateBy: userId,     // 更新人ID
+		UpdateBy: name,       // 更新人ID
 	})
 
 	if err != nil {

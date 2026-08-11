@@ -10,7 +10,7 @@ import (
 
 const TableNameOmsOrderDelivery = "oms_order_delivery"
 
-// OmsOrderDelivery 订单收货地址表
+// OmsOrderDelivery mapped from table <oms_order_delivery>
 type OmsOrderDelivery struct {
 	ID               int64      `gorm:"column:id;primaryKey;autoIncrement:true" json:"id"`
 	OrderID          int64      `gorm:"column:order_id;not null;comment:订单ID" json:"order_id"`                                 // 订单ID
@@ -25,7 +25,7 @@ type OmsOrderDelivery struct {
 	DeliveryNo       string     `gorm:"column:delivery_no;not null;comment:物流单号" json:"delivery_no"`                           // 物流单号
 	CreateTime       time.Time  `gorm:"column:create_time;not null;default:CURRENT_TIMESTAMP;comment:创建时间" json:"create_time"` // 创建时间
 	UpdateTime       *time.Time `gorm:"column:update_time;comment:更新时间" json:"update_time"`                                    // 更新时间
-	IsDeleted        int32      `gorm:"column:is_deleted;not null;comment:是否删除" json:"is_deleted"`                             // 是否删除
+	IsDeleted        int32      `gorm:"column:is_deleted;not null;default:1;comment:是否删除(0:否,1:是)" json:"is_deleted"`          // 是否删除(0:否,1:是)
 }
 
 // TableName OmsOrderDelivery's table name

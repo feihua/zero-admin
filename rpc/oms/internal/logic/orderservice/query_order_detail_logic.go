@@ -75,8 +75,8 @@ func (l *QueryOrderDetailLogic) QueryOrderDetail(in *omsclient.QueryOrderDetailR
 		UpdateTime:         time_util.TimeToString(item.UpdateTime),   //
 	}
 
-	if item.PayType != nil {
-		data.PayType = *item.PayType // 支付方式：1-支付宝,2-微信,3-银联
+	if item.PayType != 0 {
+		data.PayType = item.PayType // 支付方式：1-支付宝,2-微信,3-银联
 	}
 
 	orderItem := query.OmsOrderItem

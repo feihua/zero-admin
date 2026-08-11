@@ -2,6 +2,7 @@ package product_attribute
 
 import (
 	"context"
+
 	"github.com/feihua/zero-admin/api/admin/internal/common"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
 	"github.com/feihua/zero-admin/api/admin/internal/svc"
@@ -34,7 +35,7 @@ func NewAddProductAttributeLogic(ctx context.Context, svcCtx *svc.ServiceContext
 
 // AddProductAttribute 添加商品属性
 func (l *AddProductAttributeLogic) AddProductAttribute(req *types.AddProductAttributeReq) (resp *types.BaseResp, err error) {
-	userId, err := common.GetUserId(l.ctx)
+	name, err := common.GetUserName(l.ctx)
 	if err != nil {
 		return nil, err
 	}
@@ -50,7 +51,7 @@ func (l *AddProductAttributeLogic) AddProductAttribute(req *types.AddProductAttr
 		IsShow:       req.IsShow,       // 是否显示
 		Sort:         req.Sort,         // 排序
 		Status:       req.Status,       // 状态：0->禁用；1->启用
-		CreateBy:     userId,           // 创建人ID
+		CreateBy:     name,             // 创建人ID
 	})
 
 	if err != nil {

@@ -2,6 +2,7 @@ package order_main
 
 import (
 	"context"
+
 	"github.com/feihua/zero-admin/api/admin/internal/common"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
 	"github.com/feihua/zero-admin/rpc/oms/omsclient"
@@ -28,14 +29,14 @@ func NewDeliveryLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Delivery
 }
 
 func (l *DeliveryLogic) Delivery(req *types.DeliveryReq) (resp *types.BaseResp, err error) {
-	userId, err := common.GetUserId(l.ctx)
+	name, err := common.GetUserId(l.ctx)
 	if err != nil {
 		return nil, err
 	}
 	_, err = l.svcCtx.OrderService.Delivery(l.ctx, &omsclient.DeliveryReq{
 		OrderId:    req.OrderId,
 		DeliverySn: req.DeliverySn,
-		OperatorId: userId,
+		OperatorId: name,
 	})
 
 	if err != nil {

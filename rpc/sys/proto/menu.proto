@@ -7,27 +7,24 @@ option go_package = "./proto";
 
 // 添加菜单信息表
 message AddMenuReq {
-  int64 id = 1; //编号
-  string menu_name = 2; //菜单名称
-  int64 parent_id = 3; //父菜单ID，一级菜单为0
-  string menu_path = 4; //前端路由
-  string menu_perms = 5; //权限标识
-  int32 menu_type = 6; //类型 0：目录,1：菜单,2：按钮,3：外链
-  string menu_icon = 7; //菜单图标
-  int32 menu_sort = 8; //菜单排序
-  string create_by = 9; //创建者
-  string create_time = 10; //创建时间
-  string update_by = 11; //更新者
-  string update_time = 12; //更新时间
-  int32 menu_status = 13; //菜单状态
-  int32 is_deleted = 14; //是否删除  0：否  1：是
-  int32 is_visible = 15; //是否可见  0：否  1：是
-  string remark = 16; //备注信息
-  string vue_path = 17; //vue系统的path
-  string vue_component = 18; //vue的页面
-  string vue_icon = 19; //vue的图标
-  string vue_redirect = 20; //vue的路由重定向
-  string background_url = 21; //接口地址
+  string menu_name = 1; //菜单名称
+  string ancestors = 2; //祖级列表
+  int32 menu_type = 3; //菜单类型(1:目录,2:菜单,3:按钮)
+  string menu_url = 4; //路由路径
+  string menu_icon = 5; //菜单图标
+  int32 menu_sort = 6; //排序
+  int64 parent_id = 7; //父id
+  string api_url = 8; //接口url
+  int32 visible = 9; //显示状态（0:隐藏,显示:1）
+  int32 status = 10; //菜单状态(1:正常，0:禁用)
+  string remark = 11; //备注
+  string vue_path = 12; //vue的path
+  string vue_component = 13; //vue的页面
+  string vue_icon = 14; //vue的图标
+  string vue_redirect = 15; //vue的路由重定向
+  string angular_icon = 16; //angular的图标
+  string react_icon = 17; //antd react的图标
+  string create_by = 18; //创建者
 
 }
 
@@ -46,27 +43,25 @@ message DeleteMenuResp {
 
 // 更新菜单信息表
 message UpdateMenuReq {
-  int64 id = 1; //编号
+  int64 id = 1; //主键
   string menu_name = 2; //菜单名称
-  int64 parent_id = 3; //父菜单ID，一级菜单为0
-  string menu_path = 4; //前端路由
-  string menu_perms = 5; //权限标识
-  int32 menu_type = 6; //类型 0：目录,1：菜单,2：按钮,3：外链
-  string menu_icon = 7; //菜单图标
-  int32 menu_sort = 8; //菜单排序
-  string create_by = 9; //创建者
-  string create_time = 10; //创建时间
-  string update_by = 11; //更新者
-  string update_time = 12; //更新时间
-  int32 menu_status = 13; //菜单状态
-  int32 is_deleted = 14; //是否删除  0：否  1：是
-  int32 is_visible = 15; //是否可见  0：否  1：是
-  string remark = 16; //备注信息
-  string vue_path = 17; //vue系统的path
-  string vue_component = 18; //vue的页面
-  string vue_icon = 19; //vue的图标
-  string vue_redirect = 20; //vue的路由重定向
-  string background_url = 21; //接口地址
+  string ancestors = 3; //祖级列表
+  int32 menu_type = 4; //菜单类型(1:目录,2:菜单,3:按钮)
+  string menu_url = 5; //路由路径
+  string menu_icon = 6; //菜单图标
+  int32 menu_sort = 7; //排序
+  int64 parent_id = 8; //父id
+  string api_url = 9; //接口url
+  int32 visible = 10; //显示状态（0:隐藏,显示:1）
+  int32 status = 11; //菜单状态(1:正常，0:禁用)
+  string remark = 12; //备注
+  string vue_path = 13; //vue的path
+  string vue_component = 14; //vue的页面
+  string vue_icon = 15; //vue的图标
+  string vue_redirect = 16; //vue的路由重定向
+  string angular_icon = 17; //angular的图标
+  string react_icon = 18; //antd react的图标
+  string update_by = 19; //更新者
 }
 
 message UpdateMenuResp {
@@ -91,27 +86,29 @@ message QueryMenuDetailReq {
 }
 
 message QueryMenuDetailResp {
-  int64 id = 1; //编号
+  int64 id = 1; //主键
   string menu_name = 2; //菜单名称
-  int64 parent_id = 3; //父菜单ID，一级菜单为0
-  string menu_path = 4; //前端路由
-  string menu_perms = 5; //权限标识
-  int32 menu_type = 6; //类型 0：目录,1：菜单,2：按钮,3：外链
-  string menu_icon = 7; //菜单图标
-  int32 menu_sort = 8; //菜单排序
-  string create_by = 9; //创建者
-  string create_time = 10; //创建时间
-  string update_by = 11; //更新者
-  string update_time = 12; //更新时间
-  int32 menu_status = 13; //菜单状态
-  int32 is_deleted = 14; //是否删除  0：否  1：是
-  int32 is_visible = 15; //是否可见  0：否  1：是
-  string remark = 16; //备注信息
-  string vue_path = 17; //vue系统的path
-  string vue_component = 18; //vue的页面
-  string vue_icon = 19; //vue的图标
-  string vue_redirect = 20; //vue的路由重定向
-  string background_url = 21; //接口地址
+  string ancestors = 3; //祖级列表
+  int32 menu_type = 4; //菜单类型(1:目录,2:菜单,3:按钮)
+  string menu_url = 5; //路由路径
+  string menu_icon = 6; //菜单图标
+  int32 menu_sort = 7; //排序
+  int64 parent_id = 8; //父id
+  string api_url = 9; //接口url
+  int32 visible = 10; //显示状态（0:隐藏,显示:1）
+  int32 status = 11; //菜单状态(1:正常，0:禁用)
+  int32 del_flag = 12; //删除标志（0:删除,1:存在）
+  string remark = 13; //备注
+  string vue_path = 14; //vue的path
+  string vue_component = 15; //vue的页面
+  string vue_icon = 16; //vue的图标
+  string vue_redirect = 17; //vue的路由重定向
+  string angular_icon = 18; //angular的图标
+  string react_icon = 19; //antd react的图标
+  string create_by = 20; //创建者
+  string create_time = 21; //创建时间
+  string update_by = 22; //更新者
+  string update_time = 23; //更新时间
 }
 
 // 分页查询菜单信息表列表
@@ -124,27 +121,29 @@ message QueryMenuListReq {
 }
 
 message MenuListData {
-  int64 id = 1; //编号
+  int64 id = 1; //主键
   string menu_name = 2; //菜单名称
-  int64 parent_id = 3; //父菜单ID，一级菜单为0
-  string menu_path = 4; //前端路由
-  string menu_perms = 5; //权限标识
-  int32 menu_type = 6; //类型 0：目录,1：菜单,2：按钮,3：外链
-  string menu_icon = 7; //菜单图标
-  int32 menu_sort = 8; //菜单排序
-  string create_by = 9; //创建者
-  string create_time = 10; //创建时间
-  string update_by = 11; //更新者
-  string update_time = 12; //更新时间
-  int32 menu_status = 13; //菜单状态
-  int32 is_deleted = 14; //是否删除  0：否  1：是
-  int32 is_visible = 15; //是否可见  0：否  1：是
-  string remark = 16; //备注信息
-  string vue_path = 17; //vue系统的path
-  string vue_component = 18; //vue的页面
-  string vue_icon = 19; //vue的图标
-  string vue_redirect = 20; //vue的路由重定向
-  string background_url = 21; //接口地址
+  string ancestors = 3; //祖级列表
+  int32 menu_type = 4; //菜单类型(1:目录,2:菜单,3:按钮)
+  string menu_url = 5; //路由路径
+  string menu_icon = 6; //菜单图标
+  int32 menu_sort = 7; //排序
+  int64 parent_id = 8; //父id
+  string api_url = 9; //接口url
+  int32 visible = 10; //显示状态（0:隐藏,显示:1）
+  int32 status = 11; //菜单状态(1:正常，0:禁用)
+  int32 del_flag = 12; //删除标志（0:删除,1:存在）
+  string remark = 13; //备注
+  string vue_path = 14; //vue的path
+  string vue_component = 15; //vue的页面
+  string vue_icon = 16; //vue的图标
+  string vue_redirect = 17; //vue的路由重定向
+  string angular_icon = 18; //angular的图标
+  string react_icon = 19; //antd react的图标
+  string create_by = 20; //创建者
+  string create_time = 21; //创建时间
+  string update_by = 22; //更新者
+  string update_time = 23; //更新时间
 
 }
 

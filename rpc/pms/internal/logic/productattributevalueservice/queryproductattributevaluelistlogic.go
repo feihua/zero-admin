@@ -3,7 +3,7 @@ package productattributevalueservicelogic
 import (
 	"context"
 	"errors"
-	"github.com/feihua/zero-admin/pkg/pointerprocess"
+
 	"github.com/feihua/zero-admin/pkg/time_util"
 	"github.com/feihua/zero-admin/rpc/pms/gen/query"
 	"github.com/feihua/zero-admin/rpc/pms/internal/svc"
@@ -55,15 +55,15 @@ func (l *QueryProductAttributeValueListLogic) QueryProductAttributeValueList(in 
 
 	for _, item := range result {
 		list = append(list, &pmsclient.ProductAttributeValueListData{
-			Id:          item.ID,                                          // 主键id
-			SpuId:       item.SpuID,                                       // 商品SPU ID
-			AttributeId: item.AttributeID,                                 // 属性ID
-			Value:       item.Value,                                       // 属性值
-			Status:      item.Status,                                      // 状态：0->禁用；1->启用
-			CreateBy:    item.CreateBy,                                    // 创建人ID
-			CreateTime:  time_util.TimeToStr(item.CreateTime),             // 创建时间
-			UpdateBy:    pointerprocess.DefaltData(item.UpdateBy).(int64), // 更新人ID
-			UpdateTime:  time_util.TimeToString(item.UpdateTime),          // 更新时间
+			Id:          item.ID,                                 // 主键id
+			SpuId:       item.SpuID,                              // 商品SPU ID
+			AttributeId: item.AttributeID,                        // 属性ID
+			Value:       item.Value,                              // 属性值
+			Status:      item.Status,                             // 状态：0->禁用；1->启用
+			CreateBy:    item.CreateBy,                           // 创建人ID
+			CreateTime:  time_util.TimeToStr(item.CreateTime),    // 创建时间
+			UpdateBy:    item.UpdateBy,                           // 更新人ID
+			UpdateTime:  time_util.TimeToString(item.UpdateTime), // 更新时间
 
 		})
 	}

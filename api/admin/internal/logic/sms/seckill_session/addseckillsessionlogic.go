@@ -2,6 +2,7 @@ package seckill_session
 
 import (
 	"context"
+
 	"github.com/feihua/zero-admin/api/admin/internal/common"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
 	"github.com/feihua/zero-admin/api/admin/internal/svc"
@@ -34,7 +35,7 @@ func NewAddSeckillSessionLogic(ctx context.Context, svcCtx *svc.ServiceContext) 
 
 // AddSeckillSession 添加秒杀场次
 func (l *AddSeckillSessionLogic) AddSeckillSession(req *types.AddSeckillSessionReq) (resp *types.BaseResp, err error) {
-	userId, err := common.GetUserId(l.ctx)
+	name, err := common.GetUserName(l.ctx)
 	if err != nil {
 		return nil, err
 	}
@@ -44,7 +45,7 @@ func (l *AddSeckillSessionLogic) AddSeckillSession(req *types.AddSeckillSessionR
 		EndTime:   req.EndTime,   // 结束时间
 		Status:    req.Status,    // 状态：0-禁用，1-启用
 		Sort:      req.Sort,      // 排序
-		CreateBy:  userId,        // 创建人ID
+		CreateBy:  name,          // 创建人ID
 	})
 
 	if err != nil {

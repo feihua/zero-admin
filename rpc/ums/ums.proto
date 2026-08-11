@@ -225,7 +225,7 @@ message AddMemberConsumeSettingReq {
   int32 use_unit = 4; //每次使用积分最小单位100
   int32 coupon_status = 5; //是否可以和优惠券同用；0->不可以；1->可以
   int32 status = 6; //状态：0->禁用；1->启用
-  int64 create_by = 7; //创建人ID
+  string create_by = 7; //创建人ID
 }
 
 message AddMemberConsumeSettingResp {
@@ -249,7 +249,7 @@ message UpdateMemberConsumeSettingReq {
   int32 use_unit = 4; //每次使用积分最小单位100
   int32 coupon_status = 5; //是否可以和优惠券同用；0->不可以；1->可以
   int32 status = 6; //状态：0->禁用；1->启用
-  int64 update_by = 9; //更新人ID
+  string update_by = 9; //更新人ID
 }
 
 message UpdateMemberConsumeSettingResp {
@@ -260,14 +260,14 @@ message UpdateMemberConsumeSettingResp {
 message UpdateStatusReq {
   int64 id = 1; //
   int32 status = 2; //状态：0->禁用；1->启用
-  int64 update_by = 3; //更新人ID
+  string update_by = 3; //更新人ID
 }
 
 // 更新积分消费设置状态
 message UpdateCouponStatusReq {
   int64 id = 1; //
   int32 coupon_status = 2; //是否可以和优惠券同用；0->不可以；1->可以
-  int64 update_by = 3; //更新人ID
+  string update_by = 3; //更新人ID
 }
 
 message UpdateMemberConsumeSettingStatusResp {
@@ -286,9 +286,9 @@ message QueryMemberConsumeSettingDetailResp {
   int32 use_unit = 4; //每次使用积分最小单位100
   int32 coupon_status = 5; //是否可以和优惠券同用；0->不可以；1->可以
   int32 status = 6; //状态：0->禁用；1->启用
-  int64 create_by = 7; //创建人ID
+  string create_by = 7; //创建人ID
   string create_time = 8; //创建时间
-  int64 update_by = 9; //更新人ID
+  string update_by = 9; //更新人ID
   string update_time = 10; //更新时间
 
 }
@@ -308,9 +308,9 @@ message MemberConsumeSettingListData {
   int32 use_unit = 4; //每次使用积分最小单位100
   int32 coupon_status = 5; //是否可以和优惠券同用；0->不可以；1->可以
   int32 status = 6; //状态：0->禁用；1->启用
-  int64 create_by = 7; //创建人ID
+  string create_by = 7; //创建人ID
   string create_time = 8; //创建时间
-  int64 update_by = 9; //更新人ID
+  string update_by = 9; //更新人ID
   string update_time = 10; //更新时间
 
 }
@@ -606,7 +606,7 @@ message AddMemberLevelReq {
   string privileges = 8; //会员特权JSON
   string remark = 9; //备注
   int32 is_enabled = 10; //是否启用
-  int64 create_by = 13; //创建人ID
+  string create_by = 13; //创建人ID
 }
 
 message AddMemberLevelResp {
@@ -634,7 +634,7 @@ message UpdateMemberLevelReq {
   string privileges = 8; //会员特权JSON
   string remark = 9; //备注
   int32 is_enabled = 10; //是否启用
-  int64 update_by = 14; //更新人ID
+  string update_by = 14; //更新人ID
 }
 
 message UpdateMemberLevelResp {
@@ -667,9 +667,9 @@ message QueryMemberLevelDetailResp {
   string privileges = 8; //会员特权JSON
   string remark = 9; //备注
   int32 is_enabled = 10; //是否启用
-  int64 create_by = 11; //创建人ID
+  string create_by = 11; //创建人ID
   string create_time = 12; //创建时间
-  int64 update_by = 13; //更新人ID
+  string update_by = 13; //更新人ID
   string update_time = 14; //更新时间
   int32 is_deleted = 15; //是否删除
 
@@ -693,9 +693,9 @@ message MemberLevelListData {
   string privileges = 8; //会员特权JSON
   string remark = 9; //备注
   int32 is_enabled = 10; //是否启用
-  int64 create_by = 11; //创建人ID
+  string create_by = 11; //创建人ID
   string create_time = 12; //创建时间
-  int64 update_by = 13; //更新人ID
+  string update_by = 13; //更新人ID
   string update_time = 14; //更新时间
   int32 is_deleted = 15; //是否删除
 
@@ -1073,7 +1073,7 @@ message AddMemberRuleSettingReq {
   int32 max_point_per_order = 4; //每笔订单最高获取点数
   int32 rule_type = 5; //类型：0->积分规则；1->成长值规则
   int32 status = 6; //状态：0->禁用；1->启用
-  int64 create_by = 7; //创建人ID
+  string create_by = 7; //创建人ID
 }
 
 message AddMemberRuleSettingResp {
@@ -1097,7 +1097,7 @@ message UpdateMemberRuleSettingReq {
   int32 max_point_per_order = 4; //每笔订单最高获取点数
   int32 rule_type = 5; //类型：0->积分规则；1->成长值规则
   int32 status = 6; //状态：0->禁用；1->启用
-  int64 update_by = 9; //更新人ID
+  string update_by = 9; //更新人ID
 }
 
 message UpdateMemberRuleSettingResp {
@@ -1108,7 +1108,7 @@ message UpdateMemberRuleSettingResp {
 message UpdateMemberRuleSettingStatusReq {
   int64 id = 1; //
   int32 status = 6; //状态：0->禁用；1->启用
-  int64 update_by = 9; //更新人ID
+  string update_by = 9; //更新人ID
 }
 
 message UpdateMemberRuleSettingStatusResp {
@@ -1127,9 +1127,9 @@ message QueryMemberRuleSettingDetailResp {
   int32 max_point_per_order = 4; //每笔订单最高获取点数
   int32 rule_type = 5; //类型：0->积分规则；1->成长值规则
   int32 status = 6; //状态：0->禁用；1->启用
-  int64 create_by = 7; //创建人ID
+  string create_by = 7; //创建人ID
   string create_time = 8; //创建时间
-  int64 update_by = 9; //更新人ID
+  string update_by = 9; //更新人ID
   string update_time = 10; //更新时间
 
 }
@@ -1149,9 +1149,9 @@ message MemberRuleSettingListData {
   int32 max_point_per_order = 4; //每笔订单最高获取点数
   int32 rule_type = 5; //类型：0->积分规则；1->成长值规则
   int32 status = 6; //状态：0->禁用；1->启用
-  int64 create_by = 7; //创建人ID
+  string create_by = 7; //创建人ID
   string create_time = 8; //创建时间
-  int64 update_by = 9; //更新人ID
+  string update_by = 9; //更新人ID
   string update_time = 10; //更新时间
 
 }
@@ -1347,7 +1347,7 @@ message AddMemberTagReq {
   int32 finish_order_count = 4; //自动打标签完成订单数量
   float finish_order_amount = 5; //自动打标签完成订单金额
   int32 status = 6; //状态：0-禁用，1-启用
-  int64 create_by = 7; //创建人ID
+  string create_by = 7; //创建人ID
 }
 
 message AddMemberTagResp {
@@ -1371,7 +1371,7 @@ message UpdateMemberTagReq {
   int32 finish_order_count = 4; //自动打标签完成订单数量
   float finish_order_amount = 5; //自动打标签完成订单金额
   int32 status = 6; //状态：0-禁用，1-启用
-  int64 update_by = 9; //更新人ID
+  string update_by = 9; //更新人ID
 }
 
 message UpdateMemberTagResp {
@@ -1382,7 +1382,7 @@ message UpdateMemberTagResp {
 message UpdateMemberTagStatusReq {
   repeated int64 ids = 1; //主键ID
   int32 status = 6; //状态：0-禁用，1-启用
-  int64 update_by = 9; //更新人ID
+  string update_by = 9; //更新人ID
 }
 
 message UpdateMemberTagStatusResp {
@@ -1401,9 +1401,9 @@ message QueryMemberTagDetailResp {
   int32 finish_order_count = 4; //自动打标签完成订单数量
   float finish_order_amount = 5; //自动打标签完成订单金额
   int32 status = 6; //状态：0-禁用，1-启用
-  int64 create_by = 7; //创建人ID
+  string create_by = 7; //创建人ID
   string create_time = 8; //创建时间
-  int64 update_by = 9; //更新人ID
+  string update_by = 9; //更新人ID
   string update_time = 10; //更新时间
 
 }
@@ -1423,9 +1423,9 @@ message MemberTagListData {
   int32 finish_order_count = 4; //自动打标签完成订单数量
   float finish_order_amount = 5; //自动打标签完成订单金额
   int32 status = 6; //状态：0-禁用，1-启用
-  int64 create_by = 7; //创建人ID
+  string create_by = 7; //创建人ID
   string create_time = 8; //创建时间
-  int64 update_by = 9; //更新人ID
+  string update_by = 9; //更新人ID
   string update_time = 10; //更新时间
 
 }
@@ -1527,7 +1527,7 @@ message AddMemberTaskReq {
   string end_time = 11; //任务结束时间
   int32 status = 12; //状态：0-禁用，1-启用
   int32 sort = 13; //排序
-  int64 create_by = 14; //创建人ID
+  string create_by = 14; //创建人ID
 }
 
 message AddMemberTaskResp {
@@ -1558,7 +1558,7 @@ message UpdateMemberTaskReq {
   string end_time = 11; //任务结束时间
   int32 status = 12; //状态：0-禁用，1-启用
   int32 sort = 13; //排序
-  int64 update_by = 16; //更新人ID
+  string update_by = 16; //更新人ID
 }
 
 message UpdateMemberTaskResp {
@@ -1569,7 +1569,7 @@ message UpdateMemberTaskResp {
 message UpdateMemberTaskStatusReq {
   repeated int64 ids = 1; //主键ID
   int32 status = 12; //状态：0-禁用，1-启用
-  int64 update_by = 16; //更新人ID
+  string update_by = 16; //更新人ID
 }
 
 message UpdateMemberTaskStatusResp {
@@ -1595,9 +1595,9 @@ message QueryMemberTaskDetailResp {
   string end_time = 11; //任务结束时间
   int32 status = 12; //状态：0-禁用，1-启用
   int32 sort = 13; //排序
-  int64 create_by = 14; //创建人ID
+  string create_by = 14; //创建人ID
   string create_time = 15; //创建时间
-  int64 update_by = 16; //更新人ID
+  string update_by = 16; //更新人ID
   string update_time = 17; //更新时间
 
 }
@@ -1628,9 +1628,9 @@ message MemberTaskListData {
   string end_time = 11; //任务结束时间
   int32 status = 12; //状态：0-禁用，1-启用
   int32 sort = 13; //排序
-  int64 create_by = 14; //创建人ID
+  string create_by = 14; //创建人ID
   string create_time = 15; //创建时间
-  int64 update_by = 16; //更新人ID
+  string update_by = 16; //更新人ID
   string update_time = 17; //更新时间
 
 }

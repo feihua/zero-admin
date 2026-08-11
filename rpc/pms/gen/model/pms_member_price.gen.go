@@ -6,7 +6,7 @@ package model
 
 const TableNamePmsMemberPrice = "pms_member_price"
 
-// PmsMemberPrice 商品会员价格表
+// PmsMemberPrice mapped from table <pms_member_price>
 type PmsMemberPrice struct {
 	ID              int64  `gorm:"column:id;primaryKey;autoIncrement:true" json:"id"`
 	ProductID       int64  `gorm:"column:product_id;not null;comment:商品id" json:"product_id"`                 // 商品id

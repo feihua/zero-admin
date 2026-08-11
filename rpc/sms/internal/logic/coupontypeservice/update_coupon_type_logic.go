@@ -4,6 +4,8 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"time"
+
 	"github.com/feihua/zero-admin/rpc/sms/gen/model"
 	"github.com/feihua/zero-admin/rpc/sms/gen/query"
 	"github.com/feihua/zero-admin/rpc/sms/internal/svc"
@@ -11,7 +13,6 @@ import (
 	"github.com/zeromicro/go-zero/core/logc"
 	"github.com/zeromicro/go-zero/core/logx"
 	"gorm.io/gorm"
-	"time"
 )
 
 // UpdateCouponTypeLogic 更新优惠券类型
@@ -72,7 +73,7 @@ func (l *UpdateCouponTypeLogic) UpdateCouponType(in *smsclient.UpdateCouponTypeR
 		Sort:         in.Sort,           // 排序
 		CreateBy:     detail.CreateBy,   // 创建人ID
 		CreateTime:   detail.CreateTime, // 创建时间
-		UpdateBy:     &in.UpdateBy,      // 更新人ID
+		UpdateBy:     in.UpdateBy,       // 更新人ID
 		UpdateTime:   &now,              // 更新时间
 
 	}

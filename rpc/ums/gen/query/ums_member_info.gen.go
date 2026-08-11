@@ -61,7 +61,6 @@ func newUmsMemberInfo(db *gorm.DB, opts ...gen.DOOption) umsMemberInfo {
 	return _umsMemberInfo
 }
 
-// umsMemberInfo 会员信息表
 type umsMemberInfo struct {
 	umsMemberInfoDo umsMemberInfoDo
 
@@ -92,7 +91,7 @@ type umsMemberInfo struct {
 	IsEnabled        field.Int32   // 是否启用：0-禁用，1-启用
 	CreateTime       field.Time    // 创建时间
 	UpdateTime       field.Time    // 更新时间
-	IsDeleted        field.Int32   // 是否删除
+	IsDeleted        field.Int32   // 是否删除(0:否,1:是)
 
 	fieldMap map[string]field.Expr
 }

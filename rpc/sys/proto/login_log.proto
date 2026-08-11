@@ -22,18 +22,10 @@ message QueryLoginLogDetailResp {
   int64 id = 1; //登录日志id
   string login_name = 2; //登录账号
   string ipaddr = 3; //登录IP地址
-  string login_location = 4; //登录地点
-  string platform = 5; //平台信息
-  string browser = 6; //浏览器类型
-  string version = 7; //浏览器版本
-  string os = 8; //操作系统
-  string arch = 9; //体系结构信息
-  string engine = 10; //渲染引擎信息
-  string engine_details = 11; //渲染引擎详细信息
-  string extra = 12; //其他信息（可选）
-  int32 status = 13; //登录状态(0:失败,1:成功)
-  string msg = 14; //提示消息
-  string login_time = 15; //访问时间
+  string extra = 4; //其他信息（可选）
+  int32 status = 5; //登录状态(0:失败,1:成功)
+  string msg = 6; //提示消息
+  string login_time = 7; //访问时间
 
 }
 
@@ -41,32 +33,19 @@ message QueryLoginLogDetailResp {
 message QueryLoginLogListReq {
   string login_name = 1; //登录账号
   string ipaddr = 2; //登录IP地址
-  string login_location = 3; //登录地点
-  string platform = 4; //平台信息
-  string browser = 5; //浏览器类型
-  string version = 6; //浏览器版本
-  string os = 7; //操作系统
-  int32 status = 8; //登录状态(0:失败,1:成功)
-  int64 page_num = 9; //第几页
-  int64 page_size = 10; //每页的数量
+  int32 status = 3; //登录状态(0:失败,1:成功)
+  int64 page_num = 4; //第几页
+  int64 page_size = 5; //每页的数量
 }
 
 message LoginLogListData {
   int64 id = 1; //登录日志id
   string login_name = 2; //登录账号
   string ipaddr = 3; //登录IP地址
-  string login_location = 4; //登录地点
-  string platform = 5; //平台信息
-  string browser = 6; //浏览器类型
-  string version = 7; //浏览器版本
-  string os = 8; //操作系统
-  string arch = 9; //体系结构信息
-  string engine = 10; //渲染引擎信息
-  string engine_details = 11; //渲染引擎详细信息
-  string extra = 12; //其他信息（可选）
-  int32 status = 13; //登录状态(0:失败,1:成功)
-  string msg = 14; //提示消息
-  string login_time = 15; //访问时间
+  string extra = 4; //其他信息（可选）
+  int32 status = 5; //登录状态(0:失败,1:成功)
+  string msg = 6; //提示消息
+  string login_time = 7; //访问时间
 
 }
 

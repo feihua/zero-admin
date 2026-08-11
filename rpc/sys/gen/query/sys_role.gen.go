@@ -33,8 +33,8 @@ func newSysRole(db *gorm.DB, opts ...gen.DOOption) sysRole {
 	_sysRole.RoleKey = field.NewString(tableName, "role_key")
 	_sysRole.DataScope = field.NewInt32(tableName, "data_scope")
 	_sysRole.Status = field.NewInt32(tableName, "status")
-	_sysRole.Remark = field.NewString(tableName, "remark")
 	_sysRole.DelFlag = field.NewInt32(tableName, "del_flag")
+	_sysRole.Remark = field.NewString(tableName, "remark")
 	_sysRole.CreateBy = field.NewString(tableName, "create_by")
 	_sysRole.CreateTime = field.NewTime(tableName, "create_time")
 	_sysRole.UpdateBy = field.NewString(tableName, "update_by")
@@ -45,18 +45,17 @@ func newSysRole(db *gorm.DB, opts ...gen.DOOption) sysRole {
 	return _sysRole
 }
 
-// sysRole 角色信息
 type sysRole struct {
 	sysRoleDo sysRoleDo
 
 	ALL        field.Asterisk
-	ID         field.Int64  // 角色id
+	ID         field.Int64  // 主键
 	RoleName   field.String // 名称
 	RoleKey    field.String // 角色权限字符串
 	DataScope  field.Int32  // 数据范围（1：全部数据权限 2：自定数据权限 3：本部门数据权限 4：本部门及以下数据权限）
 	Status     field.Int32  // 状态(1:正常，0:禁用)
+	DelFlag    field.Int32  // 删除标志（0:删除,1:存在）
 	Remark     field.String // 备注
-	DelFlag    field.Int32  // 删除标志（0代表删除 1代表存在）
 	CreateBy   field.String // 创建者
 	CreateTime field.Time   // 创建时间
 	UpdateBy   field.String // 更新者
@@ -82,8 +81,8 @@ func (s *sysRole) updateTableName(table string) *sysRole {
 	s.RoleKey = field.NewString(table, "role_key")
 	s.DataScope = field.NewInt32(table, "data_scope")
 	s.Status = field.NewInt32(table, "status")
-	s.Remark = field.NewString(table, "remark")
 	s.DelFlag = field.NewInt32(table, "del_flag")
+	s.Remark = field.NewString(table, "remark")
 	s.CreateBy = field.NewString(table, "create_by")
 	s.CreateTime = field.NewTime(table, "create_time")
 	s.UpdateBy = field.NewString(table, "update_by")
@@ -118,8 +117,8 @@ func (s *sysRole) fillFieldMap() {
 	s.fieldMap["role_key"] = s.RoleKey
 	s.fieldMap["data_scope"] = s.DataScope
 	s.fieldMap["status"] = s.Status
-	s.fieldMap["remark"] = s.Remark
 	s.fieldMap["del_flag"] = s.DelFlag
+	s.fieldMap["remark"] = s.Remark
 	s.fieldMap["create_by"] = s.CreateBy
 	s.fieldMap["create_time"] = s.CreateTime
 	s.fieldMap["update_by"] = s.UpdateBy

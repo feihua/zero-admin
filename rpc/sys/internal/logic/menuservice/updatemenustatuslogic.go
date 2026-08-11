@@ -3,9 +3,10 @@ package menuservicelogic
 import (
 	"context"
 	"errors"
+	"strconv"
+
 	"github.com/feihua/zero-admin/rpc/sys/gen/query"
 	"github.com/zeromicro/go-zero/core/logc"
-	"strconv"
 
 	"github.com/feihua/zero-admin/rpc/sys/internal/svc"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
@@ -51,7 +52,7 @@ func (l *UpdateMenuStatusLogic) UpdateMenuStatus(in *sysclient.UpdateMenuStatusR
 	}
 
 	// 2.更新菜单状态
-	_, err = q.Where(sysMenu.ID.Eq(in.Id)).Update(sysMenu.MenuStatus, in.MenuStatus)
+	_, err = q.Where(sysMenu.ID.Eq(in.Id)).Update(sysMenu.Status, in.MenuStatus)
 
 	if err != nil {
 		logc.Errorf(l.ctx, "更新菜单状态失败,参数:%+v,异常:%s", in, err.Error())

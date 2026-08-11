@@ -3,6 +3,8 @@ package userservicelogic
 import (
 	"context"
 	"errors"
+
+	"github.com/bytedance/sonic"
 	"github.com/feihua/zero-admin/pkg/time_util"
 	"github.com/feihua/zero-admin/rpc/sys/gen/model"
 	"github.com/feihua/zero-admin/rpc/sys/gen/query"
@@ -68,7 +70,7 @@ func (l *QueryUserListLogic) QueryUserList(in *sysclient.QueryUserListReq) (*sys
 
 	var list = make([]*sysclient.UserListData, 0, len(result))
 	for _, item := range result {
-		list = append(list, &sysclient.UserListData{
+		res := &sysclient.UserListData{
 			Id:            item.ID,                                    // 用户id
 			Mobile:        item.Mobile,                                // 手机号码
 			UserName:      item.UserName,                              // 用户账号
@@ -78,10 +80,6 @@ func (l *QueryUserListLogic) QueryUserList(in *sysclient.QueryUserListReq) (*sys
 			Email:         item.Email,                                 // 用户邮箱
 			Status:        item.Status,                                // 状态(1:正常，0:禁用)
 			DeptId:        item.DeptID,                                // 部门ID
-			LoginIp:       item.LoginIP,                               // 最后登录IP
-			LoginDate:     time_util.TimeToString(item.LoginDate),     // 最后登录时间
-			LoginBrowser:  item.LoginBrowser,                          // 浏览器类型
-			LoginOs:       item.LoginOs,                               // 操作系统
 			PwdUpdateDate: time_util.TimeToString(item.PwdUpdateDate), // 密码最后更新时间
 			Remark:        item.Remark,                                // 备注
 			DelFlag:       item.DelFlag,                               // 删除标志（0代表删除 1代表存在）
@@ -89,7 +87,10 @@ func (l *QueryUserListLogic) QueryUserList(in *sysclient.QueryUserListReq) (*sys
 			CreateTime:    time_util.TimeToStr(item.CreateTime),       // 创建时间
 			UpdateBy:      item.UpdateBy,                              // 更新者
 			UpdateTime:    time_util.TimeToString(item.UpdateTime),    // 更新时间
-		})
+		}
+
+		_ = sonic.Unmarshal(item.LastLoginInfo, res.LastLoginInfo)
+		list = append(list, res)
 	}
 
 	return &sysclient.QueryUserListResp{

@@ -2,6 +2,7 @@ package member_level
 
 import (
 	"context"
+
 	"github.com/feihua/zero-admin/api/admin/internal/common"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
 	"github.com/feihua/zero-admin/api/admin/internal/common/res"
@@ -36,7 +37,7 @@ func NewAddMemberLevelLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Ad
 
 // AddMemberLevel 添加会员等级
 func (l *AddMemberLevelLogic) AddMemberLevel(req *types.AddMemberLevelReq) (resp *types.BaseResp, err error) {
-	userId, err := common.GetUserId(l.ctx)
+	name, err := common.GetUserName(l.ctx)
 	if err != nil {
 		return nil, err
 	}
@@ -50,7 +51,7 @@ func (l *AddMemberLevelLogic) AddMemberLevel(req *types.AddMemberLevelReq) (resp
 		Privileges:   req.Privileges,   // 会员特权JSON
 		Remark:       req.Remark,       // 备注
 		IsEnabled:    req.IsEnabled,    // 是否启用
-		CreateBy:     userId,           // 创建人ID
+		CreateBy:     name,             // 创建人ID
 	})
 
 	if err != nil {

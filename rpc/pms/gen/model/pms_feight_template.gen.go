@@ -10,11 +10,11 @@ import (
 
 const TableNamePmsFeightTemplate = "pms_feight_template"
 
-// PmsFeightTemplate 运费模版
+// PmsFeightTemplate mapped from table <pms_feight_template>
 type PmsFeightTemplate struct {
 	ID             int64      `gorm:"column:id;primaryKey;autoIncrement:true" json:"id"`
 	Name           string     `gorm:"column:name;not null;comment:运费模版名称" json:"name"`                                       // 运费模版名称
-	ChargeType     int32      `gorm:"column:charge_type;not null;comment:计费类型:0->按重量；1->按件数" json:"charge_type"`             // 计费类型:0->按重量；1->按件数
+	ChargeType     int32      `gorm:"column:charge_type;not null;default:1;comment:计费类型:0->按重量；1->按件数" json:"charge_type"`   // 计费类型:0->按重量；1->按件数
 	FirstWeight    int64      `gorm:"column:first_weight;not null;comment:首重kg" json:"first_weight"`                         // 首重kg
 	FirstFee       int64      `gorm:"column:first_fee;not null;comment:首费（元）" json:"first_fee"`                              // 首费（元）
 	ContinueWeight int64      `gorm:"column:continue_weight;not null;comment:续重kg" json:"continue_weight"`                   // 续重kg

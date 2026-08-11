@@ -2,6 +2,7 @@ package member_tag
 
 import (
 	"context"
+
 	"github.com/feihua/zero-admin/api/admin/internal/common"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
 	"github.com/feihua/zero-admin/api/admin/internal/svc"
@@ -34,7 +35,7 @@ func NewAddMemberTagLogic(ctx context.Context, svcCtx *svc.ServiceContext) *AddM
 
 // AddMemberTag 添加用户标签
 func (l *AddMemberTagLogic) AddMemberTag(req *types.AddMemberTagReq) (resp *types.BaseResp, err error) {
-	userId, err := common.GetUserId(l.ctx)
+	name, err := common.GetUserName(l.ctx)
 	if err != nil {
 		return nil, err
 	}
@@ -44,7 +45,7 @@ func (l *AddMemberTagLogic) AddMemberTag(req *types.AddMemberTagReq) (resp *type
 		FinishOrderCount:  req.FinishOrderCount,           // 自动打标签完成订单数量
 		FinishOrderAmount: float32(req.FinishOrderAmount), // 自动打标签完成订单金额
 		Status:            req.Status,                     // 状态：0-禁用，1-启用
-		CreateBy:          userId,                         // 创建人ID
+		CreateBy:          name,                           // 创建人ID
 	})
 
 	if err != nil {

@@ -35,9 +35,9 @@ func newSmsCouponType(db *gorm.DB, opts ...gen.DOOption) smsCouponType {
 	_smsCouponType.DiscountType = field.NewInt32(tableName, "discount_type")
 	_smsCouponType.Status = field.NewInt32(tableName, "status")
 	_smsCouponType.Sort = field.NewInt32(tableName, "sort")
-	_smsCouponType.CreateBy = field.NewInt64(tableName, "create_by")
+	_smsCouponType.CreateBy = field.NewString(tableName, "create_by")
 	_smsCouponType.CreateTime = field.NewTime(tableName, "create_time")
-	_smsCouponType.UpdateBy = field.NewInt64(tableName, "update_by")
+	_smsCouponType.UpdateBy = field.NewString(tableName, "update_by")
 	_smsCouponType.UpdateTime = field.NewTime(tableName, "update_time")
 	_smsCouponType.IsDeleted = field.NewInt32(tableName, "is_deleted")
 
@@ -46,7 +46,6 @@ func newSmsCouponType(db *gorm.DB, opts ...gen.DOOption) smsCouponType {
 	return _smsCouponType
 }
 
-// smsCouponType 优惠券类型表
 type smsCouponType struct {
 	smsCouponTypeDo smsCouponTypeDo
 
@@ -58,11 +57,11 @@ type smsCouponType struct {
 	DiscountType field.Int32  // 优惠方式：1-固定金额，2-折扣率，3-第N件特惠，4-买赠，5-特价，6-套装优惠，7-搭配优惠，8-积分抵现，9-积分倍率，10-免运费，11-运费减免，12-限时特权，13-会员特权
 	Status       field.Int32  // 是否启用
 	Sort         field.Int32  // 排序
-	CreateBy     field.Int64  // 创建人ID
+	CreateBy     field.String // 创建人ID
 	CreateTime   field.Time   // 创建时间
-	UpdateBy     field.Int64  // 更新人ID
+	UpdateBy     field.String // 更新人ID
 	UpdateTime   field.Time   // 更新时间
-	IsDeleted    field.Int32  // 是否删除
+	IsDeleted    field.Int32  // 是否删除(0:否,1:是)
 
 	fieldMap map[string]field.Expr
 }
@@ -86,9 +85,9 @@ func (s *smsCouponType) updateTableName(table string) *smsCouponType {
 	s.DiscountType = field.NewInt32(table, "discount_type")
 	s.Status = field.NewInt32(table, "status")
 	s.Sort = field.NewInt32(table, "sort")
-	s.CreateBy = field.NewInt64(table, "create_by")
+	s.CreateBy = field.NewString(table, "create_by")
 	s.CreateTime = field.NewTime(table, "create_time")
-	s.UpdateBy = field.NewInt64(table, "update_by")
+	s.UpdateBy = field.NewString(table, "update_by")
 	s.UpdateTime = field.NewTime(table, "update_time")
 	s.IsDeleted = field.NewInt32(table, "is_deleted")
 

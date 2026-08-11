@@ -66,7 +66,7 @@ func (l *UpdateProductSpuLogic) UpdateProductSpu(req *types.UpdateProductSpuReq)
 }
 
 func (l *UpdateProductSpuLogic) updateProductSpuInfo(req *types.UpdateProductSpuReq) error {
-	userId, err := common.GetUserId(l.ctx)
+	name, err := common.GetUserName(l.ctx)
 	if err != nil {
 		return err
 	}
@@ -99,7 +99,7 @@ func (l *UpdateProductSpuLogic) updateProductSpuInfo(req *types.UpdateProductSpu
 		SubTitle:                  product.SubTitle,                          // 详情标题
 		DetailHtml:                product.DetailHtml,                        // 产品详情网页内容
 		DetailMobileHtml:          product.DetailMobileHtml,                  // 移动端网页详情
-		CreateBy:                  userId,                                    // 更新人ID
+		CreateBy:                  name,                                      // 更新人ID
 		MemberPriceList:           buildUpdateMemberPriceList(req),           // 会员价格
 		ProductAttributeValueList: buildUpdateProductAttributeValueList(req), // 商品参数及自定义规格属性
 		ProductFullReductionList:  buildUpdateProductFullReductionList(req),  // 满减价格

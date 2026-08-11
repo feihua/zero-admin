@@ -36,9 +36,9 @@ func newOmsOrderSetting(db *gorm.DB, opts ...gen.DOOption) omsOrderSetting {
 	_omsOrderSetting.Status = field.NewInt32(tableName, "status")
 	_omsOrderSetting.IsDefault = field.NewInt32(tableName, "is_default")
 	_omsOrderSetting.CommentOvertime = field.NewInt32(tableName, "comment_overtime")
-	_omsOrderSetting.CreateBy = field.NewInt64(tableName, "create_by")
+	_omsOrderSetting.CreateBy = field.NewString(tableName, "create_by")
 	_omsOrderSetting.CreateTime = field.NewTime(tableName, "create_time")
-	_omsOrderSetting.UpdateBy = field.NewInt64(tableName, "update_by")
+	_omsOrderSetting.UpdateBy = field.NewString(tableName, "update_by")
 	_omsOrderSetting.UpdateTime = field.NewTime(tableName, "update_time")
 	_omsOrderSetting.IsDeleted = field.NewInt32(tableName, "is_deleted")
 
@@ -47,24 +47,23 @@ func newOmsOrderSetting(db *gorm.DB, opts ...gen.DOOption) omsOrderSetting {
 	return _omsOrderSetting
 }
 
-// omsOrderSetting 订单设置表
 type omsOrderSetting struct {
 	omsOrderSettingDo omsOrderSettingDo
 
 	ALL                 field.Asterisk
-	ID                  field.Int64 // 主键ID
-	FlashOrderOvertime  field.Int32 // 秒杀订单超时关闭时间(分)
-	NormalOrderOvertime field.Int32 // 正常订单超时时间(分)
-	ConfirmOvertime     field.Int32 // 发货后自动确认收货时间（天）
-	FinishOvertime      field.Int32 // 自动完成交易时间，不能申请售后（天）
-	Status              field.Int32 // 状态：0->禁用；1->启用
-	IsDefault           field.Int32 // 是否默认：0->否；1->是
-	CommentOvertime     field.Int32 // 订单完成后自动好评时间（天）
-	CreateBy            field.Int64 // 创建人ID
-	CreateTime          field.Time  // 创建时间
-	UpdateBy            field.Int64 // 更新人ID
-	UpdateTime          field.Time  // 更新时间
-	IsDeleted           field.Int32 // 是否删除
+	ID                  field.Int64  // 主键ID
+	FlashOrderOvertime  field.Int32  // 秒杀订单超时关闭时间(分)
+	NormalOrderOvertime field.Int32  // 正常订单超时时间(分)
+	ConfirmOvertime     field.Int32  // 发货后自动确认收货时间（天）
+	FinishOvertime      field.Int32  // 自动完成交易时间，不能申请售后（天）
+	Status              field.Int32  // 状态：0->禁用；1->启用
+	IsDefault           field.Int32  // 是否默认：0->否；1->是
+	CommentOvertime     field.Int32  // 订单完成后自动好评时间（天）
+	CreateBy            field.String // 创建人ID
+	CreateTime          field.Time   // 创建时间
+	UpdateBy            field.String // 更新人ID
+	UpdateTime          field.Time   // 更新时间
+	IsDeleted           field.Int32  // 是否删除(0:否,1:是)
 
 	fieldMap map[string]field.Expr
 }
@@ -89,9 +88,9 @@ func (o *omsOrderSetting) updateTableName(table string) *omsOrderSetting {
 	o.Status = field.NewInt32(table, "status")
 	o.IsDefault = field.NewInt32(table, "is_default")
 	o.CommentOvertime = field.NewInt32(table, "comment_overtime")
-	o.CreateBy = field.NewInt64(table, "create_by")
+	o.CreateBy = field.NewString(table, "create_by")
 	o.CreateTime = field.NewTime(table, "create_time")
-	o.UpdateBy = field.NewInt64(table, "update_by")
+	o.UpdateBy = field.NewString(table, "update_by")
 	o.UpdateTime = field.NewTime(table, "update_time")
 	o.IsDeleted = field.NewInt32(table, "is_deleted")
 

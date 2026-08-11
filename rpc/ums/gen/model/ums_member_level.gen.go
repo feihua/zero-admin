@@ -10,23 +10,23 @@ import (
 
 const TableNameUmsMemberLevel = "ums_member_level"
 
-// UmsMemberLevel 会员等级表
+// UmsMemberLevel mapped from table <ums_member_level>
 type UmsMemberLevel struct {
-	ID           int64      `gorm:"column:id;primaryKey;autoIncrement:true;comment:主键ID" json:"id"`                        // 主键ID
-	Name         string     `gorm:"column:name;not null;comment:等级名称" json:"name"`                                         // 等级名称
-	Level        int32      `gorm:"column:level;not null;comment:等级" json:"level"`                                         // 等级
-	GrowthPoint  int32      `gorm:"column:growth_point;not null;comment:升级所需成长值" json:"growth_point"`                      // 升级所需成长值
-	DiscountRate float64    `gorm:"column:discount_rate;not null;default:100.00;comment:折扣率(0-100)" json:"discount_rate"`  // 折扣率(0-100)
-	FreeFreight  int32      `gorm:"column:free_freight;not null;comment:是否免运费" json:"free_freight"`                        // 是否免运费
-	CommentExtra int32      `gorm:"column:comment_extra;not null;comment:是否可评论获取奖励" json:"comment_extra"`                  // 是否可评论获取奖励
-	Privileges   string     `gorm:"column:privileges;not null;comment:会员特权JSON" json:"privileges"`                         // 会员特权JSON
-	Remark       string     `gorm:"column:remark;not null;comment:备注" json:"remark"`                                       // 备注
-	IsEnabled    int32      `gorm:"column:is_enabled;not null;default:1;comment:是否启用" json:"is_enabled"`                   // 是否启用
-	CreateBy     int64      `gorm:"column:create_by;not null;comment:创建人ID" json:"create_by"`                              // 创建人ID
-	CreateTime   time.Time  `gorm:"column:create_time;not null;default:CURRENT_TIMESTAMP;comment:创建时间" json:"create_time"` // 创建时间
-	UpdateBy     *int64     `gorm:"column:update_by;comment:更新人ID" json:"update_by"`                                       // 更新人ID
-	UpdateTime   *time.Time `gorm:"column:update_time;comment:更新时间" json:"update_time"`                                    // 更新时间
-	IsDeleted    int32      `gorm:"column:is_deleted;not null;comment:是否删除" json:"is_deleted"`                             // 是否删除
+	ID           int64      `gorm:"column:id;primaryKey;autoIncrement:true;comment:主键ID" json:"id"`                         // 主键ID
+	Name         string     `gorm:"column:name;not null;comment:等级名称" json:"name"`                                          // 等级名称
+	Level        int32      `gorm:"column:level;not null;comment:等级" json:"level"`                                          // 等级
+	GrowthPoint  int32      `gorm:"column:growth_point;not null;comment:升级所需成长值" json:"growth_point"`                       // 升级所需成长值
+	DiscountRate float64    `gorm:"column:discount_rate;not null;comment:折扣率(0-100)" json:"discount_rate"`                  // 折扣率(0-100)
+	FreeFreight  int32      `gorm:"column:free_freight;not null;default:1;comment:是否免运费" json:"free_freight"`               // 是否免运费
+	CommentExtra int32      `gorm:"column:comment_extra;not null;default:1;comment:是否可评论获取奖励" json:"comment_extra"`         // 是否可评论获取奖励
+	Privileges   string     `gorm:"column:privileges;not null;comment:会员特权JSON" json:"privileges"`                          // 会员特权JSON
+	Remark       string     `gorm:"column:remark;not null;comment:备注" json:"remark"`                                        // 备注
+	IsEnabled    int32      `gorm:"column:is_enabled;not null;default:1;comment:是否启用" json:"is_enabled"`                    // 是否启用
+	CreateBy     string     `gorm:"column:create_by;not null;default:''::character varying;comment:创建人ID" json:"create_by"` // 创建人ID
+	CreateTime   time.Time  `gorm:"column:create_time;not null;default:CURRENT_TIMESTAMP;comment:创建时间" json:"create_time"`  // 创建时间
+	UpdateBy     string     `gorm:"column:update_by;not null;default:''::character varying;comment:更新人ID" json:"update_by"` // 更新人ID
+	UpdateTime   *time.Time `gorm:"column:update_time;comment:更新时间" json:"update_time"`                                     // 更新时间
+	IsDeleted    int32      `gorm:"column:is_deleted;not null;default:1;comment:是否删除(0:否,1:是)" json:"is_deleted"`           // 是否删除(0:否,1:是)
 }
 
 // TableName UmsMemberLevel's table name

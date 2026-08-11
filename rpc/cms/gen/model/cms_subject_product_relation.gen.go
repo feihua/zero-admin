@@ -6,7 +6,7 @@ package model
 
 const TableNameCmsSubjectProductRelation = "cms_subject_product_relation"
 
-// CmsSubjectProductRelation 专题商品关系表
+// CmsSubjectProductRelation mapped from table <cms_subject_product_relation>
 type CmsSubjectProductRelation struct {
 	ID        int64 `gorm:"column:id;primaryKey;autoIncrement:true;comment:主键ID" json:"id"` // 主键ID
 	SubjectID int64 `gorm:"column:subject_id;not null;comment:专题ID" json:"subject_id"`      // 专题ID

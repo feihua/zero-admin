@@ -3,6 +3,8 @@ package loginlogservicelogic
 import (
 	"context"
 	"errors"
+
+	"github.com/bytedance/sonic"
 	"github.com/feihua/zero-admin/pkg/time_util"
 	"github.com/feihua/zero-admin/rpc/sys/gen/query"
 	"github.com/zeromicro/go-zero/core/logc"
@@ -49,23 +51,14 @@ func (l *QueryLoginLogDetailLogic) QueryLoginLogDetail(in *sysclient.QueryLoginL
 	}
 
 	data := &sysclient.QueryLoginLogDetailResp{
-		Id:            item.ID,                             // 登录日志id
-		LoginName:     item.LoginName,                      // 登录账号
-		Ipaddr:        item.Ipaddr,                         // 登录IP地址
-		LoginLocation: item.LoginLocation,                  // 登录地点
-		Platform:      item.Platform,                       // 平台信息
-		Browser:       item.Browser,                        // 浏览器类型
-		Version:       item.Version,                        // 浏览器版本
-		Os:            item.Os,                             // 操作系统
-		Arch:          item.Arch,                           // 体系结构信息
-		Engine:        item.Engine,                         // 渲染引擎信息
-		EngineDetails: item.EngineDetails,                  // 渲染引擎详细信息
-		Extra:         item.Extra,                          // 其他信息（可选）
-		Status:        item.Status,                         // 登录状态(0:失败,1:成功)
-		Msg:           item.Msg,                            // 提示消息
-		LoginTime:     time_util.TimeToStr(item.LoginTime), // 登录时间
+		Id:        item.ID,                             // 登录日志id
+		LoginName: item.LoginName,                      // 登录账号
+		Status:    item.Status,                         // 登录状态(0:失败,1:成功)
+		Msg:       item.Msg,                            // 提示消息
+		LoginTime: time_util.TimeToStr(item.LoginTime), // 登录时间
 	}
 
+	_ = sonic.Unmarshal(item.Extra, data.Extra)
 	return data, nil
 
 }

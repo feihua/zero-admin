@@ -2,6 +2,7 @@ package coupon
 
 import (
 	"context"
+
 	"github.com/feihua/zero-admin/api/admin/internal/common"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
 	"github.com/feihua/zero-admin/api/admin/internal/svc"
@@ -34,14 +35,14 @@ func NewUpdateCouponStatusLogic(ctx context.Context, svcCtx *svc.ServiceContext)
 
 // UpdateCouponStatus 更新优惠券状态
 func (l *UpdateCouponStatusLogic) UpdateCouponStatus(req *types.UpdateSmsCouponStatusReq) (resp *types.BaseResp, err error) {
-	userId, err := common.GetUserId(l.ctx)
+	name, err := common.GetUserName(l.ctx)
 	if err != nil {
 		return nil, err
 	}
 	_, err = l.svcCtx.CouponService.UpdateCouponStatus(l.ctx, &smsclient.UpdateCouponStatusReq{
 		Ids:      req.Ids,    // 优惠券ID
 		Status:   req.Status, // 状态：0-未开始，1-进行中，2-已结束，3-已取消
-		UpdateBy: userId,     // 更新人ID
+		UpdateBy: name,       // 更新人ID
 
 	})
 

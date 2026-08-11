@@ -2,6 +2,7 @@ package company_address
 
 import (
 	"context"
+
 	"github.com/feihua/zero-admin/api/admin/internal/common"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
 	"github.com/feihua/zero-admin/api/admin/internal/svc"
@@ -34,7 +35,7 @@ func NewAddCompanyAddressLogic(ctx context.Context, svcCtx *svc.ServiceContext) 
 
 // AddCompanyAddress 添加公司收发货地址
 func (l *AddCompanyAddressLogic) AddCompanyAddress(req *types.AddCompanyAddressReq) (resp *types.BaseResp, err error) {
-	userId, err := common.GetUserId(l.ctx)
+	name, err := common.GetUserName(l.ctx)
 	if err != nil {
 		return nil, err
 	}
@@ -48,7 +49,7 @@ func (l *AddCompanyAddressLogic) AddCompanyAddress(req *types.AddCompanyAddressR
 		DetailAddress: req.DetailAddress, // 详细地址
 		SendStatus:    req.SendStatus,    // 默认发货地址：0->否；1->是
 		ReceiveStatus: req.ReceiveStatus, // 默认收货地址：0->否；1->是
-		CreateBy:      userId,            // 创建人ID
+		CreateBy:      name,              // 创建人ID
 	})
 
 	if err != nil {

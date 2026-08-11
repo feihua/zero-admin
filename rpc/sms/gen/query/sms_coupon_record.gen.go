@@ -48,7 +48,6 @@ func newSmsCouponRecord(db *gorm.DB, opts ...gen.DOOption) smsCouponRecord {
 	return _smsCouponRecord
 }
 
-// smsCouponRecord 优惠券领取记录表
 type smsCouponRecord struct {
 	smsCouponRecordDo smsCouponRecordDo
 
@@ -66,7 +65,7 @@ type smsCouponRecord struct {
 	InvalidTime    field.Time    // 失效时间
 	InvalidReason  field.String  // 失效原因
 	CreateTime     field.Time    // 创建时间
-	IsDeleted      field.Int32   // 是否删除
+	IsDeleted      field.Int32   // 是否删除(0:否,1:是)
 
 	fieldMap map[string]field.Expr
 }

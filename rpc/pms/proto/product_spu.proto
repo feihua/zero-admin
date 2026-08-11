@@ -72,7 +72,7 @@ message ProductSpuReq {
   string sub_title = 29; //副标题
   string detail_html = 31; //产品详情网页内容
   string detail_mobile_html = 32; //移动端网页详情
-  int64 create_by = 33; //创建人ID
+  string create_by = 33; //创建人ID
   repeated MemberPriceList      MemberPriceList = 34; //会员价格
   repeated ProductAttributeValueList      ProductAttributeValueList = 35; //商品属性和值
   repeated ProductFullReductionList      ProductFullReductionList = 36; //满减价格
@@ -98,7 +98,7 @@ message UpdateProductSpuStatusReq {
   repeated int64 ids = 1; //商品SpuId
   int32 status = 16; //状态
   string detail = 3;
-  int64 update_by = 4; //审核人
+  string update_by = 4; //审核人
   string review_man = 5; //更新人ID
 }
 
@@ -123,9 +123,9 @@ message BrandData {
   int32 product_count = 9; //产品数量
   int32 product_comment_count = 10; //产品评论数量
   int32 is_enabled = 11; //是否启用
-  int64 create_by = 12; //创建人ID
+  string create_by = 12; //创建人ID
   string create_time = 13; //创建时间
-  int64 update_by = 14; //更新人ID
+  string update_by = 14; //更新人ID
   string update_time = 15; //更新时间
 
 }
@@ -141,9 +141,9 @@ message ProductAttributeDataList {
   int32 is_searchable = 9; //是否支持搜索
   int32 is_show = 10; //是否显示
   int32 sort = 11; //排序
-  int64 create_by = 12; //创建人ID
+  string create_by = 12; //创建人ID
   string create_time = 13; //创建时间
-  int64 update_by = 14; //更新人ID
+  string update_by = 14; //更新人ID
   string update_time = 15; //更新时间
 
 }
@@ -152,9 +152,9 @@ message ProductAttributeValueData {
   int64 spu_id = 2; //商品SPU ID
   int64 attribute_id = 3; //属性ID
   string value = 4; //属性值
-  int64 create_by = 5; //创建人ID
+  string create_by = 5; //创建人ID
   string create_time = 6; //创建时间
-  int64 update_by = 7; //更新人ID
+  string update_by = 7; //更新人ID
   string update_time = 8; //更新时间
 }
 message SkuStockData {
@@ -176,9 +176,9 @@ message SkuStockData {
   int32 verify_status = 16; //审核状态：0-未审核，1-审核通过，2-审核不通过
   int32 sort = 17; //排序
   int32 sales = 18; //销量
-  int64 create_by = 19; //创建人ID
+  string create_by = 19; //创建人ID
   string create_time = 20; //创建时间
-  int64 update_by = 21; //更新人ID
+  string update_by = 21; //更新人ID
   string update_time = 22; //更新时间
 
 
@@ -269,9 +269,9 @@ message ProductSpuListData {
   string sub_title = 29; //副标题
   string detail_html = 31; //产品详情网页内容
   string detail_mobile_html = 32; //移动端网页详情
-  int64 create_by = 33; //创建人ID
+  string create_by = 33; //创建人ID
   string create_time = 34; //创建时间
-  int64 update_by = 35; //更新人ID
+  string update_by = 35; //更新人ID
   string update_time = 36; //更新时间
 
 }
@@ -284,7 +284,7 @@ message QueryProductSpuListResp {
 message UpdateProductSortReq {
   int64 id = 1;
   int32 sort = 2;
-  int64 update_by = 3; //更新人ID
+  string update_by = 3; //更新人ID
 }
 message QueryProductSpuByIdsReq {
   repeated int64  Ids = 1;

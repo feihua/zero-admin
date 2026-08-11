@@ -34,9 +34,9 @@ func newUmsMemberTag(db *gorm.DB, opts ...gen.DOOption) umsMemberTag {
 	_umsMemberTag.FinishOrderCount = field.NewInt32(tableName, "finish_order_count")
 	_umsMemberTag.FinishOrderAmount = field.NewFloat64(tableName, "finish_order_amount")
 	_umsMemberTag.Status = field.NewInt32(tableName, "status")
-	_umsMemberTag.CreateBy = field.NewInt64(tableName, "create_by")
+	_umsMemberTag.CreateBy = field.NewString(tableName, "create_by")
 	_umsMemberTag.CreateTime = field.NewTime(tableName, "create_time")
-	_umsMemberTag.UpdateBy = field.NewInt64(tableName, "update_by")
+	_umsMemberTag.UpdateBy = field.NewString(tableName, "update_by")
 	_umsMemberTag.UpdateTime = field.NewTime(tableName, "update_time")
 	_umsMemberTag.IsDeleted = field.NewInt32(tableName, "is_deleted")
 
@@ -45,7 +45,6 @@ func newUmsMemberTag(db *gorm.DB, opts ...gen.DOOption) umsMemberTag {
 	return _umsMemberTag
 }
 
-// umsMemberTag 用户标签表
 type umsMemberTag struct {
 	umsMemberTagDo umsMemberTagDo
 
@@ -56,11 +55,11 @@ type umsMemberTag struct {
 	FinishOrderCount  field.Int32   // 自动打标签完成订单数量
 	FinishOrderAmount field.Float64 // 自动打标签完成订单金额
 	Status            field.Int32   // 状态：0-禁用，1-启用
-	CreateBy          field.Int64   // 创建人ID
+	CreateBy          field.String  // 创建人ID
 	CreateTime        field.Time    // 创建时间
-	UpdateBy          field.Int64   // 更新人ID
+	UpdateBy          field.String  // 更新人ID
 	UpdateTime        field.Time    // 更新时间
-	IsDeleted         field.Int32   // 是否删除
+	IsDeleted         field.Int32   // 是否删除(0:否,1:是)
 
 	fieldMap map[string]field.Expr
 }
@@ -83,9 +82,9 @@ func (u *umsMemberTag) updateTableName(table string) *umsMemberTag {
 	u.FinishOrderCount = field.NewInt32(table, "finish_order_count")
 	u.FinishOrderAmount = field.NewFloat64(table, "finish_order_amount")
 	u.Status = field.NewInt32(table, "status")
-	u.CreateBy = field.NewInt64(table, "create_by")
+	u.CreateBy = field.NewString(table, "create_by")
 	u.CreateTime = field.NewTime(table, "create_time")
-	u.UpdateBy = field.NewInt64(table, "update_by")
+	u.UpdateBy = field.NewString(table, "update_by")
 	u.UpdateTime = field.NewTime(table, "update_time")
 	u.IsDeleted = field.NewInt32(table, "is_deleted")
 

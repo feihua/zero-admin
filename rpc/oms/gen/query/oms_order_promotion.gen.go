@@ -43,7 +43,6 @@ func newOmsOrderPromotion(db *gorm.DB, opts ...gen.DOOption) omsOrderPromotion {
 	return _omsOrderPromotion
 }
 
-// omsOrderPromotion 订单优惠信息表
 type omsOrderPromotion struct {
 	omsOrderPromotionDo omsOrderPromotionDo
 
@@ -56,7 +55,7 @@ type omsOrderPromotion struct {
 	PromotionName  field.String  // 优惠名称
 	DiscountAmount field.Float64 // 优惠金额
 	CreateTime     field.Time
-	IsDeleted      field.Int32 // 是否删除
+	IsDeleted      field.Int32 // 是否删除(0:否,1:是)
 
 	fieldMap map[string]field.Expr
 }

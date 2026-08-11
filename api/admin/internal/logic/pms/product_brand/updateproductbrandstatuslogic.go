@@ -2,6 +2,7 @@ package product_brand
 
 import (
 	"context"
+
 	"github.com/feihua/zero-admin/api/admin/internal/common"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
 	"github.com/feihua/zero-admin/api/admin/internal/svc"
@@ -34,14 +35,14 @@ func NewUpdateProductBrandStatusLogic(ctx context.Context, svcCtx *svc.ServiceCo
 
 // UpdateProductBrandStatus 更新商品品牌状态
 func (l *UpdateProductBrandStatusLogic) UpdateProductBrandStatus(req *types.UpdateProductBrandStatusReq) (resp *types.BaseResp, err error) {
-	userId, err := common.GetUserId(l.ctx)
+	name, err := common.GetUserName(l.ctx)
 	if err != nil {
 		return nil, err
 	}
 	_, err = l.svcCtx.ProductBrandService.UpdateProductBrandStatus(l.ctx, &pmsclient.UpdateProductBrandStatusReq{
 		Ids:      req.Ids,    //
 		Status:   req.Status, // 状态
-		UpdateBy: userId,
+		UpdateBy: name,
 	})
 
 	if err != nil {

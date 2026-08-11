@@ -30,7 +30,7 @@ func newPmsProductSpu(db *gorm.DB, opts ...gen.DOOption) pmsProductSpu {
 	_pmsProductSpu.ALL = field.NewAsterisk(tableName)
 	_pmsProductSpu.ID = field.NewInt64(tableName, "id")
 	_pmsProductSpu.Name = field.NewString(tableName, "name")
-	_pmsProductSpu.SubTitle = field.NewString(tableName, "subTitle")
+	_pmsProductSpu.SubTitle = field.NewString(tableName, "sub_title")
 	_pmsProductSpu.ProductSn = field.NewString(tableName, "product_sn")
 	_pmsProductSpu.CategoryID = field.NewInt64(tableName, "category_id")
 	_pmsProductSpu.CategoryIds = field.NewString(tableName, "category_ids")
@@ -57,9 +57,9 @@ func newPmsProductSpu(db *gorm.DB, opts ...gen.DOOption) pmsProductSpu {
 	_pmsProductSpu.PromotionType = field.NewInt32(tableName, "promotion_type")
 	_pmsProductSpu.DetailHTML = field.NewString(tableName, "detail_html")
 	_pmsProductSpu.DetailMobileHTML = field.NewString(tableName, "detail_mobile_html")
-	_pmsProductSpu.CreateBy = field.NewInt64(tableName, "create_by")
+	_pmsProductSpu.CreateBy = field.NewString(tableName, "create_by")
 	_pmsProductSpu.CreateTime = field.NewTime(tableName, "create_time")
-	_pmsProductSpu.UpdateBy = field.NewInt64(tableName, "update_by")
+	_pmsProductSpu.UpdateBy = field.NewString(tableName, "update_by")
 	_pmsProductSpu.UpdateTime = field.NewTime(tableName, "update_time")
 	_pmsProductSpu.IsDeleted = field.NewInt32(tableName, "is_deleted")
 
@@ -68,7 +68,6 @@ func newPmsProductSpu(db *gorm.DB, opts ...gen.DOOption) pmsProductSpu {
 	return _pmsProductSpu
 }
 
-// pmsProductSpu 商品SPU表
 type pmsProductSpu struct {
 	pmsProductSpuDo pmsProductSpuDo
 
@@ -102,11 +101,11 @@ type pmsProductSpu struct {
 	PromotionType       field.Int32   // 促销类型：0->没有促销使用原价;1->使用促销价；2->使用会员价；3->使用阶梯价格；4->使用满减价格；5->秒杀
 	DetailHTML          field.String  // 网页详情
 	DetailMobileHTML    field.String  // 移动端详情
-	CreateBy            field.Int64   // 创建人ID
+	CreateBy            field.String  // 创建人ID
 	CreateTime          field.Time    // 创建时间
-	UpdateBy            field.Int64   // 更新人ID
+	UpdateBy            field.String  // 更新人ID
 	UpdateTime          field.Time    // 更新时间
-	IsDeleted           field.Int32   // 是否删除
+	IsDeleted           field.Int32   // 是否删除(0:否,1:是)
 
 	fieldMap map[string]field.Expr
 }
@@ -125,7 +124,7 @@ func (p *pmsProductSpu) updateTableName(table string) *pmsProductSpu {
 	p.ALL = field.NewAsterisk(table)
 	p.ID = field.NewInt64(table, "id")
 	p.Name = field.NewString(table, "name")
-	p.SubTitle = field.NewString(table, "subTitle")
+	p.SubTitle = field.NewString(table, "sub_title")
 	p.ProductSn = field.NewString(table, "product_sn")
 	p.CategoryID = field.NewInt64(table, "category_id")
 	p.CategoryIds = field.NewString(table, "category_ids")
@@ -152,9 +151,9 @@ func (p *pmsProductSpu) updateTableName(table string) *pmsProductSpu {
 	p.PromotionType = field.NewInt32(table, "promotion_type")
 	p.DetailHTML = field.NewString(table, "detail_html")
 	p.DetailMobileHTML = field.NewString(table, "detail_mobile_html")
-	p.CreateBy = field.NewInt64(table, "create_by")
+	p.CreateBy = field.NewString(table, "create_by")
 	p.CreateTime = field.NewTime(table, "create_time")
-	p.UpdateBy = field.NewInt64(table, "update_by")
+	p.UpdateBy = field.NewString(table, "update_by")
 	p.UpdateTime = field.NewTime(table, "update_time")
 	p.IsDeleted = field.NewInt32(table, "is_deleted")
 
@@ -188,7 +187,7 @@ func (p *pmsProductSpu) fillFieldMap() {
 	p.fieldMap = make(map[string]field.Expr, 34)
 	p.fieldMap["id"] = p.ID
 	p.fieldMap["name"] = p.Name
-	p.fieldMap["subTitle"] = p.SubTitle
+	p.fieldMap["sub_title"] = p.SubTitle
 	p.fieldMap["product_sn"] = p.ProductSn
 	p.fieldMap["category_id"] = p.CategoryID
 	p.fieldMap["category_ids"] = p.CategoryIds

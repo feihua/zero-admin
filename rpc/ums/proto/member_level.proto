@@ -16,7 +16,7 @@ message AddMemberLevelReq {
   string privileges = 8; //会员特权JSON
   string remark = 9; //备注
   int32 is_enabled = 10; //是否启用
-  int64 create_by = 13; //创建人ID
+  string create_by = 13; //创建人ID
 }
 
 message AddMemberLevelResp {
@@ -44,7 +44,7 @@ message UpdateMemberLevelReq {
   string privileges = 8; //会员特权JSON
   string remark = 9; //备注
   int32 is_enabled = 10; //是否启用
-  int64 update_by = 14; //更新人ID
+  string update_by = 14; //更新人ID
 }
 
 message UpdateMemberLevelResp {
@@ -77,9 +77,9 @@ message QueryMemberLevelDetailResp {
   string privileges = 8; //会员特权JSON
   string remark = 9; //备注
   int32 is_enabled = 10; //是否启用
-  int64 create_by = 11; //创建人ID
+  string create_by = 11; //创建人ID
   string create_time = 12; //创建时间
-  int64 update_by = 13; //更新人ID
+  string update_by = 13; //更新人ID
   string update_time = 14; //更新时间
   int32 is_deleted = 15; //是否删除
 
@@ -103,9 +103,9 @@ message MemberLevelListData {
   string privileges = 8; //会员特权JSON
   string remark = 9; //备注
   int32 is_enabled = 10; //是否启用
-  int64 create_by = 11; //创建人ID
+  string create_by = 11; //创建人ID
   string create_time = 12; //创建时间
-  int64 update_by = 13; //更新人ID
+  string update_by = 13; //更新人ID
   string update_time = 14; //更新时间
   int32 is_deleted = 15; //是否删除
 

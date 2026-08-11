@@ -38,13 +38,10 @@ func newSysUser(db *gorm.DB, opts ...gen.DOOption) sysUser {
 	_sysUser.Password = field.NewString(tableName, "password")
 	_sysUser.Status = field.NewInt32(tableName, "status")
 	_sysUser.DeptID = field.NewInt64(tableName, "dept_id")
-	_sysUser.LoginIP = field.NewString(tableName, "login_ip")
-	_sysUser.LoginDate = field.NewTime(tableName, "login_date")
-	_sysUser.LoginBrowser = field.NewString(tableName, "login_browser")
-	_sysUser.LoginOs = field.NewString(tableName, "login_os")
+	_sysUser.LastLoginInfo = field.NewField(tableName, "last_login_info")
 	_sysUser.PwdUpdateDate = field.NewTime(tableName, "pwd_update_date")
-	_sysUser.Remark = field.NewString(tableName, "remark")
 	_sysUser.DelFlag = field.NewInt32(tableName, "del_flag")
+	_sysUser.Remark = field.NewString(tableName, "remark")
 	_sysUser.CreateBy = field.NewString(tableName, "create_by")
 	_sysUser.CreateTime = field.NewTime(tableName, "create_time")
 	_sysUser.UpdateBy = field.NewString(tableName, "update_by")
@@ -55,12 +52,11 @@ func newSysUser(db *gorm.DB, opts ...gen.DOOption) sysUser {
 	return _sysUser
 }
 
-// sysUser 用户信息
 type sysUser struct {
 	sysUserDo sysUserDo
 
 	ALL           field.Asterisk
-	ID            field.Int64  // 用户id
+	ID            field.Int64  // 主键
 	Mobile        field.String // 手机号码
 	UserName      field.String // 用户账号
 	NickName      field.String // 用户昵称
@@ -69,14 +65,11 @@ type sysUser struct {
 	Email         field.String // 用户邮箱
 	Password      field.String // 密码
 	Status        field.Int32  // 状态(1:正常，0:禁用)
-	DeptID        field.Int64  // 部门ID
-	LoginIP       field.String // 最后登录IP
-	LoginDate     field.Time   // 最后登录时间
-	LoginBrowser  field.String // 浏览器类型
-	LoginOs       field.String // 操作系统
+	DeptID        field.Int64  // 部门id
+	LastLoginInfo field.Field  // 最后登录信息
 	PwdUpdateDate field.Time   // 密码最后更新时间
+	DelFlag       field.Int32  // 删除标志（0:删除,1:存在）
 	Remark        field.String // 备注
-	DelFlag       field.Int32  // 删除标志（0代表删除 1代表存在）
 	CreateBy      field.String // 创建者
 	CreateTime    field.Time   // 创建时间
 	UpdateBy      field.String // 更新者
@@ -107,13 +100,10 @@ func (s *sysUser) updateTableName(table string) *sysUser {
 	s.Password = field.NewString(table, "password")
 	s.Status = field.NewInt32(table, "status")
 	s.DeptID = field.NewInt64(table, "dept_id")
-	s.LoginIP = field.NewString(table, "login_ip")
-	s.LoginDate = field.NewTime(table, "login_date")
-	s.LoginBrowser = field.NewString(table, "login_browser")
-	s.LoginOs = field.NewString(table, "login_os")
+	s.LastLoginInfo = field.NewField(table, "last_login_info")
 	s.PwdUpdateDate = field.NewTime(table, "pwd_update_date")
-	s.Remark = field.NewString(table, "remark")
 	s.DelFlag = field.NewInt32(table, "del_flag")
+	s.Remark = field.NewString(table, "remark")
 	s.CreateBy = field.NewString(table, "create_by")
 	s.CreateTime = field.NewTime(table, "create_time")
 	s.UpdateBy = field.NewString(table, "update_by")
@@ -142,7 +132,7 @@ func (s *sysUser) GetFieldByName(fieldName string) (field.OrderExpr, bool) {
 }
 
 func (s *sysUser) fillFieldMap() {
-	s.fieldMap = make(map[string]field.Expr, 21)
+	s.fieldMap = make(map[string]field.Expr, 18)
 	s.fieldMap["id"] = s.ID
 	s.fieldMap["mobile"] = s.Mobile
 	s.fieldMap["user_name"] = s.UserName
@@ -153,13 +143,10 @@ func (s *sysUser) fillFieldMap() {
 	s.fieldMap["password"] = s.Password
 	s.fieldMap["status"] = s.Status
 	s.fieldMap["dept_id"] = s.DeptID
-	s.fieldMap["login_ip"] = s.LoginIP
-	s.fieldMap["login_date"] = s.LoginDate
-	s.fieldMap["login_browser"] = s.LoginBrowser
-	s.fieldMap["login_os"] = s.LoginOs
+	s.fieldMap["last_login_info"] = s.LastLoginInfo
 	s.fieldMap["pwd_update_date"] = s.PwdUpdateDate
-	s.fieldMap["remark"] = s.Remark
 	s.fieldMap["del_flag"] = s.DelFlag
+	s.fieldMap["remark"] = s.Remark
 	s.fieldMap["create_by"] = s.CreateBy
 	s.fieldMap["create_time"] = s.CreateTime
 	s.fieldMap["update_by"] = s.UpdateBy

@@ -2,6 +2,7 @@ package order_main
 
 import (
 	"context"
+
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
 	"github.com/feihua/zero-admin/api/admin/internal/svc"
 	"github.com/feihua/zero-admin/api/admin/internal/types"
@@ -33,7 +34,7 @@ func NewUpdateOrderMainLogic(ctx context.Context, svcCtx *svc.ServiceContext) *U
 
 // UpdateOrderMain 更新订单
 func (l *UpdateOrderMainLogic) UpdateOrderMain(req *types.UpdateOrderMainReq) (resp *types.BaseResp, err error) {
-	// userId, err := common.GetUserId(l.ctx)
+	// name, err := common.GetUserName(l.ctx)
 	// if err != nil {
 	// 	return nil, err
 	// }

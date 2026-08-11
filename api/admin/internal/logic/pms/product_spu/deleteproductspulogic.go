@@ -2,6 +2,7 @@ package product_spu
 
 import (
 	"context"
+
 	"github.com/feihua/zero-admin/api/admin/internal/common"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
 	"github.com/feihua/zero-admin/api/admin/internal/svc"
@@ -34,14 +35,14 @@ func NewDeleteProductSpuLogic(ctx context.Context, svcCtx *svc.ServiceContext) *
 
 // DeleteProductSpu 删除商品SPU
 func (l *DeleteProductSpuLogic) DeleteProductSpu(req *types.DeleteProductSpuReq) (resp *types.BaseResp, err error) {
-	userId, err := common.GetUserId(l.ctx)
+	name, err := common.GetUserName(l.ctx)
 	if err != nil {
 		return nil, err
 	}
 	_, err = l.svcCtx.ProductSpuService.UpdateDeleteStatus(l.ctx, &pmsclient.UpdateProductSpuStatusReq{
 		Ids:      req.Ids,
 		Status:   1,
-		UpdateBy: userId,
+		UpdateBy: name,
 	})
 
 	if err != nil {

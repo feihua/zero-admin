@@ -50,7 +50,6 @@ func newUmsMemberStatisticsInfo(db *gorm.DB, opts ...gen.DOOption) umsMemberStat
 	return _umsMemberStatisticsInfo
 }
 
-// umsMemberStatisticsInfo 会员统计信息
 type umsMemberStatisticsInfo struct {
 	umsMemberStatisticsInfoDo umsMemberStatisticsInfoDo
 

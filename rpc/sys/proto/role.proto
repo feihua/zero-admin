@@ -168,10 +168,7 @@ message UserData {
   string password = 8; //密码
   int32 status = 9; //状态(1:正常，0:禁用)
   int64 dept_id = 10; //部门ID
-  string login_ip = 11; //最后登录IP
-  string login_date = 12; //最后登录时间
-  string login_browser = 13; //浏览器类型
-  string login_os = 14; //操作系统
+  string last_login_info = 11; //最后登录信息
   string pwd_update_date = 15; //密码最后更新时间
   string remark = 16; //备注
   int32 del_flag = 17; //删除标志（0代表删除 1代表存在）

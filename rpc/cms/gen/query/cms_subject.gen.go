@@ -54,7 +54,6 @@ func newCmsSubject(db *gorm.DB, opts ...gen.DOOption) cmsSubject {
 	return _cmsSubject
 }
 
-// cmsSubject 专题表
 type cmsSubject struct {
 	cmsSubjectDo cmsSubjectDo
 

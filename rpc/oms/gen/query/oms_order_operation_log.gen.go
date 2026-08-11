@@ -42,7 +42,6 @@ func newOmsOrderOperationLog(db *gorm.DB, opts ...gen.DOOption) omsOrderOperatio
 	return _omsOrderOperationLog
 }
 
-// omsOrderOperationLog 订单操作记录表
 type omsOrderOperationLog struct {
 	omsOrderOperationLogDo omsOrderOperationLogDo
 

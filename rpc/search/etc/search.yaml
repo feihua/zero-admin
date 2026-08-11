@@ -12,4 +12,4 @@ Log:
   Path: logs/search
 
 Es:
-  Host: http://127.0.0.1:9200
+  Host: http://elastic:12341qweqfsd2356@115.190.33.187:9200

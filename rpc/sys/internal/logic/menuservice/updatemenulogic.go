@@ -4,14 +4,15 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"strconv"
+	"time"
+
 	"github.com/feihua/zero-admin/pkg/errorx"
 	"github.com/feihua/zero-admin/rpc/sys/gen/model"
 	"github.com/feihua/zero-admin/rpc/sys/gen/query"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
 	"github.com/zeromicro/go-zero/core/logc"
 	"gorm.io/gorm"
-	"strconv"
-	"time"
 
 	"github.com/feihua/zero-admin/rpc/sys/internal/svc"
 
@@ -44,7 +45,7 @@ func NewUpdateMenuLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Update
 // 4.菜单存在时,则直接更新菜单
 func (l *UpdateMenuLogic) UpdateMenu(in *sysclient.UpdateMenuReq) (*sysclient.UpdateMenuResp, error) {
 	name := in.MenuName
-	path := in.MenuPath
+	path := in.MenuUrl
 
 	sMenu := query.SysMenu
 	q := sMenu.WithContext(l.ctx)
@@ -74,7 +75,7 @@ func (l *UpdateMenuLogic) UpdateMenu(in *sysclient.UpdateMenuReq) (*sysclient.Up
 
 	// 3.查询菜单路由是否已存在,如果菜单已存在,则直接返回
 	if len(path) != 0 {
-		count, err = q.Where(sMenu.ID.Neq(in.Id), sMenu.MenuPath.Eq(path)).Count()
+		count, err = q.Where(sMenu.ID.Neq(in.Id), sMenu.MenuURL.Eq(path)).Count()
 
 		if err != nil {
 			logc.Errorf(l.ctx, "查询菜单路由是否已存在失败,路由：%s,异常:%s", path, err.Error())
@@ -89,27 +90,28 @@ func (l *UpdateMenuLogic) UpdateMenu(in *sysclient.UpdateMenuReq) (*sysclient.Up
 
 	now := time.Now()
 	menu := &model.SysMenu{
-		ID:            in.Id,            // 编号
-		MenuName:      name,             // 菜单名称
-		ParentID:      in.ParentId,      // 父菜单ID，一级菜单为0
-		MenuPath:      path,             // 前端路由
-		MenuPerms:     in.MenuPerms,     // 权限标识
-		MenuType:      in.MenuType,      // 类型 0：目录,1：菜单,2：按钮,3：外链
-		MenuIcon:      in.MenuIcon,      // 菜单图标
-		MenuSort:      in.MenuSort,      // 菜单排序
-		UpdateBy:      in.UpdateBy,      // 更新者
-		MenuStatus:    in.MenuStatus,    // 菜单状态
-		IsDeleted:     in.IsDeleted,     // 是否删除  0：否  1：是
-		IsVisible:     in.IsVisible,     // 是否可见  0：否  1：是
-		Remark:        in.Remark,        // 备注信息
-		VuePath:       in.VuePath,       // vue系统的path
-		VueComponent:  in.VueComponent,  // vue的页面
-		VueIcon:       in.VueIcon,       // vue的图标
-		VueRedirect:   in.VueRedirect,   // vue的路由重定向
-		BackgroundURL: in.BackgroundUrl, // 接口地址
-		CreateBy:      item.CreateBy,    // 创建者
-		CreateTime:    item.CreateTime,  // 创建时间
-		UpdateTime:    &now,             // 更新时间
+		ID:           in.Id,           // 主键
+		MenuName:     in.MenuName,     // 菜单名称
+		Ancestors:    in.Ancestors,    // 祖级列表
+		MenuType:     in.MenuType,     // 菜单类型(1:目录,2:菜单,3:按钮)
+		MenuURL:      in.MenuUrl,      // 路由路径
+		MenuIcon:     in.MenuIcon,     // 菜单图标
+		MenuSort:     in.MenuSort,     // 排序
+		ParentID:     in.ParentId,     // 父id
+		APIURL:       in.ApiUrl,       // 接口url
+		Visible:      in.Visible,      // 显示状态（0:隐藏,显示:1）
+		Status:       in.Status,       // 菜单状态(1:正常，0:禁用)
+		Remark:       in.Remark,       // 备注
+		VuePath:      in.VuePath,      // vue的path
+		VueComponent: in.VueComponent, // vue的页面
+		VueIcon:      in.VueIcon,      // vue的图标
+		VueRedirect:  in.VueRedirect,  // vue的路由重定向
+		AngularIcon:  in.AngularIcon,  // angular的图标
+		ReactIcon:    in.ReactIcon,    // antd react的图标
+		CreateBy:     item.CreateBy,   // 创建者
+		CreateTime:   item.CreateTime, // 创建时间
+		UpdateBy:     in.UpdateBy,     // 更新者
+		UpdateTime:   &now,            // 更新时间
 	}
 
 	// 4.菜单存在时,则直接更新菜单
@@ -123,6 +125,6 @@ func (l *UpdateMenuLogic) UpdateMenu(in *sysclient.UpdateMenuReq) (*sysclient.Up
 	key := l.svcCtx.RedisKey + "menu"
 	filed := strconv.FormatInt(in.Id, 10)
 	_, _ = l.svcCtx.Redis.HdelCtx(l.ctx, key, filed)
-	_, _ = l.svcCtx.Redis.HdelCtx(l.ctx, l.svcCtx.RedisKey+"background_url", in.BackgroundUrl)
+	_, _ = l.svcCtx.Redis.HdelCtx(l.ctx, l.svcCtx.RedisKey+"background_url", in.ApiUrl)
 	return &sysclient.UpdateMenuResp{}, nil
 }

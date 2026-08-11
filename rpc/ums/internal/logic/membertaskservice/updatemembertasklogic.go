@@ -3,6 +3,8 @@ package membertaskservicelogic
 import (
 	"context"
 	"errors"
+	"time"
+
 	"github.com/feihua/zero-admin/rpc/ums/gen/model"
 	"github.com/feihua/zero-admin/rpc/ums/gen/query"
 	"github.com/feihua/zero-admin/rpc/ums/internal/svc"
@@ -10,7 +12,6 @@ import (
 	"github.com/zeromicro/go-zero/core/logc"
 	"github.com/zeromicro/go-zero/core/logx"
 	"gorm.io/gorm"
-	"time"
 )
 
 // UpdateMemberTaskLogic 更新会员任务
@@ -67,7 +68,7 @@ func (l *UpdateMemberTaskLogic) UpdateMemberTask(in *umsclient.UpdateMemberTaskR
 		Sort:          in.Sort,          // 排序
 		CreateBy:      task.CreateBy,    // 创建人ID
 		CreateTime:    task.CreateTime,  // 创建时间
-		UpdateBy:      &in.UpdateBy,     // 更新人ID
+		UpdateBy:      in.UpdateBy,      // 更新人ID
 		UpdateTime:    &now,             // 更新时间
 	}
 

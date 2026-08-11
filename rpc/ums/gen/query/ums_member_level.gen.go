@@ -38,9 +38,9 @@ func newUmsMemberLevel(db *gorm.DB, opts ...gen.DOOption) umsMemberLevel {
 	_umsMemberLevel.Privileges = field.NewString(tableName, "privileges")
 	_umsMemberLevel.Remark = field.NewString(tableName, "remark")
 	_umsMemberLevel.IsEnabled = field.NewInt32(tableName, "is_enabled")
-	_umsMemberLevel.CreateBy = field.NewInt64(tableName, "create_by")
+	_umsMemberLevel.CreateBy = field.NewString(tableName, "create_by")
 	_umsMemberLevel.CreateTime = field.NewTime(tableName, "create_time")
-	_umsMemberLevel.UpdateBy = field.NewInt64(tableName, "update_by")
+	_umsMemberLevel.UpdateBy = field.NewString(tableName, "update_by")
 	_umsMemberLevel.UpdateTime = field.NewTime(tableName, "update_time")
 	_umsMemberLevel.IsDeleted = field.NewInt32(tableName, "is_deleted")
 
@@ -49,7 +49,6 @@ func newUmsMemberLevel(db *gorm.DB, opts ...gen.DOOption) umsMemberLevel {
 	return _umsMemberLevel
 }
 
-// umsMemberLevel 会员等级表
 type umsMemberLevel struct {
 	umsMemberLevelDo umsMemberLevelDo
 
@@ -64,11 +63,11 @@ type umsMemberLevel struct {
 	Privileges   field.String  // 会员特权JSON
 	Remark       field.String  // 备注
 	IsEnabled    field.Int32   // 是否启用
-	CreateBy     field.Int64   // 创建人ID
+	CreateBy     field.String  // 创建人ID
 	CreateTime   field.Time    // 创建时间
-	UpdateBy     field.Int64   // 更新人ID
+	UpdateBy     field.String  // 更新人ID
 	UpdateTime   field.Time    // 更新时间
-	IsDeleted    field.Int32   // 是否删除
+	IsDeleted    field.Int32   // 是否删除(0:否,1:是)
 
 	fieldMap map[string]field.Expr
 }
@@ -95,9 +94,9 @@ func (u *umsMemberLevel) updateTableName(table string) *umsMemberLevel {
 	u.Privileges = field.NewString(table, "privileges")
 	u.Remark = field.NewString(table, "remark")
 	u.IsEnabled = field.NewInt32(table, "is_enabled")
-	u.CreateBy = field.NewInt64(table, "create_by")
+	u.CreateBy = field.NewString(table, "create_by")
 	u.CreateTime = field.NewTime(table, "create_time")
-	u.UpdateBy = field.NewInt64(table, "update_by")
+	u.UpdateBy = field.NewString(table, "update_by")
 	u.UpdateTime = field.NewTime(table, "update_time")
 	u.IsDeleted = field.NewInt32(table, "is_deleted")
 

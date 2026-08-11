@@ -4,7 +4,11 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"time"
+
+	"github.com/bytedance/sonic"
 	"github.com/dgrijalva/jwt-go"
+	"github.com/feihua/zero-admin/pkg/time_util"
 	"github.com/feihua/zero-admin/rpc/sys/gen/model"
 	"github.com/feihua/zero-admin/rpc/sys/gen/query"
 	"github.com/feihua/zero-admin/rpc/sys/internal/logic/common"
@@ -12,7 +16,6 @@ import (
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
 	"github.com/zeromicro/go-zero/core/logc"
 	"gorm.io/gorm"
-	"time"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -95,13 +98,13 @@ func (l *LoginLogic) Login(in *sysclient.LoginReq) (*sysclient.LoginResp, error)
 	l.savaLoginLog(in, 1, "登录成功")
 
 	// 7.更新登录时间
-	now := time.Now()
-	_, _ = q.WithContext(l.ctx).Where(q.ID.Eq(user.ID)).Updates(&model.SysUser{
-		LoginDate:    &now,         // 登录时间
-		LoginIP:      in.IpAddress, // 登录ip
-		LoginOs:      in.Os,        // 登录os
-		LoginBrowser: in.Browser,   // 登录浏览器
+	data, _ := sonic.Marshal(map[string]string{
+		"loginDate":    time_util.TimeToStr(time.Now()), // 登录时间
+		"loginIP":      in.IpAddress,                    // 登录ip
+		"loginOs":      in.Os,                           // 登录os
+		"loginBrowser": in.Browser,                      // 登录浏览器
 	})
+	_, _ = q.WithContext(l.ctx).Where(q.ID.Eq(user.ID)).Update(q.LastLoginInfo, data)
 
 	return &sysclient.LoginResp{
 		Id:          user.ID,       // 用户id
@@ -137,21 +140,19 @@ func (l *LoginLogic) queryApiUrls(userId int64) ([]string, string) {
 
 // 保存登录日志
 func (l *LoginLogic) savaLoginLog(in *sysclient.LoginReq, status int32, errorMsg string) {
+	data, _ := sonic.Marshal(map[string]string{
+		"loginDate":    time_util.TimeToStr(time.Now()), // 登录时间
+		"loginIP":      in.IpAddress,                    // 登录ip
+		"loginOs":      in.Os,                           // 登录os
+		"loginBrowser": in.Browser,                      // 登录浏览器
+	})
 	_ = query.SysLoginLog.WithContext(l.ctx).Create(&model.SysLoginLog{
 		LoginName: in.Account,   // 登录账号
-		Ipaddr:    in.IpAddress, // 登录IP地址
-		// LoginLocation: in.LoginLocation, // 登录地点
-		// Platform:      in.Platform,      // 平台信息
-		Browser: in.Browser, // 浏览器类型
-		// Version:       in.Version,       // 浏览器版本
-		Os: in.Os, // 操作系统
-		// Arch:          in.Arch,          // 体系结构信息
-		// Engine:        in.Engine,        // 渲染引擎信息
-		// EngineDetails: in.EngineDetails, // 渲染引擎详细信息
-		// Extra:         in.Extra,         // 其他信息（可选）
-		Status:    status,     // 登录状态(0:失败,1:成功)
-		Msg:       errorMsg,   // 提示消息
-		LoginTime: time.Now(), // 访问时间
+		IPAddr:    in.IpAddress, // 登录IP地址
+		Extra:     data,         // 其他信息（可选）
+		Status:    status,       // 登录状态(0:失败,1:成功)
+		Msg:       errorMsg,     // 提示消息
+		LoginTime: time.Now(),   // 访问时间
 	})
 }
 

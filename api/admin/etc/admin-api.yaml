@@ -63,7 +63,7 @@ Prometheus:
 
 Redis:
   Address: 127.0.0.1:6379
-  Pass: "12341qweqfsd2356"
+  Pass: "1234567"
 
 Swagger:
   IsTest: true  #是否打开swagger，true为打开，false为关闭（生产环境需要关闭）

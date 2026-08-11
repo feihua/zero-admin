@@ -2,6 +2,7 @@ package product_spec_value
 
 import (
 	"context"
+
 	"github.com/feihua/zero-admin/api/admin/internal/common"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
 	"github.com/feihua/zero-admin/api/admin/internal/svc"
@@ -34,7 +35,7 @@ func NewAddProductSpecValueLogic(ctx context.Context, svcCtx *svc.ServiceContext
 
 // AddProductSpecValue 添加商品规格值
 func (l *AddProductSpecValueLogic) AddProductSpecValue(req *types.AddProductSpecValueReq) (resp *types.BaseResp, err error) {
-	userId, err := common.GetUserId(l.ctx)
+	name, err := common.GetUserName(l.ctx)
 	if err != nil {
 		return nil, err
 	}
@@ -43,7 +44,7 @@ func (l *AddProductSpecValueLogic) AddProductSpecValue(req *types.AddProductSpec
 		Value:    req.Value,  // 规格值
 		Sort:     req.Sort,   // 排序
 		Status:   req.Status, // 状态：0->禁用；1->启用
-		CreateBy: userId,     // 创建人ID
+		CreateBy: name,       // 创建人ID
 	})
 
 	if err != nil {

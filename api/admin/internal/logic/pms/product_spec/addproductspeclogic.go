@@ -2,6 +2,7 @@ package product_spec
 
 import (
 	"context"
+
 	"github.com/feihua/zero-admin/api/admin/internal/common"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
 	"github.com/feihua/zero-admin/api/admin/internal/svc"
@@ -34,7 +35,7 @@ func NewAddProductSpecLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Ad
 
 // AddProductSpec 添加商品规格
 func (l *AddProductSpecLogic) AddProductSpec(req *types.AddProductSpecReq) (resp *types.BaseResp, err error) {
-	userId, err := common.GetUserId(l.ctx)
+	name, err := common.GetUserName(l.ctx)
 	if err != nil {
 		return nil, err
 	}
@@ -43,7 +44,7 @@ func (l *AddProductSpecLogic) AddProductSpec(req *types.AddProductSpecReq) (resp
 		Name:       req.Name,       // 规格名称
 		Sort:       req.Sort,       // 排序
 		Status:     req.Status,     // 状态：0->禁用；1->启用
-		CreateBy:   userId,         // 创建人ID
+		CreateBy:   name,           // 创建人ID
 	})
 
 	if err != nil {

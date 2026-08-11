@@ -82,10 +82,7 @@ message QueryUserDetailResp {
   string email = 7; //用户邮箱
   int32 status = 9; //状态(1:正常，0:禁用)
   int64 dept_id = 10; //部门ID
-  string login_ip = 11; //最后登录IP
-  string login_date = 12; //最后登录时间
-  string login_browser = 13; //浏览器类型
-  string login_os = 14; //操作系统
+  string last_login_info = 11; //最后登录信息
   string pwd_update_date = 15; //密码最后更新时间
   string remark = 16; //备注
   int32 del_flag = 17; //删除标志（0代表删除 1代表存在）
@@ -103,19 +100,11 @@ message QueryUserListReq {
   string user_name = 2; //用户账号
   string nick_name = 3; //用户昵称
   string user_type = 4; //用户类型（00系统用户）
-  string avatar = 5; //头像路径
   string email = 6; //用户邮箱
-  string password = 7; //密码
   int32 status = 8; //状态(1:正常，0:禁用)
   int64 dept_id = 9; //部门ID
-  string login_ip = 10; //最后登录IP
-  string login_date = 11; //最后登录时间
-  string login_browser = 12; //浏览器类型
-  string login_os = 13; //操作系统
-  string pwd_update_date = 14; //密码最后更新时间
-  int32 del_flag = 15; //删除标志（0代表删除 1代表存在）
-  int64 page_num = 16; //第几页
-  int64 page_size = 17; //每页的数量
+  int64 page_num = 10; //第几页
+  int64 page_size = 11; //每页的数量
 }
 
 message UserListData {
@@ -128,10 +117,7 @@ message UserListData {
   string email = 7; //用户邮箱
   int32 status = 9; //状态(1:正常，0:禁用)
   int64 dept_id = 10; //部门ID
-  string login_ip = 11; //最后登录IP
-  string login_date = 12; //最后登录时间
-  string login_browser = 13; //浏览器类型
-  string login_os = 14; //操作系统
+  string last_login_info = 11; //最后登录信息
   string pwd_update_date = 15; //密码最后更新时间
   string remark = 16; //备注
   int32 del_flag = 17; //删除标志（0代表删除 1代表存在）

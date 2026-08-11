@@ -82,7 +82,7 @@ func (l *DeleteMenuLogic) DeleteMenu(in *sysclient.DeleteMenuReq) (*sysclient.De
 		key := l.svcCtx.RedisKey + "menu"
 		filed := strconv.FormatInt(id, 10)
 		_, _ = l.svcCtx.Redis.HdelCtx(l.ctx, key, filed)
-		_, _ = l.svcCtx.Redis.HdelCtx(l.ctx, l.svcCtx.RedisKey+"background_url", menu.BackgroundURL)
+		_, _ = l.svcCtx.Redis.HdelCtx(l.ctx, l.svcCtx.RedisKey+"background_url", menu.APIURL)
 	}
 	return &sysclient.DeleteMenuResp{}, nil
 }

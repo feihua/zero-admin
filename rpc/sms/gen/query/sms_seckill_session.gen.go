@@ -34,9 +34,9 @@ func newSmsSeckillSession(db *gorm.DB, opts ...gen.DOOption) smsSeckillSession {
 	_smsSeckillSession.EndTime = field.NewString(tableName, "end_time")
 	_smsSeckillSession.Status = field.NewInt32(tableName, "status")
 	_smsSeckillSession.Sort = field.NewInt32(tableName, "sort")
-	_smsSeckillSession.CreateBy = field.NewInt64(tableName, "create_by")
+	_smsSeckillSession.CreateBy = field.NewString(tableName, "create_by")
 	_smsSeckillSession.CreateTime = field.NewTime(tableName, "create_time")
-	_smsSeckillSession.UpdateBy = field.NewInt64(tableName, "update_by")
+	_smsSeckillSession.UpdateBy = field.NewString(tableName, "update_by")
 	_smsSeckillSession.UpdateTime = field.NewTime(tableName, "update_time")
 	_smsSeckillSession.IsDeleted = field.NewInt32(tableName, "is_deleted")
 
@@ -45,7 +45,6 @@ func newSmsSeckillSession(db *gorm.DB, opts ...gen.DOOption) smsSeckillSession {
 	return _smsSeckillSession
 }
 
-// smsSeckillSession 秒杀场次表
 type smsSeckillSession struct {
 	smsSeckillSessionDo smsSeckillSessionDo
 
@@ -56,11 +55,11 @@ type smsSeckillSession struct {
 	EndTime    field.String // 结束时间
 	Status     field.Int32  // 状态：0-禁用，1-启用
 	Sort       field.Int32  // 排序
-	CreateBy   field.Int64  // 创建人ID
+	CreateBy   field.String // 创建人ID
 	CreateTime field.Time   // 创建时间
-	UpdateBy   field.Int64  // 更新人ID
+	UpdateBy   field.String // 更新人ID
 	UpdateTime field.Time   // 更新时间
-	IsDeleted  field.Int32  // 是否删除
+	IsDeleted  field.Int32  // 是否删除(0:否,1:是)
 
 	fieldMap map[string]field.Expr
 }
@@ -83,9 +82,9 @@ func (s *smsSeckillSession) updateTableName(table string) *smsSeckillSession {
 	s.EndTime = field.NewString(table, "end_time")
 	s.Status = field.NewInt32(table, "status")
 	s.Sort = field.NewInt32(table, "sort")
-	s.CreateBy = field.NewInt64(table, "create_by")
+	s.CreateBy = field.NewString(table, "create_by")
 	s.CreateTime = field.NewTime(table, "create_time")
-	s.UpdateBy = field.NewInt64(table, "update_by")
+	s.UpdateBy = field.NewString(table, "update_by")
 	s.UpdateTime = field.NewTime(table, "update_time")
 	s.IsDeleted = field.NewInt32(table, "is_deleted")
 

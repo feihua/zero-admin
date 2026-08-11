@@ -2,6 +2,7 @@ package product_attribute
 
 import (
 	"context"
+
 	"github.com/feihua/zero-admin/api/admin/internal/common"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
 	"github.com/feihua/zero-admin/api/admin/internal/svc"
@@ -34,14 +35,14 @@ func NewUpdateProductAttributeStatusLogic(ctx context.Context, svcCtx *svc.Servi
 
 // UpdateProductAttributeStatus 更新商品属性状态
 func (l *UpdateProductAttributeStatusLogic) UpdateProductAttributeStatus(req *types.UpdateProductAttributeStatusReq) (resp *types.BaseResp, err error) {
-	userId, err := common.GetUserId(l.ctx)
+	name, err := common.GetUserName(l.ctx)
 	if err != nil {
 		return nil, err
 	}
 	_, err = l.svcCtx.ProductAttributeService.UpdateProductAttributeStatus(l.ctx, &pmsclient.UpdateProductAttributeStatusReq{
 		Ids:      req.Ids,    // 主键id
 		Status:   req.Status, // 状态：0->禁用；1->启用
-		UpdateBy: userId,     // 更新人ID
+		UpdateBy: name,       // 更新人ID
 
 	})
 

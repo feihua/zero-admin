@@ -14,7 +14,7 @@ message AddOrderSettingReq {
   int32 status = 6; //状态：0->禁用；1->启用
   int32 is_default = 7; //是否默认：0->否；1->是
   int32 comment_overtime = 8; //订单完成后自动好评时间（天）
-  int64 create_by = 9; //创建人ID
+  string create_by = 9; //创建人ID
 }
 
 message AddOrderSettingResp {
@@ -40,7 +40,7 @@ message UpdateOrderSettingReq {
   int32 status = 6; //状态：0->禁用；1->启用
   int32 is_default = 7; //是否默认：0->否；1->是
   int32 comment_overtime = 8; //订单完成后自动好评时间（天）
-  int64 update_by = 11; //更新人ID
+  string update_by = 11; //更新人ID
 }
 
 message UpdateOrderSettingResp {
@@ -51,7 +51,7 @@ message UpdateOrderSettingResp {
 message UpdateOrderSettingStatusReq {
   int64 id = 1; //主键ID
   int32 status = 2; //状态
-  int64 update_by = 3; //更新人ID
+  string update_by = 3; //更新人ID
 }
 
 message UpdateOrderSettingStatusResp {
@@ -72,9 +72,9 @@ message QueryOrderSettingDetailResp {
   int32 status = 6; //状态：0->禁用；1->启用
   int32 is_default = 7; //是否默认：0->否；1->是
   int32 comment_overtime = 8; //订单完成后自动好评时间（天）
-  int64 create_by = 9; //创建人ID
+  string create_by = 9; //创建人ID
   string create_time = 10; //创建时间
-  int64 update_by = 11; //更新人ID
+  string update_by = 11; //更新人ID
   string update_time = 12; //更新时间
 
 }
@@ -96,9 +96,9 @@ message OrderSettingListData {
   int32 status = 6; //状态：0->禁用；1->启用
   int32 is_default = 7; //是否默认：0->否；1->是
   int32 comment_overtime = 8; //订单完成后自动好评时间（天）
-  int64 create_by = 9; //创建人ID
+  string create_by = 9; //创建人ID
   string create_time = 10; //创建时间
-  int64 update_by = 11; //更新人ID
+  string update_by = 11; //更新人ID
   string update_time = 12; //更新时间
 
 }

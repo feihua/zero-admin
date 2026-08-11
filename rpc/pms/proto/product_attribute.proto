@@ -18,7 +18,7 @@ message AddProductAttributeReq {
   int32 is_show = 10; //是否显示
   int32 sort = 11; //排序
   int32 status = 12; //状态：0->禁用；1->启用
-  int64 create_by = 13; //创建人ID
+  string create_by = 13; //创建人ID
 }
 
 message AddProductAttributeResp {
@@ -48,7 +48,7 @@ message UpdateProductAttributeReq {
   int32 is_show = 10; //是否显示
   int32 sort = 11; //排序
   int32 status = 12; //状态：0->禁用；1->启用
-  int64 update_by = 13; //更新人ID
+  string update_by = 13; //更新人ID
 }
 
 message UpdateProductAttributeResp {
@@ -59,7 +59,7 @@ message UpdateProductAttributeResp {
 message UpdateProductAttributeStatusReq {
   repeated int64 ids = 1; //主键id
   int32 status = 12; //状态：0->禁用；1->启用
-  int64 update_by = 15; //更新人ID
+  string update_by = 15; //更新人ID
 }
 
 message UpdateProductAttributeStatusResp {
@@ -84,9 +84,9 @@ message QueryProductAttributeDetailResp {
   int32 is_show = 10; //是否显示
   int32 sort = 11; //排序
   int32 status = 12; //状态：0->禁用；1->启用
-  int64 create_by = 13; //创建人ID
+  string create_by = 13; //创建人ID
   string create_time = 14; //创建时间
-  int64 update_by = 15; //更新人ID
+  string update_by = 15; //更新人ID
   string update_time = 16; //更新时间
 
 }
@@ -117,9 +117,9 @@ message ProductAttributeListData {
   int32 is_show = 10; //是否显示
   int32 sort = 11; //排序
   int32 status = 12; //状态：0->禁用；1->启用
-  int64 create_by = 13; //创建人ID
+  string create_by = 13; //创建人ID
   string create_time = 14; //创建时间
-  int64 update_by = 15; //更新人ID
+  string update_by = 15; //更新人ID
   string update_time = 16; //更新时间
 
 }

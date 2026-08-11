@@ -49,7 +49,6 @@ func newSmsHomeAdvertise(db *gorm.DB, opts ...gen.DOOption) smsHomeAdvertise {
 	return _smsHomeAdvertise
 }
 
-// smsHomeAdvertise 首页轮播广告表
 type smsHomeAdvertise struct {
 	smsHomeAdvertiseDo smsHomeAdvertiseDo
 
@@ -68,7 +67,7 @@ type smsHomeAdvertise struct {
 	Sort       field.Int32  // 排序
 	CreateTime field.Time   // 创建时间
 	UpdateTime field.Time   // 更新时间
-	IsDeleted  field.Int32  // 是否删除
+	IsDeleted  field.Int32  // 是否删除(0:否,1:是)
 
 	fieldMap map[string]field.Expr
 }

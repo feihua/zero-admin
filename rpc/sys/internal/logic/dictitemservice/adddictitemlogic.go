@@ -4,6 +4,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
+
 	"github.com/feihua/zero-admin/rpc/sys/gen/model"
 	"github.com/feihua/zero-admin/rpc/sys/gen/query"
 	"github.com/feihua/zero-admin/rpc/sys/internal/svc"
@@ -38,7 +39,7 @@ func NewAddDictItemLogic(ctx context.Context, svcCtx *svc.ServiceContext) *AddDi
 // 4.如果新增字典数据是默认,则修改其他选项为非默认状态
 // 5.字典数据不存在时,则直接添加字典数据
 func (l *AddDictItemLogic) AddDictItem(in *sysclient.AddDictItemReq) (*sysclient.AddDictItemResp, error) {
-	q := query.SysDictItem
+	q := query.SysDictData
 
 	dictType := in.DictType
 
@@ -87,8 +88,8 @@ func (l *AddDictItemLogic) AddDictItem(in *sysclient.AddDictItemReq) (*sysclient
 	}
 
 	// 5.字典数据不存在时,则直接添加字典数据
-	dictItem := &model.SysDictItem{
-		DictSort:  in.DictSort,  // 字典排序
+	dictItem := &model.SysDictData{
+		Sort:      in.DictSort,  // 字典排序
 		DictLabel: in.DictLabel, // 字典标签
 		DictValue: in.DictValue, // 字典键值
 		DictType:  in.DictType,  // 字典类型

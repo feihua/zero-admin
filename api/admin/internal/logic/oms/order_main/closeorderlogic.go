@@ -2,6 +2,7 @@ package order_main
 
 import (
 	"context"
+
 	"github.com/feihua/zero-admin/api/admin/internal/common"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
 	"github.com/feihua/zero-admin/api/admin/internal/common/res"
@@ -29,14 +30,14 @@ func NewCloseOrderLogic(ctx context.Context, svcCtx *svc.ServiceContext) *CloseO
 }
 
 func (l *CloseOrderLogic) CloseOrder(req *types.CloseOrderReq) (resp *types.BaseResp, err error) {
-	userId, err := common.GetUserId(l.ctx)
+	name, err := common.GetUserId(l.ctx)
 	if err != nil {
 		return nil, err
 	}
 	_, err = l.svcCtx.OrderService.CloseOrder(l.ctx, &omsclient.CloseOrderReq{
 		Ids:        req.Ids,
 		Note:       req.Note,
-		OperatorId: userId,
+		OperatorId: name,
 	})
 
 	if err != nil {

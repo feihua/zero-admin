@@ -10,7 +10,7 @@ import (
 
 const TableNameUmsMemberTagRelation = "ums_member_tag_relation"
 
-// UmsMemberTagRelation 会员标签关联表
+// UmsMemberTagRelation mapped from table <ums_member_tag_relation>
 type UmsMemberTagRelation struct {
 	ID         int64     `gorm:"column:id;primaryKey;autoIncrement:true;comment:主键ID" json:"id"`                        // 主键ID
 	MemberID   int64     `gorm:"column:member_id;not null;comment:会员ID" json:"member_id"`                               // 会员ID

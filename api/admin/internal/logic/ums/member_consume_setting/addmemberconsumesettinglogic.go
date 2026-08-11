@@ -2,6 +2,7 @@ package member_consume_setting
 
 import (
 	"context"
+
 	"github.com/feihua/zero-admin/api/admin/internal/common"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
 	"github.com/feihua/zero-admin/api/admin/internal/svc"
@@ -34,7 +35,7 @@ func NewAddMemberConsumeSettingLogic(ctx context.Context, svcCtx *svc.ServiceCon
 
 // AddMemberConsumeSetting 添加积分消费设置
 func (l *AddMemberConsumeSettingLogic) AddMemberConsumeSetting(req *types.AddMemberConsumeSettingReq) (resp *types.BaseResp, err error) {
-	userId, err := common.GetUserId(l.ctx)
+	name, err := common.GetUserName(l.ctx)
 	if err != nil {
 		return nil, err
 	}
@@ -44,7 +45,7 @@ func (l *AddMemberConsumeSettingLogic) AddMemberConsumeSetting(req *types.AddMem
 		UseUnit:            req.UseUnit,            // 每次使用积分最小单位100
 		CouponStatus:       req.CouponStatus,       // 是否可以和优惠券同用；0->不可以；1->可以
 		Status:             req.Status,             // 状态：0->禁用；1->启用
-		CreateBy:           userId,                 // 创建人ID
+		CreateBy:           name,                   // 创建人ID
 	})
 
 	if err != nil {

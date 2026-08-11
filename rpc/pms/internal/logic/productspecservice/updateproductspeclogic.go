@@ -3,6 +3,8 @@ package productspecservicelogic
 import (
 	"context"
 	"errors"
+	"time"
+
 	"github.com/feihua/zero-admin/rpc/pms/gen/model"
 	"github.com/feihua/zero-admin/rpc/pms/gen/query"
 	"github.com/feihua/zero-admin/rpc/pms/internal/svc"
@@ -10,7 +12,6 @@ import (
 	"github.com/zeromicro/go-zero/core/logc"
 	"github.com/zeromicro/go-zero/core/logx"
 	"gorm.io/gorm"
-	"time"
 )
 
 // UpdateProductSpecLogic 更新商品规格
@@ -58,7 +59,7 @@ func (l *UpdateProductSpecLogic) UpdateProductSpec(in *pmsclient.UpdateProductSp
 		Status:     in.Status,         // 状态：0->禁用；1->启用
 		CreateBy:   detail.CreateBy,   // 创建人ID
 		CreateTime: detail.CreateTime, // 创建时间
-		UpdateBy:   &in.UpdateBy,      // 更新人ID
+		UpdateBy:   in.UpdateBy,       // 更新人ID
 		UpdateTime: &now,              // 更新时间
 	}
 

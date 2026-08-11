@@ -3,9 +3,10 @@ package dicttypeservicelogic
 import (
 	"context"
 	"errors"
+	"strconv"
+
 	"github.com/feihua/zero-admin/rpc/sys/gen/query"
 	"github.com/zeromicro/go-zero/core/logc"
-	"strconv"
 
 	"github.com/feihua/zero-admin/rpc/sys/internal/svc"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
@@ -38,7 +39,7 @@ func NewDeleteDictTypeLogic(ctx context.Context, svcCtx *svc.ServiceContext) *De
 func (l *DeleteDictTypeLogic) DeleteDictType(in *sysclient.DeleteDictTypeReq) (*sysclient.DeleteDictTypeResp, error) {
 	err := query.Q.Transaction(func(tx *query.Query) error {
 		q := tx.SysDictType
-		q1 := tx.SysDictItem
+		q1 := tx.SysDictData
 
 		ids := in.Ids
 		for _, id := range ids {

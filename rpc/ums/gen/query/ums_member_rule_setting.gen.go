@@ -34,9 +34,9 @@ func newUmsMemberRuleSetting(db *gorm.DB, opts ...gen.DOOption) umsMemberRuleSet
 	_umsMemberRuleSetting.MaxPointPerOrder = field.NewInt32(tableName, "max_point_per_order")
 	_umsMemberRuleSetting.RuleType = field.NewInt32(tableName, "rule_type")
 	_umsMemberRuleSetting.Status = field.NewInt32(tableName, "status")
-	_umsMemberRuleSetting.CreateBy = field.NewInt64(tableName, "create_by")
+	_umsMemberRuleSetting.CreateBy = field.NewString(tableName, "create_by")
 	_umsMemberRuleSetting.CreateTime = field.NewTime(tableName, "create_time")
-	_umsMemberRuleSetting.UpdateBy = field.NewInt64(tableName, "update_by")
+	_umsMemberRuleSetting.UpdateBy = field.NewString(tableName, "update_by")
 	_umsMemberRuleSetting.UpdateTime = field.NewTime(tableName, "update_time")
 
 	_umsMemberRuleSetting.fillFieldMap()
@@ -44,21 +44,20 @@ func newUmsMemberRuleSetting(db *gorm.DB, opts ...gen.DOOption) umsMemberRuleSet
 	return _umsMemberRuleSetting
 }
 
-// umsMemberRuleSetting 会员积分成长规则表
 type umsMemberRuleSetting struct {
 	umsMemberRuleSettingDo umsMemberRuleSettingDo
 
 	ALL              field.Asterisk
 	ID               field.Int64
-	ConsumePerPoint  field.Int64 // 每消费多少元获取1个点
-	LowOrderAmount   field.Int64 // 最低获取点数的订单金额
-	MaxPointPerOrder field.Int32 // 每笔订单最高获取点数
-	RuleType         field.Int32 // 类型：0->积分规则；1->成长值规则
-	Status           field.Int32 // 状态：0->禁用；1->启用
-	CreateBy         field.Int64 // 创建人ID
-	CreateTime       field.Time  // 创建时间
-	UpdateBy         field.Int64 // 更新人ID
-	UpdateTime       field.Time  // 更新时间
+	ConsumePerPoint  field.Int64  // 每消费多少元获取1个点
+	LowOrderAmount   field.Int64  // 最低获取点数的订单金额
+	MaxPointPerOrder field.Int32  // 每笔订单最高获取点数
+	RuleType         field.Int32  // 类型：0->积分规则；1->成长值规则
+	Status           field.Int32  // 状态：0->禁用；1->启用
+	CreateBy         field.String // 创建人ID
+	CreateTime       field.Time   // 创建时间
+	UpdateBy         field.String // 更新人ID
+	UpdateTime       field.Time   // 更新时间
 
 	fieldMap map[string]field.Expr
 }
@@ -81,9 +80,9 @@ func (u *umsMemberRuleSetting) updateTableName(table string) *umsMemberRuleSetti
 	u.MaxPointPerOrder = field.NewInt32(table, "max_point_per_order")
 	u.RuleType = field.NewInt32(table, "rule_type")
 	u.Status = field.NewInt32(table, "status")
-	u.CreateBy = field.NewInt64(table, "create_by")
+	u.CreateBy = field.NewString(table, "create_by")
 	u.CreateTime = field.NewTime(table, "create_time")
-	u.UpdateBy = field.NewInt64(table, "update_by")
+	u.UpdateBy = field.NewString(table, "update_by")
 	u.UpdateTime = field.NewTime(table, "update_time")
 
 	u.fillFieldMap()

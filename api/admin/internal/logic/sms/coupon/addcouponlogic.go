@@ -35,7 +35,7 @@ func NewAddCouponLogic(ctx context.Context, svcCtx *svc.ServiceContext) *AddCoup
 
 // AddCoupon 添加优惠券
 func (l *AddCouponLogic) AddCoupon(req *types.AddCouponReq) (resp *types.BaseResp, err error) {
-	userId, err := common.GetUserId(l.ctx)
+	name, err := common.GetUserName(l.ctx)
 	if err != nil {
 		return nil, err
 	}
@@ -53,7 +53,7 @@ func (l *AddCouponLogic) AddCoupon(req *types.AddCouponReq) (resp *types.BaseRes
 		Status:      req.Status,      // 状态：0-未开始，1-进行中，2-已结束，3-已取消
 		IsEnabled:   req.IsEnabled,   // 是否启用
 		Description: req.Description, // 使用说明
-		CreateBy:    userId,          // 创建人ID
+		CreateBy:    name,            // 创建人ID
 	}
 
 	if len(req.ScopeData) > 0 {

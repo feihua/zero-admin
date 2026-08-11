@@ -21,7 +21,7 @@ message AddSeckillProductData {
   int32 per_limit = 8; //每人限购数量
   int32 sort = 9; //排序
   int32 status = 10; //状态：0-未上架，1-已上架
-  int64 create_by = 11; //创建人ID
+  string create_by = 11; //创建人ID
   string sku_name = 12; //商品名称
 }
 
@@ -50,7 +50,7 @@ message UpdateSeckillProductReq {
   int32 per_limit = 8; //每人限购数量
   int32 sort = 9; //排序
   int32 status = 10; //状态：0-未上架，1-已上架
-  int64 update_by = 13; //更新人ID
+  string update_by = 13; //更新人ID
   string sku_name = 14; //商品名称
 }
 
@@ -62,7 +62,7 @@ message UpdateSeckillProductResp {
 message UpdateSeckillProductStatusReq {
   repeated int64 ids = 1; //ID
   int32 status = 10; //状态：0-未上架，1-已上架
-  int64 update_by = 13; //更新人ID
+  string update_by = 13; //更新人ID
 }
 
 message UpdateSeckillProductStatusResp {
@@ -85,9 +85,9 @@ message QuerySeckillProductDetailResp {
   int32 per_limit = 8; //每人限购数量
   int32 sort = 9; //排序
   int32 status = 10; //状态：0-未上架，1-已上架
-  int64 create_by = 11; //创建人ID
+  string create_by = 11; //创建人ID
   string create_time = 12; //创建时间
-  int64 update_by = 13; //更新人ID
+  string update_by = 13; //更新人ID
   string update_time = 14; //更新时间
   string sku_name = 15; //商品名称
 
@@ -113,9 +113,9 @@ message SeckillProductListData {
   int32 per_limit = 8; //每人限购数量
   int32 sort = 9; //排序
   int32 status = 10; //状态：0-未上架，1-已上架
-  int64 create_by = 11; //创建人ID
+  string create_by = 11; //创建人ID
   string create_time = 12; //创建时间
-  int64 update_by = 13; //更新人ID
+  string update_by = 13; //更新人ID
   string update_time = 14; //更新时间
   string sku_name = 15; //商品名称
 }

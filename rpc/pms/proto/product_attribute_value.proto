@@ -11,7 +11,7 @@ message AddProductAttributeValueReq {
   int64 attribute_id = 3; //属性ID
   string value = 4; //属性值
   int32 status = 5; //状态：0->禁用；1->启用
-  int64 create_by = 6; //创建人ID
+  string create_by = 6; //创建人ID
 }
 
 message AddProductAttributeValueResp {
@@ -34,7 +34,7 @@ message UpdateProductAttributeValueReq {
   int64 attribute_id = 3; //属性ID
   string value = 4; //属性值
   int32 status = 5; //状态：0->禁用；1->启用
-  int64 update_by = 8; //更新人ID
+  string update_by = 8; //更新人ID
 }
 
 message UpdateProductAttributeValueResp {
@@ -45,7 +45,7 @@ message UpdateProductAttributeValueResp {
 message UpdateProductAttributeValueStatusReq {
   repeated int64 ids = 1; //主键id
   int32 status = 5; //状态：0->禁用；1->启用
-  int64 update_by = 8; //更新人ID
+  string update_by = 8; //更新人ID
 }
 
 message UpdateProductAttributeValueStatusResp {
@@ -63,9 +63,9 @@ message QueryProductAttributeValueDetailResp {
   int64 attribute_id = 3; //属性ID
   string value = 4; //属性值
   int32 status = 5; //状态：0->禁用；1->启用
-  int64 create_by = 6; //创建人ID
+  string create_by = 6; //创建人ID
   string create_time = 7; //创建时间
-  int64 update_by = 8; //更新人ID
+  string update_by = 8; //更新人ID
   string update_time = 9; //更新时间
 
 }
@@ -85,9 +85,9 @@ message ProductAttributeValueListData {
   int64 attribute_id = 3; //属性ID
   string value = 4; //属性值
   int32 status = 5; //状态：0->禁用；1->启用
-  int64 create_by = 6; //创建人ID
+  string create_by = 6; //创建人ID
   string create_time = 7; //创建时间
-  int64 update_by = 8; //更新人ID
+  string update_by = 8; //更新人ID
   string update_time = 9; //更新时间
 
 }

@@ -2,6 +2,7 @@ package product_sku
 
 import (
 	"context"
+
 	"github.com/feihua/zero-admin/api/admin/internal/common"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
 	"github.com/feihua/zero-admin/api/admin/internal/svc"
@@ -33,7 +34,7 @@ func NewUpdateProductSkuLogic(ctx context.Context, svcCtx *svc.ServiceContext) *
 
 // UpdateProductSku 更新商品SKU
 func (l *UpdateProductSkuLogic) UpdateProductSku(req *types.UpdateProductSkuReq) (resp *types.BaseResp, err error) {
-	userId, err := common.GetUserId(l.ctx)
+	name, err := common.GetUserName(l.ctx)
 	if err != nil {
 		return nil, err
 	}
@@ -58,7 +59,7 @@ func (l *UpdateProductSkuLogic) UpdateProductSku(req *types.UpdateProductSkuReq)
 			PublishStatus:      s.PublishStatus,      // 上架状态：0-下架，1-上架
 			VerifyStatus:       s.VerifyStatus,       // 审核状态：0-未审核，1-审核通过，2-审核不通过
 			Sort:               s.Sort,               // 排序
-			UpdateBy:           userId,               // 更新人ID
+			UpdateBy:           name,                 // 更新人ID
 		})
 	}
 

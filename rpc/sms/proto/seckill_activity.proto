@@ -13,7 +13,7 @@ message AddSeckillActivityReq {
   string end_time = 5; //结束时间
   int32 status = 6; //活动状态：状态:0-上线,1-下线
   int32 is_enabled = 7; //是否启用
-  int64 create_by = 8; //创建人ID
+  string create_by = 8; //创建人ID
 }
 
 message AddSeckillActivityResp {
@@ -38,7 +38,7 @@ message UpdateSeckillActivityReq {
   string end_time = 5; //结束时间
   int32 status = 6; //活动状态：状态:0-上线,1-下线
   int32 is_enabled = 7; //是否启用
-  int64 update_by = 10; //更新人ID
+  string update_by = 10; //更新人ID
 }
 
 message UpdateSeckillActivityResp {
@@ -49,7 +49,7 @@ message UpdateSeckillActivityResp {
 message UpdateSeckillActivityStatusReq {
   repeated int64 ids = 1; //编号
   int32 status = 6; //活动状态：状态:0-上线,1-下线
-  int64 update_by = 10; //更新人ID
+  string update_by = 10; //更新人ID
 }
 
 message UpdateSeckillActivityStatusResp {
@@ -69,9 +69,9 @@ message QuerySeckillActivityDetailResp {
   string end_time = 5; //结束时间
   int32 status = 6; //活动状态：状态:0-上线,1-下线
   int32 is_enabled = 7; //是否启用
-  int64 create_by = 8; //创建人ID
+  string create_by = 8; //创建人ID
   string create_time = 9; //创建时间
-  int64 update_by = 10; //更新人ID
+  string update_by = 10; //更新人ID
   string update_time = 11; //更新时间
 
 }
@@ -95,9 +95,9 @@ message SeckillActivityListData {
   string end_time = 5; //结束时间
   int32 status = 6; //活动状态：状态:0-上线,1-下线
   int32 is_enabled = 7; //是否启用
-  int64 create_by = 8; //创建人ID
+  string create_by = 8; //创建人ID
   string create_time = 9; //创建时间
-  int64 update_by = 10; //更新人ID
+  string update_by = 10; //更新人ID
   string update_time = 11; //更新时间
 
 }

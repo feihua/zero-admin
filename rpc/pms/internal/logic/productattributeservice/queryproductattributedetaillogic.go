@@ -3,7 +3,7 @@ package productattributeservicelogic
 import (
 	"context"
 	"errors"
-	"github.com/feihua/zero-admin/pkg/pointerprocess"
+
 	"github.com/feihua/zero-admin/pkg/time_util"
 	"github.com/feihua/zero-admin/rpc/pms/gen/query"
 	"github.com/feihua/zero-admin/rpc/pms/internal/svc"
@@ -46,22 +46,22 @@ func (l *QueryProductAttributeDetailLogic) QueryProductAttributeDetail(in *pmscl
 	}
 
 	data := &pmsclient.QueryProductAttributeDetailResp{
-		Id:           item.ID,                                          // 主键id
-		GroupId:      item.GroupID,                                     // 属性分组ID
-		Name:         item.Name,                                        // 属性名称
-		InputType:    item.InputType,                                   // 输入类型：1-手动输入，2-单选，3-多选
-		ValueType:    item.ValueType,                                   // 值类型：1-文本，2-数字，3-日期
-		InputList:    item.InputList,                                   // 可选值列表，用逗号分隔
-		Unit:         item.Unit,                                        // 单位
-		IsRequired:   item.IsRequired,                                  // 是否必填
-		IsSearchable: item.IsSearchable,                                // 是否支持搜索
-		IsShow:       item.IsShow,                                      // 是否显示
-		Sort:         item.Sort,                                        // 排序
-		Status:       item.Status,                                      // 状态：0->禁用；1->启用
-		CreateBy:     item.CreateBy,                                    // 创建人ID
-		CreateTime:   time_util.TimeToStr(item.CreateTime),             // 创建时间
-		UpdateBy:     pointerprocess.DefaltData(item.UpdateBy).(int64), // 更新人ID
-		UpdateTime:   time_util.TimeToString(item.UpdateTime),          // 更新时间
+		Id:           item.ID,                                 // 主键id
+		GroupId:      item.GroupID,                            // 属性分组ID
+		Name:         item.Name,                               // 属性名称
+		InputType:    item.InputType,                          // 输入类型：1-手动输入，2-单选，3-多选
+		ValueType:    item.ValueType,                          // 值类型：1-文本，2-数字，3-日期
+		InputList:    item.InputList,                          // 可选值列表，用逗号分隔
+		Unit:         item.Unit,                               // 单位
+		IsRequired:   item.IsRequired,                         // 是否必填
+		IsSearchable: item.IsSearchable,                       // 是否支持搜索
+		IsShow:       item.IsShow,                             // 是否显示
+		Sort:         item.Sort,                               // 排序
+		Status:       item.Status,                             // 状态：0->禁用；1->启用
+		CreateBy:     item.CreateBy,                           // 创建人ID
+		CreateTime:   time_util.TimeToStr(item.CreateTime),    // 创建时间
+		UpdateBy:     item.UpdateBy,                           // 更新人ID
+		UpdateTime:   time_util.TimeToString(item.UpdateTime), // 更新时间
 	}
 
 	return data, nil

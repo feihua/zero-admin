@@ -38,9 +38,9 @@ func newOmsCompanyAddress(db *gorm.DB, opts ...gen.DOOption) omsCompanyAddress {
 	_omsCompanyAddress.DetailAddress = field.NewString(tableName, "detail_address")
 	_omsCompanyAddress.SendStatus = field.NewInt32(tableName, "send_status")
 	_omsCompanyAddress.ReceiveStatus = field.NewInt32(tableName, "receive_status")
-	_omsCompanyAddress.CreateBy = field.NewInt64(tableName, "create_by")
+	_omsCompanyAddress.CreateBy = field.NewString(tableName, "create_by")
 	_omsCompanyAddress.CreateTime = field.NewTime(tableName, "create_time")
-	_omsCompanyAddress.UpdateBy = field.NewInt64(tableName, "update_by")
+	_omsCompanyAddress.UpdateBy = field.NewString(tableName, "update_by")
 	_omsCompanyAddress.UpdateTime = field.NewTime(tableName, "update_time")
 	_omsCompanyAddress.IsDeleted = field.NewInt32(tableName, "is_deleted")
 
@@ -49,7 +49,6 @@ func newOmsCompanyAddress(db *gorm.DB, opts ...gen.DOOption) omsCompanyAddress {
 	return _omsCompanyAddress
 }
 
-// omsCompanyAddress 公司收发货地址表
 type omsCompanyAddress struct {
 	omsCompanyAddressDo omsCompanyAddressDo
 
@@ -64,11 +63,11 @@ type omsCompanyAddress struct {
 	DetailAddress field.String // 详细地址
 	SendStatus    field.Int32  // 默认发货地址：0->否；1->是
 	ReceiveStatus field.Int32  // 默认收货地址：0->否；1->是
-	CreateBy      field.Int64  // 创建人ID
+	CreateBy      field.String // 创建人ID
 	CreateTime    field.Time   // 创建时间
-	UpdateBy      field.Int64  // 更新人ID
+	UpdateBy      field.String // 更新人ID
 	UpdateTime    field.Time   // 更新时间
-	IsDeleted     field.Int32  // 是否删除
+	IsDeleted     field.Int32  // 是否删除(0:否,1:是)
 
 	fieldMap map[string]field.Expr
 }
@@ -95,9 +94,9 @@ func (o *omsCompanyAddress) updateTableName(table string) *omsCompanyAddress {
 	o.DetailAddress = field.NewString(table, "detail_address")
 	o.SendStatus = field.NewInt32(table, "send_status")
 	o.ReceiveStatus = field.NewInt32(table, "receive_status")
-	o.CreateBy = field.NewInt64(table, "create_by")
+	o.CreateBy = field.NewString(table, "create_by")
 	o.CreateTime = field.NewTime(table, "create_time")
-	o.UpdateBy = field.NewInt64(table, "update_by")
+	o.UpdateBy = field.NewString(table, "update_by")
 	o.UpdateTime = field.NewTime(table, "update_time")
 	o.IsDeleted = field.NewInt32(table, "is_deleted")
 

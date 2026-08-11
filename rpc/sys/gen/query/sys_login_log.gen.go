@@ -30,16 +30,8 @@ func newSysLoginLog(db *gorm.DB, opts ...gen.DOOption) sysLoginLog {
 	_sysLoginLog.ALL = field.NewAsterisk(tableName)
 	_sysLoginLog.ID = field.NewInt64(tableName, "id")
 	_sysLoginLog.LoginName = field.NewString(tableName, "login_name")
-	_sysLoginLog.Ipaddr = field.NewString(tableName, "ipaddr")
-	_sysLoginLog.LoginLocation = field.NewString(tableName, "login_location")
-	_sysLoginLog.Platform = field.NewString(tableName, "platform")
-	_sysLoginLog.Browser = field.NewString(tableName, "browser")
-	_sysLoginLog.Version = field.NewString(tableName, "version")
-	_sysLoginLog.Os = field.NewString(tableName, "os")
-	_sysLoginLog.Arch = field.NewString(tableName, "arch")
-	_sysLoginLog.Engine = field.NewString(tableName, "engine")
-	_sysLoginLog.EngineDetails = field.NewString(tableName, "engine_details")
-	_sysLoginLog.Extra = field.NewString(tableName, "extra")
+	_sysLoginLog.IPAddr = field.NewString(tableName, "ip_addr")
+	_sysLoginLog.Extra = field.NewField(tableName, "extra")
 	_sysLoginLog.Status = field.NewInt32(tableName, "status")
 	_sysLoginLog.Msg = field.NewString(tableName, "msg")
 	_sysLoginLog.LoginTime = field.NewTime(tableName, "login_time")
@@ -49,26 +41,17 @@ func newSysLoginLog(db *gorm.DB, opts ...gen.DOOption) sysLoginLog {
 	return _sysLoginLog
 }
 
-// sysLoginLog 系统登录日志表
 type sysLoginLog struct {
 	sysLoginLogDo sysLoginLogDo
 
-	ALL           field.Asterisk
-	ID            field.Int64  // 登录日志id
-	LoginName     field.String // 登录账号
-	Ipaddr        field.String // 登录IP地址
-	LoginLocation field.String // 登录地点
-	Platform      field.String // 平台信息
-	Browser       field.String // 浏览器类型
-	Version       field.String // 浏览器版本
-	Os            field.String // 操作系统
-	Arch          field.String // 体系结构信息
-	Engine        field.String // 渲染引擎信息
-	EngineDetails field.String // 渲染引擎详细信息
-	Extra         field.String // 其他信息（可选）
-	Status        field.Int32  // 登录状态(0:失败,1:成功)
-	Msg           field.String // 提示消息
-	LoginTime     field.Time   // 访问时间
+	ALL       field.Asterisk
+	ID        field.Int64  // 访问id
+	LoginName field.String // 登录账号
+	IPAddr    field.String // 登录ip地址
+	Extra     field.Field  // 其他信息（可选）
+	Status    field.Int32  // 登录状态(0:失败,1:成功)
+	Msg       field.String // 提示消息
+	LoginTime field.Time   // 访问时间
 
 	fieldMap map[string]field.Expr
 }
@@ -87,16 +70,8 @@ func (s *sysLoginLog) updateTableName(table string) *sysLoginLog {
 	s.ALL = field.NewAsterisk(table)
 	s.ID = field.NewInt64(table, "id")
 	s.LoginName = field.NewString(table, "login_name")
-	s.Ipaddr = field.NewString(table, "ipaddr")
-	s.LoginLocation = field.NewString(table, "login_location")
-	s.Platform = field.NewString(table, "platform")
-	s.Browser = field.NewString(table, "browser")
-	s.Version = field.NewString(table, "version")
-	s.Os = field.NewString(table, "os")
-	s.Arch = field.NewString(table, "arch")
-	s.Engine = field.NewString(table, "engine")
-	s.EngineDetails = field.NewString(table, "engine_details")
-	s.Extra = field.NewString(table, "extra")
+	s.IPAddr = field.NewString(table, "ip_addr")
+	s.Extra = field.NewField(table, "extra")
 	s.Status = field.NewInt32(table, "status")
 	s.Msg = field.NewString(table, "msg")
 	s.LoginTime = field.NewTime(table, "login_time")
@@ -126,18 +101,10 @@ func (s *sysLoginLog) GetFieldByName(fieldName string) (field.OrderExpr, bool) {
 }
 
 func (s *sysLoginLog) fillFieldMap() {
-	s.fieldMap = make(map[string]field.Expr, 15)
+	s.fieldMap = make(map[string]field.Expr, 7)
 	s.fieldMap["id"] = s.ID
 	s.fieldMap["login_name"] = s.LoginName
-	s.fieldMap["ipaddr"] = s.Ipaddr
-	s.fieldMap["login_location"] = s.LoginLocation
-	s.fieldMap["platform"] = s.Platform
-	s.fieldMap["browser"] = s.Browser
-	s.fieldMap["version"] = s.Version
-	s.fieldMap["os"] = s.Os
-	s.fieldMap["arch"] = s.Arch
-	s.fieldMap["engine"] = s.Engine
-	s.fieldMap["engine_details"] = s.EngineDetails
+	s.fieldMap["ip_addr"] = s.IPAddr
 	s.fieldMap["extra"] = s.Extra
 	s.fieldMap["status"] = s.Status
 	s.fieldMap["msg"] = s.Msg

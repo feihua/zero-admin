@@ -48,7 +48,6 @@ func newUmsMemberAddress(db *gorm.DB, opts ...gen.DOOption) umsMemberAddress {
 	return _umsMemberAddress
 }
 
-// umsMemberAddress 会员收货地址表
 type umsMemberAddress struct {
 	umsMemberAddressDo umsMemberAddressDo
 
@@ -66,7 +65,7 @@ type umsMemberAddress struct {
 	IsDefault     field.Int32  // 是否默认地址
 	CreateTime    field.Time   // 创建时间
 	UpdateTime    field.Time   // 更新时间
-	IsDeleted     field.Int32  // 是否删除
+	IsDeleted     field.Int32  // 是否删除(0:否,1:是)
 
 	fieldMap map[string]field.Expr
 }

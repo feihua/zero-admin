@@ -3,6 +3,8 @@ package membertagservicelogic
 import (
 	"context"
 	"errors"
+	"time"
+
 	"github.com/feihua/zero-admin/rpc/ums/gen/model"
 	"github.com/feihua/zero-admin/rpc/ums/gen/query"
 	"github.com/feihua/zero-admin/rpc/ums/internal/svc"
@@ -10,7 +12,6 @@ import (
 	"github.com/zeromicro/go-zero/core/logc"
 	"github.com/zeromicro/go-zero/core/logx"
 	"gorm.io/gorm"
-	"time"
 )
 
 // UpdateMemberTagLogic 更新用户标签
@@ -58,7 +59,7 @@ func (l *UpdateMemberTagLogic) UpdateMemberTag(in *umsclient.UpdateMemberTagReq)
 		Status:            in.Status,                     // 状态：0-禁用，1-启用
 		CreateBy:          tag.CreateBy,                  // 创建人ID
 		CreateTime:        tag.CreateTime,                // 创建时间
-		UpdateBy:          &in.UpdateBy,                  // 更新人ID
+		UpdateBy:          in.UpdateBy,                   // 更新人ID
 		UpdateTime:        &now,                          // 更新时间
 
 	}

@@ -11,5 +11,5 @@ Content-Type: application/json
 %}
 
 ### 查询商品专题列表
-GET {{host}}/api/cms/subject/querySubjectList?title=polo衬衫的也时尚
+GET {{host}}/api/cms/subject/querySubjectList
 Authorization: Bearer {{token}}

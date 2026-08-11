@@ -89,8 +89,8 @@ func (l *QueryOrderListLogic) QueryOrderList(in *omsclient.QueryOrderListReq) (*
 			UpdateTime:         time_util.TimeToString(item.UpdateTime),   //
 		}
 
-		if item.PayType != nil {
-			elems.PayType = *item.PayType
+		if item.PayType != 0 {
+			elems.PayType = item.PayType
 		}
 		orderItem := query.OmsOrderItem
 		result1, err1 := orderItem.WithContext(l.ctx).Where(orderItem.OrderID.Eq(item.ID)).Find()

@@ -2,6 +2,7 @@ package coupon_type
 
 import (
 	"context"
+
 	"github.com/feihua/zero-admin/api/admin/internal/common"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
 	"github.com/feihua/zero-admin/api/admin/internal/svc"
@@ -34,7 +35,7 @@ func NewAddCouponTypeLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Add
 
 // AddCouponType 添加优惠券类型
 func (l *AddCouponTypeLogic) AddCouponType(req *types.AddCouponTypeReq) (resp *types.BaseResp, err error) {
-	userId, err := common.GetUserId(l.ctx)
+	name, err := common.GetUserName(l.ctx)
 	if err != nil {
 		return nil, err
 	}
@@ -45,7 +46,7 @@ func (l *AddCouponTypeLogic) AddCouponType(req *types.AddCouponTypeReq) (resp *t
 		DiscountType: req.DiscountType, // 优惠方式：1-固定金额，2-折扣率，3-第N件特惠，4-买赠，5-特价，6-套装优惠，7-搭配优惠，8-积分抵现，9-积分倍率，10-免运费，11-运费减免，12-限时特权，13-会员特权
 		Status:       req.Status,       // 是否启用
 		Sort:         req.Sort,         // 排序
-		CreateBy:     userId,           // 创建人ID
+		CreateBy:     name,             // 创建人ID
 	})
 
 	if err != nil {

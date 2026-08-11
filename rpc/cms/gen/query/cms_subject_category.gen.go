@@ -44,7 +44,6 @@ func newCmsSubjectCategory(db *gorm.DB, opts ...gen.DOOption) cmsSubjectCategory
 	return _cmsSubjectCategory
 }
 
-// cmsSubjectCategory 专题分类表
 type cmsSubjectCategory struct {
 	cmsSubjectCategoryDo cmsSubjectCategoryDo
 

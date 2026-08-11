@@ -3,6 +3,7 @@ package orderservicelogic
 import (
 	"context"
 	"errors"
+
 	"github.com/feihua/zero-admin/pkg/time_util"
 	"github.com/feihua/zero-admin/rpc/oms/gen/model"
 	"github.com/zeromicro/go-zero/core/logc"
@@ -65,7 +66,7 @@ func (l *QueryTimeOutOrderListLogic) QueryTimeOutOrderList(in *omsclient.QueryTi
 			DiscountAmount:     float32(item.DiscountAmount),              // 优惠金额
 			FreightAmount:      float32(item.FreightAmount),               // 运费金额
 			PayAmount:          float32(item.PayAmount),                   // 实付金额
-			PayType:            *item.PayType,                             // 支付方式：1-支付宝,2-微信,3-银联
+			PayType:            item.PayType,                              // 支付方式：1-支付宝,2-微信,3-银联
 			PayTime:            time_util.TimeToString(item.PayTime),      // 支付时间
 			DeliveryTime:       time_util.TimeToString(item.DeliveryTime), // 发货时间
 			ReceiveTime:        time_util.TimeToString(item.ReceiveTime),  // 收货时间

@@ -41,9 +41,9 @@ func newUmsMemberTask(db *gorm.DB, opts ...gen.DOOption) umsMemberTask {
 	_umsMemberTask.EndTime = field.NewTime(tableName, "end_time")
 	_umsMemberTask.Status = field.NewInt32(tableName, "status")
 	_umsMemberTask.Sort = field.NewInt32(tableName, "sort")
-	_umsMemberTask.CreateBy = field.NewInt64(tableName, "create_by")
+	_umsMemberTask.CreateBy = field.NewString(tableName, "create_by")
 	_umsMemberTask.CreateTime = field.NewTime(tableName, "create_time")
-	_umsMemberTask.UpdateBy = field.NewInt64(tableName, "update_by")
+	_umsMemberTask.UpdateBy = field.NewString(tableName, "update_by")
 	_umsMemberTask.UpdateTime = field.NewTime(tableName, "update_time")
 	_umsMemberTask.IsDeleted = field.NewInt32(tableName, "is_deleted")
 
@@ -52,7 +52,6 @@ func newUmsMemberTask(db *gorm.DB, opts ...gen.DOOption) umsMemberTask {
 	return _umsMemberTask
 }
 
-// umsMemberTask 会员任务表
 type umsMemberTask struct {
 	umsMemberTaskDo umsMemberTaskDo
 
@@ -70,11 +69,11 @@ type umsMemberTask struct {
 	EndTime       field.Time   // 任务结束时间
 	Status        field.Int32  // 状态：0-禁用，1-启用
 	Sort          field.Int32  // 排序
-	CreateBy      field.Int64  // 创建人ID
+	CreateBy      field.String // 创建人ID
 	CreateTime    field.Time   // 创建时间
-	UpdateBy      field.Int64  // 更新人ID
+	UpdateBy      field.String // 更新人ID
 	UpdateTime    field.Time   // 更新时间
-	IsDeleted     field.Int32  // 是否删除
+	IsDeleted     field.Int32  // 是否删除(0:否,1:是)
 
 	fieldMap map[string]field.Expr
 }
@@ -104,9 +103,9 @@ func (u *umsMemberTask) updateTableName(table string) *umsMemberTask {
 	u.EndTime = field.NewTime(table, "end_time")
 	u.Status = field.NewInt32(table, "status")
 	u.Sort = field.NewInt32(table, "sort")
-	u.CreateBy = field.NewInt64(table, "create_by")
+	u.CreateBy = field.NewString(table, "create_by")
 	u.CreateTime = field.NewTime(table, "create_time")
-	u.UpdateBy = field.NewInt64(table, "update_by")
+	u.UpdateBy = field.NewString(table, "update_by")
 	u.UpdateTime = field.NewTime(table, "update_time")
 	u.IsDeleted = field.NewInt32(table, "is_deleted")
 

@@ -2,6 +2,7 @@ package order_setting
 
 import (
 	"context"
+
 	"github.com/feihua/zero-admin/api/admin/internal/common"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
 	"github.com/feihua/zero-admin/api/admin/internal/svc"
@@ -34,7 +35,7 @@ func NewUpdateOrderSettingLogic(ctx context.Context, svcCtx *svc.ServiceContext)
 
 // UpdateOrderSetting 更新订单设置
 func (l *UpdateOrderSettingLogic) UpdateOrderSetting(req *types.UpdateOrderSettingReq) (resp *types.BaseResp, err error) {
-	userId, err := common.GetUserId(l.ctx)
+	name, err := common.GetUserName(l.ctx)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +48,7 @@ func (l *UpdateOrderSettingLogic) UpdateOrderSetting(req *types.UpdateOrderSetti
 		Status:              req.Status,              // 状态：0->禁用；1->启用
 		IsDefault:           req.IsDefault,           // 是否默认：0->否；1->是
 		CommentOvertime:     req.CommentOvertime,     // 订单完成后自动好评时间（天）
-		UpdateBy:            userId,                  // 更新人ID
+		UpdateBy:            name,                    // 更新人ID
 	})
 
 	if err != nil {

@@ -45,14 +45,13 @@ func newOmsOrderItem(db *gorm.DB, opts ...gen.DOOption) omsOrderItem {
 	_omsOrderItem.DiscountAmount = field.NewFloat64(tableName, "discount_amount")
 	_omsOrderItem.RealAmount = field.NewFloat64(tableName, "real_amount")
 	_omsOrderItem.CreateTime = field.NewTime(tableName, "create_time")
-	_omsOrderItem.IsDeleted = field.NewBool(tableName, "is_deleted")
+	_omsOrderItem.IsDeleted = field.NewInt32(tableName, "is_deleted")
 
 	_omsOrderItem.fillFieldMap()
 
 	return _omsOrderItem
 }
 
-// omsOrderItem 订单商品表
 type omsOrderItem struct {
 	omsOrderItemDo omsOrderItemDo
 
@@ -74,7 +73,7 @@ type omsOrderItem struct {
 	DiscountAmount  field.Float64 // 优惠分摊金额
 	RealAmount      field.Float64 // 实付金额
 	CreateTime      field.Time    // 创建时间
-	IsDeleted       field.Bool    // 是否删除
+	IsDeleted       field.Int32   // 是否删除(0:否,1:是)
 
 	fieldMap map[string]field.Expr
 }
@@ -108,7 +107,7 @@ func (o *omsOrderItem) updateTableName(table string) *omsOrderItem {
 	o.DiscountAmount = field.NewFloat64(table, "discount_amount")
 	o.RealAmount = field.NewFloat64(table, "real_amount")
 	o.CreateTime = field.NewTime(table, "create_time")
-	o.IsDeleted = field.NewBool(table, "is_deleted")
+	o.IsDeleted = field.NewInt32(table, "is_deleted")
 
 	o.fillFieldMap()
 

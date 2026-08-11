@@ -43,9 +43,9 @@ func newSmsCoupon(db *gorm.DB, opts ...gen.DOOption) smsCoupon {
 	_smsCoupon.Status = field.NewInt32(tableName, "status")
 	_smsCoupon.IsEnabled = field.NewInt32(tableName, "is_enabled")
 	_smsCoupon.Description = field.NewString(tableName, "description")
-	_smsCoupon.CreateBy = field.NewInt64(tableName, "create_by")
+	_smsCoupon.CreateBy = field.NewString(tableName, "create_by")
 	_smsCoupon.CreateTime = field.NewTime(tableName, "create_time")
-	_smsCoupon.UpdateBy = field.NewInt64(tableName, "update_by")
+	_smsCoupon.UpdateBy = field.NewString(tableName, "update_by")
 	_smsCoupon.UpdateTime = field.NewTime(tableName, "update_time")
 	_smsCoupon.IsDeleted = field.NewInt32(tableName, "is_deleted")
 
@@ -54,7 +54,6 @@ func newSmsCoupon(db *gorm.DB, opts ...gen.DOOption) smsCoupon {
 	return _smsCoupon
 }
 
-// smsCoupon 优惠券表
 type smsCoupon struct {
 	smsCouponDo smsCouponDo
 
@@ -74,11 +73,11 @@ type smsCoupon struct {
 	Status        field.Int32   // 状态：0-未开始，1-进行中，2-已结束，3-已取消
 	IsEnabled     field.Int32   // 是否启用
 	Description   field.String  // 使用说明
-	CreateBy      field.Int64   // 创建人ID
+	CreateBy      field.String  // 创建人ID
 	CreateTime    field.Time    // 创建时间
-	UpdateBy      field.Int64   // 更新人ID
+	UpdateBy      field.String  // 更新人ID
 	UpdateTime    field.Time    // 更新时间
-	IsDeleted     field.Int32   // 是否删除
+	IsDeleted     field.Int32   // 是否删除(0:否,1:是)
 
 	fieldMap map[string]field.Expr
 }
@@ -110,9 +109,9 @@ func (s *smsCoupon) updateTableName(table string) *smsCoupon {
 	s.Status = field.NewInt32(table, "status")
 	s.IsEnabled = field.NewInt32(table, "is_enabled")
 	s.Description = field.NewString(table, "description")
-	s.CreateBy = field.NewInt64(table, "create_by")
+	s.CreateBy = field.NewString(table, "create_by")
 	s.CreateTime = field.NewTime(table, "create_time")
-	s.UpdateBy = field.NewInt64(table, "update_by")
+	s.UpdateBy = field.NewString(table, "update_by")
 	s.UpdateTime = field.NewTime(table, "update_time")
 	s.IsDeleted = field.NewInt32(table, "is_deleted")
 

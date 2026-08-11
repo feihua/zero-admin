@@ -3,7 +3,7 @@ package membertagservicelogic
 import (
 	"context"
 	"errors"
-	"github.com/feihua/zero-admin/pkg/pointerprocess"
+
 	"github.com/feihua/zero-admin/pkg/time_util"
 	"github.com/feihua/zero-admin/rpc/ums/gen/query"
 	"github.com/feihua/zero-admin/rpc/ums/internal/svc"
@@ -46,16 +46,16 @@ func (l *QueryMemberTagDetailLogic) QueryMemberTagDetail(in *umsclient.QueryMemb
 	}
 
 	data := &umsclient.QueryMemberTagDetailResp{
-		Id:                item.ID,                                          // 主键ID
-		TagName:           item.TagName,                                     // 标签名称
-		Description:       item.Description,                                 // 标签描述
-		FinishOrderCount:  item.FinishOrderCount,                            // 自动打标签完成订单数量
-		FinishOrderAmount: float32(item.FinishOrderAmount),                  // 自动打标签完成订单金额
-		Status:            item.Status,                                      // 状态：0-禁用，1-启用
-		CreateBy:          item.CreateBy,                                    // 创建人ID
-		CreateTime:        item.CreateTime.Format("2006-01-02 15:04:05"),    // 创建时间
-		UpdateBy:          pointerprocess.DefaltData(item.UpdateBy).(int64), // 更新人ID
-		UpdateTime:        time_util.TimeToString(item.UpdateTime),          // 更新时间
+		Id:                item.ID,                                       // 主键ID
+		TagName:           item.TagName,                                  // 标签名称
+		Description:       item.Description,                              // 标签描述
+		FinishOrderCount:  item.FinishOrderCount,                         // 自动打标签完成订单数量
+		FinishOrderAmount: float32(item.FinishOrderAmount),               // 自动打标签完成订单金额
+		Status:            item.Status,                                   // 状态：0-禁用，1-启用
+		CreateBy:          item.CreateBy,                                 // 创建人ID
+		CreateTime:        item.CreateTime.Format("2006-01-02 15:04:05"), // 创建时间
+		UpdateBy:          item.UpdateBy,                                 // 更新人ID
+		UpdateTime:        time_util.TimeToString(item.UpdateTime),       // 更新时间
 	}
 
 	return data, nil

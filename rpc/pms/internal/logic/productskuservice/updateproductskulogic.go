@@ -4,13 +4,14 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"time"
+
 	"github.com/feihua/zero-admin/rpc/pms/gen/model"
 	"github.com/feihua/zero-admin/rpc/pms/gen/query"
 	"github.com/feihua/zero-admin/rpc/pms/internal/svc"
 	"github.com/feihua/zero-admin/rpc/pms/pmsclient"
 	"github.com/zeromicro/go-zero/core/logc"
 	"github.com/zeromicro/go-zero/core/logx"
-	"time"
 )
 
 // UpdateProductSkuLogic 更新商品SKU
@@ -56,7 +57,7 @@ func (l *UpdateProductSkuLogic) UpdateProductSku(in *pmsclient.UpdateProductSkuR
 			PublishStatus:  item.PublishStatus,           // 上架状态：0-下架，1-上架
 			VerifyStatus:   item.VerifyStatus,            // 审核状态：0-未审核，1-审核通过，2-审核不通过
 			Sort:           item.Sort,                    // 排序
-			UpdateBy:       &item.UpdateBy,               // 更新人ID
+			UpdateBy:       item.UpdateBy,                // 更新人ID
 		}
 
 		if len(item.PromotionStartTime) > 0 {

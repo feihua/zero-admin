@@ -29,66 +29,35 @@ func newSysOperateLog(db *gorm.DB, opts ...gen.DOOption) sysOperateLog {
 	tableName := _sysOperateLog.sysOperateLogDo.TableName()
 	_sysOperateLog.ALL = field.NewAsterisk(tableName)
 	_sysOperateLog.ID = field.NewInt64(tableName, "id")
-	_sysOperateLog.Title = field.NewString(tableName, "title")
-	_sysOperateLog.BusinessType = field.NewInt32(tableName, "business_type")
-	_sysOperateLog.Method = field.NewString(tableName, "method")
-	_sysOperateLog.RequestMethod = field.NewString(tableName, "request_method")
-	_sysOperateLog.OperatorType = field.NewInt32(tableName, "operator_type")
 	_sysOperateLog.OperateName = field.NewString(tableName, "operate_name")
-	_sysOperateLog.DeptName = field.NewString(tableName, "dept_name")
-	_sysOperateLog.OperateURL = field.NewString(tableName, "operate_url")
 	_sysOperateLog.OperateIP = field.NewString(tableName, "operate_ip")
-	_sysOperateLog.OperateLocation = field.NewString(tableName, "operate_location")
+	_sysOperateLog.OperateURL = field.NewString(tableName, "operate_url")
 	_sysOperateLog.OperateParam = field.NewString(tableName, "operate_param")
 	_sysOperateLog.JSONResult = field.NewString(tableName, "json_result")
-	_sysOperateLog.Platform = field.NewString(tableName, "platform")
-	_sysOperateLog.Browser = field.NewString(tableName, "browser")
-	_sysOperateLog.Version = field.NewString(tableName, "version")
-	_sysOperateLog.Os = field.NewString(tableName, "os")
-	_sysOperateLog.Arch = field.NewString(tableName, "arch")
-	_sysOperateLog.Engine = field.NewString(tableName, "engine")
-	_sysOperateLog.EngineDetails = field.NewString(tableName, "engine_details")
-	_sysOperateLog.Extra = field.NewString(tableName, "extra")
+	_sysOperateLog.Extra = field.NewField(tableName, "extra")
 	_sysOperateLog.Status = field.NewInt32(tableName, "status")
-	_sysOperateLog.ErrorMsg = field.NewString(tableName, "error_msg")
-	_sysOperateLog.OperateTime = field.NewTime(tableName, "operate_time")
 	_sysOperateLog.CostTime = field.NewInt64(tableName, "cost_time")
+	_sysOperateLog.OperateTime = field.NewTime(tableName, "operate_time")
 
 	_sysOperateLog.fillFieldMap()
 
 	return _sysOperateLog
 }
 
-// sysOperateLog 系统操作日志表
 type sysOperateLog struct {
 	sysOperateLogDo sysOperateLogDo
 
-	ALL             field.Asterisk
-	ID              field.Int64  // 操作日志id
-	Title           field.String // 模块标题
-	BusinessType    field.Int32  // 业务类型（0其它 1新增 2修改 3删除）
-	Method          field.String // 方法名称
-	RequestMethod   field.String // 请求方式
-	OperatorType    field.Int32  // 操作类别（0其它 1后台用户 2手机端用户）
-	OperateName     field.String // 操作人员
-	DeptName        field.String // 部门名称
-	OperateURL      field.String // 请求URL
-	OperateIP       field.String // 主机地址
-	OperateLocation field.String // 操作地点
-	OperateParam    field.String // 请求参数
-	JSONResult      field.String // 返回参数
-	Platform        field.String // 平台信息
-	Browser         field.String // 浏览器类型
-	Version         field.String // 浏览器版本
-	Os              field.String // 操作系统
-	Arch            field.String // 体系结构信息
-	Engine          field.String // 渲染引擎信息
-	EngineDetails   field.String // 渲染引擎详细信息
-	Extra           field.String // 其他信息（可选）
-	Status          field.Int32  //  操作状态(0:异常,正常)
-	ErrorMsg        field.String //  错误消息
-	OperateTime     field.Time   //  操作时间
-	CostTime        field.Int64  //  消耗时间
+	ALL          field.Asterisk
+	ID           field.Int64  // 日志主键
+	OperateName  field.String // 操作人员
+	OperateIP    field.String // 主机地址
+	OperateURL   field.String // 请求url
+	OperateParam field.String // 请求参数
+	JSONResult   field.String // 返回参数
+	Extra        field.Field  // 其他信息（可选）
+	Status       field.Int32  // 操作状态(0:异常,正常)
+	CostTime     field.Int64  // 消耗时间
+	OperateTime  field.Time   // 操作时间
 
 	fieldMap map[string]field.Expr
 }
@@ -106,30 +75,15 @@ func (s sysOperateLog) As(alias string) *sysOperateLog {
 func (s *sysOperateLog) updateTableName(table string) *sysOperateLog {
 	s.ALL = field.NewAsterisk(table)
 	s.ID = field.NewInt64(table, "id")
-	s.Title = field.NewString(table, "title")
-	s.BusinessType = field.NewInt32(table, "business_type")
-	s.Method = field.NewString(table, "method")
-	s.RequestMethod = field.NewString(table, "request_method")
-	s.OperatorType = field.NewInt32(table, "operator_type")
 	s.OperateName = field.NewString(table, "operate_name")
-	s.DeptName = field.NewString(table, "dept_name")
-	s.OperateURL = field.NewString(table, "operate_url")
 	s.OperateIP = field.NewString(table, "operate_ip")
-	s.OperateLocation = field.NewString(table, "operate_location")
+	s.OperateURL = field.NewString(table, "operate_url")
 	s.OperateParam = field.NewString(table, "operate_param")
 	s.JSONResult = field.NewString(table, "json_result")
-	s.Platform = field.NewString(table, "platform")
-	s.Browser = field.NewString(table, "browser")
-	s.Version = field.NewString(table, "version")
-	s.Os = field.NewString(table, "os")
-	s.Arch = field.NewString(table, "arch")
-	s.Engine = field.NewString(table, "engine")
-	s.EngineDetails = field.NewString(table, "engine_details")
-	s.Extra = field.NewString(table, "extra")
+	s.Extra = field.NewField(table, "extra")
 	s.Status = field.NewInt32(table, "status")
-	s.ErrorMsg = field.NewString(table, "error_msg")
-	s.OperateTime = field.NewTime(table, "operate_time")
 	s.CostTime = field.NewInt64(table, "cost_time")
+	s.OperateTime = field.NewTime(table, "operate_time")
 
 	s.fillFieldMap()
 
@@ -158,32 +112,17 @@ func (s *sysOperateLog) GetFieldByName(fieldName string) (field.OrderExpr, bool)
 }
 
 func (s *sysOperateLog) fillFieldMap() {
-	s.fieldMap = make(map[string]field.Expr, 25)
+	s.fieldMap = make(map[string]field.Expr, 10)
 	s.fieldMap["id"] = s.ID
-	s.fieldMap["title"] = s.Title
-	s.fieldMap["business_type"] = s.BusinessType
-	s.fieldMap["method"] = s.Method
-	s.fieldMap["request_method"] = s.RequestMethod
-	s.fieldMap["operator_type"] = s.OperatorType
 	s.fieldMap["operate_name"] = s.OperateName
-	s.fieldMap["dept_name"] = s.DeptName
-	s.fieldMap["operate_url"] = s.OperateURL
 	s.fieldMap["operate_ip"] = s.OperateIP
-	s.fieldMap["operate_location"] = s.OperateLocation
+	s.fieldMap["operate_url"] = s.OperateURL
 	s.fieldMap["operate_param"] = s.OperateParam
 	s.fieldMap["json_result"] = s.JSONResult
-	s.fieldMap["platform"] = s.Platform
-	s.fieldMap["browser"] = s.Browser
-	s.fieldMap["version"] = s.Version
-	s.fieldMap["os"] = s.Os
-	s.fieldMap["arch"] = s.Arch
-	s.fieldMap["engine"] = s.Engine
-	s.fieldMap["engine_details"] = s.EngineDetails
 	s.fieldMap["extra"] = s.Extra
 	s.fieldMap["status"] = s.Status
-	s.fieldMap["error_msg"] = s.ErrorMsg
-	s.fieldMap["operate_time"] = s.OperateTime
 	s.fieldMap["cost_time"] = s.CostTime
+	s.fieldMap["operate_time"] = s.OperateTime
 }
 
 func (s sysOperateLog) clone(db *gorm.DB) sysOperateLog {

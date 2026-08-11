@@ -13,7 +13,7 @@ message AddCouponTypeReq {
   int32 discount_type = 5; //优惠方式：1-固定金额，2-折扣率，3-第N件特惠，4-买赠，5-特价，6-套装优惠，7-搭配优惠，8-积分抵现，9-积分倍率，10-免运费，11-运费减免，12-限时特权，13-会员特权
   int32 status = 6; //是否启用
   int32 sort = 7; //排序
-  int64 create_by = 8; //创建人ID
+  string create_by = 8; //创建人ID
 }
 
 message AddCouponTypeResp {
@@ -38,7 +38,7 @@ message UpdateCouponTypeReq {
   int32 discount_type = 5; //优惠方式：1-固定金额，2-折扣率，3-第N件特惠，4-买赠，5-特价，6-套装优惠，7-搭配优惠，8-积分抵现，9-积分倍率，10-免运费，11-运费减免，12-限时特权，13-会员特权
   int32 status = 6; //是否启用
   int32 sort = 7; //排序
-  int64 update_by = 10; //更新人ID
+  string update_by = 10; //更新人ID
 }
 
 message UpdateCouponTypeResp {
@@ -49,7 +49,7 @@ message UpdateCouponTypeResp {
 message UpdateCouponTypeStatusReq {
   repeated int64 ids = 1; //主键ID
   int32 status = 6; //是否启用
-  int64 update_by = 10; //更新人ID
+  string update_by = 10; //更新人ID
 }
 
 message UpdateCouponTypeStatusResp {
@@ -69,9 +69,9 @@ message QueryCouponTypeDetailResp {
   int32 discount_type = 5; //优惠方式：1-固定金额，2-折扣率，3-第N件特惠，4-买赠，5-特价，6-套装优惠，7-搭配优惠，8-积分抵现，9-积分倍率，10-免运费，11-运费减免，12-限时特权，13-会员特权
   int32 status = 6; //是否启用
   int32 sort = 7; //排序
-  int64 create_by = 8; //创建人ID
+  string create_by = 8; //创建人ID
   string create_time = 9; //创建时间
-  int64 update_by = 10; //更新人ID
+  string update_by = 10; //更新人ID
   string update_time = 11; //更新时间
 
 }
@@ -94,9 +94,9 @@ message CouponTypeListData {
   int32 discount_type = 5; //优惠方式：1-固定金额，2-折扣率，3-第N件特惠，4-买赠，5-特价，6-套装优惠，7-搭配优惠，8-积分抵现，9-积分倍率，10-免运费，11-运费减免，12-限时特权，13-会员特权
   int32 status = 6; //是否启用
   int32 sort = 7; //排序
-  int64 create_by = 8; //创建人ID
+  string create_by = 8; //创建人ID
   string create_time = 9; //创建时间
-  int64 update_by = 10; //更新人ID
+  string update_by = 10; //更新人ID
   string update_time = 11; //更新时间
 
 }

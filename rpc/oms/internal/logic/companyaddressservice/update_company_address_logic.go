@@ -4,6 +4,8 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"time"
+
 	"github.com/feihua/zero-admin/rpc/oms/gen/model"
 	"github.com/feihua/zero-admin/rpc/oms/gen/query"
 	"github.com/feihua/zero-admin/rpc/oms/internal/svc"
@@ -11,7 +13,6 @@ import (
 	"github.com/zeromicro/go-zero/core/logc"
 	"github.com/zeromicro/go-zero/core/logx"
 	"gorm.io/gorm"
-	"time"
 )
 
 // UpdateCompanyAddressLogic 更新公司收发货地址
@@ -81,7 +82,7 @@ func (l *UpdateCompanyAddressLogic) UpdateCompanyAddress(in *omsclient.UpdateCom
 			DetailAddress: in.DetailAddress,  // 详细地址
 			CreateBy:      detail.CreateBy,   // 创建者
 			CreateTime:    detail.CreateTime, // 创建时间
-			UpdateBy:      &in.UpdateBy,      // 更新者
+			UpdateBy:      in.UpdateBy,       // 更新者
 			UpdateTime:    &now,              // 更新时间
 		})
 

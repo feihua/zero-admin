@@ -43,7 +43,6 @@ func newUmsMemberGrowthLog(db *gorm.DB, opts ...gen.DOOption) umsMemberGrowthLog
 	return _umsMemberGrowthLog
 }
 
-// umsMemberGrowthLog 会员成长值记录表
 type umsMemberGrowthLog struct {
 	umsMemberGrowthLogDo umsMemberGrowthLogDo
 

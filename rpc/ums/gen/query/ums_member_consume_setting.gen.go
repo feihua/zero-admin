@@ -34,9 +34,9 @@ func newUmsMemberConsumeSetting(db *gorm.DB, opts ...gen.DOOption) umsMemberCons
 	_umsMemberConsumeSetting.UseUnit = field.NewInt32(tableName, "use_unit")
 	_umsMemberConsumeSetting.CouponStatus = field.NewInt32(tableName, "coupon_status")
 	_umsMemberConsumeSetting.Status = field.NewInt32(tableName, "status")
-	_umsMemberConsumeSetting.CreateBy = field.NewInt64(tableName, "create_by")
+	_umsMemberConsumeSetting.CreateBy = field.NewString(tableName, "create_by")
 	_umsMemberConsumeSetting.CreateTime = field.NewTime(tableName, "create_time")
-	_umsMemberConsumeSetting.UpdateBy = field.NewInt64(tableName, "update_by")
+	_umsMemberConsumeSetting.UpdateBy = field.NewString(tableName, "update_by")
 	_umsMemberConsumeSetting.UpdateTime = field.NewTime(tableName, "update_time")
 
 	_umsMemberConsumeSetting.fillFieldMap()
@@ -44,21 +44,20 @@ func newUmsMemberConsumeSetting(db *gorm.DB, opts ...gen.DOOption) umsMemberCons
 	return _umsMemberConsumeSetting
 }
 
-// umsMemberConsumeSetting 积分消费设置
 type umsMemberConsumeSetting struct {
 	umsMemberConsumeSettingDo umsMemberConsumeSettingDo
 
 	ALL                field.Asterisk
 	ID                 field.Int64
-	DeductionPerAmount field.Int32 // 每一元需要抵扣的积分数量
-	MaxPercentPerOrder field.Int32 // 每笔订单最高抵用百分比
-	UseUnit            field.Int32 // 每次使用积分最小单位100
-	CouponStatus       field.Int32 // 是否可以和优惠券同用；0->不可以；1->可以
-	Status             field.Int32 // 状态：0->禁用；1->启用
-	CreateBy           field.Int64 // 创建人ID
-	CreateTime         field.Time  // 创建时间
-	UpdateBy           field.Int64 // 更新人ID
-	UpdateTime         field.Time  // 更新时间
+	DeductionPerAmount field.Int32  // 每一元需要抵扣的积分数量
+	MaxPercentPerOrder field.Int32  // 每笔订单最高抵用百分比
+	UseUnit            field.Int32  // 每次使用积分最小单位100
+	CouponStatus       field.Int32  // 是否可以和优惠券同用；0->不可以；1->可以
+	Status             field.Int32  // 状态：0->禁用；1->启用
+	CreateBy           field.String // 创建人ID
+	CreateTime         field.Time   // 创建时间
+	UpdateBy           field.String // 更新人ID
+	UpdateTime         field.Time   // 更新时间
 
 	fieldMap map[string]field.Expr
 }
@@ -81,9 +80,9 @@ func (u *umsMemberConsumeSetting) updateTableName(table string) *umsMemberConsum
 	u.UseUnit = field.NewInt32(table, "use_unit")
 	u.CouponStatus = field.NewInt32(table, "coupon_status")
 	u.Status = field.NewInt32(table, "status")
-	u.CreateBy = field.NewInt64(table, "create_by")
+	u.CreateBy = field.NewString(table, "create_by")
 	u.CreateTime = field.NewTime(table, "create_time")
-	u.UpdateBy = field.NewInt64(table, "update_by")
+	u.UpdateBy = field.NewString(table, "update_by")
 	u.UpdateTime = field.NewTime(table, "update_time")
 
 	u.fillFieldMap()

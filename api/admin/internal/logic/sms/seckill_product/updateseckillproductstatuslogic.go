@@ -2,6 +2,7 @@ package seckill_product
 
 import (
 	"context"
+
 	"github.com/feihua/zero-admin/api/admin/internal/common"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
 	"github.com/feihua/zero-admin/api/admin/internal/svc"
@@ -34,14 +35,14 @@ func NewUpdateSeckillProductStatusLogic(ctx context.Context, svcCtx *svc.Service
 
 // UpdateSeckillProductStatus 更新秒杀商品状态
 func (l *UpdateSeckillProductStatusLogic) UpdateSeckillProductStatus(req *types.UpdateSeckillProductStatusReq) (resp *types.BaseResp, err error) {
-	userId, err := common.GetUserId(l.ctx)
+	name, err := common.GetUserName(l.ctx)
 	if err != nil {
 		return nil, err
 	}
 	_, err = l.svcCtx.SeckillProductService.UpdateSeckillProductStatus(l.ctx, &smsclient.UpdateSeckillProductStatusReq{
 		Ids:      req.Ids,    // ID
 		Status:   req.Status, // 状态：0-未上架，1-已上架
-		UpdateBy: userId,     // 更新人ID
+		UpdateBy: name,       // 更新人ID
 
 	})
 

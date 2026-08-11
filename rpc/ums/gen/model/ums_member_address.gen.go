@@ -10,7 +10,7 @@ import (
 
 const TableNameUmsMemberAddress = "ums_member_address"
 
-// UmsMemberAddress 会员收货地址表
+// UmsMemberAddress mapped from table <ums_member_address>
 type UmsMemberAddress struct {
 	ID            int64      `gorm:"column:id;primaryKey;autoIncrement:true;comment:主键ID" json:"id"`                        // 主键ID
 	MemberID      int64      `gorm:"column:member_id;not null;comment:会员ID" json:"member_id"`                               // 会员ID
@@ -22,10 +22,10 @@ type UmsMemberAddress struct {
 	DetailAddress string     `gorm:"column:detail_address;not null;comment:详细地址" json:"detail_address"`                     // 详细地址
 	PostalCode    string     `gorm:"column:postal_code;not null;comment:邮政编码" json:"postal_code"`                           // 邮政编码
 	Tag           string     `gorm:"column:tag;not null;comment:地址标签：家、公司等" json:"tag"`                                     // 地址标签：家、公司等
-	IsDefault     int32      `gorm:"column:is_default;not null;comment:是否默认地址" json:"is_default"`                           // 是否默认地址
+	IsDefault     int32      `gorm:"column:is_default;not null;default:1;comment:是否默认地址" json:"is_default"`                 // 是否默认地址
 	CreateTime    time.Time  `gorm:"column:create_time;not null;default:CURRENT_TIMESTAMP;comment:创建时间" json:"create_time"` // 创建时间
 	UpdateTime    *time.Time `gorm:"column:update_time;comment:更新时间" json:"update_time"`                                    // 更新时间
-	IsDeleted     int32      `gorm:"column:is_deleted;not null;comment:是否删除" json:"is_deleted"`                             // 是否删除
+	IsDeleted     int32      `gorm:"column:is_deleted;not null;default:1;comment:是否删除(0:否,1:是)" json:"is_deleted"`          // 是否删除(0:否,1:是)
 }
 
 // TableName UmsMemberAddress's table name

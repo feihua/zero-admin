@@ -3,9 +3,10 @@ package dictitemservicelogic
 import (
 	"context"
 	"errors"
+	"strconv"
+
 	"github.com/feihua/zero-admin/rpc/sys/gen/query"
 	"github.com/zeromicro/go-zero/core/logc"
-	"strconv"
 
 	"github.com/feihua/zero-admin/rpc/sys/internal/svc"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
@@ -34,7 +35,7 @@ func NewDeleteDictItemLogic(ctx context.Context, svcCtx *svc.ServiceContext) *De
 
 // DeleteDictItem 删除字典数据
 func (l *DeleteDictItemLogic) DeleteDictItem(in *sysclient.DeleteDictItemReq) (*sysclient.DeleteDictItemResp, error) {
-	q := query.SysDictItem
+	q := query.SysDictData
 
 	_, err := q.WithContext(l.ctx).Where(q.ID.In(in.Ids...)).Delete()
 

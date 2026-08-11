@@ -6,33 +6,32 @@ package model
 
 import (
 	"time"
+
+	"gorm.io/datatypes"
 )
 
 const TableNameSysUser = "sys_user"
 
-// SysUser 用户信息
+// SysUser mapped from table <sys_user>
 type SysUser struct {
-	ID            int64      `gorm:"column:id;primaryKey;autoIncrement:true;comment:用户id" json:"id"`                        // 用户id
-	Mobile        string     `gorm:"column:mobile;not null;comment:手机号码" json:"mobile"`                                     // 手机号码
-	UserName      string     `gorm:"column:user_name;not null;comment:用户账号" json:"user_name"`                               // 用户账号
-	NickName      string     `gorm:"column:nick_name;not null;comment:用户昵称" json:"nick_name"`                               // 用户昵称
-	UserType      string     `gorm:"column:user_type;not null;default:00;comment:用户类型（00系统用户）" json:"user_type"`            // 用户类型（00系统用户）
-	Avatar        string     `gorm:"column:avatar;not null;comment:头像路径" json:"avatar"`                                     // 头像路径
-	Email         string     `gorm:"column:email;not null;comment:用户邮箱" json:"email"`                                       // 用户邮箱
-	Password      string     `gorm:"column:password;not null;comment:密码" json:"password"`                                   // 密码
-	Status        int32      `gorm:"column:status;not null;default:1;comment:状态(1:正常，0:禁用)" json:"status"`                  // 状态(1:正常，0:禁用)
-	DeptID        int64      `gorm:"column:dept_id;not null;default:1;comment:部门ID" json:"dept_id"`                         // 部门ID
-	LoginIP       string     `gorm:"column:login_ip;not null;comment:最后登录IP" json:"login_ip"`                               // 最后登录IP
-	LoginDate     *time.Time `gorm:"column:login_date;comment:最后登录时间" json:"login_date"`                                    // 最后登录时间
-	LoginBrowser  string     `gorm:"column:login_browser;not null;comment:浏览器类型" json:"login_browser"`                      // 浏览器类型
-	LoginOs       string     `gorm:"column:login_os;not null;comment:操作系统" json:"login_os"`                                 // 操作系统
-	PwdUpdateDate *time.Time `gorm:"column:pwd_update_date;comment:密码最后更新时间" json:"pwd_update_date"`                        // 密码最后更新时间
-	Remark        string     `gorm:"column:remark;not null;comment:备注" json:"remark"`                                       // 备注
-	DelFlag       int32      `gorm:"column:del_flag;not null;default:1;comment:删除标志（0代表删除 1代表存在）" json:"del_flag"`          // 删除标志（0代表删除 1代表存在）
-	CreateBy      string     `gorm:"column:create_by;not null;default:admin;comment:创建者" json:"create_by"`                  // 创建者
-	CreateTime    time.Time  `gorm:"column:create_time;not null;default:CURRENT_TIMESTAMP;comment:创建时间" json:"create_time"` // 创建时间
-	UpdateBy      string     `gorm:"column:update_by;not null;comment:更新者" json:"update_by"`                                // 更新者
-	UpdateTime    *time.Time `gorm:"column:update_time;comment:更新时间" json:"update_time"`                                    // 更新时间
+	ID            int64          `gorm:"column:id;primaryKey;autoIncrement:true;comment:主键" json:"id"`                              // 主键
+	Mobile        string         `gorm:"column:mobile;not null;comment:手机号码" json:"mobile"`                                         // 手机号码
+	UserName      string         `gorm:"column:user_name;not null;comment:用户账号" json:"user_name"`                                   // 用户账号
+	NickName      string         `gorm:"column:nick_name;not null;comment:用户昵称" json:"nick_name"`                                   // 用户昵称
+	UserType      string         `gorm:"column:user_type;not null;default:00;comment:用户类型（00系统用户）" json:"user_type"`                // 用户类型（00系统用户）
+	Avatar        string         `gorm:"column:avatar;not null;default:''::character varying;comment:头像路径" json:"avatar"`           // 头像路径
+	Email         string         `gorm:"column:email;not null;comment:用户邮箱" json:"email"`                                           // 用户邮箱
+	Password      string         `gorm:"column:password;not null;comment:密码" json:"password"`                                       // 密码
+	Status        int32          `gorm:"column:status;not null;default:1;comment:状态(1:正常，0:禁用)" json:"status"`                      // 状态(1:正常，0:禁用)
+	DeptID        int64          `gorm:"column:dept_id;not null;default:1;comment:部门id" json:"dept_id"`                             // 部门id
+	LastLoginInfo datatypes.JSON `gorm:"column:last_login_info;not null;default:'{}'::jsonb;comment:最后登录信息" json:"last_login_info"` // 最后登录信息
+	PwdUpdateDate *time.Time     `gorm:"column:pwd_update_date;comment:密码最后更新时间" json:"pwd_update_date"`                            // 密码最后更新时间
+	DelFlag       int32          `gorm:"column:del_flag;not null;default:1;comment:删除标志（0:删除,1:存在）" json:"del_flag"`                // 删除标志（0:删除,1:存在）
+	Remark        string         `gorm:"column:remark;not null;default:''::character varying;comment:备注" json:"remark"`             // 备注
+	CreateBy      string         `gorm:"column:create_by;not null;default:''::character varying;comment:创建者" json:"create_by"`      // 创建者
+	CreateTime    time.Time      `gorm:"column:create_time;not null;default:CURRENT_TIMESTAMP;comment:创建时间" json:"create_time"`     // 创建时间
+	UpdateBy      string         `gorm:"column:update_by;not null;default:''::character varying;comment:更新者" json:"update_by"`      // 更新者
+	UpdateTime    *time.Time     `gorm:"column:update_time;comment:更新时间" json:"update_time"`                                        // 更新时间
 }
 
 // TableName SysUser's table name

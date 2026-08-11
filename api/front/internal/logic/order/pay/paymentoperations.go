@@ -3,11 +3,12 @@ package pay
 import (
 	"context"
 	"errors"
+	"net/http"
+
 	"github.com/feihua/zero-admin/api/front/internal/svc"
 	"github.com/feihua/zero-admin/rpc/oms/omsclient"
 	"github.com/smartwalle/alipay/v3"
 	"github.com/zeromicro/go-zero/core/logx"
-	"net/http"
 )
 
 // PaymentOperationsUtils 支付相关工具
@@ -43,7 +44,7 @@ func (l *PaymentOperationsUtils) AliPayNotify(writer http.ResponseWriter, reques
 		return
 	}
 
-	var notification, err = l.svcCtx.AlipayClient.DecodeNotification(request.Form)
+	var notification, err = l.svcCtx.AlipayClient.DecodeNotification(l.ctx, request.Form)
 	if err != nil {
 		_, _ = writer.Write([]byte("error"))
 		return

@@ -2,6 +2,7 @@ package seckill_product
 
 import (
 	"context"
+
 	"github.com/feihua/zero-admin/api/admin/internal/common"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
 	"github.com/feihua/zero-admin/api/admin/internal/svc"
@@ -34,7 +35,7 @@ func NewAddSeckillProductLogic(ctx context.Context, svcCtx *svc.ServiceContext) 
 
 // AddSeckillProduct 添加秒杀商品
 func (l *AddSeckillProductLogic) AddSeckillProduct(req *types.AddSeckillProductReq) (resp *types.BaseResp, err error) {
-	userId, err := common.GetUserId(l.ctx)
+	name, err := common.GetUserName(l.ctx)
 	if err != nil {
 		return nil, err
 	}
@@ -52,7 +53,7 @@ func (l *AddSeckillProductLogic) AddSeckillProduct(req *types.AddSeckillProductR
 			PerLimit:     item.PerLimit,     // 每人限购数量
 			Sort:         item.Sort,         // 排序
 			Status:       item.Status,       // 状态：0-未上架，1-已上架
-			CreateBy:     userId,            // 创建人ID
+			CreateBy:     name,              // 创建人ID
 		})
 	}
 	_, err = l.svcCtx.SeckillProductService.AddSeckillProduct(l.ctx, &smsclient.AddSeckillProductReq{

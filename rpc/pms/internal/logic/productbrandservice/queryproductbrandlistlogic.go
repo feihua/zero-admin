@@ -3,7 +3,7 @@ package productbrandservicelogic
 import (
 	"context"
 	"errors"
-	"github.com/feihua/zero-admin/pkg/pointerprocess"
+
 	"github.com/feihua/zero-admin/pkg/time_util"
 	"github.com/feihua/zero-admin/rpc/pms/gen/query"
 	"github.com/feihua/zero-admin/rpc/pms/internal/svc"
@@ -57,21 +57,21 @@ func (l *QueryProductBrandListLogic) QueryProductBrandList(in *pmsclient.QueryPr
 
 	for _, item := range result {
 		list = append(list, &pmsclient.ProductBrandListData{
-			Id:                  item.ID,                                          //
-			Name:                item.Name,                                        // 品牌名称
-			Logo:                item.Logo,                                        // 品牌logo
-			BigPic:              item.BigPic,                                      // 专区大图
-			Description:         item.Description,                                 // 描述
-			FirstLetter:         item.FirstLetter,                                 // 首字母
-			Sort:                item.Sort,                                        // 排序
-			RecommendStatus:     item.RecommendStatus,                             // 推荐状态
-			ProductCount:        item.ProductCount,                                // 产品数量
-			ProductCommentCount: item.ProductCommentCount,                         // 产品评论数量
-			IsEnabled:           item.IsEnabled,                                   // 是否启用
-			CreateBy:            item.CreateBy,                                    // 创建人ID
-			CreateTime:          time_util.TimeToStr(item.CreateTime),             // 创建时间
-			UpdateBy:            pointerprocess.DefaltData(item.UpdateBy).(int64), // 更新人ID
-			UpdateTime:          time_util.TimeToString(item.UpdateTime),          // 更新时间
+			Id:                  item.ID,                                 //
+			Name:                item.Name,                               // 品牌名称
+			Logo:                item.Logo,                               // 品牌logo
+			BigPic:              item.BigPic,                             // 专区大图
+			Description:         item.Description,                        // 描述
+			FirstLetter:         item.FirstLetter,                        // 首字母
+			Sort:                item.Sort,                               // 排序
+			RecommendStatus:     item.RecommendStatus,                    // 推荐状态
+			ProductCount:        item.ProductCount,                       // 产品数量
+			ProductCommentCount: item.ProductCommentCount,                // 产品评论数量
+			IsEnabled:           item.IsEnabled,                          // 是否启用
+			CreateBy:            item.CreateBy,                           // 创建人ID
+			CreateTime:          time_util.TimeToStr(item.CreateTime),    // 创建时间
+			UpdateBy:            item.UpdateBy,                           // 更新人ID
+			UpdateTime:          time_util.TimeToString(item.UpdateTime), // 更新时间
 
 		})
 	}

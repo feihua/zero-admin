@@ -10,7 +10,7 @@ import (
 
 const TableNameOmsOrderItem = "oms_order_item"
 
-// OmsOrderItem 订单商品表
+// OmsOrderItem mapped from table <oms_order_item>
 type OmsOrderItem struct {
 	ID              int64     `gorm:"column:id;primaryKey;autoIncrement:true" json:"id"`
 	OrderID         int64     `gorm:"column:order_id;not null;comment:订单ID" json:"order_id"`                                                        // 订单ID
@@ -23,13 +23,13 @@ type OmsOrderItem struct {
 	SkuQuantity     int32     `gorm:"column:sku_quantity;not null;comment:商品数量" json:"sku_quantity"`                                                // 商品数量
 	SpecData        string    `gorm:"column:spec_data;not null;comment:规格数据" json:"spec_data"`                                                      // 规格数据
 	SkuTotalAmount  float64   `gorm:"column:sku_total_amount;not null;comment:商品总金额" json:"sku_total_amount"`                                       // 商品总金额
-	PromotionAmount float64   `gorm:"column:promotion_amount;not null;default:0.00;comment:促销分摊金额" json:"promotion_amount"`                         // 促销分摊金额
-	CouponAmount    float64   `gorm:"column:coupon_amount;not null;default:0.00;comment:优惠券分摊金额" json:"coupon_amount"`                              // 优惠券分摊金额
-	PointsAmount    float64   `gorm:"column:points_amount;not null;default:0.00;comment:积分分摊金额" json:"points_amount"`                               // 积分分摊金额
-	DiscountAmount  float64   `gorm:"column:discount_amount;not null;default:0.00;comment:优惠分摊金额" json:"discount_amount"`                           // 优惠分摊金额
+	PromotionAmount float64   `gorm:"column:promotion_amount;not null;comment:促销分摊金额" json:"promotion_amount"`                                      // 促销分摊金额
+	CouponAmount    float64   `gorm:"column:coupon_amount;not null;comment:优惠券分摊金额" json:"coupon_amount"`                                           // 优惠券分摊金额
+	PointsAmount    float64   `gorm:"column:points_amount;not null;comment:积分分摊金额" json:"points_amount"`                                            // 积分分摊金额
+	DiscountAmount  float64   `gorm:"column:discount_amount;not null;comment:优惠分摊金额" json:"discount_amount"`                                        // 优惠分摊金额
 	RealAmount      float64   `gorm:"column:real_amount;not null;comment:实付金额" json:"real_amount"`                                                  // 实付金额
-	CreateTime      time.Time `gorm:"column:create_time;not null;default:CURRENT_TIMESTAMP(3);comment:创建时间" json:"create_time"`                     // 创建时间
-	IsDeleted       bool      `gorm:"column:is_deleted;not null;comment:是否删除" json:"is_deleted"`                                                    // 是否删除
+	CreateTime      time.Time `gorm:"column:create_time;not null;default:CURRENT_TIMESTAMP;comment:创建时间" json:"create_time"`                        // 创建时间
+	IsDeleted       int32     `gorm:"column:is_deleted;not null;default:1;comment:是否删除(0:否,1:是)" json:"is_deleted"`                                 // 是否删除(0:否,1:是)
 }
 
 // TableName OmsOrderItem's table name

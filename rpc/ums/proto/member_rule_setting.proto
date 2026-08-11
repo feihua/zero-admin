@@ -12,7 +12,7 @@ message AddMemberRuleSettingReq {
   int32 max_point_per_order = 4; //每笔订单最高获取点数
   int32 rule_type = 5; //类型：0->积分规则；1->成长值规则
   int32 status = 6; //状态：0->禁用；1->启用
-  int64 create_by = 7; //创建人ID
+  string create_by = 7; //创建人ID
 }
 
 message AddMemberRuleSettingResp {
@@ -36,7 +36,7 @@ message UpdateMemberRuleSettingReq {
   int32 max_point_per_order = 4; //每笔订单最高获取点数
   int32 rule_type = 5; //类型：0->积分规则；1->成长值规则
   int32 status = 6; //状态：0->禁用；1->启用
-  int64 update_by = 9; //更新人ID
+  string update_by = 9; //更新人ID
 }
 
 message UpdateMemberRuleSettingResp {
@@ -47,7 +47,7 @@ message UpdateMemberRuleSettingResp {
 message UpdateMemberRuleSettingStatusReq {
   int64 id = 1; //
   int32 status = 6; //状态：0->禁用；1->启用
-  int64 update_by = 9; //更新人ID
+  string update_by = 9; //更新人ID
 }
 
 message UpdateMemberRuleSettingStatusResp {
@@ -66,9 +66,9 @@ message QueryMemberRuleSettingDetailResp {
   int32 max_point_per_order = 4; //每笔订单最高获取点数
   int32 rule_type = 5; //类型：0->积分规则；1->成长值规则
   int32 status = 6; //状态：0->禁用；1->启用
-  int64 create_by = 7; //创建人ID
+  string create_by = 7; //创建人ID
   string create_time = 8; //创建时间
-  int64 update_by = 9; //更新人ID
+  string update_by = 9; //更新人ID
   string update_time = 10; //更新时间
 
 }
@@ -88,9 +88,9 @@ message MemberRuleSettingListData {
   int32 max_point_per_order = 4; //每笔订单最高获取点数
   int32 rule_type = 5; //类型：0->积分规则；1->成长值规则
   int32 status = 6; //状态：0->禁用；1->启用
-  int64 create_by = 7; //创建人ID
+  string create_by = 7; //创建人ID
   string create_time = 8; //创建时间
-  int64 update_by = 9; //更新人ID
+  string update_by = 9; //更新人ID
   string update_time = 10; //更新时间
 
 }

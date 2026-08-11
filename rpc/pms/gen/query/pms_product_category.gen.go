@@ -40,9 +40,9 @@ func newPmsProductCategory(db *gorm.DB, opts ...gen.DOOption) pmsProductCategory
 	_pmsProductCategory.Keywords = field.NewString(tableName, "keywords")
 	_pmsProductCategory.Description = field.NewString(tableName, "description")
 	_pmsProductCategory.IsEnabled = field.NewInt32(tableName, "is_enabled")
-	_pmsProductCategory.CreateBy = field.NewInt64(tableName, "create_by")
+	_pmsProductCategory.CreateBy = field.NewString(tableName, "create_by")
 	_pmsProductCategory.CreateTime = field.NewTime(tableName, "create_time")
-	_pmsProductCategory.UpdateBy = field.NewInt64(tableName, "update_by")
+	_pmsProductCategory.UpdateBy = field.NewString(tableName, "update_by")
 	_pmsProductCategory.UpdateTime = field.NewTime(tableName, "update_time")
 	_pmsProductCategory.IsDeleted = field.NewInt32(tableName, "is_deleted")
 
@@ -51,7 +51,6 @@ func newPmsProductCategory(db *gorm.DB, opts ...gen.DOOption) pmsProductCategory
 	return _pmsProductCategory
 }
 
-// pmsProductCategory 产品分类
 type pmsProductCategory struct {
 	pmsProductCategoryDo pmsProductCategoryDo
 
@@ -68,11 +67,11 @@ type pmsProductCategory struct {
 	Keywords     field.String // 关键字
 	Description  field.String // 描述
 	IsEnabled    field.Int32  // 是否启用
-	CreateBy     field.Int64  // 创建人ID
+	CreateBy     field.String // 创建人ID
 	CreateTime   field.Time   // 创建时间
-	UpdateBy     field.Int64  // 更新人ID
+	UpdateBy     field.String // 更新人ID
 	UpdateTime   field.Time   // 更新时间
-	IsDeleted    field.Int32  // 是否删除
+	IsDeleted    field.Int32  // 是否删除(0:否,1:是)
 
 	fieldMap map[string]field.Expr
 }
@@ -101,9 +100,9 @@ func (p *pmsProductCategory) updateTableName(table string) *pmsProductCategory {
 	p.Keywords = field.NewString(table, "keywords")
 	p.Description = field.NewString(table, "description")
 	p.IsEnabled = field.NewInt32(table, "is_enabled")
-	p.CreateBy = field.NewInt64(table, "create_by")
+	p.CreateBy = field.NewString(table, "create_by")
 	p.CreateTime = field.NewTime(table, "create_time")
-	p.UpdateBy = field.NewInt64(table, "update_by")
+	p.UpdateBy = field.NewString(table, "update_by")
 	p.UpdateTime = field.NewTime(table, "update_time")
 	p.IsDeleted = field.NewInt32(table, "is_deleted")
 

@@ -1,11 +1,22 @@
 Name: oms.rpc
 ListenOn: 0.0.0.0:8083
 
-Mysql:
-  Datasource: root:r-wz9wop62956dh5k9ed@tcp(110.41.179.89:30395)/gozero?charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai
+postgresql:
+  Datasource: host=127.0.0.1 user=root password=123456 dbname=gozero port=5432 sslmode=disable TimeZone=Asia/Shanghai
 
+Rabbitmq:
+  Host: 127.0.0.1
+  Port: 5672
+  UserName: root
+  Password: 123456
 Log:
   ServiceName: oms-service
   Stat: false # go-zero 版本 >= 1.5.0 才支持
-#  Mode: file
-#  Path: logs/oms
+  Mode: file
+  Path: logs/oms
+Prometheus:
+  Host: 127.0.0.1
+  Port: 8183
+  Path: /metrics
+Cart:
+  Timeout: 60 #购物车商品过期时间（单位为天）

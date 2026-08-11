@@ -2,6 +2,7 @@ package product_brand
 
 import (
 	"context"
+
 	"github.com/feihua/zero-admin/api/admin/internal/common"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
 	"github.com/feihua/zero-admin/api/admin/internal/svc"
@@ -34,7 +35,7 @@ func NewUpdateProductBrandLogic(ctx context.Context, svcCtx *svc.ServiceContext)
 
 // UpdateProductBrand 更新商品品牌
 func (l *UpdateProductBrandLogic) UpdateProductBrand(req *types.UpdateProductBrandReq) (resp *types.BaseResp, err error) {
-	userId, err := common.GetUserId(l.ctx)
+	name, err := common.GetUserName(l.ctx)
 	if err != nil {
 		return nil, err
 	}
@@ -48,7 +49,7 @@ func (l *UpdateProductBrandLogic) UpdateProductBrand(req *types.UpdateProductBra
 		Sort:            req.Sort,            // 排序
 		RecommendStatus: req.RecommendStatus, // 推荐状态
 		IsEnabled:       req.IsEnabled,       // 是否启用
-		UpdateBy:        userId,              // 更新人ID
+		UpdateBy:        name,                // 更新人ID
 	})
 
 	if err != nil {

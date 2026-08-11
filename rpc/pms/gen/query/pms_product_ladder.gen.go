@@ -39,7 +39,6 @@ func newPmsProductLadder(db *gorm.DB, opts ...gen.DOOption) pmsProductLadder {
 	return _pmsProductLadder
 }
 
-// pmsProductLadder 产品阶梯价格表(只针对同商品)
 type pmsProductLadder struct {
 	pmsProductLadderDo pmsProductLadderDo
 

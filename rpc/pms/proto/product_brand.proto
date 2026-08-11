@@ -17,7 +17,7 @@ message AddProductBrandReq {
   int32 product_count = 9; //产品数量
   int32 product_comment_count = 10; //产品评论数量
   int32 is_enabled = 11; //是否启用
-  int64 create_by = 12; //创建人ID
+  string create_by = 12; //创建人ID
 }
 
 message AddProductBrandResp {
@@ -46,7 +46,7 @@ message UpdateProductBrandReq {
   int32 product_count = 9; //产品数量
   int32 product_comment_count = 10; //产品评论数量
   int32 is_enabled = 11; //是否启用
-  int64 update_by = 14; //更新人ID
+  string update_by = 14; //更新人ID
 }
 
 message UpdateProductBrandResp {
@@ -57,7 +57,7 @@ message UpdateProductBrandResp {
 message UpdateProductBrandStatusReq {
   repeated int64 ids = 1; //
   int32 status = 2; //推荐状态
-  int64 update_by = 3; //更新人ID
+  string update_by = 3; //更新人ID
 }
 
 message UpdateProductBrandStatusResp {
@@ -81,9 +81,9 @@ message QueryProductBrandDetailResp {
   int32 product_count = 9; //产品数量
   int32 product_comment_count = 10; //产品评论数量
   int32 is_enabled = 11; //是否启用
-  int64 create_by = 12; //创建人ID
+  string create_by = 12; //创建人ID
   string create_time = 13; //创建时间
-  int64 update_by = 14; //更新人ID
+  string update_by = 14; //更新人ID
   string update_time = 15; //更新时间
 
 }
@@ -109,9 +109,9 @@ message ProductBrandListData {
   int32 product_count = 9; //产品数量
   int32 product_comment_count = 10; //产品评论数量
   int32 is_enabled = 11; //是否启用
-  int64 create_by = 12; //创建人ID
+  string create_by = 12; //创建人ID
   string create_time = 13; //创建时间
-  int64 update_by = 14; //更新人ID
+  string update_by = 14; //更新人ID
   string update_time = 15; //更新时间
 
 }
@@ -128,7 +128,7 @@ message QueryBrandListByIdsReq {
 message UpdateProductBrandSortReq {
   int64 id = 1; //
   int32 sort  = 2; //排序
-  int64 update_by = 3; //更新人ID
+  string update_by = 3; //更新人ID
 }
 // 商品品牌
 service ProductBrandService {

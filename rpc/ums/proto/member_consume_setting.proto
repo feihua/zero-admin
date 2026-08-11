@@ -12,7 +12,7 @@ message AddMemberConsumeSettingReq {
   int32 use_unit = 4; //每次使用积分最小单位100
   int32 coupon_status = 5; //是否可以和优惠券同用；0->不可以；1->可以
   int32 status = 6; //状态：0->禁用；1->启用
-  int64 create_by = 7; //创建人ID
+  string create_by = 7; //创建人ID
 }
 
 message AddMemberConsumeSettingResp {
@@ -36,7 +36,7 @@ message UpdateMemberConsumeSettingReq {
   int32 use_unit = 4; //每次使用积分最小单位100
   int32 coupon_status = 5; //是否可以和优惠券同用；0->不可以；1->可以
   int32 status = 6; //状态：0->禁用；1->启用
-  int64 update_by = 9; //更新人ID
+  string update_by = 9; //更新人ID
 }
 
 message UpdateMemberConsumeSettingResp {
@@ -47,14 +47,14 @@ message UpdateMemberConsumeSettingResp {
 message UpdateStatusReq {
   int64 id = 1; //
   int32 status = 2; //状态：0->禁用；1->启用
-  int64 update_by = 3; //更新人ID
+  string update_by = 3; //更新人ID
 }
 
 // 更新积分消费设置状态
 message UpdateCouponStatusReq {
   int64 id = 1; //
   int32 coupon_status = 2; //是否可以和优惠券同用；0->不可以；1->可以
-  int64 update_by = 3; //更新人ID
+  string update_by = 3; //更新人ID
 }
 
 message UpdateMemberConsumeSettingStatusResp {
@@ -73,9 +73,9 @@ message QueryMemberConsumeSettingDetailResp {
   int32 use_unit = 4; //每次使用积分最小单位100
   int32 coupon_status = 5; //是否可以和优惠券同用；0->不可以；1->可以
   int32 status = 6; //状态：0->禁用；1->启用
-  int64 create_by = 7; //创建人ID
+  string create_by = 7; //创建人ID
   string create_time = 8; //创建时间
-  int64 update_by = 9; //更新人ID
+  string update_by = 9; //更新人ID
   string update_time = 10; //更新时间
 
 }
@@ -95,9 +95,9 @@ message MemberConsumeSettingListData {
   int32 use_unit = 4; //每次使用积分最小单位100
   int32 coupon_status = 5; //是否可以和优惠券同用；0->不可以；1->可以
   int32 status = 6; //状态：0->禁用；1->启用
-  int64 create_by = 7; //创建人ID
+  string create_by = 7; //创建人ID
   string create_time = 8; //创建时间
-  int64 update_by = 9; //更新人ID
+  string update_by = 9; //更新人ID
   string update_time = 10; //更新时间
 
 }

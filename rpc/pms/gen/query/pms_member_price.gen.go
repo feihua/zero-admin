@@ -39,7 +39,6 @@ func newPmsMemberPrice(db *gorm.DB, opts ...gen.DOOption) pmsMemberPrice {
 	return _pmsMemberPrice
 }
 
-// pmsMemberPrice 商品会员价格表
 type pmsMemberPrice struct {
 	pmsMemberPriceDo pmsMemberPriceDo
 

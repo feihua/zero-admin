@@ -5,8 +5,8 @@ Port: 8087
 Rabbitmq:
   Host: 127.0.0.1
   Port: 5672
-  UserName: guest
-  Password: guest
+  UserName: root
+  Password: 123456
 
 #会员
 UmsRpc:

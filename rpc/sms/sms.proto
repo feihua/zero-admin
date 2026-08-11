@@ -23,7 +23,7 @@ message AddCouponReq {
   int32 status = 11; //状态：0-未开始，1-进行中，2-已结束，3-已取消
   int32 is_enabled = 12; //是否启用
   string description = 13; //使用说明
-  int64 create_by = 14; //创建人ID
+  string create_by = 14; //创建人ID
   repeated couponScopeData scopes = 15; //使用范围
 }
 
@@ -57,7 +57,7 @@ message UpdateCouponReq {
   int32 status = 13; //状态：0-未开始，1-进行中，2-已结束，3-已取消
   int32 is_enabled = 14; //是否启用
   string description = 15; //使用说明
-  int64 update_by = 18; //更新人ID
+  string update_by = 18; //更新人ID
   repeated couponScopeData scopes = 19; //使用范围
 }
 
@@ -69,7 +69,7 @@ message UpdateCouponResp {
 message UpdateCouponStatusReq {
   repeated int64 ids = 1; //优惠券ID
   int32 status = 13; //状态：0-未开始，1-进行中，2-已结束，3-已取消
-  int64 update_by = 18; //更新人ID
+  string update_by = 18; //更新人ID
 }
 
 message UpdateCouponStatusResp {
@@ -97,9 +97,9 @@ message QueryCouponDetailResp {
   int32 status = 13; //状态：0-未开始，1-进行中，2-已结束，3-已取消
   int32 is_enabled = 14; //是否启用
   string description = 15; //使用说明
-  int64 create_by = 16; //创建人ID
+  string create_by = 16; //创建人ID
   string create_time = 17; //创建时间
-  int64 update_by = 18; //更新人ID
+  string update_by = 18; //更新人ID
   string update_time = 19; //更新时间
   int32 is_deleted = 20; //是否删除
 
@@ -134,9 +134,9 @@ message CouponListData {
   int32 status = 13; //状态：0-未开始，1-进行中，2-已结束，3-已取消
   int32 is_enabled = 14; //是否启用
   string description = 15; //使用说明
-  int64 create_by = 16; //创建人ID
+  string create_by = 16; //创建人ID
   string create_time = 17; //创建时间
-  int64 update_by = 18; //更新人ID
+  string update_by = 18; //更新人ID
   string update_time = 19; //更新时间
 
 }
@@ -434,7 +434,7 @@ message AddCouponTypeReq {
   int32 discount_type = 5; //优惠方式：1-固定金额，2-折扣率，3-第N件特惠，4-买赠，5-特价，6-套装优惠，7-搭配优惠，8-积分抵现，9-积分倍率，10-免运费，11-运费减免，12-限时特权，13-会员特权
   int32 status = 6; //是否启用
   int32 sort = 7; //排序
-  int64 create_by = 8; //创建人ID
+  string create_by = 8; //创建人ID
 }
 
 message AddCouponTypeResp {
@@ -459,7 +459,7 @@ message UpdateCouponTypeReq {
   int32 discount_type = 5; //优惠方式：1-固定金额，2-折扣率，3-第N件特惠，4-买赠，5-特价，6-套装优惠，7-搭配优惠，8-积分抵现，9-积分倍率，10-免运费，11-运费减免，12-限时特权，13-会员特权
   int32 status = 6; //是否启用
   int32 sort = 7; //排序
-  int64 update_by = 10; //更新人ID
+  string update_by = 10; //更新人ID
 }
 
 message UpdateCouponTypeResp {
@@ -470,7 +470,7 @@ message UpdateCouponTypeResp {
 message UpdateCouponTypeStatusReq {
   repeated int64 ids = 1; //主键ID
   int32 status = 6; //是否启用
-  int64 update_by = 10; //更新人ID
+  string update_by = 10; //更新人ID
 }
 
 message UpdateCouponTypeStatusResp {
@@ -490,9 +490,9 @@ message QueryCouponTypeDetailResp {
   int32 discount_type = 5; //优惠方式：1-固定金额，2-折扣率，3-第N件特惠，4-买赠，5-特价，6-套装优惠，7-搭配优惠，8-积分抵现，9-积分倍率，10-免运费，11-运费减免，12-限时特权，13-会员特权
   int32 status = 6; //是否启用
   int32 sort = 7; //排序
-  int64 create_by = 8; //创建人ID
+  string create_by = 8; //创建人ID
   string create_time = 9; //创建时间
-  int64 update_by = 10; //更新人ID
+  string update_by = 10; //更新人ID
   string update_time = 11; //更新时间
 
 }
@@ -515,9 +515,9 @@ message CouponTypeListData {
   int32 discount_type = 5; //优惠方式：1-固定金额，2-折扣率，3-第N件特惠，4-买赠，5-特价，6-套装优惠，7-搭配优惠，8-积分抵现，9-积分倍率，10-免运费，11-运费减免，12-限时特权，13-会员特权
   int32 status = 6; //是否启用
   int32 sort = 7; //排序
-  int64 create_by = 8; //创建人ID
+  string create_by = 8; //创建人ID
   string create_time = 9; //创建时间
-  int64 update_by = 10; //更新人ID
+  string update_by = 10; //更新人ID
   string update_time = 11; //更新时间
 
 }
@@ -686,7 +686,7 @@ message AddSeckillActivityReq {
   string end_time = 5; //结束时间
   int32 status = 6; //活动状态：状态:0-上线,1-下线
   int32 is_enabled = 7; //是否启用
-  int64 create_by = 8; //创建人ID
+  string create_by = 8; //创建人ID
 }
 
 message AddSeckillActivityResp {
@@ -711,7 +711,7 @@ message UpdateSeckillActivityReq {
   string end_time = 5; //结束时间
   int32 status = 6; //活动状态：状态:0-上线,1-下线
   int32 is_enabled = 7; //是否启用
-  int64 update_by = 10; //更新人ID
+  string update_by = 10; //更新人ID
 }
 
 message UpdateSeckillActivityResp {
@@ -722,7 +722,7 @@ message UpdateSeckillActivityResp {
 message UpdateSeckillActivityStatusReq {
   repeated int64 ids = 1; //编号
   int32 status = 6; //活动状态：状态:0-上线,1-下线
-  int64 update_by = 10; //更新人ID
+  string update_by = 10; //更新人ID
 }
 
 message UpdateSeckillActivityStatusResp {
@@ -742,9 +742,9 @@ message QuerySeckillActivityDetailResp {
   string end_time = 5; //结束时间
   int32 status = 6; //活动状态：状态:0-上线,1-下线
   int32 is_enabled = 7; //是否启用
-  int64 create_by = 8; //创建人ID
+  string create_by = 8; //创建人ID
   string create_time = 9; //创建时间
-  int64 update_by = 10; //更新人ID
+  string update_by = 10; //更新人ID
   string update_time = 11; //更新时间
 
 }
@@ -768,9 +768,9 @@ message SeckillActivityListData {
   string end_time = 5; //结束时间
   int32 status = 6; //活动状态：状态:0-上线,1-下线
   int32 is_enabled = 7; //是否启用
-  int64 create_by = 8; //创建人ID
+  string create_by = 8; //创建人ID
   string create_time = 9; //创建时间
-  int64 update_by = 10; //更新人ID
+  string update_by = 10; //更新人ID
   string update_time = 11; //更新时间
 
 }
@@ -826,7 +826,7 @@ message AddSeckillProductData {
   int32 per_limit = 8; //每人限购数量
   int32 sort = 9; //排序
   int32 status = 10; //状态：0-未上架，1-已上架
-  int64 create_by = 11; //创建人ID
+  string create_by = 11; //创建人ID
   string sku_name = 12; //商品名称
 }
 
@@ -855,7 +855,7 @@ message UpdateSeckillProductReq {
   int32 per_limit = 8; //每人限购数量
   int32 sort = 9; //排序
   int32 status = 10; //状态：0-未上架，1-已上架
-  int64 update_by = 13; //更新人ID
+  string update_by = 13; //更新人ID
   string sku_name = 14; //商品名称
 }
 
@@ -867,7 +867,7 @@ message UpdateSeckillProductResp {
 message UpdateSeckillProductStatusReq {
   repeated int64 ids = 1; //ID
   int32 status = 10; //状态：0-未上架，1-已上架
-  int64 update_by = 13; //更新人ID
+  string update_by = 13; //更新人ID
 }
 
 message UpdateSeckillProductStatusResp {
@@ -890,9 +890,9 @@ message QuerySeckillProductDetailResp {
   int32 per_limit = 8; //每人限购数量
   int32 sort = 9; //排序
   int32 status = 10; //状态：0-未上架，1-已上架
-  int64 create_by = 11; //创建人ID
+  string create_by = 11; //创建人ID
   string create_time = 12; //创建时间
-  int64 update_by = 13; //更新人ID
+  string update_by = 13; //更新人ID
   string update_time = 14; //更新时间
   string sku_name = 15; //商品名称
 
@@ -918,9 +918,9 @@ message SeckillProductListData {
   int32 per_limit = 8; //每人限购数量
   int32 sort = 9; //排序
   int32 status = 10; //状态：0-未上架，1-已上架
-  int64 create_by = 11; //创建人ID
+  string create_by = 11; //创建人ID
   string create_time = 12; //创建时间
-  int64 update_by = 13; //更新人ID
+  string update_by = 13; //更新人ID
   string update_time = 14; //更新时间
   string sku_name = 15; //商品名称
 }
@@ -1068,7 +1068,7 @@ message AddSeckillSessionReq {
   string end_time = 4; //结束时间
   int32 status = 5; //状态：0-禁用，1-启用
   int32 sort = 6; //排序
-  int64 create_by = 7; //创建人ID
+  string create_by = 7; //创建人ID
 }
 
 message AddSeckillSessionResp {
@@ -1092,7 +1092,7 @@ message UpdateSeckillSessionReq {
   string end_time = 4; //结束时间
   int32 status = 5; //状态：0-禁用，1-启用
   int32 sort = 6; //排序
-  int64 update_by = 9; //更新人ID
+  string update_by = 9; //更新人ID
 }
 
 message UpdateSeckillSessionResp {
@@ -1103,7 +1103,7 @@ message UpdateSeckillSessionResp {
 message UpdateSeckillSessionStatusReq {
   repeated int64 ids = 1; //秒杀场次ID
   int32 status = 5; //状态：0-禁用，1-启用
-  int64 update_by = 9; //更新人ID
+  string update_by = 9; //更新人ID
 }
 
 message UpdateSeckillSessionStatusResp {
@@ -1122,9 +1122,9 @@ message QuerySeckillSessionDetailResp {
   string end_time = 4; //结束时间
   int32 status = 5; //状态：0-禁用，1-启用
   int32 sort = 6; //排序
-  int64 create_by = 7; //创建人ID
+  string create_by = 7; //创建人ID
   string create_time = 8; //创建时间
-  int64 update_by = 9; //更新人ID
+  string update_by = 9; //更新人ID
   string update_time = 10; //更新时间
   int32 is_deleted = 11; //是否删除
 
@@ -1147,9 +1147,9 @@ message SeckillSessionListData {
   string end_time = 4; //结束时间
   int32 status = 5; //状态：0-禁用，1-启用
   int32 sort = 6; //排序
-  int64 create_by = 7; //创建人ID
+  string create_by = 7; //创建人ID
   string create_time = 8; //创建时间
-  int64 update_by = 9; //更新人ID
+  string update_by = 9; //更新人ID
   string update_time = 10; //更新时间
 
 }

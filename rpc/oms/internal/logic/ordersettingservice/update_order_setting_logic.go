@@ -3,6 +3,8 @@ package ordersettingservicelogic
 import (
 	"context"
 	"errors"
+	"time"
+
 	"github.com/feihua/zero-admin/rpc/oms/gen/model"
 	"github.com/feihua/zero-admin/rpc/oms/gen/query"
 	"github.com/feihua/zero-admin/rpc/oms/internal/svc"
@@ -10,7 +12,6 @@ import (
 	"github.com/zeromicro/go-zero/core/logc"
 	"github.com/zeromicro/go-zero/core/logx"
 	"gorm.io/gorm"
-	"time"
 )
 
 // UpdateOrderSettingLogic 更新订单设置
@@ -66,7 +67,7 @@ func (l *UpdateOrderSettingLogic) UpdateOrderSetting(in *omsclient.UpdateOrderSe
 		CommentOvertime:     in.CommentOvertime,     // 订单完成后自动好评时间（天）
 		CreateBy:            detail.CreateBy,        // 创建者
 		CreateTime:          detail.CreateTime,      // 创建时间
-		UpdateBy:            &in.UpdateBy,           // 更新者
+		UpdateBy:            in.UpdateBy,            // 更新者
 		UpdateTime:          &now,                   // 更新时间
 	}
 

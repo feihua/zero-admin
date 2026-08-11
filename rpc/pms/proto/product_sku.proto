@@ -22,7 +22,7 @@ message AddProductSkuReq {
   int32 publish_status = 14; //上架状态：0-下架，1-上架
   int32 verify_status = 15; //审核状态：0-未审核，1-审核通过，2-审核不通过
   int32 sort = 16; //排序
-  int64 create_by = 17; //创建人ID
+  string create_by = 17; //创建人ID
 }
 
 message AddProductSkuResp {
@@ -60,7 +60,7 @@ message UpdateProductSkuData {
   int32 publish_status = 15; //上架状态：0-下架，1-上架
   int32 verify_status = 16; //审核状态：0-未审核，1-审核通过，2-审核不通过
   int32 sort = 17; //排序
-  int64 update_by = 18; //更新人ID
+  string update_by = 18; //更新人ID
 }
 
 message UpdateProductSkuResp {
@@ -91,9 +91,9 @@ message QueryProductSkuDetailResp {
   int32 verify_status = 16; //审核状态：0-未审核，1-审核通过，2-审核不通过
   int32 sort = 17; //排序
   int32 sales = 18; //销量
-  int64 create_by = 19; //创建人ID
+  string create_by = 19; //创建人ID
   string create_time = 20; //创建时间
-  int64 update_by = 21; //更新人ID
+  string update_by = 21; //更新人ID
   string update_time = 22; //更新时间
 
 }
@@ -130,9 +130,9 @@ message ProductSkuListData {
   int32 verify_status = 16; //审核状态：0-未审核，1-审核通过，2-审核不通过
   int32 sort = 17; //排序
   int32 sales = 18; //销量
-  int64 create_by = 19; //创建人ID
+  string create_by = 19; //创建人ID
   string create_time = 20; //创建时间
-  int64 update_by = 21; //更新人ID
+  string update_by = 21; //更新人ID
   string update_time = 22; //更新时间
 
 }

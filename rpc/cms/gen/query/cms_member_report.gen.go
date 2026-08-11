@@ -42,7 +42,6 @@ func newCmsMemberReport(db *gorm.DB, opts ...gen.DOOption) cmsMemberReport {
 	return _cmsMemberReport
 }
 
-// cmsMemberReport 用户举报表
 type cmsMemberReport struct {
 	cmsMemberReportDo cmsMemberReportDo
 

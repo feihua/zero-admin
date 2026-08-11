@@ -45,7 +45,6 @@ func newCmsHelp(db *gorm.DB, opts ...gen.DOOption) cmsHelp {
 	return _cmsHelp
 }
 
-// cmsHelp 帮助表
 type cmsHelp struct {
 	cmsHelpDo cmsHelpDo
 

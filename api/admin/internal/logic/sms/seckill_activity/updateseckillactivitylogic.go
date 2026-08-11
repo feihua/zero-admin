@@ -2,6 +2,7 @@ package seckill_activity
 
 import (
 	"context"
+
 	"github.com/feihua/zero-admin/api/admin/internal/common"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
 	"github.com/feihua/zero-admin/api/admin/internal/svc"
@@ -34,7 +35,7 @@ func NewUpdateSeckillActivityLogic(ctx context.Context, svcCtx *svc.ServiceConte
 
 // UpdateSeckillActivity 更新秒杀活动
 func (l *UpdateSeckillActivityLogic) UpdateSeckillActivity(req *types.UpdateSeckillActivityReq) (resp *types.BaseResp, err error) {
-	userId, err := common.GetUserId(l.ctx)
+	name, err := common.GetUserName(l.ctx)
 	if err != nil {
 		return nil, err
 	}
@@ -45,7 +46,7 @@ func (l *UpdateSeckillActivityLogic) UpdateSeckillActivity(req *types.UpdateSeck
 		StartTime:   req.StartTime,   // 开始时间
 		EndTime:     req.EndTime,     // 结束时间
 		Status:      req.Status,      // 状态:0-上线,1-下线
-		UpdateBy:    userId,          // 更新人ID
+		UpdateBy:    name,            // 更新人ID
 	})
 
 	if err != nil {

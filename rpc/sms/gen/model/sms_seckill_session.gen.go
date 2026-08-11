@@ -10,19 +10,19 @@ import (
 
 const TableNameSmsSeckillSession = "sms_seckill_session"
 
-// SmsSeckillSession 秒杀场次表
+// SmsSeckillSession mapped from table <sms_seckill_session>
 type SmsSeckillSession struct {
-	ID         int64      `gorm:"column:id;primaryKey;autoIncrement:true;comment:秒杀场次ID" json:"id"`                      // 秒杀场次ID
-	Name       string     `gorm:"column:name;not null;comment:场次名称" json:"name"`                                         // 场次名称
-	StartTime  string     `gorm:"column:start_time;not null;comment:开始时间" json:"start_time"`                             // 开始时间
-	EndTime    string     `gorm:"column:end_time;not null;comment:结束时间" json:"end_time"`                                 // 结束时间
-	Status     int32      `gorm:"column:status;not null;comment:状态：0-禁用，1-启用" json:"status"`                             // 状态：0-禁用，1-启用
-	Sort       int32      `gorm:"column:sort;not null;comment:排序" json:"sort"`                                           // 排序
-	CreateBy   int64      `gorm:"column:create_by;not null;comment:创建人ID" json:"create_by"`                              // 创建人ID
-	CreateTime time.Time  `gorm:"column:create_time;not null;default:CURRENT_TIMESTAMP;comment:创建时间" json:"create_time"` // 创建时间
-	UpdateBy   *int64     `gorm:"column:update_by;comment:更新人ID" json:"update_by"`                                       // 更新人ID
-	UpdateTime *time.Time `gorm:"column:update_time;comment:更新时间" json:"update_time"`                                    // 更新时间
-	IsDeleted  int32      `gorm:"column:is_deleted;not null;comment:是否删除" json:"is_deleted"`                             // 是否删除
+	ID         int64      `gorm:"column:id;primaryKey;autoIncrement:true;comment:秒杀场次ID" json:"id"`                       // 秒杀场次ID
+	Name       string     `gorm:"column:name;not null;comment:场次名称" json:"name"`                                          // 场次名称
+	StartTime  string     `gorm:"column:start_time;not null;comment:开始时间" json:"start_time"`                              // 开始时间
+	EndTime    string     `gorm:"column:end_time;not null;comment:结束时间" json:"end_time"`                                  // 结束时间
+	Status     int32      `gorm:"column:status;not null;default:1;comment:状态：0-禁用，1-启用" json:"status"`                    // 状态：0-禁用，1-启用
+	Sort       int32      `gorm:"column:sort;not null;comment:排序" json:"sort"`                                            // 排序
+	CreateBy   string     `gorm:"column:create_by;not null;default:''::character varying;comment:创建人ID" json:"create_by"` // 创建人ID
+	CreateTime time.Time  `gorm:"column:create_time;not null;default:CURRENT_TIMESTAMP;comment:创建时间" json:"create_time"`  // 创建时间
+	UpdateBy   string     `gorm:"column:update_by;not null;default:''::character varying;comment:更新人ID" json:"update_by"` // 更新人ID
+	UpdateTime *time.Time `gorm:"column:update_time;comment:更新时间" json:"update_time"`                                     // 更新时间
+	IsDeleted  int32      `gorm:"column:is_deleted;not null;default:1;comment:是否删除(0:否,1:是)" json:"is_deleted"`           // 是否删除(0:否,1:是)
 }
 
 // TableName SmsSeckillSession's table name

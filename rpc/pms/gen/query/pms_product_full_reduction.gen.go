@@ -38,7 +38,6 @@ func newPmsProductFullReduction(db *gorm.DB, opts ...gen.DOOption) pmsProductFul
 	return _pmsProductFullReduction
 }
 
-// pmsProductFullReduction 产品满减表(只针对同商品)
 type pmsProductFullReduction struct {
 	pmsProductFullReductionDo pmsProductFullReductionDo
 

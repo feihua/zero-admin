@@ -6,11 +6,11 @@ package model
 
 const TableNameSysUserPost = "sys_user_post"
 
-// SysUserPost 用户岗位关联表
+// SysUserPost mapped from table <sys_user_post>
 type SysUserPost struct {
-	ID     int64 `gorm:"column:id;primaryKey;autoIncrement:true;comment:编号" json:"id"` // 编号
-	UserID int64 `gorm:"column:user_id;not null;comment:用户Id" json:"user_id"`          // 用户Id
-	PostID int64 `gorm:"column:post_id;not null;comment:岗位Id" json:"post_id"`          // 岗位Id
+	ID     int64 `gorm:"column:id;primaryKey;autoIncrement:true;comment:主键" json:"id"` // 主键
+	UserID int64 `gorm:"column:user_id;not null;comment:用户id" json:"user_id"`          // 用户id
+	PostID int64 `gorm:"column:post_id;not null;comment:岗位id" json:"post_id"`          // 岗位id
 }
 
 // TableName SysUserPost's table name

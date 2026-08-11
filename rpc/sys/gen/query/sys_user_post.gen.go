@@ -37,14 +37,13 @@ func newSysUserPost(db *gorm.DB, opts ...gen.DOOption) sysUserPost {
 	return _sysUserPost
 }
 
-// sysUserPost 用户岗位关联表
 type sysUserPost struct {
 	sysUserPostDo sysUserPostDo
 
 	ALL    field.Asterisk
-	ID     field.Int64 // 编号
-	UserID field.Int64 // 用户Id
-	PostID field.Int64 // 岗位Id
+	ID     field.Int64 // 主键
+	UserID field.Int64 // 用户id
+	PostID field.Int64 // 岗位id
 
 	fieldMap map[string]field.Expr
 }

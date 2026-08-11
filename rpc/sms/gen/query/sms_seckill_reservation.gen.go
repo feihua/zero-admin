@@ -42,7 +42,6 @@ func newSmsSeckillReservation(db *gorm.DB, opts ...gen.DOOption) smsSeckillReser
 	return _smsSeckillReservation
 }
 
-// smsSeckillReservation 秒杀预约表
 type smsSeckillReservation struct {
 	smsSeckillReservationDo smsSeckillReservationDo
 
@@ -54,7 +53,7 @@ type smsSeckillReservation struct {
 	Status     field.Int32 // 状态：0-已预约，1-已参与，2-已取消
 	CreateTime field.Time
 	UpdateTime field.Time
-	IsDeleted  field.Int32 // 是否删除
+	IsDeleted  field.Int32 // 是否删除(0:否,1:是)
 
 	fieldMap map[string]field.Expr
 }

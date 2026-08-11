@@ -46,9 +46,9 @@ func newPmsProductSku(db *gorm.DB, opts ...gen.DOOption) pmsProductSku {
 	_pmsProductSku.VerifyStatus = field.NewInt32(tableName, "verify_status")
 	_pmsProductSku.Sort = field.NewInt32(tableName, "sort")
 	_pmsProductSku.Sales = field.NewInt32(tableName, "sales")
-	_pmsProductSku.CreateBy = field.NewInt64(tableName, "create_by")
+	_pmsProductSku.CreateBy = field.NewString(tableName, "create_by")
 	_pmsProductSku.CreateTime = field.NewTime(tableName, "create_time")
-	_pmsProductSku.UpdateBy = field.NewInt64(tableName, "update_by")
+	_pmsProductSku.UpdateBy = field.NewString(tableName, "update_by")
 	_pmsProductSku.UpdateTime = field.NewTime(tableName, "update_time")
 	_pmsProductSku.IsDeleted = field.NewInt32(tableName, "is_deleted")
 
@@ -57,7 +57,6 @@ func newPmsProductSku(db *gorm.DB, opts ...gen.DOOption) pmsProductSku {
 	return _pmsProductSku
 }
 
-// pmsProductSku 商品SKU表
 type pmsProductSku struct {
 	pmsProductSkuDo pmsProductSkuDo
 
@@ -80,11 +79,11 @@ type pmsProductSku struct {
 	VerifyStatus       field.Int32   // 审核状态：0-未审核，1-审核通过，2-审核不通过
 	Sort               field.Int32   // 排序
 	Sales              field.Int32   // 销量
-	CreateBy           field.Int64   // 创建人ID
+	CreateBy           field.String  // 创建人ID
 	CreateTime         field.Time    // 创建时间
-	UpdateBy           field.Int64   // 更新人ID
+	UpdateBy           field.String  // 更新人ID
 	UpdateTime         field.Time    // 更新时间
-	IsDeleted          field.Int32   // 是否删除
+	IsDeleted          field.Int32   // 是否删除(0:否,1:是)
 
 	fieldMap map[string]field.Expr
 }
@@ -119,9 +118,9 @@ func (p *pmsProductSku) updateTableName(table string) *pmsProductSku {
 	p.VerifyStatus = field.NewInt32(table, "verify_status")
 	p.Sort = field.NewInt32(table, "sort")
 	p.Sales = field.NewInt32(table, "sales")
-	p.CreateBy = field.NewInt64(table, "create_by")
+	p.CreateBy = field.NewString(table, "create_by")
 	p.CreateTime = field.NewTime(table, "create_time")
-	p.UpdateBy = field.NewInt64(table, "update_by")
+	p.UpdateBy = field.NewString(table, "update_by")
 	p.UpdateTime = field.NewTime(table, "update_time")
 	p.IsDeleted = field.NewInt32(table, "is_deleted")
 

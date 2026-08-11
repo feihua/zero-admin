@@ -93,7 +93,7 @@ func (l *UpdateProductSpuLogic) UpdateProductSpu(in *pmsclient.ProductSpuReq) (*
 		DetailMobileHTML:    in.DetailMobileHtml,    // 移动端网页详情
 		CreateBy:            detail.CreateBy,        // 创建人ID
 		CreateTime:          detail.CreateTime,      // 创建时间
-		UpdateBy:            &in.CreateBy,           // 更新人ID
+		UpdateBy:            in.CreateBy,            // 更新人ID
 		UpdateTime:          &now,                   // 更新时间
 	}
 

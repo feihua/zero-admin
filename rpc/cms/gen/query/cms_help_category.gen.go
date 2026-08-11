@@ -44,7 +44,6 @@ func newCmsHelpCategory(db *gorm.DB, opts ...gen.DOOption) cmsHelpCategory {
 	return _cmsHelpCategory
 }
 
-// cmsHelpCategory 帮助分类表
 type cmsHelpCategory struct {
 	cmsHelpCategoryDo cmsHelpCategoryDo
 

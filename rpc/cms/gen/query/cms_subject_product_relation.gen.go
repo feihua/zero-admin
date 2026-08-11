@@ -37,7 +37,6 @@ func newCmsSubjectProductRelation(db *gorm.DB, opts ...gen.DOOption) cmsSubjectP
 	return _cmsSubjectProductRelation
 }
 
-// cmsSubjectProductRelation 专题商品关系表
 type cmsSubjectProductRelation struct {
 	cmsSubjectProductRelationDo cmsSubjectProductRelationDo
 

@@ -48,7 +48,6 @@ func newOmsOrderDelivery(db *gorm.DB, opts ...gen.DOOption) omsOrderDelivery {
 	return _omsOrderDelivery
 }
 
-// omsOrderDelivery 订单收货地址表
 type omsOrderDelivery struct {
 	omsOrderDeliveryDo omsOrderDeliveryDo
 
@@ -66,7 +65,7 @@ type omsOrderDelivery struct {
 	DeliveryNo       field.String // 物流单号
 	CreateTime       field.Time   // 创建时间
 	UpdateTime       field.Time   // 更新时间
-	IsDeleted        field.Int32  // 是否删除
+	IsDeleted        field.Int32  // 是否删除(0:否,1:是)
 
 	fieldMap map[string]field.Expr
 }

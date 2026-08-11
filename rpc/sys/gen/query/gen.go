@@ -18,7 +18,7 @@ import (
 var (
 	Q             = new(Query)
 	SysDept       *sysDept
-	SysDictItem   *sysDictItem
+	SysDictData   *sysDictData
 	SysDictType   *sysDictType
 	SysLoginLog   *sysLoginLog
 	SysMenu       *sysMenu
@@ -35,7 +35,7 @@ var (
 func SetDefault(db *gorm.DB, opts ...gen.DOOption) {
 	*Q = *Use(db, opts...)
 	SysDept = &Q.SysDept
-	SysDictItem = &Q.SysDictItem
+	SysDictData = &Q.SysDictData
 	SysDictType = &Q.SysDictType
 	SysLoginLog = &Q.SysLoginLog
 	SysMenu = &Q.SysMenu
@@ -53,7 +53,7 @@ func Use(db *gorm.DB, opts ...gen.DOOption) *Query {
 	return &Query{
 		db:            db,
 		SysDept:       newSysDept(db, opts...),
-		SysDictItem:   newSysDictItem(db, opts...),
+		SysDictData:   newSysDictData(db, opts...),
 		SysDictType:   newSysDictType(db, opts...),
 		SysLoginLog:   newSysLoginLog(db, opts...),
 		SysMenu:       newSysMenu(db, opts...),
@@ -72,7 +72,7 @@ type Query struct {
 	db *gorm.DB
 
 	SysDept       sysDept
-	SysDictItem   sysDictItem
+	SysDictData   sysDictData
 	SysDictType   sysDictType
 	SysLoginLog   sysLoginLog
 	SysMenu       sysMenu
@@ -88,11 +88,13 @@ type Query struct {
 
 func (q *Query) Available() bool { return q.db != nil }
 
+func (q *Query) UnderlyingDB() *gorm.DB { return q.db }
+
 func (q *Query) clone(db *gorm.DB) *Query {
 	return &Query{
 		db:            db,
 		SysDept:       q.SysDept.clone(db),
-		SysDictItem:   q.SysDictItem.clone(db),
+		SysDictData:   q.SysDictData.clone(db),
 		SysDictType:   q.SysDictType.clone(db),
 		SysLoginLog:   q.SysLoginLog.clone(db),
 		SysMenu:       q.SysMenu.clone(db),
@@ -108,18 +110,18 @@ func (q *Query) clone(db *gorm.DB) *Query {
 }
 
 func (q *Query) ReadDB() *Query {
-	return q.ReplaceDB(q.db.Clauses(dbresolver.Read))
+	return q.clone(q.db.Clauses(dbresolver.Read))
 }
 
 func (q *Query) WriteDB() *Query {
-	return q.ReplaceDB(q.db.Clauses(dbresolver.Write))
+	return q.clone(q.db.Clauses(dbresolver.Write))
 }
 
 func (q *Query) ReplaceDB(db *gorm.DB) *Query {
 	return &Query{
 		db:            db,
 		SysDept:       q.SysDept.replaceDB(db),
-		SysDictItem:   q.SysDictItem.replaceDB(db),
+		SysDictData:   q.SysDictData.replaceDB(db),
 		SysDictType:   q.SysDictType.replaceDB(db),
 		SysLoginLog:   q.SysLoginLog.replaceDB(db),
 		SysMenu:       q.SysMenu.replaceDB(db),
@@ -136,7 +138,7 @@ func (q *Query) ReplaceDB(db *gorm.DB) *Query {
 
 type queryCtx struct {
 	SysDept       ISysDeptDo
-	SysDictItem   ISysDictItemDo
+	SysDictData   ISysDictDataDo
 	SysDictType   ISysDictTypeDo
 	SysLoginLog   ISysLoginLogDo
 	SysMenu       ISysMenuDo
@@ -153,7 +155,7 @@ type queryCtx struct {
 func (q *Query) WithContext(ctx context.Context) *queryCtx {
 	return &queryCtx{
 		SysDept:       q.SysDept.WithContext(ctx),
-		SysDictItem:   q.SysDictItem.WithContext(ctx),
+		SysDictData:   q.SysDictData.WithContext(ctx),
 		SysDictType:   q.SysDictType.WithContext(ctx),
 		SysLoginLog:   q.SysLoginLog.WithContext(ctx),
 		SysMenu:       q.SysMenu.WithContext(ctx),

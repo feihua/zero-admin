@@ -2,6 +2,7 @@ package member_consume_setting
 
 import (
 	"context"
+
 	"github.com/feihua/zero-admin/api/admin/internal/common"
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
 	"github.com/feihua/zero-admin/rpc/ums/umsclient"
@@ -35,14 +36,14 @@ func NewUpdateCouponStatusLogic(ctx context.Context, svcCtx *svc.ServiceContext)
 
 // UpdateCouponStatus 更新是否可以和优惠券同用
 func (l *UpdateCouponStatusLogic) UpdateCouponStatus(req *types.UpdateCouponStatusReq) (resp *types.BaseResp, err error) {
-	userId, err := common.GetUserId(l.ctx)
+	name, err := common.GetUserName(l.ctx)
 	if err != nil {
 		return nil, err
 	}
 	_, err = l.svcCtx.MemberConsumeSettingService.UpdateCouponStatus(l.ctx, &umsclient.UpdateCouponStatusReq{
 		Id:           req.Id,           //
 		CouponStatus: req.CouponStatus, // 是否可以和优惠券同用；0->不可以；1->可以
-		UpdateBy:     userId,
+		UpdateBy:     name,
 	})
 
 	if err != nil {

@@ -32,6 +32,7 @@ func newSysDictType(db *gorm.DB, opts ...gen.DOOption) sysDictType {
 	_sysDictType.DictName = field.NewString(tableName, "dict_name")
 	_sysDictType.DictType = field.NewString(tableName, "dict_type")
 	_sysDictType.Status = field.NewInt32(tableName, "status")
+	_sysDictType.DelFlag = field.NewInt32(tableName, "del_flag")
 	_sysDictType.Remark = field.NewString(tableName, "remark")
 	_sysDictType.CreateBy = field.NewString(tableName, "create_by")
 	_sysDictType.CreateTime = field.NewTime(tableName, "create_time")
@@ -43,15 +44,15 @@ func newSysDictType(db *gorm.DB, opts ...gen.DOOption) sysDictType {
 	return _sysDictType
 }
 
-// sysDictType 字典类型表
 type sysDictType struct {
 	sysDictTypeDo sysDictTypeDo
 
 	ALL        field.Asterisk
-	ID         field.Int64  // 字典id
+	ID         field.Int64  // 字典主键
 	DictName   field.String // 字典名称
 	DictType   field.String // 字典类型
 	Status     field.Int32  // 状态（0：停用，1:正常）
+	DelFlag    field.Int32  // 删除标志（0:删除,1:存在）
 	Remark     field.String // 备注
 	CreateBy   field.String // 创建者
 	CreateTime field.Time   // 创建时间
@@ -77,6 +78,7 @@ func (s *sysDictType) updateTableName(table string) *sysDictType {
 	s.DictName = field.NewString(table, "dict_name")
 	s.DictType = field.NewString(table, "dict_type")
 	s.Status = field.NewInt32(table, "status")
+	s.DelFlag = field.NewInt32(table, "del_flag")
 	s.Remark = field.NewString(table, "remark")
 	s.CreateBy = field.NewString(table, "create_by")
 	s.CreateTime = field.NewTime(table, "create_time")
@@ -108,11 +110,12 @@ func (s *sysDictType) GetFieldByName(fieldName string) (field.OrderExpr, bool) {
 }
 
 func (s *sysDictType) fillFieldMap() {
-	s.fieldMap = make(map[string]field.Expr, 9)
+	s.fieldMap = make(map[string]field.Expr, 10)
 	s.fieldMap["id"] = s.ID
 	s.fieldMap["dict_name"] = s.DictName
 	s.fieldMap["dict_type"] = s.DictType
 	s.fieldMap["status"] = s.Status
+	s.fieldMap["del_flag"] = s.DelFlag
 	s.fieldMap["remark"] = s.Remark
 	s.fieldMap["create_by"] = s.CreateBy
 	s.fieldMap["create_time"] = s.CreateTime

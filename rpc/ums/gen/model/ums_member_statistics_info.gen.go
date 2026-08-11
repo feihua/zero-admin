@@ -10,7 +10,7 @@ import (
 
 const TableNameUmsMemberStatisticsInfo = "ums_member_statistics_info"
 
-// UmsMemberStatisticsInfo 会员统计信息
+// UmsMemberStatisticsInfo mapped from table <ums_member_statistics_info>
 type UmsMemberStatisticsInfo struct {
 	ID                  int64     `gorm:"column:id;primaryKey;autoIncrement:true" json:"id"`
 	MemberID            int64     `gorm:"column:member_id;not null;comment:会员id" json:"member_id"`                              // 会员id

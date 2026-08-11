@@ -2,6 +2,7 @@ package menu
 
 import (
 	"context"
+
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
 	"github.com/zeromicro/go-zero/core/logc"
@@ -45,27 +46,28 @@ func (l *QueryMenuDetailLogic) QueryMenuDetail(req *types.QueryMenuDetailReq) (r
 	}
 
 	data := types.QueryMenuDetailData{
-		Id:            detail.Id,            // 编号
-		MenuName:      detail.MenuName,      // 菜单名称
-		ParentId:      detail.ParentId,      // 父菜单ID，一级菜单为0
-		MenuPath:      detail.MenuPath,      // 前端路由
-		MenuPerms:     detail.MenuPerms,     // 权限标识
-		MenuType:      detail.MenuType,      // 类型 0：目录,1：菜单,2：按钮,3：外链
-		MenuIcon:      detail.MenuIcon,      // 菜单图标
-		MenuSort:      detail.MenuSort,      // 菜单排序
-		CreateBy:      detail.CreateBy,      // 创建者
-		CreateTime:    detail.CreateTime,    // 创建时间
-		UpdateBy:      detail.UpdateBy,      // 更新者
-		UpdateTime:    detail.UpdateTime,    // 更新时间
-		MenuStatus:    detail.MenuStatus,    // 菜单状态
-		IsDeleted:     detail.IsDeleted,     // 是否删除  0：否  1：是
-		IsVisible:     detail.IsVisible,     // 是否可见  0：否  1：是
-		Remark:        detail.Remark,        // 备注信息
-		VuePath:       detail.VuePath,       // vue系统的path
-		VueComponent:  detail.VueComponent,  // vue的页面
-		VueIcon:       detail.VueIcon,       // vue的图标
-		VueRedirect:   detail.VueRedirect,   // vue的路由重定向
-		BackgroundUrl: detail.BackgroundUrl, // 接口地址
+		Id:           detail.Id,           // 主键
+		MenuName:     detail.MenuName,     // 菜单名称
+		Ancestors:    detail.Ancestors,    // 祖级列表
+		MenuType:     detail.MenuType,     // 菜单类型(1:目录,2:菜单,3:按钮)
+		MenuUrl:      detail.MenuUrl,      // 路由路径
+		MenuIcon:     detail.MenuIcon,     // 菜单图标
+		MenuSort:     detail.MenuSort,     // 排序
+		ParentId:     detail.ParentId,     // 父id
+		ApiUrl:       detail.ApiUrl,       // 接口url
+		Visible:      detail.Visible,      // 显示状态（0:隐藏,显示:1）
+		Status:       detail.Status,       // 菜单状态(1:正常，0:禁用)
+		Remark:       detail.Remark,       // 备注
+		VuePath:      detail.VuePath,      // vue的path
+		VueComponent: detail.VueComponent, // vue的页面
+		VueIcon:      detail.VueIcon,      // vue的图标
+		VueRedirect:  detail.VueRedirect,  // vue的路由重定向
+		AngularIcon:  detail.AngularIcon,  // angular的图标
+		ReactIcon:    detail.ReactIcon,    // antd react的图标
+		CreateBy:     detail.CreateBy,     // 创建者
+		CreateTime:   detail.CreateTime,   // 创建时间
+		UpdateBy:     detail.UpdateBy,     // 更新者
+		UpdateTime:   detail.UpdateTime,   // 更新时间
 	}
 
 	return &types.QueryMenuDetailResp{

@@ -3,7 +3,7 @@ package coupontypeservicelogic
 import (
 	"context"
 	"errors"
-	"github.com/feihua/zero-admin/pkg/pointerprocess"
+
 	"github.com/feihua/zero-admin/pkg/time_util"
 	"github.com/feihua/zero-admin/rpc/sms/gen/query"
 	"github.com/feihua/zero-admin/rpc/sms/internal/svc"
@@ -60,17 +60,17 @@ func (l *QueryCouponTypeListLogic) QueryCouponTypeList(in *smsclient.QueryCoupon
 
 	for _, item := range result {
 		list = append(list, &smsclient.CouponTypeListData{
-			Id:           item.ID,                                          // 主键ID
-			Name:         item.Name,                                        // 类型名称
-			Code:         item.Code,                                        // 类型编码
-			Description:  item.Description,                                 // 描述
-			DiscountType: item.DiscountType,                                // 优惠方式：1-固定金额，2-折扣率，3-第N件特惠，4-买赠，5-特价，6-套装优惠，7-搭配优惠，8-积分抵现，9-积分倍率，10-免运费，11-运费减免，12-限时特权，13-会员特权
-			Status:       item.Status,                                      // 是否启用
-			Sort:         item.Sort,                                        // 排序
-			CreateBy:     item.CreateBy,                                    // 创建人ID
-			CreateTime:   time_util.TimeToStr(item.CreateTime),             // 创建时间
-			UpdateBy:     pointerprocess.DefaltData(item.UpdateBy).(int64), // 更新人ID
-			UpdateTime:   time_util.TimeToString(item.UpdateTime),          // 更新时间
+			Id:           item.ID,                                 // 主键ID
+			Name:         item.Name,                               // 类型名称
+			Code:         item.Code,                               // 类型编码
+			Description:  item.Description,                        // 描述
+			DiscountType: item.DiscountType,                       // 优惠方式：1-固定金额，2-折扣率，3-第N件特惠，4-买赠，5-特价，6-套装优惠，7-搭配优惠，8-积分抵现，9-积分倍率，10-免运费，11-运费减免，12-限时特权，13-会员特权
+			Status:       item.Status,                             // 是否启用
+			Sort:         item.Sort,                               // 排序
+			CreateBy:     item.CreateBy,                           // 创建人ID
+			CreateTime:   time_util.TimeToStr(item.CreateTime),    // 创建时间
+			UpdateBy:     item.UpdateBy,                           // 更新人ID
+			UpdateTime:   time_util.TimeToString(item.UpdateTime), // 更新时间
 
 		})
 	}

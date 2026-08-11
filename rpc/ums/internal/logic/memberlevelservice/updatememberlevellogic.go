@@ -4,11 +4,12 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"time"
+
 	"github.com/feihua/zero-admin/rpc/ums/gen/model"
 	"github.com/feihua/zero-admin/rpc/ums/gen/query"
 	"github.com/zeromicro/go-zero/core/logc"
 	"gorm.io/gorm"
-	"time"
 
 	"github.com/feihua/zero-admin/rpc/ums/internal/svc"
 	"github.com/feihua/zero-admin/rpc/ums/umsclient"
@@ -74,7 +75,7 @@ func (l *UpdateMemberLevelLogic) UpdateMemberLevel(in *umsclient.UpdateMemberLev
 		IsEnabled:    in.IsEnabled,             // 是否启用
 		CreateBy:     item.CreateBy,            // 创建者
 		CreateTime:   item.CreateTime,          // 创建时间
-		UpdateBy:     &in.UpdateBy,             // 更新者
+		UpdateBy:     in.UpdateBy,              // 更新者
 		UpdateTime:   &now,                     // 更新时间
 		IsDeleted:    item.IsDeleted,
 	}

@@ -16,7 +16,7 @@ message AddCompanyAddressReq {
   string detail_address = 8; //详细地址
   int32 send_status = 9; //默认发货地址：0->否；1->是
   int32 receive_status = 10; //默认收货地址：0->否；1->是
-  int64 create_by = 11; //创建人ID
+  string create_by = 11; //创建人ID
 }
 
 message AddCompanyAddressResp {
@@ -44,7 +44,7 @@ message UpdateCompanyAddressReq {
   string detail_address = 8; //详细地址
   int32 send_status = 9; //默认发货地址：0->否；1->是
   int32 receive_status = 10; //默认收货地址：0->否；1->是
-  int64 update_by = 13; //更新人ID
+  string update_by = 13; //更新人ID
 }
 
 message UpdateCompanyAddressResp {
@@ -55,7 +55,7 @@ message UpdateCompanyAddressResp {
 message UpdateCompanyAddressStatusReq {
   int64 id = 1; //主键ID
   int32 status = 2; //默认发货地址：0->否；1->是
-  int64 update_by = 4; //更新人ID
+  string update_by = 4; //更新人ID
 }
 
 message UpdateCompanyAddressStatusResp {
@@ -78,9 +78,9 @@ message QueryCompanyAddressDetailResp {
   string detail_address = 8; //详细地址
   int32 send_status = 9; //默认发货地址：0->否；1->是
   int32 receive_status = 10; //默认收货地址：0->否；1->是
-  int64 create_by = 11; //创建人ID
+  string create_by = 11; //创建人ID
   string create_time = 12; //创建时间
-  int64 update_by = 13; //更新人ID
+  string update_by = 13; //更新人ID
   string update_time = 14; //更新时间
 
 }
@@ -107,9 +107,9 @@ message CompanyAddressListData {
   string detail_address = 8; //详细地址
   int32 send_status = 9; //默认发货地址：0->否；1->是
   int32 receive_status = 10; //默认收货地址：0->否；1->是
-  int64 create_by = 11; //创建人ID
+  string create_by = 11; //创建人ID
   string create_time = 12; //创建时间
-  int64 update_by = 13; //更新人ID
+  string update_by = 13; //更新人ID
   string update_time = 14; //更新时间
 
 }

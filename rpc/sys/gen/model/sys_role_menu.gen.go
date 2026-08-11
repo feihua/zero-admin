@@ -6,11 +6,11 @@ package model
 
 const TableNameSysRoleMenu = "sys_role_menu"
 
-// SysRoleMenu 角色菜单关联表
+// SysRoleMenu mapped from table <sys_role_menu>
 type SysRoleMenu struct {
-	ID     int64 `gorm:"column:id;primaryKey;autoIncrement:true;comment:编号" json:"id"` // 编号
-	RoleID int64 `gorm:"column:role_id;not null;comment:角色Id" json:"role_id"`          // 角色Id
-	MenuID int64 `gorm:"column:menu_id;not null;comment:菜单Id" json:"menu_id"`          // 菜单Id
+	ID     int64 `gorm:"column:id;primaryKey;autoIncrement:true;comment:主键" json:"id"` // 主键
+	RoleID int64 `gorm:"column:role_id;not null;comment:角色id" json:"role_id"`          // 角色id
+	MenuID int64 `gorm:"column:menu_id;not null;comment:菜单id" json:"menu_id"`          // 菜单id
 }
 
 // TableName SysRoleMenu's table name

@@ -3,7 +3,7 @@ package seckillactivityservicelogic
 import (
 	"context"
 	"errors"
-	"github.com/feihua/zero-admin/pkg/pointerprocess"
+
 	"github.com/feihua/zero-admin/pkg/time_util"
 	"github.com/feihua/zero-admin/rpc/sms/gen/query"
 	"github.com/feihua/zero-admin/rpc/sms/internal/svc"
@@ -46,17 +46,17 @@ func (l *QuerySeckillActivityDetailLogic) QuerySeckillActivityDetail(in *smsclie
 	}
 
 	data := &smsclient.QuerySeckillActivityDetailResp{
-		Id:          item.ID,                                          // 编号
-		Name:        item.Name,                                        // 活动名称
-		Description: item.Description,                                 // 活动描述
-		StartTime:   time_util.TimeToStr(item.StartTime),              // 开始时间
-		EndTime:     time_util.TimeToStr(item.EndTime),                // 结束时间
-		Status:      item.Status,                                      // 状态:0-上线,1-下线
-		IsEnabled:   item.IsEnabled,                                   // 是否启用
-		CreateBy:    item.CreateBy,                                    // 创建人ID
-		CreateTime:  time_util.TimeToStr(item.CreateTime),             // 创建时间
-		UpdateBy:    pointerprocess.DefaltData(item.UpdateBy).(int64), // 更新人ID
-		UpdateTime:  time_util.TimeToString(item.UpdateTime),          // 更新时间
+		Id:          item.ID,                                 // 编号
+		Name:        item.Name,                               // 活动名称
+		Description: item.Description,                        // 活动描述
+		StartTime:   time_util.TimeToStr(item.StartTime),     // 开始时间
+		EndTime:     time_util.TimeToStr(item.EndTime),       // 结束时间
+		Status:      item.Status,                             // 状态:0-上线,1-下线
+		IsEnabled:   item.IsEnabled,                          // 是否启用
+		CreateBy:    item.CreateBy,                           // 创建人ID
+		CreateTime:  time_util.TimeToStr(item.CreateTime),    // 创建时间
+		UpdateBy:    item.UpdateBy,                           // 更新人ID
+		UpdateTime:  time_util.TimeToString(item.UpdateTime), // 更新时间
 	}
 
 	return data, nil

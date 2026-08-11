@@ -47,7 +47,6 @@ func newOmsOrderReturnItem(db *gorm.DB, opts ...gen.DOOption) omsOrderReturnItem
 	return _omsOrderReturnItem
 }
 
-// omsOrderReturnItem 退货/售后明细表
 type omsOrderReturnItem struct {
 	omsOrderReturnItemDo omsOrderReturnItemDo
 

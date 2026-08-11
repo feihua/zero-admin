@@ -44,7 +44,6 @@ func newPmsFeightTemplate(db *gorm.DB, opts ...gen.DOOption) pmsFeightTemplate {
 	return _pmsFeightTemplate
 }
 
-// pmsFeightTemplate 运费模版
 type pmsFeightTemplate struct {
 	pmsFeightTemplateDo pmsFeightTemplateDo
 

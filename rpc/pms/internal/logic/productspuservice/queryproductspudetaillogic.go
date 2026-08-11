@@ -4,7 +4,6 @@ import (
 	"context"
 	"errors"
 
-	"github.com/feihua/zero-admin/pkg/pointerprocess"
 	"github.com/feihua/zero-admin/pkg/time_util"
 	"github.com/feihua/zero-admin/rpc/pms/gen/model"
 	"github.com/feihua/zero-admin/rpc/pms/gen/query"
@@ -56,39 +55,39 @@ func (l *QueryProductSpuDetailLogic) QueryProductSpuDetail(in *pmsclient.QueryPr
 	}
 
 	product := &pmsclient.ProductSpuListData{
-		Id:                  item.ID,                                          // 商品SpuId
-		Name:                item.Name,                                        // 商品名称
-		ProductSn:           item.ProductSn,                                   // 商品货号
-		CategoryId:          item.CategoryID,                                  // 商品分类ID
-		CategoryIds:         item.CategoryIds,                                 // 商品分类ID集合
-		CategoryName:        item.CategoryName,                                // 商品分类名称
-		BrandId:             item.BrandID,                                     // 品牌ID
-		BrandName:           item.BrandName,                                   // 品牌名称
-		Unit:                item.Unit,                                        // 单位
-		Weight:              float32(item.Weight),                             // 重量(kg)
-		Keywords:            item.Keywords,                                    // 关键词
-		AlbumPics:           item.AlbumPics,                                   // 画册图片，最多8张，以逗号分割
-		MainPic:             item.MainPic,                                     // 主图
-		PriceRange:          item.PriceRange,                                  // 价格区间
-		PublishStatus:       item.PublishStatus,                               // 上架状态：0-下架，1-上架
-		NewStatus:           item.NewStatus,                                   // 新品状态:0->不是新品；1->新品
-		RecommendStatus:     item.RecommendStatus,                             // 推荐状态；0->不推荐；1->推荐
-		VerifyStatus:        item.VerifyStatus,                                // 审核状态：0->未审核；1->审核通过
-		PreviewStatus:       item.PreviewStatus,                               // 是否为预告商品：0->不是；1->是
-		Sort:                item.Sort,                                        // 排序
-		NewStatusSort:       item.NewStatusSort,                               // 新品排序
-		RecommendStatusSort: item.RecommendStatusSort,                         // 推荐排序
-		Sales:               item.Sales,                                       // 销量
-		Stock:               item.Stock,                                       // 库存
-		LowStock:            item.LowStock,                                    // 预警库存
-		PromotionType:       item.PromotionType,                               // 促销类型：0->没有促销使用原价;1->使用促销价；2->使用会员价；3->使用阶梯价格；4->使用满减价格；5->秒杀
-		SubTitle:            item.SubTitle,                                    // 副标题
-		DetailHtml:          item.DetailHTML,                                  // 产品详情网页内容
-		DetailMobileHtml:    item.DetailMobileHTML,                            // 移动端网页详情
-		CreateBy:            item.CreateBy,                                    // 创建人ID
-		CreateTime:          time_util.TimeToStr(item.CreateTime),             // 创建时间
-		UpdateBy:            pointerprocess.DefaltData(item.UpdateBy).(int64), // 更新人ID
-		UpdateTime:          time_util.TimeToString(item.UpdateTime),          // 更新时间
+		Id:                  item.ID,                                 // 商品SpuId
+		Name:                item.Name,                               // 商品名称
+		ProductSn:           item.ProductSn,                          // 商品货号
+		CategoryId:          item.CategoryID,                         // 商品分类ID
+		CategoryIds:         item.CategoryIds,                        // 商品分类ID集合
+		CategoryName:        item.CategoryName,                       // 商品分类名称
+		BrandId:             item.BrandID,                            // 品牌ID
+		BrandName:           item.BrandName,                          // 品牌名称
+		Unit:                item.Unit,                               // 单位
+		Weight:              float32(item.Weight),                    // 重量(kg)
+		Keywords:            item.Keywords,                           // 关键词
+		AlbumPics:           item.AlbumPics,                          // 画册图片，最多8张，以逗号分割
+		MainPic:             item.MainPic,                            // 主图
+		PriceRange:          item.PriceRange,                         // 价格区间
+		PublishStatus:       item.PublishStatus,                      // 上架状态：0-下架，1-上架
+		NewStatus:           item.NewStatus,                          // 新品状态:0->不是新品；1->新品
+		RecommendStatus:     item.RecommendStatus,                    // 推荐状态；0->不推荐；1->推荐
+		VerifyStatus:        item.VerifyStatus,                       // 审核状态：0->未审核；1->审核通过
+		PreviewStatus:       item.PreviewStatus,                      // 是否为预告商品：0->不是；1->是
+		Sort:                item.Sort,                               // 排序
+		NewStatusSort:       item.NewStatusSort,                      // 新品排序
+		RecommendStatusSort: item.RecommendStatusSort,                // 推荐排序
+		Sales:               item.Sales,                              // 销量
+		Stock:               item.Stock,                              // 库存
+		LowStock:            item.LowStock,                           // 预警库存
+		PromotionType:       item.PromotionType,                      // 促销类型：0->没有促销使用原价;1->使用促销价；2->使用会员价；3->使用阶梯价格；4->使用满减价格；5->秒杀
+		SubTitle:            item.SubTitle,                           // 副标题
+		DetailHtml:          item.DetailHTML,                         // 产品详情网页内容
+		DetailMobileHtml:    item.DetailMobileHTML,                   // 移动端网页详情
+		CreateBy:            item.CreateBy,                           // 创建人ID
+		CreateTime:          time_util.TimeToStr(item.CreateTime),    // 创建时间
+		UpdateBy:            item.UpdateBy,                           // 更新人ID
+		UpdateTime:          time_util.TimeToString(item.UpdateTime), // 更新时间
 	}
 
 	productAttributeListData, attributeIds := buildProductAttributeListData(l, item)
@@ -108,21 +107,21 @@ func (l *QueryProductSpuDetailLogic) QueryProductSpuDetail(in *pmsclient.QueryPr
 func buildBrandListData(l *QueryProductSpuDetailLogic, pmsProduct *model.PmsProductSpu) *pmsclient.BrandData {
 	item, _ := query.PmsProductBrand.WithContext(l.ctx).Where(query.PmsProductBrand.ID.Eq(pmsProduct.BrandID)).First()
 	return &pmsclient.BrandData{
-		Id:                  item.ID,                                          //
-		Name:                item.Name,                                        // 品牌名称
-		Logo:                item.Logo,                                        // 品牌logo
-		BigPic:              item.BigPic,                                      // 专区大图
-		Description:         item.Description,                                 // 描述
-		FirstLetter:         item.FirstLetter,                                 // 首字母
-		Sort:                item.Sort,                                        // 排序
-		RecommendStatus:     item.RecommendStatus,                             // 推荐状态
-		ProductCount:        item.ProductCount,                                // 产品数量
-		ProductCommentCount: item.ProductCommentCount,                         // 产品评论数量
-		IsEnabled:           item.IsEnabled,                                   // 是否启用
-		CreateBy:            item.CreateBy,                                    // 创建人ID
-		CreateTime:          time_util.TimeToStr(item.CreateTime),             // 创建时间
-		UpdateBy:            pointerprocess.DefaltData(item.UpdateBy).(int64), // 更新人ID
-		UpdateTime:          time_util.TimeToString(item.UpdateTime),          // 更新时间
+		Id:                  item.ID,                                 //
+		Name:                item.Name,                               // 品牌名称
+		Logo:                item.Logo,                               // 品牌logo
+		BigPic:              item.BigPic,                             // 专区大图
+		Description:         item.Description,                        // 描述
+		FirstLetter:         item.FirstLetter,                        // 首字母
+		Sort:                item.Sort,                               // 排序
+		RecommendStatus:     item.RecommendStatus,                    // 推荐状态
+		ProductCount:        item.ProductCount,                       // 产品数量
+		ProductCommentCount: item.ProductCommentCount,                // 产品评论数量
+		IsEnabled:           item.IsEnabled,                          // 是否启用
+		CreateBy:            item.CreateBy,                           // 创建人ID
+		CreateTime:          time_util.TimeToStr(item.CreateTime),    // 创建时间
+		UpdateBy:            item.UpdateBy,                           // 更新人ID
+		UpdateTime:          time_util.TimeToString(item.UpdateTime), // 更新时间
 	}
 }
 
@@ -138,21 +137,21 @@ func buildProductAttributeListData(l *QueryProductSpuDetailLogic, pmsProduct *mo
 	for _, item := range result {
 		attributeIds = append(attributeIds, item.ID)
 		list = append(list, &pmsclient.ProductAttributeDataList{
-			Id:           item.ID,                                          // 主键id
-			GroupId:      item.GroupID,                                     // 属性分组ID
-			Name:         item.Name,                                        // 属性名称
-			InputType:    item.InputType,                                   // 输入类型：1-手动输入，2-单选，3-多选
-			ValueType:    item.ValueType,                                   // 值类型：1-文本，2-数字，3-日期
-			InputList:    item.InputList,                                   // 可选值列表，用逗号分隔
-			Unit:         item.Unit,                                        // 单位
-			IsRequired:   item.IsRequired,                                  // 是否必填
-			IsSearchable: item.IsSearchable,                                // 是否支持搜索
-			IsShow:       item.IsShow,                                      // 是否显示
-			Sort:         item.Sort,                                        // 排序
-			CreateBy:     item.CreateBy,                                    // 创建人ID
-			CreateTime:   time_util.TimeToStr(item.CreateTime),             // 创建时间
-			UpdateBy:     pointerprocess.DefaltData(item.UpdateBy).(int64), // 更新人ID
-			UpdateTime:   time_util.TimeToString(item.UpdateTime),          // 更新时间
+			Id:           item.ID,                                 // 主键id
+			GroupId:      item.GroupID,                            // 属性分组ID
+			Name:         item.Name,                               // 属性名称
+			InputType:    item.InputType,                          // 输入类型：1-手动输入，2-单选，3-多选
+			ValueType:    item.ValueType,                          // 值类型：1-文本，2-数字，3-日期
+			InputList:    item.InputList,                          // 可选值列表，用逗号分隔
+			Unit:         item.Unit,                               // 单位
+			IsRequired:   item.IsRequired,                         // 是否必填
+			IsSearchable: item.IsSearchable,                       // 是否支持搜索
+			IsShow:       item.IsShow,                             // 是否显示
+			Sort:         item.Sort,                               // 排序
+			CreateBy:     item.CreateBy,                           // 创建人ID
+			CreateTime:   time_util.TimeToStr(item.CreateTime),    // 创建时间
+			UpdateBy:     item.UpdateBy,                           // 更新人ID
+			UpdateTime:   time_util.TimeToString(item.UpdateTime), // 更新时间
 		})
 	}
 
@@ -168,14 +167,14 @@ func buildProductAttributeValueListData(l *QueryProductSpuDetailLogic, pmsProduc
 		var list []*pmsclient.ProductAttributeValueData
 		for _, item := range result {
 			list = append(list, &pmsclient.ProductAttributeValueData{
-				Id:          item.ID,                                          // 主键id
-				SpuId:       item.SpuID,                                       // 商品SPU ID
-				AttributeId: item.AttributeID,                                 // 属性ID
-				Value:       item.Value,                                       // 属性值
-				CreateBy:    item.CreateBy,                                    // 创建人ID
-				CreateTime:  time_util.TimeToStr(item.CreateTime),             // 创建时间
-				UpdateBy:    pointerprocess.DefaltData(item.UpdateBy).(int64), // 更新人ID
-				UpdateTime:  time_util.TimeToString(item.UpdateTime),          // 更新时间
+				Id:          item.ID,                                 // 主键id
+				SpuId:       item.SpuID,                              // 商品SPU ID
+				AttributeId: item.AttributeID,                        // 属性ID
+				Value:       item.Value,                              // 属性值
+				CreateBy:    item.CreateBy,                           // 创建人ID
+				CreateTime:  time_util.TimeToStr(item.CreateTime),    // 创建时间
+				UpdateBy:    item.UpdateBy,                           // 更新人ID
+				UpdateTime:  time_util.TimeToString(item.UpdateTime), // 更新时间
 			})
 		}
 
@@ -193,28 +192,28 @@ func buildSkuStockListData(l *QueryProductSpuDetailLogic, pmsProduct *model.PmsP
 	for _, item := range result {
 
 		list = append(list, &pmsclient.SkuStockData{
-			Id:                 item.ID,                                          // 商品SpuId
-			SpuId:              item.SpuID,                                       // 商品SpuId
-			Name:               item.Name,                                        // SKU名称
-			SkuCode:            item.SkuCode,                                     // SKU编码
-			MainPic:            item.MainPic,                                     // 主图
-			AlbumPics:          item.AlbumPics,                                   // 图片集
-			Price:              float32(item.Price),                              // 价格
-			PromotionPrice:     float32(item.PromotionPrice),                     // 单品促销价格
-			PromotionStartTime: time_util.TimeToString(item.PromotionStartTime),  // 促销开始时间
-			PromotionEndTime:   time_util.TimeToString(item.PromotionEndTime),    // 促销结束时间
-			Stock:              item.Stock,                                       // 库存
-			LowStock:           item.LowStock,                                    // 预警库存
-			SpecData:           item.SpecData,                                    // 规格数据
-			Weight:             float32(item.Weight),                             // 重量(kg)
-			PublishStatus:      item.PublishStatus,                               // 上架状态：0-下架，1-上架
-			VerifyStatus:       item.VerifyStatus,                                // 审核状态：0-未审核，1-审核通过，2-审核不通过
-			Sort:               item.Sort,                                        // 排序
-			Sales:              item.Sales,                                       // 销量
-			CreateBy:           item.CreateBy,                                    // 创建人ID
-			CreateTime:         time_util.TimeToStr(item.CreateTime),             // 创建时间
-			UpdateBy:           pointerprocess.DefaltData(item.UpdateBy).(int64), // 更新人ID
-			UpdateTime:         time_util.TimeToString(item.UpdateTime),          // 更新时间
+			Id:                 item.ID,                                         // 商品SpuId
+			SpuId:              item.SpuID,                                      // 商品SpuId
+			Name:               item.Name,                                       // SKU名称
+			SkuCode:            item.SkuCode,                                    // SKU编码
+			MainPic:            item.MainPic,                                    // 主图
+			AlbumPics:          item.AlbumPics,                                  // 图片集
+			Price:              float32(item.Price),                             // 价格
+			PromotionPrice:     float32(item.PromotionPrice),                    // 单品促销价格
+			PromotionStartTime: time_util.TimeToString(item.PromotionStartTime), // 促销开始时间
+			PromotionEndTime:   time_util.TimeToString(item.PromotionEndTime),   // 促销结束时间
+			Stock:              item.Stock,                                      // 库存
+			LowStock:           item.LowStock,                                   // 预警库存
+			SpecData:           item.SpecData,                                   // 规格数据
+			Weight:             float32(item.Weight),                            // 重量(kg)
+			PublishStatus:      item.PublishStatus,                              // 上架状态：0-下架，1-上架
+			VerifyStatus:       item.VerifyStatus,                               // 审核状态：0-未审核，1-审核通过，2-审核不通过
+			Sort:               item.Sort,                                       // 排序
+			Sales:              item.Sales,                                      // 销量
+			CreateBy:           item.CreateBy,                                   // 创建人ID
+			CreateTime:         time_util.TimeToStr(item.CreateTime),            // 创建时间
+			UpdateBy:           item.UpdateBy,                                   // 更新人ID
+			UpdateTime:         time_util.TimeToString(item.UpdateTime),         // 更新时间
 		})
 	}
 

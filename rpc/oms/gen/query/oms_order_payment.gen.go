@@ -46,7 +46,6 @@ func newOmsOrderPayment(db *gorm.DB, opts ...gen.DOOption) omsOrderPayment {
 	return _omsOrderPayment
 }
 
-// omsOrderPayment 订单支付表
 type omsOrderPayment struct {
 	omsOrderPaymentDo omsOrderPaymentDo
 
@@ -62,7 +61,7 @@ type omsOrderPayment struct {
 	PayTime       field.Time    // 支付时间
 	CreateTime    field.Time    // 创建时间
 	UpdateTime    field.Time
-	IsDeleted     field.Int32 // 是否删除
+	IsDeleted     field.Int32 // 是否删除(0:否,1:是)
 
 	fieldMap map[string]field.Expr
 }

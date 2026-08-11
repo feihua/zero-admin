@@ -83,7 +83,7 @@ func (l *UpdateCouponLogic) UpdateCoupon(in *smsclient.UpdateCouponReq) (*smscli
 		Description:   in.Description,        // 使用说明
 		CreateBy:      detail.CreateBy,       // 创建人ID
 		CreateTime:    detail.CreateTime,     // 创建时间
-		UpdateBy:      &in.UpdateBy,          // 更新人ID
+		UpdateBy:      in.UpdateBy,           // 更新人ID
 		UpdateTime:    &now,                  // 更新时间
 	}
 

@@ -55,7 +55,6 @@ func newOmsCartItem(db *gorm.DB, opts ...gen.DOOption) omsCartItem {
 	return _omsCartItem
 }
 
-// omsCartItem 购物车表
 type omsCartItem struct {
 	omsCartItemDo omsCartItemDo
 

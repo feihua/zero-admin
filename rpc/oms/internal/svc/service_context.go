@@ -2,14 +2,15 @@ package svc
 
 import (
 	"fmt"
+	"time"
+
 	"github.com/feihua/zero-admin/pkg/mq"
 	"github.com/feihua/zero-admin/rpc/oms/gen/query"
 	"github.com/feihua/zero-admin/rpc/oms/internal/config"
 	"github.com/zeromicro/go-zero/core/logx"
-	"gorm.io/driver/mysql"
+	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 	"gorm.io/gorm/logger"
-	"time"
 )
 
 type ServiceContext struct {
@@ -28,7 +29,7 @@ type ServiceContext struct {
 
 func NewServiceContext(c config.Config) *ServiceContext {
 
-	DB, err := gorm.Open(mysql.Open(c.Mysql.Datasource), &gorm.Config{
+	DB, err := gorm.Open(postgres.Open(c.Postgresql.Datasource), &gorm.Config{
 		SkipDefaultTransaction: true,
 		PrepareStmt:            true,
 		Logger:                 settingLogConfig(),

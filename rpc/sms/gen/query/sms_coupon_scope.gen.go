@@ -39,7 +39,6 @@ func newSmsCouponScope(db *gorm.DB, opts ...gen.DOOption) smsCouponScope {
 	return _smsCouponScope
 }
 
-// smsCouponScope 优惠券使用范围表
 type smsCouponScope struct {
 	smsCouponScopeDo smsCouponScopeDo
 
