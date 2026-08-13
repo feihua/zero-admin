@@ -828,7 +828,7 @@ comment on column cms_topic_category.create_time is '创建时间';
 comment on column cms_topic_category.update_by is '更新者';
 comment on column cms_topic_category.update_time is '更新时间';
 
--- 专题评论表建语句
+-- 话题评论表建语句
 drop table if exists cms_topic_comment;
 create table cms_topic_comment
 (
@@ -841,10 +841,10 @@ create table cms_topic_comment
     show_status      integer     default 1                 not null
 );
 
--- 添加专题评论表注释
-comment on table cms_topic_comment is '专题评论表';
+-- 添加话题评论表注释
+comment on table cms_topic_comment is '话题评论表';
 
--- 添加专题评论表列注释
+-- 添加话题评论表列注释
 comment on column cms_topic_comment.id is '主键id';
 comment on column cms_topic_comment.member_nick_name is '评论人员昵称';
 comment on column cms_topic_comment.topic_id is '专题id';
