@@ -122,18 +122,18 @@ func (l *LoginLogic) queryApiUrls(userId int64) ([]string, string) {
 	var apiUrls []string
 	// 4.1判断是不是超级管理员，则是超级管理员，拿所有权限
 	if common.IsAdmin(l.ctx, userId, l.svcCtx.DB) {
-		sql := `select background_url from sys_menu where background_url != ''`
-		db.WithContext(l.ctx).Raw(sql).Select("background_url").Scan(&apiUrls)
+		sql := `select api_url from sys_menu where api_url != ''`
+		db.WithContext(l.ctx).Raw(sql).Select("api_url").Scan(&apiUrls)
 		return apiUrls, "1"
 	}
 
-	sql := `select sm.background_url
+	sql := `select sm.api_url
 			from sys_user_role sur
 					 left join sys_role sr on sur.role_id = sr.id
 					 left join sys_role_menu srm on sr.id = srm.role_id
 					 left join sys_menu sm on srm.menu_id = sm.id
 			where sur.user_id = ?`
-	db.WithContext(l.ctx).Raw(sql, userId).Select("background_url").Scan(&apiUrls)
+	db.WithContext(l.ctx).Raw(sql, userId).Select("api_url").Scan(&apiUrls)
 
 	return apiUrls, "0"
 }

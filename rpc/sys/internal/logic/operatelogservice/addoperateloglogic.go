@@ -41,14 +41,14 @@ func (l *AddOperateLogLogic) AddOperateLog(in *sysclient.AddOperateLogReq) (*sys
 
 	uri := strings.Split(in.OperateUrl, "?")[0]
 
-	key := l.svcCtx.RedisKey + "background_url"
+	key := l.svcCtx.RedisKey + "api_url"
 	name, _ := l.svcCtx.Redis.HgetCtx(l.ctx, key, uri)
 
 	if name == "" {
 		q := query.SysMenu
 		_ = q.WithContext(l.ctx).Select(q.MenuName).Where(q.APIURL.Eq(uri)).Scan(&name)
 		if name == "" {
-			_, _ = l.svcCtx.Redis.HdelCtx(l.ctx, l.svcCtx.RedisKey+"background_url", uri)
+			_, _ = l.svcCtx.Redis.HdelCtx(l.ctx, l.svcCtx.RedisKey+"api_url", uri)
 			return &sysclient.AddOperateLogResp{}, nil
 		}
 		_ = l.svcCtx.Redis.HsetCtx(l.ctx, key, uri, name)
