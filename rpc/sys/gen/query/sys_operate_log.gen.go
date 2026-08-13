@@ -29,6 +29,7 @@ func newSysOperateLog(db *gorm.DB, opts ...gen.DOOption) sysOperateLog {
 	tableName := _sysOperateLog.sysOperateLogDo.TableName()
 	_sysOperateLog.ALL = field.NewAsterisk(tableName)
 	_sysOperateLog.ID = field.NewInt64(tableName, "id")
+	_sysOperateLog.Title = field.NewString(tableName, "title")
 	_sysOperateLog.OperateName = field.NewString(tableName, "operate_name")
 	_sysOperateLog.OperateIP = field.NewString(tableName, "operate_ip")
 	_sysOperateLog.OperateURL = field.NewString(tableName, "operate_url")
@@ -49,6 +50,7 @@ type sysOperateLog struct {
 
 	ALL          field.Asterisk
 	ID           field.Int64  // 日志主键
+	Title        field.String // 模块标题
 	OperateName  field.String // 操作人员
 	OperateIP    field.String // 主机地址
 	OperateURL   field.String // 请求url
@@ -75,6 +77,7 @@ func (s sysOperateLog) As(alias string) *sysOperateLog {
 func (s *sysOperateLog) updateTableName(table string) *sysOperateLog {
 	s.ALL = field.NewAsterisk(table)
 	s.ID = field.NewInt64(table, "id")
+	s.Title = field.NewString(table, "title")
 	s.OperateName = field.NewString(table, "operate_name")
 	s.OperateIP = field.NewString(table, "operate_ip")
 	s.OperateURL = field.NewString(table, "operate_url")
@@ -112,8 +115,9 @@ func (s *sysOperateLog) GetFieldByName(fieldName string) (field.OrderExpr, bool)
 }
 
 func (s *sysOperateLog) fillFieldMap() {
-	s.fieldMap = make(map[string]field.Expr, 10)
+	s.fieldMap = make(map[string]field.Expr, 11)
 	s.fieldMap["id"] = s.ID
+	s.fieldMap["title"] = s.Title
 	s.fieldMap["operate_name"] = s.OperateName
 	s.fieldMap["operate_ip"] = s.OperateIP
 	s.fieldMap["operate_url"] = s.OperateURL

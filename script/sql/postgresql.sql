@@ -453,6 +453,7 @@ drop table if exists sys_operate_log;
 create table sys_operate_log
 (
     id            bigserial primary key,
+    title         varchar(50)   default ''          not null,
     operate_name  varchar(50) default ''                not null,
     operate_ip    varchar(50) default ''                not null,
     operate_url   text        default ''                not null,
@@ -470,6 +471,7 @@ comment on table sys_operate_log is '操作日志记录';
 
 -- 添加列注释
 comment on column sys_operate_log.id is '日志主键';
+comment on column sys_operate_log.title is '模块标题';
 comment on column sys_operate_log.operate_name is '操作人员';
 comment on column sys_operate_log.operate_ip is '主机地址';
 comment on column sys_operate_log.operate_url is '请求url';

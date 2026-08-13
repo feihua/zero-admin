@@ -65,6 +65,7 @@ func (l *AddOperateLogLogic) AddOperateLog(in *sysclient.AddOperateLogReq) (*sys
 		"loginBrowser": browser, // 登录浏览器
 	})
 	sysLog := &model.SysOperateLog{
+		Title:        name,            // 模块标题
 		OperateName:  in.OperateName,  // 操作人员
 		OperateIP:    in.OperateIp,    // 主机地址
 		OperateURL:   in.OperateUrl,   // 请求URL

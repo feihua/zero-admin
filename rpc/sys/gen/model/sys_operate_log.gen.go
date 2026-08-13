@@ -15,6 +15,7 @@ const TableNameSysOperateLog = "sys_operate_log"
 // SysOperateLog mapped from table <sys_operate_log>
 type SysOperateLog struct {
 	ID           int64          `gorm:"column:id;primaryKey;autoIncrement:true;comment:日志主键" json:"id"`                              // 日志主键
+	Title        string         `gorm:"column:title;not null;default:''::character varying;comment:模块标题" json:"title"`               // 模块标题
 	OperateName  string         `gorm:"column:operate_name;not null;default:''::character varying;comment:操作人员" json:"operate_name"` // 操作人员
 	OperateIP    string         `gorm:"column:operate_ip;not null;default:''::character varying;comment:主机地址" json:"operate_ip"`     // 主机地址
 	OperateURL   string         `gorm:"column:operate_url;not null;default:''::text;comment:请求url" json:"operate_url"`               // 请求url

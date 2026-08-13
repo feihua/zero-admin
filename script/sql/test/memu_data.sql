@@ -95,29 +95,6 @@ DO $$
         INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('查询用户信息详情', 3, 5, parentId, '', '/api/sys/user/queryUserDetail', '', '查询用户信息详情');
         INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('查询用户信息列表', 3, 6, parentId, '', '/api/sys/user/queryUserList', '', '查询用户信息列表');
 
-        -- 配置用户角色关联表权限
-        INSERT INTO sys_menu (id, menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES (nextval('sys_menu_id_seq'), '用户角色关联表管理', 2, 1, 3, '/sys/userRole', '', '', '用户角色关联表管理');
-
-        SELECT currval('sys_menu_id_seq') INTO parentId;
-
-        INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('添加用户角色关联表', 3, 1, parentId, '', '/api/sys/userRole/addUserRole', '', '添加用户角色关联表');
-        INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('删除用户角色关联表', 3, 2, parentId, '', '/api/sys/userRole/deleteUserRole', '', '删除用户角色关联表');
-        INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('更新用户角色关联表', 3, 3, parentId, '', '/api/sys/userRole/updateUserRole', '', '更新用户角色关联表');
-        INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('更新用户角色关联表状态', 3, 4, parentId, '', '/api/sys/userRole/updateUserRoleStatus', '', '更新用户角色关联表状态');
-        INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('查询用户角色关联表详情', 3, 5, parentId, '', '/api/sys/userRole/queryUserRoleDetail', '', '查询用户角色关联表详情');
-        INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('查询用户角色关联表列表', 3, 6, parentId, '', '/api/sys/userRole/queryUserRoleList', '', '查询用户角色关联表列表');
-
-        -- 配置角色和部门关联表权限
-        INSERT INTO sys_menu (id, menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES (nextval('sys_menu_id_seq'), '角色和部门关联表管理', 2, 1, 3, '/sys/roleDept', '', '', '角色和部门关联表管理');
-
-        SELECT currval('sys_menu_id_seq') INTO parentId;
-
-        INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('添加角色和部门关联表', 3, 1, parentId, '', '/api/sys/roleDept/addRoleDept', '', '添加角色和部门关联表');
-        INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('删除角色和部门关联表', 3, 2, parentId, '', '/api/sys/roleDept/deleteRoleDept', '', '删除角色和部门关联表');
-        INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('更新角色和部门关联表', 3, 3, parentId, '', '/api/sys/roleDept/updateRoleDept', '', '更新角色和部门关联表');
-        INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('更新角色和部门关联表状态', 3, 4, parentId, '', '/api/sys/roleDept/updateRoleDeptStatus', '', '更新角色和部门关联表状态');
-        INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('查询角色和部门关联表详情', 3, 5, parentId, '', '/api/sys/roleDept/queryRoleDeptDetail', '', '查询角色和部门关联表详情');
-        INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('查询角色和部门关联表列表', 3, 6, parentId, '', '/api/sys/roleDept/queryRoleDeptList', '', '查询角色和部门关联表列表');
 
         -- 配置角色信息权限
         INSERT INTO sys_menu (id, menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES (nextval('sys_menu_id_seq'), '角色信息管理', 2, 1, 3, '/sys/role', '', '', '角色信息管理');
@@ -130,30 +107,6 @@ DO $$
         INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('更新角色信息状态', 3, 4, parentId, '', '/api/sys/role/updateRoleStatus', '', '更新角色信息状态');
         INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('查询角色信息详情', 3, 5, parentId, '', '/api/sys/role/queryRoleDetail', '', '查询角色信息详情');
         INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('查询角色信息列表', 3, 6, parentId, '', '/api/sys/role/queryRoleList', '', '查询角色信息列表');
-
-        -- 配置角色菜单关联表权限
-        INSERT INTO sys_menu (id, menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES (nextval('sys_menu_id_seq'), '角色菜单关联表管理', 2, 1, 3, '/sys/roleMenu', '', '', '角色菜单关联表管理');
-
-        SELECT currval('sys_menu_id_seq') INTO parentId;
-
-        INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('添加角色菜单关联表', 3, 1, parentId, '', '/api/sys/roleMenu/addRoleMenu', '', '添加角色菜单关联表');
-        INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('删除角色菜单关联表', 3, 2, parentId, '', '/api/sys/roleMenu/deleteRoleMenu', '', '删除角色菜单关联表');
-        INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('更新角色菜单关联表', 3, 3, parentId, '', '/api/sys/roleMenu/updateRoleMenu', '', '更新角色菜单关联表');
-        INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('更新角色菜单关联表状态', 3, 4, parentId, '', '/api/sys/roleMenu/updateRoleMenuStatus', '', '更新角色菜单关联表状态');
-        INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('查询角色菜单关联表详情', 3, 5, parentId, '', '/api/sys/roleMenu/queryRoleMenuDetail', '', '查询角色菜单关联表详情');
-        INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('查询角色菜单关联表列表', 3, 6, parentId, '', '/api/sys/roleMenu/queryRoleMenuList', '', '查询角色菜单关联表列表');
-
-        -- 配置用户与岗位关联表权限
-        INSERT INTO sys_menu (id, menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES (nextval('sys_menu_id_seq'), '用户与岗位关联表管理', 2, 1, 3, '/sys/userPost', '', '', '用户与岗位关联表管理');
-
-        SELECT currval('sys_menu_id_seq') INTO parentId;
-
-        INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('添加用户与岗位关联表', 3, 1, parentId, '', '/api/sys/userPost/addUserPost', '', '添加用户与岗位关联表');
-        INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('删除用户与岗位关联表', 3, 2, parentId, '', '/api/sys/userPost/deleteUserPost', '', '删除用户与岗位关联表');
-        INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('更新用户与岗位关联表', 3, 3, parentId, '', '/api/sys/userPost/updateUserPost', '', '更新用户与岗位关联表');
-        INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('更新用户与岗位关联表状态', 3, 4, parentId, '', '/api/sys/userPost/updateUserPostStatus', '', '更新用户与岗位关联表状态');
-        INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('查询用户与岗位关联表详情', 3, 5, parentId, '', '/api/sys/userPost/queryUserPostDetail', '', '查询用户与岗位关联表详情');
-        INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('查询用户与岗位关联表列表', 3, 6, parentId, '', '/api/sys/userPost/queryUserPostList', '', '查询用户与岗位关联表列表');
 
         -- 配置岗位信息表权限
         INSERT INTO sys_menu (id, menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES (nextval('sys_menu_id_seq'), '岗位信息表管理', 2, 1, 3, '/sys/post', '', '', '岗位信息表管理');
@@ -208,10 +161,7 @@ DO $$
 
         SELECT currval('sys_menu_id_seq') INTO parentId;
 
-        INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('添加系统访问记录', 3, 1, parentId, '', '/api/sys/loginLog/addLoginLog', '', '添加系统访问记录');
         INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('删除系统访问记录', 3, 2, parentId, '', '/api/sys/loginLog/deleteLoginLog', '', '删除系统访问记录');
-        INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('更新系统访问记录', 3, 3, parentId, '', '/api/sys/loginLog/updateLoginLog', '', '更新系统访问记录');
-        INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('更新系统访问记录状态', 3, 4, parentId, '', '/api/sys/loginLog/updateLoginLogStatus', '', '更新系统访问记录状态');
         INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('查询系统访问记录详情', 3, 5, parentId, '', '/api/sys/loginLog/queryLoginLogDetail', '', '查询系统访问记录详情');
         INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('查询系统访问记录列表', 3, 6, parentId, '', '/api/sys/loginLog/queryLoginLogList', '', '查询系统访问记录列表');
 
@@ -232,10 +182,7 @@ DO $$
 
         SELECT currval('sys_menu_id_seq') INTO parentId;
 
-        INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('添加操作日志记录', 3, 1, parentId, '', '/api/sys/operateLog/addOperateLog', '', '添加操作日志记录');
         INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('删除操作日志记录', 3, 2, parentId, '', '/api/sys/operateLog/deleteOperateLog', '', '删除操作日志记录');
-        INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('更新操作日志记录', 3, 3, parentId, '', '/api/sys/operateLog/updateOperateLog', '', '更新操作日志记录');
-        INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('更新操作日志记录状态', 3, 4, parentId, '', '/api/sys/operateLog/updateOperateLogStatus', '', '更新操作日志记录状态');
         INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('查询操作日志记录详情', 3, 5, parentId, '', '/api/sys/operateLog/queryOperateLogDetail', '', '查询操作日志记录详情');
         INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('查询操作日志记录列表', 3, 6, parentId, '', '/api/sys/operateLog/queryOperateLogList', '', '查询操作日志记录列表');
     END $$;
@@ -244,19 +191,6 @@ DO $$
     DECLARE
         parentId bigint;
     BEGIN
-
-
-        -- 配置会员收货地址表权限
-        INSERT INTO sys_menu (id, menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES (nextval('sys_menu_id_seq'), '会员收货地址表管理', 2, 1, 5, '/ums/memberAddress', '', '', '会员收货地址表管理');
-
-        SELECT currval('sys_menu_id_seq') INTO parentId;
-
-        INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('添加会员收货地址表', 3, 1, parentId, '', '/api/ums/memberAddress/addMemberAddress', '', '添加会员收货地址表');
-        INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('删除会员收货地址表', 3, 2, parentId, '', '/api/ums/memberAddress/deleteMemberAddress', '', '删除会员收货地址表');
-        INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('更新会员收货地址表', 3, 3, parentId, '', '/api/ums/memberAddress/updateMemberAddress', '', '更新会员收货地址表');
-        INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('更新会员收货地址表状态', 3, 4, parentId, '', '/api/ums/memberAddress/updateMemberAddressStatus', '', '更新会员收货地址表状态');
-        INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('查询会员收货地址表详情', 3, 5, parentId, '', '/api/ums/memberAddress/queryMemberAddressDetail', '', '查询会员收货地址表详情');
-        INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('查询会员收货地址表列表', 3, 6, parentId, '', '/api/ums/memberAddress/queryMemberAddressList', '', '查询会员收货地址表列表');
 
         -- 配置积分消费设置权限
         INSERT INTO sys_menu (id, menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES (nextval('sys_menu_id_seq'), '积分消费设置管理', 2, 1, 5, '/ums/memberConsumeSetting', '', '', '积分消费设置管理');
@@ -270,24 +204,11 @@ DO $$
         INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('查询积分消费设置详情', 3, 5, parentId, '', '/api/ums/memberConsumeSetting/queryMemberConsumeSettingDetail', '', '查询积分消费设置详情');
         INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('查询积分消费设置列表', 3, 6, parentId, '', '/api/ums/memberConsumeSetting/queryMemberConsumeSettingList', '', '查询积分消费设置列表');
 
-        -- 配置会员成长值记录表权限
-        INSERT INTO sys_menu (id, menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES (nextval('sys_menu_id_seq'), '会员成长值记录表管理', 2, 1, 5, '/ums/memberGrowthLog', '', '', '会员成长值记录表管理');
-
-        SELECT currval('sys_menu_id_seq') INTO parentId;
-
-        INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('添加会员成长值记录表', 3, 1, parentId, '', '/api/ums/memberGrowthLog/addMemberGrowthLog', '', '添加会员成长值记录表');
-        INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('删除会员成长值记录表', 3, 2, parentId, '', '/api/ums/memberGrowthLog/deleteMemberGrowthLog', '', '删除会员成长值记录表');
-        INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('更新会员成长值记录表', 3, 3, parentId, '', '/api/ums/memberGrowthLog/updateMemberGrowthLog', '', '更新会员成长值记录表');
-        INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('更新会员成长值记录表状态', 3, 4, parentId, '', '/api/ums/memberGrowthLog/updateMemberGrowthLogStatus', '', '更新会员成长值记录表状态');
-        INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('查询会员成长值记录表详情', 3, 5, parentId, '', '/api/ums/memberGrowthLog/queryMemberGrowthLogDetail', '', '查询会员成长值记录表详情');
-        INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('查询会员成长值记录表列表', 3, 6, parentId, '', '/api/ums/memberGrowthLog/queryMemberGrowthLogList', '', '查询会员成长值记录表列表');
-
         -- 配置会员信息表权限
         INSERT INTO sys_menu (id, menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES (nextval('sys_menu_id_seq'), '会员信息表管理', 2, 1, 5, '/ums/memberInfo', '', '', '会员信息表管理');
 
         SELECT currval('sys_menu_id_seq') INTO parentId;
 
-        INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('添加会员信息表', 3, 1, parentId, '', '/api/ums/memberInfo/addMemberInfo', '', '添加会员信息表');
         INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('删除会员信息表', 3, 2, parentId, '', '/api/ums/memberInfo/deleteMemberInfo', '', '删除会员信息表');
         INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('更新会员信息表', 3, 3, parentId, '', '/api/ums/memberInfo/updateMemberInfo', '', '更新会员信息表');
         INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('更新会员信息表状态', 3, 4, parentId, '', '/api/ums/memberInfo/updateMemberInfoStatus', '', '更新会员信息表状态');
@@ -306,30 +227,6 @@ DO $$
         INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('查询会员等级表详情', 3, 5, parentId, '', '/api/ums/memberLevel/queryMemberLevelDetail', '', '查询会员等级表详情');
         INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('查询会员等级表列表', 3, 6, parentId, '', '/api/ums/memberLevel/queryMemberLevelList', '', '查询会员等级表列表');
 
-        -- 配置会员登录记录权限
-        INSERT INTO sys_menu (id, menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES (nextval('sys_menu_id_seq'), '会员登录记录管理', 2, 1, 5, '/ums/memberLoginLog', '', '', '会员登录记录管理');
-
-        SELECT currval('sys_menu_id_seq') INTO parentId;
-
-        INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('添加会员登录记录', 3, 1, parentId, '', '/api/ums/memberLoginLog/addMemberLoginLog', '', '添加会员登录记录');
-        INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('删除会员登录记录', 3, 2, parentId, '', '/api/ums/memberLoginLog/deleteMemberLoginLog', '', '删除会员登录记录');
-        INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('更新会员登录记录', 3, 3, parentId, '', '/api/ums/memberLoginLog/updateMemberLoginLog', '', '更新会员登录记录');
-        INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('更新会员登录记录状态', 3, 4, parentId, '', '/api/ums/memberLoginLog/updateMemberLoginLogStatus', '', '更新会员登录记录状态');
-        INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('查询会员登录记录详情', 3, 5, parentId, '', '/api/ums/memberLoginLog/queryMemberLoginLogDetail', '', '查询会员登录记录详情');
-        INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('查询会员登录记录列表', 3, 6, parentId, '', '/api/ums/memberLoginLog/queryMemberLoginLogList', '', '查询会员登录记录列表');
-
-        -- 配置会员积分记录表权限
-        INSERT INTO sys_menu (id, menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES (nextval('sys_menu_id_seq'), '会员积分记录表管理', 2, 1, 5, '/ums/memberPointsLog', '', '', '会员积分记录表管理');
-
-        SELECT currval('sys_menu_id_seq') INTO parentId;
-
-        INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('添加会员积分记录表', 3, 1, parentId, '', '/api/ums/memberPointsLog/addMemberPointsLog', '', '添加会员积分记录表');
-        INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('删除会员积分记录表', 3, 2, parentId, '', '/api/ums/memberPointsLog/deleteMemberPointsLog', '', '删除会员积分记录表');
-        INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('更新会员积分记录表', 3, 3, parentId, '', '/api/ums/memberPointsLog/updateMemberPointsLog', '', '更新会员积分记录表');
-        INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('更新会员积分记录表状态', 3, 4, parentId, '', '/api/ums/memberPointsLog/updateMemberPointsLogStatus', '', '更新会员积分记录表状态');
-        INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('查询会员积分记录表详情', 3, 5, parentId, '', '/api/ums/memberPointsLog/queryMemberPointsLogDetail', '', '查询会员积分记录表详情');
-        INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('查询会员积分记录表列表', 3, 6, parentId, '', '/api/ums/memberPointsLog/queryMemberPointsLogList', '', '查询会员积分记录表列表');
-
         -- 配置会员积分成长规则表权限
         INSERT INTO sys_menu (id, menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES (nextval('sys_menu_id_seq'), '会员积分成长规则表管理', 2, 1, 5, '/ums/memberRuleSetting', '', '', '会员积分成长规则表管理');
 
@@ -342,27 +239,11 @@ DO $$
         INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('查询会员积分成长规则表详情', 3, 5, parentId, '', '/api/ums/memberRuleSetting/queryMemberRuleSettingDetail', '', '查询会员积分成长规则表详情');
         INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('查询会员积分成长规则表列表', 3, 6, parentId, '', '/api/ums/memberRuleSetting/queryMemberRuleSettingList', '', '查询会员积分成长规则表列表');
 
-        -- 配置会员签到记录表权限
-        INSERT INTO sys_menu (id, menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES (nextval('sys_menu_id_seq'), '会员签到记录表管理', 2, 1, 5, '/ums/memberSignLog', '', '', '会员签到记录表管理');
-
-        SELECT currval('sys_menu_id_seq') INTO parentId;
-
-        INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('添加会员签到记录表', 3, 1, parentId, '', '/api/ums/memberSignLog/addMemberSignLog', '', '添加会员签到记录表');
-        INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('删除会员签到记录表', 3, 2, parentId, '', '/api/ums/memberSignLog/deleteMemberSignLog', '', '删除会员签到记录表');
-        INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('更新会员签到记录表', 3, 3, parentId, '', '/api/ums/memberSignLog/updateMemberSignLog', '', '更新会员签到记录表');
-        INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('更新会员签到记录表状态', 3, 4, parentId, '', '/api/ums/memberSignLog/updateMemberSignLogStatus', '', '更新会员签到记录表状态');
-        INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('查询会员签到记录表详情', 3, 5, parentId, '', '/api/ums/memberSignLog/queryMemberSignLogDetail', '', '查询会员签到记录表详情');
-        INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('查询会员签到记录表列表', 3, 6, parentId, '', '/api/ums/memberSignLog/queryMemberSignLogList', '', '查询会员签到记录表列表');
-
         -- 配置会员统计信息权限
         INSERT INTO sys_menu (id, menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES (nextval('sys_menu_id_seq'), '会员统计信息管理', 2, 1, 5, '/ums/memberStatisticsInfo', '', '', '会员统计信息管理');
 
         SELECT currval('sys_menu_id_seq') INTO parentId;
 
-        INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('添加会员统计信息', 3, 1, parentId, '', '/api/ums/memberStatisticsInfo/addMemberStatisticsInfo', '', '添加会员统计信息');
-        INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('删除会员统计信息', 3, 2, parentId, '', '/api/ums/memberStatisticsInfo/deleteMemberStatisticsInfo', '', '删除会员统计信息');
-        INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('更新会员统计信息', 3, 3, parentId, '', '/api/ums/memberStatisticsInfo/updateMemberStatisticsInfo', '', '更新会员统计信息');
-        INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('更新会员统计信息状态', 3, 4, parentId, '', '/api/ums/memberStatisticsInfo/updateMemberStatisticsInfoStatus', '', '更新会员统计信息状态');
         INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('查询会员统计信息详情', 3, 5, parentId, '', '/api/ums/memberStatisticsInfo/queryMemberStatisticsInfoDetail', '', '查询会员统计信息详情');
         INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('查询会员统计信息列表', 3, 6, parentId, '', '/api/ums/memberStatisticsInfo/queryMemberStatisticsInfoList', '', '查询会员统计信息列表');
 
@@ -378,18 +259,6 @@ DO $$
         INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('查询用户标签表详情', 3, 5, parentId, '', '/api/ums/memberTag/queryMemberTagDetail', '', '查询用户标签表详情');
         INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('查询用户标签表列表', 3, 6, parentId, '', '/api/ums/memberTag/queryMemberTagList', '', '查询用户标签表列表');
 
-        -- 配置会员标签关联表权限
-        INSERT INTO sys_menu (id, menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES (nextval('sys_menu_id_seq'), '会员标签关联表管理', 2, 1, 5, '/ums/memberTagRelation', '', '', '会员标签关联表管理');
-
-        SELECT currval('sys_menu_id_seq') INTO parentId;
-
-        INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('添加会员标签关联表', 3, 1, parentId, '', '/api/ums/memberTagRelation/addMemberTagRelation', '', '添加会员标签关联表');
-        INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('删除会员标签关联表', 3, 2, parentId, '', '/api/ums/memberTagRelation/deleteMemberTagRelation', '', '删除会员标签关联表');
-        INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('更新会员标签关联表', 3, 3, parentId, '', '/api/ums/memberTagRelation/updateMemberTagRelation', '', '更新会员标签关联表');
-        INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('更新会员标签关联表状态', 3, 4, parentId, '', '/api/ums/memberTagRelation/updateMemberTagRelationStatus', '', '更新会员标签关联表状态');
-        INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('查询会员标签关联表详情', 3, 5, parentId, '', '/api/ums/memberTagRelation/queryMemberTagRelationDetail', '', '查询会员标签关联表详情');
-        INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('查询会员标签关联表列表', 3, 6, parentId, '', '/api/ums/memberTagRelation/queryMemberTagRelationList', '', '查询会员标签关联表列表');
-
         -- 配置会员任务表权限
         INSERT INTO sys_menu (id, menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES (nextval('sys_menu_id_seq'), '会员任务表管理', 2, 1, 5, '/ums/memberTask', '', '', '会员任务表管理');
 
@@ -402,26 +271,14 @@ DO $$
         INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('查询会员任务表详情', 3, 5, parentId, '', '/api/ums/memberTask/queryMemberTaskDetail', '', '查询会员任务表详情');
         INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('查询会员任务表列表', 3, 6, parentId, '', '/api/ums/memberTask/queryMemberTaskList', '', '查询会员任务表列表');
 
-        -- 配置会员任务关联表权限
-        INSERT INTO sys_menu (id, menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES (nextval('sys_menu_id_seq'), '会员任务关联表管理', 2, 1, 5, '/ums/memberTaskRelation', '', '', '会员任务关联表管理');
 
-        SELECT currval('sys_menu_id_seq') INTO parentId;
-
-        INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('添加会员任务关联表', 3, 1, parentId, '', '/api/ums/memberTaskRelation/addMemberTaskRelation', '', '添加会员任务关联表');
-        INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('删除会员任务关联表', 3, 2, parentId, '', '/api/ums/memberTaskRelation/deleteMemberTaskRelation', '', '删除会员任务关联表');
-        INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('更新会员任务关联表', 3, 3, parentId, '', '/api/ums/memberTaskRelation/updateMemberTaskRelation', '', '更新会员任务关联表');
-        INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('更新会员任务关联表状态', 3, 4, parentId, '', '/api/ums/memberTaskRelation/updateMemberTaskRelationStatus', '', '更新会员任务关联表状态');
-        INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('查询会员任务关联表详情', 3, 5, parentId, '', '/api/ums/memberTaskRelation/queryMemberTaskRelationDetail', '', '查询会员任务关联表详情');
-        INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('查询会员任务关联表列表', 3, 6, parentId, '', '/api/ums/memberTaskRelation/queryMemberTaskRelationList', '', '查询会员任务关联表列表');
-    END $$;
-
+        END $$;
 
 
 DO $$
     DECLARE
         parentId bigint;
     BEGIN
-
 
         -- 配置商品会员价格表权限
         INSERT INTO sys_menu (id, menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES (nextval('sys_menu_id_seq'), '商品会员价格表管理', 2, 1, 6, '/pms/memberPrice', '', '', '商品会员价格表管理');
@@ -495,29 +352,6 @@ DO $$
         INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('查询产品分类详情', 3, 5, parentId, '', '/api/pms/productCategory/queryProductCategoryDetail', '', '查询产品分类详情');
         INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('查询产品分类列表', 3, 6, parentId, '', '/api/pms/productCategory/queryProductCategoryList', '', '查询产品分类列表');
 
-        -- 配置产品的分类和属性的关系表，用于设置分类筛选条件（只支持一级分类）权限
-        INSERT INTO sys_menu (id, menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES (nextval('sys_menu_id_seq'), '产品的分类和属性的关系表，用于设置分类筛选条件（只支持一级分类）管理', 2, 1, 6, '/pms/productCategoryAttributeRelation', '', '', '产品的分类和属性的关系表，用于设置分类筛选条件（只支持一级分类）管理');
-
-        SELECT currval('sys_menu_id_seq') INTO parentId;
-
-        INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('添加产品的分类和属性的关系表，用于设置分类筛选条件（只支持一级分类）', 3, 1, parentId, '', '/api/pms/productCategoryAttributeRelation/addProductCategoryAttributeRelation', '', '添加产品的分类和属性的关系表，用于设置分类筛选条件（只支持一级分类）');
-        INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('删除产品的分类和属性的关系表，用于设置分类筛选条件（只支持一级分类）', 3, 2, parentId, '', '/api/pms/productCategoryAttributeRelation/deleteProductCategoryAttributeRelation', '', '删除产品的分类和属性的关系表，用于设置分类筛选条件（只支持一级分类）');
-        INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('更新产品的分类和属性的关系表，用于设置分类筛选条件（只支持一级分类）', 3, 3, parentId, '', '/api/pms/productCategoryAttributeRelation/updateProductCategoryAttributeRelation', '', '更新产品的分类和属性的关系表，用于设置分类筛选条件（只支持一级分类）');
-        INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('更新产品的分类和属性的关系表，用于设置分类筛选条件（只支持一级分类）状态', 3, 4, parentId, '', '/api/pms/productCategoryAttributeRelation/updateProductCategoryAttributeRelationStatus', '', '更新产品的分类和属性的关系表，用于设置分类筛选条件（只支持一级分类）状态');
-        INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('查询产品的分类和属性的关系表，用于设置分类筛选条件（只支持一级分类）详情', 3, 5, parentId, '', '/api/pms/productCategoryAttributeRelation/queryProductCategoryAttributeRelationDetail', '', '查询产品的分类和属性的关系表，用于设置分类筛选条件（只支持一级分类）详情');
-        INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('查询产品的分类和属性的关系表，用于设置分类筛选条件（只支持一级分类）列表', 3, 6, parentId, '', '/api/pms/productCategoryAttributeRelation/queryProductCategoryAttributeRelationList', '', '查询产品的分类和属性的关系表，用于设置分类筛选条件（只支持一级分类）列表');
-
-        -- 配置产品满减表(只针对同商品)权限
-        INSERT INTO sys_menu (id, menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES (nextval('sys_menu_id_seq'), '产品满减表(只针对同商品)管理', 2, 1, 6, '/pms/productFullReduction', '', '', '产品满减表(只针对同商品)管理');
-
-        SELECT currval('sys_menu_id_seq') INTO parentId;
-
-        INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('添加产品满减表(只针对同商品)', 3, 1, parentId, '', '/api/pms/productFullReduction/addProductFullReduction', '', '添加产品满减表(只针对同商品)');
-        INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('删除产品满减表(只针对同商品)', 3, 2, parentId, '', '/api/pms/productFullReduction/deleteProductFullReduction', '', '删除产品满减表(只针对同商品)');
-        INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('更新产品满减表(只针对同商品)', 3, 3, parentId, '', '/api/pms/productFullReduction/updateProductFullReduction', '', '更新产品满减表(只针对同商品)');
-        INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('更新产品满减表(只针对同商品)状态', 3, 4, parentId, '', '/api/pms/productFullReduction/updateProductFullReductionStatus', '', '更新产品满减表(只针对同商品)状态');
-        INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('查询产品满减表(只针对同商品)详情', 3, 5, parentId, '', '/api/pms/productFullReduction/queryProductFullReductionDetail', '', '查询产品满减表(只针对同商品)详情');
-        INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('查询产品满减表(只针对同商品)列表', 3, 6, parentId, '', '/api/pms/productFullReduction/queryProductFullReductionList', '', '查询产品满减表(只针对同商品)列表');
 
         -- 配置运费模版权限
         INSERT INTO sys_menu (id, menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES (nextval('sys_menu_id_seq'), '运费模版管理', 2, 1, 6, '/pms/feightTemplate', '', '', '运费模版管理');
@@ -530,18 +364,6 @@ DO $$
         INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('更新运费模版状态', 3, 4, parentId, '', '/api/pms/feightTemplate/updateFeightTemplateStatus', '', '更新运费模版状态');
         INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('查询运费模版详情', 3, 5, parentId, '', '/api/pms/feightTemplate/queryFeightTemplateDetail', '', '查询运费模版详情');
         INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('查询运费模版列表', 3, 6, parentId, '', '/api/pms/feightTemplate/queryFeightTemplateList', '', '查询运费模版列表');
-
-        -- 配置产品阶梯价格表(只针对同商品)权限
-        INSERT INTO sys_menu (id, menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES (nextval('sys_menu_id_seq'), '产品阶梯价格表(只针对同商品)管理', 2, 1, 6, '/pms/productLadder', '', '', '产品阶梯价格表(只针对同商品)管理');
-
-        SELECT currval('sys_menu_id_seq') INTO parentId;
-
-        INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('添加产品阶梯价格表(只针对同商品)', 3, 1, parentId, '', '/api/pms/productLadder/addProductLadder', '', '添加产品阶梯价格表(只针对同商品)');
-        INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('删除产品阶梯价格表(只针对同商品)', 3, 2, parentId, '', '/api/pms/productLadder/deleteProductLadder', '', '删除产品阶梯价格表(只针对同商品)');
-        INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('更新产品阶梯价格表(只针对同商品)', 3, 3, parentId, '', '/api/pms/productLadder/updateProductLadder', '', '更新产品阶梯价格表(只针对同商品)');
-        INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('更新产品阶梯价格表(只针对同商品)状态', 3, 4, parentId, '', '/api/pms/productLadder/updateProductLadderStatus', '', '更新产品阶梯价格表(只针对同商品)状态');
-        INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('查询产品阶梯价格表(只针对同商品)详情', 3, 5, parentId, '', '/api/pms/productLadder/queryProductLadderDetail', '', '查询产品阶梯价格表(只针对同商品)详情');
-        INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('查询产品阶梯价格表(只针对同商品)列表', 3, 6, parentId, '', '/api/pms/productLadder/queryProductLadderList', '', '查询产品阶梯价格表(只针对同商品)列表');
 
         -- 配置商品sku表权限
         INSERT INTO sys_menu (id, menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES (nextval('sys_menu_id_seq'), '商品sku表管理', 2, 1, 6, '/pms/productSku', '', '', '商品sku表管理');
@@ -598,19 +420,6 @@ DO $$
         parentId bigint;
     BEGIN
 
-
-        -- 配置购物车表权限
-        INSERT INTO sys_menu (id, menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES (nextval('sys_menu_id_seq'), '购物车表管理', 2, 1, 7, '/oms/cartItem', '', '', '购物车表管理');
-
-        SELECT currval('sys_menu_id_seq') INTO parentId;
-
-        INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('添加购物车表', 3, 1, parentId, '', '/api/oms/cartItem/addCartItem', '', '添加购物车表');
-        INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('删除购物车表', 3, 2, parentId, '', '/api/oms/cartItem/deleteCartItem', '', '删除购物车表');
-        INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('更新购物车表', 3, 3, parentId, '', '/api/oms/cartItem/updateCartItem', '', '更新购物车表');
-        INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('更新购物车表状态', 3, 4, parentId, '', '/api/oms/cartItem/updateCartItemStatus', '', '更新购物车表状态');
-        INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('查询购物车表详情', 3, 5, parentId, '', '/api/oms/cartItem/queryCartItemDetail', '', '查询购物车表详情');
-        INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('查询购物车表列表', 3, 6, parentId, '', '/api/oms/cartItem/queryCartItemList', '', '查询购物车表列表');
-
         -- 配置公司收发货地址表权限
         INSERT INTO sys_menu (id, menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES (nextval('sys_menu_id_seq'), '公司收发货地址表管理', 2, 1, 7, '/oms/companyAddress', '', '', '公司收发货地址表管理');
 
@@ -640,10 +449,7 @@ DO $$
 
         SELECT currval('sys_menu_id_seq') INTO parentId;
 
-        INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('添加订单收货地址表', 3, 1, parentId, '', '/api/oms/orderDelivery/addOrderDelivery', '', '添加订单收货地址表');
-        INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('删除订单收货地址表', 3, 2, parentId, '', '/api/oms/orderDelivery/deleteOrderDelivery', '', '删除订单收货地址表');
         INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('更新订单收货地址表', 3, 3, parentId, '', '/api/oms/orderDelivery/updateOrderDelivery', '', '更新订单收货地址表');
-        INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('更新订单收货地址表状态', 3, 4, parentId, '', '/api/oms/orderDelivery/updateOrderDeliveryStatus', '', '更新订单收货地址表状态');
         INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('查询订单收货地址表详情', 3, 5, parentId, '', '/api/oms/orderDelivery/queryOrderDeliveryDetail', '', '查询订单收货地址表详情');
         INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('查询订单收货地址表列表', 3, 6, parentId, '', '/api/oms/orderDelivery/queryOrderDeliveryList', '', '查询订单收货地址表列表');
 
@@ -652,10 +458,6 @@ DO $$
 
         SELECT currval('sys_menu_id_seq') INTO parentId;
 
-        INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('添加订单商品表', 3, 1, parentId, '', '/api/oms/orderItem/addOrderItem', '', '添加订单商品表');
-        INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('删除订单商品表', 3, 2, parentId, '', '/api/oms/orderItem/deleteOrderItem', '', '删除订单商品表');
-        INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('更新订单商品表', 3, 3, parentId, '', '/api/oms/orderItem/updateOrderItem', '', '更新订单商品表');
-        INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('更新订单商品表状态', 3, 4, parentId, '', '/api/oms/orderItem/updateOrderItemStatus', '', '更新订单商品表状态');
         INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('查询订单商品表详情', 3, 5, parentId, '', '/api/oms/orderItem/queryOrderItemDetail', '', '查询订单商品表详情');
         INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('查询订单商品表列表', 3, 6, parentId, '', '/api/oms/orderItem/queryOrderItemList', '', '查询订单商品表列表');
 
@@ -664,48 +466,10 @@ DO $$
 
         SELECT currval('sys_menu_id_seq') INTO parentId;
 
-        INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('添加订单主表', 3, 1, parentId, '', '/api/oms/orderMain/addOrderMain', '', '添加订单主表');
-        INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('删除订单主表', 3, 2, parentId, '', '/api/oms/orderMain/deleteOrderMain', '', '删除订单主表');
         INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('更新订单主表', 3, 3, parentId, '', '/api/oms/orderMain/updateOrderMain', '', '更新订单主表');
         INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('更新订单主表状态', 3, 4, parentId, '', '/api/oms/orderMain/updateOrderMainStatus', '', '更新订单主表状态');
         INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('查询订单主表详情', 3, 5, parentId, '', '/api/oms/orderMain/queryOrderMainDetail', '', '查询订单主表详情');
         INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('查询订单主表列表', 3, 6, parentId, '', '/api/oms/orderMain/queryOrderMainList', '', '查询订单主表列表');
-
-        -- 配置订单操作记录表权限
-        INSERT INTO sys_menu (id, menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES (nextval('sys_menu_id_seq'), '订单操作记录表管理', 2, 1, 7, '/oms/orderOperationLog', '', '', '订单操作记录表管理');
-
-        SELECT currval('sys_menu_id_seq') INTO parentId;
-
-        INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('添加订单操作记录表', 3, 1, parentId, '', '/api/oms/orderOperationLog/addOrderOperationLog', '', '添加订单操作记录表');
-        INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('删除订单操作记录表', 3, 2, parentId, '', '/api/oms/orderOperationLog/deleteOrderOperationLog', '', '删除订单操作记录表');
-        INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('更新订单操作记录表', 3, 3, parentId, '', '/api/oms/orderOperationLog/updateOrderOperationLog', '', '更新订单操作记录表');
-        INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('更新订单操作记录表状态', 3, 4, parentId, '', '/api/oms/orderOperationLog/updateOrderOperationLogStatus', '', '更新订单操作记录表状态');
-        INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('查询订单操作记录表详情', 3, 5, parentId, '', '/api/oms/orderOperationLog/queryOrderOperationLogDetail', '', '查询订单操作记录表详情');
-        INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('查询订单操作记录表列表', 3, 6, parentId, '', '/api/oms/orderOperationLog/queryOrderOperationLogList', '', '查询订单操作记录表列表');
-
-        -- 配置订单支付表权限
-        INSERT INTO sys_menu (id, menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES (nextval('sys_menu_id_seq'), '订单支付表管理', 2, 1, 7, '/oms/orderPayment', '', '', '订单支付表管理');
-
-        SELECT currval('sys_menu_id_seq') INTO parentId;
-
-        INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('添加订单支付表', 3, 1, parentId, '', '/api/oms/orderPayment/addOrderPayment', '', '添加订单支付表');
-        INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('删除订单支付表', 3, 2, parentId, '', '/api/oms/orderPayment/deleteOrderPayment', '', '删除订单支付表');
-        INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('更新订单支付表', 3, 3, parentId, '', '/api/oms/orderPayment/updateOrderPayment', '', '更新订单支付表');
-        INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('更新订单支付表状态', 3, 4, parentId, '', '/api/oms/orderPayment/updateOrderPaymentStatus', '', '更新订单支付表状态');
-        INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('查询订单支付表详情', 3, 5, parentId, '', '/api/oms/orderPayment/queryOrderPaymentDetail', '', '查询订单支付表详情');
-        INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('查询订单支付表列表', 3, 6, parentId, '', '/api/oms/orderPayment/queryOrderPaymentList', '', '查询订单支付表列表');
-
-        -- 配置订单优惠信息表权限
-        INSERT INTO sys_menu (id, menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES (nextval('sys_menu_id_seq'), '订单优惠信息表管理', 2, 1, 7, '/oms/orderPromotion', '', '', '订单优惠信息表管理');
-
-        SELECT currval('sys_menu_id_seq') INTO parentId;
-
-        INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('添加订单优惠信息表', 3, 1, parentId, '', '/api/oms/orderPromotion/addOrderPromotion', '', '添加订单优惠信息表');
-        INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('删除订单优惠信息表', 3, 2, parentId, '', '/api/oms/orderPromotion/deleteOrderPromotion', '', '删除订单优惠信息表');
-        INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('更新订单优惠信息表', 3, 3, parentId, '', '/api/oms/orderPromotion/updateOrderPromotion', '', '更新订单优惠信息表');
-        INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('更新订单优惠信息表状态', 3, 4, parentId, '', '/api/oms/orderPromotion/updateOrderPromotionStatus', '', '更新订单优惠信息表状态');
-        INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('查询订单优惠信息表详情', 3, 5, parentId, '', '/api/oms/orderPromotion/queryOrderPromotionDetail', '', '查询订单优惠信息表详情');
-        INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('查询订单优惠信息表列表', 3, 6, parentId, '', '/api/oms/orderPromotion/queryOrderPromotionList', '', '查询订单优惠信息表列表');
 
         -- 配置退货/售后主表权限
         INSERT INTO sys_menu (id, menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES (nextval('sys_menu_id_seq'), '退货/售后主表管理', 2, 1, 7, '/oms/orderReturn', '', '', '退货/售后主表管理');
@@ -906,7 +670,6 @@ DO $$
 
         SELECT currval('sys_menu_id_seq') INTO parentId;
 
-        INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('添加用户举报表', 3, 1, parentId, '', '/api/cms/memberReport/addMemberReport', '', '添加用户举报表');
         INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('删除用户举报表', 3, 2, parentId, '', '/api/cms/memberReport/deleteMemberReport', '', '删除用户举报表');
         INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('更新用户举报表', 3, 3, parentId, '', '/api/cms/memberReport/updateMemberReport', '', '更新用户举报表');
         INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('更新用户举报表状态', 3, 4, parentId, '', '/api/cms/memberReport/updateMemberReportStatus', '', '更新用户举报表状态');
@@ -924,18 +687,6 @@ DO $$
         INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('更新优选专区状态', 3, 4, parentId, '', '/api/cms/preferredArea/updatePreferredAreaStatus', '', '更新优选专区状态');
         INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('查询优选专区详情', 3, 5, parentId, '', '/api/cms/preferredArea/queryPreferredAreaDetail', '', '查询优选专区详情');
         INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('查询优选专区列表', 3, 6, parentId, '', '/api/cms/preferredArea/queryPreferredAreaList', '', '查询优选专区列表');
-
-        -- 配置优选专区和产品关系表权限
-        INSERT INTO sys_menu (id, menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES (nextval('sys_menu_id_seq'), '优选专区和产品关系表管理', 2, 1, 9, '/cms/preferredAreaProductRelation', '', '', '优选专区和产品关系表管理');
-
-        SELECT currval('sys_menu_id_seq') INTO parentId;
-
-        INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('添加优选专区和产品关系表', 3, 1, parentId, '', '/api/cms/preferredAreaProductRelation/addPreferredAreaProductRelation', '', '添加优选专区和产品关系表');
-        INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('删除优选专区和产品关系表', 3, 2, parentId, '', '/api/cms/preferredAreaProductRelation/deletePreferredAreaProductRelation', '', '删除优选专区和产品关系表');
-        INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('更新优选专区和产品关系表', 3, 3, parentId, '', '/api/cms/preferredAreaProductRelation/updatePreferredAreaProductRelation', '', '更新优选专区和产品关系表');
-        INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('更新优选专区和产品关系表状态', 3, 4, parentId, '', '/api/cms/preferredAreaProductRelation/updatePreferredAreaProductRelationStatus', '', '更新优选专区和产品关系表状态');
-        INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('查询优选专区和产品关系表详情', 3, 5, parentId, '', '/api/cms/preferredAreaProductRelation/queryPreferredAreaProductRelationDetail', '', '查询优选专区和产品关系表详情');
-        INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('查询优选专区和产品关系表列表', 3, 6, parentId, '', '/api/cms/preferredAreaProductRelation/queryPreferredAreaProductRelationList', '', '查询优选专区和产品关系表列表');
 
         -- 配置专题表权限
         INSERT INTO sys_menu (id, menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES (nextval('sys_menu_id_seq'), '专题表管理', 2, 1, 9, '/cms/subject', '', '', '专题表管理');
@@ -966,24 +717,11 @@ DO $$
 
         SELECT currval('sys_menu_id_seq') INTO parentId;
 
-        INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('添加专题评论表', 3, 1, parentId, '', '/api/cms/subjectComment/addSubjectComment', '', '添加专题评论表');
         INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('删除专题评论表', 3, 2, parentId, '', '/api/cms/subjectComment/deleteSubjectComment', '', '删除专题评论表');
         INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('更新专题评论表', 3, 3, parentId, '', '/api/cms/subjectComment/updateSubjectComment', '', '更新专题评论表');
         INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('更新专题评论表状态', 3, 4, parentId, '', '/api/cms/subjectComment/updateSubjectCommentStatus', '', '更新专题评论表状态');
         INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('查询专题评论表详情', 3, 5, parentId, '', '/api/cms/subjectComment/querySubjectCommentDetail', '', '查询专题评论表详情');
         INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('查询专题评论表列表', 3, 6, parentId, '', '/api/cms/subjectComment/querySubjectCommentList', '', '查询专题评论表列表');
-
-        -- 配置专题商品关系表权限
-        INSERT INTO sys_menu (id, menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES (nextval('sys_menu_id_seq'), '专题商品关系表管理', 2, 1, 9, '/cms/subjectProductRelation', '', '', '专题商品关系表管理');
-
-        SELECT currval('sys_menu_id_seq') INTO parentId;
-
-        INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('添加专题商品关系表', 3, 1, parentId, '', '/api/cms/subjectProductRelation/addSubjectProductRelation', '', '添加专题商品关系表');
-        INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('删除专题商品关系表', 3, 2, parentId, '', '/api/cms/subjectProductRelation/deleteSubjectProductRelation', '', '删除专题商品关系表');
-        INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('更新专题商品关系表', 3, 3, parentId, '', '/api/cms/subjectProductRelation/updateSubjectProductRelation', '', '更新专题商品关系表');
-        INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('更新专题商品关系表状态', 3, 4, parentId, '', '/api/cms/subjectProductRelation/updateSubjectProductRelationStatus', '', '更新专题商品关系表状态');
-        INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('查询专题商品关系表详情', 3, 5, parentId, '', '/api/cms/subjectProductRelation/querySubjectProductRelationDetail', '', '查询专题商品关系表详情');
-        INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('查询专题商品关系表列表', 3, 6, parentId, '', '/api/cms/subjectProductRelation/querySubjectProductRelationList', '', '查询专题商品关系表列表');
 
         -- 配置话题表权限
         INSERT INTO sys_menu (id, menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES (nextval('sys_menu_id_seq'), '话题表管理', 2, 1, 9, '/cms/topic', '', '', '话题表管理');
@@ -1014,7 +752,6 @@ DO $$
 
         SELECT currval('sys_menu_id_seq') INTO parentId;
 
-        INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('添加话题评论表', 3, 1, parentId, '', '/api/cms/topicComment/addTopicComment', '', '添加话题评论表');
         INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('删除话题评论表', 3, 2, parentId, '', '/api/cms/topicComment/deleteTopicComment', '', '删除话题评论表');
         INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('更新话题评论表', 3, 3, parentId, '', '/api/cms/topicComment/updateTopicComment', '', '更新话题评论表');
         INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('更新话题评论表状态', 3, 4, parentId, '', '/api/cms/topicComment/updateTopicCommentStatus', '', '更新话题评论表状态');
