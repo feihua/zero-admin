@@ -89,7 +89,7 @@ func buildMenuTree(menus []*model.SysMenu) ([]*sysclient.MenuListTree, []string)
 	var urls = make([]string, 0, len(menus))
 
 	for _, menu := range menus {
-		if menu.MenuType == 1 || menu.MenuType == 0 {
+		if menu.MenuType == 1 || menu.MenuType == 2 {
 			menuListTrees = append(menuListTrees, &sysclient.MenuListTree{
 				Id:           menu.ID,           // 菜单id
 				Name:         menu.MenuName,     // 菜单名称
