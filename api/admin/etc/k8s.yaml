@@ -39,11 +39,22 @@ Auth:
   # 不需要拦截的url
   ExcludeUrl: "/api/sys/user/info,/api/sys/user/queryAllRelations,/api/sys/role/queryMenuByRoleId"
 
+Prometheus:
+  Host: 127.0.0.1
+  Port: 8188
+  Path: /metrics
+
 Redis:
   Address: 110.41.179.89:30195
   Pass: r-wz9wop62956dh5k9ed
+
+Swagger:
+  IsTest: true  #是否打开swagger，true为打开，false为关闭（生产环境需要关闭）
+  Path: "api/admin/static"
+
+
 Log:
   ServiceName: admin-api
   Stat: false # go-zero 版本 >= 1.5.0 才支持
-#  Mode: file
-#  Path: logs/front
+  Mode: file
+  Path: logs/front

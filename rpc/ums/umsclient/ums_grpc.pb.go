@@ -19,12 +19,12 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	MemberAddressService_AddMemberAddress_FullMethodName          = "/umsclient.MemberAddressService/AddMemberAddress"
-	MemberAddressService_DeleteMemberAddress_FullMethodName       = "/umsclient.MemberAddressService/DeleteMemberAddress"
-	MemberAddressService_UpdateMemberAddress_FullMethodName       = "/umsclient.MemberAddressService/UpdateMemberAddress"
-	MemberAddressService_UpdateMemberAddressStatus_FullMethodName = "/umsclient.MemberAddressService/UpdateMemberAddressStatus"
-	MemberAddressService_QueryMemberAddressDetail_FullMethodName  = "/umsclient.MemberAddressService/QueryMemberAddressDetail"
-	MemberAddressService_QueryMemberAddressList_FullMethodName    = "/umsclient.MemberAddressService/QueryMemberAddressList"
+	MemberAddressService_AddMemberAddress_FullMethodName          = "/ums.MemberAddressService/AddMemberAddress"
+	MemberAddressService_DeleteMemberAddress_FullMethodName       = "/ums.MemberAddressService/DeleteMemberAddress"
+	MemberAddressService_UpdateMemberAddress_FullMethodName       = "/ums.MemberAddressService/UpdateMemberAddress"
+	MemberAddressService_UpdateMemberAddressStatus_FullMethodName = "/ums.MemberAddressService/UpdateMemberAddressStatus"
+	MemberAddressService_QueryMemberAddressDetail_FullMethodName  = "/ums.MemberAddressService/QueryMemberAddressDetail"
+	MemberAddressService_QueryMemberAddressList_FullMethodName    = "/ums.MemberAddressService/QueryMemberAddressList"
 )
 
 // MemberAddressServiceClient is the client API for MemberAddressService service.
@@ -273,7 +273,7 @@ func _MemberAddressService_QueryMemberAddressList_Handler(srv interface{}, ctx c
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var MemberAddressService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "umsclient.MemberAddressService",
+	ServiceName: "ums.MemberAddressService",
 	HandlerType: (*MemberAddressServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -306,10 +306,10 @@ var MemberAddressService_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	MemberBrandAttentionService_AddMemberBrandAttention_FullMethodName         = "/umsclient.MemberBrandAttentionService/AddMemberBrandAttention"
-	MemberBrandAttentionService_DeleteMemberBrandAttention_FullMethodName      = "/umsclient.MemberBrandAttentionService/DeleteMemberBrandAttention"
-	MemberBrandAttentionService_QueryMemberBrandAttentionDetail_FullMethodName = "/umsclient.MemberBrandAttentionService/QueryMemberBrandAttentionDetail"
-	MemberBrandAttentionService_QueryMemberBrandAttentionList_FullMethodName   = "/umsclient.MemberBrandAttentionService/QueryMemberBrandAttentionList"
+	MemberBrandAttentionService_AddMemberBrandAttention_FullMethodName         = "/ums.MemberBrandAttentionService/AddMemberBrandAttention"
+	MemberBrandAttentionService_DeleteMemberBrandAttention_FullMethodName      = "/ums.MemberBrandAttentionService/DeleteMemberBrandAttention"
+	MemberBrandAttentionService_QueryMemberBrandAttentionDetail_FullMethodName = "/ums.MemberBrandAttentionService/QueryMemberBrandAttentionDetail"
+	MemberBrandAttentionService_QueryMemberBrandAttentionList_FullMethodName   = "/ums.MemberBrandAttentionService/QueryMemberBrandAttentionList"
 )
 
 // MemberBrandAttentionServiceClient is the client API for MemberBrandAttentionService service.
@@ -491,7 +491,7 @@ func _MemberBrandAttentionService_QueryMemberBrandAttentionList_Handler(srv inte
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var MemberBrandAttentionService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "umsclient.MemberBrandAttentionService",
+	ServiceName: "ums.MemberBrandAttentionService",
 	HandlerType: (*MemberBrandAttentionServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -516,13 +516,13 @@ var MemberBrandAttentionService_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	MemberConsumeSettingService_AddMemberConsumeSetting_FullMethodName         = "/umsclient.MemberConsumeSettingService/AddMemberConsumeSetting"
-	MemberConsumeSettingService_DeleteMemberConsumeSetting_FullMethodName      = "/umsclient.MemberConsumeSettingService/DeleteMemberConsumeSetting"
-	MemberConsumeSettingService_UpdateMemberConsumeSetting_FullMethodName      = "/umsclient.MemberConsumeSettingService/UpdateMemberConsumeSetting"
-	MemberConsumeSettingService_UpdateStatus_FullMethodName                    = "/umsclient.MemberConsumeSettingService/UpdateStatus"
-	MemberConsumeSettingService_UpdateCouponStatus_FullMethodName              = "/umsclient.MemberConsumeSettingService/UpdateCouponStatus"
-	MemberConsumeSettingService_QueryMemberConsumeSettingDetail_FullMethodName = "/umsclient.MemberConsumeSettingService/QueryMemberConsumeSettingDetail"
-	MemberConsumeSettingService_QueryMemberConsumeSettingList_FullMethodName   = "/umsclient.MemberConsumeSettingService/QueryMemberConsumeSettingList"
+	MemberConsumeSettingService_AddMemberConsumeSetting_FullMethodName         = "/ums.MemberConsumeSettingService/AddMemberConsumeSetting"
+	MemberConsumeSettingService_DeleteMemberConsumeSetting_FullMethodName      = "/ums.MemberConsumeSettingService/DeleteMemberConsumeSetting"
+	MemberConsumeSettingService_UpdateMemberConsumeSetting_FullMethodName      = "/ums.MemberConsumeSettingService/UpdateMemberConsumeSetting"
+	MemberConsumeSettingService_UpdateStatus_FullMethodName                    = "/ums.MemberConsumeSettingService/UpdateStatus"
+	MemberConsumeSettingService_UpdateCouponStatus_FullMethodName              = "/ums.MemberConsumeSettingService/UpdateCouponStatus"
+	MemberConsumeSettingService_QueryMemberConsumeSettingDetail_FullMethodName = "/ums.MemberConsumeSettingService/QueryMemberConsumeSettingDetail"
+	MemberConsumeSettingService_QueryMemberConsumeSettingList_FullMethodName   = "/ums.MemberConsumeSettingService/QueryMemberConsumeSettingList"
 )
 
 // MemberConsumeSettingServiceClient is the client API for MemberConsumeSettingService service.
@@ -806,7 +806,7 @@ func _MemberConsumeSettingService_QueryMemberConsumeSettingList_Handler(srv inte
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var MemberConsumeSettingService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "umsclient.MemberConsumeSettingService",
+	ServiceName: "ums.MemberConsumeSettingService",
 	HandlerType: (*MemberConsumeSettingServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -843,9 +843,9 @@ var MemberConsumeSettingService_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	MemberGrowthLogService_AddMemberGrowthLog_FullMethodName         = "/umsclient.MemberGrowthLogService/AddMemberGrowthLog"
-	MemberGrowthLogService_QueryMemberGrowthLogDetail_FullMethodName = "/umsclient.MemberGrowthLogService/QueryMemberGrowthLogDetail"
-	MemberGrowthLogService_QueryMemberGrowthLogList_FullMethodName   = "/umsclient.MemberGrowthLogService/QueryMemberGrowthLogList"
+	MemberGrowthLogService_AddMemberGrowthLog_FullMethodName         = "/ums.MemberGrowthLogService/AddMemberGrowthLog"
+	MemberGrowthLogService_QueryMemberGrowthLogDetail_FullMethodName = "/ums.MemberGrowthLogService/QueryMemberGrowthLogDetail"
+	MemberGrowthLogService_QueryMemberGrowthLogList_FullMethodName   = "/ums.MemberGrowthLogService/QueryMemberGrowthLogList"
 )
 
 // MemberGrowthLogServiceClient is the client API for MemberGrowthLogService service.
@@ -993,7 +993,7 @@ func _MemberGrowthLogService_QueryMemberGrowthLogList_Handler(srv interface{}, c
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var MemberGrowthLogService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "umsclient.MemberGrowthLogService",
+	ServiceName: "ums.MemberGrowthLogService",
 	HandlerType: (*MemberGrowthLogServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -1014,15 +1014,15 @@ var MemberGrowthLogService_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	MemberInfoService_Register_FullMethodName               = "/umsclient.MemberInfoService/Register"
-	MemberInfoService_DeleteMemberInfo_FullMethodName       = "/umsclient.MemberInfoService/DeleteMemberInfo"
-	MemberInfoService_UpdateMemberInfo_FullMethodName       = "/umsclient.MemberInfoService/UpdateMemberInfo"
-	MemberInfoService_UpdateMemberInfoStatus_FullMethodName = "/umsclient.MemberInfoService/UpdateMemberInfoStatus"
-	MemberInfoService_QueryMemberInfoDetail_FullMethodName  = "/umsclient.MemberInfoService/QueryMemberInfoDetail"
-	MemberInfoService_QueryMemberInfoList_FullMethodName    = "/umsclient.MemberInfoService/QueryMemberInfoList"
-	MemberInfoService_Login_FullMethodName                  = "/umsclient.MemberInfoService/Login"
-	MemberInfoService_UpdateMemberPoints_FullMethodName     = "/umsclient.MemberInfoService/UpdateMemberPoints"
-	MemberInfoService_UpdateFirstLoginStatus_FullMethodName = "/umsclient.MemberInfoService/UpdateFirstLoginStatus"
+	MemberInfoService_Register_FullMethodName               = "/ums.MemberInfoService/Register"
+	MemberInfoService_DeleteMemberInfo_FullMethodName       = "/ums.MemberInfoService/DeleteMemberInfo"
+	MemberInfoService_UpdateMemberInfo_FullMethodName       = "/ums.MemberInfoService/UpdateMemberInfo"
+	MemberInfoService_UpdateMemberInfoStatus_FullMethodName = "/ums.MemberInfoService/UpdateMemberInfoStatus"
+	MemberInfoService_QueryMemberInfoDetail_FullMethodName  = "/ums.MemberInfoService/QueryMemberInfoDetail"
+	MemberInfoService_QueryMemberInfoList_FullMethodName    = "/ums.MemberInfoService/QueryMemberInfoList"
+	MemberInfoService_Login_FullMethodName                  = "/ums.MemberInfoService/Login"
+	MemberInfoService_UpdateMemberPoints_FullMethodName     = "/ums.MemberInfoService/UpdateMemberPoints"
+	MemberInfoService_UpdateFirstLoginStatus_FullMethodName = "/ums.MemberInfoService/UpdateFirstLoginStatus"
 )
 
 // MemberInfoServiceClient is the client API for MemberInfoService service.
@@ -1373,7 +1373,7 @@ func _MemberInfoService_UpdateFirstLoginStatus_Handler(srv interface{}, ctx cont
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var MemberInfoService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "umsclient.MemberInfoService",
+	ServiceName: "ums.MemberInfoService",
 	HandlerType: (*MemberInfoServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -1418,12 +1418,12 @@ var MemberInfoService_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	MemberLevelService_AddMemberLevel_FullMethodName          = "/umsclient.MemberLevelService/AddMemberLevel"
-	MemberLevelService_DeleteMemberLevel_FullMethodName       = "/umsclient.MemberLevelService/DeleteMemberLevel"
-	MemberLevelService_UpdateMemberLevel_FullMethodName       = "/umsclient.MemberLevelService/UpdateMemberLevel"
-	MemberLevelService_UpdateMemberLevelStatus_FullMethodName = "/umsclient.MemberLevelService/UpdateMemberLevelStatus"
-	MemberLevelService_QueryMemberLevelDetail_FullMethodName  = "/umsclient.MemberLevelService/QueryMemberLevelDetail"
-	MemberLevelService_QueryMemberLevelList_FullMethodName    = "/umsclient.MemberLevelService/QueryMemberLevelList"
+	MemberLevelService_AddMemberLevel_FullMethodName          = "/ums.MemberLevelService/AddMemberLevel"
+	MemberLevelService_DeleteMemberLevel_FullMethodName       = "/ums.MemberLevelService/DeleteMemberLevel"
+	MemberLevelService_UpdateMemberLevel_FullMethodName       = "/ums.MemberLevelService/UpdateMemberLevel"
+	MemberLevelService_UpdateMemberLevelStatus_FullMethodName = "/ums.MemberLevelService/UpdateMemberLevelStatus"
+	MemberLevelService_QueryMemberLevelDetail_FullMethodName  = "/ums.MemberLevelService/QueryMemberLevelDetail"
+	MemberLevelService_QueryMemberLevelList_FullMethodName    = "/ums.MemberLevelService/QueryMemberLevelList"
 )
 
 // MemberLevelServiceClient is the client API for MemberLevelService service.
@@ -1672,7 +1672,7 @@ func _MemberLevelService_QueryMemberLevelList_Handler(srv interface{}, ctx conte
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var MemberLevelService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "umsclient.MemberLevelService",
+	ServiceName: "ums.MemberLevelService",
 	HandlerType: (*MemberLevelServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -1705,8 +1705,8 @@ var MemberLevelService_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	MemberLoginLogService_DeleteMemberLoginLog_FullMethodName    = "/umsclient.MemberLoginLogService/DeleteMemberLoginLog"
-	MemberLoginLogService_QueryMemberLoginLogList_FullMethodName = "/umsclient.MemberLoginLogService/QueryMemberLoginLogList"
+	MemberLoginLogService_DeleteMemberLoginLog_FullMethodName    = "/ums.MemberLoginLogService/DeleteMemberLoginLog"
+	MemberLoginLogService_QueryMemberLoginLogList_FullMethodName = "/ums.MemberLoginLogService/QueryMemberLoginLogList"
 )
 
 // MemberLoginLogServiceClient is the client API for MemberLoginLogService service.
@@ -1819,7 +1819,7 @@ func _MemberLoginLogService_QueryMemberLoginLogList_Handler(srv interface{}, ctx
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var MemberLoginLogService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "umsclient.MemberLoginLogService",
+	ServiceName: "ums.MemberLoginLogService",
 	HandlerType: (*MemberLoginLogServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -1836,9 +1836,9 @@ var MemberLoginLogService_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	MemberPointsLogService_AddMemberPointsLog_FullMethodName         = "/umsclient.MemberPointsLogService/AddMemberPointsLog"
-	MemberPointsLogService_QueryMemberPointsLogDetail_FullMethodName = "/umsclient.MemberPointsLogService/QueryMemberPointsLogDetail"
-	MemberPointsLogService_QueryMemberPointsLogList_FullMethodName   = "/umsclient.MemberPointsLogService/QueryMemberPointsLogList"
+	MemberPointsLogService_AddMemberPointsLog_FullMethodName         = "/ums.MemberPointsLogService/AddMemberPointsLog"
+	MemberPointsLogService_QueryMemberPointsLogDetail_FullMethodName = "/ums.MemberPointsLogService/QueryMemberPointsLogDetail"
+	MemberPointsLogService_QueryMemberPointsLogList_FullMethodName   = "/ums.MemberPointsLogService/QueryMemberPointsLogList"
 )
 
 // MemberPointsLogServiceClient is the client API for MemberPointsLogService service.
@@ -1986,7 +1986,7 @@ func _MemberPointsLogService_QueryMemberPointsLogList_Handler(srv interface{}, c
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var MemberPointsLogService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "umsclient.MemberPointsLogService",
+	ServiceName: "ums.MemberPointsLogService",
 	HandlerType: (*MemberPointsLogServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -2007,8 +2007,8 @@ var MemberPointsLogService_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	MemberProductCategoryRelationService_AddMemberProductCategoryRelation_FullMethodName       = "/umsclient.MemberProductCategoryRelationService/AddMemberProductCategoryRelation"
-	MemberProductCategoryRelationService_QueryMemberProductCategoryRelationList_FullMethodName = "/umsclient.MemberProductCategoryRelationService/QueryMemberProductCategoryRelationList"
+	MemberProductCategoryRelationService_AddMemberProductCategoryRelation_FullMethodName       = "/ums.MemberProductCategoryRelationService/AddMemberProductCategoryRelation"
+	MemberProductCategoryRelationService_QueryMemberProductCategoryRelationList_FullMethodName = "/ums.MemberProductCategoryRelationService/QueryMemberProductCategoryRelationList"
 )
 
 // MemberProductCategoryRelationServiceClient is the client API for MemberProductCategoryRelationService service.
@@ -2122,7 +2122,7 @@ func _MemberProductCategoryRelationService_QueryMemberProductCategoryRelationLis
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var MemberProductCategoryRelationService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "umsclient.MemberProductCategoryRelationService",
+	ServiceName: "ums.MemberProductCategoryRelationService",
 	HandlerType: (*MemberProductCategoryRelationServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -2139,10 +2139,10 @@ var MemberProductCategoryRelationService_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	MemberProductCollectionService_AddMemberProductCollection_FullMethodName         = "/umsclient.MemberProductCollectionService/AddMemberProductCollection"
-	MemberProductCollectionService_DeleteMemberProductCollection_FullMethodName      = "/umsclient.MemberProductCollectionService/DeleteMemberProductCollection"
-	MemberProductCollectionService_QueryMemberProductCollectionDetail_FullMethodName = "/umsclient.MemberProductCollectionService/QueryMemberProductCollectionDetail"
-	MemberProductCollectionService_QueryMemberProductCollectionList_FullMethodName   = "/umsclient.MemberProductCollectionService/QueryMemberProductCollectionList"
+	MemberProductCollectionService_AddMemberProductCollection_FullMethodName         = "/ums.MemberProductCollectionService/AddMemberProductCollection"
+	MemberProductCollectionService_DeleteMemberProductCollection_FullMethodName      = "/ums.MemberProductCollectionService/DeleteMemberProductCollection"
+	MemberProductCollectionService_QueryMemberProductCollectionDetail_FullMethodName = "/ums.MemberProductCollectionService/QueryMemberProductCollectionDetail"
+	MemberProductCollectionService_QueryMemberProductCollectionList_FullMethodName   = "/ums.MemberProductCollectionService/QueryMemberProductCollectionList"
 )
 
 // MemberProductCollectionServiceClient is the client API for MemberProductCollectionService service.
@@ -2324,7 +2324,7 @@ func _MemberProductCollectionService_QueryMemberProductCollectionList_Handler(sr
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var MemberProductCollectionService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "umsclient.MemberProductCollectionService",
+	ServiceName: "ums.MemberProductCollectionService",
 	HandlerType: (*MemberProductCollectionServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -2349,10 +2349,10 @@ var MemberProductCollectionService_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	MemberReadHistoryService_AddMemberReadHistory_FullMethodName         = "/umsclient.MemberReadHistoryService/AddMemberReadHistory"
-	MemberReadHistoryService_DeleteMemberReadHistory_FullMethodName      = "/umsclient.MemberReadHistoryService/DeleteMemberReadHistory"
-	MemberReadHistoryService_QueryMemberReadHistoryDetail_FullMethodName = "/umsclient.MemberReadHistoryService/QueryMemberReadHistoryDetail"
-	MemberReadHistoryService_QueryMemberReadHistoryList_FullMethodName   = "/umsclient.MemberReadHistoryService/QueryMemberReadHistoryList"
+	MemberReadHistoryService_AddMemberReadHistory_FullMethodName         = "/ums.MemberReadHistoryService/AddMemberReadHistory"
+	MemberReadHistoryService_DeleteMemberReadHistory_FullMethodName      = "/ums.MemberReadHistoryService/DeleteMemberReadHistory"
+	MemberReadHistoryService_QueryMemberReadHistoryDetail_FullMethodName = "/ums.MemberReadHistoryService/QueryMemberReadHistoryDetail"
+	MemberReadHistoryService_QueryMemberReadHistoryList_FullMethodName   = "/ums.MemberReadHistoryService/QueryMemberReadHistoryList"
 )
 
 // MemberReadHistoryServiceClient is the client API for MemberReadHistoryService service.
@@ -2534,7 +2534,7 @@ func _MemberReadHistoryService_QueryMemberReadHistoryList_Handler(srv interface{
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var MemberReadHistoryService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "umsclient.MemberReadHistoryService",
+	ServiceName: "ums.MemberReadHistoryService",
 	HandlerType: (*MemberReadHistoryServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -2559,12 +2559,12 @@ var MemberReadHistoryService_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	MemberRuleSettingService_AddMemberRuleSetting_FullMethodName          = "/umsclient.MemberRuleSettingService/AddMemberRuleSetting"
-	MemberRuleSettingService_DeleteMemberRuleSetting_FullMethodName       = "/umsclient.MemberRuleSettingService/DeleteMemberRuleSetting"
-	MemberRuleSettingService_UpdateMemberRuleSetting_FullMethodName       = "/umsclient.MemberRuleSettingService/UpdateMemberRuleSetting"
-	MemberRuleSettingService_UpdateMemberRuleSettingStatus_FullMethodName = "/umsclient.MemberRuleSettingService/UpdateMemberRuleSettingStatus"
-	MemberRuleSettingService_QueryMemberRuleSettingDetail_FullMethodName  = "/umsclient.MemberRuleSettingService/QueryMemberRuleSettingDetail"
-	MemberRuleSettingService_QueryMemberRuleSettingList_FullMethodName    = "/umsclient.MemberRuleSettingService/QueryMemberRuleSettingList"
+	MemberRuleSettingService_AddMemberRuleSetting_FullMethodName          = "/ums.MemberRuleSettingService/AddMemberRuleSetting"
+	MemberRuleSettingService_DeleteMemberRuleSetting_FullMethodName       = "/ums.MemberRuleSettingService/DeleteMemberRuleSetting"
+	MemberRuleSettingService_UpdateMemberRuleSetting_FullMethodName       = "/ums.MemberRuleSettingService/UpdateMemberRuleSetting"
+	MemberRuleSettingService_UpdateMemberRuleSettingStatus_FullMethodName = "/ums.MemberRuleSettingService/UpdateMemberRuleSettingStatus"
+	MemberRuleSettingService_QueryMemberRuleSettingDetail_FullMethodName  = "/ums.MemberRuleSettingService/QueryMemberRuleSettingDetail"
+	MemberRuleSettingService_QueryMemberRuleSettingList_FullMethodName    = "/ums.MemberRuleSettingService/QueryMemberRuleSettingList"
 )
 
 // MemberRuleSettingServiceClient is the client API for MemberRuleSettingService service.
@@ -2814,7 +2814,7 @@ func _MemberRuleSettingService_QueryMemberRuleSettingList_Handler(srv interface{
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var MemberRuleSettingService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "umsclient.MemberRuleSettingService",
+	ServiceName: "ums.MemberRuleSettingService",
 	HandlerType: (*MemberRuleSettingServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -2847,9 +2847,9 @@ var MemberRuleSettingService_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	MemberSignLogService_AddMemberSignLog_FullMethodName         = "/umsclient.MemberSignLogService/AddMemberSignLog"
-	MemberSignLogService_QueryMemberSignLogDetail_FullMethodName = "/umsclient.MemberSignLogService/QueryMemberSignLogDetail"
-	MemberSignLogService_QueryMemberSignLogList_FullMethodName   = "/umsclient.MemberSignLogService/QueryMemberSignLogList"
+	MemberSignLogService_AddMemberSignLog_FullMethodName         = "/ums.MemberSignLogService/AddMemberSignLog"
+	MemberSignLogService_QueryMemberSignLogDetail_FullMethodName = "/ums.MemberSignLogService/QueryMemberSignLogDetail"
+	MemberSignLogService_QueryMemberSignLogList_FullMethodName   = "/ums.MemberSignLogService/QueryMemberSignLogList"
 )
 
 // MemberSignLogServiceClient is the client API for MemberSignLogService service.
@@ -2996,7 +2996,7 @@ func _MemberSignLogService_QueryMemberSignLogList_Handler(srv interface{}, ctx c
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var MemberSignLogService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "umsclient.MemberSignLogService",
+	ServiceName: "ums.MemberSignLogService",
 	HandlerType: (*MemberSignLogServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -3017,9 +3017,9 @@ var MemberSignLogService_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	MemberStatisticsInfoService_AddMemberStatisticsInfo_FullMethodName         = "/umsclient.MemberStatisticsInfoService/AddMemberStatisticsInfo"
-	MemberStatisticsInfoService_QueryMemberStatisticsInfoDetail_FullMethodName = "/umsclient.MemberStatisticsInfoService/QueryMemberStatisticsInfoDetail"
-	MemberStatisticsInfoService_QueryMemberStatisticsInfoList_FullMethodName   = "/umsclient.MemberStatisticsInfoService/QueryMemberStatisticsInfoList"
+	MemberStatisticsInfoService_AddMemberStatisticsInfo_FullMethodName         = "/ums.MemberStatisticsInfoService/AddMemberStatisticsInfo"
+	MemberStatisticsInfoService_QueryMemberStatisticsInfoDetail_FullMethodName = "/ums.MemberStatisticsInfoService/QueryMemberStatisticsInfoDetail"
+	MemberStatisticsInfoService_QueryMemberStatisticsInfoList_FullMethodName   = "/ums.MemberStatisticsInfoService/QueryMemberStatisticsInfoList"
 )
 
 // MemberStatisticsInfoServiceClient is the client API for MemberStatisticsInfoService service.
@@ -3167,7 +3167,7 @@ func _MemberStatisticsInfoService_QueryMemberStatisticsInfoList_Handler(srv inte
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var MemberStatisticsInfoService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "umsclient.MemberStatisticsInfoService",
+	ServiceName: "ums.MemberStatisticsInfoService",
 	HandlerType: (*MemberStatisticsInfoServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -3188,12 +3188,12 @@ var MemberStatisticsInfoService_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	MemberTagService_AddMemberTag_FullMethodName          = "/umsclient.MemberTagService/AddMemberTag"
-	MemberTagService_DeleteMemberTag_FullMethodName       = "/umsclient.MemberTagService/DeleteMemberTag"
-	MemberTagService_UpdateMemberTag_FullMethodName       = "/umsclient.MemberTagService/UpdateMemberTag"
-	MemberTagService_UpdateMemberTagStatus_FullMethodName = "/umsclient.MemberTagService/UpdateMemberTagStatus"
-	MemberTagService_QueryMemberTagDetail_FullMethodName  = "/umsclient.MemberTagService/QueryMemberTagDetail"
-	MemberTagService_QueryMemberTagList_FullMethodName    = "/umsclient.MemberTagService/QueryMemberTagList"
+	MemberTagService_AddMemberTag_FullMethodName          = "/ums.MemberTagService/AddMemberTag"
+	MemberTagService_DeleteMemberTag_FullMethodName       = "/ums.MemberTagService/DeleteMemberTag"
+	MemberTagService_UpdateMemberTag_FullMethodName       = "/ums.MemberTagService/UpdateMemberTag"
+	MemberTagService_UpdateMemberTagStatus_FullMethodName = "/ums.MemberTagService/UpdateMemberTagStatus"
+	MemberTagService_QueryMemberTagDetail_FullMethodName  = "/ums.MemberTagService/QueryMemberTagDetail"
+	MemberTagService_QueryMemberTagList_FullMethodName    = "/ums.MemberTagService/QueryMemberTagList"
 )
 
 // MemberTagServiceClient is the client API for MemberTagService service.
@@ -3442,7 +3442,7 @@ func _MemberTagService_QueryMemberTagList_Handler(srv interface{}, ctx context.C
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var MemberTagService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "umsclient.MemberTagService",
+	ServiceName: "ums.MemberTagService",
 	HandlerType: (*MemberTagServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -3475,9 +3475,9 @@ var MemberTagService_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	MemberTagRelationService_AddMemberTagRelation_FullMethodName         = "/umsclient.MemberTagRelationService/AddMemberTagRelation"
-	MemberTagRelationService_QueryMemberTagRelationDetail_FullMethodName = "/umsclient.MemberTagRelationService/QueryMemberTagRelationDetail"
-	MemberTagRelationService_QueryMemberTagRelationList_FullMethodName   = "/umsclient.MemberTagRelationService/QueryMemberTagRelationList"
+	MemberTagRelationService_AddMemberTagRelation_FullMethodName         = "/ums.MemberTagRelationService/AddMemberTagRelation"
+	MemberTagRelationService_QueryMemberTagRelationDetail_FullMethodName = "/ums.MemberTagRelationService/QueryMemberTagRelationDetail"
+	MemberTagRelationService_QueryMemberTagRelationList_FullMethodName   = "/ums.MemberTagRelationService/QueryMemberTagRelationList"
 )
 
 // MemberTagRelationServiceClient is the client API for MemberTagRelationService service.
@@ -3625,7 +3625,7 @@ func _MemberTagRelationService_QueryMemberTagRelationList_Handler(srv interface{
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var MemberTagRelationService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "umsclient.MemberTagRelationService",
+	ServiceName: "ums.MemberTagRelationService",
 	HandlerType: (*MemberTagRelationServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -3646,12 +3646,12 @@ var MemberTagRelationService_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	MemberTaskService_AddMemberTask_FullMethodName          = "/umsclient.MemberTaskService/AddMemberTask"
-	MemberTaskService_DeleteMemberTask_FullMethodName       = "/umsclient.MemberTaskService/DeleteMemberTask"
-	MemberTaskService_UpdateMemberTask_FullMethodName       = "/umsclient.MemberTaskService/UpdateMemberTask"
-	MemberTaskService_UpdateMemberTaskStatus_FullMethodName = "/umsclient.MemberTaskService/UpdateMemberTaskStatus"
-	MemberTaskService_QueryMemberTaskDetail_FullMethodName  = "/umsclient.MemberTaskService/QueryMemberTaskDetail"
-	MemberTaskService_QueryMemberTaskList_FullMethodName    = "/umsclient.MemberTaskService/QueryMemberTaskList"
+	MemberTaskService_AddMemberTask_FullMethodName          = "/ums.MemberTaskService/AddMemberTask"
+	MemberTaskService_DeleteMemberTask_FullMethodName       = "/ums.MemberTaskService/DeleteMemberTask"
+	MemberTaskService_UpdateMemberTask_FullMethodName       = "/ums.MemberTaskService/UpdateMemberTask"
+	MemberTaskService_UpdateMemberTaskStatus_FullMethodName = "/ums.MemberTaskService/UpdateMemberTaskStatus"
+	MemberTaskService_QueryMemberTaskDetail_FullMethodName  = "/ums.MemberTaskService/QueryMemberTaskDetail"
+	MemberTaskService_QueryMemberTaskList_FullMethodName    = "/ums.MemberTaskService/QueryMemberTaskList"
 )
 
 // MemberTaskServiceClient is the client API for MemberTaskService service.
@@ -3900,7 +3900,7 @@ func _MemberTaskService_QueryMemberTaskList_Handler(srv interface{}, ctx context
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var MemberTaskService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "umsclient.MemberTaskService",
+	ServiceName: "ums.MemberTaskService",
 	HandlerType: (*MemberTaskServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -3933,9 +3933,9 @@ var MemberTaskService_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	MemberTaskRelationService_AddMemberTaskRelation_FullMethodName         = "/umsclient.MemberTaskRelationService/AddMemberTaskRelation"
-	MemberTaskRelationService_QueryMemberTaskRelationDetail_FullMethodName = "/umsclient.MemberTaskRelationService/QueryMemberTaskRelationDetail"
-	MemberTaskRelationService_QueryMemberTaskRelationList_FullMethodName   = "/umsclient.MemberTaskRelationService/QueryMemberTaskRelationList"
+	MemberTaskRelationService_AddMemberTaskRelation_FullMethodName         = "/ums.MemberTaskRelationService/AddMemberTaskRelation"
+	MemberTaskRelationService_QueryMemberTaskRelationDetail_FullMethodName = "/ums.MemberTaskRelationService/QueryMemberTaskRelationDetail"
+	MemberTaskRelationService_QueryMemberTaskRelationList_FullMethodName   = "/ums.MemberTaskRelationService/QueryMemberTaskRelationList"
 )
 
 // MemberTaskRelationServiceClient is the client API for MemberTaskRelationService service.
@@ -4083,7 +4083,7 @@ func _MemberTaskRelationService_QueryMemberTaskRelationList_Handler(srv interfac
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var MemberTaskRelationService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "umsclient.MemberTaskRelationService",
+	ServiceName: "ums.MemberTaskRelationService",
 	HandlerType: (*MemberTaskRelationServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{

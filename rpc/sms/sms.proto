@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package smsclient;
+package sms;
 
 option go_package = "./smsclient";
 

@@ -19,12 +19,12 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	DeptService_AddDept_FullMethodName          = "/sysclient.DeptService/AddDept"
-	DeptService_DeleteDept_FullMethodName       = "/sysclient.DeptService/DeleteDept"
-	DeptService_UpdateDept_FullMethodName       = "/sysclient.DeptService/UpdateDept"
-	DeptService_UpdateDeptStatus_FullMethodName = "/sysclient.DeptService/UpdateDeptStatus"
-	DeptService_QueryDeptDetail_FullMethodName  = "/sysclient.DeptService/QueryDeptDetail"
-	DeptService_QueryDeptList_FullMethodName    = "/sysclient.DeptService/QueryDeptList"
+	DeptService_AddDept_FullMethodName          = "/sys.DeptService/AddDept"
+	DeptService_DeleteDept_FullMethodName       = "/sys.DeptService/DeleteDept"
+	DeptService_UpdateDept_FullMethodName       = "/sys.DeptService/UpdateDept"
+	DeptService_UpdateDeptStatus_FullMethodName = "/sys.DeptService/UpdateDeptStatus"
+	DeptService_QueryDeptDetail_FullMethodName  = "/sys.DeptService/QueryDeptDetail"
+	DeptService_QueryDeptList_FullMethodName    = "/sys.DeptService/QueryDeptList"
 )
 
 // DeptServiceClient is the client API for DeptService service.
@@ -273,7 +273,7 @@ func _DeptService_QueryDeptList_Handler(srv interface{}, ctx context.Context, de
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var DeptService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "sysclient.DeptService",
+	ServiceName: "sys.DeptService",
 	HandlerType: (*DeptServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -306,12 +306,12 @@ var DeptService_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	DictItemService_AddDictItem_FullMethodName          = "/sysclient.DictItemService/AddDictItem"
-	DictItemService_DeleteDictItem_FullMethodName       = "/sysclient.DictItemService/DeleteDictItem"
-	DictItemService_UpdateDictItem_FullMethodName       = "/sysclient.DictItemService/UpdateDictItem"
-	DictItemService_UpdateDictItemStatus_FullMethodName = "/sysclient.DictItemService/UpdateDictItemStatus"
-	DictItemService_QueryDictItemDetail_FullMethodName  = "/sysclient.DictItemService/QueryDictItemDetail"
-	DictItemService_QueryDictItemList_FullMethodName    = "/sysclient.DictItemService/QueryDictItemList"
+	DictItemService_AddDictItem_FullMethodName          = "/sys.DictItemService/AddDictItem"
+	DictItemService_DeleteDictItem_FullMethodName       = "/sys.DictItemService/DeleteDictItem"
+	DictItemService_UpdateDictItem_FullMethodName       = "/sys.DictItemService/UpdateDictItem"
+	DictItemService_UpdateDictItemStatus_FullMethodName = "/sys.DictItemService/UpdateDictItemStatus"
+	DictItemService_QueryDictItemDetail_FullMethodName  = "/sys.DictItemService/QueryDictItemDetail"
+	DictItemService_QueryDictItemList_FullMethodName    = "/sys.DictItemService/QueryDictItemList"
 )
 
 // DictItemServiceClient is the client API for DictItemService service.
@@ -560,7 +560,7 @@ func _DictItemService_QueryDictItemList_Handler(srv interface{}, ctx context.Con
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var DictItemService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "sysclient.DictItemService",
+	ServiceName: "sys.DictItemService",
 	HandlerType: (*DictItemServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -593,12 +593,12 @@ var DictItemService_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	DictTypeService_AddDictType_FullMethodName          = "/sysclient.DictTypeService/AddDictType"
-	DictTypeService_DeleteDictType_FullMethodName       = "/sysclient.DictTypeService/DeleteDictType"
-	DictTypeService_UpdateDictType_FullMethodName       = "/sysclient.DictTypeService/UpdateDictType"
-	DictTypeService_UpdateDictTypeStatus_FullMethodName = "/sysclient.DictTypeService/UpdateDictTypeStatus"
-	DictTypeService_QueryDictTypeDetail_FullMethodName  = "/sysclient.DictTypeService/QueryDictTypeDetail"
-	DictTypeService_QueryDictTypeList_FullMethodName    = "/sysclient.DictTypeService/QueryDictTypeList"
+	DictTypeService_AddDictType_FullMethodName          = "/sys.DictTypeService/AddDictType"
+	DictTypeService_DeleteDictType_FullMethodName       = "/sys.DictTypeService/DeleteDictType"
+	DictTypeService_UpdateDictType_FullMethodName       = "/sys.DictTypeService/UpdateDictType"
+	DictTypeService_UpdateDictTypeStatus_FullMethodName = "/sys.DictTypeService/UpdateDictTypeStatus"
+	DictTypeService_QueryDictTypeDetail_FullMethodName  = "/sys.DictTypeService/QueryDictTypeDetail"
+	DictTypeService_QueryDictTypeList_FullMethodName    = "/sys.DictTypeService/QueryDictTypeList"
 )
 
 // DictTypeServiceClient is the client API for DictTypeService service.
@@ -847,7 +847,7 @@ func _DictTypeService_QueryDictTypeList_Handler(srv interface{}, ctx context.Con
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var DictTypeService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "sysclient.DictTypeService",
+	ServiceName: "sys.DictTypeService",
 	HandlerType: (*DictTypeServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -880,9 +880,9 @@ var DictTypeService_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	LoginLogService_DeleteLoginLog_FullMethodName      = "/sysclient.LoginLogService/DeleteLoginLog"
-	LoginLogService_QueryLoginLogDetail_FullMethodName = "/sysclient.LoginLogService/QueryLoginLogDetail"
-	LoginLogService_QueryLoginLogList_FullMethodName   = "/sysclient.LoginLogService/QueryLoginLogList"
+	LoginLogService_DeleteLoginLog_FullMethodName      = "/sys.LoginLogService/DeleteLoginLog"
+	LoginLogService_QueryLoginLogDetail_FullMethodName = "/sys.LoginLogService/QueryLoginLogDetail"
+	LoginLogService_QueryLoginLogList_FullMethodName   = "/sys.LoginLogService/QueryLoginLogList"
 )
 
 // LoginLogServiceClient is the client API for LoginLogService service.
@@ -1029,7 +1029,7 @@ func _LoginLogService_QueryLoginLogList_Handler(srv interface{}, ctx context.Con
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var LoginLogService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "sysclient.LoginLogService",
+	ServiceName: "sys.LoginLogService",
 	HandlerType: (*LoginLogServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -1050,13 +1050,13 @@ var LoginLogService_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	MenuService_AddMenu_FullMethodName               = "/sysclient.MenuService/AddMenu"
-	MenuService_DeleteMenu_FullMethodName            = "/sysclient.MenuService/DeleteMenu"
-	MenuService_UpdateMenu_FullMethodName            = "/sysclient.MenuService/UpdateMenu"
-	MenuService_UpdateMenuStatus_FullMethodName      = "/sysclient.MenuService/UpdateMenuStatus"
-	MenuService_QueryMenuDetail_FullMethodName       = "/sysclient.MenuService/QueryMenuDetail"
-	MenuService_QueryMenuList_FullMethodName         = "/sysclient.MenuService/QueryMenuList"
-	MenuService_QueryMenuResourceList_FullMethodName = "/sysclient.MenuService/QueryMenuResourceList"
+	MenuService_AddMenu_FullMethodName               = "/sys.MenuService/AddMenu"
+	MenuService_DeleteMenu_FullMethodName            = "/sys.MenuService/DeleteMenu"
+	MenuService_UpdateMenu_FullMethodName            = "/sys.MenuService/UpdateMenu"
+	MenuService_UpdateMenuStatus_FullMethodName      = "/sys.MenuService/UpdateMenuStatus"
+	MenuService_QueryMenuDetail_FullMethodName       = "/sys.MenuService/QueryMenuDetail"
+	MenuService_QueryMenuList_FullMethodName         = "/sys.MenuService/QueryMenuList"
+	MenuService_QueryMenuResourceList_FullMethodName = "/sys.MenuService/QueryMenuResourceList"
 )
 
 // MenuServiceClient is the client API for MenuService service.
@@ -1337,7 +1337,7 @@ func _MenuService_QueryMenuResourceList_Handler(srv interface{}, ctx context.Con
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var MenuService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "sysclient.MenuService",
+	ServiceName: "sys.MenuService",
 	HandlerType: (*MenuServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -1374,12 +1374,12 @@ var MenuService_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	NoticeService_AddNotice_FullMethodName          = "/sysclient.NoticeService/AddNotice"
-	NoticeService_DeleteNotice_FullMethodName       = "/sysclient.NoticeService/DeleteNotice"
-	NoticeService_UpdateNotice_FullMethodName       = "/sysclient.NoticeService/UpdateNotice"
-	NoticeService_UpdateNoticeStatus_FullMethodName = "/sysclient.NoticeService/UpdateNoticeStatus"
-	NoticeService_QueryNoticeDetail_FullMethodName  = "/sysclient.NoticeService/QueryNoticeDetail"
-	NoticeService_QueryNoticeList_FullMethodName    = "/sysclient.NoticeService/QueryNoticeList"
+	NoticeService_AddNotice_FullMethodName          = "/sys.NoticeService/AddNotice"
+	NoticeService_DeleteNotice_FullMethodName       = "/sys.NoticeService/DeleteNotice"
+	NoticeService_UpdateNotice_FullMethodName       = "/sys.NoticeService/UpdateNotice"
+	NoticeService_UpdateNoticeStatus_FullMethodName = "/sys.NoticeService/UpdateNoticeStatus"
+	NoticeService_QueryNoticeDetail_FullMethodName  = "/sys.NoticeService/QueryNoticeDetail"
+	NoticeService_QueryNoticeList_FullMethodName    = "/sys.NoticeService/QueryNoticeList"
 )
 
 // NoticeServiceClient is the client API for NoticeService service.
@@ -1628,7 +1628,7 @@ func _NoticeService_QueryNoticeList_Handler(srv interface{}, ctx context.Context
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var NoticeService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "sysclient.NoticeService",
+	ServiceName: "sys.NoticeService",
 	HandlerType: (*NoticeServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -1661,10 +1661,10 @@ var NoticeService_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	OperateLogService_AddOperateLog_FullMethodName         = "/sysclient.OperateLogService/AddOperateLog"
-	OperateLogService_DeleteOperateLog_FullMethodName      = "/sysclient.OperateLogService/DeleteOperateLog"
-	OperateLogService_QueryOperateLogDetail_FullMethodName = "/sysclient.OperateLogService/QueryOperateLogDetail"
-	OperateLogService_QueryOperateLogList_FullMethodName   = "/sysclient.OperateLogService/QueryOperateLogList"
+	OperateLogService_AddOperateLog_FullMethodName         = "/sys.OperateLogService/AddOperateLog"
+	OperateLogService_DeleteOperateLog_FullMethodName      = "/sys.OperateLogService/DeleteOperateLog"
+	OperateLogService_QueryOperateLogDetail_FullMethodName = "/sys.OperateLogService/QueryOperateLogDetail"
+	OperateLogService_QueryOperateLogList_FullMethodName   = "/sys.OperateLogService/QueryOperateLogList"
 )
 
 // OperateLogServiceClient is the client API for OperateLogService service.
@@ -1845,7 +1845,7 @@ func _OperateLogService_QueryOperateLogList_Handler(srv interface{}, ctx context
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var OperateLogService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "sysclient.OperateLogService",
+	ServiceName: "sys.OperateLogService",
 	HandlerType: (*OperateLogServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -1870,12 +1870,12 @@ var OperateLogService_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	PostService_AddPost_FullMethodName          = "/sysclient.PostService/AddPost"
-	PostService_DeletePost_FullMethodName       = "/sysclient.PostService/DeletePost"
-	PostService_UpdatePost_FullMethodName       = "/sysclient.PostService/UpdatePost"
-	PostService_UpdatePostStatus_FullMethodName = "/sysclient.PostService/UpdatePostStatus"
-	PostService_QueryPostDetail_FullMethodName  = "/sysclient.PostService/QueryPostDetail"
-	PostService_QueryPostList_FullMethodName    = "/sysclient.PostService/QueryPostList"
+	PostService_AddPost_FullMethodName          = "/sys.PostService/AddPost"
+	PostService_DeletePost_FullMethodName       = "/sys.PostService/DeletePost"
+	PostService_UpdatePost_FullMethodName       = "/sys.PostService/UpdatePost"
+	PostService_UpdatePostStatus_FullMethodName = "/sys.PostService/UpdatePostStatus"
+	PostService_QueryPostDetail_FullMethodName  = "/sys.PostService/QueryPostDetail"
+	PostService_QueryPostList_FullMethodName    = "/sys.PostService/QueryPostList"
 )
 
 // PostServiceClient is the client API for PostService service.
@@ -2124,7 +2124,7 @@ func _PostService_QueryPostList_Handler(srv interface{}, ctx context.Context, de
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var PostService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "sysclient.PostService",
+	ServiceName: "sys.PostService",
 	HandlerType: (*PostServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -2157,16 +2157,16 @@ var PostService_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	RoleService_AddRole_FullMethodName             = "/sysclient.RoleService/AddRole"
-	RoleService_DeleteRole_FullMethodName          = "/sysclient.RoleService/DeleteRole"
-	RoleService_UpdateRole_FullMethodName          = "/sysclient.RoleService/UpdateRole"
-	RoleService_UpdateRoleStatus_FullMethodName    = "/sysclient.RoleService/UpdateRoleStatus"
-	RoleService_QueryRoleDetail_FullMethodName     = "/sysclient.RoleService/QueryRoleDetail"
-	RoleService_QueryRoleList_FullMethodName       = "/sysclient.RoleService/QueryRoleList"
-	RoleService_QueryRoleMenuList_FullMethodName   = "/sysclient.RoleService/QueryRoleMenuList"
-	RoleService_UpdateMenuRoleList_FullMethodName  = "/sysclient.RoleService/UpdateMenuRoleList"
-	RoleService_QueryRoleUserList_FullMethodName   = "/sysclient.RoleService/QueryRoleUserList"
-	RoleService_CancelAuthorization_FullMethodName = "/sysclient.RoleService/CancelAuthorization"
+	RoleService_AddRole_FullMethodName             = "/sys.RoleService/AddRole"
+	RoleService_DeleteRole_FullMethodName          = "/sys.RoleService/DeleteRole"
+	RoleService_UpdateRole_FullMethodName          = "/sys.RoleService/UpdateRole"
+	RoleService_UpdateRoleStatus_FullMethodName    = "/sys.RoleService/UpdateRoleStatus"
+	RoleService_QueryRoleDetail_FullMethodName     = "/sys.RoleService/QueryRoleDetail"
+	RoleService_QueryRoleList_FullMethodName       = "/sys.RoleService/QueryRoleList"
+	RoleService_QueryRoleMenuList_FullMethodName   = "/sys.RoleService/QueryRoleMenuList"
+	RoleService_UpdateMenuRoleList_FullMethodName  = "/sys.RoleService/UpdateMenuRoleList"
+	RoleService_QueryRoleUserList_FullMethodName   = "/sys.RoleService/QueryRoleUserList"
+	RoleService_CancelAuthorization_FullMethodName = "/sys.RoleService/CancelAuthorization"
 )
 
 // RoleServiceClient is the client API for RoleService service.
@@ -2551,7 +2551,7 @@ func _RoleService_CancelAuthorization_Handler(srv interface{}, ctx context.Conte
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var RoleService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "sysclient.RoleService",
+	ServiceName: "sys.RoleService",
 	HandlerType: (*RoleServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -2600,18 +2600,18 @@ var RoleService_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	UserService_AddUser_FullMethodName              = "/sysclient.UserService/AddUser"
-	UserService_DeleteUser_FullMethodName           = "/sysclient.UserService/DeleteUser"
-	UserService_UpdateUser_FullMethodName           = "/sysclient.UserService/UpdateUser"
-	UserService_UpdateUserStatus_FullMethodName     = "/sysclient.UserService/UpdateUserStatus"
-	UserService_QueryUserDetail_FullMethodName      = "/sysclient.UserService/QueryUserDetail"
-	UserService_QueryUserList_FullMethodName        = "/sysclient.UserService/QueryUserList"
-	UserService_Login_FullMethodName                = "/sysclient.UserService/Login"
-	UserService_UserInfo_FullMethodName             = "/sysclient.UserService/UserInfo"
-	UserService_ReSetPassword_FullMethodName        = "/sysclient.UserService/ReSetPassword"
-	UserService_QueryUserRoleList_FullMethodName    = "/sysclient.UserService/QueryUserRoleList"
-	UserService_UpdateUserRoleList_FullMethodName   = "/sysclient.UserService/UpdateUserRoleList"
-	UserService_QueryDeptAndPostList_FullMethodName = "/sysclient.UserService/QueryDeptAndPostList"
+	UserService_AddUser_FullMethodName              = "/sys.UserService/AddUser"
+	UserService_DeleteUser_FullMethodName           = "/sys.UserService/DeleteUser"
+	UserService_UpdateUser_FullMethodName           = "/sys.UserService/UpdateUser"
+	UserService_UpdateUserStatus_FullMethodName     = "/sys.UserService/UpdateUserStatus"
+	UserService_QueryUserDetail_FullMethodName      = "/sys.UserService/QueryUserDetail"
+	UserService_QueryUserList_FullMethodName        = "/sys.UserService/QueryUserList"
+	UserService_Login_FullMethodName                = "/sys.UserService/Login"
+	UserService_UserInfo_FullMethodName             = "/sys.UserService/UserInfo"
+	UserService_ReSetPassword_FullMethodName        = "/sys.UserService/ReSetPassword"
+	UserService_QueryUserRoleList_FullMethodName    = "/sys.UserService/QueryUserRoleList"
+	UserService_UpdateUserRoleList_FullMethodName   = "/sys.UserService/UpdateUserRoleList"
+	UserService_QueryDeptAndPostList_FullMethodName = "/sys.UserService/QueryDeptAndPostList"
 )
 
 // UserServiceClient is the client API for UserService service.
@@ -3064,7 +3064,7 @@ func _UserService_QueryDeptAndPostList_Handler(srv interface{}, ctx context.Cont
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var UserService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "sysclient.UserService",
+	ServiceName: "sys.UserService",
 	HandlerType: (*UserServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{

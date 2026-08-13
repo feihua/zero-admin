@@ -42,7 +42,7 @@ func main() {
 	}
 	startContents = append(startContents, fileContents...)
 
-	start := strings.Replace(string(startContents), "package main", "package sysclient", 1)
+	start := strings.Replace(string(startContents), "package main", "package sys", 1)
 	start = strings.Replace(start, "option go_package = \"./proto\"", "option go_package = \"./sysclient\"", 1)
 	err = ioutil.WriteFile(outputFilePath, []byte(start), 0644)
 	if err != nil {

@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package sysclient;
+package sys;
 
 option go_package = "./sysclient";
 

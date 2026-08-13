@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package omsclient;
+package oms;
 
 option go_package = "./omsclient";
 

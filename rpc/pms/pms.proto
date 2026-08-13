@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package pmsclient;
+package pms;
 
 option go_package = "./pmsclient";
 

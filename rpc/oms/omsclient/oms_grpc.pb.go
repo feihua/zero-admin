@@ -19,12 +19,12 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	CartItemService_AddCartItem_FullMethodName            = "/omsclient.CartItemService/AddCartItem"
-	CartItemService_DeleteCartItem_FullMethodName         = "/omsclient.CartItemService/DeleteCartItem"
-	CartItemService_UpdateCartItem_FullMethodName         = "/omsclient.CartItemService/UpdateCartItem"
-	CartItemService_UpdateCartItemQuantity_FullMethodName = "/omsclient.CartItemService/UpdateCartItemQuantity"
-	CartItemService_QueryCartItemDetail_FullMethodName    = "/omsclient.CartItemService/QueryCartItemDetail"
-	CartItemService_QueryCartItemList_FullMethodName      = "/omsclient.CartItemService/QueryCartItemList"
+	CartItemService_AddCartItem_FullMethodName            = "/oms.CartItemService/AddCartItem"
+	CartItemService_DeleteCartItem_FullMethodName         = "/oms.CartItemService/DeleteCartItem"
+	CartItemService_UpdateCartItem_FullMethodName         = "/oms.CartItemService/UpdateCartItem"
+	CartItemService_UpdateCartItemQuantity_FullMethodName = "/oms.CartItemService/UpdateCartItemQuantity"
+	CartItemService_QueryCartItemDetail_FullMethodName    = "/oms.CartItemService/QueryCartItemDetail"
+	CartItemService_QueryCartItemList_FullMethodName      = "/oms.CartItemService/QueryCartItemList"
 )
 
 // CartItemServiceClient is the client API for CartItemService service.
@@ -273,7 +273,7 @@ func _CartItemService_QueryCartItemList_Handler(srv interface{}, ctx context.Con
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var CartItemService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "omsclient.CartItemService",
+	ServiceName: "oms.CartItemService",
 	HandlerType: (*CartItemServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -306,13 +306,13 @@ var CartItemService_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	CompanyAddressService_AddCompanyAddress_FullMethodName                 = "/omsclient.CompanyAddressService/AddCompanyAddress"
-	CompanyAddressService_DeleteCompanyAddress_FullMethodName              = "/omsclient.CompanyAddressService/DeleteCompanyAddress"
-	CompanyAddressService_UpdateCompanyAddress_FullMethodName              = "/omsclient.CompanyAddressService/UpdateCompanyAddress"
-	CompanyAddressService_QueryCompanyAddressDetail_FullMethodName         = "/omsclient.CompanyAddressService/QueryCompanyAddressDetail"
-	CompanyAddressService_QueryCompanyAddressList_FullMethodName           = "/omsclient.CompanyAddressService/QueryCompanyAddressList"
-	CompanyAddressService_UpdateCompanyAddressSendStatus_FullMethodName    = "/omsclient.CompanyAddressService/UpdateCompanyAddressSendStatus"
-	CompanyAddressService_UpdateCompanyAddressReceiveStatus_FullMethodName = "/omsclient.CompanyAddressService/UpdateCompanyAddressReceiveStatus"
+	CompanyAddressService_AddCompanyAddress_FullMethodName                 = "/oms.CompanyAddressService/AddCompanyAddress"
+	CompanyAddressService_DeleteCompanyAddress_FullMethodName              = "/oms.CompanyAddressService/DeleteCompanyAddress"
+	CompanyAddressService_UpdateCompanyAddress_FullMethodName              = "/oms.CompanyAddressService/UpdateCompanyAddress"
+	CompanyAddressService_QueryCompanyAddressDetail_FullMethodName         = "/oms.CompanyAddressService/QueryCompanyAddressDetail"
+	CompanyAddressService_QueryCompanyAddressList_FullMethodName           = "/oms.CompanyAddressService/QueryCompanyAddressList"
+	CompanyAddressService_UpdateCompanyAddressSendStatus_FullMethodName    = "/oms.CompanyAddressService/UpdateCompanyAddressSendStatus"
+	CompanyAddressService_UpdateCompanyAddressReceiveStatus_FullMethodName = "/oms.CompanyAddressService/UpdateCompanyAddressReceiveStatus"
 )
 
 // CompanyAddressServiceClient is the client API for CompanyAddressService service.
@@ -595,7 +595,7 @@ func _CompanyAddressService_UpdateCompanyAddressReceiveStatus_Handler(srv interf
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var CompanyAddressService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "omsclient.CompanyAddressService",
+	ServiceName: "oms.CompanyAddressService",
 	HandlerType: (*CompanyAddressServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -632,11 +632,11 @@ var CompanyAddressService_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	OrderDeliveryService_AddOrderDelivery_FullMethodName         = "/omsclient.OrderDeliveryService/AddOrderDelivery"
-	OrderDeliveryService_DeleteOrderDelivery_FullMethodName      = "/omsclient.OrderDeliveryService/DeleteOrderDelivery"
-	OrderDeliveryService_UpdateOrderDelivery_FullMethodName      = "/omsclient.OrderDeliveryService/UpdateOrderDelivery"
-	OrderDeliveryService_QueryOrderDeliveryDetail_FullMethodName = "/omsclient.OrderDeliveryService/QueryOrderDeliveryDetail"
-	OrderDeliveryService_QueryOrderDeliveryList_FullMethodName   = "/omsclient.OrderDeliveryService/QueryOrderDeliveryList"
+	OrderDeliveryService_AddOrderDelivery_FullMethodName         = "/oms.OrderDeliveryService/AddOrderDelivery"
+	OrderDeliveryService_DeleteOrderDelivery_FullMethodName      = "/oms.OrderDeliveryService/DeleteOrderDelivery"
+	OrderDeliveryService_UpdateOrderDelivery_FullMethodName      = "/oms.OrderDeliveryService/UpdateOrderDelivery"
+	OrderDeliveryService_QueryOrderDeliveryDetail_FullMethodName = "/oms.OrderDeliveryService/QueryOrderDeliveryDetail"
+	OrderDeliveryService_QueryOrderDeliveryList_FullMethodName   = "/oms.OrderDeliveryService/QueryOrderDeliveryList"
 )
 
 // OrderDeliveryServiceClient is the client API for OrderDeliveryService service.
@@ -851,7 +851,7 @@ func _OrderDeliveryService_QueryOrderDeliveryList_Handler(srv interface{}, ctx c
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var OrderDeliveryService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "omsclient.OrderDeliveryService",
+	ServiceName: "oms.OrderDeliveryService",
 	HandlerType: (*OrderDeliveryServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -880,17 +880,17 @@ var OrderDeliveryService_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	OrderService_AddOrder_FullMethodName              = "/omsclient.OrderService/AddOrder"
-	OrderService_DeleteOrder_FullMethodName           = "/omsclient.OrderService/DeleteOrder"
-	OrderService_UpdateOrder_FullMethodName           = "/omsclient.OrderService/UpdateOrder"
-	OrderService_UpdateOrderStatus_FullMethodName     = "/omsclient.OrderService/UpdateOrderStatus"
-	OrderService_QueryOrderDetail_FullMethodName      = "/omsclient.OrderService/QueryOrderDetail"
-	OrderService_QueryOrderList_FullMethodName        = "/omsclient.OrderService/QueryOrderList"
-	OrderService_Delivery_FullMethodName              = "/omsclient.OrderService/Delivery"
-	OrderService_CloseOrder_FullMethodName            = "/omsclient.OrderService/CloseOrder"
-	OrderService_CancelOrder_FullMethodName           = "/omsclient.OrderService/CancelOrder"
-	OrderService_ConfirmOrder_FullMethodName          = "/omsclient.OrderService/ConfirmOrder"
-	OrderService_QueryTimeOutOrderList_FullMethodName = "/omsclient.OrderService/QueryTimeOutOrderList"
+	OrderService_AddOrder_FullMethodName              = "/oms.OrderService/AddOrder"
+	OrderService_DeleteOrder_FullMethodName           = "/oms.OrderService/DeleteOrder"
+	OrderService_UpdateOrder_FullMethodName           = "/oms.OrderService/UpdateOrder"
+	OrderService_UpdateOrderStatus_FullMethodName     = "/oms.OrderService/UpdateOrderStatus"
+	OrderService_QueryOrderDetail_FullMethodName      = "/oms.OrderService/QueryOrderDetail"
+	OrderService_QueryOrderList_FullMethodName        = "/oms.OrderService/QueryOrderList"
+	OrderService_Delivery_FullMethodName              = "/oms.OrderService/Delivery"
+	OrderService_CloseOrder_FullMethodName            = "/oms.OrderService/CloseOrder"
+	OrderService_CancelOrder_FullMethodName           = "/oms.OrderService/CancelOrder"
+	OrderService_ConfirmOrder_FullMethodName          = "/oms.OrderService/ConfirmOrder"
+	OrderService_QueryTimeOutOrderList_FullMethodName = "/oms.OrderService/QueryTimeOutOrderList"
 )
 
 // OrderServiceClient is the client API for OrderService service.
@@ -1309,7 +1309,7 @@ func _OrderService_QueryTimeOutOrderList_Handler(srv interface{}, ctx context.Co
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var OrderService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "omsclient.OrderService",
+	ServiceName: "oms.OrderService",
 	HandlerType: (*OrderServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -1362,9 +1362,9 @@ var OrderService_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	OrderOperationLogService_AddOrderOperationLog_FullMethodName         = "/omsclient.OrderOperationLogService/AddOrderOperationLog"
-	OrderOperationLogService_QueryOrderOperationLogDetail_FullMethodName = "/omsclient.OrderOperationLogService/QueryOrderOperationLogDetail"
-	OrderOperationLogService_QueryOrderOperationLogList_FullMethodName   = "/omsclient.OrderOperationLogService/QueryOrderOperationLogList"
+	OrderOperationLogService_AddOrderOperationLog_FullMethodName         = "/oms.OrderOperationLogService/AddOrderOperationLog"
+	OrderOperationLogService_QueryOrderOperationLogDetail_FullMethodName = "/oms.OrderOperationLogService/QueryOrderOperationLogDetail"
+	OrderOperationLogService_QueryOrderOperationLogList_FullMethodName   = "/oms.OrderOperationLogService/QueryOrderOperationLogList"
 )
 
 // OrderOperationLogServiceClient is the client API for OrderOperationLogService service.
@@ -1512,7 +1512,7 @@ func _OrderOperationLogService_QueryOrderOperationLogList_Handler(srv interface{
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var OrderOperationLogService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "omsclient.OrderOperationLogService",
+	ServiceName: "oms.OrderOperationLogService",
 	HandlerType: (*OrderOperationLogServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -1533,10 +1533,10 @@ var OrderOperationLogService_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	OrderPaymentService_AddOrderPayment_FullMethodName          = "/omsclient.OrderPaymentService/AddOrderPayment"
-	OrderPaymentService_UpdateOrderPaymentStatus_FullMethodName = "/omsclient.OrderPaymentService/UpdateOrderPaymentStatus"
-	OrderPaymentService_QueryOrderPaymentDetail_FullMethodName  = "/omsclient.OrderPaymentService/QueryOrderPaymentDetail"
-	OrderPaymentService_QueryOrderPaymentList_FullMethodName    = "/omsclient.OrderPaymentService/QueryOrderPaymentList"
+	OrderPaymentService_AddOrderPayment_FullMethodName          = "/oms.OrderPaymentService/AddOrderPayment"
+	OrderPaymentService_UpdateOrderPaymentStatus_FullMethodName = "/oms.OrderPaymentService/UpdateOrderPaymentStatus"
+	OrderPaymentService_QueryOrderPaymentDetail_FullMethodName  = "/oms.OrderPaymentService/QueryOrderPaymentDetail"
+	OrderPaymentService_QueryOrderPaymentList_FullMethodName    = "/oms.OrderPaymentService/QueryOrderPaymentList"
 )
 
 // OrderPaymentServiceClient is the client API for OrderPaymentService service.
@@ -1717,7 +1717,7 @@ func _OrderPaymentService_QueryOrderPaymentList_Handler(srv interface{}, ctx con
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var OrderPaymentService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "omsclient.OrderPaymentService",
+	ServiceName: "oms.OrderPaymentService",
 	HandlerType: (*OrderPaymentServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -1742,10 +1742,10 @@ var OrderPaymentService_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	OrderPromotionService_AddOrderPromotion_FullMethodName         = "/omsclient.OrderPromotionService/AddOrderPromotion"
-	OrderPromotionService_DeleteOrderPromotion_FullMethodName      = "/omsclient.OrderPromotionService/DeleteOrderPromotion"
-	OrderPromotionService_QueryOrderPromotionDetail_FullMethodName = "/omsclient.OrderPromotionService/QueryOrderPromotionDetail"
-	OrderPromotionService_QueryOrderPromotionList_FullMethodName   = "/omsclient.OrderPromotionService/QueryOrderPromotionList"
+	OrderPromotionService_AddOrderPromotion_FullMethodName         = "/oms.OrderPromotionService/AddOrderPromotion"
+	OrderPromotionService_DeleteOrderPromotion_FullMethodName      = "/oms.OrderPromotionService/DeleteOrderPromotion"
+	OrderPromotionService_QueryOrderPromotionDetail_FullMethodName = "/oms.OrderPromotionService/QueryOrderPromotionDetail"
+	OrderPromotionService_QueryOrderPromotionList_FullMethodName   = "/oms.OrderPromotionService/QueryOrderPromotionList"
 )
 
 // OrderPromotionServiceClient is the client API for OrderPromotionService service.
@@ -1926,7 +1926,7 @@ func _OrderPromotionService_QueryOrderPromotionList_Handler(srv interface{}, ctx
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var OrderPromotionService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "omsclient.OrderPromotionService",
+	ServiceName: "oms.OrderPromotionService",
 	HandlerType: (*OrderPromotionServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -1951,12 +1951,12 @@ var OrderPromotionService_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	OrderReturnService_AddOrderReturn_FullMethodName          = "/omsclient.OrderReturnService/AddOrderReturn"
-	OrderReturnService_DeleteOrderReturn_FullMethodName       = "/omsclient.OrderReturnService/DeleteOrderReturn"
-	OrderReturnService_UpdateOrderReturn_FullMethodName       = "/omsclient.OrderReturnService/UpdateOrderReturn"
-	OrderReturnService_UpdateOrderReturnStatus_FullMethodName = "/omsclient.OrderReturnService/UpdateOrderReturnStatus"
-	OrderReturnService_QueryOrderReturnDetail_FullMethodName  = "/omsclient.OrderReturnService/QueryOrderReturnDetail"
-	OrderReturnService_QueryOrderReturnList_FullMethodName    = "/omsclient.OrderReturnService/QueryOrderReturnList"
+	OrderReturnService_AddOrderReturn_FullMethodName          = "/oms.OrderReturnService/AddOrderReturn"
+	OrderReturnService_DeleteOrderReturn_FullMethodName       = "/oms.OrderReturnService/DeleteOrderReturn"
+	OrderReturnService_UpdateOrderReturn_FullMethodName       = "/oms.OrderReturnService/UpdateOrderReturn"
+	OrderReturnService_UpdateOrderReturnStatus_FullMethodName = "/oms.OrderReturnService/UpdateOrderReturnStatus"
+	OrderReturnService_QueryOrderReturnDetail_FullMethodName  = "/oms.OrderReturnService/QueryOrderReturnDetail"
+	OrderReturnService_QueryOrderReturnList_FullMethodName    = "/oms.OrderReturnService/QueryOrderReturnList"
 )
 
 // OrderReturnServiceClient is the client API for OrderReturnService service.
@@ -2205,7 +2205,7 @@ func _OrderReturnService_QueryOrderReturnList_Handler(srv interface{}, ctx conte
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var OrderReturnService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "omsclient.OrderReturnService",
+	ServiceName: "oms.OrderReturnService",
 	HandlerType: (*OrderReturnServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -2238,12 +2238,12 @@ var OrderReturnService_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	OrderReturnReasonService_AddOrderReturnReason_FullMethodName          = "/omsclient.OrderReturnReasonService/AddOrderReturnReason"
-	OrderReturnReasonService_DeleteOrderReturnReason_FullMethodName       = "/omsclient.OrderReturnReasonService/DeleteOrderReturnReason"
-	OrderReturnReasonService_UpdateOrderReturnReason_FullMethodName       = "/omsclient.OrderReturnReasonService/UpdateOrderReturnReason"
-	OrderReturnReasonService_UpdateOrderReturnReasonStatus_FullMethodName = "/omsclient.OrderReturnReasonService/UpdateOrderReturnReasonStatus"
-	OrderReturnReasonService_QueryOrderReturnReasonDetail_FullMethodName  = "/omsclient.OrderReturnReasonService/QueryOrderReturnReasonDetail"
-	OrderReturnReasonService_QueryOrderReturnReasonList_FullMethodName    = "/omsclient.OrderReturnReasonService/QueryOrderReturnReasonList"
+	OrderReturnReasonService_AddOrderReturnReason_FullMethodName          = "/oms.OrderReturnReasonService/AddOrderReturnReason"
+	OrderReturnReasonService_DeleteOrderReturnReason_FullMethodName       = "/oms.OrderReturnReasonService/DeleteOrderReturnReason"
+	OrderReturnReasonService_UpdateOrderReturnReason_FullMethodName       = "/oms.OrderReturnReasonService/UpdateOrderReturnReason"
+	OrderReturnReasonService_UpdateOrderReturnReasonStatus_FullMethodName = "/oms.OrderReturnReasonService/UpdateOrderReturnReasonStatus"
+	OrderReturnReasonService_QueryOrderReturnReasonDetail_FullMethodName  = "/oms.OrderReturnReasonService/QueryOrderReturnReasonDetail"
+	OrderReturnReasonService_QueryOrderReturnReasonList_FullMethodName    = "/oms.OrderReturnReasonService/QueryOrderReturnReasonList"
 )
 
 // OrderReturnReasonServiceClient is the client API for OrderReturnReasonService service.
@@ -2493,7 +2493,7 @@ func _OrderReturnReasonService_QueryOrderReturnReasonList_Handler(srv interface{
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var OrderReturnReasonService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "omsclient.OrderReturnReasonService",
+	ServiceName: "oms.OrderReturnReasonService",
 	HandlerType: (*OrderReturnReasonServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -2526,14 +2526,14 @@ var OrderReturnReasonService_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	OrderSettingService_AddOrderSetting_FullMethodName                 = "/omsclient.OrderSettingService/AddOrderSetting"
-	OrderSettingService_DeleteOrderSetting_FullMethodName              = "/omsclient.OrderSettingService/DeleteOrderSetting"
-	OrderSettingService_UpdateOrderSetting_FullMethodName              = "/omsclient.OrderSettingService/UpdateOrderSetting"
-	OrderSettingService_UpdateOrderSettingStatus_FullMethodName        = "/omsclient.OrderSettingService/UpdateOrderSettingStatus"
-	OrderSettingService_QueryOrderSettingDetail_FullMethodName         = "/omsclient.OrderSettingService/QueryOrderSettingDetail"
-	OrderSettingService_QueryOrderSettingList_FullMethodName           = "/omsclient.OrderSettingService/QueryOrderSettingList"
-	OrderSettingService_UpdateOrderSettingDefaultStatus_FullMethodName = "/omsclient.OrderSettingService/UpdateOrderSettingDefaultStatus"
-	OrderSettingService_QueryDefaultSetting_FullMethodName             = "/omsclient.OrderSettingService/QueryDefaultSetting"
+	OrderSettingService_AddOrderSetting_FullMethodName                 = "/oms.OrderSettingService/AddOrderSetting"
+	OrderSettingService_DeleteOrderSetting_FullMethodName              = "/oms.OrderSettingService/DeleteOrderSetting"
+	OrderSettingService_UpdateOrderSetting_FullMethodName              = "/oms.OrderSettingService/UpdateOrderSetting"
+	OrderSettingService_UpdateOrderSettingStatus_FullMethodName        = "/oms.OrderSettingService/UpdateOrderSettingStatus"
+	OrderSettingService_QueryOrderSettingDetail_FullMethodName         = "/oms.OrderSettingService/QueryOrderSettingDetail"
+	OrderSettingService_QueryOrderSettingList_FullMethodName           = "/oms.OrderSettingService/QueryOrderSettingList"
+	OrderSettingService_UpdateOrderSettingDefaultStatus_FullMethodName = "/oms.OrderSettingService/UpdateOrderSettingDefaultStatus"
+	OrderSettingService_QueryDefaultSetting_FullMethodName             = "/oms.OrderSettingService/QueryDefaultSetting"
 )
 
 // OrderSettingServiceClient is the client API for OrderSettingService service.
@@ -2850,7 +2850,7 @@ func _OrderSettingService_QueryDefaultSetting_Handler(srv interface{}, ctx conte
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var OrderSettingService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "omsclient.OrderSettingService",
+	ServiceName: "oms.OrderSettingService",
 	HandlerType: (*OrderSettingServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{

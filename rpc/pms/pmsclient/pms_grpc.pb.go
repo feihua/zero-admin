@@ -19,12 +19,12 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	ProductAttributeService_AddProductAttribute_FullMethodName          = "/pmsclient.ProductAttributeService/AddProductAttribute"
-	ProductAttributeService_DeleteProductAttribute_FullMethodName       = "/pmsclient.ProductAttributeService/DeleteProductAttribute"
-	ProductAttributeService_UpdateProductAttribute_FullMethodName       = "/pmsclient.ProductAttributeService/UpdateProductAttribute"
-	ProductAttributeService_UpdateProductAttributeStatus_FullMethodName = "/pmsclient.ProductAttributeService/UpdateProductAttributeStatus"
-	ProductAttributeService_QueryProductAttributeDetail_FullMethodName  = "/pmsclient.ProductAttributeService/QueryProductAttributeDetail"
-	ProductAttributeService_QueryProductAttributeList_FullMethodName    = "/pmsclient.ProductAttributeService/QueryProductAttributeList"
+	ProductAttributeService_AddProductAttribute_FullMethodName          = "/pms.ProductAttributeService/AddProductAttribute"
+	ProductAttributeService_DeleteProductAttribute_FullMethodName       = "/pms.ProductAttributeService/DeleteProductAttribute"
+	ProductAttributeService_UpdateProductAttribute_FullMethodName       = "/pms.ProductAttributeService/UpdateProductAttribute"
+	ProductAttributeService_UpdateProductAttributeStatus_FullMethodName = "/pms.ProductAttributeService/UpdateProductAttributeStatus"
+	ProductAttributeService_QueryProductAttributeDetail_FullMethodName  = "/pms.ProductAttributeService/QueryProductAttributeDetail"
+	ProductAttributeService_QueryProductAttributeList_FullMethodName    = "/pms.ProductAttributeService/QueryProductAttributeList"
 )
 
 // ProductAttributeServiceClient is the client API for ProductAttributeService service.
@@ -274,7 +274,7 @@ func _ProductAttributeService_QueryProductAttributeList_Handler(srv interface{},
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var ProductAttributeService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "pmsclient.ProductAttributeService",
+	ServiceName: "pms.ProductAttributeService",
 	HandlerType: (*ProductAttributeServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -307,12 +307,12 @@ var ProductAttributeService_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	ProductAttributeGroupService_AddProductAttributeGroup_FullMethodName          = "/pmsclient.ProductAttributeGroupService/AddProductAttributeGroup"
-	ProductAttributeGroupService_DeleteProductAttributeGroup_FullMethodName       = "/pmsclient.ProductAttributeGroupService/DeleteProductAttributeGroup"
-	ProductAttributeGroupService_UpdateProductAttributeGroup_FullMethodName       = "/pmsclient.ProductAttributeGroupService/UpdateProductAttributeGroup"
-	ProductAttributeGroupService_UpdateProductAttributeGroupStatus_FullMethodName = "/pmsclient.ProductAttributeGroupService/UpdateProductAttributeGroupStatus"
-	ProductAttributeGroupService_QueryProductAttributeGroupDetail_FullMethodName  = "/pmsclient.ProductAttributeGroupService/QueryProductAttributeGroupDetail"
-	ProductAttributeGroupService_QueryProductAttributeGroupList_FullMethodName    = "/pmsclient.ProductAttributeGroupService/QueryProductAttributeGroupList"
+	ProductAttributeGroupService_AddProductAttributeGroup_FullMethodName          = "/pms.ProductAttributeGroupService/AddProductAttributeGroup"
+	ProductAttributeGroupService_DeleteProductAttributeGroup_FullMethodName       = "/pms.ProductAttributeGroupService/DeleteProductAttributeGroup"
+	ProductAttributeGroupService_UpdateProductAttributeGroup_FullMethodName       = "/pms.ProductAttributeGroupService/UpdateProductAttributeGroup"
+	ProductAttributeGroupService_UpdateProductAttributeGroupStatus_FullMethodName = "/pms.ProductAttributeGroupService/UpdateProductAttributeGroupStatus"
+	ProductAttributeGroupService_QueryProductAttributeGroupDetail_FullMethodName  = "/pms.ProductAttributeGroupService/QueryProductAttributeGroupDetail"
+	ProductAttributeGroupService_QueryProductAttributeGroupList_FullMethodName    = "/pms.ProductAttributeGroupService/QueryProductAttributeGroupList"
 )
 
 // ProductAttributeGroupServiceClient is the client API for ProductAttributeGroupService service.
@@ -562,7 +562,7 @@ func _ProductAttributeGroupService_QueryProductAttributeGroupList_Handler(srv in
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var ProductAttributeGroupService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "pmsclient.ProductAttributeGroupService",
+	ServiceName: "pms.ProductAttributeGroupService",
 	HandlerType: (*ProductAttributeGroupServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -595,12 +595,12 @@ var ProductAttributeGroupService_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	ProductAttributeValueService_AddProductAttributeValue_FullMethodName          = "/pmsclient.ProductAttributeValueService/AddProductAttributeValue"
-	ProductAttributeValueService_DeleteProductAttributeValue_FullMethodName       = "/pmsclient.ProductAttributeValueService/DeleteProductAttributeValue"
-	ProductAttributeValueService_UpdateProductAttributeValue_FullMethodName       = "/pmsclient.ProductAttributeValueService/UpdateProductAttributeValue"
-	ProductAttributeValueService_UpdateProductAttributeValueStatus_FullMethodName = "/pmsclient.ProductAttributeValueService/UpdateProductAttributeValueStatus"
-	ProductAttributeValueService_QueryProductAttributeValueDetail_FullMethodName  = "/pmsclient.ProductAttributeValueService/QueryProductAttributeValueDetail"
-	ProductAttributeValueService_QueryProductAttributeValueList_FullMethodName    = "/pmsclient.ProductAttributeValueService/QueryProductAttributeValueList"
+	ProductAttributeValueService_AddProductAttributeValue_FullMethodName          = "/pms.ProductAttributeValueService/AddProductAttributeValue"
+	ProductAttributeValueService_DeleteProductAttributeValue_FullMethodName       = "/pms.ProductAttributeValueService/DeleteProductAttributeValue"
+	ProductAttributeValueService_UpdateProductAttributeValue_FullMethodName       = "/pms.ProductAttributeValueService/UpdateProductAttributeValue"
+	ProductAttributeValueService_UpdateProductAttributeValueStatus_FullMethodName = "/pms.ProductAttributeValueService/UpdateProductAttributeValueStatus"
+	ProductAttributeValueService_QueryProductAttributeValueDetail_FullMethodName  = "/pms.ProductAttributeValueService/QueryProductAttributeValueDetail"
+	ProductAttributeValueService_QueryProductAttributeValueList_FullMethodName    = "/pms.ProductAttributeValueService/QueryProductAttributeValueList"
 )
 
 // ProductAttributeValueServiceClient is the client API for ProductAttributeValueService service.
@@ -850,7 +850,7 @@ func _ProductAttributeValueService_QueryProductAttributeValueList_Handler(srv in
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var ProductAttributeValueService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "pmsclient.ProductAttributeValueService",
+	ServiceName: "pms.ProductAttributeValueService",
 	HandlerType: (*ProductAttributeValueServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -883,15 +883,15 @@ var ProductAttributeValueService_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	ProductBrandService_AddProductBrand_FullMethodName            = "/pmsclient.ProductBrandService/AddProductBrand"
-	ProductBrandService_DeleteProductBrand_FullMethodName         = "/pmsclient.ProductBrandService/DeleteProductBrand"
-	ProductBrandService_UpdateProductBrand_FullMethodName         = "/pmsclient.ProductBrandService/UpdateProductBrand"
-	ProductBrandService_UpdateProductBrandStatus_FullMethodName   = "/pmsclient.ProductBrandService/UpdateProductBrandStatus"
-	ProductBrandService_QueryProductBrandDetail_FullMethodName    = "/pmsclient.ProductBrandService/QueryProductBrandDetail"
-	ProductBrandService_QueryProductBrandList_FullMethodName      = "/pmsclient.ProductBrandService/QueryProductBrandList"
-	ProductBrandService_QueryBrandListByIds_FullMethodName        = "/pmsclient.ProductBrandService/QueryBrandListByIds"
-	ProductBrandService_UpdateBrandRecommendStatus_FullMethodName = "/pmsclient.ProductBrandService/UpdateBrandRecommendStatus"
-	ProductBrandService_UpdateBrandSort_FullMethodName            = "/pmsclient.ProductBrandService/UpdateBrandSort"
+	ProductBrandService_AddProductBrand_FullMethodName            = "/pms.ProductBrandService/AddProductBrand"
+	ProductBrandService_DeleteProductBrand_FullMethodName         = "/pms.ProductBrandService/DeleteProductBrand"
+	ProductBrandService_UpdateProductBrand_FullMethodName         = "/pms.ProductBrandService/UpdateProductBrand"
+	ProductBrandService_UpdateProductBrandStatus_FullMethodName   = "/pms.ProductBrandService/UpdateProductBrandStatus"
+	ProductBrandService_QueryProductBrandDetail_FullMethodName    = "/pms.ProductBrandService/QueryProductBrandDetail"
+	ProductBrandService_QueryProductBrandList_FullMethodName      = "/pms.ProductBrandService/QueryProductBrandList"
+	ProductBrandService_QueryBrandListByIds_FullMethodName        = "/pms.ProductBrandService/QueryBrandListByIds"
+	ProductBrandService_UpdateBrandRecommendStatus_FullMethodName = "/pms.ProductBrandService/UpdateBrandRecommendStatus"
+	ProductBrandService_UpdateBrandSort_FullMethodName            = "/pms.ProductBrandService/UpdateBrandSort"
 )
 
 // ProductBrandServiceClient is the client API for ProductBrandService service.
@@ -1240,7 +1240,7 @@ func _ProductBrandService_UpdateBrandSort_Handler(srv interface{}, ctx context.C
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var ProductBrandService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "pmsclient.ProductBrandService",
+	ServiceName: "pms.ProductBrandService",
 	HandlerType: (*ProductBrandServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -1285,14 +1285,14 @@ var ProductBrandService_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	ProductCategoryService_AddProductCategory_FullMethodName           = "/pmsclient.ProductCategoryService/AddProductCategory"
-	ProductCategoryService_DeleteProductCategory_FullMethodName        = "/pmsclient.ProductCategoryService/DeleteProductCategory"
-	ProductCategoryService_UpdateProductCategory_FullMethodName        = "/pmsclient.ProductCategoryService/UpdateProductCategory"
-	ProductCategoryService_UpdateCategoryNavStatus_FullMethodName      = "/pmsclient.ProductCategoryService/UpdateCategoryNavStatus"
-	ProductCategoryService_UpdateProductCategoryStatus_FullMethodName  = "/pmsclient.ProductCategoryService/UpdateProductCategoryStatus"
-	ProductCategoryService_QueryProductCategoryDetail_FullMethodName   = "/pmsclient.ProductCategoryService/QueryProductCategoryDetail"
-	ProductCategoryService_QueryProductCategoryList_FullMethodName     = "/pmsclient.ProductCategoryService/QueryProductCategoryList"
-	ProductCategoryService_QueryProductCategoryTreeList_FullMethodName = "/pmsclient.ProductCategoryService/QueryProductCategoryTreeList"
+	ProductCategoryService_AddProductCategory_FullMethodName           = "/pms.ProductCategoryService/AddProductCategory"
+	ProductCategoryService_DeleteProductCategory_FullMethodName        = "/pms.ProductCategoryService/DeleteProductCategory"
+	ProductCategoryService_UpdateProductCategory_FullMethodName        = "/pms.ProductCategoryService/UpdateProductCategory"
+	ProductCategoryService_UpdateCategoryNavStatus_FullMethodName      = "/pms.ProductCategoryService/UpdateCategoryNavStatus"
+	ProductCategoryService_UpdateProductCategoryStatus_FullMethodName  = "/pms.ProductCategoryService/UpdateProductCategoryStatus"
+	ProductCategoryService_QueryProductCategoryDetail_FullMethodName   = "/pms.ProductCategoryService/QueryProductCategoryDetail"
+	ProductCategoryService_QueryProductCategoryList_FullMethodName     = "/pms.ProductCategoryService/QueryProductCategoryList"
+	ProductCategoryService_QueryProductCategoryTreeList_FullMethodName = "/pms.ProductCategoryService/QueryProductCategoryTreeList"
 )
 
 // ProductCategoryServiceClient is the client API for ProductCategoryService service.
@@ -1610,7 +1610,7 @@ func _ProductCategoryService_QueryProductCategoryTreeList_Handler(srv interface{
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var ProductCategoryService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "pmsclient.ProductCategoryService",
+	ServiceName: "pms.ProductCategoryService",
 	HandlerType: (*ProductCategoryServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -1651,8 +1651,8 @@ var ProductCategoryService_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	ProductCategoryAttributeRelationService_AddProductCategoryAttributeRelation_FullMethodName       = "/pmsclient.ProductCategoryAttributeRelationService/AddProductCategoryAttributeRelation"
-	ProductCategoryAttributeRelationService_QueryProductCategoryAttributeRelationList_FullMethodName = "/pmsclient.ProductCategoryAttributeRelationService/QueryProductCategoryAttributeRelationList"
+	ProductCategoryAttributeRelationService_AddProductCategoryAttributeRelation_FullMethodName       = "/pms.ProductCategoryAttributeRelationService/AddProductCategoryAttributeRelation"
+	ProductCategoryAttributeRelationService_QueryProductCategoryAttributeRelationList_FullMethodName = "/pms.ProductCategoryAttributeRelationService/QueryProductCategoryAttributeRelationList"
 )
 
 // ProductCategoryAttributeRelationServiceClient is the client API for ProductCategoryAttributeRelationService service.
@@ -1766,7 +1766,7 @@ func _ProductCategoryAttributeRelationService_QueryProductCategoryAttributeRelat
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var ProductCategoryAttributeRelationService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "pmsclient.ProductCategoryAttributeRelationService",
+	ServiceName: "pms.ProductCategoryAttributeRelationService",
 	HandlerType: (*ProductCategoryAttributeRelationServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -1783,10 +1783,10 @@ var ProductCategoryAttributeRelationService_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	ProductCollectService_AddProductCollect_FullMethodName         = "/pmsclient.ProductCollectService/AddProductCollect"
-	ProductCollectService_DeleteProductCollect_FullMethodName      = "/pmsclient.ProductCollectService/DeleteProductCollect"
-	ProductCollectService_QueryProductCollectDetail_FullMethodName = "/pmsclient.ProductCollectService/QueryProductCollectDetail"
-	ProductCollectService_QueryProductCollectList_FullMethodName   = "/pmsclient.ProductCollectService/QueryProductCollectList"
+	ProductCollectService_AddProductCollect_FullMethodName         = "/pms.ProductCollectService/AddProductCollect"
+	ProductCollectService_DeleteProductCollect_FullMethodName      = "/pms.ProductCollectService/DeleteProductCollect"
+	ProductCollectService_QueryProductCollectDetail_FullMethodName = "/pms.ProductCollectService/QueryProductCollectDetail"
+	ProductCollectService_QueryProductCollectList_FullMethodName   = "/pms.ProductCollectService/QueryProductCollectList"
 )
 
 // ProductCollectServiceClient is the client API for ProductCollectService service.
@@ -1967,7 +1967,7 @@ func _ProductCollectService_QueryProductCollectList_Handler(srv interface{}, ctx
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var ProductCollectService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "pmsclient.ProductCollectService",
+	ServiceName: "pms.ProductCollectService",
 	HandlerType: (*ProductCollectServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -1992,11 +1992,11 @@ var ProductCollectService_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	CommentService_AddComment_FullMethodName         = "/pmsclient.CommentService/AddComment"
-	CommentService_DeleteComment_FullMethodName      = "/pmsclient.CommentService/DeleteComment"
-	CommentService_UpdateComment_FullMethodName      = "/pmsclient.CommentService/UpdateComment"
-	CommentService_QueryCommentDetail_FullMethodName = "/pmsclient.CommentService/QueryCommentDetail"
-	CommentService_QueryCommentList_FullMethodName   = "/pmsclient.CommentService/QueryCommentList"
+	CommentService_AddComment_FullMethodName         = "/pms.CommentService/AddComment"
+	CommentService_DeleteComment_FullMethodName      = "/pms.CommentService/DeleteComment"
+	CommentService_UpdateComment_FullMethodName      = "/pms.CommentService/UpdateComment"
+	CommentService_QueryCommentDetail_FullMethodName = "/pms.CommentService/QueryCommentDetail"
+	CommentService_QueryCommentList_FullMethodName   = "/pms.CommentService/QueryCommentList"
 )
 
 // CommentServiceClient is the client API for CommentService service.
@@ -2211,7 +2211,7 @@ func _CommentService_QueryCommentList_Handler(srv interface{}, ctx context.Conte
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var CommentService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "pmsclient.CommentService",
+	ServiceName: "pms.CommentService",
 	HandlerType: (*CommentServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -2240,11 +2240,11 @@ var CommentService_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	CommentReplayService_AddCommentReplay_FullMethodName         = "/pmsclient.CommentReplayService/AddCommentReplay"
-	CommentReplayService_DeleteCommentReplay_FullMethodName      = "/pmsclient.CommentReplayService/DeleteCommentReplay"
-	CommentReplayService_UpdateCommentReplay_FullMethodName      = "/pmsclient.CommentReplayService/UpdateCommentReplay"
-	CommentReplayService_QueryCommentReplayDetail_FullMethodName = "/pmsclient.CommentReplayService/QueryCommentReplayDetail"
-	CommentReplayService_QueryCommentReplayList_FullMethodName   = "/pmsclient.CommentReplayService/QueryCommentReplayList"
+	CommentReplayService_AddCommentReplay_FullMethodName         = "/pms.CommentReplayService/AddCommentReplay"
+	CommentReplayService_DeleteCommentReplay_FullMethodName      = "/pms.CommentReplayService/DeleteCommentReplay"
+	CommentReplayService_UpdateCommentReplay_FullMethodName      = "/pms.CommentReplayService/UpdateCommentReplay"
+	CommentReplayService_QueryCommentReplayDetail_FullMethodName = "/pms.CommentReplayService/QueryCommentReplayDetail"
+	CommentReplayService_QueryCommentReplayList_FullMethodName   = "/pms.CommentReplayService/QueryCommentReplayList"
 )
 
 // CommentReplayServiceClient is the client API for CommentReplayService service.
@@ -2459,7 +2459,7 @@ func _CommentReplayService_QueryCommentReplayList_Handler(srv interface{}, ctx c
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var CommentReplayService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "pmsclient.CommentReplayService",
+	ServiceName: "pms.CommentReplayService",
 	HandlerType: (*CommentReplayServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -2488,11 +2488,11 @@ var CommentReplayService_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	FeightTemplateService_AddFeightTemplate_FullMethodName         = "/pmsclient.FeightTemplateService/AddFeightTemplate"
-	FeightTemplateService_DeleteFeightTemplate_FullMethodName      = "/pmsclient.FeightTemplateService/DeleteFeightTemplate"
-	FeightTemplateService_UpdateFeightTemplate_FullMethodName      = "/pmsclient.FeightTemplateService/UpdateFeightTemplate"
-	FeightTemplateService_QueryFeightTemplateDetail_FullMethodName = "/pmsclient.FeightTemplateService/QueryFeightTemplateDetail"
-	FeightTemplateService_QueryFeightTemplateList_FullMethodName   = "/pmsclient.FeightTemplateService/QueryFeightTemplateList"
+	FeightTemplateService_AddFeightTemplate_FullMethodName         = "/pms.FeightTemplateService/AddFeightTemplate"
+	FeightTemplateService_DeleteFeightTemplate_FullMethodName      = "/pms.FeightTemplateService/DeleteFeightTemplate"
+	FeightTemplateService_UpdateFeightTemplate_FullMethodName      = "/pms.FeightTemplateService/UpdateFeightTemplate"
+	FeightTemplateService_QueryFeightTemplateDetail_FullMethodName = "/pms.FeightTemplateService/QueryFeightTemplateDetail"
+	FeightTemplateService_QueryFeightTemplateList_FullMethodName   = "/pms.FeightTemplateService/QueryFeightTemplateList"
 )
 
 // FeightTemplateServiceClient is the client API for FeightTemplateService service.
@@ -2707,7 +2707,7 @@ func _FeightTemplateService_QueryFeightTemplateList_Handler(srv interface{}, ctx
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var FeightTemplateService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "pmsclient.FeightTemplateService",
+	ServiceName: "pms.FeightTemplateService",
 	HandlerType: (*FeightTemplateServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -2736,9 +2736,9 @@ var FeightTemplateService_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	ProductFullReductionService_AddProductFullReduction_FullMethodName       = "/pmsclient.ProductFullReductionService/AddProductFullReduction"
-	ProductFullReductionService_DeleteProductFullReduction_FullMethodName    = "/pmsclient.ProductFullReductionService/DeleteProductFullReduction"
-	ProductFullReductionService_QueryProductFullReductionList_FullMethodName = "/pmsclient.ProductFullReductionService/QueryProductFullReductionList"
+	ProductFullReductionService_AddProductFullReduction_FullMethodName       = "/pms.ProductFullReductionService/AddProductFullReduction"
+	ProductFullReductionService_DeleteProductFullReduction_FullMethodName    = "/pms.ProductFullReductionService/DeleteProductFullReduction"
+	ProductFullReductionService_QueryProductFullReductionList_FullMethodName = "/pms.ProductFullReductionService/QueryProductFullReductionList"
 )
 
 // ProductFullReductionServiceClient is the client API for ProductFullReductionService service.
@@ -2886,7 +2886,7 @@ func _ProductFullReductionService_QueryProductFullReductionList_Handler(srv inte
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var ProductFullReductionService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "pmsclient.ProductFullReductionService",
+	ServiceName: "pms.ProductFullReductionService",
 	HandlerType: (*ProductFullReductionServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -2907,11 +2907,11 @@ var ProductFullReductionService_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	ProductLadderService_AddProductLadder_FullMethodName         = "/pmsclient.ProductLadderService/AddProductLadder"
-	ProductLadderService_DeleteProductLadder_FullMethodName      = "/pmsclient.ProductLadderService/DeleteProductLadder"
-	ProductLadderService_UpdateProductLadder_FullMethodName      = "/pmsclient.ProductLadderService/UpdateProductLadder"
-	ProductLadderService_QueryProductLadderDetail_FullMethodName = "/pmsclient.ProductLadderService/QueryProductLadderDetail"
-	ProductLadderService_QueryProductLadderList_FullMethodName   = "/pmsclient.ProductLadderService/QueryProductLadderList"
+	ProductLadderService_AddProductLadder_FullMethodName         = "/pms.ProductLadderService/AddProductLadder"
+	ProductLadderService_DeleteProductLadder_FullMethodName      = "/pms.ProductLadderService/DeleteProductLadder"
+	ProductLadderService_UpdateProductLadder_FullMethodName      = "/pms.ProductLadderService/UpdateProductLadder"
+	ProductLadderService_QueryProductLadderDetail_FullMethodName = "/pms.ProductLadderService/QueryProductLadderDetail"
+	ProductLadderService_QueryProductLadderList_FullMethodName   = "/pms.ProductLadderService/QueryProductLadderList"
 )
 
 // ProductLadderServiceClient is the client API for ProductLadderService service.
@@ -3126,7 +3126,7 @@ func _ProductLadderService_QueryProductLadderList_Handler(srv interface{}, ctx c
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var ProductLadderService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "pmsclient.ProductLadderService",
+	ServiceName: "pms.ProductLadderService",
 	HandlerType: (*ProductLadderServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -3155,10 +3155,10 @@ var ProductLadderService_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	ProductOperateLogService_AddProductOperateLog_FullMethodName         = "/pmsclient.ProductOperateLogService/AddProductOperateLog"
-	ProductOperateLogService_DeleteProductOperateLog_FullMethodName      = "/pmsclient.ProductOperateLogService/DeleteProductOperateLog"
-	ProductOperateLogService_QueryProductOperateLogDetail_FullMethodName = "/pmsclient.ProductOperateLogService/QueryProductOperateLogDetail"
-	ProductOperateLogService_QueryProductOperateLogList_FullMethodName   = "/pmsclient.ProductOperateLogService/QueryProductOperateLogList"
+	ProductOperateLogService_AddProductOperateLog_FullMethodName         = "/pms.ProductOperateLogService/AddProductOperateLog"
+	ProductOperateLogService_DeleteProductOperateLog_FullMethodName      = "/pms.ProductOperateLogService/DeleteProductOperateLog"
+	ProductOperateLogService_QueryProductOperateLogDetail_FullMethodName = "/pms.ProductOperateLogService/QueryProductOperateLogDetail"
+	ProductOperateLogService_QueryProductOperateLogList_FullMethodName   = "/pms.ProductOperateLogService/QueryProductOperateLogList"
 )
 
 // ProductOperateLogServiceClient is the client API for ProductOperateLogService service.
@@ -3340,7 +3340,7 @@ func _ProductOperateLogService_QueryProductOperateLogList_Handler(srv interface{
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var ProductOperateLogService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "pmsclient.ProductOperateLogService",
+	ServiceName: "pms.ProductOperateLogService",
 	HandlerType: (*ProductOperateLogServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -3365,13 +3365,13 @@ var ProductOperateLogService_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	ProductSkuService_AddProductSku_FullMethodName         = "/pmsclient.ProductSkuService/AddProductSku"
-	ProductSkuService_DeleteProductSku_FullMethodName      = "/pmsclient.ProductSkuService/DeleteProductSku"
-	ProductSkuService_UpdateProductSku_FullMethodName      = "/pmsclient.ProductSkuService/UpdateProductSku"
-	ProductSkuService_QueryProductSkuDetail_FullMethodName = "/pmsclient.ProductSkuService/QueryProductSkuDetail"
-	ProductSkuService_QueryProductSkuList_FullMethodName   = "/pmsclient.ProductSkuService/QueryProductSkuList"
-	ProductSkuService_ReleaseSkuStockLock_FullMethodName   = "/pmsclient.ProductSkuService/ReleaseSkuStockLock"
-	ProductSkuService_LockSkuStockLock_FullMethodName      = "/pmsclient.ProductSkuService/LockSkuStockLock"
+	ProductSkuService_AddProductSku_FullMethodName         = "/pms.ProductSkuService/AddProductSku"
+	ProductSkuService_DeleteProductSku_FullMethodName      = "/pms.ProductSkuService/DeleteProductSku"
+	ProductSkuService_UpdateProductSku_FullMethodName      = "/pms.ProductSkuService/UpdateProductSku"
+	ProductSkuService_QueryProductSkuDetail_FullMethodName = "/pms.ProductSkuService/QueryProductSkuDetail"
+	ProductSkuService_QueryProductSkuList_FullMethodName   = "/pms.ProductSkuService/QueryProductSkuList"
+	ProductSkuService_ReleaseSkuStockLock_FullMethodName   = "/pms.ProductSkuService/ReleaseSkuStockLock"
+	ProductSkuService_LockSkuStockLock_FullMethodName      = "/pms.ProductSkuService/LockSkuStockLock"
 )
 
 // ProductSkuServiceClient is the client API for ProductSkuService service.
@@ -3654,7 +3654,7 @@ func _ProductSkuService_LockSkuStockLock_Handler(srv interface{}, ctx context.Co
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var ProductSkuService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "pmsclient.ProductSkuService",
+	ServiceName: "pms.ProductSkuService",
 	HandlerType: (*ProductSkuServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -3691,12 +3691,12 @@ var ProductSkuService_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	ProductSpecService_AddProductSpec_FullMethodName          = "/pmsclient.ProductSpecService/AddProductSpec"
-	ProductSpecService_DeleteProductSpec_FullMethodName       = "/pmsclient.ProductSpecService/DeleteProductSpec"
-	ProductSpecService_UpdateProductSpec_FullMethodName       = "/pmsclient.ProductSpecService/UpdateProductSpec"
-	ProductSpecService_UpdateProductSpecStatus_FullMethodName = "/pmsclient.ProductSpecService/UpdateProductSpecStatus"
-	ProductSpecService_QueryProductSpecDetail_FullMethodName  = "/pmsclient.ProductSpecService/QueryProductSpecDetail"
-	ProductSpecService_QueryProductSpecList_FullMethodName    = "/pmsclient.ProductSpecService/QueryProductSpecList"
+	ProductSpecService_AddProductSpec_FullMethodName          = "/pms.ProductSpecService/AddProductSpec"
+	ProductSpecService_DeleteProductSpec_FullMethodName       = "/pms.ProductSpecService/DeleteProductSpec"
+	ProductSpecService_UpdateProductSpec_FullMethodName       = "/pms.ProductSpecService/UpdateProductSpec"
+	ProductSpecService_UpdateProductSpecStatus_FullMethodName = "/pms.ProductSpecService/UpdateProductSpecStatus"
+	ProductSpecService_QueryProductSpecDetail_FullMethodName  = "/pms.ProductSpecService/QueryProductSpecDetail"
+	ProductSpecService_QueryProductSpecList_FullMethodName    = "/pms.ProductSpecService/QueryProductSpecList"
 )
 
 // ProductSpecServiceClient is the client API for ProductSpecService service.
@@ -3945,7 +3945,7 @@ func _ProductSpecService_QueryProductSpecList_Handler(srv interface{}, ctx conte
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var ProductSpecService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "pmsclient.ProductSpecService",
+	ServiceName: "pms.ProductSpecService",
 	HandlerType: (*ProductSpecServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -3978,12 +3978,12 @@ var ProductSpecService_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	ProductSpecValueService_AddProductSpecValue_FullMethodName          = "/pmsclient.ProductSpecValueService/AddProductSpecValue"
-	ProductSpecValueService_DeleteProductSpecValue_FullMethodName       = "/pmsclient.ProductSpecValueService/DeleteProductSpecValue"
-	ProductSpecValueService_UpdateProductSpecValue_FullMethodName       = "/pmsclient.ProductSpecValueService/UpdateProductSpecValue"
-	ProductSpecValueService_UpdateProductSpecValueStatus_FullMethodName = "/pmsclient.ProductSpecValueService/UpdateProductSpecValueStatus"
-	ProductSpecValueService_QueryProductSpecValueDetail_FullMethodName  = "/pmsclient.ProductSpecValueService/QueryProductSpecValueDetail"
-	ProductSpecValueService_QueryProductSpecValueList_FullMethodName    = "/pmsclient.ProductSpecValueService/QueryProductSpecValueList"
+	ProductSpecValueService_AddProductSpecValue_FullMethodName          = "/pms.ProductSpecValueService/AddProductSpecValue"
+	ProductSpecValueService_DeleteProductSpecValue_FullMethodName       = "/pms.ProductSpecValueService/DeleteProductSpecValue"
+	ProductSpecValueService_UpdateProductSpecValue_FullMethodName       = "/pms.ProductSpecValueService/UpdateProductSpecValue"
+	ProductSpecValueService_UpdateProductSpecValueStatus_FullMethodName = "/pms.ProductSpecValueService/UpdateProductSpecValueStatus"
+	ProductSpecValueService_QueryProductSpecValueDetail_FullMethodName  = "/pms.ProductSpecValueService/QueryProductSpecValueDetail"
+	ProductSpecValueService_QueryProductSpecValueList_FullMethodName    = "/pms.ProductSpecValueService/QueryProductSpecValueList"
 )
 
 // ProductSpecValueServiceClient is the client API for ProductSpecValueService service.
@@ -4233,7 +4233,7 @@ func _ProductSpecValueService_QueryProductSpecValueList_Handler(srv interface{},
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var ProductSpecValueService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "pmsclient.ProductSpecValueService",
+	ServiceName: "pms.ProductSpecValueService",
 	HandlerType: (*ProductSpecValueServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -4266,19 +4266,19 @@ var ProductSpecValueService_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	ProductSpuService_AddProductSpu_FullMethodName             = "/pmsclient.ProductSpuService/AddProductSpu"
-	ProductSpuService_DeleteProductSpu_FullMethodName          = "/pmsclient.ProductSpuService/DeleteProductSpu"
-	ProductSpuService_UpdateProductSpu_FullMethodName          = "/pmsclient.ProductSpuService/UpdateProductSpu"
-	ProductSpuService_QueryProductSpuDetail_FullMethodName     = "/pmsclient.ProductSpuService/QueryProductSpuDetail"
-	ProductSpuService_QueryProductSpuList_FullMethodName       = "/pmsclient.ProductSpuService/QueryProductSpuList"
-	ProductSpuService_UpdateVerifyStatus_FullMethodName        = "/pmsclient.ProductSpuService/UpdateVerifyStatus"
-	ProductSpuService_UpdatePublishStatus_FullMethodName       = "/pmsclient.ProductSpuService/UpdatePublishStatus"
-	ProductSpuService_UpdateRecommendStatus_FullMethodName     = "/pmsclient.ProductSpuService/UpdateRecommendStatus"
-	ProductSpuService_UpdateNewStatus_FullMethodName           = "/pmsclient.ProductSpuService/UpdateNewStatus"
-	ProductSpuService_UpdateDeleteStatus_FullMethodName        = "/pmsclient.ProductSpuService/UpdateDeleteStatus"
-	ProductSpuService_UpdateNewStatusSort_FullMethodName       = "/pmsclient.ProductSpuService/UpdateNewStatusSort"
-	ProductSpuService_UpdateRecommendStatusSort_FullMethodName = "/pmsclient.ProductSpuService/UpdateRecommendStatusSort"
-	ProductSpuService_QueryProductSpuListByIds_FullMethodName  = "/pmsclient.ProductSpuService/QueryProductSpuListByIds"
+	ProductSpuService_AddProductSpu_FullMethodName             = "/pms.ProductSpuService/AddProductSpu"
+	ProductSpuService_DeleteProductSpu_FullMethodName          = "/pms.ProductSpuService/DeleteProductSpu"
+	ProductSpuService_UpdateProductSpu_FullMethodName          = "/pms.ProductSpuService/UpdateProductSpu"
+	ProductSpuService_QueryProductSpuDetail_FullMethodName     = "/pms.ProductSpuService/QueryProductSpuDetail"
+	ProductSpuService_QueryProductSpuList_FullMethodName       = "/pms.ProductSpuService/QueryProductSpuList"
+	ProductSpuService_UpdateVerifyStatus_FullMethodName        = "/pms.ProductSpuService/UpdateVerifyStatus"
+	ProductSpuService_UpdatePublishStatus_FullMethodName       = "/pms.ProductSpuService/UpdatePublishStatus"
+	ProductSpuService_UpdateRecommendStatus_FullMethodName     = "/pms.ProductSpuService/UpdateRecommendStatus"
+	ProductSpuService_UpdateNewStatus_FullMethodName           = "/pms.ProductSpuService/UpdateNewStatus"
+	ProductSpuService_UpdateDeleteStatus_FullMethodName        = "/pms.ProductSpuService/UpdateDeleteStatus"
+	ProductSpuService_UpdateNewStatusSort_FullMethodName       = "/pms.ProductSpuService/UpdateNewStatusSort"
+	ProductSpuService_UpdateRecommendStatusSort_FullMethodName = "/pms.ProductSpuService/UpdateRecommendStatusSort"
+	ProductSpuService_QueryProductSpuListByIds_FullMethodName  = "/pms.ProductSpuService/QueryProductSpuListByIds"
 )
 
 // ProductSpuServiceClient is the client API for ProductSpuService service.
@@ -4765,7 +4765,7 @@ func _ProductSpuService_QueryProductSpuListByIds_Handler(srv interface{}, ctx co
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var ProductSpuService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "pmsclient.ProductSpuService",
+	ServiceName: "pms.ProductSpuService",
 	HandlerType: (*ProductSpuServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -4826,9 +4826,9 @@ var ProductSpuService_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	ProductVertifyRecordService_AddProductVertifyRecord_FullMethodName         = "/pmsclient.ProductVertifyRecordService/AddProductVertifyRecord"
-	ProductVertifyRecordService_QueryProductVertifyRecordDetail_FullMethodName = "/pmsclient.ProductVertifyRecordService/QueryProductVertifyRecordDetail"
-	ProductVertifyRecordService_QueryProductVertifyRecordList_FullMethodName   = "/pmsclient.ProductVertifyRecordService/QueryProductVertifyRecordList"
+	ProductVertifyRecordService_AddProductVertifyRecord_FullMethodName         = "/pms.ProductVertifyRecordService/AddProductVertifyRecord"
+	ProductVertifyRecordService_QueryProductVertifyRecordDetail_FullMethodName = "/pms.ProductVertifyRecordService/QueryProductVertifyRecordDetail"
+	ProductVertifyRecordService_QueryProductVertifyRecordList_FullMethodName   = "/pms.ProductVertifyRecordService/QueryProductVertifyRecordList"
 )
 
 // ProductVertifyRecordServiceClient is the client API for ProductVertifyRecordService service.
@@ -4976,7 +4976,7 @@ func _ProductVertifyRecordService_QueryProductVertifyRecordList_Handler(srv inte
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var ProductVertifyRecordService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "pmsclient.ProductVertifyRecordService",
+	ServiceName: "pms.ProductVertifyRecordService",
 	HandlerType: (*ProductVertifyRecordServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{

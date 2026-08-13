@@ -19,15 +19,15 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	CouponService_AddCoupon_FullMethodName              = "/smsclient.CouponService/AddCoupon"
-	CouponService_DeleteCoupon_FullMethodName           = "/smsclient.CouponService/DeleteCoupon"
-	CouponService_UpdateCoupon_FullMethodName           = "/smsclient.CouponService/UpdateCoupon"
-	CouponService_UpdateCouponStatus_FullMethodName     = "/smsclient.CouponService/UpdateCouponStatus"
-	CouponService_QueryCouponDetail_FullMethodName      = "/smsclient.CouponService/QueryCouponDetail"
-	CouponService_QueryCouponList_FullMethodName        = "/smsclient.CouponService/QueryCouponList"
-	CouponService_QueryCouponByScopeId_FullMethodName   = "/smsclient.CouponService/QueryCouponByScopeId"
-	CouponService_QueryCouponByCode_FullMethodName      = "/smsclient.CouponService/QueryCouponByCode"
-	CouponService_HandleExpirationCoupon_FullMethodName = "/smsclient.CouponService/HandleExpirationCoupon"
+	CouponService_AddCoupon_FullMethodName              = "/sms.CouponService/AddCoupon"
+	CouponService_DeleteCoupon_FullMethodName           = "/sms.CouponService/DeleteCoupon"
+	CouponService_UpdateCoupon_FullMethodName           = "/sms.CouponService/UpdateCoupon"
+	CouponService_UpdateCouponStatus_FullMethodName     = "/sms.CouponService/UpdateCouponStatus"
+	CouponService_QueryCouponDetail_FullMethodName      = "/sms.CouponService/QueryCouponDetail"
+	CouponService_QueryCouponList_FullMethodName        = "/sms.CouponService/QueryCouponList"
+	CouponService_QueryCouponByScopeId_FullMethodName   = "/sms.CouponService/QueryCouponByScopeId"
+	CouponService_QueryCouponByCode_FullMethodName      = "/sms.CouponService/QueryCouponByCode"
+	CouponService_HandleExpirationCoupon_FullMethodName = "/sms.CouponService/HandleExpirationCoupon"
 )
 
 // CouponServiceClient is the client API for CouponService service.
@@ -378,7 +378,7 @@ func _CouponService_HandleExpirationCoupon_Handler(srv interface{}, ctx context.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var CouponService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "smsclient.CouponService",
+	ServiceName: "sms.CouponService",
 	HandlerType: (*CouponServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -423,12 +423,12 @@ var CouponService_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	CouponRecordService_AddCouponRecord_FullMethodName         = "/smsclient.CouponRecordService/AddCouponRecord"
-	CouponRecordService_DeleteCouponRecord_FullMethodName      = "/smsclient.CouponRecordService/DeleteCouponRecord"
-	CouponRecordService_UpdateCouponRecord_FullMethodName      = "/smsclient.CouponRecordService/UpdateCouponRecord"
-	CouponRecordService_QueryCouponRecordDetail_FullMethodName = "/smsclient.CouponRecordService/QueryCouponRecordDetail"
-	CouponRecordService_QueryCouponRecordList_FullMethodName   = "/smsclient.CouponRecordService/QueryCouponRecordList"
-	CouponRecordService_QueryMemberCouponList_FullMethodName   = "/smsclient.CouponRecordService/QueryMemberCouponList"
+	CouponRecordService_AddCouponRecord_FullMethodName         = "/sms.CouponRecordService/AddCouponRecord"
+	CouponRecordService_DeleteCouponRecord_FullMethodName      = "/sms.CouponRecordService/DeleteCouponRecord"
+	CouponRecordService_UpdateCouponRecord_FullMethodName      = "/sms.CouponRecordService/UpdateCouponRecord"
+	CouponRecordService_QueryCouponRecordDetail_FullMethodName = "/sms.CouponRecordService/QueryCouponRecordDetail"
+	CouponRecordService_QueryCouponRecordList_FullMethodName   = "/sms.CouponRecordService/QueryCouponRecordList"
+	CouponRecordService_QueryMemberCouponList_FullMethodName   = "/sms.CouponRecordService/QueryMemberCouponList"
 )
 
 // CouponRecordServiceClient is the client API for CouponRecordService service.
@@ -677,7 +677,7 @@ func _CouponRecordService_QueryMemberCouponList_Handler(srv interface{}, ctx con
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var CouponRecordService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "smsclient.CouponRecordService",
+	ServiceName: "sms.CouponRecordService",
 	HandlerType: (*CouponRecordServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -710,11 +710,11 @@ var CouponRecordService_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	CouponScopeService_AddCouponScope_FullMethodName         = "/smsclient.CouponScopeService/AddCouponScope"
-	CouponScopeService_DeleteCouponScope_FullMethodName      = "/smsclient.CouponScopeService/DeleteCouponScope"
-	CouponScopeService_UpdateCouponScope_FullMethodName      = "/smsclient.CouponScopeService/UpdateCouponScope"
-	CouponScopeService_QueryCouponScopeDetail_FullMethodName = "/smsclient.CouponScopeService/QueryCouponScopeDetail"
-	CouponScopeService_QueryCouponScopeList_FullMethodName   = "/smsclient.CouponScopeService/QueryCouponScopeList"
+	CouponScopeService_AddCouponScope_FullMethodName         = "/sms.CouponScopeService/AddCouponScope"
+	CouponScopeService_DeleteCouponScope_FullMethodName      = "/sms.CouponScopeService/DeleteCouponScope"
+	CouponScopeService_UpdateCouponScope_FullMethodName      = "/sms.CouponScopeService/UpdateCouponScope"
+	CouponScopeService_QueryCouponScopeDetail_FullMethodName = "/sms.CouponScopeService/QueryCouponScopeDetail"
+	CouponScopeService_QueryCouponScopeList_FullMethodName   = "/sms.CouponScopeService/QueryCouponScopeList"
 )
 
 // CouponScopeServiceClient is the client API for CouponScopeService service.
@@ -929,7 +929,7 @@ func _CouponScopeService_QueryCouponScopeList_Handler(srv interface{}, ctx conte
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var CouponScopeService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "smsclient.CouponScopeService",
+	ServiceName: "sms.CouponScopeService",
 	HandlerType: (*CouponScopeServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -958,12 +958,12 @@ var CouponScopeService_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	CouponTypeService_AddCouponType_FullMethodName          = "/smsclient.CouponTypeService/AddCouponType"
-	CouponTypeService_DeleteCouponType_FullMethodName       = "/smsclient.CouponTypeService/DeleteCouponType"
-	CouponTypeService_UpdateCouponType_FullMethodName       = "/smsclient.CouponTypeService/UpdateCouponType"
-	CouponTypeService_UpdateCouponTypeStatus_FullMethodName = "/smsclient.CouponTypeService/UpdateCouponTypeStatus"
-	CouponTypeService_QueryCouponTypeDetail_FullMethodName  = "/smsclient.CouponTypeService/QueryCouponTypeDetail"
-	CouponTypeService_QueryCouponTypeList_FullMethodName    = "/smsclient.CouponTypeService/QueryCouponTypeList"
+	CouponTypeService_AddCouponType_FullMethodName          = "/sms.CouponTypeService/AddCouponType"
+	CouponTypeService_DeleteCouponType_FullMethodName       = "/sms.CouponTypeService/DeleteCouponType"
+	CouponTypeService_UpdateCouponType_FullMethodName       = "/sms.CouponTypeService/UpdateCouponType"
+	CouponTypeService_UpdateCouponTypeStatus_FullMethodName = "/sms.CouponTypeService/UpdateCouponTypeStatus"
+	CouponTypeService_QueryCouponTypeDetail_FullMethodName  = "/sms.CouponTypeService/QueryCouponTypeDetail"
+	CouponTypeService_QueryCouponTypeList_FullMethodName    = "/sms.CouponTypeService/QueryCouponTypeList"
 )
 
 // CouponTypeServiceClient is the client API for CouponTypeService service.
@@ -1212,7 +1212,7 @@ func _CouponTypeService_QueryCouponTypeList_Handler(srv interface{}, ctx context
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var CouponTypeService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "smsclient.CouponTypeService",
+	ServiceName: "sms.CouponTypeService",
 	HandlerType: (*CouponTypeServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -1245,12 +1245,12 @@ var CouponTypeService_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	HomeAdvertiseService_AddHomeAdvertise_FullMethodName          = "/smsclient.HomeAdvertiseService/AddHomeAdvertise"
-	HomeAdvertiseService_DeleteHomeAdvertise_FullMethodName       = "/smsclient.HomeAdvertiseService/DeleteHomeAdvertise"
-	HomeAdvertiseService_UpdateHomeAdvertise_FullMethodName       = "/smsclient.HomeAdvertiseService/UpdateHomeAdvertise"
-	HomeAdvertiseService_UpdateHomeAdvertiseStatus_FullMethodName = "/smsclient.HomeAdvertiseService/UpdateHomeAdvertiseStatus"
-	HomeAdvertiseService_QueryHomeAdvertiseDetail_FullMethodName  = "/smsclient.HomeAdvertiseService/QueryHomeAdvertiseDetail"
-	HomeAdvertiseService_QueryHomeAdvertiseList_FullMethodName    = "/smsclient.HomeAdvertiseService/QueryHomeAdvertiseList"
+	HomeAdvertiseService_AddHomeAdvertise_FullMethodName          = "/sms.HomeAdvertiseService/AddHomeAdvertise"
+	HomeAdvertiseService_DeleteHomeAdvertise_FullMethodName       = "/sms.HomeAdvertiseService/DeleteHomeAdvertise"
+	HomeAdvertiseService_UpdateHomeAdvertise_FullMethodName       = "/sms.HomeAdvertiseService/UpdateHomeAdvertise"
+	HomeAdvertiseService_UpdateHomeAdvertiseStatus_FullMethodName = "/sms.HomeAdvertiseService/UpdateHomeAdvertiseStatus"
+	HomeAdvertiseService_QueryHomeAdvertiseDetail_FullMethodName  = "/sms.HomeAdvertiseService/QueryHomeAdvertiseDetail"
+	HomeAdvertiseService_QueryHomeAdvertiseList_FullMethodName    = "/sms.HomeAdvertiseService/QueryHomeAdvertiseList"
 )
 
 // HomeAdvertiseServiceClient is the client API for HomeAdvertiseService service.
@@ -1499,7 +1499,7 @@ func _HomeAdvertiseService_QueryHomeAdvertiseList_Handler(srv interface{}, ctx c
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var HomeAdvertiseService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "smsclient.HomeAdvertiseService",
+	ServiceName: "sms.HomeAdvertiseService",
 	HandlerType: (*HomeAdvertiseServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -1532,13 +1532,13 @@ var HomeAdvertiseService_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	SeckillActivityService_AddSeckillActivity_FullMethodName             = "/smsclient.SeckillActivityService/AddSeckillActivity"
-	SeckillActivityService_DeleteSeckillActivity_FullMethodName          = "/smsclient.SeckillActivityService/DeleteSeckillActivity"
-	SeckillActivityService_UpdateSeckillActivity_FullMethodName          = "/smsclient.SeckillActivityService/UpdateSeckillActivity"
-	SeckillActivityService_UpdateSeckillActivityStatus_FullMethodName    = "/smsclient.SeckillActivityService/UpdateSeckillActivityStatus"
-	SeckillActivityService_QuerySeckillActivityDetail_FullMethodName     = "/smsclient.SeckillActivityService/QuerySeckillActivityDetail"
-	SeckillActivityService_QuerySeckillActivityList_FullMethodName       = "/smsclient.SeckillActivityService/QuerySeckillActivityList"
-	SeckillActivityService_QuerySeckillActivityListByDate_FullMethodName = "/smsclient.SeckillActivityService/QuerySeckillActivityListByDate"
+	SeckillActivityService_AddSeckillActivity_FullMethodName             = "/sms.SeckillActivityService/AddSeckillActivity"
+	SeckillActivityService_DeleteSeckillActivity_FullMethodName          = "/sms.SeckillActivityService/DeleteSeckillActivity"
+	SeckillActivityService_UpdateSeckillActivity_FullMethodName          = "/sms.SeckillActivityService/UpdateSeckillActivity"
+	SeckillActivityService_UpdateSeckillActivityStatus_FullMethodName    = "/sms.SeckillActivityService/UpdateSeckillActivityStatus"
+	SeckillActivityService_QuerySeckillActivityDetail_FullMethodName     = "/sms.SeckillActivityService/QuerySeckillActivityDetail"
+	SeckillActivityService_QuerySeckillActivityList_FullMethodName       = "/sms.SeckillActivityService/QuerySeckillActivityList"
+	SeckillActivityService_QuerySeckillActivityListByDate_FullMethodName = "/sms.SeckillActivityService/QuerySeckillActivityListByDate"
 )
 
 // SeckillActivityServiceClient is the client API for SeckillActivityService service.
@@ -1822,7 +1822,7 @@ func _SeckillActivityService_QuerySeckillActivityListByDate_Handler(srv interfac
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var SeckillActivityService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "smsclient.SeckillActivityService",
+	ServiceName: "sms.SeckillActivityService",
 	HandlerType: (*SeckillActivityServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -1859,13 +1859,13 @@ var SeckillActivityService_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	SeckillProductService_AddSeckillProduct_FullMethodName          = "/smsclient.SeckillProductService/AddSeckillProduct"
-	SeckillProductService_DeleteSeckillProduct_FullMethodName       = "/smsclient.SeckillProductService/DeleteSeckillProduct"
-	SeckillProductService_UpdateSeckillProduct_FullMethodName       = "/smsclient.SeckillProductService/UpdateSeckillProduct"
-	SeckillProductService_UpdateSeckillProductStatus_FullMethodName = "/smsclient.SeckillProductService/UpdateSeckillProductStatus"
-	SeckillProductService_QuerySeckillProductDetail_FullMethodName  = "/smsclient.SeckillProductService/QuerySeckillProductDetail"
-	SeckillProductService_QuerySeckillProductList_FullMethodName    = "/smsclient.SeckillProductService/QuerySeckillProductList"
-	SeckillProductService_QuerySeckillProductBySkuId_FullMethodName = "/smsclient.SeckillProductService/QuerySeckillProductBySkuId"
+	SeckillProductService_AddSeckillProduct_FullMethodName          = "/sms.SeckillProductService/AddSeckillProduct"
+	SeckillProductService_DeleteSeckillProduct_FullMethodName       = "/sms.SeckillProductService/DeleteSeckillProduct"
+	SeckillProductService_UpdateSeckillProduct_FullMethodName       = "/sms.SeckillProductService/UpdateSeckillProduct"
+	SeckillProductService_UpdateSeckillProductStatus_FullMethodName = "/sms.SeckillProductService/UpdateSeckillProductStatus"
+	SeckillProductService_QuerySeckillProductDetail_FullMethodName  = "/sms.SeckillProductService/QuerySeckillProductDetail"
+	SeckillProductService_QuerySeckillProductList_FullMethodName    = "/sms.SeckillProductService/QuerySeckillProductList"
+	SeckillProductService_QuerySeckillProductBySkuId_FullMethodName = "/sms.SeckillProductService/QuerySeckillProductBySkuId"
 )
 
 // SeckillProductServiceClient is the client API for SeckillProductService service.
@@ -2148,7 +2148,7 @@ func _SeckillProductService_QuerySeckillProductBySkuId_Handler(srv interface{}, 
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var SeckillProductService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "smsclient.SeckillProductService",
+	ServiceName: "sms.SeckillProductService",
 	HandlerType: (*SeckillProductServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -2185,12 +2185,12 @@ var SeckillProductService_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	SeckillReservationService_AddSeckillReservation_FullMethodName          = "/smsclient.SeckillReservationService/AddSeckillReservation"
-	SeckillReservationService_DeleteSeckillReservation_FullMethodName       = "/smsclient.SeckillReservationService/DeleteSeckillReservation"
-	SeckillReservationService_UpdateSeckillReservation_FullMethodName       = "/smsclient.SeckillReservationService/UpdateSeckillReservation"
-	SeckillReservationService_UpdateSeckillReservationStatus_FullMethodName = "/smsclient.SeckillReservationService/UpdateSeckillReservationStatus"
-	SeckillReservationService_QuerySeckillReservationDetail_FullMethodName  = "/smsclient.SeckillReservationService/QuerySeckillReservationDetail"
-	SeckillReservationService_QuerySeckillReservationList_FullMethodName    = "/smsclient.SeckillReservationService/QuerySeckillReservationList"
+	SeckillReservationService_AddSeckillReservation_FullMethodName          = "/sms.SeckillReservationService/AddSeckillReservation"
+	SeckillReservationService_DeleteSeckillReservation_FullMethodName       = "/sms.SeckillReservationService/DeleteSeckillReservation"
+	SeckillReservationService_UpdateSeckillReservation_FullMethodName       = "/sms.SeckillReservationService/UpdateSeckillReservation"
+	SeckillReservationService_UpdateSeckillReservationStatus_FullMethodName = "/sms.SeckillReservationService/UpdateSeckillReservationStatus"
+	SeckillReservationService_QuerySeckillReservationDetail_FullMethodName  = "/sms.SeckillReservationService/QuerySeckillReservationDetail"
+	SeckillReservationService_QuerySeckillReservationList_FullMethodName    = "/sms.SeckillReservationService/QuerySeckillReservationList"
 )
 
 // SeckillReservationServiceClient is the client API for SeckillReservationService service.
@@ -2440,7 +2440,7 @@ func _SeckillReservationService_QuerySeckillReservationList_Handler(srv interfac
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var SeckillReservationService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "smsclient.SeckillReservationService",
+	ServiceName: "sms.SeckillReservationService",
 	HandlerType: (*SeckillReservationServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -2473,13 +2473,13 @@ var SeckillReservationService_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	SeckillSessionService_AddSeckillSession_FullMethodName             = "/smsclient.SeckillSessionService/AddSeckillSession"
-	SeckillSessionService_DeleteSeckillSession_FullMethodName          = "/smsclient.SeckillSessionService/DeleteSeckillSession"
-	SeckillSessionService_UpdateSeckillSession_FullMethodName          = "/smsclient.SeckillSessionService/UpdateSeckillSession"
-	SeckillSessionService_UpdateSeckillSessionStatus_FullMethodName    = "/smsclient.SeckillSessionService/UpdateSeckillSessionStatus"
-	SeckillSessionService_QuerySeckillSessionDetail_FullMethodName     = "/smsclient.SeckillSessionService/QuerySeckillSessionDetail"
-	SeckillSessionService_QuerySeckillSessionList_FullMethodName       = "/smsclient.SeckillSessionService/QuerySeckillSessionList"
-	SeckillSessionService_QuerySeckillSessionListByTime_FullMethodName = "/smsclient.SeckillSessionService/QuerySeckillSessionListByTime"
+	SeckillSessionService_AddSeckillSession_FullMethodName             = "/sms.SeckillSessionService/AddSeckillSession"
+	SeckillSessionService_DeleteSeckillSession_FullMethodName          = "/sms.SeckillSessionService/DeleteSeckillSession"
+	SeckillSessionService_UpdateSeckillSession_FullMethodName          = "/sms.SeckillSessionService/UpdateSeckillSession"
+	SeckillSessionService_UpdateSeckillSessionStatus_FullMethodName    = "/sms.SeckillSessionService/UpdateSeckillSessionStatus"
+	SeckillSessionService_QuerySeckillSessionDetail_FullMethodName     = "/sms.SeckillSessionService/QuerySeckillSessionDetail"
+	SeckillSessionService_QuerySeckillSessionList_FullMethodName       = "/sms.SeckillSessionService/QuerySeckillSessionList"
+	SeckillSessionService_QuerySeckillSessionListByTime_FullMethodName = "/sms.SeckillSessionService/QuerySeckillSessionListByTime"
 )
 
 // SeckillSessionServiceClient is the client API for SeckillSessionService service.
@@ -2762,7 +2762,7 @@ func _SeckillSessionService_QuerySeckillSessionListByTime_Handler(srv interface{
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var SeckillSessionService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "smsclient.SeckillSessionService",
+	ServiceName: "sms.SeckillSessionService",
 	HandlerType: (*SeckillSessionServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{

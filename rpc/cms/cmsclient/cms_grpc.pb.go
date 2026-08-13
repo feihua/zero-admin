@@ -19,12 +19,12 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	HelpService_AddHelp_FullMethodName          = "/cmsclient.HelpService/AddHelp"
-	HelpService_DeleteHelp_FullMethodName       = "/cmsclient.HelpService/DeleteHelp"
-	HelpService_UpdateHelp_FullMethodName       = "/cmsclient.HelpService/UpdateHelp"
-	HelpService_UpdateHelpStatus_FullMethodName = "/cmsclient.HelpService/UpdateHelpStatus"
-	HelpService_QueryHelpDetail_FullMethodName  = "/cmsclient.HelpService/QueryHelpDetail"
-	HelpService_QueryHelpList_FullMethodName    = "/cmsclient.HelpService/QueryHelpList"
+	HelpService_AddHelp_FullMethodName          = "/cms.HelpService/AddHelp"
+	HelpService_DeleteHelp_FullMethodName       = "/cms.HelpService/DeleteHelp"
+	HelpService_UpdateHelp_FullMethodName       = "/cms.HelpService/UpdateHelp"
+	HelpService_UpdateHelpStatus_FullMethodName = "/cms.HelpService/UpdateHelpStatus"
+	HelpService_QueryHelpDetail_FullMethodName  = "/cms.HelpService/QueryHelpDetail"
+	HelpService_QueryHelpList_FullMethodName    = "/cms.HelpService/QueryHelpList"
 )
 
 // HelpServiceClient is the client API for HelpService service.
@@ -273,7 +273,7 @@ func _HelpService_QueryHelpList_Handler(srv interface{}, ctx context.Context, de
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var HelpService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "cmsclient.HelpService",
+	ServiceName: "cms.HelpService",
 	HandlerType: (*HelpServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -306,12 +306,12 @@ var HelpService_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	HelpCategoryService_AddHelpCategory_FullMethodName          = "/cmsclient.HelpCategoryService/AddHelpCategory"
-	HelpCategoryService_DeleteHelpCategory_FullMethodName       = "/cmsclient.HelpCategoryService/DeleteHelpCategory"
-	HelpCategoryService_UpdateHelpCategory_FullMethodName       = "/cmsclient.HelpCategoryService/UpdateHelpCategory"
-	HelpCategoryService_UpdateHelpCategoryStatus_FullMethodName = "/cmsclient.HelpCategoryService/UpdateHelpCategoryStatus"
-	HelpCategoryService_QueryHelpCategoryDetail_FullMethodName  = "/cmsclient.HelpCategoryService/QueryHelpCategoryDetail"
-	HelpCategoryService_QueryHelpCategoryList_FullMethodName    = "/cmsclient.HelpCategoryService/QueryHelpCategoryList"
+	HelpCategoryService_AddHelpCategory_FullMethodName          = "/cms.HelpCategoryService/AddHelpCategory"
+	HelpCategoryService_DeleteHelpCategory_FullMethodName       = "/cms.HelpCategoryService/DeleteHelpCategory"
+	HelpCategoryService_UpdateHelpCategory_FullMethodName       = "/cms.HelpCategoryService/UpdateHelpCategory"
+	HelpCategoryService_UpdateHelpCategoryStatus_FullMethodName = "/cms.HelpCategoryService/UpdateHelpCategoryStatus"
+	HelpCategoryService_QueryHelpCategoryDetail_FullMethodName  = "/cms.HelpCategoryService/QueryHelpCategoryDetail"
+	HelpCategoryService_QueryHelpCategoryList_FullMethodName    = "/cms.HelpCategoryService/QueryHelpCategoryList"
 )
 
 // HelpCategoryServiceClient is the client API for HelpCategoryService service.
@@ -560,7 +560,7 @@ func _HelpCategoryService_QueryHelpCategoryList_Handler(srv interface{}, ctx con
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var HelpCategoryService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "cmsclient.HelpCategoryService",
+	ServiceName: "cms.HelpCategoryService",
 	HandlerType: (*HelpCategoryServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -593,12 +593,12 @@ var HelpCategoryService_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	MemberReportService_AddMemberReport_FullMethodName          = "/cmsclient.MemberReportService/AddMemberReport"
-	MemberReportService_DeleteMemberReport_FullMethodName       = "/cmsclient.MemberReportService/DeleteMemberReport"
-	MemberReportService_UpdateMemberReport_FullMethodName       = "/cmsclient.MemberReportService/UpdateMemberReport"
-	MemberReportService_UpdateMemberReportStatus_FullMethodName = "/cmsclient.MemberReportService/UpdateMemberReportStatus"
-	MemberReportService_QueryMemberReportDetail_FullMethodName  = "/cmsclient.MemberReportService/QueryMemberReportDetail"
-	MemberReportService_QueryMemberReportList_FullMethodName    = "/cmsclient.MemberReportService/QueryMemberReportList"
+	MemberReportService_AddMemberReport_FullMethodName          = "/cms.MemberReportService/AddMemberReport"
+	MemberReportService_DeleteMemberReport_FullMethodName       = "/cms.MemberReportService/DeleteMemberReport"
+	MemberReportService_UpdateMemberReport_FullMethodName       = "/cms.MemberReportService/UpdateMemberReport"
+	MemberReportService_UpdateMemberReportStatus_FullMethodName = "/cms.MemberReportService/UpdateMemberReportStatus"
+	MemberReportService_QueryMemberReportDetail_FullMethodName  = "/cms.MemberReportService/QueryMemberReportDetail"
+	MemberReportService_QueryMemberReportList_FullMethodName    = "/cms.MemberReportService/QueryMemberReportList"
 )
 
 // MemberReportServiceClient is the client API for MemberReportService service.
@@ -847,7 +847,7 @@ func _MemberReportService_QueryMemberReportList_Handler(srv interface{}, ctx con
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var MemberReportService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "cmsclient.MemberReportService",
+	ServiceName: "cms.MemberReportService",
 	HandlerType: (*MemberReportServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -880,12 +880,12 @@ var MemberReportService_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	PreferredAreaService_AddPreferredArea_FullMethodName          = "/cmsclient.PreferredAreaService/AddPreferredArea"
-	PreferredAreaService_DeletePreferredArea_FullMethodName       = "/cmsclient.PreferredAreaService/DeletePreferredArea"
-	PreferredAreaService_UpdatePreferredArea_FullMethodName       = "/cmsclient.PreferredAreaService/UpdatePreferredArea"
-	PreferredAreaService_UpdatePreferredAreaStatus_FullMethodName = "/cmsclient.PreferredAreaService/UpdatePreferredAreaStatus"
-	PreferredAreaService_QueryPreferredAreaDetail_FullMethodName  = "/cmsclient.PreferredAreaService/QueryPreferredAreaDetail"
-	PreferredAreaService_QueryPreferredAreaList_FullMethodName    = "/cmsclient.PreferredAreaService/QueryPreferredAreaList"
+	PreferredAreaService_AddPreferredArea_FullMethodName          = "/cms.PreferredAreaService/AddPreferredArea"
+	PreferredAreaService_DeletePreferredArea_FullMethodName       = "/cms.PreferredAreaService/DeletePreferredArea"
+	PreferredAreaService_UpdatePreferredArea_FullMethodName       = "/cms.PreferredAreaService/UpdatePreferredArea"
+	PreferredAreaService_UpdatePreferredAreaStatus_FullMethodName = "/cms.PreferredAreaService/UpdatePreferredAreaStatus"
+	PreferredAreaService_QueryPreferredAreaDetail_FullMethodName  = "/cms.PreferredAreaService/QueryPreferredAreaDetail"
+	PreferredAreaService_QueryPreferredAreaList_FullMethodName    = "/cms.PreferredAreaService/QueryPreferredAreaList"
 )
 
 // PreferredAreaServiceClient is the client API for PreferredAreaService service.
@@ -1134,7 +1134,7 @@ func _PreferredAreaService_QueryPreferredAreaList_Handler(srv interface{}, ctx c
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var PreferredAreaService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "cmsclient.PreferredAreaService",
+	ServiceName: "cms.PreferredAreaService",
 	HandlerType: (*PreferredAreaServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -1167,8 +1167,8 @@ var PreferredAreaService_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	PreferredAreaProductRelationService_AddPreferredAreaProductRelation_FullMethodName       = "/cmsclient.PreferredAreaProductRelationService/AddPreferredAreaProductRelation"
-	PreferredAreaProductRelationService_QueryPreferredAreaProductRelationList_FullMethodName = "/cmsclient.PreferredAreaProductRelationService/QueryPreferredAreaProductRelationList"
+	PreferredAreaProductRelationService_AddPreferredAreaProductRelation_FullMethodName       = "/cms.PreferredAreaProductRelationService/AddPreferredAreaProductRelation"
+	PreferredAreaProductRelationService_QueryPreferredAreaProductRelationList_FullMethodName = "/cms.PreferredAreaProductRelationService/QueryPreferredAreaProductRelationList"
 )
 
 // PreferredAreaProductRelationServiceClient is the client API for PreferredAreaProductRelationService service.
@@ -1282,7 +1282,7 @@ func _PreferredAreaProductRelationService_QueryPreferredAreaProductRelationList_
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var PreferredAreaProductRelationService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "cmsclient.PreferredAreaProductRelationService",
+	ServiceName: "cms.PreferredAreaProductRelationService",
 	HandlerType: (*PreferredAreaProductRelationServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -1299,15 +1299,15 @@ var PreferredAreaProductRelationService_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	SubjectService_AddSubject_FullMethodName                   = "/cmsclient.SubjectService/AddSubject"
-	SubjectService_DeleteSubject_FullMethodName                = "/cmsclient.SubjectService/DeleteSubject"
-	SubjectService_UpdateSubject_FullMethodName                = "/cmsclient.SubjectService/UpdateSubject"
-	SubjectService_UpdateSubjectStatus_FullMethodName          = "/cmsclient.SubjectService/UpdateSubjectStatus"
-	SubjectService_QuerySubjectDetail_FullMethodName           = "/cmsclient.SubjectService/QuerySubjectDetail"
-	SubjectService_QuerySubjectList_FullMethodName             = "/cmsclient.SubjectService/QuerySubjectList"
-	SubjectService_SubjectListByIds_FullMethodName             = "/cmsclient.SubjectService/SubjectListByIds"
-	SubjectService_UpdateSubjectRecommendStatus_FullMethodName = "/cmsclient.SubjectService/UpdateSubjectRecommendStatus"
-	SubjectService_UpdateSubjectSort_FullMethodName            = "/cmsclient.SubjectService/UpdateSubjectSort"
+	SubjectService_AddSubject_FullMethodName                   = "/cms.SubjectService/AddSubject"
+	SubjectService_DeleteSubject_FullMethodName                = "/cms.SubjectService/DeleteSubject"
+	SubjectService_UpdateSubject_FullMethodName                = "/cms.SubjectService/UpdateSubject"
+	SubjectService_UpdateSubjectStatus_FullMethodName          = "/cms.SubjectService/UpdateSubjectStatus"
+	SubjectService_QuerySubjectDetail_FullMethodName           = "/cms.SubjectService/QuerySubjectDetail"
+	SubjectService_QuerySubjectList_FullMethodName             = "/cms.SubjectService/QuerySubjectList"
+	SubjectService_SubjectListByIds_FullMethodName             = "/cms.SubjectService/SubjectListByIds"
+	SubjectService_UpdateSubjectRecommendStatus_FullMethodName = "/cms.SubjectService/UpdateSubjectRecommendStatus"
+	SubjectService_UpdateSubjectSort_FullMethodName            = "/cms.SubjectService/UpdateSubjectSort"
 )
 
 // SubjectServiceClient is the client API for SubjectService service.
@@ -1656,7 +1656,7 @@ func _SubjectService_UpdateSubjectSort_Handler(srv interface{}, ctx context.Cont
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var SubjectService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "cmsclient.SubjectService",
+	ServiceName: "cms.SubjectService",
 	HandlerType: (*SubjectServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -1701,12 +1701,12 @@ var SubjectService_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	SubjectCategoryService_AddSubjectCategory_FullMethodName          = "/cmsclient.SubjectCategoryService/AddSubjectCategory"
-	SubjectCategoryService_DeleteSubjectCategory_FullMethodName       = "/cmsclient.SubjectCategoryService/DeleteSubjectCategory"
-	SubjectCategoryService_UpdateSubjectCategory_FullMethodName       = "/cmsclient.SubjectCategoryService/UpdateSubjectCategory"
-	SubjectCategoryService_UpdateSubjectCategoryStatus_FullMethodName = "/cmsclient.SubjectCategoryService/UpdateSubjectCategoryStatus"
-	SubjectCategoryService_QuerySubjectCategoryDetail_FullMethodName  = "/cmsclient.SubjectCategoryService/QuerySubjectCategoryDetail"
-	SubjectCategoryService_QuerySubjectCategoryList_FullMethodName    = "/cmsclient.SubjectCategoryService/QuerySubjectCategoryList"
+	SubjectCategoryService_AddSubjectCategory_FullMethodName          = "/cms.SubjectCategoryService/AddSubjectCategory"
+	SubjectCategoryService_DeleteSubjectCategory_FullMethodName       = "/cms.SubjectCategoryService/DeleteSubjectCategory"
+	SubjectCategoryService_UpdateSubjectCategory_FullMethodName       = "/cms.SubjectCategoryService/UpdateSubjectCategory"
+	SubjectCategoryService_UpdateSubjectCategoryStatus_FullMethodName = "/cms.SubjectCategoryService/UpdateSubjectCategoryStatus"
+	SubjectCategoryService_QuerySubjectCategoryDetail_FullMethodName  = "/cms.SubjectCategoryService/QuerySubjectCategoryDetail"
+	SubjectCategoryService_QuerySubjectCategoryList_FullMethodName    = "/cms.SubjectCategoryService/QuerySubjectCategoryList"
 )
 
 // SubjectCategoryServiceClient is the client API for SubjectCategoryService service.
@@ -1956,7 +1956,7 @@ func _SubjectCategoryService_QuerySubjectCategoryList_Handler(srv interface{}, c
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var SubjectCategoryService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "cmsclient.SubjectCategoryService",
+	ServiceName: "cms.SubjectCategoryService",
 	HandlerType: (*SubjectCategoryServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -1989,12 +1989,12 @@ var SubjectCategoryService_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	SubjectCommentService_AddSubjectComment_FullMethodName          = "/cmsclient.SubjectCommentService/AddSubjectComment"
-	SubjectCommentService_DeleteSubjectComment_FullMethodName       = "/cmsclient.SubjectCommentService/DeleteSubjectComment"
-	SubjectCommentService_UpdateSubjectComment_FullMethodName       = "/cmsclient.SubjectCommentService/UpdateSubjectComment"
-	SubjectCommentService_UpdateSubjectCommentStatus_FullMethodName = "/cmsclient.SubjectCommentService/UpdateSubjectCommentStatus"
-	SubjectCommentService_QuerySubjectCommentDetail_FullMethodName  = "/cmsclient.SubjectCommentService/QuerySubjectCommentDetail"
-	SubjectCommentService_QuerySubjectCommentList_FullMethodName    = "/cmsclient.SubjectCommentService/QuerySubjectCommentList"
+	SubjectCommentService_AddSubjectComment_FullMethodName          = "/cms.SubjectCommentService/AddSubjectComment"
+	SubjectCommentService_DeleteSubjectComment_FullMethodName       = "/cms.SubjectCommentService/DeleteSubjectComment"
+	SubjectCommentService_UpdateSubjectComment_FullMethodName       = "/cms.SubjectCommentService/UpdateSubjectComment"
+	SubjectCommentService_UpdateSubjectCommentStatus_FullMethodName = "/cms.SubjectCommentService/UpdateSubjectCommentStatus"
+	SubjectCommentService_QuerySubjectCommentDetail_FullMethodName  = "/cms.SubjectCommentService/QuerySubjectCommentDetail"
+	SubjectCommentService_QuerySubjectCommentList_FullMethodName    = "/cms.SubjectCommentService/QuerySubjectCommentList"
 )
 
 // SubjectCommentServiceClient is the client API for SubjectCommentService service.
@@ -2243,7 +2243,7 @@ func _SubjectCommentService_QuerySubjectCommentList_Handler(srv interface{}, ctx
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var SubjectCommentService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "cmsclient.SubjectCommentService",
+	ServiceName: "cms.SubjectCommentService",
 	HandlerType: (*SubjectCommentServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -2276,8 +2276,8 @@ var SubjectCommentService_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	SubjectProductRelationService_AddSubjectProductRelation_FullMethodName       = "/cmsclient.SubjectProductRelationService/AddSubjectProductRelation"
-	SubjectProductRelationService_QuerySubjectProductRelationList_FullMethodName = "/cmsclient.SubjectProductRelationService/QuerySubjectProductRelationList"
+	SubjectProductRelationService_AddSubjectProductRelation_FullMethodName       = "/cms.SubjectProductRelationService/AddSubjectProductRelation"
+	SubjectProductRelationService_QuerySubjectProductRelationList_FullMethodName = "/cms.SubjectProductRelationService/QuerySubjectProductRelationList"
 )
 
 // SubjectProductRelationServiceClient is the client API for SubjectProductRelationService service.
@@ -2391,7 +2391,7 @@ func _SubjectProductRelationService_QuerySubjectProductRelationList_Handler(srv 
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var SubjectProductRelationService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "cmsclient.SubjectProductRelationService",
+	ServiceName: "cms.SubjectProductRelationService",
 	HandlerType: (*SubjectProductRelationServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -2408,12 +2408,12 @@ var SubjectProductRelationService_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	TopicService_AddTopic_FullMethodName          = "/cmsclient.TopicService/AddTopic"
-	TopicService_DeleteTopic_FullMethodName       = "/cmsclient.TopicService/DeleteTopic"
-	TopicService_UpdateTopic_FullMethodName       = "/cmsclient.TopicService/UpdateTopic"
-	TopicService_UpdateTopicStatus_FullMethodName = "/cmsclient.TopicService/UpdateTopicStatus"
-	TopicService_QueryTopicDetail_FullMethodName  = "/cmsclient.TopicService/QueryTopicDetail"
-	TopicService_QueryTopicList_FullMethodName    = "/cmsclient.TopicService/QueryTopicList"
+	TopicService_AddTopic_FullMethodName          = "/cms.TopicService/AddTopic"
+	TopicService_DeleteTopic_FullMethodName       = "/cms.TopicService/DeleteTopic"
+	TopicService_UpdateTopic_FullMethodName       = "/cms.TopicService/UpdateTopic"
+	TopicService_UpdateTopicStatus_FullMethodName = "/cms.TopicService/UpdateTopicStatus"
+	TopicService_QueryTopicDetail_FullMethodName  = "/cms.TopicService/QueryTopicDetail"
+	TopicService_QueryTopicList_FullMethodName    = "/cms.TopicService/QueryTopicList"
 )
 
 // TopicServiceClient is the client API for TopicService service.
@@ -2662,7 +2662,7 @@ func _TopicService_QueryTopicList_Handler(srv interface{}, ctx context.Context, 
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var TopicService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "cmsclient.TopicService",
+	ServiceName: "cms.TopicService",
 	HandlerType: (*TopicServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -2695,12 +2695,12 @@ var TopicService_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	TopicCategoryService_AddTopicCategory_FullMethodName          = "/cmsclient.TopicCategoryService/AddTopicCategory"
-	TopicCategoryService_DeleteTopicCategory_FullMethodName       = "/cmsclient.TopicCategoryService/DeleteTopicCategory"
-	TopicCategoryService_UpdateTopicCategory_FullMethodName       = "/cmsclient.TopicCategoryService/UpdateTopicCategory"
-	TopicCategoryService_UpdateTopicCategoryStatus_FullMethodName = "/cmsclient.TopicCategoryService/UpdateTopicCategoryStatus"
-	TopicCategoryService_QueryTopicCategoryDetail_FullMethodName  = "/cmsclient.TopicCategoryService/QueryTopicCategoryDetail"
-	TopicCategoryService_QueryTopicCategoryList_FullMethodName    = "/cmsclient.TopicCategoryService/QueryTopicCategoryList"
+	TopicCategoryService_AddTopicCategory_FullMethodName          = "/cms.TopicCategoryService/AddTopicCategory"
+	TopicCategoryService_DeleteTopicCategory_FullMethodName       = "/cms.TopicCategoryService/DeleteTopicCategory"
+	TopicCategoryService_UpdateTopicCategory_FullMethodName       = "/cms.TopicCategoryService/UpdateTopicCategory"
+	TopicCategoryService_UpdateTopicCategoryStatus_FullMethodName = "/cms.TopicCategoryService/UpdateTopicCategoryStatus"
+	TopicCategoryService_QueryTopicCategoryDetail_FullMethodName  = "/cms.TopicCategoryService/QueryTopicCategoryDetail"
+	TopicCategoryService_QueryTopicCategoryList_FullMethodName    = "/cms.TopicCategoryService/QueryTopicCategoryList"
 )
 
 // TopicCategoryServiceClient is the client API for TopicCategoryService service.
@@ -2949,7 +2949,7 @@ func _TopicCategoryService_QueryTopicCategoryList_Handler(srv interface{}, ctx c
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var TopicCategoryService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "cmsclient.TopicCategoryService",
+	ServiceName: "cms.TopicCategoryService",
 	HandlerType: (*TopicCategoryServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -2982,12 +2982,12 @@ var TopicCategoryService_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	TopicCommentService_AddTopicComment_FullMethodName          = "/cmsclient.TopicCommentService/AddTopicComment"
-	TopicCommentService_DeleteTopicComment_FullMethodName       = "/cmsclient.TopicCommentService/DeleteTopicComment"
-	TopicCommentService_UpdateTopicComment_FullMethodName       = "/cmsclient.TopicCommentService/UpdateTopicComment"
-	TopicCommentService_UpdateTopicCommentStatus_FullMethodName = "/cmsclient.TopicCommentService/UpdateTopicCommentStatus"
-	TopicCommentService_QueryTopicCommentDetail_FullMethodName  = "/cmsclient.TopicCommentService/QueryTopicCommentDetail"
-	TopicCommentService_QueryTopicCommentList_FullMethodName    = "/cmsclient.TopicCommentService/QueryTopicCommentList"
+	TopicCommentService_AddTopicComment_FullMethodName          = "/cms.TopicCommentService/AddTopicComment"
+	TopicCommentService_DeleteTopicComment_FullMethodName       = "/cms.TopicCommentService/DeleteTopicComment"
+	TopicCommentService_UpdateTopicComment_FullMethodName       = "/cms.TopicCommentService/UpdateTopicComment"
+	TopicCommentService_UpdateTopicCommentStatus_FullMethodName = "/cms.TopicCommentService/UpdateTopicCommentStatus"
+	TopicCommentService_QueryTopicCommentDetail_FullMethodName  = "/cms.TopicCommentService/QueryTopicCommentDetail"
+	TopicCommentService_QueryTopicCommentList_FullMethodName    = "/cms.TopicCommentService/QueryTopicCommentList"
 )
 
 // TopicCommentServiceClient is the client API for TopicCommentService service.
@@ -3236,7 +3236,7 @@ func _TopicCommentService_QueryTopicCommentList_Handler(srv interface{}, ctx con
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var TopicCommentService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "cmsclient.TopicCommentService",
+	ServiceName: "cms.TopicCommentService",
 	HandlerType: (*TopicCommentServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{

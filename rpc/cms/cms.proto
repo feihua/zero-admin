@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package cmsclient;
+package cms;
 
 option go_package = "./cmsclient";
 
