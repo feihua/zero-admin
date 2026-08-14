@@ -4,6 +4,7 @@ import (
 	"flag"
 	"fmt"
 	"os"
+	"strings"
 
 	"github.com/zeromicro/go-zero/core/logx"
 
@@ -23,8 +24,22 @@ import (
 	"google.golang.org/grpc/reflection"
 )
 
-var configFile = flag.String("f", "rpc/cms/etc/cms.yaml", "the config file")
+var configFile *string
 
+// 初始化配置文件路径
+func init() {
+	defaultPath := "rpc/cms/etc/cms.yaml"
+	configPath := os.Getenv("config_path")
+	if strings.TrimSpace(configPath) != "" {
+		if !strings.HasSuffix(configPath, "/") {
+			configPath = configPath + "/"
+		}
+		defaultPath = configPath + defaultPath
+	}
+	configFile = flag.String("f", defaultPath, "the config file")
+}
+
+// 启动函数
 func main() {
 	flag.Parse()
 

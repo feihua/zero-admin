@@ -3,6 +3,9 @@ package main
 import (
 	"flag"
 	"fmt"
+	"os"
+	"strings"
+
 	"github.com/feihua/zero-admin/rpc/ums/internal/config"
 	memberaddressserviceServer "github.com/feihua/zero-admin/rpc/ums/internal/server/memberaddressservice"
 	memberbrandattentionserviceServer "github.com/feihua/zero-admin/rpc/ums/internal/server/memberbrandattentionservice"
@@ -25,7 +28,6 @@ import (
 	"github.com/feihua/zero-admin/rpc/ums/internal/svc"
 	"github.com/feihua/zero-admin/rpc/ums/umsclient"
 	"github.com/zeromicro/go-zero/core/logx"
-	"os"
 
 	"github.com/zeromicro/go-zero/core/conf"
 	"github.com/zeromicro/go-zero/core/service"
@@ -34,7 +36,20 @@ import (
 	"google.golang.org/grpc/reflection"
 )
 
-var configFile = flag.String("f", "rpc/ums/etc/ums.yaml", "the config file")
+var configFile *string
+
+// 初始化配置文件路径
+func init() {
+	defaultPath := "rpc/ums/etc/ums.yaml"
+	configPath := os.Getenv("config_path")
+	if strings.TrimSpace(configPath) != "" {
+		if !strings.HasSuffix(configPath, "/") {
+			configPath = configPath + "/"
+		}
+		defaultPath = configPath + defaultPath
+	}
+	configFile = flag.String("f", defaultPath, "the config file")
+}
 
 func main() {
 	flag.Parse()

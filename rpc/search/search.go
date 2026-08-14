@@ -3,8 +3,10 @@ package main
 import (
 	"flag"
 	"fmt"
-	"github.com/zeromicro/go-zero/core/logx"
 	"os"
+	"strings"
+
+	"github.com/zeromicro/go-zero/core/logx"
 
 	"github.com/feihua/zero-admin/rpc/search/internal/config"
 	"github.com/feihua/zero-admin/rpc/search/internal/server"
@@ -17,7 +19,20 @@ import (
 	"google.golang.org/grpc/reflection"
 )
 
-var configFile = flag.String("f", "rpc/search/etc/search.yaml", "the config file")
+var configFile *string
+
+// 初始化配置文件路径
+func init() {
+	defaultPath := "rpc/search/etc/search.yaml"
+	configPath := os.Getenv("config_path")
+	if strings.TrimSpace(configPath) != "" {
+		if !strings.HasSuffix(configPath, "/") {
+			configPath = configPath + "/"
+		}
+		defaultPath = configPath + defaultPath
+	}
+	configFile = flag.String("f", defaultPath, "the config file")
+}
 
 func main() {
 	flag.Parse()

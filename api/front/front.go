@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"net/http"
 	"os"
+	"strings"
 
 	"github.com/zeromicro/go-zero/core/logx"
 
@@ -16,7 +17,20 @@ import (
 	"github.com/zeromicro/go-zero/rest"
 )
 
-var configFile = flag.String("f", "api/front/etc/front-api.yaml", "the config file")
+var configFile *string
+
+// 初始化配置文件路径
+func init() {
+	defaultPath := "api/front/etc/front-api.yaml"
+	configPath := os.Getenv("config_path")
+	if strings.TrimSpace(configPath) != "" {
+		if !strings.HasSuffix(configPath, "/") {
+			configPath = configPath + "/"
+		}
+		defaultPath = configPath + defaultPath
+	}
+	configFile = flag.String("f", defaultPath, "the config file")
+}
 
 func main() {
 	flag.Parse()

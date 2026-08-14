@@ -4,11 +4,13 @@ import (
 	"errors"
 	"flag"
 	"fmt"
+	"net/http"
+	"os"
+	"strings"
+
 	"github.com/feihua/zero-admin/pkg/errorx"
 	"github.com/zeromicro/go-zero/core/logx"
 	"github.com/zeromicro/go-zero/rest/httpx"
-	"net/http"
-	"os"
 
 	"github.com/feihua/zero-admin/consumer/internal/config"
 	"github.com/feihua/zero-admin/consumer/internal/handler"
@@ -18,7 +20,20 @@ import (
 	"github.com/zeromicro/go-zero/rest"
 )
 
-var configFile = flag.String("f", "consumer/etc/consumer-api.yaml", "the config file")
+var configFile *string
+
+// 初始化配置文件路径
+func init() {
+	defaultPath := "consumer/etc/consumer-api.yaml"
+	configPath := os.Getenv("config_path")
+	if strings.TrimSpace(configPath) != "" {
+		if !strings.HasSuffix(configPath, "/") {
+			configPath = configPath + "/"
+		}
+		defaultPath = configPath + defaultPath
+	}
+	configFile = flag.String("f", defaultPath, "the config file")
+}
 
 func main() {
 	flag.Parse()
