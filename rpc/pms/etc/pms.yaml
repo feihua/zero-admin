@@ -12,7 +12,7 @@ Rabbitmq:
   Host: 127.0.0.1
   Port: 5672
   UserName: root
-  Password: 123456
+  Password: "123456"
 Mongo:
   Datasource: mongodb://admin:123456@127.0.0.1:27017
   Db: pms

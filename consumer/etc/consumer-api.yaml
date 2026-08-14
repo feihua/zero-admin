@@ -6,7 +6,7 @@ Rabbitmq:
   Host: 127.0.0.1
   Port: 5672
   UserName: root
-  Password: 123456
+  Password: "123456"
 
 #会员
 UmsRpc:
