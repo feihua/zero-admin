@@ -568,7 +568,7 @@ DO $$
         INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('查询秒杀场次表列表', 3, 6, parentId, '', '/api/sms/seckillSession/querySeckillSessionList', '', '查询秒杀场次表列表');
 
         -- 配置品牌推荐权限
-        INSERT INTO sys_menu (id, menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark, visible) VALUES (nextval('sys_menu_id_seq'), '品牌推荐', 2, 4, 8, '/sms/homeBrand/list', '', '', '品牌推荐',0);
+        INSERT INTO sys_menu (id, menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark, visible) VALUES (nextval('sys_menu_id_seq'), '品牌推荐', 2, 4, 8, '/sms/homeBrand/list', '', '', '品牌推荐',1);
 
         SELECT currval('sys_menu_id_seq') INTO parentId;
 
@@ -580,7 +580,7 @@ DO $$
         INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('查询品牌推荐表列表', 3, 6, parentId, '', '/api/sms/homeBrand/queryHomeBrandList', '', '查询品牌推荐表列表');
 
         -- 配置新品推荐表权限
-        INSERT INTO sys_menu (id, menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark, visible) VALUES (nextval('sys_menu_id_seq'), '新品推荐', 2, 4, 8, '/sms/homeNewProduct/list', '', '', '新品推荐',0);
+        INSERT INTO sys_menu (id, menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark, visible) VALUES (nextval('sys_menu_id_seq'), '新品推荐', 2, 4, 8, '/sms/homeNewProduct/list', '', '', '新品推荐',1);
 
         SELECT currval('sys_menu_id_seq') INTO parentId;
 
@@ -592,7 +592,7 @@ DO $$
         INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('查询新品推荐表列表', 3, 6, parentId, '', '/api/sms/homeNewProduct/queryHomeNewProductList', '', '查询新品推荐表列表');
 
         -- 配置人气推荐表权限
-        INSERT INTO sys_menu (id, menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark, visible) VALUES (nextval('sys_menu_id_seq'), '人气推荐', 2, 4, 8, '/sms/homeRecommendProduct/list', '', '', '人气推荐',0);
+        INSERT INTO sys_menu (id, menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark, visible) VALUES (nextval('sys_menu_id_seq'), '人气推荐', 2, 4, 8, '/sms/homeRecommendProduct/list', '', '', '人气推荐',1);
 
         SELECT currval('sys_menu_id_seq') INTO parentId;
 
@@ -604,7 +604,7 @@ DO $$
         INSERT INTO sys_menu (menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) VALUES ('查询人气推荐表列表', 3, 6, parentId, '', '/api/sms/homeRecommendProduct/queryHomeRecommendProductList', '', '查询人气推荐表列表');
 
         -- 配置专题推荐表权限
-        INSERT INTO sys_menu (id, menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark, visible) VALUES (nextval('sys_menu_id_seq'), '专题推荐', 2, 4, 8, '/sms/homeRecommendSubject/list', '', '', '专题推荐',0);
+        INSERT INTO sys_menu (id, menu_name, menu_type, menu_sort, parent_id, menu_url, api_url, menu_icon, remark, visible) VALUES (nextval('sys_menu_id_seq'), '专题推荐', 2, 4, 8, '/sms/homeRecommendSubject/list', '', '', '专题推荐',1);
 
         SELECT currval('sys_menu_id_seq') INTO parentId;
 
