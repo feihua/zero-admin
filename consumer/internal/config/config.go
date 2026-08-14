@@ -9,10 +9,10 @@ type Config struct {
 	rest.RestConf
 
 	Rabbitmq struct {
-		Host     string
-		Port     int64
-		UserName string
-		Password string
+		Host     string `json:",env=rabbitmq_host"`
+		Port     int64  `json:",env=rabbitmq_port"`
+		UserName string `json:",env=rabbitmq_user"`
+		Password string `json:",env=rabbitmq_pass"`
 	}
 
 	// 会员

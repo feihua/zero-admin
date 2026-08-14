@@ -6,21 +6,21 @@ type Config struct {
 	zrpc.RpcServerConf
 
 	Postgresql struct {
-		Datasource string
+		Datasource string `json:",env=postgresql_dns"`
 	}
 
 	Mongo struct {
-		Datasource string
-		Db         string
+		Datasource string `json:",env=mongo_dns"`
+		Db         string `json:",env=mongo_db"`
 	}
 	Rabbitmq struct {
-		Host     string
-		Port     int64
-		UserName string
-		Password string
+		Host     string `json:",env=rabbitmq_host"`
+		Port     int64  `json:",env=rabbitmq_port"`
+		UserName string `json:",env=rabbitmq_user"`
+		Password string `json:",env=rabbitmq_pass"`
 	}
 	JWT struct {
-		AccessSecret string
-		AccessExpire int64
+		AccessSecret string `json:",env=jwt_access_secret"`
+		AccessExpire int64  `json:",env=jwt_access_expire"`
 	}
 }

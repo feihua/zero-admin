@@ -6,11 +6,11 @@ type Config struct {
 	zrpc.RpcServerConf
 
 	Postgresql struct {
-		Datasource string
+		Datasource string `json:",env=postgresql_dns"`
 	}
 
 	JWT struct {
-		AccessSecret string
-		AccessExpire int64
+		AccessSecret string `json:",env=jwt_access_secret"`
+		AccessExpire int64  `json:",env=jwt_access_expire"`
 	}
 }

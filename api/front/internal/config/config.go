@@ -38,14 +38,14 @@ type Config struct {
 	}
 
 	Rabbitmq struct {
-		Host     string
-		Port     int64
-		UserName string
-		Password string
+		Host     string `json:",env=rabbitmq_host"`
+		Port     int64  `json:",env=rabbitmq_port"`
+		UserName string `json:",env=rabbitmq_user"`
+		Password string `json:",env=rabbitmq_pass"`
 	}
 	Redis struct {
-		Address string
-		Pass    string
+		Address string `json:",env=redis_address"`
+		Pass    string `json:",env=redis_pass"`
 	}
 
 	Swagger struct {

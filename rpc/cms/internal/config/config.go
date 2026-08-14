@@ -6,6 +6,6 @@ type Config struct {
 	zrpc.RpcServerConf
 
 	Postgresql struct {
-		Datasource string
+		Datasource string `json:",env=postgresql_dns"`
 	}
 }

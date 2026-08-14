@@ -29,8 +29,8 @@ type Config struct {
 	}
 
 	Redis struct {
-		Address string
-		Pass    string
+		Address string `json:",env=redis_address"`
+		Pass    string `json:",env=redis_pass"`
 	}
 	Swagger struct {
 		IsTest bool
