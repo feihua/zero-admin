@@ -3,11 +3,12 @@ package user
 import (
 	"context"
 	"encoding/json"
+	"strings"
+
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
 	"github.com/zeromicro/go-zero/core/logc"
 	"google.golang.org/grpc/status"
-	"strings"
 
 	"github.com/feihua/zero-admin/api/admin/internal/svc"
 	"github.com/feihua/zero-admin/api/admin/internal/types"
@@ -53,12 +54,14 @@ func (l *UserInfoLogic) UserInfo() (*types.UserInfoResp, error) {
 	// 组装antd ui中的菜单
 	for _, item := range resp.MenuListTree {
 		MenuTree = append(MenuTree, &types.ListMenuTree{
-			Id:       item.Id,
-			Path:     item.Path,
-			Name:     item.Name,
-			ParentId: item.ParentId,
-			Icon:     item.Icon,
-			VueIcon:  item.VueIcon,
+			Id:          item.Id,
+			Path:        item.Path,
+			Name:        item.Name,
+			ParentId:    item.ParentId,
+			Icon:        item.Icon,
+			VueIcon:     item.VueIcon,
+			AngularIcon: item.AngularIcon,
+			ReactIcon:   item.ReactIcon,
 		})
 	}
 

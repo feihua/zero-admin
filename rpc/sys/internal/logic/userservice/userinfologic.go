@@ -35,8 +35,6 @@ func NewUserInfoLogic(ctx context.Context, svcCtx *svc.ServiceContext) *UserInfo
 }
 
 // UserInfo 获取用户信息
-// 1.根据id查询用户信息
-// 2.查询用户菜单和权限
 func (l *UserInfoLogic) UserInfo(in *sysclient.InfoReq) (*sysclient.InfoResp, error) {
 	// 1.根据id查询用户信息
 	q := query.SysUser
@@ -100,6 +98,8 @@ func buildMenuTree(menus []*model.SysMenu) ([]*sysclient.MenuListTree, []string)
 				VueComponent: menu.VueComponent, // vue组件
 				VueIcon:      menu.VueIcon,      // vue图标
 				VueRedirect:  menu.VueRedirect,  // vue的路由重定向
+				AngularIcon:  menu.AngularIcon,  // angular图标
+				ReactIcon:    menu.ReactIcon,    // antd react的图标
 			})
 		}
 

@@ -741,12 +741,14 @@ type ListMemberStatisticsInfoResp struct {
 }
 
 type ListMenuTree struct {
-	Id       int64  `json:"id"`       // 编号
-	Path     string `json:"path"`     // 菜单路径
-	Name     string `json:"name"`     // 菜单名称
-	ParentId int64  `json:"parentId"` // 父菜单ID，一级菜单为0
-	Icon     string `json:"icon"`     // 菜单图标
-	VueIcon  string `json:"vueIcon"`  // 菜单图标
+	Id          int64  `json:"id"`          // 编号
+	Path        string `json:"path"`        // 菜单路径
+	Name        string `json:"name"`        // 菜单名称
+	ParentId    int64  `json:"parentId"`    // 父菜单ID，一级菜单为0
+	Icon        string `json:"icon"`        // 菜单图标
+	VueIcon     string `json:"vueIcon"`     // 菜单图标
+	AngularIcon string `json:"angularIcon"` // 菜单图标
+	ReactIcon   string `json:"reactIcon"`   // 菜单图标
 }
 
 type ListMenuTreeVue struct {
