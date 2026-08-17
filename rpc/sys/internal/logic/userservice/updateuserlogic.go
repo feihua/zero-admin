@@ -115,6 +115,7 @@ func (l *UpdateUserLogic) UpdateUser(in *sysclient.UpdateUserReq) (*sysclient.Up
 		Email:         in.Email,           // 用户邮箱
 		Status:        in.Status,          // 状态(1:正常，0:禁用)
 		DeptID:        in.DeptId,          // 部门ID
+		LastLoginInfo: item.LastLoginInfo, // 最后登录信息
 		PwdUpdateDate: item.PwdUpdateDate, // 密码最后更新时间
 		Remark:        in.Remark,          // 备注
 		DelFlag:       item.DelFlag,       // 删除标志（0代表删除 1代表存在）

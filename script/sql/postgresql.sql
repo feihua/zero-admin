@@ -637,7 +637,7 @@ create table sys_dept
 (
     id          bigserial primary key,
     parent_id   bigint      default 0                 not null,
-    ancestors   varchar(50) default ''                not null,
+    ancestors   bigint[]    default '{}'                not null,
     dept_name   varchar(30) default ''                not null,
     sort        integer     default 0                 not null,
     leader      varchar(20) default ''                not null,
@@ -672,16 +672,16 @@ comment on column sys_dept.create_time is '创建时间';
 comment on column sys_dept.update_by is '更新者';
 comment on column sys_dept.update_time is '更新时间';
 
-insert into sys_dept (id, parent_id, ancestors, dept_name, sort, leader, phone, email, status) values (1,0, '0', '测试科技', 1, 'admin', '18613030352', '1002219331@qq.com', 1);
-insert into sys_dept (id, parent_id, ancestors, dept_name, sort, leader, phone, email, status) values (2,1, '0,1', '深圳总公司', 1, '1', '1', 'xx@qq.com', 1);
-insert into sys_dept (id, parent_id, ancestors, dept_name, sort, leader, phone, email, status) values (3,1, '0,1', '长沙分公司', 2, '1', '1', 'xx@qq.com', 1);
-insert into sys_dept (id, parent_id, ancestors, dept_name, sort, leader, phone, email, status) values (4,2, '0,1,2', '研发部门', 1, '1', '1', 'xx@qq.com', 1);
-insert into sys_dept (id, parent_id, ancestors, dept_name, sort, leader, phone, email, status) values (5,2, '0,1,2', '市场部门', 2, '1', '1', 'xx@qq.com', 1);
-insert into sys_dept (id, parent_id, ancestors, dept_name, sort, leader, phone, email, status) values (6,2, '0,1,2', '测试部门', 3, '1', '1', 'xx@qq.com', 1);
-insert into sys_dept (id, parent_id, ancestors, dept_name, sort, leader, phone, email, status) values (7,2, '0,1,2', '财务部门', 4, '1', '1', 'xx@qq.com', 1);
-insert into sys_dept (id, parent_id, ancestors, dept_name, sort, leader, phone, email, status) values (8,2, '0,1,2', '运维部门', 5, '1', '1', 'xx@qq.com', 1);
-insert into sys_dept (id, parent_id, ancestors, dept_name, sort, leader, phone, email, status) values (9,3, '0,1,3', '市场部门1', 6, '1', '1', 'xx@qq.com', 1);
-insert into sys_dept (id, parent_id, ancestors, dept_name, sort, leader, phone, email, status) values (10,3, '0,1,3', '财务部门1', 1, '1', '1', 'xx@qq.com', 1);
+insert into sys_dept (id, parent_id, ancestors, dept_name, sort, leader, phone, email, status) values (1,0, '{0}', '测试科技', 1, 'admin', '18613030352', '1002219331@qq.com', 1);
+insert into sys_dept (id, parent_id, ancestors, dept_name, sort, leader, phone, email, status) values (2,1, '{0,1}', '深圳总公司', 1, '1', '1', 'xx@qq.com', 1);
+insert into sys_dept (id, parent_id, ancestors, dept_name, sort, leader, phone, email, status) values (3,1, '{0,1}', '长沙分公司', 2, '1', '1', 'xx@qq.com', 1);
+insert into sys_dept (id, parent_id, ancestors, dept_name, sort, leader, phone, email, status) values (4,2, '{0,1,2}', '研发部门', 1, '1', '1', 'xx@qq.com', 1);
+insert into sys_dept (id, parent_id, ancestors, dept_name, sort, leader, phone, email, status) values (5,2, '{0,1,2}', '市场部门', 2, '1', '1', 'xx@qq.com', 1);
+insert into sys_dept (id, parent_id, ancestors, dept_name, sort, leader, phone, email, status) values (6,2, '{0,1,2}', '测试部门', 3, '1', '1', 'xx@qq.com', 1);
+insert into sys_dept (id, parent_id, ancestors, dept_name, sort, leader, phone, email, status) values (7,2, '{0,1,2}', '财务部门', 4, '1', '1', 'xx@qq.com', 1);
+insert into sys_dept (id, parent_id, ancestors, dept_name, sort, leader, phone, email, status) values (8,2, '{0,1,2}', '运维部门', 5, '1', '1', 'xx@qq.com', 1);
+insert into sys_dept (id, parent_id, ancestors, dept_name, sort, leader, phone, email, status) values (9,3, '{0,1,3}', '市场部门1', 6, '1', '1', 'xx@qq.com', 1);
+insert into sys_dept (id, parent_id, ancestors, dept_name, sort, leader, phone, email, status) values (10,3, '{0,1,3}', '财务部门1', 1, '1', '1', 'xx@qq.com', 1);
 
 -- select string_to_array(ancestors, ',') from sys_dept;
 -- select id from sys_dept where 2 = any(string_to_array(ancestors, ',')::integer[])

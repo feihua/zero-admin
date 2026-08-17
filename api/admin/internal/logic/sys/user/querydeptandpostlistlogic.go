@@ -2,11 +2,12 @@ package user
 
 import (
 	"context"
+	"strconv"
+
 	"github.com/feihua/zero-admin/api/admin/internal/common/errorx"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
 	"github.com/zeromicro/go-zero/core/logc"
 	"google.golang.org/grpc/status"
-	"strconv"
 
 	"github.com/feihua/zero-admin/api/admin/internal/svc"
 	"github.com/feihua/zero-admin/api/admin/internal/types"
@@ -34,9 +35,6 @@ func NewQueryDeptAndPostListLogic(ctx context.Context, svcCtx *svc.ServiceContex
 }
 
 // QueryDeptAndPostList 查询所有部门和岗位
-// 1.查询岗位列表信息
-// 2.岗位信息
-// 2.部门信息
 func (l *QueryDeptAndPostListLogic) QueryDeptAndPostList(req *types.QueryDeptAndPostListReq) (resp *types.QueryDeptAndPostListResp, err error) {
 	// 1.查询岗位列表信息
 	result, err := l.svcCtx.UserService.QueryDeptAndPostList(l.ctx, &sysclient.QueryDeptAndPostListReq{})

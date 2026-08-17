@@ -96,7 +96,7 @@ func (l *UpdateDeptLogic) UpdateDept(in *sysclient.UpdateDeptReq) (*sysclient.Up
 	}
 
 	// 4.查询是否有下级部门
-	sql := "select count(*) from sys_dept where status = 1 and del_flag = 1 and ? = ANY(string_to_array(ancestors, ','))"
+	sql := "select count(*) from sys_dept where status = 1 and del_flag = 1 and ? = ANY(ancestors)"
 	err = l.svcCtx.DB.Raw(sql, in.Id).Count(&count).Error
 	if err != nil {
 		logc.Errorf(l.ctx, "根据部门id查询是否有下级部门失败,异常:%s", err.Error())
@@ -107,7 +107,7 @@ func (l *UpdateDeptLogic) UpdateDept(in *sysclient.UpdateDeptReq) (*sysclient.Up
 		return nil, errors.New(fmt.Sprintf("该部门包含未停用的子部门"))
 	}
 
-	sql = "SELECT * FROM sys_dept WHERE ? = ANY(string_to_array(ancestors, ','))"
+	sql = "SELECT * FROM sys_dept WHERE ? = ANY(ancestors)"
 	list := make([]model.SysDept, 10)
 	err = l.svcCtx.DB.Model(&model.SysDept{}).Raw(sql, in.Id).Scan(list).Error
 	if err != nil {

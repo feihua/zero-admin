@@ -2,6 +2,7 @@ package userservicelogic
 
 import (
 	"context"
+
 	"github.com/feihua/zero-admin/pkg/time_util"
 	"github.com/feihua/zero-admin/rpc/sys/gen/query"
 	"github.com/feihua/zero-admin/rpc/sys/internal/svc"
@@ -29,8 +30,6 @@ func NewQueryDeptAndPostListLogic(ctx context.Context, svcCtx *svc.ServiceContex
 }
 
 // QueryDeptAndPostList 查询所有部门和岗位
-// 1.查询所有部门
-// 2.查询所有岗位
 func (l *QueryDeptAndPostListLogic) QueryDeptAndPostList(in *sysclient.QueryDeptAndPostListReq) (*sysclient.QueryDeptAndPostListResp, error) {
 
 	// 1.查询所有部门

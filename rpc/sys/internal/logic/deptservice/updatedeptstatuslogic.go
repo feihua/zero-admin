@@ -58,7 +58,7 @@ func (l *UpdateDeptStatusLogic) UpdateDeptStatus(in *sysclient.UpdateDeptStatusR
 
 	// 2.查询是否有下级部门
 	var count int64
-	sql := "select count(*) from sys_dept where status = 1 and del_flag = 1 and ? = ANY(string_to_array(ancestors, ','))"
+	sql := "select count(*) from sys_dept where status = 1 and del_flag = 1 and ? = ANY(ancestors)"
 	err = l.svcCtx.DB.Raw(sql, id).Count(&count).Error
 	if err != nil {
 		logc.Errorf(l.ctx, "根据部门id查询是否有下级部门失败,异常:%s", err.Error())

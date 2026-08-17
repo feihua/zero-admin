@@ -40,7 +40,7 @@ func (l *QueryUserListLogic) QueryUserList(in *sysclient.QueryUserListReq) (*sys
 	q := user.WithContext(l.ctx)
 	if in.DeptId != 0 {
 		var deptIds []int64
-		l.svcCtx.DB.Model(model.SysDept{}).WithContext(l.ctx).Select("id").Where("find_in_set(?, ancestors)", in.DeptId).Scan(&deptIds)
+		l.svcCtx.DB.Model(model.SysDept{}).WithContext(l.ctx).Select("id").Where("? = ANY(ancestors)", in.DeptId).Scan(&deptIds)
 		deptIds = append(deptIds, in.DeptId)
 		q = q.Where(user.DeptID.In(deptIds...))
 	}
@@ -61,7 +61,7 @@ func (l *QueryUserListLogic) QueryUserList(in *sysclient.QueryUserListReq) (*sys
 	}
 
 	offset := (in.PageNum - 1) * in.PageSize
-	result, count, err := q.FindByPage(int(offset), int(in.PageSize))
+	result, count, err := q.Order(user.CreateTime.Desc()).FindByPage(int(offset), int(in.PageSize))
 
 	if err != nil {
 		logc.Errorf(l.ctx, "查询用户列表失败,参数：%+v,异常:%s", in, err.Error())

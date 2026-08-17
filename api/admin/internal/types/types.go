@@ -392,7 +392,7 @@ type AddUserReq struct {
 	DeptId   int64   `json:"deptId"`            //部门ID
 	Remark   string  `json:"remark,optional"`   //备注
 	PostIds  []int64 `json:"postIds"`           //岗位id
-	RoleIds  []int64 `json:"roleIds"`           //角色id
+	RoleIds  []int64 `json:"roleIds,optional"`  //角色id
 }
 
 type BaseResp struct {
@@ -4594,18 +4594,18 @@ type UpdateSubjectStatusReq struct {
 }
 
 type UpdateUserReq struct {
-	Id       int64   `json:"id"`              //用户id
-	Mobile   string  `json:"mobile"`          //手机号码
-	UserName string  `json:"userName"`        //用户账号
-	NickName string  `json:"nickName"`        //用户昵称
-	UserType string  `json:"userType"`        //用户类型（00系统用户）
-	Avatar   string  `json:"avatar,optional"` //头像路径
-	Email    string  `json:"email"`           //用户邮箱
-	Status   int32   `json:"status"`          //状态(1:正常，0:禁用)
-	DeptId   int64   `json:"deptId"`          //部门ID
-	Remark   string  `json:"remark,optional"` //备注
-	PostIds  []int64 `json:"postIds"`         //岗位id
-	RoleIds  []int64 `json:"roleIds"`         //角色id
+	Id       int64   `json:"id"`               //用户id
+	Mobile   string  `json:"mobile"`           //手机号码
+	UserName string  `json:"userName"`         //用户账号
+	NickName string  `json:"nickName"`         //用户昵称
+	UserType string  `json:"userType"`         //用户类型（00系统用户）
+	Avatar   string  `json:"avatar,optional"`  //头像路径
+	Email    string  `json:"email"`            //用户邮箱
+	Status   int32   `json:"status"`           //状态(1:正常，0:禁用)
+	DeptId   int64   `json:"deptId"`           //部门ID
+	Remark   string  `json:"remark,optional"`  //备注
+	PostIds  []int64 `json:"postIds"`          //岗位id
+	RoleIds  []int64 `json:"roleIds,optional"` //角色id
 }
 
 type UpdateUserRoleReq struct {

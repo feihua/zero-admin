@@ -71,7 +71,7 @@ type (
 		DeptId   int64   `json:"deptId"` //部门ID
 		Remark   string  `json:"remark,optional"` //备注
 		PostIds  []int64 `json:"postIds"` //岗位id
-		RoleIds  []int64 `json:"roleIds"` //角色id
+		RoleIds  []int64 `json:"roleIds,optional"` //角色id
 	}
 	// 删除用户信息请求参数
 	DeleteUserReq {
@@ -90,7 +90,7 @@ type (
 		DeptId   int64   `json:"deptId"` //部门ID
 		Remark   string  `json:"remark,optional"` //备注
 		PostIds  []int64 `json:"postIds"` //岗位id
-		RoleIds  []int64 `json:"roleIds"` //角色id
+		RoleIds  []int64 `json:"roleIds,optional"` //角色id
 	}
 	// 更新用户信息状态请求参数
 	UpdateUserStatusReq {

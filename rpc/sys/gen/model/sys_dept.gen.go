@@ -14,7 +14,7 @@ const TableNameSysDept = "sys_dept"
 type SysDept struct {
 	ID         int64      `gorm:"column:id;primaryKey;autoIncrement:true;comment:部门id" json:"id"`                        // 部门id
 	ParentID   int64      `gorm:"column:parent_id;not null;comment:父部门id" json:"parent_id"`                              // 父部门id
-	Ancestors  string     `gorm:"column:ancestors;not null;default:''::character varying;comment:祖级列表" json:"ancestors"` // 祖级列表
+	Ancestors  string     `gorm:"column:ancestors;not null;default:'{}'::bigint[];comment:祖级列表" json:"ancestors"`        // 祖级列表
 	DeptName   string     `gorm:"column:dept_name;not null;default:''::character varying;comment:部门名称" json:"dept_name"` // 部门名称
 	Sort       int32      `gorm:"column:sort;not null;comment:显示顺序" json:"sort"`                                         // 显示顺序
 	Leader     string     `gorm:"column:leader;not null;default:''::character varying;comment:负责人" json:"leader"`        // 负责人
