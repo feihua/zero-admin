@@ -17,6 +17,7 @@ type (
 	}
 	QueryOperateLogDetailData {
 		Id           int64  `json:"id"` //日志主键
+		Title        string `json:"title"` //模块标题
 		OperateName  string `json:"operateName"` //操作人员
 		OperateIp    string `json:"operateIp"` //主机地址
 		OperateUrl   string `json:"operateUrl"` //请求url
@@ -43,6 +44,7 @@ type (
 	}
 	QueryOperateLogListData {
 		Id           int64  `json:"id"` //日志主键
+		Title        string `json:"title"` //模块标题
 		OperateName  string `json:"operateName"` //操作人员
 		OperateIp    string `json:"operateIp"` //主机地址
 		OperateUrl   string `json:"operateUrl"` //请求url

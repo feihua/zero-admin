@@ -49,9 +49,7 @@ func (l *QueryOperateLogListLogic) QueryOperateLogList(in *sysclient.QueryOperat
 	if len(in.OperateIp) > 0 {
 		q = q.Where(operateLog.OperateIP.Like("%" + in.OperateIp + "%"))
 	}
-	if len(in.Extra) > 0 {
-		q = q.Where(operateLog.Extra.Like("%" + in.Extra + "%"))
-	}
+
 	if in.Status != 2 {
 		q = q.Where(operateLog.Status.Eq(in.Status))
 	}
@@ -67,6 +65,7 @@ func (l *QueryOperateLogListLogic) QueryOperateLogList(in *sysclient.QueryOperat
 	for _, item := range result {
 		data := &sysclient.OperateLogListData{
 			Id:           item.ID,                               // 操作日志id
+			Title:        item.Title,                            // 模块标题
 			OperateName:  item.OperateName,                      // 操作人员
 			OperateUrl:   item.OperateURL,                       // 请求URL
 			OperateIp:    item.OperateIP,                        // 主机地址

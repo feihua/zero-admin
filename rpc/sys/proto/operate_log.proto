@@ -47,21 +47,18 @@ message QueryOperateLogDetailResp {
   int32 status = 8; // 操作状态(0:异常,正常)
   string operate_time = 9; // 操作时间
   int64 cost_time = 10; // 消耗时间
-
+  string title = 11; //模块标题
 }
 
 // 分页查询系统操作日志列表
 message QueryOperateLogListReq {
-  string operate_name = 2; //操作人员
-  string operate_url = 3; //请求URL
-  string operate_ip = 4; //主机地址
-  string operate_param = 5; //请求参数
-  string json_result = 6; //返回参数
-  string extra = 7; //其他信息（可选）
-  int32 status = 8; // 操作状态(0:异常,正常)
-  string operate_time = 9; // 操作时间
-  int64 page_num = 25; //第几页
-  int64 page_size = 26; //每页的数量
+  string operate_name = 1; //操作人员
+  string operate_url = 2; //请求URL
+  string operate_ip = 3; //主机地址
+  int32 status = 4; // 操作状态(0:异常,正常)
+  string operate_time = 5; // 操作时间
+  int64 page_num = 6; //第几页
+  int64 page_size = 7; //每页的数量
 }
 
 message OperateLogListData {
@@ -75,7 +72,7 @@ message OperateLogListData {
   int32 status = 8; // 操作状态(0:异常,正常)
   string operate_time = 9; // 操作时间
   int64 cost_time = 10; // 消耗时间
-
+  string title = 11; //模块标题
 }
 
 message QueryOperateLogListResp {

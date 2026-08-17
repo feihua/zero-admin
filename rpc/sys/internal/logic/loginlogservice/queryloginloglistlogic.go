@@ -41,6 +41,9 @@ func (l *QueryLoginLogListLogic) QueryLoginLogList(in *sysclient.QueryLoginLogLi
 	if len(in.LoginName) > 0 {
 		q = q.Where(loginLog.LoginName.Like("%" + in.LoginName + "%"))
 	}
+	if len(in.Ipaddr) > 0 {
+		q = q.Where(loginLog.IPAddr.Like("%" + in.Ipaddr + "%"))
+	}
 	if in.Status != 2 {
 		q = q.Where(loginLog.Status.Eq(in.Status))
 	}
@@ -56,7 +59,9 @@ func (l *QueryLoginLogListLogic) QueryLoginLogList(in *sysclient.QueryLoginLogLi
 		data := &sysclient.LoginLogListData{
 			Id:        item.ID,                             // 登录日志id
 			LoginName: item.LoginName,                      // 登录账号
+			Ipaddr:    item.IPAddr,                         // 登录IP地址
 			Status:    item.Status,                         // 登录状态(0:失败,1:成功)
+			Extra:     string(item.Extra),                  // 其他信息（可选）
 			Msg:       item.Msg,                            // 提示消息
 			LoginTime: time_util.TimeToStr(item.LoginTime), // 登录时间
 		}

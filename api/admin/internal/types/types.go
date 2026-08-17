@@ -1601,9 +1601,9 @@ type QueryLoginLogListData struct {
 type QueryLoginLogListReq struct {
 	Current   int64  `form:"current,default=1"`   //第几页
 	PageSize  int64  `form:"pageSize,default=20"` //每页的数量
-	LoginName string `json:"loginName,optional"`  //登录账号
-	Ipaddr    string `json:"ipaddr,optional"`     //登录IP地址
-	Status    int32  `json:"status,default=2"`    //登录状态(0:失败,1:成功)
+	LoginName string `form:"loginName,optional"`  //登录账号
+	Ipaddr    string `form:"ipAddr,optional"`     //登录IP地址
+	Status    int32  `form:"status,default=2"`    //登录状态(0:失败,1:成功)
 }
 
 type QueryLoginLogListResp struct {
@@ -2321,6 +2321,7 @@ type QueryNoticeListResp struct {
 
 type QueryOperateLogDetailData struct {
 	Id           int64  `json:"id"`           //日志主键
+	Title        string `json:"title"`        //模块标题
 	OperateName  string `json:"operateName"`  //操作人员
 	OperateIp    string `json:"operateIp"`    //主机地址
 	OperateUrl   string `json:"operateUrl"`   //请求url
@@ -2344,6 +2345,7 @@ type QueryOperateLogDetailResp struct {
 
 type QueryOperateLogListData struct {
 	Id           int64  `json:"id"`           //日志主键
+	Title        string `json:"title"`        //模块标题
 	OperateName  string `json:"operateName"`  //操作人员
 	OperateIp    string `json:"operateIp"`    //主机地址
 	OperateUrl   string `json:"operateUrl"`   //请求url

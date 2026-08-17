@@ -53,7 +53,9 @@ func (l *QueryLoginLogDetailLogic) QueryLoginLogDetail(in *sysclient.QueryLoginL
 	data := &sysclient.QueryLoginLogDetailResp{
 		Id:        item.ID,                             // 登录日志id
 		LoginName: item.LoginName,                      // 登录账号
+		Ipaddr:    item.IPAddr,                         // 登录IP地址
 		Status:    item.Status,                         // 登录状态(0:失败,1:成功)
+		Extra:     string(item.Extra),                  // 其他信息（可选）
 		Msg:       item.Msg,                            // 提示消息
 		LoginTime: time_util.TimeToStr(item.LoginTime), // 登录时间
 	}

@@ -52,6 +52,7 @@ func (l *QueryOperateLogDetailLogic) QueryOperateLogDetail(in *sysclient.QueryOp
 
 	data := &sysclient.QueryOperateLogDetailResp{
 		Id:           item.ID,                               // 操作日志id
+		Title:        item.Title,                            // 模块标题
 		OperateName:  item.OperateName,                      // 操作人员
 		OperateUrl:   item.OperateURL,                       // 请求URL
 		OperateIp:    item.OperateIP,                        // 主机地址

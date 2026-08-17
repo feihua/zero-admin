@@ -47,6 +47,7 @@ func (l *QueryOperateLogDetailLogic) QueryOperateLogDetail(req *types.QueryOpera
 
 	item := types.QueryOperateLogDetailData{
 		Id:           detail.Id,           // 日志主键
+		Title:        detail.Title,        // 模块标题
 		OperateName:  detail.OperateName,  // 操作人员
 		OperateIp:    detail.OperateIp,    // 主机地址
 		OperateUrl:   detail.OperateUrl,   // 请求url

@@ -54,6 +54,7 @@ func (l *QueryOperateLogListLogic) QueryOperateLogList(req *types.QueryOperateLo
 	for _, item := range result.List {
 		list = append(list, &types.QueryOperateLogListData{
 			Id:           item.Id,           // 日志主键
+			Title:        item.Title,        // 模块标题
 			OperateName:  item.OperateName,  // 操作人员
 			OperateIp:    item.OperateIp,    // 主机地址
 			OperateUrl:   item.OperateUrl,   // 请求url

@@ -33,9 +33,9 @@ type (
 	QueryLoginLogListReq {
 		Current   int64  `form:"current,default=1"` //第几页
 		PageSize  int64  `form:"pageSize,default=20"` //每页的数量
-		LoginName string `json:"loginName,optional"` //登录账号
-		Ipaddr    string `json:"ipaddr,optional"` //登录IP地址
-		Status    int32  `json:"status,default=2"` //登录状态(0:失败,1:成功)
+		LoginName string `form:"loginName,optional"` //登录账号
+		Ipaddr    string `form:"ipAddr,optional"` //登录IP地址
+		Status    int32  `form:"status,default=2"` //登录状态(0:失败,1:成功)
 	}
 	QueryLoginLogListData {
 		Id        int64  `json:"id"` //访问id
