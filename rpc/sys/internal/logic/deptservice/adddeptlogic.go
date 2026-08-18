@@ -4,6 +4,8 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"strings"
+
 	"github.com/feihua/zero-admin/rpc/sys/gen/model"
 	"github.com/feihua/zero-admin/rpc/sys/gen/query"
 	"github.com/feihua/zero-admin/rpc/sys/internal/svc"
@@ -71,7 +73,8 @@ func (l *AddDeptLogic) AddDept(in *sysclient.AddDeptReq) (*sysclient.AddDeptResp
 		return nil, errors.New(fmt.Sprintf("添加部门失败,：%s,停用，不允许新增", parentDept.DeptName))
 	}
 
-	ancestors := fmt.Sprintf("%s,%d", parentDept.Ancestors, parentDept.ID)
+	ancestors := fmt.Sprintf("%s,%d}", parentDept.Ancestors, parentDept.ID)
+	ancestors = strings.Replace(ancestors, "},", ",", 1)
 	// 4.部门不存在时,则直接添加部门
 	dept := &model.SysDept{
 		ParentID:  in.ParentId, // 上级部门id

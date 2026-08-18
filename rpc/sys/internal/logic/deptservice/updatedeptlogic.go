@@ -81,6 +81,8 @@ func (l *UpdateDeptLogic) UpdateDept(in *sysclient.UpdateDeptReq) (*sysclient.Up
 	}
 
 	ancestors := fmt.Sprintf("%s,%d", parentDept.Ancestors, parentDept.ID)
+	ancestors = strings.Replace(ancestors, "},", ",", 1)
+
 	// 3.根据部门名称查询部门是否已存在
 	deptName := in.DeptName
 	count, err := q.Where(dept.ID.Neq(in.Id), dept.DeptName.Eq(deptName), dept.ParentID.Eq(parentDept.ID)).Count()
@@ -109,7 +111,7 @@ func (l *UpdateDeptLogic) UpdateDept(in *sysclient.UpdateDeptReq) (*sysclient.Up
 
 	sql = "SELECT * FROM sys_dept WHERE ? = ANY(ancestors)"
 	list := make([]model.SysDept, 10)
-	err = l.svcCtx.DB.Model(&model.SysDept{}).Raw(sql, in.Id).Scan(list).Error
+	err = l.svcCtx.DB.Model(&model.SysDept{}).Raw(sql, in.Id).Scan(&list).Error
 	if err != nil {
 		logc.Errorf(l.ctx, "根据部门id查询是否有下级部门失败,异常:%s", err.Error())
 		return nil, errors.New(fmt.Sprintf("更新部门失败"))
@@ -127,6 +129,7 @@ func (l *UpdateDeptLogic) UpdateDept(in *sysclient.UpdateDeptReq) (*sysclient.Up
 		}
 	}
 	now := time.Now()
+	ancestors = fmt.Sprintf("%s}", ancestors)
 	sysDept := &model.SysDept{
 		ID:         in.Id,              // 部门id
 		ParentID:   in.ParentId,        // 上级部门id
