@@ -69,7 +69,7 @@ func (m *AddLogMiddleware) Handle(next http.HandlerFunc) http.HandlerFunc {
 		next(recorder, r)
 
 		// 打印响应日志
-		responseBoy := string(recorder.body)
+		// responseBoy := string(recorder.body)
 		// 响应参数较多,可以不打印
 		// logx.WithContext(r.Context()).Infof("Response: %s %s %s", r.Method, r.RequestURI, responseBoy)
 
@@ -82,11 +82,11 @@ func (m *AddLogMiddleware) Handle(next http.HandlerFunc) http.HandlerFunc {
 			OperateUrl:   uri,
 			OperateIp:    httpx.GetRemoteAddr(r),
 			OperateParam: string(body),
-			JsonResult:   responseBoy,
-			Extra:        userAgent,
-			Status:       0,
-			OperateTime:  "",
-			CostTime:     duration.Milliseconds(),
+			// JsonResult:   responseBoy,
+			Extra:       userAgent,
+			Status:      int32(recorder.statusCode),
+			OperateTime: "",
+			CostTime:    duration.Milliseconds(),
 		}
 		_, _ = m.Sys.AddOperateLog(r.Context(), opLog)
 	}
