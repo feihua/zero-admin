@@ -170,7 +170,7 @@ type AddMenuReq struct {
 	ParentId     int64  `json:"parentId,default=0"`    //父id
 	ApiUrl       string `json:"apiUrl,optional"`       //接口url
 	Visible      int32  `json:"visible"`               //显示状态（0:隐藏,显示:1）
-	Status       int32  `json:"status,default=2"`      //菜单状态(1:正常，0:禁用)
+	Status       int32  `json:"status,default=1"`      //菜单状态(1:正常，0:禁用)
 	Remark       string `json:"remark,optional"`       //备注
 	VuePath      string `json:"vuePath,optional"`      //vue的path
 	VueComponent string `json:"vueComponent,optional"` //vue的页面
@@ -4158,7 +4158,7 @@ type UpdateMenuReq struct {
 	ParentId     int64  `json:"parentId,default=0"`    //父id
 	ApiUrl       string `json:"apiUrl,optional"`       //接口url
 	Visible      int32  `json:"visible"`               //显示状态（0:隐藏,显示:1）
-	Status       int32  `json:"status,default=2"`      //菜单状态(1:正常，0:禁用)
+	Status       int32  `json:"status"`                //菜单状态(1:正常，0:禁用)
 	Remark       string `json:"remark,optional"`       //备注
 	VuePath      string `json:"vuePath,optional"`      //vue的path
 	VueComponent string `json:"vueComponent,optional"` //vue的页面
