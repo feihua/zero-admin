@@ -35,7 +35,7 @@ func NewQueryMenuListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Que
 
 // QueryMenuList 菜单列表
 func (l *QueryMenuListLogic) QueryMenuList(in *sysclient.QueryMenuListReq) (*sysclient.QueryMenuListResp, error) {
-	result, err := query.SysMenu.WithContext(l.ctx).Where(query.SysMenu.MenuType.Neq(2)).Order(query.SysMenu.MenuSort).Find()
+	result, err := query.SysMenu.WithContext(l.ctx).Where(query.SysMenu.MenuType.Neq(3)).Order(query.SysMenu.MenuSort).Find()
 
 	if err != nil {
 		logc.Errorf(l.ctx, "查询菜单列表信息失败,参数:%+v,异常:%s", in, err.Error())

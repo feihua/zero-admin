@@ -30,7 +30,7 @@ func NewQueryMenuResourceListLogic(ctx context.Context, svcCtx *svc.ServiceConte
 func (l *QueryMenuResourceListLogic) QueryMenuResourceList(in *sysclient.QueryMenuListReq) (*sysclient.QueryMenuListResp, error) {
 	menu := query.SysMenu
 	q := menu.WithContext(l.ctx)
-	q = q.Where(menu.MenuType.Eq(2))
+	q = q.Where(menu.MenuType.Eq(3))
 	if len(in.MenuName) > 0 {
 		q = q.Where(menu.MenuName.Like("%" + in.MenuName + "%"))
 	}
@@ -43,7 +43,7 @@ func (l *QueryMenuResourceListLogic) QueryMenuResourceList(in *sysclient.QueryMe
 		q = q.Where(menu.ParentID.Eq(in.ParentId))
 	}
 
-	result, count, err := q.FindByPage(int((in.PageNum-1)*in.PageSize), int(in.PageSize))
+	result, count, err := q.Order(query.SysMenu.MenuSort).FindByPage(int((in.PageNum-1)*in.PageSize), int(in.PageSize))
 
 	if err != nil {
 		logc.Errorf(l.ctx, "查询菜单列表失败,参数:%+v,异常:%s", in, err.Error())
