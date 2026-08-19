@@ -35,7 +35,7 @@ func NewQueryDeptListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Que
 // QueryDeptList 查询部门列表
 func (l *QueryDeptListLogic) QueryDeptList(in *sysclient.QueryDeptListReq) (*sysclient.QueryDeptListResp, error) {
 
-	result, err := query.SysDept.WithContext(l.ctx).Find()
+	result, err := query.SysDept.WithContext(l.ctx).Order(query.SysDept.Sort).Find()
 
 	if err != nil {
 		logc.Errorf(l.ctx, "查询部门列表失败,参数:%+v,异常:%s", in, err.Error())
