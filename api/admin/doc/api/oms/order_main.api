@@ -146,19 +146,19 @@ service admin-api {
 
 	// 删除订单
 	@handler DeleteOrderMain
-	get /deleteOrderMain (DeleteOrderMainReq) returns (DeleteOrderMainResp)
+	get /deleteOrder (DeleteOrderMainReq) returns (DeleteOrderMainResp)
 
 	// 更新订单
 	@handler UpdateOrderMain
-	post /updateOrderMain (UpdateOrderMainReq) returns (UpdateOrderMainResp)
+	post /updateOrder (UpdateOrderMainReq) returns (UpdateOrderMainResp)
 
 	// 查询订单详情
 	@handler QueryOrderMainDetail
-	get /queryOrderMainDetail (QueryOrderMainDetailReq) returns (QueryOrderMainDetailResp)
+	get /queryOrderDetail (QueryOrderMainDetailReq) returns (QueryOrderMainDetailResp)
 
 	// 分页查询订单列表
 	@handler QueryOrderMainList
-	get /queryOrderMainList (QueryOrderMainListReq) returns (QueryOrderMainListResp)
+	get /queryOrderList (QueryOrderMainListReq) returns (QueryOrderMainListResp)
 
 	//修改订单费用信息
 	@handler UpdateMoneyInfo

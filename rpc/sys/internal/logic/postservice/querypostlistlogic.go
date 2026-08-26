@@ -3,6 +3,7 @@ package postservicelogic
 import (
 	"context"
 	"errors"
+
 	"github.com/feihua/zero-admin/pkg/time_util"
 	"github.com/feihua/zero-admin/rpc/sys/gen/query"
 	"github.com/feihua/zero-admin/rpc/sys/sysclient"
@@ -46,7 +47,7 @@ func (l *QueryPostListLogic) QueryPostList(in *sysclient.QueryPostListReq) (*sys
 		q = q.Where(query.SysPost.Status.Eq(in.Status))
 	}
 
-	result, count, err := q.FindByPage(int((in.PageNum-1)*in.PageSize), int(in.PageSize))
+	result, count, err := q.Order(query.SysPost.CreateTime.Desc()).FindByPage(int((in.PageNum-1)*in.PageSize), int(in.PageSize))
 
 	if err != nil {
 		logc.Errorf(l.ctx, "查询岗位列表信息失败,参数：%+v,异常:%s", in, err.Error())

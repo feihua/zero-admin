@@ -62,10 +62,10 @@ func SynProductToEs(ctx context.Context, body []byte, Search search_client.Searc
 		// DetailDesc:          product.DetailDesc,          // 详情描述
 		DetailHtml:       product.DetailHtml,       // 产品详情网页内容
 		DetailMobileHtml: product.DetailMobileHtml, // 移动端网页详情
-		CreateBy:         product.CreateBy,         // 创建人ID
-		CreateTime:       product.CreateTime,       // 创建时间
-		UpdateBy:         product.UpdateBy,         // 更新人ID
-		UpdateTime:       product.UpdateTime,       // 更新时间
+		// CreateBy:         product.CreateBy,         // 创建人ID
+		CreateTime: product.CreateTime, // 创建时间
+		// UpdateBy:         product.UpdateBy,         // 更新人ID
+		UpdateTime: product.UpdateTime, // 更新时间
 	}
 
 	var list []*search_client.ProductData
