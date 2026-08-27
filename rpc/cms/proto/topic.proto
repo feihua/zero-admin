@@ -11,13 +11,10 @@ message AddTopicReq {
   string name = 3; //话题名称
   string start_time = 4; //话题开始时间
   string end_time = 5; //话题结束时间
-  int32 attend_count = 6; //参与人数
-  int32 attention_count = 7; //关注人数
-  int32 read_count = 8; //阅读数
-  string award_name = 9; //奖品名称
-  string attend_type = 10; //参与方式
-  string content = 11; //话题内容
-  string create_by = 12; //创建者
+  string award_name = 6; //奖品名称
+  string attend_type = 7; //参与方式
+  string content = 8; //话题内容
+  string create_by = 9; //创建者
 }
 
 message AddTopicResp {
@@ -40,13 +37,10 @@ message UpdateTopicReq {
   string name = 3; //话题名称
   string start_time = 4; //话题开始时间
   string end_time = 5; //话题结束时间
-  int32 attend_count = 6; //参与人数
-  int32 attention_count = 7; //关注人数
-  int32 read_count = 8; //阅读数
-  string award_name = 9; //奖品名称
-  string attend_type = 10; //参与方式
-  string content = 11; //话题内容
-  string update_by = 14; //更新者
+  string award_name = 6; //奖品名称
+  string attend_type = 7; //参与方式
+  string content = 8; //话题内容
+  string update_by = 9; //更新者
 }
 
 message UpdateTopicResp {

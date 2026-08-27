@@ -38,7 +38,7 @@ func NewServiceContext(c config.Config) *ServiceContext {
 		panic(err)
 	}
 
-	logx.Debug("mysql已连接")
+	logx.Info("postgres已连接")
 	query.SetDefault(DB)
 
 	mqUrl := fmt.Sprintf("amqp://%s:%s@%s:%d/", c.Rabbitmq.UserName, c.Rabbitmq.Password, c.Rabbitmq.Host, c.Rabbitmq.Port)

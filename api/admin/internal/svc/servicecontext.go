@@ -3,11 +3,18 @@ package svc
 import (
 	"github.com/feihua/zero-admin/api/admin/internal/config"
 	"github.com/feihua/zero-admin/api/admin/internal/middleware"
+	"github.com/feihua/zero-admin/rpc/cms/client/helpcategoryservice"
+	"github.com/feihua/zero-admin/rpc/cms/client/helpservice"
+	"github.com/feihua/zero-admin/rpc/cms/client/memberreportservice"
 	"github.com/feihua/zero-admin/rpc/cms/client/preferredareaproductrelationservice"
 	"github.com/feihua/zero-admin/rpc/cms/client/preferredareaservice"
 	"github.com/feihua/zero-admin/rpc/cms/client/subjectcategoryservice"
+	"github.com/feihua/zero-admin/rpc/cms/client/subjectcommentservice"
 	"github.com/feihua/zero-admin/rpc/cms/client/subjectproductrelationservice"
 	"github.com/feihua/zero-admin/rpc/cms/client/subjectservice"
+	"github.com/feihua/zero-admin/rpc/cms/client/topiccategoryservice"
+	"github.com/feihua/zero-admin/rpc/cms/client/topiccommentservice"
+	"github.com/feihua/zero-admin/rpc/cms/client/topicservice"
 	"github.com/feihua/zero-admin/rpc/oms/client/cartitemservice"
 	"github.com/feihua/zero-admin/rpc/oms/client/companyaddressservice"
 	"github.com/feihua/zero-admin/rpc/oms/client/orderdeliveryservice"
@@ -153,6 +160,13 @@ type ServiceContext struct {
 	PreferredAreaService                preferredareaservice.PreferredAreaService
 	PreferredAreaProductRelationService preferredareaproductrelationservice.PreferredAreaProductRelationService
 	SubjectCategoryService              subjectcategoryservice.SubjectCategoryService
+	HelpService                         helpservice.HelpService
+	HelpCategoryService                 helpcategoryservice.HelpCategoryService
+	MemberReportService                 memberreportservice.MemberReportService
+	SubjectCommentService               subjectcommentservice.SubjectCommentService
+	TopicService                        topicservice.TopicService
+	TopicCategoryService                topiccategoryservice.TopicCategoryService
+	TopicCommentService                 topiccommentservice.TopicCommentService
 	Redis                               *redis.Redis
 }
 
@@ -240,6 +254,13 @@ func NewServiceContext(c config.Config) *ServiceContext {
 		PreferredAreaService:                preferredareaservice.NewPreferredAreaService(cmsClient),
 		PreferredAreaProductRelationService: preferredareaproductrelationservice.NewPreferredAreaProductRelationService(cmsClient),
 		SubjectCategoryService:              subjectcategoryservice.NewSubjectCategoryService(cmsClient),
+		HelpService:                         helpservice.NewHelpService(cmsClient),
+		HelpCategoryService:                 helpcategoryservice.NewHelpCategoryService(cmsClient),
+		MemberReportService:                 memberreportservice.NewMemberReportService(cmsClient),
+		SubjectCommentService:               subjectcommentservice.NewSubjectCommentService(cmsClient),
+		TopicService:                        topicservice.NewTopicService(cmsClient),
+		TopicCategoryService:                topiccategoryservice.NewTopicCategoryService(cmsClient),
+		TopicCommentService:                 topiccommentservice.NewTopicCommentService(cmsClient),
 		Redis:                               newRedis,
 	}
 }

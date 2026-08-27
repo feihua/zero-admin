@@ -3,6 +3,7 @@ package helpservicelogic
 import (
 	"context"
 	"errors"
+
 	"github.com/feihua/zero-admin/pkg/time_util"
 	"github.com/feihua/zero-admin/rpc/cms/cmsclient"
 	"github.com/feihua/zero-admin/rpc/cms/gen/query"
@@ -37,20 +38,12 @@ func (l *QueryHelpListLogic) QueryHelpList(in *cmsclient.QueryHelpListReq) (*cms
 	if in.CategoryId != 2 {
 		q = q.Where(help.CategoryID.Eq(in.CategoryId))
 	}
-	if len(in.Icon) > 0 {
-		q = q.Where(help.Icon.Like("%" + in.Icon + "%"))
-	}
+
 	if len(in.Title) > 0 {
 		q = q.Where(help.Title.Like("%" + in.Title + "%"))
 	}
 	if in.ShowStatus != 2 {
 		q = q.Where(help.ShowStatus.Eq(in.ShowStatus))
-	}
-	if in.ReadCount != 2 {
-		q = q.Where(help.ReadCount.Eq(in.ReadCount))
-	}
-	if len(in.Content) > 0 {
-		q = q.Where(help.Content.Like("%" + in.Content + "%"))
 	}
 
 	result, count, err := q.FindByPage(int((in.PageNum-1)*in.PageSize), int(in.PageSize))

@@ -3,6 +3,7 @@ package topicservicelogic
 import (
 	"context"
 	"errors"
+
 	"github.com/feihua/zero-admin/rpc/cms/cmsclient"
 	"github.com/feihua/zero-admin/rpc/cms/gen/model"
 	"github.com/feihua/zero-admin/rpc/cms/gen/query"
@@ -33,22 +34,30 @@ func NewAddTopicLogic(ctx context.Context, svcCtx *svc.ServiceContext) *AddTopic
 // AddTopic 添加话题
 func (l *AddTopicLogic) AddTopic(in *cmsclient.AddTopicReq) (*cmsclient.AddTopicResp, error) {
 	q := query.CmsTopic
+	count, err := q.WithContext(l.ctx).Where(q.Name.Eq(in.Name)).Count()
 
+	if err != nil {
+		return nil, errors.New("查询话题失败")
+	}
+
+	if count > 0 {
+		return nil, errors.New("添加话题失败,话题名称已存在")
+	}
 	item := &model.CmsTopic{
 		CategoryID: in.CategoryId, // 关联分类id
 		Name:       in.Name,       // 话题名称
 		// StartTime:      in.StartTime,      // 话题开始时间
 		// EndTime:        in.EndTime,        // 话题结束时间
-		AttendCount:    in.AttendCount,    // 参与人数
-		AttentionCount: in.AttentionCount, // 关注人数
-		ReadCount:      in.ReadCount,      // 阅读数
-		AwardName:      in.AwardName,      // 奖品名称
-		AttendType:     in.AttendType,     // 参与方式
-		Content:        in.Content,        // 话题内容
-		CreateBy:       in.CreateBy,       // 创建者
+		AttendCount:    0,             // 参与人数
+		AttentionCount: 0,             // 关注人数
+		ReadCount:      0,             // 阅读数
+		AwardName:      in.AwardName,  // 奖品名称
+		AttendType:     in.AttendType, // 参与方式
+		Content:        in.Content,    // 话题内容
+		CreateBy:       in.CreateBy,   // 创建者
 	}
 
-	err := q.WithContext(l.ctx).Create(item)
+	err = q.WithContext(l.ctx).Create(item)
 	if err != nil {
 		logc.Errorf(l.ctx, "添加话题失败,参数:%+v,异常:%s", item, err.Error())
 		return nil, errors.New("添加话题失败")

@@ -77,10 +77,9 @@ message QueryHelpCategoryDetailResp {
 message QueryHelpCategoryListReq {
   string name = 1; //分类名称
   string icon = 2; //分类图标
-  int32 help_count = 3; //专题数量
-  int32 show_status = 4; //显示状态：0->不显示；1->显示
-  int32 page_num = 5; //第几页
-  int32 page_size = 6; //每页的数量
+  int32 show_status = 3; //显示状态：0->不显示；1->显示
+  int32 page_num = 4; //第几页
+  int32 page_size = 5; //每页的数量
 }
 
 message HelpCategoryListData {

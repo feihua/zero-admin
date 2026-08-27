@@ -79,13 +79,10 @@ message QueryHelpDetailResp {
 // 分页查询帮助列表
 message QueryHelpListReq {
   int64 category_id = 1; //分类ID
-  string icon = 2; //图标
-  string title = 3; //标题
-  int32 show_status = 4; //显示状态：0->不显示；1->显示
-  int32 read_count = 5; //阅读量
-  string content = 6; //内容
-  int32 page_num = 7; //第几页
-  int32 page_size = 8; //每页的数量
+  string title = 2; //标题
+  int32 show_status = 3; //显示状态：0->不显示；1->显示
+  int32 page_num = 4; //第几页
+  int32 page_size = 5; //每页的数量
 }
 
 message HelpListData {
@@ -200,10 +197,9 @@ message QueryHelpCategoryDetailResp {
 message QueryHelpCategoryListReq {
   string name = 1; //分类名称
   string icon = 2; //分类图标
-  int32 help_count = 3; //专题数量
-  int32 show_status = 4; //显示状态：0->不显示；1->显示
-  int32 page_num = 5; //第几页
-  int32 page_size = 6; //每页的数量
+  int32 show_status = 3; //显示状态：0->不显示；1->显示
+  int32 page_num = 4; //第几页
+  int32 page_size = 5; //每页的数量
 }
 
 message HelpCategoryListData {
@@ -318,9 +314,8 @@ message QueryMemberReportListReq {
   string report_object = 3; //被举报对象
   int32 report_status = 4; //举报状态：0->未处理；1->已处理
   int32 handle_status = 5; //处理结果：0->无效；1->有效；2->恶意
-  string note = 6; //备注
-  int32 page_num = 7; //第几页
-  int32 page_size = 8; //每页的数量
+  int32 page_num = 6; //第几页
+  int32 page_size = 7; //每页的数量
 }
 
 message MemberReportListData {
@@ -432,10 +427,9 @@ message QueryPreferredAreaDetailResp {
 message QueryPreferredAreaListReq {
   string name = 1; //专区名称
   string sub_title = 2; //子标题
-  string pic = 3; //展示图片
-  int32 show_status = 4; //显示状态：0->不显示；1->显示
-  int64 page_num = 5; //第几页
-  int64 page_size = 6; //每页的数量
+  int32 show_status = 3; //显示状态：0->不显示；1->显示
+  int64 page_num = 4; //第几页
+  int64 page_size = 5; //每页的数量
 }
 
 message PreferredAreaListData {
@@ -761,8 +755,6 @@ message QuerySubjectCategoryDetailResp {
 // 分页查询专题分类列表
 message QuerySubjectCategoryListReq {
   string name = 1; //专题分类名称
-  string icon = 2; //分类图标
-  int32 subject_count = 3; //专题数量
   int32 show_status = 4; //显示状态：0->不显示；1->显示
   int32 page_num = 5; //第几页
   int32 page_size = 6; //每页的数量
@@ -873,8 +865,6 @@ message QuerySubjectCommentDetailResp {
 message QuerySubjectCommentListReq {
   int64 subject_id = 1; //关联专题id
   string member_nick_name = 2; //关联会员昵称
-  string member_icon = 3; //会员头像
-  string content = 4; //评论内容
   int32 show_status = 5; //是否显示，0->不显示；1->显示
   int32 page_num = 6; //第几页
   int32 page_size = 7; //每页的数量
@@ -956,13 +946,10 @@ message AddTopicReq {
   string name = 3; //话题名称
   string start_time = 4; //话题开始时间
   string end_time = 5; //话题结束时间
-  int32 attend_count = 6; //参与人数
-  int32 attention_count = 7; //关注人数
-  int32 read_count = 8; //阅读数
-  string award_name = 9; //奖品名称
-  string attend_type = 10; //参与方式
-  string content = 11; //话题内容
-  string create_by = 12; //创建者
+  string award_name = 6; //奖品名称
+  string attend_type = 7; //参与方式
+  string content = 8; //话题内容
+  string create_by = 9; //创建者
 }
 
 message AddTopicResp {
@@ -985,13 +972,10 @@ message UpdateTopicReq {
   string name = 3; //话题名称
   string start_time = 4; //话题开始时间
   string end_time = 5; //话题结束时间
-  int32 attend_count = 6; //参与人数
-  int32 attention_count = 7; //关注人数
-  int32 read_count = 8; //阅读数
-  string award_name = 9; //奖品名称
-  string attend_type = 10; //参与方式
-  string content = 11; //话题内容
-  string update_by = 14; //更新者
+  string award_name = 6; //奖品名称
+  string attend_type = 7; //参与方式
+  string content = 8; //话题内容
+  string update_by = 9; //更新者
 }
 
 message UpdateTopicResp {
@@ -1096,7 +1080,6 @@ message AddTopicCategoryReq {
   int64 id = 1; //主键ID
   string name = 2; //分类名称
   string icon = 3; //分类图标
-  int32 subject_count = 4; //专题数量
   int32 show_status = 5; //显示状态：0->不显示；1->显示
   int32 sort = 6; //排序
   string create_by = 7; //创建者
@@ -1120,7 +1103,6 @@ message UpdateTopicCategoryReq {
   int64 id = 1; //主键ID
   string name = 2; //分类名称
   string icon = 3; //分类图标
-  int32 subject_count = 4; //专题数量
   int32 show_status = 5; //显示状态：0->不显示；1->显示
   int32 sort = 6; //排序
   string update_by = 9; //更新者
@@ -1164,10 +1146,9 @@ message QueryTopicCategoryDetailResp {
 message QueryTopicCategoryListReq {
   string name = 1; //分类名称
   string icon = 2; //分类图标
-  int32 subject_count = 3; //专题数量
-  int32 show_status = 4; //显示状态：0->不显示；1->显示
-  int32 page_num = 5; //第几页
-  int32 page_size = 6; //每页的数量
+  int32 show_status = 3; //显示状态：0->不显示；1->显示
+  int32 page_num = 4; //第几页
+  int32 page_size = 5; //每页的数量
 }
 
 message TopicCategoryListData {
@@ -1275,11 +1256,9 @@ message QueryTopicCommentDetailResp {
 message QueryTopicCommentListReq {
   string member_nick_name = 1; //评论人员昵称
   int64 topic_id = 2; //专题ID
-  string member_icon = 3; //评论人员头像
-  string content = 4; //评论内容
-  int32 show_status = 5; //是否显示，0->不显示；1->显示
-  int32 page_num = 6; //第几页
-  int32 page_size = 7; //每页的数量
+  int32 show_status = 3; //是否显示，0->不显示；1->显示
+  int32 page_num = 4; //第几页
+  int32 page_size = 5; //每页的数量
 }
 
 message TopicCommentListData {

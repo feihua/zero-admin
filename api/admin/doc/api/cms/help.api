@@ -1,0 +1,137 @@
+info (
+	desc:   "帮助"
+	author: "刘飞华"
+	email:  "1002219331@qq.com"
+)
+
+type (
+	// 添加帮助请求参数
+	AddHelpReq {
+		CategoryId int64  `json:"categoryId"` //分类id
+		Icon       string `json:"icon"` //图标
+		Title      string `json:"title"` //标题
+		ShowStatus int32  `json:"showStatus,default=2"` //显示状态：0->不显示；1->显示
+		Content    string `json:"content"` //内容
+	}
+	AddHelpResp {
+		Code    string `json:"code"`
+		Message string `json:"message"`
+	}
+	// 删除帮助请求参数
+	DeleteHelpReq {
+		Ids []int64 `form:"ids"`
+	}
+	DeleteHelpResp {
+		Code    string `json:"code"`
+		Message string `json:"message"`
+	}
+	// 更新帮助请求参数
+	UpdateHelpReq {
+		Id         int64  `json:"id"` //主键id
+		CategoryId int64  `json:"categoryId"` //分类id
+		Icon       string `json:"icon"` //图标
+		Title      string `json:"title"` //标题
+		ShowStatus int32  `json:"showStatus,default=2"` //显示状态：0->不显示；1->显示
+		Content    string `json:"content"` //内容
+	}
+	UpdateHelpResp {
+		Code    string `json:"code"`
+		Message string `json:"message"`
+	}
+	// 更新帮助状态请求参数
+	UpdateHelpStatusReq {
+		Ids        []int64 `json:"ids"` //主键id
+		ShowStatus int32   `json:"showStatus,default=2"` //显示状态：0->不显示；1->显示
+	}
+	UpdateHelpStatusResp {
+		Code    string `json:"code"`
+		Message string `json:"message"`
+	}
+	// 查询帮助详情请求参数
+	QueryHelpDetailReq {
+		Id int64 `form:"id"`
+	}
+	QueryHelpDetailData {
+		Id         int64  `json:"id"` //主键id
+		CategoryId int64  `json:"categoryId"` //分类id
+		Icon       string `json:"icon"` //图标
+		Title      string `json:"title"` //标题
+		ShowStatus int32  `json:"showStatus"` //显示状态：0->不显示；1->显示
+		ReadCount  int32  `json:"readCount"` //阅读量
+		Content    string `json:"content"` //内容
+		CreateBy   string `json:"createBy"` //创建者
+		CreateTime string `json:"createTime"` //创建时间
+		UpdateBy   string `json:"updateBy"` //更新者
+		UpdateTime string `json:"updateTime"` //更新时间
+	}
+	QueryHelpDetailResp {
+		Code    string              `json:"code"`
+		Message string              `json:"message"`
+		Data    QueryHelpDetailData `json:"data"`
+	}
+	// 分页查询帮助列表请求参数
+	QueryHelpListReq {
+		Current    int64  `form:"current,default=1"` //第几页
+		PageSize   int64  `form:"pageSize,default=20"` //每页的数量
+		CategoryId int64  `form:"categoryId,optional"` //分类id
+		Title      string `form:"title,optional"` //标题
+		ShowStatus int32  `form:"showStatus,default=2"` //显示状态：0->不显示；1->显示
+	}
+	QueryHelpListData {
+		Id         int64  `json:"id"` //主键id
+		CategoryId int64  `json:"categoryId"` //分类id
+		Icon       string `json:"icon"` //图标
+		Title      string `json:"title"` //标题
+		ShowStatus int32  `json:"showStatus"` //显示状态：0->不显示；1->显示
+		ReadCount  int32  `json:"readCount"` //阅读量
+		Content    string `json:"content"` //内容
+		CreateBy   string `json:"createBy"` //创建者
+		CreateTime string `json:"createTime"` //创建时间
+		UpdateBy   string `json:"updateBy"` //更新者
+		UpdateTime string `json:"updateTime"` //更新时间
+	}
+	QueryHelpListResp {
+		Code     string               `json:"code"`
+		Message  string               `json:"message"`
+		Current  int64                `json:"current,default=1"`
+		Data     []*QueryHelpListData `json:"data"`
+		PageSize int64                `json:"pageSize,default=20"`
+		Success  bool                 `json:"success"`
+		Total    int64                `json:"total"`
+	}
+)
+
+@server (
+	jwt:        Auth
+	middleware: CheckUrl
+	group:      cms/help
+	prefix:     /api/cms/help
+	tags:       "帮助管理"
+	authType:   apiKey
+)
+service admin-api {
+	// 添加帮助
+	@handler AddHelp
+	post /addHelp (AddHelpReq) returns (AddHelpResp)
+
+	// 删除帮助
+	@handler DeleteHelp
+	get /deleteHelp (DeleteHelpReq) returns (DeleteHelpResp)
+
+	// 更新帮助
+	@handler UpdateHelp
+	post /updateHelp (UpdateHelpReq) returns (UpdateHelpResp)
+
+	// 更新帮助状态
+	@handler UpdateHelpStatus
+	post /updateHelpStatus (UpdateHelpStatusReq) returns (UpdateHelpStatusResp)
+
+	// 查询帮助详情
+	@handler QueryHelpDetail
+	get /queryHelpDetail (QueryHelpDetailReq) returns (QueryHelpDetailResp)
+
+	// 分页查询帮助列表
+	@handler QueryHelpList
+	get /queryHelpList (QueryHelpListReq) returns (QueryHelpListResp)
+}
+

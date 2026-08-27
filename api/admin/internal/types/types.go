@@ -82,6 +82,31 @@ type AddDictTypeReq struct {
 	Remark   string `json:"remark,optional"` //备注
 }
 
+type AddHelpCategoryReq struct {
+	Name       string `json:"name"`                 //分类名称
+	Icon       string `json:"icon"`                 //分类图标
+	ShowStatus int32  `json:"showStatus,default=2"` //显示状态：0->不显示；1->显示
+	Sort       int32  `json:"sort"`                 //排序
+}
+
+type AddHelpCategoryResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
+}
+
+type AddHelpReq struct {
+	CategoryId int64  `json:"categoryId"`           //分类id
+	Icon       string `json:"icon"`                 //图标
+	Title      string `json:"title"`                //标题
+	ShowStatus int32  `json:"showStatus,default=2"` //显示状态：0->不显示；1->显示
+	Content    string `json:"content"`              //内容
+}
+
+type AddHelpResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
+}
+
 type AddHomeAdvertiseReq struct {
 	Name      string `json:"name"`            //名称
 	Type      int32  `json:"type"`            //轮播位置：0->PC首页轮播；1->app首页轮播
@@ -380,6 +405,33 @@ type AddSubjectReq struct {
 	Sort            int32  `json:"sort"`                      // 排序
 }
 
+type AddTopicCategoryReq struct {
+	Name       string `json:"name"`                 //分类名称
+	Icon       string `json:"icon"`                 //分类图标
+	ShowStatus int32  `json:"showStatus,default=2"` //显示状态：0->不显示；1->显示
+	Sort       int32  `json:"sort"`                 //排序
+}
+
+type AddTopicCategoryResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
+}
+
+type AddTopicReq struct {
+	CategoryId int64  `json:"categoryId"` //关联分类id
+	Name       string `json:"name"`       //话题名称
+	StartTime  string `json:"startTime"`  //话题开始时间
+	EndTime    string `json:"endTime"`    //话题结束时间
+	AwardName  string `json:"awardName"`  //奖品名称
+	AttendType string `json:"attendType"` //参与方式
+	Content    string `json:"content"`    //话题内容
+}
+
+type AddTopicResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
+}
+
 type AddUserReq struct {
 	Mobile   string  `json:"mobile"`            //手机号码
 	UserName string  `json:"userName"`          //用户账号
@@ -443,6 +495,24 @@ type DeleteDictItemReq struct {
 
 type DeleteDictTypeReq struct {
 	Ids []int64 `form:"ids"`
+}
+
+type DeleteHelpCategoryReq struct {
+	Ids []int64 `form:"ids"`
+}
+
+type DeleteHelpCategoryResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
+}
+
+type DeleteHelpReq struct {
+	Ids []int64 `form:"ids"`
+}
+
+type DeleteHelpResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
 }
 
 type DeleteHomeAdvertiseReq struct {
@@ -588,6 +658,24 @@ type DeleteSubjectCategoryReq struct {
 
 type DeleteSubjectReq struct {
 	Ids []int64 `form:"ids"`
+}
+
+type DeleteTopicCategoryReq struct {
+	Ids []int64 `form:"ids"`
+}
+
+type DeleteTopicCategoryResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
+}
+
+type DeleteTopicReq struct {
+	Ids []int64 `form:"ids"`
+}
+
+type DeleteTopicResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
 }
 
 type DeleteUserReq struct {
@@ -1424,6 +1512,115 @@ type QueryDictTypeListResp struct {
 	Total    int64                    `json:"total"`
 }
 
+type QueryHelpCategoryDetailData struct {
+	Id         int64  `json:"id"`         //主键id
+	Name       string `json:"name"`       //分类名称
+	Icon       string `json:"icon"`       //分类图标
+	HelpCount  int32  `json:"helpCount"`  //专题数量
+	ShowStatus int32  `json:"showStatus"` //显示状态：0->不显示；1->显示
+	Sort       int32  `json:"sort"`       //排序
+	CreateBy   string `json:"createBy"`   //创建者
+	CreateTime string `json:"createTime"` //创建时间
+	UpdateBy   string `json:"updateBy"`   //更新者
+	UpdateTime string `json:"updateTime"` //更新时间
+}
+
+type QueryHelpCategoryDetailReq struct {
+	Id int64 `form:"id"`
+}
+
+type QueryHelpCategoryDetailResp struct {
+	Code    string                      `json:"code"`
+	Message string                      `json:"message"`
+	Data    QueryHelpCategoryDetailData `json:"data"`
+}
+
+type QueryHelpCategoryListData struct {
+	Id         int64  `json:"id"`         //主键id
+	Name       string `json:"name"`       //分类名称
+	Icon       string `json:"icon"`       //分类图标
+	HelpCount  int32  `json:"helpCount"`  //专题数量
+	ShowStatus int32  `json:"showStatus"` //显示状态：0->不显示；1->显示
+	Sort       int32  `json:"sort"`       //排序
+	CreateBy   string `json:"createBy"`   //创建者
+	CreateTime string `json:"createTime"` //创建时间
+	UpdateBy   string `json:"updateBy"`   //更新者
+	UpdateTime string `json:"updateTime"` //更新时间
+}
+
+type QueryHelpCategoryListReq struct {
+	Current    int64  `form:"current,default=1"`    //第几页
+	PageSize   int64  `form:"pageSize,default=20"`  //每页的数量
+	Name       string `form:"name,optional"`        //分类名称
+	ShowStatus int32  `form:"showStatus,default=2"` //显示状态：0->不显示；1->显示
+}
+
+type QueryHelpCategoryListResp struct {
+	Code     string                       `json:"code"`
+	Message  string                       `json:"message"`
+	Current  int64                        `json:"current,default=1"`
+	Data     []*QueryHelpCategoryListData `json:"data"`
+	PageSize int64                        `json:"pageSize,default=20"`
+	Success  bool                         `json:"success"`
+	Total    int64                        `json:"total"`
+}
+
+type QueryHelpDetailData struct {
+	Id         int64  `json:"id"`         //主键id
+	CategoryId int64  `json:"categoryId"` //分类id
+	Icon       string `json:"icon"`       //图标
+	Title      string `json:"title"`      //标题
+	ShowStatus int32  `json:"showStatus"` //显示状态：0->不显示；1->显示
+	ReadCount  int32  `json:"readCount"`  //阅读量
+	Content    string `json:"content"`    //内容
+	CreateBy   string `json:"createBy"`   //创建者
+	CreateTime string `json:"createTime"` //创建时间
+	UpdateBy   string `json:"updateBy"`   //更新者
+	UpdateTime string `json:"updateTime"` //更新时间
+}
+
+type QueryHelpDetailReq struct {
+	Id int64 `form:"id"`
+}
+
+type QueryHelpDetailResp struct {
+	Code    string              `json:"code"`
+	Message string              `json:"message"`
+	Data    QueryHelpDetailData `json:"data"`
+}
+
+type QueryHelpListData struct {
+	Id         int64  `json:"id"`         //主键id
+	CategoryId int64  `json:"categoryId"` //分类id
+	Icon       string `json:"icon"`       //图标
+	Title      string `json:"title"`      //标题
+	ShowStatus int32  `json:"showStatus"` //显示状态：0->不显示；1->显示
+	ReadCount  int32  `json:"readCount"`  //阅读量
+	Content    string `json:"content"`    //内容
+	CreateBy   string `json:"createBy"`   //创建者
+	CreateTime string `json:"createTime"` //创建时间
+	UpdateBy   string `json:"updateBy"`   //更新者
+	UpdateTime string `json:"updateTime"` //更新时间
+}
+
+type QueryHelpListReq struct {
+	Current    int64  `form:"current,default=1"`    //第几页
+	PageSize   int64  `form:"pageSize,default=20"`  //每页的数量
+	CategoryId int64  `form:"categoryId,optional"`  //分类id
+	Title      string `form:"title,optional"`       //标题
+	ShowStatus int32  `form:"showStatus,default=2"` //显示状态：0->不显示；1->显示
+}
+
+type QueryHelpListResp struct {
+	Code     string               `json:"code"`
+	Message  string               `json:"message"`
+	Current  int64                `json:"current,default=1"`
+	Data     []*QueryHelpListData `json:"data"`
+	PageSize int64                `json:"pageSize,default=20"`
+	Success  bool                 `json:"success"`
+	Total    int64                `json:"total"`
+}
+
 type QueryHomeAdvertiseDetailData struct {
 	Id         int64  `json:"id"`         //编号
 	Name       string `json:"name"`       //名称
@@ -1915,6 +2112,58 @@ type QueryMemberPointsLogListResp struct {
 	PageSize int32                           `json:"pageSize,default=20"`
 	Success  bool                            `json:"success"`
 	Total    int64                           `json:"total"`
+}
+
+type QueryMemberReportDetailData struct {
+	Id               int64  `json:"id"`               //编号
+	ReportType       int32  `json:"reportType"`       //举报类型：0->商品评价；1->话题内容；2->用户评论
+	ReportMemberName string `json:"reportMemberName"` //举报人
+	ReportObject     string `json:"reportObject"`     //被举报对象
+	ReportStatus     int32  `json:"reportStatus"`     //举报状态：0->未处理；1->已处理
+	HandleStatus     int32  `json:"handleStatus"`     //处理结果：0->无效；1->有效；2->恶意
+	Note             string `json:"note"`             //备注
+	CreateTime       string `json:"createTime"`       //创建时间
+}
+
+type QueryMemberReportDetailReq struct {
+	Id int64 `form:"id"`
+}
+
+type QueryMemberReportDetailResp struct {
+	Code    string                      `json:"code"`
+	Message string                      `json:"message"`
+	Data    QueryMemberReportDetailData `json:"data"`
+}
+
+type QueryMemberReportListData struct {
+	Id               int64  `json:"id"`               //编号
+	ReportType       int32  `json:"reportType"`       //举报类型：0->商品评价；1->话题内容；2->用户评论
+	ReportMemberName string `json:"reportMemberName"` //举报人
+	ReportObject     string `json:"reportObject"`     //被举报对象
+	ReportStatus     int32  `json:"reportStatus"`     //举报状态：0->未处理；1->已处理
+	HandleStatus     int32  `json:"handleStatus"`     //处理结果：0->无效；1->有效；2->恶意
+	Note             string `json:"note"`             //备注
+	CreateTime       string `json:"createTime"`       //创建时间
+}
+
+type QueryMemberReportListReq struct {
+	Current          int64  `form:"current,default=1"`         //第几页
+	PageSize         int64  `form:"pageSize,default=20"`       //每页的数量
+	ReportType       int32  `form:"reportType,optional"`       //举报类型：0->商品评价；1->话题内容；2->用户评论
+	ReportMemberName string `form:"reportMemberName,optional"` //举报人
+	ReportObject     string `form:"reportObject,optional"`     //被举报对象
+	ReportStatus     int32  `form:"reportStatus,default=2"`    //举报状态：0->未处理；1->已处理
+	HandleStatus     int32  `form:"handleStatus,default=2"`    //处理结果：0->无效；1->有效；2->恶意
+}
+
+type QueryMemberReportListResp struct {
+	Code     string                       `json:"code"`
+	Message  string                       `json:"message"`
+	Current  int64                        `json:"current,default=1"`
+	Data     []*QueryMemberReportListData `json:"data"`
+	PageSize int64                        `json:"pageSize,default=20"`
+	Success  bool                         `json:"success"`
+	Total    int64                        `json:"total"`
 }
 
 type QueryMemberRuleSettingDetailData struct {
@@ -3717,6 +3966,54 @@ type QuerySubjectCategoryListResp struct {
 	Total    int64                           `json:"total"`
 }
 
+type QuerySubjectCommentDetailData struct {
+	Id             int64  `json:"id"`             //编号
+	SubjectId      int64  `json:"subjectId"`      //关联专题id
+	MemberNickName string `json:"memberNickName"` //关联会员昵称
+	MemberIcon     string `json:"memberIcon"`     //会员头像
+	Content        string `json:"content"`        //评论内容
+	CreateTime     string `json:"createTime"`     //创建时间
+	ShowStatus     int32  `json:"showStatus"`     //是否显示，0->不显示；1->显示
+}
+
+type QuerySubjectCommentDetailReq struct {
+	Id int64 `form:"id"`
+}
+
+type QuerySubjectCommentDetailResp struct {
+	Code    string                        `json:"code"`
+	Message string                        `json:"message"`
+	Data    QuerySubjectCommentDetailData `json:"data"`
+}
+
+type QuerySubjectCommentListData struct {
+	Id             int64  `json:"id"`             //编号
+	SubjectId      int64  `json:"subjectId"`      //关联专题id
+	MemberNickName string `json:"memberNickName"` //关联会员昵称
+	MemberIcon     string `json:"memberIcon"`     //会员头像
+	Content        string `json:"content"`        //评论内容
+	CreateTime     string `json:"createTime"`     //创建时间
+	ShowStatus     int32  `json:"showStatus"`     //是否显示，0->不显示；1->显示
+}
+
+type QuerySubjectCommentListReq struct {
+	Current        int64  `form:"current,default=1"`       //第几页
+	PageSize       int64  `form:"pageSize,default=20"`     //每页的数量
+	SubjectId      int64  `form:"subjectId,optional"`      //关联专题id
+	MemberNickName string `form:"memberNickName,optional"` //关联会员昵称
+	ShowStatus     int32  `form:"showStatus,default=2"`    //是否显示，0->不显示；1->显示
+}
+
+type QuerySubjectCommentListResp struct {
+	Code     string                         `json:"code"`
+	Message  string                         `json:"message"`
+	Current  int64                          `json:"current,default=1"`
+	Data     []*QuerySubjectCommentListData `json:"data"`
+	PageSize int64                          `json:"pageSize,default=20"`
+	Success  bool                           `json:"success"`
+	Total    int64                          `json:"total"`
+}
+
 type QuerySubjectDetailData struct {
 	Id              int64  `json:"id"`              //专题id
 	CategoryId      int64  `json:"categoryId"`      //专题分类id
@@ -3789,6 +4086,174 @@ type QuerySubjectListResp struct {
 	PageSize int64                   `json:"pageSize,default=20"`
 	Success  bool                    `json:"success"`
 	Total    int64                   `json:"total"`
+}
+
+type QueryTopicCategoryDetailData struct {
+	Id           int64  `json:"id"`           //主键id
+	Name         string `json:"name"`         //分类名称
+	Icon         string `json:"icon"`         //分类图标
+	SubjectCount int32  `json:"subjectCount"` //专题数量
+	ShowStatus   int32  `json:"showStatus"`   //显示状态：0->不显示；1->显示
+	Sort         int32  `json:"sort"`         //排序
+	CreateBy     string `json:"createBy"`     //创建者
+	CreateTime   string `json:"createTime"`   //创建时间
+	UpdateBy     string `json:"updateBy"`     //更新者
+	UpdateTime   string `json:"updateTime"`   //更新时间
+}
+
+type QueryTopicCategoryDetailReq struct {
+	Id int64 `form:"id"`
+}
+
+type QueryTopicCategoryDetailResp struct {
+	Code    string                       `json:"code"`
+	Message string                       `json:"message"`
+	Data    QueryTopicCategoryDetailData `json:"data"`
+}
+
+type QueryTopicCategoryListData struct {
+	Id           int64  `json:"id"`           //主键id
+	Name         string `json:"name"`         //分类名称
+	Icon         string `json:"icon"`         //分类图标
+	SubjectCount int32  `json:"subjectCount"` //专题数量
+	ShowStatus   int32  `json:"showStatus"`   //显示状态：0->不显示；1->显示
+	Sort         int32  `json:"sort"`         //排序
+	CreateBy     string `json:"createBy"`     //创建者
+	CreateTime   string `json:"createTime"`   //创建时间
+	UpdateBy     string `json:"updateBy"`     //更新者
+	UpdateTime   string `json:"updateTime"`   //更新时间
+}
+
+type QueryTopicCategoryListReq struct {
+	Current    int64  `form:"current,default=1"`    //第几页
+	PageSize   int64  `form:"pageSize,default=20"`  //每页的数量
+	Name       string `form:"name,optional"`        //分类名称
+	ShowStatus int32  `form:"showStatus,default=2"` //显示状态：0->不显示；1->显示
+}
+
+type QueryTopicCategoryListResp struct {
+	Code     string                        `json:"code"`
+	Message  string                        `json:"message"`
+	Current  int64                         `json:"current,default=1"`
+	Data     []*QueryTopicCategoryListData `json:"data"`
+	PageSize int64                         `json:"pageSize,default=20"`
+	Success  bool                          `json:"success"`
+	Total    int64                         `json:"total"`
+}
+
+type QueryTopicCommentDetailData struct {
+	Id             int64  `json:"id"`             //主键id
+	MemberNickName string `json:"memberNickName"` //评论人员昵称
+	TopicId        int64  `json:"topicId"`        //专题id
+	MemberIcon     string `json:"memberIcon"`     //评论人员头像
+	Content        string `json:"content"`        //评论内容
+	CreateTime     string `json:"createTime"`     //评论时间
+	ShowStatus     int32  `json:"showStatus"`     //是否显示，0->不显示；1->显示
+}
+
+type QueryTopicCommentDetailReq struct {
+	Id int64 `form:"id"`
+}
+
+type QueryTopicCommentDetailResp struct {
+	Code    string                      `json:"code"`
+	Message string                      `json:"message"`
+	Data    QueryTopicCommentDetailData `json:"data"`
+}
+
+type QueryTopicCommentListData struct {
+	Id             int64  `json:"id"`             //主键id
+	MemberNickName string `json:"memberNickName"` //评论人员昵称
+	TopicId        int64  `json:"topicId"`        //专题id
+	MemberIcon     string `json:"memberIcon"`     //评论人员头像
+	Content        string `json:"content"`        //评论内容
+	CreateTime     string `json:"createTime"`     //评论时间
+	ShowStatus     int32  `json:"showStatus"`     //是否显示，0->不显示；1->显示
+}
+
+type QueryTopicCommentListReq struct {
+	Current        int64  `form:"current,default=1"`       //第几页
+	PageSize       int64  `form:"pageSize,default=20"`     //每页的数量
+	MemberNickName string `form:"memberNickName,optional"` //评论人员昵称
+	TopicId        int64  `form:"topicId,optional"`        //专题id
+	ShowStatus     int32  `form:"showStatus,default=2"`    //是否显示，0->不显示；1->显示
+}
+
+type QueryTopicCommentListResp struct {
+	Code     string                       `json:"code"`
+	Message  string                       `json:"message"`
+	Current  int64                        `json:"current,default=1"`
+	Data     []*QueryTopicCommentListData `json:"data"`
+	PageSize int64                        `json:"pageSize,default=20"`
+	Success  bool                         `json:"success"`
+	Total    int64                        `json:"total"`
+}
+
+type QueryTopicDetailData struct {
+	Id             int64  `json:"id"`             //主键id
+	CategoryId     int64  `json:"categoryId"`     //关联分类id
+	Name           string `json:"name"`           //话题名称
+	StartTime      string `json:"startTime"`      //话题开始时间
+	EndTime        string `json:"endTime"`        //话题结束时间
+	AttendCount    int32  `json:"attendCount"`    //参与人数
+	AttentionCount int32  `json:"attentionCount"` //关注人数
+	ReadCount      int32  `json:"readCount"`      //阅读数
+	AwardName      string `json:"awardName"`      //奖品名称
+	AttendType     string `json:"attendType"`     //参与方式
+	Content        string `json:"content"`        //话题内容
+	CreateBy       string `json:"createBy"`       //创建者
+	CreateTime     string `json:"createTime"`     //创建时间
+	UpdateBy       string `json:"updateBy"`       //更新者
+	UpdateTime     string `json:"updateTime"`     //更新时间
+}
+
+type QueryTopicDetailReq struct {
+	Id int64 `form:"id"`
+}
+
+type QueryTopicDetailResp struct {
+	Code    string               `json:"code"`
+	Message string               `json:"message"`
+	Data    QueryTopicDetailData `json:"data"`
+}
+
+type QueryTopicListData struct {
+	Id             int64  `json:"id"`             //主键id
+	CategoryId     int64  `json:"categoryId"`     //关联分类id
+	Name           string `json:"name"`           //话题名称
+	StartTime      string `json:"startTime"`      //话题开始时间
+	EndTime        string `json:"endTime"`        //话题结束时间
+	AttendCount    int32  `json:"attendCount"`    //参与人数
+	AttentionCount int32  `json:"attentionCount"` //关注人数
+	ReadCount      int32  `json:"readCount"`      //阅读数
+	AwardName      string `json:"awardName"`      //奖品名称
+	AttendType     string `json:"attendType"`     //参与方式
+	Content        string `json:"content"`        //话题内容
+	CreateBy       string `json:"createBy"`       //创建者
+	CreateTime     string `json:"createTime"`     //创建时间
+	UpdateBy       string `json:"updateBy"`       //更新者
+	UpdateTime     string `json:"updateTime"`     //更新时间
+}
+
+type QueryTopicListReq struct {
+	Current    int64  `form:"current,default=1"`   //第几页
+	PageSize   int64  `form:"pageSize,default=20"` //每页的数量
+	CategoryId int64  `form:"categoryId,optional"` //关联分类id
+	Name       string `form:"name,optional"`       //话题名称
+	StartTime  string `form:"startTime,optional"`  //话题开始时间
+	EndTime    string `form:"endTime,optional"`    //话题结束时间
+	AwardName  string `form:"awardName,optional"`  //奖品名称
+	AttendType string `form:"attendType,optional"` //参与方式
+}
+
+type QueryTopicListResp struct {
+	Code     string                `json:"code"`
+	Message  string                `json:"message"`
+	Current  int64                 `json:"current,default=1"`
+	Data     []*QueryTopicListData `json:"data"`
+	PageSize int64                 `json:"pageSize,default=20"`
+	Success  bool                  `json:"success"`
+	Total    int64                 `json:"total"`
 }
 
 type QueryUserDetailData struct {
@@ -4032,6 +4497,53 @@ type UpdateDictTypeReq struct {
 type UpdateDictTypeStatusReq struct {
 	Ids    []int64 `json:"ids"`    //字典id
 	Status int32   `json:"status"` //状态
+}
+
+type UpdateHelpCategoryReq struct {
+	Id         int64  `json:"id"`                   //主键id
+	Name       string `json:"name"`                 //分类名称
+	Icon       string `json:"icon"`                 //分类图标
+	ShowStatus int32  `json:"showStatus,default=2"` //显示状态：0->不显示；1->显示
+	Sort       int32  `json:"sort"`                 //排序
+}
+
+type UpdateHelpCategoryResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
+}
+
+type UpdateHelpCategoryStatusReq struct {
+	Ids        []int64 `json:"ids"`                  //主键id
+	ShowStatus int32   `json:"showStatus,default=2"` //显示状态：0->不显示；1->显示
+}
+
+type UpdateHelpCategoryStatusResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
+}
+
+type UpdateHelpReq struct {
+	Id         int64  `json:"id"`                   //主键id
+	CategoryId int64  `json:"categoryId"`           //分类id
+	Icon       string `json:"icon"`                 //图标
+	Title      string `json:"title"`                //标题
+	ShowStatus int32  `json:"showStatus,default=2"` //显示状态：0->不显示；1->显示
+	Content    string `json:"content"`              //内容
+}
+
+type UpdateHelpResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
+}
+
+type UpdateHelpStatusReq struct {
+	Ids        []int64 `json:"ids"`                  //主键id
+	ShowStatus int32   `json:"showStatus,default=2"` //显示状态：0->不显示；1->显示
+}
+
+type UpdateHelpStatusResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
 }
 
 type UpdateHomeAdvertiseReq struct {
@@ -4593,6 +5105,54 @@ type UpdateSubjectStatusReq struct {
 	Ids             []int64 `json:"ids"`
 	RecommendStatus int32   `json:"recommendStatus"` //推荐状态：0->不推荐；1->推荐
 	ShowStatus      int32   `json:"showStatus"`      //显示状态：0->不显示；1->显示
+}
+
+type UpdateTopicCategoryReq struct {
+	Id         int64  `json:"id"`                   //主键id
+	Name       string `json:"name"`                 //分类名称
+	Icon       string `json:"icon"`                 //分类图标
+	ShowStatus int32  `json:"showStatus,default=2"` //显示状态：0->不显示；1->显示
+	Sort       int32  `json:"sort"`                 //排序
+}
+
+type UpdateTopicCategoryResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
+}
+
+type UpdateTopicCategoryStatusReq struct {
+	Ids        []int64 `json:"ids"`                  //主键id
+	ShowStatus int32   `json:"showStatus,default=2"` //显示状态：0->不显示；1->显示
+}
+
+type UpdateTopicCategoryStatusResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
+}
+
+type UpdateTopicReq struct {
+	Id         int64  `json:"id"`         //主键id
+	CategoryId int64  `json:"categoryId"` //关联分类id
+	Name       string `json:"name"`       //话题名称
+	StartTime  string `json:"startTime"`  //话题开始时间
+	EndTime    string `json:"endTime"`    //话题结束时间
+	AwardName  string `json:"awardName"`  //奖品名称
+	AttendType string `json:"attendType"` //参与方式
+	Content    string `json:"content"`    //话题内容
+}
+
+type UpdateTopicResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
+}
+
+type UpdateTopicStatusReq struct {
+	Ids []int64 `json:"ids"` //主键id
+}
+
+type UpdateTopicStatusResp struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
 }
 
 type UpdateUserReq struct {

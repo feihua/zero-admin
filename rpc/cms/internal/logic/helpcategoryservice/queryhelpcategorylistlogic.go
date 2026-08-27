@@ -3,6 +3,7 @@ package helpcategoryservicelogic
 import (
 	"context"
 	"errors"
+
 	"github.com/feihua/zero-admin/pkg/time_util"
 	"github.com/feihua/zero-admin/rpc/cms/cmsclient"
 	"github.com/feihua/zero-admin/rpc/cms/gen/query"
@@ -40,9 +41,7 @@ func (l *QueryHelpCategoryListLogic) QueryHelpCategoryList(in *cmsclient.QueryHe
 	if len(in.Icon) > 0 {
 		q = q.Where(helpCategory.Icon.Like("%" + in.Icon + "%"))
 	}
-	if in.HelpCount != 2 {
-		q = q.Where(helpCategory.HelpCount.Eq(in.HelpCount))
-	}
+
 	if in.ShowStatus != 2 {
 		q = q.Where(helpCategory.ShowStatus.Eq(in.ShowStatus))
 	}

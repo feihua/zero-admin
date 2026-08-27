@@ -3,6 +3,7 @@ package subjectcommentservicelogic
 import (
 	"context"
 	"errors"
+
 	"github.com/feihua/zero-admin/pkg/time_util"
 	"github.com/feihua/zero-admin/rpc/cms/cmsclient"
 	"github.com/feihua/zero-admin/rpc/cms/gen/query"
@@ -40,12 +41,7 @@ func (l *QuerySubjectCommentListLogic) QuerySubjectCommentList(in *cmsclient.Que
 	if len(in.MemberNickName) > 0 {
 		q = q.Where(subjectComment.MemberNickName.Like("%" + in.MemberNickName + "%"))
 	}
-	if len(in.MemberIcon) > 0 {
-		q = q.Where(subjectComment.MemberIcon.Like("%" + in.MemberIcon + "%"))
-	}
-	if len(in.Content) > 0 {
-		q = q.Where(subjectComment.Content.Like("%" + in.Content + "%"))
-	}
+
 	if in.ShowStatus != 2 {
 		q = q.Where(subjectComment.ShowStatus.Eq(in.ShowStatus))
 	}

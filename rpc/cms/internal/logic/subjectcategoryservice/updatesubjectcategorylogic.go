@@ -3,6 +3,9 @@ package subjectcategoryservicelogic
 import (
 	"context"
 	"errors"
+	"fmt"
+	"time"
+
 	"github.com/feihua/zero-admin/rpc/cms/cmsclient"
 	"github.com/feihua/zero-admin/rpc/cms/gen/model"
 	"github.com/feihua/zero-admin/rpc/cms/gen/query"
@@ -10,7 +13,6 @@ import (
 	"github.com/zeromicro/go-zero/core/logc"
 	"github.com/zeromicro/go-zero/core/logx"
 	"gorm.io/gorm"
-	"time"
 )
 
 // UpdateSubjectCategoryLogic 更新专题分类
@@ -34,9 +36,9 @@ func NewUpdateSubjectCategoryLogic(ctx context.Context, svcCtx *svc.ServiceConte
 
 // UpdateSubjectCategory 更新专题分类
 func (l *UpdateSubjectCategoryLogic) UpdateSubjectCategory(in *cmsclient.UpdateSubjectCategoryReq) (*cmsclient.UpdateSubjectCategoryResp, error) {
-	q := query.CmsSubjectCategory.WithContext(l.ctx)
+	q := query.CmsSubjectCategory
 
-	s, err := q.Where(query.CmsSubjectCategory.ID.Eq(in.Id)).First()
+	s, err := q.WithContext(l.ctx).Where(query.CmsSubjectCategory.ID.Eq(in.Id)).First()
 
 	switch {
 	case errors.Is(err, gorm.ErrRecordNotFound):
@@ -44,6 +46,15 @@ func (l *UpdateSubjectCategoryLogic) UpdateSubjectCategory(in *cmsclient.UpdateS
 	case err != nil:
 		logc.Errorf(l.ctx, "查询专题分类异常, 请求参数：%+v, 异常信息: %s", in, err.Error())
 		return nil, errors.New("查询专题分类异常")
+	}
+
+	count, err := q.WithContext(l.ctx).Where(q.Name.Eq(in.Name), q.ID.Neq(in.Id)).Count()
+	if err != nil {
+		return nil, errors.New(fmt.Sprintf("更新专题分类失败"))
+	}
+
+	if count > 0 {
+		return nil, errors.New(fmt.Sprintf("专题分类名称：%s,已存在", in.Name))
 	}
 
 	now := time.Now()

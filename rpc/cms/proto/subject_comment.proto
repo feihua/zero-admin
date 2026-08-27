@@ -71,8 +71,6 @@ message QuerySubjectCommentDetailResp {
 message QuerySubjectCommentListReq {
   int64 subject_id = 1; //关联专题id
   string member_nick_name = 2; //关联会员昵称
-  string member_icon = 3; //会员头像
-  string content = 4; //评论内容
   int32 show_status = 5; //是否显示，0->不显示；1->显示
   int32 page_num = 6; //第几页
   int32 page_size = 7; //每页的数量

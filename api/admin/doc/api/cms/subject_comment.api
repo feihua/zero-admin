@@ -1,0 +1,71 @@
+info (
+	desc:   "专题评论"
+	author: "刘飞华"
+	email:  "1002219331@qq.com"
+)
+
+type (
+	// 查询专题评论详情请求参数
+	QuerySubjectCommentDetailReq {
+		Id int64 `form:"id"`
+	}
+	QuerySubjectCommentDetailData {
+		Id             int64  `json:"id"` //编号
+		SubjectId      int64  `json:"subjectId"` //关联专题id
+		MemberNickName string `json:"memberNickName"` //关联会员昵称
+		MemberIcon     string `json:"memberIcon"` //会员头像
+		Content        string `json:"content"` //评论内容
+		CreateTime     string `json:"createTime"` //创建时间
+		ShowStatus     int32  `json:"showStatus"` //是否显示，0->不显示；1->显示
+	}
+	QuerySubjectCommentDetailResp {
+		Code    string                        `json:"code"`
+		Message string                        `json:"message"`
+		Data    QuerySubjectCommentDetailData `json:"data"`
+	}
+	// 分页查询专题评论列表请求参数
+	QuerySubjectCommentListReq {
+		Current        int64  `form:"current,default=1"` //第几页
+		PageSize       int64  `form:"pageSize,default=20"` //每页的数量
+		SubjectId      int64  `form:"subjectId,optional"` //关联专题id
+		MemberNickName string `form:"memberNickName,optional"` //关联会员昵称
+		ShowStatus     int32  `form:"showStatus,default=2"` //是否显示，0->不显示；1->显示
+	}
+	QuerySubjectCommentListData {
+		Id             int64  `json:"id"` //编号
+		SubjectId      int64  `json:"subjectId"` //关联专题id
+		MemberNickName string `json:"memberNickName"` //关联会员昵称
+		MemberIcon     string `json:"memberIcon"` //会员头像
+		Content        string `json:"content"` //评论内容
+		CreateTime     string `json:"createTime"` //创建时间
+		ShowStatus     int32  `json:"showStatus"` //是否显示，0->不显示；1->显示
+	}
+	QuerySubjectCommentListResp {
+		Code     string                         `json:"code"`
+		Message  string                         `json:"message"`
+		Current  int64                          `json:"current,default=1"`
+		Data     []*QuerySubjectCommentListData `json:"data"`
+		PageSize int64                          `json:"pageSize,default=20"`
+		Success  bool                           `json:"success"`
+		Total    int64                          `json:"total"`
+	}
+)
+
+@server (
+	jwt:        Auth
+	middleware: CheckUrl
+	group:      cms/subject_comment
+	prefix:     /api/cms/subjectComment
+	tags:       "专题评论"
+	authType:   apiKey
+)
+service admin-api {
+	// 查询专题评论详情
+	@handler QuerySubjectCommentDetail
+	get /querySubjectCommentDetail (QuerySubjectCommentDetailReq) returns (QuerySubjectCommentDetailResp)
+
+	// 分页查询专题评论列表
+	@handler QuerySubjectCommentList
+	get /querySubjectCommentList (QuerySubjectCommentListReq) returns (QuerySubjectCommentListResp)
+}
+

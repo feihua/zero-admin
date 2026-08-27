@@ -1,0 +1,71 @@
+info (
+	desc:   "话题评论"
+	author: "刘飞华"
+	email:  "1002219331@qq.com"
+)
+
+type (
+	// 查询话题评论详情请求参数
+	QueryTopicCommentDetailReq {
+		Id int64 `form:"id"`
+	}
+	QueryTopicCommentDetailData {
+		Id             int64  `json:"id"` //主键id
+		MemberNickName string `json:"memberNickName"` //评论人员昵称
+		TopicId        int64  `json:"topicId"` //专题id
+		MemberIcon     string `json:"memberIcon"` //评论人员头像
+		Content        string `json:"content"` //评论内容
+		CreateTime     string `json:"createTime"` //评论时间
+		ShowStatus     int32  `json:"showStatus"` //是否显示，0->不显示；1->显示
+	}
+	QueryTopicCommentDetailResp {
+		Code    string                      `json:"code"`
+		Message string                      `json:"message"`
+		Data    QueryTopicCommentDetailData `json:"data"`
+	}
+	// 分页查询话题评论列表请求参数
+	QueryTopicCommentListReq {
+		Current        int64  `form:"current,default=1"` //第几页
+		PageSize       int64  `form:"pageSize,default=20"` //每页的数量
+		MemberNickName string `form:"memberNickName,optional"` //评论人员昵称
+		TopicId        int64  `form:"topicId,optional"` //专题id
+		ShowStatus     int32  `form:"showStatus,default=2"` //是否显示，0->不显示；1->显示
+	}
+	QueryTopicCommentListData {
+		Id             int64  `json:"id"` //主键id
+		MemberNickName string `json:"memberNickName"` //评论人员昵称
+		TopicId        int64  `json:"topicId"` //专题id
+		MemberIcon     string `json:"memberIcon"` //评论人员头像
+		Content        string `json:"content"` //评论内容
+		CreateTime     string `json:"createTime"` //评论时间
+		ShowStatus     int32  `json:"showStatus"` //是否显示，0->不显示；1->显示
+	}
+	QueryTopicCommentListResp {
+		Code     string                       `json:"code"`
+		Message  string                       `json:"message"`
+		Current  int64                        `json:"current,default=1"`
+		Data     []*QueryTopicCommentListData `json:"data"`
+		PageSize int64                        `json:"pageSize,default=20"`
+		Success  bool                         `json:"success"`
+		Total    int64                        `json:"total"`
+	}
+)
+
+@server (
+	jwt:        Auth
+	middleware: CheckUrl
+	group:      cms/topic_comment
+	prefix:     /api/cms/topicComment
+	tags:       "话题评论"
+	authType:   apiKey
+)
+service admin-api {
+	// 查询话题评论详情
+	@handler QueryTopicCommentDetail
+	get /queryTopicCommentDetail (QueryTopicCommentDetailReq) returns (QueryTopicCommentDetailResp)
+
+	// 分页查询话题评论列表
+	@handler QueryTopicCommentList
+	get /queryTopicCommentList (QueryTopicCommentListReq) returns (QueryTopicCommentListResp)
+}
+

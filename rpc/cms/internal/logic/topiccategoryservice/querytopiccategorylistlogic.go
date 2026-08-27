@@ -3,6 +3,7 @@ package topiccategoryservicelogic
 import (
 	"context"
 	"errors"
+
 	"github.com/feihua/zero-admin/pkg/time_util"
 	"github.com/feihua/zero-admin/rpc/cms/cmsclient"
 	"github.com/feihua/zero-admin/rpc/cms/gen/query"
@@ -40,9 +41,7 @@ func (l *QueryTopicCategoryListLogic) QueryTopicCategoryList(in *cmsclient.Query
 	if len(in.Icon) > 0 {
 		q = q.Where(topicCategory.Icon.Like("%" + in.Icon + "%"))
 	}
-	if in.SubjectCount != 2 {
-		q = q.Where(topicCategory.SubjectCount.Eq(in.SubjectCount))
-	}
+
 	if in.ShowStatus != 2 {
 		q = q.Where(topicCategory.ShowStatus.Eq(in.ShowStatus))
 	}

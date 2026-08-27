@@ -78,9 +78,8 @@ message QueryMemberReportListReq {
   string report_object = 3; //被举报对象
   int32 report_status = 4; //举报状态：0->未处理；1->已处理
   int32 handle_status = 5; //处理结果：0->无效；1->有效；2->恶意
-  string note = 6; //备注
-  int32 page_num = 7; //第几页
-  int32 page_size = 8; //每页的数量
+  int32 page_num = 6; //第几页
+  int32 page_size = 7; //每页的数量
 }
 
 message MemberReportListData {

@@ -1,0 +1,75 @@
+info (
+	desc:   "用户举报"
+	author: "刘飞华"
+	email:  "1002219331@qq.com"
+)
+
+type (
+	// 查询用户举报详情请求参数
+	QueryMemberReportDetailReq {
+		Id int64 `form:"id"`
+	}
+	QueryMemberReportDetailData {
+		Id               int64  `json:"id"` //编号
+		ReportType       int32  `json:"reportType"` //举报类型：0->商品评价；1->话题内容；2->用户评论
+		ReportMemberName string `json:"reportMemberName"` //举报人
+		ReportObject     string `json:"reportObject"` //被举报对象
+		ReportStatus     int32  `json:"reportStatus"` //举报状态：0->未处理；1->已处理
+		HandleStatus     int32  `json:"handleStatus"` //处理结果：0->无效；1->有效；2->恶意
+		Note             string `json:"note"` //备注
+		CreateTime       string `json:"createTime"` //创建时间
+	}
+	QueryMemberReportDetailResp {
+		Code    string                      `json:"code"`
+		Message string                      `json:"message"`
+		Data    QueryMemberReportDetailData `json:"data"`
+	}
+	// 分页查询用户举报列表请求参数
+	QueryMemberReportListReq {
+		Current          int64  `form:"current,default=1"` //第几页
+		PageSize         int64  `form:"pageSize,default=20"` //每页的数量
+		ReportType       int32  `form:"reportType,optional"` //举报类型：0->商品评价；1->话题内容；2->用户评论
+		ReportMemberName string `form:"reportMemberName,optional"` //举报人
+		ReportObject     string `form:"reportObject,optional"` //被举报对象
+		ReportStatus     int32  `form:"reportStatus,default=2"` //举报状态：0->未处理；1->已处理
+		HandleStatus     int32  `form:"handleStatus,default=2"` //处理结果：0->无效；1->有效；2->恶意
+	}
+	QueryMemberReportListData {
+		Id               int64  `json:"id"` //编号
+		ReportType       int32  `json:"reportType"` //举报类型：0->商品评价；1->话题内容；2->用户评论
+		ReportMemberName string `json:"reportMemberName"` //举报人
+		ReportObject     string `json:"reportObject"` //被举报对象
+		ReportStatus     int32  `json:"reportStatus"` //举报状态：0->未处理；1->已处理
+		HandleStatus     int32  `json:"handleStatus"` //处理结果：0->无效；1->有效；2->恶意
+		Note             string `json:"note"` //备注
+		CreateTime       string `json:"createTime"` //创建时间
+	}
+	QueryMemberReportListResp {
+		Code     string                       `json:"code"`
+		Message  string                       `json:"message"`
+		Current  int64                        `json:"current,default=1"`
+		Data     []*QueryMemberReportListData `json:"data"`
+		PageSize int64                        `json:"pageSize,default=20"`
+		Success  bool                         `json:"success"`
+		Total    int64                        `json:"total"`
+	}
+)
+
+@server (
+	jwt:        Auth
+	middleware: CheckUrl
+	group:      cms/member_report
+	prefix:     /api/cms/memberReport
+	tags:       "用户举报"
+	authType:   apiKey
+)
+service admin-api {
+	// 查询用户举报详情
+	@handler QueryMemberReportDetail
+	get /queryMemberReportDetail (QueryMemberReportDetailReq) returns (QueryMemberReportDetailResp)
+
+	// 分页查询用户举报列表
+	@handler QueryMemberReportList
+	get /queryMemberReportList (QueryMemberReportListReq) returns (QueryMemberReportListResp)
+}
+

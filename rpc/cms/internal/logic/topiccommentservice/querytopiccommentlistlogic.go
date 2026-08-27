@@ -3,6 +3,7 @@ package topiccommentservicelogic
 import (
 	"context"
 	"errors"
+
 	"github.com/feihua/zero-admin/pkg/time_util"
 	"github.com/feihua/zero-admin/rpc/cms/cmsclient"
 	"github.com/feihua/zero-admin/rpc/cms/gen/query"
@@ -40,12 +41,7 @@ func (l *QueryTopicCommentListLogic) QueryTopicCommentList(in *cmsclient.QueryTo
 	if in.TopicId != 2 {
 		q = q.Where(topicComment.TopicID.Eq(in.TopicId))
 	}
-	if len(in.MemberIcon) > 0 {
-		q = q.Where(topicComment.MemberIcon.Like("%" + in.MemberIcon + "%"))
-	}
-	if len(in.Content) > 0 {
-		q = q.Where(topicComment.Content.Like("%" + in.Content + "%"))
-	}
+
 	if in.ShowStatus != 2 {
 		q = q.Where(topicComment.ShowStatus.Eq(in.ShowStatus))
 	}

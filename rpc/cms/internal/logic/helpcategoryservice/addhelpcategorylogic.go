@@ -3,6 +3,7 @@ package helpcategoryservicelogic
 import (
 	"context"
 	"errors"
+
 	"github.com/feihua/zero-admin/rpc/cms/cmsclient"
 	"github.com/feihua/zero-admin/rpc/cms/gen/model"
 	"github.com/feihua/zero-admin/rpc/cms/gen/query"
@@ -34,6 +35,17 @@ func NewAddHelpCategoryLogic(ctx context.Context, svcCtx *svc.ServiceContext) *A
 func (l *AddHelpCategoryLogic) AddHelpCategory(in *cmsclient.AddHelpCategoryReq) (*cmsclient.AddHelpCategoryResp, error) {
 	q := query.CmsHelpCategory
 
+	count, err := q.WithContext(l.ctx).Where(q.Name.Eq(in.Name)).Count()
+
+	if err != nil {
+		logc.Errorf(l.ctx, "查询帮助分类详情失败,参数:%+v,异常:%s", in, err.Error())
+		return nil, errors.New("查询帮助分类详情失败")
+	}
+
+	if count > 0 {
+		return nil, errors.New("添加帮助分类失败,分类名称已存在")
+	}
+
 	item := &model.CmsHelpCategory{
 		Name:       in.Name,       // 分类名称
 		Icon:       in.Icon,       // 分类图标
@@ -43,7 +55,7 @@ func (l *AddHelpCategoryLogic) AddHelpCategory(in *cmsclient.AddHelpCategoryReq)
 		CreateBy:   in.CreateBy,   // 创建者
 	}
 
-	err := q.WithContext(l.ctx).Create(item)
+	err = q.WithContext(l.ctx).Create(item)
 	if err != nil {
 		logc.Errorf(l.ctx, "添加帮助分类失败,参数:%+v,异常:%s", item, err.Error())
 		return nil, errors.New("添加帮助分类失败")

@@ -3,6 +3,7 @@ package subjectcategoryservicelogic
 import (
 	"context"
 	"errors"
+
 	"github.com/feihua/zero-admin/pkg/time_util"
 	"github.com/feihua/zero-admin/rpc/cms/cmsclient"
 	"github.com/feihua/zero-admin/rpc/cms/gen/query"
@@ -37,12 +38,7 @@ func (l *QuerySubjectCategoryListLogic) QuerySubjectCategoryList(in *cmsclient.Q
 	if len(in.Name) > 0 {
 		q = q.Where(subjectCategory.Name.Like("%" + in.Name + "%"))
 	}
-	if len(in.Icon) > 0 {
-		q = q.Where(subjectCategory.Icon.Like("%" + in.Icon + "%"))
-	}
-	if in.SubjectCount != 2 {
-		q = q.Where(subjectCategory.SubjectCount.Eq(in.SubjectCount))
-	}
+
 	if in.ShowStatus != 2 {
 		q = q.Where(subjectCategory.ShowStatus.Eq(in.ShowStatus))
 	}

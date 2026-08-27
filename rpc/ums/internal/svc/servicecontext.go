@@ -37,11 +37,11 @@ func NewServiceContext(c config.Config) *ServiceContext {
 		Logger:                 settingLogConfig(),
 	})
 	if err != nil {
-		logx.Errorf("mysql连接失败：%+v", err)
+		logx.Errorf("postgres连接失败：%+v", err)
 		panic(err)
 	}
 
-	logx.Info("mysql连接成功")
+	logx.Info("postgres连接成功")
 	query.SetDefault(db)
 
 	mqUrl := fmt.Sprintf("amqp://%s:%s@%s:%d/", c.Rabbitmq.UserName, c.Rabbitmq.Password, c.Rabbitmq.Host, c.Rabbitmq.Port)

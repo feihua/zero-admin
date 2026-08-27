@@ -27,7 +27,7 @@ func NewServiceContext(c config.Config) *ServiceContext {
 		panic(err)
 	}
 
-	logx.Debug("mysql已连接")
+	logx.Info("postgres已连接")
 	query.SetDefault(db)
 
 	return &ServiceContext{

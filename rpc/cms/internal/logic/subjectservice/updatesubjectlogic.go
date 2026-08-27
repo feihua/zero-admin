@@ -3,6 +3,7 @@ package subjectservicelogic
 import (
 	"context"
 	"errors"
+	"fmt"
 	"time"
 
 	"github.com/feihua/zero-admin/rpc/cms/cmsclient"
@@ -35,10 +36,10 @@ func NewUpdateSubjectLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Upd
 
 // UpdateSubject 更新专题
 func (l *UpdateSubjectLogic) UpdateSubject(in *cmsclient.UpdateSubjectReq) (*cmsclient.UpdateSubjectResp, error) {
-	q := query.CmsSubject.WithContext(l.ctx)
+	q := query.CmsSubject
 
 	// 1.根据专题id查询专题是否已存在
-	s, err := q.Where(query.CmsSubject.ID.Eq(in.Id)).First()
+	s, err := q.WithContext(l.ctx).Where(query.CmsSubject.ID.Eq(in.Id)).First()
 
 	switch {
 	case errors.Is(err, gorm.ErrRecordNotFound):
@@ -47,7 +48,14 @@ func (l *UpdateSubjectLogic) UpdateSubject(in *cmsclient.UpdateSubjectReq) (*cms
 		logc.Errorf(l.ctx, "查询专题异常, 请求参数：%+v, 异常信息: %s", in, err.Error())
 		return nil, errors.New("查询专题异常")
 	}
+	count, err := q.WithContext(l.ctx).Where(q.Title.Eq(in.Title), q.ID.Neq(in.Id)).Count()
+	if err != nil {
+		return nil, errors.New(fmt.Sprintf("更新题失败"))
+	}
 
+	if count > 0 {
+		return nil, errors.New(fmt.Sprintf("专题名称：%s,已存在", in.Title))
+	}
 	now := time.Now()
 	item := &model.CmsSubject{
 		ID:              in.Id,              // 专题id

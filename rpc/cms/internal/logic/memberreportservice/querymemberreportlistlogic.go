@@ -3,6 +3,7 @@ package memberreportservicelogic
 import (
 	"context"
 	"errors"
+
 	"github.com/feihua/zero-admin/pkg/time_util"
 	"github.com/feihua/zero-admin/rpc/cms/cmsclient"
 	"github.com/feihua/zero-admin/rpc/cms/gen/query"
@@ -48,9 +49,6 @@ func (l *QueryMemberReportListLogic) QueryMemberReportList(in *cmsclient.QueryMe
 	}
 	if in.HandleStatus != 2 {
 		q = q.Where(memberReport.HandleStatus.Eq(in.HandleStatus))
-	}
-	if len(in.Note) > 0 {
-		q = q.Where(memberReport.Note.Like("%" + in.Note + "%"))
 	}
 
 	result, count, err := q.FindByPage(int((in.PageNum-1)*in.PageSize), int(in.PageSize))

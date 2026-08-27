@@ -1,6 +1,13 @@
 import "./subject.api"
 import "./prefrence_area.api"
 import "./subject_category.api"
+import "./help.api"
+import "./help_category.api"
+import "./member_report.api"
+import "./subject_comment.api"
+import "./topic.api"
+import "./topic_category.api"
+import "./topic_comment.api"
 
 info (
 	title:                       "内容管理 API"

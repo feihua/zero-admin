@@ -79,13 +79,10 @@ message QueryHelpDetailResp {
 // 分页查询帮助列表
 message QueryHelpListReq {
   int64 category_id = 1; //分类ID
-  string icon = 2; //图标
-  string title = 3; //标题
-  int32 show_status = 4; //显示状态：0->不显示；1->显示
-  int32 read_count = 5; //阅读量
-  string content = 6; //内容
-  int32 page_num = 7; //第几页
-  int32 page_size = 8; //每页的数量
+  string title = 2; //标题
+  int32 show_status = 3; //显示状态：0->不显示；1->显示
+  int32 page_num = 4; //第几页
+  int32 page_size = 5; //每页的数量
 }
 
 message HelpListData {

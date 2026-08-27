@@ -3,6 +3,7 @@ package helpservicelogic
 import (
 	"context"
 	"errors"
+
 	"github.com/feihua/zero-admin/rpc/cms/cmsclient"
 	"github.com/feihua/zero-admin/rpc/cms/gen/model"
 	"github.com/feihua/zero-admin/rpc/cms/gen/query"
@@ -34,6 +35,15 @@ func NewAddHelpLogic(ctx context.Context, svcCtx *svc.ServiceContext) *AddHelpLo
 func (l *AddHelpLogic) AddHelp(in *cmsclient.AddHelpReq) (*cmsclient.AddHelpResp, error) {
 	q := query.CmsHelp
 
+	count, err := q.WithContext(l.ctx).Where(q.Title.Eq(in.Title)).Count()
+
+	if err != nil {
+		return nil, errors.New("查询帮助详情失败")
+	}
+
+	if count > 0 {
+		return nil, errors.New("添加帮助失败,标题已存在")
+	}
 	item := &model.CmsHelp{
 		CategoryID: in.CategoryId, // 分类ID
 		Icon:       in.Icon,       // 图标
@@ -44,7 +54,7 @@ func (l *AddHelpLogic) AddHelp(in *cmsclient.AddHelpReq) (*cmsclient.AddHelpResp
 		CreateBy:   in.CreateBy,   // 创建者
 	}
 
-	err := q.WithContext(l.ctx).Create(item)
+	err = q.WithContext(l.ctx).Create(item)
 	if err != nil {
 		logc.Errorf(l.ctx, "添加帮助失败,参数:%+v,异常:%s", item, err.Error())
 		return nil, errors.New("添加帮助失败")

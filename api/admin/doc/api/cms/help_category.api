@@ -1,0 +1,132 @@
+info (
+	desc:   "帮助分类"
+	author: "刘飞华"
+	email:  "1002219331@qq.com"
+)
+
+type (
+	// 添加帮助分类请求参数
+	AddHelpCategoryReq {
+		Name       string `json:"name"` //分类名称
+		Icon       string `json:"icon"` //分类图标
+		ShowStatus int32  `json:"showStatus,default=2"` //显示状态：0->不显示；1->显示
+		Sort       int32  `json:"sort"` //排序
+	}
+	AddHelpCategoryResp {
+		Code    string `json:"code"`
+		Message string `json:"message"`
+	}
+	// 删除帮助分类请求参数
+	DeleteHelpCategoryReq {
+		Ids []int64 `form:"ids"`
+	}
+	DeleteHelpCategoryResp {
+		Code    string `json:"code"`
+		Message string `json:"message"`
+	}
+	// 更新帮助分类请求参数
+	UpdateHelpCategoryReq {
+		Id         int64  `json:"id"` //主键id
+		Name       string `json:"name"` //分类名称
+		Icon       string `json:"icon"` //分类图标
+		ShowStatus int32  `json:"showStatus,default=2"` //显示状态：0->不显示；1->显示
+		Sort       int32  `json:"sort"` //排序
+	}
+	UpdateHelpCategoryResp {
+		Code    string `json:"code"`
+		Message string `json:"message"`
+	}
+	// 更新帮助分类状态请求参数
+	UpdateHelpCategoryStatusReq {
+		Ids        []int64 `json:"ids"` //主键id
+		ShowStatus int32   `json:"showStatus,default=2"` //显示状态：0->不显示；1->显示
+	}
+	UpdateHelpCategoryStatusResp {
+		Code    string `json:"code"`
+		Message string `json:"message"`
+	}
+	// 查询帮助分类详情请求参数
+	QueryHelpCategoryDetailReq {
+		Id int64 `form:"id"`
+	}
+	QueryHelpCategoryDetailData {
+		Id         int64  `json:"id"` //主键id
+		Name       string `json:"name"` //分类名称
+		Icon       string `json:"icon"` //分类图标
+		HelpCount  int32  `json:"helpCount"` //专题数量
+		ShowStatus int32  `json:"showStatus"` //显示状态：0->不显示；1->显示
+		Sort       int32  `json:"sort"` //排序
+		CreateBy   string `json:"createBy"` //创建者
+		CreateTime string `json:"createTime"` //创建时间
+		UpdateBy   string `json:"updateBy"` //更新者
+		UpdateTime string `json:"updateTime"` //更新时间
+	}
+	QueryHelpCategoryDetailResp {
+		Code    string                      `json:"code"`
+		Message string                      `json:"message"`
+		Data    QueryHelpCategoryDetailData `json:"data"`
+	}
+	// 分页查询帮助分类列表请求参数
+	QueryHelpCategoryListReq {
+		Current    int64  `form:"current,default=1"` //第几页
+		PageSize   int64  `form:"pageSize,default=20"` //每页的数量
+		Name       string `form:"name,optional"` //分类名称
+		ShowStatus int32  `form:"showStatus,default=2"` //显示状态：0->不显示；1->显示
+	}
+	QueryHelpCategoryListData {
+		Id         int64  `json:"id"` //主键id
+		Name       string `json:"name"` //分类名称
+		Icon       string `json:"icon"` //分类图标
+		HelpCount  int32  `json:"helpCount"` //专题数量
+		ShowStatus int32  `json:"showStatus"` //显示状态：0->不显示；1->显示
+		Sort       int32  `json:"sort"` //排序
+		CreateBy   string `json:"createBy"` //创建者
+		CreateTime string `json:"createTime"` //创建时间
+		UpdateBy   string `json:"updateBy"` //更新者
+		UpdateTime string `json:"updateTime"` //更新时间
+	}
+	QueryHelpCategoryListResp {
+		Code     string                       `json:"code"`
+		Message  string                       `json:"message"`
+		Current  int64                        `json:"current,default=1"`
+		Data     []*QueryHelpCategoryListData `json:"data"`
+		PageSize int64                        `json:"pageSize,default=20"`
+		Success  bool                         `json:"success"`
+		Total    int64                        `json:"total"`
+	}
+)
+
+@server (
+	jwt:        Auth
+	middleware: CheckUrl
+	group:      cms/help_category
+	prefix:     /api/cms/helpCategory
+	tags:       "帮助分类"
+	authType:   apiKey
+)
+service admin-api {
+	// 添加帮助分类
+	@handler AddHelpCategory
+	post /addHelpCategory (AddHelpCategoryReq) returns (AddHelpCategoryResp)
+
+	// 删除帮助分类
+	@handler DeleteHelpCategory
+	get /deleteHelpCategory (DeleteHelpCategoryReq) returns (DeleteHelpCategoryResp)
+
+	// 更新帮助分类
+	@handler UpdateHelpCategory
+	post /updateHelpCategory (UpdateHelpCategoryReq) returns (UpdateHelpCategoryResp)
+
+	// 更新帮助分类状态
+	@handler UpdateHelpCategoryStatus
+	post /updateHelpCategoryStatus (UpdateHelpCategoryStatusReq) returns (UpdateHelpCategoryStatusResp)
+
+	// 查询帮助分类详情
+	@handler QueryHelpCategoryDetail
+	get /queryHelpCategoryDetail (QueryHelpCategoryDetailReq) returns (QueryHelpCategoryDetailResp)
+
+	// 分页查询帮助分类列表
+	@handler QueryHelpCategoryList
+	get /queryHelpCategoryList (QueryHelpCategoryListReq) returns (QueryHelpCategoryListResp)
+}
+

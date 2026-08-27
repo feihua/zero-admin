@@ -1,0 +1,151 @@
+info (
+	desc:   "话题"
+	author: "刘飞华"
+	email:  "1002219331@qq.com"
+)
+
+type (
+	// 添加话题请求参数
+	AddTopicReq {
+		CategoryId int64  `json:"categoryId"` //关联分类id
+		Name       string `json:"name"` //话题名称
+		StartTime  string `json:"startTime"` //话题开始时间
+		EndTime    string `json:"endTime"` //话题结束时间
+		AwardName  string `json:"awardName"` //奖品名称
+		AttendType string `json:"attendType"` //参与方式
+		Content    string `json:"content"` //话题内容
+	}
+	AddTopicResp {
+		Code    string `json:"code"`
+		Message string `json:"message"`
+	}
+	// 删除话题请求参数
+	DeleteTopicReq {
+		Ids []int64 `form:"ids"`
+	}
+	DeleteTopicResp {
+		Code    string `json:"code"`
+		Message string `json:"message"`
+	}
+	// 更新话题请求参数
+	UpdateTopicReq {
+		Id         int64  `json:"id"` //主键id
+		CategoryId int64  `json:"categoryId"` //关联分类id
+		Name       string `json:"name"` //话题名称
+		StartTime  string `json:"startTime"` //话题开始时间
+		EndTime    string `json:"endTime"` //话题结束时间
+		AwardName  string `json:"awardName"` //奖品名称
+		AttendType string `json:"attendType"` //参与方式
+		Content    string `json:"content"` //话题内容
+	}
+	UpdateTopicResp {
+		Code    string `json:"code"`
+		Message string `json:"message"`
+	}
+	// 更新话题状态请求参数
+	UpdateTopicStatusReq {
+		Ids []int64 `json:"ids"` //主键id
+	}
+	UpdateTopicStatusResp {
+		Code    string `json:"code"`
+		Message string `json:"message"`
+	}
+	// 查询话题详情请求参数
+	QueryTopicDetailReq {
+		Id int64 `form:"id"`
+	}
+	QueryTopicDetailData {
+		Id             int64  `json:"id"` //主键id
+		CategoryId     int64  `json:"categoryId"` //关联分类id
+		Name           string `json:"name"` //话题名称
+		StartTime      string `json:"startTime"` //话题开始时间
+		EndTime        string `json:"endTime"` //话题结束时间
+		AttendCount    int32  `json:"attendCount"` //参与人数
+		AttentionCount int32  `json:"attentionCount"` //关注人数
+		ReadCount      int32  `json:"readCount"` //阅读数
+		AwardName      string `json:"awardName"` //奖品名称
+		AttendType     string `json:"attendType"` //参与方式
+		Content        string `json:"content"` //话题内容
+		CreateBy       string `json:"createBy"` //创建者
+		CreateTime     string `json:"createTime"` //创建时间
+		UpdateBy       string `json:"updateBy"` //更新者
+		UpdateTime     string `json:"updateTime"` //更新时间
+	}
+	QueryTopicDetailResp {
+		Code    string               `json:"code"`
+		Message string               `json:"message"`
+		Data    QueryTopicDetailData `json:"data"`
+	}
+	// 分页查询话题列表请求参数
+	QueryTopicListReq {
+		Current    int64  `form:"current,default=1"` //第几页
+		PageSize   int64  `form:"pageSize,default=20"` //每页的数量
+		CategoryId int64  `form:"categoryId,optional"` //关联分类id
+		Name       string `form:"name,optional"` //话题名称
+		StartTime  string `form:"startTime,optional"` //话题开始时间
+		EndTime    string `form:"endTime,optional"` //话题结束时间
+		AwardName  string `form:"awardName,optional"` //奖品名称
+		AttendType string `form:"attendType,optional"` //参与方式
+	}
+	QueryTopicListData {
+		Id             int64  `json:"id"` //主键id
+		CategoryId     int64  `json:"categoryId"` //关联分类id
+		Name           string `json:"name"` //话题名称
+		StartTime      string `json:"startTime"` //话题开始时间
+		EndTime        string `json:"endTime"` //话题结束时间
+		AttendCount    int32  `json:"attendCount"` //参与人数
+		AttentionCount int32  `json:"attentionCount"` //关注人数
+		ReadCount      int32  `json:"readCount"` //阅读数
+		AwardName      string `json:"awardName"` //奖品名称
+		AttendType     string `json:"attendType"` //参与方式
+		Content        string `json:"content"` //话题内容
+		CreateBy       string `json:"createBy"` //创建者
+		CreateTime     string `json:"createTime"` //创建时间
+		UpdateBy       string `json:"updateBy"` //更新者
+		UpdateTime     string `json:"updateTime"` //更新时间
+	}
+	QueryTopicListResp {
+		Code     string                `json:"code"`
+		Message  string                `json:"message"`
+		Current  int64                 `json:"current,default=1"`
+		Data     []*QueryTopicListData `json:"data"`
+		PageSize int64                 `json:"pageSize,default=20"`
+		Success  bool                  `json:"success"`
+		Total    int64                 `json:"total"`
+	}
+)
+
+@server (
+	jwt:        Auth
+	middleware: CheckUrl
+	group:      cms/topic
+	prefix:     /api/cms/topic
+	tags:       "话题管理"
+	authType:   apiKey
+)
+service admin-api {
+	// 添加话题
+	@handler AddTopic
+	post /addTopic (AddTopicReq) returns (AddTopicResp)
+
+	// 删除话题
+	@handler DeleteTopic
+	get /deleteTopic (DeleteTopicReq) returns (DeleteTopicResp)
+
+	// 更新话题
+	@handler UpdateTopic
+	post /updateTopic (UpdateTopicReq) returns (UpdateTopicResp)
+
+	// 更新话题状态
+	@handler UpdateTopicStatus
+	post /updateTopicStatus (UpdateTopicStatusReq) returns (UpdateTopicStatusResp)
+
+	// 查询话题详情
+	@handler QueryTopicDetail
+	get /queryTopicDetail (QueryTopicDetailReq) returns (QueryTopicDetailResp)
+
+	// 分页查询话题列表
+	@handler QueryTopicList
+	get /queryTopicList (QueryTopicListReq) returns (QueryTopicListResp)
+}
+

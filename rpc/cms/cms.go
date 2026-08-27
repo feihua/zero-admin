@@ -10,11 +10,18 @@ import (
 
 	"github.com/feihua/zero-admin/rpc/cms/cmsclient"
 	"github.com/feihua/zero-admin/rpc/cms/internal/config"
-	prefrenceareaproductrelationserviceServer "github.com/feihua/zero-admin/rpc/cms/internal/server/preferredareaproductrelationservice"
-	prefrenceareaserviceServer "github.com/feihua/zero-admin/rpc/cms/internal/server/preferredareaservice"
+	helpcategoryserviceServer "github.com/feihua/zero-admin/rpc/cms/internal/server/helpcategoryservice"
+	helpserviceServer "github.com/feihua/zero-admin/rpc/cms/internal/server/helpservice"
+	memberreportserviceServer "github.com/feihua/zero-admin/rpc/cms/internal/server/memberreportservice"
+	preferredareaproductrelationserviceServer "github.com/feihua/zero-admin/rpc/cms/internal/server/preferredareaproductrelationservice"
+	preferredareaserviceServer "github.com/feihua/zero-admin/rpc/cms/internal/server/preferredareaservice"
 	subjectcategoryserviceServer "github.com/feihua/zero-admin/rpc/cms/internal/server/subjectcategoryservice"
+	subjectcommentserviceServer "github.com/feihua/zero-admin/rpc/cms/internal/server/subjectcommentservice"
 	subjectproductrelationserviceServer "github.com/feihua/zero-admin/rpc/cms/internal/server/subjectproductrelationservice"
 	subjectserviceServer "github.com/feihua/zero-admin/rpc/cms/internal/server/subjectservice"
+	topiccategoryserviceServer "github.com/feihua/zero-admin/rpc/cms/internal/server/topiccategoryservice"
+	topiccommentserviceServer "github.com/feihua/zero-admin/rpc/cms/internal/server/topiccommentservice"
+	topicserviceServer "github.com/feihua/zero-admin/rpc/cms/internal/server/topicservice"
 	"github.com/feihua/zero-admin/rpc/cms/internal/svc"
 
 	"github.com/zeromicro/go-zero/core/conf"
@@ -50,11 +57,18 @@ func main() {
 	ctx := svc.NewServiceContext(c)
 
 	s := zrpc.MustNewServer(c.RpcServerConf, func(grpcServer *grpc.Server) {
+		cmsclient.RegisterHelpServiceServer(grpcServer, helpserviceServer.NewHelpServiceServer(ctx))
+		cmsclient.RegisterHelpCategoryServiceServer(grpcServer, helpcategoryserviceServer.NewHelpCategoryServiceServer(ctx))
+		cmsclient.RegisterMemberReportServiceServer(grpcServer, memberreportserviceServer.NewMemberReportServiceServer(ctx))
+		cmsclient.RegisterPreferredAreaServiceServer(grpcServer, preferredareaserviceServer.NewPreferredAreaServiceServer(ctx))
+		cmsclient.RegisterPreferredAreaProductRelationServiceServer(grpcServer, preferredareaproductrelationserviceServer.NewPreferredAreaProductRelationServiceServer(ctx))
 		cmsclient.RegisterSubjectServiceServer(grpcServer, subjectserviceServer.NewSubjectServiceServer(ctx))
-		cmsclient.RegisterSubjectProductRelationServiceServer(grpcServer, subjectproductrelationserviceServer.NewSubjectProductRelationServiceServer(ctx))
-		cmsclient.RegisterPreferredAreaServiceServer(grpcServer, prefrenceareaserviceServer.NewPreferredAreaServiceServer(ctx))
-		cmsclient.RegisterPreferredAreaProductRelationServiceServer(grpcServer, prefrenceareaproductrelationserviceServer.NewPreferredAreaProductRelationServiceServer(ctx))
 		cmsclient.RegisterSubjectCategoryServiceServer(grpcServer, subjectcategoryserviceServer.NewSubjectCategoryServiceServer(ctx))
+		cmsclient.RegisterSubjectCommentServiceServer(grpcServer, subjectcommentserviceServer.NewSubjectCommentServiceServer(ctx))
+		cmsclient.RegisterSubjectProductRelationServiceServer(grpcServer, subjectproductrelationserviceServer.NewSubjectProductRelationServiceServer(ctx))
+		cmsclient.RegisterTopicServiceServer(grpcServer, topicserviceServer.NewTopicServiceServer(ctx))
+		cmsclient.RegisterTopicCategoryServiceServer(grpcServer, topiccategoryserviceServer.NewTopicCategoryServiceServer(ctx))
+		cmsclient.RegisterTopicCommentServiceServer(grpcServer, topiccommentserviceServer.NewTopicCommentServiceServer(ctx))
 
 		if c.Mode == service.DevMode || c.Mode == service.TestMode {
 			reflection.Register(grpcServer)

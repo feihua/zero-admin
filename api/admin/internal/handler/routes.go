@@ -6,9 +6,16 @@ package handler
 import (
 	"net/http"
 
+	cmshelp "github.com/feihua/zero-admin/api/admin/internal/handler/cms/help"
+	cmshelp_category "github.com/feihua/zero-admin/api/admin/internal/handler/cms/help_category"
+	cmsmember_report "github.com/feihua/zero-admin/api/admin/internal/handler/cms/member_report"
 	cmsprefrence_area "github.com/feihua/zero-admin/api/admin/internal/handler/cms/prefrence_area"
 	cmssubject "github.com/feihua/zero-admin/api/admin/internal/handler/cms/subject"
 	cmssubject_category "github.com/feihua/zero-admin/api/admin/internal/handler/cms/subject_category"
+	cmssubject_comment "github.com/feihua/zero-admin/api/admin/internal/handler/cms/subject_comment"
+	cmstopic "github.com/feihua/zero-admin/api/admin/internal/handler/cms/topic"
+	cmstopic_category "github.com/feihua/zero-admin/api/admin/internal/handler/cms/topic_category"
+	cmstopic_comment "github.com/feihua/zero-admin/api/admin/internal/handler/cms/topic_comment"
 	omscompany_address "github.com/feihua/zero-admin/api/admin/internal/handler/oms/company_address"
 	omsorder_delivery "github.com/feihua/zero-admin/api/admin/internal/handler/oms/order_delivery"
 	omsorder_main "github.com/feihua/zero-admin/api/admin/internal/handler/oms/order_main"
@@ -63,6 +70,106 @@ import (
 )
 
 func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
+	server.AddRoutes(
+		rest.WithMiddlewares(
+			[]rest.Middleware{serverCtx.CheckUrl},
+			[]rest.Route{
+				{
+					Method:  http.MethodPost,
+					Path:    "/addHelp",
+					Handler: cmshelp.AddHelpHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodGet,
+					Path:    "/deleteHelp",
+					Handler: cmshelp.DeleteHelpHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodGet,
+					Path:    "/queryHelpDetail",
+					Handler: cmshelp.QueryHelpDetailHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodGet,
+					Path:    "/queryHelpList",
+					Handler: cmshelp.QueryHelpListHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodPost,
+					Path:    "/updateHelp",
+					Handler: cmshelp.UpdateHelpHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodPost,
+					Path:    "/updateHelpStatus",
+					Handler: cmshelp.UpdateHelpStatusHandler(serverCtx),
+				},
+			}...,
+		),
+		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
+		rest.WithPrefix("/api/cms/help"),
+	)
+
+	server.AddRoutes(
+		rest.WithMiddlewares(
+			[]rest.Middleware{serverCtx.CheckUrl},
+			[]rest.Route{
+				{
+					Method:  http.MethodPost,
+					Path:    "/addHelpCategory",
+					Handler: cmshelp_category.AddHelpCategoryHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodGet,
+					Path:    "/deleteHelpCategory",
+					Handler: cmshelp_category.DeleteHelpCategoryHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodGet,
+					Path:    "/queryHelpCategoryDetail",
+					Handler: cmshelp_category.QueryHelpCategoryDetailHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodGet,
+					Path:    "/queryHelpCategoryList",
+					Handler: cmshelp_category.QueryHelpCategoryListHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodPost,
+					Path:    "/updateHelpCategory",
+					Handler: cmshelp_category.UpdateHelpCategoryHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodPost,
+					Path:    "/updateHelpCategoryStatus",
+					Handler: cmshelp_category.UpdateHelpCategoryStatusHandler(serverCtx),
+				},
+			}...,
+		),
+		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
+		rest.WithPrefix("/api/cms/helpCategory"),
+	)
+
+	server.AddRoutes(
+		rest.WithMiddlewares(
+			[]rest.Middleware{serverCtx.CheckUrl},
+			[]rest.Route{
+				{
+					Method:  http.MethodGet,
+					Path:    "/queryMemberReportDetail",
+					Handler: cmsmember_report.QueryMemberReportDetailHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodGet,
+					Path:    "/queryMemberReportList",
+					Handler: cmsmember_report.QueryMemberReportListHandler(serverCtx),
+				},
+			}...,
+		),
+		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
+		rest.WithPrefix("/api/cms/memberReport"),
+	)
+
 	server.AddRoutes(
 		rest.WithMiddlewares(
 			[]rest.Middleware{serverCtx.CheckUrl},
@@ -181,6 +288,126 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 		),
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
 		rest.WithPrefix("/api/cms/subjectCategory"),
+	)
+
+	server.AddRoutes(
+		rest.WithMiddlewares(
+			[]rest.Middleware{serverCtx.CheckUrl},
+			[]rest.Route{
+				{
+					Method:  http.MethodGet,
+					Path:    "/querySubjectCommentDetail",
+					Handler: cmssubject_comment.QuerySubjectCommentDetailHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodGet,
+					Path:    "/querySubjectCommentList",
+					Handler: cmssubject_comment.QuerySubjectCommentListHandler(serverCtx),
+				},
+			}...,
+		),
+		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
+		rest.WithPrefix("/api/cms/subjectComment"),
+	)
+
+	server.AddRoutes(
+		rest.WithMiddlewares(
+			[]rest.Middleware{serverCtx.CheckUrl},
+			[]rest.Route{
+				{
+					Method:  http.MethodPost,
+					Path:    "/addTopic",
+					Handler: cmstopic.AddTopicHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodGet,
+					Path:    "/deleteTopic",
+					Handler: cmstopic.DeleteTopicHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodGet,
+					Path:    "/queryTopicDetail",
+					Handler: cmstopic.QueryTopicDetailHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodGet,
+					Path:    "/queryTopicList",
+					Handler: cmstopic.QueryTopicListHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodPost,
+					Path:    "/updateTopic",
+					Handler: cmstopic.UpdateTopicHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodPost,
+					Path:    "/updateTopicStatus",
+					Handler: cmstopic.UpdateTopicStatusHandler(serverCtx),
+				},
+			}...,
+		),
+		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
+		rest.WithPrefix("/api/cms/topic"),
+	)
+
+	server.AddRoutes(
+		rest.WithMiddlewares(
+			[]rest.Middleware{serverCtx.CheckUrl},
+			[]rest.Route{
+				{
+					Method:  http.MethodPost,
+					Path:    "/addTopicCategory",
+					Handler: cmstopic_category.AddTopicCategoryHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodGet,
+					Path:    "/deleteTopicCategory",
+					Handler: cmstopic_category.DeleteTopicCategoryHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodGet,
+					Path:    "/queryTopicCategoryDetail",
+					Handler: cmstopic_category.QueryTopicCategoryDetailHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodGet,
+					Path:    "/queryTopicCategoryList",
+					Handler: cmstopic_category.QueryTopicCategoryListHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodPost,
+					Path:    "/updateTopicCategory",
+					Handler: cmstopic_category.UpdateTopicCategoryHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodPost,
+					Path:    "/updateTopicCategoryStatus",
+					Handler: cmstopic_category.UpdateTopicCategoryStatusHandler(serverCtx),
+				},
+			}...,
+		),
+		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
+		rest.WithPrefix("/api/cms/topicCategory"),
+	)
+
+	server.AddRoutes(
+		rest.WithMiddlewares(
+			[]rest.Middleware{serverCtx.CheckUrl},
+			[]rest.Route{
+				{
+					Method:  http.MethodGet,
+					Path:    "/queryTopicCommentDetail",
+					Handler: cmstopic_comment.QueryTopicCommentDetailHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodGet,
+					Path:    "/queryTopicCommentList",
+					Handler: cmstopic_comment.QueryTopicCommentListHandler(serverCtx),
+				},
+			}...,
+		),
+		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
+		rest.WithPrefix("/api/cms/topicComment"),
 	)
 
 	server.AddRoutes(
@@ -1314,18 +1541,18 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			[]rest.Route{
 				{
 					Method:  http.MethodGet,
-					Path:    "/deleteOperateLog",
-					Handler: syslog.DeleteOperateLogHandler(serverCtx),
+					Path:    "/deleteLoginLog",
+					Handler: syslog.DeleteLoginLogHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodGet,
-					Path:    "/queryOperateLogDetail",
-					Handler: syslog.QueryOperateLogDetailHandler(serverCtx),
+					Path:    "/queryLoginLogDetail",
+					Handler: syslog.QueryLoginLogDetailHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodGet,
-					Path:    "/queryOperateLogList",
-					Handler: syslog.QueryOperateLogListHandler(serverCtx),
+					Path:    "/queryLoginLogList",
+					Handler: syslog.QueryLoginLogListHandler(serverCtx),
 				},
 			}...,
 		),
@@ -1339,18 +1566,18 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			[]rest.Route{
 				{
 					Method:  http.MethodGet,
-					Path:    "/deleteLoginLog",
-					Handler: syslog.DeleteLoginLogHandler(serverCtx),
+					Path:    "/deleteOperateLog",
+					Handler: syslog.DeleteOperateLogHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodGet,
-					Path:    "/queryLoginLogDetail",
-					Handler: syslog.QueryLoginLogDetailHandler(serverCtx),
+					Path:    "/queryOperateLogDetail",
+					Handler: syslog.QueryOperateLogDetailHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodGet,
-					Path:    "/queryLoginLogList",
-					Handler: syslog.QueryLoginLogListHandler(serverCtx),
+					Path:    "/queryOperateLogList",
+					Handler: syslog.QueryOperateLogListHandler(serverCtx),
 				},
 			}...,
 		),

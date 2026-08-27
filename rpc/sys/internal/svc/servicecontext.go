@@ -29,11 +29,11 @@ func NewServiceContext(c config.Config) *ServiceContext {
 		Logger:                 settingLogConfig(),
 	})
 	if err != nil {
-		logx.Errorf("mysql连接失败：%s", err.Error())
+		logx.Errorf("postgres连接失败：%s", err.Error())
 		panic(err)
 	}
 
-	logx.Debug("mysql已连接")
+	logx.Info("postgres已连接")
 	query.SetDefault(db)
 
 	return &ServiceContext{

@@ -49,6 +49,13 @@ import "cms/subject_category.api"
 import "ums/member_sign_log.api"
 import "ums/member_points_log.api"
 import "ums/member_growth_log.api"
+import "cms/help.api"
+import "cms/help_category.api"
+import "cms/member_report.api"
+import "cms/subject_comment.api"
+import "cms/topic.api"
+import "cms/topic_category.api"
+import "cms/topic_comment.api"
 
 info (
 	desc:   "zero admin"

@@ -71,11 +71,9 @@ message QueryTopicCommentDetailResp {
 message QueryTopicCommentListReq {
   string member_nick_name = 1; //评论人员昵称
   int64 topic_id = 2; //专题ID
-  string member_icon = 3; //评论人员头像
-  string content = 4; //评论内容
-  int32 show_status = 5; //是否显示，0->不显示；1->显示
-  int32 page_num = 6; //第几页
-  int32 page_size = 7; //每页的数量
+  int32 show_status = 3; //是否显示，0->不显示；1->显示
+  int32 page_num = 4; //第几页
+  int32 page_size = 5; //每页的数量
 }
 
 message TopicCommentListData {
