@@ -61,14 +61,14 @@ DO $$
 
 
         insert into sys_menu (id, menu_name, menu_type, status, menu_sort, parent_id, menu_url, api_url, menu_icon, remark) values (nextval('sys_menu_id_seq'), '目录', 1, 1, 1, 0, '/main', '', '', '目录');
-        insert into sys_menu (id, menu_name, menu_type, status, menu_sort, parent_id, menu_url, api_url, menu_icon, remark, vue_icon) values (nextval('sys_menu_id_seq'), '欢迎', 1, 1, 2, 1, '/welcome', '', 'SmileOutlined', '欢迎','HomeFilled');
-        insert into sys_menu (id, menu_name, menu_type, status, menu_sort, parent_id, menu_url, api_url, menu_icon, remark, vue_icon) values (nextval('sys_menu_id_seq'), '系统管理', 1, 1, 3, 1, '/system', '', 'SettingOutlined', '系统管理','Setting');
-        insert into sys_menu (id, menu_name, menu_type, status, menu_sort, parent_id, menu_url, api_url, menu_icon, remark, vue_icon) values (nextval('sys_menu_id_seq'), '日志管理', 1, 1, 4, 1, '/log', '', 'DeleteOutlined', '日志管理','Delete');
-        insert into sys_menu (id, menu_name, menu_type, status, menu_sort, parent_id, menu_url, api_url, menu_icon, remark, vue_icon) values (nextval('sys_menu_id_seq'), '会员管理', 1, 1, 5, 1, '/ums', '', 'FrownOutlined', '会员管理','Expand');
-        insert into sys_menu (id, menu_name, menu_type, status, menu_sort, parent_id, menu_url, api_url, menu_icon, remark, vue_icon) values (nextval('sys_menu_id_seq'), '商品管理', 1, 1, 6, 1, '/pms', '', 'GiftOutlined', '商品管理','Coffee');
-        insert into sys_menu (id, menu_name, menu_type, status, menu_sort, parent_id, menu_url, api_url, menu_icon, remark, vue_icon) values (nextval('sys_menu_id_seq'), '订单管理', 1, 1, 7, 1, '/oms', '', 'DollarCircleOutlined', '订单管理','ShoppingCart');
-        insert into sys_menu (id, menu_name, menu_type, status, menu_sort, parent_id, menu_url, api_url, menu_icon, remark, vue_icon) values (nextval('sys_menu_id_seq'), '营销管理', 1, 1, 8, 1, '/sms', '', 'AlertOutlined', '营销管理','Postcard');
-        insert into sys_menu (id, menu_name, menu_type, status, menu_sort, parent_id, menu_url, api_url, menu_icon, remark, vue_icon) values (nextval('sys_menu_id_seq'), '内容管理', 1, 1, 9, 1, '/cms', '', 'SettingOutlined', '内容管理','Files');
+        insert into sys_menu (id, menu_name, menu_type, status, menu_sort, parent_id, menu_url, api_url, menu_icon, remark, vue_icon, angular_icon) values (nextval('sys_menu_id_seq'), '欢迎', 1, 1, 2, 1, '/welcome', '', 'SmileOutlined', '欢迎','HomeFilled', 'home');
+        insert into sys_menu (id, menu_name, menu_type, status, menu_sort, parent_id, menu_url, api_url, menu_icon, remark, vue_icon, angular_icon) values (nextval('sys_menu_id_seq'), '系统管理', 1, 1, 3, 1, '/system', '', 'SettingOutlined', '系统管理','Setting', 'setting');
+        insert into sys_menu (id, menu_name, menu_type, status, menu_sort, parent_id, menu_url, api_url, menu_icon, remark, vue_icon, angular_icon) values (nextval('sys_menu_id_seq'), '日志管理', 1, 1, 4, 1, '/log', '', 'DeleteOutlined', '日志管理','Delete', 'delete');
+        insert into sys_menu (id, menu_name, menu_type, status, menu_sort, parent_id, menu_url, api_url, menu_icon, remark, vue_icon, angular_icon) values (nextval('sys_menu_id_seq'), '会员管理', 1, 1, 5, 1, '/ums', '', 'FrownOutlined', '会员管理','Expand', 'user');
+        insert into sys_menu (id, menu_name, menu_type, status, menu_sort, parent_id, menu_url, api_url, menu_icon, remark, vue_icon, angular_icon) values (nextval('sys_menu_id_seq'), '商品管理', 1, 1, 6, 1, '/pms', '', 'GiftOutlined', '商品管理','Coffee', 'product');
+        insert into sys_menu (id, menu_name, menu_type, status, menu_sort, parent_id, menu_url, api_url, menu_icon, remark, vue_icon, angular_icon) values (nextval('sys_menu_id_seq'), '订单管理', 1, 1, 7, 1, '/oms', '', 'DollarCircleOutlined', '订单管理','ShoppingCart', 'pay-circle');
+        insert into sys_menu (id, menu_name, menu_type, status, menu_sort, parent_id, menu_url, api_url, menu_icon, remark, vue_icon, angular_icon) values (nextval('sys_menu_id_seq'), '营销管理', 1, 1, 8, 1, '/sms', '', 'AlertOutlined', '营销管理','Postcard', 'borderless-table');
+        insert into sys_menu (id, menu_name, menu_type, status, menu_sort, parent_id, menu_url, api_url, menu_icon, remark, vue_icon, angular_icon) values (nextval('sys_menu_id_seq'), '内容管理', 1, 1, 9, 1, '/cms', '', 'SettingOutlined', '内容管理','Files', 'bar-chart');
 
 
         -- 配置菜单信息权限
