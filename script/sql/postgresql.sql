@@ -3076,117 +3076,6 @@ values (1, '总部地址', '张三', '13800138000', '北京市', '北京市', '�
        (4, '配送中心', '赵六', '13600136000', '浙江省', '杭州市', '西湖区', '文三路300号', 0, 0, 4),
        (5, '备用地址', '孙七', '13500135000', '江苏省', '南京市', '玄武区', '中山路400号', 0, 0, 5);
 
--- 订单表建语句
-drop table if exists oms_order;
-create table oms_order
-(
-    id                      bigserial primary key,
-    member_id               bigint                                not null,
-    coupon_id               bigint                                not null,
-    order_sn                varchar                               not null,
-    create_time             timestamptz default current_timestamp not null,
-    member_username         varchar                               not null,
-    total_amount            bigint                                not null,
-    pay_amount              bigint                                not null,
-    freight_amount          bigint                                not null,
-    promotion_amount        bigint                                not null,
-    integration_amount      bigint                                not null,
-    coupon_amount           bigint                                not null,
-    discount_amount         bigint                                not null,
-    pay_type                integer     default 1                 not null,
-    source_type             integer     default 1                 not null,
-    status                  integer     default 1                 not null,
-    order_type              integer     default 1                 not null,
-    delivery_company        varchar                               not null,
-    delivery_sn             varchar                               not null,
-    auto_confirm_day        integer                               not null,
-    integration             integer                               not null,
-    growth                  integer                               not null,
-    promotion_info          varchar                               not null,
-    bill_type               integer     default 1                 not null,
-    bill_header             varchar                               not null,
-    bill_content            varchar                               not null,
-    bill_receiver_phone     varchar                               not null,
-    bill_receiver_email     varchar                               not null,
-    receiver_name           varchar                               not null,
-    receiver_phone          varchar                               not null,
-    receiver_post_code      varchar                               not null,
-    receiver_province       varchar                               not null,
-    receiver_city           varchar                               not null,
-    receiver_region         varchar                               not null,
-    receiver_detail_address varchar                               not null,
-    note                    varchar                               not null,
-    confirm_status          integer     default 1                 not null,
-    delete_status           integer     default 1                 not null,
-    use_integration         integer                               not null,
-    payment_time            timestamptz                           ,
-    delivery_time           timestamptz                           ,
-    receive_time            timestamptz                           ,
-    comment_time            timestamptz                           ,
-    modify_time             timestamptz
-);
-
--- 添加订单表注释
-comment on table oms_order is '订单表';
-
--- 添加订单表列注释
-comment on column oms_order.id is '订单id';
-comment on column oms_order.member_id is '会员id';
-comment on column oms_order.coupon_id is '优惠券id';
-comment on column oms_order.order_sn is '订单编号';
-comment on column oms_order.create_time is '提交时间';
-comment on column oms_order.member_username is '用户帐号';
-comment on column oms_order.total_amount is '订单总金额';
-comment on column oms_order.pay_amount is '应付金额（实际支付金额）';
-comment on column oms_order.freight_amount is '运费金额';
-comment on column oms_order.promotion_amount is '促销优化金额（促销价、满减、阶梯价）';
-comment on column oms_order.integration_amount is '积分抵扣金额';
-comment on column oms_order.coupon_amount is '优惠券抵扣金额';
-comment on column oms_order.discount_amount is '管理员后台调整订单使用的折扣金额';
-comment on column oms_order.pay_type is '支付方式：0->未支付；1->支付宝；2->微信';
-comment on column oms_order.source_type is '订单来源：0->pc订单；1->app订单';
-comment on column oms_order.status is '订单状态：0->待付款；1->待发货；2->已发货；3->已完成；4->已关闭；5->无效订单';
-comment on column oms_order.order_type is '订单类型：0->正常订单；1->秒杀订单';
-comment on column oms_order.delivery_company is '物流公司(配送方式)';
-comment on column oms_order.delivery_sn is '物流单号';
-comment on column oms_order.auto_confirm_day is '自动确认时间（天）';
-comment on column oms_order.integration is '可以获得的积分';
-comment on column oms_order.growth is '可以活动的成长值';
-comment on column oms_order.promotion_info is '活动信息';
-comment on column oms_order.bill_type is '发票类型：0->不开发票；1->电子发票；2->纸质发票';
-comment on column oms_order.bill_header is '发票抬头';
-comment on column oms_order.bill_content is '发票内容';
-comment on column oms_order.bill_receiver_phone is '收票人电话';
-comment on column oms_order.bill_receiver_email is '收票人邮箱';
-comment on column oms_order.receiver_name is '收货人姓名';
-comment on column oms_order.receiver_phone is '收货人电话';
-comment on column oms_order.receiver_post_code is '收货人邮编';
-comment on column oms_order.receiver_province is '省份/直辖市';
-comment on column oms_order.receiver_city is '城市';
-comment on column oms_order.receiver_region is '区';
-comment on column oms_order.receiver_detail_address is '详细地址';
-comment on column oms_order.note is '订单备注';
-comment on column oms_order.confirm_status is '确认收货状态：0->未确认；1->已确认';
-comment on column oms_order.delete_status is '删除状态：0->未删除；1->已删除';
-comment on column oms_order.use_integration is '下单时使用的积分';
-comment on column oms_order.payment_time is '支付时间';
-comment on column oms_order.delivery_time is '发货时间';
-comment on column oms_order.receive_time is '确认收货时间';
-comment on column oms_order.comment_time is '评价时间';
-comment on column oms_order.modify_time is '修改时间';
-
-insert into oms_order (id, member_id, coupon_id, order_sn, create_time, member_username, total_amount, pay_amount, freight_amount, promotion_amount, integration_amount, coupon_amount, discount_amount, pay_type, source_type, status, order_type, delivery_company, delivery_sn, auto_confirm_day, integration, growth, promotion_info, bill_type, bill_header, bill_content, bill_receiver_phone, bill_receiver_email, receiver_name, receiver_phone, receiver_post_code, receiver_province, receiver_city, receiver_region, receiver_detail_address, note, confirm_status, delete_status, use_integration) values (12, 1, 2, '201809150101000001', '2025-01-23 14:50:23', 'test', 18732, 16378, 20, 2344, 0, 10, 10, 0, 1, 4, 0, '顺丰快递', '201707196398345', 15, 13284, 13284, '单品促销,打折优惠：满3件，打7.50折,满减优惠：满1000.00元，减120.00元,满减优惠：满1000.00元，减120.00元,无优惠', 1, '1111', '1111', '18613030352', '1002219331@qq.com', '大梨', '18033441849', '518000', '江苏省', '常州市', '天宁区', '东晓街道', '111', 0, 0, 1000);
-insert into oms_order (id, member_id, coupon_id, order_sn, create_time, member_username, total_amount, pay_amount, freight_amount, promotion_amount, integration_amount, coupon_amount, discount_amount, pay_type, source_type, status, order_type, delivery_company, delivery_sn, auto_confirm_day, integration, growth, promotion_info, bill_type, bill_header, bill_content, bill_receiver_phone, bill_receiver_email, receiver_name, receiver_phone, receiver_post_code, receiver_province, receiver_city, receiver_region, receiver_detail_address, note, confirm_status, delete_status, use_integration) values (13, 1, 2, '201809150102000002', '2025-01-23 14:50:23', 'test', 18732, 16378, 0, 2344, 0, 10, 0, 1, 1, 1, 0, '顺丰快递', '201707196398345', 15, 13284, 13284, '单品促销,打折优惠：满3件，打7.50折,满减优惠：满1000.00元，减120.00元,满减优惠：满1000.00元，减120.00元,无优惠', 1, '1111', '1111', '18613030352', '1002219331@qq.com', '大梨', '18033441849', '518000', '广东省', '深圳市', '福田区', '东晓街道', '111', 0, 0, 1000);
-insert into oms_order (id, member_id, coupon_id, order_sn, create_time, member_username, total_amount, pay_amount, freight_amount, promotion_amount, integration_amount, coupon_amount, discount_amount, pay_type, source_type, status, order_type, delivery_company, delivery_sn, auto_confirm_day, integration, growth, promotion_info, bill_type, bill_header, bill_content, bill_receiver_phone, bill_receiver_email, receiver_name, receiver_phone, receiver_post_code, receiver_province, receiver_city, receiver_region, receiver_detail_address, note, confirm_status, delete_status, use_integration) values (14, 1, 2, '201809130101000001', '2025-01-23 14:50:23', 'test', 18732, 16378, 0, 2344, 0, 10, 0, 2, 1, 2, 0, '顺丰快递', '201707196398345', 15, 13284, 13284, '单品促销,打折优惠：满3件，打7.50折,满减优惠：满1000.00元，减120.00元,满减优惠：满1000.00元，减120.00元,无优惠', 1, '1111', '1111', '18613030352', '1002219331@qq.com', '大梨', '18033441849', '518000', '广东省', '深圳市', '福田区', '东晓街道', '111', 0, 0, 1000);
-insert into oms_order (id, member_id, coupon_id, order_sn, create_time, member_username, total_amount, pay_amount, freight_amount, promotion_amount, integration_amount, coupon_amount, discount_amount, pay_type, source_type, status, order_type, delivery_company, delivery_sn, auto_confirm_day, integration, growth, promotion_info, bill_type, bill_header, bill_content, bill_receiver_phone, bill_receiver_email, receiver_name, receiver_phone, receiver_post_code, receiver_province, receiver_city, receiver_region, receiver_detail_address, note, confirm_status, delete_status, use_integration) values (15, 1, 2, '201809130102000002', '2025-01-23 14:50:23', 'test', 18732, 16378, 0, 2344, 0, 10, 0, 1, 1, 3, 0, '顺丰快递', '201707196398345', 15, 13284, 13284, '单品促销,打折优惠：满3件，打7.50折,满减优惠：满1000.00元，减120.00元,满减优惠：满1000.00元，减120.00元,无优惠', 1, '1111', '1111', '18613030352', '1002219331@qq.com', '大梨', '18033441849', '518000', '广东省', '深圳市', '福田区', '东晓街道', '111', 1, 0, 1000);
-insert into oms_order (id, member_id, coupon_id, order_sn, create_time, member_username, total_amount, pay_amount, freight_amount, promotion_amount, integration_amount, coupon_amount, discount_amount, pay_type, source_type, status, order_type, delivery_company, delivery_sn, auto_confirm_day, integration, growth, promotion_info, bill_type, bill_header, bill_content, bill_receiver_phone, bill_receiver_email, receiver_name, receiver_phone, receiver_post_code, receiver_province, receiver_city, receiver_region, receiver_detail_address, note, confirm_status, delete_status, use_integration) values (16, 1, 2, '201809140101000001', '2025-01-23 14:50:23', 'test', 18732, 16378, 0, 2344, 0, 10, 0, 2, 1, 4, 0, '顺丰快递', '201707196398345', 15, 13284, 13284, '单品促销,打折优惠：满3件，打7.50折,满减优惠：满1000.00元，减120.00元,满减优惠：满1000.00元，减120.00元,无优惠', 1, '1111', '1111', '18613030352', '1002219331@qq.com', '大梨', '18033441849', '518000', '广东省', '深圳市', '福田区', '东晓街道', '111', 0, 0, 1000);
-
-insert into oms_order (id, member_id, coupon_id, order_sn, create_time, member_username, total_amount, pay_amount, freight_amount, promotion_amount, integration_amount, coupon_amount, discount_amount, pay_type, source_type, status, order_type, delivery_company, delivery_sn, auto_confirm_day, integration, growth, promotion_info, bill_type, bill_header, bill_content, bill_receiver_phone, bill_receiver_email, receiver_name, receiver_phone, receiver_post_code, receiver_province, receiver_city, receiver_region, receiver_detail_address, note, confirm_status, delete_status, use_integration) values (17, 2, 2, '201809150101000001', '2025-01-23 14:50:23', 'koobe', 18732, 16378, 20, 2344, 0, 10, 10, 0, 1, 4, 0, '顺丰快递', '201707196398345', 15, 13284, 13284, '单品促销,打折优惠：满3件，打7.50折,满减优惠：满1000.00元，减120.00元,满减优惠：满1000.00元，减120.00元,无优惠', 1, '1111', '1111', '18613030352', '1002219331@qq.com', '大梨', '18033441849', '518000', '江苏省', '常州市', '天宁区', '东晓街道', '111', 0, 0, 1000);
-insert into oms_order (id, member_id, coupon_id, order_sn, create_time, member_username, total_amount, pay_amount, freight_amount, promotion_amount, integration_amount, coupon_amount, discount_amount, pay_type, source_type, status, order_type, delivery_company, delivery_sn, auto_confirm_day, integration, growth, promotion_info, bill_type, bill_header, bill_content, bill_receiver_phone, bill_receiver_email, receiver_name, receiver_phone, receiver_post_code, receiver_province, receiver_city, receiver_region, receiver_detail_address, note, confirm_status, delete_status, use_integration) values (18, 2, 2, '201809150102000002', '2025-01-23 14:50:23', 'koobe', 18732, 16378, 0, 2344, 0, 10, 0, 1, 1, 1, 0, '顺丰快递', '201707196398345', 15, 13284, 13284, '单品促销,打折优惠：满3件，打7.50折,满减优惠：满1000.00元，减120.00元,满减优惠：满1000.00元，减120.00元,无优惠', 1, '1111', '1111', '18613030352', '1002219331@qq.com', '大梨', '18033441849', '518000', '广东省', '深圳市', '福田区', '东晓街道', '111', 0, 0, 1000);
-insert into oms_order (id, member_id, coupon_id, order_sn, create_time, member_username, total_amount, pay_amount, freight_amount, promotion_amount, integration_amount, coupon_amount, discount_amount, pay_type, source_type, status, order_type, delivery_company, delivery_sn, auto_confirm_day, integration, growth, promotion_info, bill_type, bill_header, bill_content, bill_receiver_phone, bill_receiver_email, receiver_name, receiver_phone, receiver_post_code, receiver_province, receiver_city, receiver_region, receiver_detail_address, note, confirm_status, delete_status, use_integration) values (19, 2, 2, '201809130101000001', '2025-01-23 14:50:23', 'koobe', 18732, 16378, 0, 2344, 0, 10, 0, 2, 1, 2, 0, '顺丰快递', '201707196398345', 15, 13284, 13284, '单品促销,打折优惠：满3件，打7.50折,满减优惠：满1000.00元，减120.00元,满减优惠：满1000.00元，减120.00元,无优惠', 1, '1111', '1111', '18613030352', '1002219331@qq.com', '大梨', '18033441849', '518000', '广东省', '深圳市', '福田区', '东晓街道', '111', 0, 0, 1000);
-insert into oms_order (id, member_id, coupon_id, order_sn, create_time, member_username, total_amount, pay_amount, freight_amount, promotion_amount, integration_amount, coupon_amount, discount_amount, pay_type, source_type, status, order_type, delivery_company, delivery_sn, auto_confirm_day, integration, growth, promotion_info, bill_type, bill_header, bill_content, bill_receiver_phone, bill_receiver_email, receiver_name, receiver_phone, receiver_post_code, receiver_province, receiver_city, receiver_region, receiver_detail_address, note, confirm_status, delete_status, use_integration) values (20, 2, 2, '201809130102000002', '2025-01-23 14:50:23', 'koobe', 18732, 16378, 0, 2344, 0, 10, 0, 1, 1, 3, 0, '顺丰快递', '201707196398345', 15, 13284, 13284, '单品促销,打折优惠：满3件，打7.50折,满减优惠：满1000.00元，减120.00元,满减优惠：满1000.00元，减120.00元,无优惠', 1, '1111', '1111', '18613030352', '1002219331@qq.com', '大梨', '18033441849', '518000', '广东省', '深圳市', '福田区', '东晓街道', '111', 1, 0, 1000);
-insert into oms_order (id, member_id, coupon_id, order_sn, create_time, member_username, total_amount, pay_amount, freight_amount, promotion_amount, integration_amount, coupon_amount, discount_amount, pay_type, source_type, status, order_type, delivery_company, delivery_sn, auto_confirm_day, integration, growth, promotion_info, bill_type, bill_header, bill_content, bill_receiver_phone, bill_receiver_email, receiver_name, receiver_phone, receiver_post_code, receiver_province, receiver_city, receiver_region, receiver_detail_address, note, confirm_status, delete_status, use_integration) values (21, 2, 2, '201809140101000001', '2025-01-23 14:50:23', 'koobe', 18732, 16378, 0, 2344, 0, 10, 0, 2, 1, 4, 0, '顺丰快递', '201707196398345', 15, 13284, 13284, '单品促销,打折优惠：满3件，打7.50折,满减优惠：满1000.00元，减120.00元,满减优惠：满1000.00元，减120.00元,无优惠', 1, '1111', '1111', '18613030352', '1002219331@qq.com', '大梨', '18033441849', '518000', '广东省', '深圳市', '福田区', '东晓街道', '111', 0, 0, 1000);
-
 -- 订单收货地址表建语句
 drop table if exists oms_order_delivery;
 create table oms_order_delivery
@@ -3380,12 +3269,12 @@ create table oms_order_main
     comment_time         timestamptz                           null,
     source_type          integer     default 1                 not null,
     express_order_number varchar                               not null,
-    use_points           integer                               not null,
-    receive_status       integer     default 1                 not null,
+    use_points           integer    default 0                  not null,
+    receive_status       integer     default 0                 not null,
     remark               varchar                               not null,
     create_time          timestamptz default current_timestamp not null,
     update_time          timestamptz null,
-    is_deleted           integer     default 1                 not null
+    is_deleted           integer     default 0                 not null
 );
 
 -- 添加订单主表注释
