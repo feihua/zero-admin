@@ -1,5 +1,3 @@
-# 将会在flutter星球更新getx版本的flutter_mall  🎉🎉🎉
-# 将会在element plus星球更新element plus版本的的zero-vue-admin  🎉🎉🎉
 
 # Zero-Admin 电商系统
 
